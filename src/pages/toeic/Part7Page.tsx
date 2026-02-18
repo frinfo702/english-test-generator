@@ -31,12 +31,12 @@ interface ProblemData {
 }
 
 const TYPE_LABELS: Record<string, string> = {
-  detail: "詳細",
-  inference: "推論",
-  vocabulary: "語彙",
-  notStated: "NOT述べられている",
-  purpose: "目的",
-  crossReference: "クロス参照",
+  detail: "Detail",
+  inference: "Inference",
+  vocabulary: "Vocabulary",
+  notStated: "Not Stated",
+  purpose: "Purpose",
+  crossReference: "Cross-reference",
 };
 
 export function Part7Page() {
@@ -106,7 +106,7 @@ export function Part7Page() {
 
       <SectionHeader
         title="Part 7: Reading Comprehension"
-        subtitle="パッセージを読んで設問に答えてください"
+        subtitle="Read the passage(s) and answer the questions."
         backTo="/toeic"
         current={Object.keys(selected).length}
         total={questions.length}
@@ -119,16 +119,16 @@ export function Part7Page() {
           onClick={handleNew}
           disabled={loading}
         >
-          別の問題を読み込む
+          Load Another Question Set
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question set..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            questions/toeic/part7/ に問題JSONを追加してください。
+            Add question JSON under questions/toeic/part7/.
           </p>
         </div>
       )}
@@ -138,13 +138,13 @@ export function Part7Page() {
           {graded && (
             <div className={styles.resultInline}>
               <p className={styles.inlineScore}>
-                正答数:{" "}
+                Correct:{" "}
                 <strong>
                   {totalCorrect} / {questions.length}
                 </strong>
-                （{Math.round((totalCorrect / questions.length) * 100)}%）
+                ({Math.round((totalCorrect / questions.length) * 100)}%)
               </p>
-              <Button onClick={handleNew}>別の問題</Button>
+              <Button onClick={handleNew}>Another Set</Button>
             </div>
           )}
 
@@ -155,7 +155,7 @@ export function Part7Page() {
               <div key={p.id} className={styles.passageCard}>
                 {data.passages.length > 1 && (
                   <div className={styles.passageMeta}>
-                    <span className={styles.passageNum}>文書 {i + 1}</span>
+                    <span className={styles.passageNum}>Passage {i + 1}</span>
                     <span className={styles.passageType}>{p.textType}</span>
                   </div>
                 )}
@@ -176,7 +176,7 @@ export function Part7Page() {
                       {TYPE_LABELS[q.type] ?? q.type}
                     </span>
                     {q.passageRef === "cross" && (
-                      <span className={styles.crossTag}>クロス参照</span>
+                      <span className={styles.crossTag}>Cross-reference</span>
                     )}
                   </div>
                   <p className={styles.stem}>{q.stem}</p>
@@ -214,7 +214,7 @@ export function Part7Page() {
           {!graded && allSelected && (
             <div className={styles.resultInline}>
               <Button onClick={handleSubmit} size="lg">
-                提出する
+                Submit
               </Button>
             </div>
           )}

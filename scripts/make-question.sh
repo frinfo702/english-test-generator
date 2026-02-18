@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# make-question.sh — 問題JSONファイルの雛形を生成し、index.jsonを更新する
+# make-question.sh - Generate a question JSON template and update index.json
 #
-# 使い方:
+# Usage:
 #   ./scripts/make-question.sh <task>
 #
-# <task> の一覧:
+# Available <task> values:
 #   toefl/reading/complete-words
 #   toefl/reading/daily-life
 #   toefl/reading/academic
@@ -17,7 +17,7 @@
 #   toeic/part6
 #   toeic/part7
 #
-# 例:
+# Examples:
 #   ./scripts/make-question.sh toeic/part5
 #   ./scripts/make-question.sh toefl/reading/daily-life
 
@@ -26,9 +26,9 @@ set -euo pipefail
 QUESTIONS_DIR="$(cd "$(dirname "$0")/.." && pwd)/public/questions"
 
 usage() {
-  echo "使い方: $0 <task>"
+  echo "Usage: $0 <task>"
   echo ""
-  echo "task の一覧:"
+  echo "Available tasks:"
   echo "  toefl/reading/complete-words"
   echo "  toefl/reading/daily-life"
   echo "  toefl/reading/academic"
@@ -51,10 +51,10 @@ TASK="$1"
 TARGET_DIR="$QUESTIONS_DIR/$TASK"
 INDEX_FILE="$TARGET_DIR/index.json"
 
-# ディレクトリ作成
+# Create directory
 mkdir -p "$TARGET_DIR"
 
-# 既存ファイルの最大番号を取得して次番号を決める
+# Detect the max existing number and decide the next filename
 MAX=0
 if ls "$TARGET_DIR"/[0-9][0-9][0-9].json > /dev/null 2>&1; then
   for f in "$TARGET_DIR"/[0-9][0-9][0-9].json; do
@@ -70,7 +70,7 @@ NEXT=$((MAX + 1))
 FILENAME=$(printf "%03d.json" "$NEXT")
 OUTFILE="$TARGET_DIR/$FILENAME"
 
-# タスク別の雛形を生成する関数
+# Generate task-specific template
 generate_template() {
   local task="$1"
   case "$task" in
@@ -78,12 +78,12 @@ generate_template() {
     toefl/reading/complete-words)
       cat << 'TMPL'
 {
-  "paragraph": "TODO: 穴埋め付きの段落テキストを書いてください。各穴は word___ 形式。",
+  "paragraph": "TODO: Write a paragraph with blanks. Use word___ placeholders for each blank.",
   "items": [
     {
       "index": 0,
       "hint": "abc",
-      "answer": "TODO: 正解の単語",
+      "answer": "TODO: Correct word",
       "placeholder": "word___"
     }
   ]
@@ -99,20 +99,20 @@ TMPL
     {
       "id": "t1",
       "textType": "email",
-      "content": "TODO: 日常テキスト（email / SNS post / notice 等）を記入",
+      "content": "TODO: Add an everyday text (email / social post / notice / etc.)",
       "questions": [
         {
           "id": "q1",
-          "stem": "TODO: 設問文",
+          "stem": "TODO: Question stem",
           "options": [
-            "A. 選択肢A",
-            "B. 選択肢B",
-            "C. 選択肢C",
-            "D. 選択肢D"
+            "A. Choice A",
+            "B. Choice B",
+            "C. Choice C",
+            "D. Choice D"
           ],
           "correctIndex": 0,
           "type": "factual",
-          "explanation": "TODO: 解説"
+          "explanation": "TODO: Explanation"
         }
       ]
     }
@@ -124,20 +124,20 @@ TMPL
     toefl/reading/academic)
       cat << 'TMPL'
 {
-  "passage": "TODO: アカデミックな英文パッセージ（300〜500語程度）を記入",
+  "passage": "TODO: Add an academic English passage (around 300-500 words)",
   "questions": [
     {
       "id": "q1",
-      "stem": "TODO: 設問文",
+      "stem": "TODO: Question stem",
       "options": [
-        "A. 選択肢A",
-        "B. 選択肢B",
-        "C. 選択肢C",
-        "D. 選択肢D"
+        "A. Choice A",
+        "B. Choice B",
+        "C. Choice C",
+        "D. Choice D"
       ],
       "correctIndex": 0,
       "type": "factual",
-      "explanation": "TODO: 解説"
+      "explanation": "TODO: Explanation"
     }
   ]
 }
@@ -150,15 +150,15 @@ TMPL
   "sentences": [
     {
       "id": "s1",
-      "reference": "TODO: 誰かが発した質問または文章",
+      "reference": "TODO: A question or statement from another speaker",
       "chunks": [
-        "TODO: 単語1",
-        "TODO: 単語2",
-        "TODO: 単語3",
-        "TODO: 単語4"
+        "TODO: word 1",
+        "TODO: word 2",
+        "TODO: word 3",
+        "TODO: word 4"
       ],
       "correctOrder": [0, 1, 2, 3],
-      "fullSentence": "TODO: referenceへの回答として完成した英文（原則は単語分割。重複語の曖昧さ回避時のみ最小限の連結を許容）"
+      "fullSentence": "TODO: Completed response sentence to reference (normally split into single words; combine minimally only to avoid ambiguity with repeated words)"
     }
   ]
 }
@@ -168,11 +168,11 @@ TMPL
     toefl/writing/email)
       cat << 'TMPL'
 {
-  "prompt": "TODO: メール作成の指示（状況・目的・条件を記述）",
-  "sampleResponse": "TODO: 模範回答メール本文",
+  "prompt": "TODO: Email writing instructions (context, purpose, constraints)",
+  "sampleResponse": "TODO: Model email response",
   "keyPoints": [
-    "TODO: 採点ポイント1",
-    "TODO: 採点ポイント2"
+    "TODO: Scoring point 1",
+    "TODO: Scoring point 2"
   ]
 }
 TMPL
@@ -181,12 +181,12 @@ TMPL
     toefl/writing/discussion)
       cat << 'TMPL'
 {
-  "topic": "TODO: ディスカッションのお題",
-  "prompt": "TODO: 設問（例：Do you agree or disagree? Give reasons.）",
-  "sampleResponse": "TODO: 模範回答（150〜200語程度）",
+  "topic": "TODO: Discussion topic",
+  "prompt": "TODO: Prompt (e.g., Do you agree or disagree? Give reasons.)",
+  "sampleResponse": "TODO: Model response (about 150-200 words)",
   "keyPoints": [
-    "TODO: 採点ポイント1",
-    "TODO: 採点ポイント2"
+    "TODO: Scoring point 1",
+    "TODO: Scoring point 2"
   ]
 }
 TMPL
@@ -198,8 +198,8 @@ TMPL
   "sentences": [
     {
       "id": "ls1",
-      "text": "TODO: 音読する英文",
-      "phonetic": "TODO: 発音のヒント（任意）"
+      "text": "TODO: Sentence to read aloud",
+      "phonetic": "TODO: Pronunciation hint (optional)"
     }
   ]
 }
@@ -212,10 +212,10 @@ TMPL
   "questions": [
     {
       "id": "iq1",
-      "question": "TODO: インタビュー設問",
+      "question": "TODO: Interview question",
       "prepTime": 15,
       "responseTime": 45,
-      "sampleAnswer": "TODO: 模範回答（任意）"
+      "sampleAnswer": "TODO: Model answer (optional)"
     }
   ]
 }
@@ -230,13 +230,13 @@ TMPL
       "id": "q1",
       "sentence": "The team ___ the project on time.",
       "options": {
-        "A": "TODO: 選択肢A",
-        "B": "TODO: 選択肢B",
-        "C": "TODO: 選択肢C",
-        "D": "TODO: 選択肢D"
+        "A": "TODO: Choice A",
+        "B": "TODO: Choice B",
+        "C": "TODO: Choice C",
+        "D": "TODO: Choice D"
       },
       "correct": "A",
-      "explanation": "TODO: 解説",
+      "explanation": "TODO: Explanation",
       "focus": "verb tense/form"
     }
   ]
@@ -247,19 +247,19 @@ TMPL
     toeic/part6)
       cat << 'TMPL'
 {
-  "passage": "TODO: 穴埋め付きの文章（4問分の空欄を含む）",
+  "passage": "TODO: Passage with blanks (includes 4 blank positions)",
   "questions": [
     {
       "id": "q1",
       "blankNumber": 1,
       "options": {
-        "A": "TODO: 選択肢A",
-        "B": "TODO: 選択肢B",
-        "C": "TODO: 選択肢C",
-        "D": "TODO: 選択肢D"
+        "A": "TODO: Choice A",
+        "B": "TODO: Choice B",
+        "C": "TODO: Choice C",
+        "D": "TODO: Choice D"
       },
       "correct": "A",
-      "explanation": "TODO: 解説"
+      "explanation": "TODO: Explanation"
     }
   ]
 }
@@ -269,19 +269,19 @@ TMPL
     toeic/part7)
       cat << 'TMPL'
 {
-  "passage": "TODO: 読解パッセージ（メール・広告・記事等）",
+  "passage": "TODO: Reading passage (email, ad, article, etc.)",
   "questions": [
     {
       "id": "q1",
-      "stem": "TODO: 設問文",
+      "stem": "TODO: Question stem",
       "options": {
-        "A": "TODO: 選択肢A",
-        "B": "TODO: 選択肢B",
-        "C": "TODO: 選択肢C",
-        "D": "TODO: 選択肢D"
+        "A": "TODO: Choice A",
+        "B": "TODO: Choice B",
+        "C": "TODO: Choice C",
+        "D": "TODO: Choice D"
       },
       "correct": "A",
-      "explanation": "TODO: 解説"
+      "explanation": "TODO: Explanation"
     }
   ]
 }
@@ -289,17 +289,17 @@ TMPL
       ;;
 
     *)
-      echo "エラー: 未知のタスク '${task}'" >&2
+      echo "Error: Unknown task '${task}'" >&2
       usage
       ;;
   esac
 }
 
-# 雛形ファイルを書き出し
+# Write template file
 generate_template "$TASK" > "$OUTFILE"
-echo "✓ 作成: $OUTFILE"
+echo "Created: $OUTFILE"
 
-# index.json を更新（存在しなければ新規作成）
+# Update index.json (create if missing)
 if [[ -f "$INDEX_FILE" ]]; then
   python3 - "$INDEX_FILE" "$FILENAME" << 'PYEOF'
 import json, sys
@@ -321,7 +321,7 @@ with open(index_file, "w") as f:
     json.dump(idx, f, indent=2, ensure_ascii=False)
     f.write("\n")
 
-print(f"✓ index.json 更新: {files}")
+print(f"Updated index.json: {files}")
 PYEOF
 else
   python3 - "$INDEX_FILE" "$FILENAME" << 'PYEOF'
@@ -335,11 +335,11 @@ with open(index_file, "w") as f:
     json.dump(data, f, indent=2, ensure_ascii=False)
     f.write("\n")
 
-print(f"✓ index.json 新規作成: {[new_file]}")
+print(f"Created new index.json: {[new_file]}")
 PYEOF
 fi
 
 echo ""
-echo "次のステップ:"
-echo "  1. $OUTFILE を編集して TODO を実際の問題に置き換えてください"
-echo "  2. npm run dev でアプリを起動して動作確認してください"
+echo "Next steps:"
+echo "  1. Edit $OUTFILE and replace TODO values with real question content"
+echo "  2. Run npm run dev and verify the app behavior"

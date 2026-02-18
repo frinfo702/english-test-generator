@@ -68,7 +68,7 @@ export function WriteEmailPage() {
       setAnswerId(result.answerId);
     } catch (e) {
       setSaveError(
-        e instanceof Error ? e.message : "回答保存に失敗しました。",
+        e instanceof Error ? e.message : "Failed to save your answer.",
       );
     } finally {
       setSavingAnswer(false);
@@ -109,12 +109,12 @@ export function WriteEmailPage() {
     try {
       const ok = await copyText(gradingMessage);
       if (!ok) {
-        setSaveError("この環境ではクリップボードにコピーできません。");
+        setSaveError("Clipboard is not available in this environment.");
         return;
       }
       setCopied(true);
     } catch {
-      setSaveError("コピーに失敗しました。");
+      setSaveError("Failed to copy.");
     }
   };
   const handleNew = () => {
@@ -133,7 +133,7 @@ export function WriteEmailPage() {
     <div>
       <SectionHeader
         title="Write an Email"
-        subtitle="シナリオを読んでメールを作成してください（7分）"
+        subtitle="Read the scenario and write an email (7 minutes)."
         backTo="/toefl"
       />
 
@@ -144,16 +144,16 @@ export function WriteEmailPage() {
           onClick={handleNew}
           disabled={loading || phase === "writing"}
         >
-          別の問題を読み込む
+          Load Another Question
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            questions/toefl/writing/email/ に問題JSONを追加してください。
+            Add question JSON under questions/toefl/writing/email/.
           </p>
         </div>
       )}
@@ -165,14 +165,14 @@ export function WriteEmailPage() {
             <p className={styles.scenarioDesc}>{data.scenario.description}</p>
             <div className={styles.scenarioMeta}>
               <span>
-                <strong>宛先:</strong> {data.scenario.recipient}
+                <strong>Recipient:</strong> {data.scenario.recipient}
               </span>
               <span>
-                <strong>目的:</strong> {data.scenario.purpose}
+                <strong>Purpose:</strong> {data.scenario.purpose}
               </span>
             </div>
             <div className={styles.keyPoints}>
-              <p className={styles.keyPointsLabel}>含めるべき内容:</p>
+              <p className={styles.keyPointsLabel}>Include:</p>
               <ul>
                 {data.scenario.keyPoints.map((pt, i) => (
                   <li key={i}>{pt}</li>
@@ -183,11 +183,9 @@ export function WriteEmailPage() {
 
           {phase === "pre" && (
             <div className={styles.startCard}>
-              <p>
-                準備ができたら「開始」を押してください。7分のタイマーが始まります。
-              </p>
+              <p>Press Start when ready. The 7-minute timer will begin.</p>
               <Button size="lg" onClick={handleStart}>
-                開始
+                Start
               </Button>
             </div>
           )}
@@ -201,19 +199,19 @@ export function WriteEmailPage() {
                   isExpired={timer.isExpired}
                 />
                 <span className={styles.wordCount}>
-                  {userText.trim().split(/\s+/).filter(Boolean).length} 語
+                  {userText.trim().split(/\s+/).filter(Boolean).length} words
                 </span>
               </div>
               <textarea
                 className={styles.textarea}
                 value={userText}
                 onChange={(e) => setUserText(e.target.value)}
-                placeholder="ここにメールを入力してください..."
+                placeholder="Type your email here..."
                 disabled={phase === "submitted"}
                 rows={14}
               />
               {phase === "writing" && (
-                <Button onClick={handleSubmit}>提出</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
               )}
             </div>
           )}
@@ -230,7 +228,7 @@ export function WriteEmailPage() {
                 }}
               />
               <div className={styles.rubricCard}>
-                <h3>採点基準</h3>
+                <h3>Scoring Criteria</h3>
                 {data.rubric.map((r, i) => (
                   <div key={i} className={styles.rubricItem}>
                     <span className={styles.criterion}>{r.criterion}</span>
@@ -245,17 +243,17 @@ export function WriteEmailPage() {
                   variant="secondary"
                   onClick={() => setShowModel((v) => !v)}
                 >
-                  {showModel ? "模範解答を隠す" : "模範解答を見る"}
+                  {showModel ? "Hide Model Answer" : "Show Model Answer"}
                 </Button>
                 {showModel && (
                   <div className={styles.modelAnswer}>
-                    <h3>模範解答</h3>
+                    <h3>Model Answer</h3>
                     <p>{data.modelAnswer}</p>
                   </div>
                 )}
               </div>
               <Button onClick={handleNew} size="lg">
-                次の問題
+                Next Question
               </Button>
             </div>
           )}

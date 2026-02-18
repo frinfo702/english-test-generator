@@ -101,7 +101,7 @@ export function Part5Page() {
 
       <SectionHeader
         title="Part 5: Incomplete Sentences"
-        subtitle="空欄に入る最も適切な語句を選んでください（30問）"
+        subtitle="Choose the best word or phrase for each blank (30 questions)."
         backTo="/toeic"
         current={totalAnswered}
         total={questions.length}
@@ -114,16 +114,16 @@ export function Part5Page() {
           onClick={handleNew}
           disabled={loading}
         >
-          別の問題セットを読み込む
+          Load Another Set
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question set..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            questions/toeic/part5/ に問題JSONを追加してください。
+            Add question JSON under questions/toeic/part5/.
           </p>
         </div>
       )}
@@ -132,7 +132,7 @@ export function Part5Page() {
         <>
           {graded && (
             <div className={styles.resultCard}>
-              <h2>Part 5 完了</h2>
+              <h2>Part 5 Complete</h2>
               <div className={styles.scoreBox}>
                 <span className={styles.scoreNum}>{totalCorrect}</span>
                 <span className={styles.scoreDen}>/{questions.length}</span>
@@ -143,17 +143,17 @@ export function Part5Page() {
               <ProgressBar
                 current={totalCorrect}
                 total={questions.length}
-                label="正答率"
+                label="Accuracy"
               />
               <Button onClick={handleNew} size="lg">
-                別の問題セット
+                Another Set
               </Button>
             </div>
           )}
 
           <div className={styles.pageInfo}>
-            {page + 1} / {totalPages} ページ（問題 {page * PAGE_SIZE + 1}〜
-            {Math.min((page + 1) * PAGE_SIZE, questions.length)}）
+            Page {page + 1} / {totalPages} (Questions {page * PAGE_SIZE + 1}-
+            {Math.min((page + 1) * PAGE_SIZE, questions.length)})
           </div>
           <div className={styles.questions}>
             {pageQuestions.map((q, idx) => {
@@ -200,18 +200,18 @@ export function Part5Page() {
           <div className={styles.pageNav}>
             {page > 0 && (
               <Button variant="secondary" onClick={handlePrevPage}>
-                前のページ
+                Previous Page
               </Button>
             )}
             {!graded && page + 1 < totalPages && allOnPageSelected && (
-              <Button onClick={handleNextPage}>次のページ</Button>
+              <Button onClick={handleNextPage}>Next Page</Button>
             )}
             {graded && page + 1 < totalPages && (
-              <Button onClick={handleNextPage}>次のページ</Button>
+              <Button onClick={handleNextPage}>Next Page</Button>
             )}
             {!graded && page + 1 >= totalPages && allSelected && (
               <Button onClick={handleSubmit} size="lg">
-                提出する
+                Submit
               </Button>
             )}
           </div>

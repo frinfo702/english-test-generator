@@ -64,7 +64,7 @@ export function WriteDiscussionPage() {
       setAnswerId(result.answerId);
     } catch (e) {
       setSaveError(
-        e instanceof Error ? e.message : "回答保存に失敗しました。",
+        e instanceof Error ? e.message : "Failed to save your answer.",
       );
     } finally {
       setSavingAnswer(false);
@@ -108,12 +108,12 @@ export function WriteDiscussionPage() {
     try {
       const ok = await copyText(gradingMessage);
       if (!ok) {
-        setSaveError("この環境ではクリップボードにコピーできません。");
+        setSaveError("Clipboard is not available in this environment.");
         return;
       }
       setCopied(true);
     } catch {
-      setSaveError("コピーに失敗しました。");
+      setSaveError("Failed to copy.");
     }
   };
   const handleNew = () => {
@@ -132,7 +132,7 @@ export function WriteDiscussionPage() {
     <div>
       <SectionHeader
         title="Write for an Academic Discussion"
-        subtitle="教授の質問と学生の意見を読んで自分の意見を記述してください（10分・100語以上）"
+        subtitle="Read the prompt and student opinions, then write your own view (10 minutes, 100+ words)."
         backTo="/toefl"
       />
 
@@ -143,16 +143,16 @@ export function WriteDiscussionPage() {
           onClick={handleNew}
           disabled={loading || phase === "writing"}
         >
-          別の問題を読み込む
+          Load Another Question
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            questions/toefl/writing/discussion/ に問題JSONを追加してください。
+            Add question JSON under questions/toefl/writing/discussion/.
           </p>
         </div>
       )}
@@ -179,10 +179,11 @@ export function WriteDiscussionPage() {
           {phase === "pre" && (
             <div className={styles.startCard}>
               <p>
-                準備ができたら「開始」を押してください。10分のタイマーが始まります。100語以上記述してください。
+                Press Start when ready. The 10-minute timer will begin. Write
+                at least 100 words.
               </p>
               <Button size="lg" onClick={handleStart}>
-                開始
+                Start
               </Button>
             </div>
           )}
@@ -201,21 +202,23 @@ export function WriteDiscussionPage() {
                     meetsMinWords ? styles.ok : styles.notOk,
                   ].join(" ")}
                 >
-                  {wordCount} / {MIN_WORDS}+ 語
+                  {wordCount} / {MIN_WORDS}+ words
                 </span>
               </div>
               <textarea
                 className={styles.textarea}
                 value={userText}
                 onChange={(e) => setUserText(e.target.value)}
-                placeholder="ここに回答を入力してください..."
+                placeholder="Type your response here..."
                 disabled={phase === "submitted"}
                 rows={14}
               />
               {phase === "writing" && (
                 <Button onClick={handleSubmit} disabled={!meetsMinWords}>
-                  提出
-                  {!meetsMinWords ? `（あと${MIN_WORDS - wordCount}語）` : ""}
+                  Submit
+                  {!meetsMinWords
+                    ? ` (${MIN_WORDS - wordCount} more words required)`
+                    : ""}
                 </Button>
               )}
             </div>
@@ -233,7 +236,7 @@ export function WriteDiscussionPage() {
                 }}
               />
               <div className={styles.evalCard}>
-                <h3>評価ポイント</h3>
+                <h3>Evaluation Points</h3>
                 <ul className={styles.evalList}>
                   {data.evaluationPoints.map((pt, i) => (
                     <li key={i}>{pt}</li>
@@ -245,17 +248,17 @@ export function WriteDiscussionPage() {
                   variant="secondary"
                   onClick={() => setShowModel((v) => !v)}
                 >
-                  {showModel ? "模範解答を隠す" : "模範解答を見る"}
+                  {showModel ? "Hide Model Answer" : "Show Model Answer"}
                 </Button>
                 {showModel && (
                   <div className={styles.modelAnswer}>
-                    <h3>模範解答</h3>
+                    <h3>Model Answer</h3>
                     <p>{data.modelAnswer}</p>
                   </div>
                 )}
               </div>
               <Button onClick={handleNew} size="lg">
-                次の問題
+                Next Question
               </Button>
             </div>
           )}

@@ -10,7 +10,7 @@ import {
 import { formatSecondsAsMmSs } from "../lib/time";
 import styles from "./DashboardPage.module.css";
 
-// タスクの表示名
+// Task display labels
 const TASK_LABELS: Record<TaskId, string> = {
   "toefl/reading/complete-words": "TOEFL Reading: Complete Words",
   "toefl/reading/daily-life": "TOEFL Reading: Daily Life",
@@ -39,13 +39,13 @@ const TASK_COLORS: Record<string, string> = {
   "toeic/part7": "#c084fc",
 };
 
-// 日付を短い形式に変換 (例: "2/18")
+// Convert date to short format (e.g. "2/18")
 function shortDate(iso: string): string {
   const d = new Date(iso);
   return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-// 折れ線グラフコンポーネント
+// Line chart component
 interface LineChartProps {
   entries: ScoreEntry[];
   color: string;
@@ -73,7 +73,7 @@ function LineChart({ entries, color }: LineChartProps) {
 
     ctx.clearRect(0, 0, W, H);
 
-    // グリッド線と Y 軸ラベル
+    // Grid lines and Y-axis labels
     ctx.strokeStyle = "#e2e8f0";
     ctx.lineWidth = 1;
     ctx.fillStyle = "#6b7280";
@@ -94,14 +94,14 @@ function LineChart({ entries, color }: LineChartProps) {
       ctx.textAlign = "center";
       ctx.font = "13px system-ui";
       ctx.fillText(
-        "まだ記録がありません",
+        "No records yet",
         PAD.left + chartW / 2,
         PAD.top + chartH / 2,
       );
       return;
     }
 
-    // データ点の座標計算
+    // Calculate point coordinates
     const points = entries.map((e, i) => ({
       x:
         PAD.left +
@@ -112,7 +112,7 @@ function LineChart({ entries, color }: LineChartProps) {
       entry: e,
     }));
 
-    // 塗りつぶし領域
+    // Fill area
     ctx.beginPath();
     ctx.moveTo(points[0].x, PAD.top + chartH);
     points.forEach((p) => ctx.lineTo(p.x, p.y));
@@ -121,7 +121,7 @@ function LineChart({ entries, color }: LineChartProps) {
     ctx.fillStyle = `${color}22`;
     ctx.fill();
 
-    // 折れ線
+    // Polyline
     ctx.beginPath();
     ctx.strokeStyle = color;
     ctx.lineWidth = 2.5;
@@ -131,7 +131,7 @@ function LineChart({ entries, color }: LineChartProps) {
     );
     ctx.stroke();
 
-    // データ点
+    // Data points
     points.forEach((p) => {
       ctx.beginPath();
       ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
@@ -142,7 +142,7 @@ function LineChart({ entries, color }: LineChartProps) {
       ctx.stroke();
     });
 
-    // X 軸ラベル（間引き）
+    // X-axis labels (thinned out)
     ctx.fillStyle = "#6b7280";
     ctx.font = "10px system-ui";
     ctx.textAlign = "center";
@@ -165,7 +165,7 @@ function LineChart({ entries, color }: LineChartProps) {
   return <canvas ref={canvasRef} className={styles.canvas} />;
 }
 
-// タスクカード
+// Task card
 interface TaskCardProps {
   taskId: TaskId;
   entries: ScoreEntry[];
@@ -204,18 +204,18 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
       <div className={styles.taskHeader}>
         <span className={styles.taskDot} style={{ background: color }} />
         <span className={styles.taskLabel}>{TASK_LABELS[taskId]}</span>
-        <span className={styles.taskCount}>{entries.length}回</span>
+        <span className={styles.taskCount}>{entries.length} sessions</span>
       </div>
 
       <div className={styles.statsRow}>
         <div className={styles.stat}>
-          <span className={styles.statLabel}>最新</span>
+          <span className={styles.statLabel}>Latest</span>
           <span className={styles.statValue} style={{ color }}>
             {latest ? `${latest.pct}%` : "—"}
           </span>
         </div>
         <div className={styles.stat}>
-          <span className={styles.statLabel}>最高</span>
+          <span className={styles.statLabel}>Best</span>
           <span
             className={styles.statValue}
             style={{ color: "var(--color-correct)" }}
@@ -224,17 +224,17 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
           </span>
         </div>
         <div className={styles.stat}>
-          <span className={styles.statLabel}>平均</span>
+          <span className={styles.statLabel}>Average</span>
           <span className={styles.statValue}>
             {entries.length > 0 ? `${avg}%` : "—"}
           </span>
         </div>
         <div className={styles.stat}>
-          <span className={styles.statLabel}>最新時間</span>
+          <span className={styles.statLabel}>Latest Time</span>
           <span className={styles.statValue}>{latestElapsed}</span>
         </div>
         <div className={styles.stat}>
-          <span className={styles.statLabel}>平均時間</span>
+          <span className={styles.statLabel}>Avg Time</span>
           <span className={styles.statValue}>{avgElapsed}</span>
         </div>
       </div>
@@ -282,7 +282,7 @@ export function DashboardPage() {
     getAll().then(setEntries);
   }, [getAll]);
 
-  // タスク別にグループ化
+  // Group by task
   const byTask = entries.reduce<Partial<Record<TaskId, ScoreEntry[]>>>(
     (acc, e) => {
       if (!acc[e.taskId]) acc[e.taskId] = [];
@@ -324,43 +324,46 @@ export function DashboardPage() {
   return (
     <div>
       <SectionHeader
-        title="ダッシュボード"
-        subtitle="解答履歴とスコア推移"
+        title="Dashboard"
+        subtitle="Answer history and score trends"
         backTo="/"
       />
 
-      {/* サマリー */}
+      {/* Summary */}
       <div className={styles.summary}>
         <div className={styles.summaryCard}>
-          <span className={styles.summaryLabel}>総セッション数</span>
+          <span className={styles.summaryLabel}>Total Sessions</span>
           <span className={styles.summaryValue}>{totalSessions}</span>
         </div>
         <div className={styles.summaryCard}>
-          <span className={styles.summaryLabel}>取り組んだタスク</span>
+          <span className={styles.summaryLabel}>Tasks Practiced</span>
           <span className={styles.summaryValue}>{taskIds.length}</span>
         </div>
         <div className={styles.summaryCard}>
-          <span className={styles.summaryLabel}>全体平均正答率</span>
+          <span className={styles.summaryLabel}>Overall Avg Accuracy</span>
           <span className={styles.summaryValue}>
             {totalSessions > 0 ? `${overallAvg}%` : "—"}
           </span>
         </div>
         <div className={styles.summaryCard}>
-          <span className={styles.summaryLabel}>全体平均解答時間</span>
+          <span className={styles.summaryLabel}>Overall Avg Time</span>
           <span className={styles.summaryValue}>{overallAvgElapsed}</span>
         </div>
       </div>
 
       {taskIds.length === 0 ? (
         <div className={styles.empty}>
-          <p className={styles.emptyText}>まだ解答履歴がありません。</p>
+          <p className={styles.emptyText}>No answer history yet.</p>
           <p className={styles.emptyHint}>
-            各練習ページで問題を解くとここにスコアが記録されます。
+            Scores will appear here after you complete questions on practice
+            pages.
           </p>
           <div className={styles.emptyActions}>
-            <Button onClick={() => navigate("/toefl")}>TOEFL を練習する</Button>
+            <Button onClick={() => navigate("/toefl")}>
+              Practice TOEFL
+            </Button>
             <Button variant="secondary" onClick={() => navigate("/toeic")}>
-              TOEIC を練習する
+              Practice TOEIC
             </Button>
           </div>
         </div>
@@ -384,15 +387,15 @@ export function DashboardPage() {
               className={confirmClear ? styles.clearDanger : ""}
             >
               {confirmClear
-                ? "本当に削除しますか？（もう一度押す）"
-                : "履歴を全削除"}
+                ? "Delete all history? (Press again)"
+                : "Clear All History"}
             </Button>
             {confirmClear && (
               <button
                 className={styles.cancelBtn}
                 onClick={() => setConfirmClear(false)}
               >
-                キャンセル
+                Cancel
               </button>
             )}
           </div>

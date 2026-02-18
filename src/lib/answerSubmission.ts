@@ -58,13 +58,13 @@ export async function saveAnswerSubmission(payload: SaveAnswerPayload) {
       const parsed = JSON.parse(body) as { error?: string };
       message = parsed.error ?? body;
     } catch {}
-    throw new Error(message || "回答保存に失敗しました。");
+    throw new Error(message || "Failed to save the answer.");
   }
   return (await res.json()) as SaveAnswerResponse;
 }
 
 export function buildGradingMessage(problemId: string, answerId: string) {
-  return `問題${problemId}を解きました。回答番号は${answerId}です。これを採点して下さい。`;
+  return `I completed problem ${problemId}. My answer ID is ${answerId}. Please grade it.`;
 }
 
 export async function copyText(text: string) {

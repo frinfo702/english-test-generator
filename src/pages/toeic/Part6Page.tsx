@@ -140,7 +140,7 @@ export function Part6Page() {
 
       <SectionHeader
         title="Part 6: Text Completion"
-        subtitle="文書の空欄に入る最も適切な語句・文を選んでください（4文書×4問）"
+        subtitle="Choose the best words or sentence for each blank (4 passages x 4 questions)."
         backTo="/toeic"
         current={totalAnswered}
         total={totalQ}
@@ -153,16 +153,16 @@ export function Part6Page() {
           onClick={handleNew}
           disabled={loading}
         >
-          別の問題セットを読み込む
+          Load Another Set
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question set..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            questions/toeic/part6/ に問題JSONを追加してください。
+            Add question JSON under questions/toeic/part6/.
           </p>
         </div>
       )}
@@ -171,7 +171,7 @@ export function Part6Page() {
         <>
           {graded && (
             <div className={styles.resultCard}>
-              <h2>Part 6 完了</h2>
+              <h2>Part 6 Complete</h2>
               <div className={styles.scoreBox}>
                 <span className={styles.scoreNum}>{totalCorrect}</span>
                 <span className={styles.scoreDen}>/{totalQ}</span>
@@ -182,17 +182,17 @@ export function Part6Page() {
               <ProgressBar
                 current={totalCorrect}
                 total={totalQ}
-                label="正答率"
+                label="Accuracy"
               />
               <Button onClick={handleNew} size="lg">
-                別の問題セット
+                Another Set
               </Button>
             </div>
           )}
 
           <div className={styles.passageNav}>
             <span className={styles.passageLabel}>
-              文書 {passageIdx + 1} / {data.passages.length}
+              Passage {passageIdx + 1} / {data.passages.length}
             </span>
             <span className={styles.passageType}>{passage.textType}</span>
           </div>
@@ -241,22 +241,22 @@ export function Part6Page() {
           <div className={styles.nav}>
             {passageIdx > 0 && (
               <Button variant="secondary" onClick={handlePrevPassage}>
-                前の文書
+                Previous Passage
               </Button>
             )}
             {!graded &&
               passageIdx + 1 < data.passages.length &&
               allOnPassageSelected && (
-                <Button onClick={handleNextPassage}>次の文書</Button>
+                <Button onClick={handleNextPassage}>Next Passage</Button>
               )}
             {graded && passageIdx + 1 < data.passages.length && (
-              <Button onClick={handleNextPassage}>次の文書</Button>
+              <Button onClick={handleNextPassage}>Next Passage</Button>
             )}
             {!graded &&
               passageIdx + 1 >= data.passages.length &&
               allSelected && (
                 <Button onClick={handleSubmit} size="lg">
-                  提出する
+                  Submit
                 </Button>
               )}
           </div>

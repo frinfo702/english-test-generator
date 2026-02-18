@@ -117,7 +117,7 @@ export function BuildSentencePage() {
 
       <SectionHeader
         title="Build a Sentence"
-        subtitle="発話（質問・文章）への回答を、単語チャンクを並べ替えて完成させてください"
+        subtitle="Reorder word chunks to build a response to the prompt."
         backTo="/toefl"
         current={
           data
@@ -136,17 +136,16 @@ export function BuildSentencePage() {
           onClick={handleNew}
           disabled={loading}
         >
-          別の問題セットを読み込む
+          Load Another Set
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question set..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            questions/toefl/writing/build-sentence/
-            に問題JSONを追加してください。
+            Add question JSON under questions/toefl/writing/build-sentence/.
           </p>
         </div>
       )}
@@ -155,16 +154,16 @@ export function BuildSentencePage() {
         <>
           {phase === "pre" && (
             <div className={styles.startCard}>
-              <p>準備ができたら「開始」を押してください。時間計測を開始します。</p>
+              <p>Press Start when ready. The timer will begin immediately.</p>
               <Button size="lg" onClick={handleStart}>
-                開始
+                Start
               </Button>
             </div>
           )}
 
           {graded && (
             <div className={styles.resultCard}>
-              <h2>セクション完了</h2>
+              <h2>Section Complete</h2>
               <div className={styles.scoreBox}>
                 <span className={styles.scoreNum}>{score}</span>
                 <span className={styles.scoreDen}>/{totalSentences}</span>
@@ -175,10 +174,10 @@ export function BuildSentencePage() {
               <ProgressBar
                 current={score}
                 total={totalSentences}
-                label="正答率"
+                label="Accuracy"
               />
               <Button onClick={handleNew} size="lg">
-                別の問題セット
+                Another Set
               </Button>
             </div>
           )}
@@ -186,18 +185,20 @@ export function BuildSentencePage() {
           {phase !== "pre" && (
             <div className={styles.card}>
               <p className={styles.qNum}>
-                問題 {current + 1} / {totalSentences}
+                Question {current + 1} / {totalSentences}
               </p>
               <div className={styles.referenceBox}>
                 <p className={styles.referenceLabel}>Reference</p>
                 <p className={styles.referenceText}>{sentence.reference}</p>
               </div>
               <div className={styles.zone}>
-                <p className={styles.zoneLabel}>回答欄（クリックで取り除く）</p>
+                <p className={styles.zoneLabel}>
+                  Answer Area (click to remove)
+                </p>
                 <div className={styles.slots}>
                   {placed.length === 0 ? (
                     <span className={styles.placeholder}>
-                      チャンクを下から選んでください
+                      Select chunks from the pool below
                     </span>
                   ) : (
                     placed.map((chunkIdx, pos) => (
@@ -221,7 +222,7 @@ export function BuildSentencePage() {
                 </div>
               </div>
               <div className={styles.zone}>
-                <p className={styles.zoneLabel}>語句プール（クリックで配置）</p>
+                <p className={styles.zoneLabel}>Chunk Pool (click to place)</p>
                 <div className={styles.slots}>
                   {pool.map((chunkIdx) => (
                     <button
@@ -244,11 +245,11 @@ export function BuildSentencePage() {
                   ].join(" ")}
                 >
                   <p className={styles.fbStatus}>
-                    {isCorrect ? "✓ 正解！" : "✗ 不正解"}
+                    {isCorrect ? "✓ Correct" : "✗ Incorrect"}
                   </p>
                   {!isCorrect && (
                     <p className={styles.fbAnswer}>
-                      正解: <strong>{sentence.fullSentence}</strong>
+                      Correct answer: <strong>{sentence.fullSentence}</strong>
                     </p>
                   )}
                 </div>
@@ -257,19 +258,19 @@ export function BuildSentencePage() {
               <div className={styles.btnRow}>
                 {current > 0 && (
                   <Button variant="secondary" onClick={handlePrev}>
-                    前の問題
+                    Previous
                   </Button>
                 )}
                 {!graded && !isLastSentence && isComplete && (
-                  <Button onClick={handleNext}>次の問題</Button>
+                  <Button onClick={handleNext}>Next</Button>
                 )}
                 {!graded && isLastSentence && allComplete && (
                   <Button onClick={handleSubmit} size="lg">
-                    提出する
+                    Submit
                   </Button>
                 )}
                 {graded && current + 1 < totalSentences && (
-                  <Button onClick={handleNext}>次の問題</Button>
+                  <Button onClick={handleNext}>Next</Button>
                 )}
               </div>
             </div>

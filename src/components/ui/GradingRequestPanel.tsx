@@ -20,13 +20,13 @@ export function GradingRequestPanel({
 
   return (
     <div className={styles.panel}>
-      {saving && <p className={styles.status}>回答をローカルに保存中です...</p>}
+      {saving && <p className={styles.status}>Saving your response locally...</p>}
       {error && <p className={styles.error}>{error}</p>}
       {message && (
         <>
           <p className={styles.message}>{message}</p>
           <Button onClick={onCopy} variant="secondary">
-            {copied ? "コピー済み" : "文言をコピー"}
+            {copied ? "Copied" : "Copy Text"}
           </Button>
         </>
       )}

@@ -1,34 +1,34 @@
 # English Test Practice
 
-TOEFL iBT 2026年新形式 と TOEIC Reading の練習アプリ。
-**ネットワーク接続・APIキー不要**。AIエージェントがローカルに生成した問題JSONを読み込んで練習します。
+A practice app for the TOEFL iBT 2026 format and TOEIC Reading.
+**No network connection or API key is required.** The app loads question JSON files generated locally by an AI agent.
 
-## セットアップ
+## Setup
 
 ```bash
 npm install
 npm run dev
-# → http://localhost:5173
+# -> http://localhost:5173
 ```
 
-## 問題の追加方法
+## Adding Questions
 
-問題はAIエージェント（Claude Code等）に生成してもらい、`public/questions/` 配下の対応フォルダに保存します。
+Generate questions with an AI agent (for example, Claude Code) and save the output JSON in the matching folder under `public/questions/`.
 
-### ディレクトリ構造
+### Directory Structure
 
-```
+```text
 public/
-├── prompts/          # AIへの指示書（プロンプトテンプレート）
+├── prompts/          # Prompt templates for AI question generation
 │   ├── toefl/reading/complete-the-words.json
 │   ├── toefl/reading/read-in-daily-life.json
 │   ├── ...
 │   └── toeic/part7-reading-comprehension.json
 │
-└── questions/        # AIが生成した問題ファイル（←ここに追加）
+└── questions/        # AI-generated question files (add files here)
     ├── toefl/
     │   ├── reading/complete-words/
-    │   │   ├── index.json   ← {"files":["001.json","002.json",...]}
+    │   │   ├── index.json   <- {"files":["001.json","002.json",...]}
     │   │   ├── 001.json
     │   │   └── 002.json
     │   ├── reading/daily-life/
@@ -44,47 +44,47 @@ public/
         └── part7/
 ```
 
-### index.json の形式
+### `index.json` Format
 
-各タスクフォルダに `index.json` が必要です：
+Each task folder must include an `index.json` file:
 
 ```json
 { "files": ["001.json", "002.json"] }
 ```
 
-アプリ起動時にランダムで1ファイルを選んで読み込みます。
+At runtime, the app randomly picks one file from this list.
 
-### AIへの依頼方法
+### Prompting an AI Agent
 
-Claude Codeに以下のように依頼してください：
+Example request:
 
+```text
+Follow the schema in public/prompts/toefl/reading/complete-the-words.json,
+generate one TOEFL Reading Complete the Words question set,
+save it to public/questions/toefl/reading/complete-words/002.json,
+and update index.json as well.
 ```
-public/prompts/toefl/reading/complete-the-words.json の仕様に従って
-TOEFL Reading Complete the Words の問題を生成し、
-public/questions/toefl/reading/complete-words/002.json に保存してください。
-index.json も更新してください。
-```
 
-各 `public/prompts/` ファイルに出力JSONのスキーマが定義されています。
+Each file in `public/prompts/` defines the output JSON schema for that task.
 
-## 対応コンテンツ
+## Supported Content
 
-### TOEFL iBT 2026 新形式
+### TOEFL iBT 2026 Format
 
-| セクション | タスク                                                                              |
-| ---------- | ----------------------------------------------------------------------------------- |
-| Reading    | Complete the Words / Read in Daily Life（アダプティブ） / Read an Academic Passage  |
-| Writing    | Build a Sentence / Write an Email（7分） / Write for an Academic Discussion（10分） |
-| Speaking   | Listen and Repeat / Take an Interview（45秒×4問）                                   |
+| Section  | Tasks                                                                      |
+| -------- | -------------------------------------------------------------------------- |
+| Reading  | Complete the Words / Read in Daily Life (adaptive) / Read an Academic Passage |
+| Writing  | Build a Sentence / Write an Email (7 min) / Write for an Academic Discussion (10 min) |
+| Speaking | Listen and Repeat / Take an Interview (4 questions x 45 sec)             |
 
 ### TOEIC Reading
 
-| パート | 内容                                                      |
-| ------ | --------------------------------------------------------- |
-| Part 5 | Incomplete Sentences（30問）                              |
-| Part 6 | Text Completion（4文書×4問）                              |
-| Part 7 | Reading Comprehension（Single / Double / Triple Passage） |
+| Part   | Content                                                     |
+| ------ | ----------------------------------------------------------- |
+| Part 5 | Incomplete Sentences (30 questions)                         |
+| Part 6 | Text Completion (4 passages x 4 questions)                  |
+| Part 7 | Reading Comprehension (Single / Double / Triple passage)    |
 
-## サンプル問題
+## Sample Questions
 
-各タスクに1セットのサンプル問題が同梱されています。すぐに練習を始められます。
+A sample set is included for each task, so you can start practicing immediately.

@@ -7,22 +7,22 @@ const parts = [
     path: "/toeic/part5",
     label: "Part 5",
     sublabel: "Incomplete Sentences",
-    desc: "30問の短文穴埋め。文法・語彙の選択問題。",
-    count: "30問",
+    desc: "30 short sentence blanks focused on grammar and vocabulary.",
+    count: "30 Qs",
   },
   {
     path: "/toeic/part6",
     label: "Part 6",
     sublabel: "Text Completion",
-    desc: "4つの文書、各4問の空欄補充問題。",
-    count: "16問",
+    desc: "4 passages with 4 blank-fill questions each.",
+    count: "16 Qs",
   },
   {
     path: "/toeic/part7",
     label: "Part 7",
     sublabel: "Reading Comprehension",
-    desc: "シングル・ダブル・トリプルパッセージの長文読解。",
-    count: "54問",
+    desc: "Single, double, and triple-passage reading questions.",
+    count: "54 Qs",
   },
 ];
 
@@ -32,7 +32,7 @@ export function ToeicMenuPage() {
     <div>
       <SectionHeader
         title="TOEIC Reading"
-        subtitle="Part 5・6・7 — パートを選択してください"
+        subtitle="Part 5 / 6 / 7 - choose a part"
         backTo="/"
       />
       <div className={styles.grid}>

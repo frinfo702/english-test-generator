@@ -136,7 +136,7 @@ export default defineConfig({
                 res.statusCode = 400;
                 res.end(
                   JSON.stringify({
-                    error: "taskId, problemId, response は文字列で必須です。",
+                    error: "taskId, problemId, and response are required string fields.",
                   }),
                 );
                 return;
@@ -188,7 +188,7 @@ export default defineConfig({
               res.end(JSON.stringify({ answerId }));
             } catch {
               res.statusCode = 500;
-              res.end(JSON.stringify({ error: "回答保存に失敗しました。" }));
+              res.end(JSON.stringify({ error: "Failed to save the answer." }));
             }
           },
         );

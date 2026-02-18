@@ -139,7 +139,7 @@ export function CompleteWordsPage() {
 
       <SectionHeader
         title="Complete the Words"
-        subtitle="学術パラグラフ中の単語を補完してください"
+        subtitle="Fill in the missing words in the academic paragraph."
         backTo="/toefl"
       />
 
@@ -150,17 +150,17 @@ export function CompleteWordsPage() {
           onClick={handleNew}
           disabled={loading}
         >
-          別の問題を読み込む
+          Load Another Question
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            AIに問題を生成してもらい、questions/toefl/reading/complete-words/
-            に保存してください。
+            Generate question JSON with an AI agent and save it under
+            questions/toefl/reading/complete-words/.
           </p>
         </div>
       )}
@@ -174,7 +174,7 @@ export function CompleteWordsPage() {
               onClick={handleSubmit}
               disabled={answers.some((a) => !a.trim())}
             >
-              答え合わせ
+              Check Answers
             </Button>
           ) : (
             <div className={styles.result}>
@@ -189,7 +189,7 @@ export function CompleteWordsPage() {
                   %)
                 </span>
               </div>
-              <Button onClick={handleNew}>次の問題</Button>
+              <Button onClick={handleNew}>Next Question</Button>
             </div>
           )}
         </>

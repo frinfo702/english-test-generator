@@ -108,7 +108,7 @@ export function ListenRepeatPage() {
     <div>
       <SectionHeader
         title="Listen and Repeat"
-        subtitle="文を読んで覚え、隠れたらタイピングで再現してください"
+        subtitle="Read and memorize the sentence, then reproduce it by typing."
         backTo="/toefl"
         current={Object.keys(allInputs).length}
         total={totalSentences}
@@ -121,17 +121,17 @@ export function ListenRepeatPage() {
           onClick={handleNew}
           disabled={loading}
         >
-          別の問題セットを読み込む
+          Load Another Set
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question set..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
             questions/toefl/speaking/listen-repeat/
-            に問題JSONを追加してください。
+            Add question JSON under this folder.
           </p>
         </div>
       )}
@@ -139,21 +139,21 @@ export function ListenRepeatPage() {
       {data && !loading && !graded && sentence && (
         <div className={styles.card}>
           <p className={styles.qNum}>
-            問題 {current + 1} / {totalSentences}
+            Question {current + 1} / {totalSentences}
           </p>
 
           {phase === "showing" && (
             <div className={styles.showPhase}>
               <div className={styles.countdown}>{countdown}</div>
               <p className={styles.sentenceDisplay}>{sentence.text}</p>
-              <p className={styles.hint}>文をよく覚えてください</p>
+              <p className={styles.hint}>Memorize this sentence.</p>
             </div>
           )}
 
           {phase === "hidden" && (
             <div className={styles.hiddenPhase}>
               <p className={styles.hiddenMsg}>
-                文が隠れました。タイピングで再現してください。
+                The sentence is now hidden. Reproduce it by typing.
               </p>
               <input
                 ref={inputRef}
@@ -169,14 +169,14 @@ export function ListenRepeatPage() {
                     }
                   }
                 }}
-                placeholder="文をここに入力..."
+                placeholder="Type the sentence here..."
               />
               {!isLastSentence && (
                 <Button
                   onClick={handleConfirmInput}
                   disabled={!currentInput.trim()}
                 >
-                  次へ
+                  Next
                 </Button>
               )}
               {isLastSentence && (
@@ -186,7 +186,7 @@ export function ListenRepeatPage() {
                   }}
                   disabled={!currentInput.trim() || allInputs[current] != null}
                 >
-                  入力を確定
+                  Confirm Input
                 </Button>
               )}
             </div>
@@ -197,7 +197,7 @@ export function ListenRepeatPage() {
             phase === "hidden" && (
               <div style={{ marginTop: "1rem", textAlign: "center" }}>
                 <Button onClick={handleSubmit} size="lg">
-                  提出する
+                  Submit
                 </Button>
               </div>
             )}
@@ -207,7 +207,7 @@ export function ListenRepeatPage() {
       {graded && data && (
         <>
           <div className={styles.resultCard}>
-            <h2>セクション完了</h2>
+            <h2>Section Complete</h2>
             <div className={styles.scoreBox}>
               <span className={styles.scoreNum}>{score}</span>
               <span className={styles.scoreDen}>/{totalSentences}</span>
@@ -218,10 +218,10 @@ export function ListenRepeatPage() {
             <ProgressBar
               current={score}
               total={totalSentences}
-              label="完全一致"
+              label="Exact Match"
             />
             <Button onClick={handleNew} size="lg">
-              別の問題セット
+              Another Set
             </Button>
           </div>
 
@@ -231,13 +231,13 @@ export function ListenRepeatPage() {
             const correct = diff.every((d) => d.correct);
             return (
               <div key={s.id} className={styles.card}>
-                <p className={styles.qNum}>問題 {i + 1}</p>
+                <p className={styles.qNum}>Question {i + 1}</p>
                 <div className={styles.feedbackPhase}>
                   <p className={styles.fbLabel}>
-                    {correct ? "✓ 正解" : "✗ 不正解"} — 正解:
+                    {correct ? "✓ Correct" : "✗ Incorrect"} - Correct:
                   </p>
                   <p className={styles.originalSentence}>{s.text}</p>
-                  <p className={styles.fbLabel}>あなたの回答 (差分):</p>
+                  <p className={styles.fbLabel}>Your input (diff):</p>
                   <div className={styles.diffView}>
                     {diff.map((d, j) => (
                       <span
@@ -247,7 +247,7 @@ export function ListenRepeatPage() {
                           d.correct ? styles.diffCorrect : styles.diffWrong,
                         ].join(" ")}
                         title={
-                          d.correct ? "" : `入力: ${d.inputWord || "(なし)"}`
+                          d.correct ? "" : `Input: ${d.inputWord || "(none)"}`
                         }
                       >
                         {d.correct ? d.word : d.inputWord || "▪"}

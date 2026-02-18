@@ -135,7 +135,7 @@ export function ReadDailyLifePage() {
       adaptive.finishModule1();
     } else {
       const sessionSeconds = stop();
-      // セッション全体のスコアを保存（Module1 + Module2の合計）
+      // Save overall session score (Module 1 + Module 2).
       const m1c = adaptive.state.module1Correct;
       const m1t = adaptive.state.module1Total;
       const m2c = allQ.filter(
@@ -178,7 +178,7 @@ export function ReadDailyLifePage() {
 
       <SectionHeader
         title="Read in Daily Life"
-        subtitle="日常テキストを読んで設問に答えてください（アダプティブ形式）"
+        subtitle="Read everyday texts and answer questions (adaptive format)."
         backTo="/toefl"
       />
 
@@ -187,10 +187,10 @@ export function ReadDailyLifePage() {
         <div className={styles.branchCard}>
           <div className={styles.branchHeader}>
             <span className={styles.branchIcon}>✓</span>
-            <h2>Module 1 完了！</h2>
+            <h2>Module 1 Complete</h2>
           </div>
           <p className={styles.branchScore}>
-            正答率: <strong>{adaptive.module1Pct}%</strong> (
+            Accuracy: <strong>{adaptive.module1Pct}%</strong> (
             {adaptive.state.module1Correct}/{adaptive.state.module1Total})
           </p>
           <div
@@ -202,11 +202,11 @@ export function ReadDailyLifePage() {
             ].join(" ")}
           >
             {adaptive.state.module === "module2Hard"
-              ? "Module 2 Hard に進みます（スコア上限なし）"
-              : "Module 2 Easy に進みます（スコア上限 4.0）"}
+              ? "You advance to Module 2 Hard (no score cap)"
+              : "You advance to Module 2 Easy (score cap: 4.0)"}
           </div>
           <Button size="lg" onClick={handleStartModule2}>
-            Module 2 を開始
+            Start Module 2
           </Button>
         </div>
       )}
@@ -214,13 +214,13 @@ export function ReadDailyLifePage() {
       {/* complete */}
       {phase === "complete" && (
         <div className={styles.resultCard}>
-          <h2>セッション完了</h2>
+          <h2>Session Complete</h2>
           <div className={styles.resultModules}>
             <div className={styles.moduleResult}>
               <span className={styles.moduleLabel}>Module 1</span>
               <span className={styles.moduleScore}>
-                {adaptive.state.module1Correct}/{adaptive.state.module1Total}（
-                {adaptive.module1Pct}%）
+                {adaptive.state.module1Correct}/{adaptive.state.module1Total} (
+                {adaptive.module1Pct}%)
               </span>
             </div>
             <div className={styles.moduleResult}>
@@ -230,7 +230,7 @@ export function ReadDailyLifePage() {
                   : "Module 2 Easy"}
               </span>
               <span className={styles.moduleScore}>
-                {adaptive.state.module2Correct}/{adaptive.state.module2Total}（
+                {adaptive.state.module2Correct}/{adaptive.state.module2Total} (
                 {adaptive.state.module2Total > 0
                   ? Math.round(
                       (adaptive.state.module2Correct /
@@ -238,21 +238,21 @@ export function ReadDailyLifePage() {
                         100,
                     )
                   : 0}
-                %）
+                %)
               </span>
             </div>
           </div>
           <ProgressBar
             current={adaptive.totalCorrect}
             total={adaptive.totalQuestions}
-            label="総合正答率"
+            label="Overall Accuracy"
           />
           <div className={styles.bandScore}>
-            <span className={styles.bandLabel}>バンドスコア目安</span>
+            <span className={styles.bandLabel}>Estimated Band Score</span>
             <span className={styles.bandValue}>{adaptive.getBandScore()}</span>
           </div>
           <Button size="lg" onClick={handleRestart}>
-            もう一度挑戦
+            Try Again
           </Button>
         </div>
       )}
@@ -276,13 +276,12 @@ export function ReadDailyLifePage() {
             )}
           </div>
 
-          {loading && <LoadingSpinner message="問題を読み込み中..." />}
+          {loading && <LoadingSpinner message="Loading question..." />}
           {error && (
             <div className={styles.error}>
               <p>{error}</p>
               <p className={styles.errorHint}>
-                questions/toefl/reading/daily-life/
-                に問題JSONを追加してください。
+                Add question JSON under questions/toefl/reading/daily-life/.
               </p>
             </div>
           )}
@@ -295,7 +294,7 @@ export function ReadDailyLifePage() {
               </div>
               <div className={styles.questionCard}>
                 <p className={styles.qNum}>
-                  問題 {globalIdx + 1} / {totalQ}
+                  Question {globalIdx + 1} / {totalQ}
                 </p>
                 <p className={styles.stem}>{currentQ.stem}</p>
                 <div className={styles.options}>
@@ -332,21 +331,21 @@ export function ReadDailyLifePage() {
                 <div className={styles.btnRow}>
                   {globalIdx > 0 && (
                     <Button variant="secondary" onClick={handlePrev}>
-                      前へ
+                      Previous
                     </Button>
                   )}
                   {!graded &&
                     !isLastQuestion &&
                     answers[currentQ.id] != null && (
-                      <Button onClick={handleNext}>次へ</Button>
+                      <Button onClick={handleNext}>Next</Button>
                     )}
                   {!graded && isLastQuestion && allAnswered && (
                     <Button onClick={handleSubmit} size="lg">
-                      提出する
+                      Submit
                     </Button>
                   )}
                   {graded && !isLastQuestion && (
-                    <Button onClick={handleNext}>次へ</Button>
+                    <Button onClick={handleNext}>Next</Button>
                   )}
                 </div>
               </div>

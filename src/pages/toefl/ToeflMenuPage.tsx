@@ -8,9 +8,9 @@ const sections = [
     label: "Reading",
     color: "#0071bc",
     tasks: [
-      { label: "Complete the Words", path: "/toefl/reading/complete-words", desc: "学術パラグラフの単語補完（10問）" },
-      { label: "Read in Daily Life", path: "/toefl/reading/daily-life", desc: "日常テキスト読解・アダプティブ形式" },
-      { label: "Read an Academic Passage", path: "/toefl/reading/academic", desc: "約200語の学術パッセージ（5問）" },
+      { label: "Complete the Words", path: "/toefl/reading/complete-words", desc: "Complete missing words in an academic paragraph (10 items)." },
+      { label: "Read in Daily Life", path: "/toefl/reading/daily-life", desc: "Adaptive reading with everyday text passages." },
+      { label: "Read an Academic Passage", path: "/toefl/reading/academic", desc: "Read an academic passage and answer 5 questions." },
     ],
   },
   {
@@ -18,9 +18,9 @@ const sections = [
     label: "Writing",
     color: "#0e7a4e",
     tasks: [
-      { label: "Build a Sentence", path: "/toefl/writing/build-sentence", desc: "語句並べ替えで文を構築（10問）" },
-      { label: "Write an Email", path: "/toefl/writing/email", desc: "シナリオに基づきメール作成（7分）" },
-      { label: "Write for an Academic Discussion", path: "/toefl/writing/discussion", desc: "教授の質問に対して意見を記述（10分）" },
+      { label: "Build a Sentence", path: "/toefl/writing/build-sentence", desc: "Reorder chunks to build responses (10 items)." },
+      { label: "Write an Email", path: "/toefl/writing/email", desc: "Write an email based on a scenario (7 minutes)." },
+      { label: "Write for an Academic Discussion", path: "/toefl/writing/discussion", desc: "Write your opinion on a professor's prompt (10 minutes)." },
     ],
   },
   {
@@ -28,8 +28,8 @@ const sections = [
     label: "Speaking",
     color: "#7c3aed",
     tasks: [
-      { label: "Listen and Repeat", path: "/toefl/speaking/listen-repeat", desc: "文を見て覚えてタイピングで再現（7問）" },
-      { label: "Take an Interview", path: "/toefl/speaking/interview", desc: "インタビュー質問に即答（4問×45秒）" },
+      { label: "Listen and Repeat", path: "/toefl/speaking/listen-repeat", desc: "Memorize and reproduce sentences by typing (7 items)." },
+      { label: "Take an Interview", path: "/toefl/speaking/interview", desc: "Answer interview questions on the spot (4 x 45 sec)." },
     ],
   },
 ];
@@ -40,7 +40,7 @@ export function ToeflMenuPage() {
     <div>
       <SectionHeader
         title="TOEFL iBT 2026"
-        subtitle="2026年1月新形式 — セクションとタスクを選択してください"
+        subtitle="January 2026 format update — choose a section and task"
         backTo="/"
       />
       <div className={styles.sections}>

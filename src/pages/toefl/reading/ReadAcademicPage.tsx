@@ -103,7 +103,7 @@ export function ReadAcademicPage() {
 
       <SectionHeader
         title="Read an Academic Passage"
-        subtitle="学術パッセージを読んで設問に答えてください"
+        subtitle="Read the academic passage and answer the questions."
         backTo="/toefl"
         current={totalAnswered}
         total={totalQ}
@@ -116,16 +116,16 @@ export function ReadAcademicPage() {
           onClick={handleNew}
           disabled={loading}
         >
-          別の問題を読み込む
+          Load Another Question
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            questions/toefl/reading/academic/ に問題JSONを追加してください。
+            Add question JSON under questions/toefl/reading/academic/.
           </p>
         </div>
       )}
@@ -134,7 +134,7 @@ export function ReadAcademicPage() {
         <>
           {graded && (
             <div className={styles.resultCard}>
-              <h2>セクション完了</h2>
+              <h2>Section Complete</h2>
               <div className={styles.scoreBox}>
                 <span className={styles.scoreNum}>{score}</span>
                 <span className={styles.scoreDen}>/{totalQ}</span>
@@ -142,9 +142,9 @@ export function ReadAcademicPage() {
                   ({Math.round((score / totalQ) * 100)}%)
                 </span>
               </div>
-              <ProgressBar current={score} total={totalQ} label="正答率" />
+              <ProgressBar current={score} total={totalQ} label="Accuracy" />
               <Button onClick={handleNew} size="lg">
-                別のパッセージ
+                Another Passage
               </Button>
             </div>
           )}
@@ -156,7 +156,7 @@ export function ReadAcademicPage() {
             </div>
             <div className={styles.questionCard}>
               <p className={styles.qNum}>
-                問題 {current + 1} / {totalQ}
+                Question {current + 1} / {totalQ}
               </p>
               <p className={styles.stem}>{q.stem}</p>
               <div className={styles.options}>
@@ -189,19 +189,19 @@ export function ReadAcademicPage() {
               <div className={styles.btnRow}>
                 {current > 0 && (
                   <Button variant="secondary" onClick={handlePrev}>
-                    前の問題
+                    Previous
                   </Button>
                 )}
                 {!graded && !isLastQuestion && answers[current] != null && (
-                  <Button onClick={handleNext}>次の問題</Button>
+                  <Button onClick={handleNext}>Next</Button>
                 )}
                 {!graded && isLastQuestion && allAnswered && (
                   <Button onClick={handleSubmit} size="lg">
-                    提出する
+                    Submit
                   </Button>
                 )}
                 {graded && current + 1 < totalQ && (
-                  <Button onClick={handleNext}>次の問題</Button>
+                  <Button onClick={handleNext}>Next</Button>
                 )}
               </div>
             </div>

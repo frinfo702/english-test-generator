@@ -17,7 +17,7 @@ export function SectionHeader({ title, subtitle, current, total, backTo }: Secti
       <div className={styles.top}>
         {backTo && (
           <button className={styles.back} onClick={() => navigate(backTo)}>
-            ← 戻る
+            Back
           </button>
         )}
         <div className={styles.titles}>

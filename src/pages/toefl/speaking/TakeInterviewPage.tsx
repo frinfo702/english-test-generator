@@ -31,10 +31,10 @@ interface ProblemData {
 }
 
 const TYPE_LABELS: Record<string, string> = {
-  personal: "個人的経験",
-  opinion: "意見",
-  hypothetical: "仮定的状況",
-  comparison: "比較・選択",
+  personal: "Personal Experience",
+  opinion: "Opinion",
+  hypothetical: "Hypothetical Situation",
+  comparison: "Comparison / Choice",
 };
 const TASK_ID = "toefl/speaking/interview";
 
@@ -72,7 +72,7 @@ export function TakeInterviewPage() {
       setAnswerId(result.answerId);
     } catch (e) {
       setSaveError(
-        e instanceof Error ? e.message : "回答保存に失敗しました。",
+        e instanceof Error ? e.message : "Failed to save your answer.",
       );
     } finally {
       setSavingAnswer(false);
@@ -113,12 +113,12 @@ export function TakeInterviewPage() {
     try {
       const ok = await copyText(gradingMessage);
       if (!ok) {
-        setSaveError("この環境ではクリップボードにコピーできません。");
+        setSaveError("Clipboard is not available in this environment.");
         return;
       }
       setCopied(true);
     } catch {
-      setSaveError("コピーに失敗しました。");
+      setSaveError("Failed to copy.");
     }
   };
 
@@ -157,7 +157,7 @@ export function TakeInterviewPage() {
     <div>
       <SectionHeader
         title="Take an Interview"
-        subtitle="インタビュー質問に答えてください（準備時間なし・各45秒）"
+        subtitle="Answer interview prompts (no prep time, 45 seconds each)."
         backTo="/toefl"
         current={done ? data?.questions.length : current}
         total={data?.questions.length}
@@ -170,16 +170,16 @@ export function TakeInterviewPage() {
           onClick={handleNew}
           disabled={loading || phase === "answering"}
         >
-          別の問題セットを読み込む
+          Load Another Set
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {loading && <LoadingSpinner message="Loading question set..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            questions/toefl/speaking/interview/ に問題JSONを追加してください。
+            Add question JSON under questions/toefl/speaking/interview/.
           </p>
         </div>
       )}
@@ -191,7 +191,7 @@ export function TakeInterviewPage() {
               {TYPE_LABELS[q.type] ?? q.type}
             </span>
             <span className={styles.qNum}>
-              問題 {current + 1} / {data.questions.length}
+              Question {current + 1} / {data.questions.length}
             </span>
           </div>
           <p className={styles.question}>{q.question}</p>
@@ -199,10 +199,10 @@ export function TakeInterviewPage() {
           {phase === "pre" && (
             <div className={styles.preBox}>
               <p className={styles.preNote}>
-                準備時間はありません。「開始」を押すと45秒タイマーが始まります。
+                There is no prep time. Press Start to begin the 45-second timer.
               </p>
               <Button size="lg" onClick={handleStart}>
-                開始
+                Start
               </Button>
             </div>
           )}
@@ -218,12 +218,12 @@ export function TakeInterviewPage() {
                 className={styles.textarea}
                 value={userText}
                 onChange={(e) => setUserText(e.target.value)}
-                placeholder="ここに回答を入力してください（実際のテストではスピーキング）..."
+                placeholder="Type your response here (spoken in the real test)..."
                 disabled={phase === "submitted"}
                 rows={8}
               />
               {phase === "answering" && (
-                <Button onClick={handleSubmit}>提出</Button>
+                <Button onClick={handleSubmit}>Submit</Button>
               )}
             </div>
           )}
@@ -240,7 +240,7 @@ export function TakeInterviewPage() {
                 }}
               />
               <div className={styles.evalCard}>
-                <h3>評価ポイント</h3>
+                <h3>Evaluation Points</h3>
                 <ul>
                   {q.evaluationPoints.map((pt, i) => (
                     <li key={i}>{pt}</li>
@@ -252,17 +252,17 @@ export function TakeInterviewPage() {
                   variant="secondary"
                   onClick={() => setShowModel((v) => !v)}
                 >
-                  {showModel ? "模範解答を隠す" : "模範解答を見る"}
+                  {showModel ? "Hide Model Answer" : "Show Model Answer"}
                 </Button>
                 {showModel && (
                   <div className={styles.modelAnswer}>
-                    <h3>模範解答</h3>
+                    <h3>Model Answer</h3>
                     <p>{q.modelAnswer}</p>
                   </div>
                 )}
               </div>
               <Button onClick={handleNext}>
-                {current + 1 < data.questions.length ? "次の質問" : "終了"}
+                {current + 1 < data.questions.length ? "Next Question" : "Finish"}
               </Button>
             </div>
           )}
@@ -271,15 +271,15 @@ export function TakeInterviewPage() {
 
       {done && data && (
         <div className={styles.resultCard}>
-          <h2>インタビュー完了</h2>
-          <p>{data.questions.length}問すべてに回答しました。</p>
+          <h2>Interview Complete</h2>
+          <p>You answered all {data.questions.length} questions.</p>
           <ProgressBar
             current={data.questions.length}
             total={data.questions.length}
-            label="完了"
+            label="Complete"
           />
           <Button onClick={handleNew} size="lg">
-            別の問題セット
+            Another Set
           </Button>
         </div>
       )}
