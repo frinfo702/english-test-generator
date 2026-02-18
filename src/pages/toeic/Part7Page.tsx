@@ -40,27 +40,28 @@ export function Part7Page() {
   const { data, loading, error, load } =
     useQuestion<ProblemData>("toeic/part7");
   const [selected, setSelected] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState<Record<string, boolean>>({});
+  const [graded, setGraded] = useState(false);
 
   useEffect(() => {
     load();
   }, []);
 
   const questions = data?.questions ?? [];
-  const allAnswered =
-    questions.length > 0 && questions.every((q) => submitted[q.id]);
+  const allSelected =
+    questions.length > 0 && questions.every((q) => selected[q.id]);
   const totalCorrect = questions.filter(
-    (q) => submitted[q.id] && selected[q.id] === q.correct,
+    (q) => selected[q.id] === q.correct,
   ).length;
 
   const handleSelect = (id: string, opt: string) => {
-    if (!submitted[id]) setSelected((s) => ({ ...s, [id]: opt }));
+    if (!graded) setSelected((s) => ({ ...s, [id]: opt }));
   };
-  const handleCheck = (q: Question) =>
-    setSubmitted((s) => ({ ...s, [q.id]: true }));
+  const handleSubmit = () => {
+    setGraded(true);
+  };
   const handleNew = () => {
     setSelected({});
-    setSubmitted({});
+    setGraded(false);
     load();
   };
 
@@ -77,7 +78,7 @@ export function Part7Page() {
         title="Part 7: Reading Comprehension"
         subtitle="パッセージを読んで設問に答えてください"
         backTo="/toeic"
-        current={Object.keys(submitted).length}
+        current={Object.keys(selected).length}
         total={questions.length}
       />
 
@@ -104,6 +105,19 @@ export function Part7Page() {
 
       {data && !loading && (
         <>
+          {graded && (
+            <div className={styles.resultInline}>
+              <p className={styles.inlineScore}>
+                正答数:{" "}
+                <strong>
+                  {totalCorrect} / {questions.length}
+                </strong>
+                （{Math.round((totalCorrect / questions.length) * 100)}%）
+              </p>
+              <Button onClick={handleNew}>別の問題</Button>
+            </div>
+          )}
+
           <div className={styles.setTypeBadge}>{setTypeLabel}</div>
 
           <div className={styles.passages}>
@@ -124,7 +138,6 @@ export function Part7Page() {
           <div className={styles.questions}>
             {questions.map((q, idx) => {
               const sel = selected[q.id];
-              const sub = submitted[q.id];
               return (
                 <div key={q.id} className={styles.qBlock}>
                   <div className={styles.qHeader}>
@@ -144,8 +157,8 @@ export function Part7Page() {
                         className={[
                           styles.option,
                           sel === opt ? styles.selected : "",
-                          sub && opt === q.correct ? styles.correctOpt : "",
-                          sub && sel === opt && opt !== q.correct
+                          graded && opt === q.correct ? styles.correctOpt : "",
+                          graded && sel === opt && opt !== q.correct
                             ? styles.wrongOpt
                             : "",
                         ].join(" ")}
@@ -156,37 +169,23 @@ export function Part7Page() {
                       </button>
                     ))}
                   </div>
-                  {sub && (
+                  {graded && (
                     <FeedbackPanel
                       correct={sel === q.correct}
                       explanation={q.explanation}
                       correctAnswer={`(${q.correct}) ${q.options[q.correct]}`}
                     />
                   )}
-                  {!sub && (
-                    <Button
-                      size="sm"
-                      onClick={() => handleCheck(q)}
-                      disabled={!sel}
-                    >
-                      確認
-                    </Button>
-                  )}
                 </div>
               );
             })}
           </div>
 
-          {allAnswered && (
+          {!graded && allSelected && (
             <div className={styles.resultInline}>
-              <p className={styles.inlineScore}>
-                正答数:{" "}
-                <strong>
-                  {totalCorrect} / {questions.length}
-                </strong>
-                （{Math.round((totalCorrect / questions.length) * 100)}%）
-              </p>
-              <Button onClick={handleNew}>別の問題</Button>
+              <Button onClick={handleSubmit} size="lg">
+                提出する
+              </Button>
             </div>
           )}
         </>

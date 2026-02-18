@@ -16,7 +16,7 @@ interface ProblemData {
 }
 
 const SHOW_SECS = 4;
-type Phase = "showing" | "hidden" | "feedback";
+type Phase = "showing" | "hidden" | "review";
 
 function diffWords(original: string, input: string) {
   const origWords = original.trim().split(/\s+/);
@@ -37,9 +37,9 @@ export function ListenRepeatPage() {
   const [current, setCurrent] = useState(0);
   const [phase, setPhase] = useState<Phase>("showing");
   const [countdown, setCountdown] = useState(SHOW_SECS);
-  const [userInput, setUserInput] = useState("");
-  const [score, setScore] = useState(0);
-  const [done, setDone] = useState(false);
+  const [currentInput, setCurrentInput] = useState("");
+  const [allInputs, setAllInputs] = useState<Record<number, string>>({});
+  const [graded, setGraded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -63,32 +63,46 @@ export function ListenRepeatPage() {
     return () => clearInterval(interval);
   }, [phase, current]);
 
-  const handleSubmit = () => {
-    if (!data) return;
-    const diff = diffWords(data.sentences[current].text, userInput);
-    if (diff.every((d) => d.correct)) setScore((s) => s + 1);
-    setPhase("feedback");
+  const totalSentences = data?.sentences.length ?? 0;
+  const isLastSentence = current + 1 >= totalSentences;
+  const allTyped =
+    totalSentences > 0 && Object.keys(allInputs).length === totalSentences;
+
+  const handleConfirmInput = () => {
+    if (!currentInput.trim()) return;
+    setAllInputs((s) => ({ ...s, [current]: currentInput }));
+    if (!isLastSentence) {
+      setCurrent((c) => c + 1);
+      setCurrentInput("");
+      setPhase("showing");
+    }
   };
 
-  const handleNext = () => {
-    if (!data) return;
-    if (current + 1 >= data.sentences.length) {
-      setDone(true);
-      return;
+  const handleSubmit = () => {
+    // Save current input if not yet saved
+    if (currentInput.trim() && allInputs[current] == null) {
+      setAllInputs((s) => ({ ...s, [current]: currentInput }));
     }
-    setCurrent((c) => c + 1);
-    setUserInput("");
-    setPhase("showing");
+    setGraded(true);
+    setPhase("review");
+    setCurrent(0);
   };
 
   const handleNew = () => {
     setCurrent(0);
-    setUserInput("");
+    setCurrentInput("");
+    setAllInputs({});
     setPhase("showing");
-    setScore(0);
-    setDone(false);
+    setGraded(false);
     load();
   };
+
+  const score = data
+    ? data.sentences.filter((s, i) => {
+        const input = allInputs[i] ?? "";
+        return diffWords(s.text, input).every((d) => d.correct);
+      }).length
+    : 0;
 
   const sentence = data?.sentences[current];
 
@@ -98,8 +112,8 @@ export function ListenRepeatPage() {
         title="Listen and Repeat"
         subtitle="文を読んで覚え、隠れたらタイピングで再現してください"
         backTo="/toefl"
-        current={done ? data?.sentences.length : current}
-        total={data?.sentences.length}
+        current={Object.keys(allInputs).length}
+        total={totalSentences}
       />
 
       <div className={styles.topBar}>
@@ -124,10 +138,10 @@ export function ListenRepeatPage() {
         </div>
       )}
 
-      {data && !loading && !done && sentence && (
+      {data && !loading && !graded && sentence && (
         <div className={styles.card}>
           <p className={styles.qNum}>
-            問題 {current + 1} / {data.sentences.length}
+            問題 {current + 1} / {totalSentences}
           </p>
 
           {phase === "showing" && (
@@ -146,67 +160,107 @@ export function ListenRepeatPage() {
               <input
                 ref={inputRef}
                 className={styles.inputField}
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                onKeyDown={(e) =>
-                  e.key === "Enter" && userInput.trim() && handleSubmit()
-                }
+                value={currentInput}
+                onChange={(e) => setCurrentInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && currentInput.trim()) {
+                    if (isLastSentence) {
+                      setAllInputs((s) => ({ ...s, [current]: currentInput }));
+                    } else {
+                      handleConfirmInput();
+                    }
+                  }
+                }}
                 placeholder="文をここに入力..."
               />
-              <Button onClick={handleSubmit} disabled={!userInput.trim()}>
-                確認
-              </Button>
+              {!isLastSentence && (
+                <Button
+                  onClick={handleConfirmInput}
+                  disabled={!currentInput.trim()}
+                >
+                  次へ
+                </Button>
+              )}
+              {isLastSentence && (
+                <Button
+                  onClick={() => {
+                    setAllInputs((s) => ({ ...s, [current]: currentInput }));
+                  }}
+                  disabled={!currentInput.trim() || allInputs[current] != null}
+                >
+                  入力を確定
+                </Button>
+              )}
             </div>
           )}
 
-          {phase === "feedback" && (
-            <div className={styles.feedbackPhase}>
-              <p className={styles.fbLabel}>正解:</p>
-              <p className={styles.originalSentence}>{sentence.text}</p>
-              <p className={styles.fbLabel}>あなたの回答 (差分):</p>
-              <div className={styles.diffView}>
-                {diffWords(sentence.text, userInput).map((d, i) => (
-                  <span
-                    key={i}
-                    className={[
-                      styles.diffWord,
-                      d.correct ? styles.diffCorrect : styles.diffWrong,
-                    ].join(" ")}
-                    title={d.correct ? "" : `入力: ${d.inputWord || "(なし)"}`}
-                  >
-                    {d.correct ? d.word : d.inputWord || "▪"}
-                  </span>
-                ))}
+          {isLastSentence &&
+            allInputs[current] != null &&
+            phase === "hidden" && (
+              <div style={{ marginTop: "1rem", textAlign: "center" }}>
+                <Button onClick={handleSubmit} size="lg">
+                  提出する
+                </Button>
               </div>
-              <Button onClick={handleNext}>
-                {current + 1 < data.sentences.length
-                  ? "次の問題"
-                  : "結果を見る"}
-              </Button>
-            </div>
-          )}
+            )}
         </div>
       )}
 
-      {done && data && (
-        <div className={styles.resultCard}>
-          <h2>セクション完了</h2>
-          <div className={styles.scoreBox}>
-            <span className={styles.scoreNum}>{score}</span>
-            <span className={styles.scoreDen}>/{data.sentences.length}</span>
-            <span className={styles.scorePct}>
-              ({Math.round((score / data.sentences.length) * 100)}%)
-            </span>
+      {graded && data && (
+        <>
+          <div className={styles.resultCard}>
+            <h2>セクション完了</h2>
+            <div className={styles.scoreBox}>
+              <span className={styles.scoreNum}>{score}</span>
+              <span className={styles.scoreDen}>/{totalSentences}</span>
+              <span className={styles.scorePct}>
+                ({Math.round((score / totalSentences) * 100)}%)
+              </span>
+            </div>
+            <ProgressBar
+              current={score}
+              total={totalSentences}
+              label="完全一致"
+            />
+            <Button onClick={handleNew} size="lg">
+              別の問題セット
+            </Button>
           </div>
-          <ProgressBar
-            current={score}
-            total={data.sentences.length}
-            label="完全一致"
-          />
-          <Button onClick={handleNew} size="lg">
-            別の問題セット
-          </Button>
-        </div>
+
+          {data.sentences.map((s, i) => {
+            const input = allInputs[i] ?? "";
+            const diff = diffWords(s.text, input);
+            const correct = diff.every((d) => d.correct);
+            return (
+              <div key={s.id} className={styles.card}>
+                <p className={styles.qNum}>問題 {i + 1}</p>
+                <div className={styles.feedbackPhase}>
+                  <p className={styles.fbLabel}>
+                    {correct ? "✓ 正解" : "✗ 不正解"} — 正解:
+                  </p>
+                  <p className={styles.originalSentence}>{s.text}</p>
+                  <p className={styles.fbLabel}>あなたの回答 (差分):</p>
+                  <div className={styles.diffView}>
+                    {diff.map((d, j) => (
+                      <span
+                        key={j}
+                        className={[
+                          styles.diffWord,
+                          d.correct ? styles.diffCorrect : styles.diffWrong,
+                        ].join(" ")}
+                        title={
+                          d.correct ? "" : `入力: ${d.inputWord || "(なし)"}`
+                        }
+                      >
+                        {d.correct ? d.word : d.inputWord || "▪"}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </>
       )}
     </div>
   );

@@ -1,0 +1,394 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "sentence": "Please review the attached contract and let me know if you have any ___.",
+      "options": {
+        "A": "concern",
+        "B": "concerns",
+        "C": "concerning",
+        "D": "concerned"
+      },
+      "correct": "B",
+      "explanation": "'Any' with a countable noun typically takes the plural form.",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q2",
+      "sentence": "The software update will be installed automatically ___ midnight.",
+      "options": {
+        "A": "in",
+        "B": "at",
+        "C": "on",
+        "D": "by"
+      },
+      "correct": "D",
+      "explanation": "'By' indicates a deadline (no later than midnight).",
+      "focus": "preposition"
+    },
+    {
+      "id": "q3",
+      "sentence": "The new safety guidelines must be followed ___ all employees without exception.",
+      "options": {
+        "A": "by",
+        "B": "to",
+        "C": "for",
+        "D": "with"
+      },
+      "correct": "A",
+      "explanation": "Guidelines are followed 'by' people.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q4",
+      "sentence": "Ms. Rivera is responsible for ___ the weekly inventory report.",
+      "options": {
+        "A": "prepare",
+        "B": "prepares",
+        "C": "preparing",
+        "D": "to preparing"
+      },
+      "correct": "C",
+      "explanation": "'Responsible for' is followed by a gerund (-ing).",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q5",
+      "sentence": "The meeting was postponed because the presenter had not arrived ___.",
+      "options": {
+        "A": "already",
+        "B": "yet",
+        "C": "still",
+        "D": "ever"
+      },
+      "correct": "B",
+      "explanation": "'Not ... yet' indicates something expected has not happened up to now.",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q6",
+      "sentence": "Our customer support team will contact you as soon as your request ___ processed.",
+      "options": {
+        "A": "is",
+        "B": "was",
+        "C": "will be",
+        "D": "has been"
+      },
+      "correct": "A",
+      "explanation": "In time clauses with 'as soon as,' use present tense for future meaning.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q7",
+      "sentence": "The accountant recommended that the receipts ___ kept for at least seven years.",
+      "options": {
+        "A": "are",
+        "B": "be",
+        "C": "being",
+        "D": "were"
+      },
+      "correct": "B",
+      "explanation": "Subjunctive 'be' is used after verbs like 'recommend' in that-clauses.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q8",
+      "sentence": "The director spoke ___ about the company’s long-term strategy at the conference.",
+      "options": {
+        "A": "confident",
+        "B": "confidence",
+        "C": "confidently",
+        "D": "confidential"
+      },
+      "correct": "C",
+      "explanation": "An adverb is needed to modify the verb 'spoke.'",
+      "focus": "word form"
+    },
+    {
+      "id": "q9",
+      "sentence": "All applicants must submit ___ resume and a cover letter by Friday.",
+      "options": {
+        "A": "they",
+        "B": "them",
+        "C": "their",
+        "D": "theirs"
+      },
+      "correct": "C",
+      "explanation": "Possessive adjective 'their' modifies 'resume.'",
+      "focus": "pronoun"
+    },
+    {
+      "id": "q10",
+      "sentence": "The training session is open to employees ___ work in the sales division.",
+      "options": {
+        "A": "who",
+        "B": "whom",
+        "C": "whose",
+        "D": "which"
+      },
+      "correct": "A",
+      "explanation": "Use 'who' for people as the subject of the relative clause.",
+      "focus": "pronoun"
+    },
+    {
+      "id": "q11",
+      "sentence": "The restaurant offers a discount to customers ___ present a valid membership card.",
+      "options": {
+        "A": "what",
+        "B": "who",
+        "C": "where",
+        "D": "when"
+      },
+      "correct": "B",
+      "explanation": "'Customers who present...' needs a relative pronoun referring to people.",
+      "focus": "pronoun"
+    },
+    {
+      "id": "q12",
+      "sentence": "The shipment will be delivered tomorrow, ___ the weather conditions remain safe.",
+      "options": {
+        "A": "unless",
+        "B": "provided that",
+        "C": "in spite of",
+        "D": "even though"
+      },
+      "correct": "B",
+      "explanation": "'Provided that' introduces a condition that must be met.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q13",
+      "sentence": "The company’s new policy aims to improve employee ___ and reduce turnover.",
+      "options": {
+        "A": "satisfy",
+        "B": "satisfaction",
+        "C": "satisfied",
+        "D": "satisfying"
+      },
+      "correct": "B",
+      "explanation": "A noun is required after 'employee' to form the phrase 'employee satisfaction.'",
+      "focus": "word form"
+    },
+    {
+      "id": "q14",
+      "sentence": "The marketing report was not ___ detailed to support the proposed budget increase.",
+      "options": {
+        "A": "enough",
+        "B": "so",
+        "C": "too",
+        "D": "very"
+      },
+      "correct": "A",
+      "explanation": "'Not ... enough + adjective + to' expresses insufficient degree.",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q15",
+      "sentence": "Neither the printer nor the computers ___ functioning properly this morning.",
+      "options": {
+        "A": "is",
+        "B": "was",
+        "C": "are",
+        "D": "has been"
+      },
+      "correct": "C",
+      "explanation": "With 'neither...nor,' the verb agrees with the nearer subject 'computers' (plural).",
+      "focus": "subject-verb agreement"
+    },
+    {
+      "id": "q16",
+      "sentence": "The conference room is available ___ reservation on a first-come, first-served basis.",
+      "options": {
+        "A": "for",
+        "B": "to",
+        "C": "at",
+        "D": "in"
+      },
+      "correct": "A",
+      "explanation": "Use 'for' with 'reservation' to indicate purpose/availability.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q17",
+      "sentence": "Mr. Lee will attend the seminar ___ he can learn more about international tax regulations.",
+      "options": {
+        "A": "because",
+        "B": "so that",
+        "C": "even if",
+        "D": "whereas"
+      },
+      "correct": "B",
+      "explanation": "'So that' expresses purpose: he attends in order to learn.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q18",
+      "sentence": "The new product was developed to meet the needs of customers in the ___ market.",
+      "options": {
+        "A": "compete",
+        "B": "competition",
+        "C": "competitive",
+        "D": "competitively"
+      },
+      "correct": "C",
+      "explanation": "An adjective is needed before 'market.'",
+      "focus": "word form"
+    },
+    {
+      "id": "q19",
+      "sentence": "The memo explains the steps employees should take ___ they encounter a security issue.",
+      "options": {
+        "A": "whether",
+        "B": "if",
+        "C": "unless",
+        "D": "until"
+      },
+      "correct": "B",
+      "explanation": "'If' introduces the condition of encountering a security issue.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q20",
+      "sentence": "The finance department will finalize the annual budget after it ___ the latest sales forecast.",
+      "options": {
+        "A": "reviews",
+        "B": "reviewed",
+        "C": "will review",
+        "D": "is reviewing"
+      },
+      "correct": "A",
+      "explanation": "In time clauses with 'after,' use present tense for future actions.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q21",
+      "sentence": "The receptionist placed the packages on the counter ___ the courier could pick them up.",
+      "options": {
+        "A": "so",
+        "B": "so that",
+        "C": "because of",
+        "D": "despite"
+      },
+      "correct": "B",
+      "explanation": "'So that' correctly introduces a purpose clause with a subject and verb.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q22",
+      "sentence": "The employees were asked to arrive early ___ avoid delays during the system migration.",
+      "options": {
+        "A": "so",
+        "B": "in order to",
+        "C": "because",
+        "D": "although"
+      },
+      "correct": "B",
+      "explanation": "'In order to' is followed by a base verb to express purpose.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q23",
+      "sentence": "A significant amount of time ___ spent on resolving the issue last week.",
+      "options": {
+        "A": "were",
+        "B": "has",
+        "C": "was",
+        "D": "have"
+      },
+      "correct": "C",
+      "explanation": "'A significant amount' is singular, and the sentence describes a completed past action.",
+      "focus": "subject-verb agreement"
+    },
+    {
+      "id": "q24",
+      "sentence": "The new branch office is located ___ the corner of Pine Street and 3rd Avenue.",
+      "options": {
+        "A": "at",
+        "B": "in",
+        "C": "on",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "Use 'at' for a specific point/location such as 'the corner of' streets.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q25",
+      "sentence": "The consultant’s recommendations were ___ helpful that the company adopted them immediately.",
+      "options": {
+        "A": "such",
+        "B": "so",
+        "C": "too",
+        "D": "enough"
+      },
+      "correct": "B",
+      "explanation": "Use 'so + adjective + that' to express cause and result.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q26",
+      "sentence": "The CEO asked the department heads to submit the report ___ than Monday afternoon.",
+      "options": {
+        "A": "no later",
+        "B": "no latest",
+        "C": "not late",
+        "D": "later"
+      },
+      "correct": "A",
+      "explanation": "'No later than' is the correct fixed expression for deadlines.",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q27",
+      "sentence": "This software license is valid for one year and must be renewed ___.",
+      "options": {
+        "A": "annual",
+        "B": "annually",
+        "C": "annuity",
+        "D": "annex"
+      },
+      "correct": "B",
+      "explanation": "An adverb is needed to modify 'renewed.'",
+      "focus": "word form"
+    },
+    {
+      "id": "q28",
+      "sentence": "The proposal was rejected because it did not ___ the client’s requirements.",
+      "options": {
+        "A": "fulfill",
+        "B": "fulfillment",
+        "C": "fulfilled",
+        "D": "fulfilling"
+      },
+      "correct": "A",
+      "explanation": "After 'did not,' use the base verb form.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q29",
+      "sentence": "The company plans to expand its operations to Asia ___ the next two years.",
+      "options": {
+        "A": "during",
+        "B": "for",
+        "C": "in",
+        "D": "over"
+      },
+      "correct": "D",
+      "explanation": "'Over' is commonly used to indicate a time span covering a period.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q30",
+      "sentence": "The manager apologized ___ the inconvenience caused by the delayed shipment.",
+      "options": {
+        "A": "for",
+        "B": "to",
+        "C": "with",
+        "D": "about"
+      },
+      "correct": "A",
+      "explanation": "Use 'apologize for' + noun/gerund to state what you are sorry about.",
+      "focus": "preposition"
+    }
+  ]
+}

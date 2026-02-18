@@ -37,8 +37,8 @@ export function ReadDailyLifePage() {
   );
   const [textIdx, setTextIdx] = useState(0);
   const [qIdx, setQIdx] = useState(0);
-  const [selected, setSelected] = useState<number | null>(null);
-  const [showFeedback, setShowFeedback] = useState(false);
+  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [graded, setGraded] = useState(false);
 
   useEffect(() => {
     load();
@@ -59,24 +59,18 @@ export function ReadDailyLifePage() {
 
   const currentText = data?.texts[textIdx];
   const currentQ = currentText?.questions[qIdx];
+  const allAnswered = totalQ > 0 && Object.keys(answers).length === totalQ;
+  const isLastQuestion = data
+    ? textIdx === data.texts.length - 1 &&
+      qIdx === (currentText?.questions.length ?? 1) - 1
+    : false;
 
   const handleSelect = (i: number) => {
-    if (!showFeedback) setSelected(i);
-  };
-
-  const handleCheck = () => {
-    if (selected === null || !currentQ) return;
-    const correct = selected === currentQ.correctIndex;
-    if (adaptive.state.phase === "module1")
-      adaptive.recordModule1Answer(correct);
-    else adaptive.recordModule2Answer(correct);
-    setShowFeedback(true);
+    if (!graded && currentQ) setAnswers((s) => ({ ...s, [currentQ.id]: i }));
   };
 
   const handleNext = () => {
     if (!data) return;
-    setSelected(null);
-    setShowFeedback(false);
     const nextQ = qIdx + 1;
     if (nextQ < (currentText?.questions.length ?? 0)) {
       setQIdx(nextQ);
@@ -88,15 +82,43 @@ export function ReadDailyLifePage() {
       setQIdx(0);
       return;
     }
-    // module done
+  };
+
+  const handlePrev = () => {
+    if (qIdx > 0) {
+      setQIdx(qIdx - 1);
+      return;
+    }
+    if (textIdx > 0) {
+      const prevText = data?.texts[textIdx - 1];
+      setTextIdx(textIdx - 1);
+      setQIdx((prevText?.questions.length ?? 1) - 1);
+    }
+  };
+
+  const handleSubmit = () => {
+    // Record all answers to adaptive hook
+    allQ.forEach(({ question }) => {
+      const sel = answers[question.id];
+      const correct = sel === question.correctIndex;
+      if (adaptive.state.phase === "module1")
+        adaptive.recordModule1Answer(correct);
+      else adaptive.recordModule2Answer(correct);
+    });
+    // Finish module
     if (adaptive.state.phase === "module1") adaptive.finishModule1();
     else adaptive.finishModule2();
+    setGraded(true);
+    setTextIdx(0);
+    setQIdx(0);
   };
 
   const handleStartModule2 = () => {
     adaptive.startModule2();
     setTextIdx(0);
     setQIdx(0);
+    setAnswers({});
+    setGraded(false);
     load();
   };
 
@@ -104,8 +126,8 @@ export function ReadDailyLifePage() {
     adaptive.reset();
     setTextIdx(0);
     setQIdx(0);
-    setSelected(null);
-    setShowFeedback(false);
+    setAnswers({});
+    setGraded(false);
     load();
   };
 
@@ -205,7 +227,12 @@ export function ReadDailyLifePage() {
                   ? "Module 2 Hard"
                   : "Module 2 Easy"}
             </span>
-            {totalQ > 0 && <ProgressBar current={globalIdx} total={totalQ} />}
+            {totalQ > 0 && (
+              <ProgressBar
+                current={Object.keys(answers).length}
+                total={totalQ}
+              />
+            )}
           </div>
 
           {loading && <LoadingSpinner message="問題を読み込み中..." />}
@@ -236,12 +263,12 @@ export function ReadDailyLifePage() {
                       key={i}
                       className={[
                         styles.option,
-                        selected === i ? styles.selected : "",
-                        showFeedback && i === currentQ.correctIndex
+                        answers[currentQ.id] === i ? styles.selected : "",
+                        graded && i === currentQ.correctIndex
                           ? styles.correctOpt
                           : "",
-                        showFeedback &&
-                        selected === i &&
+                        graded &&
+                        answers[currentQ.id] === i &&
                         i !== currentQ.correctIndex
                           ? styles.wrongOpt
                           : "",
@@ -255,18 +282,29 @@ export function ReadDailyLifePage() {
                     </button>
                   ))}
                 </div>
-                {showFeedback && (
+                {graded && (
                   <FeedbackPanel
-                    correct={selected === currentQ.correctIndex}
+                    correct={answers[currentQ.id] === currentQ.correctIndex}
                     explanation={currentQ.explanation}
                   />
                 )}
                 <div className={styles.btnRow}>
-                  {!showFeedback ? (
-                    <Button onClick={handleCheck} disabled={selected === null}>
-                      確認
+                  {globalIdx > 0 && (
+                    <Button variant="secondary" onClick={handlePrev}>
+                      前へ
                     </Button>
-                  ) : (
+                  )}
+                  {!graded &&
+                    !isLastQuestion &&
+                    answers[currentQ.id] != null && (
+                      <Button onClick={handleNext}>次へ</Button>
+                    )}
+                  {!graded && isLastQuestion && allAnswered && (
+                    <Button onClick={handleSubmit} size="lg">
+                      提出する
+                    </Button>
+                  )}
+                  {graded && !isLastQuestion && (
                     <Button onClick={handleNext}>次へ</Button>
                   )}
                 </div>

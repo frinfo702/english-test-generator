@@ -27,8 +27,7 @@ export function Part5Page() {
     useQuestion<ProblemData>("toeic/part5");
   const [page, setPage] = useState(0);
   const [selected, setSelected] = useState<Record<string, string>>({});
-  const [submitted, setSubmitted] = useState<Record<string, boolean>>({});
-  const [done, setDone] = useState(false);
+  const [graded, setGraded] = useState(false);
 
   useEffect(() => {
     load();
@@ -40,27 +39,32 @@ export function Part5Page() {
     (page + 1) * PAGE_SIZE,
   );
   const totalPages = Math.ceil(questions.length / PAGE_SIZE);
-  const allOnPageAnswered =
-    pageQuestions.length > 0 && pageQuestions.every((q) => submitted[q.id]);
+  const allOnPageSelected =
+    pageQuestions.length > 0 && pageQuestions.every((q) => selected[q.id]);
+  const allSelected =
+    questions.length > 0 && questions.every((q) => selected[q.id]);
   const totalCorrect = questions.filter(
-    (q) => submitted[q.id] && selected[q.id] === q.correct,
+    (q) => selected[q.id] === q.correct,
   ).length;
-  const totalAnswered = Object.keys(submitted).length;
+  const totalAnswered = Object.keys(selected).length;
 
   const handleSelect = (id: string, opt: string) => {
-    if (!submitted[id]) setSelected((s) => ({ ...s, [id]: opt }));
+    if (!graded) setSelected((s) => ({ ...s, [id]: opt }));
   };
-  const handleCheck = (q: Question) =>
-    setSubmitted((s) => ({ ...s, [q.id]: true }));
   const handleNextPage = () => {
-    if (page + 1 >= totalPages) setDone(true);
-    else setPage((p) => p + 1);
+    setPage((p) => p + 1);
+  };
+  const handlePrevPage = () => {
+    setPage((p) => p - 1);
+  };
+  const handleSubmit = () => {
+    setGraded(true);
+    setPage(0);
   };
   const handleNew = () => {
     setPage(0);
     setSelected({});
-    setSubmitted({});
-    setDone(false);
+    setGraded(false);
     load();
   };
 
@@ -95,8 +99,29 @@ export function Part5Page() {
         </div>
       )}
 
-      {data && !loading && !done && (
+      {data && !loading && (
         <>
+          {graded && (
+            <div className={styles.resultCard}>
+              <h2>Part 5 完了</h2>
+              <div className={styles.scoreBox}>
+                <span className={styles.scoreNum}>{totalCorrect}</span>
+                <span className={styles.scoreDen}>/{questions.length}</span>
+                <span className={styles.scorePct}>
+                  ({Math.round((totalCorrect / questions.length) * 100)}%)
+                </span>
+              </div>
+              <ProgressBar
+                current={totalCorrect}
+                total={questions.length}
+                label="正答率"
+              />
+              <Button onClick={handleNew} size="lg">
+                別の問題セット
+              </Button>
+            </div>
+          )}
+
           <div className={styles.pageInfo}>
             {page + 1} / {totalPages} ページ（問題 {page * PAGE_SIZE + 1}〜
             {Math.min((page + 1) * PAGE_SIZE, questions.length)}）
@@ -104,7 +129,6 @@ export function Part5Page() {
           <div className={styles.questions}>
             {pageQuestions.map((q, idx) => {
               const sel = selected[q.id];
-              const sub = submitted[q.id];
               return (
                 <div key={q.id} className={styles.qBlock}>
                   <div className={styles.qHeader}>
@@ -121,8 +145,8 @@ export function Part5Page() {
                         className={[
                           styles.option,
                           sel === opt ? styles.selected : "",
-                          sub && opt === q.correct ? styles.correctOpt : "",
-                          sub && sel === opt && opt !== q.correct
+                          graded && opt === q.correct ? styles.correctOpt : "",
+                          graded && sel === opt && opt !== q.correct
                             ? styles.wrongOpt
                             : "",
                         ].join(" ")}
@@ -133,55 +157,33 @@ export function Part5Page() {
                       </button>
                     ))}
                   </div>
-                  {sub && (
+                  {graded && (
                     <FeedbackPanel
                       correct={sel === q.correct}
                       explanation={q.explanation}
                       correctAnswer={`(${q.correct}) ${q.options[q.correct]}`}
                     />
                   )}
-                  {!sub && (
-                    <Button
-                      size="sm"
-                      onClick={() => handleCheck(q)}
-                      disabled={!sel}
-                    >
-                      確認
-                    </Button>
-                  )}
                 </div>
               );
             })}
           </div>
-          {allOnPageAnswered && (
-            <div className={styles.pageNav}>
-              <Button onClick={handleNextPage} size="lg">
-                {page + 1 < totalPages ? "次のページ" : "結果を見る"}
+          <div className={styles.pageNav}>
+            {page > 0 && (
+              <Button variant="secondary" onClick={handlePrevPage}>
+                前のページ
               </Button>
-            </div>
-          )}
-        </>
-      )}
-
-      {done && data && (
-        <div className={styles.resultCard}>
-          <h2>Part 5 完了</h2>
-          <div className={styles.scoreBox}>
-            <span className={styles.scoreNum}>{totalCorrect}</span>
-            <span className={styles.scoreDen}>/{questions.length}</span>
-            <span className={styles.scorePct}>
-              ({Math.round((totalCorrect / questions.length) * 100)}%)
-            </span>
+            )}
+            {!graded && page + 1 < totalPages && allOnPageSelected && (
+              <Button onClick={handleNextPage}>次のページ</Button>
+            )}
+            {!graded && page + 1 >= totalPages && allSelected && (
+              <Button onClick={handleSubmit} size="lg">
+                提出する
+              </Button>
+            )}
           </div>
-          <ProgressBar
-            current={totalCorrect}
-            total={questions.length}
-            label="正答率"
-          />
-          <Button onClick={handleNew} size="lg">
-            別の問題セット
-          </Button>
-        </div>
+        </>
       )}
     </div>
   );

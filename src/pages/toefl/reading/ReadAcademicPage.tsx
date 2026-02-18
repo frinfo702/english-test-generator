@@ -27,49 +27,46 @@ export function ReadAcademicPage() {
     "toefl/reading/academic",
   );
   const [current, setCurrent] = useState(0);
-  const [selected, setSelected] = useState<number | null>(null);
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [score, setScore] = useState(0);
-  const [done, setDone] = useState(false);
+  const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [graded, setGraded] = useState(false);
 
   useEffect(() => {
     load();
   }, []);
 
-  const resetState = () => {
-    setCurrent(0);
-    setSelected(null);
-    setShowFeedback(false);
-    setScore(0);
-    setDone(false);
-  };
-
   const handleNew = () => {
-    resetState();
+    setCurrent(0);
+    setAnswers({});
+    setGraded(false);
     load();
   };
 
   const handleSelect = (idx: number) => {
-    if (!showFeedback) setSelected(idx);
-  };
-
-  const handleCheck = () => {
-    if (selected === null || !data) return;
-    if (selected === data.questions[current].correctIndex)
-      setScore((s) => s + 1);
-    setShowFeedback(true);
+    if (!graded) setAnswers((s) => ({ ...s, [current]: idx }));
   };
 
   const handleNext = () => {
     if (!data) return;
-    if (current + 1 >= data.questions.length) {
-      setDone(true);
-      return;
-    }
     setCurrent((c) => c + 1);
-    setSelected(null);
-    setShowFeedback(false);
   };
+
+  const handlePrev = () => {
+    setCurrent((c) => c - 1);
+  };
+
+  const handleSubmit = () => {
+    setGraded(true);
+    setCurrent(0);
+  };
+
+  const totalQ = data?.questions.length ?? 0;
+  const totalAnswered = Object.keys(answers).length;
+  const allAnswered = totalQ > 0 && totalAnswered === totalQ;
+  const isLastQuestion = data ? current + 1 >= totalQ : false;
+
+  const score = data
+    ? data.questions.filter((q, i) => answers[i] === q.correctIndex).length
+    : 0;
 
   const q = data?.questions[current];
 
@@ -79,8 +76,8 @@ export function ReadAcademicPage() {
         title="Read an Academic Passage"
         subtitle="学術パッセージを読んで設問に答えてください"
         backTo="/toefl"
-        current={done ? data?.questions.length : current}
-        total={data?.questions.length}
+        current={totalAnswered}
+        total={totalQ}
       />
 
       <div className={styles.topBar}>
@@ -104,82 +101,83 @@ export function ReadAcademicPage() {
         </div>
       )}
 
-      {data && !loading && !done && q && (
-        <div className={styles.layout}>
-          <div className={styles.passageCard}>
-            <h2 className={styles.passageTitle}>{data.title}</h2>
-            <p className={styles.passage}>{data.passage}</p>
-          </div>
-          <div className={styles.questionCard}>
-            <p className={styles.qNum}>
-              問題 {current + 1} / {data.questions.length}
-            </p>
-            <p className={styles.stem}>{q.stem}</p>
-            <div className={styles.options}>
-              {q.options.map((opt, i) => (
-                <button
-                  key={i}
-                  className={[
-                    styles.option,
-                    selected === i ? styles.selected : "",
-                    showFeedback && i === q.correctIndex
-                      ? styles.correctOpt
-                      : "",
-                    showFeedback && selected === i && i !== q.correctIndex
-                      ? styles.wrongOpt
-                      : "",
-                  ].join(" ")}
-                  onClick={() => handleSelect(i)}
-                >
-                  <span className={styles.optLabel}>
-                    {String.fromCharCode(65 + i)}
-                  </span>
-                  {opt}
-                </button>
-              ))}
+      {data && !loading && q && (
+        <>
+          {graded && (
+            <div className={styles.resultCard}>
+              <h2>セクション完了</h2>
+              <div className={styles.scoreBox}>
+                <span className={styles.scoreNum}>{score}</span>
+                <span className={styles.scoreDen}>/{totalQ}</span>
+                <span className={styles.scorePct}>
+                  ({Math.round((score / totalQ) * 100)}%)
+                </span>
+              </div>
+              <ProgressBar current={score} total={totalQ} label="正答率" />
+              <Button onClick={handleNew} size="lg">
+                別のパッセージ
+              </Button>
             </div>
-            {showFeedback && (
-              <FeedbackPanel
-                correct={selected === q.correctIndex}
-                explanation={q.explanation}
-              />
-            )}
-            <div className={styles.btnRow}>
-              {!showFeedback ? (
-                <Button onClick={handleCheck} disabled={selected === null}>
-                  確認
-                </Button>
-              ) : (
-                <Button onClick={handleNext}>
-                  {current + 1 < data.questions.length
-                    ? "次の問題"
-                    : "結果を見る"}
-                </Button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+          )}
 
-      {done && data && (
-        <div className={styles.resultCard}>
-          <h2>セクション完了</h2>
-          <div className={styles.scoreBox}>
-            <span className={styles.scoreNum}>{score}</span>
-            <span className={styles.scoreDen}>/{data.questions.length}</span>
-            <span className={styles.scorePct}>
-              ({Math.round((score / data.questions.length) * 100)}%)
-            </span>
+          <div className={styles.layout}>
+            <div className={styles.passageCard}>
+              <h2 className={styles.passageTitle}>{data.title}</h2>
+              <p className={styles.passage}>{data.passage}</p>
+            </div>
+            <div className={styles.questionCard}>
+              <p className={styles.qNum}>
+                問題 {current + 1} / {totalQ}
+              </p>
+              <p className={styles.stem}>{q.stem}</p>
+              <div className={styles.options}>
+                {q.options.map((opt, i) => (
+                  <button
+                    key={i}
+                    className={[
+                      styles.option,
+                      answers[current] === i ? styles.selected : "",
+                      graded && i === q.correctIndex ? styles.correctOpt : "",
+                      graded && answers[current] === i && i !== q.correctIndex
+                        ? styles.wrongOpt
+                        : "",
+                    ].join(" ")}
+                    onClick={() => handleSelect(i)}
+                  >
+                    <span className={styles.optLabel}>
+                      {String.fromCharCode(65 + i)}
+                    </span>
+                    {opt}
+                  </button>
+                ))}
+              </div>
+              {graded && (
+                <FeedbackPanel
+                  correct={answers[current] === q.correctIndex}
+                  explanation={q.explanation}
+                />
+              )}
+              <div className={styles.btnRow}>
+                {current > 0 && (
+                  <Button variant="secondary" onClick={handlePrev}>
+                    前の問題
+                  </Button>
+                )}
+                {!graded && !isLastQuestion && answers[current] != null && (
+                  <Button onClick={handleNext}>次の問題</Button>
+                )}
+                {!graded && isLastQuestion && allAnswered && (
+                  <Button onClick={handleSubmit} size="lg">
+                    提出する
+                  </Button>
+                )}
+                {graded && current + 1 < totalQ && (
+                  <Button onClick={handleNext}>次の問題</Button>
+                )}
+              </div>
+            </div>
           </div>
-          <ProgressBar
-            current={score}
-            total={data.questions.length}
-            label="正答率"
-          />
-          <Button onClick={handleNew} size="lg">
-            別のパッセージ
-          </Button>
-        </div>
+        </>
       )}
     </div>
   );
