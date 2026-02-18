@@ -20,6 +20,7 @@ export interface ScoreEntry {
   total: number;
   pct: number; // 0-100
   elapsedSeconds?: number;
+  questionFile?: string;
 }
 
 export function useScoreHistory() {
@@ -29,6 +30,7 @@ export function useScoreHistory() {
       correct: number,
       total: number,
       elapsedSeconds = 0,
+      questionFile?: string,
     ) => {
       if (total === 0) return;
       const entry: ScoreEntry = {
@@ -39,6 +41,9 @@ export function useScoreHistory() {
         pct: Math.round((correct / total) * 100),
         elapsedSeconds: Math.max(0, Math.floor(elapsedSeconds)),
       };
+      if (questionFile) {
+        entry.questionFile = questionFile;
+      }
       await fetch("/api/scores", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
