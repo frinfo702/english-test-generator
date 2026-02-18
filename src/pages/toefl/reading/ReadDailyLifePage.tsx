@@ -54,15 +54,26 @@ export function ReadDailyLifePage() {
   const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [graded, setGraded] = useState(false);
+  const [sessionQuestionFile, setSessionQuestionFile] = useState<string | null>(
+    null,
+  );
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
     Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const phase = adaptive.state.phase;
 
   useEffect(() => {
     if (!hasValidQuestionNumber) return;
+    setSessionQuestionFile(null);
     loadByQuestionNumber(parsedQuestionNumber);
   }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+
+  useEffect(() => {
+    if (phase === "module1" && file && !sessionQuestionFile) {
+      setSessionQuestionFile(file);
+    }
+  }, [phase, file, sessionQuestionFile]);
 
   useEffect(() => {
     if (
@@ -155,7 +166,7 @@ export function ReadDailyLifePage() {
         m1c + m2c,
         m1t + m2t,
         sessionSeconds,
-        file ?? undefined,
+        sessionQuestionFile ?? file ?? undefined,
       );
       adaptive.finishModule2();
     }
@@ -176,8 +187,6 @@ export function ReadDailyLifePage() {
     adaptive.reset();
     navigate("/toefl/reading/daily-life");
   };
-
-  const phase = adaptive.state.phase;
 
   return (
     <div>
