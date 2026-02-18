@@ -1,65 +1,65 @@
 {
-  "paragraph": "The process of photosynth___ allows plants to conv___ sunlight into chem___ energy. Chlorophyll, the green pig___ found in plant cells, absor___ light from the sun and uses it to trans___ carbon dioxide and water into glucose. This remark___ mechanism has been stud___ extensively by biol___ for over two centur___.",
+  "paragraph": "The process of pho_________ allows plants to con____ sunlight into che_____ energy. Chlorophyll, the green pig____ found in plant cells, abs____ light from the sun and uses it to tra______ carbon dioxide and water into glucose. This rem______ mechanism has been stu____ extensively by bio_______ for over two cen______.",
   "items": [
     {
       "index": 0,
       "hint": "pho",
       "answer": "photosynthesis",
-      "placeholder": "photosynth___"
+      "placeholder": "pho_________"
     },
     {
       "index": 1,
       "hint": "con",
       "answer": "convert",
-      "placeholder": "conv___"
+      "placeholder": "con____"
     },
     {
       "index": 2,
       "hint": "che",
       "answer": "chemical",
-      "placeholder": "chem___"
+      "placeholder": "che_____"
     },
     {
       "index": 3,
       "hint": "pig",
       "answer": "pigment",
-      "placeholder": "pig___"
+      "placeholder": "pig____"
     },
     {
       "index": 4,
       "hint": "abs",
       "answer": "absorbs",
-      "placeholder": "absor___"
+      "placeholder": "abs____"
     },
     {
       "index": 5,
       "hint": "tra",
       "answer": "transform",
-      "placeholder": "trans___"
+      "placeholder": "tra______"
     },
     {
       "index": 6,
       "hint": "rem",
       "answer": "remarkable",
-      "placeholder": "remark___"
+      "placeholder": "rem______"
     },
     {
       "index": 7,
       "hint": "stu",
       "answer": "studied",
-      "placeholder": "stud___"
+      "placeholder": "stu____"
     },
     {
       "index": 8,
       "hint": "bio",
       "answer": "biologists",
-      "placeholder": "biol___"
+      "placeholder": "bio_______"
     },
     {
       "index": 9,
       "hint": "cen",
       "answer": "centuries",
-      "placeholder": "centur___"
+      "placeholder": "cen______"
     }
   ]
 }

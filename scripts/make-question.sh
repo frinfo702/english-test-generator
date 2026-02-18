@@ -78,13 +78,13 @@ generate_template() {
     toefl/reading/complete-words)
       cat << 'TMPL'
 {
-  "paragraph": "TODO: Write a paragraph with blanks. Use word___ placeholders for each blank.",
+  "paragraph": "TODO: Write a paragraph with blanks. Use hint+underscores placeholders (e.g., pho_________).",
   "items": [
     {
       "index": 0,
       "hint": "abc",
       "answer": "TODO: Correct word",
-      "placeholder": "word___"
+      "placeholder": "abc____"
     }
   ]
 }

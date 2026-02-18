@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -6,7 +6,6 @@ import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTime
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
-import { useState } from "react";
 import styles from "./CompleteWordsPage.module.css";
 
 interface Item {
@@ -19,6 +18,15 @@ interface Item {
 interface ProblemData {
   paragraph: string;
   items: Item[];
+}
+
+function getExpectedSuffix(item: Item): string {
+  const answer = item.answer.trim();
+  const hint = item.hint.trim();
+  if (answer.toLowerCase().startsWith(hint.toLowerCase())) {
+    return answer.slice(hint.length);
+  }
+  return answer;
 }
 
 export function CompleteWordsPage() {
@@ -34,11 +42,12 @@ export function CompleteWordsPage() {
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<string[][]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState<{ correct: number; total: number } | null>(
     null,
   );
+  const slotRefs = useRef<Record<number, Array<HTMLInputElement | null>>>({});
 
   useEffect(() => {
     load();
@@ -46,9 +55,14 @@ export function CompleteWordsPage() {
 
   useEffect(() => {
     if (data) {
-      setAnswers(new Array(data.items.length).fill(""));
+      setAnswers(
+        data.items.map((item) =>
+          new Array(getExpectedSuffix(item).length).fill(""),
+        ),
+      );
       setSubmitted(false);
       setScore(null);
+      slotRefs.current = {};
     }
   }, [data]);
 
@@ -69,8 +83,9 @@ export function CompleteWordsPage() {
     const sessionSeconds = stop();
     let correct = 0;
     data.items.forEach((item, i) => {
-      if (answers[i].trim().toLowerCase() === item.answer.toLowerCase())
-        correct++;
+      const expectedSuffix = getExpectedSuffix(item);
+      const userInput = (answers[i] ?? []).join("");
+      if (userInput.toLowerCase() === expectedSuffix.toLowerCase()) correct++;
     });
     setScore({ correct, total: data.items.length });
     setSubmitted(true);
@@ -87,41 +102,136 @@ export function CompleteWordsPage() {
     load();
   };
 
+  const moveFocus = (itemIdx: number, slotIdx: number) => {
+    const target = slotRefs.current[itemIdx]?.[slotIdx];
+    target?.focus();
+    target?.select();
+  };
+
+  const applyTextToSlots = (
+    itemIdx: number,
+    startIdx: number,
+    rawText: string,
+  ) => {
+    if (!data || submitted) return;
+    const expectedLength = getExpectedSuffix(data.items[itemIdx]).length;
+    const chars = Array.from(rawText).filter((ch) => ch.trim().length > 0);
+    if (chars.length === 0 || expectedLength === 0) return;
+
+    setAnswers((prev) => {
+      const next = prev.map((row) => [...row]);
+      const row = [...(next[itemIdx] ?? new Array(expectedLength).fill(""))];
+      let cursor = startIdx;
+
+      for (const ch of chars) {
+        if (cursor >= expectedLength) break;
+        row[cursor] = ch;
+        cursor++;
+      }
+
+      next[itemIdx] = row;
+      return next;
+    });
+
+    const nextFocus = startIdx + chars.length;
+    const targetIdx =
+      nextFocus < expectedLength ? nextFocus : Math.max(expectedLength - 1, 0);
+    requestAnimationFrame(() => moveFocus(itemIdx, targetIdx));
+  };
+
+  const clearSlot = (itemIdx: number, slotIdx: number) => {
+    if (submitted) return;
+    setAnswers((prev) => {
+      const next = prev.map((row) => [...row]);
+      if (!next[itemIdx]) return next;
+      next[itemIdx][slotIdx] = "";
+      return next;
+    });
+  };
+
   const renderParagraph = () => {
     if (!data) return null;
     const text = data.paragraph;
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
-    const sorted = [...data.items].sort(
-      (a, b) => text.indexOf(a.placeholder) - text.indexOf(b.placeholder),
-    );
-    sorted.forEach((item, i) => {
+    const sorted = data.items
+      .map((item, itemIdx) => ({
+        item,
+        itemIdx,
+        firstPos: text.indexOf(item.placeholder),
+      }))
+      .sort(
+        (a, b) =>
+          a.firstPos - b.firstPos || a.itemIdx - b.itemIdx,
+      );
+    sorted.forEach(({ item, itemIdx }, i) => {
       const pos = text.indexOf(item.placeholder, lastIndex);
       if (pos === -1) return;
-      parts.push(<span key={`t${i}`}>{text.slice(lastIndex, pos)}</span>);
-      const itemIdx = data.items.indexOf(item);
+      const expectedSuffix = getExpectedSuffix(item);
+      const answerChars = answers[itemIdx] ?? [];
+      const userInput = answerChars.join("");
       const isCorrect =
-        submitted &&
-        answers[itemIdx].trim().toLowerCase() === item.answer.toLowerCase();
+        submitted && userInput.toLowerCase() === expectedSuffix.toLowerCase();
       const isWrong = submitted && !isCorrect;
+
+      parts.push(<span key={`t${i}`}>{text.slice(lastIndex, pos)}</span>);
       parts.push(
         <span key={`inp${i}`} className={styles.blankWrapper}>
           <span className={styles.hint}>{item.hint}</span>
-          <input
-            className={[
-              styles.blankInput,
-              submitted ? (isCorrect ? styles.correct : styles.wrong) : "",
-            ].join(" ")}
-            value={answers[itemIdx] ?? ""}
-            onChange={(e) => {
-              const next = [...answers];
-              next[itemIdx] = e.target.value;
-              setAnswers(next);
-            }}
-            disabled={submitted}
-            placeholder="___"
-            size={8}
-          />
+          <span className={styles.slotRow}>
+            {Array.from({ length: expectedSuffix.length }).map((_, slotIdx) => (
+              <input
+                key={`slot-${i}-${slotIdx}`}
+                ref={(el) => {
+                  if (!slotRefs.current[itemIdx]) slotRefs.current[itemIdx] = [];
+                  slotRefs.current[itemIdx][slotIdx] = el;
+                }}
+                className={[
+                  styles.slotInput,
+                  submitted ? (isCorrect ? styles.correct : styles.wrong) : "",
+                ].join(" ")}
+                value={answerChars[slotIdx] ?? ""}
+                onChange={(e) => {
+                  if (!e.target.value) {
+                    clearSlot(itemIdx, slotIdx);
+                    return;
+                  }
+                  applyTextToSlots(itemIdx, slotIdx, e.target.value);
+                }}
+                onPaste={(e) => {
+                  e.preventDefault();
+                  applyTextToSlots(
+                    itemIdx,
+                    slotIdx,
+                    e.clipboardData.getData("text"),
+                  );
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Backspace" && !answerChars[slotIdx]) {
+                    if (slotIdx > 0) {
+                      e.preventDefault();
+                      moveFocus(itemIdx, slotIdx - 1);
+                    }
+                  } else if (e.key === "ArrowLeft" && slotIdx > 0) {
+                    e.preventDefault();
+                    moveFocus(itemIdx, slotIdx - 1);
+                  } else if (
+                    e.key === "ArrowRight" &&
+                    slotIdx < expectedSuffix.length - 1
+                  ) {
+                    e.preventDefault();
+                    moveFocus(itemIdx, slotIdx + 1);
+                  }
+                }}
+                maxLength={1}
+                inputMode="text"
+                autoComplete="off"
+                spellCheck={false}
+                disabled={submitted}
+                aria-label={`Blank ${itemIdx + 1} letter ${slotIdx + 1}`}
+              />
+            ))}
+          </span>
           {isWrong && <span className={styles.correctHint}>{item.answer}</span>}
         </span>,
       );
@@ -131,6 +241,14 @@ export function CompleteWordsPage() {
     return parts;
   };
 
+  const hasIncompleteAnswers =
+    !data ||
+    answers.length !== data.items.length ||
+    answers.some((row, idx) => {
+      const expectedLength = getExpectedSuffix(data.items[idx]).length;
+      return row.length !== expectedLength || row.some((ch) => !ch.trim());
+    });
+
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
@@ -139,7 +257,7 @@ export function CompleteWordsPage() {
 
       <SectionHeader
         title="Complete the Words"
-        subtitle="Fill in the missing words in the academic paragraph."
+        subtitle="Type only the missing continuation after the visible prefix."
         backTo="/toefl"
       />
 
@@ -170,10 +288,7 @@ export function CompleteWordsPage() {
           <div className={styles.paragraph}>{renderParagraph()}</div>
 
           {!submitted ? (
-            <Button
-              onClick={handleSubmit}
-              disabled={answers.some((a) => !a.trim())}
-            >
+            <Button onClick={handleSubmit} disabled={hasIncompleteAnswers}>
               Check Answers
             </Button>
           ) : (

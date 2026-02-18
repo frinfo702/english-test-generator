@@ -16,8 +16,8 @@
 
 .blankWrapper {
     display: inline-flex;
-    align-items: baseline;
-    gap: 2px;
+    align-items: flex-end;
+    gap: 4px;
 }
 
 .hint {
@@ -25,23 +25,32 @@
     font-weight: 600;
 }
 
-.blankInput {
+.slotRow {
+    display: inline-flex;
+    gap: 3px;
+}
+
+.slotInput {
     border: none;
     border-bottom: 2px solid var(--color-accent);
     background: transparent;
-    padding: 2px 4px;
-    font-size: var(--font-size-body);
-    width: 80px;
+    padding: 0;
+    font-size: var(--font-size-lg);
+    line-height: 1;
+    width: 0.85em;
+    min-height: 1.2em;
+    text-align: center;
     outline: none;
     color: var(--color-text);
+    font-family: inherit;
 }
 
-.blankInput.correct {
+.slotInput.correct {
     border-bottom-color: var(--color-correct);
     color: var(--color-correct);
 }
 
-.blankInput.wrong {
+.slotInput.wrong {
     border-bottom-color: var(--color-incorrect);
     color: var(--color-incorrect);
 }

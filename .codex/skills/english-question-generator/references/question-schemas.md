@@ -157,29 +157,29 @@
 
 ## TOEFL Reading: Complete the Words
 
-段落内の単語を `word___` 形式で一部隠し、ヒントの頭文字を元に補完する。
+段落内の単語を `hint + _` 形式で一部隠し、**hintの続きだけ**を入力させる。
 
 ```json
 {
-  "paragraph": "The process of photosynth___ allows plants to conv___ sunlight into chem___ energy. Chlorophyll, the green pig___ found in plant cells, absor___ light from the sun.",
+  "paragraph": "The process of pho_________ allows plants to con____ sunlight into che_____ energy. Chlorophyll, the green pig____ found in plant cells, abs____ light from the sun.",
   "items": [
     {
       "index": 0,
       "hint": "pho",
       "answer": "photosynthesis",
-      "placeholder": "photosynth___"
+      "placeholder": "pho_________"
     },
     {
       "index": 1,
       "hint": "con",
       "answer": "convert",
-      "placeholder": "conv___"
+      "placeholder": "con____"
     },
     {
       "index": 2,
       "hint": "che",
       "answer": "chemical",
-      "placeholder": "chem___"
+      "placeholder": "che_____"
     }
   ]
 }
@@ -187,11 +187,14 @@
 
 **フィールド仕様:**
 
-- `paragraph`: `word___` 形式のプレースホルダーを含む文
+- `paragraph`: `hint + _` のプレースホルダーを含む文
 - `items[].index`: 段落内の出現順（0始まり）
 - `items[].hint`: 最初の2〜3文字
 - `items[].answer`: 正解の完全な単語
-- `items[].placeholder`: `paragraph` 内の文字列と**完全一致**させること
+- `items[].hint` は `items[].answer` の先頭一致にする（大文字小文字は無視可）
+- `items[].placeholder`: `hint + 続き文字数分の _` で作り、`paragraph` 内文字列と**完全一致**させる
+- 続き文字数 = `answer.length - hint.length`
+- UIでは hint 部分は表示済みで、解答者は続き部分のみ入力する
 - 穴埋め数: 8〜10個
 
 ---
