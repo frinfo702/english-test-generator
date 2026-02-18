@@ -3,7 +3,7 @@ import { SectionHeader } from "../../components/layout/SectionHeader";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
-import { useGenerateProblem } from "../../hooks/useGenerateProblem";
+import { useQuestion } from "../../hooks/useQuestion";
 import styles from "./Part7Page.module.css";
 
 interface Passage {
@@ -12,7 +12,6 @@ interface Passage {
   title: string | null;
   content: string;
 }
-
 interface Question {
   id: string;
   type: string;
@@ -22,18 +21,11 @@ interface Question {
   explanation: string;
   passageRef: string;
 }
-
 interface ProblemData {
-  setType: "single" | "double" | "triple";
+  setType: string;
   passages: Passage[];
   questions: Question[];
 }
-
-const SET_TYPES = [
-  { value: "single", label: "Single Passage" },
-  { value: "double", label: "Double Passage" },
-  { value: "triple", label: "Triple Passage" },
-];
 
 const TYPE_LABELS: Record<string, string> = {
   detail: "詳細",
@@ -45,32 +37,39 @@ const TYPE_LABELS: Record<string, string> = {
 };
 
 export function Part7Page() {
-  const [setType, setSetType] = useState<"single" | "double" | "triple">("single");
+  const { data, loading, error, load } =
+    useQuestion<ProblemData>("toeic/part7");
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState<Record<string, boolean>>({});
-  const [done, setDone] = useState(false);
 
-  const { data, loading, error, generate } = useGenerateProblem<ProblemData>({
-    promptPath: "/prompts/toeic/part7-reading-comprehension.json",
-    variables: { setType },
-  });
-
-  useEffect(() => { generate({ setType }); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const questions = data?.questions ?? [];
-  const allAnswered = questions.length > 0 && questions.every((q) => submitted[q.id]);
-  const totalCorrect = questions.filter((q) => submitted[q.id] && selected[q.id] === q.correct).length;
+  const allAnswered =
+    questions.length > 0 && questions.every((q) => submitted[q.id]);
+  const totalCorrect = questions.filter(
+    (q) => submitted[q.id] && selected[q.id] === q.correct,
+  ).length;
 
   const handleSelect = (id: string, opt: string) => {
-    if (submitted[id]) return;
-    setSelected((s) => ({ ...s, [id]: opt }));
+    if (!submitted[id]) setSelected((s) => ({ ...s, [id]: opt }));
   };
-  const handleCheck = (q: Question) => setSubmitted((s) => ({ ...s, [q.id]: true }));
-
+  const handleCheck = (q: Question) =>
+    setSubmitted((s) => ({ ...s, [q.id]: true }));
   const handleNew = () => {
-    setSelected({}); setSubmitted({}); setDone(false);
-    generate({ setType });
+    setSelected({});
+    setSubmitted({});
+    load();
   };
+
+  const setTypeLabel =
+    data?.setType === "single"
+      ? "Single Passage"
+      : data?.setType === "double"
+        ? "Double Passage"
+        : "Triple Passage";
 
   return (
     <div>
@@ -82,29 +81,31 @@ export function Part7Page() {
         total={questions.length}
       />
 
-      <div className={styles.controls}>
-        <div className={styles.setTypeSelector}>
-          {SET_TYPES.map((st) => (
-            <button
-              key={st.value}
-              className={[styles.typeBtn, setType === st.value ? styles.active : ""].join(" ")}
-              onClick={() => setSetType(st.value as typeof setType)}
-            >
-              {st.label}
-            </button>
-          ))}
-        </div>
-        <Button variant="secondary" size="sm" onClick={handleNew} disabled={loading}>
-          新しい問題
+      <div className={styles.topBar}>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={handleNew}
+          disabled={loading}
+        >
+          別の問題を読み込む
         </Button>
       </div>
 
-      {loading && <LoadingSpinner />}
-      {error && <p className={styles.error}>エラー: {error}</p>}
+      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {error && (
+        <div className={styles.error}>
+          <p>{error}</p>
+          <p className={styles.errorHint}>
+            questions/toeic/part7/ に問題JSONを追加してください。
+          </p>
+        </div>
+      )}
 
-      {data && !loading && !done && (
+      {data && !loading && (
         <>
-          {/* Passages */}
+          <div className={styles.setTypeBadge}>{setTypeLabel}</div>
+
           <div className={styles.passages}>
             {data.passages.map((p, i) => (
               <div key={p.id} className={styles.passageCard}>
@@ -120,7 +121,6 @@ export function Part7Page() {
             ))}
           </div>
 
-          {/* Questions */}
           <div className={styles.questions}>
             {questions.map((q, idx) => {
               const sel = selected[q.id];
@@ -129,7 +129,9 @@ export function Part7Page() {
                 <div key={q.id} className={styles.qBlock}>
                   <div className={styles.qHeader}>
                     <span className={styles.qNum}>{idx + 1}</span>
-                    <span className={styles.qType}>{TYPE_LABELS[q.type] ?? q.type}</span>
+                    <span className={styles.qType}>
+                      {TYPE_LABELS[q.type] ?? q.type}
+                    </span>
                     {q.passageRef === "cross" && (
                       <span className={styles.crossTag}>クロス参照</span>
                     )}
@@ -143,7 +145,9 @@ export function Part7Page() {
                           styles.option,
                           sel === opt ? styles.selected : "",
                           sub && opt === q.correct ? styles.correctOpt : "",
-                          sub && sel === opt && opt !== q.correct ? styles.wrongOpt : "",
+                          sub && sel === opt && opt !== q.correct
+                            ? styles.wrongOpt
+                            : "",
                         ].join(" ")}
                         onClick={() => handleSelect(q.id, opt)}
                       >
@@ -160,19 +164,29 @@ export function Part7Page() {
                     />
                   )}
                   {!sub && (
-                    <Button size="sm" onClick={() => handleCheck(q)} disabled={!sel}>確認</Button>
+                    <Button
+                      size="sm"
+                      onClick={() => handleCheck(q)}
+                      disabled={!sel}
+                    >
+                      確認
+                    </Button>
                   )}
                 </div>
               );
             })}
           </div>
 
-          {allAnswered && !done && (
+          {allAnswered && (
             <div className={styles.resultInline}>
               <p className={styles.inlineScore}>
-                正答数: <strong>{totalCorrect} / {questions.length}</strong>（{Math.round((totalCorrect / questions.length) * 100)}%）
+                正答数:{" "}
+                <strong>
+                  {totalCorrect} / {questions.length}
+                </strong>
+                （{Math.round((totalCorrect / questions.length) * 100)}%）
               </p>
-              <Button onClick={handleNew}>新しい問題</Button>
+              <Button onClick={handleNew}>別の問題</Button>
             </div>
           )}
         </>

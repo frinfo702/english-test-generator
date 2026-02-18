@@ -1,3 +1,6 @@
+.topBar { display: flex; justify-content: flex-end; margin-bottom: var(--spacing-xl); }
+.errorHint { margin-top: var(--spacing-sm); font-size: var(--font-size-sm); color: var(--color-text-muted); }
+
 .controls {
   display: flex;
   align-items: center;

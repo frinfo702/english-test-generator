@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { useGenerateProblem } from "../../../hooks/useGenerateProblem";
+import { useQuestion } from "../../../hooks/useQuestion";
+import { useState } from "react";
 import styles from "./CompleteWordsPage.module.css";
 
 interface Item {
@@ -17,32 +18,18 @@ interface ProblemData {
   items: Item[];
 }
 
-const DIFFICULTIES = [
-  { value: "Module 1 (Standard)", label: "Module 1 標準" },
-  { value: "Module 2 Easy", label: "Module 2 Easy" },
-  { value: "Module 2 Hard", label: "Module 2 Hard" },
-];
-
-const TOPICS = [
-  "biology", "geology", "astronomy", "psychology",
-  "sociology", "history", "linguistics", "environmental science",
-];
-
 export function CompleteWordsPage() {
-  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0].value);
+  const { data, loading, error, load } = useQuestion<ProblemData>(
+    "toefl/reading/complete-words",
+  );
   const [answers, setAnswers] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
-  const [score, setScore] = useState<{ correct: number; total: number } | null>(null);
-
-  const topic = TOPICS[Math.floor(Math.random() * TOPICS.length)];
-
-  const { data, loading, error, generate } = useGenerateProblem<ProblemData>({
-    promptPath: "/prompts/toefl/reading/complete-the-words.json",
-    variables: { difficulty, topic },
-  });
+  const [score, setScore] = useState<{ correct: number; total: number } | null>(
+    null,
+  );
 
   useEffect(() => {
-    generate({ difficulty, topic });
+    load();
   }, []);
 
   useEffect(() => {
@@ -57,30 +44,31 @@ export function CompleteWordsPage() {
     if (!data) return;
     let correct = 0;
     data.items.forEach((item, i) => {
-      if (answers[i].trim().toLowerCase() === item.answer.toLowerCase()) correct++;
+      if (answers[i].trim().toLowerCase() === item.answer.toLowerCase())
+        correct++;
     });
     setScore({ correct, total: data.items.length });
     setSubmitted(true);
   };
 
-  const handleNew = () => {
-    generate({ difficulty, topic: TOPICS[Math.floor(Math.random() * TOPICS.length)] });
-  };
+  const handleNew = () => load();
 
   const renderParagraph = () => {
     if (!data) return null;
-    let text = data.paragraph;
+    const text = data.paragraph;
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
-    const sorted = [...data.items].sort((a, b) =>
-      text.indexOf(a.placeholder) - text.indexOf(b.placeholder)
+    const sorted = [...data.items].sort(
+      (a, b) => text.indexOf(a.placeholder) - text.indexOf(b.placeholder),
     );
     sorted.forEach((item, i) => {
       const pos = text.indexOf(item.placeholder, lastIndex);
       if (pos === -1) return;
       parts.push(<span key={`t${i}`}>{text.slice(lastIndex, pos)}</span>);
       const itemIdx = data.items.indexOf(item);
-      const isCorrect = submitted && answers[itemIdx].trim().toLowerCase() === item.answer.toLowerCase();
+      const isCorrect =
+        submitted &&
+        answers[itemIdx].trim().toLowerCase() === item.answer.toLowerCase();
       const isWrong = submitted && !isCorrect;
       parts.push(
         <span key={`inp${i}`} className={styles.blankWrapper}>
@@ -101,7 +89,7 @@ export function CompleteWordsPage() {
             size={8}
           />
           {isWrong && <span className={styles.correctHint}>{item.answer}</span>}
-        </span>
+        </span>,
       );
       lastIndex = pos + item.placeholder.length;
     });
@@ -117,32 +105,37 @@ export function CompleteWordsPage() {
         backTo="/toefl"
       />
 
-      <div className={styles.controls}>
-        <div className={styles.difficultySelector}>
-          {DIFFICULTIES.map((d) => (
-            <button
-              key={d.value}
-              className={[styles.diffBtn, difficulty === d.value ? styles.active : ""].join(" ")}
-              onClick={() => setDifficulty(d.value)}
-            >
-              {d.label}
-            </button>
-          ))}
-        </div>
-        <Button variant="secondary" size="sm" onClick={handleNew} disabled={loading}>
-          新しい問題
+      <div className={styles.topBar}>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={handleNew}
+          disabled={loading}
+        >
+          別の問題を読み込む
         </Button>
       </div>
 
-      {loading && <LoadingSpinner />}
-      {error && <p className={styles.error}>エラー: {error}</p>}
+      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {error && (
+        <div className={styles.error}>
+          <p>{error}</p>
+          <p className={styles.errorHint}>
+            AIに問題を生成してもらい、questions/toefl/reading/complete-words/
+            に保存してください。
+          </p>
+        </div>
+      )}
 
       {data && !loading && (
         <>
           <div className={styles.paragraph}>{renderParagraph()}</div>
 
           {!submitted ? (
-            <Button onClick={handleSubmit} disabled={answers.some((a) => !a.trim())}>
+            <Button
+              onClick={handleSubmit}
+              disabled={answers.some((a) => !a.trim())}
+            >
               答え合わせ
             </Button>
           ) : (
@@ -151,7 +144,11 @@ export function CompleteWordsPage() {
                 <span className={styles.scoreNum}>{score?.correct}</span>
                 <span className={styles.scoreDen}>/{score?.total}</span>
                 <span className={styles.scorePct}>
-                  ({Math.round(((score?.correct ?? 0) / (score?.total ?? 1)) * 100)}%)
+                  (
+                  {Math.round(
+                    ((score?.correct ?? 0) / (score?.total ?? 1)) * 100,
+                  )}
+                  %)
                 </span>
               </div>
               <Button onClick={handleNew}>次の問題</Button>

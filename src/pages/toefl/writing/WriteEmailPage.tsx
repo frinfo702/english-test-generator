@@ -4,7 +4,7 @@ import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { Timer } from "../../../components/ui/Timer";
 import { useTimer } from "../../../hooks/useTimer";
-import { useGenerateProblem } from "../../../hooks/useGenerateProblem";
+import { useQuestion } from "../../../hooks/useQuestion";
 import styles from "./WriteEmailPage.module.css";
 
 interface Scenario {
@@ -26,43 +26,34 @@ interface ProblemData {
   rubric: RubricItem[];
 }
 
-const DIFFICULTIES = [
-  { value: "Module 1 (Standard)", label: "Module 1 標準" },
-  { value: "Module 2 Easy", label: "Module 2 Easy" },
-  { value: "Module 2 Hard", label: "Module 2 Hard" },
-];
-
 export function WriteEmailPage() {
-  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0].value);
+  const { data, loading, error, load } = useQuestion<ProblemData>(
+    "toefl/writing/email",
+  );
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "writing" | "submitted">("pre");
   const [showModel, setShowModel] = useState(false);
 
   const timer = useTimer(7 * 60, () => setPhase("submitted"));
 
-  const { data, loading, error, generate } = useGenerateProblem<ProblemData>({
-    promptPath: "/prompts/toefl/writing/write-an-email.json",
-    variables: { difficulty },
-  });
-
-  useEffect(() => { generate({ difficulty }); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const handleStart = () => {
     setPhase("writing");
     timer.start();
   };
-
   const handleSubmit = () => {
     timer.stop();
     setPhase("submitted");
   };
-
   const handleNew = () => {
     setUserText("");
     setPhase("pre");
     setShowModel(false);
     timer.reset();
-    generate({ difficulty });
+    load();
   };
 
   return (
@@ -73,26 +64,26 @@ export function WriteEmailPage() {
         backTo="/toefl"
       />
 
-      <div className={styles.controls}>
-        <div className={styles.difficultySelector}>
-          {DIFFICULTIES.map((d) => (
-            <button
-              key={d.value}
-              className={[styles.diffBtn, difficulty === d.value ? styles.active : ""].join(" ")}
-              onClick={() => setDifficulty(d.value)}
-              disabled={phase === "writing"}
-            >
-              {d.label}
-            </button>
-          ))}
-        </div>
-        <Button variant="secondary" size="sm" onClick={handleNew} disabled={loading || phase === "writing"}>
-          新しい問題
+      <div className={styles.topBar}>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={handleNew}
+          disabled={loading || phase === "writing"}
+        >
+          別の問題を読み込む
         </Button>
       </div>
 
-      {loading && <LoadingSpinner />}
-      {error && <p className={styles.error}>エラー: {error}</p>}
+      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {error && (
+        <div className={styles.error}>
+          <p>{error}</p>
+          <p className={styles.errorHint}>
+            questions/toefl/writing/email/ に問題JSONを追加してください。
+          </p>
+        </div>
+      )}
 
       {data && !loading && (
         <>
@@ -100,21 +91,31 @@ export function WriteEmailPage() {
             <h2 className={styles.scenarioTitle}>{data.scenario.title}</h2>
             <p className={styles.scenarioDesc}>{data.scenario.description}</p>
             <div className={styles.scenarioMeta}>
-              <span><strong>宛先:</strong> {data.scenario.recipient}</span>
-              <span><strong>目的:</strong> {data.scenario.purpose}</span>
+              <span>
+                <strong>宛先:</strong> {data.scenario.recipient}
+              </span>
+              <span>
+                <strong>目的:</strong> {data.scenario.purpose}
+              </span>
             </div>
             <div className={styles.keyPoints}>
               <p className={styles.keyPointsLabel}>含めるべき内容:</p>
               <ul>
-                {data.scenario.keyPoints.map((pt, i) => <li key={i}>{pt}</li>)}
+                {data.scenario.keyPoints.map((pt, i) => (
+                  <li key={i}>{pt}</li>
+                ))}
               </ul>
             </div>
           </div>
 
           {phase === "pre" && (
             <div className={styles.startCard}>
-              <p>準備ができたら「開始」を押してください。7分のタイマーが始まります。</p>
-              <Button size="lg" onClick={handleStart}>開始</Button>
+              <p>
+                準備ができたら「開始」を押してください。7分のタイマーが始まります。
+              </p>
+              <Button size="lg" onClick={handleStart}>
+                開始
+              </Button>
             </div>
           )}
 
@@ -126,7 +127,9 @@ export function WriteEmailPage() {
                   isWarning={timer.isWarning}
                   isExpired={timer.isExpired}
                 />
-                <span className={styles.wordCount}>{userText.trim().split(/\s+/).filter(Boolean).length} 語</span>
+                <span className={styles.wordCount}>
+                  {userText.trim().split(/\s+/).filter(Boolean).length} 語
+                </span>
               </div>
               <textarea
                 className={styles.textarea}
@@ -149,13 +152,17 @@ export function WriteEmailPage() {
                 {data.rubric.map((r, i) => (
                   <div key={i} className={styles.rubricItem}>
                     <span className={styles.criterion}>{r.criterion}</span>
-                    <span className={styles.criterionDesc}>{r.description}</span>
+                    <span className={styles.criterionDesc}>
+                      {r.description}
+                    </span>
                   </div>
                 ))}
               </div>
-
               <div className={styles.modelSection}>
-                <Button variant="secondary" onClick={() => setShowModel((v) => !v)}>
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowModel((v) => !v)}
+                >
                   {showModel ? "模範解答を隠す" : "模範解答を見る"}
                 </Button>
                 {showModel && (
@@ -165,8 +172,9 @@ export function WriteEmailPage() {
                   </div>
                 )}
               </div>
-
-              <Button onClick={handleNew} size="lg">次の問題</Button>
+              <Button onClick={handleNew} size="lg">
+                次の問題
+              </Button>
             </div>
           )}
         </>

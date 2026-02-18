@@ -5,7 +5,7 @@ import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { Timer } from "../../../components/ui/Timer";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useTimer } from "../../../hooks/useTimer";
-import { useGenerateProblem } from "../../../hooks/useGenerateProblem";
+import { useQuestion } from "../../../hooks/useQuestion";
 import styles from "./TakeInterviewPage.module.css";
 
 interface InterviewQuestion {
@@ -20,12 +20,6 @@ interface ProblemData {
   questions: InterviewQuestion[];
 }
 
-const DIFFICULTIES = [
-  { value: "Module 1 (Standard)", label: "Module 1 標準" },
-  { value: "Module 2 Easy", label: "Module 2 Easy" },
-  { value: "Module 2 Hard", label: "Module 2 Hard" },
-];
-
 const TYPE_LABELS: Record<string, string> = {
   personal: "個人的経験",
   opinion: "意見",
@@ -34,7 +28,9 @@ const TYPE_LABELS: Record<string, string> = {
 };
 
 export function TakeInterviewPage() {
-  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0].value);
+  const { data, loading, error, load } = useQuestion<ProblemData>(
+    "toefl/speaking/interview",
+  );
   const [current, setCurrent] = useState(0);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "answering" | "submitted">("pre");
@@ -43,29 +39,32 @@ export function TakeInterviewPage() {
 
   const timer = useTimer(45, () => setPhase("submitted"));
 
-  const { data, loading, error, generate } = useGenerateProblem<ProblemData>({
-    promptPath: "/prompts/toefl/speaking/take-an-interview.json",
-    variables: { difficulty },
-  });
-
-  useEffect(() => { generate({ difficulty }); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const q = data?.questions[current];
 
-  const handleStart = () => { setPhase("answering"); timer.start(); };
-  const handleSubmit = () => { timer.stop(); setPhase("submitted"); };
+  const handleStart = () => {
+    setPhase("answering");
+    timer.start();
+  };
+  const handleSubmit = () => {
+    timer.stop();
+    setPhase("submitted");
+  };
 
   const handleNext = () => {
     if (!data) return;
     if (current + 1 >= data.questions.length) {
       setDone(true);
-    } else {
-      setCurrent((c) => c + 1);
-      setUserText("");
-      setPhase("pre");
-      setShowModel(false);
-      timer.reset();
+      return;
     }
+    setCurrent((c) => c + 1);
+    setUserText("");
+    setPhase("pre");
+    setShowModel(false);
+    timer.reset();
   };
 
   const handleNew = () => {
@@ -75,7 +74,7 @@ export function TakeInterviewPage() {
     setShowModel(false);
     setDone(false);
     timer.reset();
-    generate({ difficulty });
+    load();
   };
 
   return (
@@ -88,48 +87,57 @@ export function TakeInterviewPage() {
         total={data?.questions.length}
       />
 
-      <div className={styles.controls}>
-        <div className={styles.difficultySelector}>
-          {DIFFICULTIES.map((d) => (
-            <button
-              key={d.value}
-              className={[styles.diffBtn, difficulty === d.value ? styles.active : ""].join(" ")}
-              onClick={() => setDifficulty(d.value)}
-              disabled={phase === "answering"}
-            >
-              {d.label}
-            </button>
-          ))}
-        </div>
-        <Button variant="secondary" size="sm" onClick={handleNew} disabled={loading || phase === "answering"}>
-          新しい問題セット
+      <div className={styles.topBar}>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={handleNew}
+          disabled={loading || phase === "answering"}
+        >
+          別の問題セットを読み込む
         </Button>
       </div>
 
-      {loading && <LoadingSpinner />}
-      {error && <p className={styles.error}>エラー: {error}</p>}
+      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {error && (
+        <div className={styles.error}>
+          <p>{error}</p>
+          <p className={styles.errorHint}>
+            questions/toefl/speaking/interview/ に問題JSONを追加してください。
+          </p>
+        </div>
+      )}
 
       {data && !loading && !done && q && (
         <div className={styles.card}>
           <div className={styles.cardHeader}>
-            <span className={styles.typeTag}>{TYPE_LABELS[q.type] ?? q.type}</span>
-            <span className={styles.qNum}>問題 {current + 1} / {data.questions.length}</span>
+            <span className={styles.typeTag}>
+              {TYPE_LABELS[q.type] ?? q.type}
+            </span>
+            <span className={styles.qNum}>
+              問題 {current + 1} / {data.questions.length}
+            </span>
           </div>
-
           <p className={styles.question}>{q.question}</p>
 
           {phase === "pre" && (
             <div className={styles.preBox}>
-              <p className={styles.preNote}>準備時間はありません。「開始」を押すと45秒タイマーが始まります。</p>
-              <Button size="lg" onClick={handleStart}>開始</Button>
+              <p className={styles.preNote}>
+                準備時間はありません。「開始」を押すと45秒タイマーが始まります。
+              </p>
+              <Button size="lg" onClick={handleStart}>
+                開始
+              </Button>
             </div>
           )}
 
           {(phase === "answering" || phase === "submitted") && (
             <div className={styles.answerArea}>
-              <div className={styles.timerRow}>
-                <Timer display={timer.display} isWarning={timer.isWarning} isExpired={timer.isExpired} />
-              </div>
+              <Timer
+                display={timer.display}
+                isWarning={timer.isWarning}
+                isExpired={timer.isExpired}
+              />
               <textarea
                 className={styles.textarea}
                 value={userText}
@@ -149,22 +157,25 @@ export function TakeInterviewPage() {
               <div className={styles.evalCard}>
                 <h3>評価ポイント</h3>
                 <ul>
-                  {q.evaluationPoints.map((pt, i) => <li key={i}>{pt}</li>)}
+                  {q.evaluationPoints.map((pt, i) => (
+                    <li key={i}>{pt}</li>
+                  ))}
                 </ul>
               </div>
-
               <div className={styles.modelArea}>
-                <Button variant="secondary" onClick={() => setShowModel((v) => !v)}>
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowModel((v) => !v)}
+                >
                   {showModel ? "模範解答を隠す" : "模範解答を見る"}
                 </Button>
                 {showModel && (
                   <div className={styles.modelAnswer}>
-                    <h3>模範解答（約80-120語）</h3>
+                    <h3>模範解答</h3>
                     <p>{q.modelAnswer}</p>
                   </div>
                 )}
               </div>
-
               <Button onClick={handleNext}>
                 {current + 1 < data.questions.length ? "次の質問" : "終了"}
               </Button>
@@ -177,8 +188,14 @@ export function TakeInterviewPage() {
         <div className={styles.resultCard}>
           <h2>インタビュー完了</h2>
           <p>{data.questions.length}問すべてに回答しました。</p>
-          <ProgressBar current={data.questions.length} total={data.questions.length} label="完了" />
-          <Button onClick={handleNew} size="lg">新しい問題セット</Button>
+          <ProgressBar
+            current={data.questions.length}
+            total={data.questions.length}
+            label="完了"
+          />
+          <Button onClick={handleNew} size="lg">
+            別の問題セット
+          </Button>
         </div>
       )}
     </div>

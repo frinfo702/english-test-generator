@@ -1,22 +1,71 @@
 # English Test Practice
 
-TOEFL iBT 2026年新形式 と TOEIC Reading の問題をAIが都度生成するローカル練習アプリ。
+TOEFL iBT 2026年新形式 と TOEIC Reading の練習アプリ。
+**ネットワーク接続・APIキー不要**。AIエージェントがローカルに生成した問題JSONを読み込んで練習します。
 
 ## セットアップ
 
 ```bash
-# 1. 依存パッケージのインストール
 npm install
-
-# 2. APIキーの設定
-cp .env.local.example .env.local
-# .env.local を編集して VITE_ANTHROPIC_API_KEY を設定
-
-# 3. 起動
 npm run dev
+# → http://localhost:5173
 ```
 
-ブラウザで `http://localhost:5173` を開いてください。
+## 問題の追加方法
+
+問題はAIエージェント（Claude Code等）に生成してもらい、`public/questions/` 配下の対応フォルダに保存します。
+
+### ディレクトリ構造
+
+```
+public/
+├── prompts/          # AIへの指示書（プロンプトテンプレート）
+│   ├── toefl/reading/complete-the-words.json
+│   ├── toefl/reading/read-in-daily-life.json
+│   ├── ...
+│   └── toeic/part7-reading-comprehension.json
+│
+└── questions/        # AIが生成した問題ファイル（←ここに追加）
+    ├── toefl/
+    │   ├── reading/complete-words/
+    │   │   ├── index.json   ← {"files":["001.json","002.json",...]}
+    │   │   ├── 001.json
+    │   │   └── 002.json
+    │   ├── reading/daily-life/
+    │   ├── reading/academic/
+    │   ├── writing/build-sentence/
+    │   ├── writing/email/
+    │   ├── writing/discussion/
+    │   ├── speaking/listen-repeat/
+    │   └── speaking/interview/
+    └── toeic/
+        ├── part5/
+        ├── part6/
+        └── part7/
+```
+
+### index.json の形式
+
+各タスクフォルダに `index.json` が必要です：
+
+```json
+{ "files": ["001.json", "002.json"] }
+```
+
+アプリ起動時にランダムで1ファイルを選んで読み込みます。
+
+### AIへの依頼方法
+
+Claude Codeに以下のように依頼してください：
+
+```
+public/prompts/toefl/reading/complete-the-words.json の仕様に従って
+TOEFL Reading Complete the Words の問題を生成し、
+public/questions/toefl/reading/complete-words/002.json に保存してください。
+index.json も更新してください。
+```
+
+各 `public/prompts/` ファイルに出力JSONのスキーマが定義されています。
 
 ## 対応コンテンツ
 
@@ -30,13 +79,12 @@ npm run dev
 
 ### TOEIC Reading
 
-| パート | 内容                                                  |
-| ------ | ----------------------------------------------------- |
-| Part 5 | Incomplete Sentences（30問）                          |
-| Part 6 | Text Completion（4文書×4問）                          |
-| Part 7 | Reading Comprehension（Single/Double/Triple Passage） |
+| パート | 内容                                                      |
+| ------ | --------------------------------------------------------- |
+| Part 5 | Incomplete Sentences（30問）                              |
+| Part 6 | Text Completion（4文書×4問）                              |
+| Part 7 | Reading Comprehension（Single / Double / Triple Passage） |
 
-## プロンプトのカスタマイズ
+## サンプル問題
 
-`public/prompts/` 配下のJSONファイルを直接編集することで、問題生成の指示をカスタマイズできます。
-アプリを再起動せずページをリロードするだけで反映されます。
+各タスクに1セットのサンプル問題が同梱されています。すぐに練習を始められます。

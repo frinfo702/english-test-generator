@@ -1,122 +1,94 @@
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-xl);
-}
-
-.difficultySelector {
-  display: flex;
-  gap: var(--spacing-sm);
-  flex-wrap: wrap;
-}
-
-.diffBtn {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 6px 14px;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  transition: all 0.15s;
-}
-
-.diffBtn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
-.diffBtn.active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: #fff;
-  font-weight: 600;
+.topBar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--spacing-xl);
 }
 
 .paragraph {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  font-size: var(--font-size-lg);
-  line-height: 2.2;
-  margin-bottom: var(--spacing-xl);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    font-size: var(--font-size-lg);
+    line-height: 2.2;
+    margin-bottom: var(--spacing-xl);
 }
 
 .blankWrapper {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
 }
 
 .hint {
-  color: var(--color-accent);
-  font-weight: 600;
+    color: var(--color-accent);
+    font-weight: 600;
 }
 
 .blankInput {
-  border: none;
-  border-bottom: 2px solid var(--color-accent);
-  background: transparent;
-  padding: 2px 4px;
-  font-size: var(--font-size-body);
-  width: 80px;
-  outline: none;
-  color: var(--color-text);
+    border: none;
+    border-bottom: 2px solid var(--color-accent);
+    background: transparent;
+    padding: 2px 4px;
+    font-size: var(--font-size-body);
+    width: 80px;
+    outline: none;
+    color: var(--color-text);
 }
 
 .blankInput.correct {
-  border-bottom-color: var(--color-correct);
-  color: var(--color-correct);
+    border-bottom-color: var(--color-correct);
+    color: var(--color-correct);
 }
 
 .blankInput.wrong {
-  border-bottom-color: var(--color-incorrect);
-  color: var(--color-incorrect);
+    border-bottom-color: var(--color-incorrect);
+    color: var(--color-incorrect);
 }
 
 .correctHint {
-  font-size: var(--font-size-sm);
-  color: var(--color-correct);
-  font-style: italic;
-  margin-left: 2px;
+    font-size: var(--font-size-sm);
+    color: var(--color-correct);
+    font-style: italic;
+    margin-left: 2px;
 }
 
 .result {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-lg);
-  flex-wrap: wrap;
-  margin-top: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-md);
 }
 
 .scoreBox {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
 }
 
 .scoreNum {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--color-accent);
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-accent);
 }
-
 .scoreDen {
-  font-size: var(--font-size-xl);
-  color: var(--color-text-muted);
+    font-size: var(--font-size-xl);
+    color: var(--color-text-muted);
 }
-
 .scorePct {
-  font-size: var(--font-size-body);
-  color: var(--color-text-muted);
+    font-size: var(--font-size-body);
+    color: var(--color-text-muted);
 }
 
 .error {
-  color: var(--color-incorrect);
-  background: var(--color-incorrect-bg);
-  padding: var(--spacing-md);
-  border-radius: var(--radius);
+    color: var(--color-incorrect);
+    background: var(--color-incorrect-bg);
+    padding: var(--spacing-md);
+    border-radius: var(--radius);
+}
+.errorHint {
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
 }

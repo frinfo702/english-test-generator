@@ -4,7 +4,7 @@ import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { Timer } from "../../../components/ui/Timer";
 import { useTimer } from "../../../hooks/useTimer";
-import { useGenerateProblem } from "../../../hooks/useGenerateProblem";
+import { useQuestion } from "../../../hooks/useQuestion";
 import styles from "./WriteDiscussionPage.module.css";
 
 interface Student {
@@ -21,38 +21,39 @@ interface ProblemData {
   evaluationPoints: string[];
 }
 
-const DIFFICULTIES = [
-  { value: "Module 1 (Standard)", label: "Module 1 標準" },
-  { value: "Module 2 Easy", label: "Module 2 Easy" },
-  { value: "Module 2 Hard", label: "Module 2 Hard" },
-];
-
 const MIN_WORDS = 100;
 
 export function WriteDiscussionPage() {
-  const [difficulty, setDifficulty] = useState(DIFFICULTIES[0].value);
+  const { data, loading, error, load } = useQuestion<ProblemData>(
+    "toefl/writing/discussion",
+  );
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "writing" | "submitted">("pre");
   const [showModel, setShowModel] = useState(false);
 
   const timer = useTimer(10 * 60, () => setPhase("submitted"));
 
-  const { data, loading, error, generate } = useGenerateProblem<ProblemData>({
-    promptPath: "/prompts/toefl/writing/write-academic-discussion.json",
-    variables: { difficulty },
-  });
-
-  useEffect(() => { generate({ difficulty }); }, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const wordCount = userText.trim().split(/\s+/).filter(Boolean).length;
   const meetsMinWords = wordCount >= MIN_WORDS;
 
-  const handleStart = () => { setPhase("writing"); timer.start(); };
-  const handleSubmit = () => { timer.stop(); setPhase("submitted"); };
+  const handleStart = () => {
+    setPhase("writing");
+    timer.start();
+  };
+  const handleSubmit = () => {
+    timer.stop();
+    setPhase("submitted");
+  };
   const handleNew = () => {
-    setUserText(""); setPhase("pre"); setShowModel(false);
+    setUserText("");
+    setPhase("pre");
+    setShowModel(false);
     timer.reset();
-    generate({ difficulty });
+    load();
   };
 
   return (
@@ -63,32 +64,34 @@ export function WriteDiscussionPage() {
         backTo="/toefl"
       />
 
-      <div className={styles.controls}>
-        <div className={styles.difficultySelector}>
-          {DIFFICULTIES.map((d) => (
-            <button
-              key={d.value}
-              className={[styles.diffBtn, difficulty === d.value ? styles.active : ""].join(" ")}
-              onClick={() => setDifficulty(d.value)}
-              disabled={phase === "writing"}
-            >
-              {d.label}
-            </button>
-          ))}
-        </div>
-        <Button variant="secondary" size="sm" onClick={handleNew} disabled={loading || phase === "writing"}>
-          新しい問題
+      <div className={styles.topBar}>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={handleNew}
+          disabled={loading || phase === "writing"}
+        >
+          別の問題を読み込む
         </Button>
       </div>
 
-      {loading && <LoadingSpinner />}
-      {error && <p className={styles.error}>エラー: {error}</p>}
+      {loading && <LoadingSpinner message="問題を読み込み中..." />}
+      {error && (
+        <div className={styles.error}>
+          <p>{error}</p>
+          <p className={styles.errorHint}>
+            questions/toefl/writing/discussion/ に問題JSONを追加してください。
+          </p>
+        </div>
+      )}
 
       {data && !loading && (
         <>
           <div className={styles.discussionCard}>
             <div className={styles.professorBlock}>
-              <span className={styles.roleTag}>Professor {data.professorName}</span>
+              <span className={styles.roleTag}>
+                Professor {data.professorName}
+              </span>
               <p className={styles.professorQ}>{data.professorQuestion}</p>
             </div>
             <div className={styles.students}>
@@ -103,16 +106,29 @@ export function WriteDiscussionPage() {
 
           {phase === "pre" && (
             <div className={styles.startCard}>
-              <p>準備ができたら「開始」を押してください。10分のタイマーが始まります。100語以上記述してください。</p>
-              <Button size="lg" onClick={handleStart}>開始</Button>
+              <p>
+                準備ができたら「開始」を押してください。10分のタイマーが始まります。100語以上記述してください。
+              </p>
+              <Button size="lg" onClick={handleStart}>
+                開始
+              </Button>
             </div>
           )}
 
           {(phase === "writing" || phase === "submitted") && (
             <div className={styles.writingArea}>
               <div className={styles.writingHeader}>
-                <Timer display={timer.display} isWarning={timer.isWarning} isExpired={timer.isExpired} />
-                <span className={[styles.wordCount, meetsMinWords ? styles.ok : styles.notOk].join(" ")}>
+                <Timer
+                  display={timer.display}
+                  isWarning={timer.isWarning}
+                  isExpired={timer.isExpired}
+                />
+                <span
+                  className={[
+                    styles.wordCount,
+                    meetsMinWords ? styles.ok : styles.notOk,
+                  ].join(" ")}
+                >
                   {wordCount} / {MIN_WORDS}+ 語
                 </span>
               </div>
@@ -126,7 +142,8 @@ export function WriteDiscussionPage() {
               />
               {phase === "writing" && (
                 <Button onClick={handleSubmit} disabled={!meetsMinWords}>
-                  提出{!meetsMinWords ? `（あと${MIN_WORDS - wordCount}語）` : ""}
+                  提出
+                  {!meetsMinWords ? `（あと${MIN_WORDS - wordCount}語）` : ""}
                 </Button>
               )}
             </div>
@@ -137,12 +154,16 @@ export function WriteDiscussionPage() {
               <div className={styles.evalCard}>
                 <h3>評価ポイント</h3>
                 <ul className={styles.evalList}>
-                  {data.evaluationPoints.map((pt, i) => <li key={i}>{pt}</li>)}
+                  {data.evaluationPoints.map((pt, i) => (
+                    <li key={i}>{pt}</li>
+                  ))}
                 </ul>
               </div>
-
               <div className={styles.modelSection}>
-                <Button variant="secondary" onClick={() => setShowModel((v) => !v)}>
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowModel((v) => !v)}
+                >
                   {showModel ? "模範解答を隠す" : "模範解答を見る"}
                 </Button>
                 {showModel && (
@@ -152,8 +173,9 @@ export function WriteDiscussionPage() {
                   </div>
                 )}
               </div>
-
-              <Button onClick={handleNew} size="lg">次の問題</Button>
+              <Button onClick={handleNew} size="lg">
+                次の問題
+              </Button>
             </div>
           )}
         </>
