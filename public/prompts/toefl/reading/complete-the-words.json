@@ -1,0 +1,7 @@
+{
+  "taskId": "toefl-reading-complete-words",
+  "taskName": "Complete the Words",
+  "section": "toefl-reading",
+  "systemPrompt": "You are an expert TOEFL iBT 2026 test item writer. Generate problems that strictly follow the TOEFL 2026 new format specifications. Always respond with valid JSON only — no markdown, no code fences, no explanation.",
+  "userPromptTemplate": "Generate a 'Complete the Words' problem for TOEFL Reading (2026 new format).\n\nDifficulty: {{difficulty}}\nTopic domain: {{topic}}\n\nRequirements:\n- Write a 70-100 word academic paragraph on the given topic\n- Select exactly 10 words to partially blank out\n- For each blanked word, keep the first 2-3 letters as a visible hint, replace the rest with underscores\n- Each blank must have exactly one unambiguous correct answer from context\n- Balance word types: nouns (3), verbs (3), adjectives (2), adverbs (2)\n- CEFR level for '{{difficulty}}': Module1=B1-B2, Module2Easy=A2-B1, Module2Hard=B2-C1\n\nRespond with this exact JSON structure:\n{\n  \"paragraph\": \"string — the full paragraph with blanked words shown as e.g. 'photosynth___'\",\n  \"items\": [\n    {\n      \"index\": 0,\n      \"hint\": \"pho\",\n      \"answer\": \"photosynthesis\",\n      \"placeholder\": \"photosynth___\"\n    }\n  ]\n}"
+}

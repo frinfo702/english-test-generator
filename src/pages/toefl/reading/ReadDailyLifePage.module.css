@@ -1,0 +1,228 @@
+.moduleBar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.moduleTag {
+  background: var(--color-accent);
+  color: #fff;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.textCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.textMeta {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.textContent {
+  line-height: 1.9;
+  white-space: pre-wrap;
+}
+
+.questionCard {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.qNum {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.stem {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: 12px var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  text-align: left;
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.option:hover { border-color: var(--color-accent); background: var(--color-accent-light); }
+.option.selected { border-color: var(--color-accent); background: var(--color-accent-light); }
+.option.correctOpt { border-color: var(--color-correct); background: var(--color-correct-bg); }
+.option.wrongOpt { border-color: var(--color-incorrect); background: var(--color-incorrect-bg); }
+
+.optLabel {
+  font-weight: 700;
+  color: var(--color-accent);
+  min-width: 20px;
+}
+
+.btnRow {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+/* Branching card */
+.branchCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.branchHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.branchIcon {
+  font-size: 32px;
+  color: var(--color-correct);
+}
+
+.branchScore {
+  font-size: var(--font-size-lg);
+}
+
+.branchBadge {
+  padding: 10px 24px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: var(--font-size-body);
+}
+
+.hard {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.easy {
+  background: #fefce8;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+/* Result card */
+.resultCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  text-align: center;
+}
+
+.resultTitle {
+  font-size: var(--font-size-xl);
+}
+
+.resultModules {
+  display: flex;
+  gap: var(--spacing-xl);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.moduleResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.moduleLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.moduleScore {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.bandScore {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  background: var(--color-accent-light);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: 12px 24px;
+}
+
+.bandLabel {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.bandValue {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.branchInfo {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.error {
+  color: var(--color-incorrect);
+  background: var(--color-incorrect-bg);
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+}

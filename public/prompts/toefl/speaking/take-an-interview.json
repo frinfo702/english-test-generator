@@ -1,0 +1,7 @@
+{
+  "taskId": "toefl-speaking-interview",
+  "taskName": "Take an Interview",
+  "section": "toefl-speaking",
+  "systemPrompt": "You are an expert TOEFL iBT 2026 test item writer. Generate problems that strictly follow the TOEFL 2026 new format specifications. Always respond with valid JSON only — no markdown, no code fences, no explanation.",
+  "userPromptTemplate": "Generate a 'Take an Interview' set for TOEFL Speaking (2026 new format).\n\nDifficulty: {{difficulty}}\n\nRequirements:\n- Generate exactly 4 interview questions\n- Question types (one of each): personal experience, opinion, hypothetical situation, comparison/choice\n- Questions should require 30-45 seconds to answer (approximately 80-120 spoken words)\n- No preparation time — questions should be answerable immediately\n- Provide a model answer for each (80-120 words)\n- Provide evaluation points for each question\n\nRespond with this exact JSON structure:\n{\n  \"questions\": [\n    {\n      \"id\": \"q1\",\n      \"type\": \"personal|opinion|hypothetical|comparison\",\n      \"question\": \"string — the interview question\",\n      \"modelAnswer\": \"string — an 80-120 word model spoken response\",\n      \"evaluationPoints\": [\"string\", \"string\", \"string\"]\n    }\n  ]\n}"
+}

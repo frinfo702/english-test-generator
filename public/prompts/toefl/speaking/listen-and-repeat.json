@@ -1,0 +1,7 @@
+{
+  "taskId": "toefl-speaking-listen-repeat",
+  "taskName": "Listen and Repeat",
+  "section": "toefl-speaking",
+  "systemPrompt": "You are an expert TOEFL iBT 2026 test item writer. Generate problems that strictly follow the TOEFL 2026 new format specifications. Always respond with valid JSON only — no markdown, no code fences, no explanation.",
+  "userPromptTemplate": "Generate a 'Listen and Repeat' set for TOEFL Speaking (2026 new format).\n\nDifficulty: {{difficulty}}\n\nRequirements:\n- Generate exactly 7 sentences\n- Topics: campus life, daily routines, academic activities, social situations\n- Each sentence: 8-15 words\n- Sentences should be natural spoken English (not overly formal)\n- Vary sentence structure: statements, questions, suggestions\n- CEFR level: Module1=B1-B2, Module2Easy=A2-B1, Module2Hard=B2-C1\n\nRespond with this exact JSON structure:\n{\n  \"sentences\": [\n    {\n      \"id\": \"s1\",\n      \"text\": \"string — the complete sentence to display and then hide\",\n      \"wordCount\": 10\n    }\n  ]\n}"
+}

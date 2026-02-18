@@ -1,0 +1,7 @@
+{
+  "taskId": "toefl-reading-academic",
+  "taskName": "Read an Academic Passage",
+  "section": "toefl-reading",
+  "systemPrompt": "You are an expert TOEFL iBT 2026 test item writer. Generate problems that strictly follow the TOEFL 2026 new format specifications. Always respond with valid JSON only — no markdown, no code fences, no explanation.",
+  "userPromptTemplate": "Generate a 'Read an Academic Passage' problem for TOEFL Reading (2026 new format).\n\nDifficulty: {{difficulty}}\nTopic domain: {{topic}}\n\nRequirements:\n- Write a 180-220 word academic passage on the given topic (2-3 paragraphs)\n- The passage should be informative and factually accurate\n- Generate exactly 5 four-choice questions covering these types: vocabulary (1), detail (2), inference (1), main idea/purpose (1)\n- All questions must be answerable from the passage text only\n- CEFR level for '{{difficulty}}': Module1=B1-B2, Module2Easy=A2-B1, Module2Hard=B2-C1\n\nRespond with this exact JSON structure:\n{\n  \"passage\": \"string — the full academic passage\",\n  \"title\": \"string — a concise title for the passage\",\n  \"questions\": [\n    {\n      \"id\": \"q1\",\n      \"type\": \"vocabulary|detail|inference|mainIdea\",\n      \"stem\": \"string — the question text\",\n      \"options\": [\"A. ...\", \"B. ...\", \"C. ...\", \"D. ...\"],\n      \"correctIndex\": 0,\n      \"explanation\": \"string — why correct answer is right, referencing the passage\"\n    }\n  ]\n}"
+}

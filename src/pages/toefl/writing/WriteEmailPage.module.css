@@ -1,0 +1,84 @@
+.controls {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: var(--spacing-md); margin-bottom: var(--spacing-xl);
+}
+.difficultySelector { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; }
+.diffBtn {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: 6px 14px; font-size: var(--font-size-sm);
+  color: var(--color-text-muted); transition: all 0.15s;
+}
+.diffBtn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.diffBtn.active { background: var(--color-accent); border-color: var(--color-accent); color: #fff; font-weight: 600; }
+.diffBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.scenarioCard {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+}
+.scenarioTitle { font-size: var(--font-size-lg); color: var(--color-accent); }
+.scenarioDesc { line-height: 1.7; }
+.scenarioMeta { display: flex; gap: var(--spacing-xl); flex-wrap: wrap; font-size: var(--font-size-sm); }
+.keyPoints { font-size: var(--font-size-sm); }
+.keyPointsLabel { font-weight: 600; margin-bottom: 6px; }
+.keyPoints ul { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+
+.startCard {
+  display: flex; flex-direction: column; align-items: center; gap: var(--spacing-lg);
+  padding: var(--spacing-2xl); background: var(--color-surface);
+  border: 1px solid var(--color-border); border-radius: var(--radius-lg);
+  text-align: center; color: var(--color-text-muted);
+}
+
+.writingArea {
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.writingHeader {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-md);
+}
+
+.wordCount {
+  font-size: var(--font-size-sm); color: var(--color-text-muted);
+}
+
+.textarea {
+  width: 100%; padding: var(--spacing-md); border: 1px solid var(--color-border);
+  border-radius: var(--radius); resize: vertical; line-height: 1.7;
+  background: #fff; outline: none;
+}
+.textarea:focus { border-color: var(--color-accent); }
+.textarea:disabled { background: var(--color-surface); }
+
+.feedbackSection {
+  display: flex; flex-direction: column; gap: var(--spacing-xl);
+}
+
+.rubricCard {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--spacing-xl);
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+}
+.rubricCard h3 { font-size: var(--font-size-lg); color: var(--color-accent); margin-bottom: var(--spacing-sm); }
+
+.rubricItem {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: var(--spacing-md); background: #fff;
+  border: 1px solid var(--color-border); border-radius: var(--radius);
+}
+.criterion { font-weight: 600; }
+.criterionDesc { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+
+.modelSection { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.modelAnswer {
+  background: var(--color-accent-light); border: 1px solid var(--color-accent);
+  border-radius: var(--radius-lg); padding: var(--spacing-xl);
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+}
+.modelAnswer h3 { font-size: var(--font-size-lg); color: var(--color-accent); }
+.modelAnswer p { line-height: 1.9; white-space: pre-wrap; }
+
+.error { color: var(--color-incorrect); background: var(--color-incorrect-bg); padding: var(--spacing-md); border-radius: var(--radius); }

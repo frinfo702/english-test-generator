@@ -1,0 +1,75 @@
+.controls {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: var(--spacing-md); margin-bottom: var(--spacing-xl);
+}
+.difficultySelector { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; }
+.diffBtn {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: 6px 14px; font-size: var(--font-size-sm);
+  color: var(--color-text-muted); transition: all 0.15s;
+}
+.diffBtn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.diffBtn.active { background: var(--color-accent); border-color: var(--color-accent); color: #fff; font-weight: 600; }
+.diffBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.card {
+  background: #fff; border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--spacing-xl);
+  display: flex; flex-direction: column; gap: var(--spacing-lg);
+}
+
+.cardHeader { display: flex; align-items: center; justify-content: space-between; }
+
+.typeTag {
+  background: #f3e8ff; color: #6d28d9;
+  font-size: var(--font-size-sm); font-weight: 700;
+  padding: 3px 12px; border-radius: 99px;
+}
+
+.qNum { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+
+.question { font-size: var(--font-size-xl); font-weight: 500; line-height: 1.6; }
+
+.preBox {
+  display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacing-md);
+  padding: var(--spacing-lg); background: var(--color-surface);
+  border-radius: var(--radius);
+}
+.preNote { color: var(--color-text-muted); font-size: var(--font-size-sm); }
+
+.answerArea { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.timerRow { display: flex; }
+
+.textarea {
+  width: 100%; padding: var(--spacing-md);
+  border: 1px solid var(--color-border); border-radius: var(--radius);
+  resize: vertical; line-height: 1.7; background: #fff; outline: none;
+}
+.textarea:focus { border-color: var(--color-accent); }
+.textarea:disabled { background: var(--color-surface); }
+
+.feedbackArea { display: flex; flex-direction: column; gap: var(--spacing-lg); }
+
+.evalCard {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: var(--spacing-lg);
+}
+.evalCard h3 { font-size: var(--font-size-body); font-weight: 700; color: var(--color-accent); margin-bottom: var(--spacing-sm); }
+.evalCard ul { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.evalCard li { font-size: var(--font-size-sm); line-height: 1.6; }
+
+.modelArea { display: flex; flex-direction: column; gap: var(--spacing-md); }
+.modelAnswer {
+  background: var(--color-accent-light); border: 1px solid var(--color-accent);
+  border-radius: var(--radius); padding: var(--spacing-lg);
+}
+.modelAnswer h3 { font-size: var(--font-size-sm); font-weight: 700; color: var(--color-accent); margin-bottom: var(--spacing-sm); }
+.modelAnswer p { line-height: 1.9; }
+
+.resultCard {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--spacing-2xl);
+  display: flex; flex-direction: column; align-items: center; gap: var(--spacing-lg); text-align: center;
+}
+
+.error { color: var(--color-incorrect); background: var(--color-incorrect-bg); padding: var(--spacing-md); border-radius: var(--radius); }

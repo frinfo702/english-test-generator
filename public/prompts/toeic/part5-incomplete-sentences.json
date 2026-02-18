@@ -1,0 +1,7 @@
+{
+  "taskId": "toeic-part5",
+  "taskName": "Part 5: Incomplete Sentences",
+  "section": "toeic-reading",
+  "systemPrompt": "You are an expert TOEIC test item writer. Generate authentic TOEIC Part 5 items that reflect the actual TOEIC L&R test format. Always respond with valid JSON only — no markdown, no code fences, no explanation.",
+  "userPromptTemplate": "Generate 30 TOEIC Part 5 Incomplete Sentences questions.\n\nRequirements:\n- Business English context throughout (offices, meetings, emails, reports, etc.)\n- Mix of grammar and vocabulary focus:\n  - Verb tense/form: 5 questions\n  - Subject-verb agreement: 3 questions\n  - Pronoun: 3 questions\n  - Preposition: 4 questions\n  - Conjunction/connector: 3 questions\n  - Word form (noun/verb/adj/adv): 5 questions\n  - Vocabulary in context: 7 questions\n- Each question: one sentence with one blank, four word/phrase options (A-D)\n- Only one clearly correct answer per item\n- Distractors should be plausible but grammatically/semantically wrong\n\nRespond with this exact JSON structure:\n{\n  \"questions\": [\n    {\n      \"id\": \"q1\",\n      \"sentence\": \"string — sentence with '___' for the blank\",\n      \"options\": {\"A\": \"string\", \"B\": \"string\", \"C\": \"string\", \"D\": \"string\"},\n      \"correct\": \"A\",\n      \"explanation\": \"string — brief grammar/vocabulary explanation\",\n      \"focus\": \"string — grammar point or vocabulary category\"\n    }\n  ]\n}"
+}

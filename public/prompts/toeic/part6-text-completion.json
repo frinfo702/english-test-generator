@@ -1,0 +1,7 @@
+{
+  "taskId": "toeic-part6",
+  "taskName": "Part 6: Text Completion",
+  "section": "toeic-reading",
+  "systemPrompt": "You are an expert TOEIC test item writer. Generate authentic TOEIC Part 6 items that reflect the actual TOEIC L&R test format. Always respond with valid JSON only — no markdown, no code fences, no explanation.",
+  "userPromptTemplate": "Generate 4 TOEIC Part 6 Text Completion passages (16 questions total, 4 per passage).\n\nRequirements:\n- Text types: business email, memo, notice, letter, advertisement, report excerpt\n- Each passage: 120-180 words with 4 blanks marked as [1], [2], [3], [4]\n- Question types per passage: mix of grammar, vocabulary, and at least 1 sentence insertion question\n- Sentence insertion questions provide 4 complete sentence options (not just words)\n- Business English context\n\nRespond with this exact JSON structure:\n{\n  \"passages\": [\n    {\n      \"id\": \"p1\",\n      \"textType\": \"email\",\n      \"text\": \"string — full passage text with [1], [2], [3], [4] marking blanks\",\n      \"questions\": [\n        {\n          \"id\": \"q1\",\n          \"blankNumber\": 1,\n          \"type\": \"grammar|vocabulary|sentence\",\n          \"options\": {\"A\": \"string\", \"B\": \"string\", \"C\": \"string\", \"D\": \"string\"},\n          \"correct\": \"A\",\n          \"explanation\": \"string\"\n        }\n      ]\n    }\n  ]\n}"
+}

@@ -1,0 +1,94 @@
+.controls {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: var(--spacing-md); margin-bottom: var(--spacing-xl);
+}
+.difficultySelector { display: flex; gap: var(--spacing-sm); flex-wrap: wrap; }
+.diffBtn {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: 6px 14px; font-size: var(--font-size-sm);
+  color: var(--color-text-muted); transition: all 0.15s;
+}
+.diffBtn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.diffBtn.active { background: var(--color-accent); border-color: var(--color-accent); color: #fff; font-weight: 600; }
+
+.card {
+  background: #fff; border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--spacing-2xl);
+  display: flex; flex-direction: column; gap: var(--spacing-xl);
+  min-height: 260px;
+}
+
+.qNum { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+
+.showPhase {
+  display: flex; flex-direction: column; align-items: center; gap: var(--spacing-lg);
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.countdown {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--color-accent); color: #fff;
+  font-size: var(--font-size-2xl); font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.sentenceDisplay {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 600px;
+}
+
+.hint { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+
+.hiddenPhase {
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+  animation: fadeIn 0.3s ease;
+}
+
+.hiddenMsg { color: var(--color-text-muted); font-style: italic; }
+
+.inputField {
+  width: 100%; padding: var(--spacing-md);
+  border: 2px solid var(--color-accent); border-radius: var(--radius);
+  font-size: var(--font-size-lg); outline: none;
+}
+
+.feedbackPhase {
+  display: flex; flex-direction: column; gap: var(--spacing-md);
+  animation: fadeIn 0.3s ease;
+}
+
+.fbLabel { font-weight: 600; font-size: var(--font-size-sm); color: var(--color-text-muted); }
+
+.originalSentence {
+  font-size: var(--font-size-lg); line-height: 1.6;
+  background: var(--color-correct-bg); padding: var(--spacing-md); border-radius: var(--radius);
+}
+
+.diffView {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: var(--spacing-md); background: var(--color-surface);
+  border-radius: var(--radius);
+}
+
+.diffWord {
+  padding: 3px 8px; border-radius: 4px; font-size: var(--font-size-body);
+}
+.diffCorrect { background: var(--color-correct-bg); color: var(--color-correct); }
+.diffWrong { background: var(--color-incorrect-bg); color: var(--color-incorrect); text-decoration: line-through; }
+
+.resultCard {
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg); padding: var(--spacing-2xl);
+  display: flex; flex-direction: column; align-items: center; gap: var(--spacing-lg); text-align: center;
+}
+.scoreBox { display: flex; align-items: baseline; gap: 4px; }
+.scoreNum { font-size: 56px; font-weight: 700; color: var(--color-accent); line-height: 1; }
+.scoreDen { font-size: var(--font-size-2xl); color: var(--color-text-muted); }
+.scorePct { font-size: var(--font-size-lg); color: var(--color-text-muted); }
+
+.error { color: var(--color-incorrect); background: var(--color-incorrect-bg); padding: var(--spacing-md); border-radius: var(--radius); }

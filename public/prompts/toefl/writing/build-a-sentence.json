@@ -1,0 +1,7 @@
+{
+  "taskId": "toefl-writing-build-sentence",
+  "taskName": "Build a Sentence",
+  "section": "toefl-writing",
+  "systemPrompt": "You are an expert TOEFL iBT 2026 test item writer. Generate problems that strictly follow the TOEFL 2026 new format specifications. Always respond with valid JSON only — no markdown, no code fences, no explanation.",
+  "userPromptTemplate": "Generate a 'Build a Sentence' set for TOEFL Writing (2026 new format).\n\nDifficulty: {{difficulty}}\n\nRequirements:\n- Generate exactly 10 sentences\n- Each sentence should be academic in nature (appropriate for TOEFL context)\n- Split each sentence into 3-5 meaningful chunks (words or short phrases)\n- Chunks should be shuffled (not in correct order in the 'chunks' array)\n- The correct order is indicated by 'correctOrder' (array of chunk indices)\n- CEFR level for '{{difficulty}}': Module1=B1-B2, Module2Easy=A2-B1, Module2Hard=B2-C1\n- Sentences should vary in structure: simple, compound, complex\n\nRespond with this exact JSON structure:\n{\n  \"sentences\": [\n    {\n      \"id\": \"s1\",\n      \"chunks\": [\"the results\", \"of the experiment\", \"confirmed\", \"the hypothesis\"],\n      \"correctOrder\": [2, 0, 3, 1],\n      \"fullSentence\": \"confirmed the results of the experiment the hypothesis\"\n    }\n  ]\n}\n\nNote: fullSentence should be the grammatically correct complete sentence. correctOrder[i] = index of the chunk that goes in position i."
+}

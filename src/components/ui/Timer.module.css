@@ -1,0 +1,21 @@
+.timer {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  letter-spacing: 2px;
+  transition: color 0.3s, background 0.3s;
+}
+
+.warning {
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+}
+
+.expired {
+  color: var(--color-incorrect);
+  background: var(--color-incorrect-bg);
+}
