@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -30,7 +31,9 @@ function getExpectedSuffix(item: Item): string {
 }
 
 export function CompleteWordsPage() {
-  const { data, loading, error, load } = useQuestion<ProblemData>(
+  const navigate = useNavigate();
+  const { questionNumber } = useParams<{ questionNumber: string }>();
+  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
     "toefl/reading/complete-words",
   );
   const { saveScore } = useScoreHistory();
@@ -49,9 +52,14 @@ export function CompleteWordsPage() {
   );
   const slotRefs = useRef<Record<number, Array<HTMLInputElement | null>>>({});
 
+  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
+  const hasValidQuestionNumber =
+    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+
   useEffect(() => {
-    load();
-  }, []);
+    if (!hasValidQuestionNumber) return;
+    loadByQuestionNumber(parsedQuestionNumber);
+  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   useEffect(() => {
     if (data) {
@@ -94,12 +102,13 @@ export function CompleteWordsPage() {
       correct,
       data.items.length,
       sessionSeconds,
+      file ?? undefined,
     );
   };
 
-  const handleNew = () => {
+  const handleBackToList = () => {
     resetTimer();
-    load();
+    navigate("/toefl/reading/complete-words");
   };
 
   const moveFocus = (itemIdx: number, slotIdx: number) => {
@@ -265,10 +274,10 @@ export function CompleteWordsPage() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={handleNew}
+          onClick={handleBackToList}
           disabled={loading}
         >
-          Load Another Question
+          Question List
         </Button>
       </div>
 
@@ -282,16 +291,21 @@ export function CompleteWordsPage() {
           </p>
         </div>
       )}
+      {!hasValidQuestionNumber && (
+        <div className={styles.error}>
+          <p>Invalid question number in URL.</p>
+        </div>
+      )}
 
-      {data && !loading && (
+      {data && !loading && hasValidQuestionNumber && (
         <>
           <div className={styles.paragraph}>{renderParagraph()}</div>
 
           {!submitted ? (
-            <Button onClick={handleSubmit} disabled={hasIncompleteAnswers}>
-              Check Answers
-            </Button>
-          ) : (
+              <Button onClick={handleSubmit} disabled={hasIncompleteAnswers}>
+                Check Answers
+              </Button>
+            ) : (
             <div className={styles.result}>
               <div className={styles.scoreBox}>
                 <span className={styles.scoreNum}>{score?.correct}</span>
@@ -304,7 +318,7 @@ export function CompleteWordsPage() {
                   %)
                 </span>
               </div>
-              <Button onClick={handleNew}>Next Question</Button>
+              <Button onClick={handleBackToList}>Back to Question List</Button>
             </div>
           )}
         </>

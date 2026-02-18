@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -26,7 +27,9 @@ interface ProblemData {
 }
 
 export function ReadAcademicPage() {
-  const { data, loading, error, load } = useQuestion<ProblemData>(
+  const navigate = useNavigate();
+  const { questionNumber } = useParams<{ questionNumber: string }>();
+  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
     "toefl/reading/academic",
   );
   const { saveScore } = useScoreHistory();
@@ -42,9 +45,14 @@ export function ReadAcademicPage() {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [graded, setGraded] = useState(false);
 
+  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
+  const hasValidQuestionNumber =
+    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+
   useEffect(() => {
-    load();
-  }, []);
+    if (!hasValidQuestionNumber) return;
+    loadByQuestionNumber(parsedQuestionNumber);
+  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -52,12 +60,9 @@ export function ReadAcademicPage() {
     }
   }, [data, loading, graded, running, elapsedSeconds, start]);
 
-  const handleNew = () => {
+  const handleBackToList = () => {
     resetTimer();
-    setCurrent(0);
-    setAnswers({});
-    setGraded(false);
-    load();
+    navigate("/toefl/reading/academic");
   };
 
   const handleSelect = (idx: number) => {
@@ -79,7 +84,13 @@ export function ReadAcademicPage() {
       const s = data.questions.filter(
         (q, i) => answers[i] === q.correctIndex,
       ).length;
-      saveScore("toefl/reading/academic", s, data.questions.length, sessionSeconds);
+      saveScore(
+        "toefl/reading/academic",
+        s,
+        data.questions.length,
+        sessionSeconds,
+        file ?? undefined,
+      );
     }
     setGraded(true);
   };
@@ -113,10 +124,10 @@ export function ReadAcademicPage() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={handleNew}
+          onClick={handleBackToList}
           disabled={loading}
         >
-          Load Another Question
+          Question List
         </Button>
       </div>
 
@@ -129,8 +140,13 @@ export function ReadAcademicPage() {
           </p>
         </div>
       )}
+      {!hasValidQuestionNumber && (
+        <div className={styles.error}>
+          <p>Invalid question number in URL.</p>
+        </div>
+      )}
 
-      {data && !loading && q && (
+      {data && !loading && hasValidQuestionNumber && q && (
         <>
           {graded && (
             <div className={styles.resultCard}>
@@ -143,8 +159,8 @@ export function ReadAcademicPage() {
                 </span>
               </div>
               <ProgressBar current={score} total={totalQ} label="Accuracy" />
-              <Button onClick={handleNew} size="lg">
-                Another Passage
+              <Button onClick={handleBackToList} size="lg">
+                Back to Question List
               </Button>
             </div>
           )}

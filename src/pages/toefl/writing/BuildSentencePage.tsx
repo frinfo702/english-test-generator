@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
@@ -24,7 +25,9 @@ interface ProblemData {
 const TASK_ID = "toefl/writing/build-sentence";
 
 export function BuildSentencePage() {
-  const { data, loading, error, load } = useQuestion<ProblemData>(TASK_ID);
+  const navigate = useNavigate();
+  const { questionNumber } = useParams<{ questionNumber: string }>();
+  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -39,16 +42,21 @@ export function BuildSentencePage() {
   const [phase, setPhase] = useState<"pre" | "answering" | "submitted">("pre");
   const graded = phase === "submitted";
 
-  useEffect(() => {
-    load();
-  }, []);
+  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
+  const hasValidQuestionNumber =
+    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
 
-  const handleNew = () => {
+  useEffect(() => {
+    if (!hasValidQuestionNumber) return;
+    loadByQuestionNumber(parsedQuestionNumber);
+  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+
+  const handleBackToList = () => {
     resetTimer();
     setCurrent(0);
     setAllPlaced({});
     setPhase("pre");
-    load();
+    navigate("/toefl/writing/build-sentence");
   };
 
   const sentence = data?.sentences[current];
@@ -100,7 +108,7 @@ export function BuildSentencePage() {
     if (!data || graded) return;
     const sessionSeconds = stop();
     const correct = data.sentences.filter((_, i) => isCorrectFor(i)).length;
-    saveScore(TASK_ID, correct, data.sentences.length, sessionSeconds);
+    saveScore(TASK_ID, correct, data.sentences.length, sessionSeconds, file ?? undefined);
     setPhase("submitted");
   };
   const handleStart = () => {
@@ -133,10 +141,10 @@ export function BuildSentencePage() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={handleNew}
+          onClick={handleBackToList}
           disabled={loading}
         >
-          Load Another Set
+          Question List
         </Button>
       </div>
 
@@ -149,8 +157,13 @@ export function BuildSentencePage() {
           </p>
         </div>
       )}
+      {!hasValidQuestionNumber && (
+        <div className={styles.error}>
+          <p>Invalid question number in URL.</p>
+        </div>
+      )}
 
-      {data && !loading && sentence && (
+      {data && !loading && hasValidQuestionNumber && sentence && (
         <>
           {phase === "pre" && (
             <div className={styles.startCard}>
@@ -176,8 +189,8 @@ export function BuildSentencePage() {
                 total={totalSentences}
                 label="Accuracy"
               />
-              <Button onClick={handleNew} size="lg">
-                Another Set
+              <Button onClick={handleBackToList} size="lg">
+                Back to Question List
               </Button>
             </div>
           )}

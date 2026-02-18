@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { GradingRequestPanel } from "../../../components/ui/GradingRequestPanel";
@@ -39,7 +40,9 @@ const TYPE_LABELS: Record<string, string> = {
 const TASK_ID = "toefl/speaking/interview";
 
 export function TakeInterviewPage() {
-  const { data, file, loading, error, load } = useQuestion<ProblemData>(TASK_ID);
+  const navigate = useNavigate();
+  const { questionNumber } = useParams<{ questionNumber: string }>();
+  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(TASK_ID);
   const [current, setCurrent] = useState(0);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "answering" | "submitted">("pre");
@@ -83,9 +86,14 @@ export function TakeInterviewPage() {
     void submitAnswer();
   });
 
+  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
+  const hasValidQuestionNumber =
+    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+
   useEffect(() => {
-    load();
-  }, []);
+    if (!hasValidQuestionNumber) return;
+    loadByQuestionNumber(parsedQuestionNumber);
+  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   useEffect(() => {
     if (!problemId) return;
@@ -139,7 +147,7 @@ export function TakeInterviewPage() {
     timer.reset();
   };
 
-  const handleNew = () => {
+  const handleBackToList = () => {
     setCurrent(0);
     setUserText("");
     setPhase("pre");
@@ -150,7 +158,7 @@ export function TakeInterviewPage() {
     setAnswerId(null);
     setCopied(false);
     timer.reset();
-    load();
+    navigate("/toefl/speaking/interview");
   };
 
   return (
@@ -167,10 +175,10 @@ export function TakeInterviewPage() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={handleNew}
+          onClick={handleBackToList}
           disabled={loading || phase === "answering"}
         >
-          Load Another Set
+          Question List
         </Button>
       </div>
 
@@ -183,8 +191,13 @@ export function TakeInterviewPage() {
           </p>
         </div>
       )}
+      {!hasValidQuestionNumber && (
+        <div className={styles.error}>
+          <p>Invalid question number in URL.</p>
+        </div>
+      )}
 
-      {data && !loading && !done && q && (
+      {data && !loading && hasValidQuestionNumber && !done && q && (
         <div className={styles.card}>
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>
@@ -269,7 +282,7 @@ export function TakeInterviewPage() {
         </div>
       )}
 
-      {done && data && (
+      {done && data && hasValidQuestionNumber && (
         <div className={styles.resultCard}>
           <h2>Interview Complete</h2>
           <p>You answered all {data.questions.length} questions.</p>
@@ -278,8 +291,8 @@ export function TakeInterviewPage() {
             total={data.questions.length}
             label="Complete"
           />
-          <Button onClick={handleNew} size="lg">
-            Another Set
+          <Button onClick={handleBackToList} size="lg">
+            Back to Question List
           </Button>
         </div>
       )}

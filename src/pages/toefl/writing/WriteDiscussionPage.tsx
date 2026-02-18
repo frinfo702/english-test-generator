@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { GradingRequestPanel } from "../../../components/ui/GradingRequestPanel";
@@ -35,7 +36,9 @@ const MIN_WORDS = 100;
 const TASK_ID = "toefl/writing/discussion";
 
 export function WriteDiscussionPage() {
-  const { data, file, loading, error, load } = useQuestion<ProblemData>(TASK_ID);
+  const navigate = useNavigate();
+  const { questionNumber } = useParams<{ questionNumber: string }>();
+  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(TASK_ID);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "writing" | "submitted">("pre");
   const [showModel, setShowModel] = useState(false);
@@ -75,9 +78,14 @@ export function WriteDiscussionPage() {
     void submitAnswer();
   });
 
+  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
+  const hasValidQuestionNumber =
+    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+
   useEffect(() => {
-    load();
-  }, []);
+    if (!hasValidQuestionNumber) return;
+    loadByQuestionNumber(parsedQuestionNumber);
+  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   useEffect(() => {
     if (!problemId) return;
@@ -116,7 +124,7 @@ export function WriteDiscussionPage() {
       setSaveError("Failed to copy.");
     }
   };
-  const handleNew = () => {
+  const handleBackToList = () => {
     setUserText("");
     setPhase("pre");
     setShowModel(false);
@@ -125,7 +133,7 @@ export function WriteDiscussionPage() {
     setAnswerId(null);
     setCopied(false);
     timer.reset();
-    load();
+    navigate("/toefl/writing/discussion");
   };
 
   return (
@@ -140,10 +148,10 @@ export function WriteDiscussionPage() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={handleNew}
+          onClick={handleBackToList}
           disabled={loading || phase === "writing"}
         >
-          Load Another Question
+          Question List
         </Button>
       </div>
 
@@ -156,8 +164,13 @@ export function WriteDiscussionPage() {
           </p>
         </div>
       )}
+      {!hasValidQuestionNumber && (
+        <div className={styles.error}>
+          <p>Invalid question number in URL.</p>
+        </div>
+      )}
 
-      {data && !loading && (
+      {data && !loading && hasValidQuestionNumber && (
         <>
           <div className={styles.discussionCard}>
             <div className={styles.professorBlock}>
@@ -257,8 +270,8 @@ export function WriteDiscussionPage() {
                   </div>
                 )}
               </div>
-              <Button onClick={handleNew} size="lg">
-                Next Question
+              <Button onClick={handleBackToList} size="lg">
+                Back to Question List
               </Button>
             </div>
           )}

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -34,8 +35,10 @@ interface ProblemData {
 }
 
 export function ReadDailyLifePage() {
+  const navigate = useNavigate();
+  const { questionNumber } = useParams<{ questionNumber: string }>();
   const adaptive = useAdaptive();
-  const { data, loading, error, load } = useQuestion<ProblemData>(
+  const { data, file, loading, error, load, loadByQuestionNumber } = useQuestion<ProblemData>(
     "toefl/reading/daily-life",
   );
   const { saveScore } = useScoreHistory();
@@ -52,9 +55,14 @@ export function ReadDailyLifePage() {
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [graded, setGraded] = useState(false);
 
+  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
+  const hasValidQuestionNumber =
+    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+
   useEffect(() => {
-    load();
-  }, []);
+    if (!hasValidQuestionNumber) return;
+    loadByQuestionNumber(parsedQuestionNumber);
+  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   useEffect(() => {
     if (
@@ -142,7 +150,13 @@ export function ReadDailyLifePage() {
         ({ question }) => answers[question.id] === question.correctIndex,
       ).length;
       const m2t = allQ.length;
-      saveScore("toefl/reading/daily-life", m1c + m2c, m1t + m2t, sessionSeconds);
+      saveScore(
+        "toefl/reading/daily-life",
+        m1c + m2c,
+        m1t + m2t,
+        sessionSeconds,
+        file ?? undefined,
+      );
       adaptive.finishModule2();
     }
     setGraded(true);
@@ -160,11 +174,7 @@ export function ReadDailyLifePage() {
   const handleRestart = () => {
     resetTimer();
     adaptive.reset();
-    setTextIdx(0);
-    setQIdx(0);
-    setAnswers({});
-    setGraded(false);
-    load();
+    navigate("/toefl/reading/daily-life");
   };
 
   const phase = adaptive.state.phase;
@@ -181,9 +191,24 @@ export function ReadDailyLifePage() {
         subtitle="Read everyday texts and answer questions (adaptive format)."
         backTo="/toefl"
       />
+      <div className={styles.moduleBar}>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => navigate("/toefl/reading/daily-life")}
+          disabled={loading}
+        >
+          Question List
+        </Button>
+      </div>
+      {!hasValidQuestionNumber && (
+        <div className={styles.error}>
+          <p>Invalid question number in URL.</p>
+        </div>
+      )}
 
       {/* branching */}
-      {phase === "branching" && (
+      {phase === "branching" && hasValidQuestionNumber && (
         <div className={styles.branchCard}>
           <div className={styles.branchHeader}>
             <span className={styles.branchIcon}>✓</span>
@@ -212,7 +237,7 @@ export function ReadDailyLifePage() {
       )}
 
       {/* complete */}
-      {phase === "complete" && (
+      {phase === "complete" && hasValidQuestionNumber && (
         <div className={styles.resultCard}>
           <h2>Session Complete</h2>
           <div className={styles.resultModules}>
@@ -258,7 +283,7 @@ export function ReadDailyLifePage() {
       )}
 
       {/* questions */}
-      {(phase === "module1" || phase === "module2") && (
+      {(phase === "module1" || phase === "module2") && hasValidQuestionNumber && (
         <>
           <div className={styles.moduleBar}>
             <span className={styles.moduleTag}>
