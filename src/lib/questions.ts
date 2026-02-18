@@ -25,13 +25,28 @@ export interface QuestionIndex {
   files: string[];
 }
 
-export async function fetchQuestionIndex(taskPath: string): Promise<QuestionIndex> {
+export interface LoadedQuestion<T> {
+  data: T;
+  file: string;
+}
+
+export async function fetchQuestionIndex(
+  taskPath: string,
+): Promise<QuestionIndex> {
   const res = await fetch(`/questions/${taskPath}/index.json`);
-  if (!res.ok) throw new Error(`No questions found for ${taskPath}. Generate some first!`);
+  if (!res.ok)
+    throw new Error(`No questions found for ${taskPath}. Generate some first!`);
   return res.json();
 }
 
 export async function fetchRandomQuestion<T>(taskPath: string): Promise<T> {
+  const loaded = await fetchRandomQuestionWithMeta<T>(taskPath);
+  return loaded.data;
+}
+
+export async function fetchRandomQuestionWithMeta<T>(
+  taskPath: string,
+): Promise<LoadedQuestion<T>> {
   const index = await fetchQuestionIndex(taskPath);
   if (index.files.length === 0) {
     throw new Error(`No question files in ${taskPath}. Generate some first!`);
@@ -39,7 +54,8 @@ export async function fetchRandomQuestion<T>(taskPath: string): Promise<T> {
   const file = index.files[Math.floor(Math.random() * index.files.length)];
   const res = await fetch(`/questions/${taskPath}/${file}`);
   if (!res.ok) throw new Error(`Failed to load question file: ${file}`);
-  return res.json();
+  const data = (await res.json()) as T;
+  return { data, file };
 }
 
 export async function fetchAllQuestions<T>(taskPath: string): Promise<T[]> {

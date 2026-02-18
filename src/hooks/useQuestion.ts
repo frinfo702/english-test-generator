@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { fetchRandomQuestion } from "../lib/questions";
+import { fetchRandomQuestionWithMeta } from "../lib/questions";
 
 /**
  * Hook that loads a random pre-generated question file for a given task.
@@ -7,6 +7,7 @@ import { fetchRandomQuestion } from "../lib/questions";
  */
 export function useQuestion<T>(taskPath: string) {
   const [data, setData] = useState<T | null>(null);
+  const [file, setFile] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -14,8 +15,9 @@ export function useQuestion<T>(taskPath: string) {
     setLoading(true);
     setError(null);
     try {
-      const result = await fetchRandomQuestion<T>(taskPath);
-      setData(result);
+      const result = await fetchRandomQuestionWithMeta<T>(taskPath);
+      setData(result.data);
+      setFile(result.file);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -23,5 +25,5 @@ export function useQuestion<T>(taskPath: string) {
     }
   }, [taskPath]);
 
-  return { data, loading, error, load };
+  return { data, file, loading, error, load };
 }

@@ -1,11 +1,21 @@
 import { useState, useEffect } from "react";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
+import { GradingRequestPanel } from "../../../components/ui/GradingRequestPanel";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { Timer } from "../../../components/ui/Timer";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
+import {
+  buildGradingMessage,
+  buildProblemId,
+  clearDraft,
+  copyText,
+  loadDraft,
+  saveAnswerSubmission,
+  saveDraft,
+} from "../../../lib/answerSubmission";
 import styles from "./TakeInterviewPage.module.css";
 
 interface InterviewQuestion {
@@ -26,24 +36,69 @@ const TYPE_LABELS: Record<string, string> = {
   hypothetical: "仮定的状況",
   comparison: "比較・選択",
 };
+const TASK_ID = "toefl/speaking/interview";
 
 export function TakeInterviewPage() {
-  const { data, loading, error, load } = useQuestion<ProblemData>(
-    "toefl/speaking/interview",
-  );
+  const { data, file, loading, error, load } = useQuestion<ProblemData>(TASK_ID);
   const [current, setCurrent] = useState(0);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "answering" | "submitted">("pre");
   const [showModel, setShowModel] = useState(false);
   const [done, setDone] = useState(false);
+  const [savingAnswer, setSavingAnswer] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [answerId, setAnswerId] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
-  const timer = useTimer(45, () => setPhase("submitted"));
+  const q = data?.questions[current];
+  const problemId =
+    file && q ? buildProblemId(TASK_ID, file, q.id || String(current + 1)) : null;
+  const gradingMessage =
+    problemId && answerId ? buildGradingMessage(problemId, answerId) : null;
+
+  const submitAnswer = async () => {
+    setPhase("submitted");
+    if (!q || !problemId || answerId || savingAnswer) return;
+    setSavingAnswer(true);
+    setSaveError(null);
+    try {
+      const result = await saveAnswerSubmission({
+        taskId: TASK_ID,
+        problemId,
+        response: userText,
+        question: q,
+      });
+      clearDraft(problemId);
+      setAnswerId(result.answerId);
+    } catch (e) {
+      setSaveError(
+        e instanceof Error ? e.message : "回答保存に失敗しました。",
+      );
+    } finally {
+      setSavingAnswer(false);
+    }
+  };
+
+  const timer = useTimer(45, () => {
+    void submitAnswer();
+  });
 
   useEffect(() => {
     load();
   }, []);
 
-  const q = data?.questions[current];
+  useEffect(() => {
+    if (!problemId) return;
+    setUserText(loadDraft(problemId));
+    setSaveError(null);
+    setAnswerId(null);
+    setCopied(false);
+  }, [problemId]);
+
+  useEffect(() => {
+    if (!problemId || phase === "submitted") return;
+    saveDraft(problemId, userText);
+  }, [problemId, phase, userText]);
 
   const handleStart = () => {
     setPhase("answering");
@@ -51,7 +106,20 @@ export function TakeInterviewPage() {
   };
   const handleSubmit = () => {
     timer.stop();
-    setPhase("submitted");
+    void submitAnswer();
+  };
+  const handleCopy = async () => {
+    if (!gradingMessage) return;
+    try {
+      const ok = await copyText(gradingMessage);
+      if (!ok) {
+        setSaveError("この環境ではクリップボードにコピーできません。");
+        return;
+      }
+      setCopied(true);
+    } catch {
+      setSaveError("コピーに失敗しました。");
+    }
   };
 
   const handleNext = () => {
@@ -64,6 +132,10 @@ export function TakeInterviewPage() {
     setUserText("");
     setPhase("pre");
     setShowModel(false);
+    setSavingAnswer(false);
+    setSaveError(null);
+    setAnswerId(null);
+    setCopied(false);
     timer.reset();
   };
 
@@ -73,6 +145,10 @@ export function TakeInterviewPage() {
     setPhase("pre");
     setShowModel(false);
     setDone(false);
+    setSavingAnswer(false);
+    setSaveError(null);
+    setAnswerId(null);
+    setCopied(false);
     timer.reset();
     load();
   };
@@ -154,6 +230,15 @@ export function TakeInterviewPage() {
 
           {phase === "submitted" && (
             <div className={styles.feedbackArea}>
+              <GradingRequestPanel
+                saving={savingAnswer}
+                error={saveError}
+                message={gradingMessage}
+                copied={copied}
+                onCopy={() => {
+                  void handleCopy();
+                }}
+              />
               <div className={styles.evalCard}>
                 <h3>評価ポイント</h3>
                 <ul>

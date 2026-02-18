@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
+import { GradingRequestPanel } from "../../../components/ui/GradingRequestPanel";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { Timer } from "../../../components/ui/Timer";
 import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
+import {
+  buildGradingMessage,
+  buildProblemId,
+  clearDraft,
+  copyText,
+  loadDraft,
+  saveAnswerSubmission,
+  saveDraft,
+} from "../../../lib/answerSubmission";
 import styles from "./WriteEmailPage.module.css";
 
 interface Scenario {
@@ -26,19 +36,65 @@ interface ProblemData {
   rubric: RubricItem[];
 }
 
+const TASK_ID = "toefl/writing/email";
+
 export function WriteEmailPage() {
-  const { data, loading, error, load } = useQuestion<ProblemData>(
-    "toefl/writing/email",
-  );
+  const { data, file, loading, error, load } = useQuestion<ProblemData>(TASK_ID);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "writing" | "submitted">("pre");
   const [showModel, setShowModel] = useState(false);
+  const [savingAnswer, setSavingAnswer] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [answerId, setAnswerId] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
-  const timer = useTimer(7 * 60, () => setPhase("submitted"));
+  const problemId = file ? buildProblemId(TASK_ID, file) : null;
+  const gradingMessage =
+    problemId && answerId ? buildGradingMessage(problemId, answerId) : null;
+
+  const submitAnswer = async () => {
+    setPhase("submitted");
+    if (!problemId || answerId || savingAnswer) return;
+    setSavingAnswer(true);
+    setSaveError(null);
+    try {
+      const result = await saveAnswerSubmission({
+        taskId: TASK_ID,
+        problemId,
+        response: userText,
+        question: data ?? undefined,
+      });
+      clearDraft(problemId);
+      setAnswerId(result.answerId);
+    } catch (e) {
+      setSaveError(
+        e instanceof Error ? e.message : "回答保存に失敗しました。",
+      );
+    } finally {
+      setSavingAnswer(false);
+    }
+  };
+
+  const timer = useTimer(7 * 60, () => {
+    void submitAnswer();
+  });
 
   useEffect(() => {
     load();
   }, []);
+
+  useEffect(() => {
+    if (!problemId) return;
+    setUserText(loadDraft(problemId));
+    setSaveError(null);
+    setAnswerId(null);
+    setCopied(false);
+  }, [problemId]);
+
+  useEffect(() => {
+    if (!problemId || phase === "submitted") return;
+    saveDraft(problemId, userText);
+  }, [problemId, phase, userText]);
 
   const handleStart = () => {
     setPhase("writing");
@@ -46,12 +102,29 @@ export function WriteEmailPage() {
   };
   const handleSubmit = () => {
     timer.stop();
-    setPhase("submitted");
+    void submitAnswer();
+  };
+  const handleCopy = async () => {
+    if (!gradingMessage) return;
+    try {
+      const ok = await copyText(gradingMessage);
+      if (!ok) {
+        setSaveError("この環境ではクリップボードにコピーできません。");
+        return;
+      }
+      setCopied(true);
+    } catch {
+      setSaveError("コピーに失敗しました。");
+    }
   };
   const handleNew = () => {
     setUserText("");
     setPhase("pre");
     setShowModel(false);
+    setSavingAnswer(false);
+    setSaveError(null);
+    setAnswerId(null);
+    setCopied(false);
     timer.reset();
     load();
   };
@@ -147,6 +220,15 @@ export function WriteEmailPage() {
 
           {phase === "submitted" && (
             <div className={styles.feedbackSection}>
+              <GradingRequestPanel
+                saving={savingAnswer}
+                error={saveError}
+                message={gradingMessage}
+                copied={copied}
+                onCopy={() => {
+                  void handleCopy();
+                }}
+              />
               <div className={styles.rubricCard}>
                 <h3>採点基準</h3>
                 {data.rubric.map((r, i) => (
