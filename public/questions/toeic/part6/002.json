@@ -1,0 +1,240 @@
+{
+  "passages": [
+    {
+      "id": "p1",
+      "textType": "business email",
+      "text": "Dear Team,\n\nThank you for your work on last week's client training webinar. The feedback [1] from participants was overwhelmingly positive, and several attendees requested additional examples related to contract renewals.\n\nTo keep the momentum, we will host a 45-minute follow-up session next Thursday at 2:00 p.m. [2]\n\nPlease send any slide revisions to Keiko by Tuesday noon so she can finalize the materials. For the Q&A segment, assign one facilitator to technical questions and one to billing topics. This [3] of roles will help us respond more efficiently.\n\nAfter the session, we will share the recording through the partner portal. If you have scheduling conflicts, please [4] me by Monday so we can adjust coverage.\n\nBest,\nRina",
+      "questions": [
+        {
+          "id": "q1",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "we received",
+            "B": "receiving",
+            "C": "receive",
+            "D": "to receive"
+          },
+          "correct": "A",
+          "explanation": "'The feedback we received' is the correct relative-clause structure."
+        },
+        {
+          "id": "q2",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "A registration link will be sent to all account managers this afternoon.",
+            "B": "The weather report was updated after the meeting ended.",
+            "C": "Most office plants require very little direct sunlight.",
+            "D": "Our shipping containers were unloaded at the wrong port."
+          },
+          "correct": "A",
+          "explanation": "Only option A logically follows the session announcement and provides related next-step information."
+        },
+        {
+          "id": "q3",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "division",
+            "B": "permission",
+            "C": "shortage",
+            "D": "revision"
+          },
+          "correct": "A",
+          "explanation": "'Division of roles' is the natural collocation in this context."
+        },
+        {
+          "id": "q4",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "inform",
+            "B": "informs",
+            "C": "informed",
+            "D": "informing"
+          },
+          "correct": "A",
+          "explanation": "After 'please,' the base verb form is required: 'please inform me.'"
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "textType": "memo",
+      "text": "MEMO\nTo: Retail Operations Managers\nFrom: Logistics Department\nSubject: Delay in Store Display Units\n\nDue to severe weather at the Osaka distribution center, delivery of spring display units will be delayed by up to three days. [1], stores in the western region should adjust their floor plans accordingly.\n\nThe revised shipping schedule is attached to this memo. [2]\n\nIf your location has a launch event before Friday, contact us immediately so we can prioritize partial shipments. Managers are also asked to [3] customer service teams about the updated timeline.\n\nThank you for your [4] while we resolve this issue.",
+      "questions": [
+        {
+          "id": "q5",
+          "blankNumber": 1,
+          "type": "vocabulary",
+          "options": {
+            "A": "Therefore",
+            "B": "However",
+            "C": "Meanwhile",
+            "D": "Otherwise"
+          },
+          "correct": "A",
+          "explanation": "The second sentence presents a result of the delay, so 'Therefore' fits best."
+        },
+        {
+          "id": "q6",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "Units for the Tokyo and Chiba stores are expected to arrive on Wednesday morning.",
+            "B": "The employee parking lot will be closed during repainting work.",
+            "C": "Please submit expense receipts before the end of each quarter.",
+            "D": "Our new internship program starts in late September."
+          },
+          "correct": "A",
+          "explanation": "Option A adds relevant shipment details that match the memo topic."
+        },
+        {
+          "id": "q7",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "inform",
+            "B": "define",
+            "C": "borrow",
+            "D": "cancel"
+          },
+          "correct": "A",
+          "explanation": "Managers should 'inform' teams about timeline changes."
+        },
+        {
+          "id": "q8",
+          "blankNumber": 4,
+          "type": "vocabulary",
+          "options": {
+            "A": "patience",
+            "B": "distance",
+            "C": "currency",
+            "D": "signal"
+          },
+          "correct": "A",
+          "explanation": "'Thank you for your patience' is the standard expression in delay notices."
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "textType": "notice",
+      "text": "NOTICE: Internal System Upgrade\n\nTo improve security, the company will migrate all expense-report data to the new FinanceCloud platform on June 8. Employees can continue submitting reports until 6:00 p.m. on June 7, after which the old system will become read-only. [1]\n\nBefore migration day, please download any receipts you still need for active reimbursement cases. A brief tutorial video is available on the intranet homepage and will [2] common submission errors.\n\nDepartment coordinators should collect questions from staff and submit them to IT by June 3. During the first week after launch, response times may be slightly longer than usual. For urgent reimbursement issues, [3] the Finance Help Desk directly at extension 421.\n\nThe migration plan was reviewed by both Finance and Compliance, [4] no policy changes are expected.",
+      "questions": [
+        {
+          "id": "q9",
+          "blankNumber": 1,
+          "type": "sentence",
+          "options": {
+            "A": "The new platform will be accessible beginning at 9:00 a.m. on June 9.",
+            "B": "Several conference rooms were repainted during the holiday period.",
+            "C": "Our cafeteria menu now includes two vegetarian lunch sets.",
+            "D": "The monthly newsletter is written by volunteers from each department."
+          },
+          "correct": "A",
+          "explanation": "Option A correctly continues the timeline for system availability."
+        },
+        {
+          "id": "q10",
+          "blankNumber": 2,
+          "type": "grammar",
+          "options": {
+            "A": "explain",
+            "B": "explaining",
+            "C": "explanation",
+            "D": "explained"
+          },
+          "correct": "A",
+          "explanation": "After 'will,' the base verb form is needed: 'will explain.'"
+        },
+        {
+          "id": "q11",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "contact",
+            "B": "contacts",
+            "C": "contacted",
+            "D": "contacting"
+          },
+          "correct": "A",
+          "explanation": "This is an imperative instruction, so the base form 'contact' is correct."
+        },
+        {
+          "id": "q12",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "so",
+            "B": "unless",
+            "C": "although",
+            "D": "despite"
+          },
+          "correct": "A",
+          "explanation": "The clause indicates a result, making 'so' the most appropriate connector."
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "textType": "letter",
+      "text": "Dear Ms. Alvarez,\n\nThank you for meeting with us last week to discuss renewing your office-cleaning contract. We value the partnership your team has built with our facility staff over the past four years. [1], we are prepared to offer a two-year extension at the current monthly rate.\n\nAs requested, the updated agreement includes an option for weekend deep-cleaning services twice per month. [2]\n\nPlease review Section 5, which outlines response times for urgent maintenance calls. If the terms meet your needs, sign and return the document by July 12.\n\nTo avoid interruptions in service, we recommend completing the renewal [3] the current contract expires on July 31. If you need any clarification, feel free to [4] me directly.\n\nSincerely,\nDaniel Reed",
+      "questions": [
+        {
+          "id": "q13",
+          "blankNumber": 1,
+          "type": "vocabulary",
+          "options": {
+            "A": "Accordingly",
+            "B": "Instead",
+            "C": "Likewise",
+            "D": "Otherwise"
+          },
+          "correct": "A",
+          "explanation": "'Accordingly' links the positive partnership to the offer that follows."
+        },
+        {
+          "id": "q14",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "A separate pricing sheet is attached for any additional visits beyond that limit.",
+            "B": "Your security badges should be replaced every six months.",
+            "C": "Most candidates arrived early for the recruitment workshop.",
+            "D": "The accounting software upgrade was postponed to next quarter."
+          },
+          "correct": "A",
+          "explanation": "Option A adds relevant contract details directly tied to cleaning-service frequency."
+        },
+        {
+          "id": "q15",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "before",
+            "B": "while",
+            "C": "since",
+            "D": "unless"
+          },
+          "correct": "A",
+          "explanation": "Renewal should be completed earlier than the expiration date, so 'before' is correct."
+        },
+        {
+          "id": "q16",
+          "blankNumber": 4,
+          "type": "vocabulary",
+          "options": {
+            "A": "contact",
+            "B": "decline",
+            "C": "replace",
+            "D": "rent"
+          },
+          "correct": "A",
+          "explanation": "'Feel free to contact me' is the appropriate business expression."
+        }
+      ]
+    }
+  ]
+}
