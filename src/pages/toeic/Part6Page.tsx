@@ -4,6 +4,8 @@ import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../components/ui/ProgressBar";
+import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
+import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
 import styles from "./Part6Page.module.css";
@@ -31,6 +33,14 @@ export function Part6Page() {
   const { data, loading, error, load } =
     useQuestion<ProblemData>("toeic/part6");
   const { saveScore } = useScoreHistory();
+  const {
+    display,
+    elapsedSeconds,
+    running,
+    start,
+    stop,
+    reset: resetTimer,
+  } = useElapsedTimer();
   const [passageIdx, setPassageIdx] = useState(0);
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
@@ -38,6 +48,12 @@ export function Part6Page() {
   useEffect(() => {
     load();
   }, []);
+
+  useEffect(() => {
+    if (data && !loading && !graded && !running && elapsedSeconds === 0) {
+      start();
+    }
+  }, [data, loading, graded, running, elapsedSeconds, start]);
 
   const passage = data?.passages[passageIdx];
   const allOnPassageSelected = (passage?.questions ?? []).every(
@@ -66,14 +82,16 @@ export function Part6Page() {
     setPassageIdx((i) => i - 1);
   };
   const handleSubmit = () => {
+    const sessionSeconds = stop();
     if (data) {
       const allQ = data.passages.flatMap((p) => p.questions);
       const correct = allQ.filter((q) => selected[q.id] === q.correct).length;
-      saveScore("toeic/part6", correct, allQ.length);
+      saveScore("toeic/part6", correct, allQ.length, sessionSeconds);
     }
     setGraded(true);
   };
   const handleNew = () => {
+    resetTimer();
     setPassageIdx(0);
     setSelected({});
     setGraded(false);
@@ -116,6 +134,10 @@ export function Part6Page() {
 
   return (
     <div>
+      {(running || elapsedSeconds > 0) && (
+        <FloatingElapsedTimer display={display} running={running} />
+      )}
+
       <SectionHeader
         title="Part 6: Text Completion"
         subtitle="文書の空欄に入る最も適切な語句・文を選んでください（4文書×4問）"

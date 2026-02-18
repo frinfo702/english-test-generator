@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "answerId": "ans-000001",
+    "sequence": 1,
+    "taskId": "toefl/writing/discussion",
+    "problemId": "toefl/writing/discussion/001",
+    "createdAt": "2026-02-18T11:45:47.006Z",
+    "file": "submissions/ans-000001.json"
+  }
+]

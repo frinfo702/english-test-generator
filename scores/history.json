@@ -12,5 +12,13 @@
     "correct": 19,
     "total": 30,
     "pct": 63
+  },
+  {
+    "taskId": "toefl/reading/complete-words",
+    "date": "2026-02-18T11:29:43.992Z",
+    "correct": 7,
+    "total": 10,
+    "pct": 70,
+    "elapsedSeconds": 98
   }
 ]

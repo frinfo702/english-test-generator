@@ -3,6 +3,8 @@ import { SectionHeader } from "../../components/layout/SectionHeader";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
+import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
+import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
 import styles from "./Part7Page.module.css";
@@ -41,12 +43,26 @@ export function Part7Page() {
   const { data, loading, error, load } =
     useQuestion<ProblemData>("toeic/part7");
   const { saveScore } = useScoreHistory();
+  const {
+    display,
+    elapsedSeconds,
+    running,
+    start,
+    stop,
+    reset: resetTimer,
+  } = useElapsedTimer();
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
 
   useEffect(() => {
     load();
   }, []);
+
+  useEffect(() => {
+    if (data && !loading && !graded && !running && elapsedSeconds === 0) {
+      start();
+    }
+  }, [data, loading, graded, running, elapsedSeconds, start]);
 
   const questions = data?.questions ?? [];
   const allSelected =
@@ -59,15 +75,17 @@ export function Part7Page() {
     if (!graded) setSelected((s) => ({ ...s, [id]: opt }));
   };
   const handleSubmit = () => {
+    const sessionSeconds = stop();
     if (data) {
       const correct = data.questions.filter(
         (q) => selected[q.id] === q.correct,
       ).length;
-      saveScore("toeic/part7", correct, data.questions.length);
+      saveScore("toeic/part7", correct, data.questions.length, sessionSeconds);
     }
     setGraded(true);
   };
   const handleNew = () => {
+    resetTimer();
     setSelected({});
     setGraded(false);
     load();
@@ -82,6 +100,10 @@ export function Part7Page() {
 
   return (
     <div>
+      {(running || elapsedSeconds > 0) && (
+        <FloatingElapsedTimer display={display} running={running} />
+      )}
+
       <SectionHeader
         title="Part 7: Reading Comprehension"
         subtitle="パッセージを読んで設問に答えてください"

@@ -4,6 +4,8 @@ import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../components/ui/ProgressBar";
+import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
+import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
 import styles from "./Part5Page.module.css";
@@ -27,6 +29,14 @@ export function Part5Page() {
   const { data, loading, error, load } =
     useQuestion<ProblemData>("toeic/part5");
   const { saveScore } = useScoreHistory();
+  const {
+    display,
+    elapsedSeconds,
+    running,
+    start,
+    stop,
+    reset: resetTimer,
+  } = useElapsedTimer();
   const [page, setPage] = useState(0);
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
@@ -34,6 +44,12 @@ export function Part5Page() {
   useEffect(() => {
     load();
   }, []);
+
+  useEffect(() => {
+    if (data && !loading && !graded && !running && elapsedSeconds === 0) {
+      start();
+    }
+  }, [data, loading, graded, running, elapsedSeconds, start]);
 
   const questions = data?.questions ?? [];
   const pageQuestions = questions.slice(
@@ -60,15 +76,17 @@ export function Part5Page() {
     setPage((p) => p - 1);
   };
   const handleSubmit = () => {
+    const sessionSeconds = stop();
     if (data) {
       const correct = data.questions.filter(
         (q) => selected[q.id] === q.correct,
       ).length;
-      saveScore("toeic/part5", correct, data.questions.length);
+      saveScore("toeic/part5", correct, data.questions.length, sessionSeconds);
     }
     setGraded(true);
   };
   const handleNew = () => {
+    resetTimer();
     setPage(0);
     setSelected({});
     setGraded(false);
@@ -77,6 +95,10 @@ export function Part5Page() {
 
   return (
     <div>
+      {(running || elapsedSeconds > 0) && (
+        <FloatingElapsedTimer display={display} running={running} />
+      )}
+
       <SectionHeader
         title="Part 5: Incomplete Sentences"
         subtitle="空欄に入る最も適切な語句を選んでください（30問）"

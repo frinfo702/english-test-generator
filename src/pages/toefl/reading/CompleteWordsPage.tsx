@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
+import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useState } from "react";
@@ -24,6 +26,14 @@ export function CompleteWordsPage() {
     "toefl/reading/complete-words",
   );
   const { saveScore } = useScoreHistory();
+  const {
+    display,
+    elapsedSeconds,
+    running,
+    start,
+    stop,
+    reset: resetTimer,
+  } = useElapsedTimer();
   const [answers, setAnswers] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState<{ correct: number; total: number } | null>(
@@ -42,8 +52,21 @@ export function CompleteWordsPage() {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (
+      data &&
+      !loading &&
+      !submitted &&
+      !running &&
+      elapsedSeconds === 0
+    ) {
+      start();
+    }
+  }, [data, loading, submitted, running, elapsedSeconds, start]);
+
   const handleSubmit = () => {
     if (!data) return;
+    const sessionSeconds = stop();
     let correct = 0;
     data.items.forEach((item, i) => {
       if (answers[i].trim().toLowerCase() === item.answer.toLowerCase())
@@ -51,10 +74,18 @@ export function CompleteWordsPage() {
     });
     setScore({ correct, total: data.items.length });
     setSubmitted(true);
-    saveScore("toefl/reading/complete-words", correct, data.items.length);
+    saveScore(
+      "toefl/reading/complete-words",
+      correct,
+      data.items.length,
+      sessionSeconds,
+    );
   };
 
-  const handleNew = () => load();
+  const handleNew = () => {
+    resetTimer();
+    load();
+  };
 
   const renderParagraph = () => {
     if (!data) return null;
@@ -102,6 +133,10 @@ export function CompleteWordsPage() {
 
   return (
     <div>
+      {(running || elapsedSeconds > 0) && (
+        <FloatingElapsedTimer display={display} running={running} />
+      )}
+
       <SectionHeader
         title="Complete the Words"
         subtitle="学術パラグラフ中の単語を補完してください"

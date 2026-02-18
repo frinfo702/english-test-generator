@@ -19,11 +19,17 @@ export interface ScoreEntry {
   correct: number;
   total: number;
   pct: number; // 0-100
+  elapsedSeconds?: number;
 }
 
 export function useScoreHistory() {
   const saveScore = useCallback(
-    async (taskId: TaskId, correct: number, total: number) => {
+    async (
+      taskId: TaskId,
+      correct: number,
+      total: number,
+      elapsedSeconds = 0,
+    ) => {
       if (total === 0) return;
       const entry: ScoreEntry = {
         taskId,
@@ -31,6 +37,7 @@ export function useScoreHistory() {
         correct,
         total,
         pct: Math.round((correct / total) * 100),
+        elapsedSeconds: Math.max(0, Math.floor(elapsedSeconds)),
       };
       await fetch("/api/scores", {
         method: "POST",

@@ -4,6 +4,8 @@ import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
+import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import styles from "./ReadAcademicPage.module.css";
@@ -28,6 +30,14 @@ export function ReadAcademicPage() {
     "toefl/reading/academic",
   );
   const { saveScore } = useScoreHistory();
+  const {
+    display,
+    elapsedSeconds,
+    running,
+    start,
+    stop,
+    reset: resetTimer,
+  } = useElapsedTimer();
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [graded, setGraded] = useState(false);
@@ -36,7 +46,14 @@ export function ReadAcademicPage() {
     load();
   }, []);
 
+  useEffect(() => {
+    if (data && !loading && !graded && !running && elapsedSeconds === 0) {
+      start();
+    }
+  }, [data, loading, graded, running, elapsedSeconds, start]);
+
   const handleNew = () => {
+    resetTimer();
     setCurrent(0);
     setAnswers({});
     setGraded(false);
@@ -57,11 +74,12 @@ export function ReadAcademicPage() {
   };
 
   const handleSubmit = () => {
+    const sessionSeconds = stop();
     if (data) {
       const s = data.questions.filter(
         (q, i) => answers[i] === q.correctIndex,
       ).length;
-      saveScore("toefl/reading/academic", s, data.questions.length);
+      saveScore("toefl/reading/academic", s, data.questions.length, sessionSeconds);
     }
     setGraded(true);
   };
@@ -79,6 +97,10 @@ export function ReadAcademicPage() {
 
   return (
     <div>
+      {(running || elapsedSeconds > 0) && (
+        <FloatingElapsedTimer display={display} running={running} />
+      )}
+
       <SectionHeader
         title="Read an Academic Passage"
         subtitle="学術パッセージを読んで設問に答えてください"

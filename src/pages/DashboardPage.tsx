@@ -7,6 +7,7 @@ import {
   type ScoreEntry,
   type TaskId,
 } from "../hooks/useScoreHistory";
+import { formatSecondsAsMmSs } from "../lib/time";
 import styles from "./DashboardPage.module.css";
 
 // タスクの表示名
@@ -181,6 +182,22 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
     entries.length > 0
       ? Math.round(entries.reduce((s, e) => s + e.pct, 0) / entries.length)
       : 0;
+  const timedEntries = entries.filter(
+    (e) => typeof e.elapsedSeconds === "number",
+  );
+  const latestElapsed =
+    typeof latest?.elapsedSeconds === "number"
+      ? formatSecondsAsMmSs(latest.elapsedSeconds)
+      : "—";
+  const avgElapsed =
+    timedEntries.length > 0
+      ? formatSecondsAsMmSs(
+          Math.round(
+            timedEntries.reduce((s, e) => s + (e.elapsedSeconds ?? 0), 0) /
+              timedEntries.length,
+          ),
+        )
+      : "—";
 
   return (
     <div className={styles.taskCard}>
@@ -212,6 +229,14 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
             {entries.length > 0 ? `${avg}%` : "—"}
           </span>
         </div>
+        <div className={styles.stat}>
+          <span className={styles.statLabel}>最新時間</span>
+          <span className={styles.statValue}>{latestElapsed}</span>
+        </div>
+        <div className={styles.stat}>
+          <span className={styles.statLabel}>平均時間</span>
+          <span className={styles.statValue}>{avgElapsed}</span>
+        </div>
       </div>
 
       <LineChart entries={entries} color={color} />
@@ -233,6 +258,11 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
                 <span className={styles.recentPct}>{e.pct}%</span>
                 <span className={styles.recentDetail}>
                   {e.correct}/{e.total}
+                </span>
+                <span className={styles.recentTime}>
+                  {typeof e.elapsedSeconds === "number"
+                    ? formatSecondsAsMmSs(e.elapsedSeconds)
+                    : "—"}
                 </span>
               </div>
             ))}
@@ -280,6 +310,16 @@ export function DashboardPage() {
     totalSessions > 0
       ? Math.round(entries.reduce((s, e) => s + e.pct, 0) / totalSessions)
       : 0;
+  const timedEntries = entries.filter((e) => typeof e.elapsedSeconds === "number");
+  const overallAvgElapsed =
+    timedEntries.length > 0
+      ? formatSecondsAsMmSs(
+          Math.round(
+            timedEntries.reduce((s, e) => s + (e.elapsedSeconds ?? 0), 0) /
+              timedEntries.length,
+          ),
+        )
+      : "—";
 
   return (
     <div>
@@ -304,6 +344,10 @@ export function DashboardPage() {
           <span className={styles.summaryValue}>
             {totalSessions > 0 ? `${overallAvg}%` : "—"}
           </span>
+        </div>
+        <div className={styles.summaryCard}>
+          <span className={styles.summaryLabel}>全体平均解答時間</span>
+          <span className={styles.summaryValue}>{overallAvgElapsed}</span>
         </div>
       </div>
 

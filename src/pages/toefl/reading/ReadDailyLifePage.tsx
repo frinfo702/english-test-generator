@@ -4,7 +4,9 @@ import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
+import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { useAdaptive } from "../../../hooks/useAdaptive";
+import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useState } from "react";
@@ -37,6 +39,14 @@ export function ReadDailyLifePage() {
     "toefl/reading/daily-life",
   );
   const { saveScore } = useScoreHistory();
+  const {
+    display,
+    elapsedSeconds,
+    running,
+    start,
+    stop,
+    reset: resetTimer,
+  } = useElapsedTimer();
   const [textIdx, setTextIdx] = useState(0);
   const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
@@ -45,6 +55,19 @@ export function ReadDailyLifePage() {
   useEffect(() => {
     load();
   }, []);
+
+  useEffect(() => {
+    if (
+      data &&
+      !loading &&
+      !graded &&
+      (adaptive.state.phase === "module1" || adaptive.state.phase === "module2") &&
+      !running &&
+      elapsedSeconds === 0
+    ) {
+      start();
+    }
+  }, [data, loading, graded, adaptive.state.phase, running, elapsedSeconds, start]);
 
   // Flatten questions across all texts
   const allQ: { text: TextBlock; question: Question }[] = [];
@@ -111,6 +134,7 @@ export function ReadDailyLifePage() {
     if (adaptive.state.phase === "module1") {
       adaptive.finishModule1();
     } else {
+      const sessionSeconds = stop();
       // セッション全体のスコアを保存（Module1 + Module2の合計）
       const m1c = adaptive.state.module1Correct;
       const m1t = adaptive.state.module1Total;
@@ -118,7 +142,7 @@ export function ReadDailyLifePage() {
         ({ question }) => answers[question.id] === question.correctIndex,
       ).length;
       const m2t = allQ.length;
-      saveScore("toefl/reading/daily-life", m1c + m2c, m1t + m2t);
+      saveScore("toefl/reading/daily-life", m1c + m2c, m1t + m2t, sessionSeconds);
       adaptive.finishModule2();
     }
     setGraded(true);
@@ -134,6 +158,7 @@ export function ReadDailyLifePage() {
   };
 
   const handleRestart = () => {
+    resetTimer();
     adaptive.reset();
     setTextIdx(0);
     setQIdx(0);
@@ -146,6 +171,11 @@ export function ReadDailyLifePage() {
 
   return (
     <div>
+      {(phase === "module1" || phase === "module2" || phase === "complete") &&
+        (running || elapsedSeconds > 0) && (
+        <FloatingElapsedTimer display={display} running={running} />
+      )}
+
       <SectionHeader
         title="Read in Daily Life"
         subtitle="日常テキストを読んで設問に答えてください（アダプティブ形式）"
