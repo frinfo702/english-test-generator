@@ -4,6 +4,7 @@ import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
 import { useQuestion } from "../../hooks/useQuestion";
+import { useScoreHistory } from "../../hooks/useScoreHistory";
 import styles from "./Part7Page.module.css";
 
 interface Passage {
@@ -39,6 +40,7 @@ const TYPE_LABELS: Record<string, string> = {
 export function Part7Page() {
   const { data, loading, error, load } =
     useQuestion<ProblemData>("toeic/part7");
+  const { saveScore } = useScoreHistory();
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
 
@@ -57,6 +59,12 @@ export function Part7Page() {
     if (!graded) setSelected((s) => ({ ...s, [id]: opt }));
   };
   const handleSubmit = () => {
+    if (data) {
+      const correct = data.questions.filter(
+        (q) => selected[q.id] === q.correct,
+      ).length;
+      saveScore("toeic/part7", correct, data.questions.length);
+    }
     setGraded(true);
   };
   const handleNew = () => {

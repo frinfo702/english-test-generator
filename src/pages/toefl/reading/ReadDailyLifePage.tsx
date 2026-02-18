@@ -6,6 +6,7 @@ import { FeedbackPanel } from "../../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useAdaptive } from "../../../hooks/useAdaptive";
 import { useQuestion } from "../../../hooks/useQuestion";
+import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useState } from "react";
 import styles from "./ReadDailyLifePage.module.css";
 
@@ -35,6 +36,7 @@ export function ReadDailyLifePage() {
   const { data, loading, error, load } = useQuestion<ProblemData>(
     "toefl/reading/daily-life",
   );
+  const { saveScore } = useScoreHistory();
   const [textIdx, setTextIdx] = useState(0);
   const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
@@ -106,8 +108,19 @@ export function ReadDailyLifePage() {
       else adaptive.recordModule2Answer(correct);
     });
     // Finish module
-    if (adaptive.state.phase === "module1") adaptive.finishModule1();
-    else adaptive.finishModule2();
+    if (adaptive.state.phase === "module1") {
+      adaptive.finishModule1();
+    } else {
+      // セッション全体のスコアを保存（Module1 + Module2の合計）
+      const m1c = adaptive.state.module1Correct;
+      const m1t = adaptive.state.module1Total;
+      const m2c = allQ.filter(
+        ({ question }) => answers[question.id] === question.correctIndex,
+      ).length;
+      const m2t = allQ.length;
+      saveScore("toefl/reading/daily-life", m1c + m2c, m1t + m2t);
+      adaptive.finishModule2();
+    }
     setGraded(true);
     setTextIdx(0);
     setQIdx(0);

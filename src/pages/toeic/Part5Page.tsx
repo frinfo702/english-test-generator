@@ -5,6 +5,7 @@ import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { useQuestion } from "../../hooks/useQuestion";
+import { useScoreHistory } from "../../hooks/useScoreHistory";
 import styles from "./Part5Page.module.css";
 
 interface Question {
@@ -25,6 +26,7 @@ const PAGE_SIZE = 10;
 export function Part5Page() {
   const { data, loading, error, load } =
     useQuestion<ProblemData>("toeic/part5");
+  const { saveScore } = useScoreHistory();
   const [page, setPage] = useState(0);
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
@@ -58,6 +60,12 @@ export function Part5Page() {
     setPage((p) => p - 1);
   };
   const handleSubmit = () => {
+    if (data) {
+      const correct = data.questions.filter(
+        (q) => selected[q.id] === q.correct,
+      ).length;
+      saveScore("toeic/part5", correct, data.questions.length);
+    }
     setGraded(true);
     setPage(0);
   };

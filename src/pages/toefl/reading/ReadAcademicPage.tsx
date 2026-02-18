@@ -5,6 +5,7 @@ import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useQuestion } from "../../../hooks/useQuestion";
+import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import styles from "./ReadAcademicPage.module.css";
 
 interface Question {
@@ -26,6 +27,7 @@ export function ReadAcademicPage() {
   const { data, loading, error, load } = useQuestion<ProblemData>(
     "toefl/reading/academic",
   );
+  const { saveScore } = useScoreHistory();
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [graded, setGraded] = useState(false);
@@ -55,6 +57,12 @@ export function ReadAcademicPage() {
   };
 
   const handleSubmit = () => {
+    if (data) {
+      const s = data.questions.filter(
+        (q, i) => answers[i] === q.correctIndex,
+      ).length;
+      saveScore("toefl/reading/academic", s, data.questions.length);
+    }
     setGraded(true);
     setCurrent(0);
   };

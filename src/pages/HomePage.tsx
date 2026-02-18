@@ -45,6 +45,12 @@ export function HomePage() {
         </div>
       </div>
 
+      <div className={styles.dashboardBar}>
+        <Button variant="secondary" onClick={() => navigate("/dashboard")}>
+          📊 ダッシュボード（スコア推移）
+        </Button>
+      </div>
+
       <p className={styles.note}>
         ※ 問題はAIエージェント（Claude Code等）に生成してもらい、
         <code>public/questions/</code> 配下に保存してください。

@@ -3,6 +3,7 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { useQuestion } from "../../../hooks/useQuestion";
+import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useState } from "react";
 import styles from "./CompleteWordsPage.module.css";
 
@@ -22,6 +23,7 @@ export function CompleteWordsPage() {
   const { data, loading, error, load } = useQuestion<ProblemData>(
     "toefl/reading/complete-words",
   );
+  const { saveScore } = useScoreHistory();
   const [answers, setAnswers] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState<{ correct: number; total: number } | null>(
@@ -49,6 +51,7 @@ export function CompleteWordsPage() {
     });
     setScore({ correct, total: data.items.length });
     setSubmitted(true);
+    saveScore("toefl/reading/complete-words", correct, data.items.length);
   };
 
   const handleNew = () => load();

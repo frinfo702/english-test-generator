@@ -5,6 +5,7 @@ import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { useQuestion } from "../../hooks/useQuestion";
+import { useScoreHistory } from "../../hooks/useScoreHistory";
 import styles from "./Part6Page.module.css";
 
 interface Question {
@@ -29,6 +30,7 @@ interface ProblemData {
 export function Part6Page() {
   const { data, loading, error, load } =
     useQuestion<ProblemData>("toeic/part6");
+  const { saveScore } = useScoreHistory();
   const [passageIdx, setPassageIdx] = useState(0);
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
@@ -64,6 +66,11 @@ export function Part6Page() {
     setPassageIdx((i) => i - 1);
   };
   const handleSubmit = () => {
+    if (data) {
+      const allQ = data.passages.flatMap((p) => p.questions);
+      const correct = allQ.filter((q) => selected[q.id] === q.correct).length;
+      saveScore("toeic/part6", correct, allQ.length);
+    }
     setGraded(true);
     setPassageIdx(0);
   };

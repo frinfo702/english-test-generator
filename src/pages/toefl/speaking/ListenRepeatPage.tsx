@@ -65,8 +65,6 @@ export function ListenRepeatPage() {
 
   const totalSentences = data?.sentences.length ?? 0;
   const isLastSentence = current + 1 >= totalSentences;
-  const allTyped =
-    totalSentences > 0 && Object.keys(allInputs).length === totalSentences;
 
   const handleConfirmInput = () => {
     if (!currentInput.trim()) return;

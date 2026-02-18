@@ -1,6 +1,7 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { AppShell } from "./components/layout/AppShell";
 import { HomePage } from "./pages/HomePage";
+import { DashboardPage } from "./pages/DashboardPage";
 import { ToeflMenuPage } from "./pages/toefl/ToeflMenuPage";
 import { ToeicMenuPage } from "./pages/toeic/ToeicMenuPage";
 import { CompleteWordsPage } from "./pages/toefl/reading/CompleteWordsPage";
@@ -21,6 +22,7 @@ export default function App() {
       <AppShell>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
 
           {/* TOEFL */}
           <Route path="/toefl" element={<ToeflMenuPage />} />
