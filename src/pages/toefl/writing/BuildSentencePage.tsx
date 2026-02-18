@@ -83,7 +83,6 @@ export function BuildSentencePage() {
   };
   const handleSubmit = () => {
     setGraded(true);
-    setCurrent(0);
   };
 
   return (

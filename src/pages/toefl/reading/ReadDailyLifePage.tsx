@@ -122,8 +122,6 @@ export function ReadDailyLifePage() {
       adaptive.finishModule2();
     }
     setGraded(true);
-    setTextIdx(0);
-    setQIdx(0);
   };
 
   const handleStartModule2 = () => {

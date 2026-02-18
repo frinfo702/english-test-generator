@@ -72,7 +72,6 @@ export function Part6Page() {
       saveScore("toeic/part6", correct, allQ.length);
     }
     setGraded(true);
-    setPassageIdx(0);
   };
   const handleNew = () => {
     setPassageIdx(0);
@@ -228,6 +227,9 @@ export function Part6Page() {
               allOnPassageSelected && (
                 <Button onClick={handleNextPassage}>次の文書</Button>
               )}
+            {graded && passageIdx + 1 < data.passages.length && (
+              <Button onClick={handleNextPassage}>次の文書</Button>
+            )}
             {!graded &&
               passageIdx + 1 >= data.passages.length &&
               allSelected && (

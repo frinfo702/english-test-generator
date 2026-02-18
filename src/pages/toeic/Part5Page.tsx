@@ -67,7 +67,6 @@ export function Part5Page() {
       saveScore("toeic/part5", correct, data.questions.length);
     }
     setGraded(true);
-    setPage(0);
   };
   const handleNew = () => {
     setPage(0);
@@ -183,6 +182,9 @@ export function Part5Page() {
               </Button>
             )}
             {!graded && page + 1 < totalPages && allOnPageSelected && (
+              <Button onClick={handleNextPage}>次のページ</Button>
+            )}
+            {graded && page + 1 < totalPages && (
               <Button onClick={handleNextPage}>次のページ</Button>
             )}
             {!graded && page + 1 >= totalPages && allSelected && (

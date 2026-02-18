@@ -64,7 +64,6 @@ export function ReadAcademicPage() {
       saveScore("toefl/reading/academic", s, data.questions.length);
     }
     setGraded(true);
-    setCurrent(0);
   };
 
   const totalQ = data?.questions.length ?? 0;
