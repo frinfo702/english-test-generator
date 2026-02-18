@@ -20,5 +20,13 @@
     "total": 10,
     "pct": 70,
     "elapsedSeconds": 98
+  },
+  {
+    "taskId": "toefl/reading/daily-life",
+    "date": "2026-02-18T12:54:10.673Z",
+    "correct": 6,
+    "total": 6,
+    "pct": 100,
+    "elapsedSeconds": 128
   }
 ]
