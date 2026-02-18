@@ -1,0 +1,89 @@
+{
+  "setType": "double",
+  "passages": [
+    {
+      "id": "p1",
+      "textType": "email",
+      "title": null,
+      "content": "From: Jessica Huang\nTo: Customer Support\nSubject: Order Inquiry\n\nHello,\n\nI placed an order (Order #4821) on March 5th for 20 ergonomic chairs and 10 standing desks. I was quoted a delivery window of 7-10 business days, so I expected delivery by March 19th.\n\nI have not received any shipping notification. Could you please provide an update?\n\nThank you,\nJessica Huang, Procurement Manager"
+    },
+    {
+      "id": "p2",
+      "textType": "email",
+      "title": null,
+      "content": "From: Customer Support\nTo: Jessica Huang\nSubject: RE: Order Inquiry\n\nDear Ms. Huang,\n\nThank you for reaching out regarding Order #4821. I apologize for the lack of communication.\n\nYour order is at our warehouse awaiting shipment. Due to unexpectedly high order volumes, there has been a slight delay. Your items should arrive by March 21st, two days later than estimated.\n\nAs compensation, we would like to offer you a $50 store credit for your next purchase.\n\nBest regards,\nMark Ellis, Customer Support"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q5",
+      "type": "detail",
+      "stem": "What does Ms. Huang request?",
+      "options": {
+        "A": "A refund",
+        "B": "An update on her order status",
+        "C": "A change to her delivery address",
+        "D": "A replacement for damaged items"
+      },
+      "correct": "B",
+      "explanation": "Ms. Huang asks to 'provide an update on the status of my order.'",
+      "passageRef": "p1"
+    },
+    {
+      "id": "q6",
+      "type": "detail",
+      "stem": "Why has the order been delayed?",
+      "options": {
+        "A": "A warehouse computer error",
+        "B": "Items were out of stock",
+        "C": "Higher than expected order volume",
+        "D": "Issues with the delivery courier"
+      },
+      "correct": "C",
+      "explanation": "The delay is 'due to unexpectedly high order volumes.'",
+      "passageRef": "p2"
+    },
+    {
+      "id": "q7",
+      "type": "crossReference",
+      "stem": "When is Ms. Huang's order now expected to arrive?",
+      "options": {
+        "A": "March 14th",
+        "B": "March 19th",
+        "C": "March 21st",
+        "D": "March 25th"
+      },
+      "correct": "C",
+      "explanation": "Ms. Huang expected March 19th; the new date is March 21st.",
+      "passageRef": "cross"
+    },
+    {
+      "id": "q8",
+      "type": "inference",
+      "stem": "What can be inferred about Ms. Huang's situation?",
+      "options": {
+        "A": "She plans to cancel her order.",
+        "B": "She may need the furniture by a specific deadline.",
+        "C": "She has ordered from this store many times.",
+        "D": "She works in customer service."
+      },
+      "correct": "B",
+      "explanation": "As a Procurement Manager ordering office furniture, she likely has a deadline.",
+      "passageRef": "cross"
+    },
+    {
+      "id": "q9",
+      "type": "detail",
+      "stem": "What does Officeplus Store offer as compensation?",
+      "options": {
+        "A": "Free express shipping",
+        "B": "A discount on delayed items",
+        "C": "A $50 store credit for a future purchase",
+        "D": "A full refund of the shipping fee"
+      },
+      "correct": "C",
+      "explanation": "'A $50 store credit for your next purchase.'",
+      "passageRef": "p2"
+    }
+  ]
+}

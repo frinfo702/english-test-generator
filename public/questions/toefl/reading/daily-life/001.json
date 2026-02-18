@@ -1,0 +1,58 @@
+{
+  "module": "module1",
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "content": "From: Student Services\nTo: All Students\nSubject: Library Hours Change\n\nDear Students,\n\nThe main library will be closed for renovation from March 15 to March 22. The Science Library on the north campus will be open 7 AM to midnight, Monday through Sunday.\n\nAll library resources can be accessed digitally through the student portal.\n\nThank you.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why is the main library closing?",
+          "options": [
+            "A. It is being expanded.",
+            "B. It is undergoing renovation.",
+            "C. It is switching to digital-only access.",
+            "D. It is being relocated."
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The email states the library will be closed 'for renovation.'"
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about students during the closure?",
+          "options": [
+            "A. They will have no access to library materials.",
+            "B. They must visit the north campus for all services.",
+            "C. They can still access library resources online.",
+            "D. They need special permission to use the Science Library."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "Resources are available 'digitally through the student portal.'"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "SNS post",
+      "content": "Campus Cafe Update!\nNew autumn menu starting Monday!\nNew items: Pumpkin Spice Latte & Apple Cider\nExtended hours: Now open until 9 PM on weekdays\nTemporarily unavailable: Iced drinks (equipment maintenance)",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "Which item is currently NOT available at the Campus Cafe?",
+          "options": [
+            "A. Pumpkin Spice Latte",
+            "B. Apple Cider",
+            "C. Iced drinks",
+            "D. The autumn menu"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The post states iced drinks are 'temporarily unavailable' due to equipment maintenance."
+        }
+      ]
+    }
+  ]
+}

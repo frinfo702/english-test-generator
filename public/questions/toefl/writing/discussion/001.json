@@ -1,0 +1,19 @@
+{
+  "professorName": "Dr. Chen",
+  "professorQuestion": "Technology is increasingly used in K-12 classrooms. Do you believe integrating technology into education primarily benefits or hinders student learning? Support your position with specific reasons and examples.",
+  "student1": {
+    "name": "Marcus",
+    "response": "I strongly believe technology benefits student learning. Online resources give students access to information beyond any textbook. Virtual labs allow science students to conduct experiments impossible in a standard classroom. Technology also enables personalized learning where students progress at their own pace."
+  },
+  "student2": {
+    "name": "Aisha",
+    "response": "While technology has benefits, I think it often hinders learning. Students are easily distracted by social media when devices are available. Research shows handwriting notes leads to better retention than typing. Excessive screen time may negatively affect attention spans."
+  },
+  "modelAnswer": "Both Marcus and Aisha raise valid points. However, I believe the impact depends on how technology is implemented. When used purposefully, technology can provide experiences that genuinely enhance understanding. That said, Aisha's concern about distraction is well-founded. The key distinction is structured versus unstructured use. Schools that establish clear guidelines tend to see positive outcomes. Rather than viewing technology as inherently beneficial or harmful, educators should treat it as a tool whose effectiveness depends on intentional design.",
+  "evaluationPoints": [
+    "Acknowledges both perspectives before presenting your own view",
+    "Adds a new angle not fully addressed by either student",
+    "Provides a clear logical argument supported by reasoning",
+    "Maintains academic tone and meets the 100-word minimum"
+  ]
+}

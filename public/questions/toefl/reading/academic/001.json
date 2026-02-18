@@ -1,0 +1,71 @@
+{
+  "title": "The Formation of Coral Reefs",
+  "passage": "Coral reefs are among the most biologically diverse ecosystems on Earth. These structures are built by tiny marine animals called coral polyps, which secrete calcium carbonate to form hard skeletons. Over thousands of years, these skeletons accumulate to create massive reef formations.\n\nThere are three main types of coral reefs: fringing reefs, which grow directly from shorelines; barrier reefs, which are separated from land by lagoons; and atolls, which are ring-shaped reefs encircling a central lagoon.\n\nCoral reefs require warm water temperatures between 23-29 degrees Celsius, clear shallow water that allows sunlight to penetrate, and low nutrient levels. Climate change poses a significant threat, as rising ocean temperatures cause coral bleaching, a process where corals expel their symbiotic algae, losing both color and their primary food source.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'secrete' in paragraph 1 is closest in meaning to:",
+      "options": [
+        "A. dissolve",
+        "B. produce and release",
+        "C. absorb",
+        "D. conceal"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Secrete' means to produce and release a substance."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "What distinguishes a barrier reef from a fringing reef?",
+      "options": [
+        "A. Its circular shape",
+        "B. Its separation from land by a lagoon",
+        "C. Its location in deep water",
+        "D. Its larger size"
+      ],
+      "correctIndex": 1,
+      "explanation": "Barrier reefs are 'separated from land by lagoons.'"
+    },
+    {
+      "id": "q3",
+      "type": "detail",
+      "stem": "Which condition is NOT mentioned as necessary for coral reefs?",
+      "options": [
+        "A. Warm water temperatures",
+        "B. Clear shallow water",
+        "C. High levels of nutrients",
+        "D. Sunlight penetration"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage states coral reefs need 'low nutrient levels,' not high levels."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about coral bleaching?",
+      "options": [
+        "A. It is caused by introduction of algae.",
+        "B. It results in corals becoming more colorful.",
+        "C. It leaves corals unable to feed themselves effectively.",
+        "D. It only occurs in deep ocean areas."
+      ],
+      "correctIndex": 2,
+      "explanation": "Bleaching causes corals to lose their 'symbiotic algae' which is their 'primary food source.'"
+    },
+    {
+      "id": "q5",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of this passage?",
+      "options": [
+        "A. To argue for protecting the Great Barrier Reef",
+        "B. To explain what coral reefs are, how they form, and the threats they face",
+        "C. To compare coral reefs with rainforest ecosystems",
+        "D. To describe the life cycle of coral polyps"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage covers reef formation, types, conditions for growth, and threats."
+    }
+  ]
+}

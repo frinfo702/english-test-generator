@@ -1,0 +1,65 @@
+{
+  "paragraph": "The process of photosynth___ allows plants to conv___ sunlight into chem___ energy. Chlorophyll, the green pig___ found in plant cells, absor___ light from the sun and uses it to trans___ carbon dioxide and water into glucose. This remark___ mechanism has been stud___ extensively by biol___ for over two centur___.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "pho",
+      "answer": "photosynthesis",
+      "placeholder": "photosynth___"
+    },
+    {
+      "index": 1,
+      "hint": "con",
+      "answer": "convert",
+      "placeholder": "conv___"
+    },
+    {
+      "index": 2,
+      "hint": "che",
+      "answer": "chemical",
+      "placeholder": "chem___"
+    },
+    {
+      "index": 3,
+      "hint": "pig",
+      "answer": "pigment",
+      "placeholder": "pig___"
+    },
+    {
+      "index": 4,
+      "hint": "abs",
+      "answer": "absorbs",
+      "placeholder": "absor___"
+    },
+    {
+      "index": 5,
+      "hint": "tra",
+      "answer": "transform",
+      "placeholder": "trans___"
+    },
+    {
+      "index": 6,
+      "hint": "rem",
+      "answer": "remarkable",
+      "placeholder": "remark___"
+    },
+    {
+      "index": 7,
+      "hint": "stu",
+      "answer": "studied",
+      "placeholder": "stud___"
+    },
+    {
+      "index": 8,
+      "hint": "bio",
+      "answer": "biologists",
+      "placeholder": "biol___"
+    },
+    {
+      "index": 9,
+      "hint": "cen",
+      "answer": "centuries",
+      "placeholder": "centur___"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "setType": "single",
+  "passages": [
+    {
+      "id": "p1",
+      "textType": "advertisement",
+      "title": "Grand Opening — Riverside Business Center",
+      "content": "Riverside Business Center is proud to announce the grand opening of its expanded facilities on April 1st. We now offer 45 fully furnished office suites ranging from 200 to 800 square feet, along with shared amenities including a rooftop lounge, conference rooms, and 24-hour reception.\n\nFor April, all new tenants receive a 20% discount on their first three months of rent. Free high-speed internet and utilities are included in all lease agreements.\n\nContact our leasing office at 555-0192. Limited spaces available."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "What is the purpose of the advertisement?",
+      "options": {
+        "A": "To announce the relocation of a business center",
+        "B": "To promote the opening of expanded office facilities",
+        "C": "To advertise a temporary sale on office supplies",
+        "D": "To recruit new staff"
+      },
+      "correct": "B",
+      "explanation": "The advertisement announces the 'grand opening of expanded facilities.'",
+      "passageRef": "p1"
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "What benefit do new tenants receive in April?",
+      "options": {
+        "A": "Free office furniture",
+        "B": "A six-month rent-free period",
+        "C": "A 20% discount for the first three months",
+        "D": "Complimentary conference room bookings"
+      },
+      "correct": "C",
+      "explanation": "'All new tenants will receive a 20% discount on their first three months of rent.'",
+      "passageRef": "p1"
+    },
+    {
+      "id": "q3",
+      "type": "inference",
+      "stem": "What can be inferred about the internet service?",
+      "options": {
+        "A": "It is available at an additional cost.",
+        "B": "It is provided at no extra charge.",
+        "C": "It is only available in conference rooms.",
+        "D": "It requires a separate contract."
+      },
+      "correct": "B",
+      "explanation": "'Free high-speed internet...included in all lease agreements.'",
+      "passageRef": "p1"
+    },
+    {
+      "id": "q4",
+      "type": "notStated",
+      "stem": "Which is NOT mentioned?",
+      "options": {
+        "A": "The location of the business center",
+        "B": "The range of office suite sizes",
+        "C": "The names of current tenants",
+        "D": "Contact information for the leasing office"
+      },
+      "correct": "C",
+      "explanation": "Names of current tenants are never mentioned.",
+      "passageRef": "p1"
+    }
+  ]
+}

@@ -1,0 +1,394 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "sentence": "The marketing team ___ the new product launch for next quarter.",
+      "options": {
+        "A": "is planning",
+        "B": "are planned",
+        "C": "planning",
+        "D": "to plan"
+      },
+      "correct": "A",
+      "explanation": "Singular 'team' takes singular verb.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q2",
+      "sentence": "All employees must submit expense reports ___ the end of the month.",
+      "options": {
+        "A": "until",
+        "B": "during",
+        "C": "by",
+        "D": "since"
+      },
+      "correct": "C",
+      "explanation": "'By' indicates a deadline.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q3",
+      "sentence": "The CEO's decision ___ many employees by surprise.",
+      "options": {
+        "A": "caught",
+        "B": "has caught",
+        "C": "catches",
+        "D": "catching"
+      },
+      "correct": "A",
+      "explanation": "Simple past for a completed action.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q4",
+      "sentence": "___ the project was delayed, the team met the final deadline.",
+      "options": {
+        "A": "Despite",
+        "B": "Although",
+        "C": "However",
+        "D": "Therefore"
+      },
+      "correct": "B",
+      "explanation": "'Although' introduces a clause of contrast.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q5",
+      "sentence": "The new software is ___ compatible with older systems.",
+      "options": {
+        "A": "full",
+        "B": "fullness",
+        "C": "fully",
+        "D": "fuller"
+      },
+      "correct": "C",
+      "explanation": "Adverb 'fully' modifies the adjective.",
+      "focus": "word form"
+    },
+    {
+      "id": "q6",
+      "sentence": "Ms. Thompson will present ___ findings to the board on Friday.",
+      "options": {
+        "A": "she",
+        "B": "her",
+        "C": "hers",
+        "D": "herself"
+      },
+      "correct": "B",
+      "explanation": "Possessive adjective 'her' modifies 'findings.'",
+      "focus": "pronoun"
+    },
+    {
+      "id": "q7",
+      "sentence": "The report indicates that sales ___ by 15 percent this year.",
+      "options": {
+        "A": "increase",
+        "B": "have increased",
+        "C": "are increasing",
+        "D": "increased"
+      },
+      "correct": "B",
+      "explanation": "Present perfect for a period extending to the present.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q8",
+      "sentence": "The conference room is ___ for the executive meeting.",
+      "options": {
+        "A": "reserve",
+        "B": "reserving",
+        "C": "reserved",
+        "D": "reservation"
+      },
+      "correct": "C",
+      "explanation": "Passive 'is reserved.'",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q9",
+      "sentence": "The policy applies to ___ employees who joined after January 1st.",
+      "options": {
+        "A": "each",
+        "B": "all",
+        "C": "every",
+        "D": "either"
+      },
+      "correct": "B",
+      "explanation": "'All' precedes plural nouns.",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q10",
+      "sentence": "Profits have ___ grown since the new CEO took charge.",
+      "options": {
+        "A": "steady",
+        "B": "steadiness",
+        "C": "steadied",
+        "D": "steadily"
+      },
+      "correct": "D",
+      "explanation": "Adverb 'steadily' modifies 'grown.'",
+      "focus": "word form"
+    },
+    {
+      "id": "q11",
+      "sentence": "Customers can contact us ___ phone, email, or live chat.",
+      "options": {
+        "A": "by",
+        "B": "with",
+        "C": "through",
+        "D": "via"
+      },
+      "correct": "D",
+      "explanation": "'Via' is used with communication channels.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q12",
+      "sentence": "Neither the manager nor the assistants ___ available.",
+      "options": {
+        "A": "was",
+        "B": "were",
+        "C": "is",
+        "D": "has been"
+      },
+      "correct": "B",
+      "explanation": "Verb agrees with nearer subject 'assistants' (plural).",
+      "focus": "subject-verb agreement"
+    },
+    {
+      "id": "q13",
+      "sentence": "The warehouse ___ to a larger facility next month.",
+      "options": {
+        "A": "relocated",
+        "B": "will relocate",
+        "C": "relocates",
+        "D": "relocating"
+      },
+      "correct": "B",
+      "explanation": "Future plan uses 'will + base verb.'",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q14",
+      "sentence": "Ensure all safety equipment is ___ before beginning work.",
+      "options": {
+        "A": "inspecting",
+        "B": "inspected",
+        "C": "to inspect",
+        "D": "inspection"
+      },
+      "correct": "B",
+      "explanation": "Passive 'is inspected.'",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q15",
+      "sentence": "The program is designed ___ new employees integrate into the team.",
+      "options": {
+        "A": "helping",
+        "B": "helped",
+        "C": "to help",
+        "D": "helps"
+      },
+      "correct": "C",
+      "explanation": "Infinitive of purpose 'to help.'",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q16",
+      "sentence": "The board expressed ___ satisfaction with the results.",
+      "options": {
+        "A": "they",
+        "B": "them",
+        "C": "their",
+        "D": "theirs"
+      },
+      "correct": "C",
+      "explanation": "Possessive adjective 'their.'",
+      "focus": "pronoun"
+    },
+    {
+      "id": "q17",
+      "sentence": "A number of clients ___ reported issues with the billing system.",
+      "options": {
+        "A": "has",
+        "B": "have",
+        "C": "is",
+        "D": "was"
+      },
+      "correct": "B",
+      "explanation": "'A number of' takes a plural verb.",
+      "focus": "subject-verb agreement"
+    },
+    {
+      "id": "q18",
+      "sentence": "The proposal was ___ rejected due to budget constraints.",
+      "options": {
+        "A": "final",
+        "B": "finalize",
+        "C": "finalist",
+        "D": "finally"
+      },
+      "correct": "D",
+      "explanation": "Adverb 'finally.'",
+      "focus": "word form"
+    },
+    {
+      "id": "q19",
+      "sentence": "We need a candidate with ___ experience in project management.",
+      "options": {
+        "A": "extend",
+        "B": "extension",
+        "C": "extensive",
+        "D": "extensively"
+      },
+      "correct": "C",
+      "explanation": "Adjective 'extensive.'",
+      "focus": "word form"
+    },
+    {
+      "id": "q20",
+      "sentence": "The seminar will be held ___ the conference center.",
+      "options": {
+        "A": "in",
+        "B": "on",
+        "C": "at",
+        "D": "into"
+      },
+      "correct": "C",
+      "explanation": "'At' is used with specific venues.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q21",
+      "sentence": "___ the high cost, many companies are adopting the new software.",
+      "options": {
+        "A": "Despite",
+        "B": "Although",
+        "C": "Even if",
+        "D": "Unless"
+      },
+      "correct": "A",
+      "explanation": "'Despite' + noun phrase.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q22",
+      "sentence": "Employees are encouraged to submit ___ suggestions.",
+      "options": {
+        "A": "they",
+        "B": "their",
+        "C": "them",
+        "D": "theirs"
+      },
+      "correct": "B",
+      "explanation": "Possessive adjective 'their.'",
+      "focus": "pronoun"
+    },
+    {
+      "id": "q23",
+      "sentence": "The product line was ___ received by retailers and consumers.",
+      "options": {
+        "A": "enthusiasm",
+        "B": "enthusiast",
+        "C": "enthusiastically",
+        "D": "enthusiastic"
+      },
+      "correct": "C",
+      "explanation": "Adverb 'enthusiastically.'",
+      "focus": "word form"
+    },
+    {
+      "id": "q24",
+      "sentence": "The committee will meet ___ Tuesday to discuss the budget.",
+      "options": {
+        "A": "on",
+        "B": "in",
+        "C": "at",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "'On' precedes days of the week.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q25",
+      "sentence": "Sales figures this quarter are ___ those of last year.",
+      "options": {
+        "A": "exceeding",
+        "B": "exceeded",
+        "C": "excess",
+        "D": "excessive"
+      },
+      "correct": "A",
+      "explanation": "'Exceeding' means surpassing.",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q26",
+      "sentence": "___ customers complete their purchase, they receive a confirmation email.",
+      "options": {
+        "A": "Once",
+        "B": "Since",
+        "C": "Despite",
+        "D": "However"
+      },
+      "correct": "A",
+      "explanation": "'Once' introduces a time clause.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q27",
+      "sentence": "The manager asked that all reports ___ submitted before noon.",
+      "options": {
+        "A": "are",
+        "B": "were",
+        "C": "be",
+        "D": "being"
+      },
+      "correct": "C",
+      "explanation": "Subjunctive 'be' after 'asked that.'",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q28",
+      "sentence": "The HR department is responsible ___ processing new employee paperwork.",
+      "options": {
+        "A": "of",
+        "B": "for",
+        "C": "with",
+        "D": "about"
+      },
+      "correct": "B",
+      "explanation": "'Responsible for' is a fixed collocation.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q29",
+      "sentence": "Each department head ___ required to submit a quarterly review.",
+      "options": {
+        "A": "are",
+        "B": "have been",
+        "C": "is",
+        "D": "were"
+      },
+      "correct": "C",
+      "explanation": "'Each' is singular.",
+      "focus": "subject-verb agreement"
+    },
+    {
+      "id": "q30",
+      "sentence": "The director's ___ presentation impressed all the investors.",
+      "options": {
+        "A": "compelling",
+        "B": "compel",
+        "C": "compelled",
+        "D": "compulsion"
+      },
+      "correct": "A",
+      "explanation": "Adjective 'compelling.'",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

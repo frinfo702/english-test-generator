@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "The library will be closed for maintenance next weekend.",
+      "wordCount": 9
+    },
+    {
+      "id": "s2",
+      "text": "Could you remind me when the assignment is due?",
+      "wordCount": 9
+    },
+    {
+      "id": "s3",
+      "text": "The professor canceled class because of a conference.",
+      "wordCount": 8
+    },
+    {
+      "id": "s4",
+      "text": "Students must register for next semester by the end of the month.",
+      "wordCount": 12
+    },
+    {
+      "id": "s5",
+      "text": "The cafeteria on the main campus serves breakfast until ten.",
+      "wordCount": 10
+    },
+    {
+      "id": "s6",
+      "text": "Many students struggle to balance coursework and part-time jobs.",
+      "wordCount": 9
+    },
+    {
+      "id": "s7",
+      "text": "The university offers free tutoring sessions for all enrolled students.",
+      "wordCount": 10
+    }
+  ]
+}

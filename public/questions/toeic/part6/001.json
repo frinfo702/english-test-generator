@@ -1,0 +1,240 @@
+{
+  "passages": [
+    {
+      "id": "p1",
+      "textType": "business email",
+      "text": "Dear Mr. Nakamura,\n\nThank you for your interest in our consulting services. [1] reviewing your company's recent financial reports, our team has identified several areas where we can add value.\n\nWe would like to schedule an initial consultation at your [2]. Please [3] us know your availability for the week of April 14th. We look forward to the [4] of working with you.\n\nBest regards,\nSarah Collins",
+      "questions": [
+        {
+          "id": "q1",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "After",
+            "B": "While",
+            "C": "Before",
+            "D": "Until"
+          },
+          "correct": "A",
+          "explanation": "'After reviewing' — team reviewed first, then identified opportunities."
+        },
+        {
+          "id": "q2",
+          "blankNumber": 2,
+          "type": "vocabulary",
+          "options": {
+            "A": "expense",
+            "B": "convenience",
+            "C": "permission",
+            "D": "requirement"
+          },
+          "correct": "B",
+          "explanation": "'At your convenience' is a standard polite business phrase."
+        },
+        {
+          "id": "q3",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "let",
+            "B": "make",
+            "C": "have",
+            "D": "give"
+          },
+          "correct": "A",
+          "explanation": "'Let us know' means inform us."
+        },
+        {
+          "id": "q4",
+          "blankNumber": 4,
+          "type": "vocabulary",
+          "options": {
+            "A": "possibility",
+            "B": "opportunity",
+            "C": "permission",
+            "D": "advantage"
+          },
+          "correct": "B",
+          "explanation": "'Look forward to the opportunity' is a standard closing."
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "textType": "memo",
+      "text": "MEMORANDUM\nTo: All Staff\nRe: Office Renovation\n\nThe third-floor office will undergo renovation [1] the month of May. Affected employees will be temporarily [2] to the second floor.\n\nThe renovation is necessary to [3] the office with modern amenities.\n\nA detailed schedule will be [4] to all managers by end of this week.",
+      "questions": [
+        {
+          "id": "q5",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "for",
+            "B": "during",
+            "C": "while",
+            "D": "throughout"
+          },
+          "correct": "D",
+          "explanation": "'Throughout the month' = for the entire duration."
+        },
+        {
+          "id": "q6",
+          "blankNumber": 2,
+          "type": "vocabulary",
+          "options": {
+            "A": "relocated",
+            "B": "dismissed",
+            "C": "promoted",
+            "D": "informed"
+          },
+          "correct": "A",
+          "explanation": "'Relocated' = moved to another location."
+        },
+        {
+          "id": "q7",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "replace",
+            "B": "supply",
+            "C": "equip",
+            "D": "fill"
+          },
+          "correct": "C",
+          "explanation": "'Equip the office with' = provide necessary equipment."
+        },
+        {
+          "id": "q8",
+          "blankNumber": 4,
+          "type": "sentence",
+          "options": {
+            "A": "distributed",
+            "B": "distributing",
+            "C": "distribute",
+            "D": "distribution"
+          },
+          "correct": "A",
+          "explanation": "Passive 'will be distributed' is correct."
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "textType": "notice",
+      "text": "NOTICE: Annual Performance Review\n\nThe review cycle will [1] on May 1st. All employees must complete self-assessments by April 25th.\n\nManagers should schedule review meetings [2] all team members by May 15th.\n\nEmployees with questions should [3] their HR representative.\n\n[4], the timeline has been extended by two weeks compared to last year.",
+      "questions": [
+        {
+          "id": "q9",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "begin",
+            "B": "beginning",
+            "C": "began",
+            "D": "begun"
+          },
+          "correct": "A",
+          "explanation": "'Will begin' with base form is correct."
+        },
+        {
+          "id": "q10",
+          "blankNumber": 2,
+          "type": "grammar",
+          "options": {
+            "A": "to",
+            "B": "for",
+            "C": "with",
+            "D": "at"
+          },
+          "correct": "C",
+          "explanation": "'Schedule meetings with' is the correct collocation."
+        },
+        {
+          "id": "q11",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "contact",
+            "B": "hire",
+            "C": "replace",
+            "D": "avoid"
+          },
+          "correct": "A",
+          "explanation": "'Contact their HR representative.'"
+        },
+        {
+          "id": "q12",
+          "blankNumber": 4,
+          "type": "sentence",
+          "options": {
+            "A": "As a result",
+            "B": "In contrast",
+            "C": "For example",
+            "D": "Notably"
+          },
+          "correct": "D",
+          "explanation": "'Notably' introduces noteworthy information."
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "textType": "letter",
+      "text": "Dear Ms. Patel,\n\nWe are pleased to [1] you that your application for Regional Sales Manager has been successful.\n\nYour start date will be June 2nd. Please [2] to HR on your first day at 9:00 AM.\n\nA formal offer letter, [3] a detailed overview of your compensation, will be sent by Friday. Please sign the offer letter [4] returning it within five business days.\n\nSincerely,\nDavid Park",
+      "questions": [
+        {
+          "id": "q13",
+          "blankNumber": 1,
+          "type": "vocabulary",
+          "options": {
+            "A": "remind",
+            "B": "inform",
+            "C": "advise",
+            "D": "warn"
+          },
+          "correct": "B",
+          "explanation": "'Inform you that' is standard for conveying news."
+        },
+        {
+          "id": "q14",
+          "blankNumber": 2,
+          "type": "grammar",
+          "options": {
+            "A": "report",
+            "B": "reporting",
+            "C": "reported",
+            "D": "to report"
+          },
+          "correct": "A",
+          "explanation": "After 'Please,' use the base form."
+        },
+        {
+          "id": "q15",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "including",
+            "B": "included",
+            "C": "to include",
+            "D": "includes"
+          },
+          "correct": "A",
+          "explanation": "'Including' introduces additional details."
+        },
+        {
+          "id": "q16",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "prior to",
+            "B": "because of",
+            "C": "in spite of",
+            "D": "as well as"
+          },
+          "correct": "A",
+          "explanation": "'Prior to returning it' = before returning it."
+        }
+      ]
+    }
+  ]
+}

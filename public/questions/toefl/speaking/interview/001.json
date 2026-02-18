@@ -1,0 +1,52 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "type": "personal",
+      "question": "Describe a time when you had to overcome a significant challenge. What did you learn from that experience?",
+      "modelAnswer": "One significant challenge I faced was moving to a new city for university without knowing anyone. At first, I felt isolated and struggled to adjust. To overcome this, I joined student clubs and introduced myself to classmates. Gradually I built a supportive network. This experience taught me that stepping outside my comfort zone is essential for growth. Challenges, while initially daunting, often lead to valuable personal development.",
+      "evaluationPoints": [
+        "Describes a specific relatable challenge",
+        "Explains concrete actions taken",
+        "Reflects on lessons learned",
+        "Stays on topic within the time limit"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "opinion",
+      "question": "Do you think universities should make community service a graduation requirement? Why or why not?",
+      "modelAnswer": "Yes, I think community service should be a graduation requirement. Universities aim to produce not just skilled professionals but also responsible citizens. Mandatory service exposes students to social issues they might never otherwise encounter. For example, students volunteering at food banks gain perspectives classroom learning cannot provide. Critics argue it reduces genuine motivation, but structured programs can make service meaningful. Ultimately the benefits outweigh the drawbacks.",
+      "evaluationPoints": [
+        "States a clear position at the outset",
+        "Provides specific supporting reasons",
+        "Addresses a potential counterargument",
+        "Concludes with a summary"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "hypothetical",
+      "question": "If you could design your ideal university campus, what three features would you include and why?",
+      "modelAnswer": "If I could design my ideal campus I would include three key features. First, collaborative study spaces with flexible furniture for group or individual work. Second, green outdoor spaces like gardens and walking paths, because nature reduces stress and improves concentration. Third, a wellness center offering mental health counseling and fitness facilities, since student wellbeing directly impacts academic performance. Together these features support both intellectual achievement and personal health.",
+      "evaluationPoints": [
+        "Identifies exactly three features",
+        "Provides a clear reason for each",
+        "Demonstrates logical reasoning",
+        "Uses varied vocabulary"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "comparison",
+      "question": "Some people prefer studying alone, while others prefer studying in groups. Which approach do you think is more effective?",
+      "modelAnswer": "While both approaches have merit, I believe studying alone is generally more effective for deep learning. When studying independently you can focus without distractions and work at your own pace. You are forced to confront gaps in your understanding. That said, group study is valuable for discussing complex concepts or preparing for presentations. The most effective learners combine both methods, using solo study to build foundational knowledge and group sessions to test understanding.",
+      "evaluationPoints": [
+        "Takes a clear position",
+        "Acknowledges the merits of the alternative",
+        "Supports the argument with specific reasoning",
+        "Provides a nuanced conclusion"
+      ]
+    }
+  ]
+}

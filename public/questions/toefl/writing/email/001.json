@@ -1,0 +1,29 @@
+{
+  "scenario": {
+    "title": "Requesting an Extension on an Assignment",
+    "description": "You are a student in Professor Martinez's Advanced Writing course. You have been ill for three days and cannot complete the research paper due this Friday. Request a one-week extension.",
+    "recipient": "Professor Martinez",
+    "purpose": "Request a one-week extension on the research paper",
+    "keyPoints": [
+      "Explain your illness and its impact",
+      "Specify how much additional time you need",
+      "Mention your commitment to quality work",
+      "Offer to provide a doctor note if required"
+    ]
+  },
+  "modelAnswer": "Dear Professor Martinez,\n\nI hope this email finds you well. I am writing to respectfully request a one-week extension on the research paper due this Friday, March 22nd.\n\nUnfortunately, I have been seriously ill with the flu since Monday and have been unable to work on my assignments. I have a doctor's note confirming my condition, which I am happy to provide upon request.\n\nThe additional week would allow me to recover fully and produce the quality of work your course deserves.\n\nThank you very much for your consideration.\n\nSincerely,\n[Your Name]",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Clearly explains the reason and includes all key points."
+    },
+    {
+      "criterion": "Organization",
+      "description": "Proper email format with greeting, body, and polite closing."
+    },
+    {
+      "criterion": "Language Use",
+      "description": "Formal, polite register appropriate for writing to a professor."
+    }
+  ]
+}
