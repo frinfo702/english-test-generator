@@ -254,27 +254,36 @@
   "sentences": [
     {
       "id": "s1",
+      "reference": "Professor: How has remote work affected office culture?",
       "chunks": [
-        "has significantly",
-        "Remote work",
-        "the traditional",
+        "traditional",
+        "It",
+        "office",
+        "has",
+        "model",
         "changed",
-        "office model"
+        "the",
+        "significantly"
       ],
-      "correctOrder": [1, 0, 3, 2, 4],
-      "fullSentence": "Remote work has significantly changed the traditional office model"
+      "correctOrder": [1, 3, 7, 5, 6, 0, 2, 4],
+      "fullSentence": "It has significantly changed the traditional office model"
     },
     {
       "id": "s2",
+      "reference": "Professor: Why was the conclusion surprising?",
       "chunks": [
-        "to reduce",
-        "Governments worldwide",
-        "are implementing",
-        "carbon emissions",
-        "new policies"
+        "method",
+        "was",
+        "that we",
+        "showed",
+        "It",
+        "flawed",
+        "that",
+        "used",
+        "the"
       ],
-      "correctOrder": [1, 2, 4, 0, 3],
-      "fullSentence": "Governments worldwide are implementing new policies to reduce carbon emissions"
+      "correctOrder": [4, 3, 6, 8, 0, 2, 7, 1, 5],
+      "fullSentence": "It showed that the method that we used was flawed"
     }
   ]
 }
@@ -282,10 +291,12 @@
 
 **フィールド仕様:**
 
-- `chunks`: シャッフル済みの配列（表示順）
+- `reference`: 他者の発話（質問または文章）。この発話に対する回答を並べ替える
+- `chunks`: シャッフル済みの配列（表示順）。原則1単語ずつ分割する
 - `correctOrder`: `chunks` のインデックス列で正しい語順を示す
   - 例: `[1, 0, 3, 2, 4]` → chunks[1], chunks[0], chunks[3], chunks[2], chunks[4] の順
-- `fullSentence`: 正解文（末尾ピリオドなし）
+- `fullSentence`: `reference` への自然な回答として成立する正解文（末尾ピリオドなし）
+- 重複語（例: that, the）が複数あり識別が曖昧になる場合のみ、片方を隣接語と連結してよい（例: "that we"）。連結は1問あたり1〜2個まで
 - 文数: 10文固定
 
 ---

@@ -8,6 +8,7 @@ import styles from "./BuildSentencePage.module.css";
 
 interface Sentence {
   id: string;
+  reference: string;
   chunks: string[];
   correctOrder: number[];
   fullSentence: string;
@@ -84,12 +85,13 @@ export function BuildSentencePage() {
   const handleSubmit = () => {
     setGraded(true);
   };
+  const displayChunk = (chunk: string) => chunk.toLowerCase();
 
   return (
     <div>
       <SectionHeader
         title="Build a Sentence"
-        subtitle="チャンクを正しい順序に並べて文を完成させてください"
+        subtitle="発話（質問・文章）への回答を、単語チャンクを並べ替えて完成させてください"
         backTo="/toefl"
         current={
           data
@@ -150,6 +152,10 @@ export function BuildSentencePage() {
             <p className={styles.qNum}>
               問題 {current + 1} / {totalSentences}
             </p>
+            <div className={styles.referenceBox}>
+              <p className={styles.referenceLabel}>Reference</p>
+              <p className={styles.referenceText}>{sentence.reference}</p>
+            </div>
             <div className={styles.zone}>
               <p className={styles.zoneLabel}>回答欄（クリックで取り除く）</p>
               <div className={styles.slots}>
@@ -172,7 +178,7 @@ export function BuildSentencePage() {
                       ].join(" ")}
                       onClick={() => handleRemove(pos)}
                     >
-                      {sentence.chunks[chunkIdx]}
+                      {displayChunk(sentence.chunks[chunkIdx])}
                     </button>
                   ))
                 )}
@@ -188,7 +194,7 @@ export function BuildSentencePage() {
                     onClick={() => handlePlace(chunkIdx)}
                     disabled={graded}
                   >
-                    {sentence.chunks[chunkIdx]}
+                    {displayChunk(sentence.chunks[chunkIdx])}
                   </button>
                 ))}
               </div>

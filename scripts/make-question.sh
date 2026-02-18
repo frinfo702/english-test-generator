@@ -150,14 +150,15 @@ TMPL
   "sentences": [
     {
       "id": "s1",
+      "reference": "TODO: 誰かが発した質問または文章",
       "chunks": [
-        "chunk A",
-        "chunk B",
-        "chunk C",
-        "chunk D"
+        "TODO: 単語1",
+        "TODO: 単語2",
+        "TODO: 単語3",
+        "TODO: 単語4"
       ],
       "correctOrder": [0, 1, 2, 3],
-      "fullSentence": "TODO: 完成した英文"
+      "fullSentence": "TODO: referenceへの回答として完成した英文（原則は単語分割。重複語の曖昧さ回避時のみ最小限の連結を許容）"
     }
   ]
 }
