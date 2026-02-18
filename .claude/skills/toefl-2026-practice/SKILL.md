@@ -12,9 +12,10 @@ description: >
 
 ## 概要
 
-2026年1月21日に導入されたTOEFL iBT新形式に準拠した対策問題を生成する。
-新形式の詳細仕様は `references/format-spec.md` に記載されている。
-**問題生成前に必ず `references/format-spec.md` を読み込むこと。**
+2026年1月21日に導入されたTOEFL iBT新形式および TOEIC Reading に準拠した対策問題を生成する。
+
+**問題JSONを新規作成・追加するときは、必ず先に `references/question-schemas.md` を読むこと。**
+全タスクのJSONスキーマ・フィールド仕様・保存先ディレクトリ・ファイル命名規則がすべて記載されている。
 
 ## ワークフロー
 
