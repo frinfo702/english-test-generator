@@ -1,5 +1,5 @@
 ---
-name: toefl-2026-practice
+name: english-question-generator
 description: >
   TOEFL iBT (2026年以降)やTOEICの問題を生成するスキル。
   ユーザーが「TOEFL対策」「TOEFL問題作って」「Readingの練習」「Writingの練習」「Speakingの練習」

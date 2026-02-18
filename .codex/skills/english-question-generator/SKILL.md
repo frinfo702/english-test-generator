@@ -1,11 +1,11 @@
 ---
-name: toefl-2026-practice
+name: english-question-generator
 description: >
-  TOEFL iBT 2026年1月新形式のReading・Writing・Speakingセクションの対策問題を生成するスキル。
+  TOEFL iBT (2026年以降)やTOEICの問題を生成するスキル。
   ユーザーが「TOEFL対策」「TOEFL問題作って」「Readingの練習」「Writingの練習」「Speakingの練習」
-  「TOEFL practice」「TOEFLの問題」「新形式TOEFL」「アダプティブTOEFL」などと言ったときにトリガーする。
+  「TOEFL practice」「TOEFLの問題」「新形式TOEFL」「アダプティブTOEFL」「TOEICの問題を作って」「part5の問題を作って」などと言ったときにトリガーする。
   セクション指定がなければどのセクションか確認する。難易度指定がなければModule 1（標準）レベルで生成する。
-  Listeningは音声が必要なため本スキルの対象外。
+  Listeningは音声が必要なため本スキルの対象外
 ---
 
 # TOEFL iBT 2026 新形式 対策問題ジェネレーター
