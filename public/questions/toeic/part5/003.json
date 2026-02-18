@@ -1,0 +1,394 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "sentence": "If you ___ the form by Friday, your application will be processed immediately.",
+      "options": {
+        "A": "submit",
+        "B": "submitted",
+        "C": "submitting",
+        "D": "will submit"
+      },
+      "correct": "A",
+      "explanation": "In an if-clause referring to the future, use the present simple: 'If you submit..., will be processed...'.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q2",
+      "sentence": "The brochures were printed ___ recycled paper to reduce waste.",
+      "options": {
+        "A": "on",
+        "B": "by",
+        "C": "at",
+        "D": "with"
+      },
+      "correct": "A",
+      "explanation": "'Printed on' is the standard collocation for the material/surface used.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q3",
+      "sentence": "The new policy applies to employees who work ___ at least three days a week.",
+      "options": {
+        "A": "remote",
+        "B": "remotely",
+        "C": "remoteness",
+        "D": "remotes"
+      },
+      "correct": "B",
+      "explanation": "An adverb is needed to modify the verb 'work': 'work remotely'.",
+      "focus": "word form"
+    },
+    {
+      "id": "q4",
+      "sentence": "The supplier offered a discount ___ we placed the order before the end of the week.",
+      "options": {
+        "A": "provide",
+        "B": "provided",
+        "C": "providing",
+        "D": "provision"
+      },
+      "correct": "B",
+      "explanation": "'Provided (that)' introduces a condition meaning 'on the condition that'.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q5",
+      "sentence": "Each of the invoices ___ checked for accuracy before payment is approved.",
+      "options": {
+        "A": "were",
+        "B": "have",
+        "C": "is",
+        "D": "are"
+      },
+      "correct": "C",
+      "explanation": "'Each of' is treated as singular: 'Each of the invoices is checked...'.",
+      "focus": "subject-verb agreement"
+    },
+    {
+      "id": "q6",
+      "sentence": "The conference will be held ___ the main auditorium on the second floor.",
+      "options": {
+        "A": "in",
+        "B": "on",
+        "C": "at",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "Use 'in' for events inside a room or building: 'held in the auditorium'.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q7",
+      "sentence": "Please keep your receipt in case you need to ___ the item.",
+      "options": {
+        "A": "return",
+        "B": "returned",
+        "C": "returning",
+        "D": "returns"
+      },
+      "correct": "A",
+      "explanation": "After 'to', use the base verb form: 'to return'.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q8",
+      "sentence": "The candidate spoke ___ about his previous experience leading teams.",
+      "options": {
+        "A": "persuasive",
+        "B": "persuasion",
+        "C": "persuasively",
+        "D": "persuade"
+      },
+      "correct": "C",
+      "explanation": "An adverb is needed to modify the verb 'spoke': 'spoke persuasively'.",
+      "focus": "word form"
+    },
+    {
+      "id": "q9",
+      "sentence": "The report contains the most ___ sales figures to date.",
+      "options": {
+        "A": "up-to-date",
+        "B": "update",
+        "C": "updated",
+        "D": "updating"
+      },
+      "correct": "A",
+      "explanation": "'Up-to-date' is the adjective meaning 'current' and fits before a noun.",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q10",
+      "sentence": "The marketing budget for this quarter is ___ than last quarter's.",
+      "options": {
+        "A": "more large",
+        "B": "larger",
+        "C": "more larger",
+        "D": "largely"
+      },
+      "correct": "B",
+      "explanation": "Use the comparative form 'larger' to compare two things.",
+      "focus": "comparison"
+    },
+    {
+      "id": "q11",
+      "sentence": "Our IT help desk is available 24 hours a day, ___ weekends.",
+      "options": {
+        "A": "include",
+        "B": "including",
+        "C": "included",
+        "D": "includes"
+      },
+      "correct": "B",
+      "explanation": "Use 'including' to add an item to a list: '..., including weekends'.",
+      "focus": "word form"
+    },
+    {
+      "id": "q12",
+      "sentence": "The CEO asked that the proposal ___ revised before the meeting.",
+      "options": {
+        "A": "is",
+        "B": "was",
+        "C": "be",
+        "D": "being"
+      },
+      "correct": "C",
+      "explanation": "In formal requests ('ask that'), the subjunctive base form is used: 'be revised'.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q13",
+      "sentence": "The new software is compatible ___ both Windows and macOS.",
+      "options": {
+        "A": "with",
+        "B": "to",
+        "C": "for",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "'Compatible with' is the correct preposition.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q14",
+      "sentence": "A list of approved vendors will be sent to you ___.",
+      "options": {
+        "A": "short",
+        "B": "shortly",
+        "C": "shorten",
+        "D": "shortness"
+      },
+      "correct": "B",
+      "explanation": "'Shortly' is an adverb meaning 'soon' and fits after 'will be sent'.",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q15",
+      "sentence": "The staff members were thanked for ___ hard during the busy season.",
+      "options": {
+        "A": "work",
+        "B": "works",
+        "C": "working",
+        "D": "worked"
+      },
+      "correct": "C",
+      "explanation": "After 'for', use a noun or gerund: 'for working hard'.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q16",
+      "sentence": "The auditorium was filled with guests, many of ___ had traveled from overseas.",
+      "options": {
+        "A": "who",
+        "B": "which",
+        "C": "whom",
+        "D": "that"
+      },
+      "correct": "C",
+      "explanation": "After the preposition 'of', use the object form 'whom': 'many of whom'.",
+      "focus": "relative pronoun"
+    },
+    {
+      "id": "q17",
+      "sentence": "Because the training session starts promptly at 9:00, please arrive ___ 8:45.",
+      "options": {
+        "A": "by",
+        "B": "at",
+        "C": "until",
+        "D": "for"
+      },
+      "correct": "A",
+      "explanation": "'By' indicates a deadline (no later than 8:45).",
+      "focus": "preposition"
+    },
+    {
+      "id": "q18",
+      "sentence": "The company will reimburse travel expenses ___ receipts are provided.",
+      "options": {
+        "A": "unless",
+        "B": "whereas",
+        "C": "as long as",
+        "D": "so that"
+      },
+      "correct": "C",
+      "explanation": "'As long as' expresses a condition required for reimbursement.",
+      "focus": "conjunction/connector"
+    },
+    {
+      "id": "q19",
+      "sentence": "The invoice should be paid within 30 days of ___.",
+      "options": {
+        "A": "issue",
+        "B": "issues",
+        "C": "issuing",
+        "D": "issued"
+      },
+      "correct": "A",
+      "explanation": "'Issue' is a noun here meaning the act/date of being issued: 'within 30 days of issue'.",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q20",
+      "sentence": "Mr. Garcia is the employee ___ ideas helped improve the process.",
+      "options": {
+        "A": "whose",
+        "B": "who",
+        "C": "whom",
+        "D": "which"
+      },
+      "correct": "A",
+      "explanation": "Use 'whose' to show possession: 'whose ideas'.",
+      "focus": "relative pronoun"
+    },
+    {
+      "id": "q21",
+      "sentence": "The hotel offers complimentary breakfast ___ all guests.",
+      "options": {
+        "A": "for",
+        "B": "to",
+        "C": "with",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "Use 'for' to indicate who receives a benefit: 'for all guests'.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q22",
+      "sentence": "The presentation was postponed due to technical problems, and the speakers apologized ___ the delay.",
+      "options": {
+        "A": "to",
+        "B": "for",
+        "C": "with",
+        "D": "about"
+      },
+      "correct": "B",
+      "explanation": "Use 'apologize for' + noun/gerund to state what you are sorry about.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q23",
+      "sentence": "We are looking for a candidate with ___ attention to detail.",
+      "options": {
+        "A": "carefully",
+        "B": "careful",
+        "C": "carefulness",
+        "D": "care"
+      },
+      "correct": "B",
+      "explanation": "An adjective is needed to modify the noun phrase 'attention to detail': 'careful attention'.",
+      "focus": "word form"
+    },
+    {
+      "id": "q24",
+      "sentence": "The new branch office will open in May, ___ will create about 30 jobs.",
+      "options": {
+        "A": "that",
+        "B": "which",
+        "C": "what",
+        "D": "where"
+      },
+      "correct": "B",
+      "explanation": "Use 'which' to refer to the whole preceding clause in a non-restrictive relative clause.",
+      "focus": "relative clause"
+    },
+    {
+      "id": "q25",
+      "sentence": "The project manager met with the team to discuss the tasks ___ for the next phase.",
+      "options": {
+        "A": "assigning",
+        "B": "assigned",
+        "C": "assignment",
+        "D": "assign"
+      },
+      "correct": "B",
+      "explanation": "'Assigned' is a past participle used as an adjective: 'the tasks assigned...'.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q26",
+      "sentence": "Please do not hesitate to contact me if you have ___ questions.",
+      "options": {
+        "A": "further",
+        "B": "farther",
+        "C": "farthest",
+        "D": "furthest"
+      },
+      "correct": "A",
+      "explanation": "'Further questions' means 'additional questions' (not physical distance).",
+      "focus": "vocabulary in context"
+    },
+    {
+      "id": "q27",
+      "sentence": "The equipment must be handled with care to prevent it from being ___.",
+      "options": {
+        "A": "damage",
+        "B": "damages",
+        "C": "damaged",
+        "D": "damaging"
+      },
+      "correct": "C",
+      "explanation": "After 'being', use the past participle: 'being damaged'.",
+      "focus": "verb tense/form"
+    },
+    {
+      "id": "q28",
+      "sentence": "The company newsletter is distributed ___ a monthly basis.",
+      "options": {
+        "A": "in",
+        "B": "on",
+        "C": "at",
+        "D": "for"
+      },
+      "correct": "B",
+      "explanation": "'On a monthly basis' is the standard expression.",
+      "focus": "preposition"
+    },
+    {
+      "id": "q29",
+      "sentence": "Not only ___ the seminar informative, but it was also practical.",
+      "options": {
+        "A": "was",
+        "B": "were",
+        "C": "is",
+        "D": "has been"
+      },
+      "correct": "A",
+      "explanation": "With 'Not only' at the start, subject-auxiliary inversion is required: 'Not only was...'.",
+      "focus": "inversion"
+    },
+    {
+      "id": "q30",
+      "sentence": "The customer service representative handled the complaint ___ and resolved the issue quickly.",
+      "options": {
+        "A": "professional",
+        "B": "professionally",
+        "C": "professionalism",
+        "D": "profession"
+      },
+      "correct": "B",
+      "explanation": "An adverb is needed to modify the verb 'handled': 'handled ... professionally'.",
+      "focus": "word form"
+    }
+  ]
+}
