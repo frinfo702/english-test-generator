@@ -23,8 +23,46 @@ description: >
 2. 指定がなければ ask_user_input でセクションとタスクタイプを確認する
 3. 難易度を確認する（Module 1 標準 / Module 2 Easy / Module 2 Hard）
 4. `references/format-spec.md` を読み込み、該当タスクの仕様を確認する
-5. 問題を生成し、Reactアーティファクト（.jsx）として出力する
-6. 解答・解説を別途提供する
+5. `scripts/make-question.sh` で雛形JSONファイルを生成し、index.json を自動更新する
+6. 生成された雛形の TODO を実際の問題内容に置き換える
+7. 解答・解説を別途提供する
+
+## 問題JSONファイルの作成スクリプト
+
+**問題JSONの新規追加には必ず `scripts/make-question.sh` を使うこと。**
+連番ファイル名の決定と `index.json` の更新を自動で行う。
+
+```bash
+./scripts/make-question.sh <task>
+```
+
+### task 一覧
+
+| task パス                      | 対応タスク                       |
+| ------------------------------ | -------------------------------- |
+| `toefl/reading/complete-words` | Complete the Words               |
+| `toefl/reading/daily-life`     | Read in Daily Life               |
+| `toefl/reading/academic`       | Read an Academic Passage         |
+| `toefl/writing/build-sentence` | Build a Sentence                 |
+| `toefl/writing/email`          | Write an Email                   |
+| `toefl/writing/discussion`     | Write for an Academic Discussion |
+| `toefl/speaking/listen-repeat` | Listen and Repeat                |
+| `toefl/speaking/interview`     | Take an Interview                |
+| `toeic/part5`                  | TOEIC Part 5                     |
+| `toeic/part6`                  | TOEIC Part 6                     |
+| `toeic/part7`                  | TOEIC Part 7                     |
+
+### 使用例
+
+```bash
+./scripts/make-question.sh toeic/part5
+# → public/questions/toeic/part5/001.json を生成、index.json を更新
+
+./scripts/make-question.sh toefl/reading/daily-life
+# → public/questions/toefl/reading/daily-life/NNN.json を生成
+```
+
+スクリプト実行後、生成されたJSONファイル内の `TODO` を実際の問題内容に置き換える。
 
 ## セクション別タスク一覧
 

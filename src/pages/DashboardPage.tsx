@@ -2,7 +2,11 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
-import { useScoreHistory, type ScoreEntry, type TaskId } from "../hooks/useScoreHistory";
+import {
+  useScoreHistory,
+  type ScoreEntry,
+  type TaskId,
+} from "../hooks/useScoreHistory";
 import styles from "./DashboardPage.module.css";
 
 // タスクの表示名
@@ -88,13 +92,21 @@ function LineChart({ entries, color }: LineChartProps) {
       ctx.fillStyle = "#9ca3af";
       ctx.textAlign = "center";
       ctx.font = "13px system-ui";
-      ctx.fillText("まだ記録がありません", PAD.left + chartW / 2, PAD.top + chartH / 2);
+      ctx.fillText(
+        "まだ記録がありません",
+        PAD.left + chartW / 2,
+        PAD.top + chartH / 2,
+      );
       return;
     }
 
     // データ点の座標計算
     const points = entries.map((e, i) => ({
-      x: PAD.left + (entries.length === 1 ? chartW / 2 : (i / (entries.length - 1)) * chartW),
+      x:
+        PAD.left +
+        (entries.length === 1
+          ? chartW / 2
+          : (i / (entries.length - 1)) * chartW),
       y: PAD.top + chartH - (e.pct / 100) * chartH,
       entry: e,
     }));
@@ -113,7 +125,9 @@ function LineChart({ entries, color }: LineChartProps) {
     ctx.strokeStyle = color;
     ctx.lineWidth = 2.5;
     ctx.lineJoin = "round";
-    points.forEach((p, i) => (i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)));
+    points.forEach((p, i) =>
+      i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y),
+    );
     ctx.stroke();
 
     // データ点
@@ -161,7 +175,7 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
   const latest = entries[entries.length - 1];
   const best = entries.reduce<ScoreEntry | null>(
     (acc, e) => (acc === null || e.pct > acc.pct ? e : acc),
-    null
+    null,
   );
   const avg =
     entries.length > 0
@@ -185,13 +199,18 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
         </div>
         <div className={styles.stat}>
           <span className={styles.statLabel}>最高</span>
-          <span className={styles.statValue} style={{ color: "var(--color-correct)" }}>
+          <span
+            className={styles.statValue}
+            style={{ color: "var(--color-correct)" }}
+          >
             {best ? `${best.pct}%` : "—"}
           </span>
         </div>
         <div className={styles.stat}>
           <span className={styles.statLabel}>平均</span>
-          <span className={styles.statValue}>{entries.length > 0 ? `${avg}%` : "—"}</span>
+          <span className={styles.statValue}>
+            {entries.length > 0 ? `${avg}%` : "—"}
+          </span>
         </div>
       </div>
 
@@ -230,23 +249,27 @@ export function DashboardPage() {
   const [confirmClear, setConfirmClear] = useState(false);
 
   useEffect(() => {
-    setEntries(getAll());
+    getAll().then(setEntries);
   }, [getAll]);
 
   // タスク別にグループ化
-  const byTask = entries.reduce<Partial<Record<TaskId, ScoreEntry[]>>>((acc, e) => {
-    if (!acc[e.taskId]) acc[e.taskId] = [];
-    acc[e.taskId]!.push(e);
-    return acc;
-  }, {});
+  const byTask = entries.reduce<Partial<Record<TaskId, ScoreEntry[]>>>(
+    (acc, e) => {
+      if (!acc[e.taskId]) acc[e.taskId] = [];
+      acc[e.taskId]!.push(e);
+      return acc;
+    },
+    {},
+  );
 
   const taskIds = Object.keys(byTask) as TaskId[];
 
   const handleClear = () => {
     if (confirmClear) {
-      clearAll();
-      setEntries([]);
-      setConfirmClear(false);
+      clearAll().then(() => {
+        setEntries([]);
+        setConfirmClear(false);
+      });
     } else {
       setConfirmClear(true);
     }
@@ -287,7 +310,9 @@ export function DashboardPage() {
       {taskIds.length === 0 ? (
         <div className={styles.empty}>
           <p className={styles.emptyText}>まだ解答履歴がありません。</p>
-          <p className={styles.emptyHint}>各練習ページで問題を解くとここにスコアが記録されます。</p>
+          <p className={styles.emptyHint}>
+            各練習ページで問題を解くとここにスコアが記録されます。
+          </p>
           <div className={styles.emptyActions}>
             <Button onClick={() => navigate("/toefl")}>TOEFL を練習する</Button>
             <Button variant="secondary" onClick={() => navigate("/toeic")}>
@@ -299,7 +324,11 @@ export function DashboardPage() {
         <>
           <div className={styles.taskGrid}>
             {taskIds.map((taskId) => (
-              <TaskCard key={taskId} taskId={taskId} entries={byTask[taskId]!} />
+              <TaskCard
+                key={taskId}
+                taskId={taskId}
+                entries={byTask[taskId]!}
+              />
             ))}
           </div>
 
@@ -310,10 +339,15 @@ export function DashboardPage() {
               onClick={handleClear}
               className={confirmClear ? styles.clearDanger : ""}
             >
-              {confirmClear ? "本当に削除しますか？（もう一度押す）" : "履歴を全削除"}
+              {confirmClear
+                ? "本当に削除しますか？（もう一度押す）"
+                : "履歴を全削除"}
             </Button>
             {confirmClear && (
-              <button className={styles.cancelBtn} onClick={() => setConfirmClear(false)}>
+              <button
+                className={styles.cancelBtn}
+                onClick={() => setConfirmClear(false)}
+              >
                 キャンセル
               </button>
             )}
