@@ -1,0 +1,240 @@
+{
+  "passages": [
+    {
+      "id": "p1",
+      "textType": "business email",
+      "text": "Dear Facilities Team,\n\nSeveral employees on the 8th floor have reported that the air conditioning has been [1] since Monday afternoon. Our vendor, CoolAir Services, can send a technician on Thursday morning.\n\n[2]\n\nPlease confirm whether the work can begin at 9:30 a.m. and whether anyone from your team needs to be present. To minimize disruption, the technician will access the floor through the service elevator.\n\nIf your schedule changes, please [3] us as soon as possible so we can adjust the appointment. [4], employees should avoid storing boxes in front of the mechanical-room door.\n\nThank you,\nHiroko Tanaka",
+      "questions": [
+        {
+          "id": "q1",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "malfunctioning",
+            "B": "malfunction",
+            "C": "malfunctioned",
+            "D": "malfunctions"
+          },
+          "correct": "A",
+          "explanation": "The sentence needs an adjective/participle after 'has been' to describe the air conditioning."
+        },
+        {
+          "id": "q2",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "For security reasons, please send the technician's full name by Wednesday so a visitor badge can be prepared.",
+            "B": "The cafeteria will serve a special menu during the holiday season.",
+            "C": "A new printer was delivered to the marketing department yesterday.",
+            "D": "The monthly sales report is due at the end of the quarter."
+          },
+          "correct": "A",
+          "explanation": "Only option A logically matches a vendor visit and the need to manage building access."
+        },
+        {
+          "id": "q3",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "notify",
+            "B": "notifies",
+            "C": "notified",
+            "D": "notifying"
+          },
+          "correct": "A",
+          "explanation": "After 'please,' the base verb form is required: 'please notify us.'"
+        },
+        {
+          "id": "q4",
+          "blankNumber": 4,
+          "type": "vocabulary",
+          "options": {
+            "A": "In addition",
+            "B": "For instance",
+            "C": "As a result",
+            "D": "On the contrary"
+          },
+          "correct": "A",
+          "explanation": "'In addition' adds another instruction related to the maintenance visit."
+        }
+      ]
+    },
+    {
+      "id": "p2",
+      "textType": "memo",
+      "text": "MEMO\nTo: All Sales Staff\nFrom: Finance Department\nSubject: Updates to Mileage Reimbursement\n\nEffective March 1, the mileage reimbursement rate will be [1] from $0.54 to $0.57 per mile. The change reflects higher fuel costs and has been approved by the CFO.\n\n[2]\n\nWhen submitting claims, attach a copy of your route summary from the navigation app and obtain manager approval for trips over 100 miles. Claims must be submitted within 30 days of travel.\n\nClaims without supporting documents may be [3]. If you have questions about eligible trips, [4] the Finance Help Desk at extension 338.\n\nThank you.",
+      "questions": [
+        {
+          "id": "q5",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "increased",
+            "B": "increasing",
+            "C": "increase",
+            "D": "increases"
+          },
+          "correct": "A",
+          "explanation": "Passive construction 'will be increased' correctly describes the rate change."
+        },
+        {
+          "id": "q6",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "This rate applies only to the use of personal vehicles and does not include rental cars or taxis.",
+            "B": "The company picnic will be held at the lakeside park on Saturday.",
+            "C": "Please remember to lock your computer screen when leaving your desk.",
+            "D": "Our website will be redesigned to include more product photos."
+          },
+          "correct": "A",
+          "explanation": "Option A clarifies what the mileage rate covers, which fits the policy memo context."
+        },
+        {
+          "id": "q7",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "repaired",
+            "B": "rejected",
+            "C": "refreshed",
+            "D": "repeated"
+          },
+          "correct": "B",
+          "explanation": "If documents are missing, claims may be 'rejected' (not accepted)."
+        },
+        {
+          "id": "q8",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "contact",
+            "B": "contacts",
+            "C": "contacted",
+            "D": "contacting"
+          },
+          "correct": "A",
+          "explanation": "This is an instruction, so the base verb form is used: 'contact the Help Desk.'"
+        }
+      ]
+    },
+    {
+      "id": "p3",
+      "textType": "notice",
+      "text": "NOTICE: Customer Relationship Platform Training\n\nAs part of the CRM rollout, all customer-facing employees must complete a two-hour training session [1] April 18. Sessions will be offered both in Meeting Room C and online via Teams.\n\n[2]\n\nTo select a time slot, register on the intranet training page by April 12. Please arrive 10 minutes early to sign in and collect the practice worksheet.\n\nIf you cannot attend your assigned session, submit a change request to your supervisor [3] Friday so your seat can be reassigned. After completion, you will receive a confirmation email that you should [4] for your records.",
+      "questions": [
+        {
+          "id": "q9",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "by",
+            "B": "during",
+            "C": "until",
+            "D": "since"
+          },
+          "correct": "A",
+          "explanation": "'By April 18' indicates the deadline to complete the training."
+        },
+        {
+          "id": "q10",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "Bring a laptop and make sure you can log in to the CRM with your company credentials before the session begins.",
+            "B": "Most office supplies can be ordered through the new vendor portal.",
+            "C": "The parking garage will be repainted next month.",
+            "D": "Our social media policy was updated after the quarterly review."
+          },
+          "correct": "A",
+          "explanation": "Option A provides a practical instruction that matches training participation requirements."
+        },
+        {
+          "id": "q11",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "by",
+            "B": "to",
+            "C": "with",
+            "D": "from"
+          },
+          "correct": "A",
+          "explanation": "'By Friday' gives a deadline for submitting the change request."
+        },
+        {
+          "id": "q12",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "keep",
+            "B": "keeps",
+            "C": "kept",
+            "D": "keeping"
+          },
+          "correct": "A",
+          "explanation": "After 'should,' use the base verb form: 'should keep.'"
+        }
+      ]
+    },
+    {
+      "id": "p4",
+      "textType": "report excerpt",
+      "text": "Quarterly Vendor Performance Summary: Paper Supply Co.\n\nDuring Q4, Paper Supply Co. delivered 98% of orders within the agreed timeframe. The average delivery time was 3.1 days, which is [1] the target of 4 days. In addition, the vendor reduced packaging waste by 12% compared to Q3.\n\n[2]\n\nTo maintain this performance, Procurement will [3] the contract terms in early February and confirm stock levels for the next quarter. Any price adjustments must be communicated [4] the next order cycle begins.",
+      "questions": [
+        {
+          "id": "q13",
+          "blankNumber": 1,
+          "type": "vocabulary",
+          "options": {
+            "A": "below",
+            "B": "between",
+            "C": "beside",
+            "D": "behind"
+          },
+          "correct": "A",
+          "explanation": "'Below the target' means lower than the target number of days (faster delivery)."
+        },
+        {
+          "id": "q14",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "The few late deliveries were mainly due to a temporary staffing shortage at the regional warehouse.",
+            "B": "Employees are encouraged to join the company running club on weekends.",
+            "C": "The reception desk will close early on national holidays.",
+            "D": "The cafeteria will introduce a new payment system next year."
+          },
+          "correct": "A",
+          "explanation": "Option A adds a relevant explanation connected to delivery performance in the summary."
+        },
+        {
+          "id": "q15",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "review",
+            "B": "borrow",
+            "C": "divide",
+            "D": "prevent"
+          },
+          "correct": "A",
+          "explanation": "Procurement would 'review' contract terms as part of regular vendor management."
+        },
+        {
+          "id": "q16",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "before",
+            "B": "while",
+            "C": "since",
+            "D": "unless"
+          },
+          "correct": "A",
+          "explanation": "Price adjustments must be communicated earlier than the next cycle, so 'before' fits."
+        }
+      ]
+    }
+  ]
+}

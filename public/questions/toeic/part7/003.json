@@ -1,0 +1,95 @@
+{
+  "setType": "triple",
+  "passages": [
+    {
+      "id": "p1",
+      "textType": "email",
+      "title": null,
+      "content": "From: Sofia Rivera\nTo: Training Office\nSubject: Registration Question\n\nHello,\n\nI would like to register three customer support representatives for the \"Handling Difficult Calls\" workshop on May 12. Could you confirm whether a vegetarian lunch option is available?\n\nAlso, our accounting team needs an invoice addressed to Northbay Solutions before we can process payment.\n\nThank you,\nSofia Rivera\nTeam Lead"
+    },
+    {
+      "id": "p2",
+      "textType": "email",
+      "title": null,
+      "content": "From: Training Office\nTo: Sofia Rivera\nSubject: RE: Registration Question\n\nDear Ms. Rivera,\n\nThank you for your message. Vegetarian lunches are available upon request.\n\nThe workshop fee is $180 per participant. An invoice for Northbay Solutions (Invoice #T-7714) will be emailed to your accounting team today.\n\nPlease note that cancellations made after May 5 will be charged in full.\n\nBest regards,\nKenji Morita"
+    },
+    {
+      "id": "p3",
+      "textType": "schedule",
+      "title": "Workshop Agenda (May 12)",
+      "content": "8:30-9:00  Check-in and badge pickup\n9:00-10:30 Session 1: De-escalation techniques\n10:30-10:45 Break\n10:45-12:00 Session 2: Setting clear boundaries\n12:00-1:00  Lunch\n\nParticipants must bring a photo ID to receive a badge. Parking fees will be waived for attendees who arrive before 8:20."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "type": "purpose",
+      "stem": "Why does Ms. Rivera email the Training Office?",
+      "options": {
+        "A": "To request a refund for a workshop",
+        "B": "To ask about registration details and payment requirements",
+        "C": "To complain about the workshop instructor",
+        "D": "To reserve a meeting room for her team"
+      },
+      "correct": "B",
+      "explanation": "She asks about registering three employees, lunch options, and an invoice needed for payment processing.",
+      "passageRef": "p1"
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "How much does the workshop cost per person?",
+      "options": {
+        "A": "$80",
+        "B": "$120",
+        "C": "$180",
+        "D": "$300"
+      },
+      "correct": "C",
+      "explanation": "The Training Office states that the fee is $180 per participant.",
+      "passageRef": "p2"
+    },
+    {
+      "id": "q3",
+      "type": "vocabulary",
+      "stem": "In the schedule, the word \"waived\" is closest in meaning to",
+      "options": {
+        "A": "increased",
+        "B": "charged",
+        "C": "cancelled",
+        "D": "prepared"
+      },
+      "correct": "C",
+      "explanation": "\"Parking fees will be waived\" means the fees will not be charged (they are cancelled/removed).",
+      "passageRef": "p3"
+    },
+    {
+      "id": "q4",
+      "type": "crossReference",
+      "stem": "By what date must Northbay Solutions cancel to avoid being charged in full?",
+      "options": {
+        "A": "May 1",
+        "B": "May 5",
+        "C": "May 10",
+        "D": "May 12"
+      },
+      "correct": "B",
+      "explanation": "The cancellation policy says cancellations made after May 5 will be charged in full.",
+      "passageRef": "cross"
+    },
+    {
+      "id": "q5",
+      "type": "notStated",
+      "stem": "Which is NOT mentioned in the passages?",
+      "options": {
+        "A": "The start time of the workshop",
+        "B": "A lunch option for participants",
+        "C": "A cancellation policy",
+        "D": "A hotel discount for attendees"
+      },
+      "correct": "D",
+      "explanation": "No hotel information or discounts are mentioned anywhere in the passages.",
+      "passageRef": "cross"
+    }
+  ]
+}
