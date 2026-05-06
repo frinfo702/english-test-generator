@@ -16,3 +16,6 @@ dist/
 # Logs
 *.log
 npm-debug.log*
+
+# Cached audio files
+public/audio-cache/

@@ -1,0 +1,109 @@
+{
+  "title": "Office Hours Discussion",
+  "transcript": "Student: Hi Professor Martinez. Do you have a minute? Professor: Sure, come in. What can I help you with? Student: I wanted to ask about the midterm exam. I noticed that Chapter 5 is included, but we only covered the first half in class. Professor: That's right. The second half of Chapter 5 is reading material. I expect you to study it on your own. Student: Oh, I see. Also, will the essay questions be similar to the practice ones you posted? Professor: They will follow the same format, but the topics will be different. Focus on applying the theories rather than memorizing definitions. Student: Got it. One more thing—when will the review session be? Professor: This Friday at 3 p.m. in Room 204. Student: Perfect. Thank you, Professor.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit the professor?",
+      "options": [
+        "To ask about the midterm exam and review session",
+        "To request an extension on an assignment",
+        "To complain about the difficulty of Chapter 5",
+        "To ask for extra credit opportunities"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The student asks about the midterm coverage, essay format, and the review session time."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the professor expect students to do for the second half of Chapter 5?",
+      "options": [
+        "Study it independently",
+        "Skip it for the exam",
+        "Discuss it in the next lecture",
+        "Write a summary about it"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The professor says the second half is reading material and expects students to study it on their own."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the professor suggest the student focus on for the essay questions?",
+      "options": [
+        "Applying theories rather than memorizing definitions",
+        "Memorizing all definitions word for word",
+        "Practicing with the exact posted topics",
+        "Reading additional textbooks"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The professor explicitly says to focus on applying the theories rather than memorizing definitions."
+    },
+    {
+      "id": "q4",
+      "stem": "When is the review session?",
+      "options": [
+        "This Friday at 3 p.m.",
+        "Next Monday at 10 a.m.",
+        "This Thursday at 2 p.m.",
+        "Next Friday at 3 p.m."
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The professor states the review session is this Friday at 3 p.m. in Room 204."
+    },
+    {
+      "id": "q5",
+      "stem": "What can be inferred about the professor's teaching style?",
+      "options": [
+        "He expects students to do some independent study",
+        "He only tests material covered word-for-word in lectures",
+        "He does not hold review sessions before exams",
+        "He prefers memorization over application"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The professor assigns independent reading and emphasizes application, indicating he expects independent study."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi Professor Martinez. Do you have a minute?"
+    },
+    {
+      "role": "Professor",
+      "text": "Sure, come in. What can I help you with?"
+    },
+    {
+      "role": "Student",
+      "text": "I wanted to ask about the midterm exam. I noticed that Chapter 5 is included, but we only covered the first half in class."
+    },
+    {
+      "role": "Professor",
+      "text": "That's right. The second half of Chapter 5 is reading material. I expect you to study it on your own."
+    },
+    {
+      "role": "Student",
+      "text": "Oh, I see. Also, will the essay questions be similar to the practice ones you posted?"
+    },
+    {
+      "role": "Professor",
+      "text": "They will follow the same format, but the topics will be different. Focus on applying the theories rather than memorizing definitions."
+    },
+    {
+      "role": "Student",
+      "text": "Got it. One more thing—when will the review session be?"
+    },
+    {
+      "role": "Professor",
+      "text": "This Friday at 3 p.m. in Room 204."
+    },
+    {
+      "role": "Student",
+      "text": "Perfect. Thank you, Professor."
+    }
+  ]
+}

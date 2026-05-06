@@ -1,0 +1,77 @@
+{
+  "title": "The Water Cycle",
+  "transcript": "Today we will discuss the water cycle, also known as the hydrologic cycle. The water cycle describes the continuous movement of water on, above, and below the surface of the Earth. Although the balance of water on Earth remains fairly constant over time, individual water molecules can come and go in a hurry. The cycle involves several key processes: evaporation, condensation, precipitation, and collection. Evaporation occurs when the sun heats water in rivers, lakes, or oceans and turns it into vapor or steam. This vapor rises into the air. Condensation happens when water vapor in the air cools down and changes back into liquid, forming clouds. Precipitation occurs when so much water has condensed that the air cannot hold it anymore. The clouds get heavy and water falls back to the Earth in the form of rain, snow, sleet, or hail. Finally, collection occurs when the water falls back to Earth and accumulates in oceans, rivers, lakes, or streams. Some of it soaks into the ground and becomes groundwater. This cycle then repeats continuously.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The water cycle and its key processes",
+        "The causes of climate change",
+        "The formation of ocean currents",
+        "The history of Earth science"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The lecture introduces the water cycle and explains its main processes."
+    },
+    {
+      "id": "q2",
+      "stem": "What happens during evaporation?",
+      "options": [
+        "The sun heats water and turns it into vapor",
+        "Water vapor cools and forms clouds",
+        "Water falls back to Earth as rain or snow",
+        "Water accumulates in rivers and oceans"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "Evaporation occurs when the sun heats water and turns it into vapor or steam."
+    },
+    {
+      "id": "q3",
+      "stem": "According to the lecture, what causes precipitation?",
+      "options": [
+        "The air can no longer hold the condensed water",
+        "The sun stops heating the ocean",
+        "Groundwater rises to the surface",
+        "Clouds move closer to the mountains"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "Precipitation occurs when so much water has condensed that the air cannot hold it anymore."
+    },
+    {
+      "id": "q4",
+      "stem": "Where does some of the collected water go?",
+      "options": [
+        "It soaks into the ground and becomes groundwater",
+        "It evaporates immediately",
+        "It turns into salt water",
+        "It freezes into glaciers"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The lecture states that some water soaks into the ground and becomes groundwater."
+    },
+    {
+      "id": "q5",
+      "stem": "What does the professor imply about individual water molecules?",
+      "options": [
+        "They move quickly through the cycle",
+        "They remain in the same location forever",
+        "They only exist in the atmosphere",
+        "They are not affected by temperature"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The professor says individual water molecules can come and go in a hurry, implying they move quickly."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will discuss the water cycle, also known as the hydrologic cycle. The water cycle describes the continuous movement of water on, above, and below the surface of the Earth. Although the balance of water on Earth remains fairly constant over time, individual water molecules can come and go in a hurry. The cycle involves several key processes: evaporation, condensation, precipitation, and collection. Evaporation occurs when the sun heats water in rivers, lakes, or oceans and turns it into vapor or steam. This vapor rises into the air. Condensation happens when water vapor in the air cools down and changes back into liquid, forming clouds. Precipitation occurs when so much water has condensed that the air cannot hold it anymore. The clouds get heavy and water falls back to the Earth in the form of rain, snow, sleet, or hail. Finally, collection occurs when the water falls back to Earth and accumulates in oceans, rivers, lakes, or streams. Some of it soaks into the ground and becomes groundwater. This cycle then repeats continuously."
+    }
+  ]
+}

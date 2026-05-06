@@ -12,6 +12,10 @@ import { WriteEmailPage } from "./pages/toefl/writing/WriteEmailPage";
 import { WriteDiscussionPage } from "./pages/toefl/writing/WriteDiscussionPage";
 import { ListenRepeatPage } from "./pages/toefl/speaking/ListenRepeatPage";
 import { TakeInterviewPage } from "./pages/toefl/speaking/TakeInterviewPage";
+import {
+  ConversationPage,
+  LecturePage,
+} from "./pages/toefl/listening/ListeningTaskPage";
 import { Part5Page } from "./pages/toeic/Part5Page";
 import { Part6Page } from "./pages/toeic/Part6Page";
 import { Part7Page } from "./pages/toeic/Part7Page";
@@ -154,6 +158,40 @@ export default function App() {
           <Route
             path="/toefl/speaking/interview/:questionNumber"
             element={<TakeInterviewPage />}
+          />
+
+          {/* Listening */}
+          <Route
+            path="/toefl/listening/conversation"
+            element={
+              <QuestionSelectorPage
+                taskId="toefl/listening/conversation"
+                title="Listen to a Conversation"
+                subtitle="Select a question number or start with random."
+                backTo="/toefl"
+                basePath="/toefl/listening/conversation"
+              />
+            }
+          />
+          <Route
+            path="/toefl/listening/conversation/:questionNumber"
+            element={<ConversationPage />}
+          />
+          <Route
+            path="/toefl/listening/lecture"
+            element={
+              <QuestionSelectorPage
+                taskId="toefl/listening/lecture"
+                title="Listen to a Lecture"
+                subtitle="Select a question number or start with random."
+                backTo="/toefl"
+                basePath="/toefl/listening/lecture"
+              />
+            }
+          />
+          <Route
+            path="/toefl/listening/lecture/:questionNumber"
+            element={<LecturePage />}
           />
 
           {/* TOEIC */}

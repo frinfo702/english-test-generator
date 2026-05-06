@@ -54,6 +54,25 @@ const sections = [
     ],
   },
   {
+    key: "listening",
+    label: "Listening",
+    color: "var(--color-listening)",
+    tasks: [
+      {
+        label: "Listen to a Conversation",
+        path: "/toefl/listening/conversation",
+        desc: "Listen to a campus conversation and answer questions.",
+        meta: "5 questions",
+      },
+      {
+        label: "Listen to a Lecture",
+        path: "/toefl/listening/lecture",
+        desc: "Listen to an academic lecture and answer questions.",
+        meta: "5 questions",
+      },
+    ],
+  },
+  {
     key: "speaking",
     label: "Speaking",
     color: "var(--color-speaking)",

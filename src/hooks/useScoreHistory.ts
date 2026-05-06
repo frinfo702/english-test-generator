@@ -4,6 +4,8 @@ export type TaskId =
   | "toefl/reading/complete-words"
   | "toefl/reading/daily-life"
   | "toefl/reading/academic"
+  | "toefl/listening/conversation"
+  | "toefl/listening/lecture"
   | "toefl/writing/build-sentence"
   | "toefl/writing/email"
   | "toefl/writing/discussion"
