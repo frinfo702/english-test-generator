@@ -1,52 +1,86 @@
 .sections {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-10);
 }
 
 .section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
 }
 
-.sectionTitle {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  border-bottom: 2px solid currentColor;
-  padding-bottom: 6px;
-  display: inline-block;
+.sectionLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.sectionDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
 .tasks {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--spacing-md);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--spacing-3);
 }
 
 .taskCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: var(--spacing-md) var(--spacing-lg);
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  transition: box-shadow 0.2s, border-color 0.2s;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-4) var(--spacing-5);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    transition:
+        border-color var(--duration-base) var(--ease-out),
+        box-shadow var(--duration-base) var(--ease-out),
+        transform var(--duration-base) var(--ease-spring);
 }
 
 .taskCard:hover {
-  box-shadow: var(--shadow-md);
-  background: #fff;
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow);
+    transform: translateY(-1px);
+    background: var(--color-surface);
+}
+
+.taskTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-2);
 }
 
 .taskLabel {
-  font-weight: 600;
-  color: var(--color-text);
+    font-weight: var(--font-semibold);
+    color: var(--color-ink);
+    font-size: var(--text-base);
+    letter-spacing: -0.01em;
+}
+
+.taskMeta {
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    color: var(--color-ink-tertiary);
+    background: var(--color-surface-subtle);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
 }
 
 .taskDesc {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    color: var(--color-ink-secondary);
+    line-height: var(--lh-normal);
 }

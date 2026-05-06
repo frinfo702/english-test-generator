@@ -6,30 +6,70 @@ const sections = [
   {
     key: "reading",
     label: "Reading",
-    color: "#0071bc",
+    color: "var(--color-reading)",
     tasks: [
-      { label: "Complete the Words", path: "/toefl/reading/complete-words", desc: "Complete missing words in an academic paragraph (10 items)." },
-      { label: "Read in Daily Life", path: "/toefl/reading/daily-life", desc: "Adaptive reading with everyday text passages." },
-      { label: "Read an Academic Passage", path: "/toefl/reading/academic", desc: "Read an academic passage and answer 5 questions." },
+      {
+        label: "Complete the Words",
+        path: "/toefl/reading/complete-words",
+        desc: "Complete missing words in an academic paragraph.",
+        meta: "10 items",
+      },
+      {
+        label: "Read in Daily Life",
+        path: "/toefl/reading/daily-life",
+        desc: "Adaptive reading with everyday text passages.",
+        meta: "Adaptive",
+      },
+      {
+        label: "Read an Academic Passage",
+        path: "/toefl/reading/academic",
+        desc: "Read an academic passage and answer 5 questions.",
+        meta: "5 questions",
+      },
     ],
   },
   {
     key: "writing",
     label: "Writing",
-    color: "#0e7a4e",
+    color: "var(--color-writing)",
     tasks: [
-      { label: "Build a Sentence", path: "/toefl/writing/build-sentence", desc: "Reorder chunks to build responses (10 items)." },
-      { label: "Write an Email", path: "/toefl/writing/email", desc: "Write an email based on a scenario (7 minutes)." },
-      { label: "Write for an Academic Discussion", path: "/toefl/writing/discussion", desc: "Write your opinion on a professor's prompt (10 minutes)." },
+      {
+        label: "Build a Sentence",
+        path: "/toefl/writing/build-sentence",
+        desc: "Reorder chunks to build responses.",
+        meta: "10 items",
+      },
+      {
+        label: "Write an Email",
+        path: "/toefl/writing/email",
+        desc: "Write an email based on a scenario.",
+        meta: "7 min",
+      },
+      {
+        label: "Write for an Academic Discussion",
+        path: "/toefl/writing/discussion",
+        desc: "Write your opinion on a professor's prompt.",
+        meta: "10 min",
+      },
     ],
   },
   {
     key: "speaking",
     label: "Speaking",
-    color: "#7c3aed",
+    color: "var(--color-speaking)",
     tasks: [
-      { label: "Listen and Repeat", path: "/toefl/speaking/listen-repeat", desc: "Memorize and reproduce sentences by typing (7 items)." },
-      { label: "Take an Interview", path: "/toefl/speaking/interview", desc: "Answer interview questions on the spot (4 x 45 sec)." },
+      {
+        label: "Listen and Repeat",
+        path: "/toefl/speaking/listen-repeat",
+        desc: "Memorize and reproduce sentences by typing.",
+        meta: "7 items",
+      },
+      {
+        label: "Take an Interview",
+        path: "/toefl/speaking/interview",
+        desc: "Answer interview questions on the spot.",
+        meta: "4 × 45 sec",
+      },
     ],
   },
 ];
@@ -46,18 +86,27 @@ export function ToeflMenuPage() {
       <div className={styles.sections}>
         {sections.map((section) => (
           <div key={section.key} className={styles.section}>
-            <h2 className={styles.sectionTitle} style={{ color: section.color }}>
+            <div
+              className={styles.sectionLabel}
+              style={{ color: section.color }}
+            >
+              <span
+                className={styles.sectionDot}
+                style={{ background: section.color }}
+              />
               {section.label}
-            </h2>
+            </div>
             <div className={styles.tasks}>
               {section.tasks.map((task) => (
                 <div
                   key={task.path}
                   className={styles.taskCard}
                   onClick={() => navigate(task.path)}
-                  style={{ borderColor: section.color + "33" }}
                 >
-                  <span className={styles.taskLabel}>{task.label}</span>
+                  <div className={styles.taskTop}>
+                    <span className={styles.taskLabel}>{task.label}</span>
+                    <span className={styles.taskMeta}>{task.meta}</span>
+                  </div>
                   <span className={styles.taskDesc}>{task.desc}</span>
                 </div>
               ))}

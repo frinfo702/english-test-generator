@@ -1,63 +1,106 @@
 .topBar {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-6);
 }
 
 .paragraph {
-    background: var(--color-surface);
+    background: var(--color-surface-elevated);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-xl);
-    font-size: var(--font-size-lg);
+    padding: var(--spacing-6);
+    font-size: var(--text-lg);
     line-height: 2.2;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-6);
 }
 
 .blankWrapper {
     display: inline-flex;
-    align-items: flex-end;
-    gap: 4px;
+    align-items: baseline;
+    gap: 2px;
+    vertical-align: baseline;
 }
 
 .hint {
     color: var(--color-accent);
-    font-weight: 600;
+    font-weight: var(--font-semibold);
+    white-space: nowrap;
+    user-select: none;
+    font-family: var(--font-mono);
 }
 
-.slotRow {
-    display: inline-flex;
-    gap: 3px;
-}
-
-.slotInput {
+.blankInput {
     border: none;
-    border-bottom: 2px solid var(--color-accent);
     background: transparent;
     padding: 0;
-    font-size: var(--font-size-lg);
-    line-height: 1;
-    width: 0.85em;
-    min-height: 1.2em;
-    text-align: center;
+    margin: 0;
+    font-size: var(--text-lg);
+    font-family: var(--font-mono);
+    color: var(--color-ink);
     outline: none;
-    color: var(--color-text);
-    font-family: inherit;
+    resize: none;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1.25;
+    letter-spacing: 0;
+
+    /* Tick marks: 1ch-wide strips at the bottom matching each character position */
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--color-border) 0,
+        var(--color-border) calc(1ch - 1px),
+        transparent calc(1ch - 1px),
+        transparent 1ch
+    );
+    background-position: 0 calc(100% + 1px);
+    background-size: auto 3px;
+    background-repeat: repeat-x;
 }
 
-.slotInput.correct {
-    border-bottom-color: var(--color-correct);
-    color: var(--color-correct);
+.blankFocused .blankInput {
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--color-ink-tertiary) 0,
+        var(--color-ink-tertiary) calc(1ch - 1px),
+        transparent calc(1ch - 1px),
+        transparent 1ch
+    );
 }
 
-.slotInput.wrong {
-    border-bottom-color: var(--color-incorrect);
-    color: var(--color-incorrect);
+.blankCorrect .blankInput {
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--color-success) 0,
+        var(--color-success) calc(1ch - 1px),
+        transparent calc(1ch - 1px),
+        transparent 1ch
+    );
+}
+
+.blankWrong .blankInput {
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--color-error) 0,
+        var(--color-error) calc(1ch - 1px),
+        transparent calc(1ch - 1px),
+        transparent 1ch
+    );
+}
+
+.blankInput:focus-visible {
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.blankInput:disabled {
+    color: var(--color-ink);
+    -webkit-text-fill-color: var(--color-ink);
+    opacity: 1;
 }
 
 .correctHint {
-    font-size: var(--font-size-sm);
-    color: var(--color-correct);
+    font-size: var(--text-sm);
+    color: var(--color-error);
     font-style: italic;
     margin-left: 2px;
 }
@@ -65,9 +108,9 @@
 .result {
     display: flex;
     align-items: center;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-4);
     flex-wrap: wrap;
-    margin-top: var(--spacing-md);
+    margin-top: var(--spacing-4);
 }
 
 .scoreBox {
@@ -77,27 +120,31 @@
 }
 
 .scoreNum {
-    font-size: var(--font-size-2xl);
-    font-weight: 700;
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
     color: var(--color-accent);
 }
+
 .scoreDen {
-    font-size: var(--font-size-xl);
-    color: var(--color-text-muted);
+    font-size: var(--text-xl);
+    color: var(--color-ink-secondary);
 }
+
 .scorePct {
-    font-size: var(--font-size-body);
-    color: var(--color-text-muted);
+    font-size: var(--text-base);
+    color: var(--color-ink-secondary);
 }
 
 .error {
-    color: var(--color-incorrect);
-    background: var(--color-incorrect-bg);
-    padding: var(--spacing-md);
+    color: var(--color-error);
+    background: var(--color-error-subtle);
+    padding: var(--spacing-4);
     border-radius: var(--radius);
+    font-size: var(--text-sm);
 }
+
 .errorHint {
-    margin-top: var(--spacing-sm);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    margin-top: var(--spacing-2);
+    font-size: var(--text-sm);
+    color: var(--color-ink-secondary);
 }
