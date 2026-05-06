@@ -1,59 +1,61 @@
 .panel {
-  padding: var(--spacing-md);
-  border-radius: var(--radius);
-  border-left: 4px solid;
-  margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius);
+    border-left: 3px solid;
+    margin-top: var(--spacing-md);
 }
 
 .correct {
-  background: var(--color-correct-bg);
-  border-color: var(--color-correct);
+    background: var(--color-success-subtle);
+    border-color: var(--color-success);
 }
 
 .incorrect {
-  background: var(--color-incorrect-bg);
-  border-color: var(--color-incorrect);
+    background: var(--color-error-subtle);
+    border-color: var(--color-error);
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
 }
 
 .icon {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
 }
 
 .correct .icon {
-  color: var(--color-correct);
+    color: var(--color-success);
 }
 
 .incorrect .icon {
-  color: var(--color-incorrect);
+    color: var(--color-error);
 }
 
 .status {
-  font-weight: 600;
-  font-size: var(--font-size-lg);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-lg);
 }
 
 .correct .status {
-  color: var(--color-correct);
+    color: var(--color-success);
 }
 
 .incorrect .status {
-  color: var(--color-incorrect);
+    color: var(--color-error);
 }
 
 .correctAnswer {
-  margin-bottom: var(--spacing-sm);
-  color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-ink);
+    font-size: var(--text-sm);
 }
 
 .explanation {
-  color: var(--color-text);
-  line-height: 1.7;
+    color: var(--color-ink-secondary);
+    line-height: 1.7;
+    font-size: var(--text-sm);
 }

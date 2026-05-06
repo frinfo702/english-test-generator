@@ -26,17 +26,17 @@ const TASK_LABELS: Record<TaskId, string> = {
 };
 
 const TASK_COLORS: Record<string, string> = {
-  "toefl/reading/complete-words": "#0071bc",
-  "toefl/reading/daily-life": "#0091d4",
-  "toefl/reading/academic": "#00a8e8",
-  "toefl/writing/build-sentence": "#16a34a",
-  "toefl/writing/email": "#22c55e",
-  "toefl/writing/discussion": "#4ade80",
-  "toefl/speaking/listen-repeat": "#d97706",
-  "toefl/speaking/interview": "#f59e0b",
-  "toeic/part5": "#7c3aed",
-  "toeic/part6": "#a855f7",
-  "toeic/part7": "#c084fc",
+  "toefl/reading/complete-words": "#0ea5e9",
+  "toefl/reading/daily-life": "#0284c7",
+  "toefl/reading/academic": "#0369a1",
+  "toefl/writing/build-sentence": "#10b981",
+  "toefl/writing/email": "#059669",
+  "toefl/writing/discussion": "#047857",
+  "toefl/speaking/listen-repeat": "#f59e0b",
+  "toefl/speaking/interview": "#d97706",
+  "toeic/part5": "#8b5cf6",
+  "toeic/part6": "#7c3aed",
+  "toeic/part7": "#6d28d9",
 };
 
 // Convert date to short format (e.g. "2/18")
@@ -76,8 +76,8 @@ function LineChart({ entries, color }: LineChartProps) {
     // Grid lines and Y-axis labels
     ctx.strokeStyle = "#e2e8f0";
     ctx.lineWidth = 1;
-    ctx.fillStyle = "#6b7280";
-    ctx.font = "11px system-ui";
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "11px var(--font-sans)";
     ctx.textAlign = "right";
     for (let i = 0; i <= 4; i++) {
       const pct = i * 25;
@@ -90,9 +90,9 @@ function LineChart({ entries, color }: LineChartProps) {
     }
 
     if (entries.length === 0) {
-      ctx.fillStyle = "#9ca3af";
+      ctx.fillStyle = "#94a3b8";
       ctx.textAlign = "center";
-      ctx.font = "13px system-ui";
+      ctx.font = "13px var(--font-sans)";
       ctx.fillText(
         "No records yet",
         PAD.left + chartW / 2,
@@ -143,8 +143,8 @@ function LineChart({ entries, color }: LineChartProps) {
     });
 
     // X-axis labels (thinned out)
-    ctx.fillStyle = "#6b7280";
-    ctx.font = "10px system-ui";
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "10px var(--font-sans)";
     ctx.textAlign = "center";
     const maxLabels = Math.min(entries.length, 8);
     const step = Math.ceil(entries.length / maxLabels);
@@ -204,7 +204,9 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
       <div className={styles.taskHeader}>
         <span className={styles.taskDot} style={{ background: color }} />
         <span className={styles.taskLabel}>{TASK_LABELS[taskId]}</span>
-        <span className={styles.taskCount}>{entries.length} sessions</span>
+        <span className={styles.taskCount}>
+          {entries.length} session{entries.length !== 1 ? "s" : ""}
+        </span>
       </div>
 
       <div className={styles.statsRow}>
@@ -310,7 +312,9 @@ export function DashboardPage() {
     totalSessions > 0
       ? Math.round(entries.reduce((s, e) => s + e.pct, 0) / totalSessions)
       : 0;
-  const timedEntries = entries.filter((e) => typeof e.elapsedSeconds === "number");
+  const timedEntries = entries.filter(
+    (e) => typeof e.elapsedSeconds === "number",
+  );
   const overallAvgElapsed =
     timedEntries.length > 0
       ? formatSecondsAsMmSs(
@@ -359,9 +363,7 @@ export function DashboardPage() {
             pages.
           </p>
           <div className={styles.emptyActions}>
-            <Button onClick={() => navigate("/toefl")}>
-              Practice TOEFL
-            </Button>
+            <Button onClick={() => navigate("/toefl")}>Practice TOEFL</Button>
             <Button variant="secondary" onClick={() => navigate("/toeic")}>
               Practice TOEIC
             </Button>

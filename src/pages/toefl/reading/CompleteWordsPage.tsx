@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -30,9 +31,10 @@ function getExpectedSuffix(item: Item): string {
 }
 
 export function CompleteWordsPage() {
-  const { data, loading, error, load } = useQuestion<ProblemData>(
-    "toefl/reading/complete-words",
-  );
+  const navigate = useNavigate();
+  const { questionNumber } = useParams<{ questionNumber: string }>();
+  const { data, file, loading, error, loadByQuestionNumber } =
+    useQuestion<ProblemData>("toefl/reading/complete-words");
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -42,27 +44,30 @@ export function CompleteWordsPage() {
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const [answers, setAnswers] = useState<string[][]>([]);
+  const [answers, setAnswers] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState<{ correct: number; total: number } | null>(
     null,
   );
-  const slotRefs = useRef<Record<number, Array<HTMLInputElement | null>>>({});
+  const [focusedIdx, setFocusedIdx] = useState<number | null>(null);
+  const inputRefs = useRef<Array<HTMLTextAreaElement | null>>([]);
+
+  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
+  const hasValidQuestionNumber =
+    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
 
   useEffect(() => {
-    load();
-  }, []);
+    if (!hasValidQuestionNumber) return;
+    loadByQuestionNumber(parsedQuestionNumber);
+  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   useEffect(() => {
     if (data) {
-      setAnswers(
-        data.items.map((item) =>
-          new Array(getExpectedSuffix(item).length).fill(""),
-        ),
-      );
+      setAnswers(data.items.map(() => ""));
       setSubmitted(false);
       setScore(null);
-      slotRefs.current = {};
+      setFocusedIdx(null);
+      inputRefs.current = [];
     }
   }, [data]);
 
@@ -78,75 +83,111 @@ export function CompleteWordsPage() {
     }
   }, [data, loading, submitted, running, elapsedSeconds, start]);
 
+  useEffect(() => {
+    if (focusedIdx !== null) {
+      autoResize(focusedIdx);
+    }
+  }, [answers, focusedIdx]);
+
+  const autoResize = (idx: number) => {
+    const el = inputRefs.current[idx];
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  };
+
+  const findNextBlank = (fromIdx: number): number | null => {
+    for (let i = fromIdx + 1; i < (data?.items.length ?? 0); i++) {
+      if (getExpectedSuffix(data!.items[i]).length > 0) return i;
+    }
+    return null;
+  };
+
+  const findPrevBlank = (fromIdx: number): number | null => {
+    for (let i = fromIdx - 1; i >= 0; i--) {
+      if (getExpectedSuffix(data!.items[i]).length > 0) return i;
+    }
+    return null;
+  };
+
   const handleSubmit = () => {
     if (!data) return;
     const sessionSeconds = stop();
     let correct = 0;
     data.items.forEach((item, i) => {
       const expectedSuffix = getExpectedSuffix(item);
-      const userInput = (answers[i] ?? []).join("");
-      if (userInput.toLowerCase() === expectedSuffix.toLowerCase()) correct++;
+      if (answers[i].toLowerCase() === expectedSuffix.toLowerCase()) correct++;
     });
     setScore({ correct, total: data.items.length });
     setSubmitted(true);
+    setFocusedIdx(null);
     saveScore(
       "toefl/reading/complete-words",
       correct,
       data.items.length,
       sessionSeconds,
+      file ?? undefined,
     );
   };
 
-  const handleNew = () => {
+  const handleBackToList = () => {
     resetTimer();
-    load();
+    navigate("/toefl/reading/complete-words");
   };
 
-  const moveFocus = (itemIdx: number, slotIdx: number) => {
-    const target = slotRefs.current[itemIdx]?.[slotIdx];
-    target?.focus();
-    target?.select();
-  };
-
-  const applyTextToSlots = (
-    itemIdx: number,
-    startIdx: number,
-    rawText: string,
-  ) => {
-    if (!data || submitted) return;
-    const expectedLength = getExpectedSuffix(data.items[itemIdx]).length;
-    const chars = Array.from(rawText).filter((ch) => ch.trim().length > 0);
-    if (chars.length === 0 || expectedLength === 0) return;
-
+  const handleAnswerChange = (idx: number, value: string) => {
     setAnswers((prev) => {
-      const next = prev.map((row) => [...row]);
-      const row = [...(next[itemIdx] ?? new Array(expectedLength).fill(""))];
-      let cursor = startIdx;
+      const next = [...prev];
+      next[idx] = value;
+      return next;
+    });
+  };
 
-      for (const ch of chars) {
-        if (cursor >= expectedLength) break;
-        row[cursor] = ch;
-        cursor++;
+  const handleKeyDown = (idx: number, e: React.KeyboardEvent) => {
+    if (!data) return;
+    const expectedLen = getExpectedSuffix(data.items[idx]).length;
+    if (expectedLen === 0) return;
+
+    if (e.key === "Tab" && !e.shiftKey) {
+      e.preventDefault();
+      const nextIdx = findNextBlank(idx);
+      if (nextIdx !== null) {
+        setFocusedIdx(nextIdx);
+        requestAnimationFrame(() => {
+          inputRefs.current[nextIdx]?.focus();
+          inputRefs.current[nextIdx]?.setSelectionRange(
+            answers[nextIdx]?.length ?? 0,
+            answers[nextIdx]?.length ?? 0,
+          );
+        });
       }
-
-      next[itemIdx] = row;
-      return next;
-    });
-
-    const nextFocus = startIdx + chars.length;
-    const targetIdx =
-      nextFocus < expectedLength ? nextFocus : Math.max(expectedLength - 1, 0);
-    requestAnimationFrame(() => moveFocus(itemIdx, targetIdx));
-  };
-
-  const clearSlot = (itemIdx: number, slotIdx: number) => {
-    if (submitted) return;
-    setAnswers((prev) => {
-      const next = prev.map((row) => [...row]);
-      if (!next[itemIdx]) return next;
-      next[itemIdx][slotIdx] = "";
-      return next;
-    });
+    } else if (e.key === "Tab" && e.shiftKey) {
+      e.preventDefault();
+      const prevIdx = findPrevBlank(idx);
+      if (prevIdx !== null) {
+        setFocusedIdx(prevIdx);
+        requestAnimationFrame(() => {
+          inputRefs.current[prevIdx]?.focus();
+          inputRefs.current[prevIdx]?.setSelectionRange(
+            answers[prevIdx]?.length ?? 0,
+            answers[prevIdx]?.length ?? 0,
+          );
+        });
+      }
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const nextIdx = findNextBlank(idx);
+      if (nextIdx !== null) {
+        setFocusedIdx(nextIdx);
+        requestAnimationFrame(() => {
+          inputRefs.current[nextIdx]?.focus();
+          inputRefs.current[nextIdx]?.setSelectionRange(
+            answers[nextIdx]?.length ?? 0,
+            answers[nextIdx]?.length ?? 0,
+          );
+        });
+      }
+    }
   };
 
   const renderParagraph = () => {
@@ -154,89 +195,75 @@ export function CompleteWordsPage() {
     const text = data.paragraph;
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
-    const sorted = data.items
-      .map((item, itemIdx) => ({
-        item,
-        itemIdx,
-        firstPos: text.indexOf(item.placeholder),
-      }))
-      .sort(
-        (a, b) =>
-          a.firstPos - b.firstPos || a.itemIdx - b.itemIdx,
-      );
-    sorted.forEach(({ item, itemIdx }, i) => {
+
+    data.items.forEach((item, itemIdx) => {
       const pos = text.indexOf(item.placeholder, lastIndex);
       if (pos === -1) return;
       const expectedSuffix = getExpectedSuffix(item);
-      const answerChars = answers[itemIdx] ?? [];
-      const userInput = answerChars.join("");
+      const userInput = answers[itemIdx] ?? "";
       const isCorrect =
-        submitted && userInput.toLowerCase() === expectedSuffix.toLowerCase();
+        submitted &&
+        userInput.toLowerCase() === expectedSuffix.toLowerCase();
       const isWrong = submitted && !isCorrect;
+      const isFocused = focusedIdx === itemIdx;
 
-      parts.push(<span key={`t${i}`}>{text.slice(lastIndex, pos)}</span>);
       parts.push(
-        <span key={`inp${i}`} className={styles.blankWrapper}>
-          <span className={styles.hint}>{item.hint}</span>
-          <span className={styles.slotRow}>
-            {Array.from({ length: expectedSuffix.length }).map((_, slotIdx) => (
-              <input
-                key={`slot-${i}-${slotIdx}`}
-                ref={(el) => {
-                  if (!slotRefs.current[itemIdx]) slotRefs.current[itemIdx] = [];
-                  slotRefs.current[itemIdx][slotIdx] = el;
-                }}
-                className={[
-                  styles.slotInput,
-                  submitted ? (isCorrect ? styles.correct : styles.wrong) : "",
-                ].join(" ")}
-                value={answerChars[slotIdx] ?? ""}
-                onChange={(e) => {
-                  if (!e.target.value) {
-                    clearSlot(itemIdx, slotIdx);
-                    return;
-                  }
-                  applyTextToSlots(itemIdx, slotIdx, e.target.value);
-                }}
-                onPaste={(e) => {
-                  e.preventDefault();
-                  applyTextToSlots(
-                    itemIdx,
-                    slotIdx,
-                    e.clipboardData.getData("text"),
-                  );
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Backspace" && !answerChars[slotIdx]) {
-                    if (slotIdx > 0) {
-                      e.preventDefault();
-                      moveFocus(itemIdx, slotIdx - 1);
-                    }
-                  } else if (e.key === "ArrowLeft" && slotIdx > 0) {
-                    e.preventDefault();
-                    moveFocus(itemIdx, slotIdx - 1);
-                  } else if (
-                    e.key === "ArrowRight" &&
-                    slotIdx < expectedSuffix.length - 1
-                  ) {
-                    e.preventDefault();
-                    moveFocus(itemIdx, slotIdx + 1);
-                  }
-                }}
-                maxLength={1}
-                inputMode="text"
-                autoComplete="off"
-                spellCheck={false}
-                disabled={submitted}
-                aria-label={`Blank ${itemIdx + 1} letter ${slotIdx + 1}`}
-              />
-            ))}
-          </span>
-          {isWrong && <span className={styles.correctHint}>{item.answer}</span>}
-        </span>,
+        <span key={`t${itemIdx}`}>{text.slice(lastIndex, pos)}</span>,
       );
+
+      if (expectedSuffix.length > 0) {
+        parts.push(
+          <span
+            key={`inp${itemIdx}`}
+            className={[
+              styles.blankWrapper,
+              isFocused ? styles.blankFocused : "",
+              submitted
+                ? isCorrect
+                  ? styles.blankCorrect
+                  : styles.blankWrong
+                : "",
+            ].join(" ")}
+          >
+            <span className={styles.hint}>{item.hint}</span>
+            <textarea
+              ref={(el) => {
+                inputRefs.current[itemIdx] = el;
+              }}
+              className={styles.blankInput}
+              value={userInput}
+              onChange={(e) => handleAnswerChange(itemIdx, e.target.value)}
+              onFocus={() => setFocusedIdx(itemIdx)}
+              onBlur={() => setFocusedIdx(null)}
+              onKeyDown={(e) => handleKeyDown(itemIdx, e)}
+              style={{ width: `${Math.max(expectedSuffix.length, 1)}ch` }}
+              rows={1}
+              maxLength={expectedSuffix.length * 2}
+              autoComplete="off"
+              spellCheck={false}
+              disabled={submitted}
+              aria-label={`Blank ${itemIdx + 1}`}
+            />
+          </span>,
+        );
+        if (isWrong) {
+          parts.push(
+            <span key={`hint${itemIdx}`} className={styles.correctHint}>
+              {item.answer}
+            </span>,
+          );
+        }
+      } else {
+        parts.push(
+          <span key={`inp${itemIdx}`} className={styles.hint}>
+            {item.hint}
+          </span>,
+        );
+      }
+
       lastIndex = pos + item.placeholder.length;
     });
+
     parts.push(<span key="tail">{text.slice(lastIndex)}</span>);
     return parts;
   };
@@ -244,9 +271,9 @@ export function CompleteWordsPage() {
   const hasIncompleteAnswers =
     !data ||
     answers.length !== data.items.length ||
-    answers.some((row, idx) => {
+    answers.some((ans, idx) => {
       const expectedLength = getExpectedSuffix(data.items[idx]).length;
-      return row.length !== expectedLength || row.some((ch) => !ch.trim());
+      return expectedLength > 0 && !ans.trim();
     });
 
   return (
@@ -257,7 +284,7 @@ export function CompleteWordsPage() {
 
       <SectionHeader
         title="Complete the Words"
-        subtitle="Type only the missing continuation after the visible prefix."
+        subtitle="Type only the missing continuation after the visible prefix. Tab / Enter to move between blanks."
         backTo="/toefl"
       />
 
@@ -265,10 +292,10 @@ export function CompleteWordsPage() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={handleNew}
+          onClick={handleBackToList}
           disabled={loading}
         >
-          Load Another Question
+          Question List
         </Button>
       </div>
 
@@ -282,8 +309,13 @@ export function CompleteWordsPage() {
           </p>
         </div>
       )}
+      {!hasValidQuestionNumber && (
+        <div className={styles.error}>
+          <p>Invalid question number in URL.</p>
+        </div>
+      )}
 
-      {data && !loading && (
+      {data && !loading && hasValidQuestionNumber && (
         <>
           <div className={styles.paragraph}>{renderParagraph()}</div>
 
@@ -304,7 +336,7 @@ export function CompleteWordsPage() {
                   %)
                 </span>
               </div>
-              <Button onClick={handleNew}>Next Question</Button>
+              <Button onClick={handleBackToList}>Back to Question List</Button>
             </div>
           )}
         </>

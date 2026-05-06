@@ -30,6 +30,11 @@ export interface LoadedQuestion<T> {
   file: string;
 }
 
+export interface QuestionFileEntry {
+  file: string;
+  number: number;
+}
+
 export async function fetchQuestionIndex(
   taskPath: string,
 ): Promise<QuestionIndex> {
@@ -44,18 +49,59 @@ export async function fetchRandomQuestion<T>(taskPath: string): Promise<T> {
   return loaded.data;
 }
 
-export async function fetchRandomQuestionWithMeta<T>(
+export async function listQuestionFiles(
   taskPath: string,
-): Promise<LoadedQuestion<T>> {
+): Promise<QuestionFileEntry[]> {
   const index = await fetchQuestionIndex(taskPath);
-  if (index.files.length === 0) {
-    throw new Error(`No question files in ${taskPath}. Generate some first!`);
-  }
-  const file = index.files[Math.floor(Math.random() * index.files.length)];
+  return index.files
+    .map((file) => {
+      const basename = file.replace(/\.[^.]+$/, "");
+      if (!/^\d+$/.test(basename)) {
+        throw new Error(
+          `Question file "${file}" in ${taskPath} must use numeric filename like 001.json.`,
+        );
+      }
+      return {
+        file,
+        number: Number.parseInt(basename, 10),
+      };
+    })
+    .sort((a, b) => a.number - b.number || a.file.localeCompare(b.file));
+}
+
+export async function fetchQuestionByFileWithMeta<T>(
+  taskPath: string,
+  file: string,
+): Promise<LoadedQuestion<T>> {
   const res = await fetch(`/questions/${taskPath}/${file}`);
   if (!res.ok) throw new Error(`Failed to load question file: ${file}`);
   const data = (await res.json()) as T;
   return { data, file };
+}
+
+export async function fetchQuestionByNumberWithMeta<T>(
+  taskPath: string,
+  questionNumber: number,
+): Promise<LoadedQuestion<T>> {
+  const files = await listQuestionFiles(taskPath);
+  const selected = files.find((item) => item.number === questionNumber);
+  if (!selected) {
+    throw new Error(
+      `Question ${questionNumber} not found in ${taskPath}. Generate or register it first.`,
+    );
+  }
+  return fetchQuestionByFileWithMeta<T>(taskPath, selected.file);
+}
+
+export async function fetchRandomQuestionWithMeta<T>(
+  taskPath: string,
+): Promise<LoadedQuestion<T>> {
+  const files = await listQuestionFiles(taskPath);
+  if (files.length === 0) {
+    throw new Error(`No question files in ${taskPath}. Generate some first!`);
+  }
+  const selected = files[Math.floor(Math.random() * files.length)];
+  return fetchQuestionByFileWithMeta<T>(taskPath, selected.file);
 }
 
 export async function fetchAllQuestions<T>(taskPath: string): Promise<T[]> {

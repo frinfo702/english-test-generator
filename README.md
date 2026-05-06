@@ -52,7 +52,8 @@ Each task folder must include an `index.json` file:
 { "files": ["001.json", "002.json"] }
 ```
 
-At runtime, the app randomly picks one file from this list.
+At runtime, each task first shows a question-number list.
+You can pick a specific number or start with the random button.
 
 ### Prompting an AI Agent
 

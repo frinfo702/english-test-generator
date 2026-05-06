@@ -40,7 +40,7 @@ describe("useScoreHistory", () => {
     fetchMock.mockResolvedValue(mockResponse({}));
 
     await act(async () => {
-      await result.current.saveScore("toeic/part5", 7, 9, 12.8);
+      await result.current.saveScore("toeic/part5", 7, 9, 12.8, "002.json");
     });
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -61,6 +61,7 @@ describe("useScoreHistory", () => {
       total: 9,
       pct: 78,
       elapsedSeconds: 12,
+      questionFile: "002.json",
     });
   });
 

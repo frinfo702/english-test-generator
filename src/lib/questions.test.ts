@@ -1,5 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { fetchAllQuestions, fetchQuestionIndex, fetchRandomQuestion } from "./questions";
+import {
+  fetchAllQuestions,
+  fetchQuestionByNumberWithMeta,
+  fetchQuestionIndex,
+  fetchRandomQuestion,
+  listQuestionFiles,
+} from "./questions";
 
 const fetchMock = vi.fn();
 
@@ -77,5 +83,36 @@ describe("questions loader", () => {
       .mockResolvedValueOnce(mockResponse({}, false));
 
     await expect(fetchAllQuestions("toeic/part5")).rejects.toThrow("Failed to load: 001.json");
+  });
+
+  it("lists question files sorted by numeric number", async () => {
+    fetchMock.mockResolvedValue(
+      mockResponse({ files: ["010.json", "002.json", "001.json"] }),
+    );
+
+    const result = await listQuestionFiles("toeic/part5");
+
+    expect(result).toEqual([
+      { file: "001.json", number: 1 },
+      { file: "002.json", number: 2 },
+      { file: "010.json", number: 10 },
+    ]);
+  });
+
+  it("loads question by question number", async () => {
+    fetchMock
+      .mockResolvedValueOnce(mockResponse({ files: ["001.json", "002.json"] }))
+      .mockResolvedValueOnce(mockResponse({ id: "q2" }));
+
+    const result = await fetchQuestionByNumberWithMeta<{ id: string }>(
+      "toeic/part5",
+      2,
+    );
+
+    expect(result).toEqual({ file: "002.json", data: { id: "q2" } });
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      2,
+      "/questions/toeic/part5/002.json",
+    );
   });
 });

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
@@ -30,7 +31,9 @@ interface ProblemData {
 }
 
 export function Part6Page() {
-  const { data, loading, error, load } =
+  const navigate = useNavigate();
+  const { questionNumber } = useParams<{ questionNumber: string }>();
+  const { data, file, loading, error, loadByQuestionNumber } =
     useQuestion<ProblemData>("toeic/part6");
   const { saveScore } = useScoreHistory();
   const {
@@ -45,9 +48,14 @@ export function Part6Page() {
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
 
+  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
+  const hasValidQuestionNumber =
+    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+
   useEffect(() => {
-    load();
-  }, []);
+    if (!hasValidQuestionNumber) return;
+    loadByQuestionNumber(parsedQuestionNumber);
+  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -86,16 +94,22 @@ export function Part6Page() {
     if (data) {
       const allQ = data.passages.flatMap((p) => p.questions);
       const correct = allQ.filter((q) => selected[q.id] === q.correct).length;
-      saveScore("toeic/part6", correct, allQ.length, sessionSeconds);
+      saveScore(
+        "toeic/part6",
+        correct,
+        allQ.length,
+        sessionSeconds,
+        file ?? undefined,
+      );
     }
     setGraded(true);
   };
-  const handleNew = () => {
+  const handleBackToList = () => {
     resetTimer();
     setPassageIdx(0);
     setSelected({});
     setGraded(false);
-    load();
+    navigate("/toeic/part6");
   };
 
   const renderText = (p: Passage) => {
@@ -150,10 +164,10 @@ export function Part6Page() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={handleNew}
+          onClick={handleBackToList}
           disabled={loading}
         >
-          Load Another Set
+          Question List
         </Button>
       </div>
 
@@ -166,8 +180,13 @@ export function Part6Page() {
           </p>
         </div>
       )}
+      {!hasValidQuestionNumber && (
+        <div className={styles.error}>
+          <p>Invalid question number in URL.</p>
+        </div>
+      )}
 
-      {data && !loading && passage && (
+      {data && !loading && hasValidQuestionNumber && passage && (
         <>
           {graded && (
             <div className={styles.resultCard}>
@@ -184,8 +203,8 @@ export function Part6Page() {
                 total={totalQ}
                 label="Accuracy"
               />
-              <Button onClick={handleNew} size="lg">
-                Another Set
+              <Button onClick={handleBackToList} size="lg">
+                Back to Question List
               </Button>
             </div>
           )}

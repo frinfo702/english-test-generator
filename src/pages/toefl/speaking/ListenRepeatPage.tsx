@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
+import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
+import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import styles from "./ListenRepeatPage.module.css";
 
 interface Sentence {
@@ -31,9 +35,20 @@ function diffWords(original: string, input: string) {
 }
 
 export function ListenRepeatPage() {
-  const { data, loading, error, load } = useQuestion<ProblemData>(
+  const navigate = useNavigate();
+  const { questionNumber } = useParams<{ questionNumber: string }>();
+  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
     "toefl/speaking/listen-repeat",
   );
+  const { saveScore } = useScoreHistory();
+  const {
+    display,
+    elapsedSeconds,
+    running,
+    start,
+    stop,
+    reset: resetTimer,
+  } = useElapsedTimer();
   const [current, setCurrent] = useState(0);
   const [phase, setPhase] = useState<Phase>("showing");
   const [countdown, setCountdown] = useState(SHOW_SECS);
@@ -42,9 +57,20 @@ export function ListenRepeatPage() {
   const [graded, setGraded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
+  const hasValidQuestionNumber =
+    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+
   useEffect(() => {
-    load();
-  }, []);
+    if (!hasValidQuestionNumber) return;
+    loadByQuestionNumber(parsedQuestionNumber);
+  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+
+  useEffect(() => {
+    if (data && !loading && !graded && !running && elapsedSeconds === 0) {
+      start();
+    }
+  }, [data, loading, graded, running, elapsedSeconds, start]);
 
   useEffect(() => {
     if (phase !== "showing") return;
@@ -81,18 +107,35 @@ export function ListenRepeatPage() {
     if (currentInput.trim() && allInputs[current] == null) {
       setAllInputs((s) => ({ ...s, [current]: currentInput }));
     }
+    const sessionSeconds = stop();
+    if (data) {
+      const correct = data.sentences.filter((s, i) => {
+        const input = (i === current && currentInput.trim() && allInputs[i] == null)
+          ? currentInput
+          : allInputs[i] ?? "";
+        return diffWords(s.text, input).every((d) => d.correct);
+      }).length;
+      saveScore(
+        "toefl/speaking/listen-repeat",
+        correct,
+        data.sentences.length,
+        sessionSeconds,
+        file ?? undefined,
+      );
+    }
     setGraded(true);
     setPhase("review");
     setCurrent(0);
   };
 
-  const handleNew = () => {
+  const handleBackToList = () => {
+    resetTimer();
     setCurrent(0);
     setCurrentInput("");
     setAllInputs({});
     setPhase("showing");
     setGraded(false);
-    load();
+    navigate("/toefl/speaking/listen-repeat");
   };
 
   const score = data
@@ -106,6 +149,9 @@ export function ListenRepeatPage() {
 
   return (
     <div>
+      {(running || elapsedSeconds > 0) && (
+        <FloatingElapsedTimer display={display} running={running} />
+      )}
       <SectionHeader
         title="Listen and Repeat"
         subtitle="Read and memorize the sentence, then reproduce it by typing."
@@ -118,10 +164,10 @@ export function ListenRepeatPage() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={handleNew}
+          onClick={handleBackToList}
           disabled={loading}
         >
-          Load Another Set
+          Question List
         </Button>
       </div>
 
@@ -135,8 +181,13 @@ export function ListenRepeatPage() {
           </p>
         </div>
       )}
+      {!hasValidQuestionNumber && (
+        <div className={styles.error}>
+          <p>Invalid question number in URL.</p>
+        </div>
+      )}
 
-      {data && !loading && !graded && sentence && (
+      {data && !loading && hasValidQuestionNumber && !graded && sentence && (
         <div className={styles.card}>
           <p className={styles.qNum}>
             Question {current + 1} / {totalSentences}
@@ -204,7 +255,7 @@ export function ListenRepeatPage() {
         </div>
       )}
 
-      {graded && data && (
+      {graded && data && hasValidQuestionNumber && (
         <>
           <div className={styles.resultCard}>
             <h2>Section Complete</h2>
@@ -220,8 +271,8 @@ export function ListenRepeatPage() {
               total={totalSentences}
               label="Exact Match"
             />
-            <Button onClick={handleNew} size="lg">
-              Another Set
+            <Button onClick={handleBackToList} size="lg">
+              Back to Question List
             </Button>
           </div>
 

@@ -9,6 +9,7 @@ const parts = [
     sublabel: "Incomplete Sentences",
     desc: "30 short sentence blanks focused on grammar and vocabulary.",
     count: "30 Qs",
+    color: "var(--color-toeic)",
   },
   {
     path: "/toeic/part6",
@@ -16,6 +17,7 @@ const parts = [
     sublabel: "Text Completion",
     desc: "4 passages with 4 blank-fill questions each.",
     count: "16 Qs",
+    color: "var(--color-toeic)",
   },
   {
     path: "/toeic/part7",
@@ -23,6 +25,7 @@ const parts = [
     sublabel: "Reading Comprehension",
     desc: "Single, double, and triple-passage reading questions.",
     count: "54 Qs",
+    color: "var(--color-toeic)",
   },
 ];
 
@@ -32,7 +35,7 @@ export function ToeicMenuPage() {
     <div>
       <SectionHeader
         title="TOEIC Reading"
-        subtitle="Part 5 / 6 / 7 - choose a part"
+        subtitle="Part 5 / 6 / 7 — choose a part to practice"
         backTo="/"
       />
       <div className={styles.grid}>
@@ -42,8 +45,13 @@ export function ToeicMenuPage() {
             className={styles.card}
             onClick={() => navigate(part.path)}
           >
-            <div className={styles.badge}>{part.count}</div>
-            <h2 className={styles.label}>{part.label}</h2>
+            <div className={styles.cardTop}>
+              <span className={styles.badge}>{part.count}</span>
+            </div>
+            <div className={styles.labelRow}>
+              <span className={styles.dot} style={{ background: part.color }} />
+              <h2 className={styles.label}>{part.label}</h2>
+            </div>
             <p className={styles.sublabel}>{part.sublabel}</p>
             <p className={styles.desc}>{part.desc}</p>
           </div>
