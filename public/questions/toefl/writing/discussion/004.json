@@ -1,0 +1,19 @@
+{
+  "professorName": "Dr. Brennan",
+  "professorQuestion": "Some universities require students to complete volunteer work as part of their graduation requirements. Do you think mandatory volunteer service is a good idea for university students? Explain your position.",
+  "student1": {
+    "name": "Noah",
+    "response": "I think mandatory volunteering is a great idea. Many students would never try community service otherwise, but once they experience it, they often discover a passion for helping others. It also builds a sense of social responsibility and gives students practical experience they can put on their resumes."
+  },
+  "student2": {
+    "name": "Aisha",
+    "response": "I disagree with making it mandatory. Forcing students to volunteer defeats the purpose of volunteering, which should come from genuine willingness to help. Students already have heavy academic workloads, and adding required hours creates unnecessary stress. Those who truly care about service will do it voluntarily."
+  },
+  "modelAnswer": "Noah and Aisha present compelling arguments about mandatory volunteer service. While I understand Aisha's concern about authenticity, I believe a structured requirement can be beneficial if designed thoughtfully. The key is to offer meaningful, flexible opportunities rather than arbitrary hour quotas. When students can choose causes they genuinely care about, mandatory service becomes a gateway to lifelong civic engagement rather than a burdensome checkbox. Universities should focus on connecting students with diverse community partners and allowing reflection on their experiences. This approach preserves student agency while ensuring that graduates understand their role in society beyond personal career success.",
+  "evaluationPoints": [
+    "Acknowledges both perspectives before presenting your own view",
+    "Adds a new angle not fully addressed by either student",
+    "Provides a clear logical argument supported by reasoning",
+    "Maintains academic tone and meets the 100-word minimum"
+  ]
+}

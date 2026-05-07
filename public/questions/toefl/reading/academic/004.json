@@ -1,0 +1,71 @@
+{
+  "title": "Urbanization and Biodiversity",
+  "passage": "Urbanization is one of the most significant transformations of the modern era, reshaping landscapes and altering ecosystems across the globe. As cities expand to accommodate growing populations, natural habitats are frequently fragmented or destroyed, leading to declines in biodiversity. However, recent research suggests that the relationship between urban development and biodiversity is more complex than previously assumed.\n\nOne major impact of urbanization is habitat loss. When forests, wetlands, and grasslands are converted into residential and commercial areas, native species lose the resources they need to survive. This process often benefits generalist species—those that can thrive in a variety of conditions—while specialist species, which depend on specific habitats, are pushed toward extinction. For example, birds that nest exclusively in mature forests may disappear from urbanized regions entirely.\n\nYet cities are not entirely hostile to wildlife. Some researchers argue that urban areas can serve as refuges for certain species if managed properly. Green spaces such as parks, rooftop gardens, and urban wetlands can provide valuable habitat corridors that allow animals to move between fragmented areas. A study conducted in Singapore found that carefully designed green infrastructure supported hundreds of native bird species, challenging the assumption that cities are biological deserts.\n\nAnother important factor is the introduction of non-native species. Urban environments often facilitate the spread of invasive plants and animals, which can outcompete native species and disrupt local ecosystems. At the same time, some non-native species fill ecological niches left vacant by declining native populations, creating novel ecosystems that function differently from their natural counterparts.\n\nUnderstanding these dynamics is essential for conservation planning. Rather than viewing cities and nature as opposing forces, policymakers and urban planners are increasingly encouraged to integrate biodiversity considerations into city design. Strategies such as preserving existing green spaces, creating wildlife corridors, and using native plants in landscaping can help mitigate the negative effects of urbanization while supporting both human and ecological communities.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'generalist' in paragraph 2 is closest in meaning to:",
+      "options": [
+        "A. Species that depend on a single food source",
+        "B. Species that can adapt to many different environments",
+        "C. Species that only live in urban areas",
+        "D. Species that migrate long distances"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage defines generalist species as those that 'can thrive in a variety of conditions,' which matches the idea of adapting to many environments."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, what happens to specialist species when their habitats are urbanized?",
+      "options": [
+        "A. They adapt quickly to city life",
+        "B. They are pushed toward extinction",
+        "C. They become generalist species",
+        "D. They thrive in rooftop gardens"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that specialist species, which depend on specific habitats, are 'pushed toward extinction' when those habitats are destroyed."
+    },
+    {
+      "id": "q3",
+      "type": "detail",
+      "stem": "What did the Singapore study find about urban green infrastructure?",
+      "options": [
+        "A. It had no effect on bird populations",
+        "B. It supported hundreds of native bird species",
+        "C. It caused an increase in invasive species",
+        "D. It was too expensive to maintain"
+      ],
+      "correctIndex": 1,
+      "explanation": "The study found that carefully designed green infrastructure supported hundreds of native bird species."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about the author's view on urban biodiversity?",
+      "options": [
+        "A. Cities can never support meaningful biodiversity",
+        "B. Urbanization always leads to complete ecological destruction",
+        "C. Proper planning can help cities support wildlife",
+        "D. Non-native species should be eliminated from all cities"
+      ],
+      "correctIndex": 2,
+      "explanation": "The author discusses how green infrastructure and conservation strategies can help cities support wildlife, implying that proper planning makes a difference."
+    },
+    {
+      "id": "q5",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of this passage?",
+      "options": [
+        "A. To argue that all urban development should be stopped",
+        "B. To explain the complex effects of urbanization on biodiversity",
+        "C. To compare Singapore with other global cities",
+        "D. To describe the life cycle of invasive species"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage discusses both the negative and potential positive effects of urbanization on biodiversity, presenting a nuanced view of the relationship."
+    }
+  ]
+}

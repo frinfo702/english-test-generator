@@ -1,0 +1,89 @@
+{
+  "title": "The History of Photography",
+  "transcript": "Today we will explore the history of photography, from its earliest experiments to the digital revolution. The concept of capturing images dates back centuries, but practical photography was born in the early nineteenth century. In 1826, a French inventor named Joseph Nicéphore Niépce produced the first permanent photograph using a process called heliography. It required an extremely long exposure time—about eight hours—and the image was quite faint.\n\nA few years later, Louis Daguerre developed the daguerreotype, which significantly reduced exposure time and produced much clearer images. This invention, announced in 1839, is often considered the birth of practical photography. Portraiture became popular almost immediately, though subjects had to remain perfectly still for several minutes.\n\nIn the late nineteenth century, George Eastman revolutionized photography by introducing flexible film and the Kodak camera. His famous slogan, 'You press the button, we do the rest,' made photography accessible to ordinary people for the first time. No longer limited to professionals, photography became a mass medium.\n\nThe twentieth century brought color film, 35mm cameras, and eventually digital technology. Digital cameras, which emerged in the 1990s, eliminated the need for film and darkrooms entirely. Today, smartphones have made photography an everyday activity, with billions of images shared online every day. Despite these technological shifts, the fundamental goal of photography remains unchanged: to capture and preserve moments in time.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The technical evolution of photography from the 1800s to today",
+        "The artistic styles of famous photographers",
+        "The chemistry behind film development",
+        "The business strategies of camera companies"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The lecture traces photography from Niépce's first photograph through digital cameras and smartphones, focusing on technical evolution."
+    },
+    {
+      "id": "q2",
+      "stem": "What was a major limitation of Niépce's heliography process?",
+      "options": [
+        "It could only produce black-and-white images",
+        "It required an extremely long exposure time",
+        "It used toxic chemicals that were dangerous",
+        "It could not be reproduced multiple times"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The lecturer states that heliography required an exposure time of about eight hours."
+    },
+    {
+      "id": "q3",
+      "stem": "According to the lecture, what did George Eastman contribute to photography?",
+      "options": [
+        "He invented the first color film process",
+        "He created the first digital camera",
+        "He introduced flexible film and easy-to-use cameras",
+        "He developed the daguerreotype process"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "Eastman introduced flexible film and the Kodak camera, making photography accessible to ordinary people."
+    },
+    {
+      "id": "q4",
+      "stem": "What does the professor imply about smartphone photography?",
+      "options": [
+        "It has replaced professional photography entirely",
+        "It has made photography a common daily activity",
+        "It produces lower quality images than film cameras",
+        "It requires extensive training to use properly"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor notes that smartphones have made photography an everyday activity, with billions of images shared daily."
+    },
+    {
+      "id": "q5",
+      "stem": "What does the professor suggest about the fundamental purpose of photography?",
+      "options": [
+        "It has changed dramatically with each new technology",
+        "It remains the same despite technological advances",
+        "It is now primarily for social media communication",
+        "It is mainly used for scientific documentation"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor explicitly states that despite technological shifts, the fundamental goal of photography remains unchanged: to capture and preserve moments."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will explore the history of photography, from its earliest experiments to the digital revolution. The concept of capturing images dates back centuries, but practical photography was born in the early nineteenth century. In 1826, a French inventor named Joseph Nicéphore Niépce produced the first permanent photograph using a process called heliography. It required an extremely long exposure time—about eight hours—and the image was quite faint."
+    },
+    {
+      "role": "Lecturer",
+      "text": "A few years later, Louis Daguerre developed the daguerreotype, which significantly reduced exposure time and produced much clearer images. This invention, announced in 1839, is often considered the birth of practical photography. Portraiture became popular almost immediately, though subjects had to remain perfectly still for several minutes."
+    },
+    {
+      "role": "Lecturer",
+      "text": "In the late nineteenth century, George Eastman revolutionized photography by introducing flexible film and the Kodak camera. His famous slogan, 'You press the button, we do the rest,' made photography accessible to ordinary people for the first time. No longer limited to professionals, photography became a mass medium."
+    },
+    {
+      "role": "Lecturer",
+      "text": "The twentieth century brought color film, 35mm cameras, and eventually digital technology. Digital cameras, which emerged in the 1990s, eliminated the need for film and darkrooms entirely. Today, smartphones have made photography an everyday activity, with billions of images shared online every day. Despite these technological shifts, the fundamental goal of photography remains unchanged: to capture and preserve moments in time."
+    }
+  ]
+}

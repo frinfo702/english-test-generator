@@ -1,0 +1,58 @@
+{
+  "module": "module1",
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "content": "Campus Fitness Center – Membership Renewal Notice\n\nDear Members,\n\nYour annual fitness center membership will expire on March 31. To continue using the facility, please renew your membership by April 7.\n\nRenewal options:\n- Annual plan: $180 (save $36)\n- Semester plan: $108\n\nNew this year: Free yoga classes every Tuesday and Thursday at 6 p.m.\n\nRenew online at studentportal.edu or in person at the Fitness Center front desk.\n\nCampus Fitness Center Staff",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the deadline for membership renewal?",
+          "options": [
+            "A. March 31",
+            "B. April 7",
+            "C. June 1",
+            "D. January 15"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The email states that members must renew by April 7 to continue using the facility."
+        },
+        {
+          "id": "q2",
+          "stem": "What new benefit is mentioned in the notice?",
+          "options": [
+            "A. Personal training sessions",
+            "B. Free yoga classes",
+            "C. Swimming pool access",
+            "D. Extended operating hours"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The email mentions free yoga classes every Tuesday and Thursday at 6 p.m. as a new benefit."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "notice",
+      "content": "University Cafeteria – Updated Spring Hours\n\nStarting April 1, the main cafeteria will operate on the following schedule:\n\nBreakfast: 7:00 a.m. – 9:30 a.m.\nLunch: 11:00 a.m. – 2:30 p.m.\nDinner: 5:00 p.m. – 8:00 p.m.\n\nWeekend hours remain unchanged.\n\nThe grab-and-go station will now offer fresh sushi on Wednesdays and Fridays. Gluten-free and vegan options are available at every meal.\n\nQuestions? Contact dining@university.edu",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "When can students get fresh sushi at the grab-and-go station?",
+          "options": [
+            "A. Mondays and Thursdays",
+            "B. Tuesdays and Saturdays",
+            "C. Wednesdays and Fridays",
+            "D. Every day"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The notice states that fresh sushi is available on Wednesdays and Fridays."
+        }
+      ]
+    }
+  ]
+}

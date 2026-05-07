@@ -1,0 +1,117 @@
+{
+  "title": "Library Book Renewal",
+  "transcript": "Student: Hi, I received an email saying that two of my library books are due tomorrow, but I haven't finished them yet. Can I renew them? Librarian: Let me check your account. Yes, I see you have Introduction to Sociology and Modern Art History. Student: That's right. I need them for my midterm papers. Librarian: Unfortunately, Modern Art History has a hold request from another student, so it cannot be renewed. However, Introduction to Sociology can be renewed for another two weeks. Student: Oh, I see. What should I do about the art history book? Librarian: You can return it tomorrow and place a new request. The waiting list is usually about three days. Alternatively, we have an electronic version available if you need immediate access. Student: The e-book would be helpful. How do I access it? Librarian: You can find it through the library's digital catalog using your student ID. You can download chapters or read online. Student: That works perfectly. Also, how many times can I renew the sociology book? Librarian: You can renew it up to two times as long as there are no holds. After that, you will need to return it. Student: Got it. Thank you so much for your help.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit the library?",
+      "options": [
+        "To return overdue books and pay fines",
+        "To ask about renewing checked-out books",
+        "To request a new library card",
+        "To complain about the digital catalog"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student wants to renew library books that are due tomorrow because she has not finished reading them."
+    },
+    {
+      "id": "q2",
+      "stem": "Why can the student not renew Modern Art History?",
+      "options": [
+        "It is a reference book that cannot leave the library",
+        "Another student has placed a hold on it",
+        "The student has already renewed it twice",
+        "The book is damaged and under repair"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The librarian says Modern Art History has a hold request from another student, so it cannot be renewed."
+    },
+    {
+      "id": "q3",
+      "stem": "What alternative does the librarian suggest for the art history book?",
+      "options": [
+        "Buying a copy from the campus bookstore",
+        "Using the electronic version available in the digital catalog",
+        "Borrowing it from a different university library",
+        "Photocopying relevant chapters"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The librarian mentions that an electronic version is available through the library's digital catalog."
+    },
+    {
+      "id": "q4",
+      "stem": "How long can the student keep Introduction to Sociology after renewal?",
+      "options": [
+        "One more week",
+        "Two more weeks",
+        "One month",
+        "The entire semester"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The librarian says Introduction to Sociology can be renewed for another two weeks."
+    },
+    {
+      "id": "q5",
+      "stem": "What can be inferred about the library's renewal policy?",
+      "options": [
+        "Books can never be renewed more than once",
+        "Renewals are unlimited for all students",
+        "Renewals depend on whether other students have requested the book",
+        "Only graduate students can renew books"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The librarian states that books can be renewed if there are no holds, implying that renewals depend on demand from other students."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi, I received an email saying that two of my library books are due tomorrow, but I haven't finished them yet. Can I renew them?"
+    },
+    {
+      "role": "Librarian",
+      "text": "Let me check your account. Yes, I see you have Introduction to Sociology and Modern Art History."
+    },
+    {
+      "role": "Student",
+      "text": "That's right. I need them for my midterm papers."
+    },
+    {
+      "role": "Librarian",
+      "text": "Unfortunately, Modern Art History has a hold request from another student, so it cannot be renewed. However, Introduction to Sociology can be renewed for another two weeks."
+    },
+    {
+      "role": "Student",
+      "text": "Oh, I see. What should I do about the art history book?"
+    },
+    {
+      "role": "Librarian",
+      "text": "You can return it tomorrow and place a new request. The waiting list is usually about three days. Alternatively, we have an electronic version available if you need immediate access."
+    },
+    {
+      "role": "Student",
+      "text": "The e-book would be helpful. How do I access it?"
+    },
+    {
+      "role": "Librarian",
+      "text": "You can find it through the library's digital catalog using your student ID. You can download chapters or read online."
+    },
+    {
+      "role": "Student",
+      "text": "That works perfectly. Also, how many times can I renew the sociology book?"
+    },
+    {
+      "role": "Librarian",
+      "text": "You can renew it up to two times as long as there are no holds. After that, you will need to return it."
+    },
+    {
+      "role": "Student",
+      "text": "Got it. Thank you so much for your help."
+    }
+  ]
+}

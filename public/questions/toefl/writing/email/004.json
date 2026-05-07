@@ -1,0 +1,29 @@
+{
+  "scenario": {
+    "title": "Requesting a Course Override",
+    "description": "You tried to register for Advanced Biology for the fall semester, but the registration system shows the course is full. This course is required for your major, and delaying it would push back your graduation timeline. Write an email to the Department of Biology.",
+    "recipient": "Department of Biology",
+    "purpose": "Request a course override to enroll in a full required course",
+    "keyPoints": [
+      "Explain why the course is essential for your academic plan",
+      "Describe the consequences of not taking the course this semester",
+      "Request a specific action (override or waitlist priority)",
+      "Provide your student ID and contact information"
+    ]
+  },
+  "modelAnswer": "Dear Department of Biology,\n\nI am writing to request a course override for Advanced Biology (BIO 301) for the fall semester.\n\nI am a junior majoring in Molecular Biology, and Advanced Biology is a required course for my degree. Unfortunately, the registration system indicates that all sections are currently full. If I am unable to enroll this semester, I will not be able to take Biochemistry in the spring, which would delay my graduation by at least one year.\n\nI would greatly appreciate it if you could grant me an override or place me at the top of the waitlist. I am fully prepared for the course and have completed all prerequisites with strong grades.\n\nPlease let me know if any additional information is needed. I can be reached at student@university.edu or by phone at (555) 123-4567.\n\nThank you for your understanding and assistance.\n\nSincerely,\n[Your Name]\nStudent ID: 98765432",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Clearly explains the situation and includes all key points."
+    },
+    {
+      "criterion": "Organization",
+      "description": "Proper email format with greeting, body, and polite closing."
+    },
+    {
+      "criterion": "Language Use",
+      "description": "Formal, polite register appropriate for writing to academic departments."
+    }
+  ]
+}

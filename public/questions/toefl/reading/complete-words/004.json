@@ -1,0 +1,65 @@
+{
+  "paragraph": "Recent research in renewable energy has shown that solar and wind power can sig__________ reduce greenhouse gas emissions. Sci______ believe that transitioning to clean energy sources is ess______ for combating climate change. Gov________ worldwide are investing hea____ in wind tur_____ and solar pa_____ to replace fossil fuels. New sto_____ technology is improving energy reliability. Although the initial costs are high, the long-term benefits for public health and the env________ are rem________.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "sig",
+      "answer": "significantly",
+      "placeholder": "sig__________"
+    },
+    {
+      "index": 1,
+      "hint": "Sci",
+      "answer": "Scientists",
+      "placeholder": "Sci______"
+    },
+    {
+      "index": 2,
+      "hint": "ess",
+      "answer": "essential",
+      "placeholder": "ess______"
+    },
+    {
+      "index": 3,
+      "hint": "Gov",
+      "answer": "Governments",
+      "placeholder": "Gov________"
+    },
+    {
+      "index": 4,
+      "hint": "hea",
+      "answer": "heavily",
+      "placeholder": "hea____"
+    },
+    {
+      "index": 5,
+      "hint": "tur",
+      "answer": "turbines",
+      "placeholder": "tur_____"
+    },
+    {
+      "index": 6,
+      "hint": "pa",
+      "answer": "panels",
+      "placeholder": "pa_____"
+    },
+    {
+      "index": 7,
+      "hint": "sto",
+      "answer": "storage",
+      "placeholder": "sto_____"
+    },
+    {
+      "index": 8,
+      "hint": "env",
+      "answer": "environment",
+      "placeholder": "env________"
+    },
+    {
+      "index": 9,
+      "hint": "rem",
+      "answer": "remarkable",
+      "placeholder": "rem________"
+    }
+  ]
+}
