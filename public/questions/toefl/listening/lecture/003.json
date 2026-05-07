@@ -1,0 +1,81 @@
+{
+  "title": "The Great Divergence",
+  "transcript": "Today we will explore a concept in economic history known as the Great Divergence. This term refers to the process by which Western Europe and parts of North America dramatically overtook the rest of the world in terms of economic output and living standards during the late eighteenth and nineteenth centuries. Prior to this period, the global distribution of wealth was relatively even. Regions such as China and India were economically comparable to Europe. So what changed? Historians and economists have proposed several explanations. One influential theory points to the Industrial Revolution, which began in Britain around 1760. Mechanization, steam power, and factory systems allowed for unprecedented productivity gains. Another theory emphasizes institutional factors, such as secure property rights and competitive markets, which encouraged innovation and investment. A third perspective focuses on geography and access to natural resources like coal. However, recent scholarship has challenged the idea that the divergence was purely a Western achievement. Some scholars argue that external factors, including colonial extraction and unequal trade relationships, played a major role in enabling European industrial growth while suppressing development elsewhere. Understanding the Great Divergence remains essential because it shaped the modern global economy and continues to influence discussions about development and inequality today.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The economic rise of Western Europe and North America relative to other regions",
+        "The causes of the Industrial Revolution in Britain",
+        "The history of colonial trade in Asia and Africa",
+        "The development of factory systems in the nineteenth century"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The lecture introduces the Great Divergence, explaining how Western Europe and North America overtook the rest of the world economically."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, what was the global distribution of wealth like before the Great Divergence?",
+      "options": [
+        "Relatively even across major regions",
+        "Heavily concentrated in Western Europe",
+        "Dominated entirely by Asian empires",
+        "Completely unknown to historians"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The lecturer states that prior to the Great Divergence, the global distribution of wealth was relatively even, with China and India comparable to Europe."
+    },
+    {
+      "id": "q3",
+      "stem": "Which of the following is mentioned as an explanation for the Great Divergence?",
+      "options": [
+        "Secure property rights and competitive markets",
+        "A sudden decline in Asian agricultural output",
+        "The spread of democracy across Europe",
+        "The invention of the printing press"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The lecture mentions institutional factors such as secure property rights and competitive markets as one explanation for the divergence."
+    },
+    {
+      "id": "q4",
+      "stem": "What does recent scholarship suggest about the Great Divergence?",
+      "options": [
+        "Colonial extraction and unequal trade may have enabled European growth",
+        "The divergence was caused solely by technological innovation",
+        "Asia and Africa were economically irrelevant before 1800",
+        "The divergence had no lasting impact on the modern economy"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The lecturer notes that recent scholarship argues external factors like colonial extraction and unequal trade relationships played a major role."
+    },
+    {
+      "id": "q5",
+      "stem": "What does the professor imply about understanding the Great Divergence?",
+      "options": [
+        "It is still relevant to modern discussions about inequality",
+        "It is only useful for understanding British history",
+        "It has been completely explained by economic models",
+        "It is less important than studying ancient civilizations"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The professor says understanding the Great Divergence remains essential because it shaped the modern global economy and influences current discussions about development and inequality."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will explore a concept in economic history known as the Great Divergence. This term refers to the process by which Western Europe and parts of North America dramatically overtook the rest of the world in terms of economic output and living standards during the late eighteenth and nineteenth centuries. Prior to this period, the global distribution of wealth was relatively even. Regions such as China and India were economically comparable to Europe. So what changed? Historians and economists have proposed several explanations. One influential theory points to the Industrial Revolution, which began in Britain around 1760. Mechanization, steam power, and factory systems allowed for unprecedented productivity gains. Another theory emphasizes institutional factors, such as secure property rights and competitive markets, which encouraged innovation and investment. A third perspective focuses on geography and access to natural resources like coal."
+    },
+    {
+      "role": "Lecturer",
+      "text": "However, recent scholarship has challenged the idea that the divergence was purely a Western achievement. Some scholars argue that external factors, including colonial extraction and unequal trade relationships, played a major role in enabling European industrial growth while suppressing development elsewhere. Understanding the Great Divergence remains essential because it shaped the modern global economy and continues to influence discussions about development and inequality today."
+    }
+  ]
+}

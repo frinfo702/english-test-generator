@@ -1,0 +1,29 @@
+{
+  "scenario": {
+    "title": "Requesting a Letter of Recommendation",
+    "description": "You are applying for a graduate program in Environmental Science. You would like to ask Professor Thompson, whose course you excelled in last semester, to write a letter of recommendation for you. The deadline is in three weeks.",
+    "recipient": "Professor Thompson",
+    "purpose": "Request a letter of recommendation for graduate school",
+    "keyPoints": [
+      "Mention the specific program and deadline",
+      "Reference your performance in their course",
+      "Offer to provide your resume or transcript",
+      "Express gratitude regardless of their decision"
+    ]
+  },
+  "modelAnswer": "Dear Professor Thompson,\n\nI hope you are doing well. I am writing to respectfully ask if you would be willing to write a letter of recommendation for my application to the graduate program in Environmental Science at State University.\n\nI thoroughly enjoyed and learned a great deal from your Advanced Ecology course last semester, in which I earned an A. Your insights into conservation policy greatly influenced my decision to pursue further study in this field.\n\nThe application deadline is March 15th. I would be happy to provide my resume, transcript, or any other materials that would assist you.\n\nThank you very much for considering my request.\n\nSincerely,\n[Your Name]",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Clearly states the request and includes all key points."
+    },
+    {
+      "criterion": "Organization",
+      "description": "Proper email format with greeting, body, and polite closing."
+    },
+    {
+      "criterion": "Language Use",
+      "description": "Formal, polite register appropriate for writing to a professor."
+    }
+  ]
+}

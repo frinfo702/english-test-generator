@@ -1,0 +1,81 @@
+{
+  "title": "Cognitive Dissonance Theory",
+  "transcript": "Today we will examine cognitive dissonance theory, first proposed by psychologist Leon Festinger in 1957. Cognitive dissonance refers to the mental discomfort that occurs when a person holds two or more contradictory beliefs, values, or attitudes simultaneously. Festinger argued that humans have a powerful need for consistency in their cognitions. When inconsistency arises, individuals are motivated to reduce the resulting discomfort. There are several ways to resolve dissonance. First, a person might change one of the conflicting beliefs to align with the other. Second, they might acquire new information that outweighs the dissonant belief. Third, they may reduce the importance of one of the cognitions. A classic experiment illustrating this theory involved participants who performed a boring task and were then paid either one dollar or twenty dollars to tell the next participant that the task was enjoyable. Surprisingly, those paid one dollar rated the task as more interesting than those paid twenty dollars. Why? The highly paid participants could justify their lie by the large reward, but the one-dollar group experienced dissonance and resolved it by convincing themselves the task was actually fun. This theory helps explain many everyday behaviors, from rationalizing purchases to justifying difficult decisions.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main purpose of the lecture?",
+      "options": [
+        "To explain cognitive dissonance theory and how people resolve mental conflict",
+        "To criticize Festinger's experimental methods",
+        "To compare different theories of human motivation",
+        "To demonstrate how to design psychology experiments"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The lecture introduces cognitive dissonance theory, describes its core concept, and explains how people reduce mental discomfort."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, what does cognitive dissonance refer to?",
+      "options": [
+        "Mental discomfort from holding contradictory beliefs",
+        "The process of learning new information quickly",
+        "A type of memory loss caused by stress",
+        "The desire to seek social approval from peers"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The lecturer defines cognitive dissonance as the mental discomfort that occurs when a person holds contradictory beliefs, values, or attitudes."
+    },
+    {
+      "id": "q3",
+      "stem": "Which of the following is NOT mentioned as a way to resolve cognitive dissonance?",
+      "options": [
+        "Seeking professional psychological counseling",
+        "Changing one of the conflicting beliefs",
+        "Acquiring new information that outweighs the dissonant belief",
+        "Reducing the importance of one of the cognitions"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The lecture lists three methods to resolve dissonance: changing a belief, acquiring new information, and reducing importance. Counseling is not mentioned."
+    },
+    {
+      "id": "q4",
+      "stem": "What happened in Festinger's classic experiment?",
+      "options": [
+        "Participants paid one dollar rated the boring task as more interesting",
+        "Participants paid twenty dollars refused to lie about the task",
+        "All participants reported that the task was extremely boring",
+        "Participants with no payment showed the highest satisfaction"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The lecturer states that participants paid one dollar rated the task as more interesting than those paid twenty dollars due to dissonance resolution."
+    },
+    {
+      "id": "q5",
+      "stem": "What does the professor imply about the highly paid participants in the experiment?",
+      "options": [
+        "They had an external justification for their behavior",
+        "They experienced more dissonance than the others",
+        "They were less honest than the one-dollar group",
+        "They found the task genuinely enjoyable"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The professor says the highly paid participants could justify their lie by the large reward, implying they had an external justification and thus less dissonance."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will examine cognitive dissonance theory, first proposed by psychologist Leon Festinger in 1957. Cognitive dissonance refers to the mental discomfort that occurs when a person holds two or more contradictory beliefs, values, or attitudes simultaneously. Festinger argued that humans have a powerful need for consistency in their cognitions. When inconsistency arises, individuals are motivated to reduce the resulting discomfort. There are several ways to resolve dissonance. First, a person might change one of the conflicting beliefs to align with the other. Second, they might acquire new information that outweighs the dissonant belief. Third, they may reduce the importance of one of the cognitions."
+    },
+    {
+      "role": "Lecturer",
+      "text": "A classic experiment illustrating this theory involved participants who performed a boring task and were then paid either one dollar or twenty dollars to tell the next participant that the task was enjoyable. Surprisingly, those paid one dollar rated the task as more interesting than those paid twenty dollars. Why? The highly paid participants could justify their lie by the large reward, but the one-dollar group experienced dissonance and resolved it by convincing themselves the task was actually fun. This theory helps explain many everyday behaviors, from rationalizing purchases to justifying difficult decisions."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "professorName": "Dr. Patel",
+  "professorQuestion": "Some universities are considering making study abroad programs mandatory for all undergraduate students. Do you think requiring students to study abroad is a good idea? Explain your reasoning.",
+  "student1": {
+    "name": "Elena",
+    "response": "I think requiring study abroad is an excellent idea. Living in another country forces students to develop independence and adaptability. They gain firsthand cultural understanding that cannot be replicated in a classroom. Additionally, international experience makes graduates more competitive in the global job market."
+  },
+  "student2": {
+    "name": "James",
+    "response": "I disagree with making it mandatory. Not every student can afford the extra costs of international travel and housing. Some students also have family responsibilities or health conditions that make living abroad impractical. Universities should encourage study abroad without requiring it."
+  },
+  "modelAnswer": "Both Elena and James present compelling arguments. While I value the benefits Elena highlights, I believe James's practical concerns cannot be ignored. A better approach would be to make study abroad optional but financially accessible. Universities could offer scholarships, create shorter summer programs, or even develop virtual exchange opportunities. This way, students who are able to travel gain the experience, while those with constraints are not disadvantaged. Mandatory policies risk excluding students who could benefit but face real barriers, so flexibility combined with support seems more equitable.",
+  "evaluationPoints": [
+    "Acknowledges both perspectives before presenting your own view",
+    "Adds a new angle not fully addressed by either student",
+    "Provides a clear logical argument supported by reasoning",
+    "Maintains academic tone and meets the 100-word minimum"
+  ]
+}

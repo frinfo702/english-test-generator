@@ -1,0 +1,52 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "type": "personal",
+      "question": "Describe a book or article that changed the way you think about a particular subject. What made it so influential?",
+      "modelAnswer": "One book that deeply changed my perspective was Sapiens by Yuval Noah Harari. Before reading it, I viewed history as a series of isolated events. The book connected everything through the lens of shared stories and cooperation. It made me realize how much of our society is built on collective imagination. This shift encouraged me to question assumptions in my own field. I now approach problems by looking for underlying narratives rather than surface-level facts.",
+      "evaluationPoints": [
+        "Identifies a specific book or article",
+        "Explains the original perspective",
+        "Describes how the viewpoint changed",
+        "Connects the lesson to broader thinking"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "opinion",
+      "question": "Do you believe that online courses can be as effective as traditional in-person classes? Why or why not?",
+      "modelAnswer": "I believe online courses can be equally effective when designed thoughtfully, though they serve different strengths. Online learning offers flexibility and accessibility for students with diverse schedules. However, it demands greater self-discipline and can lack spontaneous peer interaction. Traditional classrooms excel at building immediate rapport and enabling hands-on collaboration. Ultimately, effectiveness depends on the subject matter and the learner's motivation. A blended approach often harnesses the best of both worlds.",
+      "evaluationPoints": [
+        "States a clear opinion early in the response",
+        "Provides balanced reasons for the position",
+        "Acknowledges the strengths of the alternative",
+        "Concludes with a practical summary"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "hypothetical",
+      "question": "If you were given a large grant to improve education in your country, what is the first initiative you would fund and why?",
+      "modelAnswer": "If I received a large education grant, I would first fund comprehensive teacher training programs. Teachers are the single most important factor in student outcomes, yet many lack ongoing professional development. High-quality training would focus on modern pedagogy, classroom management, and digital tools. This investment would create a ripple effect, improving education for thousands of students over time. Equipping teachers ultimately builds a stronger, more adaptive education system.",
+      "evaluationPoints": [
+        "Identifies a single clear initiative",
+        "Provides a compelling rationale",
+        "Explains the expected impact",
+        "Uses conditional language appropriately"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "comparison",
+      "question": "Some people think it is better to start working immediately after high school, while others prefer to attend university first. Which path do you think leads to greater long-term success?",
+      "modelAnswer": "I think attending university first generally leads to greater long-term success, though both paths have valid merits. University provides structured learning, critical thinking skills, and a professional network that are hard to replicate elsewhere. Graduates often have access to higher-paying roles and faster career advancement. Starting work immediately offers real-world experience and financial independence sooner, but it can limit options later without credentials. In most cases, the investment in higher education pays dividends over a lifetime.",
+      "evaluationPoints": [
+        "Takes a clear position on the comparison",
+        "Supports the argument with specific benefits",
+        "Acknowledges the value of the alternative",
+        "Provides a strong concluding statement"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "title": "The Industrial Revolution and Urbanization",
+  "passage": "The Industrial Revolution, which began in Britain in the late eighteenth century, fundamentally transformed human society. Before this period, most people lived in rural areas and engaged in agricultural work. The advent of mechanized manufacturing, powered by steam engines and later electricity, drew massive numbers of workers into newly emerging industrial centers.\n\nUrbanization occurred at an unprecedented rate. Cities such as Manchester, Birmingham, and later Chicago and Osaka expanded rapidly, often without adequate infrastructure. Housing conditions for the working class were frequently cramped and unsanitary, with multiple families sharing single rooms. Public health deteriorated as clean water and waste disposal systems failed to keep pace with population growth.\n\nDespite these hardships, industrial urbanization also created opportunities for social mobility and economic advancement. The concentration of workers in cities facilitated the rise of labor movements, which eventually led to improved wages, shorter working hours, and child labor laws. By the early twentieth century, governments began implementing urban planning reforms, including public parks, sewage systems, and building regulations, which gradually improved the quality of urban life.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'advent' in paragraph 1 is closest in meaning to:",
+      "options": [
+        "A. end",
+        "B. arrival",
+        "C. consequence",
+        "D. difficulty"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Advent' refers to the arrival or beginning of something significant."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, which of the following was a problem in rapidly growing industrial cities?",
+      "options": [
+        "A. A shortage of factory workers",
+        "B. Inadequate housing and sanitation",
+        "C. Declining population",
+        "D. Excessive government regulation"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that housing was 'cramped and unsanitary' and public health deteriorated as infrastructure failed to keep pace."
+    },
+    {
+      "id": "q3",
+      "type": "inference",
+      "stem": "What can be inferred about labor movements during the Industrial Revolution?",
+      "options": [
+        "A. They were suppressed by all governments immediately.",
+        "B. They were made possible by the concentration of workers in cities.",
+        "C. They had no impact on working conditions.",
+        "D. They were led primarily by wealthy factory owners."
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that 'the concentration of workers in cities facilitated the rise of labor movements,' implying this geographic concentration made organization easier."
+    },
+    {
+      "id": "q4",
+      "type": "detail",
+      "stem": "Which reform is mentioned as an example of urban planning improvements?",
+      "options": [
+        "A. Free public transportation",
+        "B. Mandatory factory inspections",
+        "C. Public parks and sewage systems",
+        "D. Universal education"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage lists 'public parks, sewage systems, and building regulations' as urban planning reforms."
+    },
+    {
+      "id": "q5",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of this passage?",
+      "options": [
+        "A. To criticize the Industrial Revolution as a harmful historical event",
+        "B. To describe the causes and effects of industrial urbanization",
+        "C. To compare British and American cities during the nineteenth century",
+        "D. To argue that modern cities should eliminate all factories"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage explains how industrialization caused urbanization, describes resulting problems, and discusses reforms and improvements over time."
+    }
+  ]
+}

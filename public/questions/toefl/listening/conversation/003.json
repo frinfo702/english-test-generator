@@ -1,0 +1,117 @@
+{
+  "title": "Study Abroad Application",
+  "transcript": "Student: Hello, I'd like to apply for the study abroad program in Barcelona next semester, but I have some questions first. Advisor: Of course. The Barcelona program is very popular. What would you like to know? Student: I saw that the deadline is March 15th, but I haven't chosen my courses yet. Do I need a complete course plan to apply? Advisor: No, you only need a preliminary plan. You can finalize your courses after acceptance. However, you do need a letter of recommendation and a statement of purpose. Student: I have a professor who agreed to write a recommendation. How should she submit it? Advisor: She can upload it directly through the online portal. Make sure she uses her official university email. Student: Okay. Also, will my financial aid transfer to the Barcelona program? Advisor: Most federal and institutional aid does transfer, but you should confirm with the Financial Aid Office. There may also be additional travel grants available through the International Programs Office. Student: That's good to hear. One more thing—when do participants usually hear back about acceptance? Advisor: Decisions are typically sent out by April 10th. Student: Thanks so much. I'll start working on my statement of purpose right away.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit the study abroad advisor?",
+      "options": [
+        "To get information before applying to the Barcelona program",
+        "To cancel a study abroad application",
+        "To complain about a late recommendation letter",
+        "To request a refund for program fees"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The student wants to apply for the Barcelona program but has questions about requirements, deadlines, and logistics before submitting the application."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the advisor say about the course plan?",
+      "options": [
+        "A preliminary plan is enough at the application stage",
+        "A complete course plan must be submitted by March 15th",
+        "Courses must be approved by the Barcelona university first",
+        "No course plan is required for the application"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The advisor says the student only needs a preliminary plan and can finalize courses after acceptance."
+    },
+    {
+      "id": "q3",
+      "stem": "How should the recommendation letter be submitted?",
+      "options": [
+        "Uploaded directly by the professor through the online portal",
+        "Mailed in a sealed envelope to the advisor's office",
+        "Attached to the student's application form",
+        "Sent via a third-party recommendation service"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The advisor states the professor can upload the letter directly through the online portal using her official university email."
+    },
+    {
+      "id": "q4",
+      "stem": "What does the advisor suggest the student do about financial aid?",
+      "options": [
+        "Confirm transfer details with the Financial Aid Office",
+        "Apply for a private student loan immediately",
+        "Wait until after acceptance to contact Financial Aid",
+        "Pay the full program cost upfront"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The advisor says most aid transfers but the student should confirm with the Financial Aid Office, and mentions possible travel grants."
+    },
+    {
+      "id": "q5",
+      "stem": "What can be inferred about the student?",
+      "options": [
+        "She is well-prepared and proactive about planning",
+        "She has already been accepted into the program",
+        "She is trying to avoid the application deadline",
+        "She has never traveled outside the country"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The student has already secured a recommender, is asking detailed questions in advance, and plans to start her statement immediately, showing preparedness."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hello, I'd like to apply for the study abroad program in Barcelona next semester, but I have some questions first."
+    },
+    {
+      "role": "Advisor",
+      "text": "Of course. The Barcelona program is very popular. What would you like to know?"
+    },
+    {
+      "role": "Student",
+      "text": "I saw that the deadline is March 15th, but I haven't chosen my courses yet. Do I need a complete course plan to apply?"
+    },
+    {
+      "role": "Advisor",
+      "text": "No, you only need a preliminary plan. You can finalize your courses after acceptance. However, you do need a letter of recommendation and a statement of purpose."
+    },
+    {
+      "role": "Student",
+      "text": "I have a professor who agreed to write a recommendation. How should she submit it?"
+    },
+    {
+      "role": "Advisor",
+      "text": "She can upload it directly through the online portal. Make sure she uses her official university email."
+    },
+    {
+      "role": "Student",
+      "text": "Okay. Also, will my financial aid transfer to the Barcelona program?"
+    },
+    {
+      "role": "Advisor",
+      "text": "Most federal and institutional aid does transfer, but you should confirm with the Financial Aid Office. There may also be additional travel grants available through the International Programs Office."
+    },
+    {
+      "role": "Student",
+      "text": "That's good to hear. One more thing—when do participants usually hear back about acceptance?"
+    },
+    {
+      "role": "Advisor",
+      "text": "Decisions are typically sent out by April 10th."
+    },
+    {
+      "role": "Student",
+      "text": "Thanks so much. I'll start working on my statement of purpose right away."
+    }
+  ]
+}

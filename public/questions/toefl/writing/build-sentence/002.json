@@ -1,0 +1,263 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Professor: What is the main benefit of renewable energy?",
+      "chunks": [
+        "sources",
+        "reduces",
+        "Renewable",
+        "our",
+        "on",
+        "energy",
+        "dependence",
+        "fossil",
+        "fuels"
+      ],
+      "correctOrder": [
+        2,
+        5,
+        1,
+        3,
+        6,
+        4,
+        7,
+        0,
+        8
+      ],
+      "fullSentence": "Renewable energy reduces our dependence on fossil fuels"
+    },
+    {
+      "id": "s2",
+      "reference": "Lecturer: How do universities support mental health?",
+      "chunks": [
+        "free",
+        "offer",
+        "Many",
+        "services",
+        "campuses",
+        "counseling",
+        "to",
+        "students"
+      ],
+      "correctOrder": [
+        2,
+        4,
+        1,
+        0,
+        5,
+        3,
+        6,
+        7
+      ],
+      "fullSentence": "Many campuses offer free counseling services to students"
+    },
+    {
+      "id": "s3",
+      "reference": "Student: Studying in groups is not very effective.",
+      "chunks": [
+        "improves",
+        "Collaborative",
+        "and",
+        "understanding",
+        "retention",
+        "learning",
+        "of",
+        "complex",
+        "material"
+      ],
+      "correctOrder": [
+        1,
+        5,
+        0,
+        3,
+        2,
+        4,
+        6,
+        7,
+        8
+      ],
+      "fullSentence": "Collaborative learning improves understanding and retention of complex material"
+    },
+    {
+      "id": "s4",
+      "reference": "Professor: What effect does sleep have on memory?",
+      "chunks": [
+        "sleep",
+        "memory",
+        "consolidation",
+        "adequate",
+        "is",
+        "essential",
+        "for"
+      ],
+      "correctOrder": [
+        3,
+        0,
+        4,
+        5,
+        6,
+        1,
+        2
+      ],
+      "fullSentence": "Adequate sleep is essential for memory consolidation"
+    },
+    {
+      "id": "s5",
+      "reference": "Classmate: Is online learning worse than in-person classes?",
+      "chunks": [
+        "flexibility",
+        "Online",
+        "learning",
+        "offers",
+        "that",
+        "appeals",
+        "to",
+        "many",
+        "students"
+      ],
+      "correctOrder": [
+        1,
+        2,
+        3,
+        0,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "fullSentence": "Online learning offers flexibility that appeals to many students"
+    },
+    {
+      "id": "s6",
+      "reference": "Lecturer: Why is biodiversity important?",
+      "chunks": [
+        "ecosystems",
+        "Biodiversity",
+        "to",
+        "resilient",
+        "makes",
+        "environmental",
+        "more",
+        "changes"
+      ],
+      "correctOrder": [
+        1,
+        4,
+        0,
+        6,
+        3,
+        2,
+        5,
+        7
+      ],
+      "fullSentence": "Biodiversity makes ecosystems more resilient to environmental changes"
+    },
+    {
+      "id": "s7",
+      "reference": "Professor: What motivates students to volunteer?",
+      "chunks": [
+        "community",
+        "Many",
+        "a",
+        "desire",
+        "students",
+        "to",
+        "have",
+        "serve",
+        "their"
+      ],
+      "correctOrder": [
+        1,
+        4,
+        6,
+        2,
+        3,
+        5,
+        7,
+        8,
+        0
+      ],
+      "fullSentence": "Many students have a desire to serve their community"
+    },
+    {
+      "id": "s8",
+      "reference": "Student: Public transport is too slow for daily use.",
+      "chunks": [
+        "reduces",
+        "transportation",
+        "Public",
+        "congestion",
+        "and",
+        "pollution",
+        "in",
+        "urban",
+        "areas"
+      ],
+      "correctOrder": [
+        2,
+        1,
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "fullSentence": "Public transportation reduces congestion and pollution in urban areas"
+    },
+    {
+      "id": "s9",
+      "reference": "Classmate: Does social media help students network?",
+      "chunks": [
+        "academic",
+        "platforms",
+        "connect",
+        "Social",
+        "students",
+        "media",
+        "with",
+        "opportunities"
+      ],
+      "correctOrder": [
+        3,
+        5,
+        2,
+        4,
+        6,
+        0,
+        7
+      ],
+      "fullSentence": "Social media platforms connect students with academic opportunities"
+    },
+    {
+      "id": "s10",
+      "reference": "Professor: Why should students learn data literacy?",
+      "chunks": [
+        "an",
+        "skills",
+        "informed",
+        "Data",
+        "empower",
+        "make",
+        "to",
+        "students",
+        "decisions"
+      ],
+      "correctOrder": [
+        3,
+        1,
+        4,
+        7,
+        6,
+        2,
+        5,
+        0,
+        8
+      ],
+      "fullSentence": "Data skills empower students to make an informed decisions"
+    }
+  ]
+}

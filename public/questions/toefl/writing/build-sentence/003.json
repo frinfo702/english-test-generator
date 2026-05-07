@@ -1,0 +1,254 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Professor: What is one advantage of interdisciplinary study?",
+      "chunks": [
+        "perspectives",
+        "solutions",
+        "It",
+        "complex",
+        "brings",
+        "to",
+        "together",
+        "diverse",
+        "problems"
+      ],
+      "correctOrder": [
+        2,
+        4,
+        6,
+        7,
+        0,
+        5,
+        3,
+        8,
+        1
+      ],
+      "fullSentence": "It brings together diverse perspectives to complex problems"
+    },
+    {
+      "id": "s2",
+      "reference": "Lecturer: How does exercise affect academic performance?",
+      "chunks": [
+        "regular",
+        "exercise",
+        "blood",
+        "flow",
+        "to",
+        "the",
+        "improves",
+        "brain"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        6,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "fullSentence": "Regular exercise improves blood flow to the brain"
+    },
+    {
+      "id": "s3",
+      "reference": "Student: Small class sizes do not matter much.",
+      "chunks": [
+        "classes",
+        "personalized",
+        "allow",
+        "Smaller",
+        "feedback",
+        "for",
+        "instructors",
+        "more"
+      ],
+      "correctOrder": [
+        3,
+        0,
+        2,
+        6,
+        7,
+        1,
+        5,
+        4
+      ],
+      "fullSentence": "Smaller classes allow instructors more personalized feedback"
+    },
+    {
+      "id": "s4",
+      "reference": "Professor: Why are internships valuable?",
+      "chunks": [
+        "practical",
+        "Internships",
+        "apply",
+        "let",
+        "knowledge",
+        "students",
+        "real-world",
+        "settings",
+        "in"
+      ],
+      "correctOrder": [
+        1,
+        3,
+        4,
+        5,
+        2,
+        0,
+        6,
+        8,
+        7
+      ],
+      "fullSentence": "Internships let students apply practical knowledge in real-world settings"
+    },
+    {
+      "id": "s5",
+      "reference": "Classmate: Reading physical books is outdated.",
+      "chunks": [
+        "comprehension",
+        "books",
+        "often",
+        "Physical",
+        "lead",
+        "to",
+        "better",
+        "reading"
+      ],
+      "correctOrder": [
+        3,
+        1,
+        2,
+        4,
+        5,
+        6,
+        0,
+        7
+      ],
+      "fullSentence": "Physical books often lead to better reading comprehension"
+    },
+    {
+      "id": "s6",
+      "reference": "Lecturer: What role does diet play in cognitive function?",
+      "chunks": [
+        "diet",
+        "balanced",
+        "supports",
+        "concentration",
+        "and",
+        "memory"
+      ],
+      "correctOrder": [
+        1,
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "fullSentence": "A balanced diet supports concentration and memory"
+    },
+    {
+      "id": "s7",
+      "reference": "Professor: How can campuses become more sustainable?",
+      "chunks": [
+        "waste",
+        "Campuses",
+        "by",
+        "become",
+        "sustainable",
+        "reducing",
+        "single-use",
+        "plastics",
+        "more"
+      ],
+      "correctOrder": [
+        1,
+        3,
+        8,
+        4,
+        2,
+        5,
+        0,
+        6,
+        7
+      ],
+      "fullSentence": "Campuses become more sustainable by reducing single-use plastics waste"
+    },
+    {
+      "id": "s8",
+      "reference": "Student: Music is just entertainment.",
+      "chunks": [
+        "music",
+        "language",
+        "Learning",
+        "to",
+        "play",
+        "enhances",
+        "abilities"
+      ],
+      "correctOrder": [
+        2,
+        4,
+        0,
+        3,
+        5,
+        1,
+        6
+      ],
+      "fullSentence": "Learning to play music enhances language abilities"
+    },
+    {
+      "id": "s9",
+      "reference": "Classmate: Are libraries still relevant today?",
+      "chunks": [
+        "libraries",
+        "resources",
+        "quiet",
+        "offer",
+        "academic",
+        "spaces",
+        "and",
+        "reliable"
+      ],
+      "correctOrder": [
+        0,
+        3,
+        5,
+        6,
+        2,
+        4,
+        7,
+        1
+      ],
+      "fullSentence": "Libraries offer quiet spaces and reliable academic resources"
+    },
+    {
+      "id": "s10",
+      "reference": "Professor: What is a key feature of critical thinking?",
+      "chunks": [
+        "questioning",
+        "evidence",
+        "It",
+        "before",
+        "involves",
+        "accepting",
+        "assumptions",
+        "conclusions"
+      ],
+      "correctOrder": [
+        2,
+        4,
+        0,
+        6,
+        3,
+        5,
+        1,
+        7
+      ],
+      "fullSentence": "It involves questioning assumptions before accepting conclusions"
+    }
+  ]
+}

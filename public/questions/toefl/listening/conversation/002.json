@@ -1,0 +1,121 @@
+{
+  "title": "Library Research Access",
+  "transcript": "Student: Hi, I'm trying to access the online journal archives for my research paper, but it says my account doesn't have permission. Librarian: Let me check. Are you logging in through the university portal? Student: Yes, but when I click on JSTOR and ScienceDirect, it says access denied. Librarian: Ah, I see the issue. Your library account is set to undergraduate basic access. For senior thesis research, you need extended database access. Student: Oh, I didn't know that. How do I upgrade it? Librarian: You need to fill out a Database Access Request form and have your faculty advisor sign it. Student: Professor Chen is my advisor. Can I email the form to her? Librarian: Yes, but she needs to send it back to us directly from her university email for verification. Once we receive it, the upgrade takes about 24 hours. Student: That's manageable. Is there anything else I should know about the extended access? Librarian: Yes, with extended access you also get interlibrary loan privileges and remote VPN access to specialty databases. Student: Great, that will be really helpful for my research on urban planning trends. Librarian: Good luck with your paper. The form is available on the library website under Student Services.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student talk to the librarian?",
+      "options": [
+        "To resolve a database access problem for research",
+        "To check out books for a literature class",
+        "To complain about slow internet in the library",
+        "To ask about library hours during finals week"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The student cannot access online journal archives and visits the librarian to resolve the permission issue."
+    },
+    {
+      "id": "q2",
+      "stem": "What is causing the student's access problem?",
+      "options": [
+        "The account only has undergraduate basic access",
+        "The university portal is currently down",
+        "The student forgot the login password",
+        "The databases are restricted to graduate students"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The librarian states the student's library account is set to undergraduate basic access, which lacks the needed database permissions."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the student need to do to upgrade access?",
+      "options": [
+        "Submit a signed form from a faculty advisor",
+        "Pay a fee for premium database access",
+        "Attend a library orientation workshop",
+        "Enroll in an advanced research course"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The librarian explains that the student must fill out a Database Access Request form and have the faculty advisor sign it."
+    },
+    {
+      "id": "q4",
+      "stem": "What additional benefit comes with extended access?",
+      "options": [
+        "Interlibrary loan privileges and remote VPN access",
+        "Free printing and scanning services",
+        "Priority seating in the study rooms",
+        "Access to the library after midnight"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The librarian mentions that extended access includes interlibrary loan privileges and remote VPN access to specialty databases."
+    },
+    {
+      "id": "q5",
+      "stem": "What can be inferred about the student's research?",
+      "options": [
+        "It is likely a senior thesis on urban planning",
+        "It is a group project about library services",
+        "It focuses on database security systems",
+        "It is a first-year introductory assignment"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The librarian mentions senior thesis research, and the student later refers to researching urban planning trends, implying a substantial academic project."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi, I'm trying to access the online journal archives for my research paper, but it says my account doesn't have permission."
+    },
+    {
+      "role": "Librarian",
+      "text": "Let me check. Are you logging in through the university portal?"
+    },
+    {
+      "role": "Student",
+      "text": "Yes, but when I click on JSTOR and ScienceDirect, it says access denied."
+    },
+    {
+      "role": "Librarian",
+      "text": "Ah, I see the issue. Your library account is set to undergraduate basic access. For senior thesis research, you need extended database access."
+    },
+    {
+      "role": "Student",
+      "text": "Oh, I didn't know that. How do I upgrade it?"
+    },
+    {
+      "role": "Librarian",
+      "text": "You need to fill out a Database Access Request form and have your faculty advisor sign it."
+    },
+    {
+      "role": "Student",
+      "text": "Professor Chen is my advisor. Can I email the form to her?"
+    },
+    {
+      "role": "Librarian",
+      "text": "Yes, but she needs to send it back to us directly from her university email for verification. Once we receive it, the upgrade takes about 24 hours."
+    },
+    {
+      "role": "Student",
+      "text": "That's manageable. Is there anything else I should know about the extended access?"
+    },
+    {
+      "role": "Librarian",
+      "text": "Yes, with extended access you also get interlibrary loan privileges and remote VPN access to specialty databases."
+    },
+    {
+      "role": "Student",
+      "text": "Great, that will be really helpful for my research on urban planning trends."
+    },
+    {
+      "role": "Librarian",
+      "text": "Good luck with your paper. The form is available on the library website under Student Services."
+    }
+  ]
+}

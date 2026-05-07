@@ -1,0 +1,65 @@
+{
+  "paragraph": "Ancient civilizations developed rem______ architectural and eng________ achievements that continue to ast_____ modern researchers. The Egyp_____ built mon______ pyramids using soph__________ techniques for qu______ and tra________ massive stone blocks. In Mes________, engineers con_______ intricate irrigation systems.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "rem",
+      "answer": "remarkable",
+      "placeholder": "rem______"
+    },
+    {
+      "index": 1,
+      "hint": "eng",
+      "answer": "engineering",
+      "placeholder": "eng________"
+    },
+    {
+      "index": 2,
+      "hint": "ast",
+      "answer": "astonish",
+      "placeholder": "ast_____"
+    },
+    {
+      "index": 3,
+      "hint": "Egy",
+      "answer": "Egyptians",
+      "placeholder": "Egyp_____"
+    },
+    {
+      "index": 4,
+      "hint": "mon",
+      "answer": "monumental",
+      "placeholder": "mon______"
+    },
+    {
+      "index": 5,
+      "hint": "soph",
+      "answer": "sophisticated",
+      "placeholder": "soph__________"
+    },
+    {
+      "index": 6,
+      "hint": "qu",
+      "answer": "quarrying",
+      "placeholder": "qu______"
+    },
+    {
+      "index": 7,
+      "hint": "tra",
+      "answer": "transporting",
+      "placeholder": "tra________"
+    },
+    {
+      "index": 8,
+      "hint": "Mes",
+      "answer": "Mesopotamia",
+      "placeholder": "Mes________"
+    },
+    {
+      "index": 9,
+      "hint": "con",
+      "answer": "constructed",
+      "placeholder": "con_______"
+    }
+  ]
+}

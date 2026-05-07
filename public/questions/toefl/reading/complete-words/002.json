@@ -1,0 +1,65 @@
+{
+  "paragraph": "Renewable energy sources are bec_____ increasingly important in the global eff____ to com____ climate change. Solar power har_____ electricity through pho_________ cells that con_____ sunlight directly into usable power. Wind tur_____ harness the kin_____ energy of moving air to gen______ electricity without pro______ harmful emissions.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "bec",
+      "answer": "becoming",
+      "placeholder": "bec_____"
+    },
+    {
+      "index": 1,
+      "hint": "eff",
+      "answer": "effort",
+      "placeholder": "eff____"
+    },
+    {
+      "index": 2,
+      "hint": "com",
+      "answer": "combat",
+      "placeholder": "com____"
+    },
+    {
+      "index": 3,
+      "hint": "har",
+      "answer": "harvests",
+      "placeholder": "har_____"
+    },
+    {
+      "index": 4,
+      "hint": "pho",
+      "answer": "photovoltaic",
+      "placeholder": "pho_________"
+    },
+    {
+      "index": 5,
+      "hint": "con",
+      "answer": "convert",
+      "placeholder": "con_____"
+    },
+    {
+      "index": 6,
+      "hint": "tur",
+      "answer": "turbines",
+      "placeholder": "tur_____"
+    },
+    {
+      "index": 7,
+      "hint": "kin",
+      "answer": "kinetic",
+      "placeholder": "kin_____"
+    },
+    {
+      "index": 8,
+      "hint": "gen",
+      "answer": "generate",
+      "placeholder": "gen______"
+    },
+    {
+      "index": 9,
+      "hint": "pro",
+      "answer": "producing",
+      "placeholder": "pro______"
+    }
+  ]
+}

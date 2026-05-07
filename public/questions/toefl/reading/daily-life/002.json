@@ -1,0 +1,58 @@
+{
+  "module": "module1",
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "content": "From: Housing Services\nTo: All Residents of Building C\nSubject: Water Shutoff Notice\n\nDear Residents,\n\nDue to emergency pipe repairs, water service in Building C will be temporarily shut off on Thursday, October 12, from 8:00 AM to 2:00 PM.\n\nPlease plan accordingly by filling containers with water for drinking and personal use before 8:00 AM.\n\nWe apologize for the inconvenience. For questions, contact the Housing Office at ext. 4520.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why will water service be shut off in Building C?",
+          "options": [
+            "A. To install new water meters.",
+            "B. To perform emergency pipe repairs.",
+            "C. To conserve water during a drought.",
+            "D. To test water quality."
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The email states the shutoff is due to 'emergency pipe repairs.'"
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about residents during the shutoff?",
+          "options": [
+            "A. They must move to another building.",
+            "B. They will have no access to water at all.",
+            "C. They should prepare water in advance for personal needs.",
+            "D. They need to pay extra for water after the repairs."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The email advises residents to 'fill containers with water for drinking and personal use before 8:00 AM.'"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "notice",
+      "content": "Professor Yamamoto Office Hours Update\n\nEffective immediately, Professor Yamamoto's office hours have changed:\n\n- Mondays: 10:00 AM – 12:00 PM\n- Wednesdays: 2:00 PM – 4:00 PM\n- Fridays: CANCELLED until further notice\n\nStudents needing assistance on Fridays should email Prof. Yamamoto to schedule an appointment.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "When can students visit Professor Yamamoto without an appointment?",
+          "options": [
+            "A. Every weekday afternoon",
+            "B. Mondays and Wednesdays only",
+            "C. Fridays only",
+            "D. Wednesdays and Fridays only"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "Office hours without appointment are listed for Mondays and Wednesdays; Fridays are cancelled."
+        }
+      ]
+    }
+  ]
+}

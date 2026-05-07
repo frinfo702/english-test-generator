@@ -1,0 +1,19 @@
+{
+  "professorName": "Dr. Okafor",
+  "professorQuestion": "Governments often face decisions about how to allocate limited funding. Should governments prioritize investing in space exploration or in improving public healthcare systems? Explain your position.",
+  "student1": {
+    "name": "Liam",
+    "response": "I believe governments should prioritize public healthcare. Access to affordable medical care is a basic human right that directly impacts quality of life. Preventive healthcare and modern treatments reduce mortality rates and improve productivity. Space exploration is fascinating, but it does not address urgent needs on Earth."
+  },
+  "student2": {
+    "name": "Mei",
+    "response": "I think space exploration deserves more funding. Research into space technology drives innovation that benefits everyday life, from satellite communication to medical imaging. Furthermore, exploring other planets could become essential if Earth's resources are depleted. We should not limit our future because of short-term priorities."
+  },
+  "modelAnswer": "Liam and Mei both make valid points about healthcare and space exploration. However, I believe the debate creates a false dichotomy. Rather than choosing one over the other, governments should view these investments as complementary. A small percentage of a national budget allocated to space can yield technological breakthroughs that improve healthcare delivery, such as remote diagnostics and advanced materials for medical devices. The key is balanced allocation that addresses immediate public health needs while preserving long-term innovation. Both sectors can thrive without completely sacrificing the other.",
+  "evaluationPoints": [
+    "Acknowledges both perspectives before presenting your own view",
+    "Adds a new angle not fully addressed by either student",
+    "Provides a clear logical argument supported by reasoning",
+    "Maintains academic tone and meets the 100-word minimum"
+  ]
+}

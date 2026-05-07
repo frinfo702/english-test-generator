@@ -1,0 +1,29 @@
+{
+  "scenario": {
+    "title": "Reporting a Maintenance Issue in the Dormitory",
+    "description": "You live in the university dormitory and have noticed that the heating system in your room has been malfunctioning for the past week. The room temperature drops significantly at night, making it difficult to study or sleep. Write an email to the Housing Office.",
+    "recipient": "Housing Office",
+    "purpose": "Report a heating issue and request maintenance",
+    "keyPoints": [
+      "Describe the specific problem and how long it has lasted",
+      "Explain the impact on your daily life",
+      "Request a specific repair or room check",
+      "Provide your room number and contact information"
+    ]
+  },
+  "modelAnswer": "Dear Housing Office,\n\nI am writing to report a maintenance issue in my dormitory room and to request assistance as soon as possible.\n\nFor the past week, the heating system in Room 204 of Johnson Hall has been malfunctioning. The temperature drops significantly at night, often falling below comfortable levels. This has made it very difficult for me to concentrate on my studies and to get adequate sleep.\n\nI would greatly appreciate it if a maintenance staff member could inspect and repair the heating unit at your earliest convenience. I am usually available in my room after 4:00 p.m. on weekdays.\n\nThank you for your prompt attention to this matter.\n\nSincerely,\n[Your Name]\nRoom 204, Johnson Hall",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Clearly describes the problem and includes all key points."
+    },
+    {
+      "criterion": "Organization",
+      "description": "Proper email format with greeting, body, and polite closing."
+    },
+    {
+      "criterion": "Language Use",
+      "description": "Formal, polite register appropriate for writing to university staff."
+    }
+  ]
+}

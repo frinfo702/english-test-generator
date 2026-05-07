@@ -1,0 +1,71 @@
+{
+  "title": "Memory and Cognition",
+  "passage": "Human memory is not a single unified system but rather a collection of interrelated processes that allow us to encode, store, and retrieve information. Psychologists typically divide memory into three stages: sensory memory, short-term memory, and long-term memory. Each stage serves a distinct function and operates according to different principles.\n\nSensory memory holds incoming sensory information for a very brief period, often less than a second for visual information and a few seconds for auditory information. This stage acts as a buffer, allowing the brain to decide which information deserves further attention. Without sensory memory, the continuous flow of perceptual experience would be overwhelming and impossible to process.\n\nShort-term memory, sometimes called working memory, has a limited capacity and duration. Most adults can hold approximately seven items, plus or minus two, for a period of about twenty to thirty seconds without rehearsal. Research by Alan Baddeley suggests that working memory consists of multiple components, including a phonological loop for verbal information and a visuospatial sketchpad for visual and spatial data.\n\nLong-term memory has a seemingly unlimited capacity and can store information for years or even a lifetime. It is generally divided into explicit (declarative) memory, which involves conscious recall of facts and events, and implicit (non-declarative) memory, which includes skills and conditioned responses. The process of transferring information from short-term to long-term memory is known as consolidation, which is enhanced by sleep and emotional arousal.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'buffer' in paragraph 2 is closest in meaning to:",
+      "options": [
+        "A. barrier",
+        "B. temporary holding area",
+        "C. permanent storage",
+        "D. signal amplifier"
+      ],
+      "correctIndex": 1,
+      "explanation": "A buffer is a temporary holding area that regulates the flow of information, matching the description of sensory memory."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, what is the approximate capacity of short-term memory?",
+      "options": [
+        "A. Three items",
+        "B. Seven items, plus or minus two",
+        "C. Fifteen items",
+        "D. An unlimited number of items"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage explicitly states that most adults can hold 'approximately seven items, plus or minus two.'"
+    },
+    {
+      "id": "q3",
+      "type": "detail",
+      "stem": "Which component of working memory is responsible for verbal information?",
+      "options": [
+        "A. Visuospatial sketchpad",
+        "B. Episodic buffer",
+        "C. Phonological loop",
+        "D. Sensory register"
+      ],
+      "correctIndex": 2,
+      "explanation": "Baddeley's model includes a 'phonological loop for verbal information' and a 'visuospatial sketchpad' for visual and spatial data."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about the role of sleep in memory?",
+      "options": [
+        "A. Sleep is necessary for sensory memory to function.",
+        "B. Sleep helps transfer information into long-term memory.",
+        "C. Sleep has no effect on memory consolidation.",
+        "D. Sleep only improves implicit memory."
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that consolidation is 'enhanced by sleep,' implying sleep aids the transfer to long-term memory."
+    },
+    {
+      "id": "q5",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of this passage?",
+      "options": [
+        "A. To argue that human memory is fundamentally unreliable",
+        "B. To explain the different stages and types of human memory",
+        "C. To compare human memory with computer storage systems",
+        "D. To describe the history of memory research"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage describes sensory memory, short-term memory, long-term memory, and their subdivisions, providing an overview of how memory works."
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "All seniors are required to attend the capstone presentation next Friday.",
+      "wordCount": 11
+    },
+    {
+      "id": "s2",
+      "text": "The writing center is open every weekday from nine to five.",
+      "wordCount": 11
+    },
+    {
+      "id": "s3",
+      "text": "You can borrow laptops from the tech desk for up to three days.",
+      "wordCount": 12
+    },
+    {
+      "id": "s4",
+      "text": "Graduate seminars are held in the north wing of the humanities building.",
+      "wordCount": 12
+    },
+    {
+      "id": "s5",
+      "text": "Please silence your phone before entering the lecture auditorium.",
+      "wordCount": 9
+    },
+    {
+      "id": "s6",
+      "text": "The research symposium will feature speakers from six different countries.",
+      "wordCount": 10
+    },
+    {
+      "id": "s7",
+      "text": "Final exam schedules are posted outside the registrar's office now.",
+      "wordCount": 10
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "module": "module1",
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "announcement",
+      "content": "Campus Parking Registration – Spring Semester\n\nAll students who plan to park on campus must register their vehicles by January 15.\n\nRegistration is available online through the Student Portal. Fee: $120 per semester.\n\nUnregistered vehicles parked on campus after January 20 will be ticketed and may be towed at the owner's expense.\n\nQuestions? Contact Campus Security at parking@university.edu.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What will happen to unregistered vehicles after January 20?",
+          "options": [
+            "A. They will receive a warning only.",
+            "B. They will be ticketed and may be towed.",
+            "C. They will be automatically registered.",
+            "D. They will be banned from future registration."
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The announcement states unregistered vehicles 'will be ticketed and may be towed at the owner's expense.'"
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about parking registration?",
+          "options": [
+            "A. It is free for all students.",
+            "B. It must be completed in person.",
+            "C. It costs $120 per semester.",
+            "D. It is only required for faculty."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The fee is explicitly listed as '$120 per semester.'"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "SNS post",
+      "content": "Campus Bookstore – End of Semester Buyback!\n\nBring your used textbooks to the bookstore this week and get up to 50% cash back!\n\nAccepted: Books in good condition with no missing pages or excessive writing.\nNot accepted: Custom editions, workbooks with written answers, or access code-only packages.\n\nLocation: Student Center, 1st Floor\nHours: 9 AM – 6 PM, Monday–Friday",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "Which item would likely be accepted for buyback?",
+          "options": [
+            "A. A workbook with all answers filled in",
+            "B. A custom edition textbook",
+            "C. A standard textbook with minimal highlighting",
+            "D. An access code card without a book"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "Standard textbooks in good condition are accepted; custom editions, filled workbooks, and access code-only packages are not."
+        }
+      ]
+    }
+  ]
+}

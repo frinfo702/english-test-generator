@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "The chemistry lab report is due on Thursday afternoon this week.",
+      "wordCount": 10
+    },
+    {
+      "id": "s2",
+      "text": "Office hours have been moved to room three twelve on Tuesdays.",
+      "wordCount": 11
+    },
+    {
+      "id": "s3",
+      "text": "Please submit your thesis proposal through the online portal by midnight.",
+      "wordCount": 11
+    },
+    {
+      "id": "s4",
+      "text": "The guest lecturer will speak about climate policy in the main hall.",
+      "wordCount": 12
+    },
+    {
+      "id": "s5",
+      "text": "Study abroad applications must include two letters of recommendation.",
+      "wordCount": 10
+    },
+    {
+      "id": "s6",
+      "text": "Peer review workshops will help you revise your draft more effectively.",
+      "wordCount": 11
+    },
+    {
+      "id": "s7",
+      "text": "The dean announced a new scholarship for international graduate students.",
+      "wordCount": 10
+    }
+  ]
+}

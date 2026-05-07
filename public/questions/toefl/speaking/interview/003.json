@@ -1,0 +1,52 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "type": "personal",
+      "question": "Talk about a skill you taught yourself recently. What motivated you to learn it, and how did you go about it?",
+      "modelAnswer": "Recently I taught myself basic data visualization using Python. I was motivated by a research project that required presenting survey results clearly. I started with free online tutorials and then practiced by re-creating charts from published papers. Whenever I got stuck, I consulted documentation and community forums. Within a month I could produce professional-looking graphs. This experience showed me that structured self-study and consistent practice can yield real competence.",
+      "evaluationPoints": [
+        "Describes a specific self-taught skill",
+        "Explains the motivation clearly",
+        "Outlines the learning process",
+        "Reflects on the outcome"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "opinion",
+      "question": "Do you think governments should invest more in public transportation or in road infrastructure? Why?",
+      "modelAnswer": "I strongly believe governments should prioritize public transportation over road infrastructure. Expanding buses, trains, and subways reduces traffic congestion and lowers carbon emissions. It also makes commuting affordable for people who cannot afford cars. While roads are necessary, building more highways often induces additional demand rather than solving congestion. Investing in transit creates a more sustainable and equitable urban environment for everyone.",
+      "evaluationPoints": [
+        "States a clear opinion upfront",
+        "Provides multiple supporting reasons",
+        "Addresses a counterpoint briefly",
+        "Ends with a broad impactful statement"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "hypothetical",
+      "question": "If you could have dinner with any living scientist, who would you choose and what would you want to discuss?",
+      "modelAnswer": "If I could have dinner with any living scientist, I would choose Dr. Jennifer Doudna, who co-developed CRISPR technology. I would want to discuss the ethical boundaries of gene editing in humans. While the technology can eliminate hereditary diseases, it also raises concerns about designer babies and inequality. I would ask how she balances scientific ambition with social responsibility. Her insights would help me understand the governance needed for such powerful innovations.",
+      "evaluationPoints": [
+        "Names a specific person",
+        "Identifies a focused topic for discussion",
+        "Explores both sides of the issue",
+        "Connects the conversation to broader implications"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "comparison",
+      "question": "Some students prefer taking detailed notes during lectures, while others prefer listening carefully and taking minimal notes. Which approach do you think is more effective for learning?",
+      "modelAnswer": "I think listening carefully with minimal notes is more effective for genuine learning, though detailed note-taking has its place. When students focus too much on transcribing, they often miss the speaker's emphasis and logical structure. Active listening encourages processing and synthesizing information in real time. Minimal notes can capture key frameworks or questions to revisit later. Of course, detailed notes are useful for exam review. The best strategy is to listen actively during class and then summarize from memory afterward.",
+      "evaluationPoints": [
+        "Takes a clear stance",
+        "Explains the drawbacks of the alternative",
+        "Supports the preferred method with reasoning",
+        "Offers a balanced practical suggestion"
+      ]
+    }
+  ]
+}
