@@ -15,8 +15,101 @@ interface UseTtsReturn {
   play: (text: string, voiceId?: string) => Promise<void>;
   playSegments: (segments: AudioSegment[]) => Promise<void>;
   pause: () => void;
+  resume: () => void;
   stop: () => void;
+  seek: (time: number) => void;
 }
+
+// ---------- AudioBuffer helpers ----------
+
+let sharedAudioCtx: AudioContext | null = null;
+
+function getAudioContext(): AudioContext {
+  if (!sharedAudioCtx) {
+    sharedAudioCtx = new AudioContext();
+  }
+  return sharedAudioCtx;
+}
+
+async function fetchAndDecodeAudio(text: string, voiceId: string): Promise<AudioBuffer> {
+  const response = await fetch("/api/tts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, voice_id: voiceId }),
+  });
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || `TTS request failed (${response.status})`);
+  }
+  const arrayBuffer = await response.arrayBuffer();
+  const ctx = getAudioContext();
+  if (ctx.state === "suspended") {
+    await ctx.resume();
+  }
+  return ctx.decodeAudioData(arrayBuffer.slice(0));
+}
+
+function concatenateAudioBuffers(buffers: AudioBuffer[]): AudioBuffer {
+  const totalLength = buffers.reduce((sum, buf) => sum + buf.length, 0);
+  const sampleRate = buffers[0].sampleRate;
+  const numberOfChannels = buffers[0].numberOfChannels;
+  const ctx = getAudioContext();
+  const result = ctx.createBuffer(numberOfChannels, totalLength, sampleRate);
+
+  for (let channel = 0; channel < numberOfChannels; channel++) {
+    const resultData = result.getChannelData(channel);
+    let offset = 0;
+    for (const buf of buffers) {
+      resultData.set(buf.getChannelData(channel), offset);
+      offset += buf.length;
+    }
+  }
+  return result;
+}
+
+function audioBufferToWavBlob(buffer: AudioBuffer): Blob {
+  const numChannels = buffer.numberOfChannels;
+  const sampleRate = buffer.sampleRate;
+  const bytesPerSample = 2;
+  const blockAlign = numChannels * bytesPerSample;
+  const dataLength = buffer.length * blockAlign;
+  const headerLength = 44;
+  const arrayBuffer = new ArrayBuffer(headerLength + dataLength);
+  const view = new DataView(arrayBuffer);
+
+  const writeString = (offset: number, str: string) => {
+    for (let i = 0; i < str.length; i++) {
+      view.setUint8(offset + i, str.charCodeAt(i));
+    }
+  };
+
+  writeString(0, "RIFF");
+  view.setUint32(4, 36 + dataLength, true);
+  writeString(8, "WAVE");
+  writeString(12, "fmt ");
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true); // PCM
+  view.setUint16(22, numChannels, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, sampleRate * blockAlign, true);
+  view.setUint16(32, blockAlign, true);
+  view.setUint16(34, 16, true); // 16-bit
+  writeString(36, "data");
+  view.setUint32(40, dataLength, true);
+
+  const offset = 44;
+  for (let i = 0; i < buffer.length; i++) {
+    for (let ch = 0; ch < numChannels; ch++) {
+      const sample = Math.max(-1, Math.min(1, buffer.getChannelData(ch)[i]));
+      const intSample = sample < 0 ? sample * 0x8000 : sample * 0x7fff;
+      view.setInt16(offset + (i * numChannels + ch) * bytesPerSample, intSample, true);
+    }
+  }
+
+  return new Blob([arrayBuffer], { type: "audio/wav" });
+}
+
+// ---------- Hook ----------
 
 export function useTts(): UseTtsReturn {
   const [playing, setPlaying] = useState(false);
@@ -29,31 +122,24 @@ export function useTts(): UseTtsReturn {
   const urlRef = useRef<string | null>(null);
   const rafRef = useRef<number>(0);
 
-  // For segmented playback
-  const segmentsRef = useRef<AudioSegment[]>([]);
-  const currentIndexRef = useRef(0);
-  const playedDurationRef = useRef(0);
-  const segmentDurationRef = useRef(0);
-  const playNextSegmentRef = useRef<() => Promise<void>>(async () => {});
-
   const cleanup = useCallback(() => {
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = 0;
     }
     if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = "";
+      const audio = audioRef.current;
+      audio.pause();
+      // Detach event handlers so stale errors don't fire after cleanup
+      audio.onended = null;
+      audio.onerror = null;
+      audio.src = "";
       audioRef.current = null;
     }
     if (urlRef.current) {
       URL.revokeObjectURL(urlRef.current);
       urlRef.current = null;
     }
-    segmentsRef.current = [];
-    currentIndexRef.current = 0;
-    playedDurationRef.current = 0;
-    segmentDurationRef.current = 0;
     setPlaying(false);
     setLoading(false);
     setCurrentTime(0);
@@ -66,79 +152,11 @@ export function useTts(): UseTtsReturn {
 
   const tick = useCallback(() => {
     if (audioRef.current) {
-      const segTime = audioRef.current.currentTime || 0;
-      const segDur = audioRef.current.duration || 0;
-      if (segDur && Number.isFinite(segDur)) {
-        segmentDurationRef.current = segDur;
-      }
-      setCurrentTime(playedDurationRef.current + segTime);
-      setDuration(playedDurationRef.current + segmentDurationRef.current);
+      setCurrentTime(audioRef.current.currentTime);
+      setDuration(audioRef.current.duration || 0);
     }
     rafRef.current = requestAnimationFrame(tick);
   }, []);
-
-  const playNextSegment = useCallback(async () => {
-    const segments = segmentsRef.current;
-    const idx = currentIndexRef.current;
-    if (idx >= segments.length) {
-      setPlaying(false);
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = 0;
-      }
-      return;
-    }
-
-    const segment = segments[idx];
-    const voiceId = getVoiceForRole(segment.role);
-    setLoading(true);
-    try {
-      const response = await fetch("/api/tts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: segment.text, voice_id: voiceId }),
-      });
-      if (!response.ok) {
-        const data = await response.json().catch(() => ({}));
-        throw new Error(data.error || `TTS request failed (${response.status})`);
-      }
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      urlRef.current = url;
-      const audio = new Audio(url);
-      audioRef.current = audio;
-
-      audio.addEventListener("ended", () => {
-        const dur =
-          audio.duration && Number.isFinite(audio.duration)
-            ? audio.duration
-            : audio.currentTime || 0;
-        playedDurationRef.current += dur;
-        currentIndexRef.current = idx + 1;
-        URL.revokeObjectURL(url);
-        urlRef.current = null;
-        audioRef.current = null;
-        playNextSegmentRef.current();
-      });
-
-      audio.addEventListener("error", () => {
-        setPlaying(false);
-        setError("Audio playback error");
-        setLoading(false);
-      });
-
-      await audio.play();
-      setPlaying(true);
-      setLoading(false);
-      rafRef.current = requestAnimationFrame(tick);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
-      setLoading(false);
-      setPlaying(false);
-    }
-  }, [tick]);
-
-  playNextSegmentRef.current = playNextSegment;
 
   const play = useCallback(
     async (text: string, voiceId?: string) => {
@@ -160,18 +178,18 @@ export function useTts(): UseTtsReturn {
         urlRef.current = url;
         const audio = new Audio(url);
         audioRef.current = audio;
-        audio.addEventListener("ended", () => {
+        audio.onended = () => {
           setPlaying(false);
           if (rafRef.current) {
             cancelAnimationFrame(rafRef.current);
             rafRef.current = 0;
           }
-        });
-        audio.addEventListener("error", () => {
+        };
+        audio.onerror = () => {
           setPlaying(false);
           setError("Audio playback error");
           setLoading(false);
-        });
+        };
         await audio.play();
         setPlaying(true);
         setLoading(false);
@@ -188,13 +206,46 @@ export function useTts(): UseTtsReturn {
     async (segments: AudioSegment[]) => {
       cleanup();
       setError(null);
-      segmentsRef.current = segments;
-      currentIndexRef.current = 0;
-      playedDurationRef.current = 0;
-      segmentDurationRef.current = 0;
-      await playNextSegmentRef.current();
+      setLoading(true);
+      try {
+        const buffers = await Promise.all(
+          segments.map(async (segment) => {
+            const voiceId = getVoiceForRole(segment.role);
+            return fetchAndDecodeAudio(segment.text, voiceId);
+          }),
+        );
+
+        const combinedBuffer = concatenateAudioBuffers(buffers);
+        const wavBlob = audioBufferToWavBlob(combinedBuffer);
+        const url = URL.createObjectURL(wavBlob);
+        urlRef.current = url;
+
+        const audio = new Audio(url);
+        audioRef.current = audio;
+
+        audio.onended = () => {
+          setPlaying(false);
+          if (rafRef.current) {
+            cancelAnimationFrame(rafRef.current);
+            rafRef.current = 0;
+          }
+        };
+        audio.onerror = () => {
+          setPlaying(false);
+          setError("Audio playback error");
+          setLoading(false);
+        };
+
+        await audio.play();
+        setPlaying(true);
+        setLoading(false);
+        rafRef.current = requestAnimationFrame(tick);
+      } catch (e) {
+        setError(e instanceof Error ? e.message : String(e));
+        setLoading(false);
+      }
     },
-    [cleanup],
+    [cleanup, tick],
   );
 
   const pause = useCallback(() => {
@@ -208,9 +259,32 @@ export function useTts(): UseTtsReturn {
     }
   }, []);
 
+  const resume = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.play().then(() => {
+        setPlaying(true);
+        setError(null);
+        if (!rafRef.current) {
+          rafRef.current = requestAnimationFrame(tick);
+        }
+      }).catch(() => {
+        setError("Resume failed");
+      });
+    }
+  }, [tick]);
+
   const stop = useCallback(() => {
     cleanup();
   }, [cleanup]);
 
-  return { playing, loading, error, currentTime, duration, play, playSegments, pause, stop };
+  const seek = useCallback((time: number) => {
+    if (audioRef.current && Number.isFinite(time)) {
+      const audio = audioRef.current;
+      const maxTime = audio.duration || 0;
+      audio.currentTime = Math.max(0, Math.min(time, maxTime));
+      setCurrentTime(audio.currentTime);
+    }
+  }, []);
+
+  return { playing, loading, error, currentTime, duration, play, playSegments, pause, resume, stop, seek };
 }

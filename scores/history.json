@@ -45,5 +45,41 @@
     "pct": 90,
     "elapsedSeconds": 180,
     "questionFile": "001.json"
+  },
+  {
+    "taskId": "toefl/listening/lecture",
+    "date": "2026-05-06T12:35:02.459Z",
+    "correct": 3,
+    "total": 5,
+    "pct": 60,
+    "elapsedSeconds": 113,
+    "questionFile": "001.json"
+  },
+  {
+    "taskId": "toefl/listening/lecture",
+    "date": "2026-05-06T12:54:19.841Z",
+    "correct": 2,
+    "total": 5,
+    "pct": 40,
+    "elapsedSeconds": 13,
+    "questionFile": "001.json"
+  },
+  {
+    "taskId": "toefl/listening/lecture",
+    "date": "2026-05-06T13:45:48.733Z",
+    "correct": 3,
+    "total": 5,
+    "pct": 60,
+    "elapsedSeconds": 14,
+    "questionFile": "003.json"
+  },
+  {
+    "taskId": "toefl/listening/lecture",
+    "date": "2026-05-06T13:51:04.937Z",
+    "correct": 2,
+    "total": 5,
+    "pct": 40,
+    "elapsedSeconds": 15,
+    "questionFile": "002.json"
   }
 ]

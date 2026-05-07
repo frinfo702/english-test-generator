@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
@@ -55,11 +55,13 @@ function ListeningTaskPageBase({
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playSegments, pause, stop: stopTts } =
+  const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playSegments, pause, resume, stop: stopTts, seek } =
     useTts();
 
   const [selections, setSelections] = useState<Record<number, number>>({});
   const [graded, setGraded] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
@@ -80,6 +82,41 @@ function ListeningTaskPageBase({
     if (graded) return;
     setSelections((s) => ({ ...s, [qIndex]: optionIndex }));
   };
+
+  const getSeekTime = useCallback(
+    (clientX: number) => {
+      if (!progressBarRef.current || duration <= 0) return null;
+      const rect = progressBarRef.current.getBoundingClientRect();
+      const ratio = (clientX - rect.left) / rect.width;
+      return Math.max(0, Math.min(ratio * duration, duration));
+    },
+    [duration]
+  );
+
+  const handleBarMouseDown = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!graded || duration <= 0) return;
+      const time = getSeekTime(e.clientX);
+      if (time !== null) seek(time);
+      setIsDragging(true);
+    },
+    [graded, duration, getSeekTime, seek]
+  );
+
+  useEffect(() => {
+    if (!isDragging) return;
+    const onMove = (e: MouseEvent) => {
+      const time = getSeekTime(e.clientX);
+      if (time !== null) seek(time);
+    };
+    const onUp = () => setIsDragging(false);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, [isDragging, getSeekTime, seek]);
 
   const correctCount = data
     ? data.questions.filter((_, i) => selections[i] === data.questions[i].correctIndex).length
@@ -153,32 +190,54 @@ function ListeningTaskPageBase({
           <div className={styles.playerCard}>
             <h3>{data.title}</h3>
             <div className={styles.playerControls}>
-              {!playing && (
-                <Button
-                  onClick={() => playSegments(data.audioSegments)}
-                  disabled={ttsLoading}
-                  size="md"
-                >
-                  {ttsLoading ? "Loading..." : "▶ Play Audio"}
-                </Button>
-              )}
-              {playing && (
-                <Button onClick={pause} size="md" variant="secondary">
-                  ⏸ Pause
-                </Button>
-              )}
-              {(playing || currentTime > 0) && (
-                <Button onClick={stopTts} size="sm" variant="secondary">
-                  ⏹ Stop
-                </Button>
-              )}
+              <Button
+                onClick={() => seek(Math.max(0, currentTime - 10))}
+                disabled={duration <= 0}
+                size="sm"
+                variant="secondary"
+              >
+                ⏪ 10s
+              </Button>
+              <Button
+                onClick={() => {
+                  if (playing) {
+                    pause();
+                  } else if (currentTime > 0) {
+                    resume();
+                  } else {
+                    playSegments(data.audioSegments);
+                  }
+                }}
+                disabled={ttsLoading}
+                size="md"
+              >
+                {ttsLoading
+                  ? "Loading..."
+                  : playing
+                    ? "⏸ Pause"
+                    : currentTime > 0
+                      ? "▶ Resume"
+                      : "▶ Play Audio"}
+              </Button>
+              <Button
+                onClick={() => seek(Math.min(duration, currentTime + 10))}
+                disabled={duration <= 0}
+                size="sm"
+                variant="secondary"
+              >
+                ⏩ 10s
+              </Button>
             </div>
             {(playing || currentTime > 0) && (
               <div className={styles.playerControls}>
                 <span className={styles.timeText}>
                   {formatTime(currentTime)} / {formatTime(duration)}
                 </span>
-                <div className={styles.progressBar}>
+                <div
+                  ref={progressBarRef}
+                  className={`${styles.progressBar} ${graded ? styles.progressBarSeekable : ""}`}
+                  onMouseDown={handleBarMouseDown}
+                >
                   <div
                     className={styles.progressFill}
                     style={{
