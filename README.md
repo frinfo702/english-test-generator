@@ -75,19 +75,19 @@ Each file in `public/prompts/` defines the output JSON schema for that task.
 
 ### TOEFL iBT 2026 Format
 
-| Section  | Tasks                                                                      |
-| -------- | -------------------------------------------------------------------------- |
-| Reading  | Complete the Words / Read in Daily Life (adaptive) / Read an Academic Passage |
+| Section  | Tasks                                                                                 |
+| -------- | ------------------------------------------------------------------------------------- |
+| Reading  | Complete the Words / Read in Daily Life (adaptive) / Read an Academic Passage         |
 | Writing  | Build a Sentence / Write an Email (7 min) / Write for an Academic Discussion (10 min) |
-| Speaking | Listen and Repeat / Take an Interview (4 questions x 45 sec)             |
+| Speaking | Listen and Repeat / Take an Interview (4 questions x 45 sec)                          |
 
 ### TOEIC Reading
 
-| Part   | Content                                                     |
-| ------ | ----------------------------------------------------------- |
-| Part 5 | Incomplete Sentences (30 questions)                         |
-| Part 6 | Text Completion (4 passages x 4 questions)                  |
-| Part 7 | Reading Comprehension (Single / Double / Triple passage)    |
+| Part   | Content                                                  |
+| ------ | -------------------------------------------------------- |
+| Part 5 | Incomplete Sentences (30 questions)                      |
+| Part 6 | Text Completion (4 passages x 4 questions)               |
+| Part 7 | Reading Comprehension (Single / Double / Triple passage) |
 
 ## Sample Questions
 
