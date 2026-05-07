@@ -1,5 +1,8 @@
 # English Test Practice
 
+<img width="751" height="230" alt="image" src="https://github.com/user-attachments/assets/5f36faaa-2951-4500-9ad9-b57f84645319" />
+<img width="1891" height="916" alt="image" src="https://github.com/user-attachments/assets/9f89e5d9-9bc1-4e21-9fe6-ca4b230bdfff" />
+
 A practice app for the TOEFL iBT 2026 format and TOEIC Reading.
 **No network connection or API key is required.** The app loads question JSON files generated locally by an AI agent.
 
