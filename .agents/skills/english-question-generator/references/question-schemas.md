@@ -15,22 +15,26 @@
 
 ## ディレクトリ対応表
 
-| タスク                                   | 保存先パス                                       |
-| ---------------------------------------- | ------------------------------------------------ |
-| TOEFL Reading: Read in Daily Life        | `public/questions/toefl/reading/daily-life/`     |
-| TOEFL Reading: Read Academic Passage     | `public/questions/toefl/reading/academic/`       |
-| TOEFL Reading: Complete the Words        | `public/questions/toefl/reading/complete-words/` |
-| TOEFL Writing: Write an Email            | `public/questions/toefl/writing/email/`          |
-| TOEFL Writing: Write Academic Discussion | `public/questions/toefl/writing/discussion/`     |
-| TOEFL Writing: Build a Sentence          | `public/questions/toefl/writing/build-sentence/` |
-| TOEFL Speaking: Take an Interview        | `public/questions/toefl/speaking/interview/`     |
-| TOEFL Speaking: Listen and Repeat        | `public/questions/toefl/speaking/listen-repeat/` |
-| TOEIC Part 2                             | `public/questions/toeic/part2/`                  |
-| TOEIC Part 3                             | `public/questions/toeic/part3/`                  |
-| TOEIC Part 4                             | `public/questions/toeic/part4/`                  |
-| TOEIC Part 5                             | `public/questions/toeic/part5/`                  |
-| TOEIC Part 6                             | `public/questions/toeic/part6/`                  |
-| TOEIC Part 7                             | `public/questions/toeic/part7/`                  |
+| タスク                                   | 保存先パス                                       | 音声時間    | 1音声あたりの設問数 |
+| ---------------------------------------- | ------------------------------------------------ | ----------- | ----------------- |
+| TOEFL Reading: Complete the Words        | `public/questions/toefl/reading/complete-words/` | —           | —                 |
+| TOEFL Reading: Read in Daily Life        | `public/questions/toefl/reading/daily-life/`     | —           | —                 |
+| TOEFL Reading: Read Academic Passage     | `public/questions/toefl/reading/academic/`       | —           | —                 |
+| TOEFL Writing: Build a Sentence          | `public/questions/toefl/writing/build-sentence/` | —           | —                 |
+| TOEFL Writing: Write an Email            | `public/questions/toefl/writing/email/`          | —           | —                 |
+| TOEFL Writing: Write Academic Discussion | `public/questions/toefl/writing/discussion/`     | —           | —                 |
+| TOEFL Speaking: Listen and Repeat        | `public/questions/toefl/speaking/listen-repeat/` | —           | —                 |
+| TOEFL Speaking: Take an Interview        | `public/questions/toefl/speaking/interview/`     | —           | —                 |
+| TOEFL Listening: Choose a Response       | `public/questions/toefl/listening/response/`     | 5〜15秒     | 1                 |
+| TOEFL Listening: Conversation            | `public/questions/toefl/listening/conversation/` | 30〜90秒    | 2                 |
+| TOEFL Listening: Announcement            | `public/questions/toefl/listening/announcement/` | 20〜40秒    | 2〜3              |
+| TOEFL Listening: Academic Talk           | `public/questions/toefl/listening/lecture/`      | 45〜120秒   | 4                 |
+| TOEIC Part 2                             | `public/questions/toeic/part2/`                  | —           | —                 |
+| TOEIC Part 3                             | `public/questions/toeic/part3/`                  | —           | —                 |
+| TOEIC Part 4                             | `public/questions/toeic/part4/`                  | —           | —                 |
+| TOEIC Part 5                             | `public/questions/toeic/part5/`                  | —           | —                 |
+| TOEIC Part 6                             | `public/questions/toeic/part6/`                  | —           | —                 |
+| TOEIC Part 7                             | `public/questions/toeic/part7/`                  | —           | —                 |
 
 ---
 
@@ -374,6 +378,176 @@
 
 - `wordCount`: 単語数（参考値）
 - 文数: 7〜10文
+
+---
+
+## TOEFL Listening: Choose a Response
+
+短い発言（5〜15秒）を聞き、最も適切な応答を3つの中から選ぶ。
+話し手の意図（implied meaning）、トーン、社会的文脈の理解を評価。
+1アイテム＝1問。
+
+```json
+{
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for information",
+      "stem": "Excuse me, do you know when the library opens on weekends?",
+      "options": {
+        "A": "Yes, it opens at 10 AM on Saturdays and Sundays.",
+        "B": "The library is closed for renovations.",
+        "C": "I usually study at the coffee shop."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for information about weekend hours, so a direct answer is the most appropriate response."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Student", "text": "Excuse me, do you know when the library opens on weekends?" }
+  ]
+}
+```
+
+**フィールド仕様:**
+- `context`: 状況ラベル（例: "Asking for information", "Expressing concern"）
+- `questions[].options`: オブジェクト形式（`"A"`〜`"C"`、3択）
+- `questions[].correct`: アルファベット文字列（`"A"` / `"B"` / `"C"`）
+- `audioSegments`: 各設問1セグメント（発言のみ、応答は音声不要）
+- 設問数: 8問／ファイル
+
+**聞くポイント:**
+- 話し手が何を求めているか（助け、確認、情報、付き合い）
+- 感情やトーン（不満、安堵、好奇心）
+- 隠された期待や次のステップ
+
+---
+
+## TOEFL Listening: Conversation
+
+キャンパス内の短い会話（30〜90秒）を聞き、2問に答える。
+対話理解を評価。会話は Student と Friend/Professor など2名。
+
+```json
+{
+  "title": "Office Hours Discussion",
+  "transcript": "Student: Hi Professor Martinez, do you have a moment?\nProfessor: Sure, come in. What can I help you with?",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit the professor?",
+      "options": ["To ask about an assignment", "To discuss a grade", "To request a recommendation letter", "To change a class schedule"],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The student says they have a question about the essay assignment."
+    },
+    {
+      "id": "q2",
+      "stem": "What will the student do next?",
+      "options": ["Revise the introduction", "Submit the paper", "Meet with a tutor", "Email the professor"],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The professor tells the student to submit the revised version by Friday."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Student", "text": "Hi Professor Martinez, do you have a moment?" },
+    { "role": "Professor", "text": "Sure, come in. What can I help you with?" }
+  ]
+}
+```
+
+**フィールド仕様:**
+- `transcript`: 全文文字起こし
+- `questions[].type`: `"purpose"` / `"detail"` / `"inference"` / `"attitude"`
+- `options`: 配列形式（4択）
+- `correctIndex`: 0始まり
+- 1会話あたり2問、8セットで16問がフルセット
+
+---
+
+## TOEFL Listening: Announcement
+
+構内アナウンスや案内（20〜40秒）を聞き、2〜3問に答える。
+詳細情報の保持を評価。Speaker 1名。
+
+```json
+{
+  "title": "Library Renovation Notice",
+  "transcript": "Attention students. The main library will be closed for renovation from March 15 to March 22. The science library on north campus will remain open with extended hours.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "How long will the main library be closed?",
+      "options": ["One day", "One week", "Two weeks", "One month"],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states the closure is from March 15 to March 22."
+    },
+    {
+      "id": "q2",
+      "stem": "What will happen to the science library during the closure?",
+      "options": ["It will close at the regular time", "It will remain open with extended hours", "It will also undergo renovation", "It will move to a temporary location"],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The science library will remain open with extended hours."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Speaker", "text": "Attention students. The main library will be closed for renovation from March 15 to March 22. The science library on north campus will remain open with extended hours." }
+  ]
+}
+```
+
+**フィールド仕様:**
+- `transcript`: 全文文字起こし
+- `questions[].type`: `"detail"` / `"inference"` / `"vocabulary"`
+- `options`: 配列形式（4択）
+- `correctIndex`: 0始まり
+- 1アナウンスあたり2〜3問、8セットで16〜24問がフルセット
+
+---
+
+## TOEFL Listening: Academic Talk
+
+学術的な講義（45〜120秒）を聞き、4問に答える。
+講義理解・構造把握を評価。Lecturer 1名。
+
+```json
+{
+  "title": "The Formation of Coral Reefs",
+  "transcript": "Today we'll discuss how coral reefs form. Coral reefs are built by tiny marine animals called coral polyps, which secrete calcium carbonate...",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": ["Marine animal reproduction", "The formation of coral reefs", "Ocean temperature changes", "Coral reef conservation"],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture begins by stating they will discuss how coral reefs form."
+    },
+    {
+      "id": "q2",
+      "stem": "What role do coral polyps play in reef formation?",
+      "options": ["They eat harmful algae", "They secrete calcium carbonate", "They attract fish species", "They clean the water"],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Coral polyps secrete calcium carbonate to form hard skeletons."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Lecturer", "text": "Today we'll discuss how coral reefs form. Coral reefs are built by tiny marine animals called coral polyps, which secrete calcium carbonate..." }
+  ]
+}
+```
+
+**フィールド仕様:**
+- `transcript`: 全文文字起こし
+- `questions[].type`: `"mainIdea"` / `"detail"` / `"inference"` / `"vocabulary"` / `"attitude"`
+- `options`: 配列形式（4択）
+- `correctIndex`: 0始まり
+- 1講義あたり4問、4セットで16問がフルセット
 
 ---
 

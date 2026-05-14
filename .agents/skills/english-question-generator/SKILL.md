@@ -37,6 +37,10 @@ description: >
 - `toefl/writing/discussion`
 - `toefl/speaking/listen-repeat`
 - `toefl/speaking/interview`
+- `toefl/listening/response`
+- `toefl/listening/conversation`
+- `toefl/listening/announcement`
+- `toefl/listening/lecture`
 - `toeic/part2`
 - `toeic/part3`
 - `toeic/part4`
