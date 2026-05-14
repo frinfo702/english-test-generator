@@ -1,0 +1,40 @@
+{
+  "title": "Academic Topics",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "The professor emphasized the importance of citing reliable sources in academic writing.",
+      "wordCount": 12
+    },
+    {
+      "id": "s2",
+      "text": "Photosynthesis is the process by which plants convert sunlight into chemical energy.",
+      "wordCount": 12
+    },
+    {
+      "id": "s3",
+      "text": "The Industrial Revolution brought about significant changes in manufacturing and transportation.",
+      "wordCount": 11
+    },
+    {
+      "id": "s4",
+      "text": "One of the key arguments in the paper is that economic growth does not always lead to improved well-being.",
+      "wordCount": 17
+    },
+    {
+      "id": "s5",
+      "text": "The experiment was designed to measure the effects of sleep deprivation on cognitive performance.",
+      "wordCount": 14
+    },
+    {
+      "id": "s6",
+      "text": "According to the latest research, regular exercise can significantly reduce the risk of heart disease.",
+      "wordCount": 15
+    },
+    {
+      "id": "s7",
+      "text": "The concept of supply and demand is fundamental to understanding how market economies function.",
+      "wordCount": 15
+    }
+  ]
+}

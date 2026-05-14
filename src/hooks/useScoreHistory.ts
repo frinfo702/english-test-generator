@@ -13,6 +13,7 @@ export type TaskId =
   | "toefl/speaking/interview"
   | "toeic/part5"
   | "toeic/part6"
+  | "shadowing"
   | "toeic/part7";
 
 export interface ScoreEntry {

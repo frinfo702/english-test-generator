@@ -11,6 +11,7 @@ export function AppShell({ children }: AppShellProps) {
   const navigate = useNavigate();
   const isToefl = location.pathname.startsWith("/toefl");
   const isToeic = location.pathname.startsWith("/toeic");
+  const isShadowing = location.pathname.startsWith("/shadowing");
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -49,6 +50,16 @@ export function AppShell({ children }: AppShellProps) {
               ].join(" ")}
             >
               TOEIC Reading
+            </Link>
+            <span className={styles.navDivider} />
+            <Link
+              to="/shadowing"
+              className={[
+                styles.navLink,
+                isShadowing ? styles.navLinkActive : "",
+              ].join(" ")}
+            >
+              Shadowing
             </Link>
             <span className={styles.navDivider} />
             <Link

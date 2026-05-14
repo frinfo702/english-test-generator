@@ -1,0 +1,45 @@
+{
+  "title": "Travel & Culture",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "Exploring a new city on foot is one of the best ways to experience its local culture.",
+      "wordCount": 15
+    },
+    {
+      "id": "s2",
+      "text": "The museum offers guided tours in multiple languages for international visitors.",
+      "wordCount": 11
+    },
+    {
+      "id": "s3",
+      "text": "It is always a good idea to learn a few basic phrases before traveling to a foreign country.",
+      "wordCount": 16
+    },
+    {
+      "id": "s4",
+      "text": "The street market was filled with colorful stalls selling handmade crafts and fresh produce.",
+      "wordCount": 14
+    },
+    {
+      "id": "s5",
+      "text": "Public transportation in Tokyo is incredibly efficient and punctual compared to many other major cities.",
+      "wordCount": 15
+    },
+    {
+      "id": "s6",
+      "text": "Local cuisine often tells you a lot about a region's history and the ingredients available there.",
+      "wordCount": 16
+    },
+    {
+      "id": "s7",
+      "text": "The hostel organized a walking tour that took us through some of the oldest neighborhoods in the city.",
+      "wordCount": 18
+    },
+    {
+      "id": "s8",
+      "text": "Traveling during the off-season can save you a significant amount of money on flights and accommodation.",
+      "wordCount": 17
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
@@ -54,9 +54,7 @@ export function ReadDailyLifePage() {
   const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [graded, setGraded] = useState(false);
-  const [sessionQuestionFile, setSessionQuestionFile] = useState<string | null>(
-    null,
-  );
+  const sessionFileRef = useRef<string | null>(null);
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
@@ -65,15 +63,15 @@ export function ReadDailyLifePage() {
 
   useEffect(() => {
     if (!hasValidQuestionNumber) return;
-    setSessionQuestionFile(null);
+    sessionFileRef.current = null;
     loadByQuestionNumber(parsedQuestionNumber);
   }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   useEffect(() => {
-    if (phase === "module1" && file && !sessionQuestionFile) {
-      setSessionQuestionFile(file);
+    if (phase === "module1" && file && !sessionFileRef.current) {
+      sessionFileRef.current = file;
     }
-  }, [phase, file, sessionQuestionFile]);
+  }, [phase, file]);
 
   useEffect(() => {
     if (
@@ -166,7 +164,7 @@ export function ReadDailyLifePage() {
         m1c + m2c,
         m1t + m2t,
         sessionSeconds,
-        sessionQuestionFile ?? file ?? undefined,
+        sessionFileRef.current ?? file ?? undefined,
       );
       adaptive.finishModule2();
     }

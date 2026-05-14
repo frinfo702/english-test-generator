@@ -12,6 +12,8 @@ interface UseTtsReturn {
   error: string | null;
   currentTime: number;
   duration: number;
+  playbackRate: number;
+  setPlaybackRate: (rate: number) => void;
   play: (text: string, voiceId?: string) => Promise<void>;
   playSegments: (segments: AudioSegment[]) => Promise<void>;
   pause: () => void;
@@ -121,6 +123,8 @@ export function useTts(): UseTtsReturn {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const urlRef = useRef<string | null>(null);
   const rafRef = useRef<number>(0);
+  const playbackRateRef = useRef(1.0);
+  const [playbackRate, setPlaybackRateState] = useState(1.0);
 
   const cleanup = useCallback(() => {
     if (rafRef.current) {
@@ -177,6 +181,7 @@ export function useTts(): UseTtsReturn {
         const url = URL.createObjectURL(blob);
         urlRef.current = url;
         const audio = new Audio(url);
+        audio.playbackRate = playbackRateRef.current;
         audioRef.current = audio;
         audio.onended = () => {
           setPlaying(false);
@@ -221,6 +226,7 @@ export function useTts(): UseTtsReturn {
         urlRef.current = url;
 
         const audio = new Audio(url);
+        audio.playbackRate = playbackRateRef.current;
         audioRef.current = audio;
 
         audio.onended = () => {
@@ -261,6 +267,7 @@ export function useTts(): UseTtsReturn {
 
   const resume = useCallback(() => {
     if (audioRef.current) {
+      audioRef.current.playbackRate = playbackRateRef.current;
       audioRef.current.play().then(() => {
         setPlaying(true);
         setError(null);
@@ -277,6 +284,14 @@ export function useTts(): UseTtsReturn {
     cleanup();
   }, [cleanup]);
 
+  const setPlaybackRate = useCallback((rate: number) => {
+    playbackRateRef.current = rate;
+    setPlaybackRateState(rate);
+    if (audioRef.current) {
+      audioRef.current.playbackRate = rate;
+    }
+  }, []);
+
   const seek = useCallback((time: number) => {
     if (audioRef.current && Number.isFinite(time)) {
       const audio = audioRef.current;
@@ -286,5 +301,5 @@ export function useTts(): UseTtsReturn {
     }
   }, []);
 
-  return { playing, loading, error, currentTime, duration, play, playSegments, pause, resume, stop, seek };
+  return { playing, loading, error, currentTime, duration, playbackRate, setPlaybackRate, play, playSegments, pause, resume, stop, seek };
 }

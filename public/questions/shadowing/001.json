@@ -1,0 +1,35 @@
+{
+  "title": "Daily Conversations",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "I completely forgot that we had a meeting scheduled for this afternoon.",
+      "wordCount": 12
+    },
+    {
+      "id": "s2",
+      "text": "Could you please send me the revised version of the report by Friday?",
+      "wordCount": 14
+    },
+    {
+      "id": "s3",
+      "text": "The new restaurant that opened downtown has received excellent reviews so far.",
+      "wordCount": 12
+    },
+    {
+      "id": "s4",
+      "text": "I think we should consider alternative solutions before making a final decision.",
+      "wordCount": 12
+    },
+    {
+      "id": "s5",
+      "text": "She has been working on that project for nearly six months without a break.",
+      "wordCount": 14
+    },
+    {
+      "id": "s6",
+      "text": "The flight was delayed by three hours due to severe weather conditions.",
+      "wordCount": 12
+    }
+  ]
+}

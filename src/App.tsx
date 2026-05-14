@@ -12,6 +12,7 @@ import { WriteEmailPage } from "./pages/toefl/writing/WriteEmailPage";
 import { WriteDiscussionPage } from "./pages/toefl/writing/WriteDiscussionPage";
 import { ListenRepeatPage } from "./pages/toefl/speaking/ListenRepeatPage";
 import { TakeInterviewPage } from "./pages/toefl/speaking/TakeInterviewPage";
+import { ShadowingPage } from "./pages/ShadowingPage";
 import {
   ConversationPage,
   LecturePage,
@@ -235,6 +236,24 @@ export default function App() {
             }
           />
           <Route path="/toeic/part7/:questionNumber" element={<Part7Page />} />
+
+          {/* Shadowing */}
+          <Route
+            path="/shadowing"
+            element={
+              <QuestionSelectorPage
+                taskId="shadowing"
+                title="Shadowing Practice"
+                subtitle="Select a shadowing set or start with a random one."
+                backTo="/"
+                basePath="/shadowing"
+              />
+            }
+          />
+          <Route
+            path="/shadowing/:questionNumber"
+            element={<ShadowingPage />}
+          />
         </Routes>
       </AppShell>
     </HashRouter>

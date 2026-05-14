@@ -160,6 +160,37 @@ export function HomePage() {
               Start →
             </Button>
           </div>
+
+          <div className={styles.card} onClick={() => navigate("/shadowing")}>
+            <div
+              className={styles.cardAccent}
+              style={{ background: "var(--color-speaking)" }}
+            />
+            <div className={styles.cardHeader}>
+              <h3 className={styles.cardTitle}>Shadowing Practice</h3>
+              <span
+                className={styles.cardBadge}
+                style={{
+                  background: "var(--color-warning-subtle)",
+                  color: "var(--color-warning)",
+                }}
+              >
+                NEW
+              </span>
+            </div>
+            <p className={styles.cardDesc}>
+              Listen and repeat to improve pronunciation and fluency. Audio
+              played with AI-generated voice, text can be hidden or revealed.
+            </p>
+            <ul className={styles.cardTasks}>
+              <li>Daily Conversations — 6 sentences</li>
+              <li>Academic Topics — 7 sentences</li>
+              <li>Travel &amp; Culture — 8 sentences</li>
+            </ul>
+            <Button className={styles.cardBtn} variant="accent" size="sm">
+              Start →
+            </Button>
+          </div>
         </div>
       </div>
 

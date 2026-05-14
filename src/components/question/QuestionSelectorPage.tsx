@@ -53,14 +53,13 @@ export function QuestionSelectorPage({
 
   useEffect(() => {
     let active = true;
-    setLoading(true);
-    setError(null);
 
     Promise.all([listQuestionFiles(taskId), getAll()])
       .then(([questionFiles, allScores]) => {
         if (!active) return;
         setFiles(questionFiles);
         setScores(allScores.filter((entry) => entry.taskId === taskId));
+        setError(null);
       })
       .catch((e) => {
         if (!active) return;

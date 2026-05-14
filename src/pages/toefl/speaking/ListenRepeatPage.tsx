@@ -74,16 +74,19 @@ export function ListenRepeatPage() {
 
   useEffect(() => {
     if (phase !== "showing") return;
-    setCountdown(SHOW_SECS);
     const interval = setInterval(() => {
-      setCountdown((c) => {
-        if (c <= 1) {
+      setCountdown((prev) => {
+        if (prev <= 0) {
+          clearInterval(interval);
+          return 0;
+        }
+        if (prev <= 1) {
           clearInterval(interval);
           setPhase("hidden");
           setTimeout(() => inputRef.current?.focus(), 50);
           return 0;
         }
-        return c - 1;
+        return prev - 1;
       });
     }, 1000);
     return () => clearInterval(interval);
@@ -99,6 +102,7 @@ export function ListenRepeatPage() {
       setCurrent((c) => c + 1);
       setCurrentInput("");
       setPhase("showing");
+      setCountdown(SHOW_SECS);
     }
   };
 
@@ -134,6 +138,7 @@ export function ListenRepeatPage() {
     setCurrentInput("");
     setAllInputs({});
     setPhase("showing");
+    setCountdown(SHOW_SECS);
     setGraded(false);
     navigate("/toefl/speaking/listen-repeat");
   };

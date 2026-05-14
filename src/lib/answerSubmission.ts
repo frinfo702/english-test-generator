@@ -57,7 +57,9 @@ export async function saveAnswerSubmission(payload: SaveAnswerPayload) {
     try {
       const parsed = JSON.parse(body) as { error?: string };
       message = parsed.error ?? body;
-    } catch {}
+    } catch {
+      // body is not JSON — use raw text
+    }
     throw new Error(message || "Failed to save the answer.");
   }
   return (await res.json()) as SaveAnswerResponse;
