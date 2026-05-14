@@ -46,6 +46,9 @@
     {
       "role": "Speaker",
       "text": "Attention passengers traveling on Japan Airlines Flight 78 to Tokyo. This flight is now ready for boarding. Business class passengers and those requiring special assistance may board at this time through Gate 15. We would like to remind all passengers that carry-on luggage must not exceed the size and weight restrictions posted at the check-in counters. The boarding gate will close fifteen minutes before departure. Please have your boarding pass and passport ready for inspection. We wish you a pleasant flight."
-    }
+    },
+    { "role": "Narrator", "text": "Question 1. Who is being invited to board first?" },
+    { "role": "Narrator", "text": "Question 2. What are passengers reminded about?" },
+    { "role": "Narrator", "text": "Question 3. When will the boarding gate close?" }
   ]
 }

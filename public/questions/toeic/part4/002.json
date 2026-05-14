@@ -46,6 +46,9 @@
     {
       "role": "Speaker",
       "text": "Good afternoon, shoppers. Welcome to Westfield Mall. We would like to inform you that our annual summer sale will begin this Saturday at 9 AM. All items in the store will be discounted by up to forty percent. Electronics and jewelry will have separate discounts. Our electronics department on the third floor is offering twenty percent off selected laptop models and headphones. Additionally, customers who sign up for our membership card today will receive an extra five percent off their first purchase. The sale will run until Sunday evening. We look forward to seeing you there."
-    }
+    },
+    { "role": "Narrator", "text": "Question 1. When does the summer sale begin?" },
+    { "role": "Narrator", "text": "Question 2. What is offered in the electronics department?" },
+    { "role": "Narrator", "text": "Question 3. What benefit does the membership card provide?" }
   ]
 }

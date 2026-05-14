@@ -46,6 +46,9 @@
     {
       "role": "Speaker",
       "text": "Hello, this is David Chen from the Human Resources department. I'm calling to remind all employees that the annual health and safety training session will be held this Thursday at 2 PM in Conference Room B. Attendance is mandatory for all staff members. The training will cover emergency evacuation procedures, first aid basics, and new workplace safety guidelines. The session will last approximately two hours. If you are unable to attend due to a scheduling conflict, please contact your department manager to arrange an alternative session. A confirmation email with the training materials will be sent to all participants later today. Thank you."
-    }
+    },
+    { "role": "Narrator", "text": "Question 1. What is the purpose of this message?" },
+    { "role": "Narrator", "text": "Question 2. What topics will the training cover?" },
+    { "role": "Narrator", "text": "Question 3. What should employees do if they cannot attend?" }
   ]
 }
