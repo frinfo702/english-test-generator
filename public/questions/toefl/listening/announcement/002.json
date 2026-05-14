@@ -1,0 +1,25 @@
+{
+  "title": "Campus Cafe Renovation",
+  "transcript": "Good morning everyone. Please be advised that the Campus Cafe will be closed for equipment upgrades this Saturday and Sunday. A temporary food truck will be available in the main courtyard from 11 AM to 3 PM on both days, offering sandwiches, salads, and hot drinks. Regular service will resume on Monday. We apologize for the short notice.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why will the Campus Cafe be closed?",
+      "options": ["For staff training", "For equipment upgrades", "For inventory counting", "For holiday break"],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states the cafe will be closed 'for equipment upgrades.'"
+    },
+    {
+      "id": "q2",
+      "stem": "What food options are available during the closure?",
+      "options": ["Only hot drinks", "A food truck in the courtyard", "Vending machines in the lobby", "A nearby restaurant"],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "A 'temporary food truck will be available in the main courtyard.'"
+    }
+  ],
+  "audioSegments": [
+    { "role": "Speaker", "text": "Good morning everyone. Please be advised that the Campus Cafe will be closed for equipment upgrades this Saturday and Sunday. A temporary food truck will be available in the main courtyard from 11 AM to 3 PM on both days, offering sandwiches, salads, and hot drinks. Regular service will resume on Monday. We apologize for the short notice." }
+  ]
+}

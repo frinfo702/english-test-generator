@@ -76,6 +76,12 @@ const sections = [
         desc: "Listen to short utterances and choose the best response.",
         meta: "8 items",
       },
+      {
+        label: "Listen to an Announcement",
+        path: "/toefl/listening/announcement",
+        desc: "Listen to campus announcements and answer questions.",
+        meta: "2-3 questions",
+      },
     ],
   },
   {

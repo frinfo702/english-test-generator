@@ -1,0 +1,33 @@
+{
+  "title": "Library Renovation Notice",
+  "transcript": "Attention students. The main library will be closed for renovation from March 15th to March 22nd. During this period, the Science Library on the north campus will remain open with extended hours from 7 AM to midnight. All online resources will continue to be available through the student portal. We apologize for any inconvenience and appreciate your understanding.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "How long will the main library be closed?",
+      "options": ["One day", "One week", "Two weeks", "One month"],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states the closure is from March 15th to March 22nd, which is one week."
+    },
+    {
+      "id": "q2",
+      "stem": "What will happen to the Science Library during the closure?",
+      "options": ["It will also close for renovation", "It will operate with reduced hours", "It will remain open with extended hours", "It will move to a temporary location"],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The announcement says the Science Library 'will remain open with extended hours.'"
+    },
+    {
+      "id": "q3",
+      "stem": "What can students access during the renovation?",
+      "options": ["Only print materials", "Online resources through the student portal", "Only the Science Library collection", "Inter-library loan services"],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states 'all online resources will continue to be available through the student portal.'"
+    }
+  ],
+  "audioSegments": [
+    { "role": "Speaker", "text": "Attention students. The main library will be closed for renovation from March 15th to March 22nd. During this period, the Science Library on the north campus will remain open with extended hours from 7 AM to midnight. All online resources will continue to be available through the student portal. We apologize for any inconvenience and appreciate your understanding." }
+  ]
+}

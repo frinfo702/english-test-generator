@@ -13,6 +13,10 @@
 #   toefl/writing/discussion
 #   toefl/speaking/listen-repeat
 #   toefl/speaking/interview
+#   toefl/listening/response
+#   toefl/listening/conversation
+#   toefl/listening/announcement
+#   toefl/listening/lecture
 #   toeic/part2
 #   toeic/part3
 #   toeic/part4
@@ -40,6 +44,10 @@ echo "  toefl/writing/email"
 echo "  toefl/writing/discussion"
 echo "  toefl/speaking/listen-repeat"
 echo "  toefl/speaking/interview"
+echo "  toefl/listening/response"
+echo "  toefl/listening/conversation"
+echo "  toefl/listening/announcement"
+echo "  toefl/listening/lecture"
 echo "  toeic/part2"
 echo "  toeic/part3"
 echo "  toeic/part4"
@@ -223,6 +231,178 @@ TMPL
       "responseTime": 45,
       "sampleAnswer": "TODO: Model answer (optional)"
     }
+  ]
+}
+TMPL
+      ;;
+
+    toefl/listening/response)
+      cat << 'TMPL'
+{
+  "title": "Listen and Choose a Response — TODO: Topic",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "TODO: Situation label (e.g., Asking for information)",
+      "stem": "TODO: Short utterance (5-15 sec reading)",
+      "options": {
+        "A": "TODO: Response A",
+        "B": "TODO: Response B",
+        "C": "TODO: Response C"
+      },
+      "correct": "A",
+      "explanation": "TODO: Why this response is the most appropriate"
+    }
+  ],
+  "audioSegments": [
+    { "role": "Student", "text": "TODO: Speaker line (same as stem)" }
+  ]
+}
+TMPL
+      ;;
+
+    toefl/listening/conversation)
+      cat << 'TMPL'
+{
+  "title": "TODO: Conversation topic",
+  "transcript": "Student: TODO: First line\nProfessor: TODO: Second line",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "TODO: Explanation"
+    },
+    {
+      "id": "q2",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "TODO: Explanation"
+    }
+  ],
+  "audioSegments": [
+    { "role": "Student", "text": "TODO: First line" },
+    { "role": "Professor", "text": "TODO: Second line" }
+  ]
+}
+TMPL
+      ;;
+
+    toefl/listening/announcement)
+      cat << 'TMPL'
+{
+  "title": "TODO: Announcement title",
+  "transcript": "TODO: Full transcript of the announcement (20-40 sec reading)",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "TODO: Explanation"
+    },
+    {
+      "id": "q2",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "TODO: Explanation"
+    }
+  ],
+  "audioSegments": [
+    { "role": "Speaker", "text": "TODO: Full announcement text" }
+  ]
+}
+TMPL
+      ;;
+
+    toefl/listening/lecture)
+      cat << 'TMPL'
+{
+  "title": "TODO: Lecture title",
+  "transcript": "TODO: Full transcript of the lecture (45-120 sec reading)",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "mainIdea",
+      "explanation": "TODO: Explanation"
+    },
+    {
+      "id": "q2",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "TODO: Explanation"
+    },
+    {
+      "id": "q3",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "TODO: Explanation"
+    },
+    {
+      "id": "q4",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "vocabulary",
+      "explanation": "TODO: Explanation"
+    }
+  ],
+  "audioSegments": [
+    { "role": "Lecturer", "text": "TODO: Full lecture text" }
   ]
 }
 TMPL

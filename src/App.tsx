@@ -16,6 +16,7 @@ import { ShadowingPage } from "./pages/ShadowingPage";
 import {
   ConversationPage,
   LecturePage,
+  AnnouncementPage,
 } from "./pages/toefl/listening/ListeningTaskPage";
 import { ListenResponsePage } from "./pages/toefl/listening/ListenResponsePage";
 import { Part2Page } from "./pages/toeic/Part2Page";
@@ -213,6 +214,22 @@ export default function App() {
           <Route
             path="/toefl/listening/response/:questionNumber"
             element={<ListenResponsePage />}
+          />
+          <Route
+            path="/toefl/listening/announcement"
+            element={
+              <QuestionSelectorPage
+                taskId="toefl/listening/announcement"
+                title="Listen to an Announcement"
+                subtitle="Select a question number or start with random."
+                backTo="/toefl"
+                basePath="/toefl/listening/announcement"
+              />
+            }
+          />
+          <Route
+            path="/toefl/listening/announcement/:questionNumber"
+            element={<AnnouncementPage />}
           />
 
           {/* TOEIC */}

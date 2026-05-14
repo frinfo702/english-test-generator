@@ -38,7 +38,7 @@ function ListeningTaskPageBase({
   title,
   subtitle,
 }: {
-  taskId: "toefl/listening/conversation" | "toefl/listening/lecture";
+  taskId: "toefl/listening/conversation" | "toefl/listening/lecture" | "toefl/listening/announcement";
   title: string;
   subtitle: string;
 }) {
@@ -365,6 +365,16 @@ export function LecturePage() {
     <ListeningTaskPageBase
       taskId="toefl/listening/lecture"
       title="Listen to a Lecture"
+      subtitle="Listen to the audio and answer the questions."
+    />
+  );
+}
+
+export function AnnouncementPage() {
+  return (
+    <ListeningTaskPageBase
+      taskId="toefl/listening/announcement"
+      title="Listen to an Announcement"
       subtitle="Listen to the audio and answer the questions."
     />
   );

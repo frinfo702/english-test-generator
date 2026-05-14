@@ -12,18 +12,6 @@ const PROJECT_ROOT = path.resolve(__dirname, "..");
 const QUESTIONS_DIR = path.join(PROJECT_ROOT, "public/questions");
 const AUDIO_OUT_DIR = path.join(PROJECT_ROOT, "public/audio");
 
-const VOICE_MAP: Record<string, string> = {
-  // TOEFL
-  Student: "eve",
-  Professor: "leo",
-  Lecturer: "rex",
-  // TOEIC
-  Woman: "eve",
-  Man: "leo",
-  Speaker: "rex",
-  Narrator: "ara",
-};
-const DEFAULT_VOICE = "ara";
 const ALL_SHADOW_VOICES = ["ara", "eve", "leo", "rex"];
 
 function hashText(text: string): number {
@@ -33,10 +21,6 @@ function hashText(text: string): number {
     hash |= 0;
   }
   return Math.abs(hash);
-}
-
-function getVoiceForRole(role: string): string {
-  return VOICE_MAP[role] ?? DEFAULT_VOICE;
 }
 
 function sha256(input: string): string {
@@ -130,10 +114,17 @@ async function generateForQuestion(
 
   if (hasAudioSegments(data)) {
     const segments = data.audioSegments;
+    const voiceForRole = new Map<string, string>();
+    const getVoiceForRole = (role: string): string => {
+      if (!voiceForRole.has(role)) {
+        const idx = Math.abs(hashText(`${basename}:${role}`)) % ALL_SHADOW_VOICES.length;
+        voiceForRole.set(role, ALL_SHADOW_VOICES[idx]);
+      }
+      return voiceForRole.get(role)!;
+    };
     for (let i = 0; i < segments.length; i++) {
       const seg = segments[i];
-      const voiceIdx = Math.abs(hashText(seg.text)) % ALL_SHADOW_VOICES.length;
-      const voiceId = ALL_SHADOW_VOICES[voiceIdx];
+      const voiceId = getVoiceForRole(seg.role);
       const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
       const outFile = path.join(outDir, `${i + 1}.mp3`);
 
