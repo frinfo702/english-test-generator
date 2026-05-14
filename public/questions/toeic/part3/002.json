@@ -1,0 +1,54 @@
+{
+  "title": "Business Trip Arrangements",
+  "transcript": "Man: Good morning. I need to arrange a business trip to Chicago next month. Can you help me with that?\nWoman: Of course. What dates are you planning to travel?\nMan: I'd like to leave on the evening of March 12th and return on March 15th.\nWoman: Let me check the flight availability. There's a direct flight at 6:30 PM on the 12th. Would you like me to book that?\nMan: Yes, please. Also, could you reserve a hotel near the convention center?\nWoman: Certainly. I'll book the usual hotel we use. Shall I arrange a rental car as well?\nMan: No, that won't be necessary. The client is providing transportation.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the man planning to do?",
+      "options": [
+        "Attend a conference",
+        "Take a vacation",
+        "Go on a business trip to Chicago",
+        "Visit the company's branch office"
+      ],
+      "correctIndex": 2,
+      "type": "purpose",
+      "explanation": "The man states he needs to arrange a business trip to Chicago."
+    },
+    {
+      "id": "q2",
+      "stem": "When will the man return from his trip?",
+      "options": [
+        "March 12th",
+        "March 14th",
+        "March 15th",
+        "March 16th"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The man says he'd like to return on March 15th."
+    },
+    {
+      "id": "q3",
+      "stem": "Why doesn't the man need a rental car?",
+      "options": [
+        "He prefers to take taxis",
+        "The client is providing transportation",
+        "The hotel offers a shuttle service",
+        "He will use public transportation"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The man says the client is providing transportation, so a rental car is unnecessary."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Man", "text": "Good morning. I need to arrange a business trip to Chicago next month. Can you help me with that?" },
+    { "role": "Woman", "text": "Of course. What dates are you planning to travel?" },
+    { "role": "Man", "text": "I'd like to leave on the evening of March 12th and return on March 15th." },
+    { "role": "Woman", "text": "Let me check the flight availability. There's a direct flight at 6:30 PM on the 12th. Would you like me to book that?" },
+    { "role": "Man", "text": "Yes, please. Also, could you reserve a hotel near the convention center?" },
+    { "role": "Woman", "text": "Certainly. I'll book the usual hotel we use. Shall I arrange a rental car as well?" },
+    { "role": "Man", "text": "No, that won't be necessary. The client is providing transportation." }
+  ]
+}

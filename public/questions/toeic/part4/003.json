@@ -1,0 +1,51 @@
+{
+  "title": "Office Voicemail Message",
+  "transcript": "Hello, this is David Chen from the Human Resources department. I'm calling to remind all employees that the annual health and safety training session will be held this Thursday at 2 PM in Conference Room B. Attendance is mandatory for all staff members. The training will cover emergency evacuation procedures, first aid basics, and new workplace safety guidelines. The session will last approximately two hours. If you are unable to attend due to a scheduling conflict, please contact your department manager to arrange an alternative session. A confirmation email with the training materials will be sent to all participants later today. Thank you.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the purpose of this message?",
+      "options": [
+        "To announce a new company policy",
+        "To remind employees about a training session",
+        "To inform staff about a schedule change",
+        "To introduce a new HR manager"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The speaker is reminding all employees that the annual health and safety training session will be held this Thursday."
+    },
+    {
+      "id": "q2",
+      "stem": "What topics will the training cover?",
+      "options": [
+        "Customer service and sales techniques",
+        "Emergency procedures, first aid, and safety guidelines",
+        "IT security and data protection",
+        "Team building and communication skills"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The training will cover emergency evacuation procedures, first aid basics, and new workplace safety guidelines."
+    },
+    {
+      "id": "q3",
+      "stem": "What should employees do if they cannot attend?",
+      "options": [
+        "Email the HR department",
+        "Contact their department manager",
+        "Attend the next month's session",
+        "Watch a recorded version online"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "If unable to attend, employees should contact their department manager to arrange an alternative session."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hello, this is David Chen from the Human Resources department. I'm calling to remind all employees that the annual health and safety training session will be held this Thursday at 2 PM in Conference Room B. Attendance is mandatory for all staff members. The training will cover emergency evacuation procedures, first aid basics, and new workplace safety guidelines. The session will last approximately two hours. If you are unable to attend due to a scheduling conflict, please contact your department manager to arrange an alternative session. A confirmation email with the training materials will be sent to all participants later today. Thank you."
+    }
+  ]
+}

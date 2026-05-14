@@ -1,0 +1,51 @@
+{
+  "title": "Department Store Announcement",
+  "transcript": "Good afternoon, shoppers. Welcome to Westfield Mall. We would like to inform you that our annual summer sale will begin this Saturday at 9 AM. All items in the store will be discounted by up to forty percent. Electronics and jewelry will have separate discounts. Our electronics department on the third floor is offering twenty percent off selected laptop models and headphones. Additionally, customers who sign up for our membership card today will receive an extra five percent off their first purchase. The sale will run until Sunday evening. We look forward to seeing you there.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "When does the summer sale begin?",
+      "options": [
+        "This Friday",
+        "This Saturday at 9 AM",
+        "This Sunday",
+        "Next Monday"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states the sale will begin this Saturday at 9 AM."
+    },
+    {
+      "id": "q2",
+      "stem": "What is offered in the electronics department?",
+      "options": [
+        "Free headphones with any purchase",
+        "Twenty percent off selected laptops and headphones",
+        "Buy one get one free on all items",
+        "A free membership card"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement mentions the electronics department is offering twenty percent off selected laptop models and headphones."
+    },
+    {
+      "id": "q3",
+      "stem": "What benefit does the membership card provide?",
+      "options": [
+        "Free parking at the mall",
+        "An extra five percent off the first purchase",
+        "Early access to future sales",
+        "Free gift wrapping services"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Customers who sign up for the membership card today will receive an extra five percent off their first purchase."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Good afternoon, shoppers. Welcome to Westfield Mall. We would like to inform you that our annual summer sale will begin this Saturday at 9 AM. All items in the store will be discounted by up to forty percent. Electronics and jewelry will have separate discounts. Our electronics department on the third floor is offering twenty percent off selected laptop models and headphones. Additionally, customers who sign up for our membership card today will receive an extra five percent off their first purchase. The sale will run until Sunday evening. We look forward to seeing you there."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "title": "Photographs - Retail & Services",
+  "questions": [
+    {
+      "id": "q1",
+      "photoDescription": "A woman is standing at a cash register in a clothing store, scanning a customer's items. The customer is holding a credit card ready to pay.",
+      "options": {
+        "A": "The customer is trying on clothes.",
+        "B": "The store clerk is scanning items at the register.",
+        "C": "The woman is arranging clothes on a shelf.",
+        "D": "The customer is returning an item."
+      },
+      "correct": "B",
+      "explanation": "The woman behind the register is using a scanner on the customer's items, which is typical checkout procedure."
+    },
+    {
+      "id": "q2",
+      "photoDescription": "A construction worker wearing a hard hat and safety vest is operating a large piece of machinery at a building site. Other workers are visible in the background carrying materials.",
+      "options": {
+        "A": "The construction site is closed for the day.",
+        "B": "A worker is operating machinery at a building site.",
+        "C": "The workers are taking a break.",
+        "D": "A delivery truck is unloading supplies."
+      },
+      "correct": "B",
+      "explanation": "The worker is actively using machinery while others carry materials, showing ongoing construction activity."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Narrator", "text": "Look at the picture marked number 1 in your test book." },
+    { "role": "Narrator", "text": "(A) The customer is trying on clothes." },
+    { "role": "Narrator", "text": "(B) The store clerk is scanning items at the register." },
+    { "role": "Narrator", "text": "(C) The woman is arranging clothes on a shelf." },
+    { "role": "Narrator", "text": "(D) The customer is returning an item." },
+    { "role": "Narrator", "text": "Look at the picture marked number 2 in your test book." },
+    { "role": "Narrator", "text": "(A) The construction site is closed for the day." },
+    { "role": "Narrator", "text": "(B) A worker is operating machinery at a building site." },
+    { "role": "Narrator", "text": "(C) The workers are taking a break." },
+    { "role": "Narrator", "text": "(D) A delivery truck is unloading supplies." }
+  ]
+}

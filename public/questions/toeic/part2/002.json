@@ -1,0 +1,52 @@
+{
+  "title": "Question-Response - Travel & Logistics",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "How long does it take to get to the airport from here?",
+      "options": {
+        "A": "About thirty minutes by taxi.",
+        "B": "Yes, I've been there before.",
+        "C": "The flight was delayed."
+      },
+      "correct": "A",
+      "explanation": "The question asks about duration ('How long'), so 'About thirty minutes' correctly answers the question."
+    },
+    {
+      "id": "q2",
+      "stem": "Who should I contact regarding the shipment delay?",
+      "options": {
+        "A": "It arrived this morning.",
+        "B": "Please speak to Ms. Tanaka in logistics.",
+        "C": "The shipment was very large."
+      },
+      "correct": "B",
+      "explanation": "The question asks for a person ('Who'), so directing to Ms. Tanaka is the appropriate response."
+    },
+    {
+      "id": "q3",
+      "stem": "The hotel reservation has been confirmed, hasn't it?",
+      "options": {
+        "A": "Yes, I received the confirmation email this morning.",
+        "B": "At the Grand Hotel downtown.",
+        "C": "I reserved it for three nights."
+      },
+      "correct": "A",
+      "explanation": "The question is a confirmation check ('hasn't it?'), so confirming with evidence is the best response."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Man", "text": "Number 1. How long does it take to get to the airport from here?" },
+    { "role": "Woman", "text": "(A) About thirty minutes by taxi." },
+    { "role": "Woman", "text": "(B) Yes, I've been there before." },
+    { "role": "Woman", "text": "(C) The flight was delayed." },
+    { "role": "Woman", "text": "Number 2. Who should I contact regarding the shipment delay?" },
+    { "role": "Man", "text": "(A) It arrived this morning." },
+    { "role": "Man", "text": "(B) Please speak to Ms. Tanaka in logistics." },
+    { "role": "Man", "text": "(C) The shipment was very large." },
+    { "role": "Man", "text": "Number 3. The hotel reservation has been confirmed, hasn't it?" },
+    { "role": "Woman", "text": "(A) Yes, I received the confirmation email this morning." },
+    { "role": "Woman", "text": "(B) At the Grand Hotel downtown." },
+    { "role": "Woman", "text": "(C) I reserved it for three nights." }
+  ]
+}

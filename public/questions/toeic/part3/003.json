@@ -1,0 +1,54 @@
+{
+  "title": "Product Delivery Issue",
+  "transcript": "Man: Hello, this is Mark from Apex Supplies. I'm calling about your order of office furniture.\nWoman: Yes, I was just about to call you. The delivery was scheduled for yesterday, but nothing arrived.\nMan: I apologize for the inconvenience. There was a delay at our warehouse. Your order will be delivered tomorrow morning.\nWoman: That's a problem. We have a team starting a new project on Monday and they need desks and chairs.\nMan: I understand. I've prioritized your order, so everything will arrive by 10 AM tomorrow. Our team will also handle the assembly.\nWoman: That's very helpful. Will there be any additional charge for the assembly service?\nMan: No, we'll include it at no extra cost given the delay.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why is the woman concerned about the delivery delay?",
+      "options": [
+        "The furniture was expensive",
+        "A new team is starting a project on Monday",
+        "The office is moving next week",
+        "She ordered the wrong items"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The woman says a team is starting a new project on Monday and they need the desks and chairs."
+    },
+    {
+      "id": "q2",
+      "stem": "When will the furniture be delivered?",
+      "options": [
+        "Tomorrow morning",
+        "Tomorrow afternoon",
+        "Next Monday",
+        "Later this week"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The man says everything will arrive by 10 AM tomorrow."
+    },
+    {
+      "id": "q3",
+      "stem": "What additional service will be provided at no extra cost?",
+      "options": [
+        "Free delivery",
+        "Furniture assembly",
+        "Product warranty",
+        "Return pickup"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The man offers to include the assembly service at no extra cost due to the delay."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Man", "text": "Hello, this is Mark from Apex Supplies. I'm calling about your order of office furniture." },
+    { "role": "Woman", "text": "Yes, I was just about to call you. The delivery was scheduled for yesterday, but nothing arrived." },
+    { "role": "Man", "text": "I apologize for the inconvenience. There was a delay at our warehouse. Your order will be delivered tomorrow morning." },
+    { "role": "Woman", "text": "That's a problem. We have a team starting a new project on Monday and they need desks and chairs." },
+    { "role": "Man", "text": "I understand. I've prioritized your order, so everything will arrive by 10 AM tomorrow. Our team will also handle the assembly." },
+    { "role": "Woman", "text": "That's very helpful. Will there be any additional charge for the assembly service?" },
+    { "role": "Man", "text": "No, we'll include it at no extra cost given the delay." }
+  ]
+}

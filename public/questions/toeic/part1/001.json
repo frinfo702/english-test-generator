@@ -1,0 +1,41 @@
+{
+  "title": "Photographs - Office & Business Scenes",
+  "questions": [
+    {
+      "id": "q1",
+      "photoDescription": "A woman in business attire is sitting at a desk, typing on a laptop while a smartphone is placed next to her on the desk.",
+      "options": {
+        "A": "She is writing notes on a piece of paper.",
+        "B": "She is typing on her laptop at the desk.",
+        "C": "She is talking on the smartphone.",
+        "D": "She is organizing papers in a folder."
+      },
+      "correct": "B",
+      "explanation": "The woman's hands are on the laptop keyboard, indicating she is typing."
+    },
+    {
+      "id": "q2",
+      "photoDescription": "Two men are standing around a white table in a conference room, looking at documents spread across the table. One man is pointing at a document.",
+      "options": {
+        "A": "They are cleaning the conference table.",
+        "B": "They are having a discussion over documents.",
+        "C": "They are setting up equipment for a presentation.",
+        "D": "They are waiting for a meeting to begin."
+      },
+      "correct": "B",
+      "explanation": "Both men are looking at the documents, and one is pointing, indicating they are reviewing materials together."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Narrator", "text": "Look at the picture marked number 1 in your test book." },
+    { "role": "Narrator", "text": "(A) She is writing notes on a piece of paper." },
+    { "role": "Narrator", "text": "(B) She is typing on her laptop at the desk." },
+    { "role": "Narrator", "text": "(C) She is talking on the smartphone." },
+    { "role": "Narrator", "text": "(D) She is organizing papers in a folder." },
+    { "role": "Narrator", "text": "Look at the picture marked number 2 in your test book." },
+    { "role": "Narrator", "text": "(A) They are cleaning the conference table." },
+    { "role": "Narrator", "text": "(B) They are having a discussion over documents." },
+    { "role": "Narrator", "text": "(C) They are setting up equipment for a presentation." },
+    { "role": "Narrator", "text": "(D) They are waiting for a meeting to begin." }
+  ]
+}

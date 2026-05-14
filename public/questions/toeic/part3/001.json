@@ -1,0 +1,53 @@
+{
+  "title": "Office Relocation",
+  "transcript": "Man: Hi Sarah, I heard the company is planning to move to a new office. Do you know when that's happening?\nWoman: Yes, the lease for this building ends in June, so we're aiming to complete the move by the end of May.\nMan: That's sooner than I thought. Where is the new location?\nWoman: It's in the Riverside Business District, about fifteen minutes from here by train.\nMan: Will everyone be moving, or are some teams staying here?\nWoman: All departments will relocate, but the IT team will work from this location for an extra week to ensure a smooth transition of the servers.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "When does the company plan to complete the office move?",
+      "options": [
+        "By the end of May",
+        "In June",
+        "Next week",
+        "By the end of the year"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The woman states they are aiming to complete the move by the end of May."
+    },
+    {
+      "id": "q2",
+      "stem": "How far is the new office from the current location?",
+      "options": [
+        "About five minutes by train",
+        "About fifteen minutes by train",
+        "About thirty minutes by train",
+        "About an hour by train"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The woman says the new location is about fifteen minutes from here by train."
+    },
+    {
+      "id": "q3",
+      "stem": "Why will the IT team stay at the current office longer?",
+      "options": [
+        "To pack their equipment",
+        "To ensure a smooth server transition",
+        "To train new staff members",
+        "To finalize the lease agreement"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The woman mentions the IT team will stay an extra week to ensure a smooth transition of the servers."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Man", "text": "Hi Sarah, I heard the company is planning to move to a new office. Do you know when that's happening?" },
+    { "role": "Woman", "text": "Yes, the lease for this building ends in June, so we're aiming to complete the move by the end of May." },
+    { "role": "Man", "text": "That's sooner than I thought. Where is the new location?" },
+    { "role": "Woman", "text": "It's in the Riverside Business District, about fifteen minutes from here by train." },
+    { "role": "Man", "text": "Will everyone be moving, or are some teams staying here?" },
+    { "role": "Woman", "text": "All departments will relocate, but the IT team will work from this location for an extra week to ensure a smooth transition of the servers." }
+  ]
+}
