@@ -4,13 +4,6 @@ import styles from "./ToeicMenuPage.module.css";
 
 const listeningParts = [
   {
-    path: "/toeic/part1",
-    label: "Part 1",
-    sublabel: "Photographs",
-    desc: "6 photo description questions. Listen and choose the best description.",
-    count: "6 Qs",
-  },
-  {
     path: "/toeic/part2",
     label: "Part 2",
     sublabel: "Question-Response",
@@ -93,7 +86,7 @@ export function ToeicMenuPage() {
   return (
     <div>
       <SectionHeader
-        title="TOEIC Practice"
+        title="TOEIC L&amp;R"
         subtitle="Listening & Reading — choose a part to practice"
         backTo="/"
       />

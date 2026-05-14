@@ -176,29 +176,61 @@ export function Part2Page() {
       {data && !loading && hasValidQuestionNumber && (
         <>
           {graded && (
-            <div className={styles.resultCard}>
-              <h2>Part 2 Complete</h2>
-              <div className={styles.scoreBox}>
-                <span className={styles.scoreNum}>{totalCorrect}</span>
-                <span className={styles.scoreDen}>/{totalQuestions}</span>
-                <span className={styles.scorePct}>
-                  ({Math.round((totalCorrect / totalQuestions) * 100)}%)
-                </span>
+            <>
+              <div className={styles.resultCard}>
+                <h2>Part 2 Complete</h2>
+                <div className={styles.scoreBox}>
+                  <span className={styles.scoreNum}>{totalCorrect}</span>
+                  <span className={styles.scoreDen}>/{totalQuestions}</span>
+                  <span className={styles.scorePct}>
+                    ({Math.round((totalCorrect / totalQuestions) * 100)}%)
+                  </span>
+                </div>
+                <ProgressBar
+                  current={totalCorrect}
+                  total={totalQuestions}
+                  label="Accuracy"
+                />
+                <div className={styles.resultActions}>
+                  <Button onClick={retake} size="md" variant="secondary">
+                    Retake
+                  </Button>
+                  <Button onClick={handleBackToList} size="md">
+                    Back to Question List
+                  </Button>
+                </div>
               </div>
-              <ProgressBar
-                current={totalCorrect}
-                total={totalQuestions}
-                label="Accuracy"
-              />
-              <div className={styles.resultActions}>
-                <Button onClick={retake} size="md" variant="secondary">
-                  Retake
-                </Button>
-                <Button onClick={handleBackToList} size="md">
-                  Back to Question List
-                </Button>
-              </div>
-            </div>
+
+              {questions.map((q, qIndex) => {
+                const sel = selected[q.id];
+                const isCorrect = sel === q.correct;
+                return (
+                  <div key={q.id} className={styles.reviewCard}>
+                    <div className={styles.reviewHeader}>
+                      <strong>Question {qIndex + 1}</strong>
+                      <span className={isCorrect ? styles.reviewCorrect : styles.reviewIncorrect}>
+                        {isCorrect ? "✓ Correct" : "✗ Incorrect"}
+                      </span>
+                    </div>
+                    <p className={styles.reviewStem}>{q.stem}</p>
+                    <div className={styles.reviewOptions}>
+                      {(["A", "B", "C"] as const).map((opt) => {
+                        let cls = styles.reviewOpt;
+                        if (opt === q.correct) cls += " " + styles.reviewOptCorrect;
+                        if (sel === opt && opt !== q.correct) cls += " " + styles.reviewOptWrong;
+                        return (
+                          <div key={opt} className={cls}>
+                            <span className={styles.optLabel}>{opt}</span>
+                            <span>{q.options[opt]}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <p className={styles.explanation}>{q.explanation}</p>
+                  </div>
+                );
+              })}
+            </>
           )}
 
           {!graded && currentQuestion && (
@@ -214,13 +246,9 @@ export function Part2Page() {
               <div className={styles.audioHint}>
                 {!ttsLoading && (
                   <p className={styles.audioHintText}>
-                    Listen to the question and three possible responses.
+                    Listen to the question and choose the best response.
                   </p>
                 )}
-              </div>
-
-              <div className={styles.questionStem}>
-                {currentQuestion.stem}
               </div>
 
               <div className={styles.options}>
@@ -235,7 +263,6 @@ export function Part2Page() {
                       onClick={() => handleSelect(opt)}
                     >
                       <span className={styles.optLabel}>{opt}</span>
-                      <span>{currentQuestion.options[opt]}</span>
                     </button>
                   );
                 })}

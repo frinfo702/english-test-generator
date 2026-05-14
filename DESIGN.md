@@ -80,7 +80,7 @@
 
 - **Header**: height `56px`, white background, 1px bottom-border (`--color-border`). Sticky top.
   - Logo left: wordmark "English Test Practice" in `--text-sm` `--font-semibold` `--color-ink`. No icon.
-  - Nav center-right: "TOEFL 2026", "TOEIC Reading" as pill-shaped links. Active state = filled accent pill (`--color-accent` bg, white text). Inactive = `--color-ink-secondary` text, no bg.
+  - Nav center-right: "TOEFL 2026", "TOEIC" as pill-shaped links. Active state = filled accent pill (`--color-accent` bg, white text). Inactive = `--color-ink-secondary` text, no bg.
   - Rightmost: compact "Dashboard" icon-text link.
 - **Main**: `padding: 32px 24px`, max-width `var(--max-content)`, centered.
 - **No sidebar**: this is a single-column focused tool.
@@ -141,7 +141,7 @@ Sizes: `sm` (h-32px), `md` (h-40px), `lg` (h-48px). All use `--font-medium`.
 ### Home Page
 
 **Hero**
-- Title: `--text-2xl` `--font-bold` `--color-ink`. "Master the TOEFL iBT 2026 & TOEIC Reading."
+- Title: `--text-2xl` `--font-bold` `--color-ink`. "Master the TOEFL iBT 2026 & TOEIC L&R."
 - Subtitle: `--text-base` `--color-ink-secondary`. "AI-generated practice questions. No sign-up. No internet required after load."
 - Two large cards below (TOEFL / TOEIC), equal width grid.
   - Each card: section-colored top border (`4px`), icon indicator (simple Unicode or CSS shape), title, 3-line feature list, primary CTA button.

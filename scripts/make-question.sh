@@ -13,7 +13,6 @@
 #   toefl/writing/discussion
 #   toefl/speaking/listen-repeat
 #   toefl/speaking/interview
-#   toeic/part1
 #   toeic/part2
 #   toeic/part3
 #   toeic/part4
@@ -41,7 +40,6 @@ echo "  toefl/writing/email"
 echo "  toefl/writing/discussion"
 echo "  toefl/speaking/listen-repeat"
 echo "  toefl/speaking/interview"
-echo "  toeic/part1"
 echo "  toeic/part2"
 echo "  toeic/part3"
 echo "  toeic/part4"
@@ -225,35 +223,6 @@ TMPL
       "responseTime": 45,
       "sampleAnswer": "TODO: Model answer (optional)"
     }
-  ]
-}
-TMPL
-      ;;
-
-    toeic/part1)
-      cat << 'TMPL'
-{
-  "title": "Photographs - Set",
-  "questions": [
-    {
-      "id": "q1",
-      "photoDescription": "TODO: Describe what is visible in the photo",
-      "options": {
-        "A": "TODO: Statement A describing the photo",
-        "B": "TODO: Statement B describing the photo",
-        "C": "TODO: Statement C describing the photo",
-        "D": "TODO: Statement D describing the photo"
-      },
-      "correct": "A",
-      "explanation": "TODO: Why the correct statement best matches the photo"
-    }
-  ],
-  "audioSegments": [
-    { "role": "Narrator", "text": "Look at the picture marked number 1 in your test book." },
-    { "role": "Narrator", "text": "(A) TODO: Statement A" },
-    { "role": "Narrator", "text": "(B) TODO: Statement B" },
-    { "role": "Narrator", "text": "(C) TODO: Statement C" },
-    { "role": "Narrator", "text": "(D) TODO: Statement D" }
   ]
 }
 TMPL

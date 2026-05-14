@@ -17,7 +17,6 @@ import {
   ConversationPage,
   LecturePage,
 } from "./pages/toefl/listening/ListeningTaskPage";
-import { Part1Page } from "./pages/toeic/Part1Page";
 import { Part2Page } from "./pages/toeic/Part2Page";
 import { Part3Page } from "./pages/toeic/Part3Page";
 import { Part4Page } from "./pages/toeic/Part4Page";
@@ -201,19 +200,6 @@ export default function App() {
 
           {/* TOEIC */}
           <Route path="/toeic" element={<ToeicMenuPage />} />
-          <Route
-            path="/toeic/part1"
-            element={
-              <QuestionSelectorPage
-                taskId="toeic/part1"
-                title="Part 1: Photographs"
-                subtitle="Select a question number or start with random."
-                backTo="/toeic"
-                basePath="/toeic/part1"
-              />
-            }
-          />
-          <Route path="/toeic/part1/:questionNumber" element={<Part1Page />} />
           <Route
             path="/toeic/part2"
             element={

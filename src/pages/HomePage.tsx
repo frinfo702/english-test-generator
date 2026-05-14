@@ -60,7 +60,7 @@ export function HomePage() {
       <div className={styles.hero}>
         <h1 className={styles.title}>
           Master the TOEFL iBT 2026{" "}
-          <span className={styles.titleAccent}>&amp;</span> TOEIC Reading
+          <span className={styles.titleAccent}>&amp;</span> TOEIC L&amp;R
         </h1>
         <p className={styles.description}>
           AI-generated practice questions. No sign-up required. Practice
@@ -145,11 +145,11 @@ export function HomePage() {
               style={{ background: "var(--color-toeic)" }}
             />
             <div className={styles.cardHeader}>
-              <h3 className={styles.cardTitle}>TOEIC Reading</h3>
+              <h3 className={styles.cardTitle}>TOEIC L&amp;R</h3>
             </div>
             <p className={styles.cardDesc}>
-              Part 5, 6, and 7. Complete reading comprehension practice with
-              instant scoring.
+              Parts 1-7. Complete Listening &amp; Reading practice with
+              instant scoring and audio playback.
             </p>
             <ul className={styles.cardTasks}>
               <li>Part 5 — Incomplete Sentences (30 Qs)</li>

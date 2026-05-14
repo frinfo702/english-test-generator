@@ -49,7 +49,7 @@ export function AppShell({ children }: AppShellProps) {
                 isToeic ? styles.navLinkActive : "",
               ].join(" ")}
             >
-              TOEIC Reading
+              TOEIC L&amp;R
             </Link>
             <span className={styles.navDivider} />
             <Link

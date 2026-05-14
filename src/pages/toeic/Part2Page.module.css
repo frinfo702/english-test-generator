@@ -136,6 +136,82 @@
   gap: var(--spacing-md);
 }
 
+.reviewCard {
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.reviewCorrect {
+  color: var(--color-success);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.reviewIncorrect {
+  color: var(--color-error);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.reviewStem {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: #f8f6ff;
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.reviewOptions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.reviewOpt {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 10px var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-size: var(--font-size-body);
+}
+
+.reviewOptCorrect {
+  border-color: var(--color-success);
+  background: var(--color-success-subtle);
+}
+
+.reviewOptWrong {
+  border-color: var(--color-error);
+  background: var(--color-error-subtle);
+}
+
+.explanation {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: #f3f0ff;
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+  line-height: var(--lh-relaxed);
+}
+
 .error {
   color: var(--color-incorrect);
   background: var(--color-incorrect-bg);

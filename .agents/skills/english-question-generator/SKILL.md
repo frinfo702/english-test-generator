@@ -4,7 +4,7 @@ description: >
   TOEFL iBT (2026年以降) と TOEIC の問題JSONを生成するスキル。
   「TOEFL対策」「TOEFL問題作って」「Readingの練習」「Writingの練習」「Speakingの練習」
   「TOEFL practice」「TOEFLの問題」「新形式TOEFL」「アダプティブTOEFL」「TOEICの問題を作って」
-  「part5の問題を作って」「TOEICリスニング」「part1」「part2」「part3」「part4」
+   「part5の問題を作って」「TOEICリスニング」「part2」「part3」「part4」
   など、試験問題作成依頼で使う。
   セクション/タスク指定がなければ確認し、難易度指定がなければ Module 1（標準）で生成する。
   Speaking はテキスト問題のみ対応（音声生成は generate-audio.ts で行う）。
@@ -37,7 +37,6 @@ description: >
 - `toefl/writing/discussion`
 - `toefl/speaking/listen-repeat`
 - `toefl/speaking/interview`
-- `toeic/part1`
 - `toeic/part2`
 - `toeic/part3`
 - `toeic/part4`

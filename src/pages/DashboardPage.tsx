@@ -23,7 +23,6 @@ const TASK_LABELS: Record<TaskId, string> = {
   "toefl/writing/discussion": "TOEFL Writing: Discussion",
   "toefl/speaking/listen-repeat": "TOEFL Speaking: Listen & Repeat",
   "toefl/speaking/interview": "TOEFL Speaking: Interview",
-  "toeic/part1": "TOEIC Part 1: Photographs",
   "toeic/part2": "TOEIC Part 2: Question-Response",
   "toeic/part3": "TOEIC Part 3: Conversations",
   "toeic/part4": "TOEIC Part 4: Talks",

@@ -25,7 +25,6 @@
 | TOEFL Writing: Build a Sentence          | `public/questions/toefl/writing/build-sentence/` |
 | TOEFL Speaking: Take an Interview        | `public/questions/toefl/speaking/interview/`     |
 | TOEFL Speaking: Listen and Repeat        | `public/questions/toefl/speaking/listen-repeat/` |
-| TOEIC Part 1                             | `public/questions/toeic/part1/`                  |
 | TOEIC Part 2                             | `public/questions/toeic/part2/`                  |
 | TOEIC Part 3                             | `public/questions/toeic/part3/`                  |
 | TOEIC Part 4                             | `public/questions/toeic/part4/`                  |
@@ -536,49 +535,6 @@ Single / Double / Triple passage の読解。
 - `options`: オブジェクト形式（Part 5 と同様）
 - `correct`: アルファベット文字列（`"A"` など）
 - Single: 2〜4問、Double: 5問、Triple: 5問
-
----
-
-## TOEIC Part 1: Photographs
-
-写真描写問題。6問。写真の代わりに `photoDescription` で写真内容をテキストで示す。
-Narrator が "(A)"〜"(D)" の4文を読み上げ、写真に最も合うものを選ぶ。
-`audioSegments` は問題ごとに Narrator の読み上げが連続する。
-
-```json
-{
-  "title": "Photographs - Office Scene Set",
-  "questions": [
-    {
-      "id": "q1",
-      "photoDescription": "A woman is looking at a computer screen while talking on the phone in a modern office.",
-      "options": {
-        "A": "She is typing a memo on her computer.",
-        "B": "She is talking on the phone while looking at the screen.",
-        "C": "She is reading a printed document.",
-        "D": "She is organizing files on her desk."
-      },
-      "correct": "B",
-      "explanation": "The woman is holding the phone to her ear while looking at the computer screen."
-    }
-  ],
-  "audioSegments": [
-    { "role": "Narrator", "text": "Look at the picture marked number 1 in your test book." },
-    { "role": "Narrator", "text": "(A) She is typing a memo on her computer." },
-    { "role": "Narrator", "text": "(B) She is talking on the phone while looking at the screen." },
-    { "role": "Narrator", "text": "(C) She is reading a printed document." },
-    { "role": "Narrator", "text": "(D) She is organizing files on her desk." }
-  ]
-}
-```
-
-**フィールド仕様:**
-- `title`: 問題セットのタイトル
-- `photoDescription`: 写真の内容説明（写真の代わりにテキストで表示）
-- `questions[].options`: オブジェクト形式（`"A"`〜`"D"`）
-- `questions[].correct`: アルファベット文字列
-- `audioSegments`: 全問題の音声を順に並べる。各問題5セグメント（指示＋A〜D）×6問＝30セグメント
-- 問題数: 6問固定
 
 ## TOEIC Part 2: Question-Response
 
