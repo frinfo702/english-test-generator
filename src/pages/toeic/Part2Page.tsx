@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
 import { Button } from "../../components/ui/Button";
@@ -35,13 +35,13 @@ export function Part2Page() {
   const { saveScore } = useScoreHistory();
   const { display, elapsedSeconds, running, start, stop, reset: resetTimer } =
     useElapsedTimer();
-  const { loading: ttsLoading, playSegments } = useTts();
+  const { loading: ttsLoading, playSegmentsWithGaps } = useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
-  const [audioPlayed, setAudioPlayed] = useState<Record<number, boolean>>({});
+  const audioStartedRef = useRef<Set<number>>(new Set());
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
@@ -61,7 +61,7 @@ export function Part2Page() {
   const questions = data?.questions ?? [];
 
   useEffect(() => {
-    if (data && !graded && !audioPlayed[currentIndex]) {
+    if (data && !graded && !audioStartedRef.current.has(currentIndex)) {
       const startIdx = currentIndex * SEGMENTS_PER_QUESTION;
       const urls = data.audioSegments
         .slice(startIdx, startIdx + SEGMENTS_PER_QUESTION)
@@ -69,11 +69,11 @@ export function Part2Page() {
           `/audio/toeic/part2/${fileBasename}/${startIdx + i + 1}.mp3`
         );
       if (urls.length > 0) {
-        playSegments(urls);
-        setAudioPlayed((s) => ({ ...s, [currentIndex]: true }));
+        audioStartedRef.current = new Set(audioStartedRef.current).add(currentIndex);
+        playSegmentsWithGaps(urls, [3, 3, 3]);
       }
     }
-  }, [data, currentIndex, graded, audioPlayed, playSegments, fileBasename]);
+  }, [data, currentIndex, graded, playSegmentsWithGaps, fileBasename]);
 
   const currentQuestion = questions[currentIndex];
   const totalQuestions = questions.length;
@@ -104,7 +104,7 @@ export function Part2Page() {
     setSelected({});
     setCurrentIndex(0);
     setGraded(false);
-    setAudioPlayed({});
+    audioStartedRef.current = new Set();
     resetTimer();
   };
 
@@ -130,7 +130,7 @@ export function Part2Page() {
     setCurrentIndex(0);
     setSelected({});
     setGraded(false);
-    setAudioPlayed({});
+    audioStartedRef.current = new Set();
     navigate("/toeic/part2");
   };
 

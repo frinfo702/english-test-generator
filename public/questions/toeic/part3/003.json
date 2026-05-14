@@ -49,6 +49,9 @@
     { "role": "Woman", "text": "That's a problem. We have a team starting a new project on Monday and they need desks and chairs." },
     { "role": "Man", "text": "I understand. I've prioritized your order, so everything will arrive by 10 AM tomorrow. Our team will also handle the assembly." },
     { "role": "Woman", "text": "That's very helpful. Will there be any additional charge for the assembly service?" },
-    { "role": "Man", "text": "No, we'll include it at no extra cost given the delay." }
+    { "role": "Man", "text": "No, we'll include it at no extra cost given the delay." },
+    { "role": "Narrator", "text": "Question 1. Why is the woman concerned about the delivery delay?" },
+    { "role": "Narrator", "text": "Question 2. When will the furniture be delivered?" },
+    { "role": "Narrator", "text": "Question 3. What additional service will be provided at no extra cost?" }
   ]
 }

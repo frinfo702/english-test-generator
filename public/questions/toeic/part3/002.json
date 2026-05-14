@@ -49,6 +49,9 @@
     { "role": "Woman", "text": "Let me check the flight availability. There's a direct flight at 6:30 PM on the 12th. Would you like me to book that?" },
     { "role": "Man", "text": "Yes, please. Also, could you reserve a hotel near the convention center?" },
     { "role": "Woman", "text": "Certainly. I'll book the usual hotel we use. Shall I arrange a rental car as well?" },
-    { "role": "Man", "text": "No, that won't be necessary. The client is providing transportation." }
+    { "role": "Man", "text": "No, that won't be necessary. The client is providing transportation." },
+    { "role": "Narrator", "text": "Question 1. What is the man planning to do?" },
+    { "role": "Narrator", "text": "Question 2. When will the man return from his trip?" },
+    { "role": "Narrator", "text": "Question 3. Why doesn't the man need a rental car?" }
   ]
 }

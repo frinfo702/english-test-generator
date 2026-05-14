@@ -10,6 +10,7 @@ interface UseTtsReturn {
   setPlaybackRate: (rate: number) => void;
   play: (url: string) => Promise<void>;
   playSegments: (urls: string[]) => Promise<void>;
+  playSegmentsWithGaps: (urls: string[], gaps: number[]) => Promise<void>;
   pause: () => void;
   resume: () => void;
   stop: () => void;
@@ -36,6 +37,16 @@ async function fetchAndDecodeAudio(url: string): Promise<AudioBuffer> {
     await ctx.resume();
   }
   return ctx.decodeAudioData(arrayBuffer.slice(0));
+}
+
+function createSilenceBuffer(
+  durationSec: number,
+  sampleRate: number,
+  numberOfChannels: number,
+): AudioBuffer {
+  const ctx = getAudioContext();
+  const length = Math.round(sampleRate * durationSec);
+  return ctx.createBuffer(numberOfChannels, length, sampleRate);
 }
 
 function concatenateAudioBuffers(buffers: AudioBuffer[]): AudioBuffer {
@@ -230,6 +241,64 @@ export function useTts(): UseTtsReturn {
     [cleanup, tick],
   );
 
+  const playSegmentsWithGaps = useCallback(
+    async (urls: string[], gaps: number[]) => {
+      cleanup();
+      setError(null);
+      setLoading(true);
+      try {
+        const buffers = await Promise.all(
+          urls.map((url) => fetchAndDecodeAudio(url)),
+        );
+
+        const sampleRate = buffers[0].sampleRate;
+        const numberOfChannels = buffers[0].numberOfChannels;
+        const buffersWithSilence: AudioBuffer[] = [];
+
+        for (let i = 0; i < buffers.length; i++) {
+          buffersWithSilence.push(buffers[i]);
+          const gap = gaps[i];
+          if (gap !== undefined && gap > 0) {
+            buffersWithSilence.push(
+              createSilenceBuffer(gap, sampleRate, numberOfChannels),
+            );
+          }
+        }
+
+        const combinedBuffer = concatenateAudioBuffers(buffersWithSilence);
+        const wavBlob = audioBufferToWavBlob(combinedBuffer);
+        const url = URL.createObjectURL(wavBlob);
+        urlRef.current = url;
+
+        const audio = new Audio(url);
+        audio.playbackRate = playbackRateRef.current;
+        audioRef.current = audio;
+
+        audio.onended = () => {
+          setPlaying(false);
+          if (rafRef.current) {
+            cancelAnimationFrame(rafRef.current);
+            rafRef.current = 0;
+          }
+        };
+        audio.onerror = () => {
+          setPlaying(false);
+          setError("Audio playback error");
+          setLoading(false);
+        };
+
+        await audio.play();
+        setPlaying(true);
+        setLoading(false);
+        rafRef.current = requestAnimationFrame(tick);
+      } catch (e) {
+        setError(e instanceof Error ? e.message : String(e));
+        setLoading(false);
+      }
+    },
+    [cleanup, tick],
+  );
+
   const pause = useCallback(() => {
     if (audioRef.current) {
       audioRef.current.pause();
@@ -277,5 +346,5 @@ export function useTts(): UseTtsReturn {
     }
   }, []);
 
-  return { playing, loading, error, currentTime, duration, playbackRate, setPlaybackRate, play, playSegments, pause, resume, stop, seek };
+  return { playing, loading, error, currentTime, duration, playbackRate, setPlaybackRate, play, playSegments, playSegmentsWithGaps, pause, resume, stop, seek };
 }

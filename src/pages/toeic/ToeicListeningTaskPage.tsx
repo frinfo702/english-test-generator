@@ -37,10 +37,12 @@ export function ToeicListeningTaskPageBase({
   taskId,
   subtitle,
   partLabel,
+  readQuestionsAloud,
 }: {
   taskId: "toeic/part3" | "toeic/part4";
   subtitle: string;
   partLabel: string;
+  readQuestionsAloud?: boolean;
 }) {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
@@ -55,7 +57,7 @@ export function ToeicListeningTaskPageBase({
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playSegments, pause, resume, stop: stopTts, seek } =
+  const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playSegments, playSegmentsWithGaps, pause, resume, stop: stopTts, seek } =
     useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
@@ -209,7 +211,18 @@ export function ToeicListeningTaskPageBase({
                     const urls = data.audioSegments.map((_, i) =>
                       `/audio/${taskId}/${fileBasename}/${i + 1}.mp3`
                     );
-                    playSegments(urls);
+                    if (readQuestionsAloud) {
+                      const convCount = data.audioSegments.length - data.questions.length;
+                      const gaps: number[] = [];
+                      for (let i = 0; i < data.audioSegments.length - 1; i++) {
+                        if (i < convCount - 1) gaps.push(0);
+                        else if (i === convCount - 1) gaps.push(3);
+                        else gaps.push(5);
+                      }
+                      playSegmentsWithGaps(urls, gaps);
+                    } else {
+                      playSegments(urls);
+                    }
                   }
                 }}
                 disabled={ttsLoading}

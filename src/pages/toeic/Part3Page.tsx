@@ -6,6 +6,7 @@ export function Part3Page() {
       taskId="toeic/part3"
       subtitle="Listen to the conversation and answer the questions."
       partLabel="Part 3: Conversations"
+      readQuestionsAloud
     />
   );
 }

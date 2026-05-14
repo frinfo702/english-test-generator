@@ -48,6 +48,9 @@
     { "role": "Man", "text": "That's sooner than I thought. Where is the new location?" },
     { "role": "Woman", "text": "It's in the Riverside Business District, about fifteen minutes from here by train." },
     { "role": "Man", "text": "Will everyone be moving, or are some teams staying here?" },
-    { "role": "Woman", "text": "All departments will relocate, but the IT team will work from this location for an extra week to ensure a smooth transition of the servers." }
+    { "role": "Woman", "text": "All departments will relocate, but the IT team will work from this location for an extra week to ensure a smooth transition of the servers." },
+    { "role": "Narrator", "text": "Question 1. When does the company plan to complete the office move?" },
+    { "role": "Narrator", "text": "Question 2. How far is the new office from the current location?" },
+    { "role": "Narrator", "text": "Question 3. Why will the IT team stay at the current office longer?" }
   ]
 }
