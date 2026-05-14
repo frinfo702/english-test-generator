@@ -25,6 +25,10 @@
 | TOEFL Writing: Build a Sentence          | `public/questions/toefl/writing/build-sentence/` |
 | TOEFL Speaking: Take an Interview        | `public/questions/toefl/speaking/interview/`     |
 | TOEFL Speaking: Listen and Repeat        | `public/questions/toefl/speaking/listen-repeat/` |
+| TOEIC Part 1                             | `public/questions/toeic/part1/`                  |
+| TOEIC Part 2                             | `public/questions/toeic/part2/`                  |
+| TOEIC Part 3                             | `public/questions/toeic/part3/`                  |
+| TOEIC Part 4                             | `public/questions/toeic/part4/`                  |
 | TOEIC Part 5                             | `public/questions/toeic/part5/`                  |
 | TOEIC Part 6                             | `public/questions/toeic/part6/`                  |
 | TOEIC Part 7                             | `public/questions/toeic/part7/`                  |
@@ -157,29 +161,29 @@
 
 ## TOEFL Reading: Complete the Words
 
-段落内の単語を `word___` 形式で一部隠し、ヒントの頭文字を元に補完する。
+段落内の単語を `hint + _` 形式で一部隠し、**hintの続きだけ**を入力させる。
 
 ```json
 {
-  "paragraph": "The process of photosynth___ allows plants to conv___ sunlight into chem___ energy. Chlorophyll, the green pig___ found in plant cells, absor___ light from the sun.",
+  "paragraph": "The process of pho_________ allows plants to con____ sunlight into che_____ energy. Chlorophyll, the green pig____ found in plant cells, abs____ light from the sun.",
   "items": [
     {
       "index": 0,
       "hint": "pho",
       "answer": "photosynthesis",
-      "placeholder": "photosynth___"
+      "placeholder": "pho_________"
     },
     {
       "index": 1,
       "hint": "con",
       "answer": "convert",
-      "placeholder": "conv___"
+      "placeholder": "con____"
     },
     {
       "index": 2,
       "hint": "che",
       "answer": "chemical",
-      "placeholder": "chem___"
+      "placeholder": "che_____"
     }
   ]
 }
@@ -187,11 +191,14 @@
 
 **フィールド仕様:**
 
-- `paragraph`: `word___` 形式のプレースホルダーを含む文
+- `paragraph`: `hint + _` のプレースホルダーを含む文
 - `items[].index`: 段落内の出現順（0始まり）
 - `items[].hint`: 最初の2〜3文字
 - `items[].answer`: 正解の完全な単語
-- `items[].placeholder`: `paragraph` 内の文字列と**完全一致**させること
+- `items[].hint` は `items[].answer` の先頭一致にする（大文字小文字は無視可）
+- `items[].placeholder`: `hint + 続き文字数分の _` で作り、`paragraph` 内文字列と**完全一致**させる
+- 続き文字数 = `answer.length - hint.length`
+- UIでは hint 部分は表示済みで、解答者は続き部分のみ入力する
 - 穴埋め数: 8〜10個
 
 ---
@@ -529,3 +536,151 @@ Single / Double / Triple passage の読解。
 - `options`: オブジェクト形式（Part 5 と同様）
 - `correct`: アルファベット文字列（`"A"` など）
 - Single: 2〜4問、Double: 5問、Triple: 5問
+
+---
+
+## TOEIC Part 1: Photographs
+
+写真描写問題。6問。写真の代わりに `photoDescription` で写真内容をテキストで示す。
+Narrator が "(A)"〜"(D)" の4文を読み上げ、写真に最も合うものを選ぶ。
+`audioSegments` は問題ごとに Narrator の読み上げが連続する。
+
+```json
+{
+  "title": "Photographs - Office Scene Set",
+  "questions": [
+    {
+      "id": "q1",
+      "photoDescription": "A woman is looking at a computer screen while talking on the phone in a modern office.",
+      "options": {
+        "A": "She is typing a memo on her computer.",
+        "B": "She is talking on the phone while looking at the screen.",
+        "C": "She is reading a printed document.",
+        "D": "She is organizing files on her desk."
+      },
+      "correct": "B",
+      "explanation": "The woman is holding the phone to her ear while looking at the computer screen."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Narrator", "text": "Look at the picture marked number 1 in your test book." },
+    { "role": "Narrator", "text": "(A) She is typing a memo on her computer." },
+    { "role": "Narrator", "text": "(B) She is talking on the phone while looking at the screen." },
+    { "role": "Narrator", "text": "(C) She is reading a printed document." },
+    { "role": "Narrator", "text": "(D) She is organizing files on her desk." }
+  ]
+}
+```
+
+**フィールド仕様:**
+- `title`: 問題セットのタイトル
+- `photoDescription`: 写真の内容説明（写真の代わりにテキストで表示）
+- `questions[].options`: オブジェクト形式（`"A"`〜`"D"`）
+- `questions[].correct`: アルファベット文字列
+- `audioSegments`: 全問題の音声を順に並べる。各問題5セグメント（指示＋A〜D）×6問＝30セグメント
+- 問題数: 6問固定
+
+## TOEIC Part 2: Question-Response
+
+応答問題。25問。質問または陳述を聞き、最も適切な応答を3つの中から選ぶ。
+
+```json
+{
+  "title": "Question-Response Set 1",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "When is the deadline for the budget proposal?",
+      "options": {
+        "A": "It's due this Friday.",
+        "B": "Yes, I submitted it yesterday.",
+        "C": "In the conference room."
+      },
+      "correct": "A",
+      "explanation": "The question asks 'When', so only 'It's due this Friday' is a time-related response."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Woman", "text": "Number 1. When is the deadline for the budget proposal?" },
+    { "role": "Man", "text": "(A) It's due this Friday." },
+    { "role": "Man", "text": "(B) Yes, I submitted it yesterday." },
+    { "role": "Man", "text": "(C) In the conference room." }
+  ]
+}
+```
+
+**フィールド仕様:**
+- `questions[].stem`: 聞かれる質問文
+- `questions[].options`: オブジェクト形式（`"A"`〜`"C"` — Part 2は選択肢3つのみ）
+- `questions[].correct`: アルファベット文字列（`"A"` / `"B"` / `"C"`）
+- `audioSegments`: 質問は Man/Woman 交互、応答3つは反対の性別の話者
+- 問題数: 25問（本番準拠）
+
+## TOEIC Part 3: Conversations
+
+会話問題。1会話につき3問×13セット＝39問。
+TOEFL Listening Conversation と同構造。会話は必ず Man と Woman の2名。
+audioSegments の role は `"Man"` / `"Woman"` を使用（音声割当が一貫する）。
+トピックはビジネス文脈（オフィス、会議、出張、顧客対応など）。
+
+```json
+{
+  "title": "Office Renovation",
+  "transcript": "Man: Good morning. I'm here to discuss the office renovation schedule.\nWoman: Yes, let me pull up the contractor's timeline.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the man's purpose in the conversation?",
+      "options": ["To discuss the office renovation timeline", "To complain about construction noise", "To request a change of workspace", "To inquire about contractor pricing"],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The man says he is there to discuss the office renovation schedule."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Man", "text": "Good morning. I'm here to discuss the office renovation schedule." },
+    { "role": "Woman", "text": "Yes, let me pull up the contractor's timeline. The construction team will start next Monday." }
+  ]
+}
+```
+
+**フィールド仕様:**
+- TOEFL Listening Conversation と同一構造
+- `audioSegments[].role`: `"Man"` または `"Woman"`（TOEICのキャラクター一貫性ルール）
+- `options`: 配列形式（TOEFL Listening と同様）
+- `correctIndex`: 0始まり
+- 1会話あたり3問、13セットで39問がフルセット
+
+## TOEIC Part 4: Talks
+
+説明文問題。1トークにつき3問×10セット＝30問。
+TOEFL Listening Lecture と同構造。トークは Speaker 1名。
+audioSegments の role は常に `"Speaker"`。
+トピックはビジネス関連（アナウンス、プレゼン、ラジオ広告、音声メッセージなど）。
+
+```json
+{
+  "title": "Airport Announcement",
+  "transcript": "Attention all passengers. Flight 247 to Chicago is now boarding at Gate 12.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Where does this announcement most likely take place?",
+      "options": ["At a train station", "At an airport", "At a bus terminal", "At a hotel lobby"],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The announcement refers to a flight number, gates, and boarding passes."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Speaker", "text": "Attention all passengers. Flight 247 to Chicago is now boarding at Gate 12." }
+  ]
+}
+```
+
+**フィールド仕様:**
+- TOEFL Listening Lecture と同一構造
+- `audioSegments[].role`: 常に `"Speaker"`（1名の話者）
+- `options`: 配列形式
+- `correctIndex`: 0始まり
+- 1トークあたり3問、10セットで30問がフルセット

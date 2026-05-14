@@ -17,6 +17,10 @@ import {
   ConversationPage,
   LecturePage,
 } from "./pages/toefl/listening/ListeningTaskPage";
+import { Part1Page } from "./pages/toeic/Part1Page";
+import { Part2Page } from "./pages/toeic/Part2Page";
+import { Part3Page } from "./pages/toeic/Part3Page";
+import { Part4Page } from "./pages/toeic/Part4Page";
 import { Part5Page } from "./pages/toeic/Part5Page";
 import { Part6Page } from "./pages/toeic/Part6Page";
 import { Part7Page } from "./pages/toeic/Part7Page";
@@ -197,6 +201,58 @@ export default function App() {
 
           {/* TOEIC */}
           <Route path="/toeic" element={<ToeicMenuPage />} />
+          <Route
+            path="/toeic/part1"
+            element={
+              <QuestionSelectorPage
+                taskId="toeic/part1"
+                title="Part 1: Photographs"
+                subtitle="Select a question number or start with random."
+                backTo="/toeic"
+                basePath="/toeic/part1"
+              />
+            }
+          />
+          <Route path="/toeic/part1/:questionNumber" element={<Part1Page />} />
+          <Route
+            path="/toeic/part2"
+            element={
+              <QuestionSelectorPage
+                taskId="toeic/part2"
+                title="Part 2: Question-Response"
+                subtitle="Select a question number or start with random."
+                backTo="/toeic"
+                basePath="/toeic/part2"
+              />
+            }
+          />
+          <Route path="/toeic/part2/:questionNumber" element={<Part2Page />} />
+          <Route
+            path="/toeic/part3"
+            element={
+              <QuestionSelectorPage
+                taskId="toeic/part3"
+                title="Part 3: Conversations"
+                subtitle="Select a question number or start with random."
+                backTo="/toeic"
+                basePath="/toeic/part3"
+              />
+            }
+          />
+          <Route path="/toeic/part3/:questionNumber" element={<Part3Page />} />
+          <Route
+            path="/toeic/part4"
+            element={
+              <QuestionSelectorPage
+                taskId="toeic/part4"
+                title="Part 4: Talks"
+                subtitle="Select a question number or start with random."
+                backTo="/toeic"
+                basePath="/toeic/part4"
+              />
+            }
+          />
+          <Route path="/toeic/part4/:questionNumber" element={<Part4Page />} />
           <Route
             path="/toeic/part5"
             element={

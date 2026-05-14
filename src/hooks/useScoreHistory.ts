@@ -11,10 +11,14 @@ export type TaskId =
   | "toefl/writing/discussion"
   | "toefl/speaking/listen-repeat"
   | "toefl/speaking/interview"
+  | "toeic/part1"
+  | "toeic/part2"
+  | "toeic/part3"
+  | "toeic/part4"
   | "toeic/part5"
   | "toeic/part6"
-  | "shadowing"
-  | "toeic/part7";
+  | "toeic/part7"
+  | "shadowing";
 
 export interface ScoreEntry {
   taskId: TaskId;

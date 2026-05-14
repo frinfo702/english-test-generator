@@ -13,12 +13,16 @@
 #   toefl/writing/discussion
 #   toefl/speaking/listen-repeat
 #   toefl/speaking/interview
+#   toeic/part1
+#   toeic/part2
+#   toeic/part3
+#   toeic/part4
 #   toeic/part5
 #   toeic/part6
 #   toeic/part7
 #
 # Examples:
-#   ./scripts/make-question.sh toeic/part5
+#   ./scripts/make-question.sh toeic/part3
 #   ./scripts/make-question.sh toefl/reading/daily-life
 
 set -euo pipefail
@@ -28,18 +32,22 @@ QUESTIONS_DIR="$(cd "$(dirname "$0")/.." && pwd)/public/questions"
 usage() {
   echo "Usage: $0 <task>"
   echo ""
-  echo "Available tasks:"
-  echo "  toefl/reading/complete-words"
-  echo "  toefl/reading/daily-life"
-  echo "  toefl/reading/academic"
-  echo "  toefl/writing/build-sentence"
-  echo "  toefl/writing/email"
-  echo "  toefl/writing/discussion"
-  echo "  toefl/speaking/listen-repeat"
-  echo "  toefl/speaking/interview"
-  echo "  toeic/part5"
-  echo "  toeic/part6"
-  echo "  toeic/part7"
+echo "Available tasks:"
+echo "  toefl/reading/complete-words"
+echo "  toefl/reading/daily-life"
+echo "  toefl/reading/academic"
+echo "  toefl/writing/build-sentence"
+echo "  toefl/writing/email"
+echo "  toefl/writing/discussion"
+echo "  toefl/speaking/listen-repeat"
+echo "  toefl/speaking/interview"
+echo "  toeic/part1"
+echo "  toeic/part2"
+echo "  toeic/part3"
+echo "  toeic/part4"
+echo "  toeic/part5"
+echo "  toeic/part6"
+echo "  toeic/part7"
   exit 1
 }
 
@@ -216,6 +224,120 @@ TMPL
       "prepTime": 15,
       "responseTime": 45,
       "sampleAnswer": "TODO: Model answer (optional)"
+    }
+  ]
+}
+TMPL
+      ;;
+
+    toeic/part1)
+      cat << 'TMPL'
+{
+  "title": "Photographs - Set",
+  "questions": [
+    {
+      "id": "q1",
+      "photoDescription": "TODO: Describe what is visible in the photo",
+      "options": {
+        "A": "TODO: Statement A describing the photo",
+        "B": "TODO: Statement B describing the photo",
+        "C": "TODO: Statement C describing the photo",
+        "D": "TODO: Statement D describing the photo"
+      },
+      "correct": "A",
+      "explanation": "TODO: Why the correct statement best matches the photo"
+    }
+  ],
+  "audioSegments": [
+    { "role": "Narrator", "text": "Look at the picture marked number 1 in your test book." },
+    { "role": "Narrator", "text": "(A) TODO: Statement A" },
+    { "role": "Narrator", "text": "(B) TODO: Statement B" },
+    { "role": "Narrator", "text": "(C) TODO: Statement C" },
+    { "role": "Narrator", "text": "(D) TODO: Statement D" }
+  ]
+}
+TMPL
+      ;;
+
+    toeic/part2)
+      cat << 'TMPL'
+{
+  "title": "Question-Response Set",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "TODO: Question or statement",
+      "options": {
+        "A": "TODO: Response A",
+        "B": "TODO: Response B",
+        "C": "TODO: Response C"
+      },
+      "correct": "A",
+      "explanation": "TODO: Why this response is the most appropriate"
+    }
+  ],
+  "audioSegments": [
+    { "role": "Woman", "text": "TODO: Question or statement" },
+    { "role": "Man", "text": "(A) TODO: Response A" },
+    { "role": "Man", "text": "(B) TODO: Response B" },
+    { "role": "Man", "text": "(C) TODO: Response C" }
+  ]
+}
+TMPL
+      ;;
+
+    toeic/part3)
+      cat << 'TMPL'
+{
+  "title": "TODO: Conversation topic",
+  "transcript": "Man: TODO: First line\nWoman: TODO: Second line",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "TODO: Explanation"
+    }
+  ],
+  "audioSegments": [
+    { "role": "Man", "text": "TODO: First line" },
+    { "role": "Woman", "text": "TODO: Second line" }
+  ]
+}
+TMPL
+      ;;
+
+    toeic/part4)
+      cat << 'TMPL'
+{
+  "title": "TODO: Talk title",
+  "transcript": "TODO: Full transcript of the talk",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "TODO: Question stem",
+      "options": [
+        "TODO: Choice A",
+        "TODO: Choice B",
+        "TODO: Choice C",
+        "TODO: Choice D"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "TODO: Explanation"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "TODO: Full talk text"
     }
   ]
 }

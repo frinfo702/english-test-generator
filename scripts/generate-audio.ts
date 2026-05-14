@@ -13,11 +13,27 @@ const QUESTIONS_DIR = path.join(PROJECT_ROOT, "public/questions");
 const AUDIO_OUT_DIR = path.join(PROJECT_ROOT, "public/audio");
 
 const VOICE_MAP: Record<string, string> = {
+  // TOEFL
   Student: "eve",
   Professor: "leo",
   Lecturer: "rex",
+  // TOEIC
+  Woman: "eve",
+  Man: "leo",
+  Speaker: "rex",
+  Narrator: "ara",
 };
 const DEFAULT_VOICE = "ara";
+const ALL_SHADOW_VOICES = ["ara", "eve", "leo", "rex"];
+
+function hashText(text: string): number {
+  let hash = 0;
+  for (let i = 0; i < text.length; i++) {
+    hash = ((hash << 5) - hash) + text.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+}
 
 function getVoiceForRole(role: string): string {
   return VOICE_MAP[role] ?? DEFAULT_VOICE;
@@ -155,8 +171,10 @@ async function generateForQuestion(
         continue;
       }
 
-      console.log(`  FETCH: sentence ${i + 1}/${sentences.length}`);
-      const mp3 = await fetchTts(sentences[i].text, DEFAULT_VOICE);
+      const voiceIdx = Math.abs(hashText(sentences[i].text)) % ALL_SHADOW_VOICES.length;
+          const shadowVoice = ALL_SHADOW_VOICES[voiceIdx];
+          console.log(`  FETCH: sentence ${i + 1}/${sentences.length} (voice=${shadowVoice})`);
+          const mp3 = await fetchTts(sentences[i].text, shadowVoice);
 
       fs.mkdirSync(outDir, { recursive: true });
       fs.writeFileSync(outFile, mp3);

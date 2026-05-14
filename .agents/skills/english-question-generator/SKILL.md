@@ -1,12 +1,13 @@
 ---
 name: english-question-generator
 description: >
-  TOEFL iBT (2026年以降) と TOEIC Reading の問題JSONを生成するスキル。
+  TOEFL iBT (2026年以降) と TOEIC の問題JSONを生成するスキル。
   「TOEFL対策」「TOEFL問題作って」「Readingの練習」「Writingの練習」「Speakingの練習」
   「TOEFL practice」「TOEFLの問題」「新形式TOEFL」「アダプティブTOEFL」「TOEICの問題を作って」
-  「part5の問題を作って」など、試験問題作成依頼で使う。
+  「part5の問題を作って」「TOEICリスニング」「part1」「part2」「part3」「part4」
+  など、試験問題作成依頼で使う。
   セクション/タスク指定がなければ確認し、難易度指定がなければ Module 1（標準）で生成する。
-  Listening 音声生成は対象外（Speaking はテキスト問題のみ対応）。
+  Speaking はテキスト問題のみ対応（音声生成は generate-audio.ts で行う）。
 ---
 
 # TOEFL / TOEIC Question Generator
@@ -36,6 +37,10 @@ description: >
 - `toefl/writing/discussion`
 - `toefl/speaking/listen-repeat`
 - `toefl/speaking/interview`
+- `toeic/part1`
+- `toeic/part2`
+- `toeic/part3`
+- `toeic/part4`
 - `toeic/part5`
 - `toeic/part6`
 - `toeic/part7`
