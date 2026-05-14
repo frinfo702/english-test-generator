@@ -136,6 +136,34 @@
   cursor: pointer;
 }
 
+.speedBtns {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.speedBtn {
+  padding: 4px 12px;
+  font-size: var(--text-xs);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-ink-secondary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.speedBtn:hover {
+  border-color: var(--color-accent);
+}
+
+.speedBtnActive {
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
 .speedValue {
   font-size: var(--text-sm);
   font-weight: var(--font-semibold);

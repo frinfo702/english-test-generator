@@ -94,12 +94,28 @@ function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
               type="range"
               className={styles.speedSlider}
               min="0.5"
-              max="2.0"
+              max="1.5"
               step="0.1"
               value={playbackRate}
               onChange={(e) => setPlaybackRate(Number(e.target.value))}
             />
             <span className={styles.speedValue}>{playbackRate.toFixed(1)}x</span>
+          </div>
+          <div className={styles.speedBtns}>
+            {[
+              { label: "Slow", rate: 0.8 },
+              { label: "Normal", rate: 1.0 },
+              { label: "Fast", rate: 1.2 },
+            ].map(({ label, rate }) => (
+              <button
+                key={rate}
+                type="button"
+                className={`${styles.speedBtn} ${playbackRate === rate ? styles.speedBtnActive : ""}`}
+                onClick={() => setPlaybackRate(rate)}
+              >
+                {label}
+              </button>
+            ))}
           </div>
           {duration > 0 && (
             <span className={styles.timeText}>

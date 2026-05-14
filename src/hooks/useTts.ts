@@ -330,10 +330,11 @@ export function useTts(): UseTtsReturn {
   }, [cleanup]);
 
   const setPlaybackRate = useCallback((rate: number) => {
-    playbackRateRef.current = rate;
-    setPlaybackRateState(rate);
+    const clamped = Math.min(rate, 1.5);
+    playbackRateRef.current = clamped;
+    setPlaybackRateState(clamped);
     if (audioRef.current) {
-      audioRef.current.playbackRate = rate;
+      audioRef.current.playbackRate = clamped;
     }
   }, []);
 

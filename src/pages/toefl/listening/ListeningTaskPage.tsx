@@ -55,7 +55,7 @@ function ListeningTaskPageBase({
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playSegments, pause, resume, stop: stopTts, seek } =
+  const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playbackRate, setPlaybackRate, playSegments, pause, resume, stop: stopTts, seek } =
     useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
@@ -249,6 +249,24 @@ function ListeningTaskPageBase({
                     }}
                   />
                 </div>
+              </div>
+            )}
+            {duration > 0 && (
+              <div className={styles.speedBtns}>
+                {[
+                  { label: "Slow", rate: 0.8 },
+                  { label: "Normal", rate: 1.0 },
+                  { label: "Fast", rate: 1.2 },
+                ].map(({ label, rate }) => (
+                  <button
+                    key={rate}
+                    type="button"
+                    className={`${styles.speedBtn} ${playbackRate === rate ? styles.speedBtnActive : ""}`}
+                    onClick={() => setPlaybackRate(rate)}
+                  >
+                    {label}
+                  </button>
+                ))}
               </div>
             )}
             {ttsError && <p className={styles.errorText}>{ttsError}</p>}
