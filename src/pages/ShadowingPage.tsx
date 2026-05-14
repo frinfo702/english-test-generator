@@ -5,7 +5,6 @@ import { Button } from "../components/ui/Button";
 import { LoadingSpinner } from "../components/ui/LoadingSpinner";
 import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
-import { DEFAULT_VOICE, ROLE_VOICE_MAP } from "../lib/voiceMapping";
 import styles from "./ShadowingPage.module.css";
 
 interface Sentence {
@@ -25,29 +24,11 @@ function formatTime(seconds: number) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-const ALL_VOICES = (() => {
-  const set = new Set(Object.values(ROLE_VOICE_MAP));
-  set.add(DEFAULT_VOICE);
-  return Array.from(set);
-})();
-
-function hashText(text: string): number {
-  let hash = 0;
-  for (let i = 0; i < text.length; i++) {
-    hash = ((hash << 5) - hash) + text.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash);
-}
-
-function voiceForText(text: string): string {
-  return ALL_VOICES[hashText(text) % ALL_VOICES.length];
-}
-
-function ShadowingContent({ data }: { data: ProblemData }) {
+function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
   const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playbackRate, setPlaybackRate, play, pause, resume, stop } = useTts();
   const [current, setCurrent] = useState(0);
   const [showText, setShowText] = useState(false);
+  const fileBasename = file.replace(/\.json$/i, "");
 
   useEffect(() => {
     return () => stop();
@@ -61,9 +42,9 @@ function ShadowingContent({ data }: { data: ProblemData }) {
     } else if (currentTime > 0) {
       resume();
     } else {
-      play(sentence.text, voiceForText(sentence.text));
+      play(`/audio/shadowing/${fileBasename}/${current + 1}.mp3`);
     }
-  }, [data, current, playing, currentTime, play, pause, resume]);
+  }, [data, current, playing, currentTime, play, pause, resume, fileBasename]);
 
   const totalSentences = data.sentences.length;
   const safeCurrent = current >= totalSentences ? 0 : current;
@@ -175,7 +156,7 @@ function ShadowingContent({ data }: { data: ProblemData }) {
 export function ShadowingPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
+  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
     "shadowing",
   );
 
@@ -229,7 +210,7 @@ export function ShadowingPage() {
       )}
 
       {data && !loading && hasValidQuestionNumber && (
-        <ShadowingContent key={parsedQuestionNumber} data={data} />
+        <ShadowingContent key={parsedQuestionNumber} data={data} file={file ?? ""} />
       )}
     </div>
   );

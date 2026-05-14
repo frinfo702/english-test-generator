@@ -9,7 +9,16 @@ interface SaveAnswerResponse {
   answerId: string;
 }
 
+export interface AnswerEntry {
+  answerId: string;
+  taskId: string;
+  problemId: string;
+  response: string;
+  date: string;
+}
+
 const DRAFT_KEY_PREFIX = "answer-draft:";
+const ANSWERS_STORAGE_KEY = "answer-history";
 
 export function buildProblemId(
   taskId: string,
@@ -45,24 +54,36 @@ export function clearDraft(problemId: string) {
   localStorage.removeItem(buildDraftKey(problemId));
 }
 
-export async function saveAnswerSubmission(payload: SaveAnswerPayload) {
-  const res = await fetch("/api/answers", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  if (!res.ok) {
-    const body = await res.text();
-    let message = body;
-    try {
-      const parsed = JSON.parse(body) as { error?: string };
-      message = parsed.error ?? body;
-    } catch {
-      // body is not JSON — use raw text
-    }
-    throw new Error(message || "Failed to save the answer.");
+function readAnswerHistory(): AnswerEntry[] {
+  try {
+    const raw = localStorage.getItem(ANSWERS_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as AnswerEntry[]) : [];
+  } catch {
+    return [];
   }
-  return (await res.json()) as SaveAnswerResponse;
+}
+
+function writeAnswerHistory(entries: AnswerEntry[]) {
+  localStorage.setItem(ANSWERS_STORAGE_KEY, JSON.stringify(entries));
+}
+
+export async function saveAnswerSubmission(payload: SaveAnswerPayload) {
+  const entries = readAnswerHistory();
+  const answerId = `ans-${Date.now()}`;
+  const entry: AnswerEntry = {
+    answerId,
+    taskId: payload.taskId,
+    problemId: payload.problemId,
+    response: payload.response,
+    date: new Date().toISOString(),
+  };
+  entries.push(entry);
+  writeAnswerHistory(entries);
+  return { answerId } as SaveAnswerResponse;
+}
+
+export function getAllAnswers(): AnswerEntry[] {
+  return readAnswerHistory().slice().reverse();
 }
 
 export function buildGradingMessage(problemId: string, answerId: string) {

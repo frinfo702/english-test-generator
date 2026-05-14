@@ -18,12 +18,27 @@ export type TaskId =
 
 export interface ScoreEntry {
   taskId: TaskId;
-  date: string; // ISO 8601
+  date: string;
   correct: number;
   total: number;
-  pct: number; // 0-100
+  pct: number;
   elapsedSeconds?: number;
   questionFile?: string;
+}
+
+const STORAGE_KEY = "score-history";
+
+function readScores(): ScoreEntry[] {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as ScoreEntry[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeScores(entries: ScoreEntry[]) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
 }
 
 export function useScoreHistory() {
@@ -47,22 +62,19 @@ export function useScoreHistory() {
       if (questionFile) {
         entry.questionFile = questionFile;
       }
-      await fetch("/api/scores", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(entry),
-      });
+      const entries = readScores();
+      entries.push(entry);
+      writeScores(entries);
     },
     [],
   );
 
   const getAll = useCallback(async (): Promise<ScoreEntry[]> => {
-    const res = await fetch("/api/scores");
-    return res.json();
+    return readScores();
   }, []);
 
   const clearAll = useCallback(async () => {
-    await fetch("/api/scores", { method: "DELETE" });
+    localStorage.removeItem(STORAGE_KEY);
   }, []);
 
   return { saveScore, getAll, clearAll };

@@ -19,3 +19,7 @@ npm-debug.log*
 
 # Cached audio files
 public/audio-cache/
+
+# Old server-side data dirs (no longer used)
+scores/
+answers/

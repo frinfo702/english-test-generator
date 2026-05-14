@@ -57,6 +57,7 @@ function ListeningTaskPageBase({
   } = useElapsedTimer();
   const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playSegments, pause, resume, stop: stopTts, seek } =
     useTts();
+  const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
   const [selections, setSelections] = useState<Record<number, number>>({});
   const [graded, setGraded] = useState(false);
@@ -205,7 +206,10 @@ function ListeningTaskPageBase({
                   } else if (currentTime > 0) {
                     resume();
                   } else {
-                    playSegments(data.audioSegments);
+                    const urls = data.audioSegments.map((_, i) =>
+                      `/audio/${taskId}/${fileBasename}/${i + 1}.mp3`
+                    );
+                    playSegments(urls);
                   }
                 }}
                 disabled={ttsLoading}

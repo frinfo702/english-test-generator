@@ -8,6 +8,7 @@ import {
   type TaskId,
 } from "../hooks/useScoreHistory";
 import { formatSecondsAsMmSs } from "../lib/time";
+import { getAllAnswers, type AnswerEntry } from "../lib/answerSubmission";
 import styles from "./DashboardPage.module.css";
 
 // Task display labels
@@ -25,6 +26,7 @@ const TASK_LABELS: Record<TaskId, string> = {
   "toeic/part5": "TOEIC Part 5",
   "toeic/part6": "TOEIC Part 6",
   "toeic/part7": "TOEIC Part 7",
+  "shadowing": "Shadowing",
 };
 
 const TASK_COLORS: Record<string, string> = {
@@ -283,6 +285,7 @@ export function DashboardPage() {
   const { getAll, clearAll } = useScoreHistory();
   const [entries, setEntries] = useState<ScoreEntry[]>([]);
   const [confirmClear, setConfirmClear] = useState(false);
+  const [answers] = useState<AnswerEntry[]>(() => getAllAnswers());
 
   useEffect(() => {
     getAll().then(setEntries);
@@ -406,6 +409,28 @@ export function DashboardPage() {
             )}
           </div>
         </>
+      )}
+
+      {answers.length > 0 && (
+        <section className={styles.answersSection}>
+          <h2 className={styles.answersHeading}>Answer History</h2>
+          <div className={styles.answersList}>
+            {answers.map((a) => {
+              const preview = a.response.length > 80
+                ? a.response.slice(0, 80) + "..."
+                : a.response;
+              return (
+                <div key={a.answerId} className={styles.answerRow}>
+                  <span className={styles.answerDate}>
+                    {new Date(a.date).toLocaleDateString()}
+                  </span>
+                  <span className={styles.answerProblem}>{a.problemId}</span>
+                  <span className={styles.answerPreview}>{preview}</span>
+                </div>
+              );
+            })}
+          </div>
+        </section>
       )}
     </div>
   );
