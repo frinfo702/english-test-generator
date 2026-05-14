@@ -1,0 +1,111 @@
+{
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for information",
+      "stem": "Excuse me, do you know when the library opens on weekends?",
+      "options": {
+        "A": "Yes, it opens at 10 AM on Saturdays and Sundays.",
+        "B": "The library is closed for renovations.",
+        "C": "I usually study at the coffee shop."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for specific information about weekend hours, so a direct answer about opening time is the most appropriate response."
+    },
+    {
+      "id": "q2",
+      "context": "Asking for help",
+      "stem": "I'm having trouble with this math problem. Could you take a look?",
+      "options": {
+        "A": "Sure, let me see what I can do.",
+        "B": "Math is my favorite subject too.",
+        "C": "I finished my homework yesterday."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for help, so a willing offer to assist is the expected response."
+    },
+    {
+      "id": "q3",
+      "context": "Making a suggestion",
+      "stem": "I'm starving, but I don't know what to eat around here.",
+      "options": {
+        "A": "You should have brought lunch today.",
+        "B": "There's a great ramen place just across the street.",
+        "C": "I'm not hungry at all."
+      },
+      "correct": "B",
+      "explanation": "The speaker is expressing hunger and indecision, so a helpful suggestion of where to eat is the most natural response."
+    },
+    {
+      "id": "q4",
+      "context": "Expressing concern",
+      "stem": "You've been studying for hours. Don't you think you should take a break?",
+      "options": {
+        "A": "No, I'm almost done with this chapter.",
+        "B": "I didn't go to the library yesterday.",
+        "C": "The exam is next Monday, right?"
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing concern about overworking, so acknowledging the concern while explaining your plan is the most natural response."
+    },
+    {
+      "id": "q5",
+      "context": "Confirming plans",
+      "stem": "We're still on for the group presentation tomorrow, right?",
+      "options": {
+        "A": "I presented my project last week.",
+        "B": "Yes, I'll meet you in the conference room at 2 PM.",
+        "C": "The group project is worth 30% of our grade."
+      },
+      "correct": "B",
+      "explanation": "The speaker is confirming existing plans, so an affirmative response with specific details about the meeting is appropriate."
+    },
+    {
+      "id": "q6",
+      "context": "Apologizing",
+      "stem": "I'm really sorry I forgot to bring your textbook. I'll bring it tomorrow.",
+      "options": {
+        "A": "You should be more careful with library books.",
+        "B": "That's okay, I didn't need it for today's class anyway.",
+        "C": "I forgot my notebook too."
+      },
+      "correct": "B",
+      "explanation": "The speaker is apologizing, so a gracious acceptance of the apology and reassurance is the most appropriate response."
+    },
+    {
+      "id": "q7",
+      "context": "Seeking permission",
+      "stem": "Would it be alright if I submitted my paper a day late? I've been sick.",
+      "options": {
+        "A": "You should see a doctor first.",
+        "B": "The deadline was already extended once.",
+        "C": "Sure, just make sure to get it in by Wednesday."
+      },
+      "correct": "C",
+      "explanation": "The speaker is politely requesting an extension, so a gracious approval with a clear new deadline is the appropriate response from a professor."
+    },
+    {
+      "id": "q8",
+      "context": "Expressing surprise",
+      "stem": "Wait, you mean the campus tour starts at 8 AM, not 9?",
+      "options": {
+        "A": "Yes, you'll receive a campus map at the tour.",
+        "B": "That's right. The schedule was updated yesterday.",
+        "C": "There are several tours available throughout the week."
+      },
+      "correct": "B",
+      "explanation": "The speaker is expressing surprise about a time change and seeking confirmation, so confirming the updated information is most appropriate."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Student", "text": "Excuse me, do you know when the library opens on weekends?" },
+    { "role": "Student", "text": "I'm having trouble with this math problem. Could you take a look?" },
+    { "role": "Student", "text": "I'm starving, but I don't know what to eat around here." },
+    { "role": "Friend", "text": "You've been studying for hours. Don't you think you should take a break?" },
+    { "role": "Student", "text": "We're still on for the group presentation tomorrow, right?" },
+    { "role": "Student", "text": "I'm really sorry I forgot to bring your textbook. I'll bring it tomorrow." },
+    { "role": "Student", "text": "Would it be alright if I submitted my paper a day late? I've been sick." },
+    { "role": "Student", "text": "Wait, you mean the campus tour starts at 8 AM, not 9?" }
+  ]
+}

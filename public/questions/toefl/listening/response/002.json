@@ -1,0 +1,111 @@
+{
+  "title": "Listen and Choose a Response — Academic Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Requesting clarification",
+      "stem": "Professor, I didn't quite follow the assignment. Could you explain it again?",
+      "options": {
+        "A": "I'm glad you asked. The key requirement is a 10-page analysis.",
+        "B": "The assignment is due next Friday, yes.",
+        "C": "You should read chapter 5 for background."
+      },
+      "correct": "A",
+      "explanation": "The student is asking for clarification about the assignment itself, so re-explaining the requirements is the most helpful response."
+    },
+    {
+      "id": "q2",
+      "context": "Making an offer",
+      "stem": "I'm heading to the coffee shop. Can I get you anything?",
+      "options": {
+        "A": "I don't drink coffee, thanks.",
+        "B": "Yes, a latte would be great. Here's some cash.",
+        "C": "The coffee shop closes at 6 PM."
+      },
+      "correct": "B",
+      "explanation": "The speaker is offering to bring something back, so accepting the offer and specifying what you'd like is the natural response."
+    },
+    {
+      "id": "q3",
+      "context": "Expressing doubt",
+      "stem": "Do you really think we can finish this research paper by Friday?",
+      "options": {
+        "A": "Friday is the last day of the week.",
+        "B": "If we split the work, I think we can make it.",
+        "C": "Research papers require at least five sources."
+      },
+      "correct": "B",
+      "explanation": "The speaker is expressing doubt about the deadline, so offering a practical solution addresses their concern constructively."
+    },
+    {
+      "id": "q4",
+      "context": "Declining politely",
+      "stem": "We're having a study group session tonight. Want to join us?",
+      "options": {
+        "A": "I appreciate the offer, but I have a part-time job tonight.",
+        "B": "Study groups are very effective for exam preparation.",
+        "C": "Yes, I finished studying for the exam."
+      },
+      "correct": "A",
+      "explanation": "The speaker is inviting you to join, so politely declining with a reason is appropriate rather than ignoring the invitation."
+    },
+    {
+      "id": "q5",
+      "context": "Seeking advice",
+      "stem": "I can't decide between taking economics or psychology this semester. What do you think?",
+      "options": {
+        "A": "Both are offered in the fall semester.",
+        "B": "Well, what are you more interested in?",
+        "C": "Economics 101 has a very strict professor."
+      },
+      "correct": "B",
+      "explanation": "The speaker is asking for advice on a personal preference, so helping them think through their interests is more helpful than giving unsolicited opinions."
+    },
+    {
+      "id": "q6",
+      "context": "Showing appreciation",
+      "stem": "Thank you so much for reviewing my draft. Your feedback was really helpful.",
+      "options": {
+        "A": "You're welcome. I'm looking forward to the final version.",
+        "B": "Yes, the draft did need quite a bit of work.",
+        "C": "I submitted my draft last week."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing gratitude, so a gracious acknowledgment and encouragement is the polite response."
+    },
+    {
+      "id": "q7",
+      "context": "Asking for direction",
+      "stem": "I'm looking for the science building. Is it near here?",
+      "options": {
+        "A": "The science department is offering several new courses.",
+        "B": "Yes, it's the red brick building right past the fountain.",
+        "C": "I'm a biology major, actually."
+      },
+      "correct": "B",
+      "explanation": "The speaker is asking for directions, so providing clear location information directly addresses their need."
+    },
+    {
+      "id": "q8",
+      "context": "Proposing a change",
+      "stem": "I think we should move our meeting to Thursday instead. Does that work for everyone?",
+      "options": {
+        "A": "Thursday is the day after Wednesday.",
+        "B": "I have a class until 3 PM, but anytime after that works.",
+        "C": "We met last Thursday to discuss the project."
+      },
+      "correct": "B",
+      "explanation": "The speaker is proposing a schedule change and asking for availability, so stating your availability is the most appropriate response."
+    }
+  ],
+  "audioSegments": [
+    { "role": "Student", "text": "Professor, I didn't quite follow the assignment. Could you explain it again?" },
+    { "role": "Student", "text": "I'm heading to the coffee shop. Can I get you anything?" },
+    { "role": "Student", "text": "Do you really think we can finish this research paper by Friday?" },
+    { "role": "Friend", "text": "We're having a study group session tonight. Want to join us?" },
+    { "role": "Student", "text": "I can't decide between taking economics or psychology this semester. What do you think?" },
+    { "role": "Student", "text": "Thank you so much for reviewing my draft. Your feedback was really helpful." },
+    { "role": "Student", "text": "I'm looking for the science building. Is it near here?" },
+    { "role": "Student", "text": "I think we should move our meeting to Thursday instead. Does that work for everyone?" }
+  ]
+}

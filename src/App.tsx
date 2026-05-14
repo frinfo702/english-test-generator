@@ -17,6 +17,7 @@ import {
   ConversationPage,
   LecturePage,
 } from "./pages/toefl/listening/ListeningTaskPage";
+import { ListenResponsePage } from "./pages/toefl/listening/ListenResponsePage";
 import { Part2Page } from "./pages/toeic/Part2Page";
 import { Part3Page } from "./pages/toeic/Part3Page";
 import { Part4Page } from "./pages/toeic/Part4Page";
@@ -196,6 +197,22 @@ export default function App() {
           <Route
             path="/toefl/listening/lecture/:questionNumber"
             element={<LecturePage />}
+          />
+          <Route
+            path="/toefl/listening/response"
+            element={
+              <QuestionSelectorPage
+                taskId="toefl/listening/response"
+                title="Listen and Choose a Response"
+                subtitle="Select a question number or start with random."
+                backTo="/toefl"
+                basePath="/toefl/listening/response"
+              />
+            }
+          />
+          <Route
+            path="/toefl/listening/response/:questionNumber"
+            element={<ListenResponsePage />}
           />
 
           {/* TOEIC */}

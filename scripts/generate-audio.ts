@@ -132,7 +132,8 @@ async function generateForQuestion(
     const segments = data.audioSegments;
     for (let i = 0; i < segments.length; i++) {
       const seg = segments[i];
-      const voiceId = getVoiceForRole(seg.role);
+      const voiceIdx = Math.abs(hashText(seg.text)) % ALL_SHADOW_VOICES.length;
+      const voiceId = ALL_SHADOW_VOICES[voiceIdx];
       const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
       const outFile = path.join(outDir, `${i + 1}.mp3`);
 

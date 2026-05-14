@@ -70,6 +70,12 @@ const sections = [
         desc: "Listen to an academic lecture and answer questions.",
         meta: "5 questions",
       },
+      {
+        label: "Listen and Choose a Response",
+        path: "/toefl/listening/response",
+        desc: "Listen to short utterances and choose the best response.",
+        meta: "8 items",
+      },
     ],
   },
   {
