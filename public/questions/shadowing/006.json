@@ -1,0 +1,13 @@
+{
+  "title": "Environment & Nature",
+  "sentences": [
+    { "id": "s1", "text": "Climate change is one of the most pressing challenges facing our planet today.", "wordCount": 13 },
+    { "id": "s2", "text": "Deforestation threatens biodiversity and contributes to global warming at an alarming rate.", "wordCount": 13 },
+    { "id": "s3", "text": "Recycling and reducing waste are simple actions that everyone can take to help the environment.", "wordCount": 15 },
+    { "id": "s4", "text": "Renewable energy sources such as solar and wind power are becoming more affordable every year.", "wordCount": 15 },
+    { "id": "s5", "text": "The Great Barrier Reef is one of the most diverse ecosystems on Earth and must be protected.", "wordCount": 16 },
+    { "id": "s6", "text": "Plastic pollution has become a serious problem for marine life and ocean ecosystems worldwide.", "wordCount": 14 },
+    { "id": "s7", "text": "Planting trees is one of the most effective ways to combat climate change and restore nature.", "wordCount": 16 },
+    { "id": "s8", "text": "National parks preserve natural habitats and provide opportunities for people to enjoy the outdoors.", "wordCount": 15 }
+  ]
+}
