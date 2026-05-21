@@ -40,12 +40,10 @@
 
 ## TOEFL Reading: Read in Daily Life
 
-`module` フィールドで Module 1 / Module 2 Easy / Module 2 Hard を区別する。
-テキスト2〜4本を含み、各テキストに設問を付ける。
+ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設問を付ける。
 
 ```json
 {
-  "module": "module1",
   "texts": [
     {
       "id": "t1",
@@ -106,12 +104,16 @@
 
 **フィールド仕様:**
 
-- `module`: `"module1"` / `"module2-easy"` / `"module2-hard"`
-- `textType`: `"email"` / `"SNS post"` / `"notice"` / `"schedule"` / `"advertisement"` など
-- `type`（設問種別）: `"factual"` / `"inference"` / `"vocabulary"`
+- `textType`: `"email"` / `"notice"` / `"schedule"` / `"menu"` / `"announcement"` / `"text message"` / `"online post"` / `"advertisement"` / `"poster"` / `"sign"` / `"webpage"` / `"news article"` / `"form"` / `"invoice"` / `"receipt"` など
+- `type`（設問種別）: `"factual"` / `"inference"` / `"purpose"` / `"vocabulary"`
 - `correctIndex`: 0始まり（A=0, B=1, C=2, D=3）
-- Module 1: テキスト2〜3本、計3〜4問
-- Module 2: テキスト3〜4本、計5〜6問
+- テキスト数: 2〜3本（1セットあたり1〜2テキストの場合もある）
+- 各テキストの語数: 15〜150語
+- 各テキストあたりの設問数: 2〜3問
+- 合計設問数: 4〜9問（目安6〜7問）
+- 難易度: CEFR B2〜C1（実用文だが高度な推論や態度・意図の読み取りを含む）
+- 選択肢は4択。不正解選択肢は意味的に近いものを含め、容易に除外できない設計にする
+- 評価されるスキル: 非線形テキスト形式の理解、書面コミュニケーションの主目的の特定、非公式・慣用的表現の理解、推論、スキャン・スキミング
 
 ---
 
@@ -156,9 +158,12 @@
 
 **フィールド仕様:**
 
-- `type`（設問種別）: `"vocabulary"` / `"detail"` / `"inference"` / `"mainIdea"`
+- `type`（設問種別）: `"vocabulary"` / `"detail"` / `"inference"` / `"mainIdea"` / `"paragraphRelation"` / `"importantIdea"` / `"negativeFactual"` / `"rhetoricalPurpose"` / `"insertSentence"`
 - `correctIndex`: 0始まり
+- パッセージ語数: 150〜250語（目安200語）
 - 設問数: 5問固定
+- 難易度: CEFR C1〜C2（学術語彙・複雑な構造を含む）
+- トピック領域: history, art and music, business and economics, life science, physical science, social science など。背景知識は不要
 
 ---
 
@@ -196,13 +201,15 @@
 
 - `paragraph`: `hint + _` のプレースホルダーを含む文
 - `items[].index`: 段落内の出現順（0始まり）
-- `items[].hint`: 最初の2〜3文字
+- `items[].hint`: 最初の2〜3文字（文脈に応じて変動可）
 - `items[].answer`: 正解の完全な単語
 - `items[].hint` は `items[].answer` の先頭一致にする（大文字小文字は無視可）
 - `items[].placeholder`: `hint + 続き文字数分の _` で作り、`paragraph` 内文字列と**完全一致**させる
 - 続き文字数 = `answer.length - hint.length`
 - UIでは hint 部分は表示済みで、解答者は続き部分のみ入力する
-- 穴埋め数: 8〜10個
+- パッセージ語数: 70〜100語
+- 第1文は通常全文表示。第2文以降で単語の後半が欠落する形式
+- 穴埋め数: 10個固定
 
 ---
 

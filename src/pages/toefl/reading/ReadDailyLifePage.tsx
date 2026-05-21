@@ -6,7 +6,6 @@ import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
-import { useAdaptive } from "../../../hooks/useAdaptive";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
@@ -30,15 +29,13 @@ interface TextBlock {
 }
 
 interface ProblemData {
-  module: string;
   texts: TextBlock[];
 }
 
 export function ReadDailyLifePage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const adaptive = useAdaptive();
-  const { data, file, loading, error, load, loadByQuestionNumber } = useQuestion<ProblemData>(
+  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
     "toefl/reading/daily-life",
   );
   const { saveScore } = useScoreHistory();
@@ -59,7 +56,6 @@ export function ReadDailyLifePage() {
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
     Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
-  const phase = adaptive.state.phase;
 
   useEffect(() => {
     if (!hasValidQuestionNumber) return;
@@ -68,23 +64,22 @@ export function ReadDailyLifePage() {
   }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   useEffect(() => {
-    if (phase === "module1" && file && !sessionFileRef.current) {
+    if (file && !sessionFileRef.current) {
       sessionFileRef.current = file;
     }
-  }, [phase, file]);
+  }, [file]);
 
   useEffect(() => {
     if (
       data &&
       !loading &&
       !graded &&
-      (adaptive.state.phase === "module1" || adaptive.state.phase === "module2") &&
       !running &&
       elapsedSeconds === 0
     ) {
       start();
     }
-  }, [data, loading, graded, adaptive.state.phase, running, elapsedSeconds, start]);
+  }, [data, loading, graded, running, elapsedSeconds, start]);
 
   // Flatten questions across all texts
   const allQ: { text: TextBlock; question: Question }[] = [];
@@ -106,6 +101,10 @@ export function ReadDailyLifePage() {
     ? textIdx === data.texts.length - 1 &&
       qIdx === (currentText?.questions.length ?? 1) - 1
     : false;
+
+  const correctCount = allQ.filter(
+    ({ question }) => answers[question.id] === question.correctIndex,
+  ).length;
 
   const handleSelect = (i: number) => {
     if (!graded && currentQ) setAnswers((s) => ({ ...s, [currentQ.id]: i }));
@@ -139,63 +138,31 @@ export function ReadDailyLifePage() {
   };
 
   const handleSubmit = () => {
-    // Record all answers to adaptive hook
-    allQ.forEach(({ question }) => {
-      const sel = answers[question.id];
-      const correct = sel === question.correctIndex;
-      if (adaptive.state.phase === "module1")
-        adaptive.recordModule1Answer(correct);
-      else adaptive.recordModule2Answer(correct);
-    });
-    // Finish module
-    if (adaptive.state.phase === "module1") {
-      adaptive.finishModule1();
-    } else {
-      const sessionSeconds = stop();
-      // Save overall session score (Module 1 + Module 2).
-      const m1c = adaptive.state.module1Correct;
-      const m1t = adaptive.state.module1Total;
-      const m2c = allQ.filter(
-        ({ question }) => answers[question.id] === question.correctIndex,
-      ).length;
-      const m2t = allQ.length;
-      saveScore(
-        "toefl/reading/daily-life",
-        m1c + m2c,
-        m1t + m2t,
-        sessionSeconds,
-        sessionFileRef.current ?? file ?? undefined,
-      );
-      adaptive.finishModule2();
-    }
+    const sessionSeconds = stop();
+    saveScore(
+      "toefl/reading/daily-life",
+      correctCount,
+      totalQ,
+      sessionSeconds,
+      sessionFileRef.current ?? file ?? undefined,
+    );
     setGraded(true);
-  };
-
-  const handleStartModule2 = () => {
-    adaptive.startModule2();
-    setTextIdx(0);
-    setQIdx(0);
-    setAnswers({});
-    setGraded(false);
-    load();
   };
 
   const handleRestart = () => {
     resetTimer();
-    adaptive.reset();
     navigate("/toefl/reading/daily-life");
   };
 
   return (
     <div>
-      {(phase === "module1" || phase === "module2" || phase === "complete") &&
-        (running || elapsedSeconds > 0) && (
+      {(running || elapsedSeconds > 0) && (
         <FloatingElapsedTimer display={display} running={running} />
       )}
 
       <SectionHeader
         title="Read in Daily Life"
-        subtitle="Read everyday texts and answer questions (adaptive format)."
+        subtitle="Read everyday texts and answer questions."
         backTo="/toefl"
       />
       <div className={styles.moduleBar}>
@@ -214,92 +181,35 @@ export function ReadDailyLifePage() {
         </div>
       )}
 
-      {/* branching */}
-      {phase === "branching" && hasValidQuestionNumber && (
-        <div className={styles.branchCard}>
-          <div className={styles.branchHeader}>
-            <span className={styles.branchIcon}>✓</span>
-            <h2>Module 1 Complete</h2>
-          </div>
-          <p className={styles.branchScore}>
-            Accuracy: <strong>{adaptive.module1Pct}%</strong> (
-            {adaptive.state.module1Correct}/{adaptive.state.module1Total})
-          </p>
-          <div
-            className={[
-              styles.branchBadge,
-              adaptive.state.module === "module2Hard"
-                ? styles.hard
-                : styles.easy,
-            ].join(" ")}
-          >
-            {adaptive.state.module === "module2Hard"
-              ? "You advance to Module 2 Hard (no score cap)"
-              : "You advance to Module 2 Easy (score cap: 4.0)"}
-          </div>
-          <Button size="lg" onClick={handleStartModule2}>
-            Start Module 2
-          </Button>
-        </div>
-      )}
-
-      {/* complete */}
-      {phase === "complete" && hasValidQuestionNumber && (
+      {/* Result */}
+      {graded && hasValidQuestionNumber && (
         <div className={styles.resultCard}>
-          <h2>Session Complete</h2>
+          <h2 className={styles.resultTitle}>Result</h2>
           <div className={styles.resultModules}>
             <div className={styles.moduleResult}>
-              <span className={styles.moduleLabel}>Module 1</span>
+              <span className={styles.moduleLabel}>Score</span>
               <span className={styles.moduleScore}>
-                {adaptive.state.module1Correct}/{adaptive.state.module1Total} (
-                {adaptive.module1Pct}%)
-              </span>
-            </div>
-            <div className={styles.moduleResult}>
-              <span className={styles.moduleLabel}>
-                {adaptive.state.module === "module2Hard"
-                  ? "Module 2 Hard"
-                  : "Module 2 Easy"}
-              </span>
-              <span className={styles.moduleScore}>
-                {adaptive.state.module2Correct}/{adaptive.state.module2Total} (
-                {adaptive.state.module2Total > 0
-                  ? Math.round(
-                      (adaptive.state.module2Correct /
-                        adaptive.state.module2Total) *
-                        100,
-                    )
-                  : 0}
+                {correctCount}/{totalQ} (
+                {totalQ > 0 ? Math.round((correctCount / totalQ) * 100) : 0}
                 %)
               </span>
             </div>
           </div>
           <ProgressBar
-            current={adaptive.totalCorrect}
-            total={adaptive.totalQuestions}
-            label="Overall Accuracy"
+            current={correctCount}
+            total={totalQ}
+            label="Accuracy"
           />
-          <div className={styles.bandScore}>
-            <span className={styles.bandLabel}>Estimated Band Score</span>
-            <span className={styles.bandValue}>{adaptive.getBandScore()}</span>
-          </div>
           <Button size="lg" onClick={handleRestart}>
             Try Again
           </Button>
         </div>
       )}
 
-      {/* questions */}
-      {(phase === "module1" || phase === "module2") && hasValidQuestionNumber && (
+      {/* Questions */}
+      {!graded && hasValidQuestionNumber && (
         <>
           <div className={styles.moduleBar}>
-            <span className={styles.moduleTag}>
-              {phase === "module1"
-                ? "Module 1"
-                : adaptive.state.module === "module2Hard"
-                  ? "Module 2 Hard"
-                  : "Module 2 Easy"}
-            </span>
             {totalQ > 0 && (
               <ProgressBar
                 current={Object.keys(answers).length}

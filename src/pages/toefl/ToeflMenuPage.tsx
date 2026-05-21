@@ -17,8 +17,8 @@ const sections = [
       {
         label: "Read in Daily Life",
         path: "/toefl/reading/daily-life",
-        desc: "Adaptive reading with everyday text passages.",
-        meta: "Adaptive",
+        desc: "Read everyday texts (emails, notices, ads) and answer questions.",
+        meta: "2–3 texts",
       },
       {
         label: "Read an Academic Passage",
