@@ -12,7 +12,7 @@
         "To demonstrate how to design psychology experiments"
       ],
       "correctIndex": 0,
-      "type": "purpose",
+      "type": "mainIdea",
       "explanation": "The lecture introduces cognitive dissonance theory, describes its core concept, and explains how people reduce mental discomfort."
     },
     {
@@ -40,19 +40,6 @@
       "correctIndex": 0,
       "type": "detail",
       "explanation": "The lecture lists three methods to resolve dissonance: changing a belief, acquiring new information, and reducing importance. Counseling is not mentioned."
-    },
-    {
-      "id": "q4",
-      "stem": "What happened in Festinger's classic experiment?",
-      "options": [
-        "Participants paid one dollar rated the boring task as more interesting",
-        "Participants paid twenty dollars refused to lie about the task",
-        "All participants reported that the task was extremely boring",
-        "Participants with no payment showed the highest satisfaction"
-      ],
-      "correctIndex": 0,
-      "type": "detail",
-      "explanation": "The lecturer states that participants paid one dollar rated the task as more interesting than those paid twenty dollars due to dissonance resolution."
     },
     {
       "id": "q5",

@@ -12,7 +12,7 @@
         "The development of factory systems in the nineteenth century"
       ],
       "correctIndex": 0,
-      "type": "purpose",
+      "type": "mainIdea",
       "explanation": "The lecture introduces the Great Divergence, explaining how Western Europe and North America overtook the rest of the world economically."
     },
     {
@@ -40,19 +40,6 @@
       "correctIndex": 0,
       "type": "detail",
       "explanation": "The lecture mentions institutional factors such as secure property rights and competitive markets as one explanation for the divergence."
-    },
-    {
-      "id": "q4",
-      "stem": "What does recent scholarship suggest about the Great Divergence?",
-      "options": [
-        "Colonial extraction and unequal trade may have enabled European growth",
-        "The divergence was caused solely by technological innovation",
-        "Asia and Africa were economically irrelevant before 1800",
-        "The divergence had no lasting impact on the modern economy"
-      ],
-      "correctIndex": 0,
-      "type": "detail",
-      "explanation": "The lecturer notes that recent scholarship argues external factors like colonial extraction and unequal trade relationships played a major role."
     },
     {
       "id": "q5",

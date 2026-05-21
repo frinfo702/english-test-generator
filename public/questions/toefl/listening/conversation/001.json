@@ -27,45 +27,6 @@
       "correctIndex": 0,
       "type": "detail",
       "explanation": "The professor says the second half is reading material and expects students to study it on their own."
-    },
-    {
-      "id": "q3",
-      "stem": "What does the professor suggest the student focus on for the essay questions?",
-      "options": [
-        "Applying theories rather than memorizing definitions",
-        "Memorizing all definitions word for word",
-        "Practicing with the exact posted topics",
-        "Reading additional textbooks"
-      ],
-      "correctIndex": 0,
-      "type": "detail",
-      "explanation": "The professor explicitly says to focus on applying the theories rather than memorizing definitions."
-    },
-    {
-      "id": "q4",
-      "stem": "When is the review session?",
-      "options": [
-        "This Friday at 3 p.m.",
-        "Next Monday at 10 a.m.",
-        "This Thursday at 2 p.m.",
-        "Next Friday at 3 p.m."
-      ],
-      "correctIndex": 0,
-      "type": "detail",
-      "explanation": "The professor states the review session is this Friday at 3 p.m. in Room 204."
-    },
-    {
-      "id": "q5",
-      "stem": "What can be inferred about the professor's teaching style?",
-      "options": [
-        "He expects students to do some independent study",
-        "He only tests material covered word-for-word in lectures",
-        "He does not hold review sessions before exams",
-        "He prefers memorization over application"
-      ],
-      "correctIndex": 0,
-      "type": "inference",
-      "explanation": "The professor assigns independent reading and emphasizes application, indicating he expects independent study."
     }
   ],
   "audioSegments": [

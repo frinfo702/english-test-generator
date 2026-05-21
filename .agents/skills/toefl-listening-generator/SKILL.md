@@ -18,21 +18,21 @@ description: >
 
 ## タスク一覧
 
-| タスク | 音声時間 | 1音声あたりの設問数 | 主な評価スキル |
-|--------|---------|-------------------|--------------|
-| Choose a Response | 5〜15秒 | 1問 | 実用的な応答理解 |
-| Conversation | 30〜90秒 | 2問 | 対話理解 |
-| Announcement | 20〜40秒 | 2〜3問 | 詳細情報の保持 |
-| Academic Talk | 45〜120秒 | 4問 | 講義理解・構造把握 |
+| タスク            | 音声時間  | 1音声あたりの設問数 | 主な評価スキル     |
+| ----------------- | --------- | ------------------- | ------------------ |
+| Choose a Response | 5〜15秒   | 1問                 | 実用的な応答理解   |
+| Conversation      | 30〜90秒  | 2問                 | 対話理解           |
+| Announcement      | 20〜40秒  | 2〜3問              | 詳細情報の保持     |
+| Academic Talk     | 45〜120秒 | 4問                 | 講義理解・構造把握 |
 
 ## 各タスクの保存先
 
-| タスク | 保存先 |
-|--------|--------|
-| Choose a Response | `public/questions/toefl/listening/response/` |
-| Conversation | `public/questions/toefl/listening/conversation/` |
-| Announcement | `public/questions/toefl/listening/announcement/` |
-| Academic Talk | `public/questions/toefl/listening/lecture/` |
+| タスク            | 保存先                                           |
+| ----------------- | ------------------------------------------------ |
+| Choose a Response | `public/questions/toefl/listening/response/`     |
+| Conversation      | `public/questions/toefl/listening/conversation/` |
+| Announcement      | `public/questions/toefl/listening/announcement/` |
+| Academic Talk     | `public/questions/toefl/listening/lecture/`      |
 
 ## 聞くポイント（Choose a Response）
 

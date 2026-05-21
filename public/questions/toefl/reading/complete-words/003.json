@@ -1,11 +1,11 @@
 {
-  "paragraph": "Ancient civilizations developed rem______ architectural and eng________ achievements that continue to ast_____ modern researchers. The Egyp_____ built mon______ pyramids using soph__________ techniques for qu______ and tra________ massive stone blocks. In Mes________, engineers con_______ intricate irrigation systems.",
+  "paragraph": "Throughout history, ancient civilizations developed rem_______ architectural and eng________ achievements that continue to ast_____ modern researchers around the world. The Egy______ built mon_______ pyramids using soph_________ techniques for qu_______ and tra_________ massive stone blocks across vast distances without modern machinery. In Mes________, engineers con________ intricate irrigation systems that transformed arid landscapes into productive agricultural regions. These early innovations demonstrate the remarkable ingenuity of human societies that flourished thousands of years ago.",
   "items": [
     {
       "index": 0,
       "hint": "rem",
       "answer": "remarkable",
-      "placeholder": "rem______"
+      "placeholder": "rem_______"
     },
     {
       "index": 1,
@@ -23,31 +23,31 @@
       "index": 3,
       "hint": "Egy",
       "answer": "Egyptians",
-      "placeholder": "Egyp_____"
+      "placeholder": "Egy______"
     },
     {
       "index": 4,
       "hint": "mon",
       "answer": "monumental",
-      "placeholder": "mon______"
+      "placeholder": "mon_______"
     },
     {
       "index": 5,
       "hint": "soph",
       "answer": "sophisticated",
-      "placeholder": "soph__________"
+      "placeholder": "soph_________"
     },
     {
       "index": 6,
       "hint": "qu",
       "answer": "quarrying",
-      "placeholder": "qu______"
+      "placeholder": "qu_______"
     },
     {
       "index": 7,
       "hint": "tra",
       "answer": "transporting",
-      "placeholder": "tra________"
+      "placeholder": "tra_________"
     },
     {
       "index": 8,
@@ -59,7 +59,7 @@
       "index": 9,
       "hint": "con",
       "answer": "constructed",
-      "placeholder": "con_______"
+      "placeholder": "con________"
     }
   ]
 }

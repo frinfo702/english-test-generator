@@ -1,0 +1,46 @@
+{
+  "title": "The Psychology of Decision Making",
+  "passage": "Traditional economic theory assumes that human beings are rational actors who make decisions by carefully weighing costs and benefits to maximize their self-interest. However, research in behavioral economics and cognitive psychology has revealed that actual human decision making often deviates significantly from this rational model. People are influenced by cognitive biases, emotions, and social factors in ways that can lead to systematic errors in judgment.\n\nOne of the most influential frameworks for understanding decision making is the dual-process theory, which distinguishes between two systems of thinking. System One is fast, automatic, and intuitive, requiring little conscious effort. It operates largely below the level of awareness and is responsible for quick judgments and everyday decisions. System Two is slow, deliberate, and analytical, requiring focused attention and mental effort. Although System Two is more accurate for complex problems, people tend to rely on System One because it requires less energy.\n\nCognitive biases are systematic patterns of deviation from rational judgment. For example, confirmation bias leads people to search for and interpret information in ways that confirm their existing beliefs while ignoring contradictory evidence. The availability heuristic causes people to overestimate the likelihood of events that are easily recalled, such as dramatic plane crashes, while underestimating more common but less memorable risks like car accidents. Anchoring bias occurs when people rely too heavily on the first piece of information they receive when making decisions.\n\nEmotions also play a crucial role in decision making. Contrary to the traditional view that emotions interfere with rational choice, research by Antonio Damasio has shown that people with damage to brain regions responsible for emotions often struggle to make even simple decisions. This suggests that emotional signals are essential for effective decision making, as they help people evaluate options quickly and intuitively based on past experiences.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'systematic' in paragraph 3 is closest in meaning to:",
+      "options": ["A. random and unpredictable", "B. methodical and consistent", "C. rare and unusual", "D. unconscious and automatic"],
+      "correctIndex": 1,
+      "explanation": "'Systematic' means done according to a system or method, suggesting consistent and predictable patterns."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, which system of thinking is slow and analytical?",
+      "options": ["A. System One", "B. System Two", "C. The availability heuristic", "D. Confirmation bias"],
+      "correctIndex": 1,
+      "explanation": "The passage describes System Two as 'slow, deliberate, and analytical, requiring focused attention and mental effort.'"
+    },
+    {
+      "id": "q3",
+      "type": "detail",
+      "stem": "Which cognitive bias causes people to overestimate the likelihood of easily remembered events?",
+      "options": ["A. Confirmation bias", "B. The availability heuristic", "C. Anchoring bias", "D. The rational actor model"],
+      "correctIndex": 1,
+      "explanation": "The availability heuristic causes people to 'overestimate the likelihood of events that are easily recalled.'"
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred from Damasio's research about emotions and decision making?",
+      "options": ["A. Emotions always lead to poor decisions.", "B. Emotions are unnecessary for making choices.", "C. Emotions can actually help people make better decisions.", "D. Only negative emotions affect decision making."],
+      "correctIndex": 2,
+      "explanation": "The research showed that people without emotional brain function struggled to make decisions, implying that emotions are 'essential for effective decision making.'"
+    },
+    {
+      "id": "q5",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of this passage?",
+      "options": ["A. To argue that people should always rely on careful analysis", "B. To explain how human decision making differs from the rational model", "C. To describe the history of behavioral economics", "D. To prove that emotions are harmful to decision making"],
+      "correctIndex": 1,
+      "explanation": "The passage presents how actual human decision making deviates from rational models through biases, dual-process theory, and emotions."
+    }
+  ]
+}

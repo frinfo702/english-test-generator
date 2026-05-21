@@ -27,45 +27,6 @@
       "correctIndex": 0,
       "type": "detail",
       "explanation": "The librarian states the student's library account is set to undergraduate basic access, which lacks the needed database permissions."
-    },
-    {
-      "id": "q3",
-      "stem": "What does the student need to do to upgrade access?",
-      "options": [
-        "Submit a signed form from a faculty advisor",
-        "Pay a fee for premium database access",
-        "Attend a library orientation workshop",
-        "Enroll in an advanced research course"
-      ],
-      "correctIndex": 0,
-      "type": "detail",
-      "explanation": "The librarian explains that the student must fill out a Database Access Request form and have the faculty advisor sign it."
-    },
-    {
-      "id": "q4",
-      "stem": "What additional benefit comes with extended access?",
-      "options": [
-        "Interlibrary loan privileges and remote VPN access",
-        "Free printing and scanning services",
-        "Priority seating in the study rooms",
-        "Access to the library after midnight"
-      ],
-      "correctIndex": 0,
-      "type": "detail",
-      "explanation": "The librarian mentions that extended access includes interlibrary loan privileges and remote VPN access to specialty databases."
-    },
-    {
-      "id": "q5",
-      "stem": "What can be inferred about the student's research?",
-      "options": [
-        "It is likely a senior thesis on urban planning",
-        "It is a group project about library services",
-        "It focuses on database security systems",
-        "It is a first-year introductory assignment"
-      ],
-      "correctIndex": 0,
-      "type": "inference",
-      "explanation": "The librarian mentions senior thesis research, and the student later refers to researching urban planning trends, implying a substantial academic project."
     }
   ],
   "audioSegments": [

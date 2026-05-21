@@ -27,45 +27,6 @@
       "correctIndex": 0,
       "type": "detail",
       "explanation": "The advisor says the student only needs a preliminary plan and can finalize courses after acceptance."
-    },
-    {
-      "id": "q3",
-      "stem": "How should the recommendation letter be submitted?",
-      "options": [
-        "Uploaded directly by the professor through the online portal",
-        "Mailed in a sealed envelope to the advisor's office",
-        "Attached to the student's application form",
-        "Sent via a third-party recommendation service"
-      ],
-      "correctIndex": 0,
-      "type": "detail",
-      "explanation": "The advisor states the professor can upload the letter directly through the online portal using her official university email."
-    },
-    {
-      "id": "q4",
-      "stem": "What does the advisor suggest the student do about financial aid?",
-      "options": [
-        "Confirm transfer details with the Financial Aid Office",
-        "Apply for a private student loan immediately",
-        "Wait until after acceptance to contact Financial Aid",
-        "Pay the full program cost upfront"
-      ],
-      "correctIndex": 0,
-      "type": "detail",
-      "explanation": "The advisor says most aid transfers but the student should confirm with the Financial Aid Office, and mentions possible travel grants."
-    },
-    {
-      "id": "q5",
-      "stem": "What can be inferred about the student?",
-      "options": [
-        "She is well-prepared and proactive about planning",
-        "She has already been accepted into the program",
-        "She is trying to avoid the application deadline",
-        "She has never traveled outside the country"
-      ],
-      "correctIndex": 0,
-      "type": "inference",
-      "explanation": "The student has already secured a recommender, is asking detailed questions in advance, and plans to start her statement immediately, showing preparedness."
     }
   ],
   "audioSegments": [

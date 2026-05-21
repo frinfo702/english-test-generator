@@ -12,7 +12,7 @@
         "The business strategies of camera companies"
       ],
       "correctIndex": 0,
-      "type": "purpose",
+      "type": "mainIdea",
       "explanation": "The lecture traces photography from Niépce's first photograph through digital cameras and smartphones, focusing on technical evolution."
     },
     {
@@ -53,19 +53,6 @@
       "correctIndex": 1,
       "type": "inference",
       "explanation": "The professor notes that smartphones have made photography an everyday activity, with billions of images shared daily."
-    },
-    {
-      "id": "q5",
-      "stem": "What does the professor suggest about the fundamental purpose of photography?",
-      "options": [
-        "It has changed dramatically with each new technology",
-        "It remains the same despite technological advances",
-        "It is now primarily for social media communication",
-        "It is mainly used for scientific documentation"
-      ],
-      "correctIndex": 1,
-      "type": "inference",
-      "explanation": "The professor explicitly states that despite technological shifts, the fundamental goal of photography remains unchanged: to capture and preserve moments."
     }
   ],
   "audioSegments": [

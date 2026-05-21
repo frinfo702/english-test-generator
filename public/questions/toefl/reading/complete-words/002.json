@@ -1,5 +1,5 @@
 {
-  "paragraph": "Renewable energy sources are bec_____ increasingly important in the global eff____ to com____ climate change. Solar power har_____ electricity through pho_________ cells that con_____ sunlight directly into usable power. Wind tur_____ harness the kin_____ energy of moving air to gen______ electricity without pro______ harmful emissions.",
+  "paragraph": "Renewable energy sources are bec_____ increasingly important in the global eff___ to com___ climate change and reduce dependence on fossil fuels. Solar power har_____ electricity through pho_________ cells that con____ sunlight directly into usable power for residential and industrial applications. Wind tur_____ harness the kin____ energy of moving air to gen_____ electricity without pro______ harmful emissions that contribute to atmospheric pollution. Governments worldwide are investing heavily in these sustainable technologies to ensure long-term energy security.",
   "items": [
     {
       "index": 0,
@@ -11,13 +11,13 @@
       "index": 1,
       "hint": "eff",
       "answer": "effort",
-      "placeholder": "eff____"
+      "placeholder": "eff___"
     },
     {
       "index": 2,
       "hint": "com",
       "answer": "combat",
-      "placeholder": "com____"
+      "placeholder": "com___"
     },
     {
       "index": 3,
@@ -35,7 +35,7 @@
       "index": 5,
       "hint": "con",
       "answer": "convert",
-      "placeholder": "con_____"
+      "placeholder": "con____"
     },
     {
       "index": 6,
@@ -47,13 +47,13 @@
       "index": 7,
       "hint": "kin",
       "answer": "kinetic",
-      "placeholder": "kin_____"
+      "placeholder": "kin____"
     },
     {
       "index": 8,
       "hint": "gen",
       "answer": "generate",
-      "placeholder": "gen______"
+      "placeholder": "gen_____"
     },
     {
       "index": 9,

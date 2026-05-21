@@ -12,7 +12,7 @@
         "The history of Earth science"
       ],
       "correctIndex": 0,
-      "type": "purpose",
+      "type": "mainIdea",
       "explanation": "The lecture introduces the water cycle and explains its main processes."
     },
     {
@@ -40,19 +40,6 @@
       "correctIndex": 0,
       "type": "detail",
       "explanation": "Precipitation occurs when so much water has condensed that the air cannot hold it anymore."
-    },
-    {
-      "id": "q4",
-      "stem": "Where does some of the collected water go?",
-      "options": [
-        "It soaks into the ground and becomes groundwater",
-        "It evaporates immediately",
-        "It turns into salt water",
-        "It freezes into glaciers"
-      ],
-      "correctIndex": 0,
-      "type": "detail",
-      "explanation": "The lecture states that some water soaks into the ground and becomes groundwater."
     },
     {
       "id": "q5",

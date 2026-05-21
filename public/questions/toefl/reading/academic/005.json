@@ -1,0 +1,71 @@
+{
+  "title": "The Development of the Internet",
+  "passage": "The Internet originated as a Cold War project of the United States Department of Defense. In 1969, the Advanced Research Projects Agency Network, known as ARPANET, established the first connection between computers at the University of California, Los Angeles and the Stanford Research Institute. Early experiments involved connecting large mainframe computers at academic institutions, and the project initially included only a handful of research centers. The original goal was to create a decentralized communication network that could withstand a nuclear attack by routing information through multiple pathways.\n\nThroughout the 1970s, the TCP/IP protocol suite was developed to standardize data transmission across different types of networks. This breakthrough allowed separate networks to interconnect, forming a network of networks. This standardization was essential because previously, different computer systems used incompatible protocols that prevented seamless communication. By 1983, ARPANET had officially adopted TCP/IP, marking what many consider the true birth of the modern Internet.\n\nThe invention of the World Wide Web by Tim Berners-Lee in 1989 transformed the Internet from a tool used primarily by researchers and academics into a mass medium accessible to the general public. Berners-Lee introduced the concept of hyperlinks, which allowed users to navigate between documents stored on different servers simply by clicking on linked text. The development of search engines and online directories further accelerated public adoption by helping users locate information amid the rapidly expanding volume of web content. The first graphical web browser, Mosaic, was released in 1993 and played a crucial role in popularizing the web.\n\nSince the late 1990s, the Internet has undergone rapid commercialization and expansion. The rise of e-commerce, social media, and mobile connectivity has fundamentally changed how people communicate, work, and access information. Emerging technologies such as artificial intelligence, virtual reality, and the Internet of Things continue to reshape the digital landscape and raise new questions about privacy and security. Today, more than half the world's population uses the Internet, and its influence on nearly every aspect of modern life continues to grow.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'decentralized' in paragraph 1 is closest in meaning to:",
+      "options": [
+        "A. controlled by a single central authority",
+        "B. distributed across multiple locations",
+        "C. designed for military purposes only",
+        "D. limited to academic institutions"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Decentralized' means spread out or distributed across multiple points rather than controlled from one central location."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "What event is considered the true birth of the modern Internet?",
+      "options": [
+        "A. The creation of ARPANET in 1969",
+        "B. The invention of the World Wide Web in 1989",
+        "C. The official adoption of TCP/IP by ARPANET in 1983",
+        "D. The release of the Mosaic browser in 1993"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage states that ARPANET adopted TCP/IP in 1983, 'marking what many consider the true birth of the modern Internet.'"
+    },
+    {
+      "id": "q3",
+      "type": "inference",
+      "stem": "What can be inferred about the Internet before the World Wide Web?",
+      "options": [
+        "A. It was primarily used by the general public.",
+        "B. It was difficult for non-experts to navigate.",
+        "C. It did not use any standardized protocols.",
+        "D. It was only available in the United States."
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage says the Web transformed the Internet into 'a mass medium accessible to the general public,' implying it was previously hard for non-specialists to use."
+    },
+    {
+      "id": "q4",
+      "type": "detail",
+      "stem": "What role did the Mosaic browser play in the history of the Internet?",
+      "options": [
+        "A. It was the first web browser ever created.",
+        "B. It popularized the World Wide Web among the public.",
+        "C. It introduced the TCP/IP protocol.",
+        "D. It established the first connection between two computers."
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states Mosaic 'played a crucial role in popularizing the web' as the first graphical browser."
+    },
+    {
+      "id": "q5",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of this passage?",
+      "options": [
+        "A. To compare the Internet with other communication technologies",
+        "B. To trace the historical development of the Internet from its origins to the present",
+        "C. To argue that the Internet has had a negative impact on society",
+        "D. To explain how TCP/IP protocols function in detail"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage chronologically covers the Internet's origins, key developments, and its expansion into modern life."
+    }
+  ]
+}

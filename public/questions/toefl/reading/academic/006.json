@@ -1,0 +1,46 @@
+{
+  "title": "Plate Tectonics",
+  "passage": "Plate tectonics is the scientific theory that explains the movement of Earth's lithosphere, which is broken into several large and small plates that float on the partially molten asthenosphere beneath them. This theory revolutionized the Earth sciences by providing a unified explanation for phenomena such as earthquakes, volcanic activity, mountain building, and continental drift.\n\nThe theory emerged from earlier ideas about continental drift proposed by Alfred Wegener in 1912. Wegener observed that the coastlines of Africa and South America appeared to fit together like puzzle pieces, and he gathered evidence from fossil records, rock formations, and ancient climate patterns to support his claim that the continents had once been joined in a supercontinent called Pangaea. However, Wegener could not explain what force drove the continents apart, and his theory was largely dismissed during his lifetime.\n\nIt was not until the 1960s that technological advances in seafloor mapping provided the missing evidence. Scientists discovered that the ocean floor was spreading apart at mid-ocean ridges, where magma rose from beneath the crust to create new oceanic crust. This process, called seafloor spreading, provided the mechanism that Wegener's theory had lacked. As new crust forms at ridges, older crust is pushed away, causing the plates to move at rates of a few centimeters per year.\n\nThe boundaries between tectonic plates are where most geological activity occurs. At divergent boundaries, plates move apart and new crust is created. At convergent boundaries, plates collide, often resulting in subduction—where one plate slides beneath another—or mountain formation. At transform boundaries, plates slide past each other horizontally, causing earthquakes. The San Andreas Fault in California is a well-known example of a transform boundary.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'asthenosphere' in paragraph 1 is closest in meaning to:",
+      "options": ["A. the solid outer layer of Earth", "B. the partially molten layer beneath the lithosphere", "C. the core of the planet", "D. the layer of the atmosphere above Earth's surface"],
+      "correctIndex": 1,
+      "explanation": "The passage describes the asthenosphere as the layer beneath the lithosphere that is 'partially molten,' providing the surface on which plates float."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "Why was Wegener's theory of continental drift rejected during his lifetime?",
+      "options": ["A. He could not find any fossil evidence to support his claims.", "B. He could not explain the force driving continental movement.", "C. His observations about coastlines were incorrect.", "D. Other scientists had already proposed a better theory."],
+      "correctIndex": 1,
+      "explanation": "The passage states that 'Wegener could not explain what force drove the continents apart, and his theory was largely dismissed.'"
+    },
+    {
+      "id": "q3",
+      "type": "detail",
+      "stem": "What discovery in the 1960s provided the missing evidence for continental drift?",
+      "options": ["A. The discovery of fossils in Antarctica", "B. The mapping of seafloor spreading at mid-ocean ridges", "C. The measurement of plate movement using satellites", "D. The identification of the San Andreas Fault"],
+      "correctIndex": 1,
+      "explanation": "Scientists discovered that 'the ocean floor was spreading apart at mid-ocean ridges,' providing the mechanism Wegener's theory had lacked."
+    },
+    {
+      "id": "q4",
+      "type": "detail",
+      "stem": "According to the passage, what is the approximate rate of plate movement?",
+      "options": ["A. It is fast enough to be observed in a single day.", "B. It occurs very slowly, at a few centimeters per year.", "C. It varies dramatically depending on the season.", "D. It has slowed significantly since the 1960s."],
+      "correctIndex": 1,
+      "explanation": "The passage explicitly states plates move 'at rates of a few centimeters per year,' which is very slow."
+    },
+    {
+      "id": "q5",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of this passage?",
+      "options": ["A. To prove that Wegener was the greatest geologist in history", "B. To explain the theory of plate tectonics and how it developed over time", "C. To compare different types of geological disasters", "D. To describe the structure of Earth's interior in detail"],
+      "correctIndex": 1,
+      "explanation": "The passage covers the development of plate tectonic theory from Wegener's early ideas to the evidence that confirmed it."
+    }
+  ]
+}

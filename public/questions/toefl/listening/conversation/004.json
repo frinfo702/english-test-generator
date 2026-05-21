@@ -27,45 +27,6 @@
       "correctIndex": 1,
       "type": "detail",
       "explanation": "The librarian says Modern Art History has a hold request from another student, so it cannot be renewed."
-    },
-    {
-      "id": "q3",
-      "stem": "What alternative does the librarian suggest for the art history book?",
-      "options": [
-        "Buying a copy from the campus bookstore",
-        "Using the electronic version available in the digital catalog",
-        "Borrowing it from a different university library",
-        "Photocopying relevant chapters"
-      ],
-      "correctIndex": 1,
-      "type": "detail",
-      "explanation": "The librarian mentions that an electronic version is available through the library's digital catalog."
-    },
-    {
-      "id": "q4",
-      "stem": "How long can the student keep Introduction to Sociology after renewal?",
-      "options": [
-        "One more week",
-        "Two more weeks",
-        "One month",
-        "The entire semester"
-      ],
-      "correctIndex": 1,
-      "type": "detail",
-      "explanation": "The librarian says Introduction to Sociology can be renewed for another two weeks."
-    },
-    {
-      "id": "q5",
-      "stem": "What can be inferred about the library's renewal policy?",
-      "options": [
-        "Books can never be renewed more than once",
-        "Renewals are unlimited for all students",
-        "Renewals depend on whether other students have requested the book",
-        "Only graduate students can renew books"
-      ],
-      "correctIndex": 2,
-      "type": "inference",
-      "explanation": "The librarian states that books can be renewed if there are no holds, implying that renewals depend on demand from other students."
     }
   ],
   "audioSegments": [

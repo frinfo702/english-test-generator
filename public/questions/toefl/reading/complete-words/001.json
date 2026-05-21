@@ -1,11 +1,11 @@
 {
-  "paragraph": "The process of pho_________ allows plants to con____ sunlight into che_____ energy. Chlorophyll, the green pig____ found in plant cells, abs____ light from the sun and uses it to tra______ carbon dioxide and water into glucose. This rem______ mechanism has been stu____ extensively by bio_______ for over two cen______.",
+  "paragraph": "The process of pho___________, which occurs primarily in the leaves of green plants, allows them to con____ sunlight into che_____ energy that powers cellular activities. Chlorophyll, the green pig____ found in plant cells, abs____ light from the sun and uses it to tra______ carbon dioxide and water into glucose. This rem_______ mechanism has been stu____ extensively by bio_______ for over two cen______, yet researchers continue to discover new aspects of its efficiency.",
   "items": [
     {
       "index": 0,
       "hint": "pho",
       "answer": "photosynthesis",
-      "placeholder": "pho_________"
+      "placeholder": "pho___________"
     },
     {
       "index": 1,
@@ -41,7 +41,7 @@
       "index": 6,
       "hint": "rem",
       "answer": "remarkable",
-      "placeholder": "rem______"
+      "placeholder": "rem_______"
     },
     {
       "index": 7,

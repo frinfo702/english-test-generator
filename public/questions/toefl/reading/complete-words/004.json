@@ -1,65 +1,65 @@
 {
-  "paragraph": "Recent research in renewable energy has shown that solar and wind power can sig__________ reduce greenhouse gas emissions. Sci______ believe that transitioning to clean energy sources is ess______ for combating climate change. Gov________ worldwide are investing hea____ in wind tur_____ and solar pa_____ to replace fossil fuels. New sto_____ technology is improving energy reliability. Although the initial costs are high, the long-term benefits for public health and the env________ are rem________.",
+  "paragraph": "Ocean ecosystems cover more than 70 per____ of Earth's sur____ and are home to an inc_______ variety of life. From the sunlit surface waters to the dark depths of the tre_____, marine hab_____ sup____ a diverse array of org______. Coral reefs pro____ food and she____ for roughly a qua____ of all marine species, making them essential for global biodiversity. Scientists emphasize the urgent need to protect these fragile environments from pollution and climate change.",
   "items": [
     {
       "index": 0,
-      "hint": "sig",
-      "answer": "significantly",
-      "placeholder": "sig__________"
+      "hint": "per",
+      "answer": "percent",
+      "placeholder": "per____"
     },
     {
       "index": 1,
-      "hint": "Sci",
-      "answer": "Scientists",
-      "placeholder": "Sci______"
+      "hint": "sur",
+      "answer": "surface",
+      "placeholder": "sur____"
     },
     {
       "index": 2,
-      "hint": "ess",
-      "answer": "essential",
-      "placeholder": "ess______"
+      "hint": "inc",
+      "answer": "incredible",
+      "placeholder": "inc_______"
     },
     {
       "index": 3,
-      "hint": "Gov",
-      "answer": "Governments",
-      "placeholder": "Gov________"
+      "hint": "tre",
+      "answer": "trenches",
+      "placeholder": "tre_____"
     },
     {
       "index": 4,
-      "hint": "hea",
-      "answer": "heavily",
-      "placeholder": "hea____"
+      "hint": "hab",
+      "answer": "habitats",
+      "placeholder": "hab_____"
     },
     {
       "index": 5,
-      "hint": "tur",
-      "answer": "turbines",
-      "placeholder": "tur_____"
+      "hint": "sup",
+      "answer": "support",
+      "placeholder": "sup____"
     },
     {
       "index": 6,
-      "hint": "pa",
-      "answer": "panels",
-      "placeholder": "pa_____"
+      "hint": "org",
+      "answer": "organisms",
+      "placeholder": "org______"
     },
     {
       "index": 7,
-      "hint": "sto",
-      "answer": "storage",
-      "placeholder": "sto_____"
+      "hint": "pro",
+      "answer": "provide",
+      "placeholder": "pro____"
     },
     {
       "index": 8,
-      "hint": "env",
-      "answer": "environment",
-      "placeholder": "env________"
+      "hint": "she",
+      "answer": "shelter",
+      "placeholder": "she____"
     },
     {
       "index": 9,
-      "hint": "rem",
-      "answer": "remarkable",
-      "placeholder": "rem________"
+      "hint": "qua",
+      "answer": "quarter",
+      "placeholder": "qua____"
     }
   ]
 }
