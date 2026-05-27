@@ -15,32 +15,32 @@
 
 ## ディレクトリ対応表
 
-| タスク                                   | 保存先パス                                       | 音声時間    | 1音声あたりの設問数 |
-| ---------------------------------------- | ------------------------------------------------ | ----------- | ----------------- |
-| TOEFL Reading: Complete the Words        | `public/questions/toefl/reading/complete-words/` | —           | —                 |
-| TOEFL Reading: Read in Daily Life        | `public/questions/toefl/reading/daily-life/`     | —           | —                 |
-| TOEFL Reading: Read Academic Passage     | `public/questions/toefl/reading/academic/`       | —           | —                 |
-| TOEFL Writing: Build a Sentence          | `public/questions/toefl/writing/build-sentence/` | —           | —                 |
-| TOEFL Writing: Write an Email            | `public/questions/toefl/writing/email/`          | —           | —                 |
-| TOEFL Writing: Write Academic Discussion | `public/questions/toefl/writing/discussion/`     | —           | —                 |
-| TOEFL Speaking: Listen and Repeat        | `public/questions/toefl/speaking/listen-repeat/` | —           | —                 |
-| TOEFL Speaking: Take an Interview        | `public/questions/toefl/speaking/interview/`     | —           | —                 |
-| TOEFL Listening: Choose a Response       | `public/questions/toefl/listening/response/`     | 5〜15秒     | 1                 |
-| TOEFL Listening: Conversation            | `public/questions/toefl/listening/conversation/` | 30〜90秒    | 2                 |
-| TOEFL Listening: Announcement            | `public/questions/toefl/listening/announcement/` | 20〜40秒    | 2〜3              |
-| TOEFL Listening: Academic Talk           | `public/questions/toefl/listening/lecture/`      | 45〜120秒   | 4                 |
-| TOEIC Part 2                             | `public/questions/toeic/part2/`                  | —           | —                 |
-| TOEIC Part 3                             | `public/questions/toeic/part3/`                  | —           | —                 |
-| TOEIC Part 4                             | `public/questions/toeic/part4/`                  | —           | —                 |
-| TOEIC Part 5                             | `public/questions/toeic/part5/`                  | —           | —                 |
-| TOEIC Part 6                             | `public/questions/toeic/part6/`                  | —           | —                 |
-| TOEIC Part 7                             | `public/questions/toeic/part7/`                  | —           | —                 |
+| タスク                                   | 保存先パス                                       | 音声時間  | 1音声あたりの設問数 |
+| ---------------------------------------- | ------------------------------------------------ | --------- | ------------------- |
+| TOEFL Reading: Complete the Words        | `public/questions/toefl/reading/complete-words/` | —         | —                   |
+| TOEFL Reading: Read in Daily Life        | `public/questions/toefl/reading/daily-life/`     | —         | —                   |
+| TOEFL Reading: Read Academic Passage     | `public/questions/toefl/reading/academic/`       | —         | —                   |
+| TOEFL Writing: Build a Sentence          | `public/questions/toefl/writing/build-sentence/` | —         | —                   |
+| TOEFL Writing: Write an Email            | `public/questions/toefl/writing/email/`          | —         | —                   |
+| TOEFL Writing: Write Academic Discussion | `public/questions/toefl/writing/discussion/`     | —         | —                   |
+| TOEFL Speaking: Listen and Repeat        | `public/questions/toefl/speaking/listen-repeat/` | —         | —                   |
+| TOEFL Speaking: Take an Interview        | `public/questions/toefl/speaking/interview/`     | —         | —                   |
+| TOEFL Listening: Choose a Response       | `public/questions/toefl/listening/response/`     | 5〜15秒   | 1                   |
+| TOEFL Listening: Conversation            | `public/questions/toefl/listening/conversation/` | 30〜90秒  | 2                   |
+| TOEFL Listening: Announcement            | `public/questions/toefl/listening/announcement/` | 20〜40秒  | 2〜3                |
+| TOEFL Listening: Academic Talk           | `public/questions/toefl/listening/lecture/`      | 45〜120秒 | 4                   |
+| TOEIC Part 2                             | `public/questions/toeic/part2/`                  | —         | —                   |
+| TOEIC Part 3                             | `public/questions/toeic/part3/`                  | —         | —                   |
+| TOEIC Part 4                             | `public/questions/toeic/part4/`                  | —         | —                   |
+| TOEIC Part 5                             | `public/questions/toeic/part5/`                  | —         | —                   |
+| TOEIC Part 6                             | `public/questions/toeic/part6/`                  | —         | —                   |
+| TOEIC Part 7                             | `public/questions/toeic/part7/`                  | —         | —                   |
 
 ---
 
 ## TOEFL Reading: Read in Daily Life
 
- everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設問を付ける。
+everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設問を付ける。
 
 ```json
 {
@@ -412,12 +412,16 @@
     }
   ],
   "audioSegments": [
-    { "role": "Student", "text": "Excuse me, do you know when the library opens on weekends?" }
+    {
+      "role": "Student",
+      "text": "Excuse me, do you know when the library opens on weekends?"
+    }
   ]
 }
 ```
 
 **フィールド仕様:**
+
 - `context`: 状況ラベル（例: "Asking for information", "Expressing concern"）
 - `questions[].options`: オブジェクト形式（`"A"`〜`"C"`、3択）
 - `questions[].correct`: アルファベット文字列（`"A"` / `"B"` / `"C"`）
@@ -425,6 +429,7 @@
 - 設問数: 8問／ファイル
 
 **聞くポイント:**
+
 - 話し手が何を求めているか（助け、確認、情報、付き合い）
 - 感情やトーン（不満、安堵、好奇心）
 - 隠された期待や次のステップ
@@ -444,7 +449,12 @@
     {
       "id": "q1",
       "stem": "Why does the student visit the professor?",
-      "options": ["To ask about an assignment", "To discuss a grade", "To request a recommendation letter", "To change a class schedule"],
+      "options": [
+        "To ask about an assignment",
+        "To discuss a grade",
+        "To request a recommendation letter",
+        "To change a class schedule"
+      ],
       "correctIndex": 0,
       "type": "purpose",
       "explanation": "The student says they have a question about the essay assignment."
@@ -452,20 +462,29 @@
     {
       "id": "q2",
       "stem": "What will the student do next?",
-      "options": ["Revise the introduction", "Submit the paper", "Meet with a tutor", "Email the professor"],
+      "options": [
+        "Revise the introduction",
+        "Submit the paper",
+        "Meet with a tutor",
+        "Email the professor"
+      ],
       "correctIndex": 1,
       "type": "detail",
       "explanation": "The professor tells the student to submit the revised version by Friday."
     }
   ],
   "audioSegments": [
-    { "role": "Student", "text": "Hi Professor Martinez, do you have a moment?" },
+    {
+      "role": "Student",
+      "text": "Hi Professor Martinez, do you have a moment?"
+    },
     { "role": "Professor", "text": "Sure, come in. What can I help you with?" }
   ]
 }
 ```
 
 **フィールド仕様:**
+
 - `transcript`: 全文文字起こし
 - `questions[].type`: `"purpose"` / `"detail"` / `"inference"` / `"attitude"`
 - `options`: 配列形式（4択）
@@ -495,19 +514,28 @@
     {
       "id": "q2",
       "stem": "What will happen to the science library during the closure?",
-      "options": ["It will close at the regular time", "It will remain open with extended hours", "It will also undergo renovation", "It will move to a temporary location"],
+      "options": [
+        "It will close at the regular time",
+        "It will remain open with extended hours",
+        "It will also undergo renovation",
+        "It will move to a temporary location"
+      ],
       "correctIndex": 1,
       "type": "detail",
       "explanation": "The science library will remain open with extended hours."
     }
   ],
   "audioSegments": [
-    { "role": "Speaker", "text": "Attention students. The main library will be closed for renovation from March 15 to March 22. The science library on north campus will remain open with extended hours." }
+    {
+      "role": "Speaker",
+      "text": "Attention students. The main library will be closed for renovation from March 15 to March 22. The science library on north campus will remain open with extended hours."
+    }
   ]
 }
 ```
 
 **フィールド仕様:**
+
 - `transcript`: 全文文字起こし
 - `questions[].type`: `"detail"` / `"inference"` / `"vocabulary"`
 - `options`: 配列形式（4択）
@@ -529,7 +557,12 @@
     {
       "id": "q1",
       "stem": "What is the main topic of the lecture?",
-      "options": ["Marine animal reproduction", "The formation of coral reefs", "Ocean temperature changes", "Coral reef conservation"],
+      "options": [
+        "Marine animal reproduction",
+        "The formation of coral reefs",
+        "Ocean temperature changes",
+        "Coral reef conservation"
+      ],
       "correctIndex": 1,
       "type": "mainIdea",
       "explanation": "The lecture begins by stating they will discuss how coral reefs form."
@@ -537,19 +570,28 @@
     {
       "id": "q2",
       "stem": "What role do coral polyps play in reef formation?",
-      "options": ["They eat harmful algae", "They secrete calcium carbonate", "They attract fish species", "They clean the water"],
+      "options": [
+        "They eat harmful algae",
+        "They secrete calcium carbonate",
+        "They attract fish species",
+        "They clean the water"
+      ],
       "correctIndex": 1,
       "type": "detail",
       "explanation": "Coral polyps secrete calcium carbonate to form hard skeletons."
     }
   ],
   "audioSegments": [
-    { "role": "Lecturer", "text": "Today we'll discuss how coral reefs form. Coral reefs are built by tiny marine animals called coral polyps, which secrete calcium carbonate..." }
+    {
+      "role": "Lecturer",
+      "text": "Today we'll discuss how coral reefs form. Coral reefs are built by tiny marine animals called coral polyps, which secrete calcium carbonate..."
+    }
   ]
 }
 ```
 
 **フィールド仕様:**
+
 - `transcript`: 全文文字起こし
 - `questions[].type`: `"mainIdea"` / `"detail"` / `"inference"` / `"vocabulary"` / `"attitude"`
 - `options`: 配列形式（4択）
@@ -738,7 +780,10 @@ Single / Double / Triple passage の読解。
     }
   ],
   "audioSegments": [
-    { "role": "Woman", "text": "Number 1. When is the deadline for the budget proposal?" },
+    {
+      "role": "Woman",
+      "text": "Number 1. When is the deadline for the budget proposal?"
+    },
     { "role": "Man", "text": "(A) It's due this Friday." },
     { "role": "Man", "text": "(B) Yes, I submitted it yesterday." },
     { "role": "Man", "text": "(C) In the conference room." }
@@ -747,6 +792,7 @@ Single / Double / Triple passage の読解。
 ```
 
 **フィールド仕様:**
+
 - `questions[].stem`: 聞かれる質問文
 - `questions[].options`: オブジェクト形式（`"A"`〜`"C"` — Part 2は選択肢3つのみ）
 - `questions[].correct`: アルファベット文字列（`"A"` / `"B"` / `"C"`）
@@ -768,20 +814,32 @@ audioSegments の role は `"Man"` / `"Woman"` を使用（音声割当が一貫
     {
       "id": "q1",
       "stem": "What is the man's purpose in the conversation?",
-      "options": ["To discuss the office renovation timeline", "To complain about construction noise", "To request a change of workspace", "To inquire about contractor pricing"],
+      "options": [
+        "To discuss the office renovation timeline",
+        "To complain about construction noise",
+        "To request a change of workspace",
+        "To inquire about contractor pricing"
+      ],
       "correctIndex": 0,
       "type": "purpose",
       "explanation": "The man says he is there to discuss the office renovation schedule."
     }
   ],
   "audioSegments": [
-    { "role": "Man", "text": "Good morning. I'm here to discuss the office renovation schedule." },
-    { "role": "Woman", "text": "Yes, let me pull up the contractor's timeline. The construction team will start next Monday." }
+    {
+      "role": "Man",
+      "text": "Good morning. I'm here to discuss the office renovation schedule."
+    },
+    {
+      "role": "Woman",
+      "text": "Yes, let me pull up the contractor's timeline. The construction team will start next Monday."
+    }
   ]
 }
 ```
 
 **フィールド仕様:**
+
 - TOEFL Listening Conversation と同一構造
 - `audioSegments[].role`: `"Man"` または `"Woman"`（TOEICのキャラクター一貫性ルール）
 - `options`: 配列形式（TOEFL Listening と同様）
@@ -803,19 +861,28 @@ audioSegments の role は常に `"Speaker"`。
     {
       "id": "q1",
       "stem": "Where does this announcement most likely take place?",
-      "options": ["At a train station", "At an airport", "At a bus terminal", "At a hotel lobby"],
+      "options": [
+        "At a train station",
+        "At an airport",
+        "At a bus terminal",
+        "At a hotel lobby"
+      ],
       "correctIndex": 1,
       "type": "inference",
       "explanation": "The announcement refers to a flight number, gates, and boarding passes."
     }
   ],
   "audioSegments": [
-    { "role": "Speaker", "text": "Attention all passengers. Flight 247 to Chicago is now boarding at Gate 12." }
+    {
+      "role": "Speaker",
+      "text": "Attention all passengers. Flight 247 to Chicago is now boarding at Gate 12."
+    }
   ]
 }
 ```
 
 **フィールド仕様:**
+
 - TOEFL Listening Lecture と同一構造
 - `audioSegments[].role`: 常に `"Speaker"`（1名の話者）
 - `options`: 配列形式

@@ -16,15 +16,16 @@ description: >
 
 ## タスク一覧
 
-| タスク | 保存先 | 設問数 |
-|-------|--------|--------|
-| Complete the Words | `public/questions/toefl/reading/complete-words/` | 10 blanks |
-| Read in Daily Life | `public/questions/toefl/reading/daily-life/` | 2〜3 texts × 2〜3 questions each |
-| Read Academic Passage | `public/questions/toefl/reading/academic/` | 5問固定 |
+| タスク                | 保存先                                           | 設問数                           |
+| --------------------- | ------------------------------------------------ | -------------------------------- |
+| Complete the Words    | `public/questions/toefl/reading/complete-words/` | 10 blanks                        |
+| Read in Daily Life    | `public/questions/toefl/reading/daily-life/`     | 2〜3 texts × 2〜3 questions each |
+| Read Academic Passage | `public/questions/toefl/reading/academic/`       | 5問固定                          |
 
 ## 必須仕様（2026年新形式準拠）
 
 ### Complete the Words
+
 - 70〜100語の学術段落、空欄10個固定
 - `hint` は2〜3文字、`answer` の先頭と一致させる
 - `placeholder` = `hint + 続き文字数分の _`
@@ -32,6 +33,7 @@ description: >
 - 文脈から一意に特定できる語のみ選ぶ
 
 ### Read in Daily Life
+
 - everyday text（email, notice, schedule, menu, announcement, text message, online post, ad, poster, sign, webpage, news article, form, invoice, receipt など）2〜3本
 - 各テキスト15〜150語、設問2〜3問
 - 合計4〜9問（目安6〜7問）
@@ -41,6 +43,7 @@ description: >
 - 評価されるスキル: 非線形テキスト形式の理解、書面コミュニケーションの主目的の特定、非公式・慣用的表現の理解、推論、スキャン・スキミング
 
 ### Read Academic Passage
+
 - 学術段落1本、150〜250語（目安200語）
 - 5問固定
 - 設問タイプ: vocabulary / detail / inference / mainIdea / paragraphRelation / importantIdea / negativeFactual / rhetoricalPurpose / insertSentence

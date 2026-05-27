@@ -16,11 +16,11 @@ description: >
 
 ## タスク一覧
 
-| タスク | 保存先 | 出題数 |
-|-------|--------|--------|
-| Build a Sentence | `public/questions/toefl/writing/build-sentence/` | 10文 |
-| Write an Email | `public/questions/toefl/writing/email/` | 1問（7分想定） |
-| Write for an Academic Discussion | `public/questions/toefl/writing/discussion/` | 1問（10分想定） |
+| タスク                           | 保存先                                           | 出題数          |
+| -------------------------------- | ------------------------------------------------ | --------------- |
+| Build a Sentence                 | `public/questions/toefl/writing/build-sentence/` | 10文            |
+| Write an Email                   | `public/questions/toefl/writing/email/`          | 1問（7分想定）  |
+| Write for an Academic Discussion | `public/questions/toefl/writing/discussion/`     | 1問（10分想定） |
 
 ## 実行手順
 

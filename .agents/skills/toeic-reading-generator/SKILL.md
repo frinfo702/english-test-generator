@@ -16,10 +16,10 @@ description: >
 
 ## タスク一覧
 
-| タスク | 保存先 | 問題数 |
-|-------|--------|--------|
-| Part 5: Incomplete Sentences | `public/questions/toeic/part5/` | 30問 |
-| Part 6: Text Completion | `public/questions/toeic/part6/` | 4 passages × 4問 = 16問 |
+| タスク                        | 保存先                          | 問題数                                   |
+| ----------------------------- | ------------------------------- | ---------------------------------------- |
+| Part 5: Incomplete Sentences  | `public/questions/toeic/part5/` | 30問                                     |
+| Part 6: Text Completion       | `public/questions/toeic/part6/` | 4 passages × 4問 = 16問                  |
 | Part 7: Reading Comprehension | `public/questions/toeic/part7/` | Single: 2〜4問, Double: 5問, Triple: 5問 |
 
 ## 注意
