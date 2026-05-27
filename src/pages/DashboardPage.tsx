@@ -31,7 +31,7 @@ const TASK_LABELS: Record<TaskId, string> = {
   "toeic/part5": "TOEIC Part 5",
   "toeic/part6": "TOEIC Part 6",
   "toeic/part7": "TOEIC Part 7",
-  "shadowing": "Shadowing",
+  shadowing: "Shadowing",
 };
 
 const TASK_COLORS: Record<string, string> = {
@@ -423,9 +423,10 @@ export function DashboardPage() {
           <h2 className={styles.answersHeading}>Answer History</h2>
           <div className={styles.answersList}>
             {answers.map((a) => {
-              const preview = a.response.length > 80
-                ? a.response.slice(0, 80) + "..."
-                : a.response;
+              const preview =
+                a.response.length > 80
+                  ? a.response.slice(0, 80) + "..."
+                  : a.response;
               return (
                 <div key={a.answerId} className={styles.answerRow}>
                   <span className={styles.answerDate}>

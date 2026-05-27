@@ -72,7 +72,11 @@ function migrateDir(dirPath) {
     const fullPath = path.join(dirPath, entry.name);
     if (entry.isDirectory()) {
       migrateDir(fullPath);
-    } else if (entry.isFile() && entry.name.endsWith(".json") && entry.name !== "index.json") {
+    } else if (
+      entry.isFile() &&
+      entry.name.endsWith(".json") &&
+      entry.name !== "index.json"
+    ) {
       migrateFile(fullPath);
     }
   }

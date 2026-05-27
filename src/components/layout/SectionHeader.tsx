@@ -10,7 +10,13 @@ interface SectionHeaderProps {
   backTo?: string;
 }
 
-export function SectionHeader({ title, subtitle, current, total, backTo }: SectionHeaderProps) {
+export function SectionHeader({
+  title,
+  subtitle,
+  current,
+  total,
+  backTo,
+}: SectionHeaderProps) {
   const navigate = useNavigate();
   return (
     <div className={styles.wrapper}>

@@ -38,7 +38,8 @@ const TASK_ID = "toefl/writing/discussion";
 export function WriteDiscussionPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(TASK_ID);
+  const { data, file, loading, error, loadByQuestionNumber } =
+    useQuestion<ProblemData>(TASK_ID);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "writing" | "submitted">("pre");
   const [showModel, setShowModel] = useState(false);
@@ -192,8 +193,8 @@ export function WriteDiscussionPage() {
           {phase === "pre" && (
             <div className={styles.startCard}>
               <p>
-                Press Start when ready. The 10-minute timer will begin. Write
-                at least 100 words.
+                Press Start when ready. The 10-minute timer will begin. Write at
+                least 100 words.
               </p>
               <Button size="lg" onClick={handleStart}>
                 Start

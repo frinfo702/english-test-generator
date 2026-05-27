@@ -42,7 +42,8 @@ const TASK_ID = "toefl/speaking/interview";
 export function TakeInterviewPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(TASK_ID);
+  const { data, file, loading, error, loadByQuestionNumber } =
+    useQuestion<ProblemData>(TASK_ID);
   const [current, setCurrent] = useState(0);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "answering" | "submitted">("pre");
@@ -55,7 +56,9 @@ export function TakeInterviewPage() {
 
   const q = data?.questions[current];
   const problemId =
-    file && q ? buildProblemId(TASK_ID, file, q.id || String(current + 1)) : null;
+    file && q
+      ? buildProblemId(TASK_ID, file, q.id || String(current + 1))
+      : null;
   const gradingMessage =
     problemId && answerId ? buildGradingMessage(problemId, answerId) : null;
 
@@ -275,7 +278,9 @@ export function TakeInterviewPage() {
                 )}
               </div>
               <Button onClick={handleNext}>
-                {current + 1 < data.questions.length ? "Next Question" : "Finish"}
+                {current + 1 < data.questions.length
+                  ? "Next Question"
+                  : "Finish"}
               </Button>
             </div>
           )}

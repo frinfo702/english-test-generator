@@ -67,11 +67,7 @@ export function HomePage() {
           anytime, anywhere.
         </p>
         <div className={styles.quickStart}>
-          <Button
-            variant="accent"
-            size="md"
-            onClick={() => navigate("/toefl")}
-          >
+          <Button variant="accent" size="md" onClick={() => navigate("/toefl")}>
             Practice TOEFL
           </Button>
           <Button
@@ -148,8 +144,8 @@ export function HomePage() {
               <h3 className={styles.cardTitle}>TOEIC L&amp;R</h3>
             </div>
             <p className={styles.cardDesc}>
-              Parts 1-7. Complete Listening &amp; Reading practice with
-              instant scoring and audio playback.
+              Parts 1-7. Complete Listening &amp; Reading practice with instant
+              scoring and audio playback.
             </p>
             <ul className={styles.cardTasks}>
               <li>Part 5 — Incomplete Sentences (30 Qs)</li>

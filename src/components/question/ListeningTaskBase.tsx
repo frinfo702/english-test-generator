@@ -1,15 +1,16 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { SectionHeader } from "../../components/layout/SectionHeader";
-import { Button } from "../../components/ui/Button";
-import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
-import { ProgressBar } from "../../components/ui/ProgressBar";
-import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
+import { SectionHeader } from "../layout/SectionHeader";
+import { Button } from "../ui/Button";
+import { LoadingSpinner } from "../ui/LoadingSpinner";
+import { ProgressBar } from "../ui/ProgressBar";
+import { FloatingElapsedTimer } from "../ui/FloatingElapsedTimer";
+import { SpeedControl } from "../ui/SpeedControl";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
-import { useScoreHistory } from "../../hooks/useScoreHistory";
+import { useScoreHistory, type TaskId } from "../../hooks/useScoreHistory";
 import { useTts } from "../../hooks/useTts";
-import styles from "./ToeicListeningTaskPage.module.css";
+import styles from "./ListeningTaskBase.module.css";
 
 interface ListeningQuestion {
   id: string;
@@ -33,17 +34,23 @@ function formatTime(seconds: number) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-export function ToeicListeningTaskPageBase({
-  taskId,
-  subtitle,
-  partLabel,
-  readQuestionsAloud,
-}: {
-  taskId: "toeic/part3" | "toeic/part4";
+interface ListeningTaskBaseProps {
+  taskId: TaskId;
+  title: string;
   subtitle: string;
-  partLabel: string;
+  backTo: string;
   readQuestionsAloud?: boolean;
-}) {
+  showSpeedControl?: boolean;
+}
+
+export function ListeningTaskBase({
+  taskId,
+  title,
+  subtitle,
+  backTo,
+  readQuestionsAloud,
+  showSpeedControl,
+}: ListeningTaskBaseProps) {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
   const { data, file, loading, error, loadByQuestionNumber } =
@@ -57,8 +64,21 @@ export function ToeicListeningTaskPageBase({
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playSegments, playSegmentsWithGaps, pause, resume, stop: stopTts, seek } =
-    useTts();
+  const {
+    playing,
+    loading: ttsLoading,
+    error: ttsError,
+    currentTime,
+    duration,
+    playbackRate,
+    setPlaybackRate,
+    playSegments,
+    playSegmentsWithGaps,
+    pause,
+    resume,
+    stop: stopTts,
+    seek,
+  } = useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
   const [selections, setSelections] = useState<Record<number, number>>({});
@@ -93,7 +113,7 @@ export function ToeicListeningTaskPageBase({
       const ratio = (clientX - rect.left) / rect.width;
       return Math.max(0, Math.min(ratio * duration, duration));
     },
-    [duration]
+    [duration],
   );
 
   const handleBarMouseDown = useCallback(
@@ -103,7 +123,7 @@ export function ToeicListeningTaskPageBase({
       if (time !== null) seek(time);
       setIsDragging(true);
     },
-    [graded, duration, getSeekTime, seek]
+    [graded, duration, getSeekTime, seek],
   );
 
   useEffect(() => {
@@ -122,7 +142,9 @@ export function ToeicListeningTaskPageBase({
   }, [isDragging, getSeekTime, seek]);
 
   const correctCount = data
-    ? data.questions.filter((_, i) => selections[i] === data.questions[i].correctIndex).length
+    ? data.questions.filter(
+        (_, i) => selections[i] === data.questions[i].correctIndex,
+      ).length
     : 0;
   const totalQuestions = data?.questions.length ?? 0;
 
@@ -146,10 +168,35 @@ export function ToeicListeningTaskPageBase({
     setSelections({});
     setGraded(false);
     stopTts();
-    navigate(`/toeic/${taskId.split("/")[1]}`);
+    navigate(`/${taskId}`);
   };
 
-  const allAnswered = totalQuestions > 0 && Object.keys(selections).length === totalQuestions;
+  const allAnswered =
+    totalQuestions > 0 && Object.keys(selections).length === totalQuestions;
+
+  const handlePlay = () => {
+    if (playing) {
+      pause();
+    } else if (currentTime > 0) {
+      resume();
+    } else {
+      const urls = data!.audioSegments.map(
+        (_, i) => `/audio/${taskId}/${fileBasename}/${i + 1}.mp3`,
+      );
+      if (readQuestionsAloud) {
+        const convCount = data!.audioSegments.length - data!.questions.length;
+        const gaps: number[] = [];
+        for (let i = 0; i < data!.audioSegments.length - 1; i++) {
+          if (i < convCount - 1) gaps.push(0);
+          else if (i === convCount - 1) gaps.push(3);
+          else gaps.push(5);
+        }
+        void playSegmentsWithGaps(urls, gaps);
+      } else {
+        void playSegments(urls);
+      }
+    }
+  };
 
   return (
     <div>
@@ -157,9 +204,9 @@ export function ToeicListeningTaskPageBase({
         <FloatingElapsedTimer display={display} running={running} />
       )}
       <SectionHeader
-        title={partLabel}
+        title={title}
         subtitle={subtitle}
-        backTo="/toeic"
+        backTo={backTo}
         current={Object.keys(selections).length}
         total={totalQuestions}
       />
@@ -201,33 +248,7 @@ export function ToeicListeningTaskPageBase({
               >
                 ⏪ 10s
               </Button>
-              <Button
-                onClick={() => {
-                  if (playing) {
-                    pause();
-                  } else if (currentTime > 0) {
-                    resume();
-                  } else {
-                    const urls = data.audioSegments.map((_, i) =>
-                      `/audio/${taskId}/${fileBasename}/${i + 1}.mp3`
-                    );
-                    if (readQuestionsAloud) {
-                      const convCount = data.audioSegments.length - data.questions.length;
-                      const gaps: number[] = [];
-                      for (let i = 0; i < data.audioSegments.length - 1; i++) {
-                        if (i < convCount - 1) gaps.push(0);
-                        else if (i === convCount - 1) gaps.push(3);
-                        else gaps.push(5);
-                      }
-                      playSegmentsWithGaps(urls, gaps);
-                    } else {
-                      playSegments(urls);
-                    }
-                  }
-                }}
-                disabled={ttsLoading}
-                size="md"
-              >
+              <Button onClick={handlePlay} disabled={ttsLoading} size="md">
                 {ttsLoading
                   ? "Loading..."
                   : playing
@@ -258,10 +279,21 @@ export function ToeicListeningTaskPageBase({
                   <div
                     className={styles.progressFill}
                     style={{
-                      width: duration > 0 ? `${(currentTime / duration) * 100}%` : "0%",
+                      width:
+                        duration > 0
+                          ? `${(currentTime / duration) * 100}%`
+                          : "0%",
                     }}
                   />
                 </div>
+              </div>
+            )}
+            {showSpeedControl && duration > 0 && (
+              <div className={styles.speedControlRow}>
+                <SpeedControl
+                  playbackRate={playbackRate}
+                  onChange={setPlaybackRate}
+                />
               </div>
             )}
             {ttsError && <p className={styles.errorText}>{ttsError}</p>}
@@ -269,11 +301,7 @@ export function ToeicListeningTaskPageBase({
 
           {!graded && (
             <div className={styles.submitArea}>
-              <Button
-                onClick={handleSubmit}
-                disabled={!allAnswered}
-                size="lg"
-              >
+              <Button onClick={handleSubmit} disabled={!allAnswered} size="lg">
                 Submit Answers
               </Button>
             </div>

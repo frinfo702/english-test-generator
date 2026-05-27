@@ -29,9 +29,8 @@ interface ProblemData {
 export function ReadAcademicPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
-    "toefl/reading/academic",
-  );
+  const { data, file, loading, error, loadByQuestionNumber } =
+    useQuestion<ProblemData>("toefl/reading/academic");
   const { saveScore } = useScoreHistory();
   const {
     display,

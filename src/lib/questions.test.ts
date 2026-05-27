@@ -40,7 +40,7 @@ describe("questions loader", () => {
     fetchMock.mockResolvedValue(mockResponse({}, false));
 
     await expect(fetchQuestionIndex("missing/task")).rejects.toThrow(
-      "No questions found for missing/task. Generate some first!"
+      "No questions found for missing/task. Generate some first!",
     );
   });
 
@@ -53,14 +53,17 @@ describe("questions loader", () => {
     const result = await fetchRandomQuestion<{ id: string }>("toeic/part5");
 
     expect(result).toEqual({ id: "q2" });
-    expect(fetchMock).toHaveBeenNthCalledWith(2, "/questions/toeic/part5/002.json");
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      2,
+      "/questions/toeic/part5/002.json",
+    );
   });
 
   it("throws when no question files exist", async () => {
     fetchMock.mockResolvedValue(mockResponse({ files: [] }));
 
     await expect(fetchRandomQuestion("toeic/part5")).rejects.toThrow(
-      "No question files in toeic/part5. Generate some first!"
+      "No question files in toeic/part5. Generate some first!",
     );
   });
 
@@ -73,8 +76,14 @@ describe("questions loader", () => {
     const result = await fetchAllQuestions<{ id: number }>("toeic/part5");
 
     expect(result).toEqual([{ id: 1 }, { id: 2 }]);
-    expect(fetchMock).toHaveBeenNthCalledWith(2, "/questions/toeic/part5/001.json");
-    expect(fetchMock).toHaveBeenNthCalledWith(3, "/questions/toeic/part5/002.json");
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      2,
+      "/questions/toeic/part5/001.json",
+    );
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      3,
+      "/questions/toeic/part5/002.json",
+    );
   });
 
   it("throws when loading one question file fails", async () => {
@@ -82,7 +91,9 @@ describe("questions loader", () => {
       .mockResolvedValueOnce(mockResponse({ files: ["001.json"] }))
       .mockResolvedValueOnce(mockResponse({}, false));
 
-    await expect(fetchAllQuestions("toeic/part5")).rejects.toThrow("Failed to load: 001.json");
+    await expect(fetchAllQuestions("toeic/part5")).rejects.toThrow(
+      "Failed to load: 001.json",
+    );
   });
 
   it("lists question files sorted by numeric number", async () => {

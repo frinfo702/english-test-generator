@@ -14,7 +14,9 @@ export function ProgressBar({ current, total, label }: ProgressBarProps) {
       <div className={styles.track}>
         <div className={styles.fill} style={{ width: `${pct}%` }} />
       </div>
-      <span className={styles.count}>{current}/{total}</span>
+      <span className={styles.count}>
+        {current}/{total}
+      </span>
     </div>
   );
 }

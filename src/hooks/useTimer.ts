@@ -52,5 +52,14 @@ export function useTimer(initialSeconds: number, onExpire?: () => void) {
   const isWarning = seconds <= 60 && seconds > 0;
   const isExpired = seconds === 0;
 
-  return { seconds, display, isWarning, isExpired, running, start, stop, reset };
+  return {
+    seconds,
+    display,
+    isWarning,
+    isExpired,
+    running,
+    start,
+    stop,
+    reset,
+  };
 }

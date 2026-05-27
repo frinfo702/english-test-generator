@@ -72,7 +72,9 @@
   border-radius: var(--radius);
   cursor: pointer;
   background: var(--color-surface);
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
   text-align: left;
 }
 
@@ -153,36 +155,6 @@
   border-radius: var(--radius);
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
-}
-
-.speedBtns {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  margin-top: var(--spacing-3);
-}
-
-.speedBtn {
-  padding: 4px 12px;
-  font-size: var(--text-xs);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-ink-secondary);
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
-}
-
-.speedBtn:hover {
-  border-color: var(--color-accent);
-}
-
-.speedBtnActive {
-  border-color: var(--color-accent);
-  background: var(--color-accent-subtle);
-  color: var(--color-ink);
-  font-weight: 600;
 }
 
 .topBar {

@@ -27,7 +27,8 @@ const TASK_ID = "toefl/writing/build-sentence";
 export function BuildSentencePage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(TASK_ID);
+  const { data, file, loading, error, loadByQuestionNumber } =
+    useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -108,7 +109,13 @@ export function BuildSentencePage() {
     if (!data || graded) return;
     const sessionSeconds = stop();
     const correct = data.sentences.filter((_, i) => isCorrectFor(i)).length;
-    saveScore(TASK_ID, correct, data.sentences.length, sessionSeconds, file ?? undefined);
+    saveScore(
+      TASK_ID,
+      correct,
+      data.sentences.length,
+      sessionSeconds,
+      file ?? undefined,
+    );
     setPhase("submitted");
   };
   const handleStart = () => {

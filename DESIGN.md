@@ -10,27 +10,28 @@
 
 ### Color Palette
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `--color-ink` | `#0f172a` | Primary text, headings, icons |
-| `--color-ink-secondary` | `#475569` | Body text, descriptions |
-| `--color-ink-tertiary` | `#94a3b8` | Disabled, placeholders, meta |
-| `--color-surface` | `#ffffff` | Page background |
-| `--color-surface-elevated` | `#f8fafc` | Cards, panels, hover rows |
-| `--color-surface-subtle` | `#f1f5f9` | Subtle backgrounds, badges |
-| `--color-border` | `#e2e8f0` | Dividers, input borders |
-| `--color-border-strong` | `#cbd5e1` | Focus states, active borders |
-| `--color-accent` | `#0f62fe` | Primary actions, links, active nav — shifted from `#0071bc` to a deeper, more authoritative cobalt |
-| `--color-accent-hover` | `#054ada` | Hover / pressed accent |
-| `--color-accent-subtle` | `#eff4ff` | Accent tint backgrounds |
-| `--color-success` | `#059669` | Correct answers, positive stats |
-| `--color-success-subtle` | `#ecfdf5` | Correct answer background |
-| `--color-error` | `#dc2626` | Incorrect answers, destructive actions |
-| `--color-error-subtle` | `#fef2f2` | Error background |
-| `--color-warning` | `#d97706` | Timers, warnings |
-| `--color-warning-subtle` | `#fffbeb` | Warning background |
+| Token                      | Hex       | Usage                                                                                              |
+| -------------------------- | --------- | -------------------------------------------------------------------------------------------------- |
+| `--color-ink`              | `#0f172a` | Primary text, headings, icons                                                                      |
+| `--color-ink-secondary`    | `#475569` | Body text, descriptions                                                                            |
+| `--color-ink-tertiary`     | `#94a3b8` | Disabled, placeholders, meta                                                                       |
+| `--color-surface`          | `#ffffff` | Page background                                                                                    |
+| `--color-surface-elevated` | `#f8fafc` | Cards, panels, hover rows                                                                          |
+| `--color-surface-subtle`   | `#f1f5f9` | Subtle backgrounds, badges                                                                         |
+| `--color-border`           | `#e2e8f0` | Dividers, input borders                                                                            |
+| `--color-border-strong`    | `#cbd5e1` | Focus states, active borders                                                                       |
+| `--color-accent`           | `#0f62fe` | Primary actions, links, active nav — shifted from `#0071bc` to a deeper, more authoritative cobalt |
+| `--color-accent-hover`     | `#054ada` | Hover / pressed accent                                                                             |
+| `--color-accent-subtle`    | `#eff4ff` | Accent tint backgrounds                                                                            |
+| `--color-success`          | `#059669` | Correct answers, positive stats                                                                    |
+| `--color-success-subtle`   | `#ecfdf5` | Correct answer background                                                                          |
+| `--color-error`            | `#dc2626` | Incorrect answers, destructive actions                                                             |
+| `--color-error-subtle`     | `#fef2f2` | Error background                                                                                   |
+| `--color-warning`          | `#d97706` | Timers, warnings                                                                                   |
+| `--color-warning-subtle`   | `#fffbeb` | Warning background                                                                                 |
 
 **TOEFL / TOEIC section tints** (used sparingly as dot/line colors only):
+
 - Reading: `#0ea5e9`
 - Writing: `#10b981`
 - Speaking: `#f59e0b`
@@ -38,34 +39,34 @@
 
 ### Typography
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--font-sans` | `Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif` | All UI text |
-| `--font-mono` | `"SF Mono", ui-monospace, "Cascadia Code", monospace` | Metrics, timestamps, code snippets |
-| `--text-xs` | `12px / 1.5` | Badges, captions |
-| `--text-sm` | `14px / 1.5` | Secondary text, nav, buttons |
-| `--text-base` | `15px / 1.6` | Body copy (reduced from 16px for density) |
-| `--text-lg` | `18px / 1.4` | Sub-headings, card titles |
-| `--text-xl` | `22px / 1.3` | Page titles |
-| `--text-2xl` | `32px / 1.2` | Hero display |
-| `--font-normal` | `400` | Body |
-| `--font-medium` | `500` | Labels, buttons |
-| `--font-semibold` | `600` | Headings, emphasis |
-| `--font-bold` | `700` | Display, hero |
+| Token             | Value                                                                         | Usage                                     |
+| ----------------- | ----------------------------------------------------------------------------- | ----------------------------------------- |
+| `--font-sans`     | `Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif` | All UI text                               |
+| `--font-mono`     | `"SF Mono", ui-monospace, "Cascadia Code", monospace`                         | Metrics, timestamps, code snippets        |
+| `--text-xs`       | `12px / 1.5`                                                                  | Badges, captions                          |
+| `--text-sm`       | `14px / 1.5`                                                                  | Secondary text, nav, buttons              |
+| `--text-base`     | `15px / 1.6`                                                                  | Body copy (reduced from 16px for density) |
+| `--text-lg`       | `18px / 1.4`                                                                  | Sub-headings, card titles                 |
+| `--text-xl`       | `22px / 1.3`                                                                  | Page titles                               |
+| `--text-2xl`      | `32px / 1.2`                                                                  | Hero display                              |
+| `--font-normal`   | `400`                                                                         | Body                                      |
+| `--font-medium`   | `500`                                                                         | Labels, buttons                           |
+| `--font-semibold` | `600`                                                                         | Headings, emphasis                        |
+| `--font-bold`     | `700`                                                                         | Display, hero                             |
 
 ### Spacing & Shape
 
-| Token | Value |
-|-------|-------|
-| `--radius-sm` | `6px` |
-| `--radius` | `8px` |
-| `--radius-lg` | `12px` |
-| `--radius-xl` | `16px` |
-| `--shadow-sm` | `0 1px 2px rgba(15,23,42,0.04)` |
-| `--shadow` | `0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04)` |
-| `--shadow-md` | `0 4px 12px rgba(15,23,42,0.08), 0 2px 4px rgba(15,23,42,0.04)` |
-| `--shadow-lg` | `0 12px 24px rgba(15,23,42,0.08), 0 4px 8px rgba(15,23,42,0.04)` |
-| `--max-content` | `840px` |
+| Token           | Value                                                            |
+| --------------- | ---------------------------------------------------------------- |
+| `--radius-sm`   | `6px`                                                            |
+| `--radius`      | `8px`                                                            |
+| `--radius-lg`   | `12px`                                                           |
+| `--radius-xl`   | `16px`                                                           |
+| `--shadow-sm`   | `0 1px 2px rgba(15,23,42,0.04)`                                  |
+| `--shadow`      | `0 1px 3px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04)`   |
+| `--shadow-md`   | `0 4px 12px rgba(15,23,42,0.08), 0 2px 4px rgba(15,23,42,0.04)`  |
+| `--shadow-lg`   | `0 12px 24px rgba(15,23,42,0.08), 0 4px 8px rgba(15,23,42,0.04)` |
+| `--max-content` | `840px`                                                          |
 
 ### Animation
 
@@ -99,12 +100,12 @@
 
 All buttons are sharp-edged rectangles (`--radius`). No fully-rounded pills except nav active state.
 
-| Variant | Style |
-|---------|-------|
-| **Primary** | `--color-accent` bg, white text, no border. Hover: `--color-accent-hover`. Active: scale `0.98`. |
+| Variant       | Style                                                                                                                                           |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Primary**   | `--color-accent` bg, white text, no border. Hover: `--color-accent-hover`. Active: scale `0.98`.                                                |
 | **Secondary** | `--color-surface-elevated` bg, `--color-border` border, `--color-ink` text. Hover: `--color-border-strong` border, `--color-surface-subtle` bg. |
-| **Ghost** | Transparent bg, `--color-accent` text. Hover: `--color-accent-subtle` bg. |
-| **Danger** | `--color-error` bg, white text. |
+| **Ghost**     | Transparent bg, `--color-accent` text. Hover: `--color-accent-subtle` bg.                                                                       |
+| **Danger**    | `--color-error` bg, white text.                                                                                                                 |
 
 Sizes: `sm` (h-32px), `md` (h-40px), `lg` (h-48px). All use `--font-medium`.
 
@@ -141,6 +142,7 @@ Sizes: `sm` (h-32px), `md` (h-40px), `lg` (h-48px). All use `--font-medium`.
 ### Home Page
 
 **Hero**
+
 - Title: `--text-2xl` `--font-bold` `--color-ink`. "Master the TOEFL iBT 2026 & TOEIC L&R."
 - Subtitle: `--text-base` `--color-ink-secondary`. "AI-generated practice questions. No sign-up. No internet required after load."
 - Two large cards below (TOEFL / TOEIC), equal width grid.

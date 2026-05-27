@@ -65,15 +65,15 @@ function PartCard({
 }) {
   const navigate = useNavigate();
   return (
-    <div
-      className={styles.card}
-      onClick={() => navigate(path)}
-    >
+    <div className={styles.card} onClick={() => navigate(path)}>
       <div className={styles.cardTop}>
         <span className={styles.badge}>{count}</span>
       </div>
       <div className={styles.labelRow}>
-        <span className={styles.dot} style={{ background: "var(--color-toeic)" }} />
+        <span
+          className={styles.dot}
+          style={{ background: "var(--color-toeic)" }}
+        />
         <h2 className={styles.label}>{label}</h2>
       </div>
       <p className={styles.sublabel}>{sublabel}</p>

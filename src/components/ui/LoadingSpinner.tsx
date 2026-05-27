@@ -4,7 +4,9 @@ interface LoadingSpinnerProps {
   message?: string;
 }
 
-export function LoadingSpinner({ message = "Generating question..." }: LoadingSpinnerProps) {
+export function LoadingSpinner({
+  message = "Generating question...",
+}: LoadingSpinnerProps) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.spinner} />

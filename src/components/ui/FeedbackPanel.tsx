@@ -6,12 +6,23 @@ interface FeedbackPanelProps {
   correctAnswer?: string;
 }
 
-export function FeedbackPanel({ correct, explanation, correctAnswer }: FeedbackPanelProps) {
+export function FeedbackPanel({
+  correct,
+  explanation,
+  correctAnswer,
+}: FeedbackPanelProps) {
   return (
-    <div className={[styles.panel, correct ? styles.correct : styles.incorrect].join(" ")}>
+    <div
+      className={[
+        styles.panel,
+        correct ? styles.correct : styles.incorrect,
+      ].join(" ")}
+    >
       <div className={styles.header}>
         <span className={styles.icon}>{correct ? "✓" : "✗"}</span>
-        <span className={styles.status}>{correct ? "Correct" : "Incorrect"}</span>
+        <span className={styles.status}>
+          {correct ? "Correct" : "Incorrect"}
+        </span>
       </div>
       {!correct && correctAnswer && (
         <p className={styles.correctAnswer}>

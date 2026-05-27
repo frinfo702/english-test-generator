@@ -63,7 +63,9 @@
   text-align: left;
   font-size: var(--font-size-body);
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 }
 
 .option:hover {

@@ -37,9 +37,8 @@ function diffWords(original: string, input: string) {
 export function ListenRepeatPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
-    "toefl/speaking/listen-repeat",
-  );
+  const { data, file, loading, error, loadByQuestionNumber } =
+    useQuestion<ProblemData>("toefl/speaking/listen-repeat");
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -114,9 +113,10 @@ export function ListenRepeatPage() {
     const sessionSeconds = stop();
     if (data) {
       const correct = data.sentences.filter((s, i) => {
-        const input = (i === current && currentInput.trim() && allInputs[i] == null)
-          ? currentInput
-          : allInputs[i] ?? "";
+        const input =
+          i === current && currentInput.trim() && allInputs[i] == null
+            ? currentInput
+            : (allInputs[i] ?? "");
         return diffWords(s.text, input).every((d) => d.correct);
       }).length;
       saveScore(
@@ -181,8 +181,8 @@ export function ListenRepeatPage() {
         <div className={styles.error}>
           <p>{error}</p>
           <p className={styles.errorHint}>
-            questions/toefl/speaking/listen-repeat/
-            Add question JSON under this folder.
+            questions/toefl/speaking/listen-repeat/ Add question JSON under this
+            folder.
           </p>
         </div>
       )}

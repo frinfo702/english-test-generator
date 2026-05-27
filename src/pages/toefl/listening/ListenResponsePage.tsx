@@ -34,8 +34,14 @@ export function ListenResponsePage() {
   const { data, file, loading, error, loadByQuestionNumber } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
-  const { display, elapsedSeconds, running, start, stop, reset: resetTimer } =
-    useElapsedTimer();
+  const {
+    display,
+    elapsedSeconds,
+    running,
+    start,
+    stop,
+    reset: resetTimer,
+  } = useElapsedTimer();
   const { loading: ttsLoading, playSegmentsWithGaps } = useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
@@ -64,7 +70,9 @@ export function ListenResponsePage() {
   useEffect(() => {
     if (data && !graded && !audioStartedRef.current.has(currentIndex)) {
       const url = `/audio/${TASK_ID}/${fileBasename}/${currentIndex + 1}.mp3`;
-      audioStartedRef.current = new Set(audioStartedRef.current).add(currentIndex);
+      audioStartedRef.current = new Set(audioStartedRef.current).add(
+        currentIndex,
+      );
       playSegmentsWithGaps([url], []);
     }
   }, [data, currentIndex, graded, playSegmentsWithGaps, fileBasename]);
@@ -73,7 +81,7 @@ export function ListenResponsePage() {
   const totalQuestions = questions.length;
   const allAnswered = questions.every((q) => selected[q.id]);
   const totalCorrect = questions.filter(
-    (q) => selected[q.id] === q.correct
+    (q) => selected[q.id] === q.correct,
   ).length;
 
   const handleSelect = (opt: string) => {
@@ -106,14 +114,14 @@ export function ListenResponsePage() {
     const sessionSeconds = stop();
     if (data) {
       const correct = data.questions.filter(
-        (q) => selected[q.id] === q.correct
+        (q) => selected[q.id] === q.correct,
       ).length;
       saveScore(
         TASK_ID,
         correct,
         data.questions.length,
         sessionSeconds,
-        file ?? undefined
+        file ?? undefined,
       );
     }
     setGraded(true);
@@ -208,7 +216,13 @@ export function ListenResponsePage() {
                   <div key={q.id} className={styles.reviewCard}>
                     <div className={styles.reviewHeader}>
                       <strong>Question {qIndex + 1}</strong>
-                      <span className={isCorrect ? styles.reviewCorrect : styles.reviewIncorrect}>
+                      <span
+                        className={
+                          isCorrect
+                            ? styles.reviewCorrect
+                            : styles.reviewIncorrect
+                        }
+                      >
                         {isCorrect ? "Correct" : "Incorrect"}
                       </span>
                     </div>
@@ -217,8 +231,10 @@ export function ListenResponsePage() {
                     <div className={styles.reviewOptions}>
                       {(["A", "B", "C"] as const).map((opt) => {
                         let cls = styles.reviewOpt;
-                        if (opt === q.correct) cls += " " + styles.reviewOptCorrect;
-                        if (sel === opt && opt !== q.correct) cls += " " + styles.reviewOptWrong;
+                        if (opt === q.correct)
+                          cls += " " + styles.reviewOptCorrect;
+                        if (sel === opt && opt !== q.correct)
+                          cls += " " + styles.reviewOptWrong;
                         return (
                           <div key={opt} className={cls}>
                             <span className={styles.optLabel}>{opt}</span>
@@ -240,7 +256,9 @@ export function ListenResponsePage() {
                 Question {currentIndex + 1} of {totalQuestions}
               </div>
 
-              <span className={styles.contextBadge}>{currentQuestion.context}</span>
+              <span className={styles.contextBadge}>
+                {currentQuestion.context}
+              </span>
 
               <div className={styles.audioArea}>
                 {ttsLoading && (

@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
+    "format": "prettier --write .",
     "generate-audio": "tsx scripts/generate-audio.ts"
   },
   "dependencies": {

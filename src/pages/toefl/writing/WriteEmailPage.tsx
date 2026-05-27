@@ -42,7 +42,8 @@ const TASK_ID = "toefl/writing/email";
 export function WriteEmailPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(TASK_ID);
+  const { data, file, loading, error, loadByQuestionNumber } =
+    useQuestion<ProblemData>(TASK_ID);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"pre" | "writing" | "submitted">("pre");
   const [showModel, setShowModel] = useState(false);

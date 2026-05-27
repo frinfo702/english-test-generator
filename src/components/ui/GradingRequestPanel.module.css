@@ -1,31 +1,31 @@
 .panel {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    background: var(--color-surface-elevated);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
 }
 
 .status {
-    font-size: var(--text-sm);
-    color: var(--color-ink-tertiary);
-    font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+  font-weight: var(--font-medium);
 }
 
 .error {
-    color: var(--color-error);
-    background: var(--color-error-subtle);
-    padding: var(--spacing-sm);
-    border-radius: var(--radius);
-    font-size: var(--text-sm);
-    font-weight: var(--font-medium);
+  color: var(--color-error);
+  background: var(--color-error-subtle);
+  padding: var(--spacing-sm);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
 }
 
 .message {
-    line-height: 1.7;
-    word-break: break-all;
-    font-size: var(--text-sm);
-    color: var(--color-ink-secondary);
+  line-height: 1.7;
+  word-break: break-all;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
 }

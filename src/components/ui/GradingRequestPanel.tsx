@@ -20,7 +20,9 @@ export function GradingRequestPanel({
 
   return (
     <div className={styles.panel}>
-      {saving && <p className={styles.status}>Saving your response locally...</p>}
+      {saving && (
+        <p className={styles.status}>Saving your response locally...</p>
+      )}
       {error && <p className={styles.error}>{error}</p>}
       {message && (
         <>

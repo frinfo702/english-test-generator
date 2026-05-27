@@ -17,7 +17,7 @@ const ALL_SHADOW_VOICES = ["ara", "eve", "leo", "rex"];
 function hashText(text: string): number {
   let hash = 0;
   for (let i = 0; i < text.length; i++) {
-    hash = ((hash << 5) - hash) + text.charCodeAt(i);
+    hash = (hash << 5) - hash + text.charCodeAt(i);
     hash |= 0;
   }
   return Math.abs(hash);
@@ -32,7 +32,9 @@ interface AudioSegment {
   text: string;
 }
 
-function hasAudioSegments(obj: unknown): obj is { audioSegments: AudioSegment[] } {
+function hasAudioSegments(
+  obj: unknown,
+): obj is { audioSegments: AudioSegment[] } {
   return (
     typeof obj === "object" &&
     obj !== null &&
@@ -41,7 +43,9 @@ function hasAudioSegments(obj: unknown): obj is { audioSegments: AudioSegment[] 
   );
 }
 
-function hasTextSentences(obj: unknown): obj is { sentences: { text: string }[] } {
+function hasTextSentences(
+  obj: unknown,
+): obj is { sentences: { text: string }[] } {
   if (
     typeof obj !== "object" ||
     obj === null ||
@@ -51,7 +55,12 @@ function hasTextSentences(obj: unknown): obj is { sentences: { text: string }[] 
     return false;
   }
   const sentences = (obj as Record<string, unknown>).sentences as unknown[];
-  return sentences.length > 0 && typeof sentences[0] === "object" && sentences[0] !== null && "text" in (sentences[0] as Record<string, unknown>);
+  return (
+    sentences.length > 0 &&
+    typeof sentences[0] === "object" &&
+    sentences[0] !== null &&
+    "text" in (sentences[0] as Record<string, unknown>)
+  );
 }
 
 async function fetchTts(text: string, voiceId: string): Promise<Buffer> {
@@ -89,7 +98,11 @@ async function fetchTts(text: string, voiceId: string): Promise<Buffer> {
         res.on("end", () => {
           const buf = Buffer.concat(chunks);
           if (!res.statusCode || res.statusCode >= 400) {
-            reject(new Error(`TTS API error ${res.statusCode} for text "${text.slice(0, 60)}": ${buf.toString("utf-8").slice(0, 200)}`));
+            reject(
+              new Error(
+                `TTS API error ${res.statusCode} for text "${text.slice(0, 60)}": ${buf.toString("utf-8").slice(0, 200)}`,
+              ),
+            );
           } else {
             resolve(buf);
           }
@@ -117,7 +130,8 @@ async function generateForQuestion(
     const voiceForRole = new Map<string, string>();
     const getVoiceForRole = (role: string): string => {
       if (!voiceForRole.has(role)) {
-        const idx = Math.abs(hashText(`${basename}:${role}`)) % ALL_SHADOW_VOICES.length;
+        const idx =
+          Math.abs(hashText(`${basename}:${role}`)) % ALL_SHADOW_VOICES.length;
         voiceForRole.set(role, ALL_SHADOW_VOICES[idx]);
       }
       return voiceForRole.get(role)!;
@@ -129,7 +143,9 @@ async function generateForQuestion(
       const outFile = path.join(outDir, `${i + 1}.mp3`);
 
       if (fs.existsSync(outFile)) {
-        console.log(`  SKIP (exists): ${path.join(dirname, basename, `${i + 1}.mp3`)}`);
+        console.log(
+          `  SKIP (exists): ${path.join(dirname, basename, `${i + 1}.mp3`)}`,
+        );
         continue;
       }
 
@@ -142,7 +158,9 @@ async function generateForQuestion(
         mp3 = fs.readFileSync(cacheFile);
         console.log(`  CACHE HIT: segment ${i + 1}/${segments.length}`);
       } else {
-        console.log(`  FETCH: segment ${i + 1}/${segments.length} (voice=${voiceId})`);
+        console.log(
+          `  FETCH: segment ${i + 1}/${segments.length} (voice=${voiceId})`,
+        );
         mp3 = await fetchTts(seg.text, voiceId);
       }
 
@@ -159,14 +177,19 @@ async function generateForQuestion(
       const outFile = path.join(outDir, `${i + 1}.mp3`);
 
       if (fs.existsSync(outFile)) {
-        console.log(`  SKIP (exists): ${path.join(dirname, basename, `${i + 1}.mp3`)}`);
+        console.log(
+          `  SKIP (exists): ${path.join(dirname, basename, `${i + 1}.mp3`)}`,
+        );
         continue;
       }
 
-      const voiceIdx = Math.abs(hashText(sentences[i].text)) % ALL_SHADOW_VOICES.length;
-          const shadowVoice = ALL_SHADOW_VOICES[voiceIdx];
-          console.log(`  FETCH: sentence ${i + 1}/${sentences.length} (voice=${shadowVoice})`);
-          const mp3 = await fetchTts(sentences[i].text, shadowVoice);
+      const voiceIdx =
+        Math.abs(hashText(sentences[i].text)) % ALL_SHADOW_VOICES.length;
+      const shadowVoice = ALL_SHADOW_VOICES[voiceIdx];
+      console.log(
+        `  FETCH: sentence ${i + 1}/${sentences.length} (voice=${shadowVoice})`,
+      );
+      const mp3 = await fetchTts(sentences[i].text, shadowVoice);
 
       fs.mkdirSync(outDir, { recursive: true });
       fs.writeFileSync(outFile, mp3);
@@ -184,7 +207,11 @@ async function walkQuestions(dir: string, relativePath: string): Promise<void> {
 
     if (entry.isDirectory()) {
       await walkQuestions(fullPath, relPath);
-    } else if (entry.isFile() && entry.name.endsWith(".json") && entry.name !== "index.json") {
+    } else if (
+      entry.isFile() &&
+      entry.name.endsWith(".json") &&
+      entry.name !== "index.json"
+    ) {
       console.log(`\nProcessing: ${relPath}`);
       await generateForQuestion(fullPath, relPath);
     }

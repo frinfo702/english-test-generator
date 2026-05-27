@@ -85,100 +85,16 @@
   user-select: none;
 }
 
-.speedControl {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-}
-
-.speedLabel {
-  font-size: var(--text-xs);
-  color: var(--color-ink-secondary);
-  font-weight: var(--font-medium);
-  white-space: nowrap;
-}
-
-.speedSlider {
-  width: 120px;
-  height: 4px;
-  appearance: none;
-  -webkit-appearance: none;
-  background: var(--color-border);
-  border-radius: var(--radius-full);
-  outline: none;
-  cursor: pointer;
-}
-
-.speedSlider::-webkit-slider-thumb {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  border: 2px solid var(--color-surface);
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transition: transform var(--duration-fast) var(--ease-out);
-}
-
-.speedSlider::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-}
-
-.speedSlider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  border: 2px solid var(--color-surface);
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-}
-
-.speedBtns {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.speedBtn {
-  padding: 4px 12px;
-  font-size: var(--text-xs);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-  color: var(--color-ink-secondary);
-  cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
-}
-
-.speedBtn:hover {
-  border-color: var(--color-accent);
-}
-
-.speedBtnActive {
-  border-color: var(--color-accent);
-  background: var(--color-accent-subtle);
-  color: var(--color-ink);
-  font-weight: 600;
-}
-
-.speedValue {
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
-  color: var(--color-ink);
-  min-width: 36px;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
-}
-
 .navSection {
   display: flex;
   gap: var(--spacing-4);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

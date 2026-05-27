@@ -1,11 +1,12 @@
-import { ToeicListeningTaskPageBase } from "./ToeicListeningTaskPage";
+import { ListeningTaskBase } from "../../components/question/ListeningTaskBase";
 
 export function Part4Page() {
   return (
-    <ToeicListeningTaskPageBase
+    <ListeningTaskBase
       taskId="toeic/part4"
+      title="Part 4: Talks"
       subtitle="Listen to the talk and answer the questions."
-      partLabel="Part 4: Talks"
+      backTo="/toeic"
       readQuestionsAloud
     />
   );

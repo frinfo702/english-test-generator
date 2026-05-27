@@ -35,9 +35,8 @@ interface ProblemData {
 export function ReadDailyLifePage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
-    "toefl/reading/daily-life",
-  );
+  const { data, file, loading, error, loadByQuestionNumber } =
+    useQuestion<ProblemData>("toefl/reading/daily-life");
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -70,13 +69,7 @@ export function ReadDailyLifePage() {
   }, [file]);
 
   useEffect(() => {
-    if (
-      data &&
-      !loading &&
-      !graded &&
-      !running &&
-      elapsedSeconds === 0
-    ) {
+    if (data && !loading && !graded && !running && elapsedSeconds === 0) {
       start();
     }
   }, [data, loading, graded, running, elapsedSeconds, start]);
@@ -195,11 +188,7 @@ export function ReadDailyLifePage() {
               </span>
             </div>
           </div>
-          <ProgressBar
-            current={correctCount}
-            total={totalQ}
-            label="Accuracy"
-          />
+          <ProgressBar current={correctCount} total={totalQ} label="Accuracy" />
           <Button size="lg" onClick={handleRestart}>
             Try Again
           </Button>

@@ -102,7 +102,11 @@ function audioBufferToWavBlob(buffer: AudioBuffer): Blob {
     for (let ch = 0; ch < numChannels; ch++) {
       const sample = Math.max(-1, Math.min(1, buffer.getChannelData(ch)[i]));
       const intSample = sample < 0 ? sample * 0x8000 : sample * 0x7fff;
-      view.setInt16(offset + (i * numChannels + ch) * bytesPerSample, intSample, true);
+      view.setInt16(
+        offset + (i * numChannels + ch) * bytesPerSample,
+        intSample,
+        true,
+      );
     }
   }
 
@@ -157,6 +161,31 @@ export function useTts(): UseTtsReturn {
     rafRef.current = requestAnimationFrame(tick);
   }, []);
 
+  const startPlayback = useCallback(
+    async (url: string) => {
+      const audio = new Audio(url);
+      audio.playbackRate = playbackRateRef.current;
+      audioRef.current = audio;
+      audio.onended = () => {
+        setPlaying(false);
+        if (rafRef.current) {
+          cancelAnimationFrame(rafRef.current);
+          rafRef.current = 0;
+        }
+      };
+      audio.onerror = () => {
+        setPlaying(false);
+        setError("Audio playback error");
+        setLoading(false);
+      };
+      await audio.play();
+      setPlaying(true);
+      setLoading(false);
+      rafRef.current = requestAnimationFrame(tick);
+    },
+    [tick],
+  );
+
   const play = useCallback(
     async (url: string) => {
       cleanup();
@@ -170,31 +199,13 @@ export function useTts(): UseTtsReturn {
         const blob = await response.blob();
         const objectUrl = URL.createObjectURL(blob);
         urlRef.current = objectUrl;
-        const audio = new Audio(objectUrl);
-        audio.playbackRate = playbackRateRef.current;
-        audioRef.current = audio;
-        audio.onended = () => {
-          setPlaying(false);
-          if (rafRef.current) {
-            cancelAnimationFrame(rafRef.current);
-            rafRef.current = 0;
-          }
-        };
-        audio.onerror = () => {
-          setPlaying(false);
-          setError("Audio playback error");
-          setLoading(false);
-        };
-        await audio.play();
-        setPlaying(true);
-        setLoading(false);
-        rafRef.current = requestAnimationFrame(tick);
+        await startPlayback(objectUrl);
       } catch (e) {
         setError(e instanceof Error ? e.message : String(e));
         setLoading(false);
       }
     },
-    [cleanup, tick],
+    [cleanup, startPlayback],
   );
 
   const playSegments = useCallback(
@@ -212,33 +223,13 @@ export function useTts(): UseTtsReturn {
         const url = URL.createObjectURL(wavBlob);
         urlRef.current = url;
 
-        const audio = new Audio(url);
-        audio.playbackRate = playbackRateRef.current;
-        audioRef.current = audio;
-
-        audio.onended = () => {
-          setPlaying(false);
-          if (rafRef.current) {
-            cancelAnimationFrame(rafRef.current);
-            rafRef.current = 0;
-          }
-        };
-        audio.onerror = () => {
-          setPlaying(false);
-          setError("Audio playback error");
-          setLoading(false);
-        };
-
-        await audio.play();
-        setPlaying(true);
-        setLoading(false);
-        rafRef.current = requestAnimationFrame(tick);
+        await startPlayback(url);
       } catch (e) {
         setError(e instanceof Error ? e.message : String(e));
         setLoading(false);
       }
     },
-    [cleanup, tick],
+    [cleanup, startPlayback],
   );
 
   const playSegmentsWithGaps = useCallback(
@@ -270,33 +261,13 @@ export function useTts(): UseTtsReturn {
         const url = URL.createObjectURL(wavBlob);
         urlRef.current = url;
 
-        const audio = new Audio(url);
-        audio.playbackRate = playbackRateRef.current;
-        audioRef.current = audio;
-
-        audio.onended = () => {
-          setPlaying(false);
-          if (rafRef.current) {
-            cancelAnimationFrame(rafRef.current);
-            rafRef.current = 0;
-          }
-        };
-        audio.onerror = () => {
-          setPlaying(false);
-          setError("Audio playback error");
-          setLoading(false);
-        };
-
-        await audio.play();
-        setPlaying(true);
-        setLoading(false);
-        rafRef.current = requestAnimationFrame(tick);
+        await startPlayback(url);
       } catch (e) {
         setError(e instanceof Error ? e.message : String(e));
         setLoading(false);
       }
     },
-    [cleanup, tick],
+    [cleanup, startPlayback],
   );
 
   const pause = useCallback(() => {
@@ -313,15 +284,18 @@ export function useTts(): UseTtsReturn {
   const resume = useCallback(() => {
     if (audioRef.current) {
       audioRef.current.playbackRate = playbackRateRef.current;
-      audioRef.current.play().then(() => {
-        setPlaying(true);
-        setError(null);
-        if (!rafRef.current) {
-          rafRef.current = requestAnimationFrame(tick);
-        }
-      }).catch(() => {
-        setError("Resume failed");
-      });
+      audioRef.current
+        .play()
+        .then(() => {
+          setPlaying(true);
+          setError(null);
+          if (!rafRef.current) {
+            rafRef.current = requestAnimationFrame(tick);
+          }
+        })
+        .catch(() => {
+          setError("Resume failed");
+        });
     }
   }, [tick]);
 
@@ -347,5 +321,20 @@ export function useTts(): UseTtsReturn {
     }
   }, []);
 
-  return { playing, loading, error, currentTime, duration, playbackRate, setPlaybackRate, play, playSegments, playSegmentsWithGaps, pause, resume, stop, seek };
+  return {
+    playing,
+    loading,
+    error,
+    currentTime,
+    duration,
+    playbackRate,
+    setPlaybackRate,
+    play,
+    playSegments,
+    playSegmentsWithGaps,
+    pause,
+    resume,
+    stop,
+    seek,
+  };
 }

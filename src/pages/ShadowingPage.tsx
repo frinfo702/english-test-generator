@@ -5,6 +5,7 @@ import { Button } from "../components/ui/Button";
 import { LoadingSpinner } from "../components/ui/LoadingSpinner";
 import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
+import { SpeedControl } from "../components/ui/SpeedControl";
 import styles from "./ShadowingPage.module.css";
 
 interface Sentence {
@@ -25,7 +26,19 @@ function formatTime(seconds: number) {
 }
 
 function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
-  const { playing, loading: ttsLoading, error: ttsError, currentTime, duration, playbackRate, setPlaybackRate, play, pause, resume, stop } = useTts();
+  const {
+    playing,
+    loading: ttsLoading,
+    error: ttsError,
+    currentTime,
+    duration,
+    playbackRate,
+    setPlaybackRate,
+    play,
+    pause,
+    resume,
+    stop,
+  } = useTts();
   const [current, setCurrent] = useState(0);
   const [showText, setShowText] = useState(false);
   const fileBasename = file.replace(/\.json$/i, "");
@@ -88,35 +101,11 @@ function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
                   ? "Resume"
                   : "Play"}
           </Button>
-          <div className={styles.speedControl}>
-            <label className={styles.speedLabel}>Speed</label>
-            <input
-              type="range"
-              className={styles.speedSlider}
-              min="0.5"
-              max="1.5"
-              step="0.1"
-              value={playbackRate}
-              onChange={(e) => setPlaybackRate(Number(e.target.value))}
-            />
-            <span className={styles.speedValue}>{playbackRate.toFixed(1)}x</span>
-          </div>
-          <div className={styles.speedBtns}>
-            {[
-              { label: "Slow", rate: 0.8 },
-              { label: "Normal", rate: 1.0 },
-              { label: "Fast", rate: 1.2 },
-            ].map(({ label, rate }) => (
-              <button
-                key={rate}
-                type="button"
-                className={`${styles.speedBtn} ${playbackRate === rate ? styles.speedBtnActive : ""}`}
-                onClick={() => setPlaybackRate(rate)}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+          <SpeedControl
+            playbackRate={playbackRate}
+            onChange={setPlaybackRate}
+            showSlider
+          />
           {duration > 0 && (
             <span className={styles.timeText}>
               {formatTime(currentTime)} / {formatTime(duration)}
@@ -172,9 +161,8 @@ function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
 export function ShadowingPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } = useQuestion<ProblemData>(
-    "shadowing",
-  );
+  const { data, file, loading, error, loadByQuestionNumber } =
+    useQuestion<ProblemData>("shadowing");
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
@@ -226,7 +214,11 @@ export function ShadowingPage() {
       )}
 
       {data && !loading && hasValidQuestionNumber && (
-        <ShadowingContent key={parsedQuestionNumber} data={data} file={file ?? ""} />
+        <ShadowingContent
+          key={parsedQuestionNumber}
+          data={data}
+          file={file ?? ""}
+        />
       )}
     </div>
   );

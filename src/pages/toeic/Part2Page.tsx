@@ -33,8 +33,14 @@ export function Part2Page() {
   const { data, file, loading, error, loadByQuestionNumber } =
     useQuestion<ProblemData>("toeic/part2");
   const { saveScore } = useScoreHistory();
-  const { display, elapsedSeconds, running, start, stop, reset: resetTimer } =
-    useElapsedTimer();
+  const {
+    display,
+    elapsedSeconds,
+    running,
+    start,
+    stop,
+    reset: resetTimer,
+  } = useElapsedTimer();
   const { loading: ttsLoading, playSegmentsWithGaps } = useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
@@ -65,11 +71,14 @@ export function Part2Page() {
       const startIdx = currentIndex * SEGMENTS_PER_QUESTION;
       const urls = data.audioSegments
         .slice(startIdx, startIdx + SEGMENTS_PER_QUESTION)
-        .map((_, i) =>
-          `/audio/toeic/part2/${fileBasename}/${startIdx + i + 1}.mp3`
+        .map(
+          (_, i) =>
+            `/audio/toeic/part2/${fileBasename}/${startIdx + i + 1}.mp3`,
         );
       if (urls.length > 0) {
-        audioStartedRef.current = new Set(audioStartedRef.current).add(currentIndex);
+        audioStartedRef.current = new Set(audioStartedRef.current).add(
+          currentIndex,
+        );
         playSegmentsWithGaps(urls, [3, 3, 3]);
       }
     }
@@ -79,7 +88,7 @@ export function Part2Page() {
   const totalQuestions = questions.length;
   const allAnswered = questions.every((q) => selected[q.id]);
   const totalCorrect = questions.filter(
-    (q) => selected[q.id] === q.correct
+    (q) => selected[q.id] === q.correct,
   ).length;
 
   const handleSelect = (opt: string) => {
@@ -112,14 +121,14 @@ export function Part2Page() {
     const sessionSeconds = stop();
     if (data) {
       const correct = data.questions.filter(
-        (q) => selected[q.id] === q.correct
+        (q) => selected[q.id] === q.correct,
       ).length;
       saveScore(
         "toeic/part2",
         correct,
         data.questions.length,
         sessionSeconds,
-        file ?? undefined
+        file ?? undefined,
       );
     }
     setGraded(true);
@@ -208,7 +217,13 @@ export function Part2Page() {
                   <div key={q.id} className={styles.reviewCard}>
                     <div className={styles.reviewHeader}>
                       <strong>Question {qIndex + 1}</strong>
-                      <span className={isCorrect ? styles.reviewCorrect : styles.reviewIncorrect}>
+                      <span
+                        className={
+                          isCorrect
+                            ? styles.reviewCorrect
+                            : styles.reviewIncorrect
+                        }
+                      >
                         {isCorrect ? "✓ Correct" : "✗ Incorrect"}
                       </span>
                     </div>
@@ -216,8 +231,10 @@ export function Part2Page() {
                     <div className={styles.reviewOptions}>
                       {(["A", "B", "C"] as const).map((opt) => {
                         let cls = styles.reviewOpt;
-                        if (opt === q.correct) cls += " " + styles.reviewOptCorrect;
-                        if (sel === opt && opt !== q.correct) cls += " " + styles.reviewOptWrong;
+                        if (opt === q.correct)
+                          cls += " " + styles.reviewOptCorrect;
+                        if (sel === opt && opt !== q.correct)
+                          cls += " " + styles.reviewOptWrong;
                         return (
                           <div key={opt} className={cls}>
                             <span className={styles.optLabel}>{opt}</span>

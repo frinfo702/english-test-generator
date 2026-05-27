@@ -1,23 +1,23 @@
 .timer {
-    font-size: var(--text-xl);
-    font-weight: var(--font-bold);
-    font-variant-numeric: tabular-nums;
-    color: var(--color-accent);
-    background: var(--color-accent-subtle);
-    padding: 8px 16px;
-    border-radius: var(--radius);
-    letter-spacing: 1px;
-    transition:
-        color 300ms,
-        background 300ms;
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  letter-spacing: 1px;
+  transition:
+    color 300ms,
+    background 300ms;
 }
 
 .warning {
-    color: var(--color-warning);
-    background: var(--color-warning-subtle);
+  color: var(--color-warning);
+  background: var(--color-warning-subtle);
 }
 
 .expired {
-    color: var(--color-error);
-    background: var(--color-error-subtle);
+  color: var(--color-error);
+  background: var(--color-error-subtle);
 }

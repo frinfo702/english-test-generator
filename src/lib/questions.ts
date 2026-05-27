@@ -111,7 +111,7 @@ export async function fetchAllQuestions<T>(taskPath: string): Promise<T[]> {
       const res = await fetch(`/questions/${taskPath}/${file}`);
       if (!res.ok) throw new Error(`Failed to load: ${file}`);
       return res.json() as Promise<T>;
-    })
+    }),
   );
   return results;
 }

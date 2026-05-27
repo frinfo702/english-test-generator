@@ -1,5 +1,13 @@
-.topBar { display: flex; justify-content: flex-end; margin-bottom: var(--spacing-xl); }
-.errorHint { margin-top: var(--spacing-sm); font-size: var(--font-size-sm); color: var(--color-text-muted); }
+.topBar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--spacing-xl);
+}
+.errorHint {
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
 
 .moduleBar {
   display: flex;
@@ -83,13 +91,27 @@
   text-align: left;
   font-size: var(--font-size-body);
   line-height: 1.5;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 }
 
-.option:hover { border-color: var(--color-accent); background: var(--color-accent-light); }
-.option.selected { border-color: var(--color-accent); background: var(--color-accent-light); }
-.option.correctOpt { border-color: var(--color-correct); background: var(--color-correct-bg); }
-.option.wrongOpt { border-color: var(--color-incorrect); background: var(--color-incorrect-bg); }
+.option:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+.option.selected {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+.option.correctOpt {
+  border-color: var(--color-correct);
+  background: var(--color-correct-bg);
+}
+.option.wrongOpt {
+  border-color: var(--color-incorrect);
+  background: var(--color-incorrect-bg);
+}
 
 .optLabel {
   font-weight: 700;
@@ -118,8 +140,14 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .branchHeader {

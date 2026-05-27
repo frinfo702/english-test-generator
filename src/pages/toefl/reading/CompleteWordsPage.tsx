@@ -72,13 +72,7 @@ export function CompleteWordsPage() {
   }, [data]);
 
   useEffect(() => {
-    if (
-      data &&
-      !loading &&
-      !submitted &&
-      !running &&
-      elapsedSeconds === 0
-    ) {
+    if (data && !loading && !submitted && !running && elapsedSeconds === 0) {
       start();
     }
   }, [data, loading, submitted, running, elapsedSeconds, start]);
@@ -202,14 +196,11 @@ export function CompleteWordsPage() {
       const expectedSuffix = getExpectedSuffix(item);
       const userInput = answers[itemIdx] ?? "";
       const isCorrect =
-        submitted &&
-        userInput.toLowerCase() === expectedSuffix.toLowerCase();
+        submitted && userInput.toLowerCase() === expectedSuffix.toLowerCase();
       const isWrong = submitted && !isCorrect;
       const isFocused = focusedIdx === itemIdx;
 
-      parts.push(
-        <span key={`t${itemIdx}`}>{text.slice(lastIndex, pos)}</span>,
-      );
+      parts.push(<span key={`t${itemIdx}`}>{text.slice(lastIndex, pos)}</span>);
 
       if (expectedSuffix.length > 0) {
         parts.push(
