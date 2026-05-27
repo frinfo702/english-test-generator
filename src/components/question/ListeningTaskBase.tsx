@@ -286,6 +286,7 @@ export function ListeningTaskBase({
                     }}
                   />
                 </div>
+                <span className={styles.timeText} aria-hidden="true" />
               </div>
             )}
             {showSpeedControl && duration > 0 && (
