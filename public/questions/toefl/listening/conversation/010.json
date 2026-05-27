@@ -1,0 +1,82 @@
+{
+  "title": "Thesis Advisor Meeting",
+  "transcript": "Student: Professor Adams, I've been working on my thesis proposal, but I'm struggling to narrow down my research question. Professor: Let's discuss it. What is your general area of interest? Student: I'm interested in renewable energy policy, specifically how government subsidies affect solar adoption. Professor: That's a broad topic. Have you decided on a geographic focus? Student: I was thinking about comparing Germany and the United States. Professor: Good choice. Both have different subsidy structures and adoption rates. You might also consider adding a time dimension—how policies evolved over the last decade. Student: That's a great idea. Should I focus on residential or commercial adoption? Professor: Residential might be more manageable for an undergraduate thesis. There's also more accessible data. Student: I'll go with that. How many sources should my literature review include? Professor: Aim for twenty to thirty peer-reviewed sources. Make sure they span policy analysis, economic evaluation, and case studies. Student: Understood. I'll revise my proposal and send you a draft by Friday. Professor: Looking forward to reading it.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student meet with Professor Adams?",
+      "options": [
+        "To submit a completed thesis",
+        "To get help narrowing a research question",
+        "To request an extension on a deadline",
+        "To discuss grades from last semester"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student is struggling to narrow down their thesis research question and seeks the professor's guidance."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the professor suggest the student focus on?",
+      "options": [
+        "Commercial solar adoption worldwide",
+        "Residential solar adoption over the last decade",
+        "Wind energy subsidies in Asia",
+        "Historical fossil fuel policies"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The professor suggests residential solar adoption with a time dimension comparing policy evolution over the last decade."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor Adams, I've been working on my thesis proposal, but I'm struggling to narrow down my research question."
+    },
+    {
+      "role": "Professor",
+      "text": "Let's discuss it. What is your general area of interest?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm interested in renewable energy policy, specifically how government subsidies affect solar adoption."
+    },
+    {
+      "role": "Professor",
+      "text": "That's a broad topic. Have you decided on a geographic focus?"
+    },
+    {
+      "role": "Student",
+      "text": "I was thinking about comparing Germany and the United States."
+    },
+    {
+      "role": "Professor",
+      "text": "Good choice. Both have different subsidy structures and adoption rates. You might also consider adding a time dimension—how policies evolved over the last decade."
+    },
+    {
+      "role": "Student",
+      "text": "That's a great idea. Should I focus on residential or commercial adoption?"
+    },
+    {
+      "role": "Professor",
+      "text": "Residential might be more manageable for an undergraduate thesis. There's also more accessible data."
+    },
+    {
+      "role": "Student",
+      "text": "I'll go with that. How many sources should my literature review include?"
+    },
+    {
+      "role": "Professor",
+      "text": "Aim for twenty to thirty peer-reviewed sources. Make sure they span policy analysis, economic evaluation, and case studies."
+    },
+    {
+      "role": "Student",
+      "text": "Understood. I'll revise my proposal and send you a draft by Friday."
+    },
+    {
+      "role": "Professor",
+      "text": "Looking forward to reading it."
+    }
+  ]
+}

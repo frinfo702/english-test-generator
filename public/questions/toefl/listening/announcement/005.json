@@ -1,0 +1,51 @@
+{
+  "title": "Winter Weather Advisory",
+  "transcript": "Attention campus community. Due to the winter storm warning issued for our area, all evening classes after 6 PM today are cancelled. The dining halls will remain open with limited hours until 8 PM. The campus safety office advises students to avoid unnecessary travel and to use the buddy system if walking on icy pathways. Shuttle services will be suspended after 7 PM. All students living in off-campus housing are encouraged to monitor local weather updates. Normal operations are expected to resume tomorrow morning unless otherwise notified.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Which classes are cancelled?",
+      "options": [
+        "All classes for the entire day",
+        "Only classes after 6 PM",
+        "Only morning classes",
+        "Only laboratory sessions"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states that all evening classes after 6 PM today are cancelled."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the campus safety office advise students to do?",
+      "options": [
+        "Drive carefully to off-campus housing",
+        "Avoid unnecessary travel and walk with others",
+        "Stay in their dorm rooms until morning",
+        "Call the safety office every hour"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The campus safety office advises students to avoid unnecessary travel and to use the buddy system if walking on icy pathways."
+    },
+    {
+      "id": "q3",
+      "stem": "What will happen to shuttle services?",
+      "options": [
+        "They will run every 30 minutes",
+        "They will be suspended after 7 PM",
+        "They will only serve on-campus routes",
+        "They will be free for all students"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement says shuttle services will be suspended after 7 PM."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention campus community. Due to the winter storm warning issued for our area, all evening classes after 6 PM today are cancelled. The dining halls will remain open with limited hours until 8 PM. The campus safety office advises students to avoid unnecessary travel and to use the buddy system if walking on icy pathways. Shuttle services will be suspended after 7 PM. All students living in off-campus housing are encouraged to monitor local weather updates. Normal operations are expected to resume tomorrow morning unless otherwise notified."
+    }
+  ]
+}

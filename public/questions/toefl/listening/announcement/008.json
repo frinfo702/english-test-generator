@@ -1,0 +1,51 @@
+{
+  "title": "Campus Job Fair",
+  "transcript": "Attention students. The annual campus job fair will be held this Wednesday from 10 AM to 3 PM in the University Center Ballroom. Over fifty employers from industries including technology, healthcare, education, and finance will be present. Please bring multiple copies of your resume and dress in professional attire. Career counselors will be available for quick resume reviews at the entrance. A workshop on interview skills will take place at noon in Room 102. All students, both undergraduate and graduate, are encouraged to attend. Parking is free in Lot C for job fair participants.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Where will the job fair be held?",
+      "options": [
+        "In the Science Building",
+        "In the University Center Ballroom",
+        "In the library auditorium",
+        "In the student union"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The job fair will be held in the University Center Ballroom."
+    },
+    {
+      "id": "q2",
+      "stem": "What will happen at noon in Room 102?",
+      "options": [
+        "A resume printing session",
+        "An interview skills workshop",
+        "A networking lunch",
+        "A panel discussion"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "A workshop on interview skills will take place at noon in Room 102."
+    },
+    {
+      "id": "q3",
+      "stem": "What should students bring to the job fair?",
+      "options": [
+        "Their student ID and laptop",
+        "Multiple copies of their resume",
+        "A list of references",
+        "A completed application form"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement instructs students to bring multiple copies of their resume."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention students. The annual campus job fair will be held this Wednesday from 10 AM to 3 PM in the University Center Ballroom. Over fifty employers from industries including technology, healthcare, education, and finance will be present. Please bring multiple copies of your resume and dress in professional attire. Career counselors will be available for quick resume reviews at the entrance. A workshop on interview skills will take place at noon in Room 102. All students, both undergraduate and graduate, are encouraged to attend. Parking is free in Lot C for job fair participants."
+    }
+  ]
+}

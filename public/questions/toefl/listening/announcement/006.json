@@ -1,0 +1,51 @@
+{
+  "title": "New Recycling Program",
+  "transcript": "Hello everyone. Facilities Management would like to introduce an updated recycling program starting next week. New blue bins for paper and cardboard will be placed in all academic buildings. Green bins for glass, plastic, and metal will be located near dormitory entrances. Please rinse all containers before disposal. Electronic waste can be dropped off at the collection point behind the library on the first Friday of each month. For questions about what items are acceptable, please visit the sustainability page on the university website.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What color bin should paper be placed in?",
+      "options": [
+        "Green",
+        "Blue",
+        "Orange",
+        "Black"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states that blue bins are for paper and cardboard."
+    },
+    {
+      "id": "q2",
+      "stem": "Where can electronic waste be dropped off?",
+      "options": [
+        "In the green bins",
+        "At the library collection point on the first Friday of each month",
+        "At any academic building",
+        "At the campus safety office"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Electronic waste can be dropped off at the collection point behind the library on the first Friday of each month."
+    },
+    {
+      "id": "q3",
+      "stem": "What should students do before disposing of containers?",
+      "options": [
+        "Remove all labels",
+        "Rinse them",
+        "Crush them flat",
+        "Sort them by color"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement instructs students to rinse all containers before disposal."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hello everyone. Facilities Management would like to introduce an updated recycling program starting next week. New blue bins for paper and cardboard will be placed in all academic buildings. Green bins for glass, plastic, and metal will be located near dormitory entrances. Please rinse all containers before disposal. Electronic waste can be dropped off at the collection point behind the library on the first Friday of each month. For questions about what items are acceptable, please visit the sustainability page on the university website."
+    }
+  ]
+}

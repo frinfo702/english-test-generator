@@ -1,0 +1,68 @@
+{
+  "title": "Market Structures in Economics",
+  "transcript": "Today we will examine the four primary market structures in economics: perfect competition, monopolistic competition, oligopoly, and monopoly. Each structure is defined by the number of firms in the market, the type of product sold, and the ease of entry for new competitors. In perfect competition, there are many firms selling identical products, and no single firm can influence the market price. Agricultural markets are often cited as examples. Monopolistic competition also features many firms, but each sells a slightly differentiated product, such as restaurants or clothing brands. Firms have some control over pricing based on brand loyalty and perceived quality. An oligopoly consists of a small number of large firms that dominate the market. Because each firm's decisions affect the others, strategic behavior is common. The automobile and airline industries are classic examples. Finally, a monopoly exists when a single firm is the sole seller of a product with no close substitutes. Public utilities and patented pharmaceuticals often fall into this category. Monopolies can set prices but are frequently regulated by governments to prevent abuse of market power. Understanding these structures helps us analyze how markets function and how public policy can promote competition and consumer welfare.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "Government regulation of businesses",
+        "The four primary market structures in economics",
+        "Pricing strategies for new companies",
+        "The history of economic theory"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture introduces and explains the four primary market structures in economics."
+    },
+    {
+      "id": "q2",
+      "stem": "Which market structure has many firms selling identical products?",
+      "options": [
+        "Monopoly",
+        "Oligopoly",
+        "Monopolistic competition",
+        "Perfect competition"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "In perfect competition, there are many firms selling identical products."
+    },
+    {
+      "id": "q3",
+      "stem": "According to the lecture, why is strategic behavior common in an oligopoly?",
+      "options": [
+        "Because firms sell identical products",
+        "Because each firm's decisions affect the others",
+        "Because there are no barriers to entry",
+        "Because prices are set by the government"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "In an oligopoly, each firm's decisions affect the others, so strategic behavior is common."
+    },
+    {
+      "id": "q4",
+      "stem": "What does the professor imply about monopolies?",
+      "options": [
+        "They are the most efficient market structure",
+        "They do not exist in modern economies",
+        "They are often regulated to protect consumers",
+        "They always result in lower prices"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The professor states monopolies are frequently regulated by governments to prevent abuse of market power, implying regulation protects consumers."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will examine the four primary market structures in economics: perfect competition, monopolistic competition, oligopoly, and monopoly. Each structure is defined by the number of firms in the market, the type of product sold, and the ease of entry for new competitors. In perfect competition, there are many firms selling identical products, and no single firm can influence the market price. Agricultural markets are often cited as examples. Monopolistic competition also features many firms, but each sells a slightly differentiated product, such as restaurants or clothing brands. Firms have some control over pricing based on brand loyalty and perceived quality. An oligopoly consists of a small number of large firms that dominate the market. Because each firm's decisions affect the others, strategic behavior is common. The automobile and airline industries are classic examples."
+    },
+    {
+      "role": "Lecturer",
+      "text": "Finally, a monopoly exists when a single firm is the sole seller of a product with no close substitutes. Public utilities and patented pharmaceuticals often fall into this category. Monopolies can set prices but are frequently regulated by governments to prevent abuse of market power. Understanding these structures helps us analyze how markets function and how public policy can promote competition and consumer welfare."
+    }
+  ]
+}

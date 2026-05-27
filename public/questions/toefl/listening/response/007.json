@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Academic and Personal",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about a grade",
+      "stem": "Could you tell me what I got wrong on question three? I thought my answer was correct.",
+      "options": {
+        "A": "Let's look at it together. The question tested application, not memorization.",
+        "B": "Question three was the hardest on the exam.",
+        "C": "You should review the textbook chapter."
+      },
+      "correct": "A",
+      "explanation": "The speaker is questioning their grade on a specific item, so offering to review it together and explain the reasoning is constructive."
+    },
+    {
+      "id": "q2",
+      "context": "Inviting to a study session",
+      "stem": "We're forming a study group for the chemistry final. Are you interested?",
+      "options": {
+        "A": "Absolutely! When and where are you meeting?",
+        "B": "Chemistry is a difficult subject.",
+        "C": "I prefer to study alone."
+      },
+      "correct": "A",
+      "explanation": "The speaker is inviting the listener to join a study group, so an enthusiastic acceptance with logistical follow-up is the natural response."
+    },
+    {
+      "id": "q3",
+      "context": "Mentioning an achievement",
+      "stem": "I finally finished reading that 500-page book for literature class.",
+      "options": {
+        "A": "That's impressive! What did you think of the ending?",
+        "B": "500 pages is quite long for a novel.",
+        "C": "I haven't started mine yet."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing an accomplishment, so acknowledging their effort and engaging with the content is encouraging."
+    },
+    {
+      "id": "q4",
+      "context": "Asking for technical help",
+      "stem": "My laptop keeps crashing whenever I open the design software. Any ideas?",
+      "options": {
+        "A": "Try updating your graphics drivers. That usually fixes rendering issues.",
+        "B": "Design software requires a powerful computer.",
+        "C": "I use a different program for design."
+      },
+      "correct": "A",
+      "explanation": "The speaker is describing a technical problem and asking for help, so offering a specific troubleshooting step is most useful."
+    },
+    {
+      "id": "q5",
+      "context": "Expressing concern about a friend",
+      "stem": "You haven't been to class in three days. Is everything okay?",
+      "options": {
+        "A": "I've been dealing with a family emergency, but I'm getting back on track.",
+        "B": "Attendance isn't mandatory for this course.",
+        "C": "I've been busy with other classes."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing concern about a friend's absence, so an honest explanation that addresses their concern is the appropriate response."
+    },
+    {
+      "id": "q6",
+      "context": "Asking about a refund policy",
+      "stem": "I dropped the course last week. When will the tuition refund appear on my account?",
+      "options": {
+        "A": "Refunds are processed within 5 to 10 business days.",
+        "B": "Tuition is very expensive this semester.",
+        "C": "You should have dropped it earlier."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a specific timeline for a refund, so providing the exact processing time directly answers their question."
+    },
+    {
+      "id": "q7",
+      "context": "Suggesting an alternative",
+      "stem": "The bookstore is sold out of the required textbook. What should I do?",
+      "options": {
+        "A": "You can order it online or check the library's course reserves.",
+        "B": "Textbooks are overpriced anyway.",
+        "C": "I bought mine during orientation."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for alternatives after encountering an obstacle, so providing practical options directly helps solve their problem."
+    },
+    {
+      "id": "q8",
+      "context": "Congratulating on an award",
+      "stem": "I heard you won the undergraduate research award. That's fantastic!",
+      "options": {
+        "A": "Thank you so much! I couldn't have done it without my advisor's support.",
+        "B": "The research award includes a small stipend.",
+        "C": "Many students applied this year."
+      },
+      "correct": "A",
+      "explanation": "The speaker is offering congratulations, so graciously accepting the compliment and acknowledging support is the polite response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Could you tell me what I got wrong on question three? I thought my answer was correct."
+    },
+    {
+      "role": "Classmate",
+      "text": "We're forming a study group for the chemistry final. Are you interested?"
+    },
+    {
+      "role": "Student",
+      "text": "I finally finished reading that 500-page book for literature class."
+    },
+    {
+      "role": "Student",
+      "text": "My laptop keeps crashing whenever I open the design software. Any ideas?"
+    },
+    {
+      "role": "Friend",
+      "text": "You haven't been to class in three days. Is everything okay?"
+    },
+    {
+      "role": "Student",
+      "text": "I dropped the course last week. When will the tuition refund appear on my account?"
+    },
+    {
+      "role": "Student",
+      "text": "The bookstore is sold out of the required textbook. What should I do?"
+    },
+    {
+      "role": "Student",
+      "text": "I heard you won the undergraduate research award. That's fantastic!"
+    }
+  ]
+}

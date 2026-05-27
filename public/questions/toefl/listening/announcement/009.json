@@ -1,0 +1,51 @@
+{
+  "title": "Student Health Portal Update",
+  "transcript": "Good afternoon. The Student Health Center would like to inform you that the online appointment system has been upgraded. Starting today, students can now schedule same-day appointments through the health portal using their university login. Prescription refill requests can also be submitted online and will be processed within two business days. The portal now includes a symptom checker tool to help determine whether an in-person visit is necessary. For technical issues with the portal, please contact the IT help desk. The health center phone line remains available for urgent matters.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What new feature has been added to the health portal?",
+      "options": [
+        "Video consultations with doctors",
+        "Same-day appointment scheduling",
+        "Online payment for services",
+        "A fitness tracking tool"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Students can now schedule same-day appointments through the health portal."
+    },
+    {
+      "id": "q2",
+      "stem": "How long will prescription refill requests take to process?",
+      "options": [
+        "One business day",
+        "Two business days",
+        "Three business days",
+        "Same day"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Prescription refill requests will be processed within two business days."
+    },
+    {
+      "id": "q3",
+      "stem": "What should students do if they have technical issues with the portal?",
+      "options": [
+        "Visit the health center in person",
+        "Contact the IT help desk",
+        "Email the health center director",
+        "Call the emergency line"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "For technical issues with the portal, students should contact the IT help desk."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Good afternoon. The Student Health Center would like to inform you that the online appointment system has been upgraded. Starting today, students can now schedule same-day appointments through the health portal using their university login. Prescription refill requests can also be submitted online and will be processed within two business days. The portal now includes a symptom checker tool to help determine whether an in-person visit is necessary. For technical issues with the portal, please contact the IT help desk. The health center phone line remains available for urgent matters."
+    }
+  ]
+}

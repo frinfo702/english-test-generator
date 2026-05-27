@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Social Interactions",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Expressing disappointment",
+      "stem": "I just found out I didn't get the internship I applied for.",
+      "options": {
+        "A": "Don't worry, there will be other opportunities.",
+        "B": "When did you submit your application?",
+        "C": "I got an internship last summer too."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing disappointment about bad news, so an empathetic and reassuring response is most appropriate."
+    },
+    {
+      "id": "q2",
+      "context": "Offering assistance",
+      "stem": "These boxes are really heavy. Could you give me a hand?",
+      "options": {
+        "A": "Sure, where do you want them?",
+        "B": "I prefer light boxes.",
+        "C": "The store is having a sale on boxes."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for physical help, so a willing offer to assist is the natural response."
+    },
+    {
+      "id": "q3",
+      "context": "Sharing good news",
+      "stem": "Guess what? I got accepted into the graduate program!",
+      "options": {
+        "A": "That's amazing! Congratulations!",
+        "B": "Graduate programs are very competitive.",
+        "C": "When does the semester start?"
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing exciting personal news, so an enthusiastic and congratulatory response is expected."
+    },
+    {
+      "id": "q4",
+      "context": "Expressing confusion",
+      "stem": "I'm not sure I understand how to use this software. It's so complicated.",
+      "options": {
+        "A": "I felt the same way when I first started.",
+        "B": "Software updates are released every month.",
+        "C": "Have you tried reading the manual from page one?"
+      },
+      "correct": "C",
+      "explanation": "The speaker is expressing confusion and implicitly asking for help, so offering a concrete starting point for learning is most helpful."
+    },
+    {
+      "id": "q5",
+      "context": "Making a complaint",
+      "stem": "The Wi-Fi in the dorm has been really slow for the past three days.",
+      "options": {
+        "A": "You should buy a new laptop.",
+        "B": "That's frustrating. Have you reported it to IT services?",
+        "C": "I don't use Wi-Fi very often."
+      },
+      "correct": "B",
+      "explanation": "The speaker is complaining about a problem, so acknowledging their frustration and suggesting a constructive next step is appropriate."
+    },
+    {
+      "id": "q6",
+      "context": "Inviting someone",
+      "stem": "A few of us are going to the concert on Saturday. Want to come?",
+      "options": {
+        "A": "I don't really like loud music.",
+        "B": "Sounds fun! What time should I meet you?",
+        "C": "Concerts are usually expensive."
+      },
+      "correct": "B",
+      "explanation": "The speaker is extending a social invitation, so an enthusiastic acceptance with a practical follow-up question is the natural response."
+    },
+    {
+      "id": "q7",
+      "context": "Asking for confirmation",
+      "stem": "So, the meeting is at 3 PM in Room 302, not Room 203, right?",
+      "options": {
+        "A": "Yes, 302 on the third floor.",
+        "B": "I have another meeting at 4 PM.",
+        "C": "Room 203 is bigger than 302."
+      },
+      "correct": "A",
+      "explanation": "The speaker is seeking confirmation of specific details, so directly confirming or correcting the information is appropriate."
+    },
+    {
+      "id": "q8",
+      "context": "Expressing gratitude",
+      "stem": "I really appreciate you covering my shift yesterday. You saved me!",
+      "options": {
+        "A": "It was no problem at all.",
+        "B": "I worked three shifts last week.",
+        "C": "You should plan your schedule better."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing strong gratitude, so a humble and gracious acceptance is the polite response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I just found out I didn't get the internship I applied for."
+    },
+    {
+      "role": "Student",
+      "text": "These boxes are really heavy. Could you give me a hand?"
+    },
+    {
+      "role": "Student",
+      "text": "Guess what? I got accepted into the graduate program!"
+    },
+    {
+      "role": "Student",
+      "text": "I'm not sure I understand how to use this software. It's so complicated."
+    },
+    {
+      "role": "Student",
+      "text": "The Wi-Fi in the dorm has been really slow for the past three days."
+    },
+    {
+      "role": "Friend",
+      "text": "A few of us are going to the concert on Saturday. Want to come?"
+    },
+    {
+      "role": "Student",
+      "text": "So, the meeting is at 3 PM in Room 302, not Room 203, right?"
+    },
+    {
+      "role": "Student",
+      "text": "I really appreciate you covering my shift yesterday. You saved me!"
+    }
+  ]
+}

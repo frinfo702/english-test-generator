@@ -1,0 +1,68 @@
+{
+  "title": "The Human Brain and Memory",
+  "transcript": "Today we will explore how the human brain processes and stores memories. Memory is not a single system but rather a collection of interconnected processes. Psychologists typically divide memory into three stages: encoding, storage, and retrieval. Encoding is the process by which sensory input is transformed into a form that can be stored. This can happen visually, acoustically, or through semantic meaning. Storage refers to how information is maintained over time, and retrieval is the process of accessing that information when needed. There are also different types of memory. Sensory memory holds information from the senses for a very brief period, often less than a second. Short-term memory, also called working memory, can hold a limited amount of information for about twenty to thirty seconds without rehearsal. Long-term memory has a much larger capacity and can store information for years or even a lifetime. Within long-term memory, we distinguish between explicit memory, which involves conscious recall of facts and events, and implicit memory, which includes skills and conditioned responses that operate unconsciously. Research has shown that the hippocampus plays a critical role in converting short-term memories into long-term ones. Damage to this structure can severely impair the ability to form new memories while leaving older memories intact.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The anatomy of the human brain",
+        "How the brain processes and stores memories",
+        "The differences between human and animal memory",
+        "Techniques for improving memory"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture focuses on memory processes in the human brain, including encoding, storage, and retrieval."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, how long can short-term memory hold information without rehearsal?",
+      "options": [
+        "Less than a second",
+        "About twenty to thirty seconds",
+        "Several hours",
+        "A lifetime"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Short-term memory can hold information for about twenty to thirty seconds without rehearsal."
+    },
+    {
+      "id": "q3",
+      "stem": "What is the role of the hippocampus?",
+      "options": [
+        "Controlling sensory input",
+        "Converting short-term memories into long-term ones",
+        "Regulating emotional responses",
+        "Processing visual information"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The hippocampus plays a critical role in converting short-term memories into long-term ones."
+    },
+    {
+      "id": "q4",
+      "stem": "What does the professor imply about implicit memory?",
+      "options": [
+        "It requires conscious effort to access",
+        "It includes facts and personal experiences",
+        "It operates unconsciously",
+        "It is stored in the hippocampus"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The professor says implicit memory includes skills and conditioned responses that operate unconsciously."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will explore how the human brain processes and stores memories. Memory is not a single system but rather a collection of interconnected processes. Psychologists typically divide memory into three stages: encoding, storage, and retrieval. Encoding is the process by which sensory input is transformed into a form that can be stored. This can happen visually, acoustically, or through semantic meaning. Storage refers to how information is maintained over time, and retrieval is the process of accessing that information when needed. There are also different types of memory. Sensory memory holds information from the senses for a very brief period, often less than a second. Short-term memory, also called working memory, can hold a limited amount of information for about twenty to thirty seconds without rehearsal. Long-term memory has a much larger capacity and can store information for years or even a lifetime."
+    },
+    {
+      "role": "Lecturer",
+      "text": "Within long-term memory, we distinguish between explicit memory, which involves conscious recall of facts and events, and implicit memory, which includes skills and conditioned responses that operate unconsciously. Research has shown that the hippocampus plays a critical role in converting short-term memories into long-term ones. Damage to this structure can severely impair the ability to form new memories while leaving older memories intact."
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Practical Matters",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for a signature",
+      "stem": "Professor, would you mind signing my course withdrawal form?",
+      "options": {
+        "A": "Of course. Have you spoken to your academic advisor about this?",
+        "B": "Withdrawal deadlines are strictly enforced.",
+        "C": "I had to sign many forms this morning."
+      },
+      "correct": "A",
+      "explanation": "The speaker is requesting a signature on an official form, so granting the request while showing professional concern is appropriate."
+    },
+    {
+      "id": "q2",
+      "context": "Offering a ride",
+      "stem": "I'm driving to the conference center. Do you need a lift?",
+      "options": {
+        "A": "That would be great, thanks!",
+        "B": "I prefer to take public transit.",
+        "C": "The conference center is far from campus."
+      },
+      "correct": "A",
+      "explanation": "The speaker is offering transportation, so accepting gratefully is the natural and polite response."
+    },
+    {
+      "id": "q3",
+      "context": "Asking about office hours",
+      "stem": "Are your office hours only on Tuesdays, or can I come in another day?",
+      "options": {
+        "A": "Tuesdays are my regular hours, but we can schedule another time if needed.",
+        "B": "Office hours are for all students.",
+        "C": "I usually have meetings on Thursdays."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about flexibility in office hours, so answering directly about alternatives is helpful."
+    },
+    {
+      "id": "q4",
+      "context": "Mentioning bad weather impact",
+      "stem": "The snowstorm last night made the roads impossible. I barely made it to campus.",
+      "options": {
+        "A": "I'm glad you got here safely. Several students emailed that they're stuck.",
+        "B": "Snowstorms are common in January.",
+        "C": "I live on campus, so I don't have to commute."
+      },
+      "correct": "A",
+      "explanation": "The speaker is describing a difficult commute due to weather, so expressing relief for their safety and providing relevant context is empathetic."
+    },
+    {
+      "id": "q5",
+      "context": "Asking about volunteer opportunities",
+      "stem": "I'd like to volunteer at the community center this semester. How do I sign up?",
+      "options": {
+        "A": "You can register at the service learning office or fill out the online form.",
+        "B": "Volunteering looks good on a resume.",
+        "C": "The community center hosts many events."
+      },
+      "correct": "A",
+      "explanation": "The speaker wants to volunteer and is asking how to sign up, so providing clear registration options directly answers their question."
+    },
+    {
+      "id": "q6",
+      "context": "Expressing confusion about directions",
+      "stem": "The map says the science building is east of the quad, but I think I'm going in circles.",
+      "options": {
+        "A": "You're almost there. Just keep walking past the fountain and turn left.",
+        "B": "Maps can be confusing sometimes.",
+        "C": "The science building was renovated recently."
+      },
+      "correct": "A",
+      "explanation": "The speaker is lost and asking for directions, so giving clear navigational guidance is the most helpful response."
+    },
+    {
+      "id": "q7",
+      "context": "Asking to reschedule a meeting",
+      "stem": "Something urgent came up. Could we move our meeting from 2 PM to 4 PM?",
+      "options": {
+        "A": "No problem. I'll see you at 4 PM in the same room.",
+        "B": "You should manage your time better.",
+        "C": "I have another meeting at 4 PM too."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking to reschedule, so confirming the new time and place is the cooperative response."
+    },
+    {
+      "id": "q8",
+      "context": "Inquiring about a waitlist",
+      "stem": "I'm number five on the waitlist for Biology 201. What are my chances of getting in?",
+      "options": {
+        "A": "Students usually drop within the first week, so your chances are fairly good.",
+        "B": "Biology 201 is a popular course.",
+        "C": "You should have registered earlier."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about their likelihood of getting into a waitlisted course, so providing realistic information about typical waitlist movement is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor, would you mind signing my course withdrawal form?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm driving to the conference center. Do you need a lift?"
+    },
+    {
+      "role": "Student",
+      "text": "Are your office hours only on Tuesdays, or can I come in another day?"
+    },
+    {
+      "role": "Student",
+      "text": "The snowstorm last night made the roads impossible. I barely made it to campus."
+    },
+    {
+      "role": "Student",
+      "text": "I'd like to volunteer at the community center this semester. How do I sign up?"
+    },
+    {
+      "role": "Student",
+      "text": "The map says the science building is east of the quad, but I think I'm going in circles."
+    },
+    {
+      "role": "Student",
+      "text": "Something urgent came up. Could we move our meeting from 2 PM to 4 PM?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm number five on the waitlist for Biology 201. What are my chances of getting in?"
+    }
+  ]
+}

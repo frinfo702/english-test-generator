@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Campus Services",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about health services",
+      "stem": "Can I make an appointment at the health center for a flu shot?",
+      "options": {
+        "A": "Yes, you can book online or call the front desk.",
+        "B": "Flu shots are recommended every year.",
+        "C": "The health center is on the west side of campus."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking how to access a health service, so providing booking options directly answers their question."
+    },
+    {
+      "id": "q2",
+      "context": "Reporting a maintenance issue",
+      "stem": "The light in my dorm room keeps flickering. Can someone fix it?",
+      "options": {
+        "A": "I'll submit a maintenance request for you right now.",
+        "B": "Flickering lights are usually a wiring issue.",
+        "C": "You should buy a new bulb."
+      },
+      "correct": "A",
+      "explanation": "The speaker is reporting a maintenance problem, so offering to take action and submit a request is the appropriate staff response."
+    },
+    {
+      "id": "q3",
+      "context": "Asking about job openings",
+      "stem": "Are there any work-study positions still available in the admissions office?",
+      "options": {
+        "A": "We have one opening for a front desk assistant. Would you like to apply?",
+        "B": "Work-study jobs are popular among students.",
+        "C": "The admissions office is very busy in the fall."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about job availability, so providing specific information about an opening and next steps is directly helpful."
+    },
+    {
+      "id": "q4",
+      "context": "Requesting an extension politely",
+      "stem": "Would it be possible to get a two-day extension on the lab report? I've been sick.",
+      "options": {
+        "A": "That's fine. Please submit it by Friday and attach a brief note.",
+        "B": "Extensions are rarely granted in this department.",
+        "C": "You should take better care of your health."
+      },
+      "correct": "A",
+      "explanation": "The speaker is politely requesting an extension with a valid reason, so a compassionate approval with clear conditions is appropriate."
+    },
+    {
+      "id": "q5",
+      "context": "Asking about club activities",
+      "stem": "When does the debate club usually meet? I'm interested in joining.",
+      "options": {
+        "A": "We meet every Wednesday at 6 PM in the student union.",
+        "B": "Debate clubs help with public speaking skills.",
+        "C": "Many students join clubs in their first year."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about meeting times because they want to join, so providing the specific schedule is the most useful response."
+    },
+    {
+      "id": "q6",
+      "context": "Complimenting a service",
+      "stem": "The writing center tutors were so helpful with my thesis. I wanted to share that feedback.",
+      "options": {
+        "A": "Thank you for letting us know. I'll pass that along to the tutoring staff.",
+        "B": "The writing center was renovated last year.",
+        "C": "Tutors are usually graduate students."
+      },
+      "correct": "A",
+      "explanation": "The speaker is giving positive feedback about a service, so thanking them and confirming the feedback will be shared is professional."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about transcript requests",
+      "stem": "How long does it take to get an official transcript mailed to my home address?",
+      "options": {
+        "A": "Official transcripts are mailed within 3 to 5 business days.",
+        "B": "Transcripts include all courses you've taken.",
+        "C": "You can also request an unofficial copy online."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a processing timeline, so providing the specific timeframe directly answers their question."
+    },
+    {
+      "id": "q8",
+      "context": "Expressing preference",
+      "stem": "I'd rather work on the presentation than the research paper. Is that okay?",
+      "options": {
+        "A": "Sure, we can divide the tasks that way. What section will you present?",
+        "B": "Research papers are more important than presentations.",
+        "C": "I prefer the research paper myself."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing a preference for task division, so accommodating the preference and clarifying next steps is cooperative."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Can I make an appointment at the health center for a flu shot?"
+    },
+    {
+      "role": "Student",
+      "text": "The light in my dorm room keeps flickering. Can someone fix it?"
+    },
+    {
+      "role": "Student",
+      "text": "Are there any work-study positions still available in the admissions office?"
+    },
+    {
+      "role": "Student",
+      "text": "Would it be possible to get a two-day extension on the lab report? I've been sick."
+    },
+    {
+      "role": "Student",
+      "text": "When does the debate club usually meet? I'm interested in joining."
+    },
+    {
+      "role": "Student",
+      "text": "The writing center tutors were so helpful with my thesis. I wanted to share that feedback."
+    },
+    {
+      "role": "Student",
+      "text": "How long does it take to get an official transcript mailed to my home address?"
+    },
+    {
+      "role": "Student",
+      "text": "I'd rather work on the presentation than the research paper. Is that okay?"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Campus Facilities",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "Excuse me, the printer on the second floor is out of paper again.",
+      "options": {
+        "A": "Thank you for letting me know. I'll refill it right away.",
+        "B": "Printers often break down during finals.",
+        "C": "You can print at the library instead."
+      },
+      "correct": "A",
+      "explanation": "The speaker is reporting a facility problem, so acknowledging the report and offering to fix it is the appropriate staff response."
+    },
+    {
+      "id": "q2",
+      "context": "Asking about rules",
+      "stem": "Am I allowed to eat in the study area?",
+      "options": {
+        "A": "Only covered drinks and small snacks are permitted.",
+        "B": "The cafeteria closes at 8 PM.",
+        "C": "I usually eat in the lounge."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about rules, so providing the specific policy directly answers their question."
+    },
+    {
+      "id": "q3",
+      "context": "Requesting a favor",
+      "stem": "Could you keep an eye on my bag while I grab a coffee? I'll be right back.",
+      "options": {
+        "A": "Sure, I'll watch it for you.",
+        "B": "I prefer tea over coffee.",
+        "C": "The cafe is on the first floor."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking a small favor, so a straightforward agreement is the expected response."
+    },
+    {
+      "id": "q4",
+      "context": "Expressing satisfaction",
+      "stem": "The new gym equipment is fantastic! I've been using it every day.",
+      "options": {
+        "A": "I'm glad you're enjoying it.",
+        "B": "Exercise is important for your health.",
+        "C": "The old equipment was cheaper."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing positive feedback, so acknowledging and validating their satisfaction is the natural response."
+    },
+    {
+      "id": "q5",
+      "context": "Giving a reminder",
+      "stem": "Don't forget to return your lab coat before leaving today.",
+      "options": {
+        "A": "Thanks for the reminder. I'll drop it off after class.",
+        "B": "I bought my own lab coat.",
+        "C": "The lab is closed on weekends."
+      },
+      "correct": "A",
+      "explanation": "The speaker is giving a reminder, so acknowledging it and confirming compliance is the appropriate response."
+    },
+    {
+      "id": "q6",
+      "context": "Asking for a recommendation",
+      "stem": "I'm looking for a quiet place to study. Any suggestions?",
+      "options": {
+        "A": "The fourth floor of the library has individual study carrels.",
+        "B": "Studying in groups is more effective.",
+        "C": "I don't like studying at night."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for a recommendation, so providing a specific helpful suggestion directly addresses their need."
+    },
+    {
+      "id": "q7",
+      "context": "Mentioning a schedule conflict",
+      "stem": "I can't make it to the seminar because I have a doctor's appointment.",
+      "options": {
+        "A": "I hope everything is okay. The slides will be posted online.",
+        "B": "Doctors usually charge a lot for appointments.",
+        "C": "Seminars are mandatory for all students."
+      },
+      "correct": "A",
+      "explanation": "The speaker is explaining an absence, so expressing concern and offering a practical alternative is empathetic and helpful."
+    },
+    {
+      "id": "q8",
+      "context": "Asking about availability",
+      "stem": "Is the tutoring center open on Sunday afternoons?",
+      "options": {
+        "A": "Yes, from noon to 5 PM.",
+        "B": "Tutors are usually graduate students.",
+        "C": "The center was renovated recently."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about hours of availability, so providing the specific schedule directly answers their question."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Excuse me, the printer on the second floor is out of paper again."
+    },
+    {
+      "role": "Student",
+      "text": "Am I allowed to eat in the study area?"
+    },
+    {
+      "role": "Student",
+      "text": "Could you keep an eye on my bag while I grab a coffee? I'll be right back."
+    },
+    {
+      "role": "Student",
+      "text": "The new gym equipment is fantastic! I've been using it every day."
+    },
+    {
+      "role": "Lab Assistant",
+      "text": "Don't forget to return your lab coat before leaving today."
+    },
+    {
+      "role": "Student",
+      "text": "I'm looking for a quiet place to study. Any suggestions?"
+    },
+    {
+      "role": "Student",
+      "text": "I can't make it to the seminar because I have a doctor's appointment."
+    },
+    {
+      "role": "Student",
+      "text": "Is the tutoring center open on Sunday afternoons?"
+    }
+  ]
+}

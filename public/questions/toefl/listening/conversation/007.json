@@ -1,0 +1,74 @@
+{
+  "title": "Lab Safety Concern",
+  "transcript": "Student: Professor Lee, could I talk to you about the chemistry lab? I have some safety concerns. Professor: Certainly. What's on your mind? Student: During last week's experiment, the ventilation fan wasn't working properly, and several students noticed a strong chemical odor. Professor: That's concerning. Did anyone report it to the lab technician? Student: I mentioned it to the TA, but I'm not sure if it was logged. Professor: I'll check the maintenance log immediately. In the meantime, if the fan isn't working during your next session, stop the experiment and evacuate the lab. Student: Should we reschedule the lab if that happens? Professor: Yes. Safety comes first. I'll also send an email to all students reminding them to report equipment issues right away. Student: Thank you. I just want to make sure everyone stays safe. Professor: I appreciate you bringing this to my attention. Please let me know if you notice anything else.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student speak to Professor Lee?",
+      "options": [
+        "To ask for an extension on a lab report",
+        "To report a safety issue in the chemistry lab",
+        "To request a different lab section",
+        "To discuss a poor grade on an experiment"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student wants to report that the ventilation fan wasn't working and there was a strong chemical odor during lab."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the professor tell the students to do if the fan is not working?",
+      "options": [
+        "Continue the experiment with masks",
+        "Stop the experiment and leave the lab",
+        "Open the windows and finish quickly",
+        "Report it after the lab is over"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The professor instructs students to stop the experiment and evacuate the lab if the ventilation fan isn't working."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor Lee, could I talk to you about the chemistry lab? I have some safety concerns."
+    },
+    {
+      "role": "Professor",
+      "text": "Certainly. What's on your mind?"
+    },
+    {
+      "role": "Student",
+      "text": "During last week's experiment, the ventilation fan wasn't working properly, and several students noticed a strong chemical odor."
+    },
+    {
+      "role": "Professor",
+      "text": "That's concerning. Did anyone report it to the lab technician?"
+    },
+    {
+      "role": "Student",
+      "text": "I mentioned it to the TA, but I'm not sure if it was logged."
+    },
+    {
+      "role": "Professor",
+      "text": "I'll check the maintenance log immediately. In the meantime, if the fan isn't working during your next session, stop the experiment and evacuate the lab."
+    },
+    {
+      "role": "Student",
+      "text": "Should we reschedule the lab if that happens?"
+    },
+    {
+      "role": "Professor",
+      "text": "Yes. Safety comes first. I'll also send an email to all students reminding them to report equipment issues right away."
+    },
+    {
+      "role": "Student",
+      "text": "Thank you. I just want to make sure everyone stays safe."
+    },
+    {
+      "role": "Professor",
+      "text": "I appreciate you bringing this to my attention. Please let me know if you notice anything else."
+    }
+  ]
+}

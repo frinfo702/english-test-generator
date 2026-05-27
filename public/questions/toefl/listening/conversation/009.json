@@ -1,0 +1,78 @@
+{
+  "title": "Peer Tutoring Request",
+  "transcript": "Student: Hey, I heard you're really good at calculus. Would you be willing to tutor me before the midterm? Tutor: Sure, I'd be happy to help. When were you thinking? Student: Maybe this weekend? I'm free Saturday afternoon and all day Sunday. Tutor: Saturday afternoon works for me. Let's meet at the library at 2 PM. Student: Great. Should I bring anything specific? Tutor: Bring your textbook, your notes, and any practice problems you've been struggling with. Also, it helps if you identify the topics you find most confusing. Student: Definitely integration by parts and related rates. Tutor: Perfect. We'll start there. I usually charge fifteen dollars an hour, but since we're classmates, ten is fine. Student: That sounds fair. Can we do two hours? Tutor: Sure. If you need more sessions after that, just let me know. Student: Thanks so much. I really need to pass this exam.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student approach their classmate?",
+      "options": [
+        "To borrow a calculus textbook",
+        "To ask for tutoring help before the midterm",
+        "To form a study group",
+        "To compare lecture notes"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student asks the classmate to tutor them in calculus before the midterm."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the tutor tell the student to bring?",
+      "options": [
+        "Previous exam papers and a laptop",
+        "Textbook, notes, and difficult practice problems",
+        "A calculator and snacks",
+        "A printed syllabus and schedule"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The tutor asks the student to bring the textbook, notes, and any practice problems they've been struggling with."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hey, I heard you're really good at calculus. Would you be willing to tutor me before the midterm?"
+    },
+    {
+      "role": "Tutor",
+      "text": "Sure, I'd be happy to help. When were you thinking?"
+    },
+    {
+      "role": "Student",
+      "text": "Maybe this weekend? I'm free Saturday afternoon and all day Sunday."
+    },
+    {
+      "role": "Tutor",
+      "text": "Saturday afternoon works for me. Let's meet at the library at 2 PM."
+    },
+    {
+      "role": "Student",
+      "text": "Great. Should I bring anything specific?"
+    },
+    {
+      "role": "Tutor",
+      "text": "Bring your textbook, your notes, and any practice problems you've been struggling with. Also, it helps if you identify the topics you find most confusing."
+    },
+    {
+      "role": "Student",
+      "text": "Definitely integration by parts and related rates."
+    },
+    {
+      "role": "Tutor",
+      "text": "Perfect. We'll start there. I usually charge fifteen dollars an hour, but since we're classmates, ten is fine."
+    },
+    {
+      "role": "Student",
+      "text": "That sounds fair. Can we do two hours?"
+    },
+    {
+      "role": "Tutor",
+      "text": "Sure. If you need more sessions after that, just let me know."
+    },
+    {
+      "role": "Student",
+      "text": "Thanks so much. I really need to pass this exam."
+    }
+  ]
+}

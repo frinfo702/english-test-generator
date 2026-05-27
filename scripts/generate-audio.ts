@@ -12,7 +12,7 @@ const PROJECT_ROOT = path.resolve(__dirname, "..");
 const QUESTIONS_DIR = path.join(PROJECT_ROOT, "public/questions");
 const AUDIO_OUT_DIR = path.join(PROJECT_ROOT, "public/audio");
 
-const ALL_SHADOW_VOICES = ["ara", "eve", "leo", "rex"];
+const ALL_SHADOW_VOICES = ["ara", "eve", "leo", "rex", "sal"];
 
 function hashText(text: string): number {
   let hash = 0;
@@ -128,11 +128,16 @@ async function generateForQuestion(
   if (hasAudioSegments(data)) {
     const segments = data.audioSegments;
     const voiceForRole = new Map<string, string>();
+    const usedVoices = new Set<string>();
     const getVoiceForRole = (role: string): string => {
       if (!voiceForRole.has(role)) {
+        const available = ALL_SHADOW_VOICES.filter((v) => !usedVoices.has(v));
+        const pool = available.length > 0 ? available : ALL_SHADOW_VOICES;
         const idx =
-          Math.abs(hashText(`${basename}:${role}`)) % ALL_SHADOW_VOICES.length;
-        voiceForRole.set(role, ALL_SHADOW_VOICES[idx]);
+          Math.abs(hashText(`${basename}:${role}`)) % pool.length;
+        const voice = pool[idx];
+        voiceForRole.set(role, voice);
+        usedVoices.add(voice);
       }
       return voiceForRole.get(role)!;
     };

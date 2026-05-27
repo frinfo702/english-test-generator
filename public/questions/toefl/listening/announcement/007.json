@@ -1,0 +1,51 @@
+{
+  "title": "Library Extended Hours",
+  "transcript": "Good morning. The university library is pleased to announce extended hours for the final exam period. Starting this Monday, the main library will remain open until 2 AM Sunday through Thursday, and until midnight on Friday and Saturday. The 24-hour study room on the third floor will continue to operate as usual. Additional staff will be available at the reference desk until 11 PM to assist with research questions. Coffee and snacks will be available for purchase in the lobby during extended hours. We wish all students success on their exams.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What are the new library hours on Sunday through Thursday during finals?",
+      "options": [
+        "Until midnight",
+        "Until 2 AM",
+        "Until 11 PM",
+        "24 hours"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The main library will remain open until 2 AM Sunday through Thursday during finals."
+    },
+    {
+      "id": "q2",
+      "stem": "What service will be available until 11 PM?",
+      "options": [
+        "Coffee and snack sales",
+        "Reference desk assistance",
+        "Computer repair",
+        "Group study room bookings"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Additional staff will be available at the reference desk until 11 PM."
+    },
+    {
+      "id": "q3",
+      "stem": "What is available on the third floor?",
+      "options": [
+        "A coffee shop",
+        "A 24-hour study room",
+        "A computer lab",
+        "A tutoring center"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The 24-hour study room on the third floor will continue to operate as usual."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Good morning. The university library is pleased to announce extended hours for the final exam period. Starting this Monday, the main library will remain open until 2 AM Sunday through Thursday, and until midnight on Friday and Saturday. The 24-hour study room on the third floor will continue to operate as usual. Additional staff will be available at the reference desk until 11 PM to assist with research questions. Coffee and snacks will be available for purchase in the lobby during extended hours. We wish all students success on their exams."
+    }
+  ]
+}

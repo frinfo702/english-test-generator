@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Final Set",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about prerequisites",
+      "stem": "Do I need to take Statistics 101 before enrolling in Econometrics?",
+      "options": {
+        "A": "Yes, Statistics 101 is a strict prerequisite for Econometrics.",
+        "B": "Econometrics is offered every fall semester.",
+        "C": "Many students find statistics challenging."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about course prerequisites, so a clear confirmation or denial with details is the most helpful response."
+    },
+    {
+      "id": "q2",
+      "context": "Accepting an apology",
+      "stem": "I'm sorry I missed our study session. I completely lost track of time.",
+      "options": {
+        "A": "No worries. Let's reschedule for tomorrow afternoon.",
+        "B": "You should set reminders on your phone.",
+        "C": "I waited for twenty minutes."
+      },
+      "correct": "A",
+      "explanation": "The speaker is apologizing for missing a meeting, so graciously accepting the apology and proposing a new time is constructive."
+    },
+    {
+      "id": "q3",
+      "context": "Asking for a recommendation",
+      "stem": "Would you be willing to write me a letter of recommendation for grad school?",
+      "options": {
+        "A": "I'd be happy to. Please send me your resume and statement of purpose.",
+        "B": "Grad school applications require several letters.",
+        "C": "I'm very busy this semester."
+      },
+      "correct": "A",
+      "explanation": "The speaker is requesting a letter of recommendation, so a positive response with instructions on needed materials is appropriate."
+    },
+    {
+      "id": "q4",
+      "context": "Expressing uncertainty",
+      "stem": "I'm not sure which major to choose. Everything seems interesting right now.",
+      "options": {
+        "A": "That's completely normal. Have you talked to the career counseling center?",
+        "B": "You should decide before your sophomore year.",
+        "C": "Some majors are more practical than others."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing uncertainty about a major decision, so normalizing their feelings and suggesting a helpful resource is supportive."
+    },
+    {
+      "id": "q5",
+      "context": "Asking about a schedule change",
+      "stem": "Did the seminar time change? I thought it was at 10 AM, but my calendar says 1 PM.",
+      "options": {
+        "A": "Yes, it was moved to 1 PM because the speaker's flight was delayed.",
+        "B": "Seminars are usually scheduled in the morning.",
+        "C": "You should check the department website."
+      },
+      "correct": "A",
+      "explanation": "The speaker is confused about a schedule discrepancy, so confirming the change and providing the reason is helpful."
+    },
+    {
+      "id": "q6",
+      "context": "Declining an invitation politely",
+      "stem": "We're going hiking this weekend. Do you want to join?",
+      "options": {
+        "A": "I'd love to, but I have a family commitment this weekend. Maybe next time?",
+        "B": "Hiking is too exhausting for me.",
+        "C": "I went hiking last month."
+      },
+      "correct": "A",
+      "explanation": "The speaker is extending a social invitation, so politely declining with a reason and leaving the door open is courteous."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about fees",
+      "stem": "Is there an extra fee for using the 3D printing lab?",
+      "options": {
+        "A": "Yes, it's five dollars per hour of printing time.",
+        "B": "The 3D printing lab has new equipment.",
+        "C": "Labs are open to all engineering students."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about fees, so providing the specific cost structure directly answers their question."
+    },
+    {
+      "id": "q8",
+      "context": "Expressing relief",
+      "stem": "I was so worried about the exam, but I actually think I did okay!",
+      "options": {
+        "A": "I'm glad to hear that! All that studying paid off.",
+        "B": "Exams are always stressful.",
+        "C": "The exam was easier than last year's."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing relief after a stressful event, so sharing in their relief and validating their effort is encouraging."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Do I need to take Statistics 101 before enrolling in Econometrics?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm sorry I missed our study session. I completely lost track of time."
+    },
+    {
+      "role": "Student",
+      "text": "Would you be willing to write me a letter of recommendation for grad school?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm not sure which major to choose. Everything seems interesting right now."
+    },
+    {
+      "role": "Student",
+      "text": "Did the seminar time change? I thought it was at 10 AM, but my calendar says 1 PM."
+    },
+    {
+      "role": "Friend",
+      "text": "We're going hiking this weekend. Do you want to join?"
+    },
+    {
+      "role": "Student",
+      "text": "Is there an extra fee for using the 3D printing lab?"
+    },
+    {
+      "role": "Student",
+      "text": "I was so worried about the exam, but I actually think I did okay!"
+    }
+  ]
+}

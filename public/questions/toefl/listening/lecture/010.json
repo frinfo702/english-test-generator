@@ -1,0 +1,68 @@
+{
+  "title": "Plate Tectonics",
+  "transcript": "Today we will discuss plate tectonics, the theory that explains the movement of Earth's lithosphere. The lithosphere is divided into several large and small plates that float on the semi-fluid asthenosphere beneath them. There are three main types of plate boundaries. At divergent boundaries, plates move away from each other, allowing magma to rise and create new crust. This process occurs along mid-ocean ridges and is responsible for seafloor spreading. At convergent boundaries, plates move toward each other. When an oceanic plate collides with a continental plate, the denser oceanic plate is forced beneath the continental plate in a process called subduction. This often creates deep ocean trenches and volcanic mountain ranges. When two continental plates collide, neither is dense enough to subduct, so the crust crumples and folds, forming massive mountain ranges like the Himalayas. The third type is transform boundaries, where plates slide past each other horizontally. The San Andreas Fault in California is a well-known example. Earthquakes are common along all three boundary types. The theory of plate tectonics revolutionized geology by providing a unified explanation for earthquakes, volcanic activity, and the distribution of continents and oceans over geological time.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The structure of Earth's core",
+        "The theory of plate tectonics",
+        "The causes of earthquakes",
+        "The formation of mountain ranges"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture explains plate tectonics theory and the three main types of plate boundaries."
+    },
+    {
+      "id": "q2",
+      "stem": "What happens at divergent boundaries?",
+      "options": [
+        "Plates collide and form mountains",
+        "Plates move away from each other and magma rises",
+        "Plates slide past each other horizontally",
+        "One plate is forced beneath another"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "At divergent boundaries, plates move away from each other, allowing magma to rise and create new crust."
+    },
+    {
+      "id": "q3",
+      "stem": "According to the lecture, what happens when two continental plates collide?",
+      "options": [
+        "The denser plate subducts",
+        "A deep ocean trench forms",
+        "The crust crumples and forms mountain ranges",
+        "Magma creates new oceanic crust"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "When two continental plates collide, the crust crumples and folds, forming massive mountain ranges."
+    },
+    {
+      "id": "q4",
+      "stem": "What does the professor imply about the importance of plate tectonics theory?",
+      "options": [
+        "It has been largely replaced by newer theories",
+        "It only explains volcanic activity",
+        "It provides a unified explanation for many geological phenomena",
+        "It is too complex for practical use"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The professor states plate tectonics revolutionized geology by providing a unified explanation for earthquakes, volcanic activity, and continental distribution."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will discuss plate tectonics, the theory that explains the movement of Earth's lithosphere. The lithosphere is divided into several large and small plates that float on the semi-fluid asthenosphere beneath them. There are three main types of plate boundaries. At divergent boundaries, plates move away from each other, allowing magma to rise and create new crust. This process occurs along mid-ocean ridges and is responsible for seafloor spreading. At convergent boundaries, plates move toward each other. When an oceanic plate collides with a continental plate, the denser oceanic plate is forced beneath the continental plate in a process called subduction. This often creates deep ocean trenches and volcanic mountain ranges. When two continental plates collide, neither is dense enough to subduct, so the crust crumples and folds, forming massive mountain ranges like the Himalayas."
+    },
+    {
+      "role": "Lecturer",
+      "text": "The third type is transform boundaries, where plates slide past each other horizontally. The San Andreas Fault in California is a well-known example. Earthquakes are common along all three boundary types. The theory of plate tectonics revolutionized geology by providing a unified explanation for earthquakes, volcanic activity, and the distribution of continents and oceans over geological time."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "title": "The Art of the Renaissance",
+  "transcript": "Today we will explore the Renaissance, a cultural movement that spanned roughly the fourteenth to the seventeenth centuries, originating in Italy before spreading across Europe. The term 'Renaissance' means 'rebirth,' and it refers to a renewed interest in the classical art, literature, and philosophy of ancient Greece and Rome. In the visual arts, this revival manifested in a focus on realism, human emotion, and perspective. Artists like Leonardo da Vinci, Michelangelo, and Raphael sought to depict the human body and the natural world with unprecedented accuracy. One of the key innovations of this period was the development of linear perspective, which allowed artists to create the illusion of depth on a flat surface. This technique, pioneered by Filippo Brunelleschi and later codified by Leon Battista Alberti, revolutionized how space was represented in painting. Patronage played a crucial role in Renaissance art. Wealthy families, particularly the Medici in Florence, and the Catholic Church commissioned works that often combined religious themes with humanist ideals. The Renaissance was not merely an artistic movement; it represented a fundamental shift in how people viewed themselves and their place in the world, emphasizing individual achievement and the potential of human reason.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The political history of Italy",
+        "The Renaissance and its artistic innovations",
+        "The lives of the Medici family",
+        "The philosophy of ancient Greece"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture discusses the Renaissance as a cultural movement, focusing on its art and innovations."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, what does the term 'Renaissance' mean?",
+      "options": [
+        "Rebirth",
+        "Revolution",
+        "Realism",
+        "Reason"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The lecturer states that 'Renaissance' means 'rebirth.'"
+    },
+    {
+      "id": "q3",
+      "stem": "What was one key artistic innovation of the Renaissance?",
+      "options": [
+        "Abstract expressionism",
+        "Linear perspective",
+        "Photographic realism",
+        "Cubism"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The development of linear perspective was a key innovation of the Renaissance."
+    },
+    {
+      "id": "q4",
+      "stem": "What does the professor imply about the role of patrons in Renaissance art?",
+      "options": [
+        "They had little influence on artistic choices",
+        "They were primarily interested in secular themes",
+        "They were essential in supporting and commissioning art",
+        "They only funded works by unknown artists"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The professor discusses how wealthy families and the Church commissioned works, implying patrons were essential in supporting Renaissance art."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will explore the Renaissance, a cultural movement that spanned roughly the fourteenth to the seventeenth centuries, originating in Italy before spreading across Europe. The term 'Renaissance' means 'rebirth,' and it refers to a renewed interest in the classical art, literature, and philosophy of ancient Greece and Rome. In the visual arts, this revival manifested in a focus on realism, human emotion, and perspective. Artists like Leonardo da Vinci, Michelangelo, and Raphael sought to depict the human body and the natural world with unprecedented accuracy. One of the key innovations of this period was the development of linear perspective, which allowed artists to create the illusion of depth on a flat surface. This technique, pioneered by Filippo Brunelleschi and later codified by Leon Battista Alberti, revolutionized how space was represented in painting."
+    },
+    {
+      "role": "Lecturer",
+      "text": "Patronage played a crucial role in Renaissance art. Wealthy families, particularly the Medici in Florence, and the Catholic Church commissioned works that often combined religious themes with humanist ideals. The Renaissance was not merely an artistic movement; it represented a fundamental shift in how people viewed themselves and their place in the world, emphasizing individual achievement and the potential of human reason."
+    }
+  ]
+}

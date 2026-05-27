@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Requests and Offers",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for clarification on instructions",
+      "stem": "The syllabus says the paper should be double-spaced. Does that include the bibliography too?",
+      "options": {
+        "A": "Yes, the entire document should be double-spaced.",
+        "B": "Bibliographies are usually single-spaced.",
+        "C": "The syllabus was updated last month."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for specific formatting clarification, so a direct yes/no answer with explanation is most helpful."
+    },
+    {
+      "id": "q2",
+      "context": "Declining an offer of food",
+      "stem": "Would you like some more pizza? There's still half a pie left.",
+      "options": {
+        "A": "No thanks, I'm full. It was delicious though!",
+        "B": "Pizza has too many calories.",
+        "C": "I ate lunch two hours ago."
+      },
+      "correct": "A",
+      "explanation": "The speaker is offering food, so politely declining with a compliment is courteous."
+    },
+    {
+      "id": "q3",
+      "context": "Asking someone to wait",
+      "stem": "Could you hold on for just a minute? I'm almost done with this email.",
+      "options": {
+        "A": "Sure, take your time.",
+        "B": "Emails shouldn't take that long.",
+        "C": "I sent three emails this morning."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking someone to wait briefly, so a patient and accommodating response is appropriate."
+    },
+    {
+      "id": "q4",
+      "context": "Expressing disagreement politely",
+      "stem": "I know the group wants to meet at 8 AM, but I think that's too early for a weekend.",
+      "options": {
+        "A": "I see your point. How about 10 AM instead?",
+        "B": "Early meetings are more productive.",
+        "C": "I wake up at 6 AM every day."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing disagreement with a proposed time, so acknowledging their concern and offering a compromise is constructive."
+    },
+    {
+      "id": "q5",
+      "context": "Requesting a repeat",
+      "stem": "I didn't catch what you said about the assignment deadline. Could you repeat that?",
+      "options": {
+        "A": "Of course. The deadline is next Tuesday at midnight.",
+        "B": "You should pay more attention in class.",
+        "C": "Deadlines are posted online anyway."
+      },
+      "correct": "A",
+      "explanation": "The speaker missed important information and is asking for it to be repeated, so patiently providing the information again is helpful."
+    },
+    {
+      "id": "q6",
+      "context": "Expressing excitement about plans",
+      "stem": "I can't believe we're going to present at the national conference! This is huge!",
+      "options": {
+        "A": "I know! We've worked so hard for this moment.",
+        "B": "Conferences are important for networking.",
+        "C": "The national conference is in Chicago this year."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing excitement about shared success, so matching their enthusiasm and acknowledging the achievement is the natural response."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about a procedure",
+      "stem": "How do I apply for a parking permit for next semester?",
+      "options": {
+        "A": "You can apply online through the transportation portal starting next week.",
+        "B": "Parking permits are expensive.",
+        "C": "The parking lot is always full."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking how to complete a procedure, so providing clear step-by-step guidance is most helpful."
+    },
+    {
+      "id": "q8",
+      "context": "Acknowledging a mistake",
+      "stem": "I accidentally deleted the shared folder. I feel terrible about it.",
+      "options": {
+        "A": "Don't panic. IT can probably restore it from backup.",
+        "B": "You should be more careful with shared files.",
+        "C": "I never use that folder anyway."
+      },
+      "correct": "A",
+      "explanation": "The speaker is upset about making a mistake, so a calming response with a practical solution is most supportive."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The syllabus says the paper should be double-spaced. Does that include the bibliography too?"
+    },
+    {
+      "role": "Friend",
+      "text": "Would you like some more pizza? There's still half a pie left."
+    },
+    {
+      "role": "Student",
+      "text": "Could you hold on for just a minute? I'm almost done with this email."
+    },
+    {
+      "role": "Student",
+      "text": "I know the group wants to meet at 8 AM, but I think that's too early for a weekend."
+    },
+    {
+      "role": "Student",
+      "text": "I didn't catch what you said about the assignment deadline. Could you repeat that?"
+    },
+    {
+      "role": "Student",
+      "text": "I can't believe we're going to present at the national conference! This is huge!"
+    },
+    {
+      "role": "Student",
+      "text": "How do I apply for a parking permit for next semester?"
+    },
+    {
+      "role": "Student",
+      "text": "I accidentally deleted the shared folder. I feel terrible about it."
+    }
+  ]
+}

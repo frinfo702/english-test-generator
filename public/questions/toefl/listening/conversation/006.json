@@ -1,0 +1,78 @@
+{
+  "title": "Career Center Appointment",
+  "transcript": "Student: Hello, I'd like to make an appointment with a career counselor. I need help with my resume for internship applications. Receptionist: Of course. We have availability tomorrow at 10 AM and Thursday at 2 PM. Student: Thursday at 2 PM works better for me. Receptionist: I'll book that for you. Please bring a draft of your resume and a job description for the internship you're targeting. Student: Will the counselor review my cover letter too? Receptionist: Yes, but you should mention that when you arrive so they can allocate enough time. Student: Understood. Also, does the career center offer mock interviews? Receptionist: Yes, we do. You can sign up for a mock interview after your resume appointment. They're held every Friday morning. Student: That's perfect. I'm nervous about the interview process. Receptionist: Many students feel that way. The practice sessions are very helpful. We'll send you a confirmation email with the location. Student: Thank you so much.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit the career center?",
+      "options": [
+        "To apply for an internship",
+        "To get help preparing application materials",
+        "To attend a mock interview",
+        "To find a part-time job"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student wants help with their resume for internship applications."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the receptionist say about mock interviews?",
+      "options": [
+        "They are mandatory for all students",
+        "They are available every Friday morning",
+        "They must be scheduled three weeks in advance",
+        "They are only for graduate students"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The receptionist says mock interviews are held every Friday morning and can be signed up for after the resume appointment."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hello, I'd like to make an appointment with a career counselor. I need help with my resume for internship applications."
+    },
+    {
+      "role": "Receptionist",
+      "text": "Of course. We have availability tomorrow at 10 AM and Thursday at 2 PM."
+    },
+    {
+      "role": "Student",
+      "text": "Thursday at 2 PM works better for me."
+    },
+    {
+      "role": "Receptionist",
+      "text": "I'll book that for you. Please bring a draft of your resume and a job description for the internship you're targeting."
+    },
+    {
+      "role": "Student",
+      "text": "Will the counselor review my cover letter too?"
+    },
+    {
+      "role": "Receptionist",
+      "text": "Yes, but you should mention that when you arrive so they can allocate enough time."
+    },
+    {
+      "role": "Student",
+      "text": "Understood. Also, does the career center offer mock interviews?"
+    },
+    {
+      "role": "Receptionist",
+      "text": "Yes, we do. You can sign up for a mock interview after your resume appointment. They're held every Friday morning."
+    },
+    {
+      "role": "Student",
+      "text": "That's perfect. I'm nervous about the interview process."
+    },
+    {
+      "role": "Receptionist",
+      "text": "Many students feel that way. The practice sessions are very helpful. We'll send you a confirmation email with the location."
+    },
+    {
+      "role": "Student",
+      "text": "Thank you so much."
+    }
+  ]
+}

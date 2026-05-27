@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Everyday Situations",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Apologizing for being late",
+      "stem": "Sorry I'm late. The bus broke down and I had to wait for the next one.",
+      "options": {
+        "A": "That's okay. Let's get started.",
+        "B": "Buses are often unreliable.",
+        "C": "I drove here today."
+      },
+      "correct": "A",
+      "explanation": "The speaker is apologizing and explaining a delay, so graciously accepting the apology and moving on is appropriate."
+    },
+    {
+      "id": "q2",
+      "context": "Asking to borrow something",
+      "stem": "Do you have a pen I could borrow? Mine just ran out of ink.",
+      "options": {
+        "A": "Sure, here you go.",
+        "B": "I prefer pencils for writing.",
+        "C": "You should buy a new one."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking to borrow an item, so a direct offer to lend is the expected response."
+    },
+    {
+      "id": "q3",
+      "context": "Expressing worry",
+      "stem": "I have three exams next week and I'm really stressed about it.",
+      "options": {
+        "A": "You should have started studying earlier.",
+        "B": "I know how you feel. Let's make a study plan together.",
+        "C": "Exams are only worth half the grade."
+      },
+      "correct": "B",
+      "explanation": "The speaker is expressing stress, so an empathetic response and offer to help is more supportive than criticism."
+    },
+    {
+      "id": "q4",
+      "context": "Checking understanding",
+      "stem": "So, you're saying the deadline was moved to Thursday instead of Friday?",
+      "options": {
+        "A": "That's correct. We have one extra day.",
+        "B": "Friday is usually less busy.",
+        "C": "Deadlines are always stressful."
+      },
+      "correct": "A",
+      "explanation": "The speaker is checking their understanding of information, so confirming or correcting the details is appropriate."
+    },
+    {
+      "id": "q5",
+      "context": "Complimenting someone",
+      "stem": "Your presentation was incredible! How did you prepare so well?",
+      "options": {
+        "A": "Thank you! I practiced in front of a mirror every day.",
+        "B": "Presentations are required for this class.",
+        "C": "Yours was pretty good too, I guess."
+      },
+      "correct": "A",
+      "explanation": "The speaker is giving a compliment, so graciously accepting it and answering the follow-up question is polite and natural."
+    },
+    {
+      "id": "q6",
+      "context": "Making an excuse",
+      "stem": "I won't be able to finish the report today because the data files got corrupted.",
+      "options": {
+        "A": "That's unfortunate. Can you recover any of the data?",
+        "B": "You should have backed up your files.",
+        "C": "Reports are due every Monday."
+      },
+      "correct": "A",
+      "explanation": "The speaker is explaining a problem preventing them from completing a task, so expressing concern and offering to problem-solve is constructive."
+    },
+    {
+      "id": "q7",
+      "context": "Asking for an opinion",
+      "stem": "What do you think of the new campus dining options?",
+      "options": {
+        "A": "I think the Asian fusion station is a great addition.",
+        "B": "The cafeteria was built three years ago.",
+        "C": "I usually eat off campus."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for an opinion, so providing a specific evaluation directly answers their question."
+    },
+    {
+      "id": "q8",
+      "context": "Saying goodbye temporarily",
+      "stem": "I'll be right back. I need to return this book to the front desk.",
+      "options": {
+        "A": "Okay, I'll save your seat.",
+        "B": "I already returned my books.",
+        "C": "The front desk closes soon."
+      },
+      "correct": "A",
+      "explanation": "The speaker is leaving temporarily, so acknowledging and offering to preserve their place is a cooperative response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Sorry I'm late. The bus broke down and I had to wait for the next one."
+    },
+    {
+      "role": "Student",
+      "text": "Do you have a pen I could borrow? Mine just ran out of ink."
+    },
+    {
+      "role": "Student",
+      "text": "I have three exams next week and I'm really stressed about it."
+    },
+    {
+      "role": "Student",
+      "text": "So, you're saying the deadline was moved to Thursday instead of Friday?"
+    },
+    {
+      "role": "Student",
+      "text": "Your presentation was incredible! How did you prepare so well?"
+    },
+    {
+      "role": "Student",
+      "text": "I won't be able to finish the report today because the data files got corrupted."
+    },
+    {
+      "role": "Student",
+      "text": "What do you think of the new campus dining options?"
+    },
+    {
+      "role": "Student",
+      "text": "I'll be right back. I need to return this book to the front desk."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "title": "Introduction to Photosynthesis",
+  "transcript": "Today we'll discuss photosynthesis, the process by which plants, algae, and some bacteria convert light energy into chemical energy. The word itself comes from Greek: 'photo' meaning light and 'synthesis' meaning putting together. During photosynthesis, organisms use sunlight, water, and carbon dioxide to create glucose and oxygen. This process occurs primarily in the chloroplasts of plant cells, where a green pigment called chlorophyll captures light energy. There are two main stages of photosynthesis: the light-dependent reactions and the Calvin cycle. In the light-dependent reactions, which occur in the thylakoid membranes, light energy is captured and converted into chemical energy in the form of ATP and NADPH. Water molecules are split during this stage, releasing oxygen as a byproduct. The Calvin cycle, which takes place in the stroma, uses the ATP and NADPH from the first stage to convert carbon dioxide into glucose through a series of enzyme-controlled reactions. Photosynthesis is arguably the most important biological process on Earth because it provides the oxygen we breathe and forms the base of nearly all food chains. Without it, most life as we know it would cease to exist.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The structure of plant cells",
+        "The process of photosynthesis",
+        "The chemistry of glucose",
+        "The role of oxygen in the atmosphere"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture explains photosynthesis, its stages, and its importance."
+    },
+    {
+      "id": "q2",
+      "stem": "Where do the light-dependent reactions occur?",
+      "options": [
+        "In the stroma",
+        "In the thylakoid membranes",
+        "In the nucleus",
+        "In the mitochondria"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The lecturer states that light-dependent reactions occur in the thylakoid membranes."
+    },
+    {
+      "id": "q3",
+      "stem": "What is produced as a byproduct of the light-dependent reactions?",
+      "options": [
+        "Glucose",
+        "Carbon dioxide",
+        "Oxygen",
+        "ATP"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "Water molecules are split during the light-dependent reactions, releasing oxygen as a byproduct."
+    },
+    {
+      "id": "q4",
+      "stem": "Why does the professor consider photosynthesis the most important biological process?",
+      "options": [
+        "It was the first process discovered by scientists",
+        "It produces oxygen and forms the base of food chains",
+        "It only occurs in green plants",
+        "It creates energy without using sunlight"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The professor says photosynthesis provides the oxygen we breathe and forms the base of nearly all food chains."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we'll discuss photosynthesis, the process by which plants, algae, and some bacteria convert light energy into chemical energy. The word itself comes from Greek: 'photo' meaning light and 'synthesis' meaning putting together. During photosynthesis, organisms use sunlight, water, and carbon dioxide to create glucose and oxygen. This process occurs primarily in the chloroplasts of plant cells, where a green pigment called chlorophyll captures light energy. There are two main stages of photosynthesis: the light-dependent reactions and the Calvin cycle."
+    },
+    {
+      "role": "Lecturer",
+      "text": "In the light-dependent reactions, which occur in the thylakoid membranes, light energy is captured and converted into chemical energy in the form of ATP and NADPH. Water molecules are split during this stage, releasing oxygen as a byproduct. The Calvin cycle, which takes place in the stroma, uses the ATP and NADPH from the first stage to convert carbon dioxide into glucose through a series of enzyme-controlled reactions. Photosynthesis is arguably the most important biological process on Earth because it provides the oxygen we breathe and forms the base of nearly all food chains. Without it, most life as we know it would cease to exist."
+    }
+  ]
+}

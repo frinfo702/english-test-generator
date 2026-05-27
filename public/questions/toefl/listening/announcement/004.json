@@ -1,0 +1,51 @@
+{
+  "title": "Guest Lecture Announcement",
+  "transcript": "Good afternoon. The Department of Environmental Studies is pleased to announce a guest lecture by Dr. Elena Vargas, a leading researcher in marine conservation. The lecture, titled 'Protecting Coral Reefs in a Warming World,' will take place this Thursday at 4 PM in Lecture Hall B. Dr. Vargas will discuss recent findings on coral bleaching and strategies for reef restoration. A question-and-answer session will follow the presentation. All students and faculty are welcome to attend. Light refreshments will be served in the lobby afterward.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the topic of Dr. Vargas's lecture?",
+      "options": [
+        "Climate change and agriculture",
+        "Protecting coral reefs in a warming world",
+        "Marine biodiversity in the Arctic",
+        "Ocean pollution from plastics"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states the lecture is titled 'Protecting Coral Reefs in a Warming World.'"
+    },
+    {
+      "id": "q2",
+      "stem": "When and where will the lecture take place?",
+      "options": [
+        "Thursday at 4 PM in Lecture Hall B",
+        "Friday at 3 PM in the student union",
+        "Wednesday at 5 PM in the auditorium",
+        "Thursday at 6 PM in the science building"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The lecture will take place this Thursday at 4 PM in Lecture Hall B."
+    },
+    {
+      "id": "q3",
+      "stem": "What will happen after the lecture?",
+      "options": [
+        "A panel discussion",
+        "A written exam",
+        "A question-and-answer session",
+        "A film screening"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The announcement says a question-and-answer session will follow the presentation."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Good afternoon. The Department of Environmental Studies is pleased to announce a guest lecture by Dr. Elena Vargas, a leading researcher in marine conservation. The lecture, titled 'Protecting Coral Reefs in a Warming World,' will take place this Thursday at 4 PM in Lecture Hall B. Dr. Vargas will discuss recent findings on coral bleaching and strategies for reef restoration. A question-and-answer session will follow the presentation. All students and faculty are welcome to attend. Light refreshments will be served in the lobby afterward."
+    }
+  ]
+}

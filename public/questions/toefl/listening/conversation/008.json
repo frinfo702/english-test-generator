@@ -1,0 +1,82 @@
+{
+  "title": "Financial Aid Inquiry",
+  "transcript": "Student: Hi, I'm calling because my financial aid package for next semester seems lower than expected. Could someone help me understand it? Officer: I'd be happy to help. Can you give me your student ID? Student: It's 556-7734. Officer: I see. Your aid was reduced because your expected family contribution increased based on the new tax documents you submitted. Student: But my family's income didn't go up. We just sold a property, which was a one-time thing. Officer: I understand. A change in assets can affect the calculation. You can file an appeal explaining that the property sale was a non-recurring event. Student: How do I do that? Officer: You'll need to submit a Financial Aid Appeal Form along with a letter from your family explaining the situation and any supporting documents. Student: How long does the appeal take? Officer: Typically two to three weeks. If approved, your aid will be adjusted before the tuition deadline. Student: That's a relief. I'll start the appeal today. Officer: Good. You can find the form on our website under Appeals and Special Circumstances.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student contact the financial aid office?",
+      "options": [
+        "To apply for a new scholarship",
+        "To understand why their aid was reduced",
+        "To report a change in major",
+        "To request a tuition payment plan"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student's financial aid package is lower than expected, and they want to understand why."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the officer suggest the student do?",
+      "options": [
+        "Submit additional tax returns",
+        "File a financial aid appeal",
+        "Accept the reduced aid amount",
+        "Apply for a private loan"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The officer suggests filing an appeal explaining that the property sale was a non-recurring event."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi, I'm calling because my financial aid package for next semester seems lower than expected. Could someone help me understand it?"
+    },
+    {
+      "role": "Officer",
+      "text": "I'd be happy to help. Can you give me your student ID?"
+    },
+    {
+      "role": "Student",
+      "text": "It's 556-7734."
+    },
+    {
+      "role": "Officer",
+      "text": "I see. Your aid was reduced because your expected family contribution increased based on the new tax documents you submitted."
+    },
+    {
+      "role": "Student",
+      "text": "But my family's income didn't go up. We just sold a property, which was a one-time thing."
+    },
+    {
+      "role": "Officer",
+      "text": "I understand. A change in assets can affect the calculation. You can file an appeal explaining that the property sale was a non-recurring event."
+    },
+    {
+      "role": "Student",
+      "text": "How do I do that?"
+    },
+    {
+      "role": "Officer",
+      "text": "You'll need to submit a Financial Aid Appeal Form along with a letter from your family explaining the situation and any supporting documents."
+    },
+    {
+      "role": "Student",
+      "text": "How long does the appeal take?"
+    },
+    {
+      "role": "Officer",
+      "text": "Typically two to three weeks. If approved, your aid will be adjusted before the tuition deadline."
+    },
+    {
+      "role": "Student",
+      "text": "That's a relief. I'll start the appeal today."
+    },
+    {
+      "role": "Officer",
+      "text": "Good. You can find the form on our website under Appeals and Special Circumstances."
+    }
+  ]
+}

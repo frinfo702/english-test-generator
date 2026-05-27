@@ -1,0 +1,51 @@
+{
+  "title": "Shuttle Schedule Change",
+  "transcript": "Attention all students and staff. Effective next Monday, the campus shuttle route will be modified due to construction on Elm Street. The north loop shuttle will now travel via Maple Avenue, with stops at the Science Building, the Residential Halls, and the Recreation Center. The south loop remains unchanged. Temporary shuttle stops will be marked with orange signs. The construction is expected to last approximately three weeks. We apologize for any inconvenience and thank you for your patience during this period.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why is the shuttle route being modified?",
+      "options": [
+        "To add more stops around campus",
+        "Due to construction on Elm Street",
+        "To reduce the number of shuttle buses",
+        "Because of low ridership on the north loop"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states the route will be modified due to construction on Elm Street."
+    },
+    {
+      "id": "q2",
+      "stem": "Which of the following is a new shuttle stop?",
+      "options": [
+        "The library",
+        "The Recreation Center",
+        "The student union",
+        "The admissions office"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The new north loop stops include the Science Building, Residential Halls, and Recreation Center."
+    },
+    {
+      "id": "q3",
+      "stem": "How long is the construction expected to last?",
+      "options": [
+        "One week",
+        "Three weeks",
+        "One month",
+        "One semester"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The construction is expected to last approximately three weeks."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention all students and staff. Effective next Monday, the campus shuttle route will be modified due to construction on Elm Street. The north loop shuttle will now travel via Maple Avenue, with stops at the Science Building, the Residential Halls, and the Recreation Center. The south loop remains unchanged. Temporary shuttle stops will be marked with orange signs. The construction is expected to last approximately three weeks. We apologize for any inconvenience and thank you for your patience during this period."
+    }
+  ]
+}

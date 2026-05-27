@@ -1,0 +1,78 @@
+{
+  "title": "Campus Housing Issue",
+  "transcript": "Student: Hi, I'm calling about my housing application for next semester. I submitted it last month, but I haven't received any confirmation. Housing Officer: Let me look that up. Can I have your student ID? Student: It's 884-2910. Housing Officer: I see the issue. Your application was received, but it was flagged because you didn't indicate a roommate preference. Student: Oh, I didn't realize that was required. I don't have a specific roommate in mind. Housing Officer: That's fine. We can assign you to a random roommate or a single room if any are available. Single rooms cost an extra eight hundred dollars per semester. Student: I'll stick with a random roommate. How will I find out my assignment? Housing Officer: Room assignments will be emailed by July 15th. You'll also get your roommate's contact information so you can coordinate what to bring. Student: Great. Is there anything else I need to do? Housing Officer: Just make sure your deposit is paid by June 1st. Otherwise, your application will be cancelled. Student: I'll check my account right now. Thanks for your help.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student contact the housing office?",
+      "options": [
+        "To request a single room",
+        "To ask about the status of a housing application",
+        "To complain about a roommate",
+        "To inquire about off-campus housing"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student has not received confirmation about a housing application submitted last month and wants to know its status."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the housing officer say about single rooms?",
+      "options": [
+        "They are guaranteed for all applicants",
+        "They cost an additional fee",
+        "They are only for graduate students",
+        "They are not available next semester"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The officer mentions that single rooms cost an extra eight hundred dollars per semester."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi, I'm calling about my housing application for next semester. I submitted it last month, but I haven't received any confirmation."
+    },
+    {
+      "role": "Housing Officer",
+      "text": "Let me look that up. Can I have your student ID?"
+    },
+    {
+      "role": "Student",
+      "text": "It's 884-2910."
+    },
+    {
+      "role": "Housing Officer",
+      "text": "I see the issue. Your application was received, but it was flagged because you didn't indicate a roommate preference."
+    },
+    {
+      "role": "Student",
+      "text": "Oh, I didn't realize that was required. I don't have a specific roommate in mind."
+    },
+    {
+      "role": "Housing Officer",
+      "text": "That's fine. We can assign you to a random roommate or a single room if any are available. Single rooms cost an extra eight hundred dollars per semester."
+    },
+    {
+      "role": "Student",
+      "text": "I'll stick with a random roommate. How will I find out my assignment?"
+    },
+    {
+      "role": "Housing Officer",
+      "text": "Room assignments will be emailed by July 15th. You'll also get your roommate's contact information so you can coordinate what to bring."
+    },
+    {
+      "role": "Student",
+      "text": "Great. Is there anything else I need to do?"
+    },
+    {
+      "role": "Housing Officer",
+      "text": "Just make sure your deposit is paid by June 1st. Otherwise, your application will be cancelled."
+    },
+    {
+      "role": "Student",
+      "text": "I'll check my account right now. Thanks for your help."
+    }
+  ]
+}

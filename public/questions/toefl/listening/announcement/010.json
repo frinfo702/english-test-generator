@@ -1,0 +1,51 @@
+{
+  "title": "Art Gallery Opening",
+  "transcript": "Good morning. The campus art gallery is pleased to announce the opening of its new exhibition, 'Perspectives in Modern Sculpture,' featuring works by graduating Master of Fine Arts students. The opening reception will take place this Friday from 5 PM to 8 PM. Admission is free for all students with a valid ID. The exhibition will run for three weeks, and guided tours are available every Tuesday and Thursday at 1 PM. Several of the featured artists will be present at the opening to discuss their creative process. Light refreshments will be provided. We hope to see you there.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the name of the new exhibition?",
+      "options": [
+        "Masterworks of the 20th Century",
+        "Perspectives in Modern Sculpture",
+        "The Creative Process",
+        "Graduating Artists Showcase"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The exhibition is titled 'Perspectives in Modern Sculpture.'"
+    },
+    {
+      "id": "q2",
+      "stem": "When are guided tours available?",
+      "options": [
+        "Monday and Wednesday at 2 PM",
+        "Tuesday and Thursday at 1 PM",
+        "Friday evenings during the reception",
+        "Saturday mornings at 10 AM"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Guided tours are available every Tuesday and Thursday at 1 PM."
+    },
+    {
+      "id": "q3",
+      "stem": "Who will be present at the opening reception?",
+      "options": [
+        "All university faculty",
+        "Several featured artists",
+        "Local art critics",
+        "High school students"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Several of the featured artists will be present at the opening to discuss their creative process."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Good morning. The campus art gallery is pleased to announce the opening of its new exhibition, 'Perspectives in Modern Sculpture,' featuring works by graduating Master of Fine Arts students. The opening reception will take place this Friday from 5 PM to 8 PM. Admission is free for all students with a valid ID. The exhibition will run for three weeks, and guided tours are available every Tuesday and Thursday at 1 PM. Several of the featured artists will be present at the opening to discuss their creative process. Light refreshments will be provided. We hope to see you there."
+    }
+  ]
+}

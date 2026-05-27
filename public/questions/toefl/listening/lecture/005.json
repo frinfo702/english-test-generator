@@ -1,0 +1,68 @@
+{
+  "title": "The Industrial Revolution",
+  "transcript": "Today we will examine the Industrial Revolution, a period of rapid industrial growth that began in Britain in the late eighteenth century. Before this era, most goods were produced by hand in small workshops or homes. The introduction of machinery, particularly in the textile industry, dramatically changed how products were made. James Hargreaves invented the spinning jenny in 1764, allowing one worker to spin multiple threads simultaneously. Soon after, water power and then steam power were harnessed to drive machines. The development of the steam engine by James Watt was especially significant because it provided a reliable source of energy that was not dependent on rivers or weather. This led to the establishment of factories, which concentrated labor in centralized locations. While the Industrial Revolution brought economic growth and technological advancement, it also created significant social challenges. Workers, including women and children, often labored in dangerous conditions for long hours. Urban populations swelled as people moved from rural areas to find factory work, leading to overcrowded cities and public health problems. Understanding this period is crucial because it shaped the modern economic system and raised questions about labor rights and environmental impact that remain relevant today.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The causes of urban overcrowding",
+        "The Industrial Revolution and its impacts",
+        "The invention of the steam engine",
+        "Labor laws in the 18th century"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture introduces the Industrial Revolution, its technological innovations, and its social consequences."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, what did James Watt develop?",
+      "options": [
+        "The spinning jenny",
+        "The water-powered loom",
+        "An improved steam engine",
+        "The factory system"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The lecturer mentions that James Watt developed the steam engine, which was especially significant as a reliable energy source."
+    },
+    {
+      "id": "q3",
+      "stem": "Why was the steam engine particularly important?",
+      "options": [
+        "It was cheaper than water power",
+        "It did not depend on rivers or weather",
+        "It was invented first",
+        "It required fewer workers"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The steam engine provided a reliable source of energy that was not dependent on rivers or weather."
+    },
+    {
+      "id": "q4",
+      "stem": "What does the professor imply about the social effects of the Industrial Revolution?",
+      "options": [
+        "They were entirely positive",
+        "They were limited to rural areas",
+        "They included serious problems for workers",
+        "They only affected adult men"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The professor discusses dangerous working conditions, long hours, and overcrowded cities, implying serious social problems."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will examine the Industrial Revolution, a period of rapid industrial growth that began in Britain in the late eighteenth century. Before this era, most goods were produced by hand in small workshops or homes. The introduction of machinery, particularly in the textile industry, dramatically changed how products were made. James Hargreaves invented the spinning jenny in 1764, allowing one worker to spin multiple threads simultaneously. Soon after, water power and then steam power were harnessed to drive machines. The development of the steam engine by James Watt was especially significant because it provided a reliable source of energy that was not dependent on rivers or weather. This led to the establishment of factories, which concentrated labor in centralized locations."
+    },
+    {
+      "role": "Lecturer",
+      "text": "While the Industrial Revolution brought economic growth and technological advancement, it also created significant social challenges. Workers, including women and children, often labored in dangerous conditions for long hours. Urban populations swelled as people moved from rural areas to find factory work, leading to overcrowded cities and public health problems. Understanding this period is crucial because it shaped the modern economic system and raised questions about labor rights and environmental impact that remain relevant today."
+    }
+  ]
+}
