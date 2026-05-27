@@ -16,11 +16,11 @@ description: >
 
 ## タスク一覧
 
-| タスク                | 保存先                                           | 設問数                           |
-| --------------------- | ------------------------------------------------ | -------------------------------- |
-| Complete the Words    | `public/questions/toefl/reading/complete-words/` | 10 blanks                        |
-| Read in Daily Life    | `public/questions/toefl/reading/daily-life/`     | 2〜3 texts × 2〜3 questions each |
-| Read Academic Passage | `public/questions/toefl/reading/academic/`       | 5問固定                          |
+| タスク                | 保存先                                           | 設問数                       |
+| --------------------- | ------------------------------------------------ | ---------------------------- |
+| Complete the Words    | `public/questions/toefl/reading/complete-words/` | 1パッセージにつき10 blanks   |
+| Read in Daily Life    | `public/questions/toefl/reading/daily-life/`     | pacage × 2〜3 questions each |
+| Read Academic Passage | `public/questions/toefl/reading/academic/`       | 1 pacage x 5 questions       |
 
 ## 必須仕様（2026年新形式準拠）
 
