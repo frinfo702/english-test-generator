@@ -36,15 +36,24 @@
     }
   ],
   "audioSegments": [
-    { "role": "Woman", "text": "Number 1. When is the deadline for the budget report?" },
+    {
+      "role": "Woman",
+      "text": "Number 1. When is the deadline for the budget report?"
+    },
     { "role": "Man", "text": "(A) It's due this Friday." },
     { "role": "Man", "text": "(B) Yes, I submitted it yesterday." },
     { "role": "Man", "text": "(C) In the conference room." },
     { "role": "Man", "text": "Number 2. Why was the meeting postponed?" },
     { "role": "Woman", "text": "(A) At three o'clock." },
-    { "role": "Woman", "text": "(B) Because several key members were unavailable." },
+    {
+      "role": "Woman",
+      "text": "(B) Because several key members were unavailable."
+    },
     { "role": "Woman", "text": "(C) Yes, it was rescheduled." },
-    { "role": "Woman", "text": "Number 3. Would you like me to send you the updated contract?" },
+    {
+      "role": "Woman",
+      "text": "Number 3. Would you like me to send you the updated contract?"
+    },
     { "role": "Man", "text": "(A) By email, please." },
     { "role": "Man", "text": "(B) Yes, that would be helpful." },
     { "role": "Man", "text": "(C) I sent it last week." }

@@ -6,12 +6,7 @@
       "id": "q1",
       "type": "vocabulary",
       "stem": "The word 'advent' in paragraph 1 is closest in meaning to:",
-      "options": [
-        "A. end",
-        "B. arrival",
-        "C. consequence",
-        "D. difficulty"
-      ],
+      "options": ["A. end", "B. arrival", "C. consequence", "D. difficulty"],
       "correctIndex": 1,
       "explanation": "'Advent' refers to the arrival or beginning of something significant."
     },

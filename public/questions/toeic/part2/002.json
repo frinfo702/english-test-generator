@@ -36,16 +36,28 @@
     }
   ],
   "audioSegments": [
-    { "role": "Man", "text": "Number 1. How long does it take to get to the airport from here?" },
+    {
+      "role": "Man",
+      "text": "Number 1. How long does it take to get to the airport from here?"
+    },
     { "role": "Woman", "text": "(A) About thirty minutes by taxi." },
     { "role": "Woman", "text": "(B) Yes, I've been there before." },
     { "role": "Woman", "text": "(C) The flight was delayed." },
-    { "role": "Woman", "text": "Number 2. Who should I contact regarding the shipment delay?" },
+    {
+      "role": "Woman",
+      "text": "Number 2. Who should I contact regarding the shipment delay?"
+    },
     { "role": "Man", "text": "(A) It arrived this morning." },
     { "role": "Man", "text": "(B) Please speak to Ms. Tanaka in logistics." },
     { "role": "Man", "text": "(C) The shipment was very large." },
-    { "role": "Man", "text": "Number 3. The hotel reservation has been confirmed, hasn't it?" },
-    { "role": "Woman", "text": "(A) Yes, I received the confirmation email this morning." },
+    {
+      "role": "Man",
+      "text": "Number 3. The hotel reservation has been confirmed, hasn't it?"
+    },
+    {
+      "role": "Woman",
+      "text": "(A) Yes, I received the confirmation email this morning."
+    },
     { "role": "Woman", "text": "(B) At the Grand Hotel downtown." },
     { "role": "Woman", "text": "(C) I reserved it for three nights." }
   ]

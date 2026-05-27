@@ -1,13 +1,45 @@
 {
   "title": "Health & Wellness",
   "sentences": [
-    { "id": "s1", "text": "Getting at least seven hours of sleep each night is essential for maintaining good health.", "wordCount": 14 },
-    { "id": "s2", "text": "A balanced diet rich in fruits and vegetables provides the nutrients your body needs.", "wordCount": 14 },
-    { "id": "s3", "text": "Regular physical activity can improve your mood and boost your energy levels throughout the day.", "wordCount": 16 },
-    { "id": "s4", "text": "Drinking enough water is one of the simplest yet most effective ways to stay healthy.", "wordCount": 15 },
-    { "id": "s5", "text": "Mental health is just as important as physical health and should not be overlooked.", "wordCount": 14 },
-    { "id": "s6", "text": "Stress management techniques like meditation and deep breathing can help you stay calm.", "wordCount": 14 },
-    { "id": "s7", "text": "Spending time outdoors has been shown to reduce anxiety and improve overall well-being.", "wordCount": 14 },
-    { "id": "s8", "text": "Regular health checkups allow doctors to detect potential problems before they become serious.", "wordCount": 14 }
+    {
+      "id": "s1",
+      "text": "Getting at least seven hours of sleep each night is essential for maintaining good health.",
+      "wordCount": 14
+    },
+    {
+      "id": "s2",
+      "text": "A balanced diet rich in fruits and vegetables provides the nutrients your body needs.",
+      "wordCount": 14
+    },
+    {
+      "id": "s3",
+      "text": "Regular physical activity can improve your mood and boost your energy levels throughout the day.",
+      "wordCount": 16
+    },
+    {
+      "id": "s4",
+      "text": "Drinking enough water is one of the simplest yet most effective ways to stay healthy.",
+      "wordCount": 15
+    },
+    {
+      "id": "s5",
+      "text": "Mental health is just as important as physical health and should not be overlooked.",
+      "wordCount": 14
+    },
+    {
+      "id": "s6",
+      "text": "Stress management techniques like meditation and deep breathing can help you stay calm.",
+      "wordCount": 14
+    },
+    {
+      "id": "s7",
+      "text": "Spending time outdoors has been shown to reduce anxiety and improve overall well-being.",
+      "wordCount": 14
+    },
+    {
+      "id": "s8",
+      "text": "Regular health checkups allow doctors to detect potential problems before they become serious.",
+      "wordCount": 14
+    }
   ]
 }

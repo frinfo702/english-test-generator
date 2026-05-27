@@ -36,15 +36,24 @@
     }
   ],
   "audioSegments": [
-    { "role": "Woman", "text": "Number 1. Could you help me carry these boxes to the storage room?" },
+    {
+      "role": "Woman",
+      "text": "Number 1. Could you help me carry these boxes to the storage room?"
+    },
     { "role": "Man", "text": "(A) Sure, I'll give you a hand." },
     { "role": "Man", "text": "(B) They are in the storage room." },
     { "role": "Man", "text": "(C) No, the boxes are empty." },
-    { "role": "Man", "text": "Number 2. What time does the customer service desk open?" },
+    {
+      "role": "Man",
+      "text": "Number 2. What time does the customer service desk open?"
+    },
     { "role": "Woman", "text": "(A) Yes, it opens today." },
     { "role": "Woman", "text": "(B) At nine o'clock on weekdays." },
     { "role": "Woman", "text": "(C) The service was excellent." },
-    { "role": "Woman", "text": "Number 3. How many copies of the report should I make?" },
+    {
+      "role": "Woman",
+      "text": "Number 3. How many copies of the report should I make?"
+    },
     { "role": "Man", "text": "(A) Fifteen copies should be enough." },
     { "role": "Man", "text": "(B) I made a copy for you." },
     { "role": "Man", "text": "(C) The report was very detailed." }

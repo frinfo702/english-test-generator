@@ -1,12 +1,40 @@
 {
   "title": "Technology & Innovation",
   "sentences": [
-    { "id": "s1", "text": "Artificial intelligence is transforming industries ranging from healthcare to transportation.", "wordCount": 11 },
-    { "id": "s2", "text": "The latest smartphone features a camera system that rivals professional photography equipment.", "wordCount": 12 },
-    { "id": "s3", "text": "Many companies are investing heavily in renewable energy technologies to reduce their carbon footprint.", "wordCount": 14 },
-    { "id": "s4", "text": "Blockchain technology has the potential to revolutionize the way we handle digital transactions.", "wordCount": 14 },
-    { "id": "s5", "text": "Virtual reality is no longer just for gaming, it is increasingly used in education and training.", "wordCount": 16 },
-    { "id": "s6", "text": "The development of autonomous vehicles could dramatically change urban planning and commuting.", "wordCount": 13 },
-    { "id": "s7", "text": "Cybersecurity has become a top priority for businesses as cyberattacks grow more sophisticated.", "wordCount": 13 }
+    {
+      "id": "s1",
+      "text": "Artificial intelligence is transforming industries ranging from healthcare to transportation.",
+      "wordCount": 11
+    },
+    {
+      "id": "s2",
+      "text": "The latest smartphone features a camera system that rivals professional photography equipment.",
+      "wordCount": 12
+    },
+    {
+      "id": "s3",
+      "text": "Many companies are investing heavily in renewable energy technologies to reduce their carbon footprint.",
+      "wordCount": 14
+    },
+    {
+      "id": "s4",
+      "text": "Blockchain technology has the potential to revolutionize the way we handle digital transactions.",
+      "wordCount": 14
+    },
+    {
+      "id": "s5",
+      "text": "Virtual reality is no longer just for gaming, it is increasingly used in education and training.",
+      "wordCount": 16
+    },
+    {
+      "id": "s6",
+      "text": "The development of autonomous vehicles could dramatically change urban planning and commuting.",
+      "wordCount": 13
+    },
+    {
+      "id": "s7",
+      "text": "Cybersecurity has become a top priority for businesses as cyberattacks grow more sophisticated.",
+      "wordCount": 13
+    }
   ]
 }

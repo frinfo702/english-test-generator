@@ -99,13 +99,37 @@
     }
   ],
   "audioSegments": [
-    { "role": "Student", "text": "Excuse me, do you know when the library opens on weekends?" },
-    { "role": "Student", "text": "I'm having trouble with this math problem. Could you take a look?" },
-    { "role": "Student", "text": "I'm starving, but I don't know what to eat around here." },
-    { "role": "Friend", "text": "You've been studying for hours. Don't you think you should take a break?" },
-    { "role": "Student", "text": "We're still on for the group presentation tomorrow, right?" },
-    { "role": "Student", "text": "I'm really sorry I forgot to bring your textbook. I'll bring it tomorrow." },
-    { "role": "Student", "text": "Would it be alright if I submitted my paper a day late? I've been sick." },
-    { "role": "Student", "text": "Wait, you mean the campus tour starts at 8 AM, not 9?" }
+    {
+      "role": "Student",
+      "text": "Excuse me, do you know when the library opens on weekends?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm having trouble with this math problem. Could you take a look?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm starving, but I don't know what to eat around here."
+    },
+    {
+      "role": "Friend",
+      "text": "You've been studying for hours. Don't you think you should take a break?"
+    },
+    {
+      "role": "Student",
+      "text": "We're still on for the group presentation tomorrow, right?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm really sorry I forgot to bring your textbook. I'll bring it tomorrow."
+    },
+    {
+      "role": "Student",
+      "text": "Would it be alright if I submitted my paper a day late? I've been sick."
+    },
+    {
+      "role": "Student",
+      "text": "Wait, you mean the campus tour starts at 8 AM, not 9?"
+    }
   ]
 }

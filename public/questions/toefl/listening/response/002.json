@@ -99,13 +99,37 @@
     }
   ],
   "audioSegments": [
-    { "role": "Student", "text": "Professor, I didn't quite follow the assignment. Could you explain it again?" },
-    { "role": "Student", "text": "I'm heading to the coffee shop. Can I get you anything?" },
-    { "role": "Student", "text": "Do you really think we can finish this research paper by Friday?" },
-    { "role": "Friend", "text": "We're having a study group session tonight. Want to join us?" },
-    { "role": "Student", "text": "I can't decide between taking economics or psychology this semester. What do you think?" },
-    { "role": "Student", "text": "Thank you so much for reviewing my draft. Your feedback was really helpful." },
-    { "role": "Student", "text": "I'm looking for the science building. Is it near here?" },
-    { "role": "Student", "text": "I think we should move our meeting to Thursday instead. Does that work for everyone?" }
+    {
+      "role": "Student",
+      "text": "Professor, I didn't quite follow the assignment. Could you explain it again?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm heading to the coffee shop. Can I get you anything?"
+    },
+    {
+      "role": "Student",
+      "text": "Do you really think we can finish this research paper by Friday?"
+    },
+    {
+      "role": "Friend",
+      "text": "We're having a study group session tonight. Want to join us?"
+    },
+    {
+      "role": "Student",
+      "text": "I can't decide between taking economics or psychology this semester. What do you think?"
+    },
+    {
+      "role": "Student",
+      "text": "Thank you so much for reviewing my draft. Your feedback was really helpful."
+    },
+    {
+      "role": "Student",
+      "text": "I'm looking for the science building. Is it near here?"
+    },
+    {
+      "role": "Student",
+      "text": "I think we should move our meeting to Thursday instead. Does that work for everyone?"
+    }
   ]
 }
