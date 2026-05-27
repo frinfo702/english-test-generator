@@ -1,0 +1,65 @@
+{
+  "paragraph": "Archaeological excavations at the ancient city of Troy have provided comp______ evidence that supports elements of the legendary accounts found in Homer's ep___ Using advanced tech________ such as ground-penetrating radar, researchers have identified mul_____ layers of settlement spanning nearly four mil______ The ear_____ phases reveal a prosperous trading center with exten____ fortifications and sophisticated water man_______ systems. These findings suggest that the historical reality of Troy com____ far more complex than previously ske______ by skeptical scholars.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "comp",
+      "answer": "compelling",
+      "placeholder": "comp______"
+    },
+    {
+      "index": 1,
+      "hint": "ep",
+      "answer": "epics",
+      "placeholder": "ep___"
+    },
+    {
+      "index": 2,
+      "hint": "tech",
+      "answer": "technologies",
+      "placeholder": "tech________"
+    },
+    {
+      "index": 3,
+      "hint": "mul",
+      "answer": "multiple",
+      "placeholder": "mul_____"
+    },
+    {
+      "index": 4,
+      "hint": "mil",
+      "answer": "millennia",
+      "placeholder": "mil______"
+    },
+    {
+      "index": 5,
+      "hint": "ear",
+      "answer": "earliest",
+      "placeholder": "ear_____"
+    },
+    {
+      "index": 6,
+      "hint": "exten",
+      "answer": "extensive",
+      "placeholder": "exten____"
+    },
+    {
+      "index": 7,
+      "hint": "man",
+      "answer": "management",
+      "placeholder": "man_______"
+    },
+    {
+      "index": 8,
+      "hint": "com",
+      "answer": "complex",
+      "placeholder": "com____"
+    },
+    {
+      "index": 9,
+      "hint": "ske",
+      "answer": "skeptical",
+      "placeholder": "ske______"
+    }
+  ]
+}

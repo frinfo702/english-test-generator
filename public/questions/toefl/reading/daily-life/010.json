@@ -1,0 +1,94 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "notice",
+      "content": "Municipal Parks Department – Oakwood Park Renovation\n\nStarting April 1, Oakwood Park will be partially closed for six months while we upgrade the playground, walking paths, and irrigation system.\n\nThe north entrance and picnic areas will remain open throughout construction. The south entrance, tennis courts, and main playground will be closed until October 1.\n\nWe apologize for any inconvenience. A temporary dog park has been opened at Riverside Field during this period."
+    },
+    {
+      "id": "t2",
+      "textType": "announcement",
+      "content": "City of Brookhaven – Recycling Program Update\n\nStarting May 1, all residents must place recyclables in the new blue bins provided. The old green bins will no longer be collected after April 30.\n\nAccepted items: Paper, cardboard, glass bottles, aluminum cans, and plastics labeled 1 or 2.\n\nNOT accepted: Plastic bags, food waste, styrofoam, and electronics. These items placed in blue bins will result in the entire bin being left uncollected.\n\nNew bins can be picked up at City Hall Monday–Friday, 8:00 AM – 4:00 PM."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Which area of Oakwood Park will stay open during renovation?",
+      "options": [
+        "A. The south entrance",
+        "B. The tennis courts",
+        "C. The north entrance and picnic areas",
+        "D. The main playground"
+      ],
+      "correctIndex": 2,
+      "type": "factual",
+      "explanation": "The notice states that 'the north entrance and picnic areas will remain open throughout construction.'"
+    },
+    {
+      "id": "q2",
+      "stem": "What can be inferred about dog owners who usually visit Oakwood Park?",
+      "options": [
+        "A. They must keep their dogs on leashes at all times",
+        "B. They have been provided with an alternative location",
+        "C. They are prohibited from using the park until October",
+        "D. They must register their dogs with the Parks Department"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The notice mentions that 'a temporary dog park has been opened at Riverside Field during this period.'"
+    },
+    {
+      "id": "q3",
+      "stem": "What is the main purpose of the recycling announcement?",
+      "options": [
+        "A. To complain about residents' poor recycling habits",
+        "B. To inform residents of new recycling requirements",
+        "C. To cancel the city's recycling program",
+        "D. To sell new blue recycling bins"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The announcement explains the new blue bin requirement, accepted items, and where to pick up bins."
+    },
+    {
+      "id": "q4",
+      "stem": "According to the announcement, what happens if plastic bags are placed in a blue bin?",
+      "options": [
+        "A. They will be sorted out at the recycling facility",
+        "B. The resident will receive a warning letter",
+        "C. The entire bin will not be collected",
+        "D. The resident will be fined $25"
+      ],
+      "correctIndex": 2,
+      "type": "factual",
+      "explanation": "The announcement states that prohibited items 'will result in the entire bin being left uncollected.'"
+    },
+    {
+      "id": "q5",
+      "stem": "Which item is accepted in the new recycling program?",
+      "options": [
+        "A. Styrofoam cups",
+        "B. Plastic bags",
+        "C. Aluminum cans",
+        "D. Food waste"
+      ],
+      "correctIndex": 2,
+      "type": "factual",
+      "explanation": "Aluminum cans are listed under accepted items, while styrofoam, plastic bags, and food waste are explicitly not accepted."
+    },
+    {
+      "id": "q6",
+      "stem": "The word 'irrigation' in the park notice is closest in meaning to:",
+      "options": [
+        "A. a system for watering plants",
+        "B. a method of draining water",
+        "C. a type of playground equipment",
+        "D. a public transportation route"
+      ],
+      "correctIndex": 0,
+      "type": "vocabulary",
+      "explanation": "'Irrigation' refers to a system that supplies water to land or plants."
+    }
+  ]
+}

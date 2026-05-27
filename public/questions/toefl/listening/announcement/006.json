@@ -5,12 +5,7 @@
     {
       "id": "q1",
       "stem": "What color bin should paper be placed in?",
-      "options": [
-        "Green",
-        "Blue",
-        "Orange",
-        "Black"
-      ],
+      "options": ["Green", "Blue", "Orange", "Black"],
       "correctIndex": 1,
       "type": "detail",
       "explanation": "The announcement states that blue bins are for paper and cardboard."

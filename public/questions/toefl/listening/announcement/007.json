@@ -5,12 +5,7 @@
     {
       "id": "q1",
       "stem": "What are the new library hours on Sunday through Thursday during finals?",
-      "options": [
-        "Until midnight",
-        "Until 2 AM",
-        "Until 11 PM",
-        "24 hours"
-      ],
+      "options": ["Until midnight", "Until 2 AM", "Until 11 PM", "24 hours"],
       "correctIndex": 1,
       "type": "detail",
       "explanation": "The main library will remain open until 2 AM Sunday through Thursday during finals."

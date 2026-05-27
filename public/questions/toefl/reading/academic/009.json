@@ -1,0 +1,71 @@
+{
+  "title": "Behavioral Economics and Decision Making",
+  "passage": "Traditional economic theory assumes that individuals act as rational agents who consistently make decisions that maximize their personal utility. However, behavioral economists have demonstrated that human judgment is systematically influenced by cognitive biases and emotional factors that deviate from pure rationality.\n\nOne of the most well-documented phenomena is loss aversion, first identified by psychologists Daniel Kahneman and Amos Tversky. Their research revealed that people experience the psychological impact of losses approximately twice as intensely as equivalent gains. Consequently, individuals often make suboptimal financial decisions, such as holding onto declining investments too long in hopes of recovering losses, or avoiding beneficial risks due to fear of potential setbacks.\n\nAnother influential concept is the anchoring effect, whereby initial exposure to a numerical value unconsciously influences subsequent judgments. In one classic experiment, participants who were first shown a high random number subsequently estimated the price of an unfamiliar product to be significantly higher than those shown a low number, even though the anchor was entirely arbitrary.\n\nUnderstanding these predictable deviations from rationality has enabled policymakers to design interventions that guide people toward better choices without restricting their freedom. For example, automatically enrolling employees in retirement savings plans while allowing them to opt out has dramatically increased participation rates, leveraging the status quo bias to improve long-term financial security.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'suboptimal' in paragraph 2 is closest in meaning to:",
+      "options": [
+        "A. perfectly balanced",
+        "B. less than ideal",
+        "C. financially rewarding",
+        "D. carefully planned"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Suboptimal' means below the best possible level or less than ideal."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, what does loss aversion cause people to do?",
+      "options": [
+        "A. Seek out risky investments regardless of potential losses",
+        "B. Experience losses twice as often as gains",
+        "C. Hold onto declining investments too long",
+        "D. Avoid all forms of financial planning"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage states that loss aversion leads people to hold onto declining investments 'too long in hopes of recovering losses.'"
+    },
+    {
+      "id": "q3",
+      "type": "importantIdea",
+      "stem": "What is the main point of paragraph 3?",
+      "options": [
+        "A. Product prices are determined by manufacturing costs",
+        "B. People make more accurate estimates when given more information",
+        "C. Initial numerical exposure can bias later judgments",
+        "D. Random numbers have no effect on decision making"
+      ],
+      "correctIndex": 2,
+      "explanation": "Paragraph 3 explains the anchoring effect, demonstrating that initial numbers unconsciously influence subsequent judgments."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about the retirement savings plan example?",
+      "options": [
+        "A. Employees were forced to participate against their will",
+        "B. Participation increased because people tend to accept default options",
+        "C. The plan was unsuccessful due to employee resistance",
+        "D. Opt-out options reduced overall enrollment"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage explains that automatic enrollment with an opt-out option increased participation by leveraging the status quo bias."
+    },
+    {
+      "id": "q5",
+      "type": "paragraphRelation",
+      "stem": "How does paragraph 4 relate to paragraphs 2 and 3?",
+      "options": [
+        "A. It contradicts the findings presented in the earlier paragraphs",
+        "B. It provides practical applications of the concepts discussed earlier",
+        "C. It introduces an entirely new theory unrelated to the previous discussion",
+        "D. It criticizes the research methods of Kahneman and Tversky"
+      ],
+      "correctIndex": 1,
+      "explanation": "Paragraph 4 shows how understanding biases like loss aversion and anchoring can be applied in policy design, such as retirement savings enrollment."
+    }
+  ]
+}

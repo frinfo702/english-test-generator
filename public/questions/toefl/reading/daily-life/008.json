@@ -1,0 +1,89 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "notice",
+      "content": "Metro Transit – Route 42 Schedule Change\n\nEffective November 1, Route 42 will operate on a modified weekday schedule.\n\nMorning peak hours (6:00–9:00 AM): Buses every 12 minutes\nMidday (9:00 AM–3:00 PM): Buses every 20 minutes\nEvening peak (3:00–7:00 PM): Buses every 15 minutes\n\nThe last bus from Downtown Terminal will depart at 11:30 PM instead of midnight.\n\nWeekend schedules remain unchanged."
+    },
+    {
+      "id": "t2",
+      "textType": "notice",
+      "content": "Downtown Parking Garage – Rate Adjustment\n\nStarting November 1:\n\n0–1 hour: $4 (was $3)\n1–3 hours: $8 (was $6)\n3–5 hours: $12 (was $10)\n5+ hours: $18 (was $15)\n\nMonthly pass holders are not affected by this rate change.\n\nValidation is available at participating retailers for up to 2 hours of free parking."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "How frequently do Route 42 buses run during morning peak hours?",
+      "options": [
+        "A. Every 10 minutes",
+        "B. Every 12 minutes",
+        "C. Every 15 minutes",
+        "D. Every 20 minutes"
+      ],
+      "correctIndex": 1,
+      "type": "factual",
+      "explanation": "The notice states that morning peak hours have buses every 12 minutes."
+    },
+    {
+      "id": "q2",
+      "stem": "What can be inferred about Route 42 service on Saturdays?",
+      "options": [
+        "A. It follows the new modified weekday schedule",
+        "B. It does not operate on weekends",
+        "C. It uses the same schedule as before November 1",
+        "D. Buses run more frequently than on weekdays"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The notice states that 'weekend schedules remain unchanged.'"
+    },
+    {
+      "id": "q3",
+      "stem": "What is the main purpose of the parking garage notice?",
+      "options": [
+        "A. To announce a temporary closure",
+        "B. To inform drivers of increased parking fees",
+        "C. To promote monthly pass subscriptions",
+        "D. To limit parking to retail customers only"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The notice details new, higher rates for all parking duration tiers."
+    },
+    {
+      "id": "q4",
+      "stem": "If a driver parks for 4 hours, how much more will they pay under the new rates?",
+      "options": ["A. $1", "B. $2", "C. $3", "D. $4"],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The 3–5 hour rate increased from $10 to $12, a difference of $2."
+    },
+    {
+      "id": "q5",
+      "stem": "Which group is exempt from the parking rate increase?",
+      "options": [
+        "A. Retail employees",
+        "B. Tourists with validation",
+        "C. Monthly pass holders",
+        "D. Drivers parking under 1 hour"
+      ],
+      "correctIndex": 2,
+      "type": "factual",
+      "explanation": "The notice explicitly states that 'monthly pass holders are not affected by this rate change.'"
+    },
+    {
+      "id": "q6",
+      "stem": "The word 'validation' in the parking notice is closest in meaning to:",
+      "options": [
+        "A. confirmation of parking from a store",
+        "B. a monthly parking subscription",
+        "C. a traffic violation ticket",
+        "D. an online reservation"
+      ],
+      "correctIndex": 0,
+      "type": "vocabulary",
+      "explanation": "Parking validation is a stamp or confirmation from a retailer that entitles a driver to reduced or free parking."
+    }
+  ]
+}

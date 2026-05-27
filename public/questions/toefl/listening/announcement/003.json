@@ -31,12 +31,7 @@
     {
       "id": "q3",
       "stem": "How long is the construction expected to last?",
-      "options": [
-        "One week",
-        "Three weeks",
-        "One month",
-        "One semester"
-      ],
+      "options": ["One week", "Three weeks", "One month", "One semester"],
       "correctIndex": 1,
       "type": "detail",
       "explanation": "The construction is expected to last approximately three weeks."

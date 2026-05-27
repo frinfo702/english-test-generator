@@ -1,0 +1,65 @@
+{
+  "paragraph": "The study of micro_________ has revealed how small-scale economic decisions agg______ to shape larger market trends. Behavioral economists have discovered that ind________ often dev____ from rational choice models due to cog______ biases and emotional factors. For example, consumers frequently dis_____ immediate rewards over larger future benefits, phen______ phenomenon known as hyperbolic discounting. Understanding irra______ irrational patterns has enabled policy pol___ to design more eff______ interventions in areas such as retirement savings and public health.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "micro",
+      "answer": "microeconomics",
+      "placeholder": "micro_________"
+    },
+    {
+      "index": 1,
+      "hint": "agg",
+      "answer": "aggregate",
+      "placeholder": "agg______"
+    },
+    {
+      "index": 2,
+      "hint": "ind",
+      "answer": "individuals",
+      "placeholder": "ind________"
+    },
+    {
+      "index": 3,
+      "hint": "dev",
+      "answer": "deviate",
+      "placeholder": "dev____"
+    },
+    {
+      "index": 4,
+      "hint": "cog",
+      "answer": "cognitive",
+      "placeholder": "cog______"
+    },
+    {
+      "index": 5,
+      "hint": "dis",
+      "answer": "discount",
+      "placeholder": "dis_____"
+    },
+    {
+      "index": 6,
+      "hint": "phen",
+      "answer": "phenomenon",
+      "placeholder": "phen______"
+    },
+    {
+      "index": 7,
+      "hint": "irra",
+      "answer": "irrational",
+      "placeholder": "irra______"
+    },
+    {
+      "index": 8,
+      "hint": "pol",
+      "answer": "policy",
+      "placeholder": "pol___"
+    },
+    {
+      "index": 9,
+      "hint": "eff",
+      "answer": "effective",
+      "placeholder": "eff______"
+    }
+  ]
+}

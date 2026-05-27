@@ -18,12 +18,7 @@
     {
       "id": "q2",
       "stem": "According to the lecture, what does the term 'Renaissance' mean?",
-      "options": [
-        "Rebirth",
-        "Revolution",
-        "Realism",
-        "Reason"
-      ],
+      "options": ["Rebirth", "Revolution", "Realism", "Reason"],
       "correctIndex": 0,
       "type": "detail",
       "explanation": "The lecturer states that 'Renaissance' means 'rebirth.'"

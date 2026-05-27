@@ -1,0 +1,65 @@
+{
+  "paragraph": "Recent advances in neuroscience have begun to ill_______ the neural mechanisms underlying creativity. Functional mag_____ resonance imaging studies reveal that creative thinking involves the dynamic interaction of mul_____ brain networks rather than isolated regions. When subjects engage in divergent thinking tasks, the default mode network, typically ass_______ with daydreaming and self-reflection, becomes highly act___ Simultaneously, Simul_________ executive control network helps evaluate and refine the generated ev______ This collaboration between spontaneous gen______ controlled processes coll_________ explain why creative breakthroughs often occur after periods of per____ concentration followed by mental relaxation.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "ill",
+      "answer": "illuminate",
+      "placeholder": "ill_______"
+    },
+    {
+      "index": 1,
+      "hint": "mag",
+      "answer": "magnetic",
+      "placeholder": "mag_____"
+    },
+    {
+      "index": 2,
+      "hint": "mul",
+      "answer": "multiple",
+      "placeholder": "mul_____"
+    },
+    {
+      "index": 3,
+      "hint": "ass",
+      "answer": "associated",
+      "placeholder": "ass_______"
+    },
+    {
+      "index": 4,
+      "hint": "act",
+      "answer": "active",
+      "placeholder": "act___"
+    },
+    {
+      "index": 5,
+      "hint": "Simul",
+      "answer": "Simultaneously",
+      "placeholder": "Simul_________"
+    },
+    {
+      "index": 6,
+      "hint": "ev",
+      "answer": "evaluate",
+      "placeholder": "ev______"
+    },
+    {
+      "index": 7,
+      "hint": "gen",
+      "answer": "generated",
+      "placeholder": "gen______"
+    },
+    {
+      "index": 8,
+      "hint": "coll",
+      "answer": "collaboration",
+      "placeholder": "coll_________"
+    },
+    {
+      "index": 9,
+      "hint": "per",
+      "answer": "periods",
+      "placeholder": "per____"
+    }
+  ]
+}

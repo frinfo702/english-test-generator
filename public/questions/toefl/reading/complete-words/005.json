@@ -1,0 +1,65 @@
+{
+  "paragraph": "The phe_______ of urbanization has led to sig________ changes in how modern cities are planned and managed. As populations continue to mig____ to metropolitan centers, urban planners must addr___ challenges related to inf___________ housing, and environmental sustainability. The construction of green spaces within densely pop______ districts has become a pri_____ for many municipal gov________ as these areas provide ess______ benefits for public health bio_______ biological diversity in crowded urban environments.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "phe",
+      "answer": "phenomenon",
+      "placeholder": "phe_______"
+    },
+    {
+      "index": 1,
+      "hint": "sig",
+      "answer": "significant",
+      "placeholder": "sig________"
+    },
+    {
+      "index": 2,
+      "hint": "mig",
+      "answer": "migrate",
+      "placeholder": "mig____"
+    },
+    {
+      "index": 3,
+      "hint": "addr",
+      "answer": "address",
+      "placeholder": "addr___"
+    },
+    {
+      "index": 4,
+      "hint": "inf",
+      "answer": "infrastructure",
+      "placeholder": "inf___________"
+    },
+    {
+      "index": 5,
+      "hint": "pop",
+      "answer": "populated",
+      "placeholder": "pop______"
+    },
+    {
+      "index": 6,
+      "hint": "pri",
+      "answer": "priority",
+      "placeholder": "pri_____"
+    },
+    {
+      "index": 7,
+      "hint": "gov",
+      "answer": "governments",
+      "placeholder": "gov________"
+    },
+    {
+      "index": 8,
+      "hint": "ess",
+      "answer": "essential",
+      "placeholder": "ess______"
+    },
+    {
+      "index": 9,
+      "hint": "bio",
+      "answer": "biological",
+      "placeholder": "bio_______"
+    }
+  ]
+}

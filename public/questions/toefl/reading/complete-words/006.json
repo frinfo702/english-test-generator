@@ -1,0 +1,65 @@
+{
+  "paragraph": "The development of ren______ energy sources has become increasingly critical in addressing global climate challenges. Solar and wind technologies, once considered too expensive for widespread use, have now become com________ with traditional fossil fuels. Scientists and engineers have made substantial advances in bat____ storage, allowing excess energy generated during peak sun_____ to be preserved for later consumption. Governments around the world have implemented various pol_____ to accelerate this tran______ inc______ tax incentives and renewable portfolio standards that pro____ sus________ gro___",
+  "items": [
+    {
+      "index": 0,
+      "hint": "ren",
+      "answer": "renewable",
+      "placeholder": "ren______"
+    },
+    {
+      "index": 1,
+      "hint": "com",
+      "answer": "competitive",
+      "placeholder": "com________"
+    },
+    {
+      "index": 2,
+      "hint": "bat",
+      "answer": "battery",
+      "placeholder": "bat____"
+    },
+    {
+      "index": 3,
+      "hint": "sun",
+      "answer": "sunlight",
+      "placeholder": "sun_____"
+    },
+    {
+      "index": 4,
+      "hint": "pol",
+      "answer": "policies",
+      "placeholder": "pol_____"
+    },
+    {
+      "index": 5,
+      "hint": "tran",
+      "answer": "transition",
+      "placeholder": "tran______"
+    },
+    {
+      "index": 6,
+      "hint": "inc",
+      "answer": "including",
+      "placeholder": "inc______"
+    },
+    {
+      "index": 7,
+      "hint": "pro",
+      "answer": "promote",
+      "placeholder": "pro____"
+    },
+    {
+      "index": 8,
+      "hint": "sus",
+      "answer": "sustainable",
+      "placeholder": "sus________"
+    },
+    {
+      "index": 9,
+      "hint": "gro",
+      "answer": "growth",
+      "placeholder": "gro___"
+    }
+  ]
+}

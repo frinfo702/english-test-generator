@@ -31,12 +31,7 @@
     {
       "id": "q3",
       "stem": "What is produced as a byproduct of the light-dependent reactions?",
-      "options": [
-        "Glucose",
-        "Carbon dioxide",
-        "Oxygen",
-        "ATP"
-      ],
+      "options": ["Glucose", "Carbon dioxide", "Oxygen", "ATP"],
       "correctIndex": 2,
       "type": "detail",
       "explanation": "Water molecules are split during the light-dependent reactions, releasing oxygen as a byproduct."

@@ -133,8 +133,7 @@ async function generateForQuestion(
       if (!voiceForRole.has(role)) {
         const available = ALL_SHADOW_VOICES.filter((v) => !usedVoices.has(v));
         const pool = available.length > 0 ? available : ALL_SHADOW_VOICES;
-        const idx =
-          Math.abs(hashText(`${basename}:${role}`)) % pool.length;
+        const idx = Math.abs(hashText(`${basename}:${role}`)) % pool.length;
         const voice = pool[idx];
         voiceForRole.set(role, voice);
         usedVoices.add(voice);

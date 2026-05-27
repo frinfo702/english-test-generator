@@ -1,0 +1,71 @@
+{
+  "title": "The Industrial Revolution and Urban Transformation",
+  "passage": "The Industrial Revolution, which began in Britain during the late eighteenth century, fundamentally altered the economic and social fabric of Western society. Prior to this transformation, the majority of the population lived in rural areas and engaged in agricultural labor. However, the mechanization of textile production and the development of steam-powered machinery created unprecedented demand for factory workers in rapidly expanding urban centers.\n\nCities such as Manchester and Birmingham experienced explosive population growth as migrants from the countryside sought employment in the new manufacturing sector. This urbanization brought significant challenges. Housing stock failed to keep pace with demand, resulting in overcrowded tenements with inadequate sanitation. Public health deteriorated as water sources became contaminated with industrial waste, and airborne pollutants from coal-burning factories blanketed residential neighborhoods.\n\nDespite these hardships, the Industrial Revolution also generated opportunities for social mobility. Skilled workers and entrepreneurs could accumulate wealth in ways previously impossible in agrarian societies. Furthermore, the concentration of workers in factories eventually facilitated the organization of labor movements that advocated for improved wages, shorter working hours, and safer conditions. These collective efforts laid the groundwork for modern labor legislation and the emergence of a middle class.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'unprecedented' in paragraph 1 is closest in meaning to:",
+      "options": [
+        "A. unexpected",
+        "B. never before experienced",
+        "C. slightly reduced",
+        "D. officially approved"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Unprecedented' means something that has never happened or existed before."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, what was the primary cause of rapid urban population growth?",
+      "options": [
+        "A. Improved agricultural yields reduced the need for rural labor",
+        "B. Factory jobs attracted workers from rural areas",
+        "C. Urban housing became more affordable than rural cottages",
+        "D. Government policies encouraged people to move to cities"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that migrants moved to cities to 'seek employment in the new manufacturing sector.'"
+    },
+    {
+      "id": "q3",
+      "type": "negativeFactual",
+      "stem": "Which of the following is NOT mentioned as a consequence of urbanization during the Industrial Revolution?",
+      "options": [
+        "A. Overcrowded housing conditions",
+        "B. Contamination of water sources",
+        "C. Increased agricultural productivity",
+        "D. Air pollution from factories"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage mentions overcrowded tenements, contaminated water, and airborne pollutants, but does not mention increased agricultural productivity."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about labor movements during the Industrial Revolution?",
+      "options": [
+        "A. They were immediately successful in achieving all their goals",
+        "B. They were primarily organized by wealthy factory owners",
+        "C. They were made possible by the gathering of workers in factories",
+        "D. They focused exclusively on abolishing child labor"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage states that 'the concentration of workers in factories eventually facilitated the organization of labor movements.'"
+    },
+    {
+      "id": "q5",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention Manchester and Birmingham in paragraph 2?",
+      "options": [
+        "A. To criticize their urban planning",
+        "B. To provide specific examples of rapidly growing industrial cities",
+        "C. To compare British cities with European counterparts",
+        "D. To argue that these cities were exceptions to general trends"
+      ],
+      "correctIndex": 1,
+      "explanation": "The author uses Manchester and Birmingham as concrete examples of cities that experienced 'explosive population growth' during industrialization."
+    }
+  ]
+}

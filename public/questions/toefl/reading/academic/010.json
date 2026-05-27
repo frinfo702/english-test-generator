@@ -1,0 +1,71 @@
+{
+  "title": "CRISPR and the Future of Genetic Medicine",
+  "passage": "Clustered Regularly Interspaced Short Palindromic Repeats, commonly known as CRISPR, represents one of the most significant breakthroughs in molecular biology. Adapted from a bacterial immune defense system, this gene-editing technology allows scientists to make precise modifications to the genetic code with unprecedented accuracy.\n\nThe therapeutic potential of CRISPR is particularly promising for treating genetic disorders caused by single-gene mutations. Conditions such as sickle cell disease and cystic fibrosis could potentially be corrected at the genetic level rather than merely managing symptoms. Early clinical trials have demonstrated encouraging results, with some patients achieving sustained remission from previously incurable blood disorders.\n\nHowever, rapid advancement has raised profound ethical concerns. The distinction between therapeutic editing, which treats disease, and enhancement editing, which could alter traits like intelligence, remains contested. Furthermore, modifications to germline cells would be heritable, meaning changes could be passed to future generations in unpredictable ways.\n\nInternational regulations have struggled to keep pace with progress. While some nations have prohibited germline editing, others permit research under controlled conditions. The scientific community debates where to draw boundaries, recognizing that both excessive restriction and insufficient oversight carry risks.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'sustained' in paragraph 2 is closest in meaning to:",
+      "options": [
+        "A. brief and temporary",
+        "B. prolonged and maintained",
+        "C. unexpected and surprising",
+        "D. partial and incomplete"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Sustained' means maintained over a long period; prolonged."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, CRISPR was originally derived from:",
+      "options": [
+        "A. viral replication mechanisms",
+        "B. a bacterial immune defense system",
+        "C. synthetic laboratory compounds",
+        "D. plant pollination processes"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that CRISPR was 'adapted from a bacterial immune defense system.'"
+    },
+    {
+      "id": "q3",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of this passage?",
+      "options": [
+        "A. To argue that CRISPR should be banned entirely",
+        "B. To explain CRISPR technology, its medical potential, and associated ethical debates",
+        "C. To compare CRISPR with earlier gene-editing techniques",
+        "D. To describe specific clinical trials in detail"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage covers what CRISPR is, its therapeutic applications, ethical concerns, and regulatory challenges."
+    },
+    {
+      "id": "q4",
+      "type": "negativeFactual",
+      "stem": "Which of the following is NOT mentioned as a concern related to CRISPR?",
+      "options": [
+        "A. The possibility of heritable genetic changes",
+        "B. The high financial cost of treatments",
+        "C. The difficulty of predicting long-term effects",
+        "D. The potential for enhancement editing"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage discusses heritable changes, unpredictable effects, and enhancement editing, but does not mention the financial cost of treatments."
+    },
+    {
+      "id": "q5",
+      "type": "insertSentence",
+      "stem": "Where would the following sentence best fit in the passage? 'Such heritable modifications raise the possibility of permanently altering the human gene pool in ways that could have unforeseen consequences.'",
+      "options": [
+        "A. At the end of paragraph 1",
+        "B. At the end of paragraph 2",
+        "C. At the end of paragraph 3",
+        "D. At the end of paragraph 4"
+      ],
+      "correctIndex": 2,
+      "explanation": "The sentence discusses heritable modifications, which is the focus of paragraph 3. It logically follows the discussion of germline cell modifications."
+    }
+  ]
+}

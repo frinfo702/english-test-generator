@@ -1,0 +1,65 @@
+{
+  "paragraph": "Cognitive psy_______ has long been fascinated by the mechanisms underlying human memory. Recent research suggests that the brain does not store information like a dig____ computer but rather recon_______ memories each time they are retrieved. This process explains why eye_______ testimony can be sur_________ unreliable, as each rec_________ may introduce subtle alt________ Furthermore, studies demonstrate that sleep plays a cri_____ role in converting short-term experiences into long-term knowledge gui___ guides beh_____ behavior.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "psy",
+      "answer": "psychology",
+      "placeholder": "psy_______"
+    },
+    {
+      "index": 1,
+      "hint": "dig",
+      "answer": "digital",
+      "placeholder": "dig____"
+    },
+    {
+      "index": 2,
+      "hint": "recon",
+      "answer": "reconstructs",
+      "placeholder": "recon_______"
+    },
+    {
+      "index": 3,
+      "hint": "eye",
+      "answer": "eyewitness",
+      "placeholder": "eye_______"
+    },
+    {
+      "index": 4,
+      "hint": "sur",
+      "answer": "surprisingly",
+      "placeholder": "sur_________"
+    },
+    {
+      "index": 5,
+      "hint": "rec",
+      "answer": "recollection",
+      "placeholder": "rec_________"
+    },
+    {
+      "index": 6,
+      "hint": "alt",
+      "answer": "alterations",
+      "placeholder": "alt________"
+    },
+    {
+      "index": 7,
+      "hint": "cri",
+      "answer": "critical",
+      "placeholder": "cri_____"
+    },
+    {
+      "index": 8,
+      "hint": "gui",
+      "answer": "guides",
+      "placeholder": "gui___"
+    },
+    {
+      "index": 9,
+      "hint": "beh",
+      "answer": "behavior",
+      "placeholder": "beh_____"
+    }
+  ]
+}

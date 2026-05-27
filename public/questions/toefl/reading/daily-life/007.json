@@ -1,0 +1,89 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "content": "From: Event Management Team\nTo: All Registered Attendees\nSubject: TechForward Conference 2024 – Important Updates\n\nThe opening keynote has been moved from Hall A to the Grand Ballroom to accommodate increased registration numbers.\n\nAll sessions on March 12 will begin 30 minutes earlier than originally scheduled. Please check the updated agenda on our mobile app.\n\nLunch is provided for full-day ticket holders only. Half-day attendees may purchase meal vouchers at the registration desk for $18."
+    },
+    {
+      "id": "t2",
+      "textType": "schedule",
+      "content": "Workshop Sessions – March 12\n\n9:00 AM – AI Ethics (Room 301) – Dr. Lin\n10:30 AM – Cloud Security (Room 302) – Mr. Patel\n1:00 PM – UX Design Trends (Room 301) – Ms. Garcia\n2:30 PM – Data Privacy Laws (Room 303) – Prof. Andersen\n\nAll workshops require pre-registration. Walk-ins will be admitted only if space permits."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why was the keynote venue changed?",
+      "options": [
+        "A. Hall A was double-booked",
+        "B. More people registered than expected",
+        "C. The speaker requested a larger stage",
+        "D. The Grand Ballroom has better lighting"
+      ],
+      "correctIndex": 1,
+      "type": "factual",
+      "explanation": "The email states the move was 'to accommodate increased registration numbers.'"
+    },
+    {
+      "id": "q2",
+      "stem": "What can be inferred about half-day ticket holders?",
+      "options": [
+        "A. They cannot attend any workshops",
+        "B. They must leave the venue by noon",
+        "C. They do not receive complimentary lunch",
+        "D. They have priority access to walk-in sessions"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The email states that 'lunch is provided for full-day ticket holders only,' implying half-day holders do not receive it."
+    },
+    {
+      "id": "q3",
+      "stem": "Which two workshops take place in the same room?",
+      "options": [
+        "A. AI Ethics and Cloud Security",
+        "B. Cloud Security and Data Privacy Laws",
+        "C. AI Ethics and UX Design Trends",
+        "D. Data Privacy Laws and UX Design Trends"
+      ],
+      "correctIndex": 2,
+      "type": "factual",
+      "explanation": "Both AI Ethics (9:00 AM) and UX Design Trends (1:00 PM) are scheduled in Room 301."
+    },
+    {
+      "id": "q4",
+      "stem": "What is the main purpose of the email?",
+      "options": [
+        "A. To promote ticket sales",
+        "B. To inform attendees of schedule and venue changes",
+        "C. To announce the cancellation of the conference",
+        "D. To introduce the keynote speaker"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The email informs attendees about the venue change, earlier start times, and lunch policy."
+    },
+    {
+      "id": "q5",
+      "stem": "What must attendees do to guarantee a spot in a workshop?",
+      "options": [
+        "A. Arrive 30 minutes early",
+        "B. Pre-register for the session",
+        "C. Purchase a full-day ticket",
+        "D. Download the mobile app"
+      ],
+      "correctIndex": 1,
+      "type": "factual",
+      "explanation": "The schedule states that 'all workshops require pre-registration.'"
+    },
+    {
+      "id": "q6",
+      "stem": "The word 'accommodate' in the email is closest in meaning to:",
+      "options": ["A. reject", "B. provide space for", "C. ignore", "D. limit"],
+      "correctIndex": 1,
+      "type": "vocabulary",
+      "explanation": "'Accommodate' in this context means to provide sufficient space for a larger number of people."
+    }
+  ]
+}

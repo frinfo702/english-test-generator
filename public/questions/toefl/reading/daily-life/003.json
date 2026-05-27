@@ -1,0 +1,94 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "content": "From: Oceanview Travel Agency\nTo: Ms. Patricia Chen\nSubject: Booking Confirmation – Tokyo Trip\n\nYour flight has been confirmed:\nFlight OV184 – Departure: March 14 at 11:45 AM from Gate 22\nSeat: 14A (window, extra legroom)\n\nPlease arrive at least 90 minutes before domestic flights and 120 minutes before international flights.\n\nOnline check-in opens 24 hours before departure. Baggage allowance: one carry-on (max 7 kg) and one checked bag (max 23 kg)."
+    },
+    {
+      "id": "t2",
+      "textType": "notice",
+      "content": "Hotel Sakura – Guest Policies\n\nCheck-in: 3:00 PM | Check-out: 11:00 AM\nEarly check-in available for a fee of $30 before 12:00 PM.\n\nBreakfast is complimentary and served 6:30–10:00 AM in the Garden Restaurant.\n\nPlease note: All rooms are non-smoking. A cleaning fee of $150 will be charged for violations."
+    }
+  ],
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is Patricia Chen's seat assignment?",
+      "options": [
+        "A. 14B (aisle)",
+        "B. 12A (window)",
+        "C. 14A (window, extra legroom)",
+        "D. 22A (extra legroom)"
+      ],
+      "correctIndex": 2,
+      "type": "factual",
+      "explanation": "The email confirms seat 14A with window and extra legroom."
+    },
+    {
+      "id": "q2",
+      "stem": "When can Patricia check in online for her flight?",
+      "options": [
+        "A. Immediately after booking",
+        "B. 48 hours before departure",
+        "C. 24 hours before departure",
+        "D. At the airport only"
+      ],
+      "correctIndex": 2,
+      "type": "factual",
+      "explanation": "The email states that 'online check-in opens 24 hours before departure.'"
+    },
+    {
+      "id": "q3",
+      "stem": "What can be inferred about the hotel's smoking policy?",
+      "options": [
+        "A. Smoking is permitted on balconies only",
+        "B. Smoking is allowed in designated rooms",
+        "C. The hotel imposes a financial penalty for smoking in rooms",
+        "D. Guests may smoke in the Garden Restaurant"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The notice states that rooms are non-smoking and a $150 cleaning fee will be charged for violations."
+    },
+    {
+      "id": "q4",
+      "stem": "What is the purpose of the travel agency email?",
+      "options": [
+        "A. To offer a flight upgrade",
+        "B. To confirm booking details and provide instructions",
+        "C. To request payment for the trip",
+        "D. To announce a flight cancellation"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The email confirms the flight, seat, gate, and provides check-in and baggage information."
+    },
+    {
+      "id": "q5",
+      "stem": "If Patricia wants to check into her hotel at 11:00 AM, what will happen?",
+      "options": [
+        "A. She can check in for free",
+        "B. She must wait until 3:00 PM",
+        "C. She can check in early for an additional fee",
+        "D. She will receive a complimentary breakfast voucher"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "Standard check-in is 3:00 PM, but early check-in is available for $30 before 12:00 PM."
+    },
+    {
+      "id": "q6",
+      "stem": "The word 'complimentary' in the hotel notice is closest in meaning to:",
+      "options": [
+        "A. expensive",
+        "B. free of charge",
+        "C. optional",
+        "D. high quality"
+      ],
+      "correctIndex": 1,
+      "type": "vocabulary",
+      "explanation": "'Complimentary' means provided free of charge."
+    }
+  ]
+}
