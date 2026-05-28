@@ -5,9 +5,6 @@
 #   ./scripts/make-question.sh <task>
 #
 # Available <task> values:
-#   toefl/reading/complete-words
-#   toefl/reading/daily-life
-#   toefl/reading/academic
 #   toefl/writing/build-sentence
 #   toefl/writing/email
 #   toefl/writing/discussion
@@ -26,7 +23,7 @@
 #
 # Examples:
 #   ./scripts/make-question.sh toeic/part3
-#   ./scripts/make-question.sh toefl/reading/daily-life
+
 
 set -euo pipefail
 
@@ -36,9 +33,6 @@ usage() {
   echo "Usage: $0 <task>"
   echo ""
 echo "Available tasks:"
-echo "  toefl/reading/complete-words"
-echo "  toefl/reading/daily-life"
-echo "  toefl/reading/academic"
 echo "  toefl/writing/build-sentence"
 echo "  toefl/writing/email"
 echo "  toefl/writing/discussion"
@@ -88,75 +82,6 @@ OUTFILE="$TARGET_DIR/$FILENAME"
 generate_template() {
   local task="$1"
   case "$task" in
-
-    toefl/reading/complete-words)
-      cat << 'TMPL'
-{
-  "paragraph": "TODO: Write a paragraph with blanks. Use hint+underscores placeholders (e.g., pho_________).",
-  "items": [
-    {
-      "index": 0,
-      "hint": "abc",
-      "answer": "TODO: Correct word",
-      "placeholder": "abc____"
-    }
-  ]
-}
-TMPL
-      ;;
-
-    toefl/reading/daily-life)
-      cat << 'TMPL'
-{
-  "module": "module1",
-  "texts": [
-    {
-      "id": "t1",
-      "textType": "email",
-      "content": "TODO: Add an everyday text (email / social post / notice / etc.)",
-      "questions": [
-        {
-          "id": "q1",
-          "stem": "TODO: Question stem",
-          "options": [
-            "A. Choice A",
-            "B. Choice B",
-            "C. Choice C",
-            "D. Choice D"
-          ],
-          "correctIndex": 0,
-          "type": "factual",
-          "explanation": "TODO: Explanation"
-        }
-      ]
-    }
-  ]
-}
-TMPL
-      ;;
-
-    toefl/reading/academic)
-      cat << 'TMPL'
-{
-  "passage": "TODO: Add an academic English passage (around 300-500 words)",
-  "questions": [
-    {
-      "id": "q1",
-      "stem": "TODO: Question stem",
-      "options": [
-        "A. Choice A",
-        "B. Choice B",
-        "C. Choice C",
-        "D. Choice D"
-      ],
-      "correctIndex": 0,
-      "type": "factual",
-      "explanation": "TODO: Explanation"
-    }
-  ]
-}
-TMPL
-      ;;
 
     toefl/writing/build-sentence)
       cat << 'TMPL'
