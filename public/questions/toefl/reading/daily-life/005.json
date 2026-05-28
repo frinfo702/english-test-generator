@@ -3,82 +3,89 @@
     {
       "id": "t1",
       "textType": "notice",
-      "content": "Riverside Apartments – Maintenance Notice\n\nOn Tuesday, February 6, water will be shut off from 9:00 AM to 2:00 PM for emergency pipe repairs in Building C.\n\nResidents are advised to store water for essential needs beforehand. The gym and laundry room in Building C will also be closed during this time.\n\nWe apologize for the inconvenience. Updates will be posted on the community board and website."
+      "content": "Riverside Apartments – Maintenance Notice\n\nOn Tuesday, February 6, water will be shut off from 9:00 AM to 2:00 PM for emergency pipe repairs in Building C.\n\nResidents are advised to store water for essential needs beforehand. The gym and laundry room in Building C will also be closed during this time.\n\nWe apologize for the inconvenience. Updates will be posted on the community board and website.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Which facilities in Building C will be unavailable on February 6?",
+          "options": [
+            "A. The swimming pool and tennis courts",
+            "B. The gym and laundry room",
+            "C. The parking garage and lobby",
+            "D. The community board and website"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The notice states that 'the gym and laundry room in Building C will also be closed.'"
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about the water shut-off?",
+          "options": [
+            "A. It was planned months in advance",
+            "B. It will affect all buildings in the complex",
+            "C. It is necessary due to an unexpected problem",
+            "D. It will last the entire day"
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The notice refers to 'emergency pipe repairs,' suggesting an unexpected problem."
+        },
+        {
+          "id": "q6",
+          "stem": "The word 'essential' in the maintenance notice is closest in meaning to:",
+          "options": [
+            "A. extra",
+            "B. basic and necessary",
+            "C. expensive",
+            "D. optional"
+          ],
+          "correctIndex": 1,
+          "type": "vocabulary",
+          "explanation": "'Essential' refers to basic and necessary needs such as drinking and cooking."
+        }
+      ]
     },
     {
       "id": "t2",
       "textType": "invoice",
-      "content": "Utility Bill – January 2024\nAccount: Riverside Apt 4C\n\nElectricity: $78.45\nWater/Sewer: $42.10\nGas: $31.25\nInternet: $55.00\n\nTotal Due: $206.80\nDue Date: February 15, 2024\n\nLate Fee: $25 if paid after February 20.\nPay online at riverside-utilities.com or by check."
-    }
-  ],
-  "questions": [
-    {
-      "id": "q1",
-      "stem": "Which facilities in Building C will be unavailable on February 6?",
-      "options": [
-        "A. The swimming pool and tennis courts",
-        "B. The gym and laundry room",
-        "C. The parking garage and lobby",
-        "D. The community board and website"
-      ],
-      "correctIndex": 1,
-      "type": "factual",
-      "explanation": "The notice states that 'the gym and laundry room in Building C will also be closed.'"
-    },
-    {
-      "id": "q2",
-      "stem": "What can be inferred about the water shut-off?",
-      "options": [
-        "A. It was planned months in advance",
-        "B. It will affect all buildings in the complex",
-        "C. It is necessary due to an unexpected problem",
-        "D. It will last the entire day"
-      ],
-      "correctIndex": 2,
-      "type": "inference",
-      "explanation": "The notice refers to 'emergency pipe repairs,' suggesting an unexpected problem."
-    },
-    {
-      "id": "q3",
-      "stem": "What is the main purpose of the utility invoice?",
-      "options": [
-        "A. To request payment for services rendered",
-        "B. To advertise new internet packages",
-        "C. To report a billing error",
-        "D. To announce a rate increase"
-      ],
-      "correctIndex": 0,
-      "type": "purpose",
-      "explanation": "The invoice lists charges, the total due, due date, and payment methods."
-    },
-    {
-      "id": "q4",
-      "stem": "If the resident pays the bill on February 22, how much must they pay?",
-      "options": ["A. $206.80", "B. $231.80", "C. $181.80", "D. $25.00"],
-      "correctIndex": 1,
-      "type": "inference",
-      "explanation": "The total due is $206.80, and a $25 late fee applies after February 20, making the total $231.80."
-    },
-    {
-      "id": "q5",
-      "stem": "Which utility costs the most for Apartment 4C?",
-      "options": ["A. Water/Sewer", "B. Gas", "C. Internet", "D. Electricity"],
-      "correctIndex": 3,
-      "type": "factual",
-      "explanation": "Electricity is $78.45, which is higher than Water/Sewer ($42.10), Gas ($31.25), and Internet ($55.00)."
-    },
-    {
-      "id": "q6",
-      "stem": "The word 'essential' in the maintenance notice is closest in meaning to:",
-      "options": [
-        "A. extra",
-        "B. basic and necessary",
-        "C. expensive",
-        "D. optional"
-      ],
-      "correctIndex": 1,
-      "type": "vocabulary",
-      "explanation": "'Essential' refers to basic and necessary needs such as drinking and cooking."
+      "content": "Utility Bill – January 2024\nAccount: Riverside Apt 4C\n\nElectricity: $78.45\nWater/Sewer: $42.10\nGas: $31.25\nInternet: $55.00\n\nTotal Due: $206.80\nDue Date: February 15, 2024\n\nLate Fee: $25 if paid after February 20.\nPay online at riverside-utilities.com or by check.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "What is the main purpose of the utility invoice?",
+          "options": [
+            "A. To request payment for services rendered",
+            "B. To advertise new internet packages",
+            "C. To report a billing error",
+            "D. To announce a rate increase"
+          ],
+          "correctIndex": 0,
+          "type": "purpose",
+          "explanation": "The invoice lists charges, the total due, due date, and payment methods."
+        },
+        {
+          "id": "q4",
+          "stem": "If the resident pays the bill on February 22, how much must they pay?",
+          "options": ["A. $206.80", "B. $231.80", "C. $181.80", "D. $25.00"],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The total due is $206.80, and a $25 late fee applies after February 20, making the total $231.80."
+        },
+        {
+          "id": "q5",
+          "stem": "Which utility costs the most for Apartment 4C?",
+          "options": [
+            "A. Water/Sewer",
+            "B. Gas",
+            "C. Internet",
+            "D. Electricity"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "Electricity is $78.45, which is higher than Water/Sewer ($42.10), Gas ($31.25), and Internet ($55.00)."
+        }
+      ]
     }
   ]
 }

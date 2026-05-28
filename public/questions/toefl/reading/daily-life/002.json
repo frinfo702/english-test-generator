@@ -3,82 +3,94 @@
     {
       "id": "t1",
       "textType": "memo",
-      "content": "TO: All Staff\nFROM: Operations Manager\nDATE: October 3\nRE: New Conference Room Booking System\n\nEffective October 15, all conference room reservations must be made through the new online portal. The old paper sign-up sheets outside each room will be removed.\n\nEach team is limited to two reservations per week in the large conference room. Small breakout rooms can be booked for up to three hours at a time.\n\nCancellations must be made at least 24 hours in advance so that others may use the space."
+      "content": "TO: All Staff\nFROM: Operations Manager\nDATE: October 3\nRE: New Conference Room Booking System\n\nEffective October 15, all conference room reservations must be made through the new online portal. The old paper sign-up sheets outside each room will be removed.\n\nEach team is limited to two reservations per week in the large conference room. Small breakout rooms can be booked for up to three hours at a time.\n\nCancellations must be made at least 24 hours in advance so that others may use the space.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What change will take effect on October 15?",
+          "options": [
+            "A. Conference rooms will no longer be available",
+            "B. All reservations must be made online",
+            "C. Teams can book unlimited conference room time",
+            "D. Only managers can reserve meeting spaces"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The memo states that 'all conference room reservations must be made through the new online portal' effective October 15."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about the old booking system?",
+          "options": [
+            "A. It was entirely digital",
+            "B. It involved physical sign-up sheets",
+            "C. It allowed unlimited reservations",
+            "D. It was managed by an external company"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The memo mentions that 'the old paper sign-up sheets outside each room will be removed.'"
+        },
+        {
+          "id": "q5",
+          "stem": "What is the main purpose of the memo?",
+          "options": [
+            "A. To complain about staff misuse of rooms",
+            "B. To announce policy changes for room reservations",
+            "C. To request feedback on meeting room designs",
+            "D. To cancel all upcoming department meetings"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The memo introduces a new online booking system, sets limits on reservations, and establishes cancellation policies."
+        }
+      ]
     },
     {
       "id": "t2",
       "textType": "schedule",
-      "content": "Q4 Department Meetings – November\n\nMarketing: Nov 5, 10:00 AM, Room B\nEngineering: Nov 7, 2:00 PM, Large Conference Room\nSales: Nov 12, 9:00 AM, Room A\nHR: Nov 14, 11:00 AM, Room B\nFinance: Nov 19, 3:00 PM, Large Conference Room\n\nAll meetings are mandatory for department heads. Remote attendees should join via the link sent 24 hours prior."
-    }
-  ],
-  "questions": [
-    {
-      "id": "q1",
-      "stem": "What change will take effect on October 15?",
-      "options": [
-        "A. Conference rooms will no longer be available",
-        "B. All reservations must be made online",
-        "C. Teams can book unlimited conference room time",
-        "D. Only managers can reserve meeting spaces"
-      ],
-      "correctIndex": 1,
-      "type": "factual",
-      "explanation": "The memo states that 'all conference room reservations must be made through the new online portal' effective October 15."
-    },
-    {
-      "id": "q2",
-      "stem": "What can be inferred about the old booking system?",
-      "options": [
-        "A. It was entirely digital",
-        "B. It involved physical sign-up sheets",
-        "C. It allowed unlimited reservations",
-        "D. It was managed by an external company"
-      ],
-      "correctIndex": 1,
-      "type": "inference",
-      "explanation": "The memo mentions that 'the old paper sign-up sheets outside each room will be removed.'"
-    },
-    {
-      "id": "q3",
-      "stem": "According to the schedule, which department has the latest meeting time?",
-      "options": ["A. Marketing", "B. Engineering", "C. Sales", "D. Finance"],
-      "correctIndex": 3,
-      "type": "factual",
-      "explanation": "Finance meets at 3:00 PM, which is later than Marketing (10:00 AM), Engineering (2:00 PM), and Sales (9:00 AM)."
-    },
-    {
-      "id": "q4",
-      "stem": "What is implied about attending the Engineering meeting remotely?",
-      "options": [
-        "A. Remote attendance is not permitted",
-        "B. Remote attendees will receive a link before the meeting",
-        "C. Only department heads can attend remotely",
-        "D. The meeting will be recorded for later viewing"
-      ],
-      "correctIndex": 1,
-      "type": "inference",
-      "explanation": "The schedule states that 'remote attendees should join via the link sent 24 hours prior.'"
-    },
-    {
-      "id": "q5",
-      "stem": "What is the main purpose of the memo?",
-      "options": [
-        "A. To complain about staff misuse of rooms",
-        "B. To announce policy changes for room reservations",
-        "C. To request feedback on meeting room designs",
-        "D. To cancel all upcoming department meetings"
-      ],
-      "correctIndex": 1,
-      "type": "purpose",
-      "explanation": "The memo introduces a new online booking system, sets limits on reservations, and establishes cancellation policies."
-    },
-    {
-      "id": "q6",
-      "stem": "The word 'mandatory' in the schedule is closest in meaning to:",
-      "options": ["A. optional", "B. required", "C. recommended", "D. delayed"],
-      "correctIndex": 1,
-      "type": "vocabulary",
-      "explanation": "'Mandatory' means required or compulsory."
+      "content": "Q4 Department Meetings – November\n\nMarketing: Nov 5, 10:00 AM, Room B\nEngineering: Nov 7, 2:00 PM, Large Conference Room\nSales: Nov 12, 9:00 AM, Room A\nHR: Nov 14, 11:00 AM, Room B\nFinance: Nov 19, 3:00 PM, Large Conference Room\n\nAll meetings are mandatory for department heads. Remote attendees should join via the link sent 24 hours prior.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "According to the schedule, which department has the latest meeting time?",
+          "options": [
+            "A. Marketing",
+            "B. Engineering",
+            "C. Sales",
+            "D. Finance"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "Finance meets at 3:00 PM, which is later than Marketing (10:00 AM), Engineering (2:00 PM), and Sales (9:00 AM)."
+        },
+        {
+          "id": "q4",
+          "stem": "What is implied about attending the Engineering meeting remotely?",
+          "options": [
+            "A. Remote attendance is not permitted",
+            "B. Remote attendees will receive a link before the meeting",
+            "C. Only department heads can attend remotely",
+            "D. The meeting will be recorded for later viewing"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The schedule states that 'remote attendees should join via the link sent 24 hours prior.'"
+        },
+        {
+          "id": "q6",
+          "stem": "The word 'mandatory' in the schedule is closest in meaning to:",
+          "options": [
+            "A. optional",
+            "B. required",
+            "C. recommended",
+            "D. delayed"
+          ],
+          "correctIndex": 1,
+          "type": "vocabulary",
+          "explanation": "'Mandatory' means required or compulsory."
+        }
+      ]
     }
   ]
 }
