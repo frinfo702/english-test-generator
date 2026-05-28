@@ -80,12 +80,7 @@
         {
           "id": "q6",
           "stem": "How much would the customer receive if they returned the phone charger?",
-          "options": [
-            "A. $10.20",
-            "B. $24.99",
-            "C. $137.68",
-            "D. $89.99"
-          ],
+          "options": ["A. $10.20", "B. $24.99", "C. $137.68", "D. $89.99"],
           "correctIndex": 1,
           "type": "factual",
           "explanation": "The phone charger cost $24.99 and is a general item within the return window, so the full amount would be refunded."

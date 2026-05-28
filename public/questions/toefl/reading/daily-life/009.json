@@ -67,12 +67,7 @@
         {
           "id": "q5",
           "stem": "What is the maximum total overdraft fee a customer could be charged in one day?",
-          "options": [
-            "A. $35",
-            "B. $70",
-            "C. $105",
-            "D. $140"
-          ],
+          "options": ["A. $35", "B. $70", "C. $105", "D. $140"],
           "correctIndex": 3,
           "type": "inference",
           "explanation": "The overdraft fee is $35 per item with a maximum of 4 per day, so 4 × $35 = $140."

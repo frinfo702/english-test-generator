@@ -67,12 +67,7 @@
         {
           "id": "q4",
           "stem": "If the resident pays the bill on February 22, how much must they pay?",
-          "options": [
-            "A. $206.80",
-            "B. $231.80",
-            "C. $181.80",
-            "D. $25.00"
-          ],
+          "options": ["A. $206.80", "B. $231.80", "C. $181.80", "D. $25.00"],
           "correctIndex": 1,
           "type": "inference",
           "explanation": "The total due is $206.80, and a $25 late fee applies after February 20, making the total $231.80."
