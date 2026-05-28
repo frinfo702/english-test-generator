@@ -3,87 +3,94 @@
     {
       "id": "t1",
       "textType": "notice",
-      "content": "BrightMart Return Policy – Updated January 2024\n\nItems may be returned within 30 days of purchase with original receipt. Electronics must be returned within 14 days and are subject to a 15% restocking fee.\n\nSale items marked 'Final Sale' cannot be returned or exchanged. Gift receipts allow store credit only.\n\nOnline purchases can be returned to any physical location or mailed using the prepaid label included in your package."
+      "content": "BrightMart Return Policy – Updated January 2024\n\nItems may be returned within 30 days of purchase with original receipt. Electronics must be returned within 14 days and are subject to a 15% restocking fee.\n\nSale items marked 'Final Sale' cannot be returned or exchanged. Gift receipts allow store credit only.\n\nOnline purchases can be returned to any physical location or mailed using the prepaid label included in your package.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "According to the policy, which item has the shortest return window?",
+          "options": [
+            "A. Clothing",
+            "B. Electronics",
+            "C. Items with gift receipts",
+            "D. Sale items"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "Electronics must be returned within 14 days, while general items have 30 days."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about the winter scarf purchased on this receipt?",
+          "options": [
+            "A. It can be returned for a full refund",
+            "B. It can only be exchanged for another color",
+            "C. It cannot be returned under any circumstances",
+            "D. It is eligible for store credit only"
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The scarf is marked 'Final Sale,' and the policy states that 'Final Sale' items cannot be returned or exchanged."
+        },
+        {
+          "id": "q3",
+          "stem": "What is the main purpose of the return policy notice?",
+          "options": [
+            "A. To discourage customers from making returns",
+            "B. To inform customers of the rules and conditions for returns",
+            "C. To advertise upcoming sales events",
+            "D. To compare BrightMart with competitors"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The notice explains time limits, fees, exceptions, and methods for returning items."
+        }
+      ]
     },
     {
       "id": "t2",
       "textType": "receipt",
-      "content": "BrightMart – Receipt #78432\nDate: January 8, 2024\n\nWireless Headphones    $89.99\nPhone Charger          $24.99\n(Final Sale) Winter Scarf   $12.50\n\nSubtotal: $127.48\nTax: $10.20\nTotal: $137.68\n\nPaid via: Credit Card ending in 4482\nReturn by: February 7, 2024"
-    }
-  ],
-  "questions": [
-    {
-      "id": "q1",
-      "stem": "According to the policy, which item has the shortest return window?",
-      "options": [
-        "A. Clothing",
-        "B. Electronics",
-        "C. Items with gift receipts",
-        "D. Sale items"
-      ],
-      "correctIndex": 1,
-      "type": "factual",
-      "explanation": "Electronics must be returned within 14 days, while general items have 30 days."
-    },
-    {
-      "id": "q2",
-      "stem": "What can be inferred about the winter scarf purchased on this receipt?",
-      "options": [
-        "A. It can be returned for a full refund",
-        "B. It can only be exchanged for another color",
-        "C. It cannot be returned under any circumstances",
-        "D. It is eligible for store credit only"
-      ],
-      "correctIndex": 2,
-      "type": "inference",
-      "explanation": "The scarf is marked 'Final Sale,' and the policy states that 'Final Sale' items cannot be returned or exchanged."
-    },
-    {
-      "id": "q3",
-      "stem": "What is the main purpose of the return policy notice?",
-      "options": [
-        "A. To discourage customers from making returns",
-        "B. To inform customers of the rules and conditions for returns",
-        "C. To advertise upcoming sales events",
-        "D. To compare BrightMart with competitors"
-      ],
-      "correctIndex": 1,
-      "type": "purpose",
-      "explanation": "The notice explains time limits, fees, exceptions, and methods for returning items."
-    },
-    {
-      "id": "q4",
-      "stem": "If the customer returns the wireless headphones on January 25, what will occur?",
-      "options": [
-        "A. They will receive a full refund of $89.99",
-        "B. They will receive store credit only",
-        "C. A 15% restocking fee will apply",
-        "D. The return will be denied"
-      ],
-      "correctIndex": 0,
-      "type": "inference",
-      "explanation": "The headphones are not electronics (they are general merchandise) and January 25 is within 30 days of purchase, so a full refund applies."
-    },
-    {
-      "id": "q5",
-      "stem": "The word 'restocking' in the policy is closest in meaning to:",
-      "options": [
-        "A. returning items to inventory",
-        "B. removing damaged products",
-        "C. displaying merchandise",
-        "D. shipping to another store"
-      ],
-      "correctIndex": 0,
-      "type": "vocabulary",
-      "explanation": "A restocking fee is charged for putting returned items back into inventory."
-    },
-    {
-      "id": "q6",
-      "stem": "How much would the customer receive if they returned the phone charger?",
-      "options": ["A. $10.20", "B. $24.99", "C. $137.68", "D. $89.99"],
-      "correctIndex": 1,
-      "type": "factual",
-      "explanation": "The phone charger cost $24.99 and is a general item within the return window, so the full amount would be refunded."
+      "content": "BrightMart – Receipt #78432\nDate: January 8, 2024\n\nWireless Headphones    $89.99\nPhone Charger          $24.99\n(Final Sale) Winter Scarf   $12.50\n\nSubtotal: $127.48\nTax: $10.20\nTotal: $137.68\n\nPaid via: Credit Card ending in 4482\nReturn by: February 7, 2024",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "If the customer returns the wireless headphones on January 25, what will occur?",
+          "options": [
+            "A. They will receive a full refund of $89.99",
+            "B. They will receive store credit only",
+            "C. A 15% restocking fee will apply",
+            "D. The return will be denied"
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "The headphones are not electronics (they are general merchandise) and January 25 is within 30 days of purchase, so a full refund applies."
+        },
+        {
+          "id": "q5",
+          "stem": "The word 'restocking' in the policy is closest in meaning to:",
+          "options": [
+            "A. returning items to inventory",
+            "B. removing damaged products",
+            "C. displaying merchandise",
+            "D. shipping to another store"
+          ],
+          "correctIndex": 0,
+          "type": "vocabulary",
+          "explanation": "A restocking fee is charged for putting returned items back into inventory."
+        },
+        {
+          "id": "q6",
+          "stem": "How much would the customer receive if they returned the phone charger?",
+          "options": [
+            "A. $10.20",
+            "B. $24.99",
+            "C. $137.68",
+            "D. $89.99"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The phone charger cost $24.99 and is a general item within the return window, so the full amount would be refunded."
+        }
+      ]
     }
   ]
 }

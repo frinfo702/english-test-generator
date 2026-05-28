@@ -3,92 +3,94 @@
     {
       "id": "t1",
       "textType": "notice",
-      "content": "Greenfield Pharmacy – Holiday Hours\n\nDec 23: 8:00 AM – 6:00 PM\nDec 24: 8:00 AM – 2:00 PM\nDec 25: CLOSED\nDec 26–30: 9:00 AM – 5:00 PM\nDec 31: 8:00 AM – 4:00 PM\nJan 1: CLOSED\n\nThe 24-hour prescription hotline remains active throughout the holiday season. Urgent medications can be picked up at our Westside location, which operates normal hours."
+      "content": "Greenfield Pharmacy – Holiday Hours\n\nDec 23: 8:00 AM – 6:00 PM\nDec 24: 8:00 AM – 2:00 PM\nDec 25: CLOSED\nDec 26–30: 9:00 AM – 5:00 PM\nDec 31: 8:00 AM – 4:00 PM\nJan 1: CLOSED\n\nThe 24-hour prescription hotline remains active throughout the holiday season. Urgent medications can be picked up at our Westside location, which operates normal hours.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "On which date is Greenfield Pharmacy open the latest?",
+          "options": [
+            "A. December 23",
+            "B. December 24",
+            "C. December 31",
+            "D. January 1"
+          ],
+          "correctIndex": 0,
+          "type": "factual",
+          "explanation": "December 23 has hours of 8:00 AM – 6:00 PM, which is later than Dec 24 (2:00 PM), Dec 31 (4:00 PM), and Jan 1 (closed)."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred if a customer needs medication on December 25?",
+          "options": [
+            "A. They must wait until December 26",
+            "B. They can call the prescription hotline or go to the Westside location",
+            "C. They should visit the pharmacy after 6:00 PM",
+            "D. The pharmacy opens for emergency services only"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The notice states that the 24-hour hotline remains active and urgent medications can be picked up at the Westside location."
+        }
+      ]
     },
     {
       "id": "t2",
       "textType": "form",
-      "content": "HealthFirst Insurance – Claim Form Instructions\n\nSection A: Personal Information\nProvide your policy number, date of birth, and contact details.\n\nSection B: Treatment Details\nList all services received, dates of treatment, and provider names. Attach original receipts and itemized bills.\n\nSection C: Authorization\nSign and date the form. Claims submitted without a signature will be returned unprocessed.\n\nSubmit within 90 days of the final treatment date."
-    }
-  ],
-  "questions": [
-    {
-      "id": "q1",
-      "stem": "On which date is Greenfield Pharmacy open the latest?",
-      "options": [
-        "A. December 23",
-        "B. December 24",
-        "C. December 31",
-        "D. January 1"
-      ],
-      "correctIndex": 0,
-      "type": "factual",
-      "explanation": "December 23 has hours of 8:00 AM – 6:00 PM, which is later than Dec 24 (2:00 PM), Dec 31 (4:00 PM), and Jan 1 (closed)."
-    },
-    {
-      "id": "q2",
-      "stem": "What can be inferred if a customer needs medication on December 25?",
-      "options": [
-        "A. They must wait until December 26",
-        "B. They can call the prescription hotline or go to the Westside location",
-        "C. They should visit the pharmacy after 6:00 PM",
-        "D. The pharmacy opens for emergency services only"
-      ],
-      "correctIndex": 1,
-      "type": "inference",
-      "explanation": "The notice states that the 24-hour hotline remains active and urgent medications can be picked up at the Westside location."
-    },
-    {
-      "id": "q3",
-      "stem": "What is the main purpose of the insurance form instructions?",
-      "options": [
-        "A. To advertise new insurance plans",
-        "B. To explain how to complete and submit a claim",
-        "C. To list approved medical providers",
-        "D. To announce changes to coverage policies"
-      ],
-      "correctIndex": 1,
-      "type": "purpose",
-      "explanation": "The instructions guide the claimant through each section and specify submission requirements."
-    },
-    {
-      "id": "q4",
-      "stem": "According to the instructions, what will happen if a claim form is not signed?",
-      "options": [
-        "A. It will be processed with a delay",
-        "B. It will be returned unprocessed",
-        "C. It will be approved automatically",
-        "D. It will require a phone interview"
-      ],
-      "correctIndex": 1,
-      "type": "factual",
-      "explanation": "The form explicitly states that 'claims submitted without a signature will be returned unprocessed.'"
-    },
-    {
-      "id": "q5",
-      "stem": "What documents must be attached to the claim form?",
-      "options": [
-        "A. A copy of the insurance card only",
-        "B. Original receipts and itemized bills",
-        "C. A referral letter from a primary doctor",
-        "D. Proof of employment"
-      ],
-      "correctIndex": 1,
-      "type": "factual",
-      "explanation": "Section B states to 'attach original receipts and itemized bills.'"
-    },
-    {
-      "id": "q6",
-      "stem": "The word 'itemized' in the form instructions is closest in meaning to:",
-      "options": [
-        "A. summarized",
-        "B. listed in detail",
-        "C. estimated",
-        "D. approved"
-      ],
-      "correctIndex": 1,
-      "type": "vocabulary",
-      "explanation": "'Itemized' means presented as a detailed list of individual items or charges."
+      "content": "HealthFirst Insurance – Claim Form Instructions\n\nSection A: Personal Information\nProvide your policy number, date of birth, and contact details.\n\nSection B: Treatment Details\nList all services received, dates of treatment, and provider names. Attach original receipts and itemized bills.\n\nSection C: Authorization\nSign and date the form. Claims submitted without a signature will be returned unprocessed.\n\nSubmit within 90 days of the final treatment date.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "What is the main purpose of the insurance form instructions?",
+          "options": [
+            "A. To advertise new insurance plans",
+            "B. To explain how to complete and submit a claim",
+            "C. To list approved medical providers",
+            "D. To announce changes to coverage policies"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The instructions guide the claimant through each section and specify submission requirements."
+        },
+        {
+          "id": "q4",
+          "stem": "According to the instructions, what will happen if a claim form is not signed?",
+          "options": [
+            "A. It will be processed with a delay",
+            "B. It will be returned unprocessed",
+            "C. It will be approved automatically",
+            "D. It will require a phone interview"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The form explicitly states that 'claims submitted without a signature will be returned unprocessed.'"
+        },
+        {
+          "id": "q5",
+          "stem": "What documents must be attached to the claim form?",
+          "options": [
+            "A. A copy of the insurance card only",
+            "B. Original receipts and itemized bills",
+            "C. A referral letter from a primary doctor",
+            "D. Proof of employment"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "Section B states to 'attach original receipts and itemized bills.'"
+        },
+        {
+          "id": "q6",
+          "stem": "The word 'itemized' in the form instructions is closest in meaning to:",
+          "options": [
+            "A. summarized",
+            "B. listed in detail",
+            "C. estimated",
+            "D. approved"
+          ],
+          "correctIndex": 1,
+          "type": "vocabulary",
+          "explanation": "'Itemized' means presented as a detailed list of individual items or charges."
+        }
+      ]
     }
   ]
 }

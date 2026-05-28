@@ -3,87 +3,94 @@
     {
       "id": "t1",
       "textType": "email",
-      "content": "From: SecureBank Alerts\nTo: james.morrison@email.com\nSubject: Unusual Activity Detected on Your Account\n\nWe noticed a login attempt to your online banking account from an unrecognized device in Jakarta, Indonesia at 3:47 AM EST.\n\nIf this was you, no action is needed.\nIf you did not authorize this login, please reset your password immediately and contact our fraud department at 1-800-555-0199.\n\nFor your security, we have temporarily locked access from unknown devices until you verify your identity."
+      "content": "From: SecureBank Alerts\nTo: james.morrison@email.com\nSubject: Unusual Activity Detected on Your Account\n\nWe noticed a login attempt to your online banking account from an unrecognized device in Jakarta, Indonesia at 3:47 AM EST.\n\nIf this was you, no action is needed.\nIf you did not authorize this login, please reset your password immediately and contact our fraud department at 1-800-555-0199.\n\nFor your security, we have temporarily locked access from unknown devices until you verify your identity.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why did SecureBank send the email to James Morrison?",
+          "options": [
+            "A. To advertise a new savings account",
+            "B. To alert him of a suspicious login attempt",
+            "C. To confirm his recent wire transfer",
+            "D. To request updated contact information"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The email subject and content indicate it was sent because of an unusual login from an unrecognized device."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred if James did not log in from Jakarta?",
+          "options": [
+            "A. He should ignore the email",
+            "B. His account has been accessed by someone else",
+            "C. The bank will close his account automatically",
+            "D. He will be charged a fraud protection fee"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "If James did not authorize the login, an unauthorized person may have attempted to access his account."
+        }
+      ]
     },
     {
       "id": "t2",
       "textType": "notice",
-      "content": "SecureBank – Updated Fee Schedule (Effective March 1)\n\nMonthly maintenance fee: $12 (waived with minimum balance of $1,500)\nOverdraft fee: $35 per item (max 4 per day)\nATM fee (non-network): $3 per transaction\nWire transfer (domestic): $15\nWire transfer (international): $35\n\nPaper statements now cost $2 per month. Enroll in e-statements to avoid this charge."
-    }
-  ],
-  "questions": [
-    {
-      "id": "q1",
-      "stem": "Why did SecureBank send the email to James Morrison?",
-      "options": [
-        "A. To advertise a new savings account",
-        "B. To alert him of a suspicious login attempt",
-        "C. To confirm his recent wire transfer",
-        "D. To request updated contact information"
-      ],
-      "correctIndex": 1,
-      "type": "factual",
-      "explanation": "The email subject and content indicate it was sent because of an unusual login from an unrecognized device."
-    },
-    {
-      "id": "q2",
-      "stem": "What can be inferred if James did not log in from Jakarta?",
-      "options": [
-        "A. He should ignore the email",
-        "B. His account has been accessed by someone else",
-        "C. The bank will close his account automatically",
-        "D. He will be charged a fraud protection fee"
-      ],
-      "correctIndex": 1,
-      "type": "inference",
-      "explanation": "If James did not authorize the login, an unauthorized person may have attempted to access his account."
-    },
-    {
-      "id": "q3",
-      "stem": "What is the main purpose of the fee schedule notice?",
-      "options": [
-        "A. To encourage customers to switch banks",
-        "B. To inform customers of changes to account fees",
-        "C. To explain how to apply for a loan",
-        "D. To report a system error in billing"
-      ],
-      "correctIndex": 1,
-      "type": "purpose",
-      "explanation": "The notice lists updated fees for various banking services and conditions for waivers."
-    },
-    {
-      "id": "q4",
-      "stem": "How can a customer avoid the monthly paper statement fee?",
-      "options": [
-        "A. By maintaining a $1,500 balance",
-        "B. By enrolling in e-statements",
-        "C. By making fewer than 4 overdrafts per day",
-        "D. By using only in-network ATMs"
-      ],
-      "correctIndex": 1,
-      "type": "factual",
-      "explanation": "The notice states to 'enroll in e-statements to avoid this charge.'"
-    },
-    {
-      "id": "q5",
-      "stem": "What is the maximum total overdraft fee a customer could be charged in one day?",
-      "options": ["A. $35", "B. $70", "C. $105", "D. $140"],
-      "correctIndex": 3,
-      "type": "inference",
-      "explanation": "The overdraft fee is $35 per item with a maximum of 4 per day, so 4 × $35 = $140."
-    },
-    {
-      "id": "q6",
-      "stem": "The word 'waived' in the fee schedule is closest in meaning to:",
-      "options": [
-        "A. increased",
-        "B. removed or not charged",
-        "C. delayed",
-        "D. reduced by half"
-      ],
-      "correctIndex": 1,
-      "type": "vocabulary",
-      "explanation": "'Waived' means to refrain from claiming or enforcing a fee, so it is not charged."
+      "content": "SecureBank – Updated Fee Schedule (Effective March 1)\n\nMonthly maintenance fee: $12 (waived with minimum balance of $1,500)\nOverdraft fee: $35 per item (max 4 per day)\nATM fee (non-network): $3 per transaction\nWire transfer (domestic): $15\nWire transfer (international): $35\n\nPaper statements now cost $2 per month. Enroll in e-statements to avoid this charge.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "What is the main purpose of the fee schedule notice?",
+          "options": [
+            "A. To encourage customers to switch banks",
+            "B. To inform customers of changes to account fees",
+            "C. To explain how to apply for a loan",
+            "D. To report a system error in billing"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The notice lists updated fees for various banking services and conditions for waivers."
+        },
+        {
+          "id": "q4",
+          "stem": "How can a customer avoid the monthly paper statement fee?",
+          "options": [
+            "A. By maintaining a $1,500 balance",
+            "B. By enrolling in e-statements",
+            "C. By making fewer than 4 overdrafts per day",
+            "D. By using only in-network ATMs"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The notice states to 'enroll in e-statements to avoid this charge.'"
+        },
+        {
+          "id": "q5",
+          "stem": "What is the maximum total overdraft fee a customer could be charged in one day?",
+          "options": [
+            "A. $35",
+            "B. $70",
+            "C. $105",
+            "D. $140"
+          ],
+          "correctIndex": 3,
+          "type": "inference",
+          "explanation": "The overdraft fee is $35 per item with a maximum of 4 per day, so 4 × $35 = $140."
+        },
+        {
+          "id": "q6",
+          "stem": "The word 'waived' in the fee schedule is closest in meaning to:",
+          "options": [
+            "A. increased",
+            "B. removed or not charged",
+            "C. delayed",
+            "D. reduced by half"
+          ],
+          "correctIndex": 1,
+          "type": "vocabulary",
+          "explanation": "'Waived' means to refrain from claiming or enforcing a fee, so it is not charged."
+        }
+      ]
     }
   ]
 }

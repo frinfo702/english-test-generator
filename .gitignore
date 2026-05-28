@@ -23,3 +23,4 @@ public/audio-cache/
 # Old server-side data dirs (no longer used)
 scores/
 answers/
+.playwright-mcp/

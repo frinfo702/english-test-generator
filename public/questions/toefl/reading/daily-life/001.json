@@ -3,92 +3,94 @@
     {
       "id": "t1",
       "textType": "email",
-      "content": "From: Student Services\nTo: All Students\nSubject: Extended Library Hours During Finals\n\nThe university library will extend its hours for the final exam period. Starting December 10, the main reading room will be open 24 hours a day through December 20. Group study rooms must be reserved online at least two hours in advance.\n\nPlease note that the quiet study floors will maintain regular hours (8 AM – 10 PM). Food and drinks are permitted only in designated areas on the ground floor."
+      "content": "From: Student Services\nTo: All Students\nSubject: Extended Library Hours During Finals\n\nThe university library will extend its hours for the final exam period. Starting December 10, the main reading room will be open 24 hours a day through December 20. Group study rooms must be reserved online at least two hours in advance.\n\nPlease note that the quiet study floors will maintain regular hours (8 AM – 10 PM). Food and drinks are permitted only in designated areas on the ground floor.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "According to the email, which area of the library will be open 24 hours?",
+          "options": [
+            "A. The group study rooms",
+            "B. The quiet study floors",
+            "C. The main reading room",
+            "D. The ground floor cafe area"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The email states that 'the main reading room will be open 24 hours a day.'"
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about group study rooms during finals?",
+          "options": [
+            "A. They are available on a first-come, first-served basis",
+            "B. They require advance online reservation",
+            "C. They are closed during the extended hours period",
+            "D. They are only available to graduate students"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The email states that group study rooms 'must be reserved online at least two hours in advance.'"
+        },
+        {
+          "id": "q6",
+          "stem": "The word 'designated' in the email is closest in meaning to:",
+          "options": [
+            "A. restricted",
+            "B. assigned",
+            "C. hidden",
+            "D. comfortable"
+          ],
+          "correctIndex": 1,
+          "type": "vocabulary",
+          "explanation": "'Designated' means specifically assigned or marked for a particular purpose."
+        }
+      ]
     },
     {
       "id": "t2",
       "textType": "notice",
-      "content": "Campus Cafe – Winter Break Schedule\n\nDec 15–Dec 30: Reduced hours (7 AM – 3 PM)\nJan 2: Resume normal hours (6:30 AM – 8 PM)\n\nThe cafe will be completely closed on Dec 24, 25, and 31.\n\nDuring reduced hours, only grab-and-go items and coffee will be available. The hot breakfast menu returns January 2."
-    }
-  ],
-  "questions": [
-    {
-      "id": "q1",
-      "stem": "According to the email, which area of the library will be open 24 hours?",
-      "options": [
-        "A. The group study rooms",
-        "B. The quiet study floors",
-        "C. The main reading room",
-        "D. The ground floor cafe area"
-      ],
-      "correctIndex": 2,
-      "type": "factual",
-      "explanation": "The email states that 'the main reading room will be open 24 hours a day.'"
-    },
-    {
-      "id": "q2",
-      "stem": "What can be inferred about group study rooms during finals?",
-      "options": [
-        "A. They are available on a first-come, first-served basis",
-        "B. They require advance online reservation",
-        "C. They are closed during the extended hours period",
-        "D. They are only available to graduate students"
-      ],
-      "correctIndex": 1,
-      "type": "inference",
-      "explanation": "The email states that group study rooms 'must be reserved online at least two hours in advance.'"
-    },
-    {
-      "id": "q3",
-      "stem": "What is the main purpose of the cafe notice?",
-      "options": [
-        "A. To announce a permanent closure",
-        "B. To inform customers of temporary schedule changes",
-        "C. To introduce a new winter menu",
-        "D. To recruit temporary holiday staff"
-      ],
-      "correctIndex": 1,
-      "type": "purpose",
-      "explanation": "The notice informs customers about reduced hours, closure dates, and limited menu options during the winter break."
-    },
-    {
-      "id": "q4",
-      "stem": "Which statement about the cafe is true during the reduced hours period?",
-      "options": [
-        "A. The full breakfast menu is available all day",
-        "B. Hot meals can be ordered from the regular menu",
-        "C. Only grab-and-go items and coffee are served",
-        "D. The cafe opens at 6:30 AM as usual"
-      ],
-      "correctIndex": 2,
-      "type": "factual",
-      "explanation": "The notice explicitly states that 'only grab-and-go items and coffee will be available' during reduced hours."
-    },
-    {
-      "id": "q5",
-      "stem": "On which date will both the library and the cafe be operating on modified schedules?",
-      "options": [
-        "A. December 10",
-        "B. December 15",
-        "C. December 25",
-        "D. January 2"
-      ],
-      "correctIndex": 1,
-      "type": "inference",
-      "explanation": "On December 15, the library is in its extended hours period (Dec 10–20) and the cafe begins reduced hours (Dec 15–30)."
-    },
-    {
-      "id": "q6",
-      "stem": "The word 'designated' in the email is closest in meaning to:",
-      "options": [
-        "A. restricted",
-        "B. assigned",
-        "C. hidden",
-        "D. comfortable"
-      ],
-      "correctIndex": 1,
-      "type": "vocabulary",
-      "explanation": "'Designated' means specifically assigned or marked for a particular purpose."
+      "content": "Campus Cafe – Winter Break Schedule\n\nDec 15–Dec 30: Reduced hours (7 AM – 3 PM)\nJan 2: Resume normal hours (6:30 AM – 8 PM)\n\nThe cafe will be completely closed on Dec 24, 25, and 31.\n\nDuring reduced hours, only grab-and-go items and coffee will be available. The hot breakfast menu returns January 2.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "What is the main purpose of the cafe notice?",
+          "options": [
+            "A. To announce a permanent closure",
+            "B. To inform customers of temporary schedule changes",
+            "C. To introduce a new winter menu",
+            "D. To recruit temporary holiday staff"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The notice informs customers about reduced hours, closure dates, and limited menu options during the winter break."
+        },
+        {
+          "id": "q4",
+          "stem": "Which statement about the cafe is true during the reduced hours period?",
+          "options": [
+            "A. The full breakfast menu is available all day",
+            "B. Hot meals can be ordered from the regular menu",
+            "C. Only grab-and-go items and coffee are served",
+            "D. The cafe opens at 6:30 AM as usual"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The notice explicitly states that 'only grab-and-go items and coffee will be available' during reduced hours."
+        },
+        {
+          "id": "q5",
+          "stem": "On which date will both the library and the cafe be operating on modified schedules?",
+          "options": [
+            "A. December 10",
+            "B. December 15",
+            "C. December 25",
+            "D. January 2"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "On December 15, the library is in its extended hours period (Dec 10–20) and the cafe begins reduced hours (Dec 15–30)."
+        }
+      ]
     }
   ]
 }
