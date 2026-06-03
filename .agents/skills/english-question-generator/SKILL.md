@@ -52,18 +52,18 @@ description: >
 
 - 70〜100語の学術段落を作る
 - 空欄は10個に固定する
+- `paragraph` には元の全文のみを入れ、伏せ字や `_` は保存しない
+- 空欄化する単語は `items` に段落内の出現順で並べる
 - `items[].hint` は 2〜3文字にする
 - `items[].answer` は完全な正解単語を入れる
 - `items[].hint` を `items[].answer` の先頭一致にする
 - **解答者は hint の続きのみを入力する前提で作る**
 - 続き文字数 = `answer.length - hint.length` で揃える
-- `items[].placeholder` は `hint + 続き文字数分の _` にする
-- `paragraph` 内の空欄表現を `items[].placeholder` と完全一致させる
 - 文脈から一意に正解できる語だけを選ぶ
 
 ## 品質チェック
 
 - `index` は 0 始まりで連番にする
-- 各 `placeholder` は段落内に1回だけ出現させる
+- 各 `answer` は段落内に対応する出現箇所を持たせ、`items` の順序と一致させる
 - 綴り・文法・語彙レベルを難易度要件に合わせる
 - TOEICはビジネス文脈、TOEFLは学習者向け学術/日常文脈に寄せる

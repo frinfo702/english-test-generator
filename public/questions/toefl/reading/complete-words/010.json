@@ -1,65 +1,55 @@
 {
-  "paragraph": "Recent advances in neuroscience have begun to ill_______ the neural mechanisms underlying creativity. Functional mag_____ resonance imaging studies reveal that creative thinking involves the dynamic interaction of mul_____ brain networks rather than isolated regions. When subjects engage in divergent thinking tasks, the default mode network, typically ass_______ with daydreaming and self-reflection, becomes highly act___ Simultaneously, Simul_________ executive control network helps evaluate and refine the generated ev______ This collaboration between spontaneous gen______ controlled processes coll_________ explain why creative breakthroughs often occur after periods of per____ concentration followed by mental relaxation.",
+  "paragraph": "Recent advances in neuroscience have begun to illuminate the neural mechanisms underlying creativity. Functional magnetic resonance imaging studies reveal that creative thinking involves the dynamic interaction of multiple brain networks rather than isolated regions. When subjects engage in divergent thinking tasks, the default mode network, typically associated with daydreaming and self-reflection, becomes highly active. Simultaneously, executive control networks help evaluate and refine generated ideas. This collaboration between spontaneous and controlled processes may explain why creative breakthroughs often occur after periods of focused concentration followed by mental relaxation.",
   "items": [
     {
       "index": 0,
       "hint": "ill",
-      "answer": "illuminate",
-      "placeholder": "ill_______"
+      "answer": "illuminate"
     },
     {
       "index": 1,
       "hint": "mag",
-      "answer": "magnetic",
-      "placeholder": "mag_____"
+      "answer": "magnetic"
     },
     {
       "index": 2,
       "hint": "mul",
-      "answer": "multiple",
-      "placeholder": "mul_____"
+      "answer": "multiple"
     },
     {
       "index": 3,
       "hint": "ass",
-      "answer": "associated",
-      "placeholder": "ass_______"
+      "answer": "associated"
     },
     {
       "index": 4,
       "hint": "act",
-      "answer": "active",
-      "placeholder": "act___"
+      "answer": "active"
     },
     {
       "index": 5,
       "hint": "Simul",
-      "answer": "Simultaneously",
-      "placeholder": "Simul_________"
+      "answer": "Simultaneously"
     },
     {
       "index": 6,
       "hint": "ev",
-      "answer": "evaluate",
-      "placeholder": "ev______"
+      "answer": "evaluate"
     },
     {
       "index": 7,
       "hint": "gen",
-      "answer": "generated",
-      "placeholder": "gen______"
+      "answer": "generated"
     },
     {
       "index": 8,
       "hint": "coll",
-      "answer": "collaboration",
-      "placeholder": "coll_________"
+      "answer": "collaboration"
     },
     {
       "index": 9,
       "hint": "per",
-      "answer": "periods",
-      "placeholder": "per____"
+      "answer": "periods"
     }
   ]
 }

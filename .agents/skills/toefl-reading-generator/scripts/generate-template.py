@@ -22,13 +22,12 @@ from pathlib import Path
 
 TEMPLATES = {
     "complete-words": {
-        "paragraph": "TODO: Write a paragraph with blanks. Use hint+underscores placeholders (e.g., pho_________).",
+        "paragraph": "TODO: Write the original full paragraph without masking any words.",
         "items": [
             {
                 "index": 0,
                 "hint": "abc",
                 "answer": "TODO: Correct word",
-                "placeholder": "abc____",
             }
         ],
     },

@@ -1,65 +1,55 @@
 {
-  "paragraph": "Ocean ecosystems cover more than 70 per____ of Earth's sur____ and are home to an inc_______ variety of life. From the sunlit surface waters to the dark depths of the tre_____, marine hab_____ sup____ a diverse array of org______. Coral reefs pro____ food and she____ for roughly a qua____ of all marine species, making them essential for global biodiversity. Scientists emphasize the urgent need to protect these fragile environments from pollution and climate change.",
+  "paragraph": "Ocean ecosystems cover more than 70 percent of Earth's surface and are home to an incredible variety of life. From the sunlit surface waters to the dark depths of the trenches, marine habitats support a diverse array of organisms. Coral reefs provide food and shelter for roughly a quarter of all marine species, making them essential for global biodiversity. Scientists emphasize the urgent need to protect these fragile environments from pollution and climate change.",
   "items": [
     {
       "index": 0,
       "hint": "per",
-      "answer": "percent",
-      "placeholder": "per____"
+      "answer": "percent"
     },
     {
       "index": 1,
       "hint": "sur",
-      "answer": "surface",
-      "placeholder": "sur____"
+      "answer": "surface"
     },
     {
       "index": 2,
       "hint": "inc",
-      "answer": "incredible",
-      "placeholder": "inc_______"
+      "answer": "incredible"
     },
     {
       "index": 3,
       "hint": "tre",
-      "answer": "trenches",
-      "placeholder": "tre_____"
+      "answer": "trenches"
     },
     {
       "index": 4,
       "hint": "hab",
-      "answer": "habitats",
-      "placeholder": "hab_____"
+      "answer": "habitats"
     },
     {
       "index": 5,
       "hint": "sup",
-      "answer": "support",
-      "placeholder": "sup____"
+      "answer": "support"
     },
     {
       "index": 6,
       "hint": "org",
-      "answer": "organisms",
-      "placeholder": "org______"
+      "answer": "organisms"
     },
     {
       "index": 7,
       "hint": "pro",
-      "answer": "provide",
-      "placeholder": "pro____"
+      "answer": "provide"
     },
     {
       "index": 8,
       "hint": "she",
-      "answer": "shelter",
-      "placeholder": "she____"
+      "answer": "shelter"
     },
     {
       "index": 9,
       "hint": "qua",
-      "answer": "quarter",
-      "placeholder": "qua____"
+      "answer": "quarter"
     }
   ]
 }

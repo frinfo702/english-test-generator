@@ -1,65 +1,55 @@
 {
-  "paragraph": "Throughout history, ancient civilizations developed rem_______ architectural and eng________ achievements that continue to ast_____ modern researchers around the world. The Egy______ built mon_______ pyramids using soph_________ techniques for qu_______ and tra_________ massive stone blocks across vast distances without modern machinery. In Mes________, engineers con________ intricate irrigation systems that transformed arid landscapes into productive agricultural regions. These early innovations demonstrate the remarkable ingenuity of human societies that flourished thousands of years ago.",
+  "paragraph": "Throughout history, ancient civilizations developed remarkable architectural and engineering achievements that continue to astonish modern researchers around the world. The Egyptians built monumental pyramids using sophisticated techniques for quarrying and transporting massive stone blocks across vast distances without modern machinery. In Mesopotamia, engineers constructed intricate irrigation systems that transformed arid landscapes into productive agricultural regions. These early innovations demonstrate the remarkable ingenuity of human societies that flourished thousands of years ago.",
   "items": [
     {
       "index": 0,
       "hint": "rem",
-      "answer": "remarkable",
-      "placeholder": "rem_______"
+      "answer": "remarkable"
     },
     {
       "index": 1,
       "hint": "eng",
-      "answer": "engineering",
-      "placeholder": "eng________"
+      "answer": "engineering"
     },
     {
       "index": 2,
       "hint": "ast",
-      "answer": "astonish",
-      "placeholder": "ast_____"
+      "answer": "astonish"
     },
     {
       "index": 3,
       "hint": "Egy",
-      "answer": "Egyptians",
-      "placeholder": "Egy______"
+      "answer": "Egyptians"
     },
     {
       "index": 4,
       "hint": "mon",
-      "answer": "monumental",
-      "placeholder": "mon_______"
+      "answer": "monumental"
     },
     {
       "index": 5,
       "hint": "soph",
-      "answer": "sophisticated",
-      "placeholder": "soph_________"
+      "answer": "sophisticated"
     },
     {
       "index": 6,
       "hint": "qu",
-      "answer": "quarrying",
-      "placeholder": "qu_______"
+      "answer": "quarrying"
     },
     {
       "index": 7,
       "hint": "tra",
-      "answer": "transporting",
-      "placeholder": "tra_________"
+      "answer": "transporting"
     },
     {
       "index": 8,
       "hint": "Mes",
-      "answer": "Mesopotamia",
-      "placeholder": "Mes________"
+      "answer": "Mesopotamia"
     },
     {
       "index": 9,
       "hint": "con",
-      "answer": "constructed",
-      "placeholder": "con________"
+      "answer": "constructed"
     }
   ]
 }

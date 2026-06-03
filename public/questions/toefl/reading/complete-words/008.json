@@ -1,65 +1,55 @@
 {
-  "paragraph": "The study of micro_________ has revealed how small-scale economic decisions agg______ to shape larger market trends. Behavioral economists have discovered that ind________ often dev____ from rational choice models due to cog______ biases and emotional factors. For example, consumers frequently dis_____ immediate rewards over larger future benefits, phen______ phenomenon known as hyperbolic discounting. Understanding irra______ irrational patterns has enabled policy pol___ to design more eff______ interventions in areas such as retirement savings and public health.",
+  "paragraph": "The study of microeconomics has revealed how small-scale economic decisions aggregate to shape larger market trends. Behavioral economists have discovered that individuals often deviate from rational choice models due to cognitive biases and emotional factors. For example, consumers frequently discount immediate rewards over larger future benefits, a phenomenon known as hyperbolic discounting. Understanding irrational patterns has enabled policy makers to design more effective interventions in areas such as retirement savings and public health.",
   "items": [
     {
       "index": 0,
       "hint": "micro",
-      "answer": "microeconomics",
-      "placeholder": "micro_________"
+      "answer": "microeconomics"
     },
     {
       "index": 1,
       "hint": "agg",
-      "answer": "aggregate",
-      "placeholder": "agg______"
+      "answer": "aggregate"
     },
     {
       "index": 2,
       "hint": "ind",
-      "answer": "individuals",
-      "placeholder": "ind________"
+      "answer": "individuals"
     },
     {
       "index": 3,
       "hint": "dev",
-      "answer": "deviate",
-      "placeholder": "dev____"
+      "answer": "deviate"
     },
     {
       "index": 4,
       "hint": "cog",
-      "answer": "cognitive",
-      "placeholder": "cog______"
+      "answer": "cognitive"
     },
     {
       "index": 5,
       "hint": "dis",
-      "answer": "discount",
-      "placeholder": "dis_____"
+      "answer": "discount"
     },
     {
       "index": 6,
       "hint": "phen",
-      "answer": "phenomenon",
-      "placeholder": "phen______"
+      "answer": "phenomenon"
     },
     {
       "index": 7,
       "hint": "irra",
-      "answer": "irrational",
-      "placeholder": "irra______"
+      "answer": "irrational"
     },
     {
       "index": 8,
       "hint": "pol",
-      "answer": "policy",
-      "placeholder": "pol___"
+      "answer": "policy"
     },
     {
       "index": 9,
       "hint": "eff",
-      "answer": "effective",
-      "placeholder": "eff______"
+      "answer": "effective"
     }
   ]
 }

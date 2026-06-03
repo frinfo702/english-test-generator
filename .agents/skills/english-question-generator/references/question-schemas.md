@@ -169,29 +169,26 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 ## TOEFL Reading: Complete the Words
 
-段落内の単語を `hint + _` 形式で一部隠し、**hintの続きだけ**を入力させる。
+段落内の単語を表示時に部分マスクし、**hintの続きだけ**を入力させる。
 
 ```json
 {
-  "paragraph": "The process of pho_________ allows plants to con____ sunlight into che_____ energy. Chlorophyll, the green pig____ found in plant cells, abs____ light from the sun.",
+  "paragraph": "The process of photosynthesis allows plants to convert sunlight into chemical energy. Chlorophyll, the green pigment found in plant cells, absorbs light from the sun.",
   "items": [
     {
       "index": 0,
       "hint": "pho",
-      "answer": "photosynthesis",
-      "placeholder": "pho_________"
+      "answer": "photosynthesis"
     },
     {
       "index": 1,
       "hint": "con",
-      "answer": "convert",
-      "placeholder": "con____"
+      "answer": "convert"
     },
     {
       "index": 2,
       "hint": "che",
-      "answer": "chemical",
-      "placeholder": "che_____"
+      "answer": "chemical"
     }
   ]
 }
@@ -199,13 +196,13 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `paragraph`: `hint + _` のプレースホルダーを含む文
+- `paragraph`: 元の全文。伏せ字や `_` は保存しない
 - `items[].index`: 段落内の出現順（0始まり）
 - `items[].hint`: 最初の2〜3文字（文脈に応じて変動可）
 - `items[].answer`: 正解の完全な単語
 - `items[].hint` は `items[].answer` の先頭一致にする（大文字小文字は無視可）
-- `items[].placeholder`: `hint + 続き文字数分の _` で作り、`paragraph` 内文字列と**完全一致**させる
-- 続き文字数 = `answer.length - hint.length`
+- `items` は段落内の出現順に並べる
+- 各 `answer` は段落内に対応する出現箇所を持たせる
 - UIでは hint 部分は表示済みで、解答者は続き部分のみ入力する
 - パッセージ語数: 70〜100語
 - 第1文は通常全文表示。第2文以降で単語の後半が欠落する形式

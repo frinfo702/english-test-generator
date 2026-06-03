@@ -1,65 +1,55 @@
 {
-  "paragraph": "The process of pho___________, which occurs primarily in the leaves of green plants, allows them to con____ sunlight into che_____ energy that powers cellular activities. Chlorophyll, the green pig____ found in plant cells, abs____ light from the sun and uses it to tra______ carbon dioxide and water into glucose. This rem_______ mechanism has been stu____ extensively by bio_______ for over two cen______, yet researchers continue to discover new aspects of its efficiency.",
+  "paragraph": "The process of photosynthesis, which occurs primarily in the leaves of green plants, allows them to convert sunlight into chemical energy that powers cellular activities. Chlorophyll, the green pigment found in plant cells, absorbs light from the sun and uses it to transform carbon dioxide and water into glucose. This remarkable mechanism has been studied extensively by biologists for over two centuries, yet researchers continue to discover new aspects of its efficiency.",
   "items": [
     {
       "index": 0,
       "hint": "pho",
-      "answer": "photosynthesis",
-      "placeholder": "pho___________"
+      "answer": "photosynthesis"
     },
     {
       "index": 1,
       "hint": "con",
-      "answer": "convert",
-      "placeholder": "con____"
+      "answer": "convert"
     },
     {
       "index": 2,
       "hint": "che",
-      "answer": "chemical",
-      "placeholder": "che_____"
+      "answer": "chemical"
     },
     {
       "index": 3,
       "hint": "pig",
-      "answer": "pigment",
-      "placeholder": "pig____"
+      "answer": "pigment"
     },
     {
       "index": 4,
       "hint": "abs",
-      "answer": "absorbs",
-      "placeholder": "abs____"
+      "answer": "absorbs"
     },
     {
       "index": 5,
       "hint": "tra",
-      "answer": "transform",
-      "placeholder": "tra______"
+      "answer": "transform"
     },
     {
       "index": 6,
       "hint": "rem",
-      "answer": "remarkable",
-      "placeholder": "rem_______"
+      "answer": "remarkable"
     },
     {
       "index": 7,
       "hint": "stu",
-      "answer": "studied",
-      "placeholder": "stu____"
+      "answer": "studied"
     },
     {
       "index": 8,
       "hint": "bio",
-      "answer": "biologists",
-      "placeholder": "bio_______"
+      "answer": "biologists"
     },
     {
       "index": 9,
       "hint": "cen",
-      "answer": "centuries",
-      "placeholder": "cen______"
+      "answer": "centuries"
     }
   ]
 }

@@ -1,65 +1,55 @@
 {
-  "paragraph": "Archaeological excavations at the ancient city of Troy have provided comp______ evidence that supports elements of the legendary accounts found in Homer's ep___ Using advanced tech________ such as ground-penetrating radar, researchers have identified mul_____ layers of settlement spanning nearly four mil______ The ear_____ phases reveal a prosperous trading center with exten____ fortifications and sophisticated water man_______ systems. These findings suggest that the historical reality of Troy com____ far more complex than previously ske______ by skeptical scholars.",
+  "paragraph": "Archaeological excavations at the ancient city of Troy have provided compelling evidence that supports elements of the legendary accounts found in Homer's epics. Using advanced technologies such as ground-penetrating radar, researchers have identified multiple layers of settlement spanning nearly four millennia. The earliest phases reveal a prosperous trading center with extensive fortifications and sophisticated water management systems. These findings suggest that the historical reality of Troy was more complex than previously believed by skeptical scholars.",
   "items": [
     {
       "index": 0,
       "hint": "comp",
-      "answer": "compelling",
-      "placeholder": "comp______"
+      "answer": "compelling"
     },
     {
       "index": 1,
       "hint": "ep",
-      "answer": "epics",
-      "placeholder": "ep___"
+      "answer": "epics"
     },
     {
       "index": 2,
       "hint": "tech",
-      "answer": "technologies",
-      "placeholder": "tech________"
+      "answer": "technologies"
     },
     {
       "index": 3,
       "hint": "mul",
-      "answer": "multiple",
-      "placeholder": "mul_____"
+      "answer": "multiple"
     },
     {
       "index": 4,
       "hint": "mil",
-      "answer": "millennia",
-      "placeholder": "mil______"
+      "answer": "millennia"
     },
     {
       "index": 5,
       "hint": "ear",
-      "answer": "earliest",
-      "placeholder": "ear_____"
+      "answer": "earliest"
     },
     {
       "index": 6,
       "hint": "exten",
-      "answer": "extensive",
-      "placeholder": "exten____"
+      "answer": "extensive"
     },
     {
       "index": 7,
       "hint": "man",
-      "answer": "management",
-      "placeholder": "man_______"
+      "answer": "management"
     },
     {
       "index": 8,
       "hint": "com",
-      "answer": "complex",
-      "placeholder": "com____"
+      "answer": "complex"
     },
     {
       "index": 9,
       "hint": "ske",
-      "answer": "skeptical",
-      "placeholder": "ske______"
+      "answer": "skeptical"
     }
   ]
 }

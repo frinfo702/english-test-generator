@@ -27,9 +27,9 @@ description: >
 ### Complete the Words
 
 - 70〜100語の学術段落、空欄10個固定
+- `paragraph` には元の全文のみを入れ、`___` や `hint + _` の伏せ字は保存しない
+- 空欄化する単語は段落中の出現順に `items` へ並べる
 - `hint` は2〜3文字、`answer` の先頭と一致させる
-- `placeholder` = `hint + 続き文字数分の _`
-- 段落内の空欄と `placeholder` を完全一致させる
 - 文脈から一意に特定できる語のみ選ぶ
 
 ### Read in Daily Life
