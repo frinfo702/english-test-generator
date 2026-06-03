@@ -30,7 +30,9 @@ describe("useQuestion", () => {
       data: { id: "q2" },
     });
 
-    const { result } = renderHook(() => useQuestion<{ id: string }>("toeic/part5"));
+    const { result } = renderHook(() =>
+      useQuestion<{ id: string }>("toeic/part5"),
+    );
 
     await act(async () => {
       await result.current.load();
@@ -49,7 +51,9 @@ describe("useQuestion", () => {
       data: { id: "q10" },
     });
 
-    const { result } = renderHook(() => useQuestion<{ id: string }>("toeic/part5"));
+    const { result } = renderHook(() =>
+      useQuestion<{ id: string }>("toeic/part5"),
+    );
 
     await act(async () => {
       await result.current.loadByFile("010.json");
@@ -68,9 +72,13 @@ describe("useQuestion", () => {
       file: "001.json",
       data: { id: "q1" },
     });
-    vi.mocked(fetchQuestionByNumberWithMeta).mockRejectedValue(new Error("boom"));
+    vi.mocked(fetchQuestionByNumberWithMeta).mockRejectedValue(
+      new Error("boom"),
+    );
 
-    const { result } = renderHook(() => useQuestion<{ id: string }>("toeic/part5"));
+    const { result } = renderHook(() =>
+      useQuestion<{ id: string }>("toeic/part5"),
+    );
 
     await act(async () => {
       await result.current.load();
@@ -83,7 +91,10 @@ describe("useQuestion", () => {
       await result.current.loadByQuestionNumber(2);
     });
 
-    expect(fetchQuestionByNumberWithMeta).toHaveBeenCalledWith("toeic/part5", 2);
+    expect(fetchQuestionByNumberWithMeta).toHaveBeenCalledWith(
+      "toeic/part5",
+      2,
+    );
     expect(result.current.error).toBe("boom");
     expect(result.current.data).toBeNull();
     expect(result.current.file).toBeNull();

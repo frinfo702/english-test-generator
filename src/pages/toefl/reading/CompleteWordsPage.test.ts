@@ -30,9 +30,15 @@ describe("CompleteWordsPage helpers", () => {
 
   it("finds the next unused answer position and falls back to earlier matches", () => {
     const usedStarts = new Set([0]);
-    expect(findAnswerPosition("cat scatter cat", "cat", 1, usedStarts)).toBe(12);
-    expect(findAnswerPosition("cat scatter cat", "cat", 20, usedStarts)).toBe(12);
+    expect(findAnswerPosition("cat scatter cat", "cat", 1, usedStarts)).toBe(
+      12,
+    );
+    expect(findAnswerPosition("cat scatter cat", "cat", 20, usedStarts)).toBe(
+      12,
+    );
     usedStarts.add(12);
-    expect(findAnswerPosition("cat scatter cat", "cat", 0, usedStarts)).toBe(-1);
+    expect(findAnswerPosition("cat scatter cat", "cat", 0, usedStarts)).toBe(
+      -1,
+    );
   });
 });

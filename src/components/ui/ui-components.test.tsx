@@ -42,14 +42,14 @@ describe("ui components", () => {
 
     expect(screen.getByText("Accuracy")).toBeTruthy();
     expect(screen.getByText("5/10")).toBeTruthy();
-    expect(container.querySelector("div[style]")?.getAttribute("style")).toContain(
-      "width: 50%",
-    );
+    expect(
+      container.querySelector("div[style]")?.getAttribute("style"),
+    ).toContain("width: 50%");
 
     rerender(<ProgressBar current={3} total={0} />);
-    expect(container.querySelector("div[style]")?.getAttribute("style")).toContain(
-      "width: 0%",
-    );
+    expect(
+      container.querySelector("div[style]")?.getAttribute("style"),
+    ).toContain("width: 0%");
   });
 
   it("shows the default and custom spinner messages", () => {
@@ -124,7 +124,13 @@ describe("ui components", () => {
   it("lets the user change playback speed from presets and slider", () => {
     const onChange = vi.fn();
     render(
-      <SpeedControl playbackRate={1} onChange={onChange} showSlider min={0.8} max={1.4} />,
+      <SpeedControl
+        playbackRate={1}
+        onChange={onChange}
+        showSlider
+        min={0.8}
+        max={1.4}
+      />,
     );
 
     fireEvent.click(screen.getByRole("button", { name: "Fast" }));

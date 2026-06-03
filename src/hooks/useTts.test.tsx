@@ -11,7 +11,10 @@ class FakeAudioBuffer {
     this.numberOfChannels = numberOfChannels;
     this.length = length;
     this.sampleRate = sampleRate;
-    this.channels = Array.from({ length: numberOfChannels }, () => new Float32Array(length));
+    this.channels = Array.from(
+      { length: numberOfChannels },
+      () => new Float32Array(length),
+    );
   }
 
   getChannelData(channel: number) {
@@ -26,7 +29,11 @@ class FakeAudioContext {
   });
 
   createBuffer(numberOfChannels: number, length: number, sampleRate: number) {
-    return new FakeAudioBuffer(numberOfChannels, length, sampleRate) as unknown as AudioBuffer;
+    return new FakeAudioBuffer(
+      numberOfChannels,
+      length,
+      sampleRate,
+    ) as unknown as AudioBuffer;
   }
 
   decodeAudioData = vi.fn(async () => {
@@ -71,7 +78,10 @@ describe("useTts", () => {
     FakeAudio.instances = [];
 
     vi.stubGlobal("fetch", fetchMock);
-    vi.stubGlobal("AudioContext", FakeAudioContext as unknown as typeof AudioContext);
+    vi.stubGlobal(
+      "AudioContext",
+      FakeAudioContext as unknown as typeof AudioContext,
+    );
     vi.stubGlobal("Audio", FakeAudio as unknown as typeof Audio);
     vi.stubGlobal("requestAnimationFrame", requestAnimationFrameMock);
     vi.stubGlobal("cancelAnimationFrame", cancelAnimationFrameMock);
@@ -94,7 +104,9 @@ describe("useTts", () => {
   it("plays fetched audio and exposes playback controls", async () => {
     fetchMock.mockResolvedValue({
       ok: true,
-      blob: vi.fn().mockResolvedValue(new Blob(["audio"], { type: "audio/mpeg" })),
+      blob: vi
+        .fn()
+        .mockResolvedValue(new Blob(["audio"], { type: "audio/mpeg" })),
     });
 
     const { useTts } = await import("./useTts");
