@@ -7,58 +7,16 @@ import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTime
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
+import {
+  findAnswerPosition,
+  getExpectedSuffix,
+  type CompleteWordsItem,
+} from "./completeWords";
 import styles from "./CompleteWordsPage.module.css";
-
-interface Item {
-  index: number;
-  hint: string;
-  answer: string;
-}
 
 interface ProblemData {
   paragraph: string;
-  items: Item[];
-}
-
-function getExpectedSuffix(item: Item): string {
-  const answer = item.answer.trim();
-  const hint = item.hint.trim();
-  if (answer.toLowerCase().startsWith(hint.toLowerCase())) {
-    return answer.slice(hint.length);
-  }
-  return answer;
-}
-
-function isWordChar(char: string | undefined): boolean {
-  return !!char && /[A-Za-z]/.test(char);
-}
-
-function findAnswerPosition(
-  paragraph: string,
-  answer: string,
-  fromIndex: number,
-): number {
-  const normalizedParagraph = paragraph.toLowerCase();
-  const normalizedAnswer = answer.trim().toLowerCase();
-  let searchFrom = fromIndex;
-
-  while (searchFrom < paragraph.length) {
-    const matchIndex = normalizedParagraph.indexOf(
-      normalizedAnswer,
-      searchFrom,
-    );
-    if (matchIndex === -1) return -1;
-
-    const before = paragraph[matchIndex - 1];
-    const after = paragraph[matchIndex + normalizedAnswer.length];
-    if (!isWordChar(before) && !isWordChar(after)) {
-      return matchIndex;
-    }
-
-    searchFrom = matchIndex + 1;
-  }
-
-  return -1;
+  items: CompleteWordsItem[];
 }
 
 export function CompleteWordsPage() {
@@ -219,12 +177,18 @@ export function CompleteWordsPage() {
     if (!data) return null;
     const text = data.paragraph;
     const parts: React.ReactNode[] = [];
+    const usedStarts = new Set<number>();
     let lastIndex = 0;
 
     for (const [itemIdx, item] of data.items.entries()) {
       const answer = item.answer.trim();
-      const pos = findAnswerPosition(text, answer, lastIndex);
-      if (pos === -1) return text;
+      const pos = findAnswerPosition(text, answer, lastIndex, usedStarts);
+      if (pos === -1) {
+        console.warn(`Could not locate answer in paragraph: ${answer}`);
+        continue;
+      }
+
+      usedStarts.add(pos);
       const expectedSuffix = getExpectedSuffix(item);
       const userInput = answers[itemIdx] ?? "";
       const isCorrect =

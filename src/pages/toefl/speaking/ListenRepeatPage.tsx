@@ -8,6 +8,7 @@ import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTime
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
+import { diffWords } from "./listenRepeat";
 import styles from "./ListenRepeatPage.module.css";
 
 interface Sentence {
@@ -21,18 +22,6 @@ interface ProblemData {
 
 const SHOW_SECS = 4;
 type Phase = "showing" | "hidden" | "review";
-
-function diffWords(original: string, input: string) {
-  const origWords = original.trim().split(/\s+/);
-  const inputWords = input.trim().split(/\s+/);
-  return origWords.map((word, i) => ({
-    word,
-    correct:
-      word.toLowerCase().replace(/[^a-z]/g, "") ===
-      (inputWords[i] ?? "").toLowerCase().replace(/[^a-z]/g, ""),
-    inputWord: inputWords[i] ?? "",
-  }));
-}
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();

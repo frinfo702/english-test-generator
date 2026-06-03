@@ -18,15 +18,17 @@ export function useQuestion<T>(taskPath: string) {
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
-    try {
-      const result = await fetchRandomQuestionWithMeta<T>(taskPath);
-      setData(result.data);
-      setFile(result.file);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
-    } finally {
-      setLoading(false);
-    }
+      try {
+        const result = await fetchRandomQuestionWithMeta<T>(taskPath);
+        setData(result.data);
+        setFile(result.file);
+      } catch (e) {
+        setData(null);
+        setFile(null);
+        setError(e instanceof Error ? e.message : String(e));
+      } finally {
+        setLoading(false);
+      }
   }, [taskPath]);
 
   const loadByFile = useCallback(
@@ -41,6 +43,8 @@ export function useQuestion<T>(taskPath: string) {
         setData(result.data);
         setFile(result.file);
       } catch (e) {
+        setData(null);
+        setFile(null);
         setError(e instanceof Error ? e.message : String(e));
       } finally {
         setLoading(false);
@@ -61,6 +65,8 @@ export function useQuestion<T>(taskPath: string) {
         setData(result.data);
         setFile(result.file);
       } catch (e) {
+        setData(null);
+        setFile(null);
         setError(e instanceof Error ? e.message : String(e));
       } finally {
         setLoading(false);
