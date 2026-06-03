@@ -1,0 +1,66 @@
+{
+  "title": "Internship Application Discussion",
+  "transcript": "Student: Hi Ms. Reynolds. I saw the posting for the summer internship at the career center. Do you have any advice for the application? Advisor: Of course. The first step is to tailor your resume to highlight relevant coursework. Have you taken any marketing classes? Student: Yes, I took Introduction to Marketing last fall and got an A. Advisor: Excellent. Be sure to emphasize any group projects where you analyzed market trends. Also, the cover letter should explain why you are interested in that specific company. Student: I see. Should I mention my volunteer work with the student-run business club? Advisor: Absolutely. That shows leadership and initiative, which employers value highly. Student: Thank you. When is the application deadline? Advisor: March 20th. You still have three weeks, so take your time to prepare a strong application.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the student's main purpose for visiting the advisor?",
+      "options": [
+        "To get feedback on a submitted application",
+        "To ask for advice on an internship application",
+        "To change her major to marketing",
+        "To request a letter of recommendation"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student asks for advice on the summer internship application and how to improve it."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the advisor suggest the student emphasize in the cover letter?",
+      "options": [
+        "Her grade in Introduction to Marketing",
+        "The reason she is interested in that specific company",
+        "Her availability during the summer break",
+        "The number of internships she has applied to"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The advisor says the cover letter should explain why she is interested in that specific company."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi Ms. Reynolds. I saw the posting for the summer internship at the career center. Do you have any advice for the application?"
+    },
+    {
+      "role": "Advisor",
+      "text": "Of course. The first step is to tailor your resume to highlight relevant coursework. Have you taken any marketing classes?"
+    },
+    {
+      "role": "Student",
+      "text": "Yes, I took Introduction to Marketing last fall and got an A."
+    },
+    {
+      "role": "Advisor",
+      "text": "Excellent. Be sure to emphasize any group projects where you analyzed market trends. Also, the cover letter should explain why you are interested in that specific company."
+    },
+    {
+      "role": "Student",
+      "text": "I see. Should I mention my volunteer work with the student-run business club?"
+    },
+    {
+      "role": "Advisor",
+      "text": "Absolutely. That shows leadership and initiative, which employers value highly."
+    },
+    {
+      "role": "Student",
+      "text": "Thank you. When is the application deadline?"
+    },
+    {
+      "role": "Advisor",
+      "text": "March 20th. You still have three weeks, so take your time to prepare a strong application."
+    }
+  ]
+}

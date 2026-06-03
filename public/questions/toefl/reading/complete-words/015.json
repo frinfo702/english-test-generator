@@ -1,0 +1,55 @@
+{
+  "paragraph": "The Renaissance period witnessed an unprecedented flourishing of artistic innovation across Europe. Artists began experimenting with perspective to create convincing three-dimensional space on flat surfaces. The use of chiaroscuro, the strong contrast between light and dark, added dramatic depth to paintings. Patronage from wealthy merchant families allowed creators to dedicate themselves entirely to their craft. This cultural movement gradually spread from Italy to northern Europe, where distinct stylistic traditions emerged in Flanders and Germany.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "wit",
+      "answer": "witnessed"
+    },
+    {
+      "index": 1,
+      "hint": "unp",
+      "answer": "unprecedented"
+    },
+    {
+      "index": 2,
+      "hint": "fl",
+      "answer": "flourishing"
+    },
+    {
+      "index": 3,
+      "hint": "inno",
+      "answer": "innovation"
+    },
+    {
+      "index": 4,
+      "hint": "per",
+      "answer": "perspective"
+    },
+    {
+      "index": 5,
+      "hint": "con",
+      "answer": "convincing"
+    },
+    {
+      "index": 6,
+      "hint": "con",
+      "answer": "contrast"
+    },
+    {
+      "index": 7,
+      "hint": "dra",
+      "answer": "dramatic"
+    },
+    {
+      "index": 8,
+      "hint": "Pat",
+      "answer": "Patronage"
+    },
+    {
+      "index": 9,
+      "hint": "grad",
+      "answer": "gradually"
+    }
+  ]
+}

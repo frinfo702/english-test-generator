@@ -1,0 +1,83 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "schedule",
+      "content": "Westbrook Public Library – Summer Workshop Schedule\n\nAll workshops are free and held in the Community Room.\n\nMonday June 12 – Resume Writing 10:00–11:30 AM\nTuesday June 13 – Digital Photography 2:00–4:00 PM\nWednesday June 14 – Poetry Reading 6:30–8:00 PM\nThursday June 15 – Basic Web Design 10:00 AM–12:00 PM\nFriday June 16 – Children's Story Hour 10:30–11:30 AM\n\nRegistration required. Call 555-0203 to reserve your spot.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Which workshop takes place in the evening?",
+          "options": [
+            "A. Resume Writing",
+            "B. Digital Photography",
+            "C. Poetry Reading",
+            "D. Basic Web Design"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "Poetry Reading is scheduled from 6:30–8:00 PM, which is the evening."
+        },
+        {
+          "id": "q2",
+          "stem": "What must attendees do before coming to a workshop?",
+          "options": [
+            "A. Bring their own laptop",
+            "B. Sign up in advance",
+            "C. Pay a registration fee",
+            "D. Submit a writing sample"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The schedule states 'Registration required. Call 555-0203 to reserve your spot.'"
+        },
+        {
+          "id": "q3",
+          "stem": "Which workshop would be most appropriate for a parent with a young child?",
+          "options": [
+            "A. Resume Writing",
+            "B. Digital Photography",
+            "C. Basic Web Design",
+            "D. Children's Story Hour"
+          ],
+          "correctIndex": 3,
+          "type": "inference",
+          "explanation": "Children's Story Hour is the only workshop explicitly for children, held on Friday morning."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "invoice",
+      "content": "INVOICE #10492\n\nFrom: GreenScape Landscaping\nTo: David Chen\n\nService: Monthly lawn maintenance (May)\nDate: May 1, 2025\n\nMowing & edging … $55.00\nWeed control … $25.00\nTrimming shrubs … $30.00\n\nTotal Due: $110.00\nPayment terms: Due within 15 days of receipt\n\nThank you for your business!",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "What service was the most expensive on this invoice?",
+          "options": [
+            "A. Weed control",
+            "B. Mowing and edging",
+            "C. Trimming shrubs",
+            "D. Fertilizer application"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "Mowing and edging cost $55.00, the highest amount listed."
+        },
+        {
+          "id": "q5",
+          "stem": "When must David Chen pay the invoice?",
+          "options": [
+            "A. Immediately upon receipt",
+            "B. By May 15",
+            "C. Within 15 days",
+            "D. By the end of the month"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The invoice states 'Due within 15 days of receipt.'"
+        }
+      ]
+    }
+  ]
+}

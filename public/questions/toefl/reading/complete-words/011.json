@@ -1,0 +1,55 @@
+{
+  "paragraph": "The Roman Empire's extensive network of roads significantly contributed to its longevity and economic prosperity. These carefully engineered pathways allowed the rapid movement of military legions across vast territories. Merchants transported goods such as olive oil, wine, and grain between provinces with relative ease. The roads also facilitated communication through a sophisticated relay system of mounted messengers. Many of these ancient routes remained in use for centuries after the empire's decline, demonstrating their exceptional construction quality.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "ext",
+      "answer": "extensive"
+    },
+    {
+      "index": 1,
+      "hint": "sig",
+      "answer": "significantly"
+    },
+    {
+      "index": 2,
+      "hint": "lon",
+      "answer": "longevity"
+    },
+    {
+      "index": 3,
+      "hint": "eco",
+      "answer": "economic"
+    },
+    {
+      "index": 4,
+      "hint": "eng",
+      "answer": "engineered"
+    },
+    {
+      "index": 5,
+      "hint": "rap",
+      "answer": "rapid"
+    },
+    {
+      "index": 6,
+      "hint": "ter",
+      "answer": "territories"
+    },
+    {
+      "index": 7,
+      "hint": "Mer",
+      "answer": "Merchants"
+    },
+    {
+      "index": 8,
+      "hint": "soph",
+      "answer": "sophisticated"
+    },
+    {
+      "index": 9,
+      "hint": "excep",
+      "answer": "exceptional"
+    }
+  ]
+}

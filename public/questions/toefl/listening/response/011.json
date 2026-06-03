@@ -1,0 +1,87 @@
+{
+  "title": "Listen and Choose a Response — Daily Situations",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Requesting assistance",
+      "stem": "Could you help me carry these books to the library?",
+      "options": {
+        "A": "Sure, I'm heading that way anyway.",
+        "B": "The library closes at 9 PM.",
+        "C": "I read that book last semester."
+      },
+      "correct": "A",
+      "explanation": "The speaker is requesting help, so a willing agreement is the most natural response."
+    },
+    {
+      "id": "q2",
+      "context": "Expressing disappointment",
+      "stem": "I was really hoping to get into that photography workshop, but it's full.",
+      "options": {
+        "A": "You should take a photography class.",
+        "B": "That's too bad. Maybe next semester.",
+        "C": "The workshop is in the art building."
+      },
+      "correct": "B",
+      "explanation": "The speaker is expressing disappointment, so a sympathetic response is most appropriate."
+    },
+    {
+      "id": "q3",
+      "context": "Making an offer",
+      "stem": "I can give you a ride to the airport if you need one.",
+      "options": {
+        "A": "My flight was delayed by two hours.",
+        "B": "Are you sure you don't mind? That would be great.",
+        "C": "The airport shuttle costs 20 dollars."
+      },
+      "correct": "B",
+      "explanation": "The speaker is offering help, so a gracious acceptance is the expected response."
+    },
+    {
+      "id": "q4",
+      "context": "Asking for an opinion",
+      "stem": "What do you think about the new cafeteria menu?",
+      "options": {
+        "A": "I had lunch at 12:30.",
+        "B": "It's much better than last year's options.",
+        "C": "The cafeteria is on the first floor."
+      },
+      "correct": "B",
+      "explanation": "The speaker is asking for an opinion, so sharing a personal assessment is most appropriate."
+    },
+    {
+      "id": "q5",
+      "context": "Expressing confusion",
+      "stem": "I don't understand the homework assignment. Are we supposed to write a summary or an analysis?",
+      "options": {
+        "A": "A summary just restates the main points.",
+        "B": "Professor Lee said it should be an analysis with your own interpretation.",
+        "C": "The assignment is due next Friday."
+      },
+      "correct": "B",
+      "explanation": "The speaker is confused about instructions, so clarifying the requirement is most helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Could you help me carry these books to the library?"
+    },
+    {
+      "role": "Student",
+      "text": "I was really hoping to get into that photography workshop, but it's full."
+    },
+    {
+      "role": "Friend",
+      "text": "I can give you a ride to the airport if you need one."
+    },
+    {
+      "role": "Student",
+      "text": "What do you think about the new cafeteria menu?"
+    },
+    {
+      "role": "Student",
+      "text": "I don't understand the homework assignment. Are we supposed to write a summary or an analysis?"
+    }
+  ]
+}

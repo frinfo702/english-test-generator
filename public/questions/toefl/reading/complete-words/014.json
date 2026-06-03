@@ -1,0 +1,55 @@
+{
+  "paragraph": "Behavioral economics challenges the traditional assumption that humans make rational decisions. This interdisciplinary field combines insights from psychology and economics to explain why people frequently deviate from optimal choices. One well-documented phenomenon is loss aversion, where individuals feel the pain of losing something more intensely than the pleasure of gaining something equivalent. Another concept, framing effects, demonstrates that the way information is presented significantly influences decision-making outcomes. These findings have important implications for public policy and marketing strategies.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "chal",
+      "answer": "challenges"
+    },
+    {
+      "index": 1,
+      "hint": "trad",
+      "answer": "traditional"
+    },
+    {
+      "index": 2,
+      "hint": "ra",
+      "answer": "rational"
+    },
+    {
+      "index": 3,
+      "hint": "inter",
+      "answer": "interdisciplinary"
+    },
+    {
+      "index": 4,
+      "hint": "psy",
+      "answer": "psychology"
+    },
+    {
+      "index": 5,
+      "hint": "fre",
+      "answer": "frequently"
+    },
+    {
+      "index": 6,
+      "hint": "phe",
+      "answer": "phenomenon"
+    },
+    {
+      "index": 7,
+      "hint": "aver",
+      "answer": "aversion"
+    },
+    {
+      "index": 8,
+      "hint": "sig",
+      "answer": "significantly"
+    },
+    {
+      "index": 9,
+      "hint": "impl",
+      "answer": "implications"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "Guest Lecture Series Announcement",
+  "transcript": "This announcement is for all students in the School of Environmental Studies. We are pleased to host a guest lecture series titled Climate Change and Urban Policy. The first lecture will be delivered by Dr. Helena Morales from the University of Toronto on March 10th at 3 PM in room 301. Dr. Morales will discuss how cities can adapt to rising sea levels. The lecture is open to all students, but seating is limited to 80 people. Please register online through the school website to reserve your spot. A Q&A session will follow the lecture.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main purpose of this announcement?",
+      "options": [
+        "To announce a new course offering",
+        "To inform students about a guest lecture series",
+        "To advertise a job opening in environmental policy",
+        "To promote a field trip to urban areas"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The announcement is about hosting a guest lecture series on climate change and urban policy."
+    },
+    {
+      "id": "q2",
+      "stem": "What do students need to do to attend the lecture?",
+      "options": [
+        "Submit a written request to the department",
+        "Register online through the school website",
+        "Email Dr. Morales directly for permission",
+        "Pick up a ticket at the student center"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement says to register online through the school website to reserve your spot."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "This announcement is for all students in the School of Environmental Studies. We are pleased to host a guest lecture series titled Climate Change and Urban Policy. The first lecture will be delivered by Dr. Helena Morales from the University of Toronto on March 10th at 3 PM in room 301. Dr. Morales will discuss how cities can adapt to rising sea levels. The lecture is open to all students, but seating is limited to 80 people. Please register online through the school website to reserve your spot. A Q&A session will follow the lecture."
+    }
+  ]
+}

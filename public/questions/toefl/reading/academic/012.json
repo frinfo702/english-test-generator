@@ -1,0 +1,71 @@
+{
+  "title": "Photosynthesis and Plant Adaptation",
+  "passage": "Photosynthesis is the biochemical process by which plants, algae, and certain bacteria convert light energy into chemical energy. This process occurs primarily in chloroplasts, where chlorophyll pigments capture sunlight and initiate a chain of reactions that produce glucose and oxygen from carbon dioxide and water.\n\nPlants have evolved remarkable adaptations to optimize photosynthesis under varying environmental conditions. In desert environments, species such as cacti employ crassulacean acid metabolism, a modified form of photosynthesis that allows them to open their stomata at night rather than during the day. This adaptation reduces water loss while still enabling carbon dioxide uptake.\n\nIn shaded forest floors, plants develop broader, thinner leaves with higher chlorophyll concentrations to maximize light absorption in low-intensity conditions. Some species can even alter their leaf orientation to track the sun's movement across the sky, a phenomenon known as heliotropism.\n\nThe efficiency of photosynthesis is constrained by several limiting factors, including light intensity, carbon dioxide concentration, and temperature. Understanding these constraints has become increasingly important as researchers seek to improve crop yields through genetic modification and optimized growing conditions.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to the passage, what is the role of chlorophyll in photosynthesis?",
+      "options": [
+        "A. To regulate water absorption",
+        "B. To capture sunlight",
+        "C. To produce carbon dioxide",
+        "D. To transport glucose"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that 'chlorophyll pigments capture sunlight.'"
+    },
+    {
+      "id": "q2",
+      "type": "inference",
+      "stem": "What can be inferred about cacti compared to typical plants?",
+      "options": [
+        "A. They perform photosynthesis more slowly",
+        "B. They absorb water through their leaves",
+        "C. They exchange gases primarily at night",
+        "D. They require more sunlight"
+      ],
+      "correctIndex": 2,
+      "explanation": "Cacti 'open their stomata at night' for carbon dioxide uptake, implying gas exchange occurs mainly at night."
+    },
+    {
+      "id": "q3",
+      "type": "vocabulary",
+      "stem": "The word 'constrained' in paragraph 4 is closest in meaning to:",
+      "options": [
+        "A. improved",
+        "B. limited",
+        "C. measured",
+        "D. eliminated"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Constrained' means restricted or limited."
+    },
+    {
+      "id": "q4",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention heliotropism in paragraph 3?",
+      "options": [
+        "A. To compare plant movements with animal behavior",
+        "B. To illustrate an adaptation that maximizes light capture",
+        "C. To explain why forest plants are shorter",
+        "D. To introduce a disadvantage of broad leaves"
+      ],
+      "correctIndex": 1,
+      "explanation": "Heliotropism is presented as an adaptation that helps plants track sunlight for maximum absorption."
+    },
+    {
+      "id": "q5",
+      "type": "mainIdea",
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": [
+        "A. Photosynthesis is the most important biological process on Earth",
+        "B. Plants have developed diverse strategies to perform photosynthesis efficiently in different environments",
+        "C. Desert plants are more efficient at photosynthesis than forest plants",
+        "D. Genetic modification will soon solve global food shortages"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage focuses on how plants adapt photosynthesis to different environments, from deserts to forests."
+    }
+  ]
+}

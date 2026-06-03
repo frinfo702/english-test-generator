@@ -1,0 +1,64 @@
+{
+  "title": "The History of Cartography",
+  "transcript": "Today I'd like to talk about the history of cartography, or mapmaking. Early maps were far more than navigational tools—they were reflections of how people understood the world around them. Take Ptolemy's Geography from the second century, for example. It wasn't a map we would recognize today, but rather a set of instructions for drawing maps using a grid system of latitude and longitude. Fast forward to the Age of Exploration in the 15th and 16th centuries, and we see a dramatic shift. Explorers like Columbus and Magellan brought back detailed coastlines and trade routes, which mapmakers eagerly incorporated. This was also when the Mercator projection was developed. Now, the Mercator projection is interesting because it preserves angles, which made it excellent for navigation. However, it severely distorts the size of landmasses near the poles. For instance, Greenland appears almost as large as Africa on a Mercator map, when in reality Africa is about 14 times larger. This distortion has been criticized for giving a misleading visual impression of the world's geography. In the 20th century, satellite technology revolutionized cartography. We moved from paper maps to digital systems like GPS, which can pinpoint your location anywhere on Earth within a few meters. Modern cartographers now focus on how to represent data visually through geographic information systems, or GIS, which layer information like population density, climate patterns, and road networks onto a single interactive map.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The development of GPS technology",
+        "The history and evolution of mapmaking",
+        "The life of explorers like Columbus",
+        "The differences between map projections"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture covers the history of cartography from Ptolemy to modern GIS."
+    },
+    {
+      "id": "q2",
+      "stem": "What was Ptolemy's Geography?",
+      "options": [
+        "A map of the Roman Empire",
+        "A set of instructions for drawing maps using a grid system",
+        "A navigation guide for sailors",
+        "A list of place names in the ancient world"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Ptolemy's Geography was a set of instructions for drawing maps using a grid system of latitude and longitude."
+    },
+    {
+      "id": "q3",
+      "stem": "What limitation of the Mercator projection does the professor mention?",
+      "options": [
+        "It does not preserve compass directions",
+        "It distorts the size of landmasses near the poles",
+        "It cannot be used for navigation",
+        "It only works for small areas"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The Mercator projection severely distorts the size of landmasses near the poles, making Greenland look almost as large as Africa."
+    },
+    {
+      "id": "q4",
+      "stem": "What can be inferred about the professor's view of the Mercator projection?",
+      "options": [
+        "She considers it the most accurate map projection",
+        "She believes it is misleading despite its usefulness",
+        "She thinks it should still be used exclusively",
+        "She prefers it over modern digital maps"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor notes that while Mercator was useful for navigation, the size distortion gives a misleading visual impression."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today I'd like to talk about the history of cartography, or mapmaking. Early maps were far more than navigational tools—they were reflections of how people understood the world around them. Take Ptolemy's Geography from the second century, for example. It wasn't a map we would recognize today, but rather a set of instructions for drawing maps using a grid system of latitude and longitude. Fast forward to the Age of Exploration in the 15th and 16th centuries, and we see a dramatic shift. Explorers like Columbus and Magellan brought back detailed coastlines and trade routes, which mapmakers eagerly incorporated. This was also when the Mercator projection was developed. Now, the Mercator projection is interesting because it preserves angles, which made it excellent for navigation. However, it severely distorts the size of landmasses near the poles. For instance, Greenland appears almost as large as Africa on a Mercator map, when in reality Africa is about 14 times larger. This distortion has been criticized for giving a misleading visual impression of the world's geography. In the 20th century, satellite technology revolutionized cartography. We moved from paper maps to digital systems like GPS, which can pinpoint your location anywhere on Earth within a few meters. Modern cartographers now focus on how to represent data visually through geographic information systems, or GIS, which layer information like population density, climate patterns, and road networks onto a single interactive map."
+    }
+  ]
+}

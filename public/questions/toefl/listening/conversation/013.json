@@ -1,0 +1,62 @@
+{
+  "title": "Research Poster Presentation",
+  "transcript": "Student: Professor Chen, I signed up for the undergraduate research fair, but I've never made a research poster before. Do you have any tips? Professor: Congratulations on signing up. The key is to keep your poster focused. What is your research question? Student: I'm studying how urban green spaces affect mental health among college students. Professor: That sounds interesting. For the poster, I recommend organizing it into four sections: introduction, methods, results, and conclusion. Keep the text minimal and use visuals like charts and photos. Student: Should I include my full literature review? Professor: No, just cite the three most relevant studies. The poster is a conversation starter, not a paper. People can ask you for details if they are interested. Student: That makes sense. Thank you for the advice.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the student's main concern?",
+      "options": [
+        "She does not know how to design a research poster",
+        "She is unsure about her research topic",
+        "She has not collected enough data yet",
+        "She missed the registration deadline"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The student says she has never made a research poster before and asks for tips."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the professor advise regarding the literature review?",
+      "options": [
+        "Include the complete review on the poster",
+        "Cite only the three most relevant studies",
+        "Distribute printed copies of the review",
+        "Discuss it in detail during the presentation"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The professor advises citing just the three most relevant studies since the poster is a conversation starter."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor Chen, I signed up for the undergraduate research fair, but I've never made a research poster before. Do you have any tips?"
+    },
+    {
+      "role": "Professor",
+      "text": "Congratulations on signing up. The key is to keep your poster focused. What is your research question?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm studying how urban green spaces affect mental health among college students."
+    },
+    {
+      "role": "Professor",
+      "text": "That sounds interesting. For the poster, I recommend organizing it into four sections: introduction, methods, results, and conclusion. Keep the text minimal and use visuals like charts and photos."
+    },
+    {
+      "role": "Student",
+      "text": "Should I include my full literature review?"
+    },
+    {
+      "role": "Professor",
+      "text": "No, just cite the three most relevant studies. The poster is a conversation starter, not a paper. People can ask you for details if they are interested."
+    },
+    {
+      "role": "Student",
+      "text": "That makes sense. Thank you for the advice."
+    }
+  ]
+}

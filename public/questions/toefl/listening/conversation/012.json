@@ -1,0 +1,66 @@
+{
+  "title": "Roommate Conflict Resolution",
+  "transcript": "Student A: Hey, can we talk about something? It's about the apartment. Student B: Sure, what's going on? Student A: Well, I've noticed that the dishes have been piling up in the sink for days. I usually end up washing them, and it's getting a bit frustrating. Student B: Oh, I'm sorry. I've been really busy with midterms and honestly just forgot. I'll make sure to clean up after myself. Student A: Thanks, I appreciate that. Also, could you let me know if you're having friends over? I have an early class on Tuesdays and the noise keeps me up. Student B: Of course, I'll text you in advance. By the way, would it be okay if I used your blender sometime? Mine broke last week. Student A: Yeah, just ask me before you use it so I know where it is. Student B: Deal. Thanks for bringing this up. I want us to get along.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does Student A want to talk to Student B?",
+      "options": [
+        "To complain about the noise from a party",
+        "To discuss apartment issues and set boundaries",
+        "To ask for help with midterm preparation",
+        "To borrow kitchen equipment"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "Student A brings up the dirty dishes and late-night noise to resolve apartment issues and set boundaries."
+    },
+    {
+      "id": "q2",
+      "stem": "What does Student B request from Student A?",
+      "options": [
+        "Help with cleaning the apartment",
+        "Permission to use the blender",
+        "A ride to campus in the morning",
+        "Quiet time during the day"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Student B asks if they can use Student A's blender since theirs broke."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hey, can we talk about something? It's about the apartment."
+    },
+    {
+      "role": "Friend",
+      "text": "Sure, what's going on?"
+    },
+    {
+      "role": "Student",
+      "text": "Well, I've noticed that the dishes have been piling up in the sink for days. I usually end up washing them, and it's getting a bit frustrating."
+    },
+    {
+      "role": "Friend",
+      "text": "Oh, I'm sorry. I've been really busy with midterms and honestly just forgot. I'll make sure to clean up after myself."
+    },
+    {
+      "role": "Student",
+      "text": "Thanks, I appreciate that. Also, could you let me know if you're having friends over? I have an early class on Tuesdays and the noise keeps me up."
+    },
+    {
+      "role": "Friend",
+      "text": "Of course, I'll text you in advance. By the way, would it be okay if I used your blender sometime? Mine broke last week."
+    },
+    {
+      "role": "Student",
+      "text": "Yeah, just ask me before you use it so I know where it is."
+    },
+    {
+      "role": "Friend",
+      "text": "Deal. Thanks for bringing this up. I want us to get along."
+    }
+  ]
+}

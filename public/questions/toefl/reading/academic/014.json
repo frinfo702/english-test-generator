@@ -1,0 +1,71 @@
+{
+  "title": "Plate Tectonics and Mountain Formation",
+  "passage": "The theory of plate tectonics revolutionized our understanding of Earth's geological processes. According to this model, Earth's lithosphere is divided into several large and small plates that float on the semi-fluid asthenosphere beneath them. These plates move continuously, driven by convection currents in the mantle, interacting at their boundaries in ways that shape the planet's surface features.\n\nConvergent boundaries, where plates collide, are responsible for the formation of mountain ranges. When two continental plates converge, neither subducts easily because both have relatively low density. Instead, the crust buckles and thickens, gradually building mountain chains such as the Himalayas. The collision between the Indian and Eurasian plates, which began approximately 50 million years ago, continues to push the Himalayan peaks higher by roughly five millimeters each year.\n\nDivergent boundaries, by contrast, occur where plates move apart. This process creates rift valleys on continents and mid-ocean ridges beneath the sea. The Mid-Atlantic Ridge represents an extensive underwater mountain system formed by seafloor spreading, where magma rises to create new oceanic crust.\n\nTransform boundaries represent the third category, where plates slide horizontally past one another. The San Andreas Fault in California exemplifies this type of boundary, where the Pacific Plate moves northwest relative to the North American Plate, generating frequent earthquakes.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'subducts' in paragraph 2 is closest in meaning to:",
+      "options": [
+        "A. rises above",
+        "B. sinks beneath",
+        "C. splits apart",
+        "D. slides sideways"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Subducts' means one plate moves under another, sinking into the mantle."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, what causes tectonic plates to move?",
+      "options": [
+        "A. Gravitational pull from the moon",
+        "B. Convection currents in the mantle",
+        "C. Erosion of continental crust",
+        "D. Volcanic eruptions along fault lines"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states plates are 'driven by convection currents in the mantle.'"
+    },
+    {
+      "id": "q3",
+      "type": "mainIdea",
+      "stem": "What is the main topic of the passage?",
+      "options": [
+        "A. The history of geological research",
+        "B. How different types of plate boundaries create distinct geological features",
+        "C. A comparison of mountain ranges around the world",
+        "D. The relationship between earthquakes and volcanoes"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage explains plate tectonics and describes three boundary types and their effects on Earth's surface."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about the Himalayas in the future?",
+      "options": [
+        "A. They will eventually stop growing",
+        "B. They will continue to increase in height",
+        "C. They will erode faster than they rise",
+        "D. They will shift eastward"
+      ],
+      "correctIndex": 1,
+      "explanation": "The collision that formed the Himalayas 'continues to push the peaks higher by roughly five millimeters each year,' implying ongoing growth."
+    },
+    {
+      "id": "q5",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention the San Andreas Fault in paragraph 4?",
+      "options": [
+        "A. To argue that transform boundaries are the most dangerous",
+        "B. To provide a concrete example of a transform boundary",
+        "C. To compare earthquake frequency across boundary types",
+        "D. To introduce the next topic of earthquake prediction"
+      ],
+      "correctIndex": 1,
+      "explanation": "The San Andreas Fault is presented as an example that 'exemplifies this type of boundary.'"
+    }
+  ]
+}

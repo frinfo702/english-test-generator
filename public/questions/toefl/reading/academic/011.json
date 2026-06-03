@@ -1,0 +1,71 @@
+{
+  "title": "The Silk Road and Cultural Exchange",
+  "passage": "The Silk Road was not a single route but an intricate network of trade paths connecting East Asia to the Mediterranean world. Operating from approximately 130 BCE to the 15th century, this system facilitated the exchange of goods, technologies, ideas, and artistic traditions across vast distances.\n\nWhile silk was the most famous commodity traded along these routes, other goods played equally significant roles. Spices from India, glassware from Rome, and jade from Central Asia moved along the network, creating unprecedented material connections between previously isolated civilizations. Equally important was the transmission of technologies: papermaking traveled westward from China, while grapes and winemaking techniques moved eastward.\n\nThe cultural impact of the Silk Road extended beyond material exchange. Buddhism spread from India through Central Asia into China along these routes, adapting its artistic representations as it encountered different cultural traditions. Nestorian Christianity and Islam also traveled along the network, making the Silk Road one of history's most important vectors of religious diffusion.\n\nScholars debate whether the concept of a single 'Silk Road' oversimplifies the complexity of these interactions. Nevertheless, the network undeniably transformed the societies it connected, laying groundwork for the globalized world that would emerge centuries later.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "vocabulary",
+      "stem": "The word 'vectors' in paragraph 3 is closest in meaning to:",
+      "options": [
+        "A. barriers",
+        "B. channels of transmission",
+        "C. destinations",
+        "D. obstacles"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Vectors' here means channels or means of transmission, referring to how religions spread along the Silk Road."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, which technology was transmitted westward along the Silk Road?",
+      "options": [
+        "A. Winemaking",
+        "B. Glassblowing",
+        "C. Papermaking",
+        "D. Silk weaving"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage states that 'papermaking traveled westward from China.'"
+    },
+    {
+      "id": "q3",
+      "type": "negativeFactual",
+      "stem": "All of the following are mentioned as goods traded on the Silk Road EXCEPT:",
+      "options": [
+        "A. Spices from India",
+        "B. Glassware from Rome",
+        "C. Textiles from Persia",
+        "D. Jade from Central Asia"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage mentions spices, glassware, and jade but does not mention textiles from Persia."
+    },
+    {
+      "id": "q4",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of the passage?",
+      "options": [
+        "A. To argue that silk was the most important Silk Road commodity",
+        "B. To describe the Silk Road's role in facilitating material and cultural exchange",
+        "C. To compare Eastern and Western trade practices",
+        "D. To explain the decline of overland trade routes"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage covers both material goods and cultural/religious transmission, emphasizing exchange in multiple dimensions."
+    },
+    {
+      "id": "q5",
+      "type": "insertSentence",
+      "stem": "Where would the following sentence best fit in the passage? 'This cross-pollination of ideas fundamentally altered the intellectual landscape of every region it touched.'",
+      "options": [
+        "A. At the beginning of paragraph 2",
+        "B. At the end of paragraph 3",
+        "C. At the beginning of paragraph 4",
+        "D. At the end of paragraph 4"
+      ],
+      "correctIndex": 1,
+      "explanation": "The sentence summarizes the intellectual impact of cultural exchange discussed in paragraph 3, fitting naturally at its end."
+    }
+  ]
+}

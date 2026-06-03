@@ -1,0 +1,70 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "content": "From: Dr. Patel <patel@state.edu>\nTo: History 201 Students\nSubject: Guest Lecture Tomorrow\n\nThis is a reminder that Dr. Amanda Torres will be our guest speaker in tomorrow's class. She is a leading scholar in post-war immigration policy. Please prepare at least two questions for the Q&A session. Attendance is mandatory.\n\nAlso, your essay outlines are due by Friday at 5 PM. Submit them through the course portal.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of Dr. Patel's email?",
+          "options": [
+            "A. To cancel tomorrow's class",
+            "B. To introduce a guest speaker and announce a deadline",
+            "C. To assign a new research paper",
+            "D. To reschedule the Q&A session"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The email reminds students about the guest lecture and announces the essay outline deadline."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about Dr. Torres's expertise?",
+          "options": [
+            "A. She specializes in ancient European history",
+            "B. Her research focuses on immigration policy after war",
+            "C. She is a guest lecturer from another department",
+            "D. She has written a textbook for the course"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "Dr. Patel describes her as 'a leading scholar in post-war immigration policy,' indicating her specialization."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "webpage",
+      "content": "Fairview Community Center – Spring Registration Now Open\n\nPrograms available:\n• Youth Soccer (ages 6–14) – Saturdays, April 10 – June 5\n• Adult Yoga (18+) – Tuesdays & Thursdays, 7:00 – 8:00 AM\n• Senior Art Workshop (55+) – Wednesdays, 1:00 – 3:00 PM\n\nRegister online at fairviewcc.org or visit the front desk. Early bird discount ends March 20.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "According to the webpage, which program is available on weekdays in the morning?",
+          "options": [
+            "A. Youth Soccer",
+            "B. Adult Yoga",
+            "C. Senior Art Workshop",
+            "D. All three programs"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "Adult Yoga is on Tuesdays and Thursdays from 7:00–8:00 AM, which are weekday mornings."
+        },
+        {
+          "id": "q4",
+          "stem": "What is the advantage of registering before March 20?",
+          "options": [
+            "A. Free equipment rental",
+            "B. A reduced fee",
+            "C. Priority class selection",
+            "D. A free trial session"
+          ],
+          "correctIndex": 1,
+          "type": "vocabulary",
+          "explanation": "'Early bird discount' means a reduced price for those who register early."
+        }
+      ]
+    }
+  ]
+}

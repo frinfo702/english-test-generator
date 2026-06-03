@@ -1,0 +1,71 @@
+{
+  "title": "The Economics of Behavioral Decision-Making",
+  "passage": "Traditional economic theory has long operated on the assumption that individuals make rational decisions aimed at maximizing their utility. However, behavioral economics has accumulated substantial evidence demonstrating that human decision-making systematically deviates from this rational ideal. These deviations, known as cognitive biases, follow predictable patterns that can be studied and modeled.\n\nOne of the most robust findings in this field is loss aversion, a phenomenon identified by psychologists Daniel Kahneman and Amos Tversky. Loss aversion describes the tendency for individuals to feel the pain of losses approximately twice as intensely as the pleasure of equivalent gains. This asymmetry explains why investors often hold onto losing stocks too long, hoping to break even, while selling winning stocks too quickly.\n\nAnother important concept is the anchoring effect, where initial information disproportionately influences subsequent judgments. For example, when consumers see a high original price before a discounted price, they perceive the discount as more valuable than they would without the anchor. Retailers routinely exploit this bias in pricing strategies.\n\nFraming effects further demonstrate the irrationality of human choice. People respond differently to the same information depending on whether it is presented as a potential gain or a potential loss. A medical treatment described as having a '90 percent survival rate' is viewed more favorably than one described as having a '10 percent mortality rate,' even though both statements convey identical information.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of the passage?",
+      "options": [
+        "A. To argue that traditional economics should be abandoned",
+        "B. To describe cognitive biases that challenge rational choice theory",
+        "C. To explain how to avoid cognitive biases in investing",
+        "D. To compare the work of different behavioral economists"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage introduces behavioral economics and describes several biases that show how people deviate from rational decision-making."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, how does loss aversion affect investor behavior?",
+      "options": [
+        "A. It makes investors more likely to diversify their portfolios",
+        "B. It causes investors to sell winning stocks too soon",
+        "C. It encourages investors to seek professional advice",
+        "D. It leads investors to prefer low-risk investments"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states loss aversion explains why investors 'sell winning stocks too quickly.'"
+    },
+    {
+      "id": "q3",
+      "type": "vocabulary",
+      "stem": "The word 'robust' in paragraph 2 is closest in meaning to:",
+      "options": [
+        "A. controversial",
+        "B. well-supported and reliable",
+        "C. theoretical",
+        "D. newly discovered"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Robust' in this context means strongly established and consistently reproducible in research."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about how retailers use the anchoring effect?",
+      "options": [
+        "A. They avoid displaying original prices",
+        "B. They show higher initial prices to make discounts seem larger",
+        "C. They set prices based on competitor analysis",
+        "D. They offer discounts primarily on low-margin items"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that 'when consumers see a high original price before a discounted price, they perceive the discount as more valuable.'"
+    },
+    {
+      "id": "q5",
+      "type": "paragraphRelation",
+      "stem": "How does the example in paragraph 4 (the medical treatment) relate to the overall argument of the passage?",
+      "options": [
+        "A. It contradicts the idea that people are irrational",
+        "B. It provides evidence that the way information is presented affects perception",
+        "C. It shows that people are capable of statistical reasoning",
+        "D. It demonstrates that survival rates are poorly understood"
+      ],
+      "correctIndex": 1,
+      "explanation": "The medical treatment example illustrates framing effects, supporting the passage's argument that presentation format influences decisions."
+    }
+  ]
+}

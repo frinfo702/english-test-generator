@@ -1,0 +1,71 @@
+{
+  "title": "The Printing Press and Social Transformation",
+  "passage": "The invention of the movable-type printing press by Johannes Gutenberg around 1450 is widely regarded as one of the most transformative technological developments in human history. Before the printing press, books were painstakingly copied by hand, making them rare and expensive commodities accessible primarily to religious institutions and wealthy elites.\n\nThe printing press dramatically altered this landscape. By enabling the mass production of texts, it reduced the cost of books by an estimated 75 percent within decades. This economic shift had profound social consequences. Literacy rates rose as reading material became more affordable, and vernacular languages gained literary prestige as publishers sought markets beyond the Latin-reading scholarly community.\n\nPerhaps most significantly, the printing press facilitated the rapid dissemination of ideas across national boundaries. Religious reformers like Martin Luther leveraged printed pamphlets to spread their critiques of the Catholic Church, contributing to the Protestant Reformation. Scientific discoveries could now be communicated and verified across Europe with unprecedented speed, accelerating the pace of intellectual progress.\n\nThe printing press also standardized language and spelling, as widely circulated texts established conventions that readers and writers increasingly adopted. This standardization contributed to the development of national identities and the decline of regional dialects in written communication.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to the passage, what was a consequence of reduced book costs?",
+      "options": [
+        "A. Religious institutions lost their influence",
+        "B. Latin became the dominant scholarly language",
+        "C. Literacy rates increased",
+        "D. Book production shifted back to hand copying"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage states that 'Literacy rates rose as reading material became more affordable.'"
+    },
+    {
+      "id": "q2",
+      "type": "negativeFactual",
+      "stem": "All of the following are mentioned as effects of the printing press EXCEPT:",
+      "options": [
+        "A. The spread of religious reform ideas",
+        "B. The standardization of language",
+        "C. The decline of handwritten manuscripts",
+        "D. The centralization of publishing in Rome"
+      ],
+      "correctIndex": 3,
+      "explanation": "The passage does not mention centralized publishing in Rome; it mentions effects across Europe broadly."
+    },
+    {
+      "id": "q3",
+      "type": "vocabulary",
+      "stem": "The word 'vernacular' in paragraph 2 is closest in meaning to:",
+      "options": [
+        "A. classical",
+        "B. local or common",
+        "C. scholarly",
+        "D. poetic"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Vernacular' refers to the everyday language spoken by ordinary people in a region."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about Latin before the printing press?",
+      "options": [
+        "A. It was the primary language of printed materials at first",
+        "B. It was understood by the majority of Europeans",
+        "C. It was rarely used in written form",
+        "D. It was considered inferior to vernacular languages"
+      ],
+      "correctIndex": 0,
+      "explanation": "The passage mentions publishers sought markets 'beyond the Latin-reading scholarly community,' implying Latin was the initial language of printed works."
+    },
+    {
+      "id": "q5",
+      "type": "paragraphRelation",
+      "stem": "How does paragraph 4 relate to paragraph 3?",
+      "options": [
+        "A. It introduces a contrast to the positive effects described earlier",
+        "B. It describes an additional long-term consequence of the printing press",
+        "C. It provides a case study supporting the previous paragraph",
+        "D. It summarizes the main argument of the passage"
+      ],
+      "correctIndex": 1,
+      "explanation": "Paragraph 4 discusses language standardization and national identity formation as further effects beyond those in paragraph 3."
+    }
+  ]
+}

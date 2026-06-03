@@ -1,0 +1,64 @@
+{
+  "title": "Principles of Behavioral Economics",
+  "transcript": "Let's continue our discussion of behavioral economics by looking at a concept called loss aversion. Unlike traditional economic theory, which assumes humans make rational decisions to maximize utility, behavioral economics recognizes that our decisions are often influenced by psychological biases. Loss aversion, first identified by psychologists Daniel Kahneman and Amos Tversky, refers to the tendency for people to feel the pain of a loss more strongly than the pleasure of an equivalent gain. For example, losing 50 dollars feels worse than finding 50 dollars feels good. This asymmetry has significant implications. In marketing, companies often use loss aversion by framing offers as preventing a loss rather than gaining a benefit. A classic example is a message like 'Don't miss out on this limited-time offer' rather than 'Get this great deal.' Studies show that loss-framed messages are significantly more effective at driving consumer behavior. Loss aversion also helps explain why investors often hold onto losing stocks too long—they are unwilling to realize a loss—and why people stick with their current health insurance provider even when a cheaper option is available. The status quo bias, a related concept, describes our tendency to prefer things to stay the same because the potential loss from changing feels greater than the potential gain.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main concept discussed in the lecture?",
+      "options": [
+        "Traditional economic theory",
+        "Loss aversion in behavioral economics",
+        "Marketing strategies for new products",
+        "Investment portfolio management"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture focuses on loss aversion as a key concept in behavioral economics."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, how do companies use loss aversion in marketing?",
+      "options": [
+        "By offering discounts on bulk purchases",
+        "By framing offers as preventing a loss",
+        "By providing free samples to customers",
+        "By emphasizing product quality in advertisements"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Companies frame offers as preventing a loss, e.g., 'Don't miss out on this limited-time offer.'"
+    },
+    {
+      "id": "q3",
+      "stem": "What is the status quo bias?",
+      "options": [
+        "The tendency to make impulsive decisions",
+        "The preference for things to stay the same",
+        "The belief that current options are always best",
+        "The habit of comparing multiple choices"
+      ],
+      "correctIndex": 1,
+      "type": "vocabulary",
+      "explanation": "Status quo bias is the tendency to prefer things to remain the same due to fear of potential loss."
+    },
+    {
+      "id": "q4",
+      "stem": "What does the professor imply about traditional economic theory?",
+      "options": [
+        "It fully explains consumer behavior",
+        "It does not account for psychological biases",
+        "It has been replaced by behavioral economics",
+        "It is only useful for financial markets"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor contrasts traditional theory's assumption of rational decision-making with behavioral economics' recognition of psychological biases."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Let's continue our discussion of behavioral economics by looking at a concept called loss aversion. Unlike traditional economic theory, which assumes humans make rational decisions to maximize utility, behavioral economics recognizes that our decisions are often influenced by psychological biases. Loss aversion, first identified by psychologists Daniel Kahneman and Amos Tversky, refers to the tendency for people to feel the pain of a loss more strongly than the pleasure of an equivalent gain. For example, losing 50 dollars feels worse than finding 50 dollars feels good. This asymmetry has significant implications. In marketing, companies often use loss aversion by framing offers as preventing a loss rather than gaining a benefit. A classic example is a message like 'Don't miss out on this limited-time offer' rather than 'Get this great deal.' Studies show that loss-framed messages are significantly more effective at driving consumer behavior. Loss aversion also helps explain why investors often hold onto losing stocks too long—they are unwilling to realize a loss—and why people stick with their current health insurance provider even when a cheaper option is available. The status quo bias, a related concept, describes our tendency to prefer things to stay the same because the potential loss from changing feels greater than the potential gain."
+    }
+  ]
+}

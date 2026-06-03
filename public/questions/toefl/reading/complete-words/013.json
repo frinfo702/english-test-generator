@@ -1,0 +1,55 @@
+{
+  "paragraph": "Exoplanets are planets that orbit stars beyond our solar system. Since the first confirmed detection in the 1990s, astronomers have identified thousands of these distant worlds using advanced telescopic techniques. The transit method, which measures the slight dimming of a star's light when a planet passes in front of it, has proven particularly productive. Some discovered exoplanets reside within their star's habitable zone, where conditions might allow liquid water to exist. Future observatories aim to analyze the atmospheric composition of these promising candidates for potential biosignatures.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "orb",
+      "answer": "orbit"
+    },
+    {
+      "index": 1,
+      "hint": "con",
+      "answer": "confirmed"
+    },
+    {
+      "index": 2,
+      "hint": "iden",
+      "answer": "identified"
+    },
+    {
+      "index": 3,
+      "hint": "ad",
+      "answer": "advanced"
+    },
+    {
+      "index": 4,
+      "hint": "tel",
+      "answer": "telescopic"
+    },
+    {
+      "index": 5,
+      "hint": "di",
+      "answer": "dimming"
+    },
+    {
+      "index": 6,
+      "hint": "par",
+      "answer": "particularly"
+    },
+    {
+      "index": 7,
+      "hint": "hab",
+      "answer": "habitable"
+    },
+    {
+      "index": 8,
+      "hint": "at",
+      "answer": "atmospheric"
+    },
+    {
+      "index": 9,
+      "hint": "bios",
+      "answer": "biosignatures"
+    }
+  ]
+}

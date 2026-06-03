@@ -1,0 +1,55 @@
+{
+  "paragraph": "Neuroplasticity refers to the brain's remarkable ability to reorganize itself throughout an individual's lifetime. This phenomenon allows neural pathways to strengthen in response to learning and experience while unused connections gradually weaken. Studies have shown that musicians who practice regularly develop enlarged cortical areas dedicated to finger movement and auditory processing. Similarly, stroke patients can sometimes recover lost functions because adjacent brain regions assume the roles of damaged tissue. This adaptability underscores the importance of continuous mental engagement for cognitive health.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "re",
+      "answer": "refers"
+    },
+    {
+      "index": 1,
+      "hint": "rem",
+      "answer": "remarkable"
+    },
+    {
+      "index": 2,
+      "hint": "reor",
+      "answer": "reorganize"
+    },
+    {
+      "index": 3,
+      "hint": "ind",
+      "answer": "individual"
+    },
+    {
+      "index": 4,
+      "hint": "phe",
+      "answer": "phenomenon"
+    },
+    {
+      "index": 5,
+      "hint": "str",
+      "answer": "strengthen"
+    },
+    {
+      "index": 6,
+      "hint": "con",
+      "answer": "connections"
+    },
+    {
+      "index": 7,
+      "hint": "en",
+      "answer": "enlarged"
+    },
+    {
+      "index": 8,
+      "hint": "ad",
+      "answer": "adjacent"
+    },
+    {
+      "index": 9,
+      "hint": "adap",
+      "answer": "adaptability"
+    }
+  ]
+}
