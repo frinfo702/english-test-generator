@@ -13,7 +13,6 @@ interface Item {
   index: number;
   hint: string;
   answer: string;
-  placeholder: string;
 }
 
 interface ProblemData {
@@ -28,6 +27,38 @@ function getExpectedSuffix(item: Item): string {
     return answer.slice(hint.length);
   }
   return answer;
+}
+
+function isWordChar(char: string | undefined): boolean {
+  return !!char && /[A-Za-z]/.test(char);
+}
+
+function findAnswerPosition(
+  paragraph: string,
+  answer: string,
+  fromIndex: number,
+): number {
+  const normalizedParagraph = paragraph.toLowerCase();
+  const normalizedAnswer = answer.trim().toLowerCase();
+  let searchFrom = fromIndex;
+
+  while (searchFrom < paragraph.length) {
+    const matchIndex = normalizedParagraph.indexOf(
+      normalizedAnswer,
+      searchFrom,
+    );
+    if (matchIndex === -1) return -1;
+
+    const before = paragraph[matchIndex - 1];
+    const after = paragraph[matchIndex + normalizedAnswer.length];
+    if (!isWordChar(before) && !isWordChar(after)) {
+      return matchIndex;
+    }
+
+    searchFrom = matchIndex + 1;
+  }
+
+  return -1;
 }
 
 export function CompleteWordsPage() {
@@ -190,9 +221,10 @@ export function CompleteWordsPage() {
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;
 
-    data.items.forEach((item, itemIdx) => {
-      const pos = text.indexOf(item.placeholder, lastIndex);
-      if (pos === -1) return;
+    for (const [itemIdx, item] of data.items.entries()) {
+      const answer = item.answer.trim();
+      const pos = findAnswerPosition(text, answer, lastIndex);
+      if (pos === -1) return text;
       const expectedSuffix = getExpectedSuffix(item);
       const userInput = answers[itemIdx] ?? "";
       const isCorrect =
@@ -252,8 +284,8 @@ export function CompleteWordsPage() {
         );
       }
 
-      lastIndex = pos + item.placeholder.length;
-    });
+      lastIndex = pos + answer.length;
+    }
 
     parts.push(<span key="tail">{text.slice(lastIndex)}</span>);
     return parts;

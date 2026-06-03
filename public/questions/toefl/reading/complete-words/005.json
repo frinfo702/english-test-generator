@@ -1,65 +1,55 @@
 {
-  "paragraph": "The phe_______ of urbanization has led to sig________ changes in how modern cities are planned and managed. As populations continue to mig____ to metropolitan centers, urban planners must addr___ challenges related to inf___________ housing, and environmental sustainability. The construction of green spaces within densely pop______ districts has become a pri_____ for many municipal gov________ as these areas provide ess______ benefits for public health bio_______ biological diversity in crowded urban environments.",
+  "paragraph": "The phenomenon of urbanization has led to significant changes in how modern cities are planned and managed. As populations continue to migrate to metropolitan centers, urban planners must address challenges related to infrastructure, housing, and environmental sustainability. The construction of green spaces within densely populated districts has become a priority for many municipal governments, as these areas provide essential benefits for public health and biological diversity in crowded urban environments.",
   "items": [
     {
       "index": 0,
       "hint": "phe",
-      "answer": "phenomenon",
-      "placeholder": "phe_______"
+      "answer": "phenomenon"
     },
     {
       "index": 1,
       "hint": "sig",
-      "answer": "significant",
-      "placeholder": "sig________"
+      "answer": "significant"
     },
     {
       "index": 2,
       "hint": "mig",
-      "answer": "migrate",
-      "placeholder": "mig____"
+      "answer": "migrate"
     },
     {
       "index": 3,
       "hint": "addr",
-      "answer": "address",
-      "placeholder": "addr___"
+      "answer": "address"
     },
     {
       "index": 4,
       "hint": "inf",
-      "answer": "infrastructure",
-      "placeholder": "inf___________"
+      "answer": "infrastructure"
     },
     {
       "index": 5,
       "hint": "pop",
-      "answer": "populated",
-      "placeholder": "pop______"
+      "answer": "populated"
     },
     {
       "index": 6,
       "hint": "pri",
-      "answer": "priority",
-      "placeholder": "pri_____"
+      "answer": "priority"
     },
     {
       "index": 7,
       "hint": "gov",
-      "answer": "governments",
-      "placeholder": "gov________"
+      "answer": "governments"
     },
     {
       "index": 8,
       "hint": "ess",
-      "answer": "essential",
-      "placeholder": "ess______"
+      "answer": "essential"
     },
     {
       "index": 9,
       "hint": "bio",
-      "answer": "biological",
-      "placeholder": "bio_______"
+      "answer": "biological"
     }
   ]
 }

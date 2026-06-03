@@ -1,65 +1,55 @@
 {
-  "paragraph": "Cognitive psy_______ has long been fascinated by the mechanisms underlying human memory. Recent research suggests that the brain does not store information like a dig____ computer but rather recon_______ memories each time they are retrieved. This process explains why eye_______ testimony can be sur_________ unreliable, as each rec_________ may introduce subtle alt________ Furthermore, studies demonstrate that sleep plays a cri_____ role in converting short-term experiences into long-term knowledge gui___ guides beh_____ behavior.",
+  "paragraph": "Cognitive psychology has long been fascinated by the mechanisms underlying human memory. Recent research suggests that the brain does not store information like a digital computer but rather reconstructs memories each time they are retrieved. This process explains why eyewitness testimony can be surprisingly unreliable, as each recollection may introduce subtle alterations. Furthermore, studies demonstrate that sleep plays a critical role in converting short-term experiences into long-term knowledge that guides behavior.",
   "items": [
     {
       "index": 0,
       "hint": "psy",
-      "answer": "psychology",
-      "placeholder": "psy_______"
+      "answer": "psychology"
     },
     {
       "index": 1,
       "hint": "dig",
-      "answer": "digital",
-      "placeholder": "dig____"
+      "answer": "digital"
     },
     {
       "index": 2,
       "hint": "recon",
-      "answer": "reconstructs",
-      "placeholder": "recon_______"
+      "answer": "reconstructs"
     },
     {
       "index": 3,
       "hint": "eye",
-      "answer": "eyewitness",
-      "placeholder": "eye_______"
+      "answer": "eyewitness"
     },
     {
       "index": 4,
       "hint": "sur",
-      "answer": "surprisingly",
-      "placeholder": "sur_________"
+      "answer": "surprisingly"
     },
     {
       "index": 5,
       "hint": "rec",
-      "answer": "recollection",
-      "placeholder": "rec_________"
+      "answer": "recollection"
     },
     {
       "index": 6,
       "hint": "alt",
-      "answer": "alterations",
-      "placeholder": "alt________"
+      "answer": "alterations"
     },
     {
       "index": 7,
       "hint": "cri",
-      "answer": "critical",
-      "placeholder": "cri_____"
+      "answer": "critical"
     },
     {
       "index": 8,
       "hint": "gui",
-      "answer": "guides",
-      "placeholder": "gui___"
+      "answer": "guides"
     },
     {
       "index": 9,
       "hint": "beh",
-      "answer": "behavior",
-      "placeholder": "beh_____"
+      "answer": "behavior"
     }
   ]
 }

@@ -1,65 +1,55 @@
 {
-  "paragraph": "The development of ren______ energy sources has become increasingly critical in addressing global climate challenges. Solar and wind technologies, once considered too expensive for widespread use, have now become com________ with traditional fossil fuels. Scientists and engineers have made substantial advances in bat____ storage, allowing excess energy generated during peak sun_____ to be preserved for later consumption. Governments around the world have implemented various pol_____ to accelerate this tran______ inc______ tax incentives and renewable portfolio standards that pro____ sus________ gro___",
+  "paragraph": "The development of renewable energy sources has become increasingly critical in addressing global climate challenges. Solar and wind technologies, once considered too expensive for widespread use, have now become competitive with traditional fossil fuels. Scientists and engineers have made substantial advances in battery storage, allowing excess energy generated during peak sunlight to be preserved for later consumption. Governments around the world have implemented various policies to accelerate this transition, including tax incentives and renewable portfolio standards that promote sustainable growth.",
   "items": [
     {
       "index": 0,
       "hint": "ren",
-      "answer": "renewable",
-      "placeholder": "ren______"
+      "answer": "renewable"
     },
     {
       "index": 1,
       "hint": "com",
-      "answer": "competitive",
-      "placeholder": "com________"
+      "answer": "competitive"
     },
     {
       "index": 2,
       "hint": "bat",
-      "answer": "battery",
-      "placeholder": "bat____"
+      "answer": "battery"
     },
     {
       "index": 3,
       "hint": "sun",
-      "answer": "sunlight",
-      "placeholder": "sun_____"
+      "answer": "sunlight"
     },
     {
       "index": 4,
       "hint": "pol",
-      "answer": "policies",
-      "placeholder": "pol_____"
+      "answer": "policies"
     },
     {
       "index": 5,
       "hint": "tran",
-      "answer": "transition",
-      "placeholder": "tran______"
+      "answer": "transition"
     },
     {
       "index": 6,
       "hint": "inc",
-      "answer": "including",
-      "placeholder": "inc______"
+      "answer": "including"
     },
     {
       "index": 7,
       "hint": "pro",
-      "answer": "promote",
-      "placeholder": "pro____"
+      "answer": "promote"
     },
     {
       "index": 8,
       "hint": "sus",
-      "answer": "sustainable",
-      "placeholder": "sus________"
+      "answer": "sustainable"
     },
     {
       "index": 9,
       "hint": "gro",
-      "answer": "growth",
-      "placeholder": "gro___"
+      "answer": "growth"
     }
   ]
 }

@@ -1,65 +1,55 @@
 {
-  "paragraph": "Renewable energy sources are bec_____ increasingly important in the global eff___ to com___ climate change and reduce dependence on fossil fuels. Solar power har_____ electricity through pho_________ cells that con____ sunlight directly into usable power for residential and industrial applications. Wind tur_____ harness the kin____ energy of moving air to gen_____ electricity without pro______ harmful emissions that contribute to atmospheric pollution. Governments worldwide are investing heavily in these sustainable technologies to ensure long-term energy security.",
+  "paragraph": "Renewable energy sources are becoming increasingly important in the global effort to combat climate change and reduce dependence on fossil fuels. Solar power harvests electricity through photovoltaic cells that convert sunlight directly into usable power for residential and industrial applications. Wind turbines harness the kinetic energy of moving air to generate electricity without producing harmful emissions that contribute to atmospheric pollution. Governments worldwide are investing heavily in these sustainable technologies to ensure long-term energy security.",
   "items": [
     {
       "index": 0,
       "hint": "bec",
-      "answer": "becoming",
-      "placeholder": "bec_____"
+      "answer": "becoming"
     },
     {
       "index": 1,
       "hint": "eff",
-      "answer": "effort",
-      "placeholder": "eff___"
+      "answer": "effort"
     },
     {
       "index": 2,
       "hint": "com",
-      "answer": "combat",
-      "placeholder": "com___"
+      "answer": "combat"
     },
     {
       "index": 3,
       "hint": "har",
-      "answer": "harvests",
-      "placeholder": "har_____"
+      "answer": "harvests"
     },
     {
       "index": 4,
       "hint": "pho",
-      "answer": "photovoltaic",
-      "placeholder": "pho_________"
+      "answer": "photovoltaic"
     },
     {
       "index": 5,
       "hint": "con",
-      "answer": "convert",
-      "placeholder": "con____"
+      "answer": "convert"
     },
     {
       "index": 6,
       "hint": "tur",
-      "answer": "turbines",
-      "placeholder": "tur_____"
+      "answer": "turbines"
     },
     {
       "index": 7,
       "hint": "kin",
-      "answer": "kinetic",
-      "placeholder": "kin____"
+      "answer": "kinetic"
     },
     {
       "index": 8,
       "hint": "gen",
-      "answer": "generate",
-      "placeholder": "gen_____"
+      "answer": "generate"
     },
     {
       "index": 9,
       "hint": "pro",
-      "answer": "producing",
-      "placeholder": "pro______"
+      "answer": "producing"
     }
   ]
 }
