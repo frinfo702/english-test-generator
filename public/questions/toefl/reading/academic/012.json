@@ -32,12 +32,7 @@
       "id": "q3",
       "type": "vocabulary",
       "stem": "The word 'constrained' in paragraph 4 is closest in meaning to:",
-      "options": [
-        "A. improved",
-        "B. limited",
-        "C. measured",
-        "D. eliminated"
-      ],
+      "options": ["A. improved", "B. limited", "C. measured", "D. eliminated"],
       "correctIndex": 1,
       "explanation": "'Constrained' means restricted or limited."
     },

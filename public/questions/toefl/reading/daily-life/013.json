@@ -41,12 +41,7 @@
         {
           "id": "q3",
           "stem": "How much was paid in sales tax on this purchase?",
-          "options": [
-            "A. $6.76",
-            "B. $34.99",
-            "C. $79.48",
-            "D. $86.24"
-          ],
+          "options": ["A. $6.76", "B. $34.99", "C. $79.48", "D. $86.24"],
           "correctIndex": 0,
           "type": "factual",
           "explanation": "The receipt shows the tax amount as $6.76."

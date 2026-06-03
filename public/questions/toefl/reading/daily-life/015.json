@@ -21,12 +21,7 @@
         {
           "id": "q2",
           "stem": "How much would the Avocado Toast cost with an added side of bacon?",
-          "options": [
-            "A. $10.25",
-            "B. $11.50",
-            "C. $13.25",
-            "D. $9.75"
-          ],
+          "options": ["A. $10.25", "B. $11.50", "C. $13.25", "D. $9.75"],
           "correctIndex": 2,
           "type": "inference",
           "explanation": "Avocado Toast is $10.25 and a side of bacon costs $3.00, totaling $13.25."
