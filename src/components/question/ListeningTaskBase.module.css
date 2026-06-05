@@ -145,7 +145,16 @@
   margin-top: var(--spacing-4);
   font-size: var(--text-sm);
   line-height: var(--lh-relaxed);
-  color: var(--color-ink-secondary);
+  color: var(--color-ink);
+  text-align: left;
+}
+
+.transcript p {
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.transcript p:last-child {
+  margin-bottom: 0;
 }
 
 .explanation {

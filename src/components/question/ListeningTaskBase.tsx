@@ -323,12 +323,15 @@ export function ListeningTaskBase({
                 total={totalQuestions}
                 label="Correct"
               />
-              <Button onClick={handleBackToList} size="lg">
-                Back to Question List
-              </Button>
               <div className={styles.transcript}>
                 <strong>Transcript</strong>
-                <p>{data.transcript}</p>
+                {data.audioSegments
+                  .filter((seg) => seg.role !== "Narrator")
+                  .map((seg, i) => (
+                    <p key={i}>
+                      {seg.role}: {seg.text}
+                    </p>
+                  ))}
               </div>
             </div>
           )}

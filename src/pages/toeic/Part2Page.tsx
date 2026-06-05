@@ -204,9 +204,6 @@ export function Part2Page() {
                   <Button onClick={retake} size="md" variant="secondary">
                     Retake
                   </Button>
-                  <Button onClick={handleBackToList} size="md">
-                    Back to Question List
-                  </Button>
                 </div>
               </div>
 
