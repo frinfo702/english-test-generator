@@ -1,9 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
+import { useTaskQuestionCounts } from "../../hooks/useTaskQuestionCounts";
+import type { TaskId } from "../../hooks/useScoreHistory";
 import table from "../../components/ui/ProblemTable.module.css";
 import styles from "./ToeicMenuPage.module.css";
 
-const parts = [
+interface PartTask {
+  path: string;
+  label: string;
+  desc: string;
+  taskId: TaskId;
+}
+
+interface PartSection {
+  section: string;
+  tasks: PartTask[];
+}
+
+const parts: PartSection[] = [
   {
     section: "Listening",
     tasks: [
@@ -11,19 +25,19 @@ const parts = [
         path: "/toeic/part2",
         label: "Part 2: Question-Response",
         desc: "Listen to a question, choose the best response",
-        count: "25 Qs",
+        taskId: "toeic/part2",
       },
       {
         path: "/toeic/part3",
         label: "Part 3: Conversations",
-        desc: "13 conversations with 3 questions each",
-        count: "39 Qs",
+        desc: "Listen to a conversation and answer the questions",
+        taskId: "toeic/part3",
       },
       {
         path: "/toeic/part4",
         label: "Part 4: Talks",
-        desc: "10 talks with 3 questions each",
-        count: "30 Qs",
+        desc: "Listen to a talk and answer the questions",
+        taskId: "toeic/part4",
       },
     ],
   },
@@ -34,26 +48,33 @@ const parts = [
         path: "/toeic/part5",
         label: "Part 5: Incomplete Sentences",
         desc: "Grammar and vocabulary sentence blanks",
-        count: "30 Qs",
+        taskId: "toeic/part5",
       },
       {
         path: "/toeic/part6",
         label: "Part 6: Text Completion",
-        desc: "4 passages with 4 blank-fill questions each",
-        count: "16 Qs",
+        desc: "Choose the best words or sentence for each blank",
+        taskId: "toeic/part6",
       },
       {
         path: "/toeic/part7",
         label: "Part 7: Reading Comprehension",
         desc: "Single, double, and triple-passage questions",
-        count: "54 Qs",
+        taskId: "toeic/part7",
       },
     ],
   },
 ];
 
+function formatQuestionCount(count: number | null | undefined): string {
+  if (count == null) return "—";
+  return `${count} Q${count !== 1 ? "s" : ""}`;
+}
+
 export function ToeicMenuPage() {
   const navigate = useNavigate();
+  const taskIds = parts.flatMap((p) => p.tasks.map((t) => t.taskId));
+  const counts = useTaskQuestionCounts(taskIds);
   return (
     <div>
       <SectionHeader
@@ -81,7 +102,9 @@ export function ToeicMenuPage() {
                   {task.label}
                   <div className={table.titleMeta}>{task.desc}</div>
                 </span>
-                <span className={table.badgeCell}>{task.count}</span>
+                <span className={table.badgeCell}>
+                  {formatQuestionCount(counts[task.taskId])}
+                </span>
               </div>
             ))}
           </div>

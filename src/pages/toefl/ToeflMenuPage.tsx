@@ -1,9 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
+import { useTaskQuestionCounts } from "../../hooks/useTaskQuestionCounts";
+import type { TaskId } from "../../hooks/useScoreHistory";
 import table from "../../components/ui/ProblemTable.module.css";
 import styles from "./ToeflMenuPage.module.css";
 
-const sections = [
+interface TaskEntry {
+  label: string;
+  path: string;
+  desc: string;
+  taskId: TaskId;
+  unit: string;
+}
+
+interface SectionEntry {
+  key: string;
+  label: string;
+  color: string;
+  tasks: TaskEntry[];
+}
+
+const sections: SectionEntry[] = [
   {
     key: "reading",
     label: "Reading",
@@ -13,19 +30,22 @@ const sections = [
         label: "Complete the Words",
         path: "/toefl/reading/complete-words",
         desc: "Fill in missing words in an academic paragraph",
-        meta: "10 items",
+        taskId: "toefl/reading/complete-words",
+        unit: "item",
       },
       {
         label: "Read in Daily Life",
         path: "/toefl/reading/daily-life",
         desc: "Answer questions about everyday texts",
-        meta: "2–3 texts",
+        taskId: "toefl/reading/daily-life",
+        unit: "question",
       },
       {
         label: "Read an Academic Passage",
         path: "/toefl/reading/academic",
-        desc: "Answer 5 questions about an academic passage",
-        meta: "5 questions",
+        desc: "Answer questions about an academic passage",
+        taskId: "toefl/reading/academic",
+        unit: "question",
       },
     ],
   },
@@ -38,19 +58,22 @@ const sections = [
         label: "Build a Sentence",
         path: "/toefl/writing/build-sentence",
         desc: "Reorder chunks to build correct responses",
-        meta: "10 items",
+        taskId: "toefl/writing/build-sentence",
+        unit: "item",
       },
       {
         label: "Write an Email",
         path: "/toefl/writing/email",
         desc: "Compose an email based on a given scenario",
-        meta: "7 min",
+        taskId: "toefl/writing/email",
+        unit: "prompt",
       },
       {
         label: "Academic Discussion",
         path: "/toefl/writing/discussion",
         desc: "Write your opinion on a professor's prompt",
-        meta: "10 min",
+        taskId: "toefl/writing/discussion",
+        unit: "prompt",
       },
     ],
   },
@@ -63,25 +86,29 @@ const sections = [
         label: "Listen to a Conversation",
         path: "/toefl/listening/conversation",
         desc: "Campus conversation with questions",
-        meta: "5 questions",
+        taskId: "toefl/listening/conversation",
+        unit: "question",
       },
       {
         label: "Listen to a Lecture",
         path: "/toefl/listening/lecture",
         desc: "Academic lecture with questions",
-        meta: "5 questions",
+        taskId: "toefl/listening/lecture",
+        unit: "question",
       },
       {
         label: "Choose a Response",
         path: "/toefl/listening/response",
         desc: "Select the best response to utterances",
-        meta: "8 items",
+        taskId: "toefl/listening/response",
+        unit: "item",
       },
       {
         label: "Listen to an Announcement",
         path: "/toefl/listening/announcement",
         desc: "Campus announcements with questions",
-        meta: "2-3 questions",
+        taskId: "toefl/listening/announcement",
+        unit: "question",
       },
     ],
   },
@@ -94,20 +121,29 @@ const sections = [
         label: "Listen and Repeat",
         path: "/toefl/speaking/listen-repeat",
         desc: "Memorize and reproduce sentences",
-        meta: "7 items",
+        taskId: "toefl/speaking/listen-repeat",
+        unit: "item",
       },
       {
         label: "Take an Interview",
         path: "/toefl/speaking/interview",
         desc: "Answer interview questions on the spot",
-        meta: "4 × 45 sec",
+        taskId: "toefl/speaking/interview",
+        unit: "question",
       },
     ],
   },
 ];
 
+function formatMeta(count: number | null | undefined, unit: string): string {
+  if (count == null) return "—";
+  return `${count} ${unit}${count !== 1 ? "s" : ""}`;
+}
+
 export function ToeflMenuPage() {
   const navigate = useNavigate();
+  const taskIds = sections.flatMap((s) => s.tasks.map((t) => t.taskId));
+  const counts = useTaskQuestionCounts(taskIds);
   return (
     <div>
       <SectionHeader
@@ -145,7 +181,9 @@ export function ToeflMenuPage() {
                     {task.label}
                     <div className={table.titleMeta}>{task.desc}</div>
                   </span>
-                  <span className={table.badgeCell}>{task.meta}</span>
+                  <span className={table.badgeCell}>
+                    {formatMeta(counts[task.taskId], task.unit)}
+                  </span>
                 </div>
               ))}
             </div>

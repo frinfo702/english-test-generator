@@ -115,7 +115,7 @@ export function Part5Page() {
 
       <SectionHeader
         title="Part 5: Incomplete Sentences"
-        subtitle="Choose the best word or phrase for each blank (30 questions)."
+        subtitle="Choose the best word or phrase for each blank."
         backTo="/toeic"
         current={totalAnswered}
         total={questions.length}

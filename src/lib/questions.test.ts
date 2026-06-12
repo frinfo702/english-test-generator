@@ -4,6 +4,7 @@ import {
   fetchQuestionByNumberWithMeta,
   fetchQuestionIndex,
   fetchRandomQuestion,
+  fetchTaskQuestionCount,
   listQuestionFiles,
 } from "./questions";
 
@@ -125,5 +126,111 @@ describe("questions loader", () => {
       2,
       "/questions/toeic/part5/002.json",
     );
+  });
+});
+
+describe("fetchTaskQuestionCount", () => {
+  beforeEach(() => {
+    fetchMock.mockReset();
+    vi.stubGlobal("fetch", fetchMock);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+
+  it("returns null when no question files exist", async () => {
+    fetchMock.mockResolvedValue(mockResponse({ files: [] }));
+
+    const result = await fetchTaskQuestionCount("toeic/part5");
+
+    expect(result).toBeNull();
+  });
+
+  it("counts questions array", async () => {
+    fetchMock
+      .mockResolvedValueOnce(mockResponse({ files: ["001.json"] }))
+      .mockResolvedValueOnce(mockResponse({ questions: [{}, {}, {}] }));
+
+    const result = await fetchTaskQuestionCount("toeic/part5");
+
+    expect(result).toBe(3);
+  });
+
+  it("counts sentences array", async () => {
+    fetchMock
+      .mockResolvedValueOnce(mockResponse({ files: ["001.json"] }))
+      .mockResolvedValueOnce(mockResponse({ sentences: [{}, {}] }));
+
+    const result = await fetchTaskQuestionCount("toefl/speaking/listen-repeat");
+
+    expect(result).toBe(2);
+  });
+
+  it("counts items array", async () => {
+    fetchMock
+      .mockResolvedValueOnce(mockResponse({ files: ["001.json"] }))
+      .mockResolvedValueOnce(mockResponse({ items: [{}, {}, {}, {}] }));
+
+    const result = await fetchTaskQuestionCount("toefl/reading/complete-words");
+
+    expect(result).toBe(4);
+  });
+
+  it("sums questions across texts", async () => {
+    fetchMock
+      .mockResolvedValueOnce(mockResponse({ files: ["001.json"] }))
+      .mockResolvedValueOnce(
+        mockResponse({
+          texts: [
+            { questions: [{}, {}] },
+            { questions: [{}] },
+          ],
+        }),
+      );
+
+    const result = await fetchTaskQuestionCount("toefl/reading/daily-life");
+
+    expect(result).toBe(3);
+  });
+
+  it("sums questions across passages", async () => {
+    fetchMock
+      .mockResolvedValueOnce(mockResponse({ files: ["001.json"] }))
+      .mockResolvedValueOnce(
+        mockResponse({
+          passages: [
+            { questions: [{}, {}, {}, {}] },
+            { questions: [{}, {}, {}, {}] },
+          ],
+        }),
+      );
+
+    const result = await fetchTaskQuestionCount("toeic/part6");
+
+    expect(result).toBe(8);
+  });
+
+  it("returns 1 for email writing tasks", async () => {
+    fetchMock
+      .mockResolvedValueOnce(mockResponse({ files: ["001.json"] }))
+      .mockResolvedValueOnce(mockResponse({ scenario: { title: "Email" } }));
+
+    const result = await fetchTaskQuestionCount("toefl/writing/email");
+
+    expect(result).toBe(1);
+  });
+
+  it("returns 1 for discussion writing tasks", async () => {
+    fetchMock
+      .mockResolvedValueOnce(mockResponse({ files: ["001.json"] }))
+      .mockResolvedValueOnce(
+        mockResponse({ professorQuestion: "What do you think?" }),
+      );
+
+    const result = await fetchTaskQuestionCount("toefl/writing/discussion");
+
+    expect(result).toBe(1);
   });
 });

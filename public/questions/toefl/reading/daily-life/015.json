@@ -78,6 +78,19 @@
           "correctIndex": 2,
           "type": "factual",
           "explanation": "The reviewer says 'the middle section drags a bit,' indicating a pacing issue."
+        },
+        {
+          "id": "q6",
+          "stem": "Who would most likely enjoy this book?",
+          "options": [
+            "A. Readers who prefer fast-paced action",
+            "B. Readers who like vivid nature descriptions",
+            "C. Readers who dislike character-driven stories",
+            "D. Readers who avoid literary fiction"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The reviewer recommends the book to readers who enjoy slow-burn literary fiction with vivid nature descriptions."
         }
       ]
     }

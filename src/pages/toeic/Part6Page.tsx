@@ -154,7 +154,7 @@ export function Part6Page() {
 
       <SectionHeader
         title="Part 6: Text Completion"
-        subtitle="Choose the best words or sentence for each blank (4 passages x 4 questions)."
+        subtitle="Choose the best words or sentence for each blank."
         backTo="/toeic"
         current={totalAnswered}
         total={totalQ}

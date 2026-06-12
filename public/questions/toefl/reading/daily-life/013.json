@@ -78,6 +78,19 @@
           "correctIndex": 1,
           "type": "purpose",
           "explanation": "The message apologizes for being late and asks Jen to order ahead so they can eat immediately."
+        },
+        {
+          "id": "q6",
+          "stem": "What does the speaker ask Jen to do?",
+          "options": [
+            "A. Cancel the dinner reservation",
+            "B. Order the roasted chicken",
+            "C. Pick him up from the highway",
+            "D. Wait outside the restaurant"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The speaker asks Jen to order the roasted chicken for him."
         }
       ]
     }
