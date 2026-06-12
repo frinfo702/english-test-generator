@@ -12,7 +12,7 @@ html {
   font-size: var(--text-base);
   font-family: var(--font-sans);
   color: var(--color-ink);
-  background: var(--color-surface);
+  background: var(--color-surface-elevated);
   line-height: var(--lh-normal);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -21,15 +21,16 @@ html {
 
 body {
   min-height: 100vh;
+  background: var(--color-surface-elevated);
 }
 
 a {
-  color: var(--color-accent);
+  color: var(--color-ink);
   text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: var(--color-accent);
 }
 
 button {
@@ -54,23 +55,21 @@ h4 {
   color: var(--color-ink);
 }
 
-/* ---- Selection ---- */
 ::selection {
-  background: rgba(15, 98, 254, 0.15);
+  background: rgba(44, 187, 93, 0.15);
   color: var(--color-ink);
 }
 
-/* ---- Focus visible ---- */
 :focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
   border-radius: var(--radius-sm);
 }
 
-/* Scrollbar (WebKit) */
+/* Scrollbar (LeetCode-thin) */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -78,15 +77,14 @@ h4 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-strong);
-  border-radius: var(--radius-full);
+  background: #c0c0c0;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-ink-tertiary);
+  background: #a0a0a0;
 }
 
-/* Utility: screen-reader only */
 .sr-only {
   position: absolute;
   width: 1px;

@@ -80,7 +80,7 @@ describe("QuestionSelectorPage", () => {
     expect(screen.getByText("75%")).toBeTruthy();
     expect(screen.getByText("2 questions")).toBeTruthy();
 
-    fireEvent.click(screen.getByRole("button", { name: "Random Question" }));
+    fireEvent.click(screen.getByRole("button", { name: "Pick Random" }));
     expect(screen.getByTestId("location").textContent).toBe("/toeic/part5/2");
   });
 

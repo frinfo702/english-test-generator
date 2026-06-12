@@ -10,6 +10,7 @@ import {
   type TaskId,
 } from "../../hooks/useScoreHistory";
 import { formatSecondsAsMmSs } from "../../lib/time";
+import table from "../ui/ProblemTable.module.css";
 import styles from "./QuestionSelectorPage.module.css";
 
 interface QuestionSelectorPageProps {
@@ -96,11 +97,12 @@ export function QuestionSelectorPage({
 
       <div className={styles.topBar}>
         <Button
+          variant="accent"
           onClick={handleRandom}
           disabled={loading || files.length === 0}
           size="md"
         >
-          Random Question
+          Pick Random
         </Button>
         <span className={styles.count}>
           {files.length} question{files.length !== 1 ? "s" : ""}
@@ -115,8 +117,8 @@ export function QuestionSelectorPage({
       )}
 
       {!loading && !error && (
-        <div className={styles.list}>
-          {files.map((item) => {
+        <div className={table.container}>
+          {files.map((item, i) => {
             const latest = latestByFile.get(item.file);
             const elapsed =
               typeof latest?.elapsedSeconds === "number"
@@ -131,11 +133,19 @@ export function QuestionSelectorPage({
                 type="button"
                 key={item.file}
                 className={[
-                  styles.row,
-                  completed ? styles.rowCompleted : "",
+                  table.row,
+                  styles.row5Col,
+                  completed ? table.rowCompleted : "",
                 ].join(" ")}
                 onClick={() => handlePick(item.number)}
               >
+                <span className={table.statusCol}>
+                  {completed ? (
+                    <span className={table.statusSolved}>✓</span>
+                  ) : (
+                    <span className={table.statusNone}>{i + 1}</span>
+                  )}
+                </span>
                 <span className={styles.number}>Q{item.number}</span>
                 <span className={styles.metric}>
                   <span className={styles.metricLabel}>Time</span>
@@ -152,7 +162,7 @@ export function QuestionSelectorPage({
                     {accuracy}
                   </span>
                 </span>
-                <span className={styles.chevron}>›</span>
+                <span className={styles.chevron}>→</span>
               </button>
             );
           })}

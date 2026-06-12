@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-surface);
+  background: var(--color-surface-elevated);
 }
 
 .header {
@@ -10,10 +10,8 @@
   top: 0;
   z-index: 100;
   height: var(--header-height);
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: saturate(180%) blur(16px);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
-  border-bottom: 1px solid var(--color-border);
+  background: var(--color-nav);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .headerInner {
@@ -31,9 +29,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: var(--font-semibold);
-  color: var(--color-ink);
+  color: #fff;
   text-decoration: none;
   white-space: nowrap;
   letter-spacing: -0.01em;
@@ -42,12 +40,13 @@
 
 .logo:hover {
   text-decoration: none;
-  opacity: 0.8;
+  opacity: 0.85;
+  color: #fff;
 }
 
 .logoMark {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: var(--radius-sm);
   background: var(--color-accent);
   display: flex;
@@ -68,12 +67,12 @@
 .navLink {
   display: inline-flex;
   align-items: center;
-  height: 32px;
+  height: 30px;
   padding: 0 12px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
-  color: var(--color-ink-secondary);
+  color: var(--color-nav-text-secondary);
   text-decoration: none;
   transition:
     background var(--duration-fast) var(--ease-out),
@@ -82,25 +81,25 @@
 }
 
 .navLink:hover {
-  color: var(--color-ink);
-  background: var(--color-surface-hover);
+  color: #fff;
+  background: var(--color-nav-hover);
   text-decoration: none;
 }
 
 .navLinkActive {
-  background: var(--color-ink);
+  background: var(--color-accent);
   color: #fff;
 }
 
 .navLinkActive:hover {
-  background: var(--color-ink);
+  background: var(--color-accent-hover);
   color: #fff;
 }
 
 .navDivider {
   width: 1px;
-  height: 20px;
-  background: var(--color-border);
+  height: 18px;
+  background: rgba(255, 255, 255, 0.15);
   margin: 0 var(--spacing-1);
 }
 
@@ -111,7 +110,7 @@
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: var(--font-medium);
-  color: var(--color-ink-tertiary);
+  color: rgba(255, 255, 255, 0.35);
   letter-spacing: 0.02em;
 }
 
@@ -119,22 +118,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 20px;
-  height: 18px;
-  padding: 0 4px;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
+  min-width: 18px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: var(--font-semibold);
-  color: var(--color-ink-secondary);
+  color: rgba(255, 255, 255, 0.35);
   letter-spacing: 0;
 }
 
 .main {
   flex: 1;
-  padding: var(--spacing-8) var(--spacing-6);
+  padding: var(--spacing-6) var(--spacing-6);
   max-width: calc(var(--max-content) + var(--spacing-6) * 2);
   margin: 0 auto;
   width: 100%;
@@ -146,12 +145,12 @@
   }
 
   .navLink {
-    padding: 0 10px;
+    padding: 0 8px;
     font-size: var(--text-xs);
   }
 
   .main {
-    padding: var(--spacing-6) var(--spacing-4);
+    padding: var(--spacing-4) var(--spacing-4);
   }
 
   .kbd {

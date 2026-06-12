@@ -4,12 +4,12 @@
   font-variant-numeric: tabular-nums;
   color: var(--color-accent);
   background: var(--color-accent-subtle);
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: var(--radius);
   letter-spacing: 1px;
   transition:
-    color 300ms,
-    background 300ms;
+    color var(--duration-base),
+    background var(--duration-base);
 }
 
 .warning {

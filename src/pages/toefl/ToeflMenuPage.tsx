@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
+import table from "../../components/ui/ProblemTable.module.css";
 import styles from "./ToeflMenuPage.module.css";
 
 const sections = [
@@ -11,19 +12,19 @@ const sections = [
       {
         label: "Complete the Words",
         path: "/toefl/reading/complete-words",
-        desc: "Complete missing words in an academic paragraph.",
+        desc: "Fill in missing words in an academic paragraph",
         meta: "10 items",
       },
       {
         label: "Read in Daily Life",
         path: "/toefl/reading/daily-life",
-        desc: "Read everyday texts (emails, notices, ads) and answer questions.",
+        desc: "Answer questions about everyday texts",
         meta: "2–3 texts",
       },
       {
         label: "Read an Academic Passage",
         path: "/toefl/reading/academic",
-        desc: "Read an academic passage and answer 5 questions.",
+        desc: "Answer 5 questions about an academic passage",
         meta: "5 questions",
       },
     ],
@@ -36,19 +37,19 @@ const sections = [
       {
         label: "Build a Sentence",
         path: "/toefl/writing/build-sentence",
-        desc: "Reorder chunks to build responses.",
+        desc: "Reorder chunks to build correct responses",
         meta: "10 items",
       },
       {
         label: "Write an Email",
         path: "/toefl/writing/email",
-        desc: "Write an email based on a scenario.",
+        desc: "Compose an email based on a given scenario",
         meta: "7 min",
       },
       {
-        label: "Write for an Academic Discussion",
+        label: "Academic Discussion",
         path: "/toefl/writing/discussion",
-        desc: "Write your opinion on a professor's prompt.",
+        desc: "Write your opinion on a professor's prompt",
         meta: "10 min",
       },
     ],
@@ -61,25 +62,25 @@ const sections = [
       {
         label: "Listen to a Conversation",
         path: "/toefl/listening/conversation",
-        desc: "Listen to a campus conversation and answer questions.",
+        desc: "Campus conversation with questions",
         meta: "5 questions",
       },
       {
         label: "Listen to a Lecture",
         path: "/toefl/listening/lecture",
-        desc: "Listen to an academic lecture and answer questions.",
+        desc: "Academic lecture with questions",
         meta: "5 questions",
       },
       {
-        label: "Listen and Choose a Response",
+        label: "Choose a Response",
         path: "/toefl/listening/response",
-        desc: "Listen to short utterances and choose the best response.",
+        desc: "Select the best response to utterances",
         meta: "8 items",
       },
       {
         label: "Listen to an Announcement",
         path: "/toefl/listening/announcement",
-        desc: "Listen to campus announcements and answer questions.",
+        desc: "Campus announcements with questions",
         meta: "2-3 questions",
       },
     ],
@@ -92,13 +93,13 @@ const sections = [
       {
         label: "Listen and Repeat",
         path: "/toefl/speaking/listen-repeat",
-        desc: "Memorize and reproduce sentences by typing.",
+        desc: "Memorize and reproduce sentences",
         meta: "7 items",
       },
       {
         label: "Take an Interview",
         path: "/toefl/speaking/interview",
-        desc: "Answer interview questions on the spot.",
+        desc: "Answer interview questions on the spot",
         meta: "4 × 45 sec",
       },
     ],
@@ -111,7 +112,7 @@ export function ToeflMenuPage() {
     <div>
       <SectionHeader
         title="TOEFL iBT 2026"
-        subtitle="January 2026 format update — choose a section and task"
+        subtitle="January 2026 format — select a section and task to practice"
         backTo="/"
       />
       <div className={styles.sections}>
@@ -127,18 +128,24 @@ export function ToeflMenuPage() {
               />
               {section.label}
             </div>
-            <div className={styles.tasks}>
-              {section.tasks.map((task) => (
+            <div className={table.container}>
+              <div className={table.header}>
+                <span>#</span>
+                <span>Task</span>
+                <span>Scale</span>
+              </div>
+              {section.tasks.map((task, i) => (
                 <div
                   key={task.path}
-                  className={styles.taskCard}
+                  className={table.row}
                   onClick={() => navigate(task.path)}
                 >
-                  <div className={styles.taskTop}>
-                    <span className={styles.taskLabel}>{task.label}</span>
-                    <span className={styles.taskMeta}>{task.meta}</span>
-                  </div>
-                  <span className={styles.taskDesc}>{task.desc}</span>
+                  <span className={table.statusNone}>{i + 1}</span>
+                  <span className={table.titleCell}>
+                    {task.label}
+                    <div className={table.titleMeta}>{task.desc}</div>
+                  </span>
+                  <span className={table.badgeCell}>{task.meta}</span>
                 </div>
               ))}
             </div>

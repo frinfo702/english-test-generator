@@ -1,15 +1,40 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/Button";
 import { useScoreHistory } from "../hooks/useScoreHistory";
 import { formatSecondsAsMmSs } from "../lib/time";
+import table from "../components/ui/ProblemTable.module.css";
 import styles from "./HomePage.module.css";
+
+type TestItem = {
+  title: string;
+  subtitle: string;
+  path: string;
+};
+
+const tests: TestItem[] = [
+  {
+    title: "TOEFL iBT 2026",
+    subtitle: "Reading, Writing, Listening & Speaking — full practice",
+    path: "/toefl",
+  },
+  {
+    title: "TOEIC L&R",
+    subtitle: "Parts 2-7 — Listening & Reading practice",
+    path: "/toeic",
+  },
+  {
+    title: "Shadowing Practice",
+    subtitle: "Listen and repeat — improve pronunciation & fluency",
+    path: "/shadowing",
+  },
+];
 
 export function HomePage() {
   const navigate = useNavigate();
   const { getAll } = useScoreHistory();
   const [stats, setStats] = useState<{
-    sessions: number;
+    solved: number;
     accuracy: number;
     avgTime: string;
     streak: number;
@@ -18,9 +43,9 @@ export function HomePage() {
   useEffect(() => {
     getAll().then((entries) => {
       if (entries.length === 0) return;
-      const sessions = entries.length;
+      const solved = entries.length;
       const accuracy = Math.round(
-        entries.reduce((s, e) => s + e.pct, 0) / sessions,
+        entries.reduce((s, e) => s + e.pct, 0) / solved,
       );
       const timed = entries.filter((e) => typeof e.elapsedSeconds === "number");
       const avgTime =
@@ -51,31 +76,31 @@ export function HomePage() {
         }
       }
 
-      setStats({ sessions, accuracy, avgTime, streak });
+      setStats({ solved, accuracy, avgTime, streak });
     });
   }, [getAll]);
 
   return (
     <div className={styles.page}>
       <div className={styles.hero}>
+        <span className={styles.badge}>AI-Powered Practice</span>
         <h1 className={styles.title}>
-          Master the TOEFL iBT 2026{" "}
-          <span className={styles.titleAccent}>&amp;</span> TOEIC L&amp;R
+          English Test <span className={styles.titleAccent}>Practice</span>
         </h1>
         <p className={styles.description}>
-          AI-generated practice questions. No sign-up required. Practice
-          anytime, anywhere.
+          Master the TOEFL iBT 2026 & TOEIC L&R with AI-generated questions. No
+          sign-up required.
         </p>
         <div className={styles.quickStart}>
           <Button variant="accent" size="md" onClick={() => navigate("/toefl")}>
-            Practice TOEFL
+            Start Practicing
           </Button>
           <Button
             variant="secondary"
             size="md"
-            onClick={() => navigate("/toeic")}
+            onClick={() => navigate("/dashboard")}
           >
-            Practice TOEIC
+            View Dashboard
           </Button>
         </div>
       </div>
@@ -83,8 +108,8 @@ export function HomePage() {
       {stats && (
         <div className={styles.statsBar}>
           <div className={styles.statChip}>
-            <span className={styles.statChipLabel}>Sessions</span>
-            <span className={styles.statChipValue}>{stats.sessions}</span>
+            <span className={styles.statChipLabel}>Solved</span>
+            <span className={styles.statChipValue}>{stats.solved}</span>
           </div>
           <div className={styles.statChip}>
             <span className={styles.statChipLabel}>Accuracy</span>
@@ -102,98 +127,36 @@ export function HomePage() {
       )}
 
       <div className={styles.studySection}>
-        <h2 className={styles.sectionTitle}>Choose your test</h2>
-        <div className={styles.cards}>
-          <div className={styles.card} onClick={() => navigate("/toefl")}>
-            <div
-              className={styles.cardAccent}
-              style={{ background: "var(--color-reading)" }}
-            />
-            <div className={styles.cardHeader}>
-              <h3 className={styles.cardTitle}>TOEFL iBT 2026</h3>
-              <span
-                className={styles.cardBadge}
-                style={{
-                  background: "var(--color-accent-subtle)",
-                  color: "var(--color-accent)",
-                }}
-              >
-                NEW
+        <h2 className={styles.sectionTitle}>
+          Problem Sets
+          <span className={styles.sectionCount}>{tests.length} available</span>
+        </h2>
+        <div className={table.container}>
+          <div className={table.header}>
+            <span>#</span>
+            <span>Test</span>
+          </div>
+          {tests.map((test, i) => (
+            <Link key={test.path} to={test.path} className={table.row}>
+              <span className={table.statusCol}>
+                {stats ? (
+                  <span className={table.statusSolved}>✓</span>
+                ) : (
+                  <span className={table.statusNone}>{i + 1}</span>
+                )}
               </span>
-            </div>
-            <p className={styles.cardDesc}>
-              Aligned with the January 2026 format update. Reading, Writing, and
-              Speaking sections.
-            </p>
-            <ul className={styles.cardTasks}>
-              <li>Reading — Complete the Words, Daily Life, Academic</li>
-              <li>Writing — Build Sentence, Email, Discussion</li>
-              <li>Speaking — Listen &amp; Repeat, Interview</li>
-            </ul>
-            <Button className={styles.cardBtn} variant="accent" size="sm">
-              Start →
-            </Button>
-          </div>
-
-          <div className={styles.card} onClick={() => navigate("/toeic")}>
-            <div
-              className={styles.cardAccent}
-              style={{ background: "var(--color-toeic)" }}
-            />
-            <div className={styles.cardHeader}>
-              <h3 className={styles.cardTitle}>TOEIC L&amp;R</h3>
-            </div>
-            <p className={styles.cardDesc}>
-              Parts 1-7. Complete Listening &amp; Reading practice with instant
-              scoring and audio playback.
-            </p>
-            <ul className={styles.cardTasks}>
-              <li>Part 5 — Incomplete Sentences (30 Qs)</li>
-              <li>Part 6 — Text Completion (16 Qs)</li>
-              <li>Part 7 — Reading Comprehension (54 Qs)</li>
-            </ul>
-            <Button className={styles.cardBtn} variant="secondary" size="sm">
-              Start →
-            </Button>
-          </div>
-
-          <div className={styles.card} onClick={() => navigate("/shadowing")}>
-            <div
-              className={styles.cardAccent}
-              style={{ background: "var(--color-speaking)" }}
-            />
-            <div className={styles.cardHeader}>
-              <h3 className={styles.cardTitle}>Shadowing Practice</h3>
-              <span
-                className={styles.cardBadge}
-                style={{
-                  background: "var(--color-warning-subtle)",
-                  color: "var(--color-warning)",
-                }}
-              >
-                NEW
+              <span className={table.titleCell}>
+                {test.title}
+                <div className={table.titleMeta}>{test.subtitle}</div>
               </span>
-            </div>
-            <p className={styles.cardDesc}>
-              Listen and repeat to improve pronunciation and fluency. Audio
-              played with AI-generated voice, text can be hidden or revealed.
-            </p>
-            <ul className={styles.cardTasks}>
-              <li>Daily Conversations — 6 sentences</li>
-              <li>Academic Topics — 7 sentences</li>
-              <li>Travel &amp; Culture — 8 sentences</li>
-            </ul>
-            <Button className={styles.cardBtn} variant="accent" size="sm">
-              Start →
-            </Button>
-          </div>
+            </Link>
+          ))}
         </div>
       </div>
 
       <p className={styles.note}>
         Generate questions with an AI agent and save them under{" "}
-        <code>public/questions/</code>. Prompt specifications for each task are
-        available in <code>public/prompts/</code>.
+        <code>public/questions/</code>. Prompts in <code>public/prompts/</code>.
       </p>
     </div>
   );
