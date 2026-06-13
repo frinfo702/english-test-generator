@@ -32,7 +32,7 @@ const DEFAULT_WORDS_PER_SECOND = 2.2;
 const RECORDING_MULTIPLIER = 1.5;
 const PROCESSING_DELAY_MS = 400;
 
-type Phase = "playing" | "recording" | "processing" | "review";
+type Phase = "playing" | "ready" | "recording" | "processing" | "review";
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
@@ -113,6 +113,12 @@ export function ListenRepeatPage() {
       recordingTimerRef.current = null;
     }
   }, []);
+
+  useEffect(() => {
+    if (speechError && phase === "recording") {
+      clearRecordingTimer();
+    }
+  }, [speechError, phase, clearRecordingTimer]);
 
   const clearProcessingTimeout = useCallback(() => {
     if (processingTimeoutRef.current) {
@@ -217,9 +223,13 @@ export function ListenRepeatPage() {
     if (!sentence || !fileBasename) return;
     const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${current + 1}.mp3`;
     void play(url, () => {
-      startRecording();
+      setPhase("ready");
     });
-  }, [sentence, fileBasename, current, play, startRecording]);
+  }, [sentence, fileBasename, current, play]);
+
+  const handleStartRecording = useCallback(() => {
+    startRecording();
+  }, [startRecording]);
 
   useEffect(() => {
     if (
@@ -271,6 +281,15 @@ export function ListenRepeatPage() {
   };
 
   const handleReplayAudio = () => {
+    clearRecordingTimer();
+    clearProcessingTimeout();
+    void stopSpeech();
+    finishingRef.current = false;
+    setProcessingMessage(null);
+    setPhase("playing");
+  };
+
+  const handleRetryRecording = () => {
     clearRecordingTimer();
     clearProcessingTimeout();
     void stopSpeech();
@@ -357,6 +376,20 @@ export function ListenRepeatPage() {
             </div>
           )}
 
+          {phase === "ready" && (
+            <div className={styles.showPhase}>
+              <div className={styles.statusIcon}>🎤</div>
+              <p className={styles.sentenceDisplay}>Ready to record</p>
+              <p className={styles.hint}>
+                Click the button below when you are ready to repeat the
+                sentence.
+              </p>
+              <Button onClick={handleStartRecording} variant="accent" size="lg">
+                🔴 Start Recording
+              </Button>
+            </div>
+          )}
+
           {phase === "recording" && (
             <div className={styles.showPhase}>
               <div className={styles.recordingIndicator}>
@@ -371,6 +404,11 @@ export function ListenRepeatPage() {
               </p>
               {transcript && (
                 <p className={styles.liveTranscript}>{transcript}</p>
+              )}
+              {speechError && (
+                <Button onClick={handleRetryRecording} variant="accent">
+                  🔄 Retry This Sentence
+                </Button>
               )}
             </div>
           )}

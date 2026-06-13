@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ListenRepeatPage } from "./ListenRepeatPage";
@@ -67,6 +67,8 @@ describe("ListenRepeatPage", () => {
       file: "001.json",
       loading: false,
       error: null,
+      load: vi.fn(),
+      loadByFile: vi.fn(),
       loadByQuestionNumber: loadByQuestionNumberMock,
     });
 
@@ -113,6 +115,7 @@ describe("ListenRepeatPage", () => {
   });
 
   afterEach(() => {
+    cleanup();
     vi.useRealTimers();
     vi.clearAllMocks();
   });
@@ -123,6 +126,8 @@ describe("ListenRepeatPage", () => {
       file: null,
       loading: true,
       error: null,
+      load: vi.fn(),
+      loadByFile: vi.fn(),
       loadByQuestionNumber: loadByQuestionNumberMock,
     });
 
@@ -143,7 +148,7 @@ describe("ListenRepeatPage", () => {
     expect(screen.getByText("Listen carefully...")).toBeTruthy();
   });
 
-  it("starts recording after audio ends", async () => {
+  it("transitions to ready phase after audio ends", async () => {
     renderPage();
 
     let onEnded: (() => void) | undefined;
@@ -152,7 +157,39 @@ describe("ListenRepeatPage", () => {
       onEnded = playMock.mock.calls[0][1];
     });
 
-    onEnded?.();
+    act(() => {
+      onEnded?.();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText("Ready to record")).toBeTruthy();
+    });
+
+    expect(
+      screen.getByRole("button", { name: /Start Recording/i }),
+    ).toBeTruthy();
+  });
+
+  it("starts recording when user clicks Start Recording button", async () => {
+    renderPage();
+
+    let onEnded: (() => void) | undefined;
+    await waitFor(() => {
+      expect(playMock).toHaveBeenCalled();
+      onEnded = playMock.mock.calls[0][1];
+    });
+
+    act(() => {
+      onEnded?.();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText("Ready to record")).toBeTruthy();
+    });
+
+    act(() => {
+      screen.getByRole("button", { name: /Start Recording/i }).click();
+    });
 
     await waitFor(() => {
       expect(startSpeechMock).toHaveBeenCalled();
@@ -170,7 +207,17 @@ describe("ListenRepeatPage", () => {
       onEnded = playMock.mock.calls[0][1];
     });
 
-    onEnded?.();
+    act(() => {
+      onEnded?.();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText("Ready to record")).toBeTruthy();
+    });
+
+    act(() => {
+      screen.getByRole("button", { name: /Start Recording/i }).click();
+    });
 
     await waitFor(() => {
       expect(startSpeechMock).toHaveBeenCalled();
@@ -197,7 +244,17 @@ describe("ListenRepeatPage", () => {
         onEnded = calls[sentenceIndex][1];
       });
 
-      onEnded?.();
+      act(() => {
+        onEnded?.();
+      });
+
+      await waitFor(() => {
+        expect(screen.getByText("Ready to record")).toBeTruthy();
+      });
+
+      act(() => {
+        screen.getByRole("button", { name: /Start Recording/i }).click();
+      });
 
       await waitFor(() => {
         expect(startSpeechMock).toHaveBeenCalledTimes(sentenceIndex + 1);
@@ -242,6 +299,57 @@ describe("ListenRepeatPage", () => {
         screen.getByText(
           /Speech recognition is not supported in this browser/i,
         ),
+      ).toBeTruthy();
+    });
+  });
+
+  it("shows a retry button when speech recognition fails", async () => {
+    const { rerender } = renderPage();
+
+    let onEnded: (() => void) | undefined;
+    await waitFor(() => {
+      onEnded = playMock.mock.calls[0][1];
+    });
+
+    act(() => {
+      onEnded?.();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText("Ready to record")).toBeTruthy();
+    });
+
+    act(() => {
+      screen.getByRole("button", { name: /Start Recording/i }).click();
+    });
+
+    await waitFor(() => {
+      expect(startSpeechMock).toHaveBeenCalled();
+    });
+
+    vi.mocked(useSpeechRecognition).mockReturnValue({
+      supported: true,
+      recording: false,
+      transcript: "",
+      error: "Speech recognition failed due to a network error.",
+      start: startSpeechMock,
+      stop: stopSpeechMock,
+    });
+
+    rerender(
+      <MemoryRouter initialEntries={["/toefl/speaking/listen-repeat/1"]}>
+        <Routes>
+          <Route
+            path="/toefl/speaking/listen-repeat/:questionNumber"
+            element={<ListenRepeatPage />}
+          />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: /Retry This Sentence/i }),
       ).toBeTruthy();
     });
   });

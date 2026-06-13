@@ -86,7 +86,27 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
       if (event.error === "no-speech" || event.error === "aborted") {
         return;
       }
-      setError(event.message || `Speech recognition error: ${event.error}`);
+
+      const messages: Record<string, string> = {
+        "audio-capture":
+          "Failed to access the microphone. Please check your microphone and try again.",
+        network:
+          "Speech recognition failed due to a network error. Please check your connection and try again.",
+        "not-allowed":
+          "Microphone access was denied. Please allow microphone permission and try again.",
+        "service-not-allowed":
+          "Speech recognition is not allowed in this context. Please try a different browser.",
+        "bad-grammar":
+          "Speech recognition failed. Please speak clearly and try again.",
+        "language-not-supported":
+          "The selected language is not supported for speech recognition.",
+      };
+
+      setError(
+        event.message ||
+          messages[event.error] ||
+          `Speech recognition error: ${event.error}`,
+      );
       setRecording(false);
       endPromiseRef.current?.();
       endPromiseRef.current = null;

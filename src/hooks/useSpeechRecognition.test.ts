@@ -202,4 +202,22 @@ describe("useSpeechRecognition", () => {
 
     expect(result.current.error).toBeNull();
   });
+
+  it("shows a friendly message for network errors", async () => {
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    act(() => {
+      result.current.start();
+    });
+
+    const instance = FakeSpeechRecognition.instances[0];
+
+    act(() => {
+      instance.emitError("network");
+    });
+
+    expect(result.current.error).toContain("network error");
+    expect(result.current.recording).toBe(false);
+  });
 });
