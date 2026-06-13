@@ -32,7 +32,13 @@ const DEFAULT_WORDS_PER_SECOND = 2.2;
 const RECORDING_MULTIPLIER = 1.5;
 const PROCESSING_DELAY_MS = 400;
 
-type Phase = "playing" | "ready" | "recording" | "processing" | "review";
+type Phase =
+  | "playing"
+  | "ready"
+  | "recording"
+  | "processing"
+  | "feedback"
+  | "review";
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
@@ -174,8 +180,7 @@ export function ListenRepeatPage() {
       });
 
       if (!isLastSentence) {
-        setCurrent((c) => c + 1);
-        setPhase("playing");
+        setPhase("feedback");
       }
       setProcessingMessage(null);
       finishingRef.current = false;
@@ -230,6 +235,12 @@ export function ListenRepeatPage() {
   const handleStartRecording = useCallback(() => {
     startRecording();
   }, [startRecording]);
+
+  const handleNextQuestion = useCallback(() => {
+    if (isLastSentence) return;
+    setCurrent((c) => c + 1);
+    setPhase("playing");
+  }, [isLastSentence]);
 
   useEffect(() => {
     if (
@@ -419,16 +430,71 @@ export function ListenRepeatPage() {
             </div>
           )}
 
-          <div className={styles.playerControls}>
-            <Button
-              onClick={handleReplayAudio}
-              disabled={phase === "playing" || ttsLoading}
-              size="sm"
-              variant="secondary"
-            >
-              🔁 Replay Audio
-            </Button>
-          </div>
+          {phase === "feedback" && (
+            <div className={styles.feedbackPhase}>
+              <p className={styles.fbLabel}>Original sentence:</p>
+              <p className={styles.originalSentence}>{sentence.text}</p>
+              <p className={styles.fbLabel}>Your speech (diff):</p>
+              <div className={styles.diffView}>
+                {alignWords(sentence.text, transcripts[current] ?? "").map(
+                  (a, j) => {
+                    const displayWord =
+                      a.type === "deletion"
+                        ? (a.original ?? "▪")
+                        : (a.recognized ?? "▪");
+                    return (
+                      <span
+                        key={j}
+                        className={[
+                          styles.diffWord,
+                          a.correct ? styles.diffCorrect : styles.diffWrong,
+                          a.type === "deletion" ? styles.diffMissing : "",
+                          a.type === "insertion" ? styles.diffExtra : "",
+                        ].join(" ")}
+                        title={
+                          a.type === "match"
+                            ? ""
+                            : a.type === "deletion"
+                              ? `Missing: ${a.original}`
+                              : a.type === "insertion"
+                                ? `Extra: ${a.recognized}`
+                                : `Expected: ${a.original}, got: ${a.recognized}`
+                        }
+                      >
+                        {displayWord}
+                      </span>
+                    );
+                  },
+                )}
+              </div>
+              <p className={styles.hint}>
+                {countCorrectWords(
+                  alignWords(sentence.text, transcripts[current] ?? ""),
+                )}
+                /
+                {countOriginalWords(
+                  alignWords(sentence.text, transcripts[current] ?? ""),
+                )}{" "}
+                words correct
+              </p>
+              <Button onClick={handleNextQuestion} variant="accent" size="lg">
+                Next Question
+              </Button>
+            </div>
+          )}
+
+          {phase !== "feedback" && (
+            <div className={styles.playerControls}>
+              <Button
+                onClick={handleReplayAudio}
+                disabled={phase === "playing" || ttsLoading}
+                size="sm"
+                variant="secondary"
+              >
+                🔁 Replay Audio
+              </Button>
+            </div>
+          )}
         </div>
       )}
 
@@ -436,6 +502,7 @@ export function ListenRepeatPage() {
         <>
           <div className={styles.resultCard}>
             <h2>Section Complete</h2>
+            <p className={styles.hint}>Review your answers below.</p>
             <div className={styles.scoreBox}>
               <span className={styles.scoreNum}>{correctWords}</span>
               <span className={styles.scoreDen}>/{totalWords}</span>

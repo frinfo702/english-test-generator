@@ -199,7 +199,7 @@ describe("ListenRepeatPage", () => {
     expect(screen.getByText("3s")).toBeTruthy();
   });
 
-  it("advances to the next sentence after recording time expires", async () => {
+  it("shows per-question feedback after recording and advances on Next Question", async () => {
     renderPage();
 
     let onEnded: (() => void) | undefined;
@@ -215,6 +215,15 @@ describe("ListenRepeatPage", () => {
       expect(screen.getByText("Ready to record")).toBeTruthy();
     });
 
+    vi.mocked(useSpeechRecognition).mockReturnValue({
+      supported: true,
+      recording: true,
+      transcript: "",
+      error: null,
+      start: startSpeechMock,
+      stop: stopSpeechMock,
+    });
+
     act(() => {
       screen.getByRole("button", { name: /Start Recording/i }).click();
     });
@@ -223,10 +232,26 @@ describe("ListenRepeatPage", () => {
       expect(startSpeechMock).toHaveBeenCalled();
     });
 
-    // Simulate recording completion by calling finishSentence directly
-    // (the actual timer flow is tested manually in the browser)
-    expect(screen.getByText("Repeat the sentence now")).toBeTruthy();
-    expect(screen.getByText("3s")).toBeTruthy();
+    // Advance through recording (3s) + processing delay (400ms)
+    await act(async () => {
+      vi.advanceTimersByTime(4000);
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText("Original sentence:")).toBeTruthy();
+      expect(screen.getByText("The library will be closed.")).toBeTruthy();
+    });
+
+    expect(screen.getByRole("button", { name: /Next Question/i })).toBeTruthy();
+
+    act(() => {
+      screen.getByRole("button", { name: /Next Question/i }).click();
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText("Question 2 / 2")).toBeTruthy();
+      expect(screen.getByText("Listen carefully...")).toBeTruthy();
+    });
   });
 
   it("shows recording UI after clicking Start Recording", async () => {
