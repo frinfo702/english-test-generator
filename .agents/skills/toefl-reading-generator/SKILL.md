@@ -1,10 +1,10 @@
 ---
 name: toefl-reading
 description: >
-  TOEFL Reading セクションの問題JSONを生成するスキル。
-  「TOEFL Readingの問題作って」「Complete the Words」「Read in Daily Life」
-  「Academic Passage」「TOEFL Readingの練習」などの発言でトリガーする。
-  TOEIC Readingや他のTOEFLセクションには使わない。
+    TOEFL Reading セクションの問題JSONを生成するスキル。
+    「TOEFL Readingの問題作って」「Complete the Words」「Read in Daily Life」
+    「Academic Passage」「TOEFL Readingの練習」などの発言でトリガーする。
+    TOEIC Readingや他のTOEFLセクションには使わない。
 ---
 
 # TOEFL Reading Section
@@ -16,11 +16,11 @@ description: >
 
 ## タスク一覧
 
-| タスク                | 保存先                                           | 設問数                       |
-| --------------------- | ------------------------------------------------ | ---------------------------- |
-| Complete the Words    | `public/questions/toefl/reading/complete-words/` | 1パッセージにつき10 blanks   |
-| Read in Daily Life    | `public/questions/toefl/reading/daily-life/`     | pacage × 2〜3 questions each |
-| Read Academic Passage | `public/questions/toefl/reading/academic/`       | 1 pacage x 5 questions       |
+| タスク                | 保存先                                           | パッセージの長さ | 設問数                       |
+| --------------------- | ------------------------------------------------ | ---------------- | ---------------------------- |
+| Complete the Words    | `public/questions/toefl/reading/complete-words/` | 70-100 words     | 1パッセージにつき10 blanks   |
+| Read in Daily Life    | `public/questions/toefl/reading/daily-life/`     | 80-150 words     | pacage × 2〜3 questions each |
+| Read Academic Passage | `public/questions/toefl/reading/academic/`       | 170-230 words    | 1 pacage x 5 questions       |
 
 ## 必須仕様（2026年新形式準拠）
 
@@ -54,8 +54,8 @@ description: >
 ## 実行手順
 
 1. `scripts/make-question.sh <task>` または `scripts/generate-template.py <task>` で雛形JSONを作成
-   - `generate-template.py` はスキル内の `scripts/` に同梱されているPythonスクリプト
-   - 使用例: `python3 .agents/skills/toefl-reading-generator/scripts/generate-template.py daily-life`
+    - `generate-template.py` はスキル内の `scripts/` に同梱されているPythonスクリプト
+    - 使用例: `python3 .agents/skills/toefl-reading-generator/scripts/generate-template.py daily-life`
 2. `TODO` を本番問題に置換
 3. JSON構造を `question-schemas.md` と照合
 4. 保存先パスを報告

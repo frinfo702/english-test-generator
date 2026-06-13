@@ -4,7 +4,6 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../../components/ui/FeedbackPanel";
-import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
@@ -32,6 +31,17 @@ interface ProblemData {
   texts: TextBlock[];
 }
 
+const TYPE_LABELS: Record<string, string> = {
+  factual: "Factual",
+  inference: "Inference",
+  purpose: "Purpose",
+  vocabulary: "Vocabulary",
+};
+
+function cleanOptionText(text: string): string {
+  return text.replace(/^[A-Da-d][.)]\s*/, "");
+}
+
 export function ReadDailyLifePage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
@@ -46,8 +56,6 @@ export function ReadDailyLifePage() {
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const [textIdx, setTextIdx] = useState(0);
-  const [qIdx, setQIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [graded, setGraded] = useState(false);
   const sessionFileRef = useRef<string | null>(null);
@@ -74,59 +82,25 @@ export function ReadDailyLifePage() {
     }
   }, [data, loading, graded, running, elapsedSeconds, start]);
 
-  // Flatten questions across all texts
+  // Flatten questions across all texts so we can number them globally.
   const allQ: { text: TextBlock; question: Question }[] = [];
-  if (data)
+  if (data) {
     data.texts.forEach((t) =>
       t.questions.forEach((q) => allQ.push({ text: t, question: q })),
     );
+  }
 
   const totalQ = allQ.length;
-  const globalIdx = data
-    ? data.texts.slice(0, textIdx).reduce((s, t) => s + t.questions.length, 0) +
-      qIdx
-    : 0;
-
-  const currentText = data?.texts[textIdx];
-  const currentQ = currentText?.questions[qIdx];
-  const allAnswered = totalQ > 0 && Object.keys(answers).length === totalQ;
-  const isLastQuestion = data
-    ? textIdx === data.texts.length - 1 &&
-      qIdx === (currentText?.questions.length ?? 1) - 1
-    : false;
+  const answeredCount = Object.keys(answers).length;
+  const allAnswered = totalQ > 0 && answeredCount === totalQ;
 
   const correctCount = allQ.filter(
     ({ question }) => answers[question.id] === question.correctIndex,
   ).length;
 
-  const handleSelect = (i: number) => {
-    if (!graded && currentQ) setAnswers((s) => ({ ...s, [currentQ.id]: i }));
-  };
-
-  const handleNext = () => {
-    if (!data) return;
-    const nextQ = qIdx + 1;
-    if (nextQ < (currentText?.questions.length ?? 0)) {
-      setQIdx(nextQ);
-      return;
-    }
-    const nextT = textIdx + 1;
-    if (nextT < data.texts.length) {
-      setTextIdx(nextT);
-      setQIdx(0);
-      return;
-    }
-  };
-
-  const handlePrev = () => {
-    if (qIdx > 0) {
-      setQIdx(qIdx - 1);
-      return;
-    }
-    if (textIdx > 0) {
-      const prevText = data?.texts[textIdx - 1];
-      setTextIdx(textIdx - 1);
-      setQIdx((prevText?.questions.length ?? 1) - 1);
+  const handleSelect = (questionId: string, optionIndex: number) => {
+    if (!graded) {
+      setAnswers((s) => ({ ...s, [questionId]: optionIndex }));
     }
   };
 
@@ -155,10 +129,13 @@ export function ReadDailyLifePage() {
 
       <SectionHeader
         title="Read in Daily Life"
-        subtitle="Read everyday texts and answer questions."
+        subtitle="Read everyday texts and answer all questions."
         backTo="/toefl"
+        current={answeredCount}
+        total={totalQ}
       />
-      <div className={styles.moduleBar}>
+
+      <div className={styles.topBar}>
         <Button
           variant="secondary"
           size="sm"
@@ -168,118 +145,116 @@ export function ReadDailyLifePage() {
           Question List
         </Button>
       </div>
+
       {!hasValidQuestionNumber && (
         <div className={styles.error}>
           <p>Invalid question number in URL.</p>
         </div>
       )}
 
-      {/* Result */}
-      {graded && hasValidQuestionNumber && (
-        <div className={styles.resultCard}>
-          <h2 className={styles.resultTitle}>Result</h2>
-          <div className={styles.resultModules}>
-            <div className={styles.moduleResult}>
-              <span className={styles.moduleLabel}>Score</span>
-              <span className={styles.moduleScore}>
-                {correctCount}/{totalQ} (
-                {totalQ > 0 ? Math.round((correctCount / totalQ) * 100) : 0}
-                %)
-              </span>
-            </div>
-          </div>
-          <ProgressBar current={correctCount} total={totalQ} label="Accuracy" />
-          <Button size="lg" onClick={handleRestart}>
-            Try Again
-          </Button>
+      {loading && <LoadingSpinner message="Loading question..." />}
+      {error && (
+        <div className={styles.error}>
+          <p>{error}</p>
+          <p className={styles.errorHint}>
+            Add question JSON under questions/toefl/reading/daily-life/.
+          </p>
         </div>
       )}
 
-      {/* Questions */}
-      {!graded && hasValidQuestionNumber && (
+      {data && !loading && hasValidQuestionNumber && (
         <>
-          <div className={styles.moduleBar}>
-            {totalQ > 0 && (
-              <ProgressBar
-                current={Object.keys(answers).length}
-                total={totalQ}
-              />
-            )}
-          </div>
-
-          {loading && <LoadingSpinner message="Loading question..." />}
-          {error && (
-            <div className={styles.error}>
-              <p>{error}</p>
-              <p className={styles.errorHint}>
-                Add question JSON under questions/toefl/reading/daily-life/.
-              </p>
+          {graded && (
+            <div className={styles.resultCard}>
+              <h2 className={styles.resultTitle}>Result</h2>
+              <div className={styles.resultModules}>
+                <div className={styles.moduleResult}>
+                  <span className={styles.moduleLabel}>Score</span>
+                  <span className={styles.moduleScore}>
+                    {correctCount}/{totalQ} (
+                    {totalQ > 0 ? Math.round((correctCount / totalQ) * 100) : 0}
+                    %)
+                  </span>
+                </div>
+              </div>
+              <Button size="lg" onClick={handleRestart}>
+                Try Again
+              </Button>
             </div>
           )}
 
-          {data && !loading && currentText && currentQ && (
-            <div className={styles.layout}>
-              <div className={styles.textCard}>
-                <div className={styles.textMeta}>{currentText.textType}</div>
-                <p className={styles.textContent}>{currentText.content}</p>
-              </div>
-              <div className={styles.questionCard}>
-                <p className={styles.qNum}>
-                  Question {globalIdx + 1} / {totalQ}
-                </p>
-                <p className={styles.stem}>{currentQ.stem}</p>
-                <div className={styles.options}>
-                  {currentQ.options.map((opt, i) => (
-                    <button
-                      key={i}
-                      className={[
-                        styles.option,
-                        answers[currentQ.id] === i ? styles.selected : "",
-                        graded && i === currentQ.correctIndex
-                          ? styles.correctOpt
-                          : "",
-                        graded &&
-                        answers[currentQ.id] === i &&
-                        i !== currentQ.correctIndex
-                          ? styles.wrongOpt
-                          : "",
-                      ].join(" ")}
-                      onClick={() => handleSelect(i)}
-                    >
-                      <span className={styles.optLabel}>
-                        {String.fromCharCode(65 + i)}
-                      </span>
-                      {opt}
-                    </button>
-                  ))}
+          <div className={styles.texts}>
+            {data.texts.map((text) => (
+              <section key={text.id} className={styles.textSection}>
+                <div className={styles.textCard}>
+                  <div className={styles.textMeta}>{text.textType}</div>
+                  <p className={styles.textContent}>{text.content}</p>
                 </div>
-                {graded && (
-                  <FeedbackPanel
-                    correct={answers[currentQ.id] === currentQ.correctIndex}
-                    explanation={currentQ.explanation}
-                  />
-                )}
-                <div className={styles.btnRow}>
-                  {globalIdx > 0 && (
-                    <Button variant="secondary" onClick={handlePrev}>
-                      Previous
-                    </Button>
-                  )}
-                  {!graded &&
-                    !isLastQuestion &&
-                    answers[currentQ.id] != null && (
-                      <Button onClick={handleNext}>Next</Button>
-                    )}
-                  {!graded && isLastQuestion && allAnswered && (
-                    <Button onClick={handleSubmit} size="lg">
-                      Submit
-                    </Button>
-                  )}
-                  {graded && !isLastQuestion && (
-                    <Button onClick={handleNext}>Next</Button>
-                  )}
+
+                <div className={styles.questions}>
+                  {text.questions.map((q) => {
+                    const globalIdx = allQ.findIndex(
+                      (item) => item.question.id === q.id,
+                    );
+                    const selected = answers[q.id];
+                    return (
+                      <div key={q.id} className={styles.qBlock}>
+                        <div className={styles.qHeader}>
+                          <span className={styles.qNum}>
+                            {globalIdx + 1}
+                          </span>
+                          <span className={styles.qType}>
+                            {TYPE_LABELS[q.type] ?? q.type}
+                          </span>
+                        </div>
+                        <p className={styles.stem}>{q.stem}</p>
+                        <div className={styles.options}>
+                          {q.options.map((opt, i) => (
+                            <button
+                              key={i}
+                              className={[
+                                styles.option,
+                                selected === i ? styles.selected : "",
+                                graded && i === q.correctIndex
+                                  ? styles.correctOpt
+                                  : "",
+                                graded &&
+                                selected === i &&
+                                i !== q.correctIndex
+                                  ? styles.wrongOpt
+                                  : "",
+                              ].join(" ")}
+                              onClick={() => handleSelect(q.id, i)}
+                            >
+                              <span className={styles.optLabel}>
+                                {String.fromCharCode(65 + i)}
+                              </span>
+                              {cleanOptionText(opt)}
+                            </button>
+                          ))}
+                        </div>
+                        {graded && (
+                          <FeedbackPanel
+                            correct={selected === q.correctIndex}
+                            explanation={q.explanation}
+                            correctAnswer={`(${String.fromCharCode(
+                              65 + q.correctIndex,
+                            )}) ${cleanOptionText(q.options[q.correctIndex])}`}
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
-              </div>
+              </section>
+            ))}
+          </div>
+
+          {!graded && allAnswered && (
+            <div className={styles.submitRow}>
+              <Button onClick={handleSubmit} size="lg">
+                Submit
+              </Button>
             </div>
           )}
         </>

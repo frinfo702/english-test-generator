@@ -67,23 +67,15 @@
         {
           "id": "q5",
           "stem": "What is the maximum total overdraft fee a customer could be charged in one day?",
-          "options": ["A. $35", "B. $70", "C. $105", "D. $140"],
+          "options": [
+            "A. $35",
+            "B. $70",
+            "C. $105",
+            "D. $140"
+          ],
           "correctIndex": 3,
           "type": "inference",
           "explanation": "The overdraft fee is $35 per item with a maximum of 4 per day, so 4 × $35 = $140."
-        },
-        {
-          "id": "q6",
-          "stem": "The word 'waived' in the fee schedule is closest in meaning to:",
-          "options": [
-            "A. increased",
-            "B. removed or not charged",
-            "C. delayed",
-            "D. reduced by half"
-          ],
-          "correctIndex": 1,
-          "type": "vocabulary",
-          "explanation": "'Waived' means to refrain from claiming or enforcing a fee, so it is not charged."
         }
       ]
     }

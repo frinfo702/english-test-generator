@@ -32,19 +32,6 @@
           "explanation": "The email states that 'lunch is provided for full-day ticket holders only,' implying half-day holders do not receive it."
         },
         {
-          "id": "q4",
-          "stem": "What is the main purpose of the email?",
-          "options": [
-            "A. To promote ticket sales",
-            "B. To inform attendees of schedule and venue changes",
-            "C. To announce the cancellation of the conference",
-            "D. To introduce the keynote speaker"
-          ],
-          "correctIndex": 1,
-          "type": "purpose",
-          "explanation": "The email informs attendees about the venue change, earlier start times, and lunch policy."
-        },
-        {
           "id": "q6",
           "stem": "The word 'accommodate' in the email is closest in meaning to:",
           "options": [

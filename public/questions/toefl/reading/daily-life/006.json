@@ -65,19 +65,6 @@
           "explanation": "The form explicitly states that 'claims submitted without a signature will be returned unprocessed.'"
         },
         {
-          "id": "q5",
-          "stem": "What documents must be attached to the claim form?",
-          "options": [
-            "A. A copy of the insurance card only",
-            "B. Original receipts and itemized bills",
-            "C. A referral letter from a primary doctor",
-            "D. Proof of employment"
-          ],
-          "correctIndex": 1,
-          "type": "factual",
-          "explanation": "Section B states to 'attach original receipts and itemized bills.'"
-        },
-        {
           "id": "q6",
           "stem": "The word 'itemized' in the form instructions is closest in meaning to:",
           "options": [
