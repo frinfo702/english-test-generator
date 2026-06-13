@@ -1,26 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-
-interface SpeechRecognitionEvent extends Event {
-  results: SpeechRecognitionResultList;
-}
-
-interface SpeechRecognitionErrorEvent extends Event {
-  error: string;
-  message: string;
-}
-
-interface SpeechRecognitionType extends EventTarget {
-  lang: string;
-  continuous: boolean;
-  interimResults: boolean;
-  maxAlternatives: number;
-  start: () => void;
-  stop: () => void;
-  abort: () => void;
-  onresult: ((event: SpeechRecognitionEvent) => void) | null;
-  onerror: ((event: SpeechRecognitionErrorEvent) => void) | null;
-  onend: (() => void) | null;
-}
+import { transcribeAudio } from "../lib/transcribe";
 
 interface UseSpeechRecognitionReturn {
   supported: boolean;
@@ -31,262 +10,197 @@ interface UseSpeechRecognitionReturn {
   stop: () => Promise<void>;
 }
 
-const RESTART_DELAY_MS = 300;
-const RETRY_DELAY_MS = 600;
-const MAX_RETRY_COUNT = 2;
+const env = typeof import.meta !== "undefined" ? import.meta.env : undefined;
+const TRANSCRIBE_API_URL =
+  (env?.VITE_TRANSCRIBE_API_URL as string | undefined) ?? "/api/transcribe";
 
-function getSpeechRecognition(): (new () => SpeechRecognitionType) | undefined {
-  if (typeof window === "undefined") return undefined;
-  const win = window as unknown as {
-    SpeechRecognition?: new () => SpeechRecognitionType;
-    webkitSpeechRecognition?: new () => SpeechRecognitionType;
-  };
-  return win.SpeechRecognition ?? win.webkitSpeechRecognition;
+function isBrowserSupported(): boolean {
+  return (
+    typeof navigator !== "undefined" &&
+    typeof MediaRecorder !== "undefined" &&
+    !!navigator.mediaDevices?.getUserMedia
+  );
 }
 
-function joinTranscriptParts(...parts: string[]): string {
-  return parts
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .join(" ");
+function selectMimeType(): string {
+  const candidates = [
+    "audio/webm;codecs=opus",
+    "audio/webm",
+    "audio/mp4",
+    "audio/mp4;codecs=mp4a.40.2",
+  ];
+  for (const type of candidates) {
+    if (MediaRecorder.isTypeSupported(type)) {
+      return type;
+    }
+  }
+  return "";
+}
+
+function getMicrophoneErrorMessage(error: unknown): string {
+  if (error instanceof DOMException) {
+    if (
+      error.name === "NotAllowedError" ||
+      error.name === "PermissionDeniedError"
+    ) {
+      return "Microphone access was denied. Please allow microphone permission and try again.";
+    }
+    if (
+      error.name === "NotFoundError" ||
+      error.name === "DevicesNotFoundError"
+    ) {
+      return "No microphone found. Please connect a microphone and try again.";
+    }
+  }
+  return `Failed to access the microphone: ${error instanceof Error ? error.message : String(error)}`;
+}
+
+function getTranscriptionErrorMessage(error: unknown): string {
+  return error instanceof Error
+    ? error.message
+    : "Transcription failed. Please try again.";
 }
 
 export function useSpeechRecognition(): UseSpeechRecognitionReturn {
-  const [supported] = useState(() => !!getSpeechRecognition());
+  const [supported] = useState(() => isBrowserSupported());
   const [recording, setRecording] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const recognitionRef = useRef<SpeechRecognitionType | null>(null);
-  const endPromiseRef = useRef<(() => void) | null>(null);
-  const restartTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const committedTranscriptRef = useRef("");
-  const finalTranscriptRef = useRef("");
-  const requestedStopRef = useRef(false);
-  const retryCountRef = useRef(0);
-  const recognitionStartTimeRef = useRef(0);
 
-  const clearRestartTimeout = useCallback(() => {
-    if (!restartTimeoutRef.current) return;
-    clearTimeout(restartTimeoutRef.current);
-    restartTimeoutRef.current = null;
+  const streamRef = useRef<MediaStream | null>(null);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+  const stopPromiseRef = useRef<(() => void) | null>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  const finalizeStop = useCallback(() => {
+    setRecording(false);
+    stopPromiseRef.current?.();
+    stopPromiseRef.current = null;
   }, []);
 
-  function startSession(resetTranscript: boolean) {
-    const Recognition = getSpeechRecognition();
-    if (!Recognition) {
-      setError("Speech recognition is not supported in this browser.");
-      setRecording(false);
-      return;
-    }
+  const cleanup = useCallback(() => {
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = null;
 
-    clearRestartTimeout();
-
-    const previousRecognition = recognitionRef.current;
-    if (previousRecognition) {
-      previousRecognition.onresult = null;
-      previousRecognition.onerror = null;
-      previousRecognition.onend = null;
+    const recorder = recorderRef.current;
+    recorderRef.current = null;
+    if (recorder) {
       try {
-        previousRecognition.abort();
+        recorder.stop();
       } catch {
         // ignore
       }
-      recognitionRef.current = null;
     }
 
-    if (resetTranscript) {
-      setTranscript("");
-      committedTranscriptRef.current = "";
-      finalTranscriptRef.current = "";
-      setError(null);
-      endPromiseRef.current?.();
-      endPromiseRef.current = null;
-      requestedStopRef.current = false;
-      retryCountRef.current = 0;
+    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current = null;
+    chunksRef.current = [];
+  }, []);
+
+  const start = useCallback(async () => {
+    if (!supported) {
+      setError("Microphone recording is not supported in this browser.");
+      return;
     }
 
-    const recognition = new Recognition();
-    recognition.lang = "en-US";
-    // Listen & Repeat only needs one utterance, and non-continuous mode is
-    // noticeably more stable on Safari/WebKit.
-    recognition.continuous = false;
-    recognition.interimResults = true;
-    recognition.maxAlternatives = 1;
-
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
-      if (recognitionRef.current !== recognition) return;
-
-      retryCountRef.current = 0;
-
-      let finalText = "";
-      let interimText = "";
-      for (let i = 0; i < event.results.length; i++) {
-        const result = event.results[i];
-        if (result.isFinal) {
-          finalText += result[0].transcript;
-        } else {
-          interimText = result[0].transcript;
-        }
-      }
-
-      const finalized = joinTranscriptParts(
-        committedTranscriptRef.current,
-        finalText,
-      );
-      finalTranscriptRef.current = finalized;
-      setTranscript(joinTranscriptParts(finalized, interimText));
-    };
-
-    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
-      if (recognitionRef.current !== recognition) return;
-
-      if (event.error === "no-speech" || event.error === "aborted") {
-        return;
-      }
-
-      const isRetryable =
-        event.error === "network" || event.error === "audio-capture";
-      const isImmediateFailure =
-        isRetryable && Date.now() - recognitionStartTimeRef.current < 500;
-      if (
-        isRetryable &&
-        !isImmediateFailure &&
-        retryCountRef.current < MAX_RETRY_COUNT
-      ) {
-        retryCountRef.current += 1;
-        clearRestartTimeout();
-        const previousRecognition = recognitionRef.current;
-        if (previousRecognition) {
-          previousRecognition.onresult = null;
-          previousRecognition.onerror = null;
-          previousRecognition.onend = null;
-        }
-        recognitionRef.current = null;
-        restartTimeoutRef.current = setTimeout(() => {
-          restartTimeoutRef.current = null;
-          startSession(false);
-        }, RETRY_DELAY_MS);
-        return;
-      }
-
-      const messages: Record<string, string> = {
-        "audio-capture":
-          "Failed to access the microphone. Please check your microphone and try again.",
-        network:
-          "Speech recognition failed due to a network error. Please check your connection and try again.",
-        "not-allowed":
-          "Microphone access was denied. Please allow microphone permission and try again.",
-        "service-not-allowed":
-          "Speech recognition is not allowed in this context. Please try a different browser.",
-        "bad-grammar":
-          "Speech recognition failed. Please speak clearly and try again.",
-        "language-not-supported":
-          "The selected language is not supported for speech recognition.",
-      };
-
-      if (isImmediateFailure && event.error === "network") {
-        setError(
-          "Speech recognition service is unavailable. This feature requires Google Chrome with an internet connection, and may not work on Chromium, corporate browsers, or restricted networks.",
-        );
-      } else {
-        setError(
-          event.message ||
-            messages[event.error] ||
-            `Speech recognition error: ${event.error}`,
-        );
-      }
-      clearRestartTimeout();
-      recognitionRef.current = null;
-      requestedStopRef.current = false;
-      retryCountRef.current = 0;
-      setRecording(false);
-      endPromiseRef.current?.();
-      endPromiseRef.current = null;
-    };
-
-    recognition.onend = () => {
-      if (recognitionRef.current !== recognition) return;
-
-      recognitionRef.current = null;
-      committedTranscriptRef.current = finalTranscriptRef.current.trim();
-
-      if (requestedStopRef.current) {
-        requestedStopRef.current = false;
-        clearRestartTimeout();
-        retryCountRef.current = 0;
-        setRecording(false);
-        endPromiseRef.current?.();
-        endPromiseRef.current = null;
-        return;
-      }
-
-      restartTimeoutRef.current = setTimeout(() => {
-        restartTimeoutRef.current = null;
-        startSession(false);
-      }, RESTART_DELAY_MS);
-    };
-
-    recognitionRef.current = recognition;
+    cleanup();
+    setTranscript("");
+    setError(null);
+    chunksRef.current = [];
+    setRecording(true);
 
     try {
-      recognition.start();
-      recognitionStartTimeRef.current = Date.now();
-      setError(null);
-      setRecording(true);
-    } catch (e) {
-      clearRestartTimeout();
-      setError(e instanceof Error ? e.message : String(e));
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
+
+      const mimeType = selectMimeType();
+      const recorder = new MediaRecorder(
+        stream,
+        mimeType ? { mimeType } : undefined,
+      );
+      recorderRef.current = recorder;
+
+      recorder.addEventListener("dataavailable", (event) => {
+        const data = (event as BlobEvent).data;
+        if (data && data.size > 0) {
+          chunksRef.current.push(data);
+        }
+      });
+
+      recorder.addEventListener("error", (event) => {
+        const recorderError = (event as Event & { error?: DOMException }).error;
+        setError(getMicrophoneErrorMessage(recorderError));
+        cleanup();
+        finalizeStop();
+      });
+
+      recorder.addEventListener("stop", async () => {
+        if (recorderRef.current !== recorder) {
+          return;
+        }
+
+        stream.getTracks().forEach((track) => track.stop());
+
+        const blob = new Blob(chunksRef.current, {
+          type: recorder.mimeType || "audio/webm",
+        });
+
+        if (blob.size === 0) {
+          setError("No audio recorded. Please try again.");
+          finalizeStop();
+          return;
+        }
+
+        const controller = new AbortController();
+        abortControllerRef.current = controller;
+
+        try {
+          const text = await transcribeAudio(
+            blob,
+            TRANSCRIBE_API_URL,
+            controller.signal,
+          );
+          setTranscript(text);
+          finalizeStop();
+        } catch (fetchError) {
+          if ((fetchError as Error).name === "AbortError") {
+            finalizeStop();
+            return;
+          }
+          setError(getTranscriptionErrorMessage(fetchError));
+          finalizeStop();
+        } finally {
+          abortControllerRef.current = null;
+        }
+      });
+
+      recorder.start();
+    } catch (micError) {
+      setError(getMicrophoneErrorMessage(micError));
       setRecording(false);
     }
-  }
-
-  const start = useCallback(() => {
-    startSession(true);
-    // startSession only references stable refs/callbacks, so it does not need
-    // to be listed as a dependency.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [clearRestartTimeout]);
+  }, [supported, cleanup, finalizeStop]);
 
   const stop = useCallback(() => {
     return new Promise<void>((resolve) => {
-      clearRestartTimeout();
-      retryCountRef.current = 0;
-      recognitionStartTimeRef.current = 0;
-      const recognition = recognitionRef.current;
-      if (!recognition) {
-        requestedStopRef.current = false;
-        setRecording(false);
+      const recorder = recorderRef.current;
+      if (!recorder || recorder.state === "inactive") {
         resolve();
         return;
       }
-      requestedStopRef.current = true;
-      endPromiseRef.current = resolve;
+
+      stopPromiseRef.current = resolve;
       try {
-        recognition.stop();
+        recorder.stop();
       } catch {
+        setRecording(false);
         resolve();
       }
     });
-  }, [clearRestartTimeout]);
+  }, []);
 
-  useEffect(() => {
-    return () => {
-      const recognition = recognitionRef.current;
-      if (recognition) {
-        recognition.onresult = null;
-        recognition.onerror = null;
-        recognition.onend = null;
-        try {
-          recognition.abort();
-        } catch {
-          // ignore
-        }
-        recognitionRef.current = null;
-      }
-      clearRestartTimeout();
-      recognitionStartTimeRef.current = 0;
-    };
-  }, [clearRestartTimeout]);
+  useEffect(() => cleanup, [cleanup]);
 
   return { supported, recording, transcript, error, start, stop };
 }

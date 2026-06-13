@@ -1,363 +1,221 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-class FakeSpeechRecognitionResult {
-  isFinal: boolean;
-  transcript: string;
-
-  constructor(transcript: string, isFinal: boolean) {
-    this.transcript = transcript;
-    this.isFinal = isFinal;
-  }
-
-  get [0]() {
-    return { transcript: this.transcript };
-  }
+function createBlobEvent(data: Blob): Event {
+  const event = new Event("dataavailable");
+  Object.defineProperty(event, "data", { value: data });
+  return event;
 }
 
-function createResultList(results: FakeSpeechRecognitionResult[]) {
-  return new Proxy(
-    { length: results.length },
-    {
-      get(target, prop) {
-        if (prop === "length") return target.length;
-        const index = Number(prop);
-        if (!Number.isNaN(index)) return results[index];
-        return undefined;
-      },
-    },
-  ) as unknown as SpeechRecognitionResultList;
+function createErrorEvent(error: DOMException): Event {
+  const event = new Event("error");
+  Object.defineProperty(event, "error", { value: error });
+  return event;
 }
 
-class FakeSpeechRecognition {
-  static instances: FakeSpeechRecognition[] = [];
+class FakeMediaRecorder extends EventTarget {
+  static instances: FakeMediaRecorder[] = [];
 
-  lang = "";
-  continuous = false;
-  interimResults = false;
-  maxAlternatives = 1;
-  onresult: ((event: Event) => void) | null = null;
-  onerror: ((event: Event) => void) | null = null;
-  onend: (() => void) | null = null;
+  state = "inactive";
+  mimeType = "";
+  stream: MediaStream;
 
-  start = vi.fn(() => undefined);
-  stop = vi.fn(() => undefined);
-  abort = vi.fn(() => undefined);
+  start = vi.fn(() => {
+    this.state = "recording";
+    this.dispatchEvent(new Event("start"));
+  });
 
-  constructor() {
-    FakeSpeechRecognition.instances.push(this);
+  stop = vi.fn(() => {
+    this.state = "inactive";
+    this.dispatchEvent(new Event("stop"));
+  });
+
+  constructor(stream: MediaStream, options?: MediaRecorderOptions) {
+    super();
+    this.stream = stream;
+    this.mimeType = options?.mimeType ?? "";
+    FakeMediaRecorder.instances.push(this);
   }
 
-  emitResult(results: FakeSpeechRecognitionResult[]) {
-    if (this.onresult) {
-      const event = new Event("result");
-      Object.defineProperty(event, "results", {
-        value: createResultList(results),
-      });
-      this.onresult(event);
-    }
+  emitData(data: Blob) {
+    this.dispatchEvent(createBlobEvent(data));
   }
 
-  emitEnd() {
-    this.onend?.();
+  emitError(error: DOMException) {
+    this.dispatchEvent(createErrorEvent(error));
   }
 
-  emitError(error: string, message = "") {
-    if (this.onerror) {
-      const event = new Event("error");
-      Object.defineProperty(event, "error", { value: error });
-      Object.defineProperty(event, "message", { value: message });
-      this.onerror(event);
-    }
-  }
+  static isTypeSupported = vi.fn((type: string) =>
+    ["audio/webm", "audio/webm;codecs=opus", "audio/mp4"].includes(type),
+  );
+}
+
+function createFakeStream(): MediaStream {
+  return {
+    getTracks: () => [{ stop: vi.fn() }],
+  } as unknown as MediaStream;
+}
+
+function createFetchResponse(text: string, ok = true, status = 200) {
+  return {
+    ok,
+    status,
+    json: vi.fn().mockResolvedValue({ text }),
+  } as unknown as Response;
 }
 
 describe("useSpeechRecognition", () => {
+  let getUserMediaMock: ReturnType<typeof vi.fn>;
+
   beforeEach(() => {
-    vi.useFakeTimers({ shouldAdvanceTime: true });
-    FakeSpeechRecognition.instances = [];
+    FakeMediaRecorder.instances = [];
+    getUserMediaMock = vi.fn().mockResolvedValue(createFakeStream());
+
+    vi.stubGlobal("navigator", {
+      mediaDevices: { getUserMedia: getUserMediaMock },
+    });
+    vi.stubGlobal("MediaRecorder", FakeMediaRecorder);
     vi.stubGlobal(
-      "SpeechRecognition",
-      FakeSpeechRecognition as unknown as new () => unknown,
-    );
-    vi.stubGlobal(
-      "webkitSpeechRecognition",
-      FakeSpeechRecognition as unknown as new () => unknown,
+      "fetch",
+      vi.fn().mockResolvedValue(createFetchResponse("hello world")),
     );
   });
 
   afterEach(() => {
-    vi.useRealTimers();
     vi.unstubAllGlobals();
+    vi.clearAllMocks();
   });
 
-  it("reports supported when SpeechRecognition is available", async () => {
+  it("reports supported when MediaRecorder and getUserMedia are available", async () => {
     const { useSpeechRecognition } = await import("./useSpeechRecognition");
     const { result } = renderHook(() => useSpeechRecognition());
     expect(result.current.supported).toBe(true);
   });
 
-  it("starts recognition and sets recording state", async () => {
+  it("reports unsupported when MediaRecorder is unavailable", async () => {
+    vi.stubGlobal("MediaRecorder", undefined);
     const { useSpeechRecognition } = await import("./useSpeechRecognition");
     const { result } = renderHook(() => useSpeechRecognition());
-
-    act(() => {
-      result.current.start();
-    });
-
-    const instance = FakeSpeechRecognition.instances[0];
-    expect(instance.start).toHaveBeenCalled();
-    expect(instance.continuous).toBe(false);
-    expect(result.current.recording).toBe(true);
+    expect(result.current.supported).toBe(false);
   });
 
-  it("updates transcript from final and interim results", async () => {
+  it("starts recording and requests microphone access", async () => {
     const { useSpeechRecognition } = await import("./useSpeechRecognition");
     const { result } = renderHook(() => useSpeechRecognition());
 
-    act(() => {
+    await act(async () => {
       result.current.start();
-    });
-
-    const instance = FakeSpeechRecognition.instances[0];
-
-    act(() => {
-      instance.emitResult([new FakeSpeechRecognitionResult("hello", false)]);
-    });
-
-    expect(result.current.transcript).toBe("hello");
-
-    act(() => {
-      instance.emitResult([
-        new FakeSpeechRecognitionResult("hello", true),
-        new FakeSpeechRecognitionResult(" world", false),
-      ]);
-    });
-
-    expect(result.current.transcript).toBe("hello world");
-  });
-
-  it("stops recognition and resolves when onend fires", async () => {
-    const { useSpeechRecognition } = await import("./useSpeechRecognition");
-    const { result } = renderHook(() => useSpeechRecognition());
-
-    act(() => {
-      result.current.start();
-    });
-
-    const instance = FakeSpeechRecognition.instances[0];
-
-    let stopped = false;
-    act(() => {
-      void result.current.stop().then(() => {
-        stopped = true;
-      });
-    });
-
-    expect(instance.stop).toHaveBeenCalled();
-
-    act(() => {
-      instance.emitEnd();
     });
 
     await waitFor(() => {
-      expect(stopped).toBe(true);
+      expect(getUserMediaMock).toHaveBeenCalledWith({ audio: true });
     });
-    expect(result.current.recording).toBe(false);
+
+    const recorder = FakeMediaRecorder.instances[0];
+    expect(recorder.start).toHaveBeenCalled();
+    expect(result.current.recording).toBe(true);
   });
 
-  it("sets an error when recognition is unsupported", async () => {
-    vi.unstubAllGlobals();
-    vi.stubGlobal("SpeechRecognition", undefined);
-    vi.stubGlobal("webkitSpeechRecognition", undefined);
-
-    const { useSpeechRecognition } = await import("./useSpeechRecognition");
-    const { result } = renderHook(() => useSpeechRecognition());
-
-    expect(result.current.supported).toBe(false);
-
-    act(() => {
-      result.current.start();
-    });
-
-    expect(result.current.error).toContain("not supported");
-  });
-
-  it("ignores no-speech and aborted errors", async () => {
-    const { useSpeechRecognition } = await import("./useSpeechRecognition");
-    const { result } = renderHook(() => useSpeechRecognition());
-
-    act(() => {
-      result.current.start();
-    });
-
-    const instance = FakeSpeechRecognition.instances[0];
-
-    act(() => {
-      instance.emitError("no-speech");
-    });
-
-    expect(result.current.error).toBeNull();
-
-    act(() => {
-      instance.emitError("aborted");
-    });
-
-    expect(result.current.error).toBeNull();
-  });
-
-  it("shows a service-unavailable message for an immediate network error", async () => {
-    const { useSpeechRecognition } = await import("./useSpeechRecognition");
-    const { result } = renderHook(() => useSpeechRecognition());
-
-    act(() => {
-      result.current.start();
-    });
-
-    act(() => {
-      FakeSpeechRecognition.instances[0].emitError("network");
-    });
-
-    expect(result.current.error).toContain("unavailable");
-    expect(result.current.recording).toBe(false);
-    expect(FakeSpeechRecognition.instances).toHaveLength(1);
-  });
-
-  it("retries delayed network errors and shows a friendly message after retries are exhausted", async () => {
-    let now = 0;
-    const dateSpy = vi.spyOn(Date, "now").mockImplementation(() => now);
-    const { useSpeechRecognition } = await import("./useSpeechRecognition");
-    const { result } = renderHook(() => useSpeechRecognition());
-
-    act(() => {
-      result.current.start();
-    });
-
-    now = 1000;
-    act(() => {
-      FakeSpeechRecognition.instances[0].emitError("network");
-    });
-    expect(result.current.error).toBeNull();
-
-    await act(async () => {
-      await vi.advanceTimersByTimeAsync(600);
-    });
-    now = 2000;
-    act(() => {
-      FakeSpeechRecognition.instances[1].emitError("network");
-    });
-    expect(result.current.error).toBeNull();
-
-    await act(async () => {
-      await vi.advanceTimersByTimeAsync(600);
-    });
-    now = 3000;
-    act(() => {
-      FakeSpeechRecognition.instances[2].emitError("network");
-    });
-
-    expect(result.current.error).toContain("network error");
-    expect(result.current.recording).toBe(false);
-    dateSpy.mockRestore();
-  });
-
-  it("restarts recognition when onend fires without stop being called", async () => {
-    class AutoEndRecognition extends FakeSpeechRecognition {
-      start = vi.fn(() => {
-        if (FakeSpeechRecognition.instances.length > 1) return;
-        queueMicrotask(() => {
-          this.emitEnd();
-        });
-      });
-    }
-
-    vi.stubGlobal(
-      "SpeechRecognition",
-      AutoEndRecognition as unknown as new () => unknown,
+  it("sets an error when microphone permission is denied", async () => {
+    getUserMediaMock.mockRejectedValue(
+      new DOMException("Permission denied", "NotAllowedError"),
     );
-    vi.stubGlobal(
-      "webkitSpeechRecognition",
-      AutoEndRecognition as unknown as new () => unknown,
+
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    await act(async () => {
+      result.current.start();
+    });
+
+    await waitFor(() => {
+      expect(result.current.error).toContain("denied");
+    });
+    expect(result.current.recording).toBe(false);
+  });
+
+  it("transcribes audio when recording stops", async () => {
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    await act(async () => {
+      result.current.start();
+    });
+
+    await waitFor(() => {
+      expect(FakeMediaRecorder.instances).toHaveLength(1);
+    });
+
+    const recorder = FakeMediaRecorder.instances[0];
+    const blob = new Blob(["fake-audio"], { type: "audio/webm" });
+
+    act(() => {
+      recorder.emitData(blob);
+    });
+
+    await act(async () => {
+      await result.current.stop();
+    });
+
+    await waitFor(() => {
+      expect(result.current.transcript).toBe("hello world");
+    });
+    expect(result.current.recording).toBe(false);
+    expect(globalThis.fetch).toHaveBeenCalledWith(
+      "/api/transcribe",
+      expect.objectContaining({ method: "POST" }),
     );
-    FakeSpeechRecognition.instances = [];
-
-    const { useSpeechRecognition } = await import("./useSpeechRecognition");
-    const { result } = renderHook(() => useSpeechRecognition());
-
-    act(() => {
-      result.current.start();
-    });
-
-    expect(result.current.recording).toBe(true);
-    expect(result.current.error).toBeNull();
-
-    await act(async () => {
-      await vi.advanceTimersByTimeAsync(300);
-    });
-
-    expect(FakeSpeechRecognition.instances).toHaveLength(2);
-    expect(result.current.recording).toBe(true);
-    expect(result.current.error).toBeNull();
   });
 
-  it("ignores late end events from a previous recognition instance", async () => {
+  it("sets an error when the transcription request fails", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue(createFetchResponse("", false, 500)),
+    );
+
     const { useSpeechRecognition } = await import("./useSpeechRecognition");
     const { result } = renderHook(() => useSpeechRecognition());
-
-    act(() => {
-      result.current.start();
-    });
-
-    const firstInstance = FakeSpeechRecognition.instances[0];
-
-    act(() => {
-      result.current.start();
-    });
-
-    const secondInstance = FakeSpeechRecognition.instances[1];
-
-    expect(firstInstance.abort).toHaveBeenCalled();
-    expect(secondInstance.start).toHaveBeenCalled();
-
-    act(() => {
-      firstInstance.emitEnd();
-    });
-
-    expect(result.current.recording).toBe(true);
-    expect(result.current.error).toBeNull();
-  });
-
-  it("keeps transcript across automatic restarts", async () => {
-    const { useSpeechRecognition } = await import("./useSpeechRecognition");
-    const { result } = renderHook(() => useSpeechRecognition());
-
-    act(() => {
-      result.current.start();
-    });
-
-    const firstInstance = FakeSpeechRecognition.instances[0];
-
-    act(() => {
-      firstInstance.emitResult([
-        new FakeSpeechRecognitionResult("hello", true),
-      ]);
-      firstInstance.emitEnd();
-    });
 
     await act(async () => {
-      await vi.advanceTimersByTimeAsync(300);
+      result.current.start();
     });
 
-    expect(FakeSpeechRecognition.instances).toHaveLength(2);
+    await waitFor(() => {
+      expect(FakeMediaRecorder.instances).toHaveLength(1);
+    });
 
-    const secondInstance = FakeSpeechRecognition.instances[1];
+    const recorder = FakeMediaRecorder.instances[0];
+    recorder.emitData(new Blob(["fake-audio"], { type: "audio/webm" }));
 
+    await act(async () => {
+      await result.current.stop();
+    });
+
+    await waitFor(() => {
+      expect(result.current.error).toContain("failed");
+    });
+  });
+
+  it("sets an error when the recorder emits an error", async () => {
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    await act(async () => {
+      result.current.start();
+    });
+
+    await waitFor(() => {
+      expect(FakeMediaRecorder.instances).toHaveLength(1);
+    });
+
+    const recorder = FakeMediaRecorder.instances[0];
     act(() => {
-      secondInstance.emitResult([
-        new FakeSpeechRecognitionResult("world", true),
-      ]);
+      recorder.emitError(new DOMException("Device error", "NotFoundError"));
     });
 
-    expect(result.current.transcript).toBe("hello world");
+    await waitFor(() => {
+      expect(result.current.error).toContain("No microphone found");
+    });
+    expect(result.current.recording).toBe(false);
   });
 });

@@ -352,7 +352,7 @@ export function ListenRepeatPage() {
       {!speechSupported && !loading && (
         <div className={styles.error}>
           <p>
-            Speech recognition is not supported in this browser. Please use
+            Microphone recording is not supported in this browser. Please use
             Chrome, Edge, or Safari.
           </p>
         </div>

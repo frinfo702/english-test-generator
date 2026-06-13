@@ -271,7 +271,7 @@ describe("ListenRepeatPage", () => {
     await waitFor(() => {
       expect(
         screen.getByText(
-          /Speech recognition is not supported in this browser/i,
+          /Microphone recording is not supported in this browser/i,
         ),
       ).toBeTruthy();
     });

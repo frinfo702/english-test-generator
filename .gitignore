@@ -7,6 +7,8 @@ dist/
 # Environment variables (contains API key — never commit)
 .env.local
 .env.*.local
+.dev.vars
+.dev.vars.*
 
 # Editor
 .DS_Store
@@ -24,3 +26,7 @@ public/audio-cache/
 scores/
 answers/
 .playwright-mcp/
+
+# Wrangler build artifacts
+_worker.bundle/
+.wrangler/

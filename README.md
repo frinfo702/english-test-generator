@@ -4,15 +4,32 @@
 <img width="1891" height="916" alt="image" src="https://github.com/user-attachments/assets/9f89e5d9-9bc1-4e21-9fe6-ca4b230bdfff" />
 
 A practice app for the TOEFL iBT 2026 format and TOEIC Reading.
-**No network connection or API key is required.** The app loads question JSON files generated locally by an AI agent.
+The app loads question JSON files generated locally by an AI agent. The speaking "Listen and Repeat" task records audio and sends it to a Cloudflare Pages Function that uses Cloudflare Workers AI (Whisper) for transcription, so that feature requires a network connection and a Cloudflare account.
 
 ## Setup
 
 ```bash
 npm install
 npm run dev
+```
+
+`npm run dev` starts both the Wrangler Pages dev server (`http://localhost:8788`) and the Vite dev server (`http://localhost:5173`) at the same time. The Vite dev server proxies `/api/transcribe` to Wrangler, so the front-end can reach the Cloudflare Pages Function from the same origin.
+
+If you only need the front-end without the transcription API, use:
+
+```bash
+npm run dev:vite
 # -> http://localhost:5173
 ```
+
+Deploy to Cloudflare Pages:
+
+```bash
+npm run build
+npm run pages:deploy
+```
+
+The Cloudflare project must have a Workers AI binding named `AI`.
 
 ## Adding Questions
 
