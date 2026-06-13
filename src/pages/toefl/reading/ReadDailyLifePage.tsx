@@ -200,9 +200,7 @@ export function ReadDailyLifePage() {
                     return (
                       <div key={q.id} className={styles.qBlock}>
                         <div className={styles.qHeader}>
-                          <span className={styles.qNum}>
-                            {globalIdx + 1}
-                          </span>
+                          <span className={styles.qNum}>{globalIdx + 1}</span>
                           <span className={styles.qType}>
                             {TYPE_LABELS[q.type] ?? q.type}
                           </span>
@@ -218,9 +216,7 @@ export function ReadDailyLifePage() {
                                 graded && i === q.correctIndex
                                   ? styles.correctOpt
                                   : "",
-                                graded &&
-                                selected === i &&
-                                i !== q.correctIndex
+                                graded && selected === i && i !== q.correctIndex
                                   ? styles.wrongOpt
                                   : "",
                               ].join(" ")}

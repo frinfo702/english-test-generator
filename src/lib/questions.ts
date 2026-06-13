@@ -115,5 +115,3 @@ export async function fetchAllQuestions<T>(taskPath: string): Promise<T[]> {
   );
   return results;
 }
-
-

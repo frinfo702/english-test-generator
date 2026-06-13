@@ -54,12 +54,7 @@
         {
           "id": "q4",
           "stem": "If a driver parks for 4 hours, how much more will they pay under the new rates?",
-          "options": [
-            "A. $1",
-            "B. $2",
-            "C. $3",
-            "D. $4"
-          ],
+          "options": ["A. $1", "B. $2", "C. $3", "D. $4"],
           "correctIndex": 1,
           "type": "inference",
           "explanation": "The 3–5 hour rate increased from $10 to $12, a difference of $2."
