@@ -275,3 +275,30 @@
   padding: var(--spacing-md);
   border-radius: var(--radius);
 }
+
+.legend {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+  background: var(--color-surface);
+  text-align: left;
+}
+
+.legendItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.legendLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
