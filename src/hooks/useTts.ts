@@ -190,6 +190,8 @@ export function useTts(): UseTtsReturn {
             urlRef.current = null;
           }
         }
+        setCurrentTime(0);
+        setDuration(0);
       };
       audio.onerror = () => {
         setPlaying(false);

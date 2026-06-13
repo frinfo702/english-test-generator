@@ -187,6 +187,34 @@ describe("useTts", () => {
     expect(revokeObjectURL).toHaveBeenCalled();
   });
 
+  it("resets playback time when audio finishes so replay works", async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      blob: vi
+        .fn()
+        .mockResolvedValue(new Blob(["audio"], { type: "audio/mpeg" })),
+    });
+
+    const { useTts } = await import("./useTts");
+    const { result } = renderHook(() => useTts());
+
+    await act(async () => {
+      await result.current.play("/audio.mp3");
+    });
+
+    const lastAudio = FakeAudio.instances.at(-1);
+    if (lastAudio) {
+      lastAudio.currentTime = 12;
+    }
+
+    act(() => {
+      lastAudio?.onended?.();
+    });
+
+    expect(result.current.currentTime).toBe(0);
+    expect(result.current.duration).toBe(0);
+  });
+
   it("plays concatenated audio segments with and without gaps", async () => {
     fetchMock.mockResolvedValue({
       ok: true,

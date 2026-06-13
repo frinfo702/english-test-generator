@@ -6,6 +6,7 @@ import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { SpeedControl } from "../../../components/ui/SpeedControl";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
@@ -26,6 +27,12 @@ interface Sentence {
 }
 interface ProblemData {
   sentences: Sentence[];
+}
+
+function formatTime(seconds: number) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${String(s).padStart(2, "0")}`;
 }
 
 const DEFAULT_WORDS_PER_SECOND = 2.2;
@@ -196,9 +203,15 @@ export function ListenRepeatPage() {
     playing,
     loading: ttsLoading,
     error: ttsError,
+    currentTime,
     duration,
+    playbackRate,
+    setPlaybackRate,
     play,
+    pause,
+    resume,
     stop: stopTts,
+    seek,
   } = useTts();
   const {
     supported: speechSupported,
@@ -369,6 +382,25 @@ export function ListenRepeatPage() {
       setPhase("ready");
     });
   }, [sentence, fileBasename, current, play]);
+
+  const playSentence = useCallback(
+    (index: number) => {
+      if (!fileBasename) return;
+      const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${index + 1}.mp3`;
+      void play(url);
+    },
+    [fileBasename, play],
+  );
+
+  const handlePlay = useCallback(() => {
+    if (playing) {
+      pause();
+    } else if (currentTime > 0) {
+      resume();
+    } else {
+      playSentence(current);
+    }
+  }, [playing, currentTime, pause, resume, playSentence, current]);
 
   const handleStartRecording = useCallback(() => {
     startRecording();
@@ -570,6 +602,64 @@ export function ListenRepeatPage() {
 
           {phase === "feedback" && (
             <div className={styles.feedbackPhase}>
+              <div className={styles.playerCard}>
+                <div className={styles.playerControls}>
+                  <Button
+                    onClick={() => seek(Math.max(0, currentTime - 10))}
+                    disabled={duration <= 0}
+                    size="sm"
+                    variant="secondary"
+                  >
+                    ⏪ 10s
+                  </Button>
+                  <Button
+                    onClick={handlePlay}
+                    disabled={ttsLoading}
+                    size="md"
+                    variant="accent"
+                  >
+                    {ttsLoading
+                      ? "Loading..."
+                      : playing
+                        ? "⏸ Pause"
+                        : currentTime > 0
+                          ? "▶ Resume"
+                          : "▶ Play Audio"}
+                  </Button>
+                  <Button
+                    onClick={() => seek(Math.min(duration, currentTime + 10))}
+                    disabled={duration <= 0}
+                    size="sm"
+                    variant="secondary"
+                  >
+                    ⏩ 10s
+                  </Button>
+                </div>
+                <div className={styles.playerControls}>
+                  <span className={styles.timeText}>
+                    {formatTime(currentTime)} / {formatTime(duration)}
+                  </span>
+                  <div className={styles.progressBar}>
+                    <div
+                      className={styles.progressFill}
+                      style={{
+                        width:
+                          duration > 0
+                            ? `${(currentTime / duration) * 100}%`
+                            : "0%",
+                      }}
+                    />
+                  </div>
+                  <span className={styles.timeText} aria-hidden="true" />
+                </div>
+                <div className={styles.speedControlRow}>
+                  <SpeedControl
+                    playbackRate={playbackRate}
+                    onChange={setPlaybackRate}
+                  />
+                </div>
+                {ttsError && <p className={styles.error}>{ttsError}</p>}
+              </div>
               <DiffLegend />
               <p className={styles.fbLabel}>Comparison:</p>
               <ListenRepeatDiffView
@@ -644,6 +734,14 @@ export function ListenRepeatPage() {
                   Question {i + 1} — {correct}/{total} words
                 </p>
                 <div className={styles.feedbackPhase}>
+                  <Button
+                    onClick={() => playSentence(i)}
+                    disabled={ttsLoading}
+                    size="sm"
+                    variant="secondary"
+                  >
+                    ▶ Play Audio
+                  </Button>
                   <p className={styles.fbLabel}>Comparison:</p>
                   <ListenRepeatDiffView alignment={alignment} />
                 </div>
