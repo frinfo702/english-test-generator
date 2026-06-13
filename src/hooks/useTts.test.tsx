@@ -159,7 +159,7 @@ describe("useTts", () => {
     expect(result.current.error).toBe("Audio fetch failed (404)");
   });
 
-  it("invokes onEnded callback when playback finishes", async () => {
+  it("invokes onEnded callback and releases audio resources when playback finishes", async () => {
     fetchMock.mockResolvedValue({
       ok: true,
       blob: vi
@@ -182,6 +182,9 @@ describe("useTts", () => {
     });
 
     expect(onEnded).toHaveBeenCalledTimes(1);
+    expect(lastAudio?.pause).toHaveBeenCalled();
+    expect(lastAudio?.src).toBe("");
+    expect(revokeObjectURL).toHaveBeenCalled();
   });
 
   it("plays concatenated audio segments with and without gaps", async () => {

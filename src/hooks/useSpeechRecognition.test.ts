@@ -74,6 +74,7 @@ class FakeSpeechRecognition {
 
 describe("useSpeechRecognition", () => {
   beforeEach(() => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
     FakeSpeechRecognition.instances = [];
     vi.stubGlobal(
       "SpeechRecognition",
@@ -86,6 +87,7 @@ describe("useSpeechRecognition", () => {
   });
 
   afterEach(() => {
+    vi.useRealTimers();
     vi.unstubAllGlobals();
   });
 
@@ -204,7 +206,7 @@ describe("useSpeechRecognition", () => {
     expect(result.current.error).toBeNull();
   });
 
-  it("shows a friendly message for network errors", async () => {
+  it("shows a friendly message for network errors after retries are exhausted", async () => {
     const { useSpeechRecognition } = await import("./useSpeechRecognition");
     const { result } = renderHook(() => useSpeechRecognition());
 
@@ -212,10 +214,24 @@ describe("useSpeechRecognition", () => {
       result.current.start();
     });
 
-    const instance = FakeSpeechRecognition.instances[0];
-
     act(() => {
-      instance.emitError("network");
+      FakeSpeechRecognition.instances[0].emitError("network");
+    });
+    expect(result.current.error).toBeNull();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(600);
+    });
+    act(() => {
+      FakeSpeechRecognition.instances[1].emitError("network");
+    });
+    expect(result.current.error).toBeNull();
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(600);
+    });
+    act(() => {
+      FakeSpeechRecognition.instances[2].emitError("network");
     });
 
     expect(result.current.error).toContain("network error");
@@ -252,10 +268,11 @@ describe("useSpeechRecognition", () => {
     expect(result.current.recording).toBe(true);
     expect(result.current.error).toBeNull();
 
-    await waitFor(() => {
-      expect(FakeSpeechRecognition.instances).toHaveLength(2);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(300);
     });
 
+    expect(FakeSpeechRecognition.instances).toHaveLength(2);
     expect(result.current.recording).toBe(true);
     expect(result.current.error).toBeNull();
   });
@@ -304,9 +321,11 @@ describe("useSpeechRecognition", () => {
       firstInstance.emitEnd();
     });
 
-    await waitFor(() => {
-      expect(FakeSpeechRecognition.instances).toHaveLength(2);
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(300);
     });
+
+    expect(FakeSpeechRecognition.instances).toHaveLength(2);
 
     const secondInstance = FakeSpeechRecognition.instances[1];
 

@@ -31,7 +31,9 @@ interface UseSpeechRecognitionReturn {
   stop: () => Promise<void>;
 }
 
-const RESTART_DELAY_MS = 100;
+const RESTART_DELAY_MS = 300;
+const RETRY_DELAY_MS = 600;
+const MAX_RETRY_COUNT = 2;
 
 function getSpeechRecognition(): (new () => SpeechRecognitionType) | undefined {
   if (typeof window === "undefined") return undefined;
@@ -60,6 +62,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   const committedTranscriptRef = useRef("");
   const finalTranscriptRef = useRef("");
   const requestedStopRef = useRef(false);
+  const retryCountRef = useRef(0);
 
   const clearRestartTimeout = useCallback(() => {
     if (!restartTimeoutRef.current) return;
@@ -98,6 +101,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
       endPromiseRef.current?.();
       endPromiseRef.current = null;
       requestedStopRef.current = false;
+      retryCountRef.current = 0;
     }
 
     const recognition = new Recognition();
@@ -110,6 +114,8 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       if (recognitionRef.current !== recognition) return;
+
+      retryCountRef.current = 0;
 
       let finalText = "";
       let interimText = "";
@@ -137,6 +143,19 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
         return;
       }
 
+      const isRetryable =
+        event.error === "network" || event.error === "audio-capture";
+      if (isRetryable && retryCountRef.current < MAX_RETRY_COUNT) {
+        retryCountRef.current += 1;
+        clearRestartTimeout();
+        recognitionRef.current = null;
+        restartTimeoutRef.current = setTimeout(() => {
+          restartTimeoutRef.current = null;
+          startSession(false);
+        }, RETRY_DELAY_MS);
+        return;
+      }
+
       const messages: Record<string, string> = {
         "audio-capture":
           "Failed to access the microphone. Please check your microphone and try again.",
@@ -160,6 +179,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
       clearRestartTimeout();
       recognitionRef.current = null;
       requestedStopRef.current = false;
+      retryCountRef.current = 0;
       setRecording(false);
       endPromiseRef.current?.();
       endPromiseRef.current = null;
@@ -174,6 +194,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
       if (requestedStopRef.current) {
         requestedStopRef.current = false;
         clearRestartTimeout();
+        retryCountRef.current = 0;
         setRecording(false);
         endPromiseRef.current?.();
         endPromiseRef.current = null;
@@ -201,11 +222,15 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
 
   const start = useCallback(() => {
     startSession(true);
+    // startSession only references stable refs/callbacks, so it does not need
+    // to be listed as a dependency.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clearRestartTimeout]);
 
   const stop = useCallback(() => {
     return new Promise<void>((resolve) => {
       clearRestartTimeout();
+      retryCountRef.current = 0;
       const recognition = recognitionRef.current;
       if (!recognition) {
         requestedStopRef.current = false;

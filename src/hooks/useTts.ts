@@ -177,12 +177,35 @@ export function useTts(): UseTtsReturn {
         }
         onEndedRef.current?.();
         onEndedRef.current = null;
+        // Release the audio element and blob URL so Safari can free the audio
+        // session before speech recognition starts. Remove the error handler
+        // first so clearing src does not fire a spurious error event.
+        if (audioRef.current === audio) {
+          audio.onerror = null;
+          audio.pause();
+          audio.src = "";
+          audioRef.current = null;
+          if (urlRef.current) {
+            URL.revokeObjectURL(urlRef.current);
+            urlRef.current = null;
+          }
+        }
       };
       audio.onerror = () => {
         setPlaying(false);
         setError("Audio playback error");
         setLoading(false);
         onEndedRef.current = null;
+        if (audioRef.current === audio) {
+          audio.onended = null;
+          audio.pause();
+          audio.src = "";
+          audioRef.current = null;
+          if (urlRef.current) {
+            URL.revokeObjectURL(urlRef.current);
+            urlRef.current = null;
+          }
+        }
       };
       await audio.play();
       setPlaying(true);
