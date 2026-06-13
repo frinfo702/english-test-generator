@@ -43,6 +43,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     const bytes = new Uint8Array(await audio.arrayBuffer());
     const result = await context.env.AI.run("@cf/openai/whisper", {
       audio: [...bytes],
+      language: "en",
     });
 
     const text =
