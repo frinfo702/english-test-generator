@@ -183,10 +183,7 @@ describe("fetchTaskQuestionCount", () => {
       .mockResolvedValueOnce(mockResponse({ files: ["001.json"] }))
       .mockResolvedValueOnce(
         mockResponse({
-          texts: [
-            { questions: [{}, {}] },
-            { questions: [{}] },
-          ],
+          texts: [{ questions: [{}, {}] }, { questions: [{}] }],
         }),
       );
 

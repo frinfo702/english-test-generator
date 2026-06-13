@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
+import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
@@ -265,9 +266,7 @@ export function ListenRepeatPage() {
               total={totalSentences}
               label="Exact Match"
             />
-            <Button onClick={handleBackToList} size="lg">
-              Back to Question List
-            </Button>
+            <BackButton onClick={handleBackToList} size="lg" />
           </div>
 
           {data.sentences.map((s, i) => {

@@ -22,8 +22,12 @@ export function SectionHeader({
     <div className={styles.wrapper}>
       <div className={styles.top}>
         {backTo && (
-          <button className={styles.back} onClick={() => navigate(backTo)}>
-            Back
+          <button
+            className={styles.back}
+            onClick={() => navigate(backTo)}
+            aria-label="Back"
+          >
+            ←
           </button>
         )}
         <div className={styles.titles}>

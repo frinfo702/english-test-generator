@@ -187,9 +187,6 @@ export async function fetchTaskQuestionCount(
   const first = files[0];
   if (!first) return null;
 
-  const loaded = await fetchQuestionByFileWithMeta<unknown>(
-    taskId,
-    first.file,
-  );
+  const loaded = await fetchQuestionByFileWithMeta<unknown>(taskId, first.file);
   return extractor(loaded.data);
 }

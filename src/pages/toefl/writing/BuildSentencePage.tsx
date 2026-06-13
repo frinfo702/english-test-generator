@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
+import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -196,9 +197,7 @@ export function BuildSentencePage() {
                 total={totalSentences}
                 label="Accuracy"
               />
-              <Button onClick={handleBackToList} size="lg">
-                Back to Question List
-              </Button>
+              <BackButton onClick={handleBackToList} size="lg" />
             </div>
           )}
 

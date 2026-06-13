@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
+import { BackButton } from "../../components/ui/BackButton";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
@@ -164,9 +165,7 @@ export function Part5Page() {
                 total={questions.length}
                 label="Accuracy"
               />
-              <Button onClick={handleBackToList} size="lg">
-                Back to Question List
-              </Button>
+              <BackButton onClick={handleBackToList} size="lg" />
             </div>
           )}
 

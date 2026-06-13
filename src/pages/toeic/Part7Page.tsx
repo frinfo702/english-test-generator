@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
+import { BackButton } from "../../components/ui/BackButton";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
@@ -163,7 +164,7 @@ export function Part7Page() {
                 </strong>
                 ({Math.round((totalCorrect / questions.length) * 100)}%)
               </p>
-              <Button onClick={handleBackToList}>Back to Question List</Button>
+              <BackButton onClick={handleBackToList} />
             </div>
           )}
 

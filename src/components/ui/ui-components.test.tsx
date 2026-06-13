@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { BackButton } from "./BackButton";
 import { Button } from "./Button";
 import { FeedbackPanel } from "./FeedbackPanel";
 import { FloatingElapsedTimer } from "./FloatingElapsedTimer";
@@ -10,6 +11,20 @@ import { SpeedControl } from "./SpeedControl";
 import { Timer } from "./Timer";
 
 describe("ui components", () => {
+  it("renders BackButton as an arrow with an accessible label", () => {
+    const onClick = vi.fn();
+    render(<BackButton onClick={onClick} size="lg" />);
+
+    const button = screen.getByRole("button", {
+      name: "Back to question list",
+    });
+    expect(button.textContent).toBe("←");
+    expect(button.className).toContain("lg");
+
+    fireEvent.click(button);
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
   it("renders Button props through to the DOM", () => {
     render(
       <Button variant="danger" size="lg" className="extra" disabled>
