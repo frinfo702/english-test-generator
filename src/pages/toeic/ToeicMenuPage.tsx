@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
-import { useTaskQuestionCounts } from "../../hooks/useTaskQuestionCounts";
 import type { TaskId } from "../../hooks/useScoreHistory";
 import table from "../../components/ui/ProblemTable.module.css";
 import styles from "./ToeicMenuPage.module.css";
@@ -66,15 +65,8 @@ const parts: PartSection[] = [
   },
 ];
 
-function formatQuestionCount(count: number | null | undefined): string {
-  if (count == null) return "—";
-  return `${count} Q${count !== 1 ? "s" : ""}`;
-}
-
 export function ToeicMenuPage() {
   const navigate = useNavigate();
-  const taskIds = parts.flatMap((p) => p.tasks.map((t) => t.taskId));
-  const counts = useTaskQuestionCounts(taskIds);
   return (
     <div>
       <SectionHeader
@@ -89,7 +81,6 @@ export function ToeicMenuPage() {
             <div className={table.header}>
               <span>#</span>
               <span>Part</span>
-              <span>Questions</span>
             </div>
             {tasks.map((task, i) => (
               <div
@@ -101,9 +92,6 @@ export function ToeicMenuPage() {
                 <span className={table.titleCell}>
                   {task.label}
                   <div className={table.titleMeta}>{task.desc}</div>
-                </span>
-                <span className={table.badgeCell}>
-                  {formatQuestionCount(counts[task.taskId])}
                 </span>
               </div>
             ))}

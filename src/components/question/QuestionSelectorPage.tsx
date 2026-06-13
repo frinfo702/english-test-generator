@@ -104,9 +104,6 @@ export function QuestionSelectorPage({
         >
           Pick Random
         </Button>
-        <span className={styles.count}>
-          {files.length} question{files.length !== 1 ? "s" : ""}
-        </span>
       </div>
 
       {loading && <LoadingSpinner message="Loading question list..." />}

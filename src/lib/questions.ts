@@ -30,8 +30,6 @@ export interface LoadedQuestion<T> {
   file: string;
 }
 
-import type { TaskId } from "../hooks/useScoreHistory";
-
 export interface QuestionFileEntry {
   file: string;
   number: number;
@@ -118,75 +116,4 @@ export async function fetchAllQuestions<T>(taskPath: string): Promise<T[]> {
   return results;
 }
 
-function hasKey(data: unknown, key: string): data is Record<string, unknown> {
-  return data != null && typeof data === "object" && key in data;
-}
 
-function getArray(data: unknown, key: string): unknown[] | null {
-  if (!hasKey(data, key)) return null;
-  const value = data[key];
-  return Array.isArray(value) ? value : null;
-}
-
-function countArray(data: unknown, key: string): number | null {
-  const arr = getArray(data, key);
-  return arr ? arr.length : null;
-}
-
-function sumNestedQuestions(data: unknown, outerKey: string): number | null {
-  const outer = getArray(data, outerKey);
-  if (!outer) return null;
-  return outer.reduce<number>((sum, item) => {
-    const questions = getArray(item, "questions");
-    return sum + (questions ? questions.length : 0);
-  }, 0);
-}
-
-type CountExtractor = (data: unknown) => number | null;
-
-/**
- * Explicit registry of how to extract the question/item count from a task's
- * question file. Keeping this table explicit avoids brittle structural
- * reflection and makes each task's shape assumption readable in one place.
- */
-const TASK_QUESTION_COUNT_EXTRACTORS: Record<TaskId, CountExtractor> = {
-  "toefl/reading/complete-words": (d) => countArray(d, "items"),
-  "toefl/reading/daily-life": (d) => sumNestedQuestions(d, "texts"),
-  "toefl/reading/academic": (d) => countArray(d, "questions"),
-  "toefl/listening/conversation": (d) => countArray(d, "questions"),
-  "toefl/listening/lecture": (d) => countArray(d, "questions"),
-  "toefl/listening/response": (d) => countArray(d, "questions"),
-  "toefl/listening/announcement": (d) => countArray(d, "questions"),
-  "toefl/writing/build-sentence": (d) => countArray(d, "sentences"),
-  "toefl/writing/email": () => 1,
-  "toefl/writing/discussion": () => 1,
-  "toefl/speaking/listen-repeat": (d) => countArray(d, "sentences"),
-  "toefl/speaking/interview": (d) => countArray(d, "questions"),
-  "toeic/part2": (d) => countArray(d, "questions"),
-  "toeic/part3": (d) => countArray(d, "questions"),
-  "toeic/part4": (d) => countArray(d, "questions"),
-  "toeic/part5": (d) => countArray(d, "questions"),
-  "toeic/part6": (d) => sumNestedQuestions(d, "passages"),
-  "toeic/part7": (d) => countArray(d, "questions"),
-  shadowing: (d) => countArray(d, "sentences"),
-};
-
-/**
- * Inspects the first available question file for a task and returns the number
- * of questions (or items/prompts) it contains. Returns `null` when no files
- * are available or the task is not registered.
- */
-export async function fetchTaskQuestionCount(
-  taskId: TaskId,
-): Promise<number | null> {
-  const extractor = TASK_QUESTION_COUNT_EXTRACTORS[taskId];
-  if (!extractor) return null;
-
-  const files = await listQuestionFiles(taskId);
-  if (files.length === 0) return null;
-  const first = files[0];
-  if (!first) return null;
-
-  const loaded = await fetchQuestionByFileWithMeta<unknown>(taskId, first.file);
-  return extractor(loaded.data);
-}
