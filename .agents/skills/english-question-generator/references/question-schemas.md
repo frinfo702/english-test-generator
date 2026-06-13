@@ -360,7 +360,7 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 ## TOEFL Speaking: Listen and Repeat
 
-短文7〜10文。音声不要のためテキストのみ保持。
+短文7〜10文。`scripts/generate-audio.ts` で各文の音声を別途生成する。
 
 ```json
 {

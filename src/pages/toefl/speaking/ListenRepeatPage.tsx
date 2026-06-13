@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
@@ -9,7 +9,14 @@ import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTime
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
-import { diffWords } from "./listenRepeat";
+import { useTts } from "../../../hooks/useTts";
+import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
+import {
+  alignWords,
+  countCorrectWords,
+  countOriginalWords,
+  type AlignedWord,
+} from "./listenRepeat";
 import styles from "./ListenRepeatPage.module.css";
 
 interface Sentence {
@@ -21,8 +28,11 @@ interface ProblemData {
   sentences: Sentence[];
 }
 
-const SHOW_SECS = 4;
-type Phase = "showing" | "hidden" | "review";
+const DEFAULT_WORDS_PER_SECOND = 2.2;
+const RECORDING_MULTIPLIER = 1.5;
+const PROCESSING_DELAY_MS = 400;
+
+type Phase = "playing" | "recording" | "processing" | "review";
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
@@ -38,17 +48,53 @@ export function ListenRepeatPage() {
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
+  const {
+    playing,
+    loading: ttsLoading,
+    error: ttsError,
+    duration,
+    play,
+    stop: stopTts,
+  } = useTts();
+  const {
+    supported: speechSupported,
+    transcript,
+    error: speechError,
+    start: startSpeech,
+    stop: stopSpeech,
+  } = useSpeechRecognition();
+  const transcriptRef = useRef(transcript);
+
   const [current, setCurrent] = useState(0);
-  const [phase, setPhase] = useState<Phase>("showing");
-  const [countdown, setCountdown] = useState(SHOW_SECS);
-  const [currentInput, setCurrentInput] = useState("");
-  const [allInputs, setAllInputs] = useState<Record<number, string>>({});
+  const [phase, setPhase] = useState<Phase>("playing");
+  const [transcripts, setTranscripts] = useState<Record<number, string>>({});
   const [graded, setGraded] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [recordingTimeLeft, setRecordingTimeLeft] = useState(0);
+  const [processingMessage, setProcessingMessage] = useState<string | null>(
+    null,
+  );
+
+  const durationRef = useRef(duration);
+  const recordingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const processingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  useEffect(() => {
+    transcriptRef.current = transcript;
+  }, [transcript]);
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
     Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+
+  const fileBasename = file ? file.replace(/\.json$/i, "") : "";
+  const totalSentences = data?.sentences.length ?? 0;
+  const sentence = data?.sentences[current];
+  const isLastSentence = current + 1 >= totalSentences;
+
+  useEffect(() => {
+    durationRef.current = duration;
+  }, [duration]);
 
   useEffect(() => {
     if (!hasValidQuestionNumber) return;
@@ -61,86 +107,189 @@ export function ListenRepeatPage() {
     }
   }, [data, loading, graded, running, elapsedSeconds, start]);
 
-  useEffect(() => {
-    if (phase !== "showing") return;
-    const interval = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 0) {
-          clearInterval(interval);
-          return 0;
+  const clearRecordingTimer = useCallback(() => {
+    if (recordingTimerRef.current) {
+      clearInterval(recordingTimerRef.current);
+      recordingTimerRef.current = null;
+    }
+  }, []);
+
+  const clearProcessingTimeout = useCallback(() => {
+    if (processingTimeoutRef.current) {
+      clearTimeout(processingTimeoutRef.current);
+      processingTimeoutRef.current = null;
+    }
+  }, []);
+
+  const finishingRef = useRef(false);
+
+  const finishSentence = useCallback(async () => {
+    if (finishingRef.current) return;
+    finishingRef.current = true;
+
+    clearRecordingTimer();
+    clearProcessingTimeout();
+    await stopSpeech();
+    setPhase("processing");
+    setProcessingMessage("Processing your speech...");
+
+    processingTimeoutRef.current = setTimeout(() => {
+      setTranscripts((prev) => {
+        const next = { ...prev, [current]: transcriptRef.current.trim() };
+
+        if (isLastSentence) {
+          const sessionSeconds = stop();
+          if (data) {
+            const allAlignments = data.sentences.map((s, i) =>
+              alignWords(s.text, next[i] ?? ""),
+            );
+            const correct = allAlignments.reduce(
+              (sum, a) => sum + countCorrectWords(a),
+              0,
+            );
+            const total = allAlignments.reduce(
+              (sum, a) => sum + countOriginalWords(a),
+              0,
+            );
+            saveScore(
+              "toefl/speaking/listen-repeat",
+              correct,
+              total,
+              sessionSeconds,
+              file ?? undefined,
+            );
+          }
+          setGraded(true);
+          setPhase("review");
+          stopTts();
         }
+
+        return next;
+      });
+
+      if (!isLastSentence) {
+        setCurrent((c) => c + 1);
+        setPhase("playing");
+      }
+      setProcessingMessage(null);
+      finishingRef.current = false;
+    }, PROCESSING_DELAY_MS);
+  }, [
+    clearRecordingTimer,
+    clearProcessingTimeout,
+    stopSpeech,
+    current,
+    isLastSentence,
+    data,
+    stop,
+    saveScore,
+    file,
+    stopTts,
+  ]);
+
+  const startRecording = useCallback(() => {
+    if (!speechSupported) return;
+    const audioDuration =
+      durationRef.current > 0
+        ? durationRef.current
+        : (sentence?.wordCount ?? 0) / DEFAULT_WORDS_PER_SECOND;
+    const recordingDuration = Math.max(
+      3,
+      Math.round(audioDuration * RECORDING_MULTIPLIER),
+    );
+
+    setRecordingTimeLeft(recordingDuration);
+    setPhase("recording");
+    startSpeech();
+
+    recordingTimerRef.current = setInterval(() => {
+      setRecordingTimeLeft((prev) => {
         if (prev <= 1) {
-          clearInterval(interval);
-          setPhase("hidden");
-          setTimeout(() => inputRef.current?.focus(), 50);
+          void finishSentence();
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
-    return () => clearInterval(interval);
-  }, [phase, current]);
+  }, [speechSupported, sentence, startSpeech, finishSentence]);
 
-  const totalSentences = data?.sentences.length ?? 0;
-  const isLastSentence = current + 1 >= totalSentences;
+  const playCurrentSentence = useCallback(() => {
+    if (!sentence || !fileBasename) return;
+    const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${current + 1}.mp3`;
+    void play(url, () => {
+      startRecording();
+    });
+  }, [sentence, fileBasename, current, play, startRecording]);
 
-  const handleConfirmInput = () => {
-    if (!currentInput.trim()) return;
-    setAllInputs((s) => ({ ...s, [current]: currentInput }));
-    if (!isLastSentence) {
-      setCurrent((c) => c + 1);
-      setCurrentInput("");
-      setPhase("showing");
-      setCountdown(SHOW_SECS);
+  useEffect(() => {
+    if (
+      data &&
+      !loading &&
+      !graded &&
+      hasValidQuestionNumber &&
+      phase === "playing" &&
+      !playing &&
+      !ttsLoading
+    ) {
+      playCurrentSentence();
     }
-  };
+  }, [
+    data,
+    loading,
+    graded,
+    hasValidQuestionNumber,
+    phase,
+    playing,
+    ttsLoading,
+    playCurrentSentence,
+  ]);
 
-  const handleSubmit = () => {
-    // Save current input if not yet saved
-    if (currentInput.trim() && allInputs[current] == null) {
-      setAllInputs((s) => ({ ...s, [current]: currentInput }));
-    }
-    const sessionSeconds = stop();
-    if (data) {
-      const correct = data.sentences.filter((s, i) => {
-        const input =
-          i === current && currentInput.trim() && allInputs[i] == null
-            ? currentInput
-            : (allInputs[i] ?? "");
-        return diffWords(s.text, input).every((d) => d.correct);
-      }).length;
-      saveScore(
-        "toefl/speaking/listen-repeat",
-        correct,
-        data.sentences.length,
-        sessionSeconds,
-        file ?? undefined,
-      );
-    }
-    setGraded(true);
-    setPhase("review");
-    setCurrent(0);
-  };
+  useEffect(() => {
+    return () => {
+      clearRecordingTimer();
+      clearProcessingTimeout();
+      void stopSpeech();
+      stopTts();
+      finishingRef.current = false;
+    };
+  }, [clearRecordingTimer, clearProcessingTimeout, stopSpeech, stopTts]);
 
   const handleBackToList = () => {
+    clearRecordingTimer();
+    clearProcessingTimeout();
+    void stopSpeech();
+    stopTts();
     resetTimer();
     setCurrent(0);
-    setCurrentInput("");
-    setAllInputs({});
-    setPhase("showing");
-    setCountdown(SHOW_SECS);
+    setTranscripts({});
+    setPhase("playing");
     setGraded(false);
+    setRecordingTimeLeft(0);
+    setProcessingMessage(null);
+    finishingRef.current = false;
     navigate("/toefl/speaking/listen-repeat");
   };
 
-  const score = data
-    ? data.sentences.filter((s, i) => {
-        const input = allInputs[i] ?? "";
-        return diffWords(s.text, input).every((d) => d.correct);
-      }).length
-    : 0;
+  const handleReplayAudio = () => {
+    clearRecordingTimer();
+    clearProcessingTimeout();
+    void stopSpeech();
+    finishingRef.current = false;
+    setProcessingMessage(null);
+    setPhase("playing");
+  };
 
-  const sentence = data?.sentences[current];
+  const alignments: AlignedWord[][] = data
+    ? data.sentences.map((s, i) => alignWords(s.text, transcripts[i] ?? ""))
+    : [];
+  const correctWords = alignments.reduce(
+    (sum, a) => sum + countCorrectWords(a),
+    0,
+  );
+  const totalWords = alignments.reduce(
+    (sum, a) => sum + countOriginalWords(a),
+    0,
+  );
 
   return (
     <div>
@@ -149,9 +298,9 @@ export function ListenRepeatPage() {
       )}
       <SectionHeader
         title="Listen and Repeat"
-        subtitle="Read and memorize the sentence, then reproduce it by typing."
+        subtitle="Listen to the sentence, then repeat it into the microphone."
         backTo="/toefl"
-        current={Object.keys(allInputs).length}
+        current={current}
         total={totalSentences}
       />
 
@@ -181,6 +330,16 @@ export function ListenRepeatPage() {
           <p>Invalid question number in URL.</p>
         </div>
       )}
+      {!speechSupported && !loading && (
+        <div className={styles.error}>
+          <p>
+            Speech recognition is not supported in this browser. Please use
+            Chrome, Edge, or Safari.
+          </p>
+        </div>
+      )}
+      {speechError && <div className={styles.error}>{speechError}</div>}
+      {ttsError && <div className={styles.error}>{ttsError}</div>}
 
       {data && !loading && hasValidQuestionNumber && !graded && sentence && (
         <div className={styles.card}>
@@ -188,65 +347,50 @@ export function ListenRepeatPage() {
             Question {current + 1} / {totalSentences}
           </p>
 
-          {phase === "showing" && (
+          {phase === "playing" && (
             <div className={styles.showPhase}>
-              <div className={styles.countdown}>{countdown}</div>
-              <p className={styles.sentenceDisplay}>{sentence.text}</p>
-              <p className={styles.hint}>Memorize this sentence.</p>
-            </div>
-          )}
-
-          {phase === "hidden" && (
-            <div className={styles.hiddenPhase}>
-              <p className={styles.hiddenMsg}>
-                The sentence is now hidden. Reproduce it by typing.
+              <div className={styles.statusIcon}>🔊</div>
+              <p className={styles.sentenceDisplay}>Listen carefully...</p>
+              <p className={styles.hint}>
+                {ttsLoading ? "Loading audio..." : "The sentence is playing."}
               </p>
-              <input
-                ref={inputRef}
-                className={styles.inputField}
-                value={currentInput}
-                onChange={(e) => setCurrentInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && currentInput.trim()) {
-                    if (isLastSentence) {
-                      setAllInputs((s) => ({ ...s, [current]: currentInput }));
-                    } else {
-                      handleConfirmInput();
-                    }
-                  }
-                }}
-                placeholder="Type the sentence here..."
-              />
-              {!isLastSentence && (
-                <Button
-                  onClick={handleConfirmInput}
-                  disabled={!currentInput.trim()}
-                >
-                  Next
-                </Button>
-              )}
-              {isLastSentence && (
-                <Button
-                  onClick={() => {
-                    setAllInputs((s) => ({ ...s, [current]: currentInput }));
-                  }}
-                  disabled={!currentInput.trim() || allInputs[current] != null}
-                >
-                  Confirm Input
-                </Button>
+            </div>
+          )}
+
+          {phase === "recording" && (
+            <div className={styles.showPhase}>
+              <div className={styles.recordingIndicator}>
+                <span className={styles.recordingDot} />
+                <span className={styles.recordingTimer}>
+                  {recordingTimeLeft}s
+                </span>
+              </div>
+              <p className={styles.sentenceDisplay}>Repeat the sentence now</p>
+              <p className={styles.hint}>
+                Microphone is on. Speak clearly before time runs out.
+              </p>
+              {transcript && (
+                <p className={styles.liveTranscript}>{transcript}</p>
               )}
             </div>
           )}
 
-          {isLastSentence &&
-            allInputs[current] != null &&
-            phase === "hidden" && (
-              <div style={{ marginTop: "1rem", textAlign: "center" }}>
-                <Button onClick={handleSubmit} size="lg">
-                  Submit
-                </Button>
-              </div>
-            )}
+          {(phase === "processing" || processingMessage) && (
+            <div className={styles.showPhase}>
+              <LoadingSpinner message={processingMessage ?? "Processing..."} />
+            </div>
+          )}
+
+          <div className={styles.playerControls}>
+            <Button
+              onClick={handleReplayAudio}
+              disabled={phase === "playing" || ttsLoading}
+              size="sm"
+              variant="secondary"
+            >
+              🔁 Replay Audio
+            </Button>
+          </div>
         </div>
       )}
 
@@ -255,48 +399,66 @@ export function ListenRepeatPage() {
           <div className={styles.resultCard}>
             <h2>Section Complete</h2>
             <div className={styles.scoreBox}>
-              <span className={styles.scoreNum}>{score}</span>
-              <span className={styles.scoreDen}>/{totalSentences}</span>
+              <span className={styles.scoreNum}>{correctWords}</span>
+              <span className={styles.scoreDen}>/{totalWords}</span>
               <span className={styles.scorePct}>
-                ({Math.round((score / totalSentences) * 100)}%)
+                (
+                {totalWords > 0
+                  ? Math.round((correctWords / totalWords) * 100)
+                  : 0}
+                %)
               </span>
             </div>
             <ProgressBar
-              current={score}
-              total={totalSentences}
-              label="Exact Match"
+              current={correctWords}
+              total={totalWords}
+              label="Words Correct"
             />
             <BackButton onClick={handleBackToList} size="lg" />
           </div>
 
           {data.sentences.map((s, i) => {
-            const input = allInputs[i] ?? "";
-            const diff = diffWords(s.text, input);
-            const correct = diff.every((d) => d.correct);
+            const alignment = alignWords(s.text, transcripts[i] ?? "");
+            const correct = countCorrectWords(alignment);
+            const total = countOriginalWords(alignment);
             return (
               <div key={s.id} className={styles.card}>
-                <p className={styles.qNum}>Question {i + 1}</p>
+                <p className={styles.qNum}>
+                  Question {i + 1} — {correct}/{total} words
+                </p>
                 <div className={styles.feedbackPhase}>
-                  <p className={styles.fbLabel}>
-                    {correct ? "✓ Correct" : "✗ Incorrect"} - Correct:
-                  </p>
+                  <p className={styles.fbLabel}>Original sentence:</p>
                   <p className={styles.originalSentence}>{s.text}</p>
-                  <p className={styles.fbLabel}>Your input (diff):</p>
+                  <p className={styles.fbLabel}>Your speech (diff):</p>
                   <div className={styles.diffView}>
-                    {diff.map((d, j) => (
-                      <span
-                        key={j}
-                        className={[
-                          styles.diffWord,
-                          d.correct ? styles.diffCorrect : styles.diffWrong,
-                        ].join(" ")}
-                        title={
-                          d.correct ? "" : `Input: ${d.inputWord || "(none)"}`
-                        }
-                      >
-                        {d.correct ? d.word : d.inputWord || "▪"}
-                      </span>
-                    ))}
+                    {alignment.map((a, j) => {
+                      const displayWord =
+                        a.type === "deletion"
+                          ? (a.original ?? "▪")
+                          : (a.recognized ?? "▪");
+                      return (
+                        <span
+                          key={j}
+                          className={[
+                            styles.diffWord,
+                            a.correct ? styles.diffCorrect : styles.diffWrong,
+                            a.type === "deletion" ? styles.diffMissing : "",
+                            a.type === "insertion" ? styles.diffExtra : "",
+                          ].join(" ")}
+                          title={
+                            a.type === "match"
+                              ? ""
+                              : a.type === "deletion"
+                                ? `Missing: ${a.original}`
+                                : a.type === "insertion"
+                                  ? `Extra: ${a.recognized}`
+                                  : `Expected: ${a.original}, got: ${a.recognized}`
+                          }
+                        >
+                          {displayWord}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

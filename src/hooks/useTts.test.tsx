@@ -159,6 +159,31 @@ describe("useTts", () => {
     expect(result.current.error).toBe("Audio fetch failed (404)");
   });
 
+  it("invokes onEnded callback when playback finishes", async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      blob: vi
+        .fn()
+        .mockResolvedValue(new Blob(["audio"], { type: "audio/mpeg" })),
+    });
+
+    const { useTts } = await import("./useTts");
+    const { result } = renderHook(() => useTts());
+    const onEnded = vi.fn();
+
+    await act(async () => {
+      await result.current.play("/audio.mp3", onEnded);
+    });
+
+    const lastAudio = FakeAudio.instances.at(-1);
+
+    act(() => {
+      lastAudio?.onended?.();
+    });
+
+    expect(onEnded).toHaveBeenCalledTimes(1);
+  });
+
   it("plays concatenated audio segments with and without gaps", async () => {
     fetchMock.mockResolvedValue({
       ok: true,

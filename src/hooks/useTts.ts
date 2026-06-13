@@ -8,8 +8,8 @@ interface UseTtsReturn {
   duration: number;
   playbackRate: number;
   setPlaybackRate: (rate: number) => void;
-  play: (url: string) => Promise<void>;
-  playSegments: (urls: string[]) => Promise<void>;
+  play: (url: string, onEnded?: () => void) => Promise<void>;
+  playSegments: (urls: string[], onEnded?: () => void) => Promise<void>;
   playSegmentsWithGaps: (urls: string[], gaps: number[]) => Promise<void>;
   pause: () => void;
   resume: () => void;
@@ -143,6 +143,7 @@ export function useTts(): UseTtsReturn {
       URL.revokeObjectURL(urlRef.current);
       urlRef.current = null;
     }
+    onEndedRef.current = null;
     setPlaying(false);
     setLoading(false);
     setCurrentTime(0);
@@ -161,6 +162,8 @@ export function useTts(): UseTtsReturn {
     rafRef.current = requestAnimationFrame(tick);
   }, []);
 
+  const onEndedRef = useRef<(() => void) | null>(null);
+
   const startPlayback = useCallback(
     async (url: string) => {
       const audio = new Audio(url);
@@ -172,11 +175,14 @@ export function useTts(): UseTtsReturn {
           cancelAnimationFrame(rafRef.current);
           rafRef.current = 0;
         }
+        onEndedRef.current?.();
+        onEndedRef.current = null;
       };
       audio.onerror = () => {
         setPlaying(false);
         setError("Audio playback error");
         setLoading(false);
+        onEndedRef.current = null;
       };
       await audio.play();
       setPlaying(true);
@@ -187,8 +193,9 @@ export function useTts(): UseTtsReturn {
   );
 
   const play = useCallback(
-    async (url: string) => {
+    async (url: string, onEnded?: () => void) => {
       cleanup();
+      onEndedRef.current = onEnded ?? null;
       setError(null);
       setLoading(true);
       try {
@@ -201,6 +208,7 @@ export function useTts(): UseTtsReturn {
         urlRef.current = objectUrl;
         await startPlayback(objectUrl);
       } catch (e) {
+        onEndedRef.current = null;
         setError(e instanceof Error ? e.message : String(e));
         setLoading(false);
       }
@@ -209,8 +217,9 @@ export function useTts(): UseTtsReturn {
   );
 
   const playSegments = useCallback(
-    async (urls: string[]) => {
+    async (urls: string[], onEnded?: () => void) => {
       cleanup();
+      onEndedRef.current = onEnded ?? null;
       setError(null);
       setLoading(true);
       try {
@@ -225,6 +234,7 @@ export function useTts(): UseTtsReturn {
 
         await startPlayback(url);
       } catch (e) {
+        onEndedRef.current = null;
         setError(e instanceof Error ? e.message : String(e));
         setLoading(false);
       }
