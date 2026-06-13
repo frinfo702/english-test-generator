@@ -63,6 +63,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   const finalTranscriptRef = useRef("");
   const requestedStopRef = useRef(false);
   const retryCountRef = useRef(0);
+  const recognitionStartTimeRef = useRef(0);
 
   const clearRestartTimeout = useCallback(() => {
     if (!restartTimeoutRef.current) return;
@@ -145,9 +146,21 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
 
       const isRetryable =
         event.error === "network" || event.error === "audio-capture";
-      if (isRetryable && retryCountRef.current < MAX_RETRY_COUNT) {
+      const isImmediateFailure =
+        isRetryable && Date.now() - recognitionStartTimeRef.current < 500;
+      if (
+        isRetryable &&
+        !isImmediateFailure &&
+        retryCountRef.current < MAX_RETRY_COUNT
+      ) {
         retryCountRef.current += 1;
         clearRestartTimeout();
+        const previousRecognition = recognitionRef.current;
+        if (previousRecognition) {
+          previousRecognition.onresult = null;
+          previousRecognition.onerror = null;
+          previousRecognition.onend = null;
+        }
         recognitionRef.current = null;
         restartTimeoutRef.current = setTimeout(() => {
           restartTimeoutRef.current = null;
@@ -171,11 +184,17 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
           "The selected language is not supported for speech recognition.",
       };
 
-      setError(
-        event.message ||
-          messages[event.error] ||
-          `Speech recognition error: ${event.error}`,
-      );
+      if (isImmediateFailure && event.error === "network") {
+        setError(
+          "Speech recognition service is unavailable. This feature requires Google Chrome with an internet connection, and may not work on Chromium, corporate browsers, or restricted networks.",
+        );
+      } else {
+        setError(
+          event.message ||
+            messages[event.error] ||
+            `Speech recognition error: ${event.error}`,
+        );
+      }
       clearRestartTimeout();
       recognitionRef.current = null;
       requestedStopRef.current = false;
@@ -211,6 +230,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
 
     try {
       recognition.start();
+      recognitionStartTimeRef.current = Date.now();
       setError(null);
       setRecording(true);
     } catch (e) {
@@ -231,6 +251,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
     return new Promise<void>((resolve) => {
       clearRestartTimeout();
       retryCountRef.current = 0;
+      recognitionStartTimeRef.current = 0;
       const recognition = recognitionRef.current;
       if (!recognition) {
         requestedStopRef.current = false;
@@ -263,6 +284,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
         recognitionRef.current = null;
       }
       clearRestartTimeout();
+      recognitionStartTimeRef.current = 0;
     };
   }, [clearRestartTimeout]);
 

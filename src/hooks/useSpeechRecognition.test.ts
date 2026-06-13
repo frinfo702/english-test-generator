@@ -206,7 +206,7 @@ describe("useSpeechRecognition", () => {
     expect(result.current.error).toBeNull();
   });
 
-  it("shows a friendly message for network errors after retries are exhausted", async () => {
+  it("shows a service-unavailable message for an immediate network error", async () => {
     const { useSpeechRecognition } = await import("./useSpeechRecognition");
     const { result } = renderHook(() => useSpeechRecognition());
 
@@ -217,11 +217,32 @@ describe("useSpeechRecognition", () => {
     act(() => {
       FakeSpeechRecognition.instances[0].emitError("network");
     });
+
+    expect(result.current.error).toContain("unavailable");
+    expect(result.current.recording).toBe(false);
+    expect(FakeSpeechRecognition.instances).toHaveLength(1);
+  });
+
+  it("retries delayed network errors and shows a friendly message after retries are exhausted", async () => {
+    let now = 0;
+    const dateSpy = vi.spyOn(Date, "now").mockImplementation(() => now);
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    act(() => {
+      result.current.start();
+    });
+
+    now = 1000;
+    act(() => {
+      FakeSpeechRecognition.instances[0].emitError("network");
+    });
     expect(result.current.error).toBeNull();
 
     await act(async () => {
       await vi.advanceTimersByTimeAsync(600);
     });
+    now = 2000;
     act(() => {
       FakeSpeechRecognition.instances[1].emitError("network");
     });
@@ -230,12 +251,14 @@ describe("useSpeechRecognition", () => {
     await act(async () => {
       await vi.advanceTimersByTimeAsync(600);
     });
+    now = 3000;
     act(() => {
       FakeSpeechRecognition.instances[2].emitError("network");
     });
 
     expect(result.current.error).toContain("network error");
     expect(result.current.recording).toBe(false);
+    dateSpy.mockRestore();
   });
 
   it("restarts recognition when onend fires without stop being called", async () => {
