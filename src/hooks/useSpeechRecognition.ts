@@ -31,6 +31,8 @@ interface UseSpeechRecognitionReturn {
   stop: () => Promise<void>;
 }
 
+const RESTART_DELAY_MS = 100;
+
 function getSpeechRecognition(): (new () => SpeechRecognitionType) | undefined {
   if (typeof window === "undefined") return undefined;
   const win = window as unknown as {
@@ -40,6 +42,13 @@ function getSpeechRecognition(): (new () => SpeechRecognitionType) | undefined {
   return win.SpeechRecognition ?? win.webkitSpeechRecognition;
 }
 
+function joinTranscriptParts(...parts: string[]): string {
+  return parts
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(" ");
+}
+
 export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   const [supported] = useState(() => !!getSpeechRecognition());
   const [recording, setRecording] = useState(false);
@@ -47,27 +56,61 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   const [error, setError] = useState<string | null>(null);
   const recognitionRef = useRef<SpeechRecognitionType | null>(null);
   const endPromiseRef = useRef<(() => void) | null>(null);
+  const restartTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const committedTranscriptRef = useRef("");
   const finalTranscriptRef = useRef("");
+  const requestedStopRef = useRef(false);
 
-  const start = useCallback(() => {
+  const clearRestartTimeout = useCallback(() => {
+    if (!restartTimeoutRef.current) return;
+    clearTimeout(restartTimeoutRef.current);
+    restartTimeoutRef.current = null;
+  }, []);
+
+  function startSession(resetTranscript: boolean) {
     const Recognition = getSpeechRecognition();
     if (!Recognition) {
       setError("Speech recognition is not supported in this browser.");
+      setRecording(false);
       return;
     }
 
-    setTranscript("");
-    finalTranscriptRef.current = "";
-    setError(null);
-    endPromiseRef.current = null;
+    clearRestartTimeout();
+
+    const previousRecognition = recognitionRef.current;
+    if (previousRecognition) {
+      previousRecognition.onresult = null;
+      previousRecognition.onerror = null;
+      previousRecognition.onend = null;
+      try {
+        previousRecognition.abort();
+      } catch {
+        // ignore
+      }
+      recognitionRef.current = null;
+    }
+
+    if (resetTranscript) {
+      setTranscript("");
+      committedTranscriptRef.current = "";
+      finalTranscriptRef.current = "";
+      setError(null);
+      endPromiseRef.current?.();
+      endPromiseRef.current = null;
+      requestedStopRef.current = false;
+    }
 
     const recognition = new Recognition();
     recognition.lang = "en-US";
-    recognition.continuous = true;
+    // Listen & Repeat only needs one utterance, and non-continuous mode is
+    // noticeably more stable on Safari/WebKit.
+    recognition.continuous = false;
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
+      if (recognitionRef.current !== recognition) return;
+
       let finalText = "";
       let interimText = "";
       for (let i = 0; i < event.results.length; i++) {
@@ -78,11 +121,18 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
           interimText = result[0].transcript;
         }
       }
-      finalTranscriptRef.current = finalText;
-      setTranscript((finalText + interimText).trim());
+
+      const finalized = joinTranscriptParts(
+        committedTranscriptRef.current,
+        finalText,
+      );
+      finalTranscriptRef.current = finalized;
+      setTranscript(joinTranscriptParts(finalized, interimText));
     };
 
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      if (recognitionRef.current !== recognition) return;
+
       if (event.error === "no-speech" || event.error === "aborted") {
         return;
       }
@@ -107,35 +157,63 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
           messages[event.error] ||
           `Speech recognition error: ${event.error}`,
       );
+      clearRestartTimeout();
+      recognitionRef.current = null;
+      requestedStopRef.current = false;
       setRecording(false);
       endPromiseRef.current?.();
       endPromiseRef.current = null;
     };
 
     recognition.onend = () => {
-      setRecording(false);
-      endPromiseRef.current?.();
-      endPromiseRef.current = null;
+      if (recognitionRef.current !== recognition) return;
+
+      recognitionRef.current = null;
+      committedTranscriptRef.current = finalTranscriptRef.current.trim();
+
+      if (requestedStopRef.current) {
+        requestedStopRef.current = false;
+        clearRestartTimeout();
+        setRecording(false);
+        endPromiseRef.current?.();
+        endPromiseRef.current = null;
+        return;
+      }
+
+      restartTimeoutRef.current = setTimeout(() => {
+        restartTimeoutRef.current = null;
+        startSession(false);
+      }, RESTART_DELAY_MS);
     };
 
     recognitionRef.current = recognition;
 
     try {
       recognition.start();
+      setError(null);
       setRecording(true);
     } catch (e) {
+      clearRestartTimeout();
       setError(e instanceof Error ? e.message : String(e));
       setRecording(false);
     }
-  }, []);
+  }
+
+  const start = useCallback(() => {
+    startSession(true);
+  }, [clearRestartTimeout]);
 
   const stop = useCallback(() => {
     return new Promise<void>((resolve) => {
+      clearRestartTimeout();
       const recognition = recognitionRef.current;
       if (!recognition) {
+        requestedStopRef.current = false;
+        setRecording(false);
         resolve();
         return;
       }
+      requestedStopRef.current = true;
       endPromiseRef.current = resolve;
       try {
         recognition.stop();
@@ -143,20 +221,25 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
         resolve();
       }
     });
-  }, []);
+  }, [clearRestartTimeout]);
 
   useEffect(() => {
     return () => {
       const recognition = recognitionRef.current;
       if (recognition) {
+        recognition.onresult = null;
+        recognition.onerror = null;
+        recognition.onend = null;
         try {
           recognition.abort();
         } catch {
           // ignore
         }
+        recognitionRef.current = null;
       }
+      clearRestartTimeout();
     };
-  }, []);
+  }, [clearRestartTimeout]);
 
   return { supported, recording, transcript, error, start, stop };
 }

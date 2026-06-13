@@ -105,6 +105,7 @@ describe("useSpeechRecognition", () => {
 
     const instance = FakeSpeechRecognition.instances[0];
     expect(instance.start).toHaveBeenCalled();
+    expect(instance.continuous).toBe(false);
     expect(result.current.recording).toBe(true);
   });
 
@@ -219,5 +220,102 @@ describe("useSpeechRecognition", () => {
 
     expect(result.current.error).toContain("network error");
     expect(result.current.recording).toBe(false);
+  });
+
+  it("restarts recognition when onend fires without stop being called", async () => {
+    class AutoEndRecognition extends FakeSpeechRecognition {
+      start = vi.fn(() => {
+        if (FakeSpeechRecognition.instances.length > 1) return;
+        queueMicrotask(() => {
+          this.emitEnd();
+        });
+      });
+    }
+
+    vi.stubGlobal(
+      "SpeechRecognition",
+      AutoEndRecognition as unknown as new () => unknown,
+    );
+    vi.stubGlobal(
+      "webkitSpeechRecognition",
+      AutoEndRecognition as unknown as new () => unknown,
+    );
+    FakeSpeechRecognition.instances = [];
+
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    act(() => {
+      result.current.start();
+    });
+
+    expect(result.current.recording).toBe(true);
+    expect(result.current.error).toBeNull();
+
+    await waitFor(() => {
+      expect(FakeSpeechRecognition.instances).toHaveLength(2);
+    });
+
+    expect(result.current.recording).toBe(true);
+    expect(result.current.error).toBeNull();
+  });
+
+  it("ignores late end events from a previous recognition instance", async () => {
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    act(() => {
+      result.current.start();
+    });
+
+    const firstInstance = FakeSpeechRecognition.instances[0];
+
+    act(() => {
+      result.current.start();
+    });
+
+    const secondInstance = FakeSpeechRecognition.instances[1];
+
+    expect(firstInstance.abort).toHaveBeenCalled();
+    expect(secondInstance.start).toHaveBeenCalled();
+
+    act(() => {
+      firstInstance.emitEnd();
+    });
+
+    expect(result.current.recording).toBe(true);
+    expect(result.current.error).toBeNull();
+  });
+
+  it("keeps transcript across automatic restarts", async () => {
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    act(() => {
+      result.current.start();
+    });
+
+    const firstInstance = FakeSpeechRecognition.instances[0];
+
+    act(() => {
+      firstInstance.emitResult([
+        new FakeSpeechRecognitionResult("hello", true),
+      ]);
+      firstInstance.emitEnd();
+    });
+
+    await waitFor(() => {
+      expect(FakeSpeechRecognition.instances).toHaveLength(2);
+    });
+
+    const secondInstance = FakeSpeechRecognition.instances[1];
+
+    act(() => {
+      secondInstance.emitResult([
+        new FakeSpeechRecognitionResult("world", true),
+      ]);
+    });
+
+    expect(result.current.transcript).toBe("hello world");
   });
 });
