@@ -198,21 +198,31 @@
   color: var(--color-text-muted);
 }
 
-.originalSentence {
-  font-size: var(--font-size-lg);
-  line-height: 1.6;
-  background: var(--color-correct-bg);
-  padding: var(--spacing-md);
-  border-radius: var(--radius);
-}
-
-.diffView {
+.sideBySideDiff {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
   padding: var(--spacing-md);
   background: var(--color-surface);
   border-radius: var(--radius);
+}
+
+.diffColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 40px;
+}
+
+.diffCell {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: var(--font-size-body);
+  min-height: 1.5em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .diffWord {
@@ -236,6 +246,22 @@
 
 .diffExtra {
   border: 1px dashed var(--color-incorrect);
+}
+
+.diffPlaceholder {
+  color: var(--color-text-muted);
+  background: transparent;
+}
+
+.diffRowLabel {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  justify-content: flex-start;
+  padding-left: 0;
 }
 
 .resultCard {

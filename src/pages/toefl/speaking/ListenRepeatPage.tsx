@@ -40,6 +40,144 @@ type Phase =
   | "feedback"
   | "review";
 
+function DiffLegend() {
+  return (
+    <div className={styles.legend}>
+      <p className={styles.fbLabel}>How to read the answer</p>
+      <div className={styles.legendItems}>
+        <div className={styles.legendItem}>
+          <span
+            className={[styles.diffWord, styles.diffCorrect].join(" ")}
+            title="Correctly spoken"
+          >
+            correct
+          </span>
+          <span className={styles.legendLabel}>Correctly spoken</span>
+        </div>
+        <div className={styles.legendItem}>
+          <span
+            className={[styles.diffWord, styles.diffWrong].join(" ")}
+            title="Wrong word"
+          >
+            wrong
+          </span>
+          <span className={styles.legendLabel}>Wrong word</span>
+        </div>
+        <div className={styles.legendItem}>
+          <span
+            className={[
+              styles.diffWord,
+              styles.diffWrong,
+              styles.diffMissing,
+            ].join(" ")}
+            title="Missing word"
+          >
+            ▪
+          </span>
+          <span className={styles.legendLabel}>Missing word</span>
+        </div>
+        <div className={styles.legendItem}>
+          <span
+            className={[
+              styles.diffWord,
+              styles.diffWrong,
+              styles.diffExtra,
+            ].join(" ")}
+            title="Extra word"
+          >
+            extra
+          </span>
+          <span className={styles.legendLabel}>Extra word</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ListenRepeatDiffView({
+  alignment,
+  showLabels = true,
+}: {
+  alignment: AlignedWord[];
+  showLabels?: boolean;
+}) {
+  return (
+    <div className={styles.sideBySideDiff}>
+      {showLabels && (
+        <div className={styles.diffColumn}>
+          <div
+            className={[styles.diffCell, styles.diffRowLabel].join(" ")}
+            aria-hidden="true"
+          >
+            Correct
+          </div>
+          <div
+            className={[styles.diffCell, styles.diffRowLabel].join(" ")}
+            aria-hidden="true"
+          >
+            You
+          </div>
+        </div>
+      )}
+      {alignment.map((a, j) => {
+        const isMatch = a.type === "match";
+        const isDeletion = a.type === "deletion";
+        const isInsertion = a.type === "insertion";
+
+        const topClasses = [styles.diffCell];
+        const bottomClasses = [styles.diffCell];
+
+        if (isMatch) {
+          topClasses.push(styles.diffCorrect);
+          bottomClasses.push(styles.diffCorrect);
+        } else if (isDeletion) {
+          topClasses.push(styles.diffWrong, styles.diffMissing);
+          bottomClasses.push(styles.diffPlaceholder);
+        } else if (isInsertion) {
+          topClasses.push(styles.diffPlaceholder);
+          bottomClasses.push(styles.diffWrong, styles.diffExtra);
+        } else {
+          topClasses.push(styles.diffWrong);
+          bottomClasses.push(styles.diffWrong);
+        }
+
+        return (
+          <div key={j} className={styles.diffColumn}>
+            <div
+              className={topClasses.join(" ")}
+              title={
+                a.type === "match"
+                  ? "Correct"
+                  : a.type === "deletion"
+                    ? `Missing: ${a.original}`
+                    : a.type === "insertion"
+                      ? "(not in original)"
+                      : `Expected: ${a.original}`
+              }
+            >
+              {a.original ?? "▪"}
+            </div>
+            <div
+              className={bottomClasses.join(" ")}
+              title={
+                a.type === "match"
+                  ? "Correct"
+                  : a.type === "deletion"
+                    ? "(not spoken)"
+                    : a.type === "insertion"
+                      ? `Extra: ${a.recognized}`
+                      : `Got: ${a.recognized}`
+              }
+            >
+              {a.recognized ?? "▪"}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function ListenRepeatPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
@@ -432,41 +570,14 @@ export function ListenRepeatPage() {
 
           {phase === "feedback" && (
             <div className={styles.feedbackPhase}>
-              <p className={styles.fbLabel}>Original sentence:</p>
-              <p className={styles.originalSentence}>{sentence.text}</p>
-              <p className={styles.fbLabel}>Your speech (diff):</p>
-              <div className={styles.diffView}>
-                {alignWords(sentence.text, transcripts[current] ?? "").map(
-                  (a, j) => {
-                    const displayWord =
-                      a.type === "deletion"
-                        ? (a.original ?? "▪")
-                        : (a.recognized ?? "▪");
-                    return (
-                      <span
-                        key={j}
-                        className={[
-                          styles.diffWord,
-                          a.correct ? styles.diffCorrect : styles.diffWrong,
-                          a.type === "deletion" ? styles.diffMissing : "",
-                          a.type === "insertion" ? styles.diffExtra : "",
-                        ].join(" ")}
-                        title={
-                          a.type === "match"
-                            ? ""
-                            : a.type === "deletion"
-                              ? `Missing: ${a.original}`
-                              : a.type === "insertion"
-                                ? `Extra: ${a.recognized}`
-                                : `Expected: ${a.original}, got: ${a.recognized}`
-                        }
-                      >
-                        {displayWord}
-                      </span>
-                    );
-                  },
+              <DiffLegend />
+              <p className={styles.fbLabel}>Comparison:</p>
+              <ListenRepeatDiffView
+                alignment={alignWords(
+                  sentence.text,
+                  transcripts[current] ?? "",
                 )}
-              </div>
+              />
               <p className={styles.hint}>
                 {countCorrectWords(
                   alignWords(sentence.text, transcripts[current] ?? ""),
@@ -503,6 +614,7 @@ export function ListenRepeatPage() {
           <div className={styles.resultCard}>
             <h2>Section Complete</h2>
             <p className={styles.hint}>Review your answers below.</p>
+            <DiffLegend />
             <div className={styles.scoreBox}>
               <span className={styles.scoreNum}>{correctWords}</span>
               <span className={styles.scoreDen}>/{totalWords}</span>
@@ -532,39 +644,8 @@ export function ListenRepeatPage() {
                   Question {i + 1} — {correct}/{total} words
                 </p>
                 <div className={styles.feedbackPhase}>
-                  <p className={styles.fbLabel}>Original sentence:</p>
-                  <p className={styles.originalSentence}>{s.text}</p>
-                  <p className={styles.fbLabel}>Your speech (diff):</p>
-                  <div className={styles.diffView}>
-                    {alignment.map((a, j) => {
-                      const displayWord =
-                        a.type === "deletion"
-                          ? (a.original ?? "▪")
-                          : (a.recognized ?? "▪");
-                      return (
-                        <span
-                          key={j}
-                          className={[
-                            styles.diffWord,
-                            a.correct ? styles.diffCorrect : styles.diffWrong,
-                            a.type === "deletion" ? styles.diffMissing : "",
-                            a.type === "insertion" ? styles.diffExtra : "",
-                          ].join(" ")}
-                          title={
-                            a.type === "match"
-                              ? ""
-                              : a.type === "deletion"
-                                ? `Missing: ${a.original}`
-                                : a.type === "insertion"
-                                  ? `Extra: ${a.recognized}`
-                                  : `Expected: ${a.original}, got: ${a.recognized}`
-                          }
-                        >
-                          {displayWord}
-                        </span>
-                      );
-                    })}
-                  </div>
+                  <p className={styles.fbLabel}>Comparison:</p>
+                  <ListenRepeatDiffView alignment={alignment} />
                 </div>
               </div>
             );

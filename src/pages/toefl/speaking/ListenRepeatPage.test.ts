@@ -103,4 +103,27 @@ describe("normalizeWord", () => {
     expect(normalizeWord("don't")).toBe("don't");
     expect(normalizeWord("123")).toBe("123");
   });
+
+  it("treats number words and digits as equivalent", () => {
+    expect(normalizeWord("ten")).toBe("10");
+    expect(normalizeWord("Ten")).toBe("10");
+    expect(normalizeWord("10")).toBe("10");
+    expect(normalizeWord("twenty")).toBe("20");
+    expect(normalizeWord("zero")).toBe("0");
+    expect(normalizeWord("ninety")).toBe("90");
+  });
+});
+
+describe("alignWords with number equivalence", () => {
+  it("matches number words and digits", () => {
+    const result = alignWords("I have ten books", "i have 10 books");
+    expect(result.every((a) => a.correct)).toBe(true);
+    expect(countCorrectWords(result)).toBe(4);
+  });
+
+  it("matches digits and number words", () => {
+    const result = alignWords("She is twenty", "she is 20");
+    expect(result.every((a) => a.correct)).toBe(true);
+    expect(countCorrectWords(result)).toBe(3);
+  });
 });
