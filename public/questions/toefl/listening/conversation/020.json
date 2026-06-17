@@ -1,0 +1,78 @@
+{
+  "title": "Research Assistant Position Inquiry",
+  "transcript": "Student: Professor Gupta, I saw the email you sent about hiring a research assistant for your linguistics study. I'm very interested in applying. Professor: Great, I'm glad you reached out. What aspect of the project interests you? Student: I'm fascinated by how bilingual children acquire grammar. I took your psycholinguistics course last semester and really enjoyed it. Professor: I remember you. You wrote an excellent paper on language acquisition. Do you have any previous research experience? Student: I helped a graduate student with data collection for a study on second language pronunciation last year. I did transcription and basic data entry. Professor: That's good experience. The main tasks for this position would be recruiting participants, conducting interviews in both English and Spanish, and transcribing audio recordings. Are you fluent in Spanish? Student: Yes, I grew up speaking Spanish at home. I'm comfortable with both academic and conversational Spanish. Professor: Excellent, that's a key requirement. The position is about ten hours per week with flexible scheduling. Would that work with your class schedule? Student: I think so. I only have classes in the mornings this semester, so afternoons would be open. Professor: Perfect. Could you send me your resume and the names of two references? I'd like to review them and set up a brief follow-up meeting next week. Student: Absolutely. I'll send everything by tomorrow morning. Thank you for considering me.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit Professor Gupta?",
+      "options": [
+        "To ask about a grade from last semester",
+        "To express interest in a research assistant position",
+        "To request a topic change for a paper",
+        "To get advice on graduate school applications"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student saw the professor's email about a research assistant position and visits to express interest and discuss the role."
+    },
+    {
+      "id": "q2",
+      "stem": "What is a key requirement for the research assistant position?",
+      "options": [
+        "Previous experience with statistical analysis",
+        "Fluency in both English and Spanish",
+        "Availability to work full time during the summer",
+        "Completion of a graduate-level course"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The professor mentions that conducting interviews in both English and Spanish is a main task, and confirms the student is fluent in Spanish as a key requirement."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor Gupta, I saw the email you sent about hiring a research assistant for your linguistics study. I'm very interested in applying."
+    },
+    {
+      "role": "Professor",
+      "text": "Great, I'm glad you reached out. What aspect of the project interests you?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm fascinated by how bilingual children acquire grammar. I took your psycholinguistics course last semester and really enjoyed it."
+    },
+    {
+      "role": "Professor",
+      "text": "I remember you. You wrote an excellent paper on language acquisition. Do you have any previous research experience?"
+    },
+    {
+      "role": "Student",
+      "text": "I helped a graduate student with data collection for a study on second language pronunciation last year. I did transcription and basic data entry."
+    },
+    {
+      "role": "Professor",
+      "text": "That's good experience. The main tasks for this position would be recruiting participants, conducting interviews in both English and Spanish, and transcribing audio recordings. Are you fluent in Spanish?"
+    },
+    {
+      "role": "Student",
+      "text": "Yes, I grew up speaking Spanish at home. I'm comfortable with both academic and conversational Spanish."
+    },
+    {
+      "role": "Professor",
+      "text": "Excellent, that's a key requirement. The position is about ten hours per week with flexible scheduling. Would that work with your class schedule?"
+    },
+    {
+      "role": "Student",
+      "text": "I think so. I only have classes in the mornings this semester, so afternoons would be open."
+    },
+    {
+      "role": "Professor",
+      "text": "Perfect. Could you send me your resume and the names of two references? I'd like to review them and set up a brief follow-up meeting next week."
+    },
+    {
+      "role": "Student",
+      "text": "Absolutely. I'll send everything by tomorrow morning. Thank you for considering me."
+    }
+  ]
+}

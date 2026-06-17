@@ -1,0 +1,38 @@
+{
+  "title": "Registration Deadline Reminder",
+  "transcript": "This is a reminder for all students that the registration deadline for spring semester courses is this Friday, February 10th at midnight. After this date, a late registration fee of fifty dollars will be applied. Students who have not yet registered are encouraged to meet with their academic advisors as soon as possible. Course schedules can be viewed and updated through the student portal. Waitlisted courses will be released to new registrants after the deadline. Payment for tuition must be completed by February 20th to secure your schedule.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "When is the registration deadline?",
+      "options": [
+        "February 5th at noon",
+        "February 10th at midnight",
+        "February 15th at 5 PM",
+        "February 20th at midnight"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states the registration deadline is this Friday, February 10th at midnight."
+    },
+    {
+      "id": "q2",
+      "stem": "What will happen to waitlisted courses after the deadline?",
+      "options": [
+        "They will be canceled for the semester",
+        "They will be released to new registrants",
+        "They will require special permission to join",
+        "They will be moved to the next semester"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Waitlisted courses will be released to new registrants after the deadline."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "This is a reminder for all students that the registration deadline for spring semester courses is this Friday, February 10th at midnight. After this date, a late registration fee of fifty dollars will be applied. Students who have not yet registered are encouraged to meet with their academic advisors as soon as possible. Course schedules can be viewed and updated through the student portal. Waitlisted courses will be released to new registrants after the deadline. Payment for tuition must be completed by February 20th to secure your schedule."
+    }
+  ]
+}

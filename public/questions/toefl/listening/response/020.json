@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Technology & Communication",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about Wi-Fi issues",
+      "stem": "The campus Wi-Fi keeps disconnecting in my dorm. Is there a solution?",
+      "options": {
+        "A": "Try registering your device through the IT portal. That usually stabilizes the connection.",
+        "B": "Wi-Fi technology has improved significantly.",
+        "C": "I use mobile data on my phone."
+      },
+      "correct": "A",
+      "explanation": "The speaker is reporting a technical issue, so providing a specific troubleshooting step is the most helpful response."
+    },
+    {
+      "id": "q2",
+      "context": "Asking about software access",
+      "stem": "Does the school provide free access to Microsoft Office for students?",
+      "options": {
+        "A": "Yes, all students can download Office 365 for free using their student email.",
+        "B": "Microsoft Office includes Word, Excel, and PowerPoint.",
+        "C": "I use free alternatives like Google Docs."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about software availability, so confirming access and explaining how to get it is directly helpful."
+    },
+    {
+      "id": "q3",
+      "context": "Asking about email setup",
+      "stem": "I can't figure out how to set up my student email on my phone. Can you help?",
+      "options": {
+        "A": "Sure, go to Settings and add the account using your full student email address.",
+        "B": "Student emails are provided by the university.",
+        "C": "I check my email on my laptop."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for technical help with email setup, so offering clear instructions is helpful."
+    },
+    {
+      "id": "q4",
+      "context": "Expressing frustration with online submissions",
+      "stem": "The online submission portal keeps giving me an error message. I'm so frustrated.",
+      "options": {
+        "A": "Try clearing your browser cache and using Chrome. That worked for me.",
+        "B": "Online portals are designed for convenience.",
+        "C": "I submitted my assignment yesterday."
+      },
+      "correct": "A",
+      "explanation": "The speaker is frustrated with a technical problem, so offering a specific practical solution is helpful."
+    },
+    {
+      "id": "q5",
+      "context": "Asking about computer lab access",
+      "stem": "Are the computer labs open 24 hours during finals week?",
+      "options": {
+        "A": "Yes, two labs in the library will be open 24/7 during exam period.",
+        "B": "Computer labs have a variety of software installed.",
+        "C": "I use my personal laptop for studying."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about access hours during a specific period, so providing the detailed schedule directly answers their question."
+    },
+    {
+      "id": "q6",
+      "context": "Sharing a useful discovery",
+      "stem": "I just found out the library has free access to LinkedIn Learning courses!",
+      "options": {
+        "A": "That's great to know! I've been wanting to learn graphic design.",
+        "B": "LinkedIn Learning has thousands of video tutorials.",
+        "C": "I already have a LinkedIn Learning subscription."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing useful information, so showing enthusiasm and engaging with the opportunity is the natural response."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about online class etiquette",
+      "stem": "Should I keep my camera on during the online lecture or is it optional?",
+      "options": {
+        "A": "The professor prefers cameras on, but you can turn it off if your connection is unstable.",
+        "B": "Online lectures are recorded and posted later.",
+        "C": "I usually keep my camera off during class."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about expected behavior in an online class, so providing the professor's preference and exception is helpful."
+    },
+    {
+      "id": "q8",
+      "context": "Offering tech support",
+      "stem": "I can help you set up the citation manager if you're still struggling with it.",
+      "options": {
+        "A": "That would be amazing! I've been stuck on this for hours.",
+        "B": "Citation managers organize references automatically.",
+        "C": "I already finished my bibliography."
+      },
+      "correct": "A",
+      "explanation": "The speaker is offering assistance, so gratefully accepting the offer is the natural and polite response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The campus Wi-Fi keeps disconnecting in my dorm. Is there a solution?"
+    },
+    {
+      "role": "Friend",
+      "text": "Does the school provide free access to Microsoft Office for students?"
+    },
+    {
+      "role": "Student",
+      "text": "I can't figure out how to set up my student email on my phone. Can you help?"
+    },
+    {
+      "role": "Friend",
+      "text": "The online submission portal keeps giving me an error message. I'm so frustrated."
+    },
+    {
+      "role": "Student",
+      "text": "Are the computer labs open 24 hours during finals week?"
+    },
+    {
+      "role": "Friend",
+      "text": "I just found out the library has free access to LinkedIn Learning courses!"
+    },
+    {
+      "role": "Student",
+      "text": "Should I keep my camera on during the online lecture or is it optional?"
+    },
+    {
+      "role": "Friend",
+      "text": "I can help you set up the citation manager if you're still struggling with it."
+    }
+  ]
+}

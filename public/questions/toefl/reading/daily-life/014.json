@@ -2,80 +2,80 @@
   "texts": [
     {
       "id": "t1",
-      "textType": "news article",
-      "content": "Local residents rallied at City Hall on Monday to protest the proposed demolition of the historic Grand Theater. Built in 1928, the theater has hosted countless performances and community events over the decades. The city council voted 5–3 last week to approve plans for a commercial development on the site.\n\nSupporters of preservation argue that the building contributes to the neighborhood's cultural identity and attracts tourism. Developers, however, claim the structure no longer meets safety codes and would require costly renovations.",
+      "textType": "announcement",
+      "content": "Notice to All Tenants\nSubject: Building Maintenance — Elevator Outage\n\nPlease be advised that the passenger elevators in Tower B will be out of service from 8:00 PM on Friday, September 12, until 6:00 AM on Monday, September 15, for scheduled maintenance. Freight elevators will remain operational during this period.\n\nWe apologize for any inconvenience. Residents on floors 8 and above who require assistance with heavy items may contact the front desk to schedule a time slot for freight elevator use.\n\nManagement recommends using the staircase for floors 1 through 7 during the outage.",
       "questions": [
         {
           "id": "q1",
-          "stem": "What is the main issue described in the article?",
+          "stem": "What is the primary reason for this announcement?",
           "options": [
-            "A. The high cost of renovating the Grand Theater",
-            "B. The conflict over the future of a historic building",
-            "C. The outcome of the mayoral election",
-            "D. The decline of tourism in the area"
+            "A. To warn tenants about a building emergency",
+            "B. To inform tenants about planned elevator maintenance",
+            "C. To announce the installation of new elevators",
+            "D. To notify tenants about a change in building management"
           ],
           "correctIndex": 1,
           "type": "purpose",
-          "explanation": "The article describes the dispute between preservation supporters and developers over the theater."
+          "explanation": "The announcement is about 'scheduled maintenance' of the passenger elevators, informing tenants in advance."
         },
         {
           "id": "q2",
-          "stem": "The word 'preservation' in paragraph 2 is closest in meaning to:",
+          "stem": "What can be inferred about the freight elevators during the maintenance period?",
           "options": [
-            "A. observation",
-            "B. conservation",
-            "C. decoration",
-            "D. reconstruction"
+            "A. They will be available for all tenants to use freely",
+            "B. They will be exclusively for maintenance workers",
+            "C. They can be used by arrangement for moving heavy items",
+            "D. They will also be undergoing maintenance at the same time"
           ],
-          "correctIndex": 1,
-          "type": "vocabulary",
-          "explanation": "'Preservation' here means protecting and maintaining the building in its original state."
-        },
-        {
-          "id": "q3",
-          "stem": "Which of the following is an argument made by those who want to demolish the theater?",
-          "options": [
-            "A. The theater no longer attracts audiences",
-            "B. The building is not safe enough by current standards",
-            "C. The location is not convenient for public transport",
-            "D. The property taxes on the building are too high"
-          ],
-          "correctIndex": 1,
-          "type": "factual",
-          "explanation": "Developers claim the structure 'no longer meets safety codes.'"
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The announcement says residents can 'contact the front desk to schedule a time slot for freight elevator use,' implying it is available by appointment for specific needs."
         }
       ]
     },
     {
       "id": "t2",
-      "textType": "announcement",
-      "content": "Notice to All Tenants – Building Maintenance\n\nWater will be shut off on Thursday, June 8, from 9:00 AM to 2:00 PM for pipe repairs in the basement. Please plan accordingly.\n\nAdditionally, the elevator will be out of service on June 10–11 for scheduled inspection. We apologize for any inconvenience.\n\nFor emergencies, contact the building superintendent at 555-0191.",
+      "textType": "webpage",
+      "content": "Monthly Budget Planner — Step 1: Track Your Income\n\nBefore you can build a budget that works, you need to know exactly how much money is coming in each month. Start by listing all sources of income:\n\n• Primary job salary (after taxes)\n• Freelance or side business earnings\n• Investment dividends\n• Government benefits or student grants\n\nPro Tip: Use your net income (after-tax amount), not your gross income. This gives you a realistic picture of what you actually have available to spend and save.\n\nNext week: Step 2 — Categorize Your Expenses.",
       "questions": [
         {
-          "id": "q4",
-          "stem": "What is happening on June 10–11?",
+          "id": "q3",
+          "stem": "What is the main topic of this webpage?",
           "options": [
-            "A. The water will be turned off all day",
-            "B. The elevator is undergoing inspection",
-            "C. The basement will be cleaned",
-            "D. Emergency repairs will be performed"
+            "A. How to reduce monthly expenses",
+            "B. How to invest money for retirement",
+            "C. The first step in creating a monthly budget",
+            "D. How to apply for government benefits"
+          ],
+          "correctIndex": 2,
+          "type": "purpose",
+          "explanation": "The webpage is titled 'Monthly Budget Planner — Step 1' and focuses on tracking income as the first step in budgeting."
+        },
+        {
+          "id": "q4",
+          "stem": "The word 'net' in 'net income' most likely refers to:",
+          "options": [
+            "A. the total earnings before any deductions",
+            "B. the amount remaining after taxes and deductions",
+            "C. the estimated income for the next quarter",
+            "D. the combined income of all household members"
           ],
           "correctIndex": 1,
-          "type": "factual",
-          "explanation": "The notice says the elevator will be out of service on June 10–11 for scheduled inspection."
+          "type": "vocabulary",
+          "explanation": "The webpage defines net income as 'after-tax amount,' meaning what remains after taxes and deductions."
         },
         {
           "id": "q5",
-          "stem": "What can be inferred about the relationship between the notice writer and the tenants?",
+          "stem": "What does the webpage imply about using gross income for budgeting?",
           "options": [
-            "A. The writer is a government official",
-            "B. The writer manages the building",
-            "C. The writer is a fellow tenant",
-            "D. The writer is an external contractor"
+            "A. It is the preferred method for most experts",
+            "B. It leads to an unrealistic spending plan",
+            "C. It works better for freelance workers",
+            "D. It is required for government grant applications"
           ],
           "correctIndex": 1,
           "type": "inference",
-          "explanation": "The notice is written from a building management perspective, announcing maintenance work and providing contact info for the superintendent."
+          "explanation": "The webpage advises using net income because it 'gives you a realistic picture,' implying that gross income would overstate what is actually available."
         }
       ]
     }

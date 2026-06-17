@@ -1,0 +1,63 @@
+{
+  "title": "DNA and Genetic Inheritance",
+  "transcript": "Today we will discuss DNA, the molecule that carries the genetic instructions for all known living organisms. DNA, or deoxyribonucleic acid, is composed of two strands that form a double helix structure. Each strand consists of a sequence of nucleotides, which contain four bases: adenine, thymine, cytosine, and guanine. The order of these bases determines the genetic code. Gregor Mendel, an Austrian monk, laid the foundation for our understanding of inheritance in the mid-nineteenth century through his experiments with pea plants. He discovered that traits are passed from parents to offspring through discrete units we now call genes. However, Mendel did not know about DNA. It was not until 1953 that James Watson and Francis Crick, building on the work of Rosalind Franklin, proposed the double helix model of DNA. This discovery revolutionized biology by explaining how genetic information is stored, replicated, and transmitted. Each human cell contains approximately two meters of DNA tightly coiled into chromosomes. When cells divide, DNA is replicated so that each new cell receives an identical copy. Mutations, or changes in the DNA sequence, can occur during this process and are the ultimate source of genetic variation. Some mutations are harmless, while others can cause genetic disorders or contribute to evolution by providing raw material for natural selection.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The discovery of the double helix model",
+        "The structure and function of DNA in genetic inheritance",
+        "The experiments of Gregor Mendel",
+        "The causes of genetic mutations"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture covers DNA structure, its discovery, and its role in inheritance and genetic variation."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, what are the four bases found in DNA?",
+      "options": [
+        "Adenine, thymine, cytosine, and guanine",
+        "Alanine, tyrosine, cysteine, and glycine",
+        "Adenine, uracil, cytosine, and guanine",
+        "Arginine, threonine, cysteine, and glutamine"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The four DNA bases are adenine, thymine, cytosine, and guanine."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the professor imply about mutations?",
+      "options": [
+        "They are always harmful to the organism",
+        "They occur only in plants",
+        "They can be a source of genetic variation for evolution",
+        "They were discovered by Gregor Mendel"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The professor states mutations can contribute to evolution by providing raw material for natural selection, implying they are a source of genetic variation."
+    },
+    {
+      "id": "q4",
+      "stem": "What is the term used for the units of inheritance that Mendel discovered?",
+      "options": ["Chromosomes", "Nucleotides", "Genes", "Proteins"],
+      "correctIndex": 2,
+      "type": "vocabulary",
+      "explanation": "The professor explains that Mendel discovered discrete units of inheritance that we now call genes."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will discuss DNA, the molecule that carries the genetic instructions for all known living organisms. DNA, or deoxyribonucleic acid, is composed of two strands that form a double helix structure. Each strand consists of a sequence of nucleotides, which contain four bases: adenine, thymine, cytosine, and guanine. The order of these bases determines the genetic code. Gregor Mendel, an Austrian monk, laid the foundation for our understanding of inheritance in the mid-nineteenth century through his experiments with pea plants. He discovered that traits are passed from parents to offspring through discrete units we now call genes."
+    },
+    {
+      "role": "Lecturer",
+      "text": "However, Mendel did not know about DNA. It was not until 1953 that James Watson and Francis Crick, building on the work of Rosalind Franklin, proposed the double helix model of DNA. This discovery revolutionized biology by explaining how genetic information is stored, replicated, and transmitted. Each human cell contains approximately two meters of DNA tightly coiled into chromosomes. When cells divide, DNA is replicated so that each new cell receives an identical copy. Mutations, or changes in the DNA sequence, can occur during this process and are the ultimate source of genetic variation. Some mutations are harmless, while others can cause genetic disorders or contribute to evolution by providing raw material for natural selection."
+    }
+  ]
+}

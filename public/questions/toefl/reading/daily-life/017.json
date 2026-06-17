@@ -1,0 +1,83 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "sign",
+      "content": "⚠ NOTICE\n\nNO FOOD OR DRINK BEYOND THIS POINT\n\nPlease leave all beverages, including water bottles and coffee cups, on the shelf provided near the entrance.\n\nThis policy protects the archival materials in the rare book collection. Airborne moisture and food particles can cause irreversible damage to documents that are over 200 years old.\n\nThank you for your cooperation.\n— Special Collections Staff",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of this sign?",
+          "options": [
+            "A. To announce the opening hours of the collection",
+            "B. To enforce a rule about food and drinks in a specific area",
+            "C. To warn visitors about expensive items in the collection",
+            "D. To direct visitors to the main entrance"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The sign explicitly prohibits food and drink to protect archival materials, directing visitors to leave beverages at the entrance."
+        },
+        {
+          "id": "q2",
+          "stem": "Why does the sign mention documents that are 'over 200 years old'?",
+          "options": [
+            "A. To impress visitors with the collection's age",
+            "B. To explain why the restriction is necessary",
+            "C. To indicate which items require special handling",
+            "D. To advertise the value of the collection"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The age of the documents is mentioned to emphasize their fragility and justify the strict food and drink policy."
+        },
+        {
+          "id": "q3",
+          "stem": "What can be inferred about the shelf near the entrance?",
+          "options": [
+            "A. It is used to display rare books",
+            "B. It is a designated area for leaving beverages",
+            "C. It is a checkout station for library materials",
+            "D. It is where visitors must sign in"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The sign instructs visitors to leave beverages 'on the shelf provided near the entrance,' implying this shelf serves as a temporary holding area."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "news article",
+      "content": "Student Research Team Wins Grant for Water Purification Project\n\nA team of four engineering students from Westbrook University has been awarded a $50,000 research grant to develop a low-cost water purification system for rural communities. The project, named AquaClear, uses solar energy to power a filtration process that removes bacteria and heavy metals from contaminated water sources.\n\nProfessor Linda Park, the team's faculty advisor, praised the students' innovative approach. 'What impressed the grant committee was not just the technical solution, but the team's commitment to working directly with communities to understand their specific needs,' she said.\n\nThe grant, funded by the National Science Foundation, will support the project over the next 18 months. The team plans to pilot the system in three villages in the southern region starting next summer.",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "What is the AquaClear project designed to do?",
+          "options": [
+            "A. Generate electricity from solar panels",
+            "B. Purify water using solar-powered filtration",
+            "C. Study bacteria in rural water sources",
+            "D. Train villagers to install plumbing systems"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The article states AquaClear 'uses solar energy to power a filtration process that removes bacteria and heavy metals from contaminated water.'"
+        },
+        {
+          "id": "q5",
+          "stem": "What did the grant committee find particularly impressive according to Professor Park?",
+          "options": [
+            "A. The low cost of the filtration materials",
+            "B. The team's engagement with the communities",
+            "C. The speed of the prototype development",
+            "D. The academic qualifications of the team members"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The professor said the committee was impressed by 'the team's commitment to working directly with communities to understand their specific needs.'"
+        }
+      ]
+    }
+  ]
+}

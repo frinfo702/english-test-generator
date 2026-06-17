@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "sentence": "The team ___ the project on time.",
+      "options": {
+        "A": "TODO: Choice A",
+        "B": "TODO: Choice B",
+        "C": "TODO: Choice C",
+        "D": "TODO: Choice D"
+      },
+      "correct": "A",
+      "explanation": "TODO: Explanation",
+      "focus": "verb tense/form"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "Dining Hall Holiday Schedule",
+  "transcript": "Attention students. Please be advised that all campus dining halls will operate on a reduced schedule during the upcoming winter break. Starting December 20th, only the Main Street Dining Hall will remain open, with breakfast and lunch service from 8 AM to 2 PM daily. All other dining locations will be closed from December 20th through January 3rd. Meal plans will remain active during this period. Students staying on campus over break are encouraged to check the dining services website for weekly menu updates. Normal operations will resume on January 4th.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the purpose of this announcement?",
+      "options": [
+        "To introduce a new meal plan",
+        "To inform students about holiday dining hours",
+        "To announce a price increase at dining halls",
+        "To promote a special holiday menu"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The announcement informs students about the reduced schedule and hours for dining halls during winter break."
+    },
+    {
+      "id": "q2",
+      "stem": "Which dining hall will remain open during the break?",
+      "options": [
+        "The Science Campus Dining Hall",
+        "The Main Street Dining Hall",
+        "The North Campus Cafeteria",
+        "The Student Union Food Court"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Only the Main Street Dining Hall will remain open during the winter break period."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention students. Please be advised that all campus dining halls will operate on a reduced schedule during the upcoming winter break. Starting December 20th, only the Main Street Dining Hall will remain open, with breakfast and lunch service from 8 AM to 2 PM daily. All other dining locations will be closed from December 20th through January 3rd. Meal plans will remain active during this period. Students staying on campus over break are encouraged to check the dining services website for weekly menu updates. Normal operations will resume on January 4th."
+    }
+  ]
+}

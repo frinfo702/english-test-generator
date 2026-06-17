@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Student Services",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about financial aid",
+      "stem": "I haven't received my financial aid award letter yet. When should I expect it?",
+      "options": {
+        "A": "Award letters are being sent out this week. Check your student portal too.",
+        "B": "Financial aid covers tuition and living expenses.",
+        "C": "I applied for a scholarship last month."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a specific timeline for financial aid documents, so providing current information and an alternate way to check is helpful."
+    },
+    {
+      "id": "q2",
+      "context": "Offering a study tip",
+      "stem": "I keep forgetting vocabulary terms for the Spanish exam. Any advice?",
+      "options": {
+        "A": "Try using flashcards with spaced repetition. That really helped me.",
+        "B": "Spanish exams include grammar and reading comprehension.",
+        "C": "I took Spanish in high school."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for study advice, so sharing a specific effective technique is the most helpful response."
+    },
+    {
+      "id": "q3",
+      "context": "Requesting a room change",
+      "stem": "My roommate is very noisy and I can't sleep. Can I request a room change?",
+      "options": {
+        "A": "I'm sorry to hear that. You can submit a room change request to housing services.",
+        "B": "Roommates can be difficult sometimes.",
+        "C": "I get along well with my roommate."
+      },
+      "correct": "A",
+      "explanation": "The speaker is having a housing issue and asking about resolution, so acknowledging their problem and explaining the process is helpful."
+    },
+    {
+      "id": "q4",
+      "context": "Declining a suggestion politely",
+      "stem": "You should apply for the teaching assistant position. You'd be perfect for it!",
+      "options": {
+        "A": "Thanks for the encouragement, but I'm already committed to the lab assistant role.",
+        "B": "Teaching assistant positions are very competitive.",
+        "C": "I applied for a position last semester."
+      },
+      "correct": "A",
+      "explanation": "The speaker is making a suggestion, so politely declining with gratitude and a valid reason is gracious."
+    },
+    {
+      "id": "q5",
+      "context": "Asking about printing services",
+      "stem": "How much does it cost to print in color at the library?",
+      "options": {
+        "A": "Color printing is 25 cents per page at the library kiosks.",
+        "B": "Printers need regular maintenance.",
+        "C": "I usually print my documents at home."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a specific cost, so providing the exact price is the most direct and helpful response."
+    },
+    {
+      "id": "q6",
+      "context": "Expressing sympathy",
+      "stem": "I found out I didn't qualify for the study abroad scholarship.",
+      "options": {
+        "A": "That's really disappointing. Don't give up — there are other funding options.",
+        "B": "Study abroad scholarships are very limited.",
+        "C": "I'm planning to study abroad next year too."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing disappointing news, so expressing empathy and offering hope for alternatives is supportive."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about ID card functions",
+      "stem": "Can I use my student ID to get into the gym, or do I need a separate membership?",
+      "options": {
+        "A": "Your student ID works as your gym access card. Just scan it at the entrance.",
+        "B": "The gym has new cardio equipment this semester.",
+        "C": "I go to the gym three times a week."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a specific function of their student ID, so providing a clear answer about usage is most helpful."
+    },
+    {
+      "id": "q8",
+      "context": "Suggesting a meetup",
+      "stem": "I haven't seen you in ages! We should catch up soon.",
+      "options": {
+        "A": "Definitely! Are you free this Saturday for coffee?",
+        "B": "I've been really busy with classes.",
+        "C": "Catching up takes too much time."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing a desire to reconnect, so enthusiastically agreeing and proposing a specific time is the natural response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I haven't received my financial aid award letter yet. When should I expect it?"
+    },
+    {
+      "role": "Friend",
+      "text": "I keep forgetting vocabulary terms for the Spanish exam. Any advice?"
+    },
+    {
+      "role": "Student",
+      "text": "My roommate is very noisy and I can't sleep. Can I request a room change?"
+    },
+    {
+      "role": "Friend",
+      "text": "You should apply for the teaching assistant position. You'd be perfect for it!"
+    },
+    {
+      "role": "Student",
+      "text": "How much does it cost to print in color at the library?"
+    },
+    {
+      "role": "Friend",
+      "text": "I found out I didn't qualify for the study abroad scholarship."
+    },
+    {
+      "role": "Student",
+      "text": "Can I use my student ID to get into the gym, or do I need a separate membership?"
+    },
+    {
+      "role": "Friend",
+      "text": "I haven't seen you in ages! We should catch up soon."
+    }
+  ]
+}

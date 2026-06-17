@@ -1,0 +1,38 @@
+{
+  "title": "Health Services Flu Shot Clinic",
+  "transcript": "Attention students and staff. Campus Health Services will be hosting a flu shot clinic on Monday, November 7th from 9 AM to 4 PM in the Student Health Center lobby. Flu shots are available at no cost for all currently enrolled students with a valid student ID. Staff and faculty can receive the vaccine for a fee of twenty dollars. No appointment is necessary, but you are encouraged to arrive early as supplies are limited. Please wear clothing that allows easy access to your upper arm. The entire process takes approximately ten minutes.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Who can receive a free flu shot?",
+      "options": [
+        "All students and staff",
+        "Only students with a valid student ID",
+        "Only faculty members",
+        "Students who have made an appointment"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement states flu shots are available at no cost for all currently enrolled students with a valid student ID."
+    },
+    {
+      "id": "q2",
+      "stem": "Why are students encouraged to arrive early?",
+      "options": [
+        "The clinic closes at noon",
+        "Supplies are limited",
+        "Appointments are required after 1 PM",
+        "The health center closes early on Mondays"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The announcement says students are encouraged to arrive early as supplies are limited, implying that vaccines may run out."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention students and staff. Campus Health Services will be hosting a flu shot clinic on Monday, November 7th from 9 AM to 4 PM in the Student Health Center lobby. Flu shots are available at no cost for all currently enrolled students with a valid student ID. Staff and faculty can receive the vaccine for a fee of twenty dollars. No appointment is necessary, but you are encouraged to arrive early as supplies are limited. Please wear clothing that allows easy access to your upper arm. The entire process takes approximately ten minutes."
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Library & Resources",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about library hours during break",
+      "stem": "Is the library open during spring break? I need a place to study.",
+      "options": {
+        "A": "Yes, but with reduced hours. It's open from 10 AM to 6 PM.",
+        "B": "Spring break is a week long.",
+        "C": "I'm going home for spring break."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about library hours during a holiday, so providing the specific schedule is the most helpful response."
+    },
+    {
+      "id": "q2",
+      "context": "Asking about borrowing limits",
+      "stem": "How many books can I check out at once with my student ID?",
+      "options": {
+        "A": "Undergraduate students can borrow up to 30 books at a time.",
+        "B": "Books can be renewed online if no one else needs them.",
+        "C": "I usually borrow e-books instead."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about borrowing limits, so providing the specific number directly answers their question."
+    },
+    {
+      "id": "q3",
+      "context": "Asking about interlibrary loans",
+      "stem": "What if the library doesn't have the book I need? Can you get it from another library?",
+      "options": {
+        "A": "Yes, we offer interlibrary loans. It usually takes about a week.",
+        "B": "Libraries share resources through a network.",
+        "C": "I found my book at a used bookstore."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about alternative access options, so explaining the interlibrary loan service and timeline is helpful."
+    },
+    {
+      "id": "q4",
+      "context": "Asking about scanning equipment",
+      "stem": "Are there scanners available in the library for digitizing documents?",
+      "options": {
+        "A": "Yes, there are scanners on the first floor near the reference desk.",
+        "B": "Digital copies are easier to organize.",
+        "C": "I use a scanning app on my phone."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about available equipment, so confirming availability and providing the location is helpful."
+    },
+    {
+      "id": "q5",
+      "context": "Expressing gratitude for library help",
+      "stem": "The research librarian was incredibly helpful with my thesis sources. I just wanted to say thanks.",
+      "options": {
+        "A": "That's wonderful to hear. I'll make sure the librarian gets your feedback.",
+        "B": "Research librarians have advanced degrees in library science.",
+        "C": "I should visit the research desk more often."
+      },
+      "correct": "A",
+      "explanation": "The speaker is giving positive feedback about library staff, so acknowledging and promising to share the appreciation is professional."
+    },
+    {
+      "id": "q6",
+      "context": "Asking about laptop rentals",
+      "stem": "Can I borrow a laptop from the library if mine is being repaired?",
+      "options": {
+        "A": "Yes, we have laptops available for 24-hour checkout at the circulation desk.",
+        "B": "Laptops are essential for college students.",
+        "C": "I bought my laptop during orientation week."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about temporary equipment access, so confirming availability and explaining the checkout process is helpful."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about quiet zone rules",
+      "stem": "Which floor of the library is the silent study area? I need complete quiet.",
+      "options": {
+        "A": "The fourth floor is designated as a silent study zone. No talking allowed.",
+        "B": "Quiet study areas are popular during exam week.",
+        "C": "I study best with background music."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about specific study environment locations, so providing the exact floor and its rules is the most useful response."
+    },
+    {
+      "id": "q8",
+      "context": "Warning about a due date",
+      "stem": "Just a heads up — the book you borrowed is due tomorrow.",
+      "options": {
+        "A": "Thanks for the reminder! I'll return it later today.",
+        "B": "Books can be renewed twice per semester.",
+        "C": "I returned my books last week."
+      },
+      "correct": "A",
+      "explanation": "The speaker is giving a friendly reminder, so expressing thanks and confirming the action you'll take is the appropriate response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Is the library open during spring break? I need a place to study."
+    },
+    {
+      "role": "Friend",
+      "text": "How many books can I check out at once with my student ID?"
+    },
+    {
+      "role": "Student",
+      "text": "What if the library doesn't have the book I need? Can you get it from another library?"
+    },
+    {
+      "role": "Friend",
+      "text": "Are there scanners available in the library for digitizing documents?"
+    },
+    {
+      "role": "Student",
+      "text": "The research librarian was incredibly helpful with my thesis sources. I just wanted to say thanks."
+    },
+    {
+      "role": "Friend",
+      "text": "Can I borrow a laptop from the library if mine is being repaired?"
+    },
+    {
+      "role": "Student",
+      "text": "Which floor of the library is the silent study area? I need complete quiet."
+    },
+    {
+      "role": "Friend",
+      "text": "Just a heads up — the book you borrowed is due tomorrow."
+    }
+  ]
+}

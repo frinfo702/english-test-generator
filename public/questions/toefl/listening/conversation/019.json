@@ -1,0 +1,86 @@
+{
+  "title": "Campus Health Center Visit",
+  "transcript": "Student: Excuse me, I'd like to make an appointment to see a doctor. I've been having headaches and trouble concentrating in class. Receptionist: I'm sorry to hear that. Are you a registered patient at the campus health center? Student: Yes, I came in for a checkup last semester. Receptionist: Great. Let me check the schedule. Dr. Kim has an opening tomorrow at 2 PM. Does that work for you? Student: I have a class at that time. Is there anything earlier? Receptionist: Let me see... We have a same-day walk-in clinic this afternoon from 1 to 4 PM. You can come in anytime and see the nurse practitioner. Student: That would be better. What do I need to bring? Receptionist: Just your student ID. The visit is covered by your student health fee, so there's no charge. Student: That's good to know. How long does the walk-in usually take? Receptionist: It depends, but typically about 30 to 45 minutes. I'd recommend coming right at 1 PM to avoid the longest wait. Student: I'll do that. Should I also bring my class schedule or any medical records? Receptionist: If you have any records from previous visits regarding headaches, bring those. Otherwise, just your ID is fine. Student: Thanks for the help. I'll be there at 1.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit the campus health center?",
+      "options": [
+        "To get a routine physical exam",
+        "To seek treatment for headaches and difficulty concentrating",
+        "To pick up a prescription refill",
+        "To ask about health insurance options"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student has been having headaches and trouble concentrating in class, so she wants to see a doctor."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the receptionist recommend to minimize waiting time?",
+      "options": [
+        "Schedule an appointment for the next day",
+        "Come right at 1 PM when the walk-in clinic opens",
+        "Go to an off-campus clinic instead",
+        "Wait until the end of the week"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The receptionist recommends coming right at 1 PM when the walk-in clinic opens to avoid the longest wait."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Excuse me, I'd like to make an appointment to see a doctor. I've been having headaches and trouble concentrating in class."
+    },
+    {
+      "role": "Receptionist",
+      "text": "I'm sorry to hear that. Are you a registered patient at the campus health center?"
+    },
+    {
+      "role": "Student",
+      "text": "Yes, I came in for a checkup last semester."
+    },
+    {
+      "role": "Receptionist",
+      "text": "Great. Let me check the schedule. Dr. Kim has an opening tomorrow at 2 PM. Does that work for you?"
+    },
+    {
+      "role": "Student",
+      "text": "I have a class at that time. Is there anything earlier?"
+    },
+    {
+      "role": "Receptionist",
+      "text": "Let me see... We have a same-day walk-in clinic this afternoon from 1 to 4 PM. You can come in anytime and see the nurse practitioner."
+    },
+    {
+      "role": "Student",
+      "text": "That would be better. What do I need to bring?"
+    },
+    {
+      "role": "Receptionist",
+      "text": "Just your student ID. The visit is covered by your student health fee, so there's no charge."
+    },
+    {
+      "role": "Student",
+      "text": "That's good to know. How long does the walk-in usually take?"
+    },
+    {
+      "role": "Receptionist",
+      "text": "It depends, but typically about 30 to 45 minutes. I'd recommend coming right at 1 PM to avoid the longest wait."
+    },
+    {
+      "role": "Student",
+      "text": "I'll do that. Should I also bring my class schedule or any medical records?"
+    },
+    {
+      "role": "Receptionist",
+      "text": "If you have any records from previous visits regarding headaches, bring those. Otherwise, just your ID is fine."
+    },
+    {
+      "role": "Student",
+      "text": "Thanks for the help. I'll be there at 1."
+    }
+  ]
+}

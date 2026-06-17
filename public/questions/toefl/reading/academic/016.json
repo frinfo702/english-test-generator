@@ -1,0 +1,72 @@
+{
+  "title": "The Development of Ancient Greek Democracy",
+  "passage": "The concept of democracy, which originated in ancient Athens around the fifth century BCE, represented a radical departure from the monarchies and oligarchies that dominated the ancient world. In the Athenian model, eligible citizens participated directly in legislative decision-making through an assembly that met regularly to debate and vote on matters of public concern.\n\nHowever, Athenian democracy was far from inclusive by modern standards. Only adult male citizens who had completed military training were permitted to participate. Women, slaves, and foreign residents were excluded entirely from political processes. Of Athens estimated population of approximately 250,000 people, only about 30,000 qualified as citizens with voting rights.\n\nDespite these limitations, Athenian democracy introduced several institutions that continue to influence modern governance. The practice of ostracism, where citizens could vote to exile a threatening political figure for ten years, demonstrates how ancient societies attempted to protect their political systems from concentrated power. Similarly, the use of randomly selected juries for legal cases established principles of civic participation that remain central to democratic legal systems today.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the main topic of the passage?",
+      "options": [
+        "A. A comparison of ancient and modern political systems",
+        "B. The origins and characteristics of Athenian democracy",
+        "C. The decline of monarchies in ancient Greece",
+        "D. The role of slavery in Athenian society"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage covers the origin, limitations, and lasting institutions of Athenian democracy."
+    },
+    {
+      "id": "q2",
+      "type": "negativeFactual",
+      "stem": "Which of the following groups was permitted to vote in Athenian democracy?",
+      "options": [
+        "A. Women over the age of twenty",
+        "B. Foreign residents of Athens",
+        "C. Adult male citizens with military training",
+        "D. All free residents of the city"
+      ],
+      "correctIndex": 2,
+      "explanation": "Only 'adult male citizens who had completed military training' were allowed to participate."
+    },
+    {
+      "id": "q3",
+      "type": "vocabulary",
+      "stem": "The word 'ostracism' in paragraph 3 is closest in meaning to:",
+      "options": [
+        "A. imprisonment",
+        "B. official exclusion",
+        "C. public recognition",
+        "D. financial penalty"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ostracism was a practice where citizens could vote to exile a threatening figure, meaning official exclusion from the city."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about the population of ancient Athens?",
+      "options": [
+        "A. It was the largest of all Greek city-states",
+        "B. Less than fifteen percent of residents had voting rights",
+        "C. Most citizens participated regularly in the assembly",
+        "D. The population grew steadily during the fifth century"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "With 30,000 citizens out of 250,000 people, only about 12 percent of the population could vote."
+    },
+    {
+      "id": "q5",
+      "type": "insertSentence",
+      "stem": "Where would the following sentence best fit in the passage? 'This exclusion extended to all aspects of public life, not just voting.'",
+      "options": [
+        "A. At the end of paragraph 1",
+        "B. After the first sentence of paragraph 2",
+        "C. After the last sentence of paragraph 2",
+        "D. At the beginning of paragraph 3"
+      ],
+      "correctIndex": 2,
+      "explanation": "The sentence elaborates on the exclusion described in paragraph 2 and logically follows the enumeration of excluded groups."
+    }
+  ]
+}

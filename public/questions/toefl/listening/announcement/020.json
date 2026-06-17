@@ -1,0 +1,38 @@
+{
+  "title": "Orientation Week Schedule Change",
+  "transcript": "Attention incoming students. Please note that the orientation schedule for next week has been updated. The campus tour originally scheduled for Tuesday morning has been moved to Wednesday at 10 AM due to a special guest speaker event. All other orientation activities remain at their originally scheduled times. Updated schedules are available at the orientation welcome desk in the Student Center lobby and on the university orientation website. We recommend that all students check the website for the most current information before attending any events.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What change was made to the orientation schedule?",
+      "options": [
+        "The entire orientation was postponed",
+        "The campus tour was moved from Tuesday to Wednesday",
+        "The guest speaker event was canceled",
+        "The welcome desk hours were reduced"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The campus tour was moved from Tuesday morning to Wednesday at 10 AM."
+    },
+    {
+      "id": "q2",
+      "stem": "Why was the campus tour rescheduled?",
+      "options": [
+        "Due to bad weather forecast",
+        "Due to a special guest speaker event",
+        "Because not enough students registered",
+        "Because the tour guide was unavailable"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The announcement implies the tour was rescheduled because a special guest speaker event was added to Tuesday's schedule."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention incoming students. Please note that the orientation schedule for next week has been updated. The campus tour originally scheduled for Tuesday morning has been moved to Wednesday at 10 AM due to a special guest speaker event. All other orientation activities remain at their originally scheduled times. Updated schedules are available at the orientation welcome desk in the Student Center lobby and on the university orientation website. We recommend that all students check the website for the most current information before attending any events."
+    }
+  ]
+}

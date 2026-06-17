@@ -1,0 +1,68 @@
+{
+  "title": "The Solar System and Planetary Formation",
+  "transcript": "Today we will explore our solar system and how it formed approximately four point six billion years ago. The leading scientific explanation is the nebular hypothesis, which proposes that the solar system formed from a massive cloud of gas and dust called a solar nebula. As this cloud collapsed under its own gravity, it began to spin and flatten into a disk. Most of the material accumulated at the center to form the Sun, which contains over ninety-nine percent of the total mass of the solar system. The remaining material in the disk gradually clumped together through a process called accretion to form planets, moons, asteroids, and comets. The inner planets—Mercury, Venus, Earth, and Mars—are relatively small and rocky because the solar wind from the young Sun blew away lighter gases from the inner region. The outer planets—Jupiter, Saturn, Uranus, and Neptune—are much larger and composed primarily of gas and ice. These are called gas giants and ice giants. Interestingly, recent discoveries have identified thousands of exoplanets orbiting other stars, suggesting that planetary systems are common throughout the galaxy. The study of these distant systems helps refine our understanding of how our own solar system formed and evolved.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The characteristics of gas giants",
+        "The formation of the solar system according to the nebular hypothesis",
+        "The discovery of exoplanets around other stars",
+        "The differences between inner and outer planets"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture explains the nebular hypothesis and how the solar system formed from a cloud of gas and dust."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, why are the inner planets rocky?",
+      "options": [
+        "They formed from ice and gas",
+        "The solar wind blew away lighter gases from the inner region",
+        "They are closer to asteroids that supplied rock",
+        "Their gravity attracted only heavy materials"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The solar wind from the young Sun blew away lighter gases from the inner region, leaving rocky materials to form the inner planets."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the professor imply about the study of exoplanets?",
+      "options": [
+        "It has no relevance to understanding our solar system",
+        "It helps refine our understanding of planetary formation",
+        "It proves the nebular hypothesis is incorrect",
+        "It only focuses on gas giants"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor states that studying distant planetary systems helps refine our understanding of how our own solar system formed."
+    },
+    {
+      "id": "q4",
+      "stem": "What percentage of the solar system's mass does the Sun contain?",
+      "options": [
+        "About fifty percent",
+        "Approximately seventy-five percent",
+        "Over ninety-nine percent",
+        "Exactly one hundred percent"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The professor states the Sun contains over ninety-nine percent of the total mass of the solar system."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will explore our solar system and how it formed approximately four point six billion years ago. The leading scientific explanation is the nebular hypothesis, which proposes that the solar system formed from a massive cloud of gas and dust called a solar nebula. As this cloud collapsed under its own gravity, it began to spin and flatten into a disk. Most of the material accumulated at the center to form the Sun, which contains over ninety-nine percent of the total mass of the solar system. The remaining material in the disk gradually clumped together through a process called accretion to form planets, moons, asteroids, and comets."
+    },
+    {
+      "role": "Lecturer",
+      "text": "The inner planets—Mercury, Venus, Earth, and Mars—are relatively small and rocky because the solar wind from the young Sun blew away lighter gases from the inner region. The outer planets—Jupiter, Saturn, Uranus, and Neptune—are much larger and composed primarily of gas and ice. These are called gas giants and ice giants. Interestingly, recent discoveries have identified thousands of exoplanets orbiting other stars, suggesting that planetary systems are common throughout the galaxy. The study of these distant systems helps refine our understanding of how our own solar system formed and evolved."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "paragraph": "The water cycle describes the continuous movement of water throughout our entire planetary system. Water evaporates from oceans and large lakes, rises into the atmosphere, and eventually condenses into thick cloud formations overhead. Precipitation returns water to the surface, where it flows across the land or slowly filters underground through porous rock below. This endless circulation is essential for sustaining both aquatic life and terrestrial ecosystems across the entire planet.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "con",
+      "answer": "continuous"
+    },
+    {
+      "index": 1,
+      "hint": "pla",
+      "answer": "planetary"
+    },
+    {
+      "index": 2,
+      "hint": "eva",
+      "answer": "evaporates"
+    },
+    {
+      "index": 3,
+      "hint": "at",
+      "answer": "atmosphere"
+    },
+    {
+      "index": 4,
+      "hint": "Pre",
+      "answer": "Precipitation"
+    },
+    {
+      "index": 5,
+      "hint": "fil",
+      "answer": "filters"
+    },
+    {
+      "index": 6,
+      "hint": "cir",
+      "answer": "circulation"
+    },
+    {
+      "index": 7,
+      "hint": "sus",
+      "answer": "sustaining"
+    },
+    {
+      "index": 8,
+      "hint": "ter",
+      "answer": "terrestrial"
+    },
+    {
+      "index": 9,
+      "hint": "pla",
+      "answer": "planet"
+    }
+  ]
+}

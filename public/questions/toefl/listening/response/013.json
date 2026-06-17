@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Daily Encounters",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for the time",
+      "stem": "Excuse me, do you have the time? My phone battery died.",
+      "options": {
+        "A": "Sure, it's quarter past two.",
+        "B": "You should always carry a watch.",
+        "C": "My phone battery lasts all day."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for the current time, so providing it directly is the most appropriate response."
+    },
+    {
+      "id": "q2",
+      "context": "Apologizing for spilling something",
+      "stem": "Oh no, I'm so sorry! I spilled my coffee on your notes.",
+      "options": {
+        "A": "It's okay, accidents happen. I have a digital copy anyway.",
+        "B": "You should be more careful with hot drinks.",
+        "C": "Coffee stains are very hard to remove."
+      },
+      "correct": "A",
+      "explanation": "The speaker is apologizing for a small accident, so reassuring them and minimizing the impact is gracious."
+    },
+    {
+      "id": "q3",
+      "context": "Making small talk about weather",
+      "stem": "It's been raining nonstop for three days. I'm tired of it.",
+      "options": {
+        "A": "I know what you mean. I wish spring weather would arrive already.",
+        "B": "Rainfall is measured in millimeters.",
+        "C": "I always carry an umbrella."
+      },
+      "correct": "A",
+      "explanation": "The speaker is complaining about the weather, so showing agreement and shared sentiment builds rapport."
+    },
+    {
+      "id": "q4",
+      "context": "Inquiring about lost and found",
+      "stem": "I lost my student ID somewhere on campus. Is there a lost and found office?",
+      "options": {
+        "A": "Yes, check at the campus security office in the student center.",
+        "B": "Student IDs are required for library access.",
+        "C": "I found a wallet yesterday."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about where to find lost items, so providing the location of the lost and found is directly helpful."
+    },
+    {
+      "id": "q5",
+      "context": "Responding to good news",
+      "stem": "My advisor approved my research proposal! I can finally start collecting data.",
+      "options": {
+        "A": "That's wonderful news! Your proposal was very well written.",
+        "B": "Research proposals require ethics board approval too.",
+        "C": "Data collection can take several months."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing exciting academic news, so sharing their enthusiasm and complimenting their work is encouraging."
+    },
+    {
+      "id": "q6",
+      "context": "Asking about a package delivery",
+      "stem": "I'm expecting a package. Where do dorm residents usually pick up mail?",
+      "options": {
+        "A": "Packages are delivered to the front desk of your dorm building.",
+        "B": "Mail delivery times vary by location.",
+        "C": "I ordered something online too."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about mail pickup procedures, so providing the specific location is helpful."
+    },
+    {
+      "id": "q7",
+      "context": "Expressing appreciation for a favor",
+      "stem": "I can't thank you enough for taking notes for me while I was sick.",
+      "options": {
+        "A": "Of course! I hope you're feeling better now.",
+        "B": "Missing class can put you behind.",
+        "C": "I take notes for all my classes."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing deep gratitude, so acknowledging the thanks warmly and expressing concern for their health is caring."
+    },
+    {
+      "id": "q8",
+      "context": "Asking about a bus route",
+      "stem": "Does the campus shuttle go to the train station, or do I need to take the city bus?",
+      "options": {
+        "A": "The campus shuttle stops at the train station every hour on the hour.",
+        "B": "Train stations are usually located downtown.",
+        "C": "I prefer driving to taking public transportation."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about transportation options, so providing clear information about the shuttle service is directly useful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Excuse me, do you have the time? My phone battery died."
+    },
+    {
+      "role": "Friend",
+      "text": "Oh no, I'm so sorry! I spilled my coffee on your notes."
+    },
+    {
+      "role": "Student",
+      "text": "It's been raining nonstop for three days. I'm tired of it."
+    },
+    {
+      "role": "Friend",
+      "text": "I lost my student ID somewhere on campus. Is there a lost and found office?"
+    },
+    {
+      "role": "Student",
+      "text": "My advisor approved my research proposal! I can finally start collecting data."
+    },
+    {
+      "role": "Friend",
+      "text": "I'm expecting a package. Where do dorm residents usually pick up mail?"
+    },
+    {
+      "role": "Student",
+      "text": "I can't thank you enough for taking notes for me while I was sick."
+    },
+    {
+      "role": "Friend",
+      "text": "Does the campus shuttle go to the train station, or do I need to take the city bus?"
+    }
+  ]
+}

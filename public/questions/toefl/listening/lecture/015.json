@@ -1,0 +1,68 @@
+{
+  "title": "Climate Change and Global Warming",
+  "transcript": "Today we will discuss climate change and the scientific evidence behind global warming. The Earth's climate has naturally fluctuated throughout its history due to factors like volcanic activity and variations in solar radiation. However, the current warming trend is unprecedented in its speed and is primarily caused by human activities. Since the Industrial Revolution, the burning of fossil fuels such as coal, oil, and natural gas has released enormous amounts of greenhouse gases, especially carbon dioxide and methane, into the atmosphere. These gases trap heat from the sun, creating what is known as the greenhouse effect. Without this effect, Earth would be too cold to support life, but the excessive accumulation of greenhouse gases is causing global temperatures to rise at an alarming rate. The consequences include melting polar ice caps, rising sea levels, more frequent and intense extreme weather events, and disruptions to ecosystems. The Intergovernmental Panel on Climate Change, or IPCC, has concluded that urgent action is needed to limit global warming to one point five degrees Celsius above pre-industrial levels. Solutions involve transitioning to renewable energy sources like solar and wind power, improving energy efficiency, and protecting forests that absorb carbon dioxide. Climate change is not just an environmental issue; it has profound implications for global economies, public health, and social stability.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The history of the Industrial Revolution",
+        "The causes and consequences of climate change",
+        "The difference between weather and climate",
+        "The work of the Intergovernmental Panel on Climate Change"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture discusses the causes of global warming, its consequences, and potential solutions."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, what is the primary cause of the current warming trend?",
+      "options": [
+        "Volcanic activity and solar radiation changes",
+        "Human activities, especially burning fossil fuels",
+        "Natural climate fluctuations",
+        "Deforestation in tropical regions"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The professor states the current warming trend is primarily caused by human activities, particularly burning fossil fuels."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the professor imply about the greenhouse effect?",
+      "options": [
+        "It is entirely harmful to the planet",
+        "It is a natural process that has become excessive",
+        "It was discovered by the IPCC",
+        "It only affects polar regions"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor says the greenhouse effect is natural and necessary for life, but excessive accumulation of gases is causing problems."
+    },
+    {
+      "id": "q4",
+      "stem": "What does IPCC stand for?",
+      "options": [
+        "International Panel on Climate Control",
+        "Intergovernmental Panel on Climate Change",
+        "Interagency Planning Commission on Climate",
+        "Institute for Pollution and Climate Control"
+      ],
+      "correctIndex": 1,
+      "type": "vocabulary",
+      "explanation": "IPCC stands for Intergovernmental Panel on Climate Change, as stated in the lecture."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will discuss climate change and the scientific evidence behind global warming. The Earth's climate has naturally fluctuated throughout its history due to factors like volcanic activity and variations in solar radiation. However, the current warming trend is unprecedented in its speed and is primarily caused by human activities. Since the Industrial Revolution, the burning of fossil fuels such as coal, oil, and natural gas has released enormous amounts of greenhouse gases, especially carbon dioxide and methane, into the atmosphere. These gases trap heat from the sun, creating what is known as the greenhouse effect. Without this effect, Earth would be too cold to support life, but the excessive accumulation of greenhouse gases is causing global temperatures to rise at an alarming rate."
+    },
+    {
+      "role": "Lecturer",
+      "text": "The consequences include melting polar ice caps, rising sea levels, more frequent and intense extreme weather events, and disruptions to ecosystems. The Intergovernmental Panel on Climate Change, or IPCC, has concluded that urgent action is needed to limit global warming to one point five degrees Celsius above pre-industrial levels. Solutions involve transitioning to renewable energy sources like solar and wind power, improving energy efficiency, and protecting forests that absorb carbon dioxide. Climate change is not just an environmental issue; it has profound implications for global economies, public health, and social stability."
+    }
+  ]
+}

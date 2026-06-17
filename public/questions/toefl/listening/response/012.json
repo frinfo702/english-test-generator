@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Academic Situations",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about registration",
+      "stem": "I'm trying to register for Psychology 201, but the system says it's full.",
+      "options": {
+        "A": "You can join the waitlist and check for openings during the first week.",
+        "B": "Psychology courses are very popular this semester.",
+        "C": "I took Psychology 101 last year."
+      },
+      "correct": "A",
+      "explanation": "The speaker is reporting a problem with course registration, so offering the waitlist as a solution is the most helpful response."
+    },
+    {
+      "id": "q2",
+      "context": "Responding to an invitation",
+      "stem": "We're ordering takeout for the study group tonight. Do you want anything?",
+      "options": {
+        "A": "Yes, I'll take a chicken wrap and a soda. I'll pay you back.",
+        "B": "Studying in groups can be very effective.",
+        "C": "I usually cook my own dinner."
+      },
+      "correct": "A",
+      "explanation": "The speaker is offering to include you in a food order, so specifying what you'd like and offering to pay is the natural response."
+    },
+    {
+      "id": "q3",
+      "context": "Seeking permission to record a lecture",
+      "stem": "Professor, would it be alright if I recorded today's lecture? I'm an auditory learner.",
+      "options": {
+        "A": "As long as it's for personal use only, that's fine with me.",
+        "B": "Lectures are already posted online every week.",
+        "C": "You should take notes instead."
+      },
+      "correct": "A",
+      "explanation": "The speaker is politely asking for permission to record, so granting it with reasonable conditions is appropriate."
+    },
+    {
+      "id": "q4",
+      "context": "Complaining about group work",
+      "stem": "I'm frustrated because my group members haven't done their part of the project.",
+      "options": {
+        "A": "I understand. Maybe you can talk to the professor about reassigning groups?",
+        "B": "Group projects teach collaboration skills.",
+        "C": "I did my part on time."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing frustration about unequal group participation, so sympathizing and suggesting a constructive action is supportive."
+    },
+    {
+      "id": "q5",
+      "context": "Asking about study abroad",
+      "stem": "I'm considering the exchange program in Japan. Do you know anyone who's done it?",
+      "options": {
+        "A": "Yes, my roommate went last year and loved it. I can connect you two.",
+        "B": "Study abroad programs require a minimum GPA.",
+        "C": "Japan is very expensive for students."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for firsthand experience about a program, so sharing a relevant connection is directly helpful."
+    },
+    {
+      "id": "q6",
+      "context": "Returning a borrowed item",
+      "stem": "Thanks for letting me borrow your notes. Here they are back — I made some extra annotations too.",
+      "options": {
+        "A": "Oh nice, I'll take a look at those annotations later. Thanks!",
+        "B": "I hope my handwriting wasn't too messy.",
+        "C": "Notes are important for exam review."
+      },
+      "correct": "A",
+      "explanation": "The speaker is returning borrowed notes with added value, so acknowledging the gesture and showing appreciation is polite."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about graduation requirements",
+      "stem": "Do I need to complete an internship to graduate, or are there other options?",
+      "options": {
+        "A": "You can choose between an internship or a capstone research project.",
+        "B": "Internships provide valuable work experience.",
+        "C": "Graduation requirements are listed in the catalog."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about specific graduation requirements, so providing the alternatives available directly answers their question."
+    },
+    {
+      "id": "q8",
+      "context": "Expressing excitement about a professor",
+      "stem": "I just signed up for Dr. Martinez's class. I've heard she's an amazing lecturer!",
+      "options": {
+        "A": "She really is! Her classes are challenging but very rewarding.",
+        "B": "Dr. Martinez teaches several different courses.",
+        "C": "You should buy the textbook before the first class."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing excitement about a professor, so sharing in their enthusiasm and providing validation is the natural response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I'm trying to register for Psychology 201, but the system says it's full."
+    },
+    {
+      "role": "Friend",
+      "text": "We're ordering takeout for the study group tonight. Do you want anything?"
+    },
+    {
+      "role": "Student",
+      "text": "Professor, would it be alright if I recorded today's lecture? I'm an auditory learner."
+    },
+    {
+      "role": "Friend",
+      "text": "I'm frustrated because my group members haven't done their part of the project."
+    },
+    {
+      "role": "Student",
+      "text": "I'm considering the exchange program in Japan. Do you know anyone who's done it?"
+    },
+    {
+      "role": "Friend",
+      "text": "Thanks for letting me borrow your notes. Here they are back — I made some extra annotations too."
+    },
+    {
+      "role": "Student",
+      "text": "Do I need to complete an internship to graduate, or are there other options?"
+    },
+    {
+      "role": "Friend",
+      "text": "I just signed up for Dr. Martinez's class. I've heard she's an amazing lecturer!"
+    }
+  ]
+}

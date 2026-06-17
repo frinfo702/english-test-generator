@@ -1,0 +1,116 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "notice",
+      "content": "Important Update: Visitor Parking Policy\n\nEffective March 1, all visitors must register their vehicles at the security kiosk before parking in the main lot. A valid driver's license and proof of insurance are required upon registration. Designated visitor spaces on Level 2 will now be limited to four hours maximum. Visitors who exceed the time limit may receive a citation.\n\nContractors and delivery drivers should continue using the loading bay on the east side of the building. Annual parking permits are no longer available for purchase at the front desk; all permit applications must now be submitted through the online portal.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main change being announced in this notice?",
+          "options": [
+            "A. The parking lot will be closed for construction",
+            "B. Visitors must now register their vehicles at the security kiosk",
+            "C. All parking permits are being discontinued",
+            "D. Contractor parking has been moved to the main lot"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The notice states that 'all visitors must register their vehicles at the security kiosk before parking in the main lot,' which is the primary policy change."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about applying for an annual parking permit?",
+          "options": [
+            "A. It can now only be done through the online portal",
+            "B. It is no longer possible under the new policy",
+            "C. It requires approval from the building manager",
+            "D. It can still be done at the front desk until March"
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "The notice states annual permits are 'no longer available for purchase at the front desk' and 'must now be submitted through the online portal,' implying that in-person applications are no longer accepted."
+        },
+        {
+          "id": "q3",
+          "stem": "The word 'citation' in the notice most likely means a:",
+          "options": [
+            "A. written warning from security",
+            "B. note of appreciation for compliance",
+            "C. formal penalty for violating the rule",
+            "D. request to extend parking time"
+          ],
+          "correctIndex": 2,
+          "type": "vocabulary",
+          "explanation": "In the context of exceeding the time limit, 'citation' refers to a formal notice of a violation that typically carries a fine or penalty."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "text message",
+      "content": "Hi Emma — are you still coming to the study session this afternoon?\n\nYes, I'll be there around 3. Do you still have the notes from Tuesday's lecture?\n\nI do, but I only have the first half — my recorder ran out of battery halfway through.\n\nNo problem, I think I have the rest. I can share my screen during the session so we can fill in the gaps together.\n\nThat would be great. See you at 3!",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "What is the main purpose of this text exchange?",
+          "options": [
+            "A. To cancel a study session",
+            "B. To arrange how to combine lecture notes",
+            "C. To complain about a broken recorder",
+            "D. To ask for a copy of the assignment"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The conversation focuses on confirming attendance and working together to combine incomplete lecture notes into a complete set."
+        },
+        {
+          "id": "q5",
+          "stem": "What does the second speaker imply about her notes?",
+          "options": [
+            "A. They are more detailed than the first speaker's notes",
+            "B. They were lost due to a technical issue",
+            "C. They contain material the first speaker is missing",
+            "D. They need to be rewritten before sharing"
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The second speaker says 'I have the rest' of the notes, indicating she can provide the portions the first speaker is missing due to the recorder battery issue."
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "textType": "advertisement",
+      "content": "Need a workspace that works around your schedule?\n\nJoin MetroDesk — the city's most flexible co-working space. Open 24/7 with secure keycard access, high-speed fiber internet, and complimentary coffee.\n\nPlans start at $99/month for hot-desking access. Private offices available from $399/month. All members receive two hours of free meeting room booking per week.\n\nFirst week free — no contract required. Cancel anytime.\n\nVisit www.metrodesk.example.com or stop by our location on King Street for a tour.",
+      "questions": [
+        {
+          "id": "q6",
+          "stem": "What is the primary selling point of MetroDesk being emphasized in the advertisement?",
+          "options": [
+            "A. Its affordable private office rates",
+            "B. Its central downtown location",
+            "C. Its adaptability to different schedules",
+            "D. Its complimentary refreshment options"
+          ],
+          "correctIndex": 2,
+          "type": "purpose",
+          "explanation": "The ad opens with 'a workspace that works around your schedule' and highlights 24/7 access, no contract, and flexible plans — all pointing to schedule adaptability as the core selling point."
+        },
+        {
+          "id": "q7",
+          "stem": "What can be inferred about the meeting room booking policy?",
+          "options": [
+            "A. Meeting rooms require an additional membership fee",
+            "B. Members can book meeting rooms without extra charges up to a limit",
+            "C. Meeting rooms are only available during business hours",
+            "D. Hot-desk members cannot use meeting rooms"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The ad states 'All members receive two hours of free meeting room booking per week,' implying that the first two hours are included at no extra cost, beyond which additional charges may apply."
+        }
+      ]
+    }
+  ]
+}

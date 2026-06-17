@@ -1,0 +1,71 @@
+{
+  "title": "The Science of Language Acquisition",
+  "passage": "Language acquisition in humans follows a remarkably consistent developmental trajectory regardless of culture or linguistic environment. Infants begin by producing cooing sounds around two months, progress to babbling at approximately six months, and typically speak their first recognizable words between ten and fourteen months. By age three, most children have acquired vocabularies of several hundred words and can construct simple sentences.\n\nLinguist Noam Chomsky proposed that humans possess an innate language faculty, which he termed the universal grammar hypothesis. According to this view, the human brain is pre-wired with fundamental grammatical principles that allow children to rapidly acquire language from limited exposure. This theory helps explain why children learn language so effortlessly compared to adults and why all human languages share certain structural commonalities, such as distinctions between nouns and verbs.\n\nAn alternative perspective, championed by cognitive linguists, emphasizes the role of general learning mechanisms rather than specialized language modules. From this viewpoint, language acquisition emerges from more fundamental cognitive abilities, including pattern recognition, statistical learning, and social cognition. Children track statistical regularities in speech, infer meaning from social context, and generalize grammatical patterns through experience rather than innate knowledge.\n\nBoth perspectives have generated extensive research and debate. Neuroimaging studies have identified brain regions specialized for language processing, supporting the nativist view, while computational models demonstrating language learning from input alone lend credibility to the emergentist approach.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of the passage?",
+      "options": [
+        "A. To argue that Chomsky's theory is correct",
+        "B. To describe different theories of how children acquire language",
+        "C. To explain why adults struggle to learn new languages",
+        "D. To compare language acquisition across different cultures"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage presents developmental stages and contrasts the universal grammar and emergentist perspectives on language acquisition."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to the passage, when do infants typically speak their first words?",
+      "options": [
+        "A. Around two months of age",
+        "B. At approximately six months",
+        "C. Between ten and fourteen months",
+        "D. At around three years of age"
+      ],
+      "correctIndex": 2,
+      "explanation": "Infants 'typically speak their first recognizable words between ten and fourteen months.'"
+    },
+    {
+      "id": "q3",
+      "type": "vocabulary",
+      "stem": "The word 'innate' in paragraph 2 is closest in meaning to:",
+      "options": [
+        "A. learned through experience",
+        "B. present from birth",
+        "C. culturally determined",
+        "D. gradually developed"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Innate' means inborn or existing naturally from birth, not acquired through learning."
+    },
+    {
+      "id": "q4",
+      "type": "paragraphRelation",
+      "stem": "How does paragraph 3 relate to paragraph 2?",
+      "options": [
+        "A. It supports the universal grammar hypothesis with additional evidence",
+        "B. It presents an alternative viewpoint that contrasts with Chomsky's theory",
+        "C. It provides historical context for the development of linguistic research",
+        "D. It summarizes the weaknesses of both perspectives"
+      ],
+      "correctIndex": 1,
+      "explanation": "Paragraph 3 introduces the emergentist perspective, which is presented as 'an alternative perspective' to Chomsky's universal grammar, emphasizing general learning mechanisms instead."
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What can be inferred about computational models of language learning?",
+      "options": [
+        "A. They completely disprove the universal grammar hypothesis",
+        "B. They provide support for the emergentist approach to language acquisition",
+        "C. They have only been applied to adult language learning",
+        "D. They are considered unreliable by most linguists"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that 'computational models demonstrating language learning from input alone lend credibility to the emergentist approach.'"
+    }
+  ]
+}

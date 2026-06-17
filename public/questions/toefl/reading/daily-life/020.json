@@ -1,0 +1,116 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "content": "From: Career Services\nTo: Senior Class\nSubject: Spring Career Fair — Register Now!\n\nDear Seniors,\n\nThe Spring Career Fair will be held on March 25 from 10:00 AM to 4:00 PM in the Student Union Ballroom. Over 50 employers from various industries will be in attendance.\n\nRegistration is required. Please sign up through the Career Services portal by March 20 to receive a personalized schedule. Bring at least 10 copies of your resume and prepare a brief introduction about your skills and career goals.\n\nProfessional attire is required. First 100 registered students will receive a free professional headshot.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the email asking students to do?",
+          "options": [
+            "A. Submit their resumes for review",
+            "B. Register for an upcoming career fair",
+            "C. Schedule individual meetings with employers",
+            "D. Prepare a presentation about their career goals"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The email announces the career fair and instructs students to 'sign up through the Career Services portal' by March 20."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about the registration deadline?",
+          "options": [
+            "A. Students can register at the door on the day of the event",
+            "B. Registering by March 20 provides additional benefits",
+            "C. Late registrations are accepted with a fee",
+            "D. Only seniors who register early can attend"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "Registration by March 20 is linked to receiving 'a personalized schedule' and being among the first 100 to get a free headshot, suggesting benefits for early registration."
+        },
+        {
+          "id": "q3",
+          "stem": "How many copies of their resume are students advised to bring?",
+          "options": [
+            "A. At least 5 copies",
+            "B. At least 10 copies",
+            "C. At least 15 copies",
+            "D. At least 20 copies"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The email advises students to 'Bring at least 10 copies of your resume.'"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "schedule",
+      "content": "City Marathon — Race Day Schedule\n\nSunday, October 12\n\n6:00 AM — Runners' check-in opens (Main Square)\n6:30 AM — Bag drop closes\n7:00 AM — Wheelchair race starts\n7:15 AM — Full marathon (26.2 miles) starts\n7:30 AM — Half marathon (13.1 miles) starts\n8:00 AM — 5K fun run starts\n9:30 AM — Water stations close for full marathon\n11:00 AM — Award ceremony begins\n1:00 PM — Course officially closes\n\nNote: Road closures begin at 5:30 AM and are expected to lift by 2:00 PM.",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "How much later does the half marathon start compared to the full marathon?",
+          "options": [
+            "A. 15 minutes",
+            "B. 30 minutes",
+            "C. 45 minutes",
+            "D. 60 minutes"
+          ],
+          "correctIndex": 0,
+          "type": "factual",
+          "explanation": "The full marathon starts at 7:15 AM and the half marathon starts at 7:30 AM — a difference of 15 minutes."
+        },
+        {
+          "id": "q5",
+          "stem": "What can be inferred about runners who have not finished the marathon by 1:00 PM?",
+          "options": [
+            "A. They will receive a medal regardless",
+            "B. They must move to the sidewalk and follow traffic rules",
+            "C. They will be redirected to the shorter course",
+            "D. They can continue but will not have water station support"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "Since the course officially closes at 1:00 PM and road closures lift by 2:00 PM, runners still on the course would need to use pedestrian routes."
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "textType": "notice",
+      "content": "Important: Annual Fire Drill\n\nOn Thursday, November 14 at 10:00 AM, we will conduct our annual building-wide fire drill. When the alarm sounds, please do the following:\n\n1. Immediately stop what you are doing.\n2. Close any open windows and doors behind you.\n3. Walk — do not run — to the nearest emergency exit.\n4. Proceed to the designated assembly area in the north parking lot.\n5. Wait for further instructions from the safety warden.\n\nDo not use elevators. Do not re-enter the building until the all-clear signal is given.\n\nThe drill is expected to last approximately 15 minutes.",
+      "questions": [
+        {
+          "id": "q6",
+          "stem": "What is the primary reason for this notice?",
+          "options": [
+            "A. To report a fire incident that occurred",
+            "B. To inform occupants about an upcoming safety exercise",
+            "C. To announce new fire safety equipment installation",
+            "D. To update the building's emergency evacuation plan"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The notice informs building occupants about the 'annual building-wide fire drill' on a specific date and provides evacuation instructions."
+        },
+        {
+          "id": "q7",
+          "stem": "The instruction 'do not re-enter the building until the all-clear signal is given' suggests that:",
+          "options": [
+            "A. the alarm will continue until everyone has left the building",
+            "B. a specific signal will indicate when it is safe to return",
+            "C. the drill will end automatically after 15 minutes",
+            "D. the safety warden will escort everyone back inside"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The phrase 'all-clear signal' implies there is a designated signal that occupants must wait for before re-entering."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "title": "Career Counseling Session",
+  "transcript": "Student: Hi, I have an appointment with Dr. Patel for career counseling. I'm trying to decide between pursuing graduate school and looking for a job after graduation. Advisor: Welcome, come in. That's a big decision. Let's talk about your options. What is your major? Student: I'm majoring in environmental science with a minor in economics. Advisor: That's a great combination. With that background, you have strong prospects both ways. What interests you about graduate school? Student: I really enjoyed my research methods class, and my professor suggested I consider a master's degree. But I'm also worried about student debt. Advisor: That's understandable. Have you looked into funded master's programs? Many offer teaching or research assistantships that cover tuition and provide a stipend. Student: I didn't know that. I thought all graduate programs were expensive. Advisor: Not necessarily. For environmental policy, there are several well-funded programs. Meanwhile, if you want to work first, you could look into environmental consulting firms or government agencies. Many offer tuition reimbursement for employees who later pursue a master's. Student: That's a good point. Would I be at a disadvantage if I worked for a few years first? Advisor: Not at all. Work experience can actually strengthen your graduate school application. It shows maturity and practical knowledge. Student: I think I'll explore both options and attend the career fair next week to see what's available. Advisor: That's a smart approach. Let's meet again after the fair to discuss what you find.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit Dr. Patel?",
+      "options": [
+        "To discuss a grade dispute",
+        "To get advice on choosing between graduate school and employment",
+        "To change her academic major",
+        "To apply for an internship"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student is trying to decide between graduate school and finding a job, so she visits the career counselor for guidance."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the advisor say about work experience before graduate school?",
+      "options": [
+        "It can hurt the student's chances of admission",
+        "It makes no difference to applications",
+        "It can actually strengthen a graduate school application",
+        "It is only beneficial for business school"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The advisor explains that work experience can strengthen a graduate school application by showing maturity and practical knowledge."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi, I have an appointment with Dr. Patel for career counseling. I'm trying to decide between pursuing graduate school and looking for a job after graduation."
+    },
+    {
+      "role": "Advisor",
+      "text": "Welcome, come in. That's a big decision. Let's talk about your options. What is your major?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm majoring in environmental science with a minor in economics."
+    },
+    {
+      "role": "Advisor",
+      "text": "That's a great combination. With that background, you have strong prospects both ways. What interests you about graduate school?"
+    },
+    {
+      "role": "Student",
+      "text": "I really enjoyed my research methods class, and my professor suggested I consider a master's degree. But I'm also worried about student debt."
+    },
+    {
+      "role": "Advisor",
+      "text": "That's understandable. Have you looked into funded master's programs? Many offer teaching or research assistantships that cover tuition and provide a stipend."
+    },
+    {
+      "role": "Student",
+      "text": "I didn't know that. I thought all graduate programs were expensive."
+    },
+    {
+      "role": "Advisor",
+      "text": "Not necessarily. For environmental policy, there are several well-funded programs. Meanwhile, if you want to work first, you could look into environmental consulting firms or government agencies. Many offer tuition reimbursement for employees who later pursue a master's."
+    },
+    {
+      "role": "Student",
+      "text": "That's a good point. Would I be at a disadvantage if I worked for a few years first?"
+    },
+    {
+      "role": "Advisor",
+      "text": "Not at all. Work experience can actually strengthen your graduate school application. It shows maturity and practical knowledge."
+    },
+    {
+      "role": "Student",
+      "text": "I think I'll explore both options and attend the career fair next week to see what's available."
+    },
+    {
+      "role": "Advisor",
+      "text": "That's a smart approach. Let's meet again after the fair to discuss what you find."
+    }
+  ]
+}

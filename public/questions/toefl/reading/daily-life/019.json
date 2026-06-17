@@ -1,0 +1,103 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "text message",
+      "content": "Hey, are you still planning to sell your used textbooks this semester?\n\nYeah, I listed them on the student exchange page yesterday. Three of them — intro to psych, calculus, and freshman comp.\n\nHow much are you asking for the psych book? I might be interested.\n\n$40. It's in really good condition, no highlighting. The retail price is over $120.\n\nThat's a deal. Can I come by and pick it up this evening?\n\nSure, text me when you're on your way.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of this conversation?",
+          "options": [
+            "A. To discuss a group study session",
+            "B. To arrange the purchase of a used textbook",
+            "C. To compare prices at different bookstores",
+            "D. To ask for a recommendation about courses"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The exchange focuses on the sale of a used psychology textbook, from listing to price negotiation to pickup arrangement."
+        },
+        {
+          "id": "q2",
+          "stem": "What does the seller imply about the price of $40?",
+          "options": [
+            "A. It is negotiable depending on the condition",
+            "B. It is significantly lower than the original price",
+            "C. It is the standard price for used textbooks",
+            "D. It includes all three textbooks as a bundle"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The seller mentions the retail price is 'over $120,' implying that $40 represents a substantial saving."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "advertisement",
+      "content": "SpeakFluently Language School\n\nLearn a new language in just 10 weeks!\n\n- Small group classes (max 6 students)\n- Native-speaking instructors\n- Flexible evening and weekend schedules\n- Free trial class — no obligation\n\nLanguages offered: Spanish, French, German, Mandarin, Japanese, and Italian.\n\nSummer enrollment is now open. Early bird discount: 15% off if you register before June 1.\n\nVisit www.speakfluently.example.com or call 555-0147 to book your free trial.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "What is the main selling point emphasized by this advertisement?",
+          "options": [
+            "A. The lowest prices in the city",
+            "B. The convenience and flexibility of the classes",
+            "C. The opportunity to travel abroad",
+            "D. The use of digital learning tools"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The ad highlights small class sizes, native-speaking instructors, and flexible schedules — all pointing to quality and convenience."
+        },
+        {
+          "id": "q4",
+          "stem": "What can be inferred about the early bird discount?",
+          "options": [
+            "A. It applies to all language courses equally",
+            "B. It is only available for the first 50 registrants",
+            "C. It offers a reduced rate for those who sign up early",
+            "D. It requires a minimum payment upfront"
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The ad states '15% off if you register before June 1,' meaning early registrants receive a discount on the regular price."
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "textType": "online post",
+      "content": "Neighborhood Alert — Lost Cat\n\nHi everyone — our cat Oliver went missing on the evening of Tuesday, April 8. He's a 4-year-old orange tabby with a white chest and paws. He is microchipped and was wearing a blue collar with a bell.\n\nHe was last seen on Cedar Avenue near the park. Oliver is very friendly but can be easily startled by loud noises.\n\nIf you see him, please contact Sarah at 555-0238. No questions asked — we just want him home safely.\n\nPlease share this post!",
+      "questions": [
+        {
+          "id": "q5",
+          "stem": "What is the primary purpose of this post?",
+          "options": [
+            "A. To complain about the neighborhood's pet policies",
+            "B. To ask the community for help finding a lost pet",
+            "C. To warn residents about a dangerous animal",
+            "D. To advertise a pet adoption opportunity"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The post describes a lost cat and asks neighbors to contact the owner if they see it, clearly seeking help in locating the missing pet."
+        },
+        {
+          "id": "q6",
+          "stem": "The phrase 'no questions asked' in the post suggests that the owner:",
+          "options": [
+            "A. does not need proof that the cat belongs to them",
+            "B. will not inquire about how or why the cat went missing",
+            "C. wants the cat returned regardless of any circumstances",
+            "D. cannot answer questions about the cat's description"
+          ],
+          "correctIndex": 2,
+          "type": "vocabulary",
+          "explanation": "'No questions asked' is a common expression indicating the owner simply wants the cat back safely without any complications or explanations."
+        }
+      ]
+    }
+  ]
+}

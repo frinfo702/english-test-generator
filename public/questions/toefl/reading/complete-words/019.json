@@ -1,0 +1,55 @@
+{
+  "paragraph": "Earthquakes occur when stress accumulated along fault lines is suddenly released as powerful seismic waves that travel through the ground. Minor tremors happen somewhere almost daily, but major quakes remain comparatively rare worldwide events. Scientists use the Richter scale and moment magnitude calculation for precisely measuring earthquakes. Modern warning systems provide crucial seconds of notice before destructive shaking reaches populated areas. Preparedness measures have significantly reduced casualties in vulnerable regions worldwide.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "acc",
+      "answer": "accumulated"
+    },
+    {
+      "index": 1,
+      "hint": "sei",
+      "answer": "seismic"
+    },
+    {
+      "index": 2,
+      "hint": "tr",
+      "answer": "tremors"
+    },
+    {
+      "index": 3,
+      "hint": "da",
+      "answer": "daily"
+    },
+    {
+      "index": 4,
+      "hint": "ra",
+      "answer": "rare"
+    },
+    {
+      "index": 5,
+      "hint": "cal",
+      "answer": "calculation"
+    },
+    {
+      "index": 6,
+      "hint": "cru",
+      "answer": "crucial"
+    },
+    {
+      "index": 7,
+      "hint": "des",
+      "answer": "destructive"
+    },
+    {
+      "index": 8,
+      "hint": "Pre",
+      "answer": "Preparedness"
+    },
+    {
+      "index": 9,
+      "hint": "cas",
+      "answer": "casualties"
+    }
+  ]
+}

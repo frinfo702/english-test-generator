@@ -1,0 +1,51 @@
+{
+  "title": "Intramural Sports Registration",
+  "transcript": "Attention students. Registration for the spring intramural sports season is now open. Sports offered include basketball, soccer, volleyball, and ultimate frisbee. Teams can be formed by departments, student organizations, or groups of friends. Registration closes on March 5th, and the season will run from March 15th to May 20th. There is a participation fee of fifteen dollars per person, which includes a team t-shirt. All games will be held at the campus recreation center. Interested students can sign up at the recreation center front desk or online through the campus activities portal.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What sports are mentioned in the announcement?",
+      "options": [
+        "Baseball, tennis, and swimming",
+        "Basketball, soccer, volleyball, and ultimate frisbee",
+        "Football, hockey, and lacrosse",
+        "Track and field, golf, and badminton"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement lists basketball, soccer, volleyball, and ultimate frisbee as the sports offered."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the participation fee include?",
+      "options": [
+        "A team t-shirt",
+        "Free refreshments at games",
+        "Transportation to away games",
+        "A season pass to the recreation center"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The fifteen dollar participation fee includes a team t-shirt."
+    },
+    {
+      "id": "q3",
+      "stem": "Where can students sign up for intramural sports?",
+      "options": [
+        "Only at the recreation center front desk",
+        "Only through the campus activities portal",
+        "At the recreation center or online through the activities portal",
+        "At the student services office"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "Students can sign up at the recreation center front desk or online through the campus activities portal."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention students. Registration for the spring intramural sports season is now open. Sports offered include basketball, soccer, volleyball, and ultimate frisbee. Teams can be formed by departments, student organizations, or groups of friends. Registration closes on March 5th, and the season will run from March 15th to May 20th. There is a participation fee of fifteen dollars per person, which includes a team t-shirt. All games will be held at the campus recreation center. Interested students can sign up at the recreation center front desk or online through the campus activities portal."
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "title": "The Evolution of Jazz Music",
+  "transcript": "Today we will trace the evolution of jazz, a uniquely American art form that emerged in the early twentieth century. Jazz originated in New Orleans, a port city where diverse musical traditions—including African rhythms, European harmonies, and blues—came together. Early jazz musicians like Louis Armstrong transformed the music through improvisation, turning individual solos into the centerpiece of performances. In the 1920s, known as the Jazz Age, the music spread to Chicago and New York, becoming the soundtrack of American nightlife. The swing era of the 1930s and 1940s featured large big bands led by musicians like Duke Ellington and Count Basie. Swing was characterized by a strong rhythmic drive and arranged ensemble sections alternating with solo improvisations. In the 1940s, a new style called bebop emerged, pioneered by Charlie Parker and Dizzy Gillespie. Bebop was faster, more complex, and intended more for listening than dancing. It featured small combos playing intricate melodies with rapid chord changes. Later styles included cool jazz, which was more relaxed and melodic, and free jazz, which abandoned traditional structures entirely. Jazz has continued to evolve through fusion with other genres, including rock, funk, and Latin music. Today, jazz remains a vibrant and influential art form that continues to inspire musicians around the world.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The life of Louis Armstrong",
+        "The historical development of jazz music",
+        "The difference between swing and bebop",
+        "The influence of jazz on modern popular music"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture traces jazz from its origins in New Orleans through various stylistic periods."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, where did jazz originate?",
+      "options": ["Chicago", "New York", "New Orleans", "Kansas City"],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "Jazz originated in New Orleans, where diverse musical traditions came together."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the professor imply about bebop compared to earlier jazz styles?",
+      "options": [
+        "It was simpler and easier to dance to",
+        "It was more complex and intended for listening",
+        "It featured larger ensembles than swing",
+        "It returned to traditional New Orleans styles"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor says bebop was faster, more complex, and intended more for listening than dancing, implying it was aimed at a more attentive audience."
+    },
+    {
+      "id": "q4",
+      "stem": "The professor describes the swing era as having what kind of musical arrangement?",
+      "options": [
+        "Small combos with complex solos",
+        "Large big bands with arranged sections and improvisation",
+        "Solo performers with minimal accompaniment",
+        "Electronic instruments and synthesizers"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The swing era featured large big bands with arranged ensemble sections alternating with solo improvisations."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will trace the evolution of jazz, a uniquely American art form that emerged in the early twentieth century. Jazz originated in New Orleans, a port city where diverse musical traditions—including African rhythms, European harmonies, and blues—came together. Early jazz musicians like Louis Armstrong transformed the music through improvisation, turning individual solos into the centerpiece of performances. In the 1920s, known as the Jazz Age, the music spread to Chicago and New York, becoming the soundtrack of American nightlife. The swing era of the 1930s and 1940s featured large big bands led by musicians like Duke Ellington and Count Basie. Swing was characterized by a strong rhythmic drive and arranged ensemble sections alternating with solo improvisations."
+    },
+    {
+      "role": "Lecturer",
+      "text": "In the 1940s, a new style called bebop emerged, pioneered by Charlie Parker and Dizzy Gillespie. Bebop was faster, more complex, and intended more for listening than dancing. It featured small combos playing intricate melodies with rapid chord changes. Later styles included cool jazz, which was more relaxed and melodic, and free jazz, which abandoned traditional structures entirely. Jazz has continued to evolve through fusion with other genres, including rock, funk, and Latin music. Today, jazz remains a vibrant and influential art form that continues to inspire musicians around the world."
+    }
+  ]
+}

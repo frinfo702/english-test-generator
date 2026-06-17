@@ -1,0 +1,68 @@
+{
+  "title": "The Roman Empire: Rise and Fall",
+  "transcript": "Today we will examine the Roman Empire, one of the most influential civilizations in Western history. The Roman Republic, established around 509 BCE, gradually expanded through military conquest and strategic alliances. By the first century BCE, Rome controlled most of the Mediterranean region. However, internal political conflicts, including the assassination of Julius Caesar in 44 BCE, led to the end of the Republic. Augustus became the first emperor in 27 BCE, ushering in the Pax Romana, a period of relative peace and stability that lasted about two hundred years. During this time, the empire reached its greatest territorial extent, encompassing lands from Britain to North Africa and from Spain to the Middle East. The Romans made lasting contributions in law, engineering, and architecture. They developed a legal system that influenced many modern codes, built an extensive network of roads and aqueducts, and perfected the use of arches and concrete in structures like the Colosseum. Yet the empire eventually declined. Historians cite multiple causes: economic troubles, political corruption, military overspending, and pressure from Germanic tribes. The Western Roman Empire fell in 476 CE when the last emperor was deposed. The Eastern Roman Empire, known as the Byzantine Empire, continued for nearly another thousand years.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The military tactics of the Roman army",
+        "The rise, achievements, and decline of the Roman Empire",
+        "The life of Julius Caesar",
+        "The architecture of the Colosseum"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture covers the Roman Empire from its origins through its peak to its decline."
+    },
+    {
+      "id": "q2",
+      "stem": "What event marked the beginning of the Roman Empire?",
+      "options": [
+        "The assassination of Julius Caesar",
+        "Augustus becoming the first emperor",
+        "The fall of the Roman Republic",
+        "The building of the Colosseum"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Augustus became the first emperor in 27 BCE, marking the beginning of the Roman Empire."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the professor imply about the Pax Romana?",
+      "options": [
+        "It was a period of constant warfare",
+        "It lasted for about two hundred years of stability",
+        "It was the least productive period in Roman history",
+        "It ended with the rise of the Byzantine Empire"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor describes the Pax Romana as a period of relative peace and stability lasting about two hundred years."
+    },
+    {
+      "id": "q4",
+      "stem": "Which of the following is mentioned as a Roman contribution?",
+      "options": [
+        "The invention of paper",
+        "The development of democratic voting",
+        "The construction of roads and aqueducts",
+        "The discovery of electricity"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The lecture mentions that Romans built an extensive network of roads and aqueducts."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will examine the Roman Empire, one of the most influential civilizations in Western history. The Roman Republic, established around 509 BCE, gradually expanded through military conquest and strategic alliances. By the first century BCE, Rome controlled most of the Mediterranean region. However, internal political conflicts, including the assassination of Julius Caesar in 44 BCE, led to the end of the Republic. Augustus became the first emperor in 27 BCE, ushering in the Pax Romana, a period of relative peace and stability that lasted about two hundred years. During this time, the empire reached its greatest territorial extent, encompassing lands from Britain to North Africa and from Spain to the Middle East."
+    },
+    {
+      "role": "Lecturer",
+      "text": "The Romans made lasting contributions in law, engineering, and architecture. They developed a legal system that influenced many modern codes, built an extensive network of roads and aqueducts, and perfected the use of arches and concrete in structures like the Colosseum. Yet the empire eventually declined. Historians cite multiple causes: economic troubles, political corruption, military overspending, and pressure from Germanic tribes. The Western Roman Empire fell in 476 CE when the last emperor was deposed. The Eastern Roman Empire, known as the Byzantine Empire, continued for nearly another thousand years."
+    }
+  ]
+}

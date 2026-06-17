@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Study Related",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about textbook availability",
+      "stem": "Does the library have copies of the required textbooks on reserve?",
+      "options": {
+        "A": "Yes, there are two copies on reserve that can be checked out for two hours.",
+        "B": "Textbooks can be very expensive to buy new.",
+        "C": "I bought my textbook from the campus store."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about textbook access at the library, so providing specific information about availability and loan periods is helpful."
+    },
+    {
+      "id": "q2",
+      "context": "Encouraging a friend",
+      "stem": "I'm so nervous about the oral presentation. What if I forget what to say?",
+      "options": {
+        "A": "You'll do great! Just practice a few more times and bring notes as backup.",
+        "B": "Oral presentations are a common requirement.",
+        "C": "I gave my presentation last week."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing anxiety about a presentation, so offering reassurance and practical advice is supportive."
+    },
+    {
+      "id": "q3",
+      "context": "Asking about group study rooms",
+      "stem": "How do I book a group study room in the library?",
+      "options": {
+        "A": "You can reserve one online through the library website up to a week in advance.",
+        "B": "Group study rooms have whiteboards and projectors.",
+        "C": "I prefer studying in quiet areas."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about the booking process, so explaining how to reserve a room directly answers their question."
+    },
+    {
+      "id": "q4",
+      "context": "Admitting a mistake",
+      "stem": "I think I submitted the wrong file for the assignment. I'm panicking.",
+      "options": {
+        "A": "Don't worry, email the professor right now and explain. Most are understanding.",
+        "B": "Assignments should be checked before submission.",
+        "C": "I always double-check my files."
+      },
+      "correct": "A",
+      "explanation": "The speaker is panicking about a submission error, so offering a calming and actionable solution is the most helpful response."
+    },
+    {
+      "id": "q5",
+      "context": "Asking about a research database",
+      "stem": "Which database should I use to find peer-reviewed articles on climate change?",
+      "options": {
+        "A": "Try JSTOR or ScienceDirect. Both have extensive environmental science collections.",
+        "B": "Climate change research is published in many journals.",
+        "C": "I used Google Scholar for my paper."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for research guidance, so recommending specific databases with a rationale is directly helpful."
+    },
+    {
+      "id": "q6",
+      "context": "Reacting to a funny story",
+      "stem": "You won't believe what happened — the professor walked into class with his shirt buttoned wrong!",
+      "options": {
+        "A": "No way! Did anyone tell him? That's hilarious.",
+        "B": "Professors are very busy people.",
+        "C": "I always check my clothes before leaving."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing an amusing anecdote, so reacting with surprise and engaging with the story is the natural social response."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about citation format",
+      "stem": "Does the department prefer APA or MLA format for research papers?",
+      "options": {
+        "A": "Most of our faculty prefer APA format for the social sciences.",
+        "B": "Citation formats organize bibliographic information.",
+        "C": "I use a citation generator tool."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a formatting requirement, so providing the department's preference directly answers their question."
+    },
+    {
+      "id": "q8",
+      "context": "Agreeing to a plan",
+      "stem": "Let's meet at the library at 10 AM tomorrow to work on the project.",
+      "options": {
+        "A": "Sounds good. I'll bring my laptop and the data we collected.",
+        "B": "The library opens at 8 AM on weekdays.",
+        "C": "I worked on the project yesterday."
+      },
+      "correct": "A",
+      "explanation": "The speaker is proposing a meeting plan, so confirming the arrangement and stating what you'll bring is cooperative."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Does the library have copies of the required textbooks on reserve?"
+    },
+    {
+      "role": "Friend",
+      "text": "I'm so nervous about the oral presentation. What if I forget what to say?"
+    },
+    {
+      "role": "Student",
+      "text": "How do I book a group study room in the library?"
+    },
+    {
+      "role": "Friend",
+      "text": "I think I submitted the wrong file for the assignment. I'm panicking."
+    },
+    {
+      "role": "Student",
+      "text": "Which database should I use to find peer-reviewed articles on climate change?"
+    },
+    {
+      "role": "Friend",
+      "text": "You won't believe what happened — the professor walked into class with his shirt buttoned wrong!"
+    },
+    {
+      "role": "Student",
+      "text": "Does the department prefer APA or MLA format for research papers?"
+    },
+    {
+      "role": "Friend",
+      "text": "Let's meet at the library at 10 AM tomorrow to work on the project."
+    }
+  ]
+}

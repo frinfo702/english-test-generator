@@ -1,0 +1,17 @@
+{
+  "passage": "TODO: Reading passage (email, ad, article, etc.)",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "TODO: Question stem",
+      "options": {
+        "A": "TODO: Choice A",
+        "B": "TODO: Choice B",
+        "C": "TODO: Choice C",
+        "D": "TODO: Choice D"
+      },
+      "correct": "A",
+      "explanation": "TODO: Explanation"
+    }
+  ]
+}

@@ -2,80 +2,80 @@
   "texts": [
     {
       "id": "t1",
-      "textType": "schedule",
-      "content": "Westbrook Public Library – Summer Workshop Schedule\n\nAll workshops are free and held in the Community Room.\n\nMonday June 12 – Resume Writing 10:00–11:30 AM\nTuesday June 13 – Digital Photography 2:00–4:00 PM\nWednesday June 14 – Poetry Reading 6:30–8:00 PM\nThursday June 15 – Basic Web Design 10:00 AM–12:00 PM\nFriday June 16 – Children's Story Hour 10:30–11:30 AM\n\nRegistration required. Call 555-0203 to reserve your spot.",
+      "textType": "invoice",
+      "content": "INVOICE # INV-2025-0891\n\nBrightPath Web Services\n55 Digital Lane, Suite 300\nSan Francisco, CA 94102\n\nBill To: GreenLeaf Cafe, 22 Park Street\n\nService Description                         Amount\n-----------------------------------------------\nWebsite redesign — homepage & contact page   $2,400.00\nMonthly hosting & maintenance (March 2025)      $150.00\nSEO optimization consultation                   $600.00\n-----------------------------------------------\nTotal Due:                                    $3,150.00\n\nPayment Terms: Net 30\nDue Date: April 15, 2025\n\nPlease include invoice number with payment.\nLate payments subject to 1.5% monthly interest.",
       "questions": [
         {
           "id": "q1",
-          "stem": "Which workshop takes place in the evening?",
+          "stem": "What is the purpose of this document?",
           "options": [
-            "A. Resume Writing",
-            "B. Digital Photography",
-            "C. Poetry Reading",
-            "D. Basic Web Design"
+            "A. To advertise web design services",
+            "B. To request payment for completed services",
+            "C. To provide a cost estimate for future work",
+            "D. To confirm a contract agreement"
           ],
-          "correctIndex": 2,
-          "type": "factual",
-          "explanation": "Poetry Reading is scheduled from 6:30–8:00 PM, which is the evening."
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The document is an invoice with a total due amount, payment terms, and a due date — all indicating a payment request."
         },
         {
           "id": "q2",
-          "stem": "What must attendees do before coming to a workshop?",
+          "stem": "What can be inferred from the payment terms 'Net 30'?",
           "options": [
-            "A. Bring their own laptop",
-            "B. Sign up in advance",
-            "C. Pay a registration fee",
-            "D. Submit a writing sample"
+            "A. The client must pay 30 percent upfront",
+            "B. Payment is due within 30 days of the invoice date",
+            "C. The client can pay in 30 monthly installments",
+            "D. A 30 percent discount applies for early payment"
           ],
           "correctIndex": 1,
-          "type": "factual",
-          "explanation": "The schedule states 'Registration required. Call 555-0203 to reserve your spot.'"
+          "type": "inference",
+          "explanation": "'Net 30' is a standard business term meaning the full payment is due within 30 days."
         },
         {
           "id": "q3",
-          "stem": "Which workshop would be most appropriate for a parent with a young child?",
+          "stem": "What happens if the payment is made after the due date?",
           "options": [
-            "A. Resume Writing",
-            "B. Digital Photography",
-            "C. Basic Web Design",
-            "D. Children's Story Hour"
+            "A. The service will be discontinued",
+            "B. Additional interest charges will apply",
+            "C. A late fee of $50 will be added",
+            "D. The invoice amount will be renegotiated"
           ],
-          "correctIndex": 3,
-          "type": "inference",
-          "explanation": "Children's Story Hour is the only workshop explicitly for children, held on Friday morning."
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The invoice states 'Late payments subject to 1.5% monthly interest,' meaning interest accrues on overdue amounts."
         }
       ]
     },
     {
       "id": "t2",
-      "textType": "invoice",
-      "content": "INVOICE #10492\n\nFrom: GreenScape Landscaping\nTo: David Chen\n\nService: Monthly lawn maintenance (May)\nDate: May 1, 2025\n\nMowing & edging … $55.00\nWeed control … $25.00\nTrimming shrubs … $30.00\n\nTotal Due: $110.00\nPayment terms: Due within 15 days of receipt\n\nThank you for your business!",
+      "textType": "notice",
+      "content": "Fitness Center — Temporary Equipment Closure\n\nPlease be advised that the following equipment will be temporarily unavailable from March 10 through March 14 for routine maintenance:\n\n- All treadmills (maintenance: belt replacement and calibration)\n- Leg press machine (parts replacement)\n\nAlternative equipment will remain available:\n- Ellipticals (4 units)\n- Stationary bikes (6 units)\n- Free weights section (fully accessible)\n\nWe apologize for any inconvenience. The fitness center will operate regular hours throughout the maintenance period.",
       "questions": [
         {
           "id": "q4",
-          "stem": "What service was the most expensive on this invoice?",
+          "stem": "What is the main reason for the equipment closure?",
           "options": [
-            "A. Weed control",
-            "B. Mowing and edging",
-            "C. Trimming shrubs",
-            "D. Fertilizer application"
+            "A. The fitness center is undergoing renovation",
+            "B. The equipment requires routine maintenance",
+            "C. New equipment is being installed",
+            "D. There is a staffing shortage"
           ],
           "correctIndex": 1,
           "type": "factual",
-          "explanation": "Mowing and edging cost $55.00, the highest amount listed."
+          "explanation": "The notice states the closure is 'for routine maintenance,' including belt replacement and parts replacement."
         },
         {
           "id": "q5",
-          "stem": "When must David Chen pay the invoice?",
+          "stem": "What can be inferred about the fitness center's operation during this period?",
           "options": [
-            "A. Immediately upon receipt",
-            "B. By May 15",
-            "C. Within 15 days",
-            "D. By the end of the month"
+            "A. It will close early each day during maintenance",
+            "B. It will remain open with alternative equipment available",
+            "C. Only members with premium memberships can enter",
+            "D. It will be closed to the public for the entire week"
           ],
-          "correctIndex": 2,
-          "type": "factual",
-          "explanation": "The invoice states 'Due within 15 days of receipt.'"
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The notice lists alternative equipment that 'will remain available' and states that 'regular hours' will be maintained throughout the period."
         }
       ]
     }

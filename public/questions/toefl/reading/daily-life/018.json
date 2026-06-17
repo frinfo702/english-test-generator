@@ -1,0 +1,83 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "menu",
+      "content": "Riverside Cafe — Breakfast Menu\nServed 7:00 AM – 11:00 AM daily\n\nFarmhouse Breakfast — $14.95\nTwo eggs any style, bacon or sausage, toast, hash browns\n\nAvocado Toast — $12.50\nSourdough bread, smashed avocado, cherry tomatoes, poached egg\n\nButtermilk Pancakes — $11.00\nStack of three pancakes with maple syrup and fresh berries\n\nContinental Breakfast — $8.50\nCroissant, butter, jam, fresh fruit cup, orange juice\n\nCoffee, tea, or hot chocolate included with any breakfast item.\nSubstitute gluten-free toast: add $2.00.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the most expensive breakfast item on the menu?",
+          "options": [
+            "A. Avocado Toast",
+            "B. Farmhouse Breakfast",
+            "C. Buttermilk Pancakes",
+            "D. Continental Breakfast"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The Farmhouse Breakfast costs $14.95, which is the highest price on the menu."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about the beverage policy?",
+          "options": [
+            "A. Coffee and tea cost extra for Continental Breakfast customers",
+            "B. A hot drink is included with every breakfast order",
+            "C. Only hot chocolate is offered free of charge",
+            "D. Beverages are not included with the Avocado Toast"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The menu states 'Coffee, tea, or hot chocolate included with any breakfast item,' meaning a beverage is complementary regardless of which item is ordered."
+        },
+        {
+          "id": "q3",
+          "stem": "What does 'substitute' in 'substitute gluten-free toast' most likely mean?",
+          "options": [
+            "A. To remove an item from the meal",
+            "B. To replace one item with an alternative",
+            "C. To add an extra item to the order",
+            "D. To reduce the portion size"
+          ],
+          "correctIndex": 1,
+          "type": "vocabulary",
+          "explanation": "In this context, 'substitute' means to replace the regular toast with a gluten-free alternative at an additional cost."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "textType": "form",
+      "content": "City Parks Department — Volunteer Application\n\nThank you for your interest in volunteering! Please complete the following:\n\nAvailable Positions (select one):\n☐ Trail Maintenance — physical outdoor work; must be able to lift 30 lbs\n☐ Visitor Information Desk — indoor; customer service focus\n☐ Educational Program Assistant — must be available weekends\n☐ Garden Crew — planting, weeding, watering\n\nAvailability (check all that apply):\n☐ Weekday mornings   ☐ Weekday afternoons\n☐ Weekend mornings    ☐ Weekend afternoons\n\nCommitment: We ask volunteers to commit to at least 4 hours per week for a minimum of 3 months.\n\nAge requirement: Volunteers must be at least 16 years old.\n\nTraining: All new volunteers attend a one-day orientation session before starting.",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "What is the purpose of the volunteer application form?",
+          "options": [
+            "A. To recruit volunteers for the parks department",
+            "B. To provide safety training information",
+            "C. To collect feedback on park maintenance",
+            "D. To advertise paid positions at the city"
+          ],
+          "correctIndex": 0,
+          "type": "purpose",
+          "explanation": "The form is titled 'Volunteer Application' and collects availability, position preferences, and commitment details for volunteer roles in the parks department."
+        },
+        {
+          "id": "q5",
+          "stem": "What can be inferred about the volunteer commitment?",
+          "options": [
+            "A. Volunteers can choose their own hours without any minimum",
+            "B. The program expects a regular weekly commitment over several months",
+            "C. Volunteers must commit to at least one full day per week",
+            "D. The commitment period is flexible and can be adjusted monthly"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The form asks for 'at least 4 hours per week for a minimum of 3 months,' indicating a consistent, long-term commitment is expected."
+        }
+      ]
+    }
+  ]
+}

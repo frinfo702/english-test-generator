@@ -1,0 +1,71 @@
+{
+  "title": "The Physics of Renewable Energy Storage",
+  "passage": "One of the greatest challenges facing the transition to renewable energy is not generating power but storing it. Solar and wind resources are inherently intermittent: the sun does not shine at night, and turbines remain still when the wind dies down. To maintain a reliable electrical grid, energy produced during peak generation periods must be captured and released during periods of high demand or low generation.\n\nCurrently, pumped hydroelectric storage represents the most widely deployed solution, accounting for over ninety percent of global energy storage capacity. This technology uses surplus electricity to pump water from a lower reservoir to a higher one. When electricity is needed, the water is released back downhill through turbines, generating power. While highly efficient, with round-trip efficiencies of seventy to eighty percent, pumped hydro requires specific geographical features that limit its applicability.\n\nLithium-ion batteries, the same technology powering electric vehicles, have emerged as a versatile alternative. Their advantages include rapid response times, scalability, and deployment flexibility. However, current battery technologies remain expensive for grid-scale storage and face challenges related to raw material availability and recycling. Emerging solutions such as flow batteries, compressed air energy storage, and green hydrogen production each offer distinct trade-offs between cost, efficiency, and geographical requirements.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the main purpose of the passage?",
+      "options": [
+        "A. To argue that renewable energy is too expensive",
+        "B. To explain energy storage challenges and current solutions",
+        "C. To compare solar and wind power generation methods",
+        "D. To promote lithium-ion batteries for all applications"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage discusses the storage challenge and describes pumped hydro, batteries, and emerging alternatives."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "What percentage of global energy storage does pumped hydroelectric account for?",
+      "options": [
+        "A. About fifty percent",
+        "B. About seventy percent",
+        "C. Over ninety percent",
+        "D. Nearly one hundred percent"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage states pumped hydro accounts for 'over ninety percent of global energy storage capacity.'"
+    },
+    {
+      "id": "q3",
+      "type": "vocabulary",
+      "stem": "The word 'intermittent' in paragraph 1 is closest in meaning to:",
+      "options": [
+        "A. unreliable and irregular",
+        "B. powerful and consistent",
+        "C. environmentally friendly",
+        "D. expensive to produce"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Intermittent' means not continuous or steady, referring to the variable nature of solar and wind energy."
+    },
+    {
+      "id": "q4",
+      "type": "negativeFactual",
+      "stem": "Which of the following is NOT mentioned as a limitation of pumped hydroelectric storage?",
+      "options": [
+        "A. It requires specific geographical features",
+        "B. It has limited applicability in many regions",
+        "C. It produces harmful emissions during operation",
+        "D. It depends on elevation differences"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage does not mention emissions; pumped hydro is described as 'highly efficient' without discussing pollution."
+    },
+    {
+      "id": "q5",
+      "type": "paragraphRelation",
+      "stem": "How does paragraph 3 relate to the argument presented in paragraph 2?",
+      "options": [
+        "A. It contradicts the effectiveness of pumped hydro",
+        "B. It introduces alternative solutions beyond the dominant technology",
+        "C. It argues that battery storage is superior in all aspects",
+        "D. It explains the economic disadvantages of all storage methods"
+      ],
+      "correctIndex": 1,
+      "explanation": "After detailing pumped hydro in paragraph 2, paragraph 3 presents batteries and emerging alternatives as other available options."
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "paragraph": "The Industrial Revolution transformed societies from agricultural economies into industrial powerhouses across Europe and America. Mechanized production replaced manual labor in factories, dramatically increasing output and efficiency across many sectors. Railroads and steamships expanded trade networks across continents, creating complex global supply chains. Urban populations grew rapidly as people migrated from countryside to cities in search of employment in new industries. This era fundamentally changed the way people lived their daily lives.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "tra",
+      "answer": "transformed"
+    },
+    {
+      "index": 1,
+      "hint": "ag",
+      "answer": "agricultural"
+    },
+    {
+      "index": 2,
+      "hint": "Mec",
+      "answer": "Mechanized"
+    },
+    {
+      "index": 3,
+      "hint": "man",
+      "answer": "manual"
+    },
+    {
+      "index": 4,
+      "hint": "dra",
+      "answer": "dramatically"
+    },
+    {
+      "index": 5,
+      "hint": "ex",
+      "answer": "expanded"
+    },
+    {
+      "index": 6,
+      "hint": "Ur",
+      "answer": "Urban"
+    },
+    {
+      "index": 7,
+      "hint": "emp",
+      "answer": "employment"
+    },
+    {
+      "index": 8,
+      "hint": "fun",
+      "answer": "fundamentally"
+    },
+    {
+      "index": 9,
+      "hint": "dai",
+      "answer": "daily"
+    }
+  ]
+}

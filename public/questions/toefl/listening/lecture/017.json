@@ -1,0 +1,68 @@
+{
+  "title": "First Language Acquisition",
+  "transcript": "Today we will discuss how children acquire their first language, a remarkable feat that occurs without formal instruction. By the time children enter school at age five, they have already mastered the basic grammatical structures and thousands of words of their native language. There are two main theoretical perspectives on language acquisition. The behaviorist view, associated with B.F. Skinner, proposed that children learn language through imitation, reinforcement, and conditioning. According to this view, parents correct their children's speech, and children mimic what they hear. However, the linguist Noam Chomsky challenged this view by arguing that children cannot possibly learn all the rules of language through imitation alone because the language they hear is often incomplete or ungrammatical. Chomsky proposed that humans are born with an innate language faculty called a universal grammar, which contains the basic principles common to all languages. Evidence for this includes the fact that children across cultures go through similar stages of language development at roughly the same ages, regardless of the specific language they are learning. For instance, children begin with babbling around six months, produce single words around twelve months, and combine words into simple sentences by age two. This suggests that language acquisition is guided by biological maturation rather than just environmental input.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The debate between Skinner and Chomsky",
+        "How children acquire their first language naturally",
+        "The stages of language development in infants",
+        "The differences between first and second language learning"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture discusses how children acquire language, comparing behaviorist and nativist perspectives."
+    },
+    {
+      "id": "q2",
+      "stem": "What did B.F. Skinner propose about language learning?",
+      "options": [
+        "Children are born with an innate language faculty",
+        "Children learn through imitation and reinforcement",
+        "Language acquisition is guided by biological maturation",
+        "Children create their own grammatical rules"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Skinner proposed that children learn language through imitation, reinforcement, and conditioning."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the professor suggest about children's language development?",
+      "options": [
+        "It varies enormously across different cultures",
+        "It follows similar stages at similar ages worldwide",
+        "It depends entirely on the quality of parental input",
+        "It is faster for children who watch educational television"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor states children across cultures go through similar stages at roughly the same ages, suggesting biological guidance."
+    },
+    {
+      "id": "q4",
+      "stem": "What is universal grammar according to Chomsky?",
+      "options": [
+        "A set of rules for writing grammatically correct sentences",
+        "An innate language faculty containing basic principles common to all languages",
+        "A grammar textbook used in schools worldwide",
+        "The grammatical structure of English specifically"
+      ],
+      "correctIndex": 1,
+      "type": "vocabulary",
+      "explanation": "Chomsky's universal grammar is an innate language faculty containing basic principles common to all languages."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will discuss how children acquire their first language, a remarkable feat that occurs without formal instruction. By the time children enter school at age five, they have already mastered the basic grammatical structures and thousands of words of their native language. There are two main theoretical perspectives on language acquisition. The behaviorist view, associated with B.F. Skinner, proposed that children learn language through imitation, reinforcement, and conditioning. According to this view, parents correct their children's speech, and children mimic what they hear. However, the linguist Noam Chomsky challenged this view by arguing that children cannot possibly learn all the rules of language through imitation alone because the language they hear is often incomplete or ungrammatical. Chomsky proposed that humans are born with an innate language faculty called a universal grammar, which contains the basic principles common to all languages."
+    },
+    {
+      "role": "Lecturer",
+      "text": "Evidence for this includes the fact that children across cultures go through similar stages of language development at roughly the same ages, regardless of the specific language they are learning. For instance, children begin with babbling around six months, produce single words around twelve months, and combine words into simple sentences by age two. This suggests that language acquisition is guided by biological maturation rather than just environmental input."
+    }
+  ]
+}

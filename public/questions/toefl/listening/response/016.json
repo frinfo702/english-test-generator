@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Extracurricular",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about sports facilities",
+      "stem": "Are the basketball courts open for free play during lunch hours?",
+      "options": {
+        "A": "Yes, they're open from noon to 2 PM for anyone with a student ID.",
+        "B": "Basketball is a popular sport on campus.",
+        "C": "I prefer playing tennis myself."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about facility availability, so providing the schedule and access requirements directly answers their question."
+    },
+    {
+      "id": "q2",
+      "context": "Inviting to a cultural event",
+      "stem": "There's a Korean film festival at the student center this Friday. Want to go?",
+      "options": {
+        "A": "That sounds great! What time does it start?",
+        "B": "Korean films are very popular internationally.",
+        "C": "I watched a Korean movie last weekend."
+      },
+      "correct": "A",
+      "explanation": "The speaker is inviting you to an event, so showing enthusiasm and asking for details is the natural accepting response."
+    },
+    {
+      "id": "q3",
+      "context": "Asking about music practice rooms",
+      "stem": "Can students use the music practice rooms even if they're not music majors?",
+      "options": {
+        "A": "Yes, they're open to all students. You just need to reserve a time slot.",
+        "B": "Music majors have priority for practice rooms.",
+        "C": "I took piano lessons when I was young."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about access policies, so clarifying the policy and reservation process is helpful."
+    },
+    {
+      "id": "q4",
+      "context": "Expressing boredom",
+      "stem": "I'm so bored this weekend. There's nothing to do on campus.",
+      "options": {
+        "A": "The student union is hosting a game night on Saturday. You should check it out!",
+        "B": "Weekends are for resting and catching up on sleep.",
+        "C": "I usually go home on weekends."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing boredom, so suggesting a specific campus activity is a constructive and helpful response."
+    },
+    {
+      "id": "q5",
+      "context": "Asking about volunteering opportunities",
+      "stem": "I want to get involved in community service. Are there any student organizations for that?",
+      "options": {
+        "A": "Definitely! The Community Outreach Club meets every Tuesday. I can introduce you.",
+        "B": "Community service is required for some scholarships.",
+        "C": "I volunteered at a shelter last semester."
+      },
+      "correct": "A",
+      "explanation": "The speaker is looking for volunteering options, so recommending a specific organization and offering to help connect is very helpful."
+    },
+    {
+      "id": "q6",
+      "context": "Reacting to a canceled event",
+      "stem": "The spring music festival was canceled due to budget cuts. I'm so disappointed.",
+      "options": {
+        "A": "That's really unfortunate. Maybe the student council can organize a smaller alternative.",
+        "B": "Music festivals require a lot of planning.",
+        "C": "I didn't go to last year's festival."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing disappointment about a canceled event, so sharing their feelings and suggesting a possible alternative is supportive."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about club fees",
+      "stem": "Is there a membership fee to join the photography club?",
+      "options": {
+        "A": "It's only 10 dollars per semester, which covers film and darkroom access.",
+        "B": "Photography clubs are a great way to learn new skills.",
+        "C": "I used to be in the photography club."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about costs, so providing the specific fee and what it covers directly answers their question."
+    },
+    {
+      "id": "q8",
+      "context": "Encouraging participation",
+      "stem": "I'm thinking about trying out for the campus theater production, but I'm shy.",
+      "options": {
+        "A": "You should go for it! Everyone is nervous at first, but it's a lot of fun.",
+        "B": "Theater productions require a lot of rehearsals.",
+        "C": "I prefer watching plays to performing."
+      },
+      "correct": "A",
+      "explanation": "The speaker is hesitant about trying something new, so offering encouragement and normalizing their feelings is supportive."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Are the basketball courts open for free play during lunch hours?"
+    },
+    {
+      "role": "Friend",
+      "text": "There's a Korean film festival at the student center this Friday. Want to go?"
+    },
+    {
+      "role": "Student",
+      "text": "Can students use the music practice rooms even if they're not music majors?"
+    },
+    {
+      "role": "Friend",
+      "text": "I'm so bored this weekend. There's nothing to do on campus."
+    },
+    {
+      "role": "Student",
+      "text": "I want to get involved in community service. Are there any student organizations for that?"
+    },
+    {
+      "role": "Friend",
+      "text": "The spring music festival was canceled due to budget cuts. I'm so disappointed."
+    },
+    {
+      "role": "Student",
+      "text": "Is there a membership fee to join the photography club?"
+    },
+    {
+      "role": "Friend",
+      "text": "I'm thinking about trying out for the campus theater production, but I'm shy."
+    }
+  ]
+}

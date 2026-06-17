@@ -1,0 +1,38 @@
+{
+  "title": "Lost and Found Office Relocation",
+  "transcript": "Attention students and staff. The campus lost and found office has been relocated from the basement of the library to Room 105 in the Student Services Building. The new location is open Monday through Friday from 9 AM to 5 PM. To claim an item, you must present a valid student or staff ID and provide a detailed description of the lost item. Items that are not claimed within thirty days will be donated to local charities. For inquiries, you may contact the lost and found office at extension 4521 or visit the campus safety website.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Where was the lost and found office originally located?",
+      "options": [
+        "In the Student Services Building",
+        "In the basement of the library",
+        "In the campus safety office",
+        "In the administration building"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The announcement says the office has been relocated from the basement of the library."
+    },
+    {
+      "id": "q2",
+      "stem": "What happens to unclaimed items after thirty days?",
+      "options": [
+        "They are returned to the finder",
+        "They are donated to local charities",
+        "They are stored permanently",
+        "They are sold at auction"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Items not claimed within thirty days will be donated to local charities."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention students and staff. The campus lost and found office has been relocated from the basement of the library to Room 105 in the Student Services Building. The new location is open Monday through Friday from 9 AM to 5 PM. To claim an item, you must present a valid student or staff ID and provide a detailed description of the lost item. Items that are not claimed within thirty days will be donated to local charities. For inquiries, you may contact the lost and found office at extension 4521 or visit the campus safety website."
+    }
+  ]
+}

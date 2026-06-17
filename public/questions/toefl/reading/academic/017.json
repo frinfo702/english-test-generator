@@ -1,0 +1,66 @@
+{
+  "title": "The Role of Fungi in Forest Ecosystems",
+  "passage": "Fungi play a critical but often overlooked role in forest ecosystems. While trees and plants are visible above ground, an extensive underground network of fungal mycelium connects their root systems in what scientists call the mycorrhizal network. This symbiotic association benefits both organisms: fungi receive carbohydrates produced by trees through photosynthesis, while trees gain access to water and minerals that fungal hyphae can reach far more efficiently than plant roots alone.\n\nRecent research has revealed that these fungal networks are far more sophisticated than previously understood. Through the mycelial web, trees can transfer carbon, nitrogen, and other nutrients to neighboring plants, including seedlings struggling to establish themselves. Older trees, sometimes called hub trees or mother trees, have been observed channeling resources through fungal connections to support younger members of the forest community. Some studies even suggest that trees can send chemical warning signals through these networks when threatened by pests or disease.\n\nHowever, the mycorrhizal relationship is not universally beneficial to all plants. Some fungi form parasitic relationships with certain species, extracting resources without providing significant benefits in return. Additionally, disturbance to forest soils through logging or construction can sever these delicate fungal networks, with recovery potentially taking decades.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "importantIdea",
+      "stem": "According to the passage, which of the following is a key benefit that trees gain from the mycorrhizal network?",
+      "options": [
+        "A. Protection against extreme temperatures",
+        "B. Improved access to water and minerals",
+        "C. Faster growth through direct sunlight exposure",
+        "D. Resistance to fungal infections"
+      ],
+      "correctIndex": 1,
+      "explanation": "Trees gain 'access to water and minerals that fungal hyphae can reach far more efficiently than plant roots alone.'"
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "What have researchers discovered about older trees in forest ecosystems?",
+      "options": [
+        "A. They compete aggressively with younger trees for nutrients",
+        "B. They can channel resources to support younger trees through fungal networks",
+        "C. They develop immunity to all common forest diseases",
+        "D. They grow faster when isolated from fungal connections"
+      ],
+      "correctIndex": 1,
+      "explanation": "Older trees 'have been observed channeling resources through fungal connections to support younger members of the forest community.'"
+    },
+    {
+      "id": "q3",
+      "type": "vocabulary",
+      "stem": "The word 'sever' in paragraph 3 is closest in meaning to:",
+      "options": ["A. strengthen", "B. repair", "C. cut or break", "D. expand"],
+      "correctIndex": 2,
+      "explanation": "'Sever' means to cut off or break apart, referring here to the disruption of fungal networks."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred about forest logging based on the passage?",
+      "options": [
+        "A. It only affects above-ground plant life",
+        "B. It may cause long-term damage to underground fungal networks",
+        "C. It benefits younger trees by increasing sunlight availability",
+        "D. It has no effect on mycorrhizal relationships"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that logging 'can sever these delicate fungal networks, with recovery potentially taking decades,' implying lasting underground damage."
+    },
+    {
+      "id": "q5",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention 'chemical warning signals' in paragraph 2?",
+      "options": [
+        "A. To illustrate the sophistication of fungal network communication",
+        "B. To argue that trees are sentient beings",
+        "C. To compare forest communication with human warning systems",
+        "D. To suggest that fungi are the primary communicators in forests"
+      ],
+      "correctIndex": 0,
+      "explanation": "The mention of chemical warning signals supports the passage's point that fungal networks are 'far more sophisticated than previously understood.'"
+    }
+  ]
+}

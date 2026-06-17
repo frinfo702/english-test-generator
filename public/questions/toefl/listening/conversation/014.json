@@ -1,0 +1,86 @@
+{
+  "title": "Course Registration Hold",
+  "transcript": "Student: Hi, I'm trying to register for classes for next semester, but the system says I have a hold on my account. Can you help me figure out why? Registrar: Sure, let me pull up your account. What's your student ID? Student: It's 445-2091. Registrar: I see. You have a hold because you haven't submitted your final transcript from your previous institution. Student: But I already ordered it to be sent here last month. Registrar: Sometimes it takes a while for the records office to process. Let me check... Actually, it arrived yesterday but hasn't been logged into the system yet. Student: So will I be able to register once it's logged? Registrar: Yes, I can expedite this for you. I'll process it now, and the hold should be removed within a few hours. Student: That's a relief. Also, I wanted to ask about an override for Biology 201. It says I don't meet the prerequisite. Registrar: Let me check. You took Chemistry 101, but the prerequisite is Biology 101 or equivalent AP credit. Do you have AP Biology? Student: I scored a 4 on the AP Biology exam in high school. Registrar: That qualifies. You'll need to submit your AP score report to the registrar's office, and then we can apply the override. Student: Great, I'll do that today. Thank you for your help.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit the registrar's office?",
+      "options": [
+        "To change her major to biology",
+        "To resolve a registration hold and a prerequisite issue",
+        "To appeal a grade from last semester",
+        "To request a transcript for a job application"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student has a hold preventing registration and also needs an override for a prerequisite, so she visits the registrar for help with both issues."
+    },
+    {
+      "id": "q2",
+      "stem": "How does the student qualify for the Biology 201 prerequisite?",
+      "options": [
+        "She completed Chemistry 101 last semester",
+        "She passed a placement test",
+        "She earned a score of 4 on the AP Biology exam",
+        "She took a summer biology course"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The student scored a 4 on the AP Biology exam in high school, which qualifies as meeting the prerequisite for Biology 201."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi, I'm trying to register for classes for next semester, but the system says I have a hold on my account. Can you help me figure out why?"
+    },
+    {
+      "role": "Registrar",
+      "text": "Sure, let me pull up your account. What's your student ID?"
+    },
+    {
+      "role": "Student",
+      "text": "It's 445-2091."
+    },
+    {
+      "role": "Registrar",
+      "text": "I see. You have a hold because you haven't submitted your final transcript from your previous institution."
+    },
+    {
+      "role": "Student",
+      "text": "But I already ordered it to be sent here last month."
+    },
+    {
+      "role": "Registrar",
+      "text": "Sometimes it takes a while for the records office to process. Let me check... Actually, it arrived yesterday but hasn't been logged into the system yet."
+    },
+    {
+      "role": "Student",
+      "text": "So will I be able to register once it's logged?"
+    },
+    {
+      "role": "Registrar",
+      "text": "Yes, I can expedite this for you. I'll process it now, and the hold should be removed within a few hours."
+    },
+    {
+      "role": "Student",
+      "text": "That's a relief. Also, I wanted to ask about an override for Biology 201. It says I don't meet the prerequisite."
+    },
+    {
+      "role": "Registrar",
+      "text": "Let me check. You took Chemistry 101, but the prerequisite is Biology 101 or equivalent AP credit. Do you have AP Biology?"
+    },
+    {
+      "role": "Student",
+      "text": "I scored a 4 on the AP Biology exam in high school."
+    },
+    {
+      "role": "Registrar",
+      "text": "That qualifies. You'll need to submit your AP score report to the registrar's office, and then we can apply the override."
+    },
+    {
+      "role": "Student",
+      "text": "Great, I'll do that today. Thank you for your help."
+    }
+  ]
+}

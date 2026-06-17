@@ -1,0 +1,38 @@
+{
+  "title": "Parking Garage Closure Notice",
+  "transcript": "Attention faculty, staff, and students. Parking Garage B on the south side of campus will be closed for structural inspections from April 10th to April 12th. All vehicles must be removed from the garage by 8 PM on April 9th. During the closure, parking will be available in Garage C on West Campus Avenue with a complimentary shuttle service running every ten minutes between the garage and the main campus. Faculty and staff with reserved spots in Garage B have been contacted via email with alternative arrangements. We apologize for any inconvenience.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why is Parking Garage B closing?",
+      "options": [
+        "It is being demolished",
+        "It needs structural inspections",
+        "It is being repainted",
+        "It will be converted into a building"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The garage will be closed for structural inspections."
+    },
+    {
+      "id": "q2",
+      "stem": "How often will the shuttle service run?",
+      "options": [
+        "Every five minutes",
+        "Every ten minutes",
+        "Every fifteen minutes",
+        "Every thirty minutes"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "A complimentary shuttle service will run every ten minutes between Garage C and the main campus."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention faculty, staff, and students. Parking Garage B on the south side of campus will be closed for structural inspections from April 10th to April 12th. All vehicles must be removed from the garage by 8 PM on April 9th. During the closure, parking will be available in Garage C on West Campus Avenue with a complimentary shuttle service running every ten minutes between the garage and the main campus. Faculty and staff with reserved spots in Garage B have been contacted via email with alternative arrangements. We apologize for any inconvenience."
+    }
+  ]
+}

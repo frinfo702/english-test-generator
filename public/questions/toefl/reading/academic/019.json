@@ -1,0 +1,71 @@
+{
+  "title": "Animal Navigation and Migration Patterns",
+  "passage": "Every year, countless animals undertake remarkable migrations across vast distances, navigating with precision that human technology struggles to match. Arctic terns travel from the Arctic to Antarctica and back annually, covering approximately seventy thousand kilometers. Monarch butterflies, weighing less than a gram, migrate from Canada to central Mexico, returning to specific trees their ancestors left generations earlier.\n\nResearch has revealed that animals employ an impressive array of navigational tools. Many species, including birds and sea turtles, detect Earth's magnetic field through specialized proteins called cryptochromes in their eyes, essentially giving them a built-in compass. Some fish detect subtle changes in water pressure and temperature gradients. Insects use polarized light patterns invisible to humans to maintain their bearings. Pigeons are known to follow familiar landmarks and even use infrasound, low-frequency sound waves that travel hundreds of kilometers.\n\nPerhaps most remarkable is the phenomenon of genetic memory in migration. Young monarch butterflies that have never made the journey somehow know the route, suggesting that navigational information is encoded in their DNA. Similarly, salmon return from the ocean to the exact freshwater streams where they hatched years earlier, guided in part by chemical signatures imprinted during their earliest developmental stages.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "Approximately how far do Arctic terns travel each year?",
+      "options": [
+        "A. Thirty thousand kilometers",
+        "B. Fifty thousand kilometers",
+        "C. Seventy thousand kilometers",
+        "D. One hundred thousand kilometers"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage states Arctic terns travel 'approximately seventy thousand kilometers' annually."
+    },
+    {
+      "id": "q2",
+      "type": "vocabulary",
+      "stem": "The word 'phenomenon' in paragraph 3 is closest in meaning to:",
+      "options": [
+        "A. hypothesis",
+        "B. experiment",
+        "C. remarkable occurrence",
+        "D. common behavior"
+      ],
+      "correctIndex": 2,
+      "explanation": "'Phenomenon' refers to an observable fact or event, especially one that is remarkable or unusual."
+    },
+    {
+      "id": "q3",
+      "type": "inference",
+      "stem": "What can be inferred about cryptochromes from the passage?",
+      "options": [
+        "A. They are found exclusively in migratory birds",
+        "B. They allow animals to detect magnetic fields",
+        "C. They are only active during daylight hours",
+        "D. They contribute to muscle strength during migration"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage states that birds and sea turtles 'detect Earth's magnetic field through specialized proteins called cryptochromes in their eyes.'"
+    },
+    {
+      "id": "q4",
+      "type": "insertSentence",
+      "stem": "Where would the following sentence best fit in the passage? 'This magnetic sense operates even on cloudy days when the sun is not visible.'",
+      "options": [
+        "A. At the end of paragraph 1",
+        "B. After the first sentence of paragraph 2",
+        "C. After the sentence about cryptochromes in paragraph 2",
+        "D. At the beginning of paragraph 3"
+      ],
+      "correctIndex": 2,
+      "explanation": "The sentence elaborates on magnetic field detection, so it logically follows the discussion of cryptochromes and the magnetic compass."
+    },
+    {
+      "id": "q5",
+      "type": "mainIdea",
+      "stem": "Which of the following best summarizes the passage?",
+      "options": [
+        "A. Animal migration is primarily driven by seasonal temperature changes",
+        "B. Various species use diverse mechanisms to navigate during long migrations",
+        "C. Monarch butterflies have the most sophisticated navigation system",
+        "D. Genetic memory is the only reliable navigation method among animals"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage covers migration distances, multiple navigation tools (magnetic, light, chemical), and genetic memory."
+    }
+  ]
+}

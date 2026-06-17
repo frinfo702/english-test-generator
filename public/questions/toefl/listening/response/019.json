@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Travel & Transportation",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about airport shuttle",
+      "stem": "Is there a campus shuttle to the airport during winter break?",
+      "options": {
+        "A": "Yes, we run a shuttle every two hours. You need to sign up in advance.",
+        "B": "Airport shuttles are usually shared rides.",
+        "C": "I'm taking a taxi to the airport."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about transportation availability, so confirming the service and explaining the booking process is helpful."
+    },
+    {
+      "id": "q2",
+      "context": "Asking about directions to a building",
+      "stem": "Excuse me, can you tell me how to get to the engineering building from here?",
+      "options": {
+        "A": "Sure, go straight past the fountain, then take the second left.",
+        "B": "The engineering building has six floors.",
+        "C": "I'm not an engineering student."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for directions, so providing clear, step-by-step instructions is the most helpful response."
+    },
+    {
+      "id": "q3",
+      "context": "Asking about bike parking",
+      "stem": "Where can I park my bike on campus? I don't want it to get towed.",
+      "options": {
+        "A": "There are bike racks in front of every major building. Just avoid locking to railings.",
+        "B": "Biking is a great way to get around campus.",
+        "C": "I walk to class every day."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about proper bike parking, so explaining where racks are and what to avoid is directly helpful."
+    },
+    {
+      "id": "q4",
+      "context": "Expressing frustration with traffic",
+      "stem": "The traffic on Main Street was terrible this morning. I was stuck for forty minutes.",
+      "options": {
+        "A": "Tell me about it. There's construction near the campus entrance.",
+        "B": "Traffic jams are measured by vehicle density.",
+        "C": "I take the back roads to avoid traffic."
+      },
+      "correct": "A",
+      "explanation": "The speaker is complaining about traffic, so showing shared understanding and providing context is the natural empathetic response."
+    },
+    {
+      "id": "q5",
+      "context": "Asking about carpool program",
+      "stem": "Does the university have a carpool program for students who commute?",
+      "options": {
+        "A": "Yes, you can register on the sustainability portal to find carpool partners.",
+        "B": "Carpooling reduces carbon emissions from commuting.",
+        "C": "I drive alone to campus every day."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a specific program, so confirming its existence and explaining how to access it is helpful."
+    },
+    {
+      "id": "q6",
+      "context": "Asking about taxi services",
+      "stem": "Is there a taxi stand near the dorms, or should I call one in advance?",
+      "options": {
+        "A": "It's better to call or use a ride-sharing app. Taxis rarely wait near the dorms.",
+        "B": "Taxis charge by mileage and time.",
+        "C": "I use ride-sharing services frequently."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about local transportation logistics, so providing practical advice about what works best is helpful."
+    },
+    {
+      "id": "q7",
+      "context": "Mentioning a flat tire",
+      "stem": "My bike has a flat tire and I need to get to class in fifteen minutes.",
+      "options": {
+        "A": "You can borrow my bike. I don't have class until noon.",
+        "B": "Flat tires can be fixed with a repair kit.",
+        "C": "I walk to class, so I don't need a bike."
+      },
+      "correct": "A",
+      "explanation": "The speaker has a practical problem and a time constraint, so offering a generous immediate solution is the most helpful response."
+    },
+    {
+      "id": "q8",
+      "context": "Asking about international travel documentation",
+      "stem": "I'm studying abroad next semester. Do I need any special travel documents?",
+      "options": {
+        "A": "Yes, make sure your passport is valid and check if you need a student visa.",
+        "B": "Study abroad programs offer unique cultural experiences.",
+        "C": "I've always wanted to study abroad."
+      },
+      "correct": "A",
+      "explanation": "The speaker is preparing for international travel and asking about requirements, so providing key documentation advice is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Is there a campus shuttle to the airport during winter break?"
+    },
+    {
+      "role": "Friend",
+      "text": "Excuse me, can you tell me how to get to the engineering building from here?"
+    },
+    {
+      "role": "Student",
+      "text": "Where can I park my bike on campus? I don't want it to get towed."
+    },
+    {
+      "role": "Friend",
+      "text": "The traffic on Main Street was terrible this morning. I was stuck for forty minutes."
+    },
+    {
+      "role": "Student",
+      "text": "Does the university have a carpool program for students who commute?"
+    },
+    {
+      "role": "Friend",
+      "text": "Is there a taxi stand near the dorms, or should I call one in advance?"
+    },
+    {
+      "role": "Student",
+      "text": "My bike has a flat tire and I need to get to class in fifteen minutes."
+    },
+    {
+      "role": "Friend",
+      "text": "I'm studying abroad next semester. Do I need any special travel documents?"
+    }
+  ]
+}

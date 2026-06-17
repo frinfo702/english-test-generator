@@ -1,0 +1,135 @@
+{
+  "title": "Listen and Choose a Response — Housing & Dining",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Complaining about dining hall food",
+      "stem": "The dining hall has been serving the same meals every week. I'm getting tired of it.",
+      "options": {
+        "A": "You should fill out the feedback form. They actually consider student suggestions.",
+        "B": "Dining halls serve hundreds of students every day.",
+        "C": "I usually cook my own meals in the dorm kitchen."
+      },
+      "correct": "A",
+      "explanation": "The speaker is complaining about repetitive food, so suggesting a constructive way to address the issue is helpful."
+    },
+    {
+      "id": "q2",
+      "context": "Asking about guest policy",
+      "stem": "Can I have a guest stay overnight in my dorm room over the weekend?",
+      "options": {
+        "A": "Overnight guests are allowed but need to be registered at the front desk.",
+        "B": "Dorm rooms are quite small for two people.",
+        "C": "I had a friend visit last weekend."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about dormitory rules, so explaining the policy clearly is the most helpful response."
+    },
+    {
+      "id": "q3",
+      "context": "Asking about meal plan options",
+      "stem": "I'm thinking of switching from the 14-meal plan to the unlimited plan. Can I do that?",
+      "options": {
+        "A": "Yes, you can change your meal plan during the first two weeks of the semester.",
+        "B": "Unlimited meal plans are more expensive.",
+        "C": "I have the 10-meal plan."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about changing a service plan, so confirming it's possible and explaining the window for changes is helpful."
+    },
+    {
+      "id": "q4",
+      "context": "Reporting a broken appliance",
+      "stem": "The refrigerator in my dorm room stopped working. All my food is spoiling.",
+      "options": {
+        "A": "That's urgent. I'll send a maintenance worker to your room right away.",
+        "B": "Refrigerators can be repaired or replaced.",
+        "C": "You should keep a cooler for emergencies."
+      },
+      "correct": "A",
+      "explanation": "The speaker is reporting an urgent maintenance issue, so taking immediate action to resolve it is the appropriate staff response."
+    },
+    {
+      "id": "q5",
+      "context": "Suggesting a roommate activity",
+      "stem": "We should decorate our dorm room together. It looks a bit plain right now.",
+      "options": {
+        "A": "Good idea! I can bring some posters and string lights from home.",
+        "B": "Dorm rooms come with basic furniture.",
+        "C": "I'm not very good at decorating."
+      },
+      "correct": "A",
+      "explanation": "The speaker is suggesting a shared activity, so agreeing enthusiastically and offering to contribute is cooperative."
+    },
+    {
+      "id": "q6",
+      "context": "Inquiring about housing deposit",
+      "stem": "When do I get my housing deposit back after moving out of the dorm?",
+      "options": {
+        "A": "The deposit is refunded within 30 days after move-out, minus any damages.",
+        "B": "Housing deposits are required for all residents.",
+        "C": "I got my full deposit back last year."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a refund timeline, so providing the specific timeframe and relevant conditions is direct and helpful."
+    },
+    {
+      "id": "q7",
+      "context": "Asking about dietary restrictions",
+      "stem": "Does the dining hall offer gluten-free options? I have celiac disease.",
+      "options": {
+        "A": "Yes, we have a dedicated gluten-free station. Just ask the staff for assistance.",
+        "B": "Gluten-free diets have become more common.",
+        "C": "I eat gluten-free sometimes too."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a dietary accommodation, so confirming availability and providing specific guidance is the appropriate response."
+    },
+    {
+      "id": "q8",
+      "context": "Complimenting a neighbor",
+      "stem": "Your room looks so cozy! I love how you arranged the furniture.",
+      "options": {
+        "A": "Thank you! I spent the whole weekend rearranging everything.",
+        "B": "Dorm rooms are usually small and compact.",
+        "C": "Furniture arrangement is important."
+      },
+      "correct": "A",
+      "explanation": "The speaker is giving a compliment about the room, so graciously accepting and sharing a bit about the effort is the natural social response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The dining hall has been serving the same meals every week. I'm getting tired of it."
+    },
+    {
+      "role": "Friend",
+      "text": "Can I have a guest stay overnight in my dorm room over the weekend?"
+    },
+    {
+      "role": "Student",
+      "text": "I'm thinking of switching from the 14-meal plan to the unlimited plan. Can I do that?"
+    },
+    {
+      "role": "Friend",
+      "text": "The refrigerator in my dorm room stopped working. All my food is spoiling."
+    },
+    {
+      "role": "Student",
+      "text": "We should decorate our dorm room together. It looks a bit plain right now."
+    },
+    {
+      "role": "Friend",
+      "text": "When do I get my housing deposit back after moving out of the dorm?"
+    },
+    {
+      "role": "Student",
+      "text": "Does the dining hall offer gluten-free options? I have celiac disease."
+    },
+    {
+      "role": "Friend",
+      "text": "Your room looks so cozy! I love how you arranged the furniture."
+    }
+  ]
+}

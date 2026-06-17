@@ -1,0 +1,78 @@
+{
+  "title": "Study Abroad Program Inquiry",
+  "transcript": "Student: Professor Davis, do you have a moment? I'm interested in the study abroad program in Japan for next spring, and I heard you're the faculty coordinator. Professor: I am. Great to hear you're interested. Have you looked at the program website? Student: Yes, but I have a few questions. First, do I need to have completed any specific language requirements? Professor: No prior Japanese is required. The program includes an intensive language course during the first month. However, you do need to have completed at least two semesters of college-level coursework. Student: I've completed three semesters, so that's fine. What about housing? Professor: You'll stay with a host family for the first semester. That's meant to help with cultural immersion and language practice. After that, you can move into a shared apartment if you prefer. Student: That sounds great. How about credits? Will my courses transfer back? Professor: All courses are pre-approved for transfer credit. You just need to get your specific course selections signed off by your academic advisor before you go. Student: Is there any financial aid available for the program? Professor: Yes, there are scholarships specifically for study abroad students. The application deadline for those is November 1st, so you still have time. Student: Wonderful. I'll start working on the application this week.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student speak with Professor Davis?",
+      "options": [
+        "To get a recommendation letter for a scholarship",
+        "To ask about the study abroad program in Japan",
+        "To change his major to Japanese studies",
+        "To complain about a housing assignment"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student is interested in the study abroad program in Japan and has several questions about requirements, housing, credits, and financial aid."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the professor say about housing in the program?",
+      "options": [
+        "Students live in university dormitories",
+        "Housing arrangements are the student's responsibility",
+        "Students stay with a host family first, then may move to a shared apartment",
+        "All students share apartments near campus"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The professor explains that students stay with a host family for the first semester and can move to a shared apartment afterward."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor Davis, do you have a moment? I'm interested in the study abroad program in Japan for next spring, and I heard you're the faculty coordinator."
+    },
+    {
+      "role": "Professor",
+      "text": "I am. Great to hear you're interested. Have you looked at the program website?"
+    },
+    {
+      "role": "Student",
+      "text": "Yes, but I have a few questions. First, do I need to have completed any specific language requirements?"
+    },
+    {
+      "role": "Professor",
+      "text": "No prior Japanese is required. The program includes an intensive language course during the first month. However, you do need to have completed at least two semesters of college-level coursework."
+    },
+    {
+      "role": "Student",
+      "text": "I've completed three semesters, so that's fine. What about housing?"
+    },
+    {
+      "role": "Professor",
+      "text": "You'll stay with a host family for the first semester. That's meant to help with cultural immersion and language practice. After that, you can move into a shared apartment if you prefer."
+    },
+    {
+      "role": "Student",
+      "text": "That sounds great. How about credits? Will my courses transfer back?"
+    },
+    {
+      "role": "Professor",
+      "text": "All courses are pre-approved for transfer credit. You just need to get your specific course selections signed off by your academic advisor before you go."
+    },
+    {
+      "role": "Student",
+      "text": "Is there any financial aid available for the program?"
+    },
+    {
+      "role": "Professor",
+      "text": "Yes, there are scholarships specifically for study abroad students. The application deadline for those is November 1st, so you still have time."
+    },
+    {
+      "role": "Student",
+      "text": "Wonderful. I'll start working on the application this week."
+    }
+  ]
+}

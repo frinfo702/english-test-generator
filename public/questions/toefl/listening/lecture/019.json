@@ -1,0 +1,68 @@
+{
+  "title": "Cellular Respiration and Energy Production",
+  "transcript": "Today we will examine cellular respiration, the process by which cells convert nutrients into usable energy. While photosynthesis captures energy from sunlight, cellular respiration releases that energy to power cellular activities. The primary energy currency of the cell is a molecule called adenosine triphosphate, or ATP. Cellular respiration can be divided into three main stages: glycolysis, the Krebs cycle, and the electron transport chain. Glycolysis occurs in the cytoplasm and breaks down one molecule of glucose into two molecules of pyruvate, producing a small amount of ATP. This stage does not require oxygen and is therefore anaerobic. If oxygen is present, the pyruvate enters the mitochondria for the next stages. The Krebs cycle, which takes place in the mitochondrial matrix, further breaks down the pyruvate and generates electron carriers. Finally, the electron transport chain, located in the inner mitochondrial membrane, uses these electron carriers to produce the majority of ATP. This stage requires oxygen and is therefore aerobic. In total, one molecule of glucose can yield up to thirty-eight molecules of ATP through aerobic respiration. However, when oxygen is scarce, cells can resort to fermentation, which produces much less ATP but allows glycolysis to continue. Understanding cellular respiration is fundamental to biology because it explains how living organisms obtain and use energy.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The structure of mitochondria",
+        "The process of cellular respiration and energy production",
+        "The difference between aerobic and anaerobic exercise",
+        "The role of glucose in human nutrition"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture explains cellular respiration, its stages, and how cells produce energy in the form of ATP."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, where does glycolysis occur?",
+      "options": [
+        "In the mitochondria",
+        "In the cytoplasm",
+        "In the nucleus",
+        "In the chloroplasts"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "Glycolysis occurs in the cytoplasm and does not require oxygen."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the professor imply about fermentation?",
+      "options": [
+        "It produces more ATP than aerobic respiration",
+        "It is the preferred method of energy production",
+        "It allows energy production to continue when oxygen is scarce",
+        "It only occurs in plant cells"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The professor states that fermentation produces much less ATP but allows glycolysis to continue when oxygen is scarce."
+    },
+    {
+      "id": "q4",
+      "stem": "What does ATP stand for?",
+      "options": [
+        "Adenosine triphosphate",
+        "Amino acid protein",
+        "Active transport process",
+        "Adenine thymine phosphate"
+      ],
+      "correctIndex": 0,
+      "type": "vocabulary",
+      "explanation": "ATP stands for adenosine triphosphate, the primary energy currency of the cell."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will examine cellular respiration, the process by which cells convert nutrients into usable energy. While photosynthesis captures energy from sunlight, cellular respiration releases that energy to power cellular activities. The primary energy currency of the cell is a molecule called adenosine triphosphate, or ATP. Cellular respiration can be divided into three main stages: glycolysis, the Krebs cycle, and the electron transport chain. Glycolysis occurs in the cytoplasm and breaks down one molecule of glucose into two molecules of pyruvate, producing a small amount of ATP. This stage does not require oxygen and is therefore anaerobic. If oxygen is present, the pyruvate enters the mitochondria for the next stages."
+    },
+    {
+      "role": "Lecturer",
+      "text": "The Krebs cycle, which takes place in the mitochondrial matrix, further breaks down the pyruvate and generates electron carriers. Finally, the electron transport chain, located in the inner mitochondrial membrane, uses these electron carriers to produce the majority of ATP. This stage requires oxygen and is therefore aerobic. In total, one molecule of glucose can yield up to thirty-eight molecules of ATP through aerobic respiration. However, when oxygen is scarce, cells can resort to fermentation, which produces much less ATP but allows glycolysis to continue. Understanding cellular respiration is fundamental to biology because it explains how living organisms obtain and use energy."
+    }
+  ]
+}

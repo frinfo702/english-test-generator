@@ -2,95 +2,113 @@
   "texts": [
     {
       "id": "t1",
-      "textType": "poster",
-      "content": "MISSING CAT\n\nName: Milo\nBreed: Orange Tabby\nAge: 3 years\nLast seen: Near Oak Street Park, May 12\n\nMilo has a microchip and answers to his name. He is shy around strangers.\n\nIf you see him, please call: 555-0187\nReward: $200",
+      "textType": "email",
+      "content": "From: Dr. Martinez\nTo: History 201 Students\nSubject: Field Trip to City Museum\n\nDear Students,\n\nThis is a reminder that our field trip to the City Museum of History is scheduled for this Friday, November 8. We will depart from the main entrance at 9:00 AM sharp and return by 3:30 PM.\n\nPlease bring your student ID, a notebook, and comfortable walking shoes. Admission is free for students, but you will need to cover the cost of your own lunch. The museum cafe has reasonable prices, or you may bring a packed lunch.\n\nIf you have not yet submitted the permission form, please do so by Wednesday at noon. Late submissions cannot be accepted.",
       "questions": [
         {
           "id": "q1",
-          "stem": "What should a person do if they spot Milo?",
+          "stem": "What is the purpose of this email?",
           "options": [
-            "A. Try to catch him immediately",
-            "B. Call the number provided",
-            "C. Take him to the nearest vet",
-            "D. Post about it on social media"
+            "A. To announce the cancellation of a field trip",
+            "B. To inform students about an upcoming museum visit",
+            "C. To request donations for the museum admission",
+            "D. To assign a research project at the museum"
           ],
           "correctIndex": 1,
-          "type": "factual",
-          "explanation": "The poster asks anyone who sees Milo to call 555-0187."
+          "type": "purpose",
+          "explanation": "The email provides details about the scheduled field trip, including meeting time, what to bring, and the permission form deadline."
         },
         {
           "id": "q2",
-          "stem": "What does the poster suggest about Milo's personality?",
+          "stem": "What can be inferred about students who miss the Wednesday deadline?",
           "options": [
-            "A. He is very friendly toward people",
-            "B. He tends to be timid with unfamiliar people",
-            "C. He does not get along with other cats",
-            "D. He enjoys spending time outdoors"
+            "A. They can pay a late fee to submit the form",
+            "B. They will not be permitted to attend the trip",
+            "C. They must get the professor's special approval",
+            "D. They can submit the form on the day of the trip"
           ],
           "correctIndex": 1,
-          "type": "vocabulary",
-          "explanation": "'Shy around strangers' indicates he is timid or nervous with unfamiliar people."
+          "type": "inference",
+          "explanation": "The email states that late submissions 'cannot be accepted,' implying that students who miss the deadline will be unable to participate."
+        },
+        {
+          "id": "q3",
+          "stem": "Which expense is the university covering for this trip?",
+          "options": [
+            "A. Lunch at the museum cafe",
+            "B. Museum admission fees",
+            "C. Transportation to the museum",
+            "D. Notebooks for note-taking"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The email states that 'Admission is free for students,' meaning the museum entry is covered."
         }
       ]
     },
     {
       "id": "t2",
       "textType": "receipt",
-      "content": "GreenLeaf Electronics\n123 Main Street, Portland, OR\n\nItem                 Qty     Price\nUSB-C Hub            1       $34.99\nWireless Mouse       1       $25.50\nLaptop Sleeve        1       $18.99\n\nSubtotal:                    $79.48\nTax (8.5%):                  $6.76\nTotal:                       $86.24\n\nPayment: Visa **** 4532\nDate: May 14, 2025\nReturn Policy: 30 days with original packaging",
+      "content": "GreenLeaf Electronics\n123 Oak Avenue, Portland, OR\nTel: 555-0198\n\nRECEIPT\nDate: 2025/03/15 14:23\nCashier: #1042\n\nItem                           Qty     Price\n------------------------------------------\nWireless Mouse                  1     $29.99\nUSB-C Hub                       1     $45.50\nLaptop Sleeve (13-inch)         1     $24.99\nScreen Cleaning Kit             1     $12.99\n------------------------------------------\nSubtotal:                             $113.47\nTax (8.5%):                             $9.64\nTotal:                                $123.11\n\nPayment: Visa ****4321\n\nReturn policy: 30-day full refund with original receipt. Items must be in original packaging.",
       "questions": [
         {
-          "id": "q3",
-          "stem": "How much was paid in sales tax on this purchase?",
-          "options": ["A. $6.76", "B. $34.99", "C. $79.48", "D. $86.24"],
-          "correctIndex": 0,
-          "type": "factual",
-          "explanation": "The receipt shows the tax amount as $6.76."
-        },
-        {
           "id": "q4",
-          "stem": "What condition must be met for a return?",
+          "stem": "What is the most expensive single item purchased?",
           "options": [
-            "A. The items must be unopened",
-            "B. The original packaging must be included",
-            "C. The return must be within 14 days",
-            "D. The receipt must be presented"
+            "A. The wireless mouse",
+            "B. The USB-C hub",
+            "C. The laptop sleeve",
+            "D. The screen cleaning kit"
           ],
           "correctIndex": 1,
           "type": "factual",
-          "explanation": "The receipt states '30 days with original packaging.'"
+          "explanation": "The USB-C hub costs $45.50, which is the highest price among the items listed."
+        },
+        {
+          "id": "q5",
+          "stem": "According to the receipt, what condition must be met for a refund?",
+          "options": [
+            "A. The items must be unopened",
+            "B. The customer must show photo identification",
+            "C. The items must be returned within 30 days with the original receipt",
+            "D. The purchase must have been made with a credit card"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The return policy states '30-day full refund with original receipt' and items 'must be in original packaging.'"
         }
       ]
     },
     {
       "id": "t3",
-      "textType": "text message",
-      "content": "Hey Jen — running 15 min late for dinner. Traffic on the highway is terrible. Could you order the roasted chicken for me? That way we can eat as soon as I arrive. See you soon!",
+      "textType": "announcement",
+      "content": "Attention all residents:\n\nThe pool will open for the season on Saturday, May 25. Operating hours are 6:00 AM to 9:00 PM daily. Please note the following:\n\n- All residents must scan their key fob at the gate for entry.\n- Guests must be signed in by a resident and are limited to two per household.\n- Glass containers are strictly prohibited in the pool area.\n- The pool will close at 6:00 PM on June 15 for a private event.\n\nThank you, and enjoy the summer!",
       "questions": [
         {
-          "id": "q5",
-          "stem": "What is the speaker's main concern?",
+          "id": "q6",
+          "stem": "What is the main purpose of this announcement?",
           "options": [
-            "A. The quality of the restaurant's food",
-            "B. Being delayed and wanting to save time",
-            "C. Finding a parking spot near the restaurant",
-            "D. Whether Jen will wait for him"
+            "A. To inform residents about pool rules and schedule",
+            "B. To announce that the pool will be closed all summer",
+            "C. To notify residents about a fee increase for pool access",
+            "D. To promote swimming lessons for children"
           ],
-          "correctIndex": 1,
+          "correctIndex": 0,
           "type": "purpose",
-          "explanation": "The message apologizes for being late and asks Jen to order ahead so they can eat immediately."
+          "explanation": "The announcement covers the opening date, hours, entry requirements, guest policy, and a specific closure — all essential information about pool usage."
         },
         {
-          "id": "q6",
-          "stem": "What does the speaker ask Jen to do?",
+          "id": "q7",
+          "stem": "What can be inferred about the event on June 15?",
           "options": [
-            "A. Cancel the dinner reservation",
-            "B. Order the roasted chicken",
-            "C. Pick him up from the highway",
-            "D. Wait outside the restaurant"
+            "A. It is a regular maintenance day",
+            "B. It is a private function that requires early pool closure",
+            "C. It is open to all residents free of charge",
+            "D. It will feature guest instructors from outside the community"
           ],
           "correctIndex": 1,
-          "type": "factual",
-          "explanation": "The speaker asks Jen to order the roasted chicken for him."
+          "type": "inference",
+          "explanation": "The announcement states the pool 'will close at 6:00 PM on June 15 for a private event,' implying the event is not open to all residents."
         }
       ]
     }

@@ -1,0 +1,78 @@
+{
+  "title": "Group Project Conflict",
+  "transcript": "Student: Professor Wagner, could I talk to you about our group project in Sociology 301? We're having some issues with collaboration. Professor: Of course. What seems to be the problem? Student: Well, one of our group members, Mark, hasn't been contributing much. We had a meeting last week, and he didn't show up or respond to messages. Professor: Have you spoken to him directly about your concerns? Student: I tried, but he said he's been busy with his part-time job. The thing is, the project is due in two weeks, and we're worried we won't finish on time. Professor: I understand. First, I'd suggest sending a group email clearly outlining each member's responsibilities and deadlines. That way expectations are documented. Student: We did that at the start, but he still didn't follow through. Professor: In that case, you could consider reassigning his tasks to other members if he continues to be unresponsive, but let me talk to him first. I'll mention that participation is part of the grade. Student: That would be helpful. Should we start doing his part just in case? Professor: You can divide his initial tasks among yourselves if you're worried about the deadline, but don't do his entire portion. He needs to be accountable. Student: Okay, we'll distribute his basic tasks and wait to hear back from you. Thank you, Professor.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student approach Professor Wagner?",
+      "options": [
+        "To request an extension on the group project",
+        "To report a problem with a non-contributing group member",
+        "To ask for a change in group assignment",
+        "To complain about the project topic"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student's group is having difficulties because one member, Mark, is not contributing, and they seek the professor's advice."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the professor say he will do about the situation?",
+      "options": [
+        "Remove Mark from the group immediately",
+        "Give the group an extra week to complete the project",
+        "Talk to Mark about participation being part of the grade",
+        "Assign the remaining work to other group members"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The professor offers to talk to Mark and mention that participation is part of the grade."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor Wagner, could I talk to you about our group project in Sociology 301? We're having some issues with collaboration."
+    },
+    {
+      "role": "Professor",
+      "text": "Of course. What seems to be the problem?"
+    },
+    {
+      "role": "Student",
+      "text": "Well, one of our group members, Mark, hasn't been contributing much. We had a meeting last week, and he didn't show up or respond to messages."
+    },
+    {
+      "role": "Professor",
+      "text": "Have you spoken to him directly about your concerns?"
+    },
+    {
+      "role": "Student",
+      "text": "I tried, but he said he's been busy with his part-time job. The thing is, the project is due in two weeks, and we're worried we won't finish on time."
+    },
+    {
+      "role": "Professor",
+      "text": "I understand. First, I'd suggest sending a group email clearly outlining each member's responsibilities and deadlines. That way expectations are documented."
+    },
+    {
+      "role": "Student",
+      "text": "We did that at the start, but he still didn't follow through."
+    },
+    {
+      "role": "Professor",
+      "text": "In that case, you could consider reassigning his tasks to other members if he continues to be unresponsive, but let me talk to him first. I'll mention that participation is part of the grade."
+    },
+    {
+      "role": "Student",
+      "text": "That would be helpful. Should we start doing his part just in case?"
+    },
+    {
+      "role": "Professor",
+      "text": "You can divide his initial tasks among yourselves if you're worried about the deadline, but don't do his entire portion. He needs to be accountable."
+    },
+    {
+      "role": "Student",
+      "text": "Okay, we'll distribute his basic tasks and wait to hear back from you. Thank you, Professor."
+    }
+  ]
+}

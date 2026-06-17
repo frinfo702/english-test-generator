@@ -1,0 +1,68 @@
+{
+  "title": "Einstein's Theory of Relativity",
+  "transcript": "Today we will discuss Albert Einstein's theory of relativity, which fundamentally changed our understanding of space, time, and gravity. Einstein actually proposed two theories: special relativity in 1905 and general relativity in 1915. Special relativity is based on two postulates: the laws of physics are the same for all observers moving at constant speed, and the speed of light is constant regardless of the observer's motion. One of the most famous consequences is the equation E equals mc squared, which shows that mass and energy are equivalent. This equation revealed that a small amount of mass can be converted into an enormous amount of energy, which later explained nuclear reactions. General relativity extended these ideas to include gravity. Einstein proposed that gravity is not a force pulling objects together, as Newton had described, but rather a curvature of spacetime caused by the presence of mass and energy. Imagine placing a heavy ball on a stretched rubber sheet—the ball creates a depression, and other objects roll toward it not because they are being pulled, but because they follow the curved surface. This model explains why planets orbit the sun and why light bends when passing near massive objects. General relativity has been confirmed through numerous experiments and observations, including the bending of starlight during a solar eclipse in 1919, which brought Einstein worldwide fame.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the lecture?",
+      "options": [
+        "The life and career of Albert Einstein",
+        "Einstein's theory of relativity and its implications",
+        "The difference between mass and energy",
+        "The experimental confirmation of general relativity"
+      ],
+      "correctIndex": 1,
+      "type": "mainIdea",
+      "explanation": "The lecture introduces both special and general relativity and explains their key concepts."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the lecture, what does the equation E equals mc squared demonstrate?",
+      "options": [
+        "Energy is always conserved in a system",
+        "Mass and energy are equivalent",
+        "The speed of light is constant",
+        "Gravity is a curvature of spacetime"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The equation E=mc² shows that mass and energy are equivalent."
+    },
+    {
+      "id": "q3",
+      "stem": "What does the professor imply about Newton's theory of gravity?",
+      "options": [
+        "It was completely wrong and has been discarded",
+        "It described gravity as a force rather than spacetime curvature",
+        "It was based on the same principles as relativity",
+        "It correctly explained the bending of light"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The professor contrasts Einstein's view of gravity as spacetime curvature with Newton's description of gravity as a force."
+    },
+    {
+      "id": "q4",
+      "stem": "What event confirmed general relativity and brought Einstein fame?",
+      "options": [
+        "The invention of the atomic bomb",
+        "The observation of light bending during a solar eclipse",
+        "The discovery of the theory of special relativity",
+        "The publication of his first scientific paper"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The bending of starlight during a solar eclipse in 1919 confirmed general relativity and brought Einstein worldwide fame."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Today we will discuss Albert Einstein's theory of relativity, which fundamentally changed our understanding of space, time, and gravity. Einstein actually proposed two theories: special relativity in 1905 and general relativity in 1915. Special relativity is based on two postulates: the laws of physics are the same for all observers moving at constant speed, and the speed of light is constant regardless of the observer's motion. One of the most famous consequences is the equation E equals mc squared, which shows that mass and energy are equivalent. This equation revealed that a small amount of mass can be converted into an enormous amount of energy, which later explained nuclear reactions."
+    },
+    {
+      "role": "Lecturer",
+      "text": "General relativity extended these ideas to include gravity. Einstein proposed that gravity is not a force pulling objects together, as Newton had described, but rather a curvature of spacetime caused by the presence of mass and energy. Imagine placing a heavy ball on a stretched rubber sheet—the ball creates a depression, and other objects roll toward it not because they are being pulled, but because they follow the curved surface. This model explains why planets orbit the sun and why light bends when passing near massive objects. General relativity has been confirmed through numerous experiments and observations, including the bending of starlight during a solar eclipse in 1919, which brought Einstein worldwide fame."
+    }
+  ]
+}

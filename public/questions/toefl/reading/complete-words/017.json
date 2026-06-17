@@ -1,0 +1,55 @@
+{
+  "paragraph": "The digestive system is responsible for breaking down food into nutrients that the body can absorb. Digestion begins in the mouth, where teeth grind food and enzymes start breaking down starches. The stomach continues this process using powerful acids and muscular contractions. Most absorption occurs in the small intestine, where nutrients enter the bloodstream and travel to cells throughout the body. Maintaining a healthy digestive system requires a balanced diet rich in fiber.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "res",
+      "answer": "responsible"
+    },
+    {
+      "index": 1,
+      "hint": "nut",
+      "answer": "nutrients"
+    },
+    {
+      "index": 2,
+      "hint": "ab",
+      "answer": "absorb"
+    },
+    {
+      "index": 3,
+      "hint": "en",
+      "answer": "enzymes"
+    },
+    {
+      "index": 4,
+      "hint": "mus",
+      "answer": "muscular"
+    },
+    {
+      "index": 5,
+      "hint": "ab",
+      "answer": "absorption"
+    },
+    {
+      "index": 6,
+      "hint": "in",
+      "answer": "intestine"
+    },
+    {
+      "index": 7,
+      "hint": "blo",
+      "answer": "bloodstream"
+    },
+    {
+      "index": 8,
+      "hint": "bal",
+      "answer": "balanced"
+    },
+    {
+      "index": 9,
+      "hint": "fi",
+      "answer": "fiber"
+    }
+  ]
+}

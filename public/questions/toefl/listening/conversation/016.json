@@ -1,0 +1,78 @@
+{
+  "title": "Scholarship Application Assistance",
+  "transcript": "Student: Good morning, Professor Thompson. Thank you for meeting with me. I'm applying for the Johnson Memorial Scholarship, and I was hoping you could give me some feedback on my application essay. Professor: Of course, I'd be happy to help. Let me take a look. Student: Here it is. The prompt asks about my academic goals and how this scholarship would help me achieve them. Professor: This is a strong start. Your introduction is compelling, but I think you could strengthen the second paragraph where you discuss your community service. Can you give a specific example of how your volunteering has shaped your career goals? Student: I've been tutoring at the local community center for two years. I could mention how that experience made me realize I want to work in educational policy. Professor: Exactly. Specific stories are much more memorable than general statements. Also, make sure to explain how the scholarship would reduce your financial burden so you can focus on research. Student: That's a good point. I didn't include that part. Professor: Keep it to one or two sentences. The committee wants to see that you've thought practically about how the funds will be used. Student: Understood. Could you also look at my resume before I submit it? Professor: Sure, send it to me by email, and I'll review it this weekend. The deadline is next Friday, right? Student: Yes, April 14th. I'll send it to you tonight. Thank you so much.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the student's main purpose for meeting with Professor Thompson?",
+      "options": [
+        "To request a letter of recommendation",
+        "To get feedback on her scholarship application essay",
+        "To discuss changing her major",
+        "To ask about graduate school options"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "The student is applying for a scholarship and wants the professor's feedback on her application essay."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the professor suggest the student add to the essay?",
+      "options": [
+        "A list of all her volunteer activities",
+        "A description of her high school achievements",
+        "An explanation of how the scholarship will reduce her financial burden",
+        "Quotes from her teachers about her performance"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The professor advises the student to explain how the scholarship would reduce her financial burden so she can focus on research."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Good morning, Professor Thompson. Thank you for meeting with me. I'm applying for the Johnson Memorial Scholarship, and I was hoping you could give me some feedback on my application essay."
+    },
+    {
+      "role": "Professor",
+      "text": "Of course, I'd be happy to help. Let me take a look."
+    },
+    {
+      "role": "Student",
+      "text": "Here it is. The prompt asks about my academic goals and how this scholarship would help me achieve them."
+    },
+    {
+      "role": "Professor",
+      "text": "This is a strong start. Your introduction is compelling, but I think you could strengthen the second paragraph where you discuss your community service. Can you give a specific example of how your volunteering has shaped your career goals?"
+    },
+    {
+      "role": "Student",
+      "text": "I've been tutoring at the local community center for two years. I could mention how that experience made me realize I want to work in educational policy."
+    },
+    {
+      "role": "Professor",
+      "text": "Exactly. Specific stories are much more memorable than general statements. Also, make sure to explain how the scholarship would reduce your financial burden so you can focus on research."
+    },
+    {
+      "role": "Student",
+      "text": "That's a good point. I didn't include that part."
+    },
+    {
+      "role": "Professor",
+      "text": "Keep it to one or two sentences. The committee wants to see that you've thought practically about how the funds will be used."
+    },
+    {
+      "role": "Student",
+      "text": "Understood. Could you also look at my resume before I submit it?"
+    },
+    {
+      "role": "Professor",
+      "text": "Sure, send it to me by email, and I'll review it this weekend. The deadline is next Friday, right?"
+    },
+    {
+      "role": "Student",
+      "text": "Yes, April 14th. I'll send it to you tonight. Thank you so much."
+    }
+  ]
+}

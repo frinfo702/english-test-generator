@@ -2,95 +2,80 @@
   "texts": [
     {
       "id": "t1",
-      "textType": "menu",
-      "content": "Sunrise Diner – Breakfast Menu\n\nFarmhouse Omelette – three eggs, cheddar, bell peppers, onions, served with toast … $11.50\nBlueberry Pancakes – stack of three, real maple syrup, whipped butter … $9.75\nAvocado Toast – sourdough, smashed avocado, cherry tomatoes, poached egg … $10.25\n\nAll breakfast plates include your choice of coffee or orange juice.\n\nAdd a side of bacon or sausage for $3.00.",
+      "textType": "news article",
+      "content": "Local Bakery Wins National Award\n\nA family-owned bakery in downtown Springfield has been named 'Best Artisan Bakery of the Year' at the National Food Industry Awards. Sweet Rise Bakery, which opened its doors in 2012, was recognized for its sourdough bread and seasonal fruit pastries.\n\nOwner Maria Gonzalez said the award was a surprise. 'We just focus on making quality bread with local ingredients,' she told reporters. The bakery uses organic flour from farms within 50 miles of the city and maintains traditional fermentation methods that take up to 48 hours per batch.\n\nThe award ceremony took place in Chicago on Monday evening. As part of the prize, Sweet Rise will receive a $10,000 grant and a feature in Food Culture Magazine.",
       "questions": [
         {
           "id": "q1",
-          "stem": "What is included with every breakfast plate?",
+          "stem": "Why did Sweet Rise Bakery win the award?",
           "options": [
-            "A. A side of bacon",
-            "B. A choice of coffee or orange juice",
-            "C. Real maple syrup",
-            "D. Sourdough bread"
+            "A. It has the most locations in the state",
+            "B. It uses traditional methods and local ingredients",
+            "C. It has been in business longer than any other bakery",
+            "D. It won a regional competition in Chicago"
           ],
           "correctIndex": 1,
-          "type": "factual",
-          "explanation": "The menu says 'All breakfast plates include your choice of coffee or orange juice.'"
+          "type": "purpose",
+          "explanation": "The article highlights their use of 'organic flour from farms within 50 miles' and 'traditional fermentation methods' as the basis for the recognition."
         },
         {
           "id": "q2",
-          "stem": "How much would the Avocado Toast cost with an added side of bacon?",
-          "options": ["A. $10.25", "B. $11.50", "C. $13.25", "D. $9.75"],
-          "correctIndex": 2,
+          "stem": "What does Maria Gonzalez's response suggest about her attitude toward the award?",
+          "options": [
+            "A. She expected to win because of her high standards",
+            "B. She was modest and somewhat surprised",
+            "C. She was disappointed it took so long to be recognized",
+            "D. She plans to expand the business immediately"
+          ],
+          "correctIndex": 1,
           "type": "inference",
-          "explanation": "Avocado Toast is $10.25 and a side of bacon costs $3.00, totaling $13.25."
+          "explanation": "Gonzalez said the award 'was a surprise' and focused on simply 'making quality bread,' suggesting a humble and genuine attitude."
+        },
+        {
+          "id": "q3",
+          "stem": "What will the bakery receive as part of the award?",
+          "options": [
+            "A. A feature in a national newspaper",
+            "B. A cash prize and a magazine feature",
+            "C. A contract to supply hotels in Chicago",
+            "D. Free equipment for their kitchen"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The article states the bakery will receive 'a $10,000 grant and a feature in Food Culture Magazine.'"
         }
       ]
     },
     {
       "id": "t2",
-      "textType": "sign",
-      "content": "ATTENTION\n\nThis area is under 24-hour video surveillance.\n\nParking for residents only.\nViolators will be towed at owner's expense.\n\nVisitor parking available in Lot B (blue signs).",
+      "textType": "form",
+      "content": "City Public Library — New Membership Application\n\nPlease complete all fields marked with *.\n\nFull Name:* ________________________\nDate of Birth:* ____ / ____ / ________\nEmail Address:* ________________________\nPhone Number: ________________________\n\nAddress:*\nStreet: ________________________\nCity: ________________________ ZIP: ________\n\nIdentification Required: Please bring a valid government-issued photo ID and a proof of current address (utility bill, bank statement, or lease agreement).\n\nMembership Type (choose one):\n☐ Standard (up to 10 items, 3-week loan period)\n☐ Premium ($25/year, up to 25 items, 6-week loan period)\n\nI agree to the library's borrowing terms and conditions.\nSignature: ________________________ Date: ________",
       "questions": [
-        {
-          "id": "q3",
-          "stem": "What is the primary message of this sign?",
-          "options": [
-            "A. To advertise visitor parking rates",
-            "B. To warn non-residents against parking",
-            "C. To announce new security cameras",
-            "D. To inform about a lost vehicle policy"
-          ],
-          "correctIndex": 1,
-          "type": "purpose",
-          "explanation": "The sign warns that parking is for residents only and violators will be towed."
-        },
         {
           "id": "q4",
-          "stem": "What can be inferred about Lot B?",
+          "stem": "Which of the following is NOT listed as acceptable proof of address?",
           "options": [
-            "A. It charges higher fees than resident parking",
-            "B. It is intended for people who do not live in the building",
-            "C. It is located underground",
-            "D. It is reserved for building staff"
+            "A. A utility bill",
+            "B. A bank statement",
+            "C. A lease agreement",
+            "D. A pay stub"
           ],
-          "correctIndex": 1,
-          "type": "inference",
-          "explanation": "Visitor parking is explicitly separated from resident parking, suggesting Lot B is for non-residents."
-        }
-      ]
-    },
-    {
-      "id": "t3",
-      "textType": "online post",
-      "content": "BookReviewer42 ★★★★☆\n\nI picked up \"The Silent Garden\" on a whim and I'm glad I did. The writing is atmospheric and the characters feel genuine, though the middle section drags a bit. If you enjoy slow-burn literary fiction with vivid nature descriptions, this one's for you. Not for readers who need fast-paced action.",
-      "questions": [
-        {
-          "id": "q5",
-          "stem": "What criticism does the reviewer have about the book?",
-          "options": [
-            "A. The characters are poorly developed",
-            "B. The writing style is confusing",
-            "C. The middle part lacks momentum",
-            "D. The ending is unsatisfying"
-          ],
-          "correctIndex": 2,
+          "correctIndex": 3,
           "type": "factual",
-          "explanation": "The reviewer says 'the middle section drags a bit,' indicating a pacing issue."
+          "explanation": "The form lists 'utility bill, bank statement, or lease agreement' as acceptable proof of address, but does not mention a pay stub."
         },
         {
-          "id": "q6",
-          "stem": "Who would most likely enjoy this book?",
+          "id": "q5",
+          "stem": "What can be inferred about the Premium membership?",
           "options": [
-            "A. Readers who prefer fast-paced action",
-            "B. Readers who like vivid nature descriptions",
-            "C. Readers who dislike character-driven stories",
-            "D. Readers who avoid literary fiction"
+            "A. It is available only to city residents",
+            "B. It allows more items and a longer borrowing period for a fee",
+            "C. It includes free access to digital resources",
+            "D. It requires a separate application form"
           ],
           "correctIndex": 1,
           "type": "inference",
-          "explanation": "The reviewer recommends the book to readers who enjoy slow-burn literary fiction with vivid nature descriptions."
+          "explanation": "The Premium membership costs $25/year and allows 'up to 25 items' with a '6-week loan period,' compared to the Standard's 10 items and 3 weeks."
         }
       ]
     }
