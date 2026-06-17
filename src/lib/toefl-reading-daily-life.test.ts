@@ -9,6 +9,10 @@ const QUESTION_DIR = path.resolve(
 
 const VALID_QUESTION_TYPES = ["factual", "inference", "purpose", "vocabulary"];
 
+// 必須仕様: 各テキスト15〜150語
+const MIN_TEXT_WORDS = 15;
+const MAX_TEXT_WORDS = 150;
+
 interface DailyLifeQuestion {
   id: string;
   stem: string;
@@ -78,9 +82,9 @@ describe("TOEFL Reading: Daily Life JSON structure", () => {
 
       expect(text).toHaveProperty("questions");
       expect(Array.isArray(text.questions)).toBe(true);
+      // schema says 2〜3 questions per text
       expect(text.questions.length).toBeGreaterThanOrEqual(2);
-      // schema says 2〜3, but some files have 4 questions per text
-      expect(text.questions.length).toBeLessThanOrEqual(4);
+      expect(text.questions.length).toBeLessThanOrEqual(3);
     }
   });
 
@@ -138,5 +142,94 @@ describe("TOEFL Reading: Daily Life JSON structure", () => {
     const ids = data.texts.map((t) => t.id);
     const uniqueIds = new Set(ids);
     expect(uniqueIds.size).toBe(ids.length);
+  });
+
+  // ─── 単語数・設問数の範囲検証 ───
+
+  it.each(files)(
+    "%s each text is within word count range (15〜150 words)",
+    (file) => {
+      const data = loadJson(file);
+      for (const text of data.texts) {
+        const wordCount = text.content.split(/\s+/).filter(Boolean).length;
+        expect(wordCount).toBeGreaterThanOrEqual(MIN_TEXT_WORDS);
+        expect(wordCount).toBeLessThanOrEqual(MAX_TEXT_WORDS);
+      }
+    },
+  );
+
+  it.each(files)("%s each text has 2〜3 questions", (file) => {
+    const data = loadJson(file);
+    for (const text of data.texts) {
+      expect(text.questions.length).toBeGreaterThanOrEqual(2);
+      expect(text.questions.length).toBeLessThanOrEqual(3);
+    }
+  });
+
+  it("all files combined have texts within word count range (15〜150 words)", () => {
+    for (const file of files) {
+      const data = loadJson(file);
+      for (const text of data.texts) {
+        const wordCount = text.content.split(/\s+/).filter(Boolean).length;
+        expect(wordCount).toBeGreaterThanOrEqual(MIN_TEXT_WORDS);
+        expect(wordCount).toBeLessThanOrEqual(MAX_TEXT_WORDS);
+      }
+    }
+  });
+
+  // ─── Question type distribution tests ───
+
+  it.each(files)(
+    "%s has at least one inference or purpose question",
+    (file) => {
+      const data = loadJson(file);
+      const types = data.texts.flatMap((t) => t.questions.map((q) => q.type));
+      expect(types).toEqual(expect.arrayContaining(["inference", "purpose"]));
+    },
+  );
+
+  it.each(files)("%s uses at least 2 different question types", (file) => {
+    const data = loadJson(file);
+    const types = new Set(
+      data.texts.flatMap((t) => t.questions.map((q) => q.type)),
+    );
+    expect(types.size).toBeGreaterThanOrEqual(2);
+  });
+
+  it("all 4 question types are used across all files combined", () => {
+    const allTypes = new Set<string>();
+    for (const file of files) {
+      const data = loadJson(file);
+      for (const text of data.texts) {
+        for (const q of text.questions) {
+          allTypes.add(q.type);
+        }
+      }
+    }
+    for (const expectedType of VALID_QUESTION_TYPES) {
+      expect(allTypes).toContain(expectedType);
+    }
+  });
+
+  it("each question type appears in at least half of the files", () => {
+    const typeFileCount: Record<string, number> = {};
+    for (const type of VALID_QUESTION_TYPES) {
+      typeFileCount[type] = 0;
+    }
+    for (const file of files) {
+      const data = loadJson(file);
+      const fileTypes = new Set(
+        data.texts.flatMap((t) => t.questions.map((q) => q.type)),
+      );
+      for (const type of VALID_QUESTION_TYPES) {
+        if (fileTypes.has(type)) {
+          typeFileCount[type]++;
+        }
+      }
+    }
+    const threshold = Math.ceil(files.length / 2);
+    for (const type of VALID_QUESTION_TYPES) {
+      expect(typeFileCount[type]).toBeGreaterThanOrEqual(threshold);
+    }
   });
 });
