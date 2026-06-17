@@ -230,6 +230,9 @@ export function ListenRepeatPage() {
   const [processingMessage, setProcessingMessage] = useState<string | null>(
     null,
   );
+  const [activeReviewSentence, setActiveReviewSentence] = useState<
+    number | null
+  >(null);
 
   const durationRef = useRef(duration);
   const recordingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -398,6 +401,7 @@ export function ListenRepeatPage() {
     } else if (currentTime > 0) {
       resume();
     } else {
+      // Replay from start (either never played or audio ended)
       playSentence(current);
     }
   }, [playing, currentTime, pause, resume, playSentence, current]);
@@ -458,6 +462,7 @@ export function ListenRepeatPage() {
     setRecordingTimeLeft(0);
     setProcessingMessage(null);
     finishingRef.current = false;
+    setActiveReviewSentence(null);
     navigate("/toefl/speaking/listen-repeat");
   };
 
@@ -467,7 +472,12 @@ export function ListenRepeatPage() {
     void stopSpeech();
     finishingRef.current = false;
     setProcessingMessage(null);
-    setPhase("playing");
+    // During feedback, replay audio without changing phase (keep feedback visible)
+    if (phase === "feedback") {
+      playSentence(current);
+    } else {
+      setPhase("playing");
+    }
   };
 
   const handleRetryRecording = () => {
@@ -734,14 +744,96 @@ export function ListenRepeatPage() {
                   Question {i + 1} — {correct}/{total} words
                 </p>
                 <div className={styles.feedbackPhase}>
-                  <Button
-                    onClick={() => playSentence(i)}
-                    disabled={ttsLoading}
-                    size="sm"
-                    variant="secondary"
-                  >
-                    ▶ Play Audio
-                  </Button>
+                  <div className={styles.playerCard}>
+                    <div className={styles.playerControls}>
+                      <Button
+                        onClick={() => {
+                          setActiveReviewSentence(i);
+                          if (playing) {
+                            pause();
+                          } else if (
+                            activeReviewSentence === i &&
+                            currentTime > 0
+                          ) {
+                            resume();
+                          } else {
+                            playSentence(i);
+                          }
+                        }}
+                        disabled={ttsLoading}
+                        size="sm"
+                        variant="accent"
+                      >
+                        {ttsLoading
+                          ? "Loading..."
+                          : playing && activeReviewSentence === i
+                            ? "⏸ Pause"
+                            : activeReviewSentence === i && currentTime > 0
+                              ? "▶ Resume"
+                              : activeReviewSentence === i
+                                ? "🔁 Replay"
+                                : "▶ Play Audio"}
+                      </Button>
+                    </div>
+                    {activeReviewSentence === i && (
+                      <>
+                        <div className={styles.playerControls}>
+                          <Button
+                            onClick={() =>
+                              seek(Math.max(0, currentTime - 10))
+                            }
+                            disabled={duration <= 0 || !playing}
+                            size="sm"
+                            variant="secondary"
+                          >
+                            ⏪ 10s
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              if (playing) {
+                                pause();
+                              } else if (currentTime > 0) {
+                                resume();
+                              } else {
+                                playSentence(i);
+                              }
+                            }}
+                            disabled={ttsLoading}
+                            size="sm"
+                            variant="secondary"
+                          >
+                            {playing ? "⏸ Pause" : "▶ Play"}
+                          </Button>
+                          <Button
+                            onClick={() =>
+                              seek(Math.min(duration, currentTime + 10))
+                            }
+                            disabled={duration <= 0 || !playing}
+                            size="sm"
+                            variant="secondary"
+                          >
+                            ⏩ 10s
+                          </Button>
+                        </div>
+                        <div className={styles.playerControls}>
+                          <span className={styles.timeText}>
+                            {formatTime(currentTime)} / {formatTime(duration)}
+                          </span>
+                          <div className={styles.progressBar}>
+                            <div
+                              className={styles.progressFill}
+                              style={{
+                                width:
+                                  duration > 0
+                                    ? `${(currentTime / duration) * 100}%`
+                                    : "0%",
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
                   <p className={styles.fbLabel}>Comparison:</p>
                   <ListenRepeatDiffView alignment={alignment} />
                 </div>
