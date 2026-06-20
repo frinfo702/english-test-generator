@@ -1,0 +1,38 @@
+{
+  "title": "Office Hours Change Announcement",
+  "transcript": "I want to let everyone know that my office hours will be changing. Starting next week, I will be available on Mondays and Wednesdays from 2 to 4 p.m., instead of the current 1 to 3 p.m. If you have an urgent need to meet with me and these times don't work for you, please email me and I can schedule an appointment. Keep in mind that office hours are a great opportunity to discuss any questions or concerns you have about the course material.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the announcement?",
+      "options": [
+        "A revision to a schedule",
+        "The process for making an appointment",
+        "Updates to course material",
+        "An upcoming exam"
+      ],
+      "correctIndex": 0,
+      "type": "mainIdea",
+      "explanation": "The announcement is about office hours changing from 1-3 p.m. to 2-4 p.m., which is a revision to a schedule."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the professor encourage students to do?",
+      "options": [
+        "Form study groups with classmates",
+        "Begin planning their schedule for next semester",
+        "Meet with her if they have questions",
+        "Email her a list of their concerns"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The professor says office hours are a great opportunity to discuss any questions about the course, encouraging students to meet with her."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "I want to let everyone know that my office hours will be changing. Starting next week, I will be available on Mondays and Wednesdays from 2 to 4 p.m., instead of the current 1 to 3 p.m. If you have an urgent need to meet with me and these times don't work for you, please email me and I can schedule an appointment. Keep in mind that office hours are a great opportunity to discuss any questions or concerns you have about the course material."
+    }
+  ]
+}
