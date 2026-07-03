@@ -47,6 +47,7 @@ description: >
 - `toeic/part5`
 - `toeic/part6`
 - `toeic/part7`
+- `dictation`
 
 ## Complete the Words の必須仕様
 

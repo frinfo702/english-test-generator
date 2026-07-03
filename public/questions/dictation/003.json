@@ -1,0 +1,41 @@
+{
+  "title": "Business & Travel Dictation",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "The meeting has been moved to room five.",
+      "wordCount": 8,
+      "distractors": ["cancelled", "office", "three"]
+    },
+    {
+      "id": "s2",
+      "text": "I need to book a flight to London next week.",
+      "wordCount": 9,
+      "distractors": ["hotel", "Paris", "month"]
+    },
+    {
+      "id": "s3",
+      "text": "Please send the report by Friday morning.",
+      "wordCount": 7,
+      "distractors": ["receive", "email", "afternoon"]
+    },
+    {
+      "id": "s4",
+      "text": "The deadline for the project is next month.",
+      "wordCount": 8,
+      "distractors": ["start", "task", "week"]
+    },
+    {
+      "id": "s5",
+      "text": "We decided to postpone the trip until spring.",
+      "wordCount": 8,
+      "distractors": ["cancel", "flight", "summer"]
+    },
+    {
+      "id": "s6",
+      "text": "Could you reschedule the appointment for Tuesday?",
+      "wordCount": 7,
+      "distractors": ["cancel", "meeting", "Thursday"]
+    }
+  ]
+}

@@ -32,6 +32,7 @@ const TASK_LABELS: Record<TaskId, string> = {
   "toeic/part6": "TOEIC Part 6",
   "toeic/part7": "TOEIC Part 7",
   shadowing: "Shadowing",
+  dictation: "Dictation",
 };
 
 const TASK_COLORS: Record<string, string> = {
@@ -50,6 +51,7 @@ const TASK_COLORS: Record<string, string> = {
   "toeic/part5": "#8b5cf6",
   "toeic/part6": "#7c3aed",
   "toeic/part7": "#6d28d9",
+  dictation: "#0891b2",
 };
 
 // Convert date to short format (e.g. "2/18")

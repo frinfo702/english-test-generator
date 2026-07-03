@@ -28,6 +28,11 @@ const tests: TestItem[] = [
     subtitle: "Listen and repeat — improve pronunciation & fluency",
     path: "/shadowing",
   },
+  {
+    title: "Dictation Practice",
+    subtitle: "Listen and arrange words — train your ear for detail",
+    path: "/dictation",
+  },
 ];
 
 export function HomePage() {

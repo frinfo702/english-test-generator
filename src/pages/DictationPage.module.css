@@ -1,0 +1,316 @@
+.dictationPage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.topBar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--spacing-lg);
+}
+
+.error {
+  color: var(--color-error);
+  background: var(--color-error-subtle);
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+}
+
+.errorHint {
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* ---- Progress ---- */
+.progressRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-sm);
+}
+.progressText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--font-medium);
+}
+.streakBadge {
+  font-size: var(--font-size-sm);
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-weight: var(--font-semibold);
+}
+
+/* ---- Card ---- */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* ---- Audio Player ---- */
+.playerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius);
+}
+.playerControls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.playerProgressRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  max-width: 280px;
+  justify-content: center;
+}
+.timeText {
+  font-size: var(--text-xs);
+  color: var(--color-ink-tertiary);
+  font-variant-numeric: tabular-nums;
+  min-width: 80px;
+  text-align: center;
+}
+.progressBar {
+  width: 200px;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width 0.1s linear;
+}
+.ttsError {
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+}
+
+/* ---- Instruction ---- */
+.instruction {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ---- Word Cards ---- */
+.wordCards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  min-height: 56px;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+.wordCardsEmpty {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+}
+
+.wordCard {
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-medium);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: all 0.15s var(--ease-out);
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+}
+.wordCard:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  transform: translateY(-1px);
+}
+.wordCard:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+}
+.wordCard:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* Placed word in answer area */
+.placedWord {
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-medium);
+  border: 1px solid var(--color-accent);
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  transition: all 0.15s var(--ease-out);
+  animation: placeIn 0.18s var(--ease-spring);
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+}
+.placedWordWrong {
+  border-color: var(--color-incorrect);
+  background: var(--color-incorrect-bg);
+  color: var(--color-incorrect);
+  animation: shake 0.3s ease;
+}
+.placedWordCorrect {
+  border-color: var(--color-correct);
+  background: var(--color-correct-bg);
+  color: var(--color-correct);
+}
+
+/* Pre-displayed trailing punctuation (., ?, !) — not a tappable chip */
+.trailingPunct {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-medium);
+  color: var(--color-ink-tertiary);
+  margin-left: 2px;
+  user-select: none;
+}
+
+@keyframes placeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+/* ---- Answer Area ---- */
+.answerZone {
+  min-height: 64px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-sm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  align-items: center;
+  transition: border-color 0.15s;
+}
+.answerZoneCorrect {
+  border-color: var(--color-correct);
+  background: var(--color-correct-bg);
+}
+.answerZoneWrong {
+  border-color: var(--color-incorrect);
+  background: var(--color-incorrect-bg);
+}
+.placeholder {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  width: 100%;
+  text-align: center;
+}
+
+
+/* ---- Feedback ---- */
+.feedback {
+  padding: var(--spacing-md);
+  border-radius: var(--radius);
+  border-left: 4px solid;
+  animation: fadeIn 0.2s ease;
+}
+.fbCorrect {
+  background: var(--color-correct-bg);
+  border-color: var(--color-correct);
+}
+.fbWrong {
+  background: var(--color-incorrect-bg);
+  border-color: var(--color-incorrect);
+}
+.fbStatus {
+  font-weight: var(--font-bold);
+  font-size: var(--font-size-lg);
+}
+.fbCorrect .fbStatus { color: var(--color-correct); }
+.fbWrong .fbStatus { color: var(--color-incorrect); }
+.fbAnswer {
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-body);
+}
+.fbAnswer strong { color: var(--color-text); }
+
+/* ---- Buttons ---- */
+.btnRow {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+/* ---- Result Card ---- */
+.resultCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  text-align: center;
+}
+.scoreBox {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.scoreNum {
+  font-size: 56px;
+  font-weight: var(--font-bold);
+  color: var(--color-accent);
+  line-height: 1;
+}
+.scoreDen {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-muted);
+}
+.scorePct {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .card { padding: var(--spacing-md); }
+  .playerSection { padding: var(--spacing-sm); }
+  .progressBar { width: 140px; }
+  .wordCard, .placedWord {
+    padding: 8px 14px;
+    font-size: var(--font-size-sm);
+  }
+}

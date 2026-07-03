@@ -1,0 +1,41 @@
+{
+  "title": "Academic Dictation",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "The professor explained the theory very clearly.",
+      "wordCount": 7,
+      "distractors": ["student", "confused", "quickly"]
+    },
+    {
+      "id": "s2",
+      "text": "Our assignment is due next Friday afternoon.",
+      "wordCount": 7,
+      "distractors": ["project", "Monday", "morning"]
+    },
+    {
+      "id": "s3",
+      "text": "The research shows interesting results this year.",
+      "wordCount": 7,
+      "distractors": ["study", "boring", "last"]
+    },
+    {
+      "id": "s4",
+      "text": "Students must submit their essays by email.",
+      "wordCount": 7,
+      "distractors": ["should", "download", "paper"]
+    },
+    {
+      "id": "s5",
+      "text": "The lecture will start in ten minutes.",
+      "wordCount": 7,
+      "distractors": ["end", "seminar", "hours"]
+    },
+    {
+      "id": "s6",
+      "text": "She received a scholarship for her excellent grades.",
+      "wordCount": 8,
+      "distractors": ["awarded", "poor", "marks"]
+    }
+  ]
+}

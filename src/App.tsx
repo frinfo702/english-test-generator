@@ -13,6 +13,7 @@ import { WriteDiscussionPage } from "./pages/toefl/writing/WriteDiscussionPage";
 import { ListenRepeatPage } from "./pages/toefl/speaking/ListenRepeatPage";
 import { TakeInterviewPage } from "./pages/toefl/speaking/TakeInterviewPage";
 import { ShadowingPage } from "./pages/ShadowingPage";
+import { DictationPage } from "./pages/DictationPage";
 import {
   ConversationPage,
   LecturePage,
@@ -190,6 +191,14 @@ const taskRoutes: TaskRoute[] = [
     subtitle: "Select a shadowing set or start with a random one.",
     backTo: "/",
     page: <ShadowingPage />,
+  },
+  {
+    basePath: "/dictation",
+    taskId: "dictation",
+    title: "Dictation Practice",
+    subtitle: "Select a dictation set or start with a random one.",
+    backTo: "/",
+    page: <DictationPage />,
   },
 ];
 

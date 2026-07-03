@@ -19,7 +19,8 @@ export type TaskId =
   | "toeic/part5"
   | "toeic/part6"
   | "toeic/part7"
-  | "shadowing";
+  | "shadowing"
+  | "dictation";
 
 export interface ScoreEntry {
   taskId: TaskId;

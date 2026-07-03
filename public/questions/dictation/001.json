@@ -1,0 +1,42 @@
+{
+  "title": "Daily Life Dictation",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "I usually take the bus to work in the morning.",
+      "wordCount": 10,
+      "distractors": ["train", "evening", "home"]
+    },
+    {
+      "id": "s2",
+      "text": "The coffee shop opens at seven on weekdays.",
+      "wordCount": 8,
+      "distractors": ["closes", "eight", "weekends"]
+    },
+    {
+      "id": "s3",
+      "text": "She forgot to bring her umbrella today.",
+      "wordCount": 7,
+      "distractors": ["remembered", "coat", "yesterday"]
+    },
+    {
+      "id": "s4",
+      "text": "We are having pasta for dinner tonight.",
+      "wordCount": 7,
+      "distractors": ["lunch", "rice", "tomorrow"]
+    },
+    {
+      "id": "s5",
+      "text": "The library is closed on Sundays.",
+      "wordCount": 6,
+      "distractors": ["open", "Mondays", "always"],
+      "note": "closed is part of the sentence — distractors are open, Mondays, always"
+    },
+    {
+      "id": "s6",
+      "text": "Please turn off the lights before you leave.",
+      "wordCount": 8,
+      "distractors": ["on", "after", "arrive"]
+    }
+  ]
+}

@@ -35,6 +35,7 @@
 | TOEIC Part 5                             | `public/questions/toeic/part5/`                  | —         | —                   |
 | TOEIC Part 6                             | `public/questions/toeic/part6/`                  | —         | —                   |
 | TOEIC Part 7                             | `public/questions/toeic/part7/`                  | —         | —                   |
+| Dictation                               | `public/questions/dictation/`                    | 3〜8秒    | 1                   |
 
 ---
 
@@ -886,3 +887,39 @@ audioSegments の role は常に `"Speaker"`。
 - `options`: 配列形式
 - `correctIndex`: 0始まり
 - 1トークあたり3問、10セットで30問がフルセット
+
+---
+
+## Dictation
+
+短い英文1文を音声で聞き、単語カードを正しい順番に並べる問題。
+フェイク選択肢（distractor）が混ざっているため、注意深く聴く力を訓練する。
+詳細は `dictation-generator` スキルの `references/dictation-schema.md` を参照。
+
+```json
+{
+  "title": "Daily Life Dictation",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "I usually take the bus to work in the morning.",
+      "wordCount": 10,
+      "distractors": ["train", "evening", "home"]
+    },
+    {
+      "id": "s2",
+      "text": "The coffee shop opens at seven on weekdays.",
+      "wordCount": 8,
+      "distractors": ["closes", "eight", "weekends"]
+    }
+  ]
+}
+```
+
+**フィールド仕様:**
+
+- `sentences[].text`: ディクテーション対象の英文（1文・6〜14語）
+- `sentences[].wordCount`: `text` の語数（空白分割と一致）
+- `sentences[].distractors`: フェイク単語の配列（2〜3個、正解文に含まれない単語）
+- 1セットあたり6文推奨
+- 音声: `public/audio/dictation/<fileBasename>/<n>.mp3`（`npm run generate-audio` で生成）
