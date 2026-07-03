@@ -124,7 +124,7 @@ export function shuffleWithSeed<T>(items: T[], seed?: number): T[] {
  * in the correct position (to avoid trivially easy layouts).
  */
 export function shufflePool(tokens: WordToken[], seed?: number): WordToken[] {
-  let shuffled = shuffleWithSeed(tokens, seed);
+  const shuffled = shuffleWithSeed(tokens, seed);
   // Avoid the trivial case where the first pool item is the first correct word
   if (
     shuffled.length > 1 &&

@@ -8,6 +8,7 @@ import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
 import { useScoreHistory } from "../hooks/useScoreHistory";
 import { useElapsedTimer } from "../hooks/useElapsedTimer";
+import { formatSecondsAsMmSs } from "../lib/time";
 import {
   buildWordPool,
   shufflePool,
@@ -21,7 +22,6 @@ import styles from "./DictationPage.module.css";
 interface DictationSentence {
   id: string;
   text: string;
-  wordCount: number;
   distractors: string[];
 }
 
@@ -32,23 +32,19 @@ interface ProblemData {
 
 const TASK_ID = "dictation";
 
-function formatTime(seconds: number) {
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return `${m}:${String(s).padStart(2, "0")}`;
-}
-
 type Phase = "listening" | "answering" | "wrong" | "correct";
 
 interface SentenceState {
   selected: WordToken[];
-  pool: WordToken[];
-  solvedFirstTry: boolean;
   phase: Phase;
   /** The last wrong word token tapped (for red chip display), or null */
   wrongToken: WordToken | null;
   /** Total number of wrong taps for this sentence */
   wrongCount: number;
+}
+
+function createSentenceState(): SentenceState {
+  return { selected: [], phase: "listening", wrongToken: null, wrongCount: 0 };
 }
 
 function DictationContent({
@@ -94,34 +90,14 @@ function DictationContent({
 
   const sentence = data.sentences[current];
 
-  // Initialise state for the current sentence once (stable pool, no re-shuffle)
-  useEffect(() => {
-    if (!sentence) return;
-    setStates((prev) => {
-      if (prev[current]) return prev; // already initialised — keep stable pool
-      const pool = buildWordPool(sentence.text, sentence.distractors);
-      return {
-        ...prev,
-        [current]: {
-          selected: [],
-          pool: shufflePool(pool),
-          solvedFirstTry: false,
-          phase: "listening" as Phase,
-          wrongToken: null as WordToken | null,
-          wrongCount: 0,
-        },
-      };
-    });
-  }, [sentence, current]);
+  // Word pool is derived data — memoised per sentence so it stays stable
+  // across re-renders and navigation (same sentence reference → cached).
+  const pool = useMemo(
+    () => (sentence ? shufflePool(buildWordPool(sentence.text, sentence.distractors)) : []),
+    [sentence],
+  );
 
-  const state: SentenceState = states[current] ?? {
-    selected: [],
-    pool: [],
-    solvedFirstTry: false,
-    phase: "listening",
-    wrongToken: null,
-    wrongCount: 0,
-  };
+  const state: SentenceState = states[current] ?? createSentenceState();
 
   const { words: correctWords, trailingPunct } = useMemo(
     () => (sentence ? splitTrailingPunctuation(sentence.text) : { words: [], trailingPunct: "" }),
@@ -129,18 +105,7 @@ function DictationContent({
   );
 
   const setState = (updater: (prev: SentenceState) => SentenceState) => {
-    setStates((s) => {
-      const prev =
-        s[current] ?? {
-          selected: [],
-          pool: [],
-          solvedFirstTry: false,
-          phase: "listening" as Phase,
-          wrongToken: null as WordToken | null,
-          wrongCount: 0,
-        };
-      return { ...s, [current]: updater(prev) };
-    });
+    setStates((s) => ({ ...s, [current]: updater(s[current] ?? createSentenceState()) }));
   };
 
   const audioUrl = `/audio/dictation/${fileBasename}/${current + 1}.mp3`;
@@ -155,29 +120,18 @@ function DictationContent({
     if (state.phase === "correct") return;
     const newSelected = [...state.selected, token];
     if (isCorrectSoFar(newSelected, correctWords)) {
-      if (isCompleteAndCorrect(newSelected, correctWords)) {
-        setState((prev) => ({
-          ...prev,
-          selected: newSelected,
-          phase: "correct",
-          solvedFirstTry: true,
-          wrongToken: null,
-        }));
-      } else {
-        setState((prev) => ({
-          ...prev,
-          selected: newSelected,
-          phase: "answering",
-          wrongToken: null,
-        }));
-      }
+      setState((prev) => ({
+        ...prev,
+        selected: newSelected,
+        phase: isCompleteAndCorrect(newSelected, correctWords) ? "correct" : "answering",
+        wrongToken: null,
+      }));
     } else {
       // Wrong word: do NOT add to selected — record it as a red chip.
       // The user can immediately continue tapping other words.
       setState((prev) => ({
         ...prev,
         phase: "wrong",
-        solvedFirstTry: false,
         wrongToken: token,
         wrongCount: prev.wrongCount + 1,
       }));
@@ -203,18 +157,20 @@ function DictationContent({
     }));
   };
 
-  const handleNext = () => { stop(); if (current + 1 < totalSentences) setCurrent((c) => c + 1); };
-  const handlePrev = () => { stop(); if (current > 0) setCurrent((c) => c - 1); };
-
-  const allCorrect = useMemo(
-    () => data.sentences.every((_, i) => states[i]?.phase === "correct"),
-    [data.sentences, states],
-  );
+  const handleNext = () => {
+    stop();
+    if (current + 1 < totalSentences) setCurrent((c) => c + 1);
+  };
+  const handlePrev = () => {
+    stop();
+    if (current > 0) setCurrent((c) => c - 1);
+  };
 
   const correctCount = useMemo(
     () => data.sentences.reduce((n, _, i) => n + (states[i]?.phase === "correct" ? 1 : 0), 0),
     [data.sentences, states],
   );
+  const allCorrect = correctCount === totalSentences;
 
   /** Total wrong taps across all sentences (lower is better) */
   const totalWrongCount = useMemo(
@@ -231,7 +187,11 @@ function DictationContent({
   };
 
   const handleRestart = () => {
-    stop(); resetTimer(); setStates({}); setSubmitted(false); setCurrent(0);
+    stop();
+    resetTimer();
+    setStates({});
+    setSubmitted(false);
+    setCurrent(0);
     navigate("/dictation");
   };
 
@@ -239,10 +199,9 @@ function DictationContent({
     if (data && !submitted && elapsedSeconds === 0) startTimer();
   }, [data, submitted, elapsedSeconds, startTimer]);
 
-  const remainingPool = state.pool.filter(
+  const remainingPool = pool.filter(
     (t) => !state.selected.some((s) => s.id === t.id),
   );
-
 
   if (submitted) {
     return (
@@ -259,7 +218,7 @@ function DictationContent({
               ? "Great job — few mistakes!"
               : "Keep practicing — fewer mistakes next time!"}
         </p>
-        <p className={styles.timeText}>Time: {formatTime(elapsedSeconds)}</p>
+        <p className={styles.timeText}>Time: {formatSecondsAsMmSs(elapsedSeconds)}</p>
         <div className={styles.btnRow}>
           <Button variant="accent" onClick={handleRestart}>Try Another Set</Button>
           <Button variant="secondary" onClick={() => navigate("/dashboard")}>View Dashboard</Button>
@@ -287,7 +246,7 @@ function DictationContent({
           <SpeedControl playbackRate={playbackRate} onChange={setPlaybackRate} />
           <div className={styles.playerProgressRow}>
             <span className={styles.timeText}>
-              {formatTime(currentTime)} / {formatTime(duration)}
+              {formatSecondsAsMmSs(currentTime)} / {formatSecondsAsMmSs(duration)}
             </span>
             <div className={styles.progressBar}>
               <div
