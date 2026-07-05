@@ -1,3 +1,4 @@
+import { CheckIcon, XIcon } from "./Icons";
 import styles from "./FeedbackPanel.module.css";
 
 interface FeedbackPanelProps {
@@ -19,7 +20,9 @@ export function FeedbackPanel({
       ].join(" ")}
     >
       <div className={styles.header}>
-        <span className={styles.icon}>{correct ? "✓" : "✗"}</span>
+        <span className={styles.icon}>
+          {correct ? <CheckIcon size={16} /> : <XIcon size={16} />}
+        </span>
         <span className={styles.status}>
           {correct ? "Correct" : "Incorrect"}
         </span>

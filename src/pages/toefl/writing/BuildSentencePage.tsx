@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
+import { CheckIcon, XIcon } from "../../../components/ui/Icons";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
@@ -264,7 +265,11 @@ export function BuildSentencePage() {
                   ].join(" ")}
                 >
                   <p className={styles.fbStatus}>
-                    {isCorrect ? "✓ Correct" : "✗ Incorrect"}
+                    {isCorrect ? (
+                      <><CheckIcon size={14} /> Correct</>
+                    ) : (
+                      <><XIcon size={14} /> Incorrect</>
+                    )}
                   </p>
                   {!isCorrect && (
                     <p className={styles.fbAnswer}>

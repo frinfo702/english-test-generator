@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
+import { ChevronRightIcon } from "../../components/ui/Icons";
 import type { TaskId } from "../../hooks/useScoreHistory";
-import table from "../../components/ui/ProblemTable.module.css";
 import styles from "./ToeflMenuPage.module.css";
 
 interface TaskEntry {
@@ -143,21 +143,28 @@ export function ToeflMenuPage() {
               />
               {section.label}
             </div>
-            <div className={table.container}>
-              <div className={table.header}>
-                <span>#</span>
-                <span>Task</span>
-              </div>
+            <div className={styles.taskList}>
               {section.tasks.map((task, i) => (
                 <div
                   key={task.path}
-                  className={table.row}
+                  className={styles.taskRow}
                   onClick={() => navigate(task.path)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      navigate(task.path);
+                    }
+                  }}
                 >
-                  <span className={table.statusNone}>{i + 1}</span>
-                  <span className={table.titleCell}>
-                    {task.label}
-                    <div className={table.titleMeta}>{task.desc}</div>
+                  <span className={styles.taskRowIcon}>{i + 1}</span>
+                  <span className={styles.taskRowContent}>
+                    <div className={styles.taskRowLabel}>{task.label}</div>
+                    <div className={styles.taskRowDesc}>{task.desc}</div>
+                  </span>
+                  <span className={styles.taskRowChevron}>
+                    <ChevronRightIcon size={14} />
                   </span>
                 </div>
               ))}

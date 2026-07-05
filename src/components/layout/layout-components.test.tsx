@@ -41,7 +41,7 @@ describe("layout components", () => {
     expect(screen.getByText("Keep going")).toBeTruthy();
     expect(screen.getByText("2/5")).toBeTruthy();
 
-    fireEvent.click(screen.getByRole("button", { name: "Back" }));
+    fireEvent.click(screen.getByRole("button", { name: "Go back" }));
     expect(screen.getByTestId("location").textContent).toBe("/menu");
   });
 

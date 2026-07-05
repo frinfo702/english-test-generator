@@ -18,7 +18,7 @@ describe("ui components", () => {
     const button = screen.getByRole("button", {
       name: "Back to question list",
     });
-    expect(button.textContent).toBe("←");
+    expect(button.getAttribute("aria-label")).toBe("Back to question list");
     expect(button.className).toContain("lg");
 
     fireEvent.click(button);
