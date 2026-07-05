@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { LayoutDashboardIcon, GraduationCapIcon } from "../ui/Icons";
 import styles from "./AppShell.module.css";
 
 interface AppShellProps {
@@ -27,19 +28,25 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <div className={styles.shell}>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <Link to="/" className={styles.logo}>
-            <span className={styles.logoMark}>ET</span>
-            English Test Practice
+          <Link to="/" className={styles.logo} aria-label="English Test Practice Home">
+            <span className={styles.logoMark}>
+              <GraduationCapIcon size={16} />
+            </span>
+            <span>English Test Practice</span>
           </Link>
-          <nav className={styles.nav}>
+          <nav className={styles.nav} aria-label="Main navigation">
             <Link
               to="/toefl"
               className={[
                 styles.navLink,
                 isToefl ? styles.navLinkActive : "",
               ].join(" ")}
+              aria-current={isToefl ? "page" : undefined}
             >
               TOEFL 2026
             </Link>
@@ -49,6 +56,7 @@ export function AppShell({ children }: AppShellProps) {
                 styles.navLink,
                 isToeic ? styles.navLinkActive : "",
               ].join(" ")}
+              aria-current={isToeic ? "page" : undefined}
             >
               TOEIC L&amp;R
             </Link>
@@ -59,16 +67,17 @@ export function AppShell({ children }: AppShellProps) {
                 styles.navLink,
                 isShadowing ? styles.navLinkActive : "",
               ].join(" ")}
+              aria-current={isShadowing ? "page" : undefined}
             >
               Shadowing
             </Link>
-            <span className={styles.navDivider} />
             <Link
               to="/dictation"
               className={[
                 styles.navLink,
                 isDictation ? styles.navLinkActive : "",
               ].join(" ")}
+              aria-current={isDictation ? "page" : undefined}
             >
               Dictation
             </Link>
@@ -79,7 +88,9 @@ export function AppShell({ children }: AppShellProps) {
                 styles.navLink,
                 location.pathname === "/dashboard" ? styles.navLinkActive : "",
               ].join(" ")}
+              aria-current={location.pathname === "/dashboard" ? "page" : undefined}
             >
+              <LayoutDashboardIcon size={15} style={{ marginRight: 5 }} />
               Dashboard
             </Link>
             <span className={styles.kbd}>
@@ -89,7 +100,9 @@ export function AppShell({ children }: AppShellProps) {
           </nav>
         </div>
       </header>
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main} id="main-content" tabIndex={-1}>
+        {children}
+      </main>
     </div>
   );
 }

@@ -9,7 +9,7 @@
 }
 
 html {
-  font-size: var(--text-base);
+  font-size: 16px;
   font-family: var(--font-sans);
   color: var(--color-ink);
   background: var(--color-surface-elevated);
@@ -17,6 +17,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -25,12 +26,13 @@ body {
 }
 
 a {
-  color: var(--color-ink);
+  color: var(--color-accent);
   text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-hover);
 }
 
 button {
@@ -40,23 +42,26 @@ button {
 }
 
 textarea,
-input {
+input,
+select {
   font-family: inherit;
-  font-size: inherit;
-  color: inherit;
+  font-size: var(--text-base);
+  color: var(--color-ink);
 }
 
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4, h5, h6 {
   line-height: var(--lh-tight);
   font-weight: var(--font-semibold);
   color: var(--color-ink);
 }
 
+h1 { font-size: var(--text-3xl); letter-spacing: -0.02em; }
+h2 { font-size: var(--text-2xl); letter-spacing: -0.015em; }
+h3 { font-size: var(--text-xl); letter-spacing: -0.01em; }
+h4 { font-size: var(--text-lg); }
+
 ::selection {
-  background: rgba(44, 187, 93, 0.15);
+  background: rgba(37, 99, 235, 0.12);
   color: var(--color-ink);
 }
 
@@ -66,10 +71,10 @@ h4 {
   border-radius: var(--radius-sm);
 }
 
-/* Scrollbar (LeetCode-thin) */
+/* Scrollbar (modern thin) */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -77,12 +82,23 @@ h4 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c0c0c0;
-  border-radius: 4px;
+  background: #cbd5e1;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a0a0a0;
+  background: #94a3b8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .sr-only {
@@ -95,4 +111,24 @@ h4 {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* Skip to main content */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: var(--radius);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transition: top var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus {
+  top: 8px;
 }

@@ -1,10 +1,9 @@
-/* Shared LeetCode-style problem table layout.
-   Page-specific modules compose from these via `composes:`. */
+/* Shared problem table layout. */ 
 
 .container {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
 }
 
@@ -13,14 +12,14 @@
   grid-template-columns: 36px 1fr auto;
   align-items: center;
   gap: var(--spacing-3);
-  padding: var(--spacing-2) var(--spacing-4);
+  padding: var(--spacing-3) var(--spacing-4);
   background: var(--color-surface-elevated);
   border-bottom: 1px solid var(--color-border);
-  font-size: var(--text-xs);
+  font-size: var(--text-2xs);
   font-weight: var(--font-semibold);
   color: var(--color-ink-tertiary);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
 
 .row {
@@ -29,7 +28,7 @@
   align-items: center;
   gap: var(--spacing-3);
   width: 100%;
-  padding: 10px var(--spacing-4);
+  padding: 12px var(--spacing-4);
   border-bottom: 1px solid var(--color-border);
   cursor: pointer;
   transition: background var(--duration-fast) var(--ease-out);
@@ -49,16 +48,16 @@
 }
 
 .row:hover {
-  background: var(--color-surface-hover);
+  background: var(--color-surface-subtle);
 }
 
-/* Completed row variant (green tint) */
+/* Completed row variant */
 .rowCompleted {
   background: var(--color-accent-subtle);
 }
 
 .rowCompleted:hover {
-  background: #dbf0e0;
+  background: #dbeafe;
 }
 
 /* Status column */
@@ -69,9 +68,9 @@
 }
 
 .statusSolved {
-  color: var(--color-accent);
-  font-weight: var(--font-bold);
-  font-size: 14px;
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
 }
 
 .statusNone {
@@ -94,7 +93,7 @@
   font-size: var(--text-xs);
   color: var(--color-ink-tertiary);
   font-weight: var(--font-normal);
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 /* Badge cell (rightmost) */

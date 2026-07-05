@@ -3,37 +3,66 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/Button";
 import { useScoreHistory } from "../hooks/useScoreHistory";
 import { formatSecondsAsMmSs } from "../lib/time";
-import table from "../components/ui/ProblemTable.module.css";
+import {
+  SparklesIcon,
+  ArrowRightIcon,
+  BookOpenIcon,
+  HeadphonesIcon,
+  MicIcon,
+  TargetIcon,
+} from "../components/ui/Icons";
 import styles from "./HomePage.module.css";
 
 type TestItem = {
   title: string;
   subtitle: string;
   path: string;
+  color: string;
+  gradient: string;
+  icon: "toefl" | "toeic" | "shadowing" | "dictation";
 };
 
 const tests: TestItem[] = [
   {
     title: "TOEFL iBT 2026",
-    subtitle: "Reading, Writing, Listening & Speaking — full practice",
+    subtitle: "Reading, Writing, Listening & Speaking — complete skill coverage for the new format.",
     path: "/toefl",
+    color: "var(--color-accent)",
+    gradient: "var(--gradient-accent)",
+    icon: "toefl",
   },
   {
     title: "TOEIC L&R",
-    subtitle: "Parts 2-7 — Listening & Reading practice",
+    subtitle: "Parts 2–7 — Listening & Reading with real test-style questions.",
     path: "/toeic",
+    color: "var(--color-toeic)",
+    gradient: "var(--gradient-toeic)",
+    icon: "toeic",
   },
   {
     title: "Shadowing Practice",
-    subtitle: "Listen and repeat — improve pronunciation & fluency",
+    subtitle: "Listen and repeat — improve your pronunciation and speaking fluency.",
     path: "/shadowing",
+    color: "var(--color-speaking)",
+    gradient: "var(--gradient-speaking)",
+    icon: "shadowing",
   },
   {
     title: "Dictation Practice",
-    subtitle: "Listen and arrange words — train your ear for detail",
+    subtitle: "Listen and arrange words — train your ear for detail and accuracy.",
     path: "/dictation",
+    color: "var(--color-listening)",
+    gradient: "var(--gradient-listening)",
+    icon: "dictation",
   },
 ];
+
+const IconMap: Record<string, React.ReactNode> = {
+  toefl: <BookOpenIcon size={20} />,
+  toeic: <TargetIcon size={20} />,
+  shadowing: <MicIcon size={20} />,
+  dictation: <HeadphonesIcon size={20} />,
+};
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -87,33 +116,41 @@ export function HomePage() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.hero}>
-        <span className={styles.badge}>AI-Powered Practice</span>
+      {/* Hero */}
+      <section className={styles.hero}>
+        <span className={styles.badge}>
+          <span className={styles.badgeDot} />
+          AI-Powered Practice
+          <SparklesIcon size={14} />
+        </span>
         <h1 className={styles.title}>
-          English Test <span className={styles.titleAccent}>Practice</span>
+          English Test{" "}
+          <span className={styles.titleAccent}>Practice</span>
         </h1>
         <p className={styles.description}>
-          Master the TOEFL iBT 2026 & TOEIC L&R with AI-generated questions. No
-          sign-up required.
+          Master the TOEFL iBT 2026 & TOEIC L&R with AI-generated questions.
+          No sign-up. No internet required after load.
         </p>
         <div className={styles.quickStart}>
-          <Button variant="accent" size="md" onClick={() => navigate("/toefl")}>
+          <Button variant="accent" size="lg" onClick={() => navigate("/toefl")}>
             Start Practicing
+            <ArrowRightIcon size={16} />
           </Button>
           <Button
             variant="secondary"
-            size="md"
+            size="lg"
             onClick={() => navigate("/dashboard")}
           >
             View Dashboard
           </Button>
         </div>
-      </div>
+      </section>
 
+      {/* Stats Bar */}
       {stats && (
         <div className={styles.statsBar}>
           <div className={styles.statChip}>
-            <span className={styles.statChipLabel}>Solved</span>
+            <span className={styles.statChipLabel}>Sessions</span>
             <span className={styles.statChipValue}>{stats.solved}</span>
           </div>
           <div className={styles.statChip}>
@@ -131,36 +168,39 @@ export function HomePage() {
         </div>
       )}
 
-      <div className={styles.studySection}>
+      {/* Study Cards */}
+      <section className={styles.studySection}>
         <h2 className={styles.sectionTitle}>
-          Problem Sets
-          <span className={styles.sectionCount}>{tests.length} available</span>
+          <BookOpenIcon size={22} />
+          Practice Tests
+          <span className={styles.sectionCount}>{tests.length} modes</span>
         </h2>
-        <div className={table.container}>
-          <div className={table.header}>
-            <span>#</span>
-            <span>Test</span>
-          </div>
-          {tests.map((test, i) => (
-            <Link key={test.path} to={test.path} className={table.row}>
-              <span className={table.statusCol}>
-                {stats ? (
-                  <span className={table.statusSolved}>✓</span>
-                ) : (
-                  <span className={table.statusNone}>{i + 1}</span>
-                )}
-              </span>
-              <span className={table.titleCell}>
-                {test.title}
-                <div className={table.titleMeta}>{test.subtitle}</div>
+        <div className={styles.studyGrid}>
+          {tests.map((test) => (
+            <Link
+              key={test.path}
+              to={test.path}
+              className={styles.studyCard}
+              style={{ ["--card-accent" as string]: test.color } as React.CSSProperties}
+            >
+              <div
+                className={styles.cardIconWrap}
+                style={{ background: test.gradient }}
+              >
+                {IconMap[test.icon]}
+              </div>
+              <span className={styles.cardTitle}>{test.title}</span>
+              <span className={styles.cardDesc}>{test.subtitle}</span>
+              <span className={styles.cardCta}>
+                Get started <ArrowRightIcon size={14} />
               </span>
             </Link>
           ))}
         </div>
-      </div>
+      </section>
 
       <p className={styles.note}>
-        Generate questions with an AI agent and save them under{" "}
+        Questions are generated with an AI agent and saved under{" "}
         <code>public/questions/</code>. Prompts in <code>public/prompts/</code>.
       </p>
     </div>
