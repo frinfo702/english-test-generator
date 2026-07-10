@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "../ui/ProgressBar";
+import { ArrowLeftIcon } from "../ui/Icons";
 import styles from "./SectionHeader.module.css";
 
 interface SectionHeaderProps {
@@ -25,9 +26,10 @@ export function SectionHeader({
           <button
             className={styles.back}
             onClick={() => navigate(backTo)}
-            aria-label="Back"
+            aria-label="Go back"
+            type="button"
           >
-            ←
+            <ArrowLeftIcon size={18} />
           </button>
         )}
         <div className={styles.titles}>

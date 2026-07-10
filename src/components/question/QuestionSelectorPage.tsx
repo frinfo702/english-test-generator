@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../layout/SectionHeader";
 import { Button } from "../ui/Button";
 import { LoadingSpinner } from "../ui/LoadingSpinner";
+import { ChevronRightIcon, CheckIcon } from "../ui/Icons";
 import { type QuestionFileEntry, listQuestionFiles } from "../../lib/questions";
 import {
   useScoreHistory,
@@ -138,7 +139,9 @@ export function QuestionSelectorPage({
               >
                 <span className={table.statusCol}>
                   {completed ? (
-                    <span className={table.statusSolved}>✓</span>
+                    <span className={table.statusSolved}>
+                      <CheckIcon size={14} />
+                    </span>
                   ) : (
                     <span className={table.statusNone}>{i + 1}</span>
                   )}
@@ -159,7 +162,9 @@ export function QuestionSelectorPage({
                     {accuracy}
                   </span>
                 </span>
-                <span className={styles.chevron}>→</span>
+                <span className={styles.chevron}>
+                  <ChevronRightIcon size={14} />
+                </span>
               </button>
             );
           })}

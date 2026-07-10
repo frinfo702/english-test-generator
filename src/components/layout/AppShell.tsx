@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks/useTheme";
+import { LayoutDashboardIcon, GraduationCapIcon } from "../ui/Icons";
 import styles from "./AppShell.module.css";
 
 interface AppShellProps {
@@ -13,6 +14,7 @@ type NavEntry =
       to: string;
       label: string;
       match: (pathname: string) => boolean;
+      icon?: React.ReactNode;
     }
   | { kind: "divider" };
 
@@ -48,6 +50,7 @@ const NAV: NavEntry[] = [
     to: "/dashboard",
     label: "Dashboard",
     match: (p) => p === "/dashboard",
+    icon: <LayoutDashboardIcon size={15} style={{ marginRight: 5 }} />,
   },
 ];
 
@@ -98,13 +101,22 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <div className={styles.shell}>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <Link to="/" className={styles.logo}>
-            <span className={styles.logoMark}>ET</span>
+          <Link
+            to="/"
+            className={styles.logo}
+            aria-label="English Test Practice Home"
+          >
+            <span className={styles.logoMark}>
+              <GraduationCapIcon size={16} />
+            </span>
             <span className={styles.logoText}>English Test Practice</span>
           </Link>
-          <nav className={styles.nav} aria-label="Main">
+          <nav className={styles.nav} aria-label="Main navigation">
             {NAV.map((entry, i) =>
               entry.kind === "divider" ? (
                 <span
@@ -120,7 +132,9 @@ export function AppShell({ children }: AppShellProps) {
                     styles.navLink,
                     entry.match(pathname) ? styles.navLinkActive : "",
                   ].join(" ")}
+                  aria-current={entry.match(pathname) ? "page" : undefined}
                 >
+                  {entry.icon}
                   {entry.label}
                 </Link>
               ),
@@ -143,7 +157,9 @@ export function AppShell({ children }: AppShellProps) {
           </nav>
         </div>
       </header>
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main} id="main-content" tabIndex={-1}>
+        {children}
+      </main>
     </div>
   );
 }
