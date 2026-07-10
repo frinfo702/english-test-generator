@@ -1,105 +1,25 @@
-.sections {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--spacing-4);
-}
-
-.partCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-5);
-  transition:
-    box-shadow var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out);
-}
-
-.partCard:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--color-border-strong);
-}
-
 .sectionTitle {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-ink);
+  margin: 0 0 var(--spacing-2);
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-size: var(--text-xs);
-  font-weight: var(--font-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-toeic);
-  margin-bottom: var(--spacing-4);
-  padding-bottom: var(--spacing-3);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .sectionTitle::before {
   content: "";
-  width: 8px;
-  height: 8px;
+  width: 3px;
+  height: 14px;
   background: var(--color-toeic);
-  border-radius: 50%;
+  border-radius: 2px;
 }
 
-.taskList {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.sectionTitle:first-of-type {
+  margin-top: var(--spacing-2);
 }
 
-.taskRow {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-3);
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: background var(--duration-fast) var(--ease-out);
-  text-decoration: none;
-  color: inherit;
-}
-
-.taskRow:hover {
-  background: var(--color-surface-subtle);
-  text-decoration: none;
-}
-
-.taskRowIcon {
-  width: 20px;
-  text-align: center;
-  font-size: var(--text-xs);
-  font-weight: var(--font-semibold);
-  font-family: var(--font-mono);
-  color: var(--color-ink-tertiary);
-  flex-shrink: 0;
-}
-
-.taskRowContent {
-  flex: 1;
-  min-width: 0;
-}
-
-.taskRowLabel {
-  font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  color: var(--color-ink);
-  line-height: var(--lh-tight);
-}
-
-.taskRowDesc {
-  font-size: var(--text-xs);
-  color: var(--color-ink-tertiary);
-  line-height: var(--lh-normal);
-  margin-top: 2px;
-}
-
-.taskRowChevron {
-  color: var(--color-ink-tertiary);
-  flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-  .sections {
-    grid-template-columns: 1fr;
-  }
+.tableWrapper {
+  margin-bottom: var(--spacing-6);
 }

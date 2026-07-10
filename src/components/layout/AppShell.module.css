@@ -11,8 +11,6 @@
   z-index: 100;
   height: var(--header-height);
   background: var(--color-nav);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-nav-border);
 }
 
@@ -30,8 +28,8 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-3);
-  font-size: var(--text-sm);
+  gap: var(--spacing-2);
+  font-size: var(--text-base);
   font-weight: var(--font-semibold);
   color: var(--color-nav-text);
   text-decoration: none;
@@ -42,28 +40,22 @@
 
 .logo:hover {
   text-decoration: none;
-  opacity: 0.75;
+  opacity: 0.85;
   color: var(--color-nav-text);
 }
 
 .logoMark {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius);
-  background: var(--gradient-accent);
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 13px;
-  font-weight: var(--font-extrabold);
+  color: var(--color-on-accent);
+  font-size: 11px;
+  font-weight: var(--font-bold);
   flex-shrink: 0;
-  letter-spacing: -0.02em;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
-}
-
-.logoText {
-  color: inherit;
 }
 
 .nav {
@@ -75,9 +67,9 @@
 .navLink {
   display: inline-flex;
   align-items: center;
-  height: 36px;
-  padding: 0 14px;
-  border-radius: var(--radius);
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
   color: var(--color-nav-text-secondary);
@@ -97,8 +89,6 @@
 .navLinkActive {
   background: var(--color-accent);
   color: var(--color-on-accent);
-  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
-  font-weight: var(--font-semibold);
 }
 
 .navLinkActive:hover {
@@ -108,35 +98,33 @@
 
 .navDivider {
   width: 1px;
-  height: 20px;
+  height: 18px;
   background: var(--color-nav-divider);
-  margin: 0 var(--spacing-2);
-  flex-shrink: 0;
+  margin: 0 var(--spacing-1);
 }
 
 .kbd {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: var(--font-medium);
   color: var(--color-ink-tertiary);
   letter-spacing: 0.02em;
-  margin-left: var(--spacing-1);
 }
 
 .kbdKey {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 20px;
-  height: 18px;
-  padding: 0 4px;
-  border-radius: 4px;
+  min-width: 18px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 3px;
   border: 1px solid var(--color-border);
   background: var(--color-surface-subtle);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 10px;
   font-weight: var(--font-semibold);
   color: var(--color-ink-tertiary);
@@ -147,19 +135,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   margin-left: 4px;
   padding: 0;
   border: 1px solid transparent;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--color-nav-text-secondary);
   cursor: pointer;
   transition:
     background var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out),
-    border-color var(--duration-fast) var(--ease-out);
+    color var(--duration-fast) var(--ease-out);
   flex-shrink: 0;
 }
 
@@ -174,36 +161,27 @@
 
 .main {
   flex: 1;
-  padding: var(--spacing-8) var(--spacing-6);
+  padding: var(--spacing-6) var(--spacing-6);
   max-width: calc(var(--max-content) + var(--spacing-6) * 2);
   margin: 0 auto;
   width: 100%;
 }
 
-@media (max-width: 720px) {
-  .logoText {
-    display: none;
-  }
-
+@media (max-width: 600px) {
   .headerInner {
     padding: 0 var(--spacing-4);
   }
 
   .navLink {
-    padding: 0 10px;
+    padding: 0 8px;
     font-size: var(--text-xs);
-    height: 32px;
   }
 
   .main {
-    padding: var(--spacing-5) var(--spacing-4);
+    padding: var(--spacing-4) var(--spacing-4);
   }
 
   .kbd {
     display: none;
-  }
-
-  .navDivider {
-    margin: 0 2px;
   }
 }

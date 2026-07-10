@@ -1,58 +1,11 @@
 import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "../../hooks/useTheme";
-import { LayoutDashboardIcon, GraduationCapIcon } from "../ui/Icons";
 import styles from "./AppShell.module.css";
 
 interface AppShellProps {
   children: React.ReactNode;
 }
-
-type NavEntry =
-  | {
-      kind: "link";
-      to: string;
-      label: string;
-      match: (pathname: string) => boolean;
-      icon?: React.ReactNode;
-    }
-  | { kind: "divider" };
-
-const NAV: NavEntry[] = [
-  {
-    kind: "link",
-    to: "/toefl",
-    label: "TOEFL 2026",
-    match: (p) => p.startsWith("/toefl"),
-  },
-  {
-    kind: "link",
-    to: "/toeic",
-    label: "TOEIC L&R",
-    match: (p) => p.startsWith("/toeic"),
-  },
-  { kind: "divider" },
-  {
-    kind: "link",
-    to: "/shadowing",
-    label: "Shadowing",
-    match: (p) => p.startsWith("/shadowing"),
-  },
-  {
-    kind: "link",
-    to: "/dictation",
-    label: "Dictation",
-    match: (p) => p.startsWith("/dictation"),
-  },
-  { kind: "divider" },
-  {
-    kind: "link",
-    to: "/dashboard",
-    label: "Dashboard",
-    match: (p) => p === "/dashboard",
-    icon: <LayoutDashboardIcon size={15} style={{ marginRight: 5 }} />,
-  },
-];
 
 function ThemeIcon({ isDark }: { isDark: boolean }) {
   const common = {
@@ -84,9 +37,13 @@ function ThemeIcon({ isDark }: { isDark: boolean }) {
 }
 
 export function AppShell({ children }: AppShellProps) {
-  const { pathname } = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
   const { isDark, toggleTheme } = useTheme();
+  const isToefl = location.pathname.startsWith("/toefl");
+  const isToeic = location.pathname.startsWith("/toeic");
+  const isShadowing = location.pathname.startsWith("/shadowing");
+  const isDictation = location.pathname.startsWith("/dictation");
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -111,34 +68,65 @@ export function AppShell({ children }: AppShellProps) {
             className={styles.logo}
             aria-label="English Test Practice Home"
           >
-            <span className={styles.logoMark}>
-              <GraduationCapIcon size={16} />
-            </span>
-            <span className={styles.logoText}>English Test Practice</span>
+            <span className={styles.logoMark}>ET</span>
+            English Test Practice
           </Link>
           <nav className={styles.nav} aria-label="Main navigation">
-            {NAV.map((entry, i) =>
-              entry.kind === "divider" ? (
-                <span
-                  key={`divider-${i}`}
-                  className={styles.navDivider}
-                  aria-hidden="true"
-                />
-              ) : (
-                <Link
-                  key={entry.to}
-                  to={entry.to}
-                  className={[
-                    styles.navLink,
-                    entry.match(pathname) ? styles.navLinkActive : "",
-                  ].join(" ")}
-                  aria-current={entry.match(pathname) ? "page" : undefined}
-                >
-                  {entry.icon}
-                  {entry.label}
-                </Link>
-              ),
-            )}
+            <Link
+              to="/toefl"
+              className={[
+                styles.navLink,
+                isToefl ? styles.navLinkActive : "",
+              ].join(" ")}
+              aria-current={isToefl ? "page" : undefined}
+            >
+              TOEFL 2026
+            </Link>
+            <Link
+              to="/toeic"
+              className={[
+                styles.navLink,
+                isToeic ? styles.navLinkActive : "",
+              ].join(" ")}
+              aria-current={isToeic ? "page" : undefined}
+            >
+              TOEIC L&amp;R
+            </Link>
+            <span className={styles.navDivider} aria-hidden="true" />
+            <Link
+              to="/shadowing"
+              className={[
+                styles.navLink,
+                isShadowing ? styles.navLinkActive : "",
+              ].join(" ")}
+              aria-current={isShadowing ? "page" : undefined}
+            >
+              Shadowing
+            </Link>
+            <span className={styles.navDivider} aria-hidden="true" />
+            <Link
+              to="/dictation"
+              className={[
+                styles.navLink,
+                isDictation ? styles.navLinkActive : "",
+              ].join(" ")}
+              aria-current={isDictation ? "page" : undefined}
+            >
+              Dictation
+            </Link>
+            <span className={styles.navDivider} aria-hidden="true" />
+            <Link
+              to="/dashboard"
+              className={[
+                styles.navLink,
+                location.pathname === "/dashboard" ? styles.navLinkActive : "",
+              ].join(" ")}
+              aria-current={
+                location.pathname === "/dashboard" ? "page" : undefined
+              }
+            >
+              Dashboard
+            </Link>
             <span className={styles.kbd} title="Go to Dashboard">
               <span className={styles.kbdKey}>⌘</span>
               <span className={styles.kbdKey}>D</span>

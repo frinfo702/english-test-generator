@@ -6,7 +6,6 @@ import { LoadingSpinner } from "../ui/LoadingSpinner";
 import { ProgressBar } from "../ui/ProgressBar";
 import { FloatingElapsedTimer } from "../ui/FloatingElapsedTimer";
 import { SpeedControl } from "../ui/SpeedControl";
-import { CheckIcon, XIcon } from "../ui/Icons";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory, type TaskId } from "../../hooks/useScoreHistory";
@@ -348,11 +347,7 @@ export function ListeningTaskBase({
                   </strong>
                   {graded && (
                     <span style={{ marginLeft: 8 }}>
-                      {isCorrect ? (
-                        <><CheckIcon size={14} style={{ verticalAlign: "middle" }} /> Correct</>
-                      ) : (
-                        <><XIcon size={14} style={{ verticalAlign: "middle" }} /> Incorrect</>
-                      )}
+                      {isCorrect ? "✓ Correct" : "✗ Incorrect"}
                     </span>
                   )}
                 </p>

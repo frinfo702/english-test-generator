@@ -13,7 +13,6 @@ import { formatSecondsAsMmSs } from "../lib/time";
 import { getAllAnswers, type AnswerEntry } from "../lib/answerSubmission";
 import styles from "./DashboardPage.module.css";
 
-// Task display labels
 const TASK_LABELS: Record<TaskId, string> = {
   "toefl/reading/complete-words": "TOEFL Reading: Complete Words",
   "toefl/reading/daily-life": "TOEFL Reading: Daily Life",
@@ -56,27 +55,11 @@ const TASK_COLORS: Record<string, string> = {
   dictation: "#0891b2",
 };
 
-// Convert date to short format (e.g. "2/18")
 function shortDate(iso: string): string {
   const d = new Date(iso);
   return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-// S-curve smoothing — Catmull-Rom → cubic bezier
-function catmullRom2bezier(
-  pts: { x: number; y: number }[],
-): { x: number; y: number; cp1x: number; cp1y: number; cp2x: number; cp2y: number }[] {
-  if (pts.length < 2) return [];
-  const out: ReturnType<typeof catmullRom2bezier> = [];
-  for (let i = 0; i < pts.length - 1; i++) {
-    const p0 = pts[Math.max(i - 1, 0)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(i + 2, pts.length - 1)];
-    const t = 0.35;
-    out.push({ x: p2.x, y: p2.y, cp1x: p1.x + (p2.x - p0.x) * t, cp1y: p1.y + (p2.y - p0.y) * t, cp2x: p2.x - (p3.x - p1.x) * t, cp2y: p2.y - (p3.y - p1.y) * t });
-  }
-  return out;
-}
-
-// Rich canvas line chart with smooth curves, gradient fill, glow, goal line & hover tooltips
 interface LineChartProps {
   entries: ScoreEntry[];
   color: string;
@@ -84,17 +67,7 @@ interface LineChartProps {
 
 function LineChart({ entries, color }: LineChartProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const tooltipRef = useRef<HTMLDivElement>(null);
-  const hitsRef = useRef<{ x: number; y: number; entry: ScoreEntry }[]>([]);
-  // Re-draw when theme tokens change (grid/label/point colors).
   const { theme } = useTheme();
-
-  const hexRgb = (h: string) => {
-    const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
-    return m ? [parseInt(m[1], 16), parseInt(m[2], 16), parseInt(m[3], 16)] : [0, 0, 0];
-  };
-  const rgba = (rgb: number[], a: number) => `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a})`;
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current;
@@ -103,114 +76,96 @@ function LineChart({ entries, color }: LineChartProps) {
     if (!ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
-    const W = canvas.offsetWidth, H = canvas.offsetHeight;
-    canvas.width = W * dpr; canvas.height = H * dpr;
+    const W = canvas.offsetWidth;
+    const H = canvas.offsetHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
     ctx.scale(dpr, dpr);
 
-    const PAD = { top: 20, right: 24, bottom: 36, left: 48 };
-    const chartW = W - PAD.left - PAD.right, chartH = H - PAD.top - PAD.bottom;
-    const rgb = hexRgb(color);
+    const PAD = { top: 16, right: 16, bottom: 40, left: 44 };
+    const chartW = W - PAD.left - PAD.right;
+    const chartH = H - PAD.top - PAD.bottom;
     const gridColor = readCssVar("--color-chart-grid", "#e2e8f0");
     const labelColor = readCssVar("--color-chart-label", "#94a3b8");
     const pointFill = readCssVar("--color-chart-point", "#ffffff");
 
     ctx.clearRect(0, 0, W, H);
 
-    // Dashed horizontal grid
-    ctx.strokeStyle = gridColor; ctx.lineWidth = 1;
-    ctx.setLineDash([3, 5]);
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+    ctx.fillStyle = labelColor;
+    ctx.font = "11px var(--font-sans)";
+    ctx.textAlign = "right";
     for (let i = 0; i <= 4; i++) {
-      const y = PAD.top + chartH - ((i * 25) / 100) * chartH;
-      ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + chartW, y); ctx.stroke();
-    }
-    ctx.setLineDash([]);
-
-    // Y-axis % labels
-    ctx.fillStyle = labelColor; ctx.font = "600 10px var(--font-sans, Inter, sans-serif)"; ctx.textAlign = "right";
-    for (let i = 0; i <= 4; i++) {
-      const y = PAD.top + chartH - ((i * 25) / 100) * chartH;
-      ctx.fillText(`${i * 25}%`, PAD.left - 8, y + 4);
+      const pct = i * 25;
+      const y = PAD.top + chartH - (pct / 100) * chartH;
+      ctx.beginPath();
+      ctx.moveTo(PAD.left, y);
+      ctx.lineTo(PAD.left + chartW, y);
+      ctx.stroke();
+      ctx.fillText(`${pct}%`, PAD.left - 6, y + 4);
     }
 
     if (entries.length === 0) {
-      ctx.fillStyle = labelColor; ctx.textAlign = "center";
-      ctx.font = "500 13px var(--font-sans, Inter, sans-serif)";
-      ctx.fillText("No records yet", PAD.left + chartW / 2, PAD.top + chartH / 2);
-      hitsRef.current = [];
+      ctx.fillStyle = labelColor;
+      ctx.textAlign = "center";
+      ctx.font = "13px var(--font-sans)";
+      ctx.fillText(
+        "No records yet",
+        PAD.left + chartW / 2,
+        PAD.top + chartH / 2,
+      );
       return;
     }
 
-    // Data points
     const points = entries.map((e, i) => ({
-      x: PAD.left + (entries.length === 1 ? chartW / 2 : (i / (entries.length - 1)) * chartW),
+      x:
+        PAD.left +
+        (entries.length === 1
+          ? chartW / 2
+          : (i / (entries.length - 1)) * chartW),
       y: PAD.top + chartH - (e.pct / 100) * chartH,
       entry: e,
     }));
-    hitsRef.current = points;
-    const bez = catmullRom2bezier(points);
 
-    // Gradient fill under curve
-    const grad = ctx.createLinearGradient(0, PAD.top, 0, PAD.top + chartH);
-    grad.addColorStop(0, rgba(rgb, 0.28)); grad.addColorStop(0.5, rgba(rgb, 0.08)); grad.addColorStop(1, rgba(rgb, 0));
     ctx.beginPath();
-    if (bez.length > 0) {
-      ctx.moveTo(points[0].x, PAD.top + chartH); ctx.lineTo(points[0].x, points[0].y);
-      for (const b of bez) ctx.bezierCurveTo(b.cp1x, b.cp1y, b.cp2x, b.cp2y, b.x, b.y);
-      ctx.lineTo(points[points.length - 1].x, PAD.top + chartH);
-    }
-    ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
+    ctx.moveTo(points[0].x, PAD.top + chartH);
+    points.forEach((p) => ctx.lineTo(p.x, p.y));
+    ctx.lineTo(points[points.length - 1].x, PAD.top + chartH);
+    ctx.closePath();
+    ctx.fillStyle = `${color}22`;
+    ctx.fill();
 
-    // Glow line
-    ctx.save(); ctx.shadowColor = rgba(rgb, 0.45); ctx.shadowBlur = 8;
-    ctx.beginPath(); ctx.strokeStyle = rgba(rgb, 0.7); ctx.lineWidth = 2.5; ctx.lineJoin = "round"; ctx.lineCap = "round";
-    if (bez.length > 0) { ctx.moveTo(points[0].x, points[0].y); for (const b of bez) ctx.bezierCurveTo(b.cp1x, b.cp1y, b.cp2x, b.cp2y, b.x, b.y); }
-    ctx.stroke(); ctx.restore();
-
-    // Main line
-    ctx.beginPath(); ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.lineJoin = "round"; ctx.lineCap = "round";
-    if (bez.length > 0) { ctx.moveTo(points[0].x, points[0].y); for (const b of bez) ctx.bezierCurveTo(b.cp1x, b.cp1y, b.cp2x, b.cp2y, b.x, b.y); }
-    else if (points.length === 1) { ctx.moveTo(points[0].x - 4, points[0].y); ctx.lineTo(points[0].x + 4, points[0].y); }
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2.5;
+    ctx.lineJoin = "round";
+    points.forEach((p, i) =>
+      i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y),
+    );
     ctx.stroke();
 
-    // Data dots
-    points.forEach((p, i) => {
-      const last = i === points.length - 1, r = last ? 5.5 : 4;
-      if (last) { ctx.beginPath(); ctx.arc(p.x, p.y, r + 4, 0, Math.PI * 2); ctx.fillStyle = rgba(rgb, 0.12); ctx.fill(); }
-      ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = pointFill; ctx.fill();
-      ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.stroke();
+    points.forEach((p) => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = pointFill;
+      ctx.fill();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
     });
 
-    // X-axis dates
-    ctx.fillStyle = labelColor; ctx.font = "600 10px var(--font-sans, Inter, sans-serif)"; ctx.textAlign = "center";
-    const maxL = Math.min(entries.length, 8), step = Math.ceil(entries.length / maxL);
-    points.forEach((p, i) => { if (i % step === 0 || i === entries.length - 1) ctx.fillText(shortDate(p.entry.date), p.x, PAD.top + chartH + 18); });
-
-    // 80% goal reference line
-    const goalY = PAD.top + chartH - 0.8 * chartH;
-    ctx.beginPath(); ctx.setLineDash([5, 5]); ctx.strokeStyle = labelColor; ctx.globalAlpha = 0.45; ctx.lineWidth = 1;
-    ctx.moveTo(PAD.left, goalY); ctx.lineTo(PAD.left + chartW, goalY); ctx.stroke(); ctx.globalAlpha = 1; ctx.setLineDash([]);
-    ctx.fillStyle = labelColor; ctx.font = "600 9px var(--font-sans, Inter, sans-serif)"; ctx.textAlign = "left";
-    ctx.fillText("80% goal", PAD.left + chartW - 44, goalY - 5);
+    ctx.fillStyle = labelColor;
+    ctx.font = "10px var(--font-sans)";
+    ctx.textAlign = "center";
+    const maxLabels = Math.min(entries.length, 8);
+    const step = Math.ceil(entries.length / maxLabels);
+    points.forEach((p, i) => {
+      if (i % step === 0 || i === entries.length - 1) {
+        ctx.fillText(shortDate(p.entry.date), p.x, PAD.top + chartH + 18);
+      }
+    });
   }, [entries, color, theme]);
-
-  // Pointer hover → nearest point tooltip
-  const onPointer = useCallback((e: React.PointerEvent<HTMLCanvasElement>) => {
-    const canvas = canvasRef.current;
-    const tooltip = tooltipRef.current;
-    if (!canvas || !tooltip) return;
-    const rect = canvas.getBoundingClientRect();
-    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-    let nearest: (typeof hitsRef.current)[0] | null = null, minD = 30;
-    for (const h of hitsRef.current) { const d = Math.sqrt((mx - h.x) ** 2 + (my - h.y) ** 2); if (d < minD) { minD = d; nearest = h; } }
-    if (nearest) {
-      const e2 = nearest.entry;
-      const elapsed = typeof e2.elapsedSeconds === "number" ? formatSecondsAsMmSs(e2.elapsedSeconds) : "—";
-      tooltip.textContent = `${shortDate(e2.date)}  •  ${e2.pct}% (${e2.correct}/${e2.total})  •  ${elapsed}`;
-      tooltip.style.left = `${nearest.x}px`; tooltip.style.top = `${nearest.y}px`;
-      tooltip.className = `${styles.chartTooltip} ${styles.chartTooltipVisible}`;
-    } else { tooltip.className = styles.chartTooltip; }
-  }, []);
-  const onLeave = useCallback(() => { if (tooltipRef.current) tooltipRef.current.className = styles.chartTooltip; }, []);
 
   useEffect(() => {
     draw();
@@ -219,23 +174,16 @@ function LineChart({ entries, color }: LineChartProps) {
     return () => observer.disconnect();
   }, [draw]);
 
-  return (
-    <div ref={wrapperRef} className={styles.chartWrapper}>
-      <canvas ref={canvasRef} className={styles.canvas} onPointerMove={onPointer} onPointerLeave={onLeave}
-        aria-label={`Score trend chart with ${entries.length} data points`} role="img" />
-      <div ref={tooltipRef} className={styles.chartTooltip} />
-    </div>
-  );
+  return <canvas ref={canvasRef} className={styles.canvas} />;
 }
 
-// Task card
 interface TaskCardProps {
   taskId: TaskId;
   entries: ScoreEntry[];
 }
 
 function TaskCard({ taskId, entries }: TaskCardProps) {
-  const color = TASK_COLORS[taskId] ?? "#0071bc";
+  const color = TASK_COLORS[taskId] ?? "#2563eb";
   const latest = entries[entries.length - 1];
   const best = entries.reduce<ScoreEntry | null>(
     (acc, e) => (acc === null || e.pct > acc.pct ? e : acc),
@@ -348,7 +296,6 @@ export function DashboardPage() {
     getAll().then(setEntries);
   }, [getAll]);
 
-  // Group by task
   const byTask = entries.reduce<Partial<Record<TaskId, ScoreEntry[]>>>(
     (acc, e) => {
       if (!acc[e.taskId]) acc[e.taskId] = [];
@@ -397,7 +344,6 @@ export function DashboardPage() {
         backTo="/"
       />
 
-      {/* Summary */}
       <div className={styles.summary}>
         <div className={styles.summaryCard}>
           <span className={styles.summaryLabel}>Total Sessions</span>

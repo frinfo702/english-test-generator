@@ -1,7 +1,4 @@
-/*
-  Design tokens — Academic • Trustworthy • Modern
-  Light is default; dark via [data-theme="dark"] on <html>.
-*/
+/* Design tokens. Light default; dark via [data-theme="dark"] on <html>. */
 
 :root,
 [data-theme="light"] {
@@ -21,7 +18,7 @@
   --color-surface-hover: #e2e8f0;
   --color-surface-overlay: rgba(255, 255, 255, 0.88);
 
-  /* ---- Navbar (modern light glass header) ---- */
+  /* ---- Navbar ---- */
   --color-nav: rgba(255, 255, 255, 0.88);
   --color-nav-hover: #f1f5f9;
   --color-nav-active: #eff6ff;
@@ -82,7 +79,7 @@
   /* ---- Selection ---- */
   --color-selection: rgba(37, 99, 235, 0.12);
 
-  /* ---- Shadows (layered elevation system) ---- */
+  /* ---- Shadows ---- */
   --shadow-none: 0 0 0 0 transparent;
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.03);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
@@ -179,14 +176,6 @@
   --shadow-error: 0 0 0 3px rgba(248, 113, 113, 0.2);
 
   --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
-
-  /* Gradients (dark-adapted) */
-  --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  --gradient-reading: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
-  --gradient-writing: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-  --gradient-speaking: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  --gradient-listening: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-  --gradient-toeic: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
 }
 
 /* Shared non-color tokens (both themes) */
@@ -240,7 +229,7 @@
   --radius-2xl: 24px;
   --radius-full: 9999px;
 
-  /* ---- Animation (spring physics) ---- */
+  /* ---- Animation ---- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -250,16 +239,8 @@
   --duration-modal: 350ms;
 
   /* ---- Layout ---- */
-  --max-content: 960px;
-  --header-height: 56px;
-
-  /* ---- Gradient accents (light defaults; overridden in dark) ---- */
-  --gradient-accent: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  --gradient-reading: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-  --gradient-writing: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  --gradient-speaking: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  --gradient-listening: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-  --gradient-toeic: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+  --max-content: 860px;
+  --header-height: 48px;
 
   /* ---- Legacy aliases ---- */
   --color-text: var(--color-ink);
