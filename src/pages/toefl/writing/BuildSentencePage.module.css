@@ -10,7 +10,7 @@
 }
 
 .startCard {
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
@@ -52,12 +52,12 @@
 .diffBtn.active {
   background: var(--color-accent);
   border-color: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   font-weight: 600;
 }
 
 .card {
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
@@ -75,7 +75,7 @@
   padding: var(--spacing-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  background: #f8fafc;
+  background: var(--color-surface-subtle);
 }
 .referenceLabel {
   font-size: var(--font-size-sm);
@@ -133,7 +133,7 @@
   color: var(--color-accent);
 }
 .placed:hover {
-  background: #dbeafe;
+  background: var(--color-accent-subtle);
 }
 
 .poolChip {

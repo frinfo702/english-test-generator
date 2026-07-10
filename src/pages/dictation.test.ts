@@ -20,8 +20,20 @@ describe("splitTrailingPunctuation", () => {
   });
 
   it("extracts trailing question mark", () => {
-    expect(splitTrailingPunctuation("Could you reschedule the appointment for Tuesday?")).toEqual({
-      words: ["Could", "you", "reschedule", "the", "appointment", "for", "Tuesday"],
+    expect(
+      splitTrailingPunctuation(
+        "Could you reschedule the appointment for Tuesday?",
+      ),
+    ).toEqual({
+      words: [
+        "Could",
+        "you",
+        "reschedule",
+        "the",
+        "appointment",
+        "for",
+        "Tuesday",
+      ],
       trailingPunct: "?",
     });
   });
@@ -41,7 +53,10 @@ describe("splitTrailingPunctuation", () => {
   });
 
   it("handles empty string", () => {
-    expect(splitTrailingPunctuation("")).toEqual({ words: [], trailingPunct: "" });
+    expect(splitTrailingPunctuation("")).toEqual({
+      words: [],
+      trailingPunct: "",
+    });
   });
 });
 
@@ -176,17 +191,23 @@ describe("isCorrectSoFar", () => {
 describe("isCompleteAndCorrect", () => {
   it("returns true when all words match", () => {
     const pool = buildWordPool("I walk home", []);
-    expect(isCompleteAndCorrect([pool[0], pool[1], pool[2]], ["I", "walk", "home"])).toBe(true);
+    expect(
+      isCompleteAndCorrect([pool[0], pool[1], pool[2]], ["I", "walk", "home"]),
+    ).toBe(true);
   });
 
   it("returns false when incomplete", () => {
     const pool = buildWordPool("I walk home", []);
-    expect(isCompleteAndCorrect([pool[0], pool[1]], ["I", "walk", "home"])).toBe(false);
+    expect(
+      isCompleteAndCorrect([pool[0], pool[1]], ["I", "walk", "home"]),
+    ).toBe(false);
   });
 
   it("returns false when wrong word included", () => {
     const pool = buildWordPool("I walk home", ["run"]);
-    expect(isCompleteAndCorrect([pool[0], pool[1], pool[3]], ["I", "walk", "home"])).toBe(false);
+    expect(
+      isCompleteAndCorrect([pool[0], pool[1], pool[3]], ["I", "walk", "home"]),
+    ).toBe(false);
   });
 });
 

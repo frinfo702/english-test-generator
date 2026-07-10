@@ -35,7 +35,7 @@
 | TOEIC Part 5                             | `public/questions/toeic/part5/`                  | —         | —                   |
 | TOEIC Part 6                             | `public/questions/toeic/part6/`                  | —         | —                   |
 | TOEIC Part 7                             | `public/questions/toeic/part7/`                  | —         | —                   |
-| Dictation                               | `public/questions/dictation/`                    | 3〜8秒    | 1                   |
+| Dictation                                | `public/questions/dictation/`                    | 3〜8秒    | 1                   |
 
 ---
 

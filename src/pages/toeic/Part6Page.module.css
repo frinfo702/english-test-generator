@@ -64,7 +64,7 @@
 }
 
 .qBlock {
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   padding: var(--spacing-lg);
@@ -79,7 +79,7 @@
 }
 .blankTag {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   font-size: var(--font-size-sm);
   font-weight: 700;
   padding: 2px 8px;

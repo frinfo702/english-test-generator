@@ -38,16 +38,16 @@
 /* Variants */
 .primary {
   background: var(--color-ink);
-  color: #fff;
+  color: var(--color-ink-inverse);
   border-color: var(--color-ink);
 }
 .primary:hover:not(:disabled) {
-  background: #1e293b;
-  border-color: #1e293b;
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
   box-shadow: var(--shadow-sm);
 }
 .primary:active:not(:disabled) {
-  background: #0f172a;
+  background: var(--color-accent-pressed);
 }
 
 .secondary {
@@ -80,7 +80,7 @@
 
 .danger {
   background: var(--color-error);
-  color: #fff;
+  color: var(--color-on-danger);
   border-color: var(--color-error);
   box-shadow: 0 1px 2px rgba(220, 38, 38, 0.2);
 }
@@ -92,7 +92,7 @@
 
 .accent {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   border-color: var(--color-accent);
   box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
 }

@@ -7,6 +7,8 @@ import {
   type ScoreEntry,
   type TaskId,
 } from "../hooks/useScoreHistory";
+import { useTheme } from "../hooks/useTheme";
+import { readCssVar } from "../lib/cssVars";
 import { formatSecondsAsMmSs } from "../lib/time";
 import { getAllAnswers, type AnswerEntry } from "../lib/answerSubmission";
 import styles from "./DashboardPage.module.css";
@@ -85,6 +87,8 @@ function LineChart({ entries, color }: LineChartProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const tooltipRef = useRef<HTMLDivElement>(null);
   const hitsRef = useRef<{ x: number; y: number; entry: ScoreEntry }[]>([]);
+  // Re-draw when theme tokens change (grid/label/point colors).
+  const { theme } = useTheme();
 
   const hexRgb = (h: string) => {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
@@ -106,11 +110,14 @@ function LineChart({ entries, color }: LineChartProps) {
     const PAD = { top: 20, right: 24, bottom: 36, left: 48 };
     const chartW = W - PAD.left - PAD.right, chartH = H - PAD.top - PAD.bottom;
     const rgb = hexRgb(color);
+    const gridColor = readCssVar("--color-chart-grid", "#e2e8f0");
+    const labelColor = readCssVar("--color-chart-label", "#94a3b8");
+    const pointFill = readCssVar("--color-chart-point", "#ffffff");
 
     ctx.clearRect(0, 0, W, H);
 
     // Dashed horizontal grid
-    ctx.strokeStyle = "#e2e8f0"; ctx.lineWidth = 1;
+    ctx.strokeStyle = gridColor; ctx.lineWidth = 1;
     ctx.setLineDash([3, 5]);
     for (let i = 0; i <= 4; i++) {
       const y = PAD.top + chartH - ((i * 25) / 100) * chartH;
@@ -119,14 +126,14 @@ function LineChart({ entries, color }: LineChartProps) {
     ctx.setLineDash([]);
 
     // Y-axis % labels
-    ctx.fillStyle = "#94a3b8"; ctx.font = "600 10px var(--font-sans, Inter, sans-serif)"; ctx.textAlign = "right";
+    ctx.fillStyle = labelColor; ctx.font = "600 10px var(--font-sans, Inter, sans-serif)"; ctx.textAlign = "right";
     for (let i = 0; i <= 4; i++) {
       const y = PAD.top + chartH - ((i * 25) / 100) * chartH;
       ctx.fillText(`${i * 25}%`, PAD.left - 8, y + 4);
     }
 
     if (entries.length === 0) {
-      ctx.fillStyle = "#94a3b8"; ctx.textAlign = "center";
+      ctx.fillStyle = labelColor; ctx.textAlign = "center";
       ctx.font = "500 13px var(--font-sans, Inter, sans-serif)";
       ctx.fillText("No records yet", PAD.left + chartW / 2, PAD.top + chartH / 2);
       hitsRef.current = [];
@@ -169,22 +176,22 @@ function LineChart({ entries, color }: LineChartProps) {
     points.forEach((p, i) => {
       const last = i === points.length - 1, r = last ? 5.5 : 4;
       if (last) { ctx.beginPath(); ctx.arc(p.x, p.y, r + 4, 0, Math.PI * 2); ctx.fillStyle = rgba(rgb, 0.12); ctx.fill(); }
-      ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = pointFill; ctx.fill();
       ctx.strokeStyle = color; ctx.lineWidth = 2.5; ctx.stroke();
     });
 
     // X-axis dates
-    ctx.fillStyle = "#94a3b8"; ctx.font = "600 10px var(--font-sans, Inter, sans-serif)"; ctx.textAlign = "center";
+    ctx.fillStyle = labelColor; ctx.font = "600 10px var(--font-sans, Inter, sans-serif)"; ctx.textAlign = "center";
     const maxL = Math.min(entries.length, 8), step = Math.ceil(entries.length / maxL);
     points.forEach((p, i) => { if (i % step === 0 || i === entries.length - 1) ctx.fillText(shortDate(p.entry.date), p.x, PAD.top + chartH + 18); });
 
     // 80% goal reference line
     const goalY = PAD.top + chartH - 0.8 * chartH;
-    ctx.beginPath(); ctx.setLineDash([5, 5]); ctx.strokeStyle = "rgba(148,163,184,0.45)"; ctx.lineWidth = 1;
-    ctx.moveTo(PAD.left, goalY); ctx.lineTo(PAD.left + chartW, goalY); ctx.stroke(); ctx.setLineDash([]);
-    ctx.fillStyle = "#94a3b8"; ctx.font = "600 9px var(--font-sans, Inter, sans-serif)"; ctx.textAlign = "left";
+    ctx.beginPath(); ctx.setLineDash([5, 5]); ctx.strokeStyle = labelColor; ctx.globalAlpha = 0.45; ctx.lineWidth = 1;
+    ctx.moveTo(PAD.left, goalY); ctx.lineTo(PAD.left + chartW, goalY); ctx.stroke(); ctx.globalAlpha = 1; ctx.setLineDash([]);
+    ctx.fillStyle = labelColor; ctx.font = "600 9px var(--font-sans, Inter, sans-serif)"; ctx.textAlign = "left";
     ctx.fillText("80% goal", PAD.left + chartW - 44, goalY - 5);
-  }, [entries, color]);
+  }, [entries, color, theme]);
 
   // Pointer hover → nearest point tooltip
   const onPointer = useCallback((e: React.PointerEvent<HTMLCanvasElement>) => {

@@ -1,15 +1,17 @@
 .timer {
-  font-size: var(--text-xl);
-  font-weight: var(--font-bold);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
   font-variant-numeric: tabular-nums;
-  color: var(--color-accent);
-  background: var(--color-accent-subtle);
-  padding: 6px 14px;
-  border-radius: var(--radius);
-  letter-spacing: 1px;
+  color: var(--color-ink);
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
   transition:
     color var(--duration-base),
-    background var(--duration-base);
+    background var(--duration-base),
+    border-color var(--duration-base);
 }
 
 .warning {

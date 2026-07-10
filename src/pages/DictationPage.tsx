@@ -47,13 +47,7 @@ function createSentenceState(): SentenceState {
   return { selected: [], phase: "listening", wrongToken: null, wrongCount: 0 };
 }
 
-function DictationContent({
-  data,
-  file,
-}: {
-  data: ProblemData;
-  file: string;
-}) {
+function DictationContent({ data, file }: { data: ProblemData; file: string }) {
   const navigate = useNavigate();
   const {
     playing,
@@ -93,19 +87,28 @@ function DictationContent({
   // Word pool is derived data — memoised per sentence so it stays stable
   // across re-renders and navigation (same sentence reference → cached).
   const pool = useMemo(
-    () => (sentence ? shufflePool(buildWordPool(sentence.text, sentence.distractors)) : []),
+    () =>
+      sentence
+        ? shufflePool(buildWordPool(sentence.text, sentence.distractors))
+        : [],
     [sentence],
   );
 
   const state: SentenceState = states[current] ?? createSentenceState();
 
   const { words: correctWords, trailingPunct } = useMemo(
-    () => (sentence ? splitTrailingPunctuation(sentence.text) : { words: [], trailingPunct: "" }),
+    () =>
+      sentence
+        ? splitTrailingPunctuation(sentence.text)
+        : { words: [], trailingPunct: "" },
     [sentence],
   );
 
   const setState = (updater: (prev: SentenceState) => SentenceState) => {
-    setStates((s) => ({ ...s, [current]: updater(s[current] ?? createSentenceState()) }));
+    setStates((s) => ({
+      ...s,
+      [current]: updater(s[current] ?? createSentenceState()),
+    }));
   };
 
   const audioUrl = `/audio/dictation/${fileBasename}/${current + 1}.mp3`;
@@ -123,7 +126,9 @@ function DictationContent({
       setState((prev) => ({
         ...prev,
         selected: newSelected,
-        phase: isCompleteAndCorrect(newSelected, correctWords) ? "correct" : "answering",
+        phase: isCompleteAndCorrect(newSelected, correctWords)
+          ? "correct"
+          : "answering",
         wrongToken: null,
       }));
     } else {
@@ -167,14 +172,19 @@ function DictationContent({
   };
 
   const correctCount = useMemo(
-    () => data.sentences.reduce((n, _, i) => n + (states[i]?.phase === "correct" ? 1 : 0), 0),
+    () =>
+      data.sentences.reduce(
+        (n, _, i) => n + (states[i]?.phase === "correct" ? 1 : 0),
+        0,
+      ),
     [data.sentences, states],
   );
   const allCorrect = correctCount === totalSentences;
 
   /** Total wrong taps across all sentences (lower is better) */
   const totalWrongCount = useMemo(
-    () => data.sentences.reduce((n, _, i) => n + (states[i]?.wrongCount ?? 0), 0),
+    () =>
+      data.sentences.reduce((n, _, i) => n + (states[i]?.wrongCount ?? 0), 0),
     [data.sentences, states],
   );
 
@@ -209,7 +219,9 @@ function DictationContent({
         <h2>Dictation Results</h2>
         <div className={styles.scoreBox}>
           <span className={styles.scoreNum}>{totalWrongCount}</span>
-          <span className={styles.scoreDen}>mistake{totalWrongCount === 1 ? "" : "s"}</span>
+          <span className={styles.scoreDen}>
+            mistake{totalWrongCount === 1 ? "" : "s"}
+          </span>
         </div>
         <p className={styles.scorePct}>
           {totalWrongCount === 0
@@ -218,10 +230,16 @@ function DictationContent({
               ? "Great job — few mistakes!"
               : "Keep practicing — fewer mistakes next time!"}
         </p>
-        <p className={styles.timeText}>Time: {formatSecondsAsMmSs(elapsedSeconds)}</p>
+        <p className={styles.timeText}>
+          Time: {formatSecondsAsMmSs(elapsedSeconds)}
+        </p>
         <div className={styles.btnRow}>
-          <Button variant="accent" onClick={handleRestart}>Try Another Set</Button>
-          <Button variant="secondary" onClick={() => navigate("/dashboard")}>View Dashboard</Button>
+          <Button variant="accent" onClick={handleRestart}>
+            Try Another Set
+          </Button>
+          <Button variant="secondary" onClick={() => navigate("/dashboard")}>
+            View Dashboard
+          </Button>
         </div>
       </div>
     );
@@ -240,18 +258,36 @@ function DictationContent({
 
       <div className={styles.card}>
         <div className={styles.playerSection}>
-          <Button onClick={handlePlay} disabled={ttsLoading || !sentence} size="lg" variant="accent">
-            {ttsLoading ? "Loading..." : playing ? "Pause" : currentTime > 0 ? "Resume" : "Play Audio"}
+          <Button
+            onClick={handlePlay}
+            disabled={ttsLoading || !sentence}
+            size="lg"
+            variant="accent"
+          >
+            {ttsLoading
+              ? "Loading..."
+              : playing
+                ? "Pause"
+                : currentTime > 0
+                  ? "Resume"
+                  : "Play Audio"}
           </Button>
-          <SpeedControl playbackRate={playbackRate} onChange={setPlaybackRate} />
+          <SpeedControl
+            playbackRate={playbackRate}
+            onChange={setPlaybackRate}
+          />
           <div className={styles.playerProgressRow}>
             <span className={styles.timeText}>
-              {formatSecondsAsMmSs(currentTime)} / {formatSecondsAsMmSs(duration)}
+              {formatSecondsAsMmSs(currentTime)} /{" "}
+              {formatSecondsAsMmSs(duration)}
             </span>
             <div className={styles.progressBar}>
               <div
                 className={styles.progressFill}
-                style={{ width: duration > 0 ? `${(currentTime / duration) * 100}%` : "0%" }}
+                style={{
+                  width:
+                    duration > 0 ? `${(currentTime / duration) * 100}%` : "0%",
+                }}
               />
             </div>
           </div>
@@ -259,7 +295,8 @@ function DictationContent({
         </div>
 
         <p className={styles.instruction}>
-          Listen to the audio, then tap the word cards below in the correct order.
+          Listen to the audio, then tap the word cards below in the correct
+          order.
         </p>
 
         <div
@@ -290,7 +327,9 @@ function DictationContent({
               {state.wrongToken && (
                 <span
                   key={state.wrongToken.id}
-                  className={[styles.placedWord, styles.placedWordWrong].join(" ")}
+                  className={[styles.placedWord, styles.placedWordWrong].join(
+                    " ",
+                  )}
                 >
                   {state.wrongToken.text}
                 </span>
@@ -325,30 +364,40 @@ function DictationContent({
           <div className={[styles.feedback, styles.fbWrong].join(" ")}>
             <p className={styles.fbStatus}>✗ Wrong word!</p>
             <p className={styles.fbAnswer}>
-              The word <strong>"{state.wrongToken.text}"</strong>{" "}
-              is not the next correct word. Keep trying — tap another word.
+              The word <strong>"{state.wrongToken.text}"</strong> is not the
+              next correct word. Keep trying — tap another word.
             </p>
           </div>
         )}
         {state.phase === "correct" && (
           <div className={[styles.feedback, styles.fbCorrect].join(" ")}>
             <p className={styles.fbStatus}>✓ Perfect!</p>
-            <p className={styles.fbAnswer}>Correct sentence: <strong>{sentence.text}</strong></p>
+            <p className={styles.fbAnswer}>
+              Correct sentence: <strong>{sentence.text}</strong>
+            </p>
           </div>
         )}
 
         <div className={styles.btnRow}>
           {state.selected.length > 0 && state.phase !== "correct" && (
-            <Button variant="secondary" onClick={handleRemoveLast}>← Backspace</Button>
+            <Button variant="secondary" onClick={handleRemoveLast}>
+              ← Backspace
+            </Button>
           )}
           {current > 0 && (
-            <Button variant="secondary" onClick={handlePrev}>Previous</Button>
+            <Button variant="secondary" onClick={handlePrev}>
+              Previous
+            </Button>
           )}
           {state.phase === "correct" && current + 1 < totalSentences && (
-            <Button variant="accent" onClick={handleNext}>Next →</Button>
+            <Button variant="accent" onClick={handleNext}>
+              Next →
+            </Button>
           )}
           {allCorrect && current + 1 >= totalSentences && (
-            <Button variant="accent" size="lg" onClick={handleSubmit}>Submit</Button>
+            <Button variant="accent" size="lg" onClick={handleSubmit}>
+              Submit
+            </Button>
           )}
         </div>
       </div>
@@ -379,12 +428,19 @@ export function DictationPage() {
     <div>
       <SectionHeader
         title="Dictation Practice"
-        subtitle={data?.title ?? "Listen and arrange the words in the correct order."}
+        subtitle={
+          data?.title ?? "Listen and arrange the words in the correct order."
+        }
         backTo="/"
       />
 
       <div className={styles.topBar}>
-        <Button variant="secondary" size="sm" onClick={handleBackToList} disabled={loading}>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={handleBackToList}
+          disabled={loading}
+        >
           Question List
         </Button>
       </div>
@@ -410,4 +466,3 @@ export function DictationPage() {
     </div>
   );
 }
-

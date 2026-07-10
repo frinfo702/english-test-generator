@@ -35,14 +35,14 @@
 
 ### フィールド仕様
 
-| フィールド | 型 | 必須 | 説明 |
-|-----------|-----|------|------|
-| `title` | string | ✓ | セットのタイトル（カテゴリ名を含む） |
-| `sentences` | array | ✓ | ディクテーション文の配列（1セット6文推奨） |
-| `sentences[].id` | string | ✓ | 文の識別子（`s1`, `s2`, ... の連番） |
-| `sentences[].text` | string | ✓ | ディクテーション対象の英文（1文・短文） |
-| `sentences[].wordCount` | number | ✓ | `text` の語数（空白分割と一致） |
-| `sentences[].distractors` | string[] | ✓ | フェイク単語の配列（2〜3個） |
+| フィールド                | 型       | 必須 | 説明                                       |
+| ------------------------- | -------- | ---- | ------------------------------------------ |
+| `title`                   | string   | ✓    | セットのタイトル（カテゴリ名を含む）       |
+| `sentences`               | array    | ✓    | ディクテーション文の配列（1セット6文推奨） |
+| `sentences[].id`          | string   | ✓    | 文の識別子（`s1`, `s2`, ... の連番）       |
+| `sentences[].text`        | string   | ✓    | ディクテーション対象の英文（1文・短文）    |
+| `sentences[].wordCount`   | number   | ✓    | `text` の語数（空白分割と一致）            |
+| `sentences[].distractors` | string[] | ✓    | フェイク単語の配列（2〜3個）               |
 
 ## 音声ファイル
 
@@ -53,6 +53,7 @@
 例: `public/questions/dictation/001.json` の1文目 → `public/audio/dictation/001/1.mp3`
 
 音声生成コマンド:
+
 ```bash
 npm run generate-audio
 ```
@@ -72,43 +73,50 @@ distractor（フェイク選択肢）は学習者が注意深く聴くことを�
 
 ### distractor の例
 
-| 正解文 | distractor | 理由 |
-|--------|-----------|------|
-| "I usually take the **bus** to work" | `train` | 同じカテゴリ（交通手段）の関連語 |
-| "The coffee shop **opens** at seven" | `closes` | 反意語（同じ動詞の対義） |
-| "opens at **seven**" | `eight` | 数値の紛らわしさ |
-| "on **weekdays**" | `weekends` | 反意語 |
-| "She **forgot** to bring her umbrella" | `remembered` | 反意語 |
+| 正解文                                 | distractor   | 理由                             |
+| -------------------------------------- | ------------ | -------------------------------- |
+| "I usually take the **bus** to work"   | `train`      | 同じカテゴリ（交通手段）の関連語 |
+| "The coffee shop **opens** at seven"   | `closes`     | 反意語（同じ動詞の対義）         |
+| "opens at **seven**"                   | `eight`      | 数値の紛らわしさ                 |
+| "on **weekdays**"                      | `weekends`   | 反意語                           |
+| "She **forgot** to bring her umbrella" | `remembered` | 反意語                           |
 
 ## ディクテーションの教育学習原則
 
 以下の原則は EnglishClub および言語教育学の実践に基づく。
 
 ### 1. 短い一文形式
+
 ディクテーションは短い1文（6〜14語）が最も効果的。短文は学習者が音声の細部（強勢、リエゾン、縮約形）に集中できる。
 
 ### 2. 段階的な難易度
+
 日常会話（Daily Life）→ 学術的文脈（Academic）→ ビジネス・旅行（Business & Travel）の順で語彙と文法が複雑になる。
 
 ### 3. 自然な口語英語
+
 実際の会話やアナウンスで聞くような自然な英語を使用。教科書的な不自然な文は避ける。
 
 ### 4. 多様な文脈
+
 異なる文脈（日常、学校、仕事、旅行）を混ぜることで、多様な語彙と話し方に触れる。
 
 ### 5. 即時フィードバック
+
 間違った単語を選んだ瞬間に「間違い」を伝えることで、自己修正の機会を最大化する。
 
 ### 6. 反復聴取
+
 音声を何度でも再生できるようにし、聞き取れなかった細部を確認できるようにする。
 
 ### 7. フェイク選択肢の活用
+
 distractor を含めることで、単なる推測ではなく注意深く聴く力を訓練する。
 
 ## 既存問題セット一覧
 
-| ファイル | タイトル | 難易度 | 文数 |
-|---------|---------|--------|-----|
-| `001.json` | Daily Life Dictation | Daily Life | 6 |
-| `002.json` | Academic Dictation | Academic | 6 |
-| `003.json` | Business & Travel Dictation | Business & Travel | 6 |
+| ファイル   | タイトル                    | 難易度            | 文数 |
+| ---------- | --------------------------- | ----------------- | ---- |
+| `001.json` | Daily Life Dictation        | Daily Life        | 6    |
+| `002.json` | Academic Dictation          | Academic          | 6    |
+| `003.json` | Business & Travel Dictation | Business & Travel | 6    |

@@ -7,7 +7,13 @@ const QUESTION_DIR = path.resolve(
   "../../public/questions/toefl/listening/announcement",
 );
 
-const VALID_QUESTION_TYPES = ["detail", "inference", "vocabulary", "purpose"];
+const VALID_QUESTION_TYPES = [
+  "detail",
+  "inference",
+  "vocabulary",
+  "purpose",
+  "mainIdea",
+];
 
 interface AnnouncementQuestion {
   id: string;

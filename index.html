@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="description" content="English Test Practice — Master TOEFL iBT 2026 & TOEIC L&R with AI-generated questions. No sign-up required." />
     <meta name="theme-color" content="#2563eb" />
     <title>English Test Practice — TOEFL 2026 / TOEIC</title>
@@ -13,6 +14,24 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <!-- FOUC bootstrap: key must match THEME_STORAGE_KEY in src/lib/theme.ts -->
+    <script>
+      (function () {
+        try {
+          var key = "etp-theme";
+          var stored = localStorage.getItem(key);
+          var theme =
+            stored === "light" || stored === "dark"
+              ? stored
+              : window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
