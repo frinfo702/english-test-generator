@@ -1,55 +1,184 @@
-:root {
-  /* ---- Ink (LeetCode text hierarchy) ---- */
-  --color-ink: #262626;
-  --color-ink-secondary: #595959;
-  --color-ink-tertiary: #8c8c8c;
-  --color-ink-disabled: #bfbfbf;
+/*
+  Design tokens — calm product UI (Linear / Vercel / OpenAI inspired).
+  Light is default; dark via [data-theme="dark"] on <html>.
+*/
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* ---- Ink (text hierarchy) ---- */
+  --color-ink: #171717;
+  --color-ink-secondary: #525252;
+  --color-ink-tertiary: #737373;
+  --color-ink-disabled: #a3a3a3;
+  --color-ink-inverse: #fafafa;
 
   /* ---- Surface ---- */
   --color-surface: #ffffff;
-  --color-surface-elevated: #f7f8fa;
-  --color-surface-subtle: #f0f0f0;
-  --color-surface-hover: #ebebeb;
+  --color-surface-elevated: #fafafa;
+  --color-surface-subtle: #f5f5f5;
+  --color-surface-hover: #f0f0f0;
+  --color-surface-overlay: rgba(255, 255, 255, 0.88);
 
-  /* ---- Navbar (dark LeetCode header) ---- */
-  --color-nav: #1a1a1a;
-  --color-nav-hover: #2a2a2a;
-  --color-nav-active: #2a2a2a;
-  --color-nav-text: #ffffff;
-  --color-nav-text-secondary: #bfbfbf;
+  /* ---- Navbar ---- */
+  --color-nav: #ffffff;
+  --color-nav-hover: #f5f5f5;
+  --color-nav-active: #f0f0f0;
+  --color-nav-text: #171717;
+  --color-nav-text-secondary: #737373;
+  --color-nav-border: #e5e5e5;
+  --color-nav-divider: #e5e5e5;
 
   /* ---- Border ---- */
   --color-border: #e5e5e5;
-  --color-border-strong: #bfbfbf;
+  --color-border-strong: #d4d4d4;
 
-  /* ---- Accent (LeetCode-style) ---- */
-  --color-accent: #2cbb5d;
-  --color-accent-hover: #269f4e;
-  --color-accent-subtle: #e6f7ed;
-  --color-accent-pressed: #1e8a40;
+  /* ---- Accent (neutral product primary) ---- */
+  --color-accent: #171717;
+  --color-accent-hover: #404040;
+  --color-accent-subtle: #f5f5f5;
+  --color-accent-pressed: #0a0a0a;
+  --color-on-accent: #ffffff;
+
+  /* Brand mark / positive highlight (used sparingly) */
+  --color-brand: #0f766e;
+  --color-brand-hover: #0d9488;
+  --color-brand-subtle: rgba(15, 118, 110, 0.1);
+  --color-on-brand: #ffffff;
+  --color-on-danger: #ffffff;
 
   /* ---- Feedback ---- */
-  --color-success: #2cbb5d;
-  --color-success-subtle: #e6f7ed;
-  --color-error: #ef4643;
-  --color-error-subtle: #fdecea;
-  --color-warning: #ffa116;
-  --color-warning-subtle: #fff3e0;
+  --color-success: #15803d;
+  --color-success-subtle: rgba(21, 128, 61, 0.1);
+  --color-error: #dc2626;
+  --color-error-subtle: rgba(220, 38, 38, 0.1);
+  --color-warning: #b45309;
+  --color-warning-subtle: rgba(180, 83, 9, 0.1);
+  --color-info: #1d4ed8;
+  --color-info-subtle: rgba(29, 78, 216, 0.1);
 
-  /* ---- Section tints (dots / lines only, LeetCode-adapted) ---- */
-  --color-reading: #1890ff;
-  --color-writing: #2cbb5d;
-  --color-speaking: #ffa116;
-  --color-listening: #722ed1;
-  --color-toeic: #eb2f96;
+  /* ---- Section tints (dots / labels only) ---- */
+  --color-reading: #0284c7;
+  --color-writing: #0f766e;
+  --color-speaking: #b45309;
+  --color-listening: #7c3aed;
+  --color-toeic: #c026d3;
 
+  /* ---- Chart / canvas ---- */
+  --color-chart-grid: #e5e5e5;
+  --color-chart-label: #a3a3a3;
+  --color-chart-point: #ffffff;
+
+  /* ---- Scrollbar ---- */
+  --color-scrollbar: #d4d4d4;
+  --color-scrollbar-hover: #a3a3a3;
+
+  /* ---- Selection ---- */
+  --color-selection: rgba(15, 118, 110, 0.16);
+
+  /* ---- Shadows (hairline, product-grade) ---- */
+  --shadow-none: 0 0 0 0 transparent;
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.12);
+
+  --shadow-accent: 0 0 0 3px rgba(23, 23, 23, 0.12);
+  --shadow-error: 0 0 0 3px rgba(220, 38, 38, 0.15);
+
+  /* ---- Focus ring ---- */
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-ink);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-ink: #ededed;
+  --color-ink-secondary: #a1a1a1;
+  --color-ink-tertiary: #737373;
+  --color-ink-disabled: #525252;
+  --color-ink-inverse: #0a0a0a;
+
+  --color-surface: #111111;
+  --color-surface-elevated: #0a0a0a;
+  --color-surface-subtle: #171717;
+  --color-surface-hover: #1a1a1a;
+  --color-surface-overlay: rgba(17, 17, 17, 0.88);
+
+  --color-nav: #0a0a0a;
+  --color-nav-hover: #171717;
+  --color-nav-active: #1a1a1a;
+  --color-nav-text: #ededed;
+  --color-nav-text-secondary: #a1a1a1;
+  --color-nav-border: #262626;
+  --color-nav-divider: #262626;
+
+  --color-border: #262626;
+  --color-border-strong: #404040;
+
+  --color-accent: #ededed;
+  --color-accent-hover: #d4d4d4;
+  --color-accent-subtle: #1a1a1a;
+  --color-accent-pressed: #ffffff;
+  --color-on-accent: #0a0a0a;
+
+  --color-brand: #2dd4bf;
+  --color-brand-hover: #5eead4;
+  --color-brand-subtle: rgba(45, 212, 191, 0.12);
+  --color-on-brand: #0a0a0a;
+  --color-on-danger: #0a0a0a;
+
+  --color-success: #4ade80;
+  --color-success-subtle: rgba(74, 222, 128, 0.12);
+  --color-error: #f87171;
+  --color-error-subtle: rgba(248, 113, 113, 0.12);
+  --color-warning: #fbbf24;
+  --color-warning-subtle: rgba(251, 191, 36, 0.12);
+  --color-info: #60a5fa;
+  --color-info-subtle: rgba(96, 165, 250, 0.12);
+
+  --color-reading: #38bdf8;
+  --color-writing: #2dd4bf;
+  --color-speaking: #fbbf24;
+  --color-listening: #a78bfa;
+  --color-toeic: #e879f9;
+
+  --color-chart-grid: #262626;
+  --color-chart-label: #737373;
+  --color-chart-point: #111111;
+
+  --color-scrollbar: #404040;
+  --color-scrollbar-hover: #525252;
+
+  --color-selection: rgba(45, 212, 191, 0.22);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-sm:
+    0 1px 2px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-md:
+    0 4px 16px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-lg:
+    0 12px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.55);
+
+  --shadow-accent: 0 0 0 3px rgba(237, 237, 237, 0.14);
+  --shadow-error: 0 0 0 3px rgba(248, 113, 113, 0.2);
+
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-ink);
+}
+
+/* Shared non-color tokens (both themes) */
+:root {
   /* ---- Typography ---- */
   --font-sans:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-mono:
-    "Menlo", "SF Mono", "Cascadia Code", "JetBrains Mono", ui-monospace,
+    "SF Mono", "Menlo", "Cascadia Code", "JetBrains Mono", ui-monospace,
     monospace;
 
   --text-xs: 12px;
@@ -69,7 +198,7 @@
   --lh-normal: 1.5;
   --lh-relaxed: 1.7;
 
-  /* ---- Spacing (4px grid, LeetCode-compact) ---- */
+  /* ---- Spacing (4px grid) ---- */
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 12px;
@@ -81,41 +210,25 @@
   --spacing-12: 48px;
   --spacing-16: 64px;
 
-  /* ---- Radius ---- */
-  --radius-sm: 4px;
-  --radius: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
+  /* ---- Radius (slightly softer product feel) ---- */
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
   --radius-full: 9999px;
 
-  /* ---- Shadow (minimal like LeetCode) ---- */
-  --shadow-none: 0 0 0 0 transparent;
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
-
-  /* ---- Shadow colored ---- */
-  --shadow-accent: 0 0 0 3px rgba(44, 187, 93, 0.2);
-  --shadow-error: 0 0 0 3px rgba(239, 70, 67, 0.15);
-
-  /* ---- Animation (LeetCode-crisp) ---- */
+  /* ---- Animation ---- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --duration-fast: 100ms;
-  --duration-base: 150ms;
-  --duration-slow: 200ms;
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 240ms;
   --duration-modal: 300ms;
-
-  /* ---- Focus ring ---- */
-  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
 
   /* ---- Layout ---- */
   --max-content: 860px;
-  --header-height: 48px;
+  --header-height: 52px;
 
   /* ---- Legacy aliases ---- */
   --color-text: var(--color-ink);
@@ -127,7 +240,7 @@
   --color-correct-bg: var(--color-success-subtle);
   --color-incorrect: var(--color-error);
   --color-incorrect-bg: var(--color-error-subtle);
-  --color-link: var(--color-accent);
+  --color-link: var(--color-brand);
   --font-body: var(--font-sans);
   --font-size-body: var(--text-base);
   --font-size-sm: var(--text-sm);

@@ -5,7 +5,7 @@
 }
 
 .paragraph {
-  background: var(--color-surface-elevated);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-6);
@@ -22,7 +22,7 @@
 }
 
 .hint {
-  color: var(--color-accent);
+  color: var(--color-brand);
   font-weight: var(--font-semibold);
   white-space: nowrap;
   user-select: none;

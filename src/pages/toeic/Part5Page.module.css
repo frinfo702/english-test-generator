@@ -17,7 +17,7 @@
 }
 
 .qBlock {
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
@@ -37,7 +37,7 @@
   height: 32px;
   border-radius: 50%;
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-on-accent);
   font-weight: 700;
   font-size: var(--font-size-sm);
   display: flex;

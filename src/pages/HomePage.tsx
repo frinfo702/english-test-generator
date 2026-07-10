@@ -88,24 +88,25 @@ export function HomePage() {
   return (
     <div className={styles.page}>
       <div className={styles.hero}>
-        <span className={styles.badge}>AI-Powered Practice</span>
-        <h1 className={styles.title}>
-          English Test <span className={styles.titleAccent}>Practice</span>
-        </h1>
+        <h1 className={styles.title}>English Test Practice</h1>
         <p className={styles.description}>
-          Master the TOEFL iBT 2026 & TOEIC L&R with AI-generated questions. No
-          sign-up required.
+          Focused practice for TOEFL iBT 2026 and TOEIC L&amp;R. No account
+          required.
         </p>
         <div className={styles.quickStart}>
-          <Button variant="accent" size="md" onClick={() => navigate("/toefl")}>
-            Start Practicing
+          <Button
+            variant="primary"
+            size="md"
+            onClick={() => navigate("/toefl")}
+          >
+            Start practicing
           </Button>
           <Button
             variant="secondary"
             size="md"
             onClick={() => navigate("/dashboard")}
           >
-            View Dashboard
+            Dashboard
           </Button>
         </div>
       </div>
@@ -133,8 +134,8 @@ export function HomePage() {
 
       <div className={styles.studySection}>
         <h2 className={styles.sectionTitle}>
-          Problem Sets
-          <span className={styles.sectionCount}>{tests.length} available</span>
+          Problem sets
+          <span className={styles.sectionCount}>{tests.length}</span>
         </h2>
         <div className={table.container}>
           <div className={table.header}>
@@ -160,8 +161,8 @@ export function HomePage() {
       </div>
 
       <p className={styles.note}>
-        Generate questions with an AI agent and save them under{" "}
-        <code>public/questions/</code>. Prompts in <code>public/prompts/</code>.
+        Questions live under <code>public/questions/</code>. Prompts in{" "}
+        <code>public/prompts/</code>.
       </p>
     </div>
   );

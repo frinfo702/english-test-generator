@@ -7,6 +7,8 @@ import {
   type ScoreEntry,
   type TaskId,
 } from "../hooks/useScoreHistory";
+import { useTheme } from "../hooks/useTheme";
+import { readCssVar } from "../lib/cssVars";
 import { formatSecondsAsMmSs } from "../lib/time";
 import { getAllAnswers, type AnswerEntry } from "../lib/answerSubmission";
 import styles from "./DashboardPage.module.css";
@@ -68,6 +70,8 @@ interface LineChartProps {
 
 function LineChart({ entries, color }: LineChartProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Re-draw when theme tokens change (grid/label/point colors).
+  const { theme } = useTheme();
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current;
@@ -86,13 +90,17 @@ function LineChart({ entries, color }: LineChartProps) {
     const chartW = W - PAD.left - PAD.right;
     const chartH = H - PAD.top - PAD.bottom;
 
+    const gridColor = readCssVar("--color-chart-grid", "#e5e5e5");
+    const labelColor = readCssVar("--color-chart-label", "#a3a3a3");
+    const pointFill = readCssVar("--color-chart-point", "#ffffff");
+
     ctx.clearRect(0, 0, W, H);
 
     // Grid lines and Y-axis labels
-    ctx.strokeStyle = "#e2e8f0";
+    ctx.strokeStyle = gridColor;
     ctx.lineWidth = 1;
-    ctx.fillStyle = "#94a3b8";
-    ctx.font = "11px var(--font-sans)";
+    ctx.fillStyle = labelColor;
+    ctx.font = "11px Inter, system-ui, sans-serif";
     ctx.textAlign = "right";
     for (let i = 0; i <= 4; i++) {
       const pct = i * 25;
@@ -105,9 +113,9 @@ function LineChart({ entries, color }: LineChartProps) {
     }
 
     if (entries.length === 0) {
-      ctx.fillStyle = "#94a3b8";
+      ctx.fillStyle = labelColor;
       ctx.textAlign = "center";
-      ctx.font = "13px var(--font-sans)";
+      ctx.font = "13px Inter, system-ui, sans-serif";
       ctx.fillText(
         "No records yet",
         PAD.left + chartW / 2,
@@ -139,7 +147,7 @@ function LineChart({ entries, color }: LineChartProps) {
     // Polyline
     ctx.beginPath();
     ctx.strokeStyle = color;
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2;
     ctx.lineJoin = "round";
     points.forEach((p, i) =>
       i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y),
@@ -149,8 +157,8 @@ function LineChart({ entries, color }: LineChartProps) {
     // Data points
     points.forEach((p) => {
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
-      ctx.fillStyle = "#fff";
+      ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = pointFill;
       ctx.fill();
       ctx.strokeStyle = color;
       ctx.lineWidth = 2;
@@ -158,8 +166,8 @@ function LineChart({ entries, color }: LineChartProps) {
     });
 
     // X-axis labels (thinned out)
-    ctx.fillStyle = "#94a3b8";
-    ctx.font = "10px var(--font-sans)";
+    ctx.fillStyle = labelColor;
+    ctx.font = "10px Inter, system-ui, sans-serif";
     ctx.textAlign = "center";
     const maxLabels = Math.min(entries.length, 8);
     const step = Math.ceil(entries.length / maxLabels);
@@ -168,7 +176,7 @@ function LineChart({ entries, color }: LineChartProps) {
         ctx.fillText(shortDate(p.entry.date), p.x, PAD.top + chartH + 18);
       }
     });
-  }, [entries, color]);
+  }, [entries, color, theme]);
 
   useEffect(() => {
     draw();

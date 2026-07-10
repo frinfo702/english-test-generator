@@ -5,58 +5,40 @@
 
 /* ---- Hero ---- */
 .hero {
-  text-align: center;
   margin-bottom: var(--spacing-10);
-  padding-top: var(--spacing-6);
-}
-
-.badge {
-  display: inline-block;
-  font-size: var(--text-xs);
-  font-weight: var(--font-semibold);
-  color: var(--color-accent);
-  background: var(--color-accent-subtle);
-  padding: 3px 12px;
-  border-radius: var(--radius-full);
-  margin-bottom: var(--spacing-4);
-  letter-spacing: 0.02em;
+  padding-top: var(--spacing-8);
 }
 
 .title {
   font-size: var(--text-3xl);
-  font-weight: var(--font-bold);
+  font-weight: var(--font-semibold);
   color: var(--color-ink);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
   line-height: 1.15;
-  margin-bottom: var(--spacing-2);
-}
-
-.titleAccent {
-  color: var(--color-accent);
+  margin-bottom: var(--spacing-3);
 }
 
 .description {
   color: var(--color-ink-secondary);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   line-height: var(--lh-relaxed);
-  max-width: 400px;
-  margin: 0 auto var(--spacing-5);
+  max-width: 420px;
+  margin: 0 0 var(--spacing-6);
 }
 
 .quickStart {
   display: flex;
   gap: var(--spacing-2);
-  justify-content: center;
   flex-wrap: wrap;
 }
 
 /* ---- Stats Bar ---- */
 .statsBar {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-6);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-3);
   margin-bottom: var(--spacing-10);
-  padding: var(--spacing-4) var(--spacing-6);
+  padding: var(--spacing-4);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -65,23 +47,23 @@
 .statChip {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 2px;
+  min-width: 0;
 }
 
 .statChipLabel {
   font-size: 11px;
   font-weight: var(--font-medium);
   color: var(--color-ink-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 
 .statChipValue {
   font-size: var(--text-xl);
-  font-weight: var(--font-bold);
+  font-weight: var(--font-semibold);
   color: var(--color-ink);
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
 /* ---- Study section ---- */
@@ -97,21 +79,26 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
+  letter-spacing: -0.01em;
 }
 
 .sectionCount {
   font-size: var(--text-xs);
-  font-weight: var(--font-normal);
+  font-weight: var(--font-medium);
   color: var(--color-ink-tertiary);
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
 }
 
 /* ---- Note ---- */
 .note {
-  text-align: center;
   color: var(--color-ink-tertiary);
   font-size: var(--text-xs);
   padding: var(--spacing-4) 0 var(--spacing-2);
   border-top: 1px solid var(--color-border);
+  line-height: var(--lh-relaxed);
 }
 
 .note code {
@@ -121,20 +108,21 @@
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--color-ink-secondary);
+  border: 1px solid var(--color-border);
 }
 
 @media (max-width: 640px) {
   .title {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .statsBar {
-    gap: var(--spacing-4);
-    padding: var(--spacing-3) var(--spacing-4);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-3);
   }
 
   .hero {
-    padding-top: var(--spacing-2);
+    padding-top: var(--spacing-4);
     margin-bottom: var(--spacing-6);
   }
 }

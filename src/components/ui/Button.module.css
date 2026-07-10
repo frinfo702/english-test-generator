@@ -20,11 +20,11 @@
   position: relative;
   user-select: none;
   -webkit-user-select: none;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.01em;
 }
 
 .btn:active:not(:disabled) {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .btn:disabled {
@@ -36,12 +36,12 @@
 /* Variants */
 .primary {
   background: var(--color-ink);
-  color: #fff;
+  color: var(--color-ink-inverse);
   border-color: var(--color-ink);
 }
 .primary:hover:not(:disabled) {
-  background: #404040;
-  border-color: #404040;
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
 }
 
 .secondary {
@@ -72,22 +72,21 @@
 
 .danger {
   background: var(--color-error);
-  color: #fff;
+  color: var(--color-on-danger);
   border-color: var(--color-error);
 }
 .danger:hover:not(:disabled) {
-  background: #d93a38;
-  border-color: #d93a38;
+  filter: brightness(0.92);
 }
 
 .accent {
-  background: var(--color-accent);
-  color: #fff;
-  border-color: var(--color-accent);
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+  border-color: var(--color-brand);
 }
 .accent:hover:not(:disabled) {
-  background: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
+  background: var(--color-brand-hover);
+  border-color: var(--color-brand-hover);
 }
 
 /* Sizes */
@@ -102,7 +101,7 @@
   font-size: var(--text-sm);
 }
 .lg {
-  height: 38px;
-  padding: 0 20px;
-  font-size: var(--text-base);
+  height: 36px;
+  padding: 0 18px;
+  font-size: var(--text-sm);
 }

@@ -779,9 +779,7 @@ export function ListenRepeatPage() {
                       <>
                         <div className={styles.playerControls}>
                           <Button
-                            onClick={() =>
-                              seek(Math.max(0, currentTime - 10))
-                            }
+                            onClick={() => seek(Math.max(0, currentTime - 10))}
                             disabled={duration <= 0 || !playing}
                             size="sm"
                             variant="secondary"

@@ -492,7 +492,9 @@ describe("ListenRepeatPage", () => {
 
     // After clicking, seek controls should appear (shown regardless of playing state)
     await waitFor(() => {
-      expect(screen.getAllByRole("button", { name: /10s/i }).length).toBeGreaterThanOrEqual(1);
+      expect(
+        screen.getAllByRole("button", { name: /10s/i }).length,
+      ).toBeGreaterThanOrEqual(1);
     });
   });
 

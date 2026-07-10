@@ -33,9 +33,10 @@ export interface WordToken {
  *   { words: ["The", "coffee", "shop", "opens", "at", "seven", "on", "weekdays"],
  *     trailingPunct: "." }
  */
-export function splitTrailingPunctuation(
-  text: string,
-): { words: string[]; trailingPunct: string } {
+export function splitTrailingPunctuation(text: string): {
+  words: string[];
+  trailingPunct: string;
+} {
   const raw = text.trim().split(/\s+/).filter(Boolean);
   if (raw.length === 0) return { words: [], trailingPunct: "" };
 
