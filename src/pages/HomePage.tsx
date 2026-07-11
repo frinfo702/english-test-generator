@@ -88,16 +88,22 @@ export function HomePage() {
   return (
     <div className={styles.page}>
       <div className={styles.hero}>
-        <span className={styles.badge}>AI-Powered Practice</span>
+        <span className={styles.badge}>
+          Curated practice for TOEFL iBT 2026 &amp; TOEIC L&amp;R
+        </span>
         <h1 className={styles.title}>
           English Test <span className={styles.titleAccent}>Practice</span>
         </h1>
         <p className={styles.description}>
-          Master the TOEFL iBT 2026 & TOEIC L&R with AI-generated questions. No
-          sign-up required.
+          Focused drills for reading, writing, listening, and speaking. No
+          sign-up required — pick a set and start.
         </p>
         <div className={styles.quickStart}>
-          <Button variant="accent" size="md" onClick={() => navigate("/toefl")}>
+          <Button
+            variant="primary"
+            size="md"
+            onClick={() => navigate("/toefl")}
+          >
             Start Practicing
           </Button>
           <Button

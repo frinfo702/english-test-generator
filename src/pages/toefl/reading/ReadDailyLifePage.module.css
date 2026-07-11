@@ -2,6 +2,8 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--doc-rule-soft);
 }
 .errorHint {
   margin-top: var(--spacing-sm);
@@ -18,12 +20,14 @@
 }
 
 .moduleTag {
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  text-transform: uppercase;
+  border: 1px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
   font-size: var(--font-size-sm);
   font-weight: 700;
   padding: 4px 12px;
-  border-radius: 99px;
+  border-radius: var(--radius-doc);
   white-space: nowrap;
 }
 
@@ -36,7 +40,8 @@
 .textCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-xl);
 }
 
@@ -49,6 +54,7 @@
 }
 
 .textContent {
+  font-family: var(--font-serif);
   line-height: 1.9;
   white-space: pre-wrap;
 }
@@ -56,7 +62,8 @@
 .questionCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -64,11 +71,13 @@
 }
 
 .qNum {
+  font-family: var(--font-mono);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
 
 .stem {
+  font-family: var(--font-serif);
   font-size: var(--font-size-lg);
   font-weight: 500;
   line-height: 1.5;
@@ -86,7 +95,8 @@
   gap: var(--spacing-sm);
   padding: 12px var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-doc);
   background: var(--color-surface);
   text-align: left;
   font-size: var(--font-size-body);
@@ -97,25 +107,29 @@
 }
 
 .option:hover {
-  border-color: var(--color-accent);
-  background: var(--color-accent-light);
+  border-color: var(--color-ink);
+  background: var(--color-surface-subtle);
 }
 .option.selected {
-  border-color: var(--color-accent);
-  background: var(--color-accent-light);
+  border-left-color: var(--color-ink);
+  border-color: var(--color-ink);
+  background: var(--color-surface-subtle);
 }
 .option.correctOpt {
+  border-left-color: var(--color-correct);
   border-color: var(--color-correct);
   background: var(--color-correct-bg);
 }
 .option.wrongOpt {
+  border-left-color: var(--color-incorrect);
   border-color: var(--color-incorrect);
   background: var(--color-incorrect-bg);
 }
 
 .optLabel {
+  font-family: var(--font-mono);
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-ink);
   min-width: 20px;
 }
 
@@ -129,7 +143,7 @@
 .branchCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
@@ -167,7 +181,7 @@
 
 .branchBadge {
   padding: 10px 24px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   font-weight: 600;
   font-size: var(--font-size-body);
 }
@@ -190,7 +204,8 @@
 .resultCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
@@ -200,6 +215,7 @@
 }
 
 .resultTitle {
+  font-family: var(--font-serif);
   font-size: var(--font-size-xl);
 }
 
@@ -231,9 +247,9 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  background: var(--color-accent-light);
+  background: var(--color-surface-subtle);
   border: 1px solid var(--color-accent);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   padding: 12px 24px;
 }
 
@@ -257,7 +273,7 @@
   color: var(--color-incorrect);
   background: var(--color-incorrect-bg);
   padding: var(--spacing-md);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
 }
 
 .texts {
@@ -281,7 +297,8 @@
 .qBlock {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -295,11 +312,13 @@
 }
 
 .qNum {
+  font-family: var(--font-mono);
   width: 28px;
   height: 28px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  border-radius: var(--radius-doc);
+  border: 1.5px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
   font-weight: 700;
   font-size: var(--font-size-sm);
   display: flex;

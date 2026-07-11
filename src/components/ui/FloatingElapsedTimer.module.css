@@ -6,9 +6,10 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 10px;
-  border-radius: var(--radius);
-  border: 1px solid var(--color-border);
+  padding: 6px 12px;
+  border-radius: var(--radius-doc);
+  border: 1px solid var(--color-border-strong);
+  border-top: 2px solid var(--color-ink);
   background: var(--color-surface-overlay);
   box-shadow: var(--shadow-sm);
   pointer-events: none;
@@ -17,7 +18,7 @@
 
 .label {
   font-size: 10px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--color-ink-tertiary);
   font-weight: var(--font-semibold);
   text-transform: uppercase;
@@ -26,8 +27,9 @@
 .value {
   font-size: 13px;
   font-weight: var(--font-semibold);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
   color: var(--color-ink);
 }
 
@@ -49,5 +51,11 @@
   .floatingTimer {
     top: 60px;
     right: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floatingTimer {
+    backdrop-filter: none;
   }
 }

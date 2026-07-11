@@ -116,13 +116,13 @@ function ListenRepeatDiffView({
             className={[styles.diffCell, styles.diffRowLabel].join(" ")}
             aria-hidden="true"
           >
-            Correct
+            Prompt
           </div>
           <div
             className={[styles.diffCell, styles.diffRowLabel].join(" ")}
             aria-hidden="true"
           >
-            You
+            Response
           </div>
         </div>
       )}

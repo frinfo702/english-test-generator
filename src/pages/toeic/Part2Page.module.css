@@ -2,12 +2,15 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--doc-rule-soft);
 }
 
 .questionCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-xl);
 }
 
@@ -41,7 +44,7 @@
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-md);
   background: color-mix(in srgb, var(--color-toeic) 8%, var(--color-surface));
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   text-align: center;
 }
 
@@ -58,7 +61,8 @@
   gap: var(--spacing-sm);
   padding: 12px var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-doc);
   background: var(--color-surface);
   text-align: left;
   font-size: var(--font-size-body);
@@ -74,11 +78,13 @@
 }
 
 .selected {
+  border-left-color: var(--color-ink);
   border-color: var(--color-toeic);
   background: color-mix(in srgb, var(--color-toeic) 14%, var(--color-surface));
 }
 
 .optLabel {
+  font-family: var(--font-mono);
   font-weight: 700;
   color: var(--color-toeic);
   min-width: 20px;
@@ -101,7 +107,8 @@
 .resultCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
@@ -117,8 +124,9 @@
 }
 
 .scoreNum {
+  font-family: var(--font-serif);
   font-size: 56px;
-  font-weight: 700;
+  font-weight: var(--font-semibold);
   color: var(--color-toeic);
   line-height: 1;
 }
@@ -141,7 +149,8 @@
 .reviewCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-xl);
   margin-bottom: var(--spacing-lg);
 }
@@ -172,7 +181,7 @@
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-md);
   background: color-mix(in srgb, var(--color-toeic) 8%, var(--color-surface));
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   text-align: center;
 }
 
@@ -189,7 +198,7 @@
   gap: var(--spacing-sm);
   padding: 10px var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   background: var(--color-surface);
   font-size: var(--font-size-body);
 }
@@ -208,7 +217,7 @@
   margin-top: var(--spacing-md);
   padding: var(--spacing-md);
   background: color-mix(in srgb, var(--color-toeic) 14%, var(--color-surface));
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
   line-height: var(--lh-relaxed);
@@ -218,7 +227,7 @@
   color: var(--color-incorrect);
   background: var(--color-incorrect-bg);
   padding: var(--spacing-md);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
 }
 
 .errorHint {

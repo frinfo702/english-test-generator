@@ -1,31 +1,36 @@
 .panel {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-4);
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
+  border: var(--doc-border);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
+  padding: var(--spacing-5);
 }
 
 .status {
-  font-size: var(--text-sm);
+  font-size: 11px;
   color: var(--color-ink-tertiary);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .error {
   color: var(--color-error);
   background: var(--color-error-subtle);
-  padding: var(--spacing-sm);
-  border-radius: var(--radius);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-doc);
+  border-left: 3px solid var(--color-error);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
 }
 
 .message {
-  line-height: 1.7;
-  word-break: break-all;
+  line-height: var(--lh-doc);
+  word-break: break-word;
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
+  font-family: var(--font-serif);
 }
