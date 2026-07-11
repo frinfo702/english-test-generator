@@ -2,6 +2,8 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--doc-rule-soft);
 }
 .errorHint {
   margin-top: var(--spacing-sm);
@@ -27,7 +29,7 @@
 .diffBtn {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   padding: 6px 14px;
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
@@ -38,9 +40,9 @@
   color: var(--color-accent);
 }
 .diffBtn.active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-on-accent);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-ink-inverse);
   font-weight: 600;
 }
 
@@ -53,17 +55,20 @@
 .passageCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-xl);
 }
 
 .passageTitle {
+  font-family: var(--font-serif);
   font-size: var(--font-size-lg);
-  color: var(--color-accent);
+  color: var(--color-ink);
   margin-bottom: var(--spacing-md);
 }
 
 .passage {
+  font-family: var(--font-serif);
   line-height: 1.9;
   white-space: pre-wrap;
 }
@@ -71,7 +76,8 @@
 .questionCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -79,11 +85,13 @@
 }
 
 .qNum {
+  font-family: var(--font-mono);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
 
 .stem {
+  font-family: var(--font-serif);
   font-size: var(--font-size-lg);
   font-weight: 500;
   line-height: 1.5;
@@ -101,7 +109,8 @@
   gap: var(--spacing-sm);
   padding: 12px var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-doc);
   background: var(--color-surface);
   text-align: left;
   font-size: var(--font-size-body);
@@ -112,28 +121,32 @@
 }
 
 .option:hover:not(:disabled) {
-  border-color: var(--color-accent);
-  background: var(--color-accent-light);
+  border-color: var(--color-ink);
+  background: var(--color-surface-subtle);
 }
 
 .option.selected {
-  border-color: var(--color-accent);
-  background: var(--color-accent-light);
+  border-left-color: var(--color-ink);
+  border-color: var(--color-ink);
+  background: var(--color-surface-subtle);
 }
 
 .option.correctOpt {
+  border-left-color: var(--color-correct);
   border-color: var(--color-correct);
   background: var(--color-correct-bg);
 }
 
 .option.wrongOpt {
+  border-left-color: var(--color-incorrect);
   border-color: var(--color-incorrect);
   background: var(--color-incorrect-bg);
 }
 
 .optLabel {
+  font-family: var(--font-mono);
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-ink);
   min-width: 20px;
 }
 
@@ -146,7 +159,8 @@
 .resultCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
@@ -156,6 +170,7 @@
 }
 
 .resultTitle {
+  font-family: var(--font-serif);
   font-size: var(--font-size-xl);
 }
 
@@ -166,9 +181,10 @@
 }
 
 .scoreNum {
+  font-family: var(--font-serif);
   font-size: 56px;
-  font-weight: 700;
-  color: var(--color-accent);
+  font-weight: var(--font-semibold);
+  color: var(--color-ink);
   line-height: 1;
 }
 .scoreDen {
@@ -184,7 +200,7 @@
   color: var(--color-incorrect);
   background: var(--color-incorrect-bg);
   padding: var(--spacing-md);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
 }
 
 .questions {
@@ -200,11 +216,13 @@
 }
 
 .qNum {
+  font-family: var(--font-mono);
   width: 28px;
   height: 28px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  border-radius: var(--radius-doc);
+  border: 1.5px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
   font-weight: 700;
   font-size: var(--font-size-sm);
   display: flex;

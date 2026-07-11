@@ -242,8 +242,8 @@ describe("ListenRepeatPage", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Comparison:")).toBeTruthy();
-      expect(screen.getByText("Correct")).toBeTruthy();
-      expect(screen.getByText("You")).toBeTruthy();
+      expect(screen.getByText("Prompt")).toBeTruthy();
+      expect(screen.getByText("Response")).toBeTruthy();
     });
 
     expect(screen.getByRole("button", { name: /Next Question/i })).toBeTruthy();

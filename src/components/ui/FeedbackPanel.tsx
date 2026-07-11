@@ -19,14 +19,16 @@ export function FeedbackPanel({
       ].join(" ")}
     >
       <div className={styles.header}>
-        <span className={styles.icon}>{correct ? "✓" : "✗"}</span>
+        <span className={styles.icon} aria-hidden="true">
+          {correct ? "✓" : "×"}
+        </span>
         <span className={styles.status}>
-          {correct ? "Correct" : "Incorrect"}
+          {correct ? "Marked correct" : "Marked incorrect"}
         </span>
       </div>
       {!correct && correctAnswer && (
         <p className={styles.correctAnswer}>
-          Correct answer: <strong>{correctAnswer}</strong>
+          Official response: <strong>{correctAnswer}</strong>
         </p>
       )}
       <p className={styles.explanation}>{explanation}</p>

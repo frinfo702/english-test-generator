@@ -2,6 +2,8 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--doc-rule-soft);
 }
 .errorHint {
   margin-top: var(--spacing-sm);
@@ -25,7 +27,7 @@
 .diffBtn {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   padding: 6px 14px;
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
@@ -36,9 +38,9 @@
   color: var(--color-accent);
 }
 .diffBtn.active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-on-accent);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-ink-inverse);
   font-weight: 600;
 }
 .diffBtn:disabled {
@@ -49,7 +51,7 @@
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -72,10 +74,11 @@
   font-size: var(--font-size-sm);
   font-weight: 700;
   padding: 3px 12px;
-  border-radius: 99px;
+  border-radius: var(--radius-doc);
 }
 
 .qNum {
+  font-family: var(--font-mono);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
@@ -93,7 +96,7 @@
   gap: var(--spacing-md);
   padding: var(--spacing-lg);
   background: var(--color-surface);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
 }
 .preNote {
   color: var(--color-text-muted);
@@ -110,10 +113,11 @@
 }
 
 .textarea {
+  font-family: var(--font-serif);
   width: 100%;
   padding: var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   resize: vertical;
   line-height: 1.7;
   background: var(--color-surface);
@@ -135,7 +139,7 @@
 .evalCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-lg);
 }
 .evalCard h3 {
@@ -161,9 +165,9 @@
   gap: var(--spacing-md);
 }
 .modelAnswer {
-  background: var(--color-accent-light);
+  background: var(--color-surface-subtle);
   border: 1px solid var(--color-accent);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-lg);
 }
 .modelAnswer h3 {
@@ -179,7 +183,8 @@
 .resultCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
@@ -192,5 +197,5 @@
   color: var(--color-incorrect);
   background: var(--color-incorrect-bg);
   padding: var(--spacing-md);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
 }

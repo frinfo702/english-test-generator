@@ -2,6 +2,8 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--doc-rule-soft);
 }
 .errorHint {
   margin-top: var(--spacing-sm);
@@ -25,7 +27,7 @@
 .diffBtn {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   padding: 6px 14px;
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
@@ -36,16 +38,16 @@
   color: var(--color-accent);
 }
 .diffBtn.active {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-on-accent);
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-ink-inverse);
   font-weight: 600;
 }
 
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
@@ -54,6 +56,7 @@
 }
 
 .qNum {
+  font-family: var(--font-mono);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
 }
@@ -108,7 +111,7 @@
   padding: var(--spacing-md) var(--spacing-xl);
   background: var(--color-incorrect-bg);
   border: 2px solid var(--color-incorrect);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-doc);
 }
 
 .recordingDot {
@@ -180,7 +183,7 @@
   width: 100%;
   padding: var(--spacing-md);
   border: 2px solid var(--color-accent);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   font-size: var(--font-size-lg);
   outline: none;
 }
@@ -204,7 +207,7 @@
   gap: 6px;
   padding: var(--spacing-md);
   background: var(--color-surface);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
 }
 
 .diffColumn {
@@ -267,7 +270,8 @@
 .resultCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
@@ -281,9 +285,10 @@
   gap: 4px;
 }
 .scoreNum {
+  font-family: var(--font-serif);
   font-size: 56px;
-  font-weight: 700;
-  color: var(--color-accent);
+  font-weight: var(--font-semibold);
+  color: var(--color-ink);
   line-height: 1;
 }
 .scoreDen {
@@ -299,13 +304,13 @@
   color: var(--color-incorrect);
   background: var(--color-incorrect-bg);
   padding: var(--spacing-md);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
 }
 
 .legend {
   width: 100%;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-md);
   background: var(--color-surface);
   text-align: left;
@@ -333,7 +338,7 @@
   width: 100%;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;

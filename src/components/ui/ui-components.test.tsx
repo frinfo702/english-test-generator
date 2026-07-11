@@ -79,7 +79,7 @@ describe("ui components", () => {
     const { rerender } = render(
       <FeedbackPanel correct explanation="Nice work" />,
     );
-    expect(screen.getByText("Correct")).toBeTruthy();
+    expect(screen.getByText("Marked correct")).toBeTruthy();
     expect(screen.getByText("Nice work")).toBeTruthy();
 
     rerender(
@@ -89,8 +89,8 @@ describe("ui components", () => {
         correctAnswer="B"
       />,
     );
-    expect(screen.getByText("Incorrect")).toBeTruthy();
-    expect(screen.getByText("Correct answer:")).toBeTruthy();
+    expect(screen.getByText("Marked incorrect")).toBeTruthy();
+    expect(screen.getByText(/Official response:/)).toBeTruthy();
     expect(screen.getByText("B")).toBeTruthy();
   });
 

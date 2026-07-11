@@ -1,7 +1,7 @@
 .playerCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-6);
   margin-bottom: var(--spacing-6);
   text-align: center;
@@ -51,7 +51,8 @@
 .questionCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-6);
   margin-bottom: var(--spacing-4);
 }
@@ -69,7 +70,8 @@
   gap: var(--spacing-3);
   padding: var(--spacing-3) var(--spacing-4);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-doc);
   cursor: pointer;
   background: var(--color-surface);
   transition:
@@ -83,23 +85,26 @@
 }
 
 .optionSelected {
-  border-color: var(--color-accent);
-  background: var(--color-accent-subtle);
+  border-left-color: var(--color-ink);
+  border-color: var(--color-ink);
+  background: var(--color-surface-subtle);
 }
 
 .optionCorrect {
+  border-left-color: var(--color-success);
   border-color: var(--color-success);
   background: var(--color-success-subtle);
 }
 
 .optionIncorrect {
+  border-left-color: var(--color-error);
   border-color: var(--color-error);
   background: var(--color-error-subtle);
 }
 
 .optionIndex {
   font-weight: 600;
-  color: var(--color-ink-secondary);
+  color: var(--color-ink);
   min-width: 20px;
 }
 
@@ -111,7 +116,8 @@
 .resultCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-6);
   margin-bottom: var(--spacing-6);
   text-align: center;
@@ -122,8 +128,9 @@
 }
 
 .scoreNum {
+  font-family: var(--font-serif);
   font-size: var(--text-3xl);
-  font-weight: 700;
+  font-weight: var(--font-semibold);
   color: var(--color-ink);
 }
 
@@ -140,7 +147,7 @@
 
 .transcript {
   background: var(--color-surface-subtle);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   padding: var(--spacing-4);
   margin-top: var(--spacing-4);
   font-size: var(--text-sm);
@@ -151,8 +158,8 @@
 .explanation {
   margin-top: var(--spacing-3);
   padding: var(--spacing-3);
-  background: var(--color-accent-subtle);
-  border-radius: var(--radius);
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-doc);
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
 }
@@ -162,4 +169,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--doc-rule-soft);
 }

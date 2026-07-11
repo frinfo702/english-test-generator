@@ -25,10 +25,10 @@
 .speedSlider::-webkit-slider-thumb {
   appearance: none;
   -webkit-appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-accent);
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-doc);
+  background: var(--color-ink);
   border: 2px solid var(--color-surface);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
@@ -40,10 +40,10 @@
 }
 
 .speedSlider::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-accent);
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-doc);
+  background: var(--color-ink);
   border: 2px solid var(--color-surface);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
@@ -60,7 +60,7 @@
   padding: 4px 12px;
   font-size: var(--text-xs);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-doc);
   background: var(--color-surface);
   color: var(--color-ink-secondary);
   cursor: pointer;
@@ -70,12 +70,12 @@
 }
 
 .speedBtn:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-ink-tertiary);
 }
 
 .speedBtnActive {
-  border-color: var(--color-accent);
-  background: var(--color-accent-subtle);
+  border-color: var(--color-ink);
+  background: var(--color-surface-subtle);
   color: var(--color-ink);
   font-weight: 600;
 }
@@ -87,4 +87,5 @@
   min-width: 36px;
   text-align: center;
   font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
 }
