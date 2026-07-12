@@ -1,18 +1,19 @@
 import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import {
+  INTERVIEW_QUESTION_TYPES,
+  interviewAudioUrl,
+  interviewChrome,
+  interviewScenarioAudioUrl,
+  isScenarioStep,
+  phasePrompt,
+} from "../pages/toefl/speaking/interviewTypes";
 
 const QUESTION_DIR = path.resolve(
   __dirname,
   "../../public/questions/toefl/speaking/interview",
 );
-
-const VALID_QUESTION_TYPES = [
-  "personal",
-  "opinion",
-  "hypothetical",
-  "comparison",
-];
 
 interface InterviewQuestion {
   id: string;
@@ -23,6 +24,7 @@ interface InterviewQuestion {
 }
 
 interface InterviewData {
+  scenario: string;
   questions: InterviewQuestion[];
 }
 
@@ -49,13 +51,21 @@ describe("TOEFL Speaking: Take an Interview JSON structure", () => {
     expect(() => loadJson(file)).not.toThrow();
   });
 
+  it.each(files)("%s has research-study scenario", (file) => {
+    const data = loadJson(file);
+    expect(data).toHaveProperty("scenario");
+    expect(typeof data.scenario).toBe("string");
+    expect(data.scenario.trim()).not.toBe("");
+    expect(data.scenario.toLowerCase()).toContain("research study");
+    expect(data.scenario.toLowerCase()).toContain("interview");
+  });
+
   it.each(files)("%s has questions field", (file) => {
     const data = loadJson(file);
     expect(data).toHaveProperty("questions");
     expect(Array.isArray(data.questions)).toBe(true);
   });
 
-  // 4 questions fixed
   it.each(files)("%s has exactly 4 questions", (file) => {
     const data = loadJson(file);
     expect(data.questions.length).toBe(4);
@@ -73,7 +83,7 @@ describe("TOEFL Speaking: Take an Interview JSON structure", () => {
       seenIds.add(q.id);
 
       expect(q).toHaveProperty("type");
-      expect(VALID_QUESTION_TYPES).toContain(q.type);
+      expect(INTERVIEW_QUESTION_TYPES).toContain(q.type);
 
       expect(q).toHaveProperty("question");
       expect(typeof q.question).toBe("string");
@@ -93,21 +103,60 @@ describe("TOEFL Speaking: Take an Interview JSON structure", () => {
     }
   });
 
-  // All 4 types should appear once per file
-  it.each(files)("%s contains all 4 question types", (file) => {
+  it.each(files)("%s follows real-test question type order", (file) => {
     const data = loadJson(file);
     const types = data.questions.map((q) => q.type);
-    for (const t of VALID_QUESTION_TYPES) {
-      expect(types).toContain(t);
-    }
+    expect(types).toEqual([...INTERVIEW_QUESTION_TYPES]);
   });
 
-  // Each type appears exactly once per file
-  it.each(files)("%s has each type exactly once", (file) => {
+  it.each(files)("%s questions sound like interviewer speech", (file) => {
     const data = loadJson(file);
-    const types = data.questions.map((q) => q.type);
-    for (const t of VALID_QUESTION_TYPES) {
-      expect(types.filter((x) => x === t).length).toBe(1);
-    }
+    const [q1, q2, , q4] = data.questions;
+
+    expect(q1.question.toLowerCase()).toMatch(
+      /thank you for your participation|i'd like to ask|i would like to ask/,
+    );
+    expect(q2.question.length).toBeGreaterThan(20);
+    expect(q4.question.toLowerCase()).toMatch(
+      /one more question|do you agree|some people believe/,
+    );
+  });
+});
+
+describe("interviewTypes helpers", () => {
+  it("builds scenario and question audio urls", () => {
+    expect(interviewScenarioAudioUrl("001")).toBe(
+      "/audio/toefl/speaking/interview/001/scenario.mp3",
+    );
+    expect(interviewAudioUrl("001", 0, "question")).toBe(
+      "/audio/toefl/speaking/interview/001/1.mp3",
+    );
+    expect(interviewAudioUrl("001", 2, "model")).toBe(
+      "/audio/toefl/speaking/interview/001/3-model.mp3",
+    );
+  });
+
+  it("treats only Q1 pre/scenario as the scenario step", () => {
+    expect(isScenarioStep("pre", 0, true)).toBe(true);
+    expect(isScenarioStep("scenario", 0, true)).toBe(true);
+    expect(isScenarioStep("listening", 0, true)).toBe(false);
+    expect(isScenarioStep("pre", 1, true)).toBe(false);
+    expect(isScenarioStep("pre", 0, false)).toBe(false);
+  });
+
+  it("labels chrome as Scenario during the scenario step", () => {
+    expect(interviewChrome("scenario", 0, 4, "opening", true)).toEqual({
+      tag: "Scenario",
+      position: "Scenario",
+    });
+    expect(interviewChrome("listening", 0, 4, "opening", true)).toEqual({
+      tag: "Opening",
+      position: "Question 1 / 4",
+    });
+  });
+
+  it("uses scenario-specific phase prompt", () => {
+    expect(phasePrompt("scenario")).toBe("Listening to the scenario…");
+    expect(phasePrompt("listening")).toBe("Listening to the question…");
   });
 });

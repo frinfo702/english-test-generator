@@ -319,33 +319,59 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 ## TOEFL Speaking: Take an Interview
 
-4問のインタビュー形式。
+本番形式に合わせた research-study インタビュー。
+1セット＝1テーマのオンライン面接。導入シナリオのあと、研究者が4問を連続で尋ねる。
 
 ```json
 {
+  "scenario": "You have volunteered for a research study about food preferences.\nYou will have a short online interview with a researcher. The researcher will ask you some questions.",
   "questions": [
     {
       "id": "q1",
-      "type": "personal",
-      "question": "Describe a time when you had to overcome a significant challenge. What did you learn from that experience?",
-      "modelAnswer": "One significant challenge I faced was moving to a new city for university without knowing anyone...",
+      "type": "opening",
+      "question": "Thank you for your participation. Today, I'd like to ask you some questions about your food preferences. First, in your opinion, what kinds of meals do people your age enjoy most? Are they traditional, modern, or something in between?",
+      "modelAnswer": "I think people my age usually enjoy modern meals more than traditional ones, but many also like a mix. Fast food, delivery, and international dishes are popular because they are convenient and social. At the same time, some friends still prefer home-style food when they eat with family. So overall, I would say preferences sit somewhere in between.",
       "evaluationPoints": [
-        "Describes a specific relatable challenge",
-        "Explains concrete actions taken",
-        "Reflects on lessons learned",
-        "Stays on topic within the time limit"
+        "Addresses the question about people of a similar age",
+        "Chooses traditional, modern, or in between",
+        "Gives at least one reason or example",
+        "Speaks clearly within the time limit"
       ]
     },
     {
       "id": "q2",
-      "type": "opinion",
-      "question": "Do you think universities should make community service a graduation requirement?",
-      "modelAnswer": "Yes, I think community service should be a graduation requirement...",
+      "type": "personal",
+      "question": "I see. And what kind of meals do you usually have on busy days—do you cook, eat out, or pick up something ready-made?",
+      "modelAnswer": "On busy days I usually pick up something ready-made. I do not have much time to cook after class or work, so a sandwich, salad, or bento is practical. Sometimes I eat out with friends if we are already near a restaurant. I cook only when I have a free evening and want a proper meal.",
       "evaluationPoints": [
-        "States a clear position at the outset",
-        "Provides specific supporting reasons",
-        "Addresses a potential counterargument",
-        "Concludes with a summary"
+        "States a clear personal habit for busy days",
+        "Chooses cook, eat out, ready-made, or a mix",
+        "Explains why that choice fits a busy schedule",
+        "Uses natural first-person language"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "opinion",
+      "question": "Interesting. Many people say that modern life has changed how we eat. Do you think people today have healthier eating habits than in the past? Why or why not?",
+      "modelAnswer": "I do not think people today generally eat healthier than in the past. Modern life makes processed and fast food very easy to get, and busy schedules reduce home cooking. On the other hand, more people now know about nutrition and choose salads or plant-based options. Still, overall convenience often wins, so habits may be less healthy than before.",
+      "evaluationPoints": [
+        "Takes a clear yes/no position",
+        "Connects the answer to modern life",
+        "Supports the view with reasons",
+        "May briefly acknowledge the other side"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "closing",
+      "question": "Good points. I just have one more question. Some people believe that preparing traditional meals at home is an important way to stay connected to one's culture. Do you agree, or do you think it's possible to connect with culture in other ways? Why?",
+      "modelAnswer": "I partly agree, but I think culture can be kept alive in other ways too. Cooking traditional meals at home is powerful because food carries family stories and shared customs. However, people can also connect through festivals, language, music, and community events. So traditional cooking helps, but it is not the only way to stay connected to culture.",
+      "evaluationPoints": [
+        "Responds clearly to the agree/or-other-ways frame",
+        "Gives a reason for the chosen position",
+        "May mention food and alternative cultural practices",
+        "Ends the interview response coherently"
       ]
     }
   ]
@@ -354,8 +380,26 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `type`: `"personal"` / `"opinion"` / `"hypothetical"` / `"comparison"`
-- 設問数: 4問固定
+- `scenario`（必須）: 受験者向け導入文（TTS で `scenario.mp3` 化。画面上は折りたたみ表示）。次の2文構成を基本とする
+  1. `You have volunteered for a research study about {topic}.`
+  2. `You will have a short online interview with a researcher. The researcher will ask you some questions.`
+- `questions`（必須）: 4問固定。同一 `scenario` のトピックに沿った一連の会話にする
+- `type`: 出題順に対応するラベル
+  - `"opening"` — Q1: 挨拶・導入のあと、同世代や一般論への質問
+  - `"personal"` — Q2: 受験者本人の習慣・経験
+  - `"opinion"` — Q3: 社会変化・価値観への意見（Why / Why not を含むことが多い）
+  - `"closing"` — Q4: 「I just have one more question」などの締め＋ agree/disagree や二者択一
+- `question`: **研究者が話す全文**を入れる。転換句（`Thank you for your participation.` / `I see.` / `Interesting.` / `Good points.` など）を含め、素のエッセイプロンプトにしない
+- `modelAnswer`: 45秒程度で話せる自然な口頭回答
+- `evaluationPoints`: 2〜4個
+
+**出題ルール（本番寄せ）:**
+
+- 1セット＝1トピック（例: food preferences, free time, technology, travel）
+- Q1は導入を長めにし、研究目的と最初の質問をまとめる
+- Q2以降は短い相づち＋本問
+- 選択肢フレーム（traditional/modern, cook/eat out/ready-made, agree/other ways）を適度に使い、答えやすくする
+- アカデミックな孤立エッセイ質問（"Describe a time when..." 単体）にはしない
 
 ---
 

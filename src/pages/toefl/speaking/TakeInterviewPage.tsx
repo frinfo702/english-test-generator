@@ -22,12 +22,16 @@ import {
 } from "../../../lib/answerSubmission";
 import { pickInterviewerVoice } from "../../../lib/voiceMapping";
 import { InterviewerCard } from "./InterviewerCard";
+import { InterviewTranscript } from "./InterviewTranscript";
 import {
   INTERVIEW_TASK_ID,
   INTERVIEW_TYPE_LABELS,
   type InterviewPhase,
   type InterviewProblemData,
   interviewAudioUrl,
+  interviewChrome,
+  interviewScenarioAudioUrl,
+  isScenarioStep,
   phasePrompt,
 } from "./interviewTypes";
 import styles from "./TakeInterviewPage.module.css";
@@ -62,6 +66,11 @@ export function TakeInterviewPage() {
       ? buildProblemId(INTERVIEW_TASK_ID, file, q.id || String(current + 1))
       : null;
 
+  const hasScenario = Boolean(data?.scenario?.trim());
+  const scenarioUrl =
+    fileBasename && hasScenario
+      ? interviewScenarioAudioUrl(fileBasename)
+      : null;
   const questionUrl =
     fileBasename && q
       ? interviewAudioUrl(fileBasename, current, "question")
@@ -70,6 +79,17 @@ export function TakeInterviewPage() {
     fileBasename && q
       ? interviewAudioUrl(fileBasename, current, "model")
       : null;
+
+  const onScenarioStep = isScenarioStep(phase, current, hasScenario);
+  const chrome = q
+    ? interviewChrome(
+        phase,
+        current,
+        data?.questions.length ?? 0,
+        q.type,
+        hasScenario,
+      )
+    : null;
 
   const qaCopyMessage = useMemo(() => {
     if (!q) return null;
@@ -92,6 +112,12 @@ export function TakeInterviewPage() {
     clearSpeechError();
     submittingRef.current = false;
   }, [clearTranscript, clearSpeechError]);
+
+  const resetInteraction = useCallback(() => {
+    setPhase("pre");
+    setSavingAnswer(false);
+    clearSessionBits();
+  }, [clearSessionBits]);
 
   const timerStopRef = useRef<() => void>(() => undefined);
 
@@ -173,13 +199,36 @@ export function TakeInterviewPage() {
     void startSpeech();
   }, [timerStart, startSpeech, clearSpeechError, clearTranscript]);
 
-  const handleStart = () => {
+  const playQuestion = useCallback(() => {
     if (!questionUrl) {
       startAnswering();
       return;
     }
     setPhase("listening");
     audio.play("question", questionUrl, startAnswering);
+  }, [audio, questionUrl, startAnswering]);
+
+  const playScenario = useCallback(() => {
+    if (!scenarioUrl) {
+      playQuestion();
+      return;
+    }
+    // Scenario only — do not auto-advance; user presses Continue.
+    setPhase("scenario");
+    audio.play("scenario", scenarioUrl);
+  }, [audio, scenarioUrl, playQuestion]);
+
+  const handleStart = () => {
+    if (onScenarioStep && scenarioUrl) {
+      playScenario();
+      return;
+    }
+    playQuestion();
+  };
+
+  const handleContinueFromScenario = () => {
+    audio.stop();
+    playQuestion();
   };
 
   const handleRetryRecording = () => {
@@ -208,10 +257,8 @@ export function TakeInterviewPage() {
     audio.stop();
     void speech.stop();
     setCurrent(0);
-    setPhase("pre");
     setDone(false);
-    setSavingAnswer(false);
-    clearSessionBits();
+    resetInteraction();
     timer.reset();
     navigate("/toefl/speaking/interview");
   };
@@ -225,14 +272,16 @@ export function TakeInterviewPage() {
       return;
     }
     setCurrent((c) => c + 1);
-    setPhase("pre");
-    setSavingAnswer(false);
-    clearSessionBits();
+    resetInteraction();
     timer.reset();
   };
 
   const busyPhase =
-    phase === "answering" || phase === "listening" || phase === "processing";
+    phase === "answering" ||
+    phase === "listening" ||
+    phase === "scenario" ||
+    phase === "processing";
+  const scenarioActive = audio.isActive("scenario");
   const questionActive = audio.isActive("question");
   const modelActive = audio.isActive("model");
   const displayAnswer = userText || speech.transcript;
@@ -273,21 +322,19 @@ export function TakeInterviewPage() {
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && !done && q && (
+      {data && !loading && hasValidQuestionNumber && !done && q && chrome && (
         <div className={styles.card}>
           <div className={styles.cardHeader}>
-            <span className={styles.typeTag}>
-              {INTERVIEW_TYPE_LABELS[q.type] ?? q.type}
-            </span>
-            <span className={styles.qNum}>
-              Question {current + 1} / {data.questions.length}
-            </span>
+            <span className={styles.typeTag}>{chrome.tag}</span>
+            <span className={styles.qNum}>{chrome.position}</span>
           </div>
 
           <InterviewerCard
             voiceId={interviewerVoice}
             speaking={
-              phase === "listening" || (audio.playing && questionActive)
+              phase === "scenario" ||
+              phase === "listening" ||
+              (audio.playing && (scenarioActive || questionActive))
             }
           />
 
@@ -297,11 +344,20 @@ export function TakeInterviewPage() {
             <p className={styles.questionHidden}>{phasePrompt(phase)}</p>
           )}
 
+          {phase !== "submitted" && (
+            <InterviewTranscript
+              kind={onScenarioStep ? "scenario" : "question"}
+              scenario={data.scenario}
+              question={q.question}
+            />
+          )}
+
           {phase === "pre" && (
             <div className={styles.preBox}>
               <p className={styles.preNote}>
-                There is no prep time. Press Start to hear the question, then
-                speak your answer within 45 seconds.
+                {onScenarioStep
+                  ? "Step 1 of 2 — Scenario. Press Start Scenario to hear the research-study introduction (audio only). Continue to Question 1 with a button after the scenario."
+                  : "There is no prep time. Press Start to hear the question, then speak your answer within 45 seconds."}
               </p>
               <MicSelector disabled={!speech.supported} />
               {!speech.supported && (
@@ -314,8 +370,45 @@ export function TakeInterviewPage() {
                 onClick={handleStart}
                 disabled={!speech.supported}
               >
-                Start
+                {onScenarioStep ? "Start Scenario" : "Start"}
               </Button>
+            </div>
+          )}
+
+          {phase === "scenario" && scenarioUrl && (
+            <div className={styles.listeningBox}>
+              <p className={styles.preNote}>
+                Listen carefully to the scenario. It will not advance
+                automatically — press Continue to Question 1 when you are ready.
+              </p>
+              <AudioPlayer
+                playing={audio.playing && scenarioActive}
+                loading={audio.loading && scenarioActive}
+                error={scenarioActive ? audio.error : null}
+                currentTime={scenarioActive ? audio.currentTime : 0}
+                duration={scenarioActive ? audio.duration : 0}
+                playbackRate={audio.playbackRate}
+                onPlayPause={() => audio.toggle("scenario", scenarioUrl)}
+                onSeek={audio.seek}
+                onPlaybackRateChange={audio.setPlaybackRate}
+                seekable
+                playLabel={
+                  audio.loading && scenarioActive
+                    ? "Loading..."
+                    : audio.playing && scenarioActive
+                      ? "⏸ Pause"
+                      : "▶ Replay scenario"
+                }
+              />
+              <div className={styles.listeningActions}>
+                <Button
+                  size="lg"
+                  onClick={handleContinueFromScenario}
+                  disabled={audio.loading && scenarioActive}
+                >
+                  Continue to Question 1
+                </Button>
+              </div>
             </div>
           )}
 
@@ -345,16 +438,18 @@ export function TakeInterviewPage() {
                       : "▶ Replay question"
                 }
               />
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => {
-                  audio.stop();
-                  startAnswering();
-                }}
-              >
-                Skip to answer
-              </Button>
+              <div className={styles.listeningActions}>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => {
+                    audio.stop();
+                    startAnswering();
+                  }}
+                >
+                  Skip to answer
+                </Button>
+              </div>
             </div>
           )}
 
