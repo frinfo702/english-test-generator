@@ -96,7 +96,7 @@ Answer interview questions on the spot. Each question has a 45-second timer with
 2. A stable interviewer voice is chosen from the file basename via `pickInterviewerVoice()` (`src/lib/voiceMapping.ts`)
 3. The interviewer portrait is shown from `/images/voices/{voiceId}.jpg` (name matches the TTS voice)
 4. Question types follow real-test order: Opening → Personal → Opinion → Closing (same research topic)
-5. On Q1, **Scenario** audio plays first (`scenario.mp3`) and does **not** auto-advance — user presses **Continue to Question 1**. Then question audio (`{n}.mp3`) plays. Scenario/question text stay collapsed; expand only if the user could not hear
+5. Q1 uses a first-class `scenario` phase (not a listening sub-mode): play `scenario.mp3`, wait for **Continue to Question 1**, then play question audio (`{n}.mp3`). Scenario/question text stay collapsed; expand only if the user could not hear
 6. When audio ends (or the user skips), a 45-second countdown begins and the microphone starts recording
 7. A live mic waveform (`MicWaveform`) confirms the mic is picking up audio while the user speaks
 8. On Stop & Submit (or timer expiry), recording stops and audio is transcribed via `/api/transcribe` → **xAI Speech-to-Text** (`POST https://api.x.ai/v1/stt`)

@@ -12,19 +12,30 @@ export interface InterviewProblemData {
   questions: InterviewQuestion[];
 }
 
+/**
+ * Interview UI step machine.
+ * `scenario` is a first-class step (no auto-advance to the question).
+ */
 export type InterviewPhase =
   | "pre"
+  | "scenario"
   | "listening"
   | "answering"
   | "processing"
   | "submitted";
 
-/** Which clip is playing during the listening phase. */
-export type InterviewListeningTrack = "scenario" | "question";
-
 export const INTERVIEW_TASK_ID = "toefl/speaking/interview";
 
 /** Real-test progression: opening → personal → opinion → closing. */
+export const INTERVIEW_QUESTION_TYPES = [
+  "opening",
+  "personal",
+  "opinion",
+  "closing",
+] as const;
+
+export type InterviewQuestionType = (typeof INTERVIEW_QUESTION_TYPES)[number];
+
 export const INTERVIEW_TYPE_LABELS: Record<string, string> = {
   opening: "Opening",
   personal: "Personal",
@@ -35,47 +46,55 @@ export const INTERVIEW_TYPE_LABELS: Record<string, string> = {
   comparison: "Comparison / Choice",
 };
 
-export const INTERVIEW_QUESTION_TYPES = [
-  "opening",
-  "personal",
-  "opinion",
-  "closing",
-] as const;
-
-export type InterviewQuestionType = (typeof INTERVIEW_QUESTION_TYPES)[number];
+export function interviewScenarioAudioUrl(fileBasename: string): string {
+  return `/audio/${INTERVIEW_TASK_ID}/${fileBasename}/scenario.mp3`;
+}
 
 export function interviewAudioUrl(
   fileBasename: string,
   questionIndex: number,
   kind: "question" | "model",
-): string;
-export function interviewAudioUrl(
-  fileBasename: string,
-  questionIndex: null,
-  kind: "scenario",
-): string;
-export function interviewAudioUrl(
-  fileBasename: string,
-  questionIndex: number | null,
-  kind: "question" | "model" | "scenario",
 ): string {
-  if (kind === "scenario") {
-    return `/audio/${INTERVIEW_TASK_ID}/${fileBasename}/scenario.mp3`;
-  }
-  const n = (questionIndex as number) + 1;
+  const n = questionIndex + 1;
   const suffix = kind === "model" ? "-model" : "";
   return `/audio/${INTERVIEW_TASK_ID}/${fileBasename}/${n}${suffix}.mp3`;
 }
 
-export function phasePrompt(
+/** True on Q1 while the user is still in the research-study scenario step. */
+export function isScenarioStep(
   phase: InterviewPhase,
-  listeningTrack: InterviewListeningTrack | null = null,
-): string {
+  questionIndex: number,
+  hasScenario: boolean,
+): boolean {
+  return (
+    hasScenario &&
+    questionIndex === 0 &&
+    (phase === "pre" || phase === "scenario")
+  );
+}
+
+export function interviewChrome(
+  phase: InterviewPhase,
+  questionIndex: number,
+  questionCount: number,
+  questionType: string,
+  hasScenario: boolean,
+): { tag: string; position: string } {
+  if (isScenarioStep(phase, questionIndex, hasScenario)) {
+    return { tag: "Scenario", position: "Scenario" };
+  }
+  return {
+    tag: INTERVIEW_TYPE_LABELS[questionType] ?? questionType,
+    position: `Question ${questionIndex + 1} / ${questionCount}`,
+  };
+}
+
+export function phasePrompt(phase: InterviewPhase): string {
   switch (phase) {
+    case "scenario":
+      return "Listening to the scenario…";
     case "listening":
-      return listeningTrack === "scenario"
-        ? "Listening to the scenario…"
-        : "Listening to the question…";
+      return "Listening to the question…";
     case "answering":
       return "Speak your answer now.";
     case "processing":
