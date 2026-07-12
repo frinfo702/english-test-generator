@@ -7,7 +7,7 @@ export interface InterviewQuestion {
 }
 
 export interface InterviewProblemData {
-  /** Intro shown before the interview (research-study framing). */
+  /** Research-study intro spoken before Q1 (audio-only; text is collapsible). */
   scenario: string;
   questions: InterviewQuestion[];
 }
@@ -18,6 +18,9 @@ export type InterviewPhase =
   | "answering"
   | "processing"
   | "submitted";
+
+/** Which clip is playing during the listening phase. */
+export type InterviewListeningTrack = "scenario" | "question";
 
 export const INTERVIEW_TASK_ID = "toefl/speaking/interview";
 
@@ -45,23 +48,41 @@ export function interviewAudioUrl(
   fileBasename: string,
   questionIndex: number,
   kind: "question" | "model",
+): string;
+export function interviewAudioUrl(
+  fileBasename: string,
+  questionIndex: null,
+  kind: "scenario",
+): string;
+export function interviewAudioUrl(
+  fileBasename: string,
+  questionIndex: number | null,
+  kind: "question" | "model" | "scenario",
 ): string {
-  const n = questionIndex + 1;
+  if (kind === "scenario") {
+    return `/audio/${INTERVIEW_TASK_ID}/${fileBasename}/scenario.mp3`;
+  }
+  const n = (questionIndex as number) + 1;
   const suffix = kind === "model" ? "-model" : "";
   return `/audio/${INTERVIEW_TASK_ID}/${fileBasename}/${n}${suffix}.mp3`;
 }
 
-export function phasePrompt(phase: InterviewPhase): string {
+export function phasePrompt(
+  phase: InterviewPhase,
+  listeningTrack: InterviewListeningTrack | null = null,
+): string {
   switch (phase) {
     case "listening":
-      return "Listening to the question…";
+      return listeningTrack === "scenario"
+        ? "Listening to the introduction…"
+        : "Listening to the question…";
     case "answering":
       return "Speak your answer now.";
     case "processing":
       return "Transcribing your answer…";
     case "pre":
     case "submitted":
-      return "The question will be spoken aloud. Text is not shown during the test.";
+      return "Audio only — text stays hidden like the real test.";
     default: {
       const _exhaustive: never = phase;
       return _exhaustive;

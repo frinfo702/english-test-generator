@@ -73,7 +73,7 @@ function hasTextSentences(
 
 function hasInterviewQuestions(
   obj: unknown,
-): obj is { questions: InterviewQuestion[] } {
+): obj is { scenario?: string; questions: InterviewQuestion[] } {
   if (
     typeof obj !== "object" ||
     obj === null ||
@@ -232,7 +232,7 @@ async function generateForQuestion(
     }
   }
 
-  // Take an Interview: question + model-answer audio per item
+  // Take an Interview: scenario intro + question + model-answer audio
   if (
     relativePath.includes("speaking/interview") &&
     hasInterviewQuestions(data)
@@ -240,6 +240,18 @@ async function generateForQuestion(
     const voiceId = pickInterviewerVoice(basename);
     console.log(`  Interviewer voice for ${basename}: ${voiceId}`);
     const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
+
+    if (typeof data.scenario === "string" && data.scenario.trim()) {
+      // Narration may use newlines; speak as natural pauses.
+      const scenarioText = data.scenario.replace(/\n+/g, " ").trim();
+      await writeMp3IfMissing(
+        path.join(outDir, "scenario.mp3"),
+        path.join(dirname, basename, "scenario.mp3"),
+        scenarioText,
+        voiceId,
+      );
+    }
+
     for (let i = 0; i < data.questions.length; i++) {
       const q = data.questions[i];
       const n = i + 1;

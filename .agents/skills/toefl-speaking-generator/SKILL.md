@@ -95,7 +95,9 @@ Scenario:
 
 ## 注意
 
-- 音声生成は `scripts/generate-audio.ts` で別途行う（`question` / `modelAnswer` を TTS）
+- 音声生成は `scripts/generate-audio.ts` で別途行う（`scenario` / `question` / `modelAnswer` を TTS）
+  - `scenario.mp3`（導入）+ `{n}.mp3`（設問）+ `{n}-model.mp3`（模範解答）
+- UI では導入・設問とも基本は音声のみ。テキストは折りたたみ（聞き取れなかったとき用）
 - Speaking はテキストベースの設問のみ本スキルの対象
 
 ## 実行手順

@@ -380,7 +380,7 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `scenario`（必須）: 受験者向け導入文。次の2文構成を基本とする
+- `scenario`（必須）: 受験者向け導入文（TTS で `scenario.mp3` 化。画面上は折りたたみ表示）。次の2文構成を基本とする
   1. `You have volunteered for a research study about {topic}.`
   2. `You will have a short online interview with a researcher. The researcher will ask you some questions.`
 - `questions`（必須）: 4問固定。同一 `scenario` のトピックに沿った一連の会話にする

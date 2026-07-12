@@ -215,22 +215,68 @@
   font-size: var(--font-size-sm);
 }
 
-.scenarioBox {
-  width: 100%;
-  padding: var(--spacing-md);
-  background: var(--color-surface-subtle, var(--color-surface));
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
 .scenarioLine {
   margin: 0;
   font-size: var(--font-size-body);
   line-height: 1.6;
   color: var(--color-text);
+}
+
+.transcriptDetails {
+  width: 100%;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-doc);
+  background: var(--color-surface-subtle, var(--color-surface));
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.transcriptSummary {
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: 600;
+  list-style: none;
+}
+
+.transcriptSummary::-webkit-details-marker {
+  display: none;
+}
+
+.transcriptSummary::before {
+  content: "▸ ";
+  color: var(--color-text-muted);
+}
+
+.transcriptDetails[open] > .transcriptSummary::before {
+  content: "▾ ";
+}
+
+.transcriptBody {
+  margin-top: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.transcriptBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.transcriptLabel {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-speaking);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.listeningActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
 }
 
 .replayRow {

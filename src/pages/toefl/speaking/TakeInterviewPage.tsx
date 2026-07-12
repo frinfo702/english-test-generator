@@ -25,6 +25,7 @@ import { InterviewerCard } from "./InterviewerCard";
 import {
   INTERVIEW_TASK_ID,
   INTERVIEW_TYPE_LABELS,
+  type InterviewListeningTrack,
   type InterviewPhase,
   type InterviewProblemData,
   interviewAudioUrl,
@@ -41,6 +42,8 @@ export function TakeInterviewPage() {
   const [current, setCurrent] = useState(0);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<InterviewPhase>("pre");
+  const [listeningTrack, setListeningTrack] =
+    useState<InterviewListeningTrack | null>(null);
   const [done, setDone] = useState(false);
   const [savingAnswer, setSavingAnswer] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
@@ -62,6 +65,10 @@ export function TakeInterviewPage() {
       ? buildProblemId(INTERVIEW_TASK_ID, file, q.id || String(current + 1))
       : null;
 
+  const scenarioUrl =
+    fileBasename && data?.scenario?.trim()
+      ? interviewAudioUrl(fileBasename, null, "scenario")
+      : null;
   const questionUrl =
     fileBasename && q
       ? interviewAudioUrl(fileBasename, current, "question")
@@ -70,6 +77,7 @@ export function TakeInterviewPage() {
     fileBasename && q
       ? interviewAudioUrl(fileBasename, current, "model")
       : null;
+  const showScenario = current === 0 && Boolean(data?.scenario?.trim());
 
   const qaCopyMessage = useMemo(() => {
     if (!q) return null;
@@ -165,6 +173,7 @@ export function TakeInterviewPage() {
   const startSpeech = speech.start;
 
   const startAnswering = useCallback(() => {
+    setListeningTrack(null);
     setPhase("answering");
     clearSpeechError();
     clearTranscript();
@@ -173,13 +182,25 @@ export function TakeInterviewPage() {
     void startSpeech();
   }, [timerStart, startSpeech, clearSpeechError, clearTranscript]);
 
-  const handleStart = () => {
+  const playQuestion = useCallback(() => {
     if (!questionUrl) {
       startAnswering();
       return;
     }
+    setListeningTrack("question");
     setPhase("listening");
     audio.play("question", questionUrl, startAnswering);
+  }, [audio, questionUrl, startAnswering]);
+
+  const handleStart = () => {
+    // Q1: play research-study scenario first (audio-only), then the question.
+    if (showScenario && scenarioUrl) {
+      setListeningTrack("scenario");
+      setPhase("listening");
+      audio.play("scenario", scenarioUrl, playQuestion);
+      return;
+    }
+    playQuestion();
   };
 
   const handleRetryRecording = () => {
@@ -209,6 +230,7 @@ export function TakeInterviewPage() {
     void speech.stop();
     setCurrent(0);
     setPhase("pre");
+    setListeningTrack(null);
     setDone(false);
     setSavingAnswer(false);
     clearSessionBits();
@@ -226,6 +248,7 @@ export function TakeInterviewPage() {
     }
     setCurrent((c) => c + 1);
     setPhase("pre");
+    setListeningTrack(null);
     setSavingAnswer(false);
     clearSessionBits();
     timer.reset();
@@ -233,8 +256,16 @@ export function TakeInterviewPage() {
 
   const busyPhase =
     phase === "answering" || phase === "listening" || phase === "processing";
+  const scenarioActive = audio.isActive("scenario");
   const questionActive = audio.isActive("question");
   const modelActive = audio.isActive("model");
+  const listeningActive = scenarioActive || questionActive;
+  const activeListeningUrl =
+    listeningTrack === "scenario"
+      ? scenarioUrl
+      : listeningTrack === "question"
+        ? questionUrl
+        : null;
   const displayAnswer = userText || speech.transcript;
 
   return (
@@ -287,30 +318,50 @@ export function TakeInterviewPage() {
           <InterviewerCard
             voiceId={interviewerVoice}
             speaking={
-              phase === "listening" || (audio.playing && questionActive)
+              phase === "listening" ||
+              (audio.playing && (scenarioActive || questionActive))
             }
           />
 
           {phase === "submitted" ? (
             <p className={styles.question}>{q.question}</p>
           ) : (
-            <p className={styles.questionHidden}>{phasePrompt(phase)}</p>
+            <p className={styles.questionHidden}>
+              {phasePrompt(phase, listeningTrack)}
+            </p>
+          )}
+
+          {/* Audio-only like the real test; expand only if you could not hear. */}
+          {phase !== "submitted" && (showScenario || q.question) && (
+            <details className={styles.transcriptDetails}>
+              <summary className={styles.transcriptSummary}>
+                Couldn&apos;t hear? Show text
+              </summary>
+              <div className={styles.transcriptBody}>
+                {showScenario && data.scenario && (
+                  <div className={styles.transcriptBlock}>
+                    <p className={styles.transcriptLabel}>Introduction</p>
+                    {data.scenario.split("\n").map((line, i) => (
+                      <p key={i} className={styles.scenarioLine}>
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                )}
+                <div className={styles.transcriptBlock}>
+                  <p className={styles.transcriptLabel}>Question</p>
+                  <p className={styles.scenarioLine}>{q.question}</p>
+                </div>
+              </div>
+            </details>
           )}
 
           {phase === "pre" && (
             <div className={styles.preBox}>
-              {current === 0 && data.scenario && (
-                <div className={styles.scenarioBox}>
-                  {data.scenario.split("\n").map((line, i) => (
-                    <p key={i} className={styles.scenarioLine}>
-                      {line}
-                    </p>
-                  ))}
-                </div>
-              )}
               <p className={styles.preNote}>
-                There is no prep time. Press Start to hear the question, then
-                speak your answer within 45 seconds.
+                {showScenario
+                  ? "There is no prep time. Press Start to hear the introduction, then the question. Speak your answer within 45 seconds."
+                  : "There is no prep time. Press Start to hear the question, then speak your answer within 45 seconds."}
               </p>
               <MicSelector disabled={!speech.supported} />
               {!speech.supported && (
@@ -328,42 +379,66 @@ export function TakeInterviewPage() {
             </div>
           )}
 
-          {phase === "listening" && questionUrl && (
+          {phase === "listening" && activeListeningUrl && (
             <div className={styles.listeningBox}>
               <p className={styles.preNote}>
-                Listen carefully. Recording starts when the question finishes.
+                {listeningTrack === "scenario"
+                  ? "Listen carefully. The first question plays next."
+                  : "Listen carefully. Recording starts when the question finishes."}
               </p>
               <AudioPlayer
-                playing={audio.playing && questionActive}
-                loading={audio.loading && questionActive}
-                error={questionActive ? audio.error : null}
-                currentTime={questionActive ? audio.currentTime : 0}
-                duration={questionActive ? audio.duration : 0}
+                playing={audio.playing && listeningActive}
+                loading={audio.loading && listeningActive}
+                error={listeningActive ? audio.error : null}
+                currentTime={listeningActive ? audio.currentTime : 0}
+                duration={listeningActive ? audio.duration : 0}
                 playbackRate={audio.playbackRate}
-                onPlayPause={() =>
-                  audio.toggle("question", questionUrl, startAnswering)
-                }
+                onPlayPause={() => {
+                  if (listeningTrack === "scenario" && scenarioUrl) {
+                    audio.toggle("scenario", scenarioUrl, playQuestion);
+                    return;
+                  }
+                  if (questionUrl) {
+                    audio.toggle("question", questionUrl, startAnswering);
+                  }
+                }}
                 onSeek={audio.seek}
                 onPlaybackRateChange={audio.setPlaybackRate}
                 seekable
                 playLabel={
-                  audio.loading && questionActive
+                  audio.loading && listeningActive
                     ? "Loading..."
-                    : audio.playing && questionActive
+                    : audio.playing && listeningActive
                       ? "⏸ Pause"
-                      : "▶ Replay question"
+                      : listeningTrack === "scenario"
+                        ? "▶ Replay introduction"
+                        : "▶ Replay question"
                 }
               />
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => {
-                  audio.stop();
-                  startAnswering();
-                }}
-              >
-                Skip to answer
-              </Button>
+              <div className={styles.listeningActions}>
+                {listeningTrack === "scenario" && (
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => {
+                      audio.stop();
+                      playQuestion();
+                    }}
+                  >
+                    Skip introduction
+                  </Button>
+                )}
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => {
+                    audio.stop();
+                    startAnswering();
+                  }}
+                >
+                  Skip to answer
+                </Button>
+              </div>
             </div>
           )}
 

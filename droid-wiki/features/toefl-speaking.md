@@ -96,7 +96,7 @@ Answer interview questions on the spot. Each question has a 45-second timer with
 2. A stable interviewer voice is chosen from the file basename via `pickInterviewerVoice()` (`src/lib/voiceMapping.ts`)
 3. The interviewer portrait is shown from `/images/voices/{voiceId}.jpg` (name matches the TTS voice)
 4. Question types follow real-test order: Opening → Personal → Opinion → Closing (same research topic)
-5. On Start (Q1), the research-study `scenario` is shown first; question audio plays (`/audio/toefl/speaking/interview/{file}/{n}.mp3`); question text stays hidden
+5. On Start (Q1), research-study `scenario` audio plays first (`scenario.mp3`), then question audio (`{n}.mp3`). Intro/question text stay collapsed; expand only if the user could not hear
 6. When audio ends (or the user skips), a 45-second countdown begins and the microphone starts recording
 7. A live mic waveform (`MicWaveform`) confirms the mic is picking up audio while the user speaks
 8. On Stop & Submit (or timer expiry), recording stops and audio is transcribed via `/api/transcribe` → **xAI Speech-to-Text** (`POST https://api.x.ai/v1/stt`)
@@ -116,6 +116,7 @@ Output layout:
 
 ```
 public/audio/toefl/speaking/interview/{questionFile}/
+  scenario.mp3   # research-study intro (Q1 only)
   1.mp3          # question
   1-model.mp3    # sample answer
   2.mp3
@@ -142,7 +143,7 @@ Interviewer voices (with portraits): ara, eve, carina, celeste, iris, luna, ursa
 }
 ```
 
-Types in order: `opening` → `personal` → `opinion` → `closing`. Each `question` is full interviewer speech (with transitions), not a bare essay prompt.
+Types in order: `opening` → `personal` → `opinion` → `closing`. Each `question` is full interviewer speech (with transitions), not a bare essay prompt. `scenario` is spoken as `scenario.mp3` before Q1; on-screen text is collapsible.
 
 ### Directory layout
 
