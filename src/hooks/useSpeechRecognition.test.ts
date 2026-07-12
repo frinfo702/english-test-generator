@@ -30,6 +30,8 @@ class FakeMediaRecorder extends EventTarget {
     this.dispatchEvent(new Event("stop"));
   });
 
+  requestData = vi.fn();
+
   constructor(stream: MediaStream, options?: MediaRecorderOptions) {
     super();
     this.stream = stream;
@@ -50,9 +52,16 @@ class FakeMediaRecorder extends EventTarget {
   );
 }
 
-function createFakeStream(): MediaStream {
+function createFakeStream(deviceId = "default-mic"): MediaStream {
+  const track = {
+    stop: vi.fn(),
+    enabled: true,
+    readyState: "live",
+    getSettings: () => ({ deviceId }),
+  };
   return {
-    getTracks: () => [{ stop: vi.fn() }],
+    getTracks: () => [track],
+    getAudioTracks: () => [track],
   } as unknown as MediaStream;
 }
 
@@ -84,6 +93,7 @@ describe("useSpeechRecognition", () => {
   afterEach(() => {
     vi.unstubAllGlobals();
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   it("reports supported when MediaRecorder and getUserMedia are available", async () => {
@@ -108,17 +118,41 @@ describe("useSpeechRecognition", () => {
     });
 
     await waitFor(() => {
-      expect(getUserMediaMock).toHaveBeenCalledWith({
-        audio: {
-          echoCancellation: true,
-          noiseSuppression: true,
-        },
-      });
+      expect(getUserMediaMock).toHaveBeenCalled();
+    });
+    const constraints = getUserMediaMock.mock.calls[0][0] as {
+      audio: MediaTrackConstraints;
+    };
+    expect(constraints.audio).toMatchObject({
+      echoCancellation: true,
+      noiseSuppression: true,
     });
 
     const recorder = FakeMediaRecorder.instances[0];
     expect(recorder.start).toHaveBeenCalled();
     expect(result.current.recording).toBe(true);
+  });
+
+  it("passes preferred microphone deviceId as exact constraint", async () => {
+    localStorage.setItem("preferred-microphone-device-id", "mic-42");
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    await act(async () => {
+      await result.current.start();
+    });
+
+    await waitFor(() => {
+      expect(getUserMediaMock).toHaveBeenCalled();
+    });
+    const constraints = getUserMediaMock.mock.calls[0][0] as {
+      audio: MediaTrackConstraints;
+    };
+    expect(constraints.audio).toMatchObject({
+      deviceId: { exact: "mic-42" },
+      echoCancellation: false,
+      noiseSuppression: false,
+    });
   });
 
   it("sets an error when microphone permission is denied", async () => {

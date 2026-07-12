@@ -5,6 +5,7 @@ import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { AudioPlayer } from "../../../components/ui/AudioPlayer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
+import { MicSelector } from "../../../components/ui/MicSelector";
 import { MicWaveform } from "../../../components/ui/MicWaveform";
 import { Timer } from "../../../components/ui/Timer";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
@@ -302,6 +303,7 @@ export function TakeInterviewPage() {
                 There is no prep time. Press Start to hear the question, then
                 speak your answer within 45 seconds.
               </p>
+              <MicSelector disabled={!speech.supported} />
               {!speech.supported && (
                 <p className={styles.error}>
                   Microphone recording is not supported in this browser.
@@ -391,6 +393,11 @@ export function TakeInterviewPage() {
                     : "Starting microphone…"}
                 </span>
               </div>
+              <MicSelector
+                disabled
+                requestPermissionOnMount={false}
+                activeDeviceId={speech.activeDeviceId}
+              />
               <MicWaveform levels={speech.levels} active={speech.recording} />
               {speech.error && (
                 <div className={styles.error}>

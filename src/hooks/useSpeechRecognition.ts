@@ -1,4 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  loadPreferredMicrophoneId,
+  openMicrophoneStream,
+} from "../lib/microphonePreference";
 import { transcribeAudio } from "../lib/transcribe";
 
 export interface UseSpeechRecognitionReturn {
@@ -9,6 +13,8 @@ export interface UseSpeechRecognitionReturn {
   error: string | null;
   /** Normalized bar levels 0–1 for waveform visualization while recording. */
   levels: number[];
+  /** deviceId of the track actually opened for the current recording. */
+  activeDeviceId: string | null;
   start: () => Promise<void>;
   /** Stops recording, transcribes, updates transcript, and returns the text. */
   stop: () => Promise<string>;
@@ -58,6 +64,15 @@ function getMicrophoneErrorMessage(error: unknown): string {
     ) {
       return "No microphone found. Please connect a microphone and try again.";
     }
+    if (
+      error.name === "OverconstrainedError" ||
+      error.name === "ConstraintNotSatisfiedError"
+    ) {
+      return "Selected microphone is unavailable. Pick another mic or System default.";
+    }
+    if (error.name === "NotReadableError") {
+      return "Microphone is busy (another app may be using it). Close other apps and try again.";
+    }
   }
   return `Failed to access the microphone: ${error instanceof Error ? error.message : String(error)}`;
 }
@@ -79,6 +94,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   const [transcript, setTranscript] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [levels, setLevels] = useState<number[]>(emptyLevels);
+  const [activeDeviceId, setActiveDeviceId] = useState<string | null>(null);
 
   const streamRef = useRef<MediaStream | null>(null);
   const recorderRef = useRef<MediaRecorder | null>(null);
@@ -92,6 +108,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const rafRef = useRef<number>(0);
   const startPromiseRef = useRef<Promise<void> | null>(null);
+  const transcriptRef = useRef("");
 
   const stopLevelMeter = useCallback(() => {
     if (rafRef.current) {
@@ -123,28 +140,32 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
         audioCtxRef.current = ctx;
         const source = ctx.createMediaStreamSource(stream);
         const analyser = ctx.createAnalyser();
-        analyser.fftSize = 64;
-        analyser.smoothingTimeConstant = 0.7;
+        // time-domain metering is more reliable than frequency bins for
+        // "is the mic picking up voice" (works better with USB headsets)
+        analyser.fftSize = 2048;
+        analyser.smoothingTimeConstant = 0.5;
         source.connect(analyser);
         analyserRef.current = analyser;
 
-        const data = new Uint8Array(analyser.frequencyBinCount);
+        const data = new Uint8Array(analyser.fftSize);
 
         const tick = () => {
           if (!analyserRef.current) return;
-          analyserRef.current.getByteFrequencyData(data);
+          analyserRef.current.getByteTimeDomainData(data);
+
+          // Split the waveform into bars by RMS energy in each segment
           const next: number[] = [];
-          const binSize = Math.max(
-            1,
-            Math.floor(data.length / LEVEL_BAR_COUNT),
-          );
+          const segment = Math.floor(data.length / LEVEL_BAR_COUNT);
           for (let i = 0; i < LEVEL_BAR_COUNT; i++) {
-            let sum = 0;
-            const start = i * binSize;
-            for (let j = 0; j < binSize && start + j < data.length; j++) {
-              sum += data[start + j];
+            let sumSq = 0;
+            const start = i * segment;
+            for (let j = 0; j < segment; j++) {
+              const v = (data[start + j] - 128) / 128;
+              sumSq += v * v;
             }
-            next.push(Math.min(1, sum / binSize / 255));
+            const rms = Math.sqrt(sumSq / segment);
+            // Scale so normal speech lights most bars
+            next.push(Math.min(1, rms * 4));
           }
           setLevels(next);
           rafRef.current = requestAnimationFrame(tick);
@@ -166,6 +187,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
       setRecording(false);
       setProcessing(false);
       stopLevelMeter();
+      setActiveDeviceId(null);
       stopPromiseRef.current?.resolve(text);
       stopPromiseRef.current = null;
     },
@@ -179,7 +201,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
 
     const recorder = recorderRef.current;
     recorderRef.current = null;
-    if (recorder) {
+    if (recorder && recorder.state !== "inactive") {
       try {
         recorder.stop();
       } catch {
@@ -201,19 +223,29 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
     const run = async () => {
       cleanup();
       setTranscript("");
+      transcriptRef.current = "";
       setError(null);
       setProcessing(false);
       chunksRef.current = [];
       setRecording(true);
 
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          audio: {
-            echoCancellation: true,
-            noiseSuppression: true,
-          },
-        });
+        const preferredId = loadPreferredMicrophoneId();
+        const { stream, usedDeviceId } =
+          await openMicrophoneStream(preferredId);
         streamRef.current = stream;
+        setActiveDeviceId(usedDeviceId);
+
+        // Ensure the track is live
+        const track = stream.getAudioTracks()[0];
+        if (!track || track.readyState !== "live") {
+          throw new DOMException(
+            "Microphone track is not live",
+            "NotReadableError",
+          );
+        }
+        track.enabled = true;
+
         startLevelMeter(stream);
 
         const mimeType = selectMimeType();
@@ -244,9 +276,11 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
           }
 
           stopLevelMeter();
-          stream.getTracks().forEach((track) => track.stop());
+          // Stop hardware after recorder has flushed its final chunk
+          stream.getTracks().forEach((t) => t.stop());
           setRecording(false);
           setProcessing(true);
+          setActiveDeviceId(null);
 
           const blob = new Blob(chunksRef.current, {
             type: recorder.mimeType || "audio/webm",
@@ -267,6 +301,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
               TRANSCRIBE_API_URL,
               controller.signal,
             );
+            transcriptRef.current = text;
             setTranscript(text);
             finalizeStop(text);
           } catch (fetchError) {
@@ -281,10 +316,12 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
           }
         });
 
+        // timeslice keeps chunks flowing; some browsers need it for non-zero blobs
         recorder.start(250);
       } catch (micError) {
         setError(getMicrophoneErrorMessage(micError));
         setRecording(false);
+        setActiveDeviceId(null);
         stopLevelMeter();
       }
     };
@@ -306,12 +343,16 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
 
         const recorder = recorderRef.current;
         if (!recorder || recorder.state === "inactive") {
-          resolve(transcript);
+          resolve(transcriptRef.current);
           return;
         }
 
         stopPromiseRef.current = { resolve, reject };
         try {
+          // Flush the last buffer before stop (important on Safari / some Chrome builds)
+          if (typeof recorder.requestData === "function") {
+            recorder.requestData();
+          }
           recorder.stop();
         } catch {
           setRecording(false);
@@ -321,10 +362,11 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
         }
       })();
     });
-  }, [transcript]);
+  }, []);
 
   const clearTranscript = useCallback(() => {
     setTranscript("");
+    transcriptRef.current = "";
   }, []);
 
   const clearError = useCallback(() => {
@@ -340,6 +382,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
     transcript,
     error,
     levels,
+    activeDeviceId,
     start,
     stop,
     clearTranscript,
