@@ -1,10 +1,20 @@
+const DEFAULT_LANGUAGE = "en";
+
 export async function transcribeAudio(
   audio: Blob,
   url: string,
   signal?: AbortSignal,
+  language: string = DEFAULT_LANGUAGE,
 ): Promise<string> {
   const formData = new FormData();
-  formData.append("audio", audio, "recording.webm");
+  // Explicit English default — backend also normalizes missing/auto to "en".
+  formData.append("language", language || DEFAULT_LANGUAGE);
+  const ext = audio.type.includes("mp4")
+    ? "mp4"
+    : audio.type.includes("wav")
+      ? "wav"
+      : "webm";
+  formData.append("audio", audio, `recording.${ext}`);
 
   const response = await fetch(url, {
     method: "POST",

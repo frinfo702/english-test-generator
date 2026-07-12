@@ -90,6 +90,54 @@ export function buildGradingMessage(problemId: string, answerId: string) {
   return `I completed problem ${problemId}. My answer ID is ${answerId}. Please grade it.`;
 }
 
+export interface InterviewCopyPayload {
+  question: string;
+  userAnswer: string;
+  modelAnswer?: string;
+  evaluationPoints?: string[];
+  questionType?: string;
+}
+
+/**
+ * Clipboard text for pasting into an external LLM chat for feedback.
+ */
+export function buildInterviewQaCopyMessage(payload: InterviewCopyPayload) {
+  const lines: string[] = [
+    "Please evaluate my TOEFL Speaking (Take an Interview) response and give constructive feedback on fluency, coherence, vocabulary, and grammar.",
+    "",
+    "## Question",
+    payload.question.trim(),
+  ];
+
+  if (payload.questionType) {
+    lines.push("", `Type: ${payload.questionType}`);
+  }
+
+  lines.push(
+    "",
+    "## My spoken answer (transcribed)",
+    payload.userAnswer.trim() || "(no speech detected)",
+  );
+
+  if (payload.modelAnswer?.trim()) {
+    lines.push("", "## Sample answer", payload.modelAnswer.trim());
+  }
+
+  if (payload.evaluationPoints && payload.evaluationPoints.length > 0) {
+    lines.push("", "## Evaluation criteria");
+    for (const point of payload.evaluationPoints) {
+      lines.push(`- ${point}`);
+    }
+  }
+
+  lines.push(
+    "",
+    "Please score me roughly on a TOEFL Speaking scale and suggest a stronger version of my answer.",
+  );
+
+  return lines.join("\n");
+}
+
 export async function copyText(text: string) {
   if (typeof navigator.clipboard?.writeText !== "function") {
     return false;

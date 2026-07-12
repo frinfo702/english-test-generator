@@ -108,7 +108,12 @@ describe("useSpeechRecognition", () => {
     });
 
     await waitFor(() => {
-      expect(getUserMediaMock).toHaveBeenCalledWith({ audio: true });
+      expect(getUserMediaMock).toHaveBeenCalledWith({
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+        },
+      });
     });
 
     const recorder = FakeMediaRecorder.instances[0];
@@ -161,10 +166,36 @@ describe("useSpeechRecognition", () => {
       expect(result.current.transcript).toBe("hello world");
     });
     expect(result.current.recording).toBe(false);
+    expect(result.current.processing).toBe(false);
     expect(globalThis.fetch).toHaveBeenCalledWith(
       "/api/transcribe",
       expect.objectContaining({ method: "POST" }),
     );
+  });
+
+  it("returns transcribed text from stop()", async () => {
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    await act(async () => {
+      await result.current.start();
+    });
+
+    await waitFor(() => {
+      expect(FakeMediaRecorder.instances).toHaveLength(1);
+    });
+
+    const recorder = FakeMediaRecorder.instances[0];
+    act(() => {
+      recorder.emitData(new Blob(["fake-audio"], { type: "audio/webm" }));
+    });
+
+    let returned = "";
+    await act(async () => {
+      returned = await result.current.stop();
+    });
+
+    expect(returned).toBe("hello world");
   });
 
   it("sets an error when the transcription request fails", async () => {

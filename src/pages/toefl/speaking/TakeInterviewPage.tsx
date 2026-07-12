@@ -1,94 +1,142 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
-import { GradingRequestPanel } from "../../../components/ui/GradingRequestPanel";
+import { AudioPlayer } from "../../../components/ui/AudioPlayer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
+import { MicWaveform } from "../../../components/ui/MicWaveform";
 import { Timer } from "../../../components/ui/Timer";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
+import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
+import { useSingleAudio } from "../../../hooks/useSingleAudio";
 import {
-  buildGradingMessage,
+  buildInterviewQaCopyMessage,
   buildProblemId,
   clearDraft,
   copyText,
-  loadDraft,
   saveAnswerSubmission,
-  saveDraft,
 } from "../../../lib/answerSubmission";
+import { pickInterviewerVoice } from "../../../lib/voiceMapping";
+import { InterviewerCard } from "./InterviewerCard";
+import {
+  INTERVIEW_TASK_ID,
+  INTERVIEW_TYPE_LABELS,
+  type InterviewPhase,
+  type InterviewProblemData,
+  interviewAudioUrl,
+  phasePrompt,
+} from "./interviewTypes";
 import styles from "./TakeInterviewPage.module.css";
-
-interface InterviewQuestion {
-  id: string;
-  type: string;
-  question: string;
-  modelAnswer: string;
-  evaluationPoints: string[];
-}
-
-interface ProblemData {
-  questions: InterviewQuestion[];
-}
-
-const TYPE_LABELS: Record<string, string> = {
-  personal: "Personal Experience",
-  opinion: "Opinion",
-  hypothetical: "Hypothetical Situation",
-  comparison: "Comparison / Choice",
-};
-const TASK_ID = "toefl/speaking/interview";
 
 export function TakeInterviewPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
   const { data, file, loading, error, loadByQuestionNumber } =
-    useQuestion<ProblemData>(TASK_ID);
+    useQuestion<InterviewProblemData>(INTERVIEW_TASK_ID);
+
   const [current, setCurrent] = useState(0);
   const [userText, setUserText] = useState("");
-  const [phase, setPhase] = useState<"pre" | "answering" | "submitted">("pre");
-  const [showModel, setShowModel] = useState(false);
+  const [phase, setPhase] = useState<InterviewPhase>("pre");
   const [done, setDone] = useState(false);
   const [savingAnswer, setSavingAnswer] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
-  const [answerId, setAnswerId] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const submittingRef = useRef(false);
+
+  const audio = useSingleAudio();
+  const speech = useSpeechRecognition();
+
+  const fileBasename = file ? file.replace(/\.json$/i, "") : "";
+  const interviewerVoice = useMemo(
+    () => (fileBasename ? pickInterviewerVoice(fileBasename) : "ara"),
+    [fileBasename],
+  );
 
   const q = data?.questions[current];
   const problemId =
     file && q
-      ? buildProblemId(TASK_ID, file, q.id || String(current + 1))
+      ? buildProblemId(INTERVIEW_TASK_ID, file, q.id || String(current + 1))
       : null;
-  const gradingMessage =
-    problemId && answerId ? buildGradingMessage(problemId, answerId) : null;
 
-  const submitAnswer = async () => {
-    setPhase("submitted");
-    if (!q || !problemId || answerId || savingAnswer) return;
-    setSavingAnswer(true);
+  const questionUrl =
+    fileBasename && q
+      ? interviewAudioUrl(fileBasename, current, "question")
+      : null;
+  const modelUrl =
+    fileBasename && q
+      ? interviewAudioUrl(fileBasename, current, "model")
+      : null;
+
+  const qaCopyMessage = useMemo(() => {
+    if (!q) return null;
+    return buildInterviewQaCopyMessage({
+      question: q.question,
+      userAnswer: userText,
+      modelAnswer: q.modelAnswer,
+      evaluationPoints: q.evaluationPoints,
+      questionType: INTERVIEW_TYPE_LABELS[q.type] ?? q.type,
+    });
+  }, [q, userText]);
+
+  const { clearTranscript, clearError: clearSpeechError } = speech;
+
+  const clearSessionBits = useCallback(() => {
+    setUserText("");
     setSaveError(null);
+    setCopied(false);
+    clearTranscript();
+    clearSpeechError();
+    submittingRef.current = false;
+  }, [clearTranscript, clearSpeechError]);
+
+  const timerStopRef = useRef<() => void>(() => undefined);
+
+  const finishAnswer = useCallback(async () => {
+    if (submittingRef.current) return;
+    submittingRef.current = true;
+    timerStopRef.current();
+    audio.stop();
+    setPhase("processing");
+
     try {
-      const result = await saveAnswerSubmission({
-        taskId: TASK_ID,
-        problemId,
-        response: userText,
-        question: q,
-      });
-      clearDraft(problemId);
-      setAnswerId(result.answerId);
-    } catch (e) {
-      setSaveError(
-        e instanceof Error ? e.message : "Failed to save your answer.",
-      );
+      const finalText = (await speech.stop()).trim();
+      setUserText(finalText);
+      setPhase("submitted");
+
+      if (q && problemId) {
+        setSavingAnswer(true);
+        setSaveError(null);
+        try {
+          await saveAnswerSubmission({
+            taskId: INTERVIEW_TASK_ID,
+            problemId,
+            response: finalText,
+            question: q,
+          });
+          clearDraft(problemId);
+        } catch (e) {
+          setSaveError(
+            e instanceof Error ? e.message : "Failed to save your answer.",
+          );
+        } finally {
+          setSavingAnswer(false);
+        }
+      }
+    } catch {
+      setPhase("submitted");
+      setSaveError("Failed to process your recording.");
     } finally {
-      setSavingAnswer(false);
+      submittingRef.current = false;
     }
-  };
+  }, [audio, speech, q, problemId]);
 
   const timer = useTimer(45, () => {
-    void submitAnswer();
+    void finishAnswer();
   });
+  timerStopRef.current = timer.stop;
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
@@ -101,29 +149,50 @@ export function TakeInterviewPage() {
 
   useEffect(() => {
     if (!problemId) return;
-    setUserText(loadDraft(problemId));
-    setSaveError(null);
-    setAnswerId(null);
-    setCopied(false);
-  }, [problemId]);
+    clearSessionBits();
+  }, [problemId, clearSessionBits]);
 
   useEffect(() => {
-    if (!problemId || phase === "submitted") return;
-    saveDraft(problemId, userText);
-  }, [problemId, phase, userText]);
+    return () => {
+      audio.stop();
+      void speech.stop();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- unmount only
+  }, []);
+
+  const timerStart = timer.start;
+  const startSpeech = speech.start;
+
+  const startAnswering = useCallback(() => {
+    setPhase("answering");
+    clearSpeechError();
+    clearTranscript();
+    setUserText("");
+    timerStart();
+    void startSpeech();
+  }, [timerStart, startSpeech, clearSpeechError, clearTranscript]);
 
   const handleStart = () => {
+    if (!questionUrl) {
+      startAnswering();
+      return;
+    }
+    setPhase("listening");
+    audio.play("question", questionUrl, startAnswering);
+  };
+
+  const handleRetryRecording = () => {
+    clearSessionBits();
     setPhase("answering");
+    timer.reset();
     timer.start();
+    void speech.start();
   };
-  const handleSubmit = () => {
-    timer.stop();
-    void submitAnswer();
-  };
-  const handleCopy = async () => {
-    if (!gradingMessage) return;
+
+  const handleCopyQa = async () => {
+    if (!qaCopyMessage) return;
     try {
-      const ok = await copyText(gradingMessage);
+      const ok = await copyText(qaCopyMessage);
       if (!ok) {
         setSaveError("Clipboard is not available in this environment.");
         return;
@@ -134,42 +203,44 @@ export function TakeInterviewPage() {
     }
   };
 
+  const goToQuestionList = () => {
+    audio.stop();
+    void speech.stop();
+    setCurrent(0);
+    setPhase("pre");
+    setDone(false);
+    setSavingAnswer(false);
+    clearSessionBits();
+    timer.reset();
+    navigate("/toefl/speaking/interview");
+  };
+
   const handleNext = () => {
     if (!data) return;
+    audio.stop();
+    void speech.stop();
     if (current + 1 >= data.questions.length) {
       setDone(true);
       return;
     }
     setCurrent((c) => c + 1);
-    setUserText("");
     setPhase("pre");
-    setShowModel(false);
     setSavingAnswer(false);
-    setSaveError(null);
-    setAnswerId(null);
-    setCopied(false);
+    clearSessionBits();
     timer.reset();
   };
 
-  const handleBackToList = () => {
-    setCurrent(0);
-    setUserText("");
-    setPhase("pre");
-    setShowModel(false);
-    setDone(false);
-    setSavingAnswer(false);
-    setSaveError(null);
-    setAnswerId(null);
-    setCopied(false);
-    timer.reset();
-    navigate("/toefl/speaking/interview");
-  };
+  const busyPhase =
+    phase === "answering" || phase === "listening" || phase === "processing";
+  const questionActive = audio.isActive("question");
+  const modelActive = audio.isActive("model");
+  const displayAnswer = userText || speech.transcript;
 
   return (
     <div>
       <SectionHeader
         title="Take an Interview"
-        subtitle="Answer interview prompts (no prep time, 45 seconds each)."
+        subtitle="Listen, then speak your answer (45 seconds). Text is hidden like the real test."
         backTo="/toefl"
         current={done ? data?.questions.length : current}
         total={data?.questions.length}
@@ -179,8 +250,8 @@ export function TakeInterviewPage() {
         <Button
           variant="secondary"
           size="sm"
-          onClick={handleBackToList}
-          disabled={loading || phase === "answering"}
+          onClick={goToQuestionList}
+          disabled={loading || busyPhase}
         >
           Question List
         </Button>
@@ -205,57 +276,192 @@ export function TakeInterviewPage() {
         <div className={styles.card}>
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>
-              {TYPE_LABELS[q.type] ?? q.type}
+              {INTERVIEW_TYPE_LABELS[q.type] ?? q.type}
             </span>
             <span className={styles.qNum}>
               Question {current + 1} / {data.questions.length}
             </span>
           </div>
-          <p className={styles.question}>{q.question}</p>
+
+          <InterviewerCard
+            voiceId={interviewerVoice}
+            speaking={
+              phase === "listening" || (audio.playing && questionActive)
+            }
+          />
+
+          {phase === "submitted" ? (
+            <p className={styles.question}>{q.question}</p>
+          ) : (
+            <p className={styles.questionHidden}>{phasePrompt(phase)}</p>
+          )}
 
           {phase === "pre" && (
             <div className={styles.preBox}>
               <p className={styles.preNote}>
-                There is no prep time. Press Start to begin the 45-second timer.
+                There is no prep time. Press Start to hear the question, then
+                speak your answer within 45 seconds.
               </p>
-              <Button size="lg" onClick={handleStart}>
+              {!speech.supported && (
+                <p className={styles.error}>
+                  Microphone recording is not supported in this browser.
+                </p>
+              )}
+              <Button
+                size="lg"
+                onClick={handleStart}
+                disabled={!speech.supported}
+              >
                 Start
               </Button>
             </div>
           )}
 
-          {(phase === "answering" || phase === "submitted") && (
+          {phase === "listening" && questionUrl && (
+            <div className={styles.listeningBox}>
+              <p className={styles.preNote}>
+                Listen carefully. Recording starts when the question finishes.
+              </p>
+              <AudioPlayer
+                playing={audio.playing && questionActive}
+                loading={audio.loading && questionActive}
+                error={questionActive ? audio.error : null}
+                currentTime={questionActive ? audio.currentTime : 0}
+                duration={questionActive ? audio.duration : 0}
+                playbackRate={audio.playbackRate}
+                onPlayPause={() =>
+                  audio.toggle("question", questionUrl, startAnswering)
+                }
+                onSeek={audio.seek}
+                onPlaybackRateChange={audio.setPlaybackRate}
+                seekable
+                playLabel={
+                  audio.loading && questionActive
+                    ? "Loading..."
+                    : audio.playing && questionActive
+                      ? "⏸ Pause"
+                      : "▶ Replay question"
+                }
+              />
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  audio.stop();
+                  startAnswering();
+                }}
+              >
+                Skip to answer
+              </Button>
+            </div>
+          )}
+
+          {phase === "answering" && (
             <div className={styles.answerArea}>
+              {questionUrl && (
+                <div className={styles.replayRow}>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => audio.toggle("question", questionUrl)}
+                    disabled={audio.loading || speech.recording}
+                  >
+                    {audio.playing && questionActive
+                      ? "⏸ Pause question"
+                      : "🔁 Replay question"}
+                  </Button>
+                </div>
+              )}
               <Timer
                 display={timer.display}
                 isWarning={timer.isWarning}
                 isExpired={timer.isExpired}
               />
-              <textarea
-                className={styles.textarea}
-                value={userText}
-                onChange={(e) => setUserText(e.target.value)}
-                placeholder="Type your response here (spoken in the real test)..."
-                disabled={phase === "submitted"}
-                rows={8}
-              />
-              {phase === "answering" && (
-                <Button onClick={handleSubmit}>Submit</Button>
+              <div className={styles.recordingStatus}>
+                <span
+                  className={
+                    speech.recording
+                      ? styles.recordingDot
+                      : styles.recordingDotIdle
+                  }
+                />
+                <span>
+                  {speech.recording
+                    ? "Recording… speak clearly"
+                    : "Starting microphone…"}
+                </span>
+              </div>
+              <MicWaveform levels={speech.levels} active={speech.recording} />
+              {speech.error && (
+                <div className={styles.error}>
+                  <p>{speech.error}</p>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={handleRetryRecording}
+                  >
+                    Retry recording
+                  </Button>
+                </div>
               )}
+              <Button
+                onClick={() => {
+                  void finishAnswer();
+                }}
+                disabled={!speech.recording}
+              >
+                Stop &amp; Submit
+              </Button>
+            </div>
+          )}
+
+          {phase === "processing" && (
+            <div className={styles.answerArea}>
+              <LoadingSpinner
+                message={
+                  speech.processing
+                    ? "Transcribing your answer…"
+                    : "Processing your answer…"
+                }
+              />
             </div>
           )}
 
           {phase === "submitted" && (
             <div className={styles.feedbackArea}>
-              <GradingRequestPanel
-                saving={savingAnswer}
-                error={saveError}
-                message={gradingMessage}
-                copied={copied}
-                onCopy={() => {
-                  void handleCopy();
-                }}
-              />
+              <div className={styles.userAnswerCard}>
+                <h3>Your spoken answer</h3>
+                {displayAnswer ? (
+                  <p className={styles.userAnswerText}>{displayAnswer}</p>
+                ) : (
+                  <p className={styles.userAnswerEmpty}>
+                    No speech was detected. Try the next question, or retry if
+                    you can.
+                  </p>
+                )}
+                {savingAnswer && (
+                  <p className={styles.preNote}>Saving your answer…</p>
+                )}
+                {saveError && <p className={styles.error}>{saveError}</p>}
+                {speech.error && <p className={styles.error}>{speech.error}</p>}
+              </div>
+
+              <div className={styles.copyCard}>
+                <p className={styles.preNote}>
+                  Copy the question and your answer, then paste into your own AI
+                  chat for detailed feedback.
+                </p>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    void handleCopyQa();
+                  }}
+                  disabled={!qaCopyMessage}
+                >
+                  {copied ? "Copied" : "Copy question and answer"}
+                </Button>
+              </div>
+
               <div className={styles.evalCard}>
                 <h3>Evaluation Points</h3>
                 <ul>
@@ -264,20 +470,39 @@ export function TakeInterviewPage() {
                   ))}
                 </ul>
               </div>
+
               <div className={styles.modelArea}>
-                <Button
-                  variant="secondary"
-                  onClick={() => setShowModel((v) => !v)}
-                >
-                  {showModel ? "Hide Model Answer" : "Show Model Answer"}
-                </Button>
-                {showModel && (
-                  <div className={styles.modelAnswer}>
-                    <h3>Model Answer</h3>
-                    <p>{q.modelAnswer}</p>
-                  </div>
-                )}
+                <div className={styles.modelAnswer}>
+                  <h3>Sample Answer</h3>
+                  <p>{q.modelAnswer}</p>
+                  {modelUrl && (
+                    <div className={styles.modelPlayer}>
+                      <AudioPlayer
+                        playing={audio.playing && modelActive}
+                        loading={audio.loading && modelActive}
+                        error={modelActive ? audio.error : null}
+                        currentTime={modelActive ? audio.currentTime : 0}
+                        duration={modelActive ? audio.duration : 0}
+                        playbackRate={audio.playbackRate}
+                        onPlayPause={() => audio.toggle("model", modelUrl)}
+                        onSeek={audio.seek}
+                        onPlaybackRateChange={audio.setPlaybackRate}
+                        seekable
+                        playLabel={
+                          audio.loading && modelActive
+                            ? "Loading..."
+                            : audio.playing && modelActive
+                              ? "⏸ Pause"
+                              : audio.currentTime > 0 && modelActive
+                                ? "▶ Resume"
+                                : "▶ Play sample answer"
+                        }
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
+
               <Button onClick={handleNext}>
                 {current + 1 < data.questions.length
                   ? "Next Question"
@@ -297,7 +522,7 @@ export function TakeInterviewPage() {
             total={data.questions.length}
             label="Complete"
           />
-          <BackButton onClick={handleBackToList} size="lg" />
+          <BackButton onClick={goToQuestionList} size="lg" />
         </div>
       )}
     </div>

@@ -6,13 +6,16 @@ import https from "node:https";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
+import {
+  ALL_VOICE_IDS,
+  pickInterviewerVoice,
+} from "../src/lib/voiceMapping.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
 const QUESTIONS_DIR = path.join(PROJECT_ROOT, "public/questions");
 const AUDIO_OUT_DIR = path.join(PROJECT_ROOT, "public/audio");
-
-const ALL_SHADOW_VOICES = ["ara", "eve", "leo", "rex", "sal"];
+const AUDIO_CACHE_DIR = path.join(PROJECT_ROOT, "public/audio-cache");
 
 function hashText(text: string): number {
   let hash = 0;
@@ -30,6 +33,11 @@ function sha256(input: string): string {
 interface AudioSegment {
   role: string;
   text: string;
+}
+
+interface InterviewQuestion {
+  question: string;
+  modelAnswer: string;
 }
 
 function hasAudioSegments(
@@ -60,6 +68,30 @@ function hasTextSentences(
     typeof sentences[0] === "object" &&
     sentences[0] !== null &&
     "text" in (sentences[0] as Record<string, unknown>)
+  );
+}
+
+function hasInterviewQuestions(
+  obj: unknown,
+): obj is { questions: InterviewQuestion[] } {
+  if (
+    typeof obj !== "object" ||
+    obj === null ||
+    !("questions" in obj) ||
+    !Array.isArray((obj as Record<string, unknown>).questions)
+  ) {
+    return false;
+  }
+  const questions = (obj as Record<string, unknown>).questions as unknown[];
+  if (questions.length === 0) return false;
+  const first = questions[0];
+  return (
+    typeof first === "object" &&
+    first !== null &&
+    "question" in first &&
+    "modelAnswer" in first &&
+    typeof (first as InterviewQuestion).question === "string" &&
+    typeof (first as InterviewQuestion).modelAnswer === "string"
   );
 }
 
@@ -116,6 +148,35 @@ async function fetchTts(text: string, voiceId: string): Promise<Buffer> {
   });
 }
 
+async function getOrFetchMp3(text: string, voiceId: string): Promise<Buffer> {
+  const cacheKey = sha256(`${voiceId}:${text}`);
+  const cacheFile = path.join(AUDIO_CACHE_DIR, `${cacheKey}.mp3`);
+  if (fs.existsSync(cacheFile)) {
+    return fs.readFileSync(cacheFile);
+  }
+  const mp3 = await fetchTts(text, voiceId);
+  fs.mkdirSync(AUDIO_CACHE_DIR, { recursive: true });
+  fs.writeFileSync(cacheFile, mp3);
+  return mp3;
+}
+
+async function writeMp3IfMissing(
+  outFile: string,
+  relativeLabel: string,
+  text: string,
+  voiceId: string,
+): Promise<void> {
+  if (fs.existsSync(outFile)) {
+    console.log(`  SKIP (exists): ${relativeLabel}`);
+    return;
+  }
+  console.log(`  FETCH: ${relativeLabel} (voice=${voiceId})`);
+  const mp3 = await getOrFetchMp3(text, voiceId);
+  fs.mkdirSync(path.dirname(outFile), { recursive: true });
+  fs.writeFileSync(outFile, mp3);
+  console.log(`  SAVED: ${relativeLabel}`);
+}
+
 async function generateForQuestion(
   questionPath: string,
   relativePath: string,
@@ -131,8 +192,8 @@ async function generateForQuestion(
     const usedVoices = new Set<string>();
     const getVoiceForRole = (role: string): string => {
       if (!voiceForRole.has(role)) {
-        const available = ALL_SHADOW_VOICES.filter((v) => !usedVoices.has(v));
-        const pool = available.length > 0 ? available : ALL_SHADOW_VOICES;
+        const available = ALL_VOICE_IDS.filter((v) => !usedVoices.has(v));
+        const pool = available.length > 0 ? available : ALL_VOICE_IDS;
         const idx = Math.abs(hashText(`${basename}:${role}`)) % pool.length;
         const voice = pool[idx];
         voiceForRole.set(role, voice);
@@ -145,32 +206,12 @@ async function generateForQuestion(
       const voiceId = getVoiceForRole(seg.role);
       const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
       const outFile = path.join(outDir, `${i + 1}.mp3`);
-
-      if (fs.existsSync(outFile)) {
-        console.log(
-          `  SKIP (exists): ${path.join(dirname, basename, `${i + 1}.mp3`)}`,
-        );
-        continue;
-      }
-
-      const cacheKey = sha256(`${voiceId}:${seg.text}`);
-      const audioCacheDir = path.join(PROJECT_ROOT, "public/audio-cache");
-      const cacheFile = path.join(audioCacheDir, `${cacheKey}.mp3`);
-
-      let mp3: Buffer;
-      if (fs.existsSync(cacheFile)) {
-        mp3 = fs.readFileSync(cacheFile);
-        console.log(`  CACHE HIT: segment ${i + 1}/${segments.length}`);
-      } else {
-        console.log(
-          `  FETCH: segment ${i + 1}/${segments.length} (voice=${voiceId})`,
-        );
-        mp3 = await fetchTts(seg.text, voiceId);
-      }
-
-      fs.mkdirSync(outDir, { recursive: true });
-      fs.writeFileSync(outFile, mp3);
-      console.log(`  SAVED: ${path.join(dirname, basename, `${i + 1}.mp3`)}`);
+      await writeMp3IfMissing(
+        outFile,
+        path.join(dirname, basename, `${i + 1}.mp3`),
+        seg.text,
+        voiceId,
+      );
     }
   }
 
@@ -179,25 +220,41 @@ async function generateForQuestion(
     for (let i = 0; i < sentences.length; i++) {
       const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
       const outFile = path.join(outDir, `${i + 1}.mp3`);
-
-      if (fs.existsSync(outFile)) {
-        console.log(
-          `  SKIP (exists): ${path.join(dirname, basename, `${i + 1}.mp3`)}`,
-        );
-        continue;
-      }
-
       const voiceIdx =
-        Math.abs(hashText(sentences[i].text)) % ALL_SHADOW_VOICES.length;
-      const shadowVoice = ALL_SHADOW_VOICES[voiceIdx];
-      console.log(
-        `  FETCH: sentence ${i + 1}/${sentences.length} (voice=${shadowVoice})`,
+        Math.abs(hashText(sentences[i].text)) % ALL_VOICE_IDS.length;
+      const voiceId = ALL_VOICE_IDS[voiceIdx];
+      await writeMp3IfMissing(
+        outFile,
+        path.join(dirname, basename, `${i + 1}.mp3`),
+        sentences[i].text,
+        voiceId,
       );
-      const mp3 = await fetchTts(sentences[i].text, shadowVoice);
+    }
+  }
 
-      fs.mkdirSync(outDir, { recursive: true });
-      fs.writeFileSync(outFile, mp3);
-      console.log(`  SAVED: ${path.join(dirname, basename, `${i + 1}.mp3`)}`);
+  // Take an Interview: question + model-answer audio per item
+  if (
+    relativePath.includes("speaking/interview") &&
+    hasInterviewQuestions(data)
+  ) {
+    const voiceId = pickInterviewerVoice(basename);
+    console.log(`  Interviewer voice for ${basename}: ${voiceId}`);
+    const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
+    for (let i = 0; i < data.questions.length; i++) {
+      const q = data.questions[i];
+      const n = i + 1;
+      await writeMp3IfMissing(
+        path.join(outDir, `${n}.mp3`),
+        path.join(dirname, basename, `${n}.mp3`),
+        q.question,
+        voiceId,
+      );
+      await writeMp3IfMissing(
+        path.join(outDir, `${n}-model.mp3`),
+        path.join(dirname, basename, `${n}-model.mp3`),
+        q.modelAnswer,
+        voiceId,
+      );
     }
   }
 }
@@ -226,6 +283,7 @@ async function main() {
   console.log("=== TTS Audio Generator ===");
   console.log(`Questions dir: ${QUESTIONS_DIR}`);
   console.log(`Audio output: ${AUDIO_OUT_DIR}`);
+  console.log(`Voice pool: ${ALL_VOICE_IDS.length} voices`);
 
   if (!fs.existsSync(QUESTIONS_DIR)) {
     console.error("Questions directory not found. Run from project root.");
