@@ -30,3 +30,6 @@ answers/
 # Wrangler build artifacts
 _worker.bundle/
 .wrangler/
+
+# AI
+.cursor
