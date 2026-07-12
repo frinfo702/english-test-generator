@@ -74,7 +74,7 @@ export function phasePrompt(
   switch (phase) {
     case "listening":
       return listeningTrack === "scenario"
-        ? "Listening to the introduction…"
+        ? "Listening to the scenario…"
         : "Listening to the question…";
     case "answering":
       return "Speak your answer now.";

@@ -44,6 +44,8 @@ export function TakeInterviewPage() {
   const [phase, setPhase] = useState<InterviewPhase>("pre");
   const [listeningTrack, setListeningTrack] =
     useState<InterviewListeningTrack | null>(null);
+  /** Scenario audio finished (or was skipped) — user must press continue. */
+  const [scenarioReady, setScenarioReady] = useState(false);
   const [done, setDone] = useState(false);
   const [savingAnswer, setSavingAnswer] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
@@ -187,19 +189,37 @@ export function TakeInterviewPage() {
       startAnswering();
       return;
     }
+    setScenarioReady(false);
     setListeningTrack("question");
     setPhase("listening");
     audio.play("question", questionUrl, startAnswering);
   }, [audio, questionUrl, startAnswering]);
 
-  const handleStart = () => {
-    // Q1: play research-study scenario first (audio-only), then the question.
-    if (showScenario && scenarioUrl) {
-      setListeningTrack("scenario");
-      setPhase("listening");
-      audio.play("scenario", scenarioUrl, playQuestion);
+  const handleStartScenario = () => {
+    if (!scenarioUrl) {
+      playQuestion();
       return;
     }
+    // Scenario only — do not auto-advance; user presses Continue.
+    setScenarioReady(false);
+    setListeningTrack("scenario");
+    setPhase("listening");
+    audio.play("scenario", scenarioUrl, () => {
+      setScenarioReady(true);
+    });
+  };
+
+  const handleStart = () => {
+    // Q1: scenario first (manual continue). Later questions: play question.
+    if (showScenario && scenarioUrl) {
+      handleStartScenario();
+      return;
+    }
+    playQuestion();
+  };
+
+  const handleContinueFromScenario = () => {
+    audio.stop();
     playQuestion();
   };
 
@@ -231,6 +251,7 @@ export function TakeInterviewPage() {
     setCurrent(0);
     setPhase("pre");
     setListeningTrack(null);
+    setScenarioReady(false);
     setDone(false);
     setSavingAnswer(false);
     clearSessionBits();
@@ -249,6 +270,7 @@ export function TakeInterviewPage() {
     setCurrent((c) => c + 1);
     setPhase("pre");
     setListeningTrack(null);
+    setScenarioReady(false);
     setSavingAnswer(false);
     clearSessionBits();
     timer.reset();
@@ -308,10 +330,16 @@ export function TakeInterviewPage() {
         <div className={styles.card}>
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>
-              {INTERVIEW_TYPE_LABELS[q.type] ?? q.type}
+              {listeningTrack === "scenario" ||
+              (phase === "pre" && showScenario)
+                ? "Scenario"
+                : (INTERVIEW_TYPE_LABELS[q.type] ?? q.type)}
             </span>
             <span className={styles.qNum}>
-              Question {current + 1} / {data.questions.length}
+              {listeningTrack === "scenario" ||
+              (phase === "pre" && showScenario)
+                ? "Scenario"
+                : `Question ${current + 1} / ${data.questions.length}`}
             </span>
           </div>
 
@@ -332,26 +360,32 @@ export function TakeInterviewPage() {
           )}
 
           {/* Audio-only like the real test; expand only if you could not hear. */}
-          {phase !== "submitted" && (showScenario || q.question) && (
+          {phase !== "submitted" && (
             <details className={styles.transcriptDetails}>
               <summary className={styles.transcriptSummary}>
                 Couldn&apos;t hear? Show text
               </summary>
               <div className={styles.transcriptBody}>
-                {showScenario && data.scenario && (
-                  <div className={styles.transcriptBlock}>
-                    <p className={styles.transcriptLabel}>Introduction</p>
-                    {data.scenario.split("\n").map((line, i) => (
-                      <p key={i} className={styles.scenarioLine}>
-                        {line}
-                      </p>
-                    ))}
-                  </div>
-                )}
-                <div className={styles.transcriptBlock}>
-                  <p className={styles.transcriptLabel}>Question</p>
-                  <p className={styles.scenarioLine}>{q.question}</p>
-                </div>
+                {showScenario &&
+                  data.scenario &&
+                  (listeningTrack === "scenario" ||
+                    (phase === "pre" && showScenario)) && (
+                    <div className={styles.transcriptBlock}>
+                      <p className={styles.transcriptLabel}>Scenario</p>
+                      {data.scenario.split("\n").map((line, i) => (
+                        <p key={i} className={styles.scenarioLine}>
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                {listeningTrack !== "scenario" &&
+                  !(phase === "pre" && showScenario) && (
+                    <div className={styles.transcriptBlock}>
+                      <p className={styles.transcriptLabel}>Question</p>
+                      <p className={styles.scenarioLine}>{q.question}</p>
+                    </div>
+                  )}
               </div>
             </details>
           )}
@@ -360,7 +394,7 @@ export function TakeInterviewPage() {
             <div className={styles.preBox}>
               <p className={styles.preNote}>
                 {showScenario
-                  ? "There is no prep time. Press Start to hear the introduction, then the question. Speak your answer within 45 seconds."
+                  ? "Step 1 of 2 — Scenario. Press Start Scenario to hear the research-study introduction (audio only). You will continue to Question 1 with a button after the scenario."
                   : "There is no prep time. Press Start to hear the question, then speak your answer within 45 seconds."}
               </p>
               <MicSelector disabled={!speech.supported} />
@@ -374,7 +408,7 @@ export function TakeInterviewPage() {
                 onClick={handleStart}
                 disabled={!speech.supported}
               >
-                Start
+                {showScenario ? "Start Scenario" : "Start"}
               </Button>
             </div>
           )}
@@ -383,7 +417,9 @@ export function TakeInterviewPage() {
             <div className={styles.listeningBox}>
               <p className={styles.preNote}>
                 {listeningTrack === "scenario"
-                  ? "Listen carefully. The first question plays next."
+                  ? scenarioReady
+                    ? "Scenario finished. Press Continue to Question when you are ready."
+                    : "Listen carefully to the scenario. It will not advance automatically."
                   : "Listen carefully. Recording starts when the question finishes."}
               </p>
               <AudioPlayer
@@ -395,7 +431,10 @@ export function TakeInterviewPage() {
                 playbackRate={audio.playbackRate}
                 onPlayPause={() => {
                   if (listeningTrack === "scenario" && scenarioUrl) {
-                    audio.toggle("scenario", scenarioUrl, playQuestion);
+                    setScenarioReady(false);
+                    audio.toggle("scenario", scenarioUrl, () => {
+                      setScenarioReady(true);
+                    });
                     return;
                   }
                   if (questionUrl) {
@@ -411,33 +450,47 @@ export function TakeInterviewPage() {
                     : audio.playing && listeningActive
                       ? "⏸ Pause"
                       : listeningTrack === "scenario"
-                        ? "▶ Replay introduction"
+                        ? "▶ Replay scenario"
                         : "▶ Replay question"
                 }
               />
               <div className={styles.listeningActions}>
-                {listeningTrack === "scenario" && (
+                {listeningTrack === "scenario" ? (
+                  <>
+                    <Button
+                      size="lg"
+                      onClick={handleContinueFromScenario}
+                      disabled={audio.loading && scenarioActive}
+                    >
+                      Continue to Question 1
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => {
+                        setScenarioReady(false);
+                        if (scenarioUrl) {
+                          audio.play("scenario", scenarioUrl, () => {
+                            setScenarioReady(true);
+                          });
+                        }
+                      }}
+                    >
+                      Replay scenario
+                    </Button>
+                  </>
+                ) : (
                   <Button
                     variant="secondary"
                     size="sm"
                     onClick={() => {
                       audio.stop();
-                      playQuestion();
+                      startAnswering();
                     }}
                   >
-                    Skip introduction
+                    Skip to answer
                   </Button>
                 )}
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => {
-                    audio.stop();
-                    startAnswering();
-                  }}
-                >
-                  Skip to answer
-                </Button>
               </div>
             </div>
           )}
