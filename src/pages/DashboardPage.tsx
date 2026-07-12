@@ -165,14 +165,14 @@ function LineChart({ entries, color }: LineChartProps) {
         ctx.fillText(shortDate(p.entry.date), p.x, PAD.top + chartH + 18);
       }
     });
-  }, [entries, color, theme]);
+  }, [entries, color]);
 
   useEffect(() => {
     draw();
     const observer = new ResizeObserver(draw);
     if (canvasRef.current) observer.observe(canvasRef.current);
     return () => observer.disconnect();
-  }, [draw]);
+  }, [draw, theme]);
 
   return <canvas ref={canvasRef} className={styles.canvas} />;
 }
