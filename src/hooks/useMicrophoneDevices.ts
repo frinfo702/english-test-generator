@@ -21,15 +21,19 @@ export interface UseMicrophoneDevicesReturn {
 }
 
 function mapDevices(list: MediaDeviceInfo[]): MicDevice[] {
-  return list
-    .filter((d) => d.kind === "audioinput" && d.deviceId)
-    // Chrome often lists a default + communications entry with empty or
-    // special ids — keep real devices only (non-empty stable ids).
-    .filter((d) => d.deviceId !== "default" && d.deviceId !== "communications")
-    .map((d, i) => ({
-      deviceId: d.deviceId,
-      label: d.label?.trim() || `Microphone ${i + 1}`,
-    }));
+  return (
+    list
+      .filter((d) => d.kind === "audioinput" && d.deviceId)
+      // Chrome often lists a default + communications entry with empty or
+      // special ids — keep real devices only (non-empty stable ids).
+      .filter(
+        (d) => d.deviceId !== "default" && d.deviceId !== "communications",
+      )
+      .map((d, i) => ({
+        deviceId: d.deviceId,
+        label: d.label?.trim() || `Microphone ${i + 1}`,
+      }))
+  );
 }
 
 async function microphonePermissionGranted(): Promise<boolean> {
@@ -70,9 +74,7 @@ export function useMicrophoneDevices(): UseMicrophoneDevicesReturn {
       }
       setError(null);
     } catch (e) {
-      setError(
-        e instanceof Error ? e.message : "Failed to list microphones.",
-      );
+      setError(e instanceof Error ? e.message : "Failed to list microphones.");
     } finally {
       setLoading(false);
     }

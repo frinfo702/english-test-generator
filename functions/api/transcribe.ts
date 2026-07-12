@@ -101,8 +101,8 @@ async function transcribeWithWhisper(
 }
 
 /**
- * English learning default: force English when possible.
- * Whisper locks decode language; xAI language is mainly ITN formatting.
+ * Prefer xAI STT (Listen and Repeat / Interview).
+ * Whisper is fallback only: missing key, xAI failure, or カタカナ mis-detect on English.
  */
 async function transcribeAudio(
   audio: Blob,
@@ -118,30 +118,26 @@ async function transcribeAudio(
 
   if (!whisper && !xai) {
     throw new Error(
-      "Transcription is not configured. Set XAI_API_KEY and/or bind Workers AI.",
+      "Transcription is not configured. Set XAI_API_KEY (required for xAI STT) and/or bind Workers AI.",
     );
   }
 
-  // Prefer Whisper for English so Japanese-accented speech is not rendered as カタカナ.
-  if (language === "en" && whisper) {
-    try {
-      return await whisper();
-    } catch (err) {
-      if (!xai) throw err;
-      return xai();
-    }
-  }
-
   if (xai) {
-    const result = await xai();
-    if (
-      language === "en" &&
-      whisper &&
-      isPredominantlyJapaneseScript(result.text)
-    ) {
+    try {
+      const result = await xai();
+      // Safety net: Japanese-accented English sometimes comes back as カタカナ.
+      if (
+        language === "en" &&
+        whisper &&
+        isPredominantlyJapaneseScript(result.text)
+      ) {
+        return whisper();
+      }
+      return result;
+    } catch (err) {
+      if (!whisper) throw err;
       return whisper();
     }
-    return result;
   }
 
   return whisper!();

@@ -19,8 +19,8 @@ sequenceDiagram
     Browser->>MR: recorder.stop()
     MR-->>Browser: Blob (audio/webm)
     Browser->>CF: POST /api/transcribe (FormData: audio, language=en)
-    Note over CF: Default language is English.<br/>Whisper forces decode language for en.
-    CF->>XAI: (fallback) POST /v1/stt (format, language=en, file)
+    Note over CF: Default language is English.<br/>Primary: xAI STT. Whisper only as fallback.
+    CF->>XAI: POST /v1/stt (format, language=en, file)
     XAI-->>CF: { text, duration, words }
     CF-->>Browser: { text: "transcribed text" }
     Browser->>Browser: show transcript / score / copy Q&A
@@ -55,10 +55,10 @@ Live bar visualization driven by `levels` so the user can confirm the mic works.
 
 **Cloudflare Pages Function** (`functions/api/transcribe.ts`):
 
-| Handler            | Description                                                                                            |
-| ------------------ | ------------------------------------------------------------------------------------------------------ |
-| `onRequestPost`    | Validates audio (max 25 MB), calls xAI STT when `XAI_API_KEY` is set; else Workers AI Whisper fallback |
-| `onRequestOptions` | Returns CORS preflight headers                                                                         |
+| Handler            | Description                                                                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `onRequestPost`    | Validates audio (max 25 MB), **xAI STT first** when `XAI_API_KEY` is set; Whisper only on failure / missing key / カタカナ mis-detect |
+| `onRequestOptions` | Returns CORS preflight headers                                                                                                        |
 
 ## Configuration
 
@@ -93,11 +93,14 @@ npx wrangler pages secret put XAI_API_KEY
 5. A `MediaRecorder` captures chunks via `dataavailable` events (timeslice 250ms).
 6. On `stop`, chunks are assembled into a `Blob` and sent to `/api/transcribe`.
 
-### Transcription API (xAI)
+### Transcription API (xAI primary)
+
+Used by **Listen and Repeat** and **Take an Interview** via the shared `useSpeechRecognition` → `/api/transcribe` path.
 
 1. The function builds multipart form data: `format=true`, `language=en`, then `file` **last** (xAI requirement).
 2. `POST https://api.x.ai/v1/stt` with `Authorization: Bearer $XAI_API_KEY`.
 3. Response `{ text, language?, duration? }` is returned to the client as JSON.
+4. **Fallback to Workers AI Whisper** only if: no `XAI_API_KEY`, xAI request fails, or English transcript is predominantly Japanese script (カタカナ mis-detect).
 
 ### Take an Interview copy helper
 
