@@ -88,18 +88,42 @@ The Cloudflare Pages Function at `functions/api/transcribe.ts`:
 
 ## Take an Interview
 
-Answer interview questions on the spot. Each question has a 45-second timer with no prep time.
+Answer interview questions on the spot. Each question has a 45-second timer with no prep time. The real test hides question text and plays audio only — this page mirrors that flow with an on-screen interviewer.
 
 ### Data flow
 
 1. `TakeInterviewPage` calls `useQuestion<ProblemData>("toefl/speaking/interview")`
-2. The page shows one interview question at a time
-3. Question types include: Personal Experience, Opinion, Hypothetical Situation, Comparison/Choice
-4. On start, a 45-second countdown begins; the timer auto-submits on expiry
-5. User types their spoken response (in the real test this would be spoken aloud)
-6. On submit, the answer is saved via `saveAnswerSubmission()` with a `problemId` per question
-7. Evaluation points and model answer are shown for each question
-8. After all questions, a summary screen shows completion status
+2. A stable interviewer voice is chosen from the file basename via `pickInterviewerVoice()` (`src/lib/voiceMapping.ts`)
+3. The interviewer portrait is shown from `/images/voices/{voiceId}.jpg` (name matches the TTS voice)
+4. Question types include: Personal Experience, Opinion, Hypothetical Situation, Comparison/Choice
+5. On Start, question audio plays (`/audio/toefl/speaking/interview/{file}/{n}.mp3`); question text stays hidden
+6. When audio ends (or the user skips), a 45-second countdown begins and the microphone starts recording
+7. A live mic waveform (`MicWaveform`) confirms the mic is picking up audio while the user speaks
+8. On Stop & Submit (or timer expiry), recording stops and audio is transcribed via `/api/transcribe` → **xAI Speech-to-Text** (`POST https://api.x.ai/v1/stt`)
+9. The transcribed spoken answer is shown; user can **Copy question and answer** to paste into their own LLM chat for feedback
+10. Evaluation points and the sample answer are shown with `AudioPlayer` for the model-answer MP3 (`{n}-model.mp3`)
+11. After all questions, a summary screen shows completion status
+
+### Audio requirement
+
+Generate interview question + model-answer MP3s with:
+
+```
+npx tsx scripts/generate-audio.ts
+```
+
+Output layout:
+
+```
+public/audio/toefl/speaking/interview/{questionFile}/
+  1.mp3          # question
+  1-model.mp3    # sample answer
+  2.mp3
+  2-model.mp3
+  ...
+```
+
+Interviewer voices (with portraits): ara, eve, carina, celeste, iris, luna, ursa, leo, rex, sal, atlas, orion, helios, kepler.
 
 ### Question file schema
 
@@ -125,6 +149,15 @@ public/questions/toefl/speaking/interview/
   001.json
   002.json
   ...
+
+public/audio/toefl/speaking/interview/
+  {questionFile}/
+    1.mp3
+    1-model.mp3
+    ...
+
+public/images/voices/
+  {voiceId}.jpg
 ```
 
 ## Key source files
@@ -132,12 +165,14 @@ public/questions/toefl/speaking/interview/
 | File                                             | Purpose                                                                     |
 | ------------------------------------------------ | --------------------------------------------------------------------------- |
 | `src/pages/toefl/speaking/ListenRepeatPage.tsx`  | Listen and Repeat task page with recording, transcription, and diff display |
-| `src/pages/toefl/speaking/TakeInterviewPage.tsx` | Take an Interview task page with timed responses                            |
+| `src/pages/toefl/speaking/TakeInterviewPage.tsx` | Take an Interview task page with timed responses, TTS, and sample answers   |
 | `src/pages/toefl/speaking/listenRepeat.ts`       | Word alignment algorithm (Levenshtein distance) and scoring helpers         |
+| `src/components/ui/AudioPlayer.tsx`              | Shared play/pause/seek/speed audio controls                                 |
+| `src/lib/voiceMapping.ts`                        | xAI TTS voice catalog, role map, interviewer selection                      |
 | `src/hooks/useTts.ts`                            | Audio playback with segments, speed control, and seek                       |
 | `src/hooks/useSpeechRecognition.ts`              | Microphone recording and Whisper API transcription                          |
 | `src/hooks/useTimer.ts`                          | Countdown timer (used in Take an Interview)                                 |
 | `src/hooks/useElapsedTimer.ts`                   | Elapsed session timer (used in Listen and Repeat)                           |
 | `src/lib/transcribe.ts`                          | API client for transcription endpoint                                       |
 | `functions/api/transcribe.ts`                    | Cloudflare Pages Function wrapping Workers AI Whisper                       |
-| `scripts/generate-audio.ts`                      | MP3 generation script for Listen and Repeat audio                           |
+| `scripts/generate-audio.ts`                      | MP3 generation for listening/speaking (including interview Q + model)       |

@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   buildDraftKey,
   buildGradingMessage,
+  buildInterviewQaCopyMessage,
   buildProblemId,
   clearDraft,
   copyText,
@@ -107,5 +108,24 @@ describe("answerSubmission", () => {
     });
 
     await expect(copyText("hello")).resolves.toBe(false);
+  });
+
+  it("builds interview Q&A copy text for external LLM feedback", () => {
+    const message = buildInterviewQaCopyMessage({
+      question: "Do you prefer studying alone?",
+      userAnswer: "I prefer studying alone because I can focus better.",
+      modelAnswer: "While both approaches have merit...",
+      evaluationPoints: ["States a clear position", "Gives a reason"],
+      questionType: "Comparison / Choice",
+    });
+
+    expect(message).toContain("## Question");
+    expect(message).toContain("Do you prefer studying alone?");
+    expect(message).toContain("## My spoken answer (transcribed)");
+    expect(message).toContain("I prefer studying alone");
+    expect(message).toContain("## Sample answer");
+    expect(message).toContain("## Evaluation criteria");
+    expect(message).toContain("States a clear position");
+    expect(message).toContain("Please evaluate my TOEFL Speaking");
   });
 });

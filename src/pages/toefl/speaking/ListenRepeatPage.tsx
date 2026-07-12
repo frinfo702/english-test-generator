@@ -6,6 +6,7 @@ import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { MicSelector } from "../../../components/ui/MicSelector";
 import { SpeedControl } from "../../../components/ui/SpeedControl";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
@@ -575,6 +576,7 @@ export function ListenRepeatPage() {
                 Click the button below when you are ready to repeat the
                 sentence.
               </p>
+              <MicSelector disabled={!speechSupported} />
               <Button onClick={handleStartRecording} variant="accent" size="lg">
                 🔴 Start Recording
               </Button>

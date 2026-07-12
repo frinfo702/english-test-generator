@@ -100,7 +100,7 @@ The `SpeedControl` component (`src/components/ui/SpeedControl.tsx`) presents thr
 
 - **Listening tasks** (Conversation, Lecture, Announcement, Response) call `playSegmentsWithGaps` to play audio segments with natural pauses.
 - **Listen and Repeat** uses `play` for each sentence audio followed by recording.
-- **Take Interview** uses `playSegments` for question audio.
+- **Take Interview** uses `play` for per-question audio (`{n}.mp3`) and sample-answer audio (`{n}-model.mp3`), with the shared `AudioPlayer` UI. Interviewer voice is selected via `pickInterviewerVoice()` from the expanded xAI TTS catalog.
 - **TOEIC Parts 2-4** use `playSegments` for question-and-option audio with per-segment speakers.
 - **Shadowing** uses `playSegments` for model audio playback.
 - The playback manager in listening pages coordinates TTS with question state (autoplay, replay, auto-advance).

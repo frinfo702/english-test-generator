@@ -19,6 +19,9 @@ class FakeMediaRecorder extends EventTarget {
   state = "inactive";
   mimeType = "";
   stream: MediaStream;
+  ondataavailable: ((event: Event) => void) | null = null;
+  onerror: ((event: Event) => void) | null = null;
+  onstop: ((event: Event) => void) | null = null;
 
   start = vi.fn(() => {
     this.state = "recording";
@@ -27,7 +30,13 @@ class FakeMediaRecorder extends EventTarget {
 
   stop = vi.fn(() => {
     this.state = "inactive";
-    this.dispatchEvent(new Event("stop"));
+    const event = new Event("stop");
+    this.onstop?.(event);
+    this.dispatchEvent(event);
+  });
+
+  requestData = vi.fn(() => {
+    // tests call emitData explicitly
   });
 
   constructor(stream: MediaStream, options?: MediaRecorderOptions) {
@@ -38,11 +47,15 @@ class FakeMediaRecorder extends EventTarget {
   }
 
   emitData(data: Blob) {
-    this.dispatchEvent(createBlobEvent(data));
+    const event = createBlobEvent(data);
+    this.ondataavailable?.(event);
+    this.dispatchEvent(event);
   }
 
   emitError(error: DOMException) {
-    this.dispatchEvent(createErrorEvent(error));
+    const event = createErrorEvent(error);
+    this.onerror?.(event);
+    this.dispatchEvent(event);
   }
 
   static isTypeSupported = vi.fn((type: string) =>
@@ -50,9 +63,16 @@ class FakeMediaRecorder extends EventTarget {
   );
 }
 
-function createFakeStream(): MediaStream {
+function createFakeStream(deviceId = "default-mic"): MediaStream {
+  const track = {
+    stop: vi.fn(),
+    enabled: true,
+    readyState: "live",
+    getSettings: () => ({ deviceId }),
+  };
   return {
-    getTracks: () => [{ stop: vi.fn() }],
+    getTracks: () => [track],
+    getAudioTracks: () => [track],
   } as unknown as MediaStream;
 }
 
@@ -84,6 +104,7 @@ describe("useSpeechRecognition", () => {
   afterEach(() => {
     vi.unstubAllGlobals();
     vi.clearAllMocks();
+    localStorage.clear();
   });
 
   it("reports supported when MediaRecorder and getUserMedia are available", async () => {
@@ -108,12 +129,41 @@ describe("useSpeechRecognition", () => {
     });
 
     await waitFor(() => {
-      expect(getUserMediaMock).toHaveBeenCalledWith({ audio: true });
+      expect(getUserMediaMock).toHaveBeenCalled();
+    });
+    const constraints = getUserMediaMock.mock.calls[0][0] as {
+      audio: MediaTrackConstraints;
+    };
+    expect(constraints.audio).toMatchObject({
+      echoCancellation: true,
+      noiseSuppression: true,
     });
 
     const recorder = FakeMediaRecorder.instances[0];
     expect(recorder.start).toHaveBeenCalled();
     expect(result.current.recording).toBe(true);
+  });
+
+  it("passes preferred microphone deviceId as exact constraint", async () => {
+    localStorage.setItem("preferred-microphone-device-id", "mic-42");
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    await act(async () => {
+      await result.current.start();
+    });
+
+    await waitFor(() => {
+      expect(getUserMediaMock).toHaveBeenCalled();
+    });
+    const constraints = getUserMediaMock.mock.calls[0][0] as {
+      audio: MediaTrackConstraints;
+    };
+    expect(constraints.audio).toMatchObject({
+      deviceId: { exact: "mic-42" },
+      echoCancellation: false,
+      noiseSuppression: false,
+    });
   });
 
   it("sets an error when microphone permission is denied", async () => {
@@ -161,10 +211,36 @@ describe("useSpeechRecognition", () => {
       expect(result.current.transcript).toBe("hello world");
     });
     expect(result.current.recording).toBe(false);
+    expect(result.current.processing).toBe(false);
     expect(globalThis.fetch).toHaveBeenCalledWith(
       "/api/transcribe",
       expect.objectContaining({ method: "POST" }),
     );
+  });
+
+  it("returns transcribed text from stop()", async () => {
+    const { useSpeechRecognition } = await import("./useSpeechRecognition");
+    const { result } = renderHook(() => useSpeechRecognition());
+
+    await act(async () => {
+      await result.current.start();
+    });
+
+    await waitFor(() => {
+      expect(FakeMediaRecorder.instances).toHaveLength(1);
+    });
+
+    const recorder = FakeMediaRecorder.instances[0];
+    act(() => {
+      recorder.emitData(new Blob(["fake-audio"], { type: "audio/webm" }));
+    });
+
+    let returned = "";
+    await act(async () => {
+      returned = await result.current.stop();
+    });
+
+    expect(returned).toBe("hello world");
   });
 
   it("sets an error when the transcription request fails", async () => {
