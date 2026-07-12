@@ -25,27 +25,26 @@ export function savePreferredMicrophoneId(deviceId: string | null): void {
 
 /**
  * Constraints for getUserMedia.
- * - Specific device: use exact deviceId so the browser cannot silently pick
- *   another mic. Soften AEC/NS — they often ruin USB/headset mics.
- * - Default: allow browser AEC/NS for built-in laptop mics.
+ * - Specific device: exact deviceId; soft AEC/NS (USB/headset mics break with hard AEC).
+ * - Default: browser AEC/NS for built-in mics.
  */
 export function buildAudioConstraints(
   deviceId: string | null | undefined,
+  mode: "exact" | "ideal" | "default" = deviceId ? "exact" : "default",
 ): MediaTrackConstraints {
-  if (deviceId) {
+  if (mode === "default" || !deviceId) {
     return {
-      deviceId: { exact: deviceId },
-      // Aggressive processing often zeros out external USB/headset mics
-      // while the analyser still shows some energy (false "working" waveform).
-      echoCancellation: false,
-      noiseSuppression: false,
+      echoCancellation: true,
+      noiseSuppression: true,
       autoGainControl: true,
       channelCount: { ideal: 1 },
     };
   }
+
   return {
-    echoCancellation: true,
-    noiseSuppression: true,
+    deviceId: mode === "exact" ? { exact: deviceId } : { ideal: deviceId },
+    echoCancellation: false,
+    noiseSuppression: false,
     autoGainControl: true,
     channelCount: { ideal: 1 },
   };
@@ -60,46 +59,6 @@ export function isConstraintError(error: unknown): boolean {
   );
 }
 
-/**
- * Open the preferred mic, with safe fallbacks if exact deviceId fails.
- */
-export async function openMicrophoneStream(
-  preferredId: string | null | undefined,
-): Promise<{ stream: MediaStream; usedDeviceId: string | null }> {
-  const id = preferredId?.trim() || null;
-
-  if (id) {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: buildAudioConstraints(id),
-      });
-      return { stream, usedDeviceId: actualDeviceId(stream) ?? id };
-    } catch (error) {
-      if (!isConstraintError(error)) throw error;
-      // Device unplugged or constraint unsupported — try ideal, then default.
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          audio: {
-            deviceId: { ideal: id },
-            echoCancellation: false,
-            noiseSuppression: false,
-            autoGainControl: true,
-            channelCount: { ideal: 1 },
-          },
-        });
-        return { stream, usedDeviceId: actualDeviceId(stream) };
-      } catch {
-        // fall through to default
-      }
-    }
-  }
-
-  const stream = await navigator.mediaDevices.getUserMedia({
-    audio: buildAudioConstraints(null),
-  });
-  return { stream, usedDeviceId: actualDeviceId(stream) };
-}
-
 export function actualDeviceId(stream: MediaStream): string | null {
   const track = stream.getAudioTracks()[0];
   if (!track) return null;
@@ -107,4 +66,35 @@ export function actualDeviceId(stream: MediaStream): string | null {
   return typeof settings.deviceId === "string" && settings.deviceId
     ? settings.deviceId
     : null;
+}
+
+/**
+ * Open preferred mic with ordered fallbacks: exact → ideal → default.
+ */
+export async function openMicrophoneStream(
+  preferredId: string | null | undefined,
+): Promise<{ stream: MediaStream; usedDeviceId: string | null }> {
+  const id = preferredId?.trim() || null;
+  const attempts: MediaTrackConstraints[] = id
+    ? [
+        buildAudioConstraints(id, "exact"),
+        buildAudioConstraints(id, "ideal"),
+        buildAudioConstraints(null, "default"),
+      ]
+    : [buildAudioConstraints(null, "default")];
+
+  let lastError: unknown;
+  for (const audio of attempts) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio });
+      return { stream, usedDeviceId: actualDeviceId(stream) ?? id };
+    } catch (error) {
+      lastError = error;
+      // Permission / busy errors must surface; only constraint failures retry.
+      if (!isConstraintError(error)) throw error;
+    }
+  }
+  throw lastError instanceof Error
+    ? lastError
+    : new Error("Failed to open microphone");
 }

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AUDIO_METER_BAR_COUNT, startAudioMeter } from "../lib/audioMeter";
 import {
   loadPreferredMicrophoneId,
   openMicrophoneStream,
@@ -11,18 +12,17 @@ export interface UseSpeechRecognitionReturn {
   processing: boolean;
   transcript: string;
   error: string | null;
-  /** Normalized bar levels 0–1 for waveform visualization while recording. */
+  /** Normalized bar levels 0–1 while recording. */
   levels: number[];
-  /** deviceId of the track actually opened for the current recording. */
+  /** deviceId of the track opened for the current recording. */
   activeDeviceId: string | null;
   start: () => Promise<void>;
-  /** Stops recording, transcribes, updates transcript, and returns the text. */
+  /** Stops recording, transcribes, updates transcript, returns text. */
   stop: () => Promise<string>;
   clearTranscript: () => void;
   clearError: () => void;
 }
 
-const LEVEL_BAR_COUNT = 24;
 const env = typeof import.meta !== "undefined" ? import.meta.env : undefined;
 const TRANSCRIBE_API_URL =
   (env?.VITE_TRANSCRIBE_API_URL as string | undefined) ?? "/api/transcribe";
@@ -36,55 +36,40 @@ function isBrowserSupported(): boolean {
 }
 
 function selectMimeType(): string {
-  const candidates = [
+  for (const type of [
     "audio/webm;codecs=opus",
     "audio/webm",
     "audio/mp4",
     "audio/mp4;codecs=mp4a.40.2",
-  ];
-  for (const type of candidates) {
-    if (MediaRecorder.isTypeSupported(type)) {
-      return type;
-    }
+  ]) {
+    if (MediaRecorder.isTypeSupported(type)) return type;
   }
   return "";
 }
 
 function getMicrophoneErrorMessage(error: unknown): string {
   if (error instanceof DOMException) {
-    if (
-      error.name === "NotAllowedError" ||
-      error.name === "PermissionDeniedError"
-    ) {
-      return "Microphone access was denied. Please allow microphone permission and try again.";
-    }
-    if (
-      error.name === "NotFoundError" ||
-      error.name === "DevicesNotFoundError"
-    ) {
-      return "No microphone found. Please connect a microphone and try again.";
-    }
-    if (
-      error.name === "OverconstrainedError" ||
-      error.name === "ConstraintNotSatisfiedError"
-    ) {
-      return "Selected microphone is unavailable. Pick another mic or System default.";
-    }
-    if (error.name === "NotReadableError") {
-      return "Microphone is busy (another app may be using it). Close other apps and try again.";
+    switch (error.name) {
+      case "NotAllowedError":
+      case "PermissionDeniedError":
+        return "Microphone access was denied. Please allow microphone permission and try again.";
+      case "NotFoundError":
+      case "DevicesNotFoundError":
+        return "No microphone found. Please connect a microphone and try again.";
+      case "OverconstrainedError":
+      case "ConstraintNotSatisfiedError":
+        return "Selected microphone is unavailable. Pick another mic or System default.";
+      case "NotReadableError":
+        return "Microphone is busy (another app may be using it). Close other apps and try again.";
+      default:
+        break;
     }
   }
   return `Failed to access the microphone: ${error instanceof Error ? error.message : String(error)}`;
 }
 
-function getTranscriptionErrorMessage(error: unknown): string {
-  return error instanceof Error
-    ? error.message
-    : "Transcription failed. Please try again.";
-}
-
 function emptyLevels(): number[] {
-  return Array.from({ length: LEVEL_BAR_COUNT }, () => 0);
+  return Array.from({ length: AUDIO_METER_BAR_COUNT }, () => 0);
 }
 
 export function useSpeechRecognition(): UseSpeechRecognitionReturn {
@@ -99,120 +84,55 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   const streamRef = useRef<MediaStream | null>(null);
   const recorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
-  const stopPromiseRef = useRef<{
-    resolve: (text: string) => void;
-    reject: (err: unknown) => void;
-  } | null>(null);
+  const stopPromiseRef = useRef<((text: string) => void) | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const rafRef = useRef<number>(0);
+  const meterRef = useRef<{ stop: () => void } | null>(null);
   const startPromiseRef = useRef<Promise<void> | null>(null);
   const transcriptRef = useRef("");
+  /** Generation token so stale stop handlers ignore themselves. */
+  const sessionIdRef = useRef(0);
 
-  const stopLevelMeter = useCallback(() => {
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = 0;
-    }
-    analyserRef.current = null;
-    if (audioCtxRef.current) {
-      void audioCtxRef.current.close().catch(() => undefined);
-      audioCtxRef.current = null;
-    }
+  const stopMeter = useCallback(() => {
+    meterRef.current?.stop();
+    meterRef.current = null;
     setLevels(emptyLevels());
   }, []);
 
-  const startLevelMeter = useCallback(
-    (stream: MediaStream) => {
-      stopLevelMeter();
-      try {
-        const AudioCtx =
-          window.AudioContext ||
-          (
-            window as unknown as {
-              webkitAudioContext?: typeof AudioContext;
-            }
-          ).webkitAudioContext;
-        if (!AudioCtx) return;
+  const resolveStop = useCallback((text: string) => {
+    stopPromiseRef.current?.(text);
+    stopPromiseRef.current = null;
+  }, []);
 
-        const ctx = new AudioCtx();
-        audioCtxRef.current = ctx;
-        const source = ctx.createMediaStreamSource(stream);
-        const analyser = ctx.createAnalyser();
-        // time-domain metering is more reliable than frequency bins for
-        // "is the mic picking up voice" (works better with USB headsets)
-        analyser.fftSize = 2048;
-        analyser.smoothingTimeConstant = 0.5;
-        source.connect(analyser);
-        analyserRef.current = analyser;
-
-        const data = new Uint8Array(analyser.fftSize);
-
-        const tick = () => {
-          if (!analyserRef.current) return;
-          analyserRef.current.getByteTimeDomainData(data);
-
-          // Split the waveform into bars by RMS energy in each segment
-          const next: number[] = [];
-          const segment = Math.floor(data.length / LEVEL_BAR_COUNT);
-          for (let i = 0; i < LEVEL_BAR_COUNT; i++) {
-            let sumSq = 0;
-            const start = i * segment;
-            for (let j = 0; j < segment; j++) {
-              const v = (data[start + j] - 128) / 128;
-              sumSq += v * v;
-            }
-            const rms = Math.sqrt(sumSq / segment);
-            // Scale so normal speech lights most bars
-            next.push(Math.min(1, rms * 4));
-          }
-          setLevels(next);
-          rafRef.current = requestAnimationFrame(tick);
-        };
-
-        if (ctx.state === "suspended") {
-          void ctx.resume();
-        }
-        rafRef.current = requestAnimationFrame(tick);
-      } catch {
-        // Waveform is best-effort; recording still works without it.
-      }
-    },
-    [stopLevelMeter],
-  );
-
-  const finalizeStop = useCallback(
-    (text: string) => {
-      setRecording(false);
-      setProcessing(false);
-      stopLevelMeter();
-      setActiveDeviceId(null);
-      stopPromiseRef.current?.resolve(text);
-      stopPromiseRef.current = null;
-    },
-    [stopLevelMeter],
-  );
-
-  const cleanup = useCallback(() => {
-    abortControllerRef.current?.abort();
-    abortControllerRef.current = null;
-    stopLevelMeter();
-
+  const releaseHardware = useCallback(() => {
+    stopMeter();
     const recorder = recorderRef.current;
     recorderRef.current = null;
     if (recorder && recorder.state !== "inactive") {
       try {
+        recorder.ondataavailable = null;
+        recorder.onerror = null;
+        recorder.onstop = null;
         recorder.stop();
       } catch {
         // ignore
       }
     }
-
-    streamRef.current?.getTracks().forEach((track) => track.stop());
+    streamRef.current?.getTracks().forEach((t) => t.stop());
     streamRef.current = null;
     chunksRef.current = [];
-  }, [stopLevelMeter]);
+    setActiveDeviceId(null);
+  }, [stopMeter]);
+
+  const cleanup = useCallback(() => {
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = null;
+    sessionIdRef.current += 1;
+    releaseHardware();
+    // Never leave a waiter hanging if cleanup interrupts a stop.
+    resolveStop(transcriptRef.current);
+    setRecording(false);
+    setProcessing(false);
+  }, [releaseHardware, resolveStop]);
 
   const start = useCallback(async () => {
     if (!supported) {
@@ -222,6 +142,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
 
     const run = async () => {
       cleanup();
+      const sessionId = sessionIdRef.current;
       setTranscript("");
       transcriptRef.current = "";
       setError(null);
@@ -233,10 +154,14 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
         const preferredId = loadPreferredMicrophoneId();
         const { stream, usedDeviceId } =
           await openMicrophoneStream(preferredId);
+        if (sessionId !== sessionIdRef.current) {
+          stream.getTracks().forEach((t) => t.stop());
+          return;
+        }
+
         streamRef.current = stream;
         setActiveDeviceId(usedDeviceId);
 
-        // Ensure the track is live
         const track = stream.getAudioTracks()[0];
         if (!track || track.readyState !== "live") {
           throw new DOMException(
@@ -246,7 +171,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
         }
         track.enabled = true;
 
-        startLevelMeter(stream);
+        meterRef.current = startAudioMeter(stream, setLevels);
 
         const mimeType = selectMimeType();
         const recorder = new MediaRecorder(
@@ -255,74 +180,86 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
         );
         recorderRef.current = recorder;
 
-        recorder.addEventListener("dataavailable", (event) => {
-          const data = (event as BlobEvent).data;
-          if (data && data.size > 0) {
-            chunksRef.current.push(data);
+        recorder.ondataavailable = (event) => {
+          if (event.data && event.data.size > 0) {
+            chunksRef.current.push(event.data);
           }
-        });
+        };
 
-        recorder.addEventListener("error", (event) => {
+        recorder.onerror = (event) => {
+          if (sessionId !== sessionIdRef.current) return;
           const recorderError = (event as Event & { error?: DOMException })
             .error;
           setError(getMicrophoneErrorMessage(recorderError));
           cleanup();
-          finalizeStop("");
-        });
+        };
 
-        recorder.addEventListener("stop", async () => {
-          if (recorderRef.current !== recorder) {
-            return;
-          }
+        recorder.onstop = () => {
+          void (async () => {
+            if (sessionId !== sessionIdRef.current) return;
 
-          stopLevelMeter();
-          // Stop hardware after recorder has flushed its final chunk
-          stream.getTracks().forEach((t) => t.stop());
-          setRecording(false);
-          setProcessing(true);
-          setActiveDeviceId(null);
+            stopMeter();
+            stream.getTracks().forEach((t) => t.stop());
+            streamRef.current = null;
+            recorderRef.current = null;
+            setRecording(false);
+            setProcessing(true);
+            setActiveDeviceId(null);
 
-          const blob = new Blob(chunksRef.current, {
-            type: recorder.mimeType || "audio/webm",
-          });
+            const blob = new Blob(chunksRef.current, {
+              type: recorder.mimeType || "audio/webm",
+            });
+            chunksRef.current = [];
 
-          if (blob.size === 0) {
-            setError("No audio recorded. Please try again.");
-            finalizeStop("");
-            return;
-          }
-
-          const controller = new AbortController();
-          abortControllerRef.current = controller;
-
-          try {
-            const text = await transcribeAudio(
-              blob,
-              TRANSCRIBE_API_URL,
-              controller.signal,
-            );
-            transcriptRef.current = text;
-            setTranscript(text);
-            finalizeStop(text);
-          } catch (fetchError) {
-            if ((fetchError as Error).name === "AbortError") {
-              finalizeStop("");
+            if (blob.size === 0) {
+              setError("No audio recorded. Please try again.");
+              setProcessing(false);
+              resolveStop("");
               return;
             }
-            setError(getTranscriptionErrorMessage(fetchError));
-            finalizeStop("");
-          } finally {
-            abortControllerRef.current = null;
-          }
-        });
 
-        // timeslice keeps chunks flowing; some browsers need it for non-zero blobs
+            const controller = new AbortController();
+            abortControllerRef.current = controller;
+            try {
+              const text = await transcribeAudio(
+                blob,
+                TRANSCRIBE_API_URL,
+                controller.signal,
+              );
+              if (sessionId !== sessionIdRef.current) return;
+              transcriptRef.current = text;
+              setTranscript(text);
+              setProcessing(false);
+              resolveStop(text);
+            } catch (fetchError) {
+              if (sessionId !== sessionIdRef.current) return;
+              if ((fetchError as Error).name === "AbortError") {
+                setProcessing(false);
+                resolveStop("");
+                return;
+              }
+              setError(
+                fetchError instanceof Error
+                  ? fetchError.message
+                  : "Transcription failed. Please try again.",
+              );
+              setProcessing(false);
+              resolveStop("");
+            } finally {
+              if (abortControllerRef.current === controller) {
+                abortControllerRef.current = null;
+              }
+            }
+          })();
+        };
+
         recorder.start(250);
       } catch (micError) {
+        if (sessionId !== sessionIdRef.current) return;
         setError(getMicrophoneErrorMessage(micError));
         setRecording(false);
         setActiveDeviceId(null);
-        stopLevelMeter();
+        stopMeter();
       }
     };
 
@@ -332,10 +269,10 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
     if (startPromiseRef.current === promise) {
       startPromiseRef.current = null;
     }
-  }, [supported, cleanup, finalizeStop, startLevelMeter, stopLevelMeter]);
+  }, [supported, cleanup, resolveStop, stopMeter]);
 
   const stop = useCallback(() => {
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<string>((resolve) => {
       void (async () => {
         if (startPromiseRef.current) {
           await startPromiseRef.current.catch(() => undefined);
@@ -347,9 +284,8 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
           return;
         }
 
-        stopPromiseRef.current = { resolve, reject };
+        stopPromiseRef.current = resolve;
         try {
-          // Flush the last buffer before stop (important on Safari / some Chrome builds)
           if (typeof recorder.requestData === "function") {
             recorder.requestData();
           }

@@ -1,5 +1,7 @@
 /// <reference types="@cloudflare/workers-types" />
 
+import { isPredominantlyJapaneseScript } from "../../src/lib/transcriptionLanguage";
+
 interface Env {
   XAI_API_KEY?: string;
   AI?: Ai;
@@ -31,22 +33,6 @@ function extensionForMime(mime: string): string {
   if (mime.includes("wav")) return "wav";
   if (mime.includes("ogg")) return "ogg";
   return "webm";
-}
-
-/** Keep logic aligned with src/lib/transcriptionLanguage.ts */
-function isPredominantlyJapaneseScript(text: string): boolean {
-  const trimmed = text.trim();
-  if (!trimmed) return false;
-  const jpChars = (
-    trimmed.match(/[\u3040-\u30ff\u31f0-\u31ff\u4e00-\u9fff\uff66-\uff9d]/g) ??
-    []
-  ).length;
-  const latinChars = (trimmed.match(/[A-Za-z]/g) ?? []).length;
-  const katakanaChars = (trimmed.match(/[\u30a0-\u30ff\uff66-\uff9d]/g) ?? [])
-    .length;
-  if (katakanaChars >= 8 && katakanaChars >= latinChars) return true;
-  if (jpChars >= 6 && jpChars > latinChars * 1.5) return true;
-  return false;
 }
 
 function normalizeLanguage(raw: FormDataEntryValue | null): string {

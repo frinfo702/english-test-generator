@@ -19,6 +19,9 @@ class FakeMediaRecorder extends EventTarget {
   state = "inactive";
   mimeType = "";
   stream: MediaStream;
+  ondataavailable: ((event: Event) => void) | null = null;
+  onerror: ((event: Event) => void) | null = null;
+  onstop: ((event: Event) => void) | null = null;
 
   start = vi.fn(() => {
     this.state = "recording";
@@ -27,10 +30,14 @@ class FakeMediaRecorder extends EventTarget {
 
   stop = vi.fn(() => {
     this.state = "inactive";
-    this.dispatchEvent(new Event("stop"));
+    const event = new Event("stop");
+    this.onstop?.(event);
+    this.dispatchEvent(event);
   });
 
-  requestData = vi.fn();
+  requestData = vi.fn(() => {
+    // tests call emitData explicitly
+  });
 
   constructor(stream: MediaStream, options?: MediaRecorderOptions) {
     super();
@@ -40,11 +47,15 @@ class FakeMediaRecorder extends EventTarget {
   }
 
   emitData(data: Blob) {
-    this.dispatchEvent(createBlobEvent(data));
+    const event = createBlobEvent(data);
+    this.ondataavailable?.(event);
+    this.dispatchEvent(event);
   }
 
   emitError(error: DOMException) {
-    this.dispatchEvent(createErrorEvent(error));
+    const event = createErrorEvent(error);
+    this.onerror?.(event);
+    this.dispatchEvent(event);
   }
 
   static isTypeSupported = vi.fn((type: string) =>

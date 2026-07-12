@@ -19,18 +19,24 @@ describe("microphonePreference", () => {
     expect(loadPreferredMicrophoneId()).toBeNull();
   });
 
-  it("builds default audio constraints without device id", () => {
+  it("builds default constraints", () => {
     expect(buildAudioConstraints(null)).toMatchObject({
       echoCancellation: true,
       noiseSuppression: true,
     });
   });
 
-  it("uses exact deviceId and softens AEC/NS for a selected mic", () => {
-    expect(buildAudioConstraints("dev-1")).toMatchObject({
+  it("builds exact constraints for a selected mic", () => {
+    expect(buildAudioConstraints("dev-1", "exact")).toMatchObject({
       deviceId: { exact: "dev-1" },
       echoCancellation: false,
       noiseSuppression: false,
+    });
+  });
+
+  it("builds ideal constraints as fallback shape", () => {
+    expect(buildAudioConstraints("dev-1", "ideal")).toMatchObject({
+      deviceId: { ideal: "dev-1" },
     });
   });
 
