@@ -249,14 +249,16 @@ File: [`src/pages/toefl/speaking/TakeInterviewPage.tsx`](/src/pages/toefl/speaki
 ```typescript
 interface InterviewQuestion {
   id: string;
-  type: string; // "personal" | "opinion" | "hypothetical" | "comparison"
-  question: string;
+  type: string; // "opening" | "personal" | "opinion" | "closing"
+  question: string; // full interviewer speech, including transitions
   modelAnswer: string;
   evaluationPoints: string[];
 }
 
 interface ProblemData {
-  questions: InterviewQuestion[];
+  /** Research-study intro shown before Q1 */
+  scenario: string;
+  questions: InterviewQuestion[]; // exactly 4
 }
 ```
 

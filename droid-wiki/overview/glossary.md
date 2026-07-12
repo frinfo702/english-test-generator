@@ -9,7 +9,7 @@
 | **Write an Email**            | TOEFL Writing task (7 minutes) to compose an email based on a scenario                                         |
 | **Academic Discussion**       | TOEFL Writing task (10 minutes) to write an opinion on a professor's prompt                                    |
 | **Listen and Repeat**         | TOEFL Speaking task where the user memorizes and reproduces sentences, recorded and transcribed                |
-| **Take an Interview**         | TOEFL Speaking task with 4 interview questions, 45 seconds each                                                |
+| **Take an Interview**         | TOEFL Speaking task: research-study scenario + 4 interviewer questions (opening → personal → opinion → closing), 45 seconds each |
 | **Listen to a Conversation**  | TOEFL Listening task with campus conversation audio and follow-up questions                                    |
 | **Listen to a Lecture**       | TOEFL Listening task with academic lecture audio and follow-up questions                                       |
 | **Choose a Response**         | TOEFL Listening task where the user selects the best response to utterances                                    |

@@ -299,6 +299,15 @@ export function TakeInterviewPage() {
 
           {phase === "pre" && (
             <div className={styles.preBox}>
+              {current === 0 && data.scenario && (
+                <div className={styles.scenarioBox}>
+                  {data.scenario.split("\n").map((line, i) => (
+                    <p key={i} className={styles.scenarioLine}>
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              )}
               <p className={styles.preNote}>
                 There is no prep time. Press Start to hear the question, then
                 speak your answer within 45 seconds.

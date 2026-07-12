@@ -215,6 +215,24 @@
   font-size: var(--font-size-sm);
 }
 
+.scenarioBox {
+  width: 100%;
+  padding: var(--spacing-md);
+  background: var(--color-surface-subtle, var(--color-surface));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-doc);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.scenarioLine {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: 1.6;
+  color: var(--color-text);
+}
+
 .replayRow {
   display: flex;
   justify-content: flex-start;

@@ -148,13 +148,47 @@ TMPL
     toefl/speaking/interview)
       cat << 'TMPL'
 {
+  "scenario": "You have volunteered for a research study about TODO: topic.\nYou will have a short online interview with a researcher. The researcher will ask you some questions.",
   "questions": [
     {
-      "id": "iq1",
-      "question": "TODO: Interview question",
-      "prepTime": 15,
-      "responseTime": 45,
-      "sampleAnswer": "TODO: Model answer (optional)"
+      "id": "q1",
+      "type": "opening",
+      "question": "TODO: Thank you for your participation. Today, I'd like to ask you some questions about {topic}. First, ...",
+      "modelAnswer": "TODO: Model spoken answer (~45 seconds)",
+      "evaluationPoints": [
+        "TODO: Evaluation point 1",
+        "TODO: Evaluation point 2"
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "personal",
+      "question": "TODO: I see. And ... (personal habit / experience)",
+      "modelAnswer": "TODO: Model spoken answer (~45 seconds)",
+      "evaluationPoints": [
+        "TODO: Evaluation point 1",
+        "TODO: Evaluation point 2"
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "opinion",
+      "question": "TODO: Interesting. ... Why or why not?",
+      "modelAnswer": "TODO: Model spoken answer (~45 seconds)",
+      "evaluationPoints": [
+        "TODO: Evaluation point 1",
+        "TODO: Evaluation point 2"
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "closing",
+      "question": "TODO: Good points. I just have one more question. Some people believe that ... Do you agree, or ...? Why?",
+      "modelAnswer": "TODO: Model spoken answer (~45 seconds)",
+      "evaluationPoints": [
+        "TODO: Evaluation point 1",
+        "TODO: Evaluation point 2"
+      ]
     }
   ]
 }

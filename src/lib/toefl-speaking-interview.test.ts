@@ -7,12 +7,7 @@ const QUESTION_DIR = path.resolve(
   "../../public/questions/toefl/speaking/interview",
 );
 
-const VALID_QUESTION_TYPES = [
-  "personal",
-  "opinion",
-  "hypothetical",
-  "comparison",
-];
+const VALID_QUESTION_TYPES = ["opening", "personal", "opinion", "closing"];
 
 interface InterviewQuestion {
   id: string;
@@ -23,6 +18,7 @@ interface InterviewQuestion {
 }
 
 interface InterviewData {
+  scenario: string;
   questions: InterviewQuestion[];
 }
 
@@ -47,6 +43,15 @@ describe("TOEFL Speaking: Take an Interview JSON structure", () => {
 
   it.each(files)("%s is valid JSON", (file) => {
     expect(() => loadJson(file)).not.toThrow();
+  });
+
+  it.each(files)("%s has research-study scenario", (file) => {
+    const data = loadJson(file);
+    expect(data).toHaveProperty("scenario");
+    expect(typeof data.scenario).toBe("string");
+    expect(data.scenario.trim()).not.toBe("");
+    expect(data.scenario.toLowerCase()).toContain("research study");
+    expect(data.scenario.toLowerCase()).toContain("interview");
   });
 
   it.each(files)("%s has questions field", (file) => {
@@ -93,21 +98,25 @@ describe("TOEFL Speaking: Take an Interview JSON structure", () => {
     }
   });
 
-  // All 4 types should appear once per file
-  it.each(files)("%s contains all 4 question types", (file) => {
+  // Opening → personal → opinion → closing
+  it.each(files)("%s follows real-test question type order", (file) => {
     const data = loadJson(file);
     const types = data.questions.map((q) => q.type);
-    for (const t of VALID_QUESTION_TYPES) {
-      expect(types).toContain(t);
-    }
+    expect(types).toEqual(["opening", "personal", "opinion", "closing"]);
   });
 
-  // Each type appears exactly once per file
-  it.each(files)("%s has each type exactly once", (file) => {
+  it.each(files)("%s questions sound like interviewer speech", (file) => {
     const data = loadJson(file);
-    const types = data.questions.map((q) => q.type);
-    for (const t of VALID_QUESTION_TYPES) {
-      expect(types.filter((x) => x === t).length).toBe(1);
-    }
+    const [q1, q2, , q4] = data.questions;
+
+    // Q1 includes a warm opening
+    expect(q1.question.toLowerCase()).toMatch(
+      /thank you for your participation|i'd like to ask|i would like to ask/,
+    );
+    // Later turns often use conversational transitions
+    expect(q2.question.length).toBeGreaterThan(20);
+    expect(q4.question.toLowerCase()).toMatch(
+      /one more question|do you agree|some people believe/,
+    );
   });
 });

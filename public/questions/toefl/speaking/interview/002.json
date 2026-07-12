@@ -1,51 +1,52 @@
 {
+  "scenario": "You have volunteered for a research study about free-time activities.\nYou will have a short online interview with a researcher. The researcher will ask you some questions.",
   "questions": [
     {
       "id": "q1",
-      "type": "personal",
-      "question": "Describe a book or article that changed the way you think about a particular subject. What made it so influential?",
-      "modelAnswer": "One book that deeply changed my perspective was Sapiens by Yuval Noah Harari. Before reading it, I viewed history as a series of isolated events. The book connected everything through the lens of shared stories and cooperation. It made me realize how much of our society is built on collective imagination. This shift encouraged me to question assumptions in my own field. I now approach problems by looking for underlying narratives rather than surface-level facts.",
+      "type": "opening",
+      "question": "Thank you for your participation. Today, I'd like to ask you some questions about free-time activities. First, in your opinion, what do people your age usually prefer to do in their free time—spend time outdoors, stay home with screens, or do something in between?",
+      "modelAnswer": "I think many people my age spend free time with screens, like streaming shows or playing games, because it is easy and social online. Still, a lot of friends also go outside for sports or short walks when the weather is nice. So I would say preferences are somewhere in between, with screens being a bit more common on weekdays.",
       "evaluationPoints": [
-        "Identifies a specific book or article",
-        "Explains the original perspective",
-        "Describes how the viewpoint changed",
-        "Connects the lesson to broader thinking"
+        "Addresses free-time preferences of people a similar age",
+        "Chooses outdoors, screens, or in between",
+        "Gives at least one reason or example",
+        "Stays on topic within the time limit"
       ]
     },
     {
       "id": "q2",
-      "type": "opinion",
-      "question": "Do you believe that online courses can be as effective as traditional in-person classes? Why or why not?",
-      "modelAnswer": "I believe online courses can be equally effective when designed thoughtfully, though they serve different strengths. Online learning offers flexibility and accessibility for students with diverse schedules. However, it demands greater self-discipline and can lack spontaneous peer interaction. Traditional classrooms excel at building immediate rapport and enabling hands-on collaboration. Ultimately, effectiveness depends on the subject matter and the learner's motivation. A blended approach often harnesses the best of both worlds.",
+      "type": "personal",
+      "question": "I see. And what do you usually do after a long, busy day—do you rest quietly, meet friends, or try to be productive?",
+      "modelAnswer": "After a long day I usually rest quietly at first. I like to listen to music or watch a short video to clear my mind. If I still have energy, I might message a friend or go for a brief walk. I only try to be productive when I have an urgent deadline the next morning.",
       "evaluationPoints": [
-        "States a clear opinion early in the response",
-        "Provides balanced reasons for the position",
-        "Acknowledges the strengths of the alternative",
-        "Concludes with a practical summary"
+        "States a clear personal after-work or after-class habit",
+        "Chooses rest, social time, productivity, or a mix",
+        "Explains why that choice fits a busy day",
+        "Uses natural first-person language"
       ]
     },
     {
       "id": "q3",
-      "type": "hypothetical",
-      "question": "If you were given a large grant to improve education in your country, what is the first initiative you would fund and why?",
-      "modelAnswer": "If I received a large education grant, I would first fund comprehensive teacher training programs. Teachers are the single most important factor in student outcomes, yet many lack ongoing professional development. High-quality training would focus on modern pedagogy, classroom management, and digital tools. This investment would create a ripple effect, improving education for thousands of students over time. Equipping teachers ultimately builds a stronger, more adaptive education system.",
+      "type": "opinion",
+      "question": "Interesting. Many people say that modern technology has changed how we relax. Do you think people today have more meaningful free time than in the past? Why or why not?",
+      "modelAnswer": "I do not think free time is always more meaningful today. Technology gives us more options, but it also creates constant distraction and pressure to stay online. In the past, free time might have been simpler, like reading or talking face to face. Those activities can feel deeper. Still, technology helps people learn hobbies and connect across distance, so the result depends on how we use it.",
       "evaluationPoints": [
-        "Identifies a single clear initiative",
-        "Provides a compelling rationale",
-        "Explains the expected impact",
-        "Uses conditional language appropriately"
+        "Takes a clear yes/no or nuanced position",
+        "Connects free time to modern technology",
+        "Supports the view with reasons",
+        "May briefly acknowledge the other side"
       ]
     },
     {
       "id": "q4",
-      "type": "comparison",
-      "question": "Some people think it is better to start working immediately after high school, while others prefer to attend university first. Which path do you think leads to greater long-term success?",
-      "modelAnswer": "I think attending university first generally leads to greater long-term success, though both paths have valid merits. University provides structured learning, critical thinking skills, and a professional network that are hard to replicate elsewhere. Graduates often have access to higher-paying roles and faster career advancement. Starting work immediately offers real-world experience and financial independence sooner, but it can limit options later without credentials. In most cases, the investment in higher education pays dividends over a lifetime.",
+      "type": "closing",
+      "question": "Good points. I just have one more question. Some people believe that sharing hobbies with family is an important way to stay close. Do you agree, or do you think close relationships can be built in other ways? Why?",
+      "modelAnswer": "I agree that shared hobbies help families stay close, but they are not the only way. Doing activities together creates memories and common topics to talk about. However, families can also stay close through daily conversations, supporting each other during hard times, and celebrating small routines. So hobbies help, but care and communication matter even more.",
       "evaluationPoints": [
-        "Takes a clear position on the comparison",
-        "Supports the argument with specific benefits",
-        "Acknowledges the value of the alternative",
-        "Provides a strong concluding statement"
+        "Responds clearly to the agree/or-other-ways frame",
+        "Gives a reason for the chosen position",
+        "May mention hobbies and alternative ways to connect",
+        "Ends the interview response coherently"
       ]
     }
   ]
