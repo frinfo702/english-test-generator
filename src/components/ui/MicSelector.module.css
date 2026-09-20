@@ -1,63 +1,162 @@
 .wrap {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--spacing-sm, 0.5rem);
-  width: 100%;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
 }
 
-.label {
+.trigger {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: var(--font-size-sm, 0.875rem);
-  font-weight: 600;
-  color: var(--color-text-muted);
-  flex-shrink: 0;
-}
-
-.icon {
-  flex-shrink: 0;
-  color: var(--color-speaking, var(--color-accent, currentColor));
-}
-
-.labelText {
-  white-space: nowrap;
-}
-
-.select {
-  flex: 1;
-  min-width: 12rem;
-  max-width: 100%;
-  padding: 6px 10px;
+  gap: 8px;
+  height: 32px;
+  max-width: 280px;
+  padding: 0 10px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc, 6px);
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
-  color: var(--color-ink, inherit);
-  font-size: var(--font-size-sm, 0.875rem);
-  outline: none;
+  color: var(--color-ink-secondary);
+  font-size: var(--text-sm);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 }
 
-.select:focus {
-  border-color: var(--color-accent);
+.trigger:hover:not(:disabled) {
+  border-color: var(--color-border-strong);
+  color: var(--color-ink);
 }
 
-.select:disabled {
-  opacity: 0.6;
+.trigger:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+.trigger:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
+.triggerOpen {
+  border-color: var(--color-border-strong);
+  color: var(--color-ink);
+}
+
+.triggerLabel {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.menu {
+  position: absolute;
+  z-index: 200;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 240px;
+  max-width: 320px;
+  max-height: 280px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+  transform-origin: top left;
+  animation: menuIn var(--duration-base) var(--ease-out);
+}
+
+.menuUp {
+  top: auto;
+  bottom: calc(100% + 6px);
+  transform-origin: bottom left;
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 7px 8px;
+  border: none;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--color-ink-secondary);
+  font-size: var(--text-sm);
+  text-align: left;
+}
+
+.optionHighlight {
+  background: var(--color-surface-hover);
+  color: var(--color-ink);
+}
+
+.optionSelected {
+  color: var(--color-ink);
+  font-weight: var(--font-medium);
+}
+
+.optionLabel {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.option svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
 .activeHint {
-  flex-basis: 100%;
-  margin: 0;
-  font-size: var(--font-size-sm, 0.875rem);
-  color: var(--color-text-muted);
-  font-family: var(--font-mono, monospace);
+  margin-top: 6px;
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  color: var(--color-ink-tertiary);
 }
 
 .error {
-  flex-basis: 100%;
-  margin: 0;
-  font-size: var(--font-size-sm, 0.875rem);
-  color: var(--color-incorrect, var(--color-error, #dc2626));
+  margin-top: 6px;
+  font-size: var(--text-xs);
+  color: var(--color-error);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu {
+    animation: none;
+  }
+}
+
+.previewRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 8px 10px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-ink-secondary);
+}
+
+.previewLabel {
+  font-family: var(--font-sans);
+  font-size: 10px;
+      color: var(--color-ink-tertiary);
 }

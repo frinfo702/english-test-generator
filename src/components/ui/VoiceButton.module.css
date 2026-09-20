@@ -1,0 +1,72 @@
+.voiceButton {
+  gap: 8px;
+  padding-right: 8px;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.capsule {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 22px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--color-ink) 5%, transparent);
+  transition:
+    background var(--duration-slow) var(--ease-out),
+    border-color var(--duration-slow) var(--ease-out);
+}
+
+.capsuleRecording {
+  background: var(--color-accent-subtle);
+  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+}
+
+.waveform {
+  position: absolute;
+  inset: 0;
+  color: inherit;
+}
+
+.trailing {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.02em;
+  color: var(--color-ink-tertiary);
+  user-select: none;
+}
+
+.feedback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+}
+
+.feedbackSuccess {
+  color: var(--color-success);
+}
+
+.feedbackError {
+  color: var(--color-error);
+}
+
+.trailingOutside {
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-secondary);
+  letter-spacing: 0.02em;
+}
