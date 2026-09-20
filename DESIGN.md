@@ -2,112 +2,140 @@
 
 ## Philosophy
 
-**Academic calm, product clarity.** Inspired by refined research UIs (e.g. Papers with Code): warm paper surfaces, serif display type, row-based lists, hairline borders, and zero ornamental noise.
+**Quiet instrument.** The app is a practice tool, not a marketing site: warm
+paper, ink-first hierarchy, and rows instead of cards. Nothing on screen should
+exist to decorate — if a rule, tint, or icon does not carry state it is removed.
 
-**Row-based by default.** Prefer horizontal lists over card grids. Density is intentional, not sparse marketing layout.
+Two ideas hold the system together:
 
-**Dark mode is OLED pure black** (`#000000`) — not slate-tinted gray. Surfaces step up via zinc (`#0a0a0a` → `#141414`). No neon gradients.
+1. **Structure is achromatic.** Warm neutrals carry every surface, border and
+   label. Hierarchy comes from type, spacing and hairlines — not colour.
+2. **Colour means something.** One ochre signal marks progress, focus and the
+   live take; green/red mark grading. Nothing else competes.
 
-## Color
+## Colour
 
 ### Light (warm paper)
 
-| Token                      | Hex       | Usage               |
-| -------------------------- | --------- | ------------------- |
-| `--color-ink`              | `#171717` | Primary text        |
-| `--color-ink-secondary`    | `#525252` | Body / descriptions |
-| `--color-ink-tertiary`     | `#8a8a8a` | Meta, labels        |
-| `--color-surface`          | `#ffffff` | Cards, tables       |
-| `--color-surface-elevated` | `#f7f6f3` | Page background     |
-| `--color-surface-subtle`   | `#f0efeb` | Badges, chips       |
-| `--color-border`           | `#ebe9e4` | Hairline dividers   |
-| `--color-accent`           | `#2563eb` | Links, emphasis     |
-| `--color-accent-subtle`    | `#eff4ff` | Soft accent fill    |
+| Token                      | Hex                    | Usage                        |
+| -------------------------- | ---------------------- | ---------------------------- |
+| `--color-ink`              | `#1c1917`              | Primary text, primary button |
+| `--color-ink-secondary`    | `#57534e`              | Body, descriptions           |
+| `--color-ink-tertiary`     | `#8d857c`              | Meta, labels                 |
+| `--color-surface`          | `#fffdfa`              | Cards, rows                  |
+| `--color-surface-elevated` | `#faf8f4`              | Page background              |
+| `--color-surface-subtle`   | `#f3f0ea`              | Chips, wells, table headers  |
+| `--color-border`           | `#e8e3da`              | Hairlines                    |
+| `--color-border-strong`    | `#d6cfc4`              | Emphasised borders           |
+| `--color-accent`           | `#a15c07`              | Signal: progress, focus, live |
+| `--color-success`          | `#2f6b4f`              | Correct                      |
+| `--color-error`            | `#a8321f`              | Incorrect                    |
 
-### Dark (OLED)
+### Dark (soft black, layered)
 
-| Token                      | Hex       | Usage                        |
-| -------------------------- | --------- | ---------------------------- |
-| `--color-surface-elevated` | `#000000` | Page background (pure black) |
-| `--color-surface`          | `#0a0a0a` | Cards, tables                |
-| `--color-surface-subtle`   | `#141414` | Elevated chips               |
-| `--color-border`           | `#1f1f1f` | Hairline dividers            |
-| `--color-ink`              | `#f5f5f5` | Primary text                 |
-| `--color-ink-secondary`    | `#a3a3a3` | Secondary text               |
-| `--color-accent`           | `#60a5fa` | Links (brighter on black)    |
+`--color-surface-elevated` `#121110` → `--color-surface` `#1a1817` →
+`--color-surface-subtle` `#232120`. Accent lifts to `#e0a044`; shadows stay
+hairline-plus-soft, never glow.
 
-Shadows in dark mode are hairline rings (`0 0 0 1px rgba(255,255,255,0.05)`), not drop shadows.
+### Section hues
 
-### Section tints (soft chips only)
-
-- Reading: cyan · Writing: emerald · Speaking: amber · Listening: violet · TOEIC: pink
+Reading / Writing / Listening / Speaking / TOEIC keep distinct but **muted**
+hues, used only as 6px dots, small marks and dashboard series — never as tints
+on large surfaces.
 
 ## Typography
 
-| Token          | Value          | Usage                                      |
-| -------------- | -------------- | ------------------------------------------ |
-| `--font-serif` | Source Serif 4 | Display titles (h1, hero, section headers) |
-| `--font-sans`  | Inter          | UI, body, nav                              |
-| `--font-mono`  | JetBrains Mono | Metrics, codes, question numbers           |
+| Token            | Family           | Usage                                 |
+| ---------------- | ---------------- | ------------------------------------- |
+| `--font-display` | Inter Tight      | Titles, task names, display numerals  |
+| `--font-sans`    | Inter            | Everything else — passages included   |
+| `--font-mono`    | system monospace | `<code>`, `<kbd>` — never UI text     |
 
-Hero pattern: roman serif + _italic serif accent_ (Papers with Code cue).
+One sans does the whole job: passages, transcripts, labels and numbers are all
+Inter, with Inter Tight only where a tighter optical fit helps (titles, big
+scores). Numbers always get `font-variant-numeric: tabular-nums`.
+
+**Never set UI text in a monospace face.** Mono labels, mono metrics and mono
+timestamps read as developer decoration and are an anti-pattern here.
+
+Captions use `.micro-label`: 12px sans, sentence case, tertiary ink.
 
 ## Layout
 
-- **Header**: sticky, 52px, translucent nav, hairline bottom border. Active nav = underline (not filled pill).
-- **Main**: max-width ~880px, generous vertical padding.
-- **Lists**: shared `ProblemTable` rows — status | title+meta | badge.
+- Header 56px, translucent, hairline bottom rule; nav is one hairline strip with
+  a sliding surface indicator (measured imperatively, never animated on first
+  paint).
+- `--max-content` 1040px for pages; `--max-reading` 680px for a single task card.
+- Lists are the default navigation surface: index | title + meta | badge.
+  Cards are reserved for one focused task at a time.
 
 ## Components
 
 ### Buttons
 
-Pill radius (`--radius-full`) for primary/secondary/accent. Ghost keeps soft square radius.
+Radius `--radius` (8px). **Primary is ink**, not coloured — the ink button is the
+only "loud" control on a page, and there is usually one.
 
-| Variant       | Style                             |
-| ------------- | --------------------------------- |
-| **Primary**   | Ink fill, inverse text            |
-| **Secondary** | White/surface fill, strong border |
-| **Accent**    | Accent fill                       |
-| **Ghost**     | Transparent                       |
-| **Danger**    | Error fill                        |
+| Variant       | Style                        |
+| ------------- | ---------------------------- |
+| **Primary**   | Ink fill, inverse text       |
+| **Secondary** | Surface fill, strong border  |
+| **Accent**    | Ochre — signal actions only (e.g. recording) |
+| **Ghost**     | Transparent                  |
+| **Danger**    | Error fill                   |
 
-Sizes: `sm` 30px · `md` 36px · `lg` 42px.
+Sizes: `sm` 30px · `md` 36px · `lg` 42px. Every button scales to 0.975 on press.
 
-### Tables / rows
+### Audio (ported from ElevenLabs UI, MIT)
 
-- White (or `#0a0a0a`) surface, hairline borders
-- Hover: subtle surface tint
-- Completed: accent-subtle wash
+| Component       | Role                                                          |
+| --------------- | ------------------------------------------------------------- |
+| `AudioPlayer`   | Decoded waveform scrubber + ink transport + mono speed chips  |
+| `LiveWaveform`  | Canvas waveform; `processing` mode animates without a mic     |
+| `MicWaveform`   | Level bars fed by the already-open recorder stream            |
+| `VoiceButton`   | Idle → recording → processing → success/error with waveform   |
+| `MicSelector`   | Device listbox with the live device marked                    |
+| `ScrubBar`      | Fallback transport while a waveform decodes                   |
+| `Matrix`        | Dot-matrix display used for loading/empty states              |
+
+Charts use **Recharts**, styled entirely from tokens (hairline grid, tertiary
+ticks, token-coloured series). The chart bundle is loaded lazily and only the
+dashboard pulls it — practice pages stay free of it.
+
+Rule: **never open a second microphone stream while recording.** Live levels
+come from `useSpeechRecognition().levels`; `LiveWaveform active` is only used
+for pre-recording device previews (mic selector).
+
+### Charts
+
+Recharts, styled from tokens (hairline grid, tertiary ticks, token-coloured
+series, hairline tooltip). The chart bundle is loaded lazily and only the
+dashboard pulls it. The plot is `aria-hidden`; the same numbers are also
+rendered as a visually hidden list, so no data depends on hovering.
+
+### Documents (question surfaces)
+
+`src/styles/question-document.css` holds the U.S.-official-document register
+used by every question page: letterhead top rule, `--radius-doc: 3px`, long
+passages at `--lh-doc`, boxed mono item numbers, form-row options
+(`.doc-option`), outlined tags, formal score blocks (`.doc-score`).
 
 ## Motion
 
-- Fast 150ms · Base 200ms · Slow 280ms
-- Easing: `cubic-bezier(0.16, 1, 0.3, 1)`
-- Prefer `opacity` / `background` / `color`. Respect `prefers-reduced-motion`.
-
-## Question / document surfaces
-
-Problem UIs use a **U.S. official-document register** that sits inside the same site chrome (warm paper / pure black OLED):
-
-| Cue                 | Implementation                                                               |
-| ------------------- | ---------------------------------------------------------------------------- |
-| Letterhead top rule | `border-top: var(--doc-rule)` (2px ink) on passage / question / result cards |
-| Sharper corners     | `--radius-doc: 3px` (site chrome stays softer)                               |
-| Passage body        | `--font-serif` + `--lh-doc` (~1.8)                                           |
-| Item numbers        | Boxed mono numerals, ink outline — not filled accent circles                 |
-| Choices             | Left bar selection (`border-left: 3px`), mono A/B labels                     |
-| Tags / modules      | Outlined uppercase chips, not filled pills                                   |
-| Feedback            | “Marked correct / incorrect”, formal left rule panel                         |
-| Timer / scores      | Mono tabular + serif display score                                           |
-
-Shared utilities live in `src/styles/question-document.css` (`.doc-surface`, `.doc-option`, …).
+- `--duration-fast` 120ms (press, hover) · `--duration-base` 180ms (state) ·
+  `--duration-slow` 260ms (indicator, panels).
+- Easing: `--ease-out` `cubic-bezier(0.23, 1, 0.32, 1)` for enter/UI,
+  `--ease-in-out` `cubic-bezier(0.77, 0, 0.175, 1)` for on-screen movement.
+- Animate `transform` / `opacity` only. Respect `prefers-reduced-motion`.
+- Keyboard-repeated actions (nav, ⌘D) never animate.
 
 ## Anti-patterns
 
-- Filled neon nav pills
-- Heavy multi-layer shadows on pure black
-- “AI-powered” marketing badges
-- Emoji as structural icons
-- Card bento grids for primary navigation (keep rows)
-- Playful rounded option chips on exam pages (prefer form rows)
+- Filled blue accent pills for navigation or primary actions
+- Rainbow section tints on surfaces, gradient chips, neon glows
+- Emoji as status icons (use SVG or plain words)
+- Monospace for anything that is not code — labels, metrics, timestamps
+- Serif faces: the app is sans-only, one voice for UI and content
+- Card grids for navigation — keep rows
+- Per-page option/score styling; use the shared `doc-*` classes
+- Decorative animation, staggered entrances, or motion on frequent actions
