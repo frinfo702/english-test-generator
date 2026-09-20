@@ -1,0 +1,51 @@
+.track {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  min-width: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+}
+
+.track:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.progress {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: var(--color-ink);
+}
+
+.thumb {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-ink);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-50%) scale(0.75);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.track:hover .thumb,
+.track:focus-visible .thumb {
+  transform: translateY(-50%) scale(1);
+}
+
+.disabled .thumb {
+  transform: translateY(-50%) scale(0.6);
+}

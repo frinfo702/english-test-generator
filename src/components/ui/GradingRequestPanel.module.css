@@ -10,18 +10,18 @@
 }
 
 .status {
-  font-size: 11px;
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-2xs);
   color: var(--color-ink-tertiary);
-  font-weight: var(--font-semibold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
+  font-weight: var(--font-medium);
+    }
 
 .error {
   color: var(--color-error);
   background: var(--color-error-subtle);
   padding: var(--spacing-3) var(--spacing-4);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius);
   border-left: 3px solid var(--color-error);
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
@@ -32,5 +32,5 @@
   word-break: break-word;
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }

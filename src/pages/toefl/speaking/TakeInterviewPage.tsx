@@ -6,7 +6,7 @@ import { Button } from "../../../components/ui/Button";
 import { AudioPlayer } from "../../../components/ui/AudioPlayer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { MicSelector } from "../../../components/ui/MicSelector";
-import { MicWaveform } from "../../../components/ui/MicWaveform";
+import { VoiceButton } from "../../../components/ui/VoiceButton";
 import { Timer } from "../../../components/ui/Timer";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useTimer } from "../../../hooks/useTimer";
@@ -326,7 +326,9 @@ export function TakeInterviewPage() {
         <div className={styles.card}>
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>{chrome.tag}</span>
-            <span className={styles.qNum}>{chrome.position}</span>
+            {chrome.position !== chrome.tag && (
+              <span className={styles.qNum}>{chrome.position}</span>
+            )}
           </div>
 
           <InterviewerCard
@@ -359,7 +361,7 @@ export function TakeInterviewPage() {
                   ? "Step 1 of 2 — Scenario. Press Start Scenario to hear the research-study introduction (audio only). Continue to Question 1 with a button after the scenario."
                   : "There is no prep time. Press Start to hear the question, then speak your answer within 45 seconds."}
               </p>
-              <MicSelector disabled={!speech.supported} />
+              <MicSelector disabled={!speech.supported} previewEnabled />
               {!speech.supported && (
                 <p className={styles.error}>
                   Microphone recording is not supported in this browser.
@@ -392,12 +394,13 @@ export function TakeInterviewPage() {
                 onSeek={audio.seek}
                 onPlaybackRateChange={audio.setPlaybackRate}
                 seekable
+                src={scenarioUrl}
                 playLabel={
                   audio.loading && scenarioActive
                     ? "Loading..."
                     : audio.playing && scenarioActive
-                      ? "⏸ Pause"
-                      : "▶ Replay scenario"
+                      ? "Pause"
+                      : "Replay scenario"
                 }
               />
               <div className={styles.listeningActions}>
@@ -430,12 +433,13 @@ export function TakeInterviewPage() {
                 onSeek={audio.seek}
                 onPlaybackRateChange={audio.setPlaybackRate}
                 seekable
+                src={questionUrl}
                 playLabel={
                   audio.loading && questionActive
                     ? "Loading..."
                     : audio.playing && questionActive
-                      ? "⏸ Pause"
-                      : "▶ Replay question"
+                      ? "Pause"
+                      : "Replay question"
                 }
               />
               <div className={styles.listeningActions}>
@@ -464,8 +468,8 @@ export function TakeInterviewPage() {
                     disabled={audio.loading || speech.recording}
                   >
                     {audio.playing && questionActive
-                      ? "⏸ Pause question"
-                      : "🔁 Replay question"}
+                      ? "Pause question"
+                      : "Replay question"}
                   </Button>
                 </div>
               )}
@@ -474,26 +478,21 @@ export function TakeInterviewPage() {
                 isWarning={timer.isWarning}
                 isExpired={timer.isExpired}
               />
-              <div className={styles.recordingStatus}>
-                <span
-                  className={
-                    speech.recording
-                      ? styles.recordingDot
-                      : styles.recordingDotIdle
-                  }
-                />
-                <span>
-                  {speech.recording
-                    ? "Recording… speak clearly"
-                    : "Starting microphone…"}
-                </span>
-              </div>
+              <VoiceButton
+                state={speech.recording ? "recording" : "processing"}
+                label="Recording"
+                size="lg"
+                variant="primary"
+                levels={speech.levels}
+                onPress={() => {
+                  void finishAnswer();
+                }}
+              />
               <MicSelector
                 disabled
                 requestPermissionOnMount={false}
                 activeDeviceId={speech.activeDeviceId}
               />
-              <MicWaveform levels={speech.levels} active={speech.recording} />
               {speech.error && (
                 <div className={styles.error}>
                   <p>{speech.error}</p>
@@ -506,14 +505,6 @@ export function TakeInterviewPage() {
                   </Button>
                 </div>
               )}
-              <Button
-                onClick={() => {
-                  void finishAnswer();
-                }}
-                disabled={!speech.recording}
-              >
-                Stop &amp; Submit
-              </Button>
             </div>
           )}
 
@@ -590,14 +581,15 @@ export function TakeInterviewPage() {
                         onSeek={audio.seek}
                         onPlaybackRateChange={audio.setPlaybackRate}
                         seekable
+                        src={modelUrl}
                         playLabel={
                           audio.loading && modelActive
                             ? "Loading..."
                             : audio.playing && modelActive
-                              ? "⏸ Pause"
+                              ? "Pause"
                               : audio.currentTime > 0 && modelActive
-                                ? "▶ Resume"
-                                : "▶ Play sample answer"
+                                ? "Resume"
+                                : "Play sample answer"
                         }
                       />
                     </div>

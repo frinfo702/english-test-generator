@@ -45,15 +45,24 @@ class FakeAudioContext {
 
 class FakeAudio {
   static instances: FakeAudio[] = [];
+  /** Resolves a pending play(), so a stop can land mid-start. */
+  static playGate: Promise<void> | null = null;
 
   src: string;
   playbackRate = 1;
   currentTime = 0;
   duration = 12;
+  /** True while the element is actually sounding. */
+  played = false;
   onended: (() => void) | null = null;
   onerror: (() => void) | null = null;
-  play = vi.fn(async () => undefined);
-  pause = vi.fn(() => undefined);
+  play = vi.fn(async () => {
+    if (FakeAudio.playGate) await FakeAudio.playGate;
+    this.played = true;
+  });
+  pause = vi.fn(() => {
+    this.played = false;
+  });
 
   constructor(src: string) {
     this.src = src;
@@ -76,6 +85,7 @@ describe("useTts", () => {
     requestAnimationFrameMock.mockClear();
     cancelAnimationFrameMock.mockClear();
     FakeAudio.instances = [];
+    FakeAudio.playGate = null;
 
     vi.stubGlobal("fetch", fetchMock);
     vi.stubGlobal(
@@ -142,6 +152,83 @@ describe("useTts", () => {
       expect(result.current.playing).toBe(true);
     });
     expect(lastAudio?.play).toHaveBeenCalledTimes(2);
+  });
+
+  it("does not start audio that was still loading when playback was stopped", async () => {
+    // Leaving the page during a load used to let the pending playback create
+    // an audio element afterwards and sound on the next screen.
+    let resolveFetch: (value: unknown) => void = () => undefined;
+    fetchMock.mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          resolveFetch = resolve;
+        }),
+    );
+
+    const { useTts } = await import("./useTts");
+    const { result } = renderHook(() => useTts());
+
+    let pending: Promise<void> = Promise.resolve();
+    await act(async () => {
+      pending = result.current.play("/slow.mp3");
+      await Promise.resolve();
+    });
+
+    act(() => {
+      result.current.stop();
+    });
+
+    await act(async () => {
+      resolveFetch({
+        ok: true,
+        blob: vi.fn().mockResolvedValue(new Blob(["audio"])),
+      });
+      await pending;
+    });
+
+    expect(FakeAudio.instances).toHaveLength(0);
+    expect(result.current.playing).toBe(false);
+    expect(result.current.loading).toBe(false);
+  });
+
+  it("silences an element that resolves after playback was stopped", async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      blob: vi.fn().mockResolvedValue(new Blob(["audio"])),
+    });
+
+    const { useTts } = await import("./useTts");
+    const { result } = renderHook(() => useTts());
+
+    let finishPlay: () => void = () => undefined;
+    FakeAudio.playGate = new Promise<void>((resolve) => {
+      finishPlay = () => resolve();
+    });
+
+    let pending: Promise<void> = Promise.resolve();
+    await act(async () => {
+      pending = result.current.play("/audio.mp3");
+      // let fetch + object URL resolve so the element exists and play() is pending
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
+    const audio = FakeAudio.instances.at(-1);
+    expect(audio).toBeTruthy();
+
+    act(() => {
+      result.current.stop();
+    });
+
+    await act(async () => {
+      finishPlay();
+      await pending;
+    });
+
+    // the resolve must not resurrect playback after the stop
+    expect(audio?.played).toBe(false);
+    expect(audio?.src).toBe("");
+    expect(result.current.playing).toBe(false);
   });
 
   it("surfaces fetch failures when normal playback cannot start", async () => {

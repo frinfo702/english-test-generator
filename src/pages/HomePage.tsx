@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../components/ui/Button";
+import { Link } from "react-router-dom";
 import { useScoreHistory } from "../hooks/useScoreHistory";
 import { formatSecondsAsMmSs } from "../lib/time";
 import table from "../components/ui/ProblemTable.module.css";
@@ -9,41 +8,47 @@ import styles from "./HomePage.module.css";
 type TestItem = {
   title: string;
   subtitle: string;
+  meta: string;
   path: string;
 };
 
 const tests: TestItem[] = [
   {
     title: "TOEFL iBT 2026",
-    subtitle: "Reading, Writing, Listening & Speaking — full practice",
+    subtitle: "Reading, Writing, Listening, Speaking",
+    meta: "12 tasks",
     path: "/toefl",
   },
   {
     title: "TOEIC L&R",
-    subtitle: "Parts 2-7 — Listening & Reading practice",
+    subtitle: "Parts 2–7 — listening and reading",
+    meta: "6 parts",
     path: "/toeic",
   },
   {
-    title: "Shadowing Practice",
-    subtitle: "Listen and repeat — improve pronunciation & fluency",
+    title: "Shadowing",
+    subtitle: "Speak along with a model voice, sentence by sentence",
+    meta: "Sets",
     path: "/shadowing",
   },
   {
-    title: "Dictation Practice",
-    subtitle: "Listen and arrange words — train your ear for detail",
+    title: "Dictation",
+    subtitle: "Hear a line, then rebuild it word by word",
+    meta: "Sets",
     path: "/dictation",
   },
 ];
 
+interface Stats {
+  solved: number;
+  accuracy: number;
+  avgTime: string;
+  streak: number;
+}
+
 export function HomePage() {
-  const navigate = useNavigate();
   const { getAll } = useScoreHistory();
-  const [stats, setStats] = useState<{
-    solved: number;
-    accuracy: number;
-    avgTime: string;
-    streak: number;
-  } | null>(null);
+  const [stats, setStats] = useState<Stats | null>(null);
 
   useEffect(() => {
     getAll().then((entries) => {
@@ -87,88 +92,77 @@ export function HomePage() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.hero}>
-        <span className={styles.badge}>
-          Curated practice for TOEFL iBT 2026 &amp; TOEIC L&amp;R
-        </span>
-        <h1 className={styles.title}>
-          English Test <span className={styles.titleAccent}>Practice</span>
-        </h1>
-        <p className={styles.description}>
-          Focused drills for reading, writing, listening, and speaking. No
-          sign-up required — pick a set and start.
-        </p>
-        <div className={styles.quickStart}>
-          <Button
-            variant="primary"
-            size="md"
-            onClick={() => navigate("/toefl")}
-          >
-            Start Practicing
-          </Button>
-          <Button
-            variant="secondary"
-            size="md"
-            onClick={() => navigate("/dashboard")}
-          >
-            View Dashboard
-          </Button>
-        </div>
+      <header className={styles.intro}>
+        <p className="micro-label">TOEFL iBT 2026 · TOEIC L&amp;R</p>
+        <h1 className={styles.title}>English Test Practice</h1>
+      </header>
+
+      <div className={styles.grid}>
+        <section className={styles.suites} aria-labelledby="suites-heading">
+          <div className={styles.sectionHead}>
+            <h2 id="suites-heading" className={styles.sectionTitle}>
+              Practice
+            </h2>
+            <span className={styles.sectionCount}>{tests.length} suites</span>
+          </div>
+          <div className={table.container}>
+            {tests.map((test, i) => (
+              <Link key={test.path} to={test.path} className={table.row}>
+                <span className={table.statusCol}>
+                  <span className={table.statusNone}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </span>
+                <span className={table.titleCell}>
+                  {test.title}
+                  <span className={table.titleMeta}>{test.subtitle}</span>
+                </span>
+                <span className={table.badgeCell}>{test.meta}</span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <aside className={styles.aside} aria-labelledby="stats-heading">
+          <div className={styles.sectionHead}>
+            <h2 id="stats-heading" className={styles.sectionTitle}>
+              This device
+            </h2>
+            <span className={styles.sectionCount}>
+              {stats ? "Local history" : "No sessions yet"}
+            </span>
+          </div>
+
+          <dl className={styles.stats}>
+            <div className={styles.stat}>
+              <dt className={styles.statLabel}>Sessions</dt>
+              <dd className={styles.statValue}>{stats ? stats.solved : "—"}</dd>
+            </div>
+            <div className={styles.stat}>
+              <dt className={styles.statLabel}>Accuracy</dt>
+              <dd className={styles.statValue}>
+                {stats ? `${stats.accuracy}%` : "—"}
+              </dd>
+            </div>
+            <div className={styles.stat}>
+              <dt className={styles.statLabel}>Avg. time</dt>
+              <dd className={styles.statValue}>{stats?.avgTime ?? "—"}</dd>
+            </div>
+            <div className={styles.stat}>
+              <dt className={styles.statLabel}>Streak</dt>
+              <dd className={styles.statValue}>
+                {stats ? `${stats.streak}d` : "—"}
+              </dd>
+            </div>
+          </dl>
+
+          <p className={styles.note}>
+            Scores stay in this browser. Question sets live in{" "}
+            <code>public/questions/</code>, added with the prompts in{" "}
+            <code>public/prompts/</code>.
+          </p>
+        </aside>
       </div>
-
-      {stats && (
-        <div className={styles.statsBar}>
-          <div className={styles.statChip}>
-            <span className={styles.statChipLabel}>Solved</span>
-            <span className={styles.statChipValue}>{stats.solved}</span>
-          </div>
-          <div className={styles.statChip}>
-            <span className={styles.statChipLabel}>Accuracy</span>
-            <span className={styles.statChipValue}>{stats.accuracy}%</span>
-          </div>
-          <div className={styles.statChip}>
-            <span className={styles.statChipLabel}>Avg Time</span>
-            <span className={styles.statChipValue}>{stats.avgTime}</span>
-          </div>
-          <div className={styles.statChip}>
-            <span className={styles.statChipLabel}>Streak</span>
-            <span className={styles.statChipValue}>{stats.streak}d</span>
-          </div>
-        </div>
-      )}
-
-      <div className={styles.studySection}>
-        <h2 className={styles.sectionTitle}>
-          Problem Sets
-          <span className={styles.sectionCount}>{tests.length} available</span>
-        </h2>
-        <div className={table.container}>
-          <div className={table.header}>
-            <span>#</span>
-            <span>Test</span>
-          </div>
-          {tests.map((test, i) => (
-            <Link key={test.path} to={test.path} className={table.row}>
-              <span className={table.statusCol}>
-                {stats ? (
-                  <span className={table.statusSolved}>✓</span>
-                ) : (
-                  <span className={table.statusNone}>{i + 1}</span>
-                )}
-              </span>
-              <span className={table.titleCell}>
-                {test.title}
-                <div className={table.titleMeta}>{test.subtitle}</div>
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      <p className={styles.note}>
-        Generate questions with an AI agent and save them under{" "}
-        <code>public/questions/</code>. Prompts in <code>public/prompts/</code>.
-      </p>
     </div>
   );
 }

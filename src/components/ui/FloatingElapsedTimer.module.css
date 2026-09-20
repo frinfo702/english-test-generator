@@ -1,61 +1,68 @@
 .floatingTimer {
   position: fixed;
-  top: 64px;
-  right: 16px;
-  z-index: 140;
+  top: calc(var(--header-height) + var(--spacing-4));
+  right: var(--spacing-6);
+  z-index: 90;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 12px;
-  border-radius: var(--radius-doc);
-  border: 1px solid var(--color-border-strong);
-  border-top: 2px solid var(--color-ink);
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
   background: var(--color-surface-overlay);
+  backdrop-filter: saturate(1.5) blur(10px);
+  -webkit-backdrop-filter: saturate(1.5) blur(10px);
   box-shadow: var(--shadow-sm);
-  pointer-events: none;
-  backdrop-filter: blur(10px);
+  font-variant-numeric: tabular-nums;
 }
 
 .label {
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.08em;
   color: var(--color-ink-tertiary);
-  font-weight: var(--font-semibold);
-  text-transform: uppercase;
 }
 
 .value {
-  font-size: 13px;
-  font-weight: var(--font-semibold);
-  letter-spacing: 0.04em;
+  font-family: var(--font-sans);
   font-variant-numeric: tabular-nums;
-  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
   color: var(--color-ink);
 }
 
 .dot {
   width: 6px;
   height: 6px;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
+  background: var(--color-ink-disabled);
+  transition: background var(--duration-base) var(--ease-out);
 }
 
 .active {
-  background: var(--color-success);
+  background: var(--color-accent);
+  animation: pulse 2s var(--ease-in-out) infinite;
 }
 
 .stopped {
-  background: var(--color-ink-tertiary);
+  background: var(--color-border-strong);
 }
 
-@media (max-width: 600px) {
-  .floatingTimer {
-    top: 60px;
-    right: 10px;
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 620px) {
   .floatingTimer {
-    backdrop-filter: none;
+    right: var(--spacing-4);
+    top: calc(var(--header-height) + var(--spacing-2));
   }
 }

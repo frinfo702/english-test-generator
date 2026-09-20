@@ -5,7 +5,7 @@ import { Button } from "../components/ui/Button";
 import { LoadingSpinner } from "../components/ui/LoadingSpinner";
 import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
-import { SpeedControl } from "../components/ui/SpeedControl";
+import { AudioPlayer } from "../components/ui/AudioPlayer";
 import styles from "./ShadowingPage.module.css";
 
 interface Sentence {
@@ -17,12 +17,6 @@ interface Sentence {
 interface ProblemData {
   title: string;
   sentences: Sentence[];
-}
-
-function formatTime(seconds: number) {
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return `${m}:${String(s).padStart(2, "0")}`;
 }
 
 function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
@@ -80,38 +74,28 @@ function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
   return (
     <>
       <div className={styles.progressRow}>
+        <span className="micro-label">Sentence</span>
         <span className={styles.progressText}>
-          {safeCurrent + 1} / {totalSentences}
+          {String(safeCurrent + 1).padStart(2, "0")} /{" "}
+          {String(totalSentences).padStart(2, "0")}
         </span>
       </div>
 
       <div className={styles.card}>
         <div className={styles.playerSection}>
-          <Button
-            onClick={handlePlay}
-            disabled={ttsLoading || !sentence}
-            size="lg"
-            variant="accent"
-          >
-            {ttsLoading
-              ? "Loading..."
-              : playing
-                ? "Pause"
-                : currentTime > 0
-                  ? "Resume"
-                  : "Play"}
-          </Button>
-          <SpeedControl
+          <AudioPlayer
+            playing={playing}
+            loading={ttsLoading}
+            error={ttsError}
+            currentTime={currentTime}
+            duration={duration}
             playbackRate={playbackRate}
-            onChange={setPlaybackRate}
-            showSlider
+            onPlayPause={handlePlay}
+            onSeek={() => {}}
+            onPlaybackRateChange={setPlaybackRate}
+            seekable={false}
+            src={`/audio/shadowing/${fileBasename}/${safeCurrent + 1}.mp3`}
           />
-          {duration > 0 && (
-            <span className={styles.timeText}>
-              {formatTime(currentTime)} / {formatTime(duration)}
-            </span>
-          )}
-          {ttsError && <p className={styles.error}>{ttsError}</p>}
         </div>
 
         <div className={styles.textSection}>

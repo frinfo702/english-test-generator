@@ -221,7 +221,7 @@ export function Part2Page() {
                             : styles.reviewIncorrect
                         }
                       >
-                        {isCorrect ? "✓ Correct" : "✗ Incorrect"}
+                        {isCorrect ? "Correct" : "Incorrect"}
                       </span>
                     </div>
                     <p className={styles.reviewStem}>{q.stem}</p>

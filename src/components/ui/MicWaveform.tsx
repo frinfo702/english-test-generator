@@ -1,19 +1,21 @@
 import styles from "./MicWaveform.module.css";
 
 interface MicWaveformProps {
+  /** Normalised bar levels (0–1), e.g. from useSpeechRecognition. */
   levels: number[];
   active?: boolean;
   label?: string;
   className?: string;
 }
 
+/** Compact level bars for an already-open microphone stream. */
 export function MicWaveform({
   levels,
   active = false,
   label = "Microphone level",
   className,
 }: MicWaveformProps) {
-  const hasSignal = levels.some((l) => l > 0.05);
+  const hasSignal = levels.some((level) => level > 0.05);
 
   return (
     <div
@@ -22,32 +24,16 @@ export function MicWaveform({
         .join(" ")}
       role="img"
       aria-label={
-        active
-          ? hasSignal
-            ? `${label}: signal detected`
-            : `${label}: listening (speak to see the wave move)`
-          : label
+        active && hasSignal ? `${label}: signal` : label
       }
     >
-      <div className={styles.bars} aria-hidden="true">
-        {levels.map((level, i) => {
-          const height = active ? Math.max(8, Math.round(level * 100)) : 8;
-          return (
-            <span
-              key={i}
-              className={styles.bar}
-              style={{ height: `${height}%` }}
-            />
-          );
-        })}
-      </div>
-      <p className={styles.hint}>
-        {active
-          ? hasSignal
-            ? "Mic is working — keep speaking"
-            : "Listening… speak to verify your mic"
-          : "Microphone idle"}
-      </p>
+      {levels.map((level, index) => (
+        <span
+          key={index}
+          className={styles.bar}
+          style={{ height: `${active ? Math.max(6, level * 100) : 6}%` }}
+        />
+      ))}
     </div>
   );
 }

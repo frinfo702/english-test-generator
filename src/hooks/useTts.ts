@@ -122,11 +122,18 @@ export function useTts(): UseTtsReturn {
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const urlRef = useRef<string | null>(null);
+  /**
+   * Generation token. `play` is async (fetch → decode → play), so a stop that
+   * lands while it is loading must cancel the playback that is still in
+   * flight — otherwise the audio starts after the user has left the page.
+   */
+  const sessionRef = useRef(0);
   const rafRef = useRef<number>(0);
   const playbackRateRef = useRef(1.0);
   const [playbackRate, setPlaybackRateState] = useState(1.0);
 
   const cleanup = useCallback(() => {
+    sessionRef.current += 1;
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = 0;
@@ -165,11 +172,12 @@ export function useTts(): UseTtsReturn {
   const onEndedRef = useRef<(() => void) | null>(null);
 
   const startPlayback = useCallback(
-    async (url: string) => {
+    async (url: string, session: number) => {
       const audio = new Audio(url);
       audio.playbackRate = playbackRateRef.current;
       audioRef.current = audio;
       audio.onended = () => {
+        if (session !== sessionRef.current) return;
         setPlaying(false);
         if (rafRef.current) {
           cancelAnimationFrame(rafRef.current);
@@ -194,6 +202,7 @@ export function useTts(): UseTtsReturn {
         setDuration(0);
       };
       audio.onerror = () => {
+        if (session !== sessionRef.current) return;
         setPlaying(false);
         setError("Audio playback error");
         setLoading(false);
@@ -210,6 +219,18 @@ export function useTts(): UseTtsReturn {
         }
       };
       await audio.play();
+
+      // Stopped while the element was starting: make sure it never sounds.
+      if (session !== sessionRef.current) {
+        audio.onended = null;
+        audio.onerror = null;
+        audio.pause();
+        audio.src = "";
+        if (audioRef.current === audio) audioRef.current = null;
+        URL.revokeObjectURL(url);
+        return;
+      }
+
       setPlaying(true);
       setLoading(false);
       rafRef.current = requestAnimationFrame(tick);
@@ -220,6 +241,7 @@ export function useTts(): UseTtsReturn {
   const play = useCallback(
     async (url: string, onEnded?: () => void) => {
       cleanup();
+      const session = sessionRef.current;
       onEndedRef.current = onEnded ?? null;
       setError(null);
       setLoading(true);
@@ -229,10 +251,12 @@ export function useTts(): UseTtsReturn {
           throw new Error(`Audio fetch failed (${response.status})`);
         }
         const blob = await response.blob();
+        if (session !== sessionRef.current) return;
         const objectUrl = URL.createObjectURL(blob);
         urlRef.current = objectUrl;
-        await startPlayback(objectUrl);
+        await startPlayback(objectUrl, session);
       } catch (e) {
+        if (session !== sessionRef.current) return;
         onEndedRef.current = null;
         setError(e instanceof Error ? e.message : String(e));
         setLoading(false);
@@ -244,6 +268,7 @@ export function useTts(): UseTtsReturn {
   const playSegments = useCallback(
     async (urls: string[], onEnded?: () => void) => {
       cleanup();
+      const session = sessionRef.current;
       onEndedRef.current = onEnded ?? null;
       setError(null);
       setLoading(true);
@@ -251,14 +276,16 @@ export function useTts(): UseTtsReturn {
         const buffers = await Promise.all(
           urls.map((url) => fetchAndDecodeAudio(url)),
         );
+        if (session !== sessionRef.current) return;
 
         const combinedBuffer = concatenateAudioBuffers(buffers);
         const wavBlob = audioBufferToWavBlob(combinedBuffer);
         const url = URL.createObjectURL(wavBlob);
         urlRef.current = url;
 
-        await startPlayback(url);
+        await startPlayback(url, session);
       } catch (e) {
+        if (session !== sessionRef.current) return;
         onEndedRef.current = null;
         setError(e instanceof Error ? e.message : String(e));
         setLoading(false);
@@ -270,12 +297,14 @@ export function useTts(): UseTtsReturn {
   const playSegmentsWithGaps = useCallback(
     async (urls: string[], gaps: number[]) => {
       cleanup();
+      const session = sessionRef.current;
       setError(null);
       setLoading(true);
       try {
         const buffers = await Promise.all(
           urls.map((url) => fetchAndDecodeAudio(url)),
         );
+        if (session !== sessionRef.current) return;
 
         const sampleRate = buffers[0].sampleRate;
         const numberOfChannels = buffers[0].numberOfChannels;
@@ -296,8 +325,9 @@ export function useTts(): UseTtsReturn {
         const url = URL.createObjectURL(wavBlob);
         urlRef.current = url;
 
-        await startPlayback(url);
+        await startPlayback(url, session);
       } catch (e) {
+        if (session !== sessionRef.current) return;
         setError(e instanceof Error ? e.message : String(e));
         setLoading(false);
       }

@@ -1,9 +1,9 @@
 import styles from "./SpeedControl.module.css";
 
 const PRESETS = [
-  { label: "Slow", rate: 0.8 },
-  { label: "Normal", rate: 1.0 },
-  { label: "Fast", rate: 1.2 },
+  { label: "Slow", display: "0.8×", rate: 0.8 },
+  { label: "Normal", display: "1×", rate: 1.0 },
+  { label: "Fast", display: "1.2×", rate: 1.2 },
 ];
 
 interface SpeedControlProps {
@@ -40,15 +40,21 @@ export function SpeedControl({
           <span className={styles.speedValue}>{playbackRate.toFixed(1)}x</span>
         </div>
       )}
-      <div className={styles.speedBtns}>
-        {PRESETS.map(({ label, rate }) => (
+      <div
+        className={styles.speedBtns}
+        role="group"
+        aria-label="Playback speed"
+      >
+        {PRESETS.map(({ label, display, rate }) => (
           <button
             key={rate}
             type="button"
+            aria-label={label}
+            aria-pressed={playbackRate === rate}
             className={`${styles.speedBtn} ${playbackRate === rate ? styles.speedBtnActive : ""}`}
             onClick={() => onChange(rate)}
           >
-            {label}
+            {display}
           </button>
         ))}
       </div>

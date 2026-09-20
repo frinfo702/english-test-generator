@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../layout/SectionHeader";
 import { Button } from "../ui/Button";
 import { LoadingSpinner } from "../ui/LoadingSpinner";
 import { ProgressBar } from "../ui/ProgressBar";
+import { FeedbackPanel } from "../ui/FeedbackPanel";
 import { FloatingElapsedTimer } from "../ui/FloatingElapsedTimer";
-import { SpeedControl } from "../ui/SpeedControl";
+import { AudioPlayer } from "../ui/AudioPlayer";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory, type TaskId } from "../../hooks/useScoreHistory";
@@ -26,12 +27,6 @@ interface ProblemData {
   audioSegments: { role: string; text: string }[];
   transcript: string;
   questions: ListeningQuestion[];
-}
-
-function formatTime(seconds: number) {
-  const m = Math.floor(seconds / 60);
-  const s = Math.floor(seconds % 60);
-  return `${m}:${String(s).padStart(2, "0")}`;
 }
 
 interface ListeningTaskBaseProps {
@@ -83,8 +78,6 @@ export function ListeningTaskBase({
 
   const [selections, setSelections] = useState<Record<number, number>>({});
   const [graded, setGraded] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const progressBarRef = useRef<HTMLDivElement>(null);
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
@@ -105,41 +98,6 @@ export function ListeningTaskBase({
     if (graded) return;
     setSelections((s) => ({ ...s, [qIndex]: optionIndex }));
   };
-
-  const getSeekTime = useCallback(
-    (clientX: number) => {
-      if (!progressBarRef.current || duration <= 0) return null;
-      const rect = progressBarRef.current.getBoundingClientRect();
-      const ratio = (clientX - rect.left) / rect.width;
-      return Math.max(0, Math.min(ratio * duration, duration));
-    },
-    [duration],
-  );
-
-  const handleBarMouseDown = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!graded || duration <= 0) return;
-      const time = getSeekTime(e.clientX);
-      if (time !== null) seek(time);
-      setIsDragging(true);
-    },
-    [graded, duration, getSeekTime, seek],
-  );
-
-  useEffect(() => {
-    if (!isDragging) return;
-    const onMove = (e: MouseEvent) => {
-      const time = getSeekTime(e.clientX);
-      if (time !== null) seek(time);
-    };
-    const onUp = () => setIsDragging(false);
-    window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
-    };
-  }, [isDragging, getSeekTime, seek]);
 
   const correctCount = data
     ? data.questions.filter(
@@ -237,68 +195,25 @@ export function ListeningTaskBase({
 
       {data && !loading && hasValidQuestionNumber && (
         <>
-          <div className={styles.playerCard}>
-            <h3>{data.title}</h3>
-            <div className={styles.playerControls}>
-              <Button
-                onClick={() => seek(Math.max(0, currentTime - 10))}
-                disabled={duration <= 0}
-                size="sm"
-                variant="secondary"
-              >
-                ⏪ 10s
-              </Button>
-              <Button onClick={handlePlay} disabled={ttsLoading} size="md">
-                {ttsLoading
-                  ? "Loading..."
-                  : playing
-                    ? "⏸ Pause"
-                    : currentTime > 0
-                      ? "▶ Resume"
-                      : "▶ Play Audio"}
-              </Button>
-              <Button
-                onClick={() => seek(Math.min(duration, currentTime + 10))}
-                disabled={duration <= 0}
-                size="sm"
-                variant="secondary"
-              >
-                ⏩ 10s
-              </Button>
-            </div>
-            {(playing || currentTime > 0) && (
-              <div className={styles.playerControls}>
-                <span className={styles.timeText}>
-                  {formatTime(currentTime)} / {formatTime(duration)}
-                </span>
-                <div
-                  ref={progressBarRef}
-                  className={`${styles.progressBar} ${graded ? styles.progressBarSeekable : ""}`}
-                  onMouseDown={handleBarMouseDown}
-                >
-                  <div
-                    className={styles.progressFill}
-                    style={{
-                      width:
-                        duration > 0
-                          ? `${(currentTime / duration) * 100}%`
-                          : "0%",
-                    }}
-                  />
-                </div>
-                <span className={styles.timeText} aria-hidden="true" />
-              </div>
-            )}
-            {showSpeedControl && duration > 0 && (
-              <div className={styles.speedControlRow}>
-                <SpeedControl
-                  playbackRate={playbackRate}
-                  onChange={setPlaybackRate}
-                />
-              </div>
-            )}
-            {ttsError && <p className={styles.errorText}>{ttsError}</p>}
-          </div>
+          <AudioPlayer
+            title={data.title}
+            playing={playing}
+            loading={ttsLoading}
+            error={ttsError}
+            currentTime={currentTime}
+            duration={duration}
+            playbackRate={playbackRate}
+            onPlayPause={handlePlay}
+            onSeek={seek}
+            onPlaybackRateChange={setPlaybackRate}
+            seekable={graded}
+            showSpeedControl={showSpeedControl}
+            src={
+              data.audioSegments.length === 1
+                ? `/audio/${taskId}/${fileBasename}/1.mp3`
+                : undefined
+            }
+          />
 
           {!graded && (
             <div className={styles.submitArea}>
@@ -310,12 +225,12 @@ export function ListeningTaskBase({
 
           {graded && (
             <div className={styles.resultCard}>
-              <h2>Section Complete</h2>
-              <div className={styles.scoreBox}>
-                <span className={styles.scoreNum}>{correctCount}</span>
-                <span className={styles.scoreDen}>/{totalQuestions}</span>
-                <span className={styles.scorePct}>
-                  ({Math.round((correctCount / totalQuestions) * 100)}%)
+              <p className="micro-label">Section complete</p>
+              <div className="doc-score">
+                <span className="doc-score-num">{correctCount}</span>
+                <span className="doc-score-den">/ {totalQuestions}</span>
+                <span className="doc-score-pct">
+                  {Math.round((correctCount / totalQuestions) * 100)}%
                 </span>
               </div>
               <ProgressBar
@@ -323,16 +238,17 @@ export function ListeningTaskBase({
                 total={totalQuestions}
                 label="Correct"
               />
-              <div className={styles.transcript}>
-                <strong>Transcript</strong>
+              <details className={styles.transcript}>
+                <summary>Transcript</summary>
                 {data.audioSegments
                   .filter((seg) => seg.role !== "Narrator")
                   .map((seg, i) => (
                     <p key={i}>
-                      {seg.role}: {seg.text}
+                      <span className={styles.transcriptRole}>{seg.role}</span>
+                      {seg.text}
                     </p>
                   ))}
-              </div>
+              </details>
             </div>
           )}
 
@@ -341,50 +257,58 @@ export function ListeningTaskBase({
             const isCorrect = selected === q.correctIndex;
             return (
               <div key={q.id} className={styles.questionCard}>
-                <p>
-                  <strong>
-                    Question {qIndex + 1} / {totalQuestions}
-                  </strong>
+                <div className={styles.questionHead}>
+                  <span className="doc-item-num">{qIndex + 1}</span>
                   {graded && (
-                    <span style={{ marginLeft: 8 }}>
-                      {isCorrect ? "✓ Correct" : "✗ Incorrect"}
+                    <span
+                      className={[
+                        styles.verdict,
+                        isCorrect ? styles.verdictCorrect : styles.verdictWrong,
+                      ].join(" ")}
+                    >
+                      {isCorrect ? "Correct" : "Incorrect"}
                     </span>
                   )}
-                </p>
-                <p>{q.stem}</p>
+                </div>
+                <p className={styles.stem}>{q.stem}</p>
                 <div className={styles.options}>
                   {q.options.map((opt, optIndex) => {
-                    let optionClass = styles.option;
+                    const className = ["doc-option"];
                     if (!graded && selected === optIndex) {
-                      optionClass += " " + styles.optionSelected;
+                      className.push("doc-option-selected");
                     }
                     if (graded && optIndex === q.correctIndex) {
-                      optionClass += " " + styles.optionCorrect;
+                      className.push("doc-option-correct");
                     }
                     if (
                       graded &&
                       selected === optIndex &&
                       optIndex !== q.correctIndex
                     ) {
-                      optionClass += " " + styles.optionIncorrect;
+                      className.push("doc-option-wrong");
                     }
                     return (
                       <button
                         key={optIndex}
                         type="button"
-                        className={optionClass}
+                        className={className.join(" ")}
                         onClick={() => handleSelect(qIndex, optIndex)}
+                        aria-pressed={selected === optIndex}
+                        disabled={graded}
                       >
-                        <span className={styles.optionIndex}>
-                          {String.fromCharCode(65 + optIndex)}.
+                        <span className="doc-option-label">
+                          {String.fromCharCode(65 + optIndex)}
                         </span>
                         <span>{opt}</span>
                       </button>
                     );
                   })}
                 </div>
-                {graded && (
-                  <div className={styles.explanation}>{q.explanation}</div>
+                {graded && q.explanation && (
+                  <FeedbackPanel
+                    correct={isCorrect}
+                    explanation={q.explanation}
+                  />
                 )}
               </div>
             );

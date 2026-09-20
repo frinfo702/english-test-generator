@@ -7,7 +7,7 @@
 }
 
 .paragraph {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: var(--doc-rule);
@@ -30,7 +30,7 @@
   font-weight: var(--font-semibold);
   white-space: nowrap;
   user-select: none;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 .blankInput {
@@ -39,7 +39,7 @@
   padding: 0;
   margin: 0;
   font-size: var(--text-lg);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   color: var(--color-ink);
   outline: none;
   resize: none;
@@ -57,7 +57,7 @@
     transparent 1ch
   );
   background-position: 0 calc(100% + 1px);
-  background-size: auto 3px;
+  background-size: auto 2px;
   background-repeat: repeat-x;
 }
 
@@ -124,7 +124,7 @@
 }
 
 .scoreNum {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
   font-weight: var(--font-bold);
   color: var(--color-ink);
@@ -152,4 +152,21 @@
   margin-top: var(--spacing-2);
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
+}
+
+@media (max-width: 620px) {
+  .paragraph {
+    font-size: var(--text-base);
+    line-height: 2;
+    padding: var(--spacing-4);
+  }
+
+  .blankInput {
+    font-size: var(--text-base);
+    max-width: 100%;
+  }
+
+  .hint {
+    font-size: var(--text-base);
+  }
 }

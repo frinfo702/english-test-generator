@@ -1,183 +1,182 @@
-/* Design tokens.
- * Light: Papers-with-Code inspired — warm paper, hairline borders, academic calm.
- * Dark: OLED pure black (#000000) base with zinc-scale elevation.
+/* Design tokens — "Quiet Instrument"
+ *
+ * One warm achromatic scale carries structure; colour is reserved for
+ * meaning: a single ochre signal (progress, focus, the marker) plus
+ * semantic green/red for grading. Dark mode is a soft near-black, not OLED
+ * pure black, so surfaces can layer instead of glowing off a void.
  */
 
 :root,
 [data-theme="light"] {
   color-scheme: light;
 
-  /* ---- Ink (text hierarchy, WCAG AA) ---- */
-  --color-ink: #171717;
-  --color-ink-secondary: #525252;
-  --color-ink-tertiary: #8a8a8a;
-  --color-ink-disabled: #c4c4c4;
-  --color-ink-inverse: #ffffff;
+  /* ---- Ink (warm neutral, WCAG AA on paper) ---- */
+  --color-ink: #1c1917;
+  --color-ink-secondary: #57534e;
+  --color-ink-tertiary: #8d857c;
+  --color-ink-disabled: #c4bdb3;
+  --color-ink-inverse: #fffdfa;
 
-  /* ---- Surface (warm paper, not pure cold gray) ---- */
-  --color-surface: #ffffff;
-  --color-surface-elevated: #f7f6f3;
-  --color-surface-subtle: #f0efeb;
-  --color-surface-hover: #ebe9e4;
-  --color-surface-overlay: rgba(255, 255, 255, 0.9);
+  /* ---- Surface (warm paper, not cold gray) ---- */
+  --color-surface: #fffdfa;
+  --color-surface-elevated: #faf8f4;
+  --color-surface-subtle: #f3f0ea;
+  --color-surface-hover: #eeeae3;
+  --color-surface-overlay: rgba(255, 253, 250, 0.86);
 
   /* ---- Navbar ---- */
-  --color-nav: rgba(255, 255, 255, 0.92);
-  --color-nav-hover: #f0efeb;
+  --color-nav: rgba(250, 248, 244, 0.82);
+  --color-nav-hover: #f3f0ea;
   --color-nav-active: transparent;
-  --color-nav-text: #171717;
-  --color-nav-text-secondary: #6b6b6b;
-  --color-nav-border: #ebe9e4;
-  --color-nav-divider: #ebe9e4;
+  --color-nav-text: #1c1917;
+  --color-nav-text-secondary: #6b645c;
+  --color-nav-border: #e8e3da;
+  --color-nav-divider: #e8e3da;
 
   /* ---- Border ---- */
-  --color-border: #ebe9e4;
-  --color-border-strong: #d6d4ce;
+  --color-border: #e8e3da;
+  --color-border-strong: #d6cfc4;
 
-  /* ---- Accent (restrained academic blue) ---- */
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-subtle: #eff4ff;
-  --color-accent-pressed: #1e40af;
-  --color-on-accent: #ffffff;
+  /* ---- Signal (burnished ochre — the marker) ---- */
+  --color-accent: #a15c07;
+  --color-accent-hover: #8a4f06;
+  --color-accent-subtle: rgba(161, 92, 7, 0.09);
+  --color-accent-pressed: #744204;
+  --color-on-accent: #fffdfa;
 
-  /* Brand / highlight aliases */
-  --color-brand: #2563eb;
-  --color-brand-hover: #1d4ed8;
-  --color-brand-subtle: #eff4ff;
-  --color-on-brand: #ffffff;
-  --color-on-danger: #ffffff;
+  --color-brand: #a15c07;
+  --color-brand-hover: #8a4f06;
+  --color-brand-subtle: rgba(161, 92, 7, 0.09);
+  --color-on-brand: #fffdfa;
+  --color-on-danger: #fffdfa;
 
   /* ---- Feedback ---- */
-  --color-success: #059669;
-  --color-success-subtle: #ecfdf5;
-  --color-error: #dc2626;
-  --color-error-subtle: #fef2f2;
-  --color-warning: #d97706;
-  --color-warning-subtle: #fffbeb;
-  --color-info: #0284c7;
-  --color-info-subtle: #f0f9ff;
+  --color-success: #2f6b4f;
+  --color-success-subtle: rgba(47, 107, 79, 0.1);
+  --color-error: #a8321f;
+  --color-error-subtle: rgba(168, 50, 31, 0.09);
+  --color-warning: #a15c07;
+  --color-warning-subtle: rgba(161, 92, 7, 0.09);
+  --color-info: #3f5f7d;
+  --color-info-subtle: rgba(63, 95, 125, 0.09);
 
-  /* ---- Section tints (soft pastel chips, PwC-like) ---- */
-  --color-reading: #0284c7;
-  --color-reading-subtle: #e0f2fe;
-  --color-writing: #059669;
-  --color-writing-subtle: #d1fae5;
-  --color-speaking: #d97706;
-  --color-speaking-subtle: #fef3c7;
-  --color-listening: #7c3aed;
-  --color-listening-subtle: #ede9fe;
-  --color-toeic: #db2777;
-  --color-toeic-subtle: #fce7f3;
+  /* ---- Section hues (muted, used only as small marks) ---- */
+  --color-reading: #3f5f7d;
+  --color-reading-subtle: rgba(63, 95, 125, 0.1);
+  --color-writing: #43644c;
+  --color-writing-subtle: rgba(67, 100, 76, 0.1);
+  --color-speaking: #8a5a24;
+  --color-speaking-subtle: rgba(138, 90, 36, 0.1);
+  --color-listening: #5b5478;
+  --color-listening-subtle: rgba(91, 84, 120, 0.1);
+  --color-toeic: #7d4a56;
+  --color-toeic-subtle: rgba(125, 74, 86, 0.1);
 
   /* ---- Chart / canvas ---- */
-  --color-chart-grid: #ebe9e4;
-  --color-chart-label: #8a8a8a;
-  --color-chart-point: #ffffff;
+  --color-chart-grid: #e8e3da;
+  --color-chart-label: #8d857c;
+  --color-chart-point: #fffdfa;
 
   /* ---- Scrollbar ---- */
-  --color-scrollbar: #d6d4ce;
-  --color-scrollbar-hover: #a3a3a3;
+  --color-scrollbar: #d6cfc4;
+  --color-scrollbar-hover: #a9a196;
 
   /* ---- Selection ---- */
-  --color-selection: rgba(37, 99, 235, 0.12);
+  --color-selection: rgba(161, 92, 7, 0.16);
 
-  /* ---- Shadows (hairline-first; almost none) ---- */
+  /* ---- Shadows (hairline-first, warm-tinted) ---- */
   --shadow-none: 0 0 0 0 transparent;
-  --shadow-xs: 0 1px 2px rgba(23, 23, 23, 0.03);
-  --shadow-sm: 0 1px 2px rgba(23, 23, 23, 0.04);
-  --shadow: 0 1px 3px rgba(23, 23, 23, 0.05);
-  --shadow-md: 0 4px 12px rgba(23, 23, 23, 0.06);
-  --shadow-lg: 0 12px 24px rgba(23, 23, 23, 0.07);
-  --shadow-xl: 0 20px 40px rgba(23, 23, 23, 0.08);
+  --shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.04);
+  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.05);
+  --shadow: 0 1px 3px rgba(28, 25, 23, 0.06);
+  --shadow-md: 0 4px 10px -2px rgba(28, 25, 23, 0.08);
+  --shadow-lg: 0 12px 28px -8px rgba(28, 25, 23, 0.16), 0 2px 6px rgba(28, 25, 23, 0.06);
+  --shadow-xl: 0 24px 48px -12px rgba(28, 25, 23, 0.2);
 
-  --shadow-accent: 0 0 0 3px rgba(37, 99, 235, 0.14);
-  --shadow-error: 0 0 0 3px rgba(220, 38, 38, 0.12);
+  --shadow-accent: 0 0 0 3px rgba(161, 92, 7, 0.16);
+  --shadow-error: 0 0 0 3px rgba(168, 50, 31, 0.14);
 
   /* ---- Focus ring ---- */
   --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
 }
 
-/* OLED pure-black dark mode */
+/* Dark mode — soft black, layered surfaces */
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --color-ink: #f5f5f5;
-  --color-ink-secondary: #a3a3a3;
-  --color-ink-tertiary: #737373;
-  --color-ink-disabled: #525252;
-  --color-ink-inverse: #000000;
+  --color-ink: #f2efea;
+  --color-ink-secondary: #a8a29a;
+  --color-ink-tertiary: #78716a;
+  --color-ink-disabled: #57534e;
+  --color-ink-inverse: #14110f;
 
-  /* Pure black base; surfaces step up via zinc */
-  --color-surface: #0a0a0a;
-  --color-surface-elevated: #000000;
-  --color-surface-subtle: #141414;
-  --color-surface-hover: #1a1a1a;
-  --color-surface-overlay: rgba(0, 0, 0, 0.88);
+  --color-surface: #1a1817;
+  --color-surface-elevated: #121110;
+  --color-surface-subtle: #232120;
+  --color-surface-hover: #292624;
+  --color-surface-overlay: rgba(18, 17, 16, 0.85);
 
-  --color-nav: rgba(0, 0, 0, 0.92);
-  --color-nav-hover: #141414;
+  --color-nav: rgba(18, 17, 16, 0.8);
+  --color-nav-hover: #232120;
   --color-nav-active: transparent;
-  --color-nav-text: #f5f5f5;
-  --color-nav-text-secondary: #a3a3a3;
-  --color-nav-border: #1a1a1a;
-  --color-nav-divider: #1a1a1a;
+  --color-nav-text: #f2efea;
+  --color-nav-text-secondary: #a8a29a;
+  --color-nav-border: #2a2725;
+  --color-nav-divider: #2a2725;
 
-  --color-border: #1f1f1f;
-  --color-border-strong: #2e2e2e;
+  --color-border: #2a2725;
+  --color-border-strong: #3d3936;
 
-  /* Brighter accent on pure black for AA contrast */
-  --color-accent: #60a5fa;
-  --color-accent-hover: #93c5fd;
-  --color-accent-subtle: rgba(96, 165, 250, 0.12);
-  --color-accent-pressed: #bfdbfe;
-  --color-on-accent: #000000;
+  --color-accent: #e0a044;
+  --color-accent-hover: #edb463;
+  --color-accent-subtle: rgba(224, 160, 68, 0.13);
+  --color-accent-pressed: #f0c078;
+  --color-on-accent: #1c1917;
 
-  --color-brand: #60a5fa;
-  --color-brand-hover: #93c5fd;
-  --color-brand-subtle: rgba(96, 165, 250, 0.12);
-  --color-on-brand: #000000;
-  --color-on-danger: #000000;
+  --color-brand: #e0a044;
+  --color-brand-hover: #edb463;
+  --color-brand-subtle: rgba(224, 160, 68, 0.13);
+  --color-on-brand: #1c1917;
+  --color-on-danger: #fffdfa;
 
-  --color-success: #34d399;
-  --color-success-subtle: rgba(52, 211, 153, 0.1);
-  --color-error: #f87171;
-  --color-error-subtle: rgba(248, 113, 113, 0.1);
-  --color-warning: #fbbf24;
-  --color-warning-subtle: rgba(251, 191, 36, 0.1);
-  --color-info: #38bdf8;
-  --color-info-subtle: rgba(56, 189, 248, 0.1);
+  --color-success: #6cc08b;
+  --color-success-subtle: rgba(108, 192, 139, 0.12);
+  --color-error: #e4776b;
+  --color-error-subtle: rgba(228, 119, 107, 0.12);
+  --color-warning: #e0a044;
+  --color-warning-subtle: rgba(224, 160, 68, 0.12);
+  --color-info: #8fb0cc;
+  --color-info-subtle: rgba(143, 176, 204, 0.12);
 
-  --color-reading: #38bdf8;
-  --color-reading-subtle: rgba(56, 189, 248, 0.1);
-  --color-writing: #34d399;
-  --color-writing-subtle: rgba(52, 211, 153, 0.1);
-  --color-speaking: #fbbf24;
-  --color-speaking-subtle: rgba(251, 191, 36, 0.1);
-  --color-listening: #a78bfa;
-  --color-listening-subtle: rgba(167, 139, 250, 0.1);
-  --color-toeic: #f472b6;
-  --color-toeic-subtle: rgba(244, 114, 182, 0.1);
+  --color-reading: #8fb0cc;
+  --color-reading-subtle: rgba(143, 176, 204, 0.12);
+  --color-writing: #8fbb9c;
+  --color-writing-subtle: rgba(143, 187, 156, 0.12);
+  --color-speaking: #d9a86a;
+  --color-speaking-subtle: rgba(217, 168, 106, 0.12);
+  --color-listening: #a9a2c9;
+  --color-listening-subtle: rgba(169, 162, 201, 0.12);
+  --color-toeic: #cc9aa8;
+  --color-toeic-subtle: rgba(204, 154, 168, 0.12);
 
-  --color-chart-grid: #1f1f1f;
-  --color-chart-label: #737373;
-  --color-chart-point: #0a0a0a;
+  --color-chart-grid: #2a2725;
+  --color-chart-label: #78716a;
+  --color-chart-point: #1a1817;
 
-  --color-scrollbar: #2e2e2e;
-  --color-scrollbar-hover: #525252;
+  --color-scrollbar: #3d3936;
+  --color-scrollbar-hover: #57534e;
 
-  --color-selection: rgba(96, 165, 250, 0.22);
+  --color-selection: rgba(224, 160, 68, 0.22);
 
-  /* On pure black, prefer hairline borders over heavy drop shadows */
-  --shadow-xs: 0 0 0 1px rgba(255, 255, 255, 0.04);
-  --shadow-sm: 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
-  --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.07);
-  --shadow-lg: 0 0 0 1px rgba(255, 255, 255, 0.08);
-  --shadow-xl: 0 0 0 1px rgba(255, 255, 255, 0.1);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.45);
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 6px 16px -4px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 18px 36px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  --shadow-xl: 0 32px 64px -16px rgba(0, 0, 0, 0.7);
 
-  --shadow-accent: 0 0 0 3px rgba(96, 165, 250, 0.22);
-  --shadow-error: 0 0 0 3px rgba(248, 113, 113, 0.18);
+  --shadow-accent: 0 0 0 3px rgba(224, 160, 68, 0.2);
+  --shadow-error: 0 0 0 3px rgba(228, 119, 107, 0.18);
 
   --focus-ring:
     0 0 0 2px var(--color-surface-elevated), 0 0 0 4px var(--color-accent);
@@ -189,22 +188,23 @@
   --font-sans:
     "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-serif:
-    "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Palatino,
-    "Book Antiqua", Georgia, "Times New Roman", serif;
-  --font-mono:
-    "JetBrains Mono", "SF Mono", "Cascadia Code", "Menlo", ui-monospace,
-    monospace;
+  --font-display:
+    "Inter Tight", "Inter", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  /* Code only. UI text never uses this — it reads as developer decoration. */
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+    "Liberation Mono", monospace;
 
   --text-2xs: 11px;
   --text-xs: 12px;
-  --text-sm: 14px;
-  --text-base: 16px;
-  --text-lg: 18px;
-  --text-xl: 22px;
-  --text-2xl: 28px;
-  --text-3xl: 40px;
-  --text-4xl: 52px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 17px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 40px;
 
   --font-normal: 400;
   --font-medium: 500;
@@ -212,11 +212,15 @@
   --font-bold: 700;
   --font-extrabold: 800;
 
-  --lh-tight: 1.2;
-  --lh-normal: 1.6;
-  --lh-relaxed: 1.75;
+  --lh-tight: 1.15;
+  --lh-snug: 1.35;
+  --lh-normal: 1.55;
+  --lh-relaxed: 1.7;
 
-  /* ---- Spacing (8px system) ---- */
+  --tracking-tight: -0.02em;
+  --tracking-tighter: -0.03em;
+
+  /* ---- Spacing (4px system) ---- */
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 12px;
@@ -230,11 +234,12 @@
   --spacing-20: 80px;
 
   /* ---- Radius (site chrome soft; documents sharper) ---- */
+  --radius-xs: 4px;
   --radius-sm: 6px;
   --radius: 8px;
   --radius-lg: 10px;
   --radius-xl: 14px;
-  --radius-2xl: 20px;
+  --radius-2xl: 18px;
   --radius-full: 9999px;
   /* Official-document surfaces: near-rectilinear, still slightly eased */
   --radius-doc: 3px;
@@ -243,21 +248,24 @@
   --doc-border: 1px solid var(--color-border-strong);
   --doc-rule: 2px solid var(--color-ink);
   --doc-rule-soft: 1px solid var(--color-border-strong);
-  --lh-doc: 1.8;
+  --lh-doc: 1.75;
   --doc-padding: var(--spacing-6);
 
   /* ---- Animation ---- */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --duration-fast: 150ms;
-  --duration-base: 200ms;
-  --duration-slow: 280ms;
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 260ms;
   --duration-modal: 320ms;
 
   /* ---- Layout ---- */
-  --max-content: 880px;
-  --header-height: 52px;
+  --max-content: 1040px;
+  --max-reading: 680px;
+  --header-height: 56px;
+  --rule: 1px solid var(--color-border);
 
   /* ---- Legacy aliases ---- */
   --color-text: var(--color-ink);
@@ -272,6 +280,7 @@
   --color-link: var(--color-accent);
   --font-body: var(--font-sans);
   --font-size-body: var(--text-base);
+  --font-size-xs: var(--text-xs);
   --font-size-sm: var(--text-sm);
   --font-size-lg: var(--text-lg);
   --font-size-xl: var(--text-xl);
