@@ -1,20 +1,30 @@
 /** Live RMS bars for mic level visualization. */
 
-export const AUDIO_METER_BAR_COUNT = 24;
+import {
+  AUDIO_METER_BAR_COUNT,
+  computeMeterLevels,
+  createMeterState,
+  emptyLevels,
+  type LevelListener,
+} from "./audioLevels";
 
-export type LevelListener = (levels: number[]) => void;
+export { AUDIO_METER_BAR_COUNT, emptyLevels };
+export type { LevelListener };
 
 export interface AudioMeterHandle {
   stop: () => void;
 }
 
-function emptyLevels(): number[] {
-  return Array.from({ length: AUDIO_METER_BAR_COUNT }, () => 0);
-}
-
 /**
  * Attach a time-domain RMS meter to a MediaStream.
  * Returns a disposer; safe if Web Audio is unavailable.
+ *
+ * The meter is self-healing and auto-ranging:
+ * - Browsers suspend an AudioContext when the page is backgrounded or audio
+ *   focus moves; a suspended context returns silence forever, which used to
+ *   freeze the waveform mid-recording. The loop resumes it.
+ * - The display follows a rolling peak, so a steady input keeps filling the
+ *   meter after the browser's AGC settles to a lower level.
  */
 export function startAudioMeter(
   stream: MediaStream,
@@ -23,12 +33,48 @@ export function startAudioMeter(
   let raf = 0;
   let ctx: AudioContext | null = null;
   let analyser: AnalyserNode | null = null;
+  let data: Uint8Array<ArrayBuffer> | null = null;
+  let disposed = false;
+  const state = createMeterState();
+
+  const resumeIfNeeded = () => {
+    if (ctx && ctx.state !== "running") {
+      void ctx.resume().catch(() => undefined);
+    }
+  };
+
+  const schedule = () => {
+    if (disposed) return;
+    // Idempotent: never let two loops run at once.
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(tick);
+  };
+
+  const onVisibilityChange = () => {
+    if (document.visibilityState !== "visible") return;
+    resumeIfNeeded();
+    // rAF does not fire while hidden, so kick the loop back to life.
+    schedule();
+  };
+
+  const tick = (now = 0) => {
+    if (disposed || !analyser || !data) return;
+    try {
+      resumeIfNeeded();
+      analyser.getByteTimeDomainData(data);
+      onLevels(computeMeterLevels(data, state, now));
+    } catch {
+      // Metering is best-effort; never let one bad frame kill the loop.
+    }
+    schedule();
+  };
 
   const stop = () => {
-    if (raf) {
-      cancelAnimationFrame(raf);
-      raf = 0;
-    }
+    disposed = true;
+    cancelAnimationFrame(raf);
+    raf = 0;
+    document.removeEventListener("visibilitychange", onVisibilityChange);
+    window.removeEventListener("pageshow", onVisibilityChange);
     analyser = null;
     if (ctx) {
       void ctx.close().catch(() => undefined);
@@ -51,31 +97,13 @@ export function startAudioMeter(
     analyser.fftSize = 2048;
     analyser.smoothingTimeConstant = 0.5;
     source.connect(analyser);
+    data = new Uint8Array(new ArrayBuffer(analyser.fftSize));
 
-    const data = new Uint8Array(analyser.fftSize);
-    const tick = () => {
-      if (!analyser) return;
-      analyser.getByteTimeDomainData(data);
-      const next: number[] = [];
-      const segment = Math.floor(data.length / AUDIO_METER_BAR_COUNT);
-      for (let i = 0; i < AUDIO_METER_BAR_COUNT; i++) {
-        let sumSq = 0;
-        const start = i * segment;
-        for (let j = 0; j < segment; j++) {
-          const v = (data[start + j] - 128) / 128;
-          sumSq += v * v;
-        }
-        const rms = Math.sqrt(sumSq / Math.max(1, segment));
-        next.push(Math.min(1, rms * 4));
-      }
-      onLevels(next);
-      raf = requestAnimationFrame(tick);
-    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("pageshow", onVisibilityChange);
 
-    if (ctx.state === "suspended") {
-      void ctx.resume();
-    }
-    raf = requestAnimationFrame(tick);
+    resumeIfNeeded();
+    schedule();
   } catch {
     // Meter is best-effort.
   }

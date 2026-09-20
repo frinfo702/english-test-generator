@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AUDIO_METER_BAR_COUNT, startAudioMeter } from "../lib/audioMeter";
+import { emptyLevels, startAudioMeter } from "../lib/audioMeter";
 import {
   loadPreferredMicrophoneId,
   openMicrophoneStream,
@@ -66,10 +66,6 @@ function getMicrophoneErrorMessage(error: unknown): string {
     }
   }
   return `Failed to access the microphone: ${error instanceof Error ? error.message : String(error)}`;
-}
-
-function emptyLevels(): number[] {
-  return Array.from({ length: AUDIO_METER_BAR_COUNT }, () => 0);
 }
 
 export function useSpeechRecognition(): UseSpeechRecognitionReturn {
