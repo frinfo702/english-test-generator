@@ -32,6 +32,7 @@ function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
     pause,
     resume,
     stop,
+    seek,
   } = useTts();
   const [current, setCurrent] = useState(0);
   const [showText, setShowText] = useState(false);
@@ -91,9 +92,10 @@ function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
             duration={duration}
             playbackRate={playbackRate}
             onPlayPause={handlePlay}
-            onSeek={() => {}}
+            onSeek={seek}
             onPlaybackRateChange={setPlaybackRate}
             seekable={false}
+            skipSeconds={3}
             src={`/audio/shadowing/${fileBasename}/${safeCurrent + 1}.mp3`}
           />
         </div>

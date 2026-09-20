@@ -88,6 +88,8 @@ export interface AudioPlayerProps {
   onPlaybackRateChange: (rate: number) => void;
   /** Disable seeking (e.g. while a timed response is active). Default true. */
   seekable?: boolean;
+  /** Seconds skipped by the back/forward buttons. Default 10. */
+  skipSeconds?: number;
   showSpeedControl?: boolean;
   /** Audio URL — decoded once to draw the waveform. */
   src?: string;
@@ -108,6 +110,7 @@ export function AudioPlayer({
   onSeek,
   onPlaybackRateChange,
   seekable = true,
+  skipSeconds = 10,
   showSpeedControl = true,
   src,
   title,
@@ -205,18 +208,18 @@ export function AudioPlayer({
           <button
             type="button"
             className={styles.skipButton}
-            onClick={() => onSeek(Math.max(0, currentTime - 10))}
+            onClick={() => onSeek(Math.max(0, currentTime - skipSeconds))}
             disabled={duration <= 0}
-            aria-label="Back 10s"
+            aria-label={`Back ${skipSeconds}s`}
           >
             <SkipIcon back />
           </button>
           <button
             type="button"
             className={styles.skipButton}
-            onClick={() => onSeek(Math.min(duration, currentTime + 10))}
+            onClick={() => onSeek(Math.min(duration, currentTime + skipSeconds))}
             disabled={duration <= 0}
-            aria-label="Forward 10s"
+            aria-label={`Forward ${skipSeconds}s`}
           >
             <SkipIcon />
           </button>
