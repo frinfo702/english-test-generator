@@ -1,6 +1,6 @@
 .panel {
   padding: var(--spacing-4) var(--spacing-5);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius);
   border: 1px solid var(--color-border-strong);
   border-left: 3px solid;
   margin-top: var(--spacing-4);
@@ -20,23 +20,21 @@
 .header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-3);
+  gap: var(--spacing-2);
   margin-bottom: var(--spacing-3);
-  padding-bottom: var(--spacing-2);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: var(--radius-doc);
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
   border: 1.5px solid currentColor;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: var(--font-bold);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   flex-shrink: 0;
   line-height: 1;
 }
@@ -50,11 +48,12 @@
 }
 
 .status {
-  font-weight: var(--font-semibold);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
   font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-medium);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .correct .status {
@@ -69,11 +68,10 @@
   margin-bottom: var(--spacing-2);
   color: var(--color-ink);
   font-size: var(--text-sm);
-  font-family: var(--font-sans);
 }
 
 .correctAnswer strong {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-weight: var(--font-semibold);
 }
 
@@ -81,5 +79,5 @@
   color: var(--color-ink-secondary);
   line-height: var(--lh-doc);
   font-size: var(--text-sm);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }

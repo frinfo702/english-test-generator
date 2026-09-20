@@ -1,19 +1,21 @@
 .timer {
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
-  font-family: var(--font-mono);
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  font-family: var(--font-sans);
   font-variant-numeric: tabular-nums;
   color: var(--color-ink);
   background: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid var(--color-border);
   border-top: 2px solid var(--color-ink);
-  padding: 6px 12px;
+  padding: 7px 14px;
   border-radius: var(--radius-doc);
   letter-spacing: 0.04em;
   transition:
-    color var(--duration-base),
-    background var(--duration-base),
-    border-color var(--duration-base);
+    color var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
 }
 
 .warning {

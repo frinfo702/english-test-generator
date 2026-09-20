@@ -1,0 +1,9 @@
+.matrix {
+  display: inline-flex;
+  color: var(--color-ink);
+}
+
+.matrix svg {
+  display: block;
+  overflow: visible;
+}
