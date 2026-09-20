@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
 import { LoadingSpinner } from "../components/ui/LoadingSpinner";
-import { SpeedControl } from "../components/ui/SpeedControl";
+import { AudioPlayer } from "../components/ui/AudioPlayer";
 import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
 import { useScoreHistory } from "../hooks/useScoreHistory";
@@ -216,29 +216,29 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
   if (submitted) {
     return (
       <div className={styles.resultCard}>
-        <h2>Dictation Results</h2>
-        <div className={styles.scoreBox}>
-          <span className={styles.scoreNum}>{totalWrongCount}</span>
-          <span className={styles.scoreDen}>
+        <p className="micro-label">Dictation complete</p>
+        <div className="doc-score">
+          <span className="doc-score-num">{totalWrongCount}</span>
+          <span className="doc-score-den">
             mistake{totalWrongCount === 1 ? "" : "s"}
           </span>
         </div>
         <p className={styles.scorePct}>
           {totalWrongCount === 0
-            ? "Perfect — no mistakes!"
+            ? "No mistakes — every sentence exactly right."
             : totalWrongCount <= 3
-              ? "Great job — few mistakes!"
-              : "Keep practicing — fewer mistakes next time!"}
+              ? "Close. A few words slipped."
+              : "Keep going — the word order will stick."}
         </p>
         <p className={styles.timeText}>
-          Time: {formatSecondsAsMmSs(elapsedSeconds)}
+          Time {formatSecondsAsMmSs(elapsedSeconds)}
         </p>
         <div className={styles.btnRow}>
-          <Button variant="accent" onClick={handleRestart}>
-            Try Another Set
+          <Button variant="primary" onClick={handleRestart}>
+            Try another set
           </Button>
-          <Button variant="secondary" onClick={() => navigate("/dashboard")}>
-            View Dashboard
+          <Button variant="ghost" onClick={() => navigate("/dashboard")}>
+            View progress
           </Button>
         </div>
       </div>
@@ -248,50 +248,32 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
   return (
     <div className={styles.dictationPage}>
       <div className={styles.progressRow}>
+        <span className="micro-label">Sentence</span>
         <span className={styles.progressText}>
-          Sentence {current + 1} / {totalSentences}
+          {String(current + 1).padStart(2, "0")} /{" "}
+          {String(totalSentences).padStart(2, "0")}
         </span>
         <span className={styles.streakBadge}>{correctCount} correct</span>
+        {timerDisplay && (
+          <span className={styles.progressTimer}>{timerDisplay}</span>
+        )}
       </div>
-
-      {timerDisplay && <span className={styles.timeText}>{timerDisplay}</span>}
 
       <div className={styles.card}>
         <div className={styles.playerSection}>
-          <Button
-            onClick={handlePlay}
-            disabled={ttsLoading || !sentence}
-            size="lg"
-            variant="accent"
-          >
-            {ttsLoading
-              ? "Loading..."
-              : playing
-                ? "Pause"
-                : currentTime > 0
-                  ? "Resume"
-                  : "Play Audio"}
-          </Button>
-          <SpeedControl
+          <AudioPlayer
+            playing={playing}
+            loading={ttsLoading}
+            error={ttsError}
+            currentTime={currentTime}
+            duration={duration}
             playbackRate={playbackRate}
-            onChange={setPlaybackRate}
+            onPlayPause={handlePlay}
+            onSeek={() => {}}
+            onPlaybackRateChange={setPlaybackRate}
+            seekable={false}
+            src={audioUrl}
           />
-          <div className={styles.playerProgressRow}>
-            <span className={styles.timeText}>
-              {formatSecondsAsMmSs(currentTime)} /{" "}
-              {formatSecondsAsMmSs(duration)}
-            </span>
-            <div className={styles.progressBar}>
-              <div
-                className={styles.progressFill}
-                style={{
-                  width:
-                    duration > 0 ? `${(currentTime / duration) * 100}%` : "0%",
-                }}
-              />
-            </div>
-          </div>
-          {ttsError && <p className={styles.ttsError}>{ttsError}</p>}
         </div>
 
         <p className={styles.instruction}>
@@ -362,7 +344,7 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
 
         {state.phase === "wrong" && state.wrongToken && (
           <div className={[styles.feedback, styles.fbWrong].join(" ")}>
-            <p className={styles.fbStatus}>✗ Wrong word!</p>
+            <p className={styles.fbStatus}>Wrong word</p>
             <p className={styles.fbAnswer}>
               The word <strong>"{state.wrongToken.text}"</strong> is not the
               next correct word. Keep trying — tap another word.
@@ -371,7 +353,7 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
         )}
         {state.phase === "correct" && (
           <div className={[styles.feedback, styles.fbCorrect].join(" ")}>
-            <p className={styles.fbStatus}>✓ Perfect!</p>
+            <p className={styles.fbStatus}>Correct</p>
             <p className={styles.fbAnswer}>
               Correct sentence: <strong>{sentence.text}</strong>
             </p>
@@ -390,12 +372,12 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
             </Button>
           )}
           {state.phase === "correct" && current + 1 < totalSentences && (
-            <Button variant="accent" onClick={handleNext}>
+            <Button variant="secondary" onClick={handleNext}>
               Next →
             </Button>
           )}
           {allCorrect && current + 1 >= totalSentences && (
-            <Button variant="accent" size="lg" onClick={handleSubmit}>
+            <Button size="lg" onClick={handleSubmit}>
               Submit
             </Button>
           )}

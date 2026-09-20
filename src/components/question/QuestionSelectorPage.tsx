@@ -97,7 +97,7 @@ export function QuestionSelectorPage({
 
       <div className={styles.topBar}>
         <Button
-          variant="accent"
+          variant="primary"
           onClick={handleRandom}
           disabled={loading || files.length === 0}
           size="md"
@@ -115,6 +115,13 @@ export function QuestionSelectorPage({
 
       {!loading && !error && (
         <div className={table.container}>
+          <div className={[table.header, styles.headerRow].join(" ")}>
+            <span aria-hidden="true" />
+            <span>Question</span>
+            <span className={styles.headerMetric}>Time</span>
+            <span className={styles.headerMetric}>Accuracy</span>
+            <span aria-hidden="true" />
+          </div>
           {files.map((item, i) => {
             const latest = latestByFile.get(item.file);
             const elapsed =
@@ -144,20 +151,14 @@ export function QuestionSelectorPage({
                   )}
                 </span>
                 <span className={styles.number}>Q{item.number}</span>
-                <span className={styles.metric}>
-                  <span className={styles.metricLabel}>Time</span>
-                  <span className={styles.metricValue}>{elapsed}</span>
-                </span>
-                <span className={styles.metric}>
-                  <span className={styles.metricLabel}>Accuracy</span>
-                  <span
-                    className={[
-                      styles.metricValue,
-                      completed ? styles.metricValueAccent : "",
-                    ].join(" ")}
-                  >
-                    {accuracy}
-                  </span>
+                <span className={styles.metricValue}>{elapsed}</span>
+                <span
+                  className={[
+                    styles.metricValue,
+                    completed ? styles.metricValueAccent : "",
+                  ].join(" ")}
+                >
+                  {accuracy}
                 </span>
                 <span className={styles.chevron}>→</span>
               </button>

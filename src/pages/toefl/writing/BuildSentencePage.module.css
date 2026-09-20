@@ -7,8 +7,8 @@
 }
 .errorHint {
   margin-top: var(--spacing-sm);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
 }
 
 .startCard {
@@ -44,9 +44,12 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-doc);
   padding: 6px 14px;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  transition: all 0.15s;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 .diffBtn:hover {
   border-color: var(--color-accent);
@@ -70,9 +73,10 @@
 }
 
 .qNum {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
 }
 
 .referenceBox {
@@ -82,14 +86,14 @@
   background: var(--color-surface-subtle);
 }
 .referenceLabel {
-  font-size: var(--font-size-sm);
+  font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: var(--color-ink-secondary);
   margin-bottom: 6px;
 }
 .referenceText {
-  color: var(--color-text);
-  font-size: var(--font-size-body);
+  color: var(--color-ink);
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -100,9 +104,9 @@
 }
 
 .zoneLabel {
-  font-size: var(--font-size-sm);
+  font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: var(--color-ink-secondary);
 }
 
 .slots {
@@ -117,18 +121,21 @@
 }
 
 .placeholder {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
+  color: var(--color-ink-secondary);
+  font-size: var(--text-sm);
   font-style: italic;
 }
 
 .chip {
   padding: 8px 16px;
   border-radius: var(--radius-doc);
-  font-size: var(--font-size-body);
+  font-size: var(--text-base);
   font-weight: 500;
   border: 1px solid;
-  transition: all 0.15s;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 
 .placed {
@@ -143,7 +150,7 @@
 .poolChip {
   background: var(--color-surface);
   border-color: var(--color-border);
-  color: var(--color-text);
+  color: var(--color-ink);
 }
 .poolChip:hover:not(:disabled) {
   border-color: var(--color-accent);
@@ -155,14 +162,14 @@
 }
 
 .correctChip {
-  background: var(--color-correct-bg);
-  border-color: var(--color-correct);
-  color: var(--color-correct);
+  background: var(--color-success-subtle);
+  border-color: var(--color-success);
+  color: var(--color-success);
 }
 .wrongChip {
-  background: var(--color-incorrect-bg);
-  border-color: var(--color-incorrect);
-  color: var(--color-incorrect);
+  background: var(--color-error-subtle);
+  border-color: var(--color-error);
+  color: var(--color-error);
 }
 
 .feedback {
@@ -171,23 +178,23 @@
   border-left: 4px solid;
 }
 .fbCorrect {
-  background: var(--color-correct-bg);
-  border-color: var(--color-correct);
+  background: var(--color-success-subtle);
+  border-color: var(--color-success);
 }
 .fbWrong {
-  background: var(--color-incorrect-bg);
-  border-color: var(--color-incorrect);
+  background: var(--color-error-subtle);
+  border-color: var(--color-error);
 }
 
 .fbStatus {
   font-weight: 700;
-  font-size: var(--font-size-lg);
+  font-size: var(--text-lg);
 }
 .fbCorrect .fbStatus {
-  color: var(--color-correct);
+  color: var(--color-success);
 }
 .fbWrong .fbStatus {
-  color: var(--color-incorrect);
+  color: var(--color-error);
 }
 .fbAnswer {
   margin-top: 6px;
@@ -217,24 +224,26 @@
   gap: 4px;
 }
 .scoreNum {
-  font-family: var(--font-serif);
-  font-size: 56px;
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-semibold);
+  letter-spacing: -0.02em;
   font-weight: var(--font-semibold);
   color: var(--color-ink);
   line-height: 1;
 }
 .scoreDen {
-  font-size: var(--font-size-2xl);
-  color: var(--color-text-muted);
+  font-size: var(--text-2xl);
+  color: var(--color-ink-secondary);
 }
 .scorePct {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  color: var(--color-ink-secondary);
 }
 
 .error {
-  color: var(--color-incorrect);
-  background: var(--color-incorrect-bg);
+  color: var(--color-error);
+  background: var(--color-error-subtle);
   padding: var(--spacing-md);
   border-radius: var(--radius-doc);
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
@@ -7,11 +7,16 @@ import {
   type ScoreEntry,
   type TaskId,
 } from "../hooks/useScoreHistory";
-import { useTheme } from "../hooks/useTheme";
-import { readCssVar } from "../lib/cssVars";
 import { formatSecondsAsMmSs } from "../lib/time";
 import { getAllAnswers, type AnswerEntry } from "../lib/answerSubmission";
 import styles from "./DashboardPage.module.css";
+
+/** Charts are a dashboard-only concern — keep recharts out of the practice pages. */
+const ScoreTrendChart = lazy(() =>
+  import("../components/ui/ScoreTrendChart").then((mod) => ({
+    default: mod.ScoreTrendChart,
+  })),
+);
 
 const TASK_LABELS: Record<TaskId, string> = {
   "toefl/reading/complete-words": "TOEFL Reading: Complete Words",
@@ -36,145 +41,31 @@ const TASK_LABELS: Record<TaskId, string> = {
   dictation: "Dictation",
 };
 
-const TASK_COLORS: Record<string, string> = {
-  "toefl/reading/complete-words": "#0ea5e9",
-  "toefl/reading/daily-life": "#0284c7",
-  "toefl/reading/academic": "#0369a1",
-  "toefl/listening/conversation": "#ec4899",
-  "toefl/listening/lecture": "#db2777",
-  "toefl/listening/response": "#f472b6",
-  "toefl/listening/announcement": "#be185d",
-  "toefl/writing/build-sentence": "#10b981",
-  "toefl/writing/email": "#059669",
-  "toefl/writing/discussion": "#047857",
-  "toefl/speaking/listen-repeat": "#f59e0b",
-  "toefl/speaking/interview": "#d97706",
-  "toeic/part5": "#8b5cf6",
-  "toeic/part6": "#7c3aed",
-  "toeic/part7": "#6d28d9",
-  dictation: "#0891b2",
+const TASK_HUES: Record<string, string> = {
+  "toefl/reading/complete-words": "--color-reading",
+  "toefl/reading/daily-life": "--color-reading",
+  "toefl/reading/academic": "--color-reading",
+  "toefl/listening/conversation": "--color-listening",
+  "toefl/listening/lecture": "--color-listening",
+  "toefl/listening/response": "--color-listening",
+  "toefl/listening/announcement": "--color-listening",
+  "toefl/writing/build-sentence": "--color-writing",
+  "toefl/writing/email": "--color-writing",
+  "toefl/writing/discussion": "--color-writing",
+  "toefl/speaking/listen-repeat": "--color-speaking",
+  "toefl/speaking/interview": "--color-speaking",
+  "toeic/part2": "--color-toeic",
+  "toeic/part3": "--color-toeic",
+  "toeic/part4": "--color-toeic",
+  "toeic/part5": "--color-toeic",
+  "toeic/part6": "--color-toeic",
+  "toeic/part7": "--color-toeic",
+  shadowing: "--color-speaking",
+  dictation: "--color-writing",
 };
-
 function shortDate(iso: string): string {
   const d = new Date(iso);
   return `${d.getMonth() + 1}/${d.getDate()}`;
-}
-
-interface LineChartProps {
-  entries: ScoreEntry[];
-  color: string;
-}
-
-function LineChart({ entries, color }: LineChartProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { theme } = useTheme();
-
-  const draw = useCallback(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    const W = canvas.offsetWidth;
-    const H = canvas.offsetHeight;
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
-    ctx.scale(dpr, dpr);
-
-    const PAD = { top: 16, right: 16, bottom: 40, left: 44 };
-    const chartW = W - PAD.left - PAD.right;
-    const chartH = H - PAD.top - PAD.bottom;
-    const gridColor = readCssVar("--color-chart-grid", "#e2e8f0");
-    const labelColor = readCssVar("--color-chart-label", "#94a3b8");
-    const pointFill = readCssVar("--color-chart-point", "#ffffff");
-
-    ctx.clearRect(0, 0, W, H);
-
-    ctx.strokeStyle = gridColor;
-    ctx.lineWidth = 1;
-    ctx.fillStyle = labelColor;
-    ctx.font = "11px var(--font-sans)";
-    ctx.textAlign = "right";
-    for (let i = 0; i <= 4; i++) {
-      const pct = i * 25;
-      const y = PAD.top + chartH - (pct / 100) * chartH;
-      ctx.beginPath();
-      ctx.moveTo(PAD.left, y);
-      ctx.lineTo(PAD.left + chartW, y);
-      ctx.stroke();
-      ctx.fillText(`${pct}%`, PAD.left - 6, y + 4);
-    }
-
-    if (entries.length === 0) {
-      ctx.fillStyle = labelColor;
-      ctx.textAlign = "center";
-      ctx.font = "13px var(--font-sans)";
-      ctx.fillText(
-        "No records yet",
-        PAD.left + chartW / 2,
-        PAD.top + chartH / 2,
-      );
-      return;
-    }
-
-    const points = entries.map((e, i) => ({
-      x:
-        PAD.left +
-        (entries.length === 1
-          ? chartW / 2
-          : (i / (entries.length - 1)) * chartW),
-      y: PAD.top + chartH - (e.pct / 100) * chartH,
-      entry: e,
-    }));
-
-    ctx.beginPath();
-    ctx.moveTo(points[0].x, PAD.top + chartH);
-    points.forEach((p) => ctx.lineTo(p.x, p.y));
-    ctx.lineTo(points[points.length - 1].x, PAD.top + chartH);
-    ctx.closePath();
-    ctx.fillStyle = `${color}22`;
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2.5;
-    ctx.lineJoin = "round";
-    points.forEach((p, i) =>
-      i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y),
-    );
-    ctx.stroke();
-
-    points.forEach((p) => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
-      ctx.fillStyle = pointFill;
-      ctx.fill();
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-    });
-
-    ctx.fillStyle = labelColor;
-    ctx.font = "10px var(--font-sans)";
-    ctx.textAlign = "center";
-    const maxLabels = Math.min(entries.length, 8);
-    const step = Math.ceil(entries.length / maxLabels);
-    points.forEach((p, i) => {
-      if (i % step === 0 || i === entries.length - 1) {
-        ctx.fillText(shortDate(p.entry.date), p.x, PAD.top + chartH + 18);
-      }
-    });
-  }, [entries, color]);
-
-  useEffect(() => {
-    draw();
-    const observer = new ResizeObserver(draw);
-    if (canvasRef.current) observer.observe(canvasRef.current);
-    return () => observer.disconnect();
-  }, [draw, theme]);
-
-  return <canvas ref={canvasRef} className={styles.canvas} />;
 }
 
 interface TaskCardProps {
@@ -183,7 +74,7 @@ interface TaskCardProps {
 }
 
 function TaskCard({ taskId, entries }: TaskCardProps) {
-  const color = TASK_COLORS[taskId] ?? "#2563eb";
+  const hue = TASK_HUES[taskId] ?? "--color-accent";
   const latest = entries[entries.length - 1];
   const best = entries.reduce<ScoreEntry | null>(
     (acc, e) => (acc === null || e.pct > acc.pct ? e : acc),
@@ -213,7 +104,7 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
   return (
     <div className={styles.taskCard}>
       <div className={styles.taskHeader}>
-        <span className={styles.taskDot} style={{ background: color }} />
+        <span className={styles.taskDot} style={{ background: `var(${hue})` }} />
         <span className={styles.taskLabel}>{TASK_LABELS[taskId]}</span>
         <span className={styles.taskCount}>
           {entries.length} session{entries.length !== 1 ? "s" : ""}
@@ -223,7 +114,7 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
       <div className={styles.statsRow}>
         <div className={styles.stat}>
           <span className={styles.statLabel}>Latest</span>
-          <span className={styles.statValue} style={{ color }}>
+          <span className={styles.statValue}>
             {latest ? `${latest.pct}%` : "—"}
           </span>
         </div>
@@ -231,7 +122,7 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
           <span className={styles.statLabel}>Best</span>
           <span
             className={styles.statValue}
-            style={{ color: "var(--color-correct)" }}
+            style={{ color: "var(--color-success)" }}
           >
             {best ? `${best.pct}%` : "—"}
           </span>
@@ -252,7 +143,9 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
         </div>
       </div>
 
-      <LineChart entries={entries} color={color} />
+      <Suspense fallback={<div className={styles.chartFallback} />}>
+        <ScoreTrendChart entries={entries} colorVar={hue} />
+      </Suspense>
 
       {entries.length > 0 && (
         <div className={styles.recentList}>
@@ -265,7 +158,7 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
                 <div className={styles.recentBar}>
                   <div
                     className={styles.recentFill}
-                    style={{ width: `${e.pct}%`, background: color }}
+                    style={{ width: `${e.pct}%`, background: `var(${hue})` }}
                   />
                 </div>
                 <span className={styles.recentPct}>{e.pct}%</span>

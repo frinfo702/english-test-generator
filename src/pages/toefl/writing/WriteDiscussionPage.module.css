@@ -7,8 +7,8 @@
 }
 .errorHint {
   margin-top: var(--spacing-sm);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
 }
 
 .controls {
@@ -29,9 +29,12 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-doc);
   padding: 6px 14px;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  transition: all 0.15s;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 .diffBtn:hover {
   border-color: var(--color-accent);
@@ -71,7 +74,7 @@
   display: inline-block;
   background: var(--color-accent);
   color: var(--color-on-accent);
-  font-size: var(--font-size-sm);
+  font-size: var(--text-sm);
   font-weight: 700;
   padding: 3px 10px;
   border-radius: var(--radius-doc);
@@ -79,7 +82,7 @@
 }
 
 .professorQ {
-  font-size: var(--font-size-lg);
+  font-size: var(--text-lg);
   line-height: 1.6;
 }
 
@@ -102,8 +105,8 @@
 .studentTag {
   display: inline-block;
   background: var(--color-surface-subtle);
-  color: var(--color-text);
-  font-size: var(--font-size-sm);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
   font-weight: 600;
   padding: 2px 10px;
   border-radius: var(--radius-doc);
@@ -121,7 +124,7 @@
   border-top: var(--doc-rule);
   border-radius: var(--radius-doc);
   text-align: center;
-  color: var(--color-text-muted);
+  color: var(--color-ink-secondary);
 }
 
 .writingArea {
@@ -138,18 +141,18 @@
 }
 
 .wordCount {
-  font-size: var(--font-size-body);
+  font-size: var(--text-base);
   font-weight: 600;
 }
 .ok {
-  color: var(--color-correct);
+  color: var(--color-success);
 }
 .notOk {
   color: var(--color-warning);
 }
 
 .textarea {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   width: 100%;
   padding: var(--spacing-md);
   border: 1px solid var(--color-border);
@@ -179,7 +182,7 @@
   padding: var(--spacing-xl);
 }
 .evalCard h3 {
-  font-size: var(--font-size-lg);
+  font-size: var(--text-lg);
   color: var(--color-accent);
   margin-bottom: var(--spacing-md);
 }
@@ -208,7 +211,7 @@
   gap: var(--spacing-md);
 }
 .modelAnswer h3 {
-  font-size: var(--font-size-lg);
+  font-size: var(--text-lg);
   color: var(--color-accent);
 }
 .modelAnswer p {
@@ -217,8 +220,8 @@
 }
 
 .error {
-  color: var(--color-incorrect);
-  background: var(--color-incorrect-bg);
+  color: var(--color-error);
+  background: var(--color-error-subtle);
   padding: var(--spacing-md);
   border-radius: var(--radius-doc);
 }

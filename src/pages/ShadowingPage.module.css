@@ -2,15 +2,14 @@
   display: flex;
   justify-content: flex-end;
   margin-bottom: var(--spacing-6);
-  padding-bottom: var(--spacing-3);
-  border-bottom: var(--doc-rule-soft);
 }
 
 .error {
   color: var(--color-error);
   background: var(--color-error-subtle);
   padding: var(--spacing-4);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius);
+  border: 1px solid color-mix(in srgb, var(--color-error) 40%, transparent);
 }
 
 .errorHint {
@@ -20,49 +19,50 @@
 }
 
 .progressRow {
-  text-align: center;
-  margin-bottom: var(--spacing-4);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  max-width: var(--max-reading);
+  margin: 0 auto var(--spacing-3);
 }
 
 .progressText {
+  font-family: var(--font-sans);
   font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-  font-weight: var(--font-medium);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
 }
 
 .card {
+  max-width: var(--max-reading);
+  margin: 0 auto;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
-  padding: var(--spacing-8);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-8);
+  gap: var(--spacing-6);
+  box-shadow: var(--shadow-xs);
 }
 
 .playerSection {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-3);
-}
-
-.timeText {
-  font-size: var(--text-xs);
-  color: var(--color-ink-tertiary);
-  min-width: 80px;
-  text-align: center;
+  width: 100%;
 }
 
 .textSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-4);
+  gap: var(--spacing-5);
   width: 100%;
   min-height: 120px;
   justify-content: center;
+  padding: var(--spacing-6) 0;
+  border-top: var(--rule);
+  border-bottom: var(--rule);
 }
 
 .sentenceArea {
@@ -71,24 +71,25 @@
 }
 
 .sentenceText {
+  font-family: var(--font-sans);
   font-size: var(--text-xl);
-  font-weight: var(--font-medium);
   line-height: var(--lh-relaxed);
   color: var(--color-ink);
-  animation: fadeIn 0.25s ease;
+  animation: fadeIn var(--duration-slow) var(--ease-out);
 }
 
 .hiddenText {
-  font-size: var(--text-xl);
-  font-weight: var(--font-medium);
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
   line-height: var(--lh-relaxed);
-  color: var(--color-ink-tertiary);
-  letter-spacing: 0.15em;
+  color: var(--color-ink-disabled);
+  letter-spacing: 0.18em;
   user-select: none;
 }
 
 .navSection {
   display: flex;
+  justify-content: space-between;
   gap: var(--spacing-4);
 }
 

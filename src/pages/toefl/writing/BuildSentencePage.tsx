@@ -264,7 +264,7 @@ export function BuildSentencePage() {
                   ].join(" ")}
                 >
                   <p className={styles.fbStatus}>
-                    {isCorrect ? "✓ Correct" : "✗ Incorrect"}
+                    {isCorrect ? "Correct" : "Incorrect"}
                   </p>
                   {!isCorrect && (
                     <p className={styles.fbAnswer}>

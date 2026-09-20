@@ -7,8 +7,8 @@
 }
 .errorHint {
   margin-top: var(--spacing-sm);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
 }
 
 .controls {
@@ -31,9 +31,12 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-doc);
   padding: 6px 14px;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  transition: all 0.15s;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 .diffBtn:hover {
   border-color: var(--color-accent);
@@ -61,14 +64,14 @@
 }
 
 .passageTitle {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-lg);
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
   color: var(--color-ink);
   margin-bottom: var(--spacing-md);
 }
 
 .passage {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   line-height: 1.9;
   white-space: pre-wrap;
 }
@@ -85,14 +88,15 @@
 }
 
 .qNum {
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
 }
 
 .stem {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-lg);
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
   font-weight: 500;
   line-height: 1.5;
 }
@@ -113,7 +117,7 @@
   border-radius: var(--radius-doc);
   background: var(--color-surface);
   text-align: left;
-  font-size: var(--font-size-body);
+  font-size: var(--text-base);
   line-height: 1.5;
   transition:
     border-color 0.15s,
@@ -132,19 +136,19 @@
 }
 
 .option.correctOpt {
-  border-left-color: var(--color-correct);
-  border-color: var(--color-correct);
-  background: var(--color-correct-bg);
+  border-left-color: var(--color-success);
+  border-color: var(--color-success);
+  background: var(--color-success-subtle);
 }
 
 .option.wrongOpt {
-  border-left-color: var(--color-incorrect);
-  border-color: var(--color-incorrect);
-  background: var(--color-incorrect-bg);
+  border-left-color: var(--color-error);
+  border-color: var(--color-error);
+  background: var(--color-error-subtle);
 }
 
 .optLabel {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-weight: 700;
   color: var(--color-ink);
   min-width: 20px;
@@ -170,8 +174,8 @@
 }
 
 .resultTitle {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-xl);
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
 }
 
 .scoreBox {
@@ -181,24 +185,26 @@
 }
 
 .scoreNum {
-  font-family: var(--font-serif);
-  font-size: 56px;
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-semibold);
+  letter-spacing: -0.02em;
   font-weight: var(--font-semibold);
   color: var(--color-ink);
   line-height: 1;
 }
 .scoreDen {
-  font-size: var(--font-size-2xl);
-  color: var(--color-text-muted);
+  font-size: var(--text-2xl);
+  color: var(--color-ink-secondary);
 }
 .scorePct {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  color: var(--color-ink-secondary);
 }
 
 .error {
-  color: var(--color-incorrect);
-  background: var(--color-incorrect-bg);
+  color: var(--color-error);
+  background: var(--color-error-subtle);
   padding: var(--spacing-md);
   border-radius: var(--radius-doc);
 }
@@ -216,7 +222,8 @@
 }
 
 .qNum {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   width: 28px;
   height: 28px;
   border-radius: var(--radius-doc);
@@ -224,7 +231,7 @@
   background: transparent;
   color: var(--color-ink);
   font-weight: 700;
-  font-size: var(--font-size-sm);
+  font-size: var(--text-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -232,8 +239,8 @@
 }
 
 .qType {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
 }
 
 .submitRow {

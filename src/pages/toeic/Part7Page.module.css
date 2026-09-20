@@ -13,9 +13,7 @@
   border: 1px solid var(--color-ink);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 12px;
+      padding: 4px 12px;
   border-radius: var(--radius-doc);
   margin-bottom: var(--spacing-lg);
 }
@@ -24,9 +22,12 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-doc);
   padding: 6px 14px;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  transition: all 0.15s;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 .typeBtn:hover {
   border-color: var(--color-ink-tertiary);
@@ -65,22 +66,23 @@
   background: transparent;
   color: var(--color-ink);
   border: 1.5px solid var(--color-ink);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-sm);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-sm);
   font-weight: 700;
   padding: 2px 10px;
   border-radius: var(--radius-doc);
 }
 .passageType {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
   background: var(--color-border);
   padding: 2px 8px;
   border-radius: var(--radius-doc);
 }
 .passageTitle {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-lg);
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
   font-weight: 600;
 }
 .passageText {
@@ -110,7 +112,8 @@
   gap: var(--spacing-sm);
 }
 .qNum {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   width: 28px;
   height: 28px;
   border-radius: var(--radius-doc);
@@ -118,15 +121,15 @@
   background: transparent;
   color: var(--color-ink);
   font-weight: 700;
-  font-size: var(--font-size-sm);
+  font-size: var(--text-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 .qType {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
 }
 .crossTag {
   font-size: 11px;
@@ -137,8 +140,8 @@
   border-radius: var(--radius-doc);
 }
 .stem {
-  font-family: var(--font-serif);
-  font-size: var(--font-size-lg);
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
   font-weight: 500;
   line-height: 1.5;
 }
@@ -158,7 +161,7 @@
   border-radius: var(--radius-doc);
   background: var(--color-surface);
   text-align: left;
-  font-size: var(--font-size-body);
+  font-size: var(--text-base);
   line-height: 1.5;
   transition:
     border-color 0.15s,
@@ -174,17 +177,17 @@
   background: var(--color-surface-subtle);
 }
 .option.correctOpt {
-  border-left-color: var(--color-correct);
-  border-color: var(--color-correct);
-  background: var(--color-correct-bg);
+  border-left-color: var(--color-success);
+  border-color: var(--color-success);
+  background: var(--color-success-subtle);
 }
 .option.wrongOpt {
-  border-left-color: var(--color-incorrect);
-  border-color: var(--color-incorrect);
-  background: var(--color-incorrect-bg);
+  border-left-color: var(--color-error);
+  border-color: var(--color-error);
+  background: var(--color-error-subtle);
 }
 .optLabel {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-weight: 700;
   color: var(--color-ink);
   min-width: 20px;
@@ -204,12 +207,12 @@
   gap: var(--spacing-md);
 }
 .inlineScore {
-  font-size: var(--font-size-lg);
+  font-size: var(--text-lg);
 }
 
 .error {
-  color: var(--color-incorrect);
-  background: var(--color-incorrect-bg);
+  color: var(--color-error);
+  background: var(--color-error-subtle);
   padding: var(--spacing-md);
   border-radius: var(--radius-doc);
 }

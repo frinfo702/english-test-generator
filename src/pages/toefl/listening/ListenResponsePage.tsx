@@ -42,7 +42,8 @@ export function ListenResponsePage() {
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const { loading: ttsLoading, playSegmentsWithGaps } = useTts();
+  const { loading: ttsLoading, playing: ttsPlaying, playSegmentsWithGaps } =
+    useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -258,18 +259,26 @@ export function ListenResponsePage() {
               </span>
 
               <div className={styles.audioArea}>
-                {ttsLoading && (
-                  <p className={styles.loadingAudio}>Loading audio...</p>
-                )}
-                {!ttsLoading && (
-                  <Button
-                    onClick={handleReplayAudio}
-                    size="sm"
-                    variant="secondary"
+                <button
+                  type="button"
+                  className={styles.playButton}
+                  onClick={handleReplayAudio}
+                  disabled={ttsLoading}
+                  aria-label={ttsPlaying ? "Playing audio" : "Play audio"}
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    aria-hidden="true"
                   >
-                    Play Audio
-                  </Button>
-                )}
+                    <path d="M8 5.4c0-.9 1-1.5 1.8-1L18 9.9c.7.5.7 1.7 0 2.2l-8.2 5.5c-.8.5-1.8-.1-1.8-1z" />
+                  </svg>
+                </button>
+                <span className={styles.audioLabel}>
+                  {ttsLoading ? "Loading audio…" : "Play audio"}
+                </span>
               </div>
 
               <div className={styles.options}>
