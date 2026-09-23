@@ -7,8 +7,41 @@
   padding: var(--spacing-16) var(--spacing-4);
 }
 
-.matrix {
+.blocks {
+  --block-size: 48px;
+  --block-duration: 1300ms;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: calc(var(--block-size) * 0.1);
+  width: var(--block-size);
+  height: var(--block-size);
   color: var(--color-ink-secondary);
+}
+
+.block {
+  background: currentColor;
+  border-radius: calc(var(--block-size) * 0.0625);
+  animation: block-sweep var(--block-duration) ease-in-out infinite;
+  animation-delay: calc(var(--block-duration) * (var(--step) - 5) / 5);
+}
+
+@keyframes block-sweep {
+  0%,
+  70%,
+  100% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block {
+    transform: scale(0.8);
+    animation: none;
+  }
 }
 
 .message {
