@@ -103,7 +103,6 @@ export function HomePage() {
             <h2 id="suites-heading" className={styles.sectionTitle}>
               Practice
             </h2>
-            <span className={styles.sectionCount}>{tests.length} suites</span>
           </div>
           <div className={table.container}>
             {tests.map((test, i) => (
@@ -128,9 +127,6 @@ export function HomePage() {
             <h2 id="stats-heading" className={styles.sectionTitle}>
               This device
             </h2>
-            <span className={styles.sectionCount}>
-              {stats ? "Local history" : "No sessions yet"}
-            </span>
           </div>
 
           <dl className={styles.stats}>
@@ -156,11 +152,6 @@ export function HomePage() {
             </div>
           </dl>
 
-          <p className={styles.note}>
-            Scores stay in this browser. Question sets live in{" "}
-            <code>public/questions/</code>, added with the prompts in{" "}
-            <code>public/prompts/</code>.
-          </p>
         </aside>
       </div>
     </div>
