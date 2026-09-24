@@ -6,6 +6,7 @@ import { LoadingSpinner } from "../components/ui/LoadingSpinner";
 import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
 import { AudioPlayer } from "../components/ui/AudioPlayer";
+import { CardStack } from "../components/ui/CardStack";
 import styles from "./ShadowingPage.module.css";
 
 interface Sentence {
@@ -82,64 +83,66 @@ function ShadowingContent({ data, file }: { data: ProblemData; file: string }) {
         </span>
       </div>
 
-      <div className={styles.card}>
-        <div className={styles.playerSection}>
-          <AudioPlayer
-            playing={playing}
-            loading={ttsLoading}
-            error={ttsError}
-            currentTime={currentTime}
-            duration={duration}
-            playbackRate={playbackRate}
-            onPlayPause={handlePlay}
-            onSeek={seek}
-            onPlaybackRateChange={setPlaybackRate}
-            seekable={false}
-            skipSeconds={3}
-            src={`/audio/shadowing/${fileBasename}/${safeCurrent + 1}.mp3`}
-          />
-        </div>
+      <CardStack index={safeCurrent} total={totalSentences}>
+        <div className={styles.card}>
+          <div className={styles.playerSection}>
+            <AudioPlayer
+              playing={playing}
+              loading={ttsLoading}
+              error={ttsError}
+              currentTime={currentTime}
+              duration={duration}
+              playbackRate={playbackRate}
+              onPlayPause={handlePlay}
+              onSeek={seek}
+              onPlaybackRateChange={setPlaybackRate}
+              seekable={false}
+              skipSeconds={3}
+              src={`/audio/shadowing/${fileBasename}/${safeCurrent + 1}.mp3`}
+            />
+          </div>
 
-        <div className={styles.textSection}>
-          {sentence && (
-            <>
-              <div className={styles.sentenceArea}>
-                {showText ? (
-                  <p className={styles.sentenceText}>{sentence.text}</p>
-                ) : (
-                  <p className={styles.hiddenText}>
-                    {"\u00B7 ".repeat(sentence.text.split(/\s+/).length)}
-                  </p>
-                )}
-              </div>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={() => setShowText((s) => !s)}
-              >
-                {showText ? "Hide Text" : "Show Text"}
-              </Button>
-            </>
-          )}
-        </div>
+          <div className={styles.textSection}>
+            {sentence && (
+              <>
+                <div className={styles.sentenceArea}>
+                  {showText ? (
+                    <p className={styles.sentenceText}>{sentence.text}</p>
+                  ) : (
+                    <p className={styles.hiddenText}>
+                      {"\u00B7 ".repeat(sentence.text.split(/\s+/).length)}
+                    </p>
+                  )}
+                </div>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setShowText((s) => !s)}
+                >
+                  {showText ? "Hide Text" : "Show Text"}
+                </Button>
+              </>
+            )}
+          </div>
 
-        <div className={styles.navSection}>
-          <Button
-            variant="secondary"
-            onClick={handlePrev}
-            disabled={safeCurrent <= 0}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="secondary"
-            onClick={handleNext}
-            disabled={safeCurrent + 1 >= totalSentences}
-          >
-            Next
-          </Button>
+          <div className={styles.navSection}>
+            <Button
+              variant="secondary"
+              onClick={handlePrev}
+              disabled={safeCurrent <= 0}
+            >
+              Previous
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={handleNext}
+              disabled={safeCurrent + 1 >= totalSentences}
+            >
+              Next
+            </Button>
+          </div>
         </div>
-      </div>
+      </CardStack>
     </>
   );
 }

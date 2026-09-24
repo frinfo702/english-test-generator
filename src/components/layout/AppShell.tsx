@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useTheme } from "../../hooks/useTheme";
+import { ThemeToggle } from "../ui/ThemeToggle";
 import styles from "./AppShell.module.css";
 
 interface AppShellProps {
@@ -43,46 +43,9 @@ const navItems: NavItem[] = [
   },
 ];
 
-function SunIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      aria-hidden="true"
-    >
-      <circle cx="12" cy="12" r="4" />
-      <path d="M12 2.5v2M12 19.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2.5 12h2M19.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-    </svg>
-  );
-}
-
-function MoonIcon() {
-  return (
-    <svg
-      width="15"
-      height="15"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.7"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M21 13.2A8.6 8.6 0 1 1 10.8 3a6.8 6.8 0 0 0 10.2 10.2z" />
-    </svg>
-  );
-}
-
 export function AppShell({ children }: AppShellProps) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { isDark, toggleTheme } = useTheme();
   const navRef = useRef<HTMLElement | null>(null);
   const activeRef = useRef<HTMLAnchorElement | null>(null);
   const indicatorRef = useRef<HTMLSpanElement | null>(null);
@@ -137,7 +100,11 @@ export function AppShell({ children }: AppShellProps) {
       </a>
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <Link to="/" className={styles.logo} aria-label="English Test Practice home">
+          <Link
+            to="/"
+            className={styles.logo}
+            aria-label="English Test Practice home"
+          >
             <span className={styles.logoMark} aria-hidden="true">
               ET
             </span>
@@ -174,15 +141,7 @@ export function AppShell({ children }: AppShellProps) {
             })}
           </nav>
 
-          <button
-            type="button"
-            className={styles.themeToggle}
-            onClick={toggleTheme}
-            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            title={isDark ? "Light mode" : "Dark mode"}
-          >
-            {isDark ? <SunIcon /> : <MoonIcon />}
-          </button>
+          <ThemeToggle />
         </div>
       </header>
       <main className={styles.main} id="main-content" tabIndex={-1}>

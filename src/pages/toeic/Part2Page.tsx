@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
 import { Button } from "../../components/ui/Button";
+import { CardStack } from "../../components/ui/CardStack";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../components/ui/ProgressBar";
 import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
@@ -248,73 +249,75 @@ export function Part2Page() {
           )}
 
           {!graded && currentQuestion && (
-            <div className={styles.questionCard}>
-              <div className={styles.qProgress}>
-                Question {currentIndex + 1} of {totalQuestions}
-              </div>
+            <CardStack index={currentIndex} total={totalQuestions}>
+              <div className={styles.questionCard}>
+                <div className={styles.qProgress}>
+                  Question {currentIndex + 1} of {totalQuestions}
+                </div>
 
-              {ttsLoading && (
-                <p className={styles.loadingAudio}>Loading audio...</p>
-              )}
-
-              <div className={styles.audioHint}>
-                {!ttsLoading && (
-                  <p className={styles.audioHintText}>
-                    Listen to the question and choose the best response.
-                  </p>
+                {ttsLoading && (
+                  <p className={styles.loadingAudio}>Loading audio...</p>
                 )}
-              </div>
 
-              <div className={styles.options}>
-                {(["A", "B", "C"] as const).map((opt) => {
-                  const sel = selected[currentQuestion.id];
-                  return (
-                    <button
-                      key={opt}
-                      className={`${styles.option} ${
-                        sel === opt ? styles.selected : ""
-                      }`}
-                      onClick={() => handleSelect(opt)}
+                <div className={styles.audioHint}>
+                  {!ttsLoading && (
+                    <p className={styles.audioHintText}>
+                      Listen to the question and choose the best response.
+                    </p>
+                  )}
+                </div>
+
+                <div className={styles.options}>
+                  {(["A", "B", "C"] as const).map((opt) => {
+                    const sel = selected[currentQuestion.id];
+                    return (
+                      <button
+                        key={opt}
+                        className={`${styles.option} ${
+                          sel === opt ? styles.selected : ""
+                        }`}
+                        onClick={() => handleSelect(opt)}
+                      >
+                        <span className={styles.optLabel}>{opt}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className={styles.navButtons}>
+                  <Button
+                    variant="secondary"
+                    onClick={handlePrev}
+                    disabled={currentIndex === 0}
+                    size="sm"
+                  >
+                    Previous
+                  </Button>
+                  <span className={styles.qStatus}>
+                    {selected[currentQuestion.id]
+                      ? "Answered"
+                      : "Select an answer"}
+                  </span>
+                  {currentIndex < totalQuestions - 1 ? (
+                    <Button
+                      onClick={handleNext}
+                      disabled={!selected[currentQuestion.id]}
+                      size="sm"
                     >
-                      <span className={styles.optLabel}>{opt}</span>
-                    </button>
-                  );
-                })}
+                      Next
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleSubmit}
+                      disabled={!allAnswered}
+                      size="sm"
+                    >
+                      Submit
+                    </Button>
+                  )}
+                </div>
               </div>
-
-              <div className={styles.navButtons}>
-                <Button
-                  variant="secondary"
-                  onClick={handlePrev}
-                  disabled={currentIndex === 0}
-                  size="sm"
-                >
-                  Previous
-                </Button>
-                <span className={styles.qStatus}>
-                  {selected[currentQuestion.id]
-                    ? "Answered"
-                    : "Select an answer"}
-                </span>
-                {currentIndex < totalQuestions - 1 ? (
-                  <Button
-                    onClick={handleNext}
-                    disabled={!selected[currentQuestion.id]}
-                    size="sm"
-                  >
-                    Next
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={!allAnswered}
-                    size="sm"
-                  >
-                    Submit
-                  </Button>
-                )}
-              </div>
-            </div>
+            </CardStack>
           )}
         </>
       )}
