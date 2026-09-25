@@ -80,7 +80,8 @@
   line-height: var(--lh-normal);
   color: var(--color-ink-secondary);
   padding: var(--spacing-3) var(--spacing-4);
-  border-left: 2px solid var(--color-accent);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
+  border-radius: var(--radius);
   background: var(--color-accent-subtle);
   text-align: left;
 }
