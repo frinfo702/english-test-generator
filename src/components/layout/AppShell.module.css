@@ -151,45 +151,6 @@
   padding-left: 2px;
 }
 
-/* ---- Theme switch ---- */
-
-.themeToggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  flex-shrink: 0;
-  padding: 0;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--color-ink-secondary);
-  transition:
-    background var(--duration-base) var(--ease-out),
-    color var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
-}
-
-.themeToggle:hover {
-  background: var(--color-surface);
-  color: var(--color-ink);
-  border-color: var(--color-border-strong);
-}
-
-.themeToggle:active {
-  transform: scale(0.94);
-}
-
-.themeToggle svg {
-  transition: transform var(--duration-slow) var(--ease-drawer);
-}
-
-.themeToggle:hover svg {
-  transform: rotate(18deg);
-}
-
 .main {
   flex: 1;
   padding: var(--spacing-10) var(--spacing-6) var(--spacing-20);

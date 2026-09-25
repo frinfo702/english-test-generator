@@ -175,15 +175,15 @@
 .feedback {
   padding: var(--spacing-md);
   border-radius: var(--radius-doc);
-  border-left: 4px solid;
+  border: 1px solid transparent;
 }
 .fbCorrect {
   background: var(--color-success-subtle);
-  border-color: var(--color-success);
+  border-color: color-mix(in srgb, var(--color-success) 40%, transparent);
 }
 .fbWrong {
   background: var(--color-error-subtle);
-  border-color: var(--color-error);
+  border-color: color-mix(in srgb, var(--color-error) 40%, transparent);
 }
 
 .fbStatus {

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
+import { CardStack } from "../../../components/ui/CardStack";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
@@ -42,8 +43,11 @@ export function ListenResponsePage() {
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const { loading: ttsLoading, playing: ttsPlaying, playSegmentsWithGaps } =
-    useTts();
+  const {
+    loading: ttsLoading,
+    playing: ttsPlaying,
+    playSegmentsWithGaps,
+  } = useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -249,89 +253,91 @@ export function ListenResponsePage() {
           )}
 
           {!graded && currentQuestion && (
-            <div className={styles.questionCard}>
-              <div className={styles.qProgress}>
-                Question {currentIndex + 1} of {totalQuestions}
-              </div>
+            <CardStack index={currentIndex} total={totalQuestions}>
+              <div className={styles.questionCard}>
+                <div className={styles.qProgress}>
+                  Question {currentIndex + 1} of {totalQuestions}
+                </div>
 
-              <span className={styles.contextBadge}>
-                {currentQuestion.context}
-              </span>
-
-              <div className={styles.audioArea}>
-                <button
-                  type="button"
-                  className={styles.playButton}
-                  onClick={handleReplayAudio}
-                  disabled={ttsLoading}
-                  aria-label={ttsPlaying ? "Playing audio" : "Play audio"}
-                >
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path d="M8 5.4c0-.9 1-1.5 1.8-1L18 9.9c.7.5.7 1.7 0 2.2l-8.2 5.5c-.8.5-1.8-.1-1.8-1z" />
-                  </svg>
-                </button>
-                <span className={styles.audioLabel}>
-                  {ttsLoading ? "Loading audio…" : "Play audio"}
+                <span className={styles.contextBadge}>
+                  {currentQuestion.context}
                 </span>
-              </div>
 
-              <div className={styles.options}>
-                {(["A", "B", "C"] as const).map((opt) => {
-                  const sel = selected[currentQuestion.id];
-                  return (
-                    <button
-                      key={opt}
-                      className={`${styles.option} ${
-                        sel === opt ? styles.selected : ""
-                      }`}
-                      onClick={() => handleSelect(opt)}
+                <div className={styles.audioArea}>
+                  <button
+                    type="button"
+                    className={styles.playButton}
+                    onClick={handleReplayAudio}
+                    disabled={ttsLoading}
+                    aria-label={ttsPlaying ? "Playing audio" : "Play audio"}
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
                     >
-                      <span className={styles.optLabel}>{opt}</span>
-                      <span>{currentQuestion.options[opt]}</span>
-                    </button>
-                  );
-                })}
-              </div>
+                      <path d="M8 5.4c0-.9 1-1.5 1.8-1L18 9.9c.7.5.7 1.7 0 2.2l-8.2 5.5c-.8.5-1.8-.1-1.8-1z" />
+                    </svg>
+                  </button>
+                  <span className={styles.audioLabel}>
+                    {ttsLoading ? "Loading audio…" : "Play audio"}
+                  </span>
+                </div>
 
-              <div className={styles.navButtons}>
-                <Button
-                  variant="secondary"
-                  onClick={handlePrev}
-                  disabled={currentIndex === 0}
-                  size="sm"
-                >
-                  Previous
-                </Button>
-                <span className={styles.qStatus}>
-                  {selected[currentQuestion.id]
-                    ? "Answered"
-                    : "Select a response"}
-                </span>
-                {currentIndex < totalQuestions - 1 ? (
+                <div className={styles.options}>
+                  {(["A", "B", "C"] as const).map((opt) => {
+                    const sel = selected[currentQuestion.id];
+                    return (
+                      <button
+                        key={opt}
+                        className={`${styles.option} ${
+                          sel === opt ? styles.selected : ""
+                        }`}
+                        onClick={() => handleSelect(opt)}
+                      >
+                        <span className={styles.optLabel}>{opt}</span>
+                        <span>{currentQuestion.options[opt]}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className={styles.navButtons}>
                   <Button
-                    onClick={handleNext}
-                    disabled={!selected[currentQuestion.id]}
+                    variant="secondary"
+                    onClick={handlePrev}
+                    disabled={currentIndex === 0}
                     size="sm"
                   >
-                    Next
+                    Previous
                   </Button>
-                ) : (
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={!allAnswered}
-                    size="sm"
-                  >
-                    Submit
-                  </Button>
-                )}
+                  <span className={styles.qStatus}>
+                    {selected[currentQuestion.id]
+                      ? "Answered"
+                      : "Select a response"}
+                  </span>
+                  {currentIndex < totalQuestions - 1 ? (
+                    <Button
+                      onClick={handleNext}
+                      disabled={!selected[currentQuestion.id]}
+                      size="sm"
+                    >
+                      Next
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleSubmit}
+                      disabled={!allAnswered}
+                      size="sm"
+                    >
+                      Submit
+                    </Button>
+                  )}
+                </div>
               </div>
-            </div>
+            </CardStack>
           )}
         </>
       )}

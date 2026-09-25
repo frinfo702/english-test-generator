@@ -70,7 +70,6 @@
   gap: var(--spacing-3);
   padding: var(--spacing-3) var(--spacing-4);
   border: 1px solid var(--color-border);
-  border-left: 3px solid transparent;
   border-radius: var(--radius-doc);
   cursor: pointer;
   background: var(--color-surface);
@@ -85,19 +84,16 @@
 }
 
 .optionSelected {
-  border-left-color: var(--color-ink);
   border-color: var(--color-ink);
   background: var(--color-surface-subtle);
 }
 
 .optionCorrect {
-  border-left-color: var(--color-success);
   border-color: var(--color-success);
   background: var(--color-success-subtle);
 }
 
 .optionIncorrect {
-  border-left-color: var(--color-error);
   border-color: var(--color-error);
   background: var(--color-error-subtle);
 }

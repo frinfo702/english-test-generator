@@ -2,12 +2,14 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { BackButton } from "./BackButton";
 import { Button } from "./Button";
+import { CardStack } from "./CardStack";
 import { FeedbackPanel } from "./FeedbackPanel";
 import { FloatingElapsedTimer } from "./FloatingElapsedTimer";
 import { GradingRequestPanel } from "./GradingRequestPanel";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { ProgressBar } from "./ProgressBar";
 import { SpeedControl } from "./SpeedControl";
+import { ThemeToggle } from "./ThemeToggle";
 import { Timer } from "./Timer";
 
 describe("ui components", () => {
@@ -162,5 +164,37 @@ describe("ui components", () => {
 
     expect(screen.getByRole("timer").textContent).toContain("TIME");
     expect(screen.getByRole("timer").textContent).toContain("03:21");
+  });
+
+  it("swaps the front card when CardStack moves to another item", () => {
+    const { rerender } = render(
+      <CardStack index={0} total={3}>
+        <p>Sentence one</p>
+      </CardStack>,
+    );
+    expect(screen.getByText("Sentence one")).toBeTruthy();
+
+    rerender(
+      <CardStack index={1} total={3}>
+        <p>Sentence two</p>
+      </CardStack>,
+    );
+    expect(screen.getByText("Sentence two")).toBeTruthy();
+    expect(screen.queryByText("Sentence one")).toBeNull();
+  });
+
+  it("toggles the document theme from the switch", () => {
+    document.documentElement.removeAttribute("data-theme");
+    render(<ThemeToggle />);
+
+    const toggle = screen.getByRole("switch", { name: "Dark mode" });
+    expect(toggle.getAttribute("aria-checked")).toBe("false");
+
+    fireEvent.click(toggle);
+    expect(toggle.getAttribute("aria-checked")).toBe("true");
+    expect(document.documentElement.getAttribute("data-theme")).toBe("dark");
+
+    document.documentElement.removeAttribute("data-theme");
+    localStorage.clear();
   });
 });

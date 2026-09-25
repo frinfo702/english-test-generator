@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
+import { CardStack } from "../../../components/ui/CardStack";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
@@ -202,97 +203,101 @@ export function BuildSentencePage() {
           )}
 
           {phase !== "pre" && (
-            <div className={styles.card}>
-              <p className={styles.qNum}>
-                Question {current + 1} / {totalSentences}
-              </p>
-              <div className={styles.referenceBox}>
-                <p className={styles.referenceLabel}>Reference</p>
-                <p className={styles.referenceText}>{sentence.reference}</p>
-              </div>
-              <div className={styles.zone}>
-                <p className={styles.zoneLabel}>
-                  Answer Area (click to remove)
+            <CardStack index={current} total={totalSentences}>
+              <div className={styles.card}>
+                <p className={styles.qNum}>
+                  Question {current + 1} / {totalSentences}
                 </p>
-                <div className={styles.slots}>
-                  {placed.length === 0 ? (
-                    <span className={styles.placeholder}>
-                      Select chunks from the pool below
-                    </span>
-                  ) : (
-                    placed.map((chunkIdx, pos) => (
+                <div className={styles.referenceBox}>
+                  <p className={styles.referenceLabel}>Reference</p>
+                  <p className={styles.referenceText}>{sentence.reference}</p>
+                </div>
+                <div className={styles.zone}>
+                  <p className={styles.zoneLabel}>
+                    Answer Area (click to remove)
+                  </p>
+                  <div className={styles.slots}>
+                    {placed.length === 0 ? (
+                      <span className={styles.placeholder}>
+                        Select chunks from the pool below
+                      </span>
+                    ) : (
+                      placed.map((chunkIdx, pos) => (
+                        <button
+                          key={pos}
+                          className={[
+                            styles.chip,
+                            styles.placed,
+                            graded
+                              ? isCorrect
+                                ? styles.correctChip
+                                : styles.wrongChip
+                              : "",
+                          ].join(" ")}
+                          onClick={() => handleRemove(pos)}
+                        >
+                          {displayChunk(sentence.chunks[chunkIdx])}
+                        </button>
+                      ))
+                    )}
+                  </div>
+                </div>
+                <div className={styles.zone}>
+                  <p className={styles.zoneLabel}>
+                    Chunk Pool (click to place)
+                  </p>
+                  <div className={styles.slots}>
+                    {pool.map((chunkIdx) => (
                       <button
-                        key={pos}
-                        className={[
-                          styles.chip,
-                          styles.placed,
-                          graded
-                            ? isCorrect
-                              ? styles.correctChip
-                              : styles.wrongChip
-                            : "",
-                        ].join(" ")}
-                        onClick={() => handleRemove(pos)}
+                        key={chunkIdx}
+                        className={[styles.chip, styles.poolChip].join(" ")}
+                        onClick={() => handlePlace(chunkIdx)}
+                        disabled={graded}
                       >
                         {displayChunk(sentence.chunks[chunkIdx])}
                       </button>
-                    ))
-                  )}
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className={styles.zone}>
-                <p className={styles.zoneLabel}>Chunk Pool (click to place)</p>
-                <div className={styles.slots}>
-                  {pool.map((chunkIdx) => (
-                    <button
-                      key={chunkIdx}
-                      className={[styles.chip, styles.poolChip].join(" ")}
-                      onClick={() => handlePlace(chunkIdx)}
-                      disabled={graded}
-                    >
-                      {displayChunk(sentence.chunks[chunkIdx])}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
-              {graded && (
-                <div
-                  className={[
-                    styles.feedback,
-                    isCorrect ? styles.fbCorrect : styles.fbWrong,
-                  ].join(" ")}
-                >
-                  <p className={styles.fbStatus}>
-                    {isCorrect ? "Correct" : "Incorrect"}
-                  </p>
-                  {!isCorrect && (
-                    <p className={styles.fbAnswer}>
-                      Correct answer: <strong>{sentence.fullSentence}</strong>
+                {graded && (
+                  <div
+                    className={[
+                      styles.feedback,
+                      isCorrect ? styles.fbCorrect : styles.fbWrong,
+                    ].join(" ")}
+                  >
+                    <p className={styles.fbStatus}>
+                      {isCorrect ? "Correct" : "Incorrect"}
                     </p>
+                    {!isCorrect && (
+                      <p className={styles.fbAnswer}>
+                        Correct answer: <strong>{sentence.fullSentence}</strong>
+                      </p>
+                    )}
+                  </div>
+                )}
+
+                <div className={styles.btnRow}>
+                  {current > 0 && (
+                    <Button variant="secondary" onClick={handlePrev}>
+                      Previous
+                    </Button>
+                  )}
+                  {!graded && !isLastSentence && isComplete && (
+                    <Button onClick={handleNext}>Next</Button>
+                  )}
+                  {!graded && isLastSentence && allComplete && (
+                    <Button onClick={handleSubmit} size="lg">
+                      Submit
+                    </Button>
+                  )}
+                  {graded && current + 1 < totalSentences && (
+                    <Button onClick={handleNext}>Next</Button>
                   )}
                 </div>
-              )}
-
-              <div className={styles.btnRow}>
-                {current > 0 && (
-                  <Button variant="secondary" onClick={handlePrev}>
-                    Previous
-                  </Button>
-                )}
-                {!graded && !isLastSentence && isComplete && (
-                  <Button onClick={handleNext}>Next</Button>
-                )}
-                {!graded && isLastSentence && allComplete && (
-                  <Button onClick={handleSubmit} size="lg">
-                    Submit
-                  </Button>
-                )}
-                {graded && current + 1 < totalSentences && (
-                  <Button onClick={handleNext}>Next</Button>
-                )}
               </div>
-            </div>
+            </CardStack>
           )}
         </>
       )}

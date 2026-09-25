@@ -2,19 +2,18 @@
   padding: var(--spacing-4) var(--spacing-5);
   border-radius: var(--radius);
   border: 1px solid var(--color-border-strong);
-  border-left: 3px solid;
   margin-top: var(--spacing-4);
   background: var(--color-surface);
 }
 
 .correct {
   background: var(--color-success-subtle);
-  border-left-color: var(--color-success);
+  border-color: color-mix(in srgb, var(--color-success) 40%, transparent);
 }
 
 .incorrect {
   background: var(--color-error-subtle);
-  border-left-color: var(--color-error);
+  border-color: color-mix(in srgb, var(--color-error) 40%, transparent);
 }
 
 .header {

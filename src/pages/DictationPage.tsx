@@ -4,6 +4,7 @@ import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
 import { LoadingSpinner } from "../components/ui/LoadingSpinner";
 import { AudioPlayer } from "../components/ui/AudioPlayer";
+import { CardStack } from "../components/ui/CardStack";
 import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
 import { useScoreHistory } from "../hooks/useScoreHistory";
@@ -259,130 +260,132 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
         )}
       </div>
 
-      <div className={styles.card}>
-        <div className={styles.playerSection}>
-          <AudioPlayer
-            playing={playing}
-            loading={ttsLoading}
-            error={ttsError}
-            currentTime={currentTime}
-            duration={duration}
-            playbackRate={playbackRate}
-            onPlayPause={handlePlay}
-            onSeek={() => {}}
-            onPlaybackRateChange={setPlaybackRate}
-            seekable={false}
-            src={audioUrl}
-          />
-        </div>
+      <CardStack index={current} total={totalSentences}>
+        <div className={styles.card}>
+          <div className={styles.playerSection}>
+            <AudioPlayer
+              playing={playing}
+              loading={ttsLoading}
+              error={ttsError}
+              currentTime={currentTime}
+              duration={duration}
+              playbackRate={playbackRate}
+              onPlayPause={handlePlay}
+              onSeek={() => {}}
+              onPlaybackRateChange={setPlaybackRate}
+              seekable={false}
+              src={audioUrl}
+            />
+          </div>
 
-        <p className={styles.instruction}>
-          Listen to the audio, then tap the word cards below in the correct
-          order.
-        </p>
+          <p className={styles.instruction}>
+            Listen to the audio, then tap the word cards below in the correct
+            order.
+          </p>
 
-        <div
-          className={[
-            styles.answerZone,
-            state.phase === "correct" ? styles.answerZoneCorrect : "",
-            state.phase === "wrong" ? styles.answerZoneWrong : "",
-          ].join(" ")}
-        >
-          {state.selected.length === 0 && !state.wrongToken ? (
-            <span className={styles.placeholder}>
-              Tap words from the pool below to build the sentence
-            </span>
-          ) : (
-            <>
-              {state.selected.map((token) => (
-                <span
+          <div
+            className={[
+              styles.answerZone,
+              state.phase === "correct" ? styles.answerZoneCorrect : "",
+              state.phase === "wrong" ? styles.answerZoneWrong : "",
+            ].join(" ")}
+          >
+            {state.selected.length === 0 && !state.wrongToken ? (
+              <span className={styles.placeholder}>
+                Tap words from the pool below to build the sentence
+              </span>
+            ) : (
+              <>
+                {state.selected.map((token) => (
+                  <span
+                    key={token.id}
+                    className={[
+                      styles.placedWord,
+                      state.phase === "correct" ? styles.placedWordCorrect : "",
+                    ].join(" ")}
+                  >
+                    {token.text}
+                  </span>
+                ))}
+                {/* Wrong word chip — shown in red, not part of the answer */}
+                {state.wrongToken && (
+                  <span
+                    key={state.wrongToken.id}
+                    className={[styles.placedWord, styles.placedWordWrong].join(
+                      " ",
+                    )}
+                  >
+                    {state.wrongToken.text}
+                  </span>
+                )}
+                {/* Pre-displayed trailing punctuation (., ?, !) */}
+                {trailingPunct && (
+                  <span className={styles.trailingPunct}>{trailingPunct}</span>
+                )}
+              </>
+            )}
+          </div>
+
+          <div className={styles.wordCards}>
+            {remainingPool.length === 0 ? (
+              <span className={styles.wordCardsEmpty}>All words placed</span>
+            ) : (
+              remainingPool.map((token) => (
+                <button
                   key={token.id}
-                  className={[
-                    styles.placedWord,
-                    state.phase === "correct" ? styles.placedWordCorrect : "",
-                  ].join(" ")}
+                  type="button"
+                  className={styles.wordCard}
+                  onClick={() => handleSelectWord(token)}
+                  disabled={state.phase === "correct"}
                 >
                   {token.text}
-                </span>
-              ))}
-              {/* Wrong word chip — shown in red, not part of the answer */}
-              {state.wrongToken && (
-                <span
-                  key={state.wrongToken.id}
-                  className={[styles.placedWord, styles.placedWordWrong].join(
-                    " ",
-                  )}
-                >
-                  {state.wrongToken.text}
-                </span>
-              )}
-              {/* Pre-displayed trailing punctuation (., ?, !) */}
-              {trailingPunct && (
-                <span className={styles.trailingPunct}>{trailingPunct}</span>
-              )}
-            </>
-          )}
-        </div>
-
-        <div className={styles.wordCards}>
-          {remainingPool.length === 0 ? (
-            <span className={styles.wordCardsEmpty}>All words placed</span>
-          ) : (
-            remainingPool.map((token) => (
-              <button
-                key={token.id}
-                type="button"
-                className={styles.wordCard}
-                onClick={() => handleSelectWord(token)}
-                disabled={state.phase === "correct"}
-              >
-                {token.text}
-              </button>
-            ))
-          )}
-        </div>
-
-        {state.phase === "wrong" && state.wrongToken && (
-          <div className={[styles.feedback, styles.fbWrong].join(" ")}>
-            <p className={styles.fbStatus}>Wrong word</p>
-            <p className={styles.fbAnswer}>
-              The word <strong>"{state.wrongToken.text}"</strong> is not the
-              next correct word. Keep trying — tap another word.
-            </p>
+                </button>
+              ))
+            )}
           </div>
-        )}
-        {state.phase === "correct" && (
-          <div className={[styles.feedback, styles.fbCorrect].join(" ")}>
-            <p className={styles.fbStatus}>Correct</p>
-            <p className={styles.fbAnswer}>
-              Correct sentence: <strong>{sentence.text}</strong>
-            </p>
-          </div>
-        )}
 
-        <div className={styles.btnRow}>
-          {state.selected.length > 0 && state.phase !== "correct" && (
-            <Button variant="secondary" onClick={handleRemoveLast}>
-              ← Backspace
-            </Button>
+          {state.phase === "wrong" && state.wrongToken && (
+            <div className={[styles.feedback, styles.fbWrong].join(" ")}>
+              <p className={styles.fbStatus}>Wrong word</p>
+              <p className={styles.fbAnswer}>
+                The word <strong>"{state.wrongToken.text}"</strong> is not the
+                next correct word. Keep trying — tap another word.
+              </p>
+            </div>
           )}
-          {current > 0 && (
-            <Button variant="secondary" onClick={handlePrev}>
-              Previous
-            </Button>
+          {state.phase === "correct" && (
+            <div className={[styles.feedback, styles.fbCorrect].join(" ")}>
+              <p className={styles.fbStatus}>Correct</p>
+              <p className={styles.fbAnswer}>
+                Correct sentence: <strong>{sentence.text}</strong>
+              </p>
+            </div>
           )}
-          {state.phase === "correct" && current + 1 < totalSentences && (
-            <Button variant="secondary" onClick={handleNext}>
-              Next →
-            </Button>
-          )}
-          {allCorrect && current + 1 >= totalSentences && (
-            <Button size="lg" onClick={handleSubmit}>
-              Submit
-            </Button>
-          )}
+
+          <div className={styles.btnRow}>
+            {state.selected.length > 0 && state.phase !== "correct" && (
+              <Button variant="secondary" onClick={handleRemoveLast}>
+                ← Backspace
+              </Button>
+            )}
+            {current > 0 && (
+              <Button variant="secondary" onClick={handlePrev}>
+                Previous
+              </Button>
+            )}
+            {state.phase === "correct" && current + 1 < totalSentences && (
+              <Button variant="secondary" onClick={handleNext}>
+                Next →
+              </Button>
+            )}
+            {allCorrect && current + 1 >= totalSentences && (
+              <Button size="lg" onClick={handleSubmit}>
+                Submit
+              </Button>
+            )}
+          </div>
         </div>
-      </div>
+      </CardStack>
     </div>
   );
 }

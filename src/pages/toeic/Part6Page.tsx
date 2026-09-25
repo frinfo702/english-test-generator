@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
 import { BackButton } from "../../components/ui/BackButton";
 import { Button } from "../../components/ui/Button";
+import { CardStack } from "../../components/ui/CardStack";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../components/ui/ProgressBar";
@@ -214,48 +215,54 @@ export function Part6Page() {
             </span>
             <span className={styles.passageType}>{passage.textType}</span>
           </div>
-          <div className={styles.passageCard}>
-            <p className={styles.passageText}>{renderText(passage)}</p>
-          </div>
-          <div className={styles.questions}>
-            {passage.questions.map((q) => {
-              const sel = selected[q.id];
-              return (
-                <div key={q.id} className={styles.qBlock}>
-                  <div className={styles.qHeader}>
-                    <span className={styles.blankTag}>[{q.blankNumber}]</span>
-                    <span className={styles.typeTag}>{q.type}</span>
+          <CardStack index={passageIdx} total={data.passages.length}>
+            <div className={styles.passageCard}>
+              <p className={styles.passageText}>{renderText(passage)}</p>
+            </div>
+            <div className={styles.questions}>
+              {passage.questions.map((q) => {
+                const sel = selected[q.id];
+                return (
+                  <div key={q.id} className={styles.qBlock}>
+                    <div className={styles.qHeader}>
+                      <span className={styles.blankTag}>[{q.blankNumber}]</span>
+                      <span className={styles.typeTag}>{q.type}</span>
+                    </div>
+                    <div className={styles.options}>
+                      {(["A", "B", "C", "D"] as const).map((opt) => (
+                        <button
+                          key={opt}
+                          className={[
+                            styles.option,
+                            sel === opt ? styles.selected : "",
+                            graded && opt === q.correct
+                              ? styles.correctOpt
+                              : "",
+                            graded && sel === opt && opt !== q.correct
+                              ? styles.wrongOpt
+                              : "",
+                          ].join(" ")}
+                          onClick={() => handleSelect(q.id, opt)}
+                        >
+                          <span className={styles.optLabel}>{opt}</span>
+                          <span className={styles.optText}>
+                            {q.options[opt]}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                    {graded && (
+                      <FeedbackPanel
+                        correct={sel === q.correct}
+                        explanation={q.explanation}
+                        correctAnswer={`(${q.correct}) ${q.options[q.correct]}`}
+                      />
+                    )}
                   </div>
-                  <div className={styles.options}>
-                    {(["A", "B", "C", "D"] as const).map((opt) => (
-                      <button
-                        key={opt}
-                        className={[
-                          styles.option,
-                          sel === opt ? styles.selected : "",
-                          graded && opt === q.correct ? styles.correctOpt : "",
-                          graded && sel === opt && opt !== q.correct
-                            ? styles.wrongOpt
-                            : "",
-                        ].join(" ")}
-                        onClick={() => handleSelect(q.id, opt)}
-                      >
-                        <span className={styles.optLabel}>{opt}</span>
-                        <span className={styles.optText}>{q.options[opt]}</span>
-                      </button>
-                    ))}
-                  </div>
-                  {graded && (
-                    <FeedbackPanel
-                      correct={sel === q.correct}
-                      explanation={q.explanation}
-                      correctAnswer={`(${q.correct}) ${q.options[q.correct]}`}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          </CardStack>
           <div className={styles.nav}>
             {passageIdx > 0 && (
               <Button variant="secondary" onClick={handlePrevPassage}>
