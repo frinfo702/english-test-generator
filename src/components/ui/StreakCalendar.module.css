@@ -1,0 +1,191 @@
+.card {
+  --cell: 13px;
+  --gap: 3px;
+  --level-0: var(--color-surface-subtle);
+  --level-1: color-mix(in srgb, var(--color-success) 28%, var(--color-surface));
+  --level-2: color-mix(in srgb, var(--color-success) 52%, var(--color-surface));
+  --level-3: color-mix(in srgb, var(--color-success) 76%, var(--color-surface));
+  --level-4: var(--color-success);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-6);
+  padding: var(--spacing-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-xs);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-3) var(--spacing-6);
+}
+
+.title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  letter-spacing: -0.01em;
+}
+
+.streaks {
+  display: flex;
+  gap: var(--spacing-6);
+}
+
+.streak {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+}
+
+.streak dt {
+  font-size: var(--text-2xs);
+  color: var(--color-ink-tertiary);
+}
+
+.streak dd {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+
+.streak dd span {
+  margin-left: 1px;
+  font-size: var(--text-xs);
+  color: var(--color-ink-tertiary);
+}
+
+/* ---- Calendar ---- */
+
+.scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: auto max-content;
+  grid-template-rows: auto auto;
+  column-gap: var(--spacing-2);
+  row-gap: var(--spacing-1);
+  width: max-content;
+  margin-inline: auto;
+}
+
+.months {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(var(--weeks), var(--cell));
+  gap: var(--gap);
+  height: 14px;
+}
+
+.months span,
+.days span {
+  font-size: 10px;
+  line-height: 1;
+  color: var(--color-ink-tertiary);
+  white-space: nowrap;
+}
+
+.days {
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+  grid-template-rows: repeat(7, var(--cell));
+  gap: var(--gap);
+}
+
+.days span {
+  line-height: var(--cell);
+}
+
+.grid {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(var(--weeks), var(--cell));
+  grid-template-rows: repeat(7, var(--cell));
+  gap: var(--gap);
+}
+
+.cell,
+.future {
+  width: var(--cell);
+  height: var(--cell);
+  border-radius: 2px;
+}
+
+.cell {
+  background: var(--level-0);
+  outline: 1px solid color-mix(in srgb, var(--color-ink) 6%, transparent);
+  outline-offset: -1px;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.cell[data-level="1"] {
+  background: var(--level-1);
+}
+.cell[data-level="2"] {
+  background: var(--level-2);
+}
+.cell[data-level="3"] {
+  background: var(--level-3);
+}
+.cell[data-level="4"] {
+  background: var(--level-4);
+}
+
+.grid .cell:hover {
+  outline-color: var(--color-ink-secondary);
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, calc(-100% - 6px));
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: var(--color-ink);
+  color: var(--color-ink-inverse);
+  font-size: var(--text-2xs);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ---- Legend ---- */
+
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--gap);
+  font-size: 10px;
+  color: var(--color-ink-tertiary);
+}
+
+.legend > span:first-child {
+  margin-right: var(--spacing-1);
+}
+
+.legend > span:last-child {
+  margin-left: var(--spacing-1);
+}
+
+@media (max-width: 620px) {
+  .card {
+    --cell: 11px;
+  }
+
+  .streaks {
+    gap: var(--spacing-4);
+  }
+}

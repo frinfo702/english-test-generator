@@ -1,7 +1,8 @@
-import { lazy, Suspense, useState, useEffect } from "react";
+import { lazy, Suspense, useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
+import { StreakCalendar } from "../components/ui/StreakCalendar";
 import {
   useScoreHistory,
   type ScoreEntry,
@@ -199,6 +200,7 @@ export function DashboardPage() {
   );
 
   const taskIds = Object.keys(byTask) as TaskId[];
+  const sessionDates = useMemo(() => entries.map((e) => e.date), [entries]);
 
   const handleClear = () => {
     if (confirmClear) {
@@ -257,6 +259,8 @@ export function DashboardPage() {
           <span className={styles.summaryValue}>{overallAvgElapsed}</span>
         </div>
       </div>
+
+      <StreakCalendar dates={sessionDates} />
 
       {taskIds.length === 0 ? (
         <div className={styles.empty}>

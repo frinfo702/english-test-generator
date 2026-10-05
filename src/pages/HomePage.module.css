@@ -4,29 +4,6 @@
   gap: var(--spacing-10);
 }
 
-/* ---- Masthead ---- */
-
-.intro {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.title {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-semibold);
-  letter-spacing: var(--tracking-tight);
-}
-
-/* ---- Body grid ---- */
-
-.grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 264px;
-  gap: var(--spacing-12);
-  align-items: start;
-}
-
 .sectionHead {
   display: flex;
   align-items: baseline;
@@ -41,85 +18,4 @@
   font-size: var(--text-sm);
   font-weight: var(--font-semibold);
   letter-spacing: -0.01em;
-}
-
-.sectionCount {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-2xs);
-  color: var(--color-ink-tertiary);
-  letter-spacing: 0.04em;
-}
-
-/* ---- Stats ---- */
-
-.aside {
-  position: sticky;
-  top: calc(var(--header-height) + var(--spacing-6));
-}
-
-.stats {
-  display: flex;
-  flex-direction: column;
-}
-
-.stat {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: var(--rule);
-}
-
-.statLabel {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-2xs);
-      color: var(--color-ink-tertiary);
-}
-
-.statValue {
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-variant-numeric: tabular-nums;
-  font-weight: var(--font-medium);
-  color: var(--color-ink);
-  letter-spacing: -0.01em;
-}
-
-.note {
-  margin-top: var(--spacing-5);
-  font-size: var(--text-xs);
-  line-height: var(--lh-normal);
-  color: var(--color-ink-tertiary);
-}
-
-.note code {
-  font-size: 11px;
-  color: var(--color-ink-secondary);
-  background: var(--color-surface-subtle);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
-  padding: 1px 4px;
-}
-
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--spacing-10);
-  }
-
-  .aside {
-    position: static;
-  }
-
-  .page {
-    gap: var(--spacing-10);
-  }
-}
-
-@media (max-width: 620px) {
-  .title {
-    font-size: var(--text-xl);
-  }
 }
