@@ -29,7 +29,31 @@ export function HomeHero() {
           height={480}
           loading="lazy"
         />
+        <HelloBubble />
       </div>
     </header>
+  );
+}
+
+function HelloBubble() {
+  return (
+    <svg className={styles.bubble} viewBox="0 0 80 62" aria-hidden="true">
+      <path
+        d="M4 30 C4 12 24 4 40 4 C62 4 76 14 76 30 C76 46 62 54 42 54 C34 54 28 53 22 50 L8 60 L12 46 C7 42 4 37 4 30 Z"
+        fill="var(--hero-lime)"
+        stroke="var(--hero-ink)"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+      />
+      <text
+        x="41"
+        y="36"
+        textAnchor="middle"
+        transform="rotate(-8 41 32)"
+        className={styles.hello}
+      >
+        hello
+      </text>
+    </svg>
   );
 }

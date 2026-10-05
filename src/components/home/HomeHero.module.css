@@ -4,6 +4,7 @@
 .hero {
   --hero-bg: #34337a;
   --hero-lime: #eef59a;
+  --hero-ink: #1c1917;
 
   position: relative;
   display: grid;
@@ -79,6 +80,43 @@
 }
 
 
+
+/* ---- "hello" bubble ---- */
+
+.bubble {
+  position: absolute;
+  top: -2%;
+  right: -4%;
+  width: 27%;
+  height: auto;
+  overflow: visible;
+  animation: bob 3.2s ease-in-out infinite;
+}
+
+.hello {
+  font-family: "Segoe Print", "Bradley Hand", "Chalkboard SE", "Comic Sans MS",
+    cursive;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  fill: var(--hero-ink);
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble {
+    animation: none;
+  }
+}
 
 @media (max-width: 620px) {
   .hero {
