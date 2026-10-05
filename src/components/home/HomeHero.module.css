@@ -1,0 +1,190 @@
+/* Home hero — a small, playful banner. Its palette is local on purpose:
+ * the rest of the app stays quiet, this one card gets to smile. */
+
+.hero {
+  --hero-bg: #34337a;
+  --hero-ink: #1c1917;
+  --hero-lime: #eef59a;
+  --hero-orange: #f28a5a;
+  --hero-lilac: #b9b3ee;
+  --hero-skin: #f3c9a4;
+  --hero-cheek: rgba(242, 138, 90, 0.45);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
+  align-items: end;
+  gap: var(--spacing-6);
+  padding: var(--spacing-6) var(--spacing-8) 0;
+  border-radius: var(--radius-xl);
+  background: var(--hero-bg);
+  overflow: hidden;
+}
+
+[data-theme="dark"] .hero {
+  --hero-bg: #2a2966;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  align-self: center;
+  padding-bottom: var(--spacing-6);
+}
+
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.title {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--hero-lime);
+}
+
+.lead {
+  max-width: 40ch;
+  font-size: var(--text-sm);
+  line-height: var(--lh-normal);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.art {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 180px;
+  overflow: visible;
+}
+
+.hello {
+  font-family: "Segoe Print", "Bradley Hand", "Chalkboard SE", "Comic Sans MS",
+    cursive;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  fill: var(--hero-ink);
+}
+
+/* ---- Motion ---- */
+
+.bubble,
+.friendA,
+.friendB,
+.cap,
+.head,
+.twinkle path {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.bubble {
+  animation: bob 3.2s ease-in-out infinite;
+}
+
+.friendA {
+  animation: bob 2.6s ease-in-out infinite 0.4s;
+}
+
+.friendB {
+  animation: bob 2.9s ease-in-out infinite 0.9s;
+}
+
+.cap {
+  animation: tilt 4s ease-in-out infinite;
+}
+
+.head {
+  transform-origin: 50% 90%;
+  animation: nod 5s ease-in-out infinite;
+}
+
+.twinkle path {
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+
+.twinkle .twinkleDelay {
+  animation-delay: 1.2s;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes tilt {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg) translateY(-2px);
+  }
+}
+
+@keyframes nod {
+  0%,
+  80%,
+  100% {
+    transform: rotate(0);
+  }
+  88% {
+    transform: rotate(-5deg);
+  }
+  94% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bubble,
+  .friendA,
+  .friendB,
+  .cap,
+  .head,
+  .twinkle path {
+    animation: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: var(--spacing-5) var(--spacing-5) 0;
+  }
+
+  .copy {
+    padding-bottom: var(--spacing-2);
+  }
+
+  .title {
+    font-size: var(--text-xl);
+  }
+
+  .art {
+    justify-self: end;
+    width: min(100%, 260px);
+  }
+}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { HomeHero } from "../components/home/HomeHero";
 import { useScoreHistory } from "../hooks/useScoreHistory";
 import { formatSecondsAsMmSs } from "../lib/time";
 import table from "../components/ui/ProblemTable.module.css";
@@ -92,10 +93,7 @@ export function HomePage() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.intro}>
-        <p className="micro-label">TOEFL iBT 2026 · TOEIC L&amp;R</p>
-        <h1 className={styles.title}>English Test Practice</h1>
-      </header>
+      <HomeHero />
 
       <div className={styles.grid}>
         <section className={styles.suites} aria-labelledby="suites-heading">

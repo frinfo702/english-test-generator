@@ -4,20 +4,6 @@
   gap: var(--spacing-10);
 }
 
-/* ---- Masthead ---- */
-
-.intro {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.title {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-semibold);
-  letter-spacing: var(--tracking-tight);
-}
-
 /* ---- Body grid ---- */
 
 .grid {
@@ -115,11 +101,5 @@
 
   .page {
     gap: var(--spacing-10);
-  }
-}
-
-@media (max-width: 620px) {
-  .title {
-    font-size: var(--text-xl);
   }
 }
