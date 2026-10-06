@@ -51,8 +51,8 @@
   /* Tick marks: 1ch-wide strips at the bottom matching each character position */
   background-image: repeating-linear-gradient(
     to right,
-    var(--color-border) 0,
-    var(--color-border) calc(1ch - 1px),
+    var(--color-ink) 0,
+    var(--color-ink) calc(1ch - 1px),
     transparent calc(1ch - 1px),
     transparent 1ch
   );
@@ -64,8 +64,8 @@
 .blankFocused .blankInput {
   background-image: repeating-linear-gradient(
     to right,
-    var(--color-ink-tertiary) 0,
-    var(--color-ink-tertiary) calc(1ch - 1px),
+    var(--color-brand) 0,
+    var(--color-brand) calc(1ch - 1px),
     transparent calc(1ch - 1px),
     transparent 1ch
   );
