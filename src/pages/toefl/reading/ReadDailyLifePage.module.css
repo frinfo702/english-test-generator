@@ -20,7 +20,7 @@
 }
 
 .moduleTag {
-    border: 1px solid var(--color-ink);
+  border: 1px solid var(--color-ink);
   background: transparent;
   color: var(--color-ink);
   font-size: var(--text-sm);
@@ -47,7 +47,7 @@
 .textMeta {
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
-    letter-spacing: 0.5px;
+  letter-spacing: 0.5px;
   margin-bottom: var(--spacing-sm);
 }
 
@@ -330,6 +330,17 @@
 
 .submitRow {
   display: flex;
+  align-items: center;
   justify-content: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
   margin-top: var(--spacing-xl);
+}
+
+.resultActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
 }

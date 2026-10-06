@@ -7,7 +7,10 @@ import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
 import { AudioPlayer } from "../components/ui/AudioPlayer";
 import { CardStack } from "../components/ui/CardStack";
+import { NextQuestionButton } from "../components/question/NextQuestionButton";
 import styles from "./ShadowingPage.module.css";
+
+const TASK_ID = "shadowing";
 
 interface Sentence {
   id: string;
@@ -151,7 +154,7 @@ export function ShadowingPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
   const { data, file, loading, error, loadByQuestionNumber } =
-    useQuestion<ProblemData>("shadowing");
+    useQuestion<ProblemData>(TASK_ID);
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
@@ -163,7 +166,7 @@ export function ShadowingPage() {
   }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
   const handleBackToList = () => {
-    navigate("/shadowing");
+    navigate(`/${TASK_ID}`);
   };
 
   return (
@@ -185,6 +188,7 @@ export function ShadowingPage() {
         >
           Question List
         </Button>
+        <NextQuestionButton taskId={TASK_ID} variant="secondary" size="sm" />
       </div>
 
       {loading && <LoadingSpinner message="Loading shadowing set..." />}

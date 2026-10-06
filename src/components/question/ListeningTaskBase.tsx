@@ -11,6 +11,7 @@ import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory, type TaskId } from "../../hooks/useScoreHistory";
 import { useTts } from "../../hooks/useTts";
+import { NextQuestionButton } from "./NextQuestionButton";
 import styles from "./ListeningTaskBase.module.css";
 
 interface ListeningQuestion {
@@ -129,9 +130,6 @@ export function ListeningTaskBase({
     navigate(`/${taskId}`);
   };
 
-  const allAnswered =
-    totalQuestions > 0 && Object.keys(selections).length === totalQuestions;
-
   const handlePlay = () => {
     if (playing) {
       pause();
@@ -217,9 +215,14 @@ export function ListeningTaskBase({
 
           {!graded && (
             <div className={styles.submitArea}>
-              <Button onClick={handleSubmit} disabled={!allAnswered} size="lg">
+              <Button onClick={handleSubmit} size="lg">
                 Submit Answers
               </Button>
+              <NextQuestionButton
+                taskId={taskId}
+                variant="secondary"
+                size="lg"
+              />
             </div>
           )}
 
@@ -249,6 +252,9 @@ export function ListeningTaskBase({
                     </p>
                   ))}
               </details>
+              <div className={styles.resultActions}>
+                <NextQuestionButton taskId={taskId} />
+              </div>
             </div>
           )}
 

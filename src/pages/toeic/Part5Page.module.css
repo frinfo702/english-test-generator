@@ -112,7 +112,10 @@
 
 .pageNav {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
   margin-top: var(--spacing-xl);
 }
 
@@ -156,4 +159,12 @@
   background: var(--color-error-subtle);
   padding: var(--spacing-md);
   border-radius: var(--radius-doc);
+}
+
+.resultActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
 }

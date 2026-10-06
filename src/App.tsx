@@ -1,4 +1,5 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { Fragment } from "react";
+import { HashRouter, Routes, Route, useParams } from "react-router-dom";
 import { AppShell } from "./components/layout/AppShell";
 import { HomePage } from "./pages/HomePage";
 import { DashboardPage } from "./pages/DashboardPage";
@@ -27,7 +28,7 @@ import { Part5Page } from "./pages/toeic/Part5Page";
 import { Part6Page } from "./pages/toeic/Part6Page";
 import { Part7Page } from "./pages/toeic/Part7Page";
 import { QuestionSelectorPage } from "./components/question/QuestionSelectorPage";
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 import type { TaskId } from "./hooks/useScoreHistory";
 
 interface TaskRoute {
@@ -202,6 +203,12 @@ const taskRoutes: TaskRoute[] = [
   },
 ];
 
+/** Remounts the page per question so "Next Question" starts from clean state. */
+function KeyedByQuestion({ children }: { children: ReactNode }) {
+  const { questionNumber } = useParams<{ questionNumber: string }>();
+  return <Fragment key={questionNumber}>{children}</Fragment>;
+}
+
 export default function App() {
   return (
     <HashRouter>
@@ -226,7 +233,10 @@ export default function App() {
                   />
                 }
               />
-              <Route path={`${r.basePath}/:questionNumber`} element={r.page} />
+              <Route
+                path={`${r.basePath}/:questionNumber`}
+                element={<KeyedByQuestion>{r.page}</KeyedByQuestion>}
+              />
             </Route>
           ))}
         </Routes>

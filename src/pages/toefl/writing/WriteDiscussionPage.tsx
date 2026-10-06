@@ -18,6 +18,7 @@ import {
   saveDraft,
 } from "../../../lib/answerSubmission";
 import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
+import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./WriteDiscussionPage.module.css";
 
 interface Student {
@@ -136,7 +137,7 @@ export function WriteDiscussionPage() {
     setAnswerId(null);
     setCopied(false);
     timer.reset();
-    navigate("/toefl/writing/discussion");
+    navigate(`/${TASK_ID}`);
   };
 
   return (
@@ -198,9 +199,16 @@ export function WriteDiscussionPage() {
                 Press Start when ready. The 10-minute timer will begin. Write at
                 least 100 words.
               </p>
-              <Button size="lg" onClick={handleStart}>
-                Start
-              </Button>
+              <div className={styles.actions}>
+                <Button size="lg" onClick={handleStart}>
+                  Start
+                </Button>
+                <NextQuestionButton
+                  taskId={TASK_ID}
+                  variant="secondary"
+                  size="lg"
+                />
+              </div>
             </div>
           )}
 
@@ -232,12 +240,10 @@ export function WriteDiscussionPage() {
                 />
               </PoodlePerch>
               {phase === "writing" && (
-                <Button onClick={handleSubmit} disabled={!meetsMinWords}>
-                  Submit
-                  {!meetsMinWords
-                    ? ` (${MIN_WORDS - wordCount} more words required)`
-                    : ""}
-                </Button>
+                <div className={styles.actions}>
+                  <Button onClick={handleSubmit}>Submit</Button>
+                  <NextQuestionButton taskId={TASK_ID} variant="secondary" />
+                </div>
               )}
             </div>
           )}
@@ -275,7 +281,10 @@ export function WriteDiscussionPage() {
                   </div>
                 )}
               </div>
-              <BackButton onClick={handleBackToList} size="lg" />
+              <div className={styles.actions}>
+                <BackButton onClick={handleBackToList} size="lg" />
+                <NextQuestionButton taskId={TASK_ID} size="lg" />
+              </div>
             </div>
           )}
         </>

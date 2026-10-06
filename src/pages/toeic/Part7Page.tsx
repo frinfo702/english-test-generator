@@ -9,6 +9,7 @@ import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
+import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part7Page.module.css";
 
 interface Passage {
@@ -74,8 +75,6 @@ export function Part7Page() {
   }, [data, loading, graded, running, elapsedSeconds, start]);
 
   const questions = data?.questions ?? [];
-  const allSelected =
-    questions.length > 0 && questions.every((q) => selected[q.id]);
   const totalCorrect = questions.filter(
     (q) => selected[q.id] === q.correct,
   ).length;
@@ -164,7 +163,10 @@ export function Part7Page() {
                 </strong>
                 ({Math.round((totalCorrect / questions.length) * 100)}%)
               </p>
-              <BackButton onClick={handleBackToList} />
+              <div className={styles.resultActions}>
+                <BackButton onClick={handleBackToList} />
+                <NextQuestionButton taskId="toeic/part7" />
+              </div>
             </div>
           )}
 
@@ -231,11 +233,18 @@ export function Part7Page() {
             })}
           </div>
 
-          {!graded && allSelected && (
+          {!graded && (
             <div className={styles.resultInline}>
-              <Button onClick={handleSubmit} size="lg">
-                Submit
-              </Button>
+              <div className={styles.resultActions}>
+                <Button onClick={handleSubmit} size="lg">
+                  Submit
+                </Button>
+                <NextQuestionButton
+                  taskId="toeic/part7"
+                  variant="secondary"
+                  size="lg"
+                />
+              </div>
             </div>
           )}
         </>

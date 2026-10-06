@@ -10,6 +10,7 @@ import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
 import { useTts } from "../../hooks/useTts";
+import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part2Page.module.css";
 
 interface QRQuestion {
@@ -26,13 +27,14 @@ interface ProblemData {
   audioSegments: { role: string; text: string }[];
 }
 
+const TASK_ID = "toeic/part2";
 const SEGMENTS_PER_QUESTION = 4;
 
 export function Part2Page() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
   const { data, file, loading, error, loadByQuestionNumber } =
-    useQuestion<ProblemData>("toeic/part2");
+    useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -73,8 +75,7 @@ export function Part2Page() {
       const urls = data.audioSegments
         .slice(startIdx, startIdx + SEGMENTS_PER_QUESTION)
         .map(
-          (_, i) =>
-            `/audio/toeic/part2/${fileBasename}/${startIdx + i + 1}.mp3`,
+          (_, i) => `/audio/${TASK_ID}/${fileBasename}/${startIdx + i + 1}.mp3`,
         );
       if (urls.length > 0) {
         audioStartedRef.current = new Set(audioStartedRef.current).add(
@@ -87,7 +88,6 @@ export function Part2Page() {
 
   const currentQuestion = questions[currentIndex];
   const totalQuestions = questions.length;
-  const allAnswered = questions.every((q) => selected[q.id]);
   const totalCorrect = questions.filter(
     (q) => selected[q.id] === q.correct,
   ).length;
@@ -125,7 +125,7 @@ export function Part2Page() {
         (q) => selected[q.id] === q.correct,
       ).length;
       saveScore(
-        "toeic/part2",
+        TASK_ID,
         correct,
         data.questions.length,
         sessionSeconds,
@@ -141,7 +141,7 @@ export function Part2Page() {
     setSelected({});
     setGraded(false);
     audioStartedRef.current = new Set();
-    navigate("/toeic/part2");
+    navigate(`/${TASK_ID}`);
   };
 
   return (
@@ -205,6 +205,7 @@ export function Part2Page() {
                   <Button onClick={retake} size="md" variant="secondary">
                     Retake
                   </Button>
+                  <NextQuestionButton taskId={TASK_ID} size="md" />
                 </div>
               </div>
 
@@ -298,23 +299,22 @@ export function Part2Page() {
                       ? "Answered"
                       : "Select an answer"}
                   </span>
-                  {currentIndex < totalQuestions - 1 ? (
-                    <Button
-                      onClick={handleNext}
-                      disabled={!selected[currentQuestion.id]}
+                  <div className={styles.navRight}>
+                    {currentIndex < totalQuestions - 1 ? (
+                      <Button onClick={handleNext} size="sm">
+                        Next
+                      </Button>
+                    ) : (
+                      <Button onClick={handleSubmit} size="sm">
+                        Submit
+                      </Button>
+                    )}
+                    <NextQuestionButton
+                      taskId={TASK_ID}
+                      variant="secondary"
                       size="sm"
-                    >
-                      Next
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={handleSubmit}
-                      disabled={!allAnswered}
-                      size="sm"
-                    >
-                      Submit
-                    </Button>
-                  )}
+                    />
+                  </div>
                 </div>
               </div>
             </CardStack>

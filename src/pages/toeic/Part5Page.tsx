@@ -11,6 +11,7 @@ import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
+import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part5Page.module.css";
 
 interface Question {
@@ -67,10 +68,6 @@ export function Part5Page() {
     (page + 1) * PAGE_SIZE,
   );
   const totalPages = Math.ceil(questions.length / PAGE_SIZE);
-  const allOnPageSelected =
-    pageQuestions.length > 0 && pageQuestions.every((q) => selected[q.id]);
-  const allSelected =
-    questions.length > 0 && questions.every((q) => selected[q.id]);
   const totalCorrect = questions.filter(
     (q) => selected[q.id] === q.correct,
   ).length;
@@ -166,7 +163,10 @@ export function Part5Page() {
                 total={questions.length}
                 label="Accuracy"
               />
-              <BackButton onClick={handleBackToList} size="lg" />
+              <div className={styles.resultActions}>
+                <BackButton onClick={handleBackToList} size="lg" />
+                <NextQuestionButton taskId="toeic/part5" size="lg" />
+              </div>
             </div>
           )}
 
@@ -226,16 +226,20 @@ export function Part5Page() {
                 Previous Page
               </Button>
             )}
-            {!graded && page + 1 < totalPages && allOnPageSelected && (
+            {page + 1 < totalPages && (
               <Button onClick={handleNextPage}>Next Page</Button>
             )}
-            {graded && page + 1 < totalPages && (
-              <Button onClick={handleNextPage}>Next Page</Button>
-            )}
-            {!graded && page + 1 >= totalPages && allSelected && (
-              <Button onClick={handleSubmit} size="lg">
-                Submit
-              </Button>
+            {!graded && page + 1 >= totalPages && (
+              <>
+                <Button onClick={handleSubmit} size="lg">
+                  Submit
+                </Button>
+                <NextQuestionButton
+                  taskId="toeic/part5"
+                  variant="secondary"
+                  size="lg"
+                />
+              </>
             )}
           </div>
         </>

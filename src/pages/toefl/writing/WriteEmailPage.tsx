@@ -18,6 +18,7 @@ import {
   saveDraft,
 } from "../../../lib/answerSubmission";
 import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
+import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./WriteEmailPage.module.css";
 
 interface Scenario {
@@ -137,7 +138,7 @@ export function WriteEmailPage() {
     setAnswerId(null);
     setCopied(false);
     timer.reset();
-    navigate("/toefl/writing/email");
+    navigate(`/${TASK_ID}`);
   };
 
   return (
@@ -200,9 +201,16 @@ export function WriteEmailPage() {
           {phase === "pre" && (
             <div className={styles.startCard}>
               <p>Press Start when ready. The 7-minute timer will begin.</p>
-              <Button size="lg" onClick={handleStart}>
-                Start
-              </Button>
+              <div className={styles.actions}>
+                <Button size="lg" onClick={handleStart}>
+                  Start
+                </Button>
+                <NextQuestionButton
+                  taskId={TASK_ID}
+                  variant="secondary"
+                  size="lg"
+                />
+              </div>
             </div>
           )}
 
@@ -229,7 +237,10 @@ export function WriteEmailPage() {
                 />
               </PoodlePerch>
               {phase === "writing" && (
-                <Button onClick={handleSubmit}>Submit</Button>
+                <div className={styles.actions}>
+                  <Button onClick={handleSubmit}>Submit</Button>
+                  <NextQuestionButton taskId={TASK_ID} variant="secondary" />
+                </div>
               )}
             </div>
           )}
@@ -270,7 +281,10 @@ export function WriteEmailPage() {
                   </div>
                 )}
               </div>
-              <BackButton onClick={handleBackToList} size="lg" />
+              <div className={styles.actions}>
+                <BackButton onClick={handleBackToList} size="lg" />
+                <NextQuestionButton taskId={TASK_ID} size="lg" />
+              </div>
             </div>
           )}
         </>

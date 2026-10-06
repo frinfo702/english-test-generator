@@ -34,7 +34,7 @@
   padding: 4px 10px;
   border-radius: var(--radius-doc);
   margin-bottom: var(--spacing-md);
-    }
+}
 
 .audioArea {
   display: flex;
@@ -101,6 +101,14 @@
   border-top: 1px solid var(--color-border);
 }
 
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .qStatus {
   font-size: var(--text-sm);
   color: var(--color-ink-tertiary);
@@ -147,7 +155,9 @@
 
 .resultActions {
   display: flex;
+  align-items: center;
   gap: var(--spacing-md);
+  flex-wrap: wrap;
 }
 
 .reviewCard {
@@ -288,5 +298,5 @@
 .audioLabel {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
 }

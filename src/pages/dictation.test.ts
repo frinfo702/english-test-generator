@@ -9,6 +9,7 @@ import {
   isCorrectSoFar,
   isCompleteAndCorrect,
   reconstructSentence,
+  computeDictationScore,
 } from "./dictation";
 
 describe("splitTrailingPunctuation", () => {
@@ -214,5 +215,24 @@ describe("isCompleteAndCorrect", () => {
 describe("reconstructSentence", () => {
   it("joins words with spaces", () => {
     expect(reconstructSentence(["I", "walk", "home"])).toBe("I walk home");
+  });
+});
+
+describe("computeDictationScore", () => {
+  it("gives full marks when every sentence is complete with no mistakes", () => {
+    expect(computeDictationScore(5, 0)).toBe(5);
+  });
+
+  it("subtracts one point per wrong tap", () => {
+    expect(computeDictationScore(5, 2)).toBe(3);
+  });
+
+  it("counts unfinished sentences as wrong", () => {
+    expect(computeDictationScore(3, 0)).toBe(3);
+    expect(computeDictationScore(0, 0)).toBe(0);
+  });
+
+  it("never goes below zero", () => {
+    expect(computeDictationScore(2, 7)).toBe(0);
   });
 });

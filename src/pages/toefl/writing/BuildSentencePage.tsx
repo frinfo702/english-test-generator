@@ -11,6 +11,7 @@ import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
+import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./BuildSentencePage.module.css";
 import {
   applyDrop,
@@ -71,7 +72,7 @@ export function BuildSentencePage() {
     setCurrent(0);
     setAllSlots({});
     setPhase("pre");
-    navigate("/toefl/writing/build-sentence");
+    navigate(`/${TASK_ID}`);
   };
 
   const sentence = data?.sentences[current];
@@ -122,10 +123,7 @@ export function BuildSentencePage() {
     const s = data?.sentences[idx];
     return s != null && isFilled(slotsFor(idx), s.chunks.length);
   };
-  const isComplete = isFilledFor(current);
   const totalSentences = data?.sentences.length ?? 0;
-  const allComplete =
-    totalSentences > 0 && data!.sentences.every((_, i) => isFilledFor(i));
   const isLastSentence = data ? current + 1 >= totalSentences : false;
 
   const isCorrectFor = (idx: number) => {
@@ -210,9 +208,16 @@ export function BuildSentencePage() {
           {phase === "pre" && (
             <div className={styles.startCard}>
               <p>Press Start when ready. The timer will begin immediately.</p>
-              <Button size="lg" onClick={handleStart}>
-                Start
-              </Button>
+              <div className={styles.actions}>
+                <Button size="lg" onClick={handleStart}>
+                  Start
+                </Button>
+                <NextQuestionButton
+                  taskId={TASK_ID}
+                  variant="secondary"
+                  size="lg"
+                />
+              </div>
             </div>
           )}
 
@@ -231,7 +236,10 @@ export function BuildSentencePage() {
                 total={totalSentences}
                 label="Accuracy"
               />
-              <BackButton onClick={handleBackToList} size="lg" />
+              <div className={styles.actions}>
+                <BackButton onClick={handleBackToList} size="lg" />
+                <NextQuestionButton taskId={TASK_ID} size="lg" />
+              </div>
             </div>
           )}
 
@@ -348,13 +356,16 @@ export function BuildSentencePage() {
                       Previous
                     </Button>
                   )}
-                  {!graded && !isLastSentence && isComplete && (
+                  {!graded && !isLastSentence && (
                     <Button onClick={handleNext}>Next</Button>
                   )}
-                  {!graded && isLastSentence && allComplete && (
+                  {!graded && isLastSentence && (
                     <Button onClick={handleSubmit} size="lg">
                       Submit
                     </Button>
+                  )}
+                  {!graded && (
+                    <NextQuestionButton taskId={TASK_ID} variant="secondary" />
                   )}
                   {graded && current + 1 < totalSentences && (
                     <Button onClick={handleNext}>Next</Button>

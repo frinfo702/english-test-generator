@@ -44,7 +44,7 @@
 .typeTag {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
-      color: var(--color-ink-secondary);
+  color: var(--color-ink-secondary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xs);
   padding: 3px 8px;
@@ -55,7 +55,7 @@
   font-family: var(--font-sans);
   font-variant-numeric: tabular-nums;
   font-size: var(--text-2xs);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
 }
 
 .question {
@@ -150,7 +150,7 @@
   font-variant-numeric: tabular-nums;
   font-size: var(--text-2xs);
   font-weight: var(--font-medium);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
   margin-bottom: var(--spacing-3);
 }
 
@@ -172,7 +172,7 @@
   font-variant-numeric: tabular-nums;
   font-size: var(--text-2xs);
   font-weight: var(--font-medium);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
   margin-bottom: var(--spacing-3);
 }
 
@@ -201,7 +201,7 @@
   font-variant-numeric: tabular-nums;
   font-size: var(--text-2xs);
   font-weight: var(--font-medium);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
   margin-bottom: var(--spacing-3);
 }
 
@@ -328,7 +328,7 @@
 .interviewerRole {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
 }
 
 .interviewerHint {
@@ -348,7 +348,7 @@
   cursor: pointer;
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
   list-style: none;
 }
 
@@ -381,7 +381,7 @@
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
   font-weight: var(--font-medium);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
 }
 
 .scenarioLine {
@@ -389,4 +389,11 @@
   font-size: var(--text-base);
   line-height: var(--lh-doc);
   color: var(--color-ink);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
 }

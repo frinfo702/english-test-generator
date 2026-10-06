@@ -13,6 +13,7 @@ import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
 import { useSingleAudio } from "../../../hooks/useSingleAudio";
+import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import {
   buildInterviewQaCopyMessage,
   buildProblemId,
@@ -260,7 +261,7 @@ export function TakeInterviewPage() {
     setDone(false);
     resetInteraction();
     timer.reset();
-    navigate("/toefl/speaking/interview");
+    navigate(`/${INTERVIEW_TASK_ID}`);
   };
 
   const handleNext = () => {
@@ -367,13 +368,20 @@ export function TakeInterviewPage() {
                   Microphone recording is not supported in this browser.
                 </p>
               )}
-              <Button
-                size="lg"
-                onClick={handleStart}
-                disabled={!speech.supported}
-              >
-                {onScenarioStep ? "Start Scenario" : "Start"}
-              </Button>
+              <div className={styles.actions}>
+                <Button
+                  size="lg"
+                  onClick={handleStart}
+                  disabled={!speech.supported}
+                >
+                  {onScenarioStep ? "Start Scenario" : "Start"}
+                </Button>
+                <NextQuestionButton
+                  taskId={INTERVIEW_TASK_ID}
+                  variant="secondary"
+                  size="lg"
+                />
+              </div>
             </div>
           )}
 
@@ -597,11 +605,15 @@ export function TakeInterviewPage() {
                 </div>
               </div>
 
-              <Button onClick={handleNext}>
-                {current + 1 < data.questions.length
-                  ? "Next Question"
-                  : "Finish"}
-              </Button>
+              <div className={styles.actions}>
+                <Button onClick={handleNext}>
+                  {current + 1 < data.questions.length ? "Continue" : "Finish"}
+                </Button>
+                <NextQuestionButton
+                  taskId={INTERVIEW_TASK_ID}
+                  variant="secondary"
+                />
+              </div>
             </div>
           )}
         </div>
@@ -616,7 +628,10 @@ export function TakeInterviewPage() {
             total={data.questions.length}
             label="Complete"
           />
-          <BackButton onClick={goToQuestionList} size="lg" />
+          <div className={styles.actions}>
+            <BackButton onClick={goToQuestionList} size="lg" />
+            <NextQuestionButton taskId={INTERVIEW_TASK_ID} size="lg" />
+          </div>
         </div>
       )}
     </div>

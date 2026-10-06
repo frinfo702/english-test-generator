@@ -9,6 +9,7 @@ import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTime
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
+import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ReadAcademicPage.module.css";
 
 interface Question {
@@ -102,7 +103,6 @@ export function ReadAcademicPage() {
 
   const totalQ = data?.questions.length ?? 0;
   const totalAnswered = Object.keys(answers).length;
-  const allAnswered = totalQ > 0 && totalAnswered === totalQ;
 
   const score = data
     ? data.questions.filter((q) => answers[q.id] === q.correctIndex).length
@@ -160,7 +160,10 @@ export function ReadAcademicPage() {
                   ({Math.round((score / totalQ) * 100)}%)
                 </span>
               </div>
-              <BackButton onClick={handleBackToList} size="lg" />
+              <div className={styles.resultActions}>
+                <BackButton onClick={handleBackToList} size="lg" />
+                <NextQuestionButton taskId="toefl/reading/academic" size="lg" />
+              </div>
             </div>
           )}
 
@@ -220,11 +223,16 @@ export function ReadAcademicPage() {
             </div>
           </div>
 
-          {!graded && allAnswered && (
+          {!graded && (
             <div className={styles.submitRow}>
               <Button onClick={handleSubmit} size="lg">
                 Submit
               </Button>
+              <NextQuestionButton
+                taskId="toefl/reading/academic"
+                variant="secondary"
+                size="lg"
+              />
             </div>
           )}
         </>

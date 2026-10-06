@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "../ui/ProgressBar";
+import { PixelArrowIcon } from "../ui/PixelArrowIcon";
 import styles from "./SectionHeader.module.css";
 
 interface SectionHeaderProps {
@@ -28,7 +29,7 @@ export function SectionHeader({
             aria-label="Go back"
             type="button"
           >
-            ←
+            <PixelArrowIcon direction="left" size={14} />
           </button>
         )}
         <div className={styles.titles}>

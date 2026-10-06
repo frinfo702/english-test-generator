@@ -14,6 +14,7 @@ import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useTts } from "../../../hooks/useTts";
 import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
+import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import {
   alignWords,
   countCorrectWords,
@@ -31,17 +32,13 @@ interface ProblemData {
   sentences: Sentence[];
 }
 
+const TASK_ID = "toefl/speaking/listen-repeat";
 const DEFAULT_WORDS_PER_SECOND = 2.2;
 const RECORDING_MULTIPLIER = 1.5;
 const PROCESSING_DELAY_MS = 400;
 
 type Phase =
-  | "playing"
-  | "ready"
-  | "recording"
-  | "processing"
-  | "feedback"
-  | "review";
+  "playing" | "ready" | "recording" | "processing" | "feedback" | "review";
 
 function DiffLegend() {
   return (
@@ -185,7 +182,7 @@ export function ListenRepeatPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
   const { data, file, loading, error, loadByQuestionNumber } =
-    useQuestion<ProblemData>("toefl/speaking/listen-repeat");
+    useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -315,7 +312,7 @@ export function ListenRepeatPage() {
               0,
             );
             saveScore(
-              "toefl/speaking/listen-repeat",
+              TASK_ID,
               correct,
               total,
               sessionSeconds,
@@ -407,7 +404,7 @@ export function ListenRepeatPage() {
     startRecording();
   }, [startRecording]);
 
-  const handleNextQuestion = useCallback(() => {
+  const handleNextSentence = useCallback(() => {
     if (isLastSentence) return;
     setCurrent((c) => c + 1);
     setPhase("playing");
@@ -460,7 +457,7 @@ export function ListenRepeatPage() {
     setProcessingMessage(null);
     finishingRef.current = false;
     setActiveReviewSentence(null);
-    navigate("/toefl/speaking/listen-repeat");
+    navigate(`/${TASK_ID}`);
   };
 
   const handleReplayAudio = () => {
@@ -570,10 +567,7 @@ export function ListenRepeatPage() {
                 Listen once more if you need to, then say the sentence back.
               </p>
               <div className={styles.recordControls}>
-                <MicSelector
-                  disabled={!speechSupported}
-                  previewEnabled
-                />
+                <MicSelector disabled={!speechSupported} previewEnabled />
                 <VoiceButton
                   state="idle"
                   label="Start Recording"
@@ -629,11 +623,7 @@ export function ListenRepeatPage() {
                 onPlaybackRateChange={setPlaybackRate}
                 src={`/audio/toefl/speaking/listen-repeat/${fileBasename}/${current + 1}.mp3`}
                 playLabel={
-                  playing
-                    ? "Pause"
-                    : currentTime > 0
-                      ? "Resume"
-                      : "Play Audio"
+                  playing ? "Pause" : currentTime > 0 ? "Resume" : "Play Audio"
                 }
               />
               <DiffLegend />
@@ -654,14 +644,14 @@ export function ListenRepeatPage() {
                 )}{" "}
                 words correct
               </p>
-              <Button onClick={handleNextQuestion} size="lg">
-                Next Question
+              <Button onClick={handleNextSentence} size="lg">
+                Next Sentence
               </Button>
             </div>
           )}
 
-          {phase !== "feedback" && (
-            <div className={styles.playerControls}>
+          <div className={styles.playerControls}>
+            {phase !== "feedback" && (
               <Button
                 onClick={handleReplayAudio}
                 disabled={phase === "playing" || ttsLoading}
@@ -670,8 +660,13 @@ export function ListenRepeatPage() {
               >
                 Replay audio
               </Button>
-            </div>
-          )}
+            )}
+            <NextQuestionButton
+              taskId={TASK_ID}
+              variant="secondary"
+              size="sm"
+            />
+          </div>
         </div>
       )}
 
@@ -697,7 +692,10 @@ export function ListenRepeatPage() {
               total={totalWords}
               label="Words Correct"
             />
-            <BackButton onClick={handleBackToList} size="lg" />
+            <div className={styles.actions}>
+              <BackButton onClick={handleBackToList} size="lg" />
+              <NextQuestionButton taskId={TASK_ID} size="lg" />
+            </div>
           </div>
 
           {data.sentences.map((s, i) => {

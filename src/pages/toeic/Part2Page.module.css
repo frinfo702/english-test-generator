@@ -97,6 +97,14 @@
   border-top: 1px solid var(--color-border);
 }
 
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .qStatus {
   font-size: var(--text-sm);
   color: var(--color-ink-tertiary);
@@ -143,7 +151,9 @@
 
 .resultActions {
   display: flex;
+  align-items: center;
   gap: var(--spacing-md);
+  flex-wrap: wrap;
 }
 
 .reviewCard {

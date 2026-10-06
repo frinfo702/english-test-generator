@@ -8,12 +8,15 @@ import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTime
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
+import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import {
   findAnswerPosition,
   getExpectedSuffix,
   type CompleteWordsItem,
 } from "./completeWords";
 import styles from "./CompleteWordsPage.module.css";
+
+const TASK_ID = "toefl/reading/complete-words";
 
 interface ProblemData {
   paragraph: string;
@@ -24,7 +27,7 @@ export function CompleteWordsPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
   const { data, file, loading, error, loadByQuestionNumber } =
-    useQuestion<ProblemData>("toefl/reading/complete-words");
+    useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -106,7 +109,7 @@ export function CompleteWordsPage() {
     setSubmitted(true);
     setFocusedIdx(null);
     saveScore(
-      "toefl/reading/complete-words",
+      TASK_ID,
       correct,
       data.items.length,
       sessionSeconds,
@@ -116,7 +119,7 @@ export function CompleteWordsPage() {
 
   const handleBackToList = () => {
     resetTimer();
-    navigate("/toefl/reading/complete-words");
+    navigate(`/${TASK_ID}`);
   };
 
   const handleAnswerChange = (idx: number, value: string) => {
@@ -256,14 +259,6 @@ export function CompleteWordsPage() {
     return parts;
   };
 
-  const hasIncompleteAnswers =
-    !data ||
-    answers.length !== data.items.length ||
-    answers.some((ans, idx) => {
-      const expectedLength = getExpectedSuffix(data.items[idx]).length;
-      return expectedLength > 0 && !ans.trim();
-    });
-
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
@@ -308,9 +303,10 @@ export function CompleteWordsPage() {
           <div className={styles.paragraph}>{renderParagraph()}</div>
 
           {!submitted ? (
-            <Button onClick={handleSubmit} disabled={hasIncompleteAnswers}>
-              Check Answers
-            </Button>
+            <div className={styles.actions}>
+              <Button onClick={handleSubmit}>Check Answers</Button>
+              <NextQuestionButton taskId={TASK_ID} variant="secondary" />
+            </div>
           ) : (
             <div className={styles.result}>
               <div className={styles.scoreBox}>
@@ -325,6 +321,7 @@ export function CompleteWordsPage() {
                 </span>
               </div>
               <BackButton onClick={handleBackToList} />
+              <NextQuestionButton taskId={TASK_ID} />
             </div>
           )}
         </>

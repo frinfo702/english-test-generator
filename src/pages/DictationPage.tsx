@@ -9,6 +9,7 @@ import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
 import { useScoreHistory } from "../hooks/useScoreHistory";
 import { useElapsedTimer } from "../hooks/useElapsedTimer";
+import { NextQuestionButton } from "../components/question/NextQuestionButton";
 import { formatSecondsAsMmSs } from "../lib/time";
 import {
   buildWordPool,
@@ -16,6 +17,7 @@ import {
   isCorrectSoFar,
   isCompleteAndCorrect,
   splitTrailingPunctuation,
+  computeDictationScore,
   type WordToken,
 } from "./dictation";
 import styles from "./DictationPage.module.css";
@@ -181,6 +183,8 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
     [data.sentences, states],
   );
   const allCorrect = correctCount === totalSentences;
+  const unfinishedCount = totalSentences - correctCount;
+  const isLastSentence = current + 1 >= totalSentences;
 
   /** Total wrong taps across all sentences (lower is better) */
   const totalWrongCount = useMemo(
@@ -192,8 +196,8 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
   const handleSubmit = () => {
     stopTimer();
     setSubmitted(true);
-    // Score: total sentences minus wrong taps (clamped to 0) so fewer mistakes = higher score
-    const score = Math.max(0, totalSentences - totalWrongCount);
+    // Unfinished sentences score zero; each wrong tap costs a point.
+    const score = computeDictationScore(correctCount, totalWrongCount);
     saveScore(TASK_ID, score, totalSentences, elapsedSeconds, file);
   };
 
@@ -224,10 +228,17 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
             mistake{totalWrongCount === 1 ? "" : "s"}
           </span>
         </div>
+        {unfinishedCount > 0 && (
+          <p className={styles.scorePct}>
+            {unfinishedCount} of {totalSentences} sentence
+            {totalSentences === 1 ? "" : "s"} left unfinished (counted as
+            wrong).
+          </p>
+        )}
         <p className={styles.scorePct}>
-          {totalWrongCount === 0
+          {totalWrongCount === 0 && unfinishedCount === 0
             ? "No mistakes — every sentence exactly right."
-            : totalWrongCount <= 3
+            : totalWrongCount + unfinishedCount <= 3
               ? "Close. A few words slipped."
               : "Keep going — the word order will stick."}
         </p>
@@ -241,6 +252,7 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
           <Button variant="ghost" onClick={() => navigate("/dashboard")}>
             View progress
           </Button>
+          <NextQuestionButton taskId={TASK_ID} />
         </div>
       </div>
     );
@@ -373,12 +385,12 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
                 Previous
               </Button>
             )}
-            {state.phase === "correct" && current + 1 < totalSentences && (
+            {!isLastSentence && (
               <Button variant="secondary" onClick={handleNext}>
                 Next →
               </Button>
             )}
-            {allCorrect && current + 1 >= totalSentences && (
+            {(allCorrect || isLastSentence) && (
               <Button size="lg" onClick={handleSubmit}>
                 Submit
               </Button>
@@ -428,6 +440,7 @@ export function DictationPage() {
         >
           Question List
         </Button>
+        <NextQuestionButton taskId={TASK_ID} variant="secondary" size="sm" />
       </div>
 
       {loading && <LoadingSpinner message="Loading dictation set..." />}

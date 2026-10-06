@@ -8,6 +8,7 @@ import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTime
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
+import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import { useState } from "react";
 import styles from "./ReadDailyLifePage.module.css";
 
@@ -92,7 +93,6 @@ export function ReadDailyLifePage() {
 
   const totalQ = allQ.length;
   const answeredCount = Object.keys(answers).length;
-  const allAnswered = totalQ > 0 && answeredCount === totalQ;
 
   const correctCount = allQ.filter(
     ({ question }) => answers[question.id] === question.correctIndex,
@@ -177,9 +177,15 @@ export function ReadDailyLifePage() {
                   </span>
                 </div>
               </div>
-              <Button size="lg" onClick={handleRestart}>
-                Try Again
-              </Button>
+              <div className={styles.resultActions}>
+                <Button size="lg" onClick={handleRestart}>
+                  Try Again
+                </Button>
+                <NextQuestionButton
+                  taskId="toefl/reading/daily-life"
+                  size="lg"
+                />
+              </div>
             </div>
           )}
 
@@ -246,11 +252,16 @@ export function ReadDailyLifePage() {
             ))}
           </div>
 
-          {!graded && allAnswered && (
+          {!graded && (
             <div className={styles.submitRow}>
               <Button onClick={handleSubmit} size="lg">
                 Submit
               </Button>
+              <NextQuestionButton
+                taskId="toefl/reading/daily-life"
+                variant="secondary"
+                size="lg"
+              />
             </div>
           )}
         </>

@@ -202,7 +202,7 @@ describe("ListenRepeatPage", () => {
     expect(screen.getByText("3s")).toBeTruthy();
   });
 
-  it("shows per-question feedback after recording and advances on Next Question", async () => {
+  it("shows per-question feedback after recording and advances on Next Sentence", async () => {
     renderPage();
 
     let onEnded: (() => void) | undefined;
@@ -246,10 +246,10 @@ describe("ListenRepeatPage", () => {
       expect(screen.getByText("Response")).toBeTruthy();
     });
 
-    expect(screen.getByRole("button", { name: /Next Question/i })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Next Sentence/i })).toBeTruthy();
 
     act(() => {
-      screen.getByRole("button", { name: /Next Question/i }).click();
+      screen.getByRole("button", { name: /Next Sentence/i }).click();
     });
 
     await waitFor(() => {
@@ -444,13 +444,13 @@ describe("ListenRepeatPage", () => {
       vi.advanceTimersByTime(4000);
     });
 
-    // Now in feedback phase for sentence 1. Click Next Question.
+    // Now in feedback phase for sentence 1. Click Next Sentence.
     await waitFor(() => {
       expect(screen.getByText("Comparison:")).toBeTruthy();
     });
 
     act(() => {
-      screen.getByRole("button", { name: /Next Question/i }).click();
+      screen.getByRole("button", { name: /Next Sentence/i }).click();
     });
 
     // Sentence 2: audio plays → ends → record → finish (last sentence → review)
@@ -597,7 +597,7 @@ describe("ListenRepeatPage", () => {
     });
 
     act(() => {
-      screen.getByRole("button", { name: /Next Question/i }).click();
+      screen.getByRole("button", { name: /Next Sentence/i }).click();
     });
 
     await waitFor(() => {

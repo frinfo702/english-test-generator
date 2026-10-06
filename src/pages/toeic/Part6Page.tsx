@@ -11,6 +11,7 @@ import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
+import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part6Page.module.css";
 
 interface Question {
@@ -66,17 +67,9 @@ export function Part6Page() {
   }, [data, loading, graded, running, elapsedSeconds, start]);
 
   const passage = data?.passages[passageIdx];
-  const allOnPassageSelected = (passage?.questions ?? []).every(
-    (q) => selected[q.id],
-  );
   const totalQ =
     data?.passages.reduce((s, p) => s + p.questions.length, 0) ?? 0;
   const totalAnswered = Object.keys(selected).length;
-  const allSelected =
-    totalQ > 0 &&
-    (data?.passages ?? [])
-      .flatMap((p) => p.questions)
-      .every((q) => selected[q.id]);
   const totalCorrect = (data?.passages ?? [])
     .flatMap((p) => p.questions)
     .filter((q) => selected[q.id] === q.correct).length;
@@ -130,11 +123,11 @@ export function Part6Page() {
           key={`b${n}`}
           className={[
             styles.inlineBlank,
-            graded && sel === q?.correct
-              ? styles.blankCorrect
-              : graded && sel
-                ? styles.blankWrong
-                : "",
+            graded && q
+              ? sel === q.correct
+                ? styles.blankCorrect
+                : styles.blankWrong
+              : "",
           ].join(" ")}
         >
           {sel
@@ -205,7 +198,10 @@ export function Part6Page() {
                 total={totalQ}
                 label="Accuracy"
               />
-              <BackButton onClick={handleBackToList} size="lg" />
+              <div className={styles.resultActions}>
+                <BackButton onClick={handleBackToList} size="lg" />
+                <NextQuestionButton taskId="toeic/part6" size="lg" />
+              </div>
             </div>
           )}
 
@@ -269,21 +265,21 @@ export function Part6Page() {
                 Previous Passage
               </Button>
             )}
-            {!graded &&
-              passageIdx + 1 < data.passages.length &&
-              allOnPassageSelected && (
-                <Button onClick={handleNextPassage}>Next Passage</Button>
-              )}
-            {graded && passageIdx + 1 < data.passages.length && (
+            {passageIdx + 1 < data.passages.length && (
               <Button onClick={handleNextPassage}>Next Passage</Button>
             )}
-            {!graded &&
-              passageIdx + 1 >= data.passages.length &&
-              allSelected && (
+            {!graded && passageIdx + 1 >= data.passages.length && (
+              <>
                 <Button onClick={handleSubmit} size="lg">
                   Submit
                 </Button>
-              )}
+                <NextQuestionButton
+                  taskId="toeic/part6"
+                  variant="secondary"
+                  size="lg"
+                />
+              </>
+            )}
           </div>
         </>
       )}
