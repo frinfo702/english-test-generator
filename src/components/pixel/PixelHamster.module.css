@@ -1,0 +1,45 @@
+.hamster {
+  /* One sprite cell; set --hamster-cell on a container to scale. */
+  --cell: var(--hamster-cell, 3px);
+  display: block;
+  width: calc(var(--cell) * 26);
+  height: calc(var(--cell) * 21);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hamster:focus-visible {
+  outline: none;
+  border-radius: var(--radius-xs);
+  box-shadow: var(--focus-ring);
+}
+
+.sprite {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.petted .sprite {
+  animation: wiggle 240ms steps(2, jump-none) infinite;
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(var(--cell));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petted .sprite {
+    animation: none;
+  }
+}

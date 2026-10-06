@@ -1,0 +1,51 @@
+.poodle {
+  /* One sprite cell; set --poodle-cell on a container to scale. */
+  --cell: var(--poodle-cell, 2px);
+  display: block;
+  width: calc(var(--cell) * 32);
+  height: calc(var(--cell) * 26);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.poodle:focus-visible {
+  outline: none;
+  border-radius: var(--radius-xs);
+  box-shadow: var(--focus-ring);
+}
+
+.sprite {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* A black dog on a dark surface needs a rim to read. Containers opt in by
+ * setting --poodle-rim (dark theme does it globally). */
+.sprite {
+  filter: var(--poodle-rim, none);
+}
+
+.lively .sprite {
+  animation: hop 360ms steps(2, jump-none) infinite;
+}
+
+@keyframes hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(calc(var(--cell) * -1));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lively .sprite {
+    animation: none;
+  }
+}

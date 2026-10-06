@@ -19,3 +19,9 @@
   font-weight: var(--font-semibold);
   letter-spacing: -0.01em;
 }
+
+.rowIcon {
+  display: block;
+  width: 28px;
+  height: 28px;
+}

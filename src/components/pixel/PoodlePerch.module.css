@@ -1,0 +1,15 @@
+.perch {
+  --poodle-cell: 3px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Room for the dog; its paws land on the box's top border. */
+  padding-top: calc(var(--poodle-cell) * 26 - 1px);
+}
+
+.poodle {
+  position: absolute;
+  top: 0;
+  right: var(--spacing-6);
+  z-index: 1;
+}

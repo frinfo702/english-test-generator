@@ -45,34 +45,21 @@
   color: var(--color-ink);
 }
 
-.logo:hover .logoMark {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
-}
-
 .logoMark {
-  width: 24px;
-  height: 24px;
-  border-radius: 7px;
-  background: var(--color-ink);
-  border: 1px solid var(--color-ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-ink-inverse);
-  font-family: var(--font-sans);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  display: block;
+  width: 33px;
+  height: auto;
+  aspect-ratio: 22 / 15;
   flex-shrink: 0;
-  transition:
-    background var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out),
-    transform var(--duration-base) var(--ease-out);
+  transition: transform var(--duration-base) var(--ease-out);
 }
 
-.logo:active .logoMark {
-  transform: scale(0.94);
+.logo:hover .logoMark {
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"] .logoMark {
+  filter: var(--poodle-rim);
 }
 
 /* ---- Nav: one hairline strip, one sliding surface ---- */

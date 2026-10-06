@@ -17,6 +17,7 @@ import {
   saveAnswerSubmission,
   saveDraft,
 } from "../../../lib/answerSubmission";
+import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
 import styles from "./WriteEmailPage.module.css";
 
 interface Scenario {
@@ -217,14 +218,16 @@ export function WriteEmailPage() {
                   {userText.trim().split(/\s+/).filter(Boolean).length} words
                 </span>
               </div>
-              <textarea
-                className={styles.textarea}
-                value={userText}
-                onChange={(e) => setUserText(e.target.value)}
-                placeholder="Type your email here..."
-                disabled={phase === "submitted"}
-                rows={14}
-              />
+              <PoodlePerch>
+                <textarea
+                  className={styles.textarea}
+                  value={userText}
+                  onChange={(e) => setUserText(e.target.value)}
+                  placeholder="Type your email here..."
+                  disabled={phase === "submitted"}
+                  rows={14}
+                />
+              </PoodlePerch>
               {phase === "writing" && (
                 <Button onClick={handleSubmit}>Submit</Button>
               )}

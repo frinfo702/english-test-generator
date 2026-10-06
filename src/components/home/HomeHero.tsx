@@ -1,6 +1,29 @@
+import { PixelArt } from "../pixel/PixelArt";
+import { PixelIcon } from "../pixel/PixelIcon";
+import { PixelPoodle } from "../pixel/PixelPoodle";
 import styles from "./HomeHero.module.css";
 
-// Photos: public domain / CC0 via Wikimedia Commons — see public/images/hero/CREDITS.md
+// prettier-ignore
+const SPARKLES = [
+  "....s",
+  "...sss..........................s",
+  "....s...........................",
+  "...............s",
+  "..............sss",
+  "...............s",
+  "",
+  "",
+  "",
+  ".s...................................s",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "......................................",
+  "..s",
+];
+
 export function HomeHero() {
   return (
     <header className={styles.hero}>
@@ -13,47 +36,45 @@ export function HomeHero() {
         </p>
       </div>
       <div className={styles.art}>
-        <img
-          className={`${styles.photo} ${styles.photoBack}`}
-          src="/images/hero/hall.jpg"
-          alt=""
-          width={320}
-          height={480}
-          loading="lazy"
+        <PixelArt
+          className={styles.sparkles}
+          layers={[SPARKLES]}
+          palette={{ s: "var(--hero-lime)" }}
+          width={40}
+          height={20}
         />
-        <img
-          className={`${styles.photo} ${styles.photoFront}`}
-          src="/images/hero/tower.jpg"
-          alt=""
-          width={320}
-          height={480}
-          loading="lazy"
-        />
+        <PixelIcon name="university" className={styles.building} />
+        <span className={styles.ground} aria-hidden="true" />
+        <PixelPoodle className={styles.poodle} />
         <HelloBubble />
       </div>
     </header>
   );
 }
 
+const BUBBLE_INNER = "l".repeat(24);
+// prettier-ignore
+const BUBBLE = [
+  "..".concat("o".repeat(22)),
+  ".o".concat("l".repeat(22), "o"),
+  ...Array.from({ length: 8 }, () => `o${BUBBLE_INNER}o`),
+  ".o".concat("l".repeat(22), "o"),
+  "..oooooooo".concat("ll", "o".repeat(12)),
+  ".........olo",
+  "........oo",
+];
+
 function HelloBubble() {
   return (
-    <svg className={styles.bubble} viewBox="0 0 80 62" aria-hidden="true">
-      <path
-        d="M4 30 C4 12 24 4 40 4 C62 4 76 14 76 30 C76 46 62 54 42 54 C34 54 28 53 22 50 L8 60 L12 46 C7 42 4 37 4 30 Z"
-        fill="var(--hero-lime)"
-        stroke="var(--hero-ink)"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
+    <div className={styles.bubble} aria-hidden="true">
+      <PixelArt
+        layers={[BUBBLE]}
+        palette={{ o: "var(--hero-ink)", l: "var(--hero-lime)" }}
+        width={26}
+        height={13}
+        className={styles.bubbleArt}
       />
-      <text
-        x="41"
-        y="36"
-        textAnchor="middle"
-        transform="rotate(-8 41 32)"
-        className={styles.hello}
-      >
-        hello
-      </text>
-    </svg>
+      <span className={styles.hello}>hello!</span>
+    </div>
   );
 }

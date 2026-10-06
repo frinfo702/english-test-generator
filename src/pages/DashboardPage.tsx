@@ -2,6 +2,7 @@ import { lazy, Suspense, useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
+import { PixelHamster } from "../components/pixel/PixelHamster";
 import { StreakCalendar } from "../components/ui/StreakCalendar";
 import {
   useScoreHistory,
@@ -260,7 +261,10 @@ export function DashboardPage() {
         </div>
       </div>
 
-      <StreakCalendar dates={sessionDates} />
+      <div className={styles.streakPerch}>
+        <PixelHamster className={styles.hamster} />
+        <StreakCalendar dates={sessionDates} />
+      </div>
 
       {taskIds.length === 0 ? (
         <div className={styles.empty}>
