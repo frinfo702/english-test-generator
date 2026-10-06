@@ -12,6 +12,7 @@ import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useTts } from "../../../hooks/useTts";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ListenResponsePage.module.css";
+import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 
 interface ResponseQuestion {
   id: string;
@@ -327,6 +328,7 @@ export function ListenResponsePage() {
                     ) : (
                       <Button onClick={handleSubmit} size="sm">
                         Submit
+                        <PixelCheckIcon />
                       </Button>
                     )}
                     <NextQuestionButton

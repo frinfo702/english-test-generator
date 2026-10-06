@@ -13,6 +13,7 @@ import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part6Page.module.css";
+import { PixelCheckIcon } from "../../components/ui/PixelCheckIcon";
 
 interface Question {
   id: string;
@@ -272,6 +273,7 @@ export function Part6Page() {
               <>
                 <Button onClick={handleSubmit} size="lg">
                   Submit
+                  <PixelCheckIcon />
                 </Button>
                 <NextQuestionButton
                   taskId="toeic/part6"

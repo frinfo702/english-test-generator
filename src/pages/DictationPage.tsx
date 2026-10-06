@@ -21,6 +21,7 @@ import {
   type WordToken,
 } from "./dictation";
 import styles from "./DictationPage.module.css";
+import { PixelCheckIcon } from "../components/ui/PixelCheckIcon";
 
 interface DictationSentence {
   id: string;
@@ -393,6 +394,7 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
             {(allCorrect || isLastSentence) && (
               <Button size="lg" onClick={handleSubmit}>
                 Submit
+                <PixelCheckIcon />
               </Button>
             )}
           </div>

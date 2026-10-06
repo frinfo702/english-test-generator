@@ -13,6 +13,7 @@ import { useScoreHistory, type TaskId } from "../../hooks/useScoreHistory";
 import { useTts } from "../../hooks/useTts";
 import { NextQuestionButton } from "./NextQuestionButton";
 import styles from "./ListeningTaskBase.module.css";
+import { PixelCheckIcon } from "../ui/PixelCheckIcon";
 
 interface ListeningQuestion {
   id: string;
@@ -217,6 +218,7 @@ export function ListeningTaskBase({
             <div className={styles.submitArea}>
               <Button onClick={handleSubmit} size="lg">
                 Submit Answers
+                <PixelCheckIcon />
               </Button>
               <NextQuestionButton
                 taskId={taskId}

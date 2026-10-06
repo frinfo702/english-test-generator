@@ -24,6 +24,7 @@ import {
   type Slots,
 } from "./buildSentence";
 import { useChunkDrag } from "./useChunkDrag";
+import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 
 interface Sentence {
   id: string;
@@ -362,6 +363,7 @@ export function BuildSentencePage() {
                   {!graded && isLastSentence && (
                     <Button onClick={handleSubmit} size="lg">
                       Submit
+                      <PixelCheckIcon />
                     </Button>
                   )}
                   {!graded && (

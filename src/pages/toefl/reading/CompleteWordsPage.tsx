@@ -15,6 +15,7 @@ import {
   type CompleteWordsItem,
 } from "./completeWords";
 import styles from "./CompleteWordsPage.module.css";
+import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 
 const TASK_ID = "toefl/reading/complete-words";
 
@@ -304,7 +305,10 @@ export function CompleteWordsPage() {
 
           {!submitted ? (
             <div className={styles.actions}>
-              <Button onClick={handleSubmit}>Check Answers</Button>
+              <Button onClick={handleSubmit}>
+                Check Answers
+                <PixelCheckIcon />
+              </Button>
               <NextQuestionButton taskId={TASK_ID} variant="secondary" />
             </div>
           ) : (

@@ -11,6 +11,7 @@ import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import { useState } from "react";
 import styles from "./ReadDailyLifePage.module.css";
+import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 
 interface Question {
   id: string;
@@ -256,6 +257,7 @@ export function ReadDailyLifePage() {
             <div className={styles.submitRow}>
               <Button onClick={handleSubmit} size="lg">
                 Submit
+                <PixelCheckIcon />
               </Button>
               <NextQuestionButton
                 taskId="toefl/reading/daily-life"

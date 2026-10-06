@@ -11,6 +11,7 @@ import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ReadAcademicPage.module.css";
+import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 
 interface Question {
   id: string;
@@ -227,6 +228,7 @@ export function ReadAcademicPage() {
             <div className={styles.submitRow}>
               <Button onClick={handleSubmit} size="lg">
                 Submit
+                <PixelCheckIcon />
               </Button>
               <NextQuestionButton
                 taskId="toefl/reading/academic"

@@ -20,6 +20,7 @@ import {
 import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./WriteDiscussionPage.module.css";
+import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 
 interface Student {
   name: string;
@@ -241,7 +242,10 @@ export function WriteDiscussionPage() {
               </PoodlePerch>
               {phase === "writing" && (
                 <div className={styles.actions}>
-                  <Button onClick={handleSubmit}>Submit</Button>
+                  <Button onClick={handleSubmit}>
+                    Submit
+                    <PixelCheckIcon />
+                  </Button>
                   <NextQuestionButton taskId={TASK_ID} variant="secondary" />
                 </div>
               )}

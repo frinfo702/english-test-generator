@@ -12,6 +12,7 @@ import { useScoreHistory } from "../../hooks/useScoreHistory";
 import { useTts } from "../../hooks/useTts";
 import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part2Page.module.css";
+import { PixelCheckIcon } from "../../components/ui/PixelCheckIcon";
 
 interface QRQuestion {
   id: string;
@@ -307,6 +308,7 @@ export function Part2Page() {
                     ) : (
                       <Button onClick={handleSubmit} size="sm">
                         Submit
+                        <PixelCheckIcon />
                       </Button>
                     )}
                     <NextQuestionButton
