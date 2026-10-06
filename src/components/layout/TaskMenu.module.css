@@ -36,15 +36,6 @@
   background: var(--color-border);
 }
 
-.count {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-2xs);
-  color: var(--color-ink-tertiary);
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-}
-
 .list {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);

@@ -5,7 +5,7 @@ export interface TaskMenuItem {
   label: string;
   desc: string;
   path: string;
-  /** Fixed constraint worth showing: time limit, item count, format note. */
+  /** Number of questions, when fixed. */
   meta?: string;
 }
 
@@ -35,7 +35,6 @@ export function TaskMenu({ sections }: TaskMenuProps) {
             />
             <h2 className={styles.label}>{section.label}</h2>
             <span className={styles.rule} aria-hidden="true" />
-            <span className={styles.count}>{section.items.length} tasks</span>
           </div>
 
           <div className={styles.list}>
