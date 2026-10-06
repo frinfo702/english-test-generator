@@ -37,6 +37,25 @@
 
 /* ---- Task cards ---- */
 
+/* The hamster sits on the streak card's top edge. */
+.streakPerch {
+  --hamster-cell: 3px;
+  position: relative;
+  margin-top: var(--spacing-6);
+  padding-top: calc(var(--hamster-cell) * 21 - 1px);
+}
+
+.streakPerch > section {
+  margin-top: 0;
+}
+
+.hamster {
+  position: absolute;
+  top: 0;
+  right: var(--spacing-8);
+  z-index: 1;
+}
+
 .taskGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

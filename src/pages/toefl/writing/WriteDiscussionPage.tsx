@@ -17,6 +17,7 @@ import {
   saveAnswerSubmission,
   saveDraft,
 } from "../../../lib/answerSubmission";
+import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
 import styles from "./WriteDiscussionPage.module.css";
 
 interface Student {
@@ -220,14 +221,16 @@ export function WriteDiscussionPage() {
                   {wordCount} / {MIN_WORDS}+ words
                 </span>
               </div>
-              <textarea
-                className={styles.textarea}
-                value={userText}
-                onChange={(e) => setUserText(e.target.value)}
-                placeholder="Type your response here..."
-                disabled={phase === "submitted"}
-                rows={14}
-              />
+              <PoodlePerch>
+                <textarea
+                  className={styles.textarea}
+                  value={userText}
+                  onChange={(e) => setUserText(e.target.value)}
+                  placeholder="Type your response here..."
+                  disabled={phase === "submitted"}
+                  rows={14}
+                />
+              </PoodlePerch>
               {phase === "writing" && (
                 <Button onClick={handleSubmit} disabled={!meetsMinWords}>
                   Submit

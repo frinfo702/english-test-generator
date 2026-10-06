@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { PixelArt } from "../pixel/PixelArt";
+import { POODLE_BODY, POODLE_PALETTE } from "../pixel/poodleSprite";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import styles from "./AppShell.module.css";
+
+// The mascot's head (sprite rows 1–15, ears to collar) as the logo mark.
+const POODLE_HEAD = POODLE_BODY.slice(1, 16).map((row) => row.slice(2, 24));
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -105,9 +110,13 @@ export function AppShell({ children }: AppShellProps) {
             className={styles.logo}
             aria-label="English Test Practice home"
           >
-            <span className={styles.logoMark} aria-hidden="true">
-              ET
-            </span>
+            <PixelArt
+              className={styles.logoMark}
+              layers={[POODLE_HEAD]}
+              palette={POODLE_PALETTE}
+              width={22}
+              height={15}
+            />
             <span className={styles.logoText}>English Test Practice</span>
           </Link>
 
