@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
@@ -11,6 +12,17 @@ import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import styles from "./BuildSentencePage.module.css";
+import {
+  applyDrop,
+  emptySlots,
+  isCorrectOrder,
+  isFilled,
+  poolChunks,
+  type DragSource,
+  type DropTarget,
+  type Slots,
+} from "./buildSentence";
+import { useChunkDrag } from "./useChunkDrag";
 
 interface Sentence {
   id: string;
@@ -41,7 +53,7 @@ export function BuildSentencePage() {
     reset: resetTimer,
   } = useElapsedTimer();
   const [current, setCurrent] = useState(0);
-  const [allPlaced, setAllPlaced] = useState<Record<number, number[]>>({});
+  const [allSlots, setAllSlots] = useState<Record<number, Slots>>({});
   const [phase, setPhase] = useState<"pre" | "answering" | "submitted">("pre");
   const graded = phase === "submitted";
 
@@ -57,43 +69,68 @@ export function BuildSentencePage() {
   const handleBackToList = () => {
     resetTimer();
     setCurrent(0);
-    setAllPlaced({});
+    setAllSlots({});
     setPhase("pre");
     navigate("/toefl/writing/build-sentence");
   };
 
   const sentence = data?.sentences[current];
-  const placed = allPlaced[current] ?? [];
-  const pool = sentence
-    ? sentence.chunks.map((_, i) => i).filter((i) => !placed.includes(i))
-    : [];
+  const slotsFor = (idx: number): Slots =>
+    allSlots[idx] ?? emptySlots(data?.sentences[idx]?.chunks.length ?? 0);
+  const slots = slotsFor(current);
+  const pool = sentence ? poolChunks(sentence.chunks.length, slots) : [];
 
-  const setPlaced = (newPlaced: number[]) => {
-    setAllPlaced((s) => ({ ...s, [current]: newPlaced }));
+  const handleDrop = (source: DragSource, target: DropTarget) => {
+    if (graded) return;
+    setAllSlots((s) => ({
+      ...s,
+      [current]: applyDrop(
+        s[current] ?? emptySlots(sentence?.chunks.length ?? 0),
+        source,
+        target,
+      ),
+    }));
+  };
+  const { ghost, over, startDrag, isDragClick } = useChunkDrag(
+    phase === "answering",
+    handleDrop,
+  );
+
+  // Clicking still works as a shortcut: pool → first empty blank, blank → pool.
+  const handlePoolClick = (chunkIdx: number) => {
+    if (isDragClick()) return;
+    const firstEmpty = slots.indexOf(null);
+    if (firstEmpty === -1) return;
+    handleDrop(
+      { kind: "pool", chunk: chunkIdx },
+      { kind: "slot", index: firstEmpty },
+    );
+  };
+  const handleSlotClick = (pos: number) => {
+    if (isDragClick()) return;
+    handleDrop({ kind: "slot", index: pos }, { kind: "pool" });
   };
 
-  const handlePlace = (chunkIdx: number) => {
-    if (!graded) setPlaced([...placed, chunkIdx]);
-  };
-  const handleRemove = (pos: number) => {
-    if (!graded) setPlaced(placed.filter((_, i) => i !== pos));
-  };
+  const isDraggingSlot = (pos: number) =>
+    ghost?.source.kind === "slot" && ghost.source.index === pos;
+  const isDraggingChunk = (chunkIdx: number) =>
+    ghost?.source.kind === "pool" && ghost.source.chunk === chunkIdx;
+  const isOverSlot = (pos: number) =>
+    over?.kind === "slot" && over.index === pos;
 
-  const isComplete =
-    sentence != null && placed.length === sentence.chunks.length;
+  const isFilledFor = (idx: number) => {
+    const s = data?.sentences[idx];
+    return s != null && isFilled(slotsFor(idx), s.chunks.length);
+  };
+  const isComplete = isFilledFor(current);
   const totalSentences = data?.sentences.length ?? 0;
   const allComplete =
-    totalSentences > 0 &&
-    data!.sentences.every(
-      (s, i) => (allPlaced[i] ?? []).length === s.chunks.length,
-    );
+    totalSentences > 0 && data!.sentences.every((_, i) => isFilledFor(i));
   const isLastSentence = data ? current + 1 >= totalSentences : false;
 
   const isCorrectFor = (idx: number) => {
     const s = data?.sentences[idx];
-    const p = allPlaced[idx] ?? [];
-    if (!s || p.length !== s.chunks.length) return false;
-    return p.every((chunkIdx, pos) => s.correctOrder[pos] === chunkIdx);
+    return s != null && isCorrectOrder(slotsFor(idx), s.correctOrder);
   };
 
   const isCorrect = isCorrectFor(current);
@@ -137,11 +174,7 @@ export function BuildSentencePage() {
         subtitle="Reorder word chunks to build a response to the prompt."
         backTo="/toefl"
         current={
-          data
-            ? data.sentences.filter(
-                (s, i) => (allPlaced[i] ?? []).length === s.chunks.length,
-              ).length
-            : 0
+          data ? data.sentences.filter((_, i) => isFilledFor(i)).length : 0
         }
         total={totalSentences}
       />
@@ -213,45 +246,76 @@ export function BuildSentencePage() {
                   <p className={styles.referenceText}>{sentence.reference}</p>
                 </div>
                 <div className={styles.zone}>
-                  <p className={styles.zoneLabel}>
-                    Answer Area (click to remove)
-                  </p>
-                  <div className={styles.slots}>
-                    {placed.length === 0 ? (
-                      <span className={styles.placeholder}>
-                        Select chunks from the pool below
+                  <p className={styles.zoneLabel}>Answer Area</p>
+                  <div className={styles.blanks}>
+                    {slots.map((chunkIdx, pos) => (
+                      <span
+                        key={pos}
+                        data-drop="slot"
+                        data-slot={pos}
+                        className={[
+                          styles.blank,
+                          isOverSlot(pos) ? styles.blankOver : "",
+                        ].join(" ")}
+                      >
+                        {chunkIdx !== null && (
+                          <button
+                            className={[
+                              styles.chip,
+                              styles.placed,
+                              graded
+                                ? isCorrect
+                                  ? styles.correctChip
+                                  : styles.wrongChip
+                                : "",
+                              isDraggingSlot(pos) ? styles.dragging : "",
+                            ].join(" ")}
+                            onPointerDown={(e) =>
+                              startDrag(
+                                e,
+                                { kind: "slot", index: pos },
+                                displayChunk(sentence.chunks[chunkIdx]),
+                              )
+                            }
+                            onClick={() => handleSlotClick(pos)}
+                            disabled={graded}
+                          >
+                            {displayChunk(sentence.chunks[chunkIdx])}
+                          </button>
+                        )}
                       </span>
-                    ) : (
-                      placed.map((chunkIdx, pos) => (
-                        <button
-                          key={pos}
-                          className={[
-                            styles.chip,
-                            styles.placed,
-                            graded
-                              ? isCorrect
-                                ? styles.correctChip
-                                : styles.wrongChip
-                              : "",
-                          ].join(" ")}
-                          onClick={() => handleRemove(pos)}
-                        >
-                          {displayChunk(sentence.chunks[chunkIdx])}
-                        </button>
-                      ))
-                    )}
+                    ))}
                   </div>
                 </div>
                 <div className={styles.zone}>
                   <p className={styles.zoneLabel}>
-                    Chunk Pool (click to place)
+                    Chunk Pool (drag onto a blank)
                   </p>
-                  <div className={styles.slots}>
+                  <div
+                    data-drop="pool"
+                    className={[
+                      styles.slots,
+                      over?.kind === "pool" && ghost?.source.kind === "slot"
+                        ? styles.poolOver
+                        : "",
+                    ].join(" ")}
+                  >
                     {pool.map((chunkIdx) => (
                       <button
                         key={chunkIdx}
-                        className={[styles.chip, styles.poolChip].join(" ")}
-                        onClick={() => handlePlace(chunkIdx)}
+                        className={[
+                          styles.chip,
+                          styles.poolChip,
+                          isDraggingChunk(chunkIdx) ? styles.dragging : "",
+                        ].join(" ")}
+                        onPointerDown={(e) =>
+                          startDrag(
+                            e,
+                            { kind: "pool", chunk: chunkIdx },
+                            displayChunk(sentence.chunks[chunkIdx]),
+                          )
+                        }
+                        onClick={() => handlePoolClick(chunkIdx)}
                         disabled={graded}
                       >
                         {displayChunk(sentence.chunks[chunkIdx])}
@@ -301,6 +365,17 @@ export function BuildSentencePage() {
           )}
         </>
       )}
+      {ghost &&
+        createPortal(
+          <div
+            className={[styles.chip, styles.poolChip, styles.ghost].join(" ")}
+            style={{ left: ghost.left, top: ghost.top, width: ghost.width }}
+            aria-hidden="true"
+          >
+            {ghost.label}
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }

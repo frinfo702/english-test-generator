@@ -139,22 +139,21 @@
 }
 
 .placed {
-  background: var(--color-surface-subtle);
-  border-color: var(--color-accent);
+  background: transparent;
+  border-color: transparent;
   color: var(--color-accent);
 }
-.placed:hover {
-  background: var(--color-surface-subtle);
+.placed:hover:not(:disabled) {
+  border-color: var(--color-accent);
 }
 
 .poolChip {
-  background: var(--color-surface);
-  border-color: var(--color-border);
+  background: transparent;
+  border-color: transparent;
   color: var(--color-ink);
 }
 .poolChip:hover:not(:disabled) {
   border-color: var(--color-accent);
-  background: var(--color-surface-subtle);
 }
 .poolChip:disabled {
   opacity: 0.5;
@@ -246,4 +245,61 @@
   background: var(--color-error-subtle);
   padding: var(--spacing-md);
   border-radius: var(--radius-doc);
+}
+
+/* Answer blanks: one underline per chunk, filled by drag and drop */
+.blanks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--spacing-sm) var(--spacing-md);
+  min-height: 56px;
+  padding: var(--spacing-sm) 0;
+}
+
+.blank {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 72px;
+  min-height: 44px;
+  padding: 0 2px 4px;
+  border-bottom: 2px solid var(--color-ink-tertiary);
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
+}
+
+.blankOver {
+  border-bottom-color: var(--color-accent);
+  background: var(--color-surface-subtle);
+}
+
+.poolOver {
+  border-color: var(--color-accent);
+}
+
+.chip {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+.chip:disabled {
+  cursor: default;
+}
+
+.dragging {
+  opacity: 0.35;
+}
+
+.ghost {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  cursor: grabbing;
+  text-align: center;
+  box-shadow: var(--shadow-md, 0 6px 16px rgba(0, 0, 0, 0.18));
+  border-color: var(--color-accent);
+  background: var(--color-surface);
 }
