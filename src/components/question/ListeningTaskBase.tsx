@@ -26,7 +26,7 @@ interface ListeningQuestion {
   explanation: string;
 }
 
-interface ProblemData {
+export interface ListeningProblemData {
   title: string;
   /** Class the talk belongs to, e.g. "environmental science". */
   subject?: string;
@@ -50,12 +50,22 @@ interface ListeningTaskBaseProps {
    * at a time beside the speaker.
    */
   layout?: "list" | "talk";
+  /** Instruction above the speaker in the talk layout. */
+  listenPrompt?: (data: ListeningProblemData) => string;
 }
 
-function talkPrompt(subject?: string): string {
+function talkPrompt({ subject }: ListeningProblemData): string {
   if (!subject) return "Listen to an academic talk.";
   const article = /^[aeiou]/i.test(subject) ? "an" : "a";
   return `Listen to a talk in ${article} ${subject} class.`;
+}
+
+/** Distinct on-screen speakers (the narrator is not pictured). */
+function speakerCount(data: ListeningProblemData): number {
+  const roles = new Set(
+    data.audioSegments.map((s) => s.role).filter((r) => r !== "Narrator"),
+  );
+  return Math.min(Math.max(roles.size, 1), 2);
 }
 
 export function ListeningTaskBase({
@@ -66,11 +76,12 @@ export function ListeningTaskBase({
   readQuestionsAloud,
   showSpeedControl,
   layout = "list",
+  listenPrompt = talkPrompt,
 }: ListeningTaskBaseProps) {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
   const { data, file, loading, error, loadByQuestionNumber } =
-    useQuestion<ProblemData>(taskId);
+    useQuestion<ListeningProblemData>(taskId);
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -291,9 +302,10 @@ export function ListeningTaskBase({
         <>
           {stage === "listen" && (
             <div className={styles.listenCard}>
-              <p className={styles.listenPrompt}>{talkPrompt(data.subject)}</p>
+              <p className={styles.listenPrompt}>{listenPrompt(data)}</p>
               <SpeakerFigure
                 speaker={data.speaker}
+                count={speakerCount(data)}
                 className={styles.speaker}
               />
               {audioPlayer(false, true)}
@@ -311,6 +323,7 @@ export function ListeningTaskBase({
                   <div className={styles.speakerCard}>
                     <SpeakerFigure
                       speaker={data.speaker}
+                      count={speakerCount(data)}
                       className={styles.speakerSmall}
                     />
                     {graded && audioPlayer(true)}

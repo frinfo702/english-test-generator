@@ -1,6 +1,8 @@
 interface SpeakerFigureProps {
   /** Photo id under public/images/speakers/ (e.g. "f1", "m3"). */
   speaker?: string;
+  /** People in the drawn fallback (2 for a conversation). */
+  count?: number;
   className?: string;
 }
 
@@ -8,7 +10,11 @@ interface SpeakerFigureProps {
  * Full-length photo of the speaker in listening tasks; falls back to a
  * flat drawn lecturer when the question names no photo. Decorative only.
  */
-export function SpeakerFigure({ speaker, className }: SpeakerFigureProps) {
+export function SpeakerFigure({
+  speaker,
+  count = 1,
+  className,
+}: SpeakerFigureProps) {
   if (speaker) {
     return (
       <img
@@ -21,9 +27,28 @@ export function SpeakerFigure({ speaker, className }: SpeakerFigureProps) {
       />
     );
   }
+  // Same square box as a photo, figures standing on its bottom edge.
+  return (
+    <span
+      className={className}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-end",
+        aspectRatio: "1 / 1",
+      }}
+    >
+      {Array.from({ length: count }, (_, i) => (
+        <DrawnLecturer key={i} />
+      ))}
+    </span>
+  );
+}
+
+function DrawnLecturer() {
   return (
     <svg
-      className={className}
+      style={{ height: "100%", width: "auto" }}
       viewBox="0 0 120 260"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"

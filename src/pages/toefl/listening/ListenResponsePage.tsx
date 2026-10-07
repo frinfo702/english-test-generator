@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
-import { CardStack } from "../../../components/ui/CardStack";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
@@ -12,10 +11,19 @@ import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useTts } from "../../../hooks/useTts";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ListenResponsePage.module.css";
-import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
+import { AudioPlayer } from "../../../components/ui/AudioPlayer";
+import {
+  ChoiceQuestionCard,
+  QuestionNav,
+  SplitView,
+  type ChoiceQuestion,
+} from "../../../components/question/QuestionStepper";
+import { SpeakerFigure } from "../../../components/question/SpeakerFigure";
 
 interface ResponseQuestion {
   id: string;
+  /** Speaker photo for this item; each item may be a different person. */
+  speaker?: string;
   context: string;
   stem: string;
   options: { A: string; B: string; C: string };
@@ -25,6 +33,8 @@ interface ResponseQuestion {
 
 interface ProblemData {
   title: string;
+  /** Speaker photo id under public/images/speakers/. */
+  speaker?: string;
   questions: ResponseQuestion[];
   audioSegments: { role: string; text: string }[];
 }
@@ -48,7 +58,9 @@ export function ListenResponsePage() {
   const {
     loading: ttsLoading,
     playing: ttsPlaying,
+    currentTime,
     playSegmentsWithGaps,
+    stop: stopTts,
   } = useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
@@ -95,16 +107,8 @@ export function ListenResponsePage() {
     setSelected((s) => ({ ...s, [currentQuestion.id]: opt }));
   };
 
-  const handleNext = () => {
-    if (currentIndex < totalQuestions - 1) {
-      setCurrentIndex((i) => i + 1);
-    }
-  };
-
-  const handlePrev = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((i) => i - 1);
-    }
+  const goTo = (index: number) => {
+    setCurrentIndex(Math.max(0, Math.min(index, totalQuestions - 1)));
   };
 
   const retake = () => {
@@ -131,10 +135,17 @@ export function ListenResponsePage() {
       );
     }
     setGraded(true);
+    stopTts();
+    setCurrentIndex(0);
+    window.scrollTo({ top: 0 });
   };
 
   const handleReplayAudio = () => {
-    if (!data || graded) return;
+    if (!data) return;
+    if (ttsPlaying) {
+      stopTts();
+      return;
+    }
     const url = `/audio/${TASK_ID}/${fileBasename}/${currentIndex + 1}.mp3`;
     playSegmentsWithGaps([url], []);
   };
@@ -147,6 +158,22 @@ export function ListenResponsePage() {
     audioStartedRef.current = new Set();
     navigate(`/${TASK_ID}`);
   };
+
+  // The utterance is only revealed in review; before that the card asks for
+  // the best response, as in the test.
+  const LETTERS = ["A", "B", "C"] as const;
+  const choiceQuestions: ChoiceQuestion[] = questions.map((q) => ({
+    id: q.id,
+    stem: graded ? `“${q.stem}”` : "Choose the best response.",
+    options: LETTERS.map((l) => q.options[l]),
+    correctIndex: LETTERS.indexOf(q.correct as (typeof LETTERS)[number]),
+    explanation: q.explanation,
+  }));
+  const answersByIndex: Record<string, number> = {};
+  for (const q of questions) {
+    const sel = selected[q.id];
+    if (sel) answersByIndex[q.id] = LETTERS.indexOf(sel as "A" | "B" | "C");
+  }
 
   return (
     <div>
@@ -187,159 +214,81 @@ export function ListenResponsePage() {
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && (
+      {data && !loading && hasValidQuestionNumber && currentQuestion && (
         <>
           {graded && (
-            <>
-              <div className={styles.resultCard}>
-                <h2>Section Complete</h2>
-                <div className={styles.scoreBox}>
-                  <span className={styles.scoreNum}>{totalCorrect}</span>
-                  <span className={styles.scoreDen}>/{totalQuestions}</span>
-                  <span className={styles.scorePct}>
-                    ({Math.round((totalCorrect / totalQuestions) * 100)}%)
-                  </span>
-                </div>
-                <ProgressBar
-                  current={totalCorrect}
-                  total={totalQuestions}
-                  label="Accuracy"
-                />
-                <div className={styles.resultActions}>
-                  <Button onClick={retake} size="md" variant="secondary">
-                    Retake
-                  </Button>
-                  <NextQuestionButton taskId={TASK_ID} size="md" />
-                </div>
+            <div className={styles.resultCard}>
+              <h2>Section Complete</h2>
+              <div className={styles.scoreBox}>
+                <span className={styles.scoreNum}>{totalCorrect}</span>
+                <span className={styles.scoreDen}>/{totalQuestions}</span>
+                <span className={styles.scorePct}>
+                  ({Math.round((totalCorrect / totalQuestions) * 100)}%)
+                </span>
               </div>
-
-              {questions.map((q, qIndex) => {
-                const sel = selected[q.id];
-                const isCorrect = sel === q.correct;
-                return (
-                  <div key={q.id} className={styles.reviewCard}>
-                    <div className={styles.reviewHeader}>
-                      <strong>Question {qIndex + 1}</strong>
-                      <span
-                        className={
-                          isCorrect
-                            ? styles.reviewCorrect
-                            : styles.reviewIncorrect
-                        }
-                      >
-                        {isCorrect ? "Correct" : "Incorrect"}
-                      </span>
-                    </div>
-                    <span className={styles.reviewContext}>{q.context}</span>
-                    <p className={styles.reviewStem}>{q.stem}</p>
-                    <div className={styles.reviewOptions}>
-                      {(["A", "B", "C"] as const).map((opt) => {
-                        let cls = styles.reviewOpt;
-                        if (opt === q.correct)
-                          cls += " " + styles.reviewOptCorrect;
-                        if (sel === opt && opt !== q.correct)
-                          cls += " " + styles.reviewOptWrong;
-                        return (
-                          <div key={opt} className={cls}>
-                            <span className={styles.optLabel}>{opt}</span>
-                            <span>{q.options[opt]}</span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                    <p className={styles.explanation}>{q.explanation}</p>
-                  </div>
-                );
-              })}
-            </>
+              <ProgressBar
+                current={totalCorrect}
+                total={totalQuestions}
+                label="Accuracy"
+              />
+              <div className={styles.resultActions}>
+                <Button onClick={retake} size="md" variant="secondary">
+                  Retake
+                </Button>
+                <NextQuestionButton taskId={TASK_ID} size="md" />
+              </div>
+            </div>
           )}
 
-          {!graded && currentQuestion && (
-            <CardStack index={currentIndex} total={totalQuestions}>
-              <div className={styles.questionCard}>
-                <div className={styles.qProgress}>
-                  Question {currentIndex + 1} of {totalQuestions}
-                </div>
-
-                <span className={styles.contextBadge}>
-                  {currentQuestion.context}
-                </span>
-
-                <div className={styles.audioArea}>
-                  <button
-                    type="button"
-                    className={styles.playButton}
-                    onClick={handleReplayAudio}
-                    disabled={ttsLoading}
-                    aria-label={ttsPlaying ? "Playing audio" : "Play audio"}
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M8 5.4c0-.9 1-1.5 1.8-1L18 9.9c.7.5.7 1.7 0 2.2l-8.2 5.5c-.8.5-1.8-.1-1.8-1z" />
-                    </svg>
-                  </button>
-                  <span className={styles.audioLabel}>
-                    {ttsLoading ? "Loading audio…" : "Play audio"}
-                  </span>
-                </div>
-
-                <div className={styles.options}>
-                  {(["A", "B", "C"] as const).map((opt) => {
-                    const sel = selected[currentQuestion.id];
-                    return (
-                      <button
-                        key={opt}
-                        className={`${styles.option} ${
-                          sel === opt ? styles.selected : ""
-                        }`}
-                        onClick={() => handleSelect(opt)}
-                      >
-                        <span className={styles.optLabel}>{opt}</span>
-                        <span>{currentQuestion.options[opt]}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className={styles.navButtons}>
-                  <Button
-                    variant="secondary"
-                    onClick={handlePrev}
-                    disabled={currentIndex === 0}
-                    size="sm"
-                  >
-                    Previous
-                  </Button>
-                  <span className={styles.qStatus}>
-                    {selected[currentQuestion.id]
-                      ? "Answered"
-                      : "Select a response"}
-                  </span>
-                  <div className={styles.navRight}>
-                    {currentIndex < totalQuestions - 1 ? (
-                      <Button onClick={handleNext} size="sm">
-                        Next
-                      </Button>
-                    ) : (
-                      <Button onClick={handleSubmit} size="sm">
-                        Submit
-                        <PixelCheckIcon />
-                      </Button>
-                    )}
-                    <NextQuestionButton
-                      taskId={TASK_ID}
-                      variant="secondary"
-                      size="sm"
-                    />
-                  </div>
-                </div>
+          <SplitView
+            leftKey={currentQuestion.id}
+            left={
+              <div className={styles.speakerCard}>
+                <SpeakerFigure
+                  speaker={currentQuestion.speaker ?? data.speaker}
+                  className={styles.speaker}
+                />
+                <AudioPlayer
+                  minimal
+                  playing={ttsPlaying}
+                  loading={ttsLoading}
+                  currentTime={currentTime}
+                  duration={0}
+                  playbackRate={1}
+                  onPlayPause={handleReplayAudio}
+                  onSeek={() => undefined}
+                  onPlaybackRateChange={() => undefined}
+                  playLabel={ttsPlaying ? "Playing audio" : "Play audio"}
+                />
               </div>
-            </CardStack>
+            }
+            right={
+              <ChoiceQuestionCard
+                key={currentQuestion.id}
+                question={choiceQuestions[currentIndex]}
+                index={currentIndex}
+                total={totalQuestions}
+                context={currentQuestion.context}
+                selected={answersByIndex[currentQuestion.id]}
+                graded={graded}
+                onSelect={(_, i) => handleSelect(LETTERS[i])}
+              />
+            }
+          />
+
+          <QuestionNav
+            groups={[choiceQuestions]}
+            answers={answersByIndex}
+            currentIndex={currentIndex}
+            graded={graded}
+            onGo={goTo}
+            onSubmit={handleSubmit}
+          />
+
+          {!graded && (
+            <div className={styles.submitRow}>
+              <NextQuestionButton taskId={TASK_ID} variant="ghost" size="sm" />
+            </div>
           )}
         </>
       )}
