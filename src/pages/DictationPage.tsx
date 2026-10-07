@@ -222,12 +222,10 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
   return (
     <div className={styles.dictationPage}>
       <div className={styles.progressRow}>
-        <span className="micro-label">Sentence</span>
         <span className={styles.progressText}>
           {String(current + 1).padStart(2, "0")} /{" "}
           {String(totalSentences).padStart(2, "0")}
         </span>
-        <span className={styles.streakBadge}>{correctCount} correct</span>
         {timerDisplay && (
           <span className={styles.progressTimer}>{timerDisplay}</span>
         )}
