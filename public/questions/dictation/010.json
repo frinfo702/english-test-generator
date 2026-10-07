@@ -1,0 +1,15 @@
+{
+  "title": "Academic Dictation",
+  "sentences": [
+    {
+      "id": "s4",
+      "text": "Students must submit their essays by email.",
+      "wordCount": 7,
+      "distractors": [
+        "should",
+        "download",
+        "paper"
+      ]
+    }
+  ]
+}

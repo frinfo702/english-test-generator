@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q18",
+      "sentence": "The company will reimburse travel expenses ___ receipts are provided.",
+      "options": {
+        "A": "unless",
+        "B": "whereas",
+        "C": "as long as",
+        "D": "so that"
+      },
+      "correct": "C",
+      "explanation": "'As long as' expresses a condition required for reimbursement.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

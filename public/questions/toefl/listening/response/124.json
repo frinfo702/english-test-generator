@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Extracurricular",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q7",
+      "speaker": "m6",
+      "context": "Asking about club fees",
+      "stem": "Is there a membership fee to join the photography club?",
+      "options": {
+        "A": "It's only 10 dollars per semester, which covers film and darkroom access.",
+        "B": "Photography clubs are a great way to learn new skills.",
+        "C": "I used to be in the photography club."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about costs, so providing the specific fee and what it covers directly answers their question."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Is there a membership fee to join the photography club?"
+    }
+  ]
+}

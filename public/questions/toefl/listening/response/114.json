@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Study Related",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "f4",
+      "context": "Asking about a research database",
+      "stem": "Which database should I use to find peer-reviewed articles on climate change?",
+      "options": {
+        "A": "Try JSTOR or ScienceDirect. Both have extensive environmental science collections.",
+        "B": "Climate change research is published in many journals.",
+        "C": "I used Google Scholar for my paper."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for research guidance, so recommending specific databases with a rationale is directly helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Which database should I use to find peer-reviewed articles on climate change?"
+    }
+  ]
+}

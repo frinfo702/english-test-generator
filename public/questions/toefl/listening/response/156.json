@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Technology & Communication",
+  "voices": {
+    "Student": "leo",
+    "Friend": "rex"
+  },
+  "questions": [
+    {
+      "id": "q7",
+      "speaker": "m6",
+      "context": "Asking about online class etiquette",
+      "stem": "Should I keep my camera on during the online lecture or is it optional?",
+      "options": {
+        "A": "The professor prefers cameras on, but you can turn it off if your connection is unstable.",
+        "B": "Online lectures are recorded and posted later.",
+        "C": "I usually keep my camera off during class."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about expected behavior in an online class, so providing the professor's preference and exception is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Should I keep my camera on during the online lecture or is it optional?"
+    }
+  ]
+}

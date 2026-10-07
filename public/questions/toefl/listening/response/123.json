@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Extracurricular",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q6",
+      "speaker": "f4",
+      "context": "Reacting to a canceled event",
+      "stem": "The spring music festival was canceled due to budget cuts. I'm so disappointed.",
+      "options": {
+        "A": "That's really unfortunate. Maybe the student council can organize a smaller alternative.",
+        "B": "Music festivals require a lot of planning.",
+        "C": "I didn't go to last year's festival."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing disappointment about a canceled event, so sharing their feelings and suggesting a possible alternative is supportive."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "The spring music festival was canceled due to budget cuts. I'm so disappointed."
+    }
+  ]
+}

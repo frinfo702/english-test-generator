@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q8",
+      "sentence": "The conference room is ___ for the executive meeting.",
+      "options": {
+        "A": "reserve",
+        "B": "reserving",
+        "C": "reserved",
+        "D": "reservation"
+      },
+      "correct": "C",
+      "explanation": "Passive 'is reserved.'",
+      "focus": "verb tense/form"
+    }
+  ]
+}

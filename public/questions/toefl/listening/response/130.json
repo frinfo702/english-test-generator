@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Housing & Dining",
+  "voices": {
+    "Student": "ara",
+    "Friend": "rex"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "f4",
+      "context": "Suggesting a roommate activity",
+      "stem": "We should decorate our dorm room together. It looks a bit plain right now.",
+      "options": {
+        "A": "Good idea! I can bring some posters and string lights from home.",
+        "B": "Dorm rooms come with basic furniture.",
+        "C": "I'm not very good at decorating."
+      },
+      "correct": "A",
+      "explanation": "The speaker is suggesting a shared activity, so agreeing enthusiastically and offering to contribute is cooperative."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "We should decorate our dorm room together. It looks a bit plain right now."
+    }
+  ]
+}

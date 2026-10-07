@@ -1,0 +1,63 @@
+{
+  "passages": [
+    {
+      "id": "p2",
+      "textType": "memo",
+      "text": "MEMO\nTo: All Sales Staff\nFrom: Finance Department\nSubject: Updates to Mileage Reimbursement\n\nEffective March 1, the mileage reimbursement rate will be [1] from $0.54 to $0.57 per mile. The change reflects higher fuel costs and has been approved by the CFO.\n\n[2]\n\nWhen submitting claims, attach a copy of your route summary from the navigation app and obtain manager approval for trips over 100 miles. Claims must be submitted within 30 days of travel.\n\nClaims without supporting documents may be [3]. If you have questions about eligible trips, [4] the Finance Help Desk at extension 338.\n\nThank you.",
+      "questions": [
+        {
+          "id": "q5",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "increased",
+            "B": "increasing",
+            "C": "increase",
+            "D": "increases"
+          },
+          "correct": "A",
+          "explanation": "Passive construction 'will be increased' correctly describes the rate change."
+        },
+        {
+          "id": "q6",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "This rate applies only to the use of personal vehicles and does not include rental cars or taxis.",
+            "B": "The company picnic will be held at the lakeside park on Saturday.",
+            "C": "Please remember to lock your computer screen when leaving your desk.",
+            "D": "Our website will be redesigned to include more product photos."
+          },
+          "correct": "A",
+          "explanation": "Option A clarifies what the mileage rate covers, which fits the policy memo context."
+        },
+        {
+          "id": "q7",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "repaired",
+            "B": "rejected",
+            "C": "refreshed",
+            "D": "repeated"
+          },
+          "correct": "B",
+          "explanation": "If documents are missing, claims may be 'rejected' (not accepted)."
+        },
+        {
+          "id": "q8",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "contact",
+            "B": "contacts",
+            "C": "contacted",
+            "D": "contacting"
+          },
+          "correct": "A",
+          "explanation": "This is an instruction, so the base verb form is used: 'contact the Help Desk.'"
+        }
+      ]
+    }
+  ]
+}

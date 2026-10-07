@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q13",
+      "sentence": "The new software is compatible ___ both Windows and macOS.",
+      "options": {
+        "A": "with",
+        "B": "to",
+        "C": "for",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "'Compatible with' is the correct preposition.",
+      "focus": "preposition"
+    }
+  ]
+}

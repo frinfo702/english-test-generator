@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Campus Services",
+  "voices": {
+    "Student": "eve"
+  },
+  "questions": [
+    {
+      "id": "q8",
+      "speaker": "f4",
+      "context": "Expressing preference",
+      "stem": "I'd rather work on the presentation than the research paper. Is that okay?",
+      "options": {
+        "A": "Sure, we can divide the tasks that way. What section will you present?",
+        "B": "Research papers are more important than presentations.",
+        "C": "I prefer the research paper myself."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing a preference for task division, so accommodating the preference and clarifying next steps is cooperative."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I'd rather work on the presentation than the research paper. Is that okay?"
+    }
+  ]
+}

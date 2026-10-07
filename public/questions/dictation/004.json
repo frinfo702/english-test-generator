@@ -1,0 +1,15 @@
+{
+  "title": "Daily Life Dictation",
+  "sentences": [
+    {
+      "id": "s4",
+      "text": "We are having pasta for dinner tonight.",
+      "wordCount": 7,
+      "distractors": [
+        "lunch",
+        "rice",
+        "tomorrow"
+      ]
+    }
+  ]
+}

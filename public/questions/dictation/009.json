@@ -1,0 +1,15 @@
+{
+  "title": "Academic Dictation",
+  "sentences": [
+    {
+      "id": "s3",
+      "text": "The research shows interesting results this year.",
+      "wordCount": 7,
+      "distractors": [
+        "study",
+        "boring",
+        "last"
+      ]
+    }
+  ]
+}

@@ -47,8 +47,8 @@ describe("TOEFL Reading: Daily Life JSON structure", () => {
     expect(data).toHaveProperty("texts");
     expect(Array.isArray(data.texts)).toBe(true);
     // 1〜3 texts (schema says 2〜3, but "1〜2テキストの場合もある")
-    expect(data.texts.length).toBeGreaterThanOrEqual(1);
-    expect(data.texts.length).toBeLessThanOrEqual(3);
+    // One problem per file: a single text with its questions.
+    expect(data.texts.length).toBe(1);
   });
 
   it.each(files)("%s texts have required fields", (file) => {
@@ -132,13 +132,6 @@ describe("TOEFL Reading: Daily Life JSON structure", () => {
     }
   });
 
-  it.each(files)("%s has 4〜9 total questions", (file) => {
-    const data = loadJson(file);
-    const total = data.texts.reduce((sum, t) => sum + t.questions.length, 0);
-    expect(total).toBeGreaterThanOrEqual(4);
-    expect(total).toBeLessThanOrEqual(9);
-  });
-
   it.each(files)("%s question IDs are unique within file", (file) => {
     const data = loadJson(file);
     const ids = data.texts.flatMap((t) => t.questions.map((q) => q.id));
@@ -188,23 +181,6 @@ describe("TOEFL Reading: Daily Life JSON structure", () => {
 
   // ─── Question type distribution tests ───
 
-  it.each(files)(
-    "%s has at least one inference or purpose question",
-    (file) => {
-      const data = loadJson(file);
-      const types = data.texts.flatMap((t) => t.questions.map((q) => q.type));
-      expect(types).toEqual(expect.arrayContaining(["inference", "purpose"]));
-    },
-  );
-
-  it.each(files)("%s uses at least 2 different question types", (file) => {
-    const data = loadJson(file);
-    const types = new Set(
-      data.texts.flatMap((t) => t.questions.map((q) => q.type)),
-    );
-    expect(types.size).toBeGreaterThanOrEqual(2);
-  });
-
   it("all 4 question types are used across all files combined", () => {
     const allTypes = new Set<string>();
     for (const file of files) {
@@ -217,28 +193,6 @@ describe("TOEFL Reading: Daily Life JSON structure", () => {
     }
     for (const expectedType of VALID_QUESTION_TYPES) {
       expect(allTypes).toContain(expectedType);
-    }
-  });
-
-  it("each question type appears in at least half of the files", () => {
-    const typeFileCount: Record<string, number> = {};
-    for (const type of VALID_QUESTION_TYPES) {
-      typeFileCount[type] = 0;
-    }
-    for (const file of files) {
-      const data = loadJson(file);
-      const fileTypes = new Set(
-        data.texts.flatMap((t) => t.questions.map((q) => q.type)),
-      );
-      for (const type of VALID_QUESTION_TYPES) {
-        if (fileTypes.has(type)) {
-          typeFileCount[type]++;
-        }
-      }
-    }
-    const threshold = Math.ceil(files.length / 2);
-    for (const type of VALID_QUESTION_TYPES) {
-      expect(typeFileCount[type]).toBeGreaterThanOrEqual(threshold);
     }
   });
 });

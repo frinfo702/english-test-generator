@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q28",
+      "sentence": "The proposal was rejected because it did not ___ the client’s requirements.",
+      "options": {
+        "A": "fulfill",
+        "B": "fulfillment",
+        "C": "fulfilled",
+        "D": "fulfilling"
+      },
+      "correct": "A",
+      "explanation": "After 'did not,' use the base verb form.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Academic Situations",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "m6",
+      "context": "Asking about study abroad",
+      "stem": "I'm considering the exchange program in Japan. Do you know anyone who's done it?",
+      "options": {
+        "A": "Yes, my roommate went last year and loved it. I can connect you two.",
+        "B": "Study abroad programs require a minimum GPA.",
+        "C": "Japan is very expensive for students."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for firsthand experience about a program, so sharing a relevant connection is directly helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I'm considering the exchange program in Japan. Do you know anyone who's done it?"
+    }
+  ]
+}

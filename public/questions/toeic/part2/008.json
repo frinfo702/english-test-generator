@@ -1,0 +1,34 @@
+{
+  "title": "Question-Response - Service & Requests",
+  "questions": [
+    {
+      "id": "q2",
+      "stem": "What time does the customer service desk open?",
+      "options": {
+        "A": "Yes, it opens today.",
+        "B": "At nine o'clock on weekdays.",
+        "C": "The service was excellent."
+      },
+      "correct": "B",
+      "explanation": "The question asks about time ('What time'), so 'At nine o'clock' correctly answers the question."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Man",
+      "text": "Number 2. What time does the customer service desk open?"
+    },
+    {
+      "role": "Woman",
+      "text": "(A) Yes, it opens today."
+    },
+    {
+      "role": "Woman",
+      "text": "(B) At nine o'clock on weekdays."
+    },
+    {
+      "role": "Woman",
+      "text": "(C) The service was excellent."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Everyday Situations",
+  "voices": {
+    "Student": "eve"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "speaker": "f4",
+      "context": "Apologizing for being late",
+      "stem": "Sorry I'm late. The bus broke down and I had to wait for the next one.",
+      "options": {
+        "A": "That's okay. Let's get started.",
+        "B": "Buses are often unreliable.",
+        "C": "I drove here today."
+      },
+      "correct": "A",
+      "explanation": "The speaker is apologizing and explaining a delay, so graciously accepting the apology and moving on is appropriate."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Sorry I'm late. The bus broke down and I had to wait for the next one."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q11",
+      "sentence": "Our IT help desk is available 24 hours a day, ___ weekends.",
+      "options": {
+        "A": "include",
+        "B": "including",
+        "C": "included",
+        "D": "includes"
+      },
+      "correct": "B",
+      "explanation": "Use 'including' to add an item to a list: '..., including weekends'.",
+      "focus": "word form"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q3",
+      "sentence": "The new policy applies to employees who work ___ at least three days a week.",
+      "options": {
+        "A": "remote",
+        "B": "remotely",
+        "C": "remoteness",
+        "D": "remotes"
+      },
+      "correct": "B",
+      "explanation": "An adverb is needed to modify the verb 'work': 'work remotely'.",
+      "focus": "word form"
+    }
+  ]
+}

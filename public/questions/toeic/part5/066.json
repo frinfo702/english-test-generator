@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q6",
+      "sentence": "The conference will be held ___ the main auditorium on the second floor.",
+      "options": {
+        "A": "in",
+        "B": "on",
+        "C": "at",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "Use 'in' for events inside a room or building: 'held in the auditorium'.",
+      "focus": "preposition"
+    }
+  ]
+}

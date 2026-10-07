@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Everyday Situations",
+  "voices": {
+    "Student": "eve"
+  },
+  "questions": [
+    {
+      "id": "q3",
+      "speaker": "f4",
+      "context": "Expressing worry",
+      "stem": "I have three exams next week and I'm really stressed about it.",
+      "options": {
+        "A": "You should have started studying earlier.",
+        "B": "I know how you feel. Let's make a study plan together.",
+        "C": "Exams are only worth half the grade."
+      },
+      "correct": "B",
+      "explanation": "The speaker is expressing stress, so an empathetic response and offer to help is more supportive than criticism."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I have three exams next week and I'm really stressed about it."
+    }
+  ]
+}

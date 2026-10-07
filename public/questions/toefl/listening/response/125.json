@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Extracurricular",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q8",
+      "speaker": "f4",
+      "context": "Encouraging participation",
+      "stem": "I'm thinking about trying out for the campus theater production, but I'm shy.",
+      "options": {
+        "A": "You should go for it! Everyone is nervous at first, but it's a lot of fun.",
+        "B": "Theater productions require a lot of rehearsals.",
+        "C": "I prefer watching plays to performing."
+      },
+      "correct": "A",
+      "explanation": "The speaker is hesitant about trying something new, so offering encouragement and normalizing their feelings is supportive."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I'm thinking about trying out for the campus theater production, but I'm shy."
+    }
+  ]
+}

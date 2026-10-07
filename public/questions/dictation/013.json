@@ -1,0 +1,15 @@
+{
+  "title": "Business & Travel Dictation",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "The meeting has been moved to room five.",
+      "wordCount": 8,
+      "distractors": [
+        "cancelled",
+        "office",
+        "three"
+      ]
+    }
+  ]
+}

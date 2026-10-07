@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Requests and Offers",
+  "voices": {
+    "Student": "rex",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q4",
+      "speaker": "m6",
+      "context": "Expressing disagreement politely",
+      "stem": "I know the group wants to meet at 8 AM, but I think that's too early for a weekend.",
+      "options": {
+        "A": "I see your point. How about 10 AM instead?",
+        "B": "Early meetings are more productive.",
+        "C": "I wake up at 6 AM every day."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing disagreement with a proposed time, so acknowledging their concern and offering a compromise is constructive."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I know the group wants to meet at 8 AM, but I think that's too early for a weekend."
+    }
+  ]
+}

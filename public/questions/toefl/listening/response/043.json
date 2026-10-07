@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Requests and Offers",
+  "voices": {
+    "Student": "rex",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q3",
+      "speaker": "m6",
+      "context": "Asking someone to wait",
+      "stem": "Could you hold on for just a minute? I'm almost done with this email.",
+      "options": {
+        "A": "Sure, take your time.",
+        "B": "Emails shouldn't take that long.",
+        "C": "I sent three emails this morning."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking someone to wait briefly, so a patient and accommodating response is appropriate."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Could you hold on for just a minute? I'm almost done with this email."
+    }
+  ]
+}

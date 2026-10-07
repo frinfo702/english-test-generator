@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Travel & Transportation",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q2",
+      "speaker": "f3",
+      "context": "Asking about directions to a building",
+      "stem": "Excuse me, can you tell me how to get to the engineering building from here?",
+      "options": {
+        "A": "Sure, go straight past the fountain, then take the second left.",
+        "B": "The engineering building has six floors.",
+        "C": "I'm not an engineering student."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for directions, so providing clear, step-by-step instructions is the most helpful response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Excuse me, can you tell me how to get to the engineering building from here?"
+    }
+  ]
+}

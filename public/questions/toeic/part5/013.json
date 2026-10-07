@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q13",
+      "sentence": "The warehouse ___ to a larger facility next month.",
+      "options": {
+        "A": "relocated",
+        "B": "will relocate",
+        "C": "relocates",
+        "D": "relocating"
+      },
+      "correct": "B",
+      "explanation": "Future plan uses 'will + base verb.'",
+      "focus": "verb tense/form"
+    }
+  ]
+}

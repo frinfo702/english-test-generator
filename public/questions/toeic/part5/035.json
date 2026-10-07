@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q5",
+      "sentence": "The meeting was postponed because the presenter had not arrived ___.",
+      "options": {
+        "A": "already",
+        "B": "yet",
+        "C": "still",
+        "D": "ever"
+      },
+      "correct": "B",
+      "explanation": "'Not ... yet' indicates something expected has not happened up to now.",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

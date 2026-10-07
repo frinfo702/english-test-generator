@@ -1,0 +1,63 @@
+{
+  "passages": [
+    {
+      "id": "p1",
+      "textType": "business email",
+      "text": "Dear Facilities Team,\n\nSeveral employees on the 8th floor have reported that the air conditioning has been [1] since Monday afternoon. Our vendor, CoolAir Services, can send a technician on Thursday morning.\n\n[2]\n\nPlease confirm whether the work can begin at 9:30 a.m. and whether anyone from your team needs to be present. To minimize disruption, the technician will access the floor through the service elevator.\n\nIf your schedule changes, please [3] us as soon as possible so we can adjust the appointment. [4], employees should avoid storing boxes in front of the mechanical-room door.\n\nThank you,\nHiroko Tanaka",
+      "questions": [
+        {
+          "id": "q1",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "malfunctioning",
+            "B": "malfunction",
+            "C": "malfunctioned",
+            "D": "malfunctions"
+          },
+          "correct": "A",
+          "explanation": "The sentence needs an adjective/participle after 'has been' to describe the air conditioning."
+        },
+        {
+          "id": "q2",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "For security reasons, please send the technician's full name by Wednesday so a visitor badge can be prepared.",
+            "B": "The cafeteria will serve a special menu during the holiday season.",
+            "C": "A new printer was delivered to the marketing department yesterday.",
+            "D": "The monthly sales report is due at the end of the quarter."
+          },
+          "correct": "A",
+          "explanation": "Only option A logically matches a vendor visit and the need to manage building access."
+        },
+        {
+          "id": "q3",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "notify",
+            "B": "notifies",
+            "C": "notified",
+            "D": "notifying"
+          },
+          "correct": "A",
+          "explanation": "After 'please,' the base verb form is required: 'please notify us.'"
+        },
+        {
+          "id": "q4",
+          "blankNumber": 4,
+          "type": "vocabulary",
+          "options": {
+            "A": "In addition",
+            "B": "For instance",
+            "C": "As a result",
+            "D": "On the contrary"
+          },
+          "correct": "A",
+          "explanation": "'In addition' adds another instruction related to the maintenance visit."
+        }
+      ]
+    }
+  ]
+}

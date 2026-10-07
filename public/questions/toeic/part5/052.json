@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q22",
+      "sentence": "The employees were asked to arrive early ___ avoid delays during the system migration.",
+      "options": {
+        "A": "so",
+        "B": "in order to",
+        "C": "because",
+        "D": "although"
+      },
+      "correct": "B",
+      "explanation": "'In order to' is followed by a base verb to express purpose.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

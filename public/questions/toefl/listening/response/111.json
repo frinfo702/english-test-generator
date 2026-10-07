@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Study Related",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q2",
+      "speaker": "f3",
+      "context": "Encouraging a friend",
+      "stem": "I'm so nervous about the oral presentation. What if I forget what to say?",
+      "options": {
+        "A": "You'll do great! Just practice a few more times and bring notes as backup.",
+        "B": "Oral presentations are a common requirement.",
+        "C": "I gave my presentation last week."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing anxiety about a presentation, so offering reassurance and practical advice is supportive."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I'm so nervous about the oral presentation. What if I forget what to say?"
+    }
+  ]
+}

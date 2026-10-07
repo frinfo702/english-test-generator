@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Travel & Transportation",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q7",
+      "speaker": "f4",
+      "context": "Mentioning a flat tire",
+      "stem": "My bike has a flat tire and I need to get to class in fifteen minutes.",
+      "options": {
+        "A": "You can borrow my bike. I don't have class until noon.",
+        "B": "Flat tires can be fixed with a repair kit.",
+        "C": "I walk to class, so I don't need a bike."
+      },
+      "correct": "A",
+      "explanation": "The speaker has a practical problem and a time constraint, so offering a generous immediate solution is the most helpful response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "My bike has a flat tire and I need to get to class in fifteen minutes."
+    }
+  ]
+}

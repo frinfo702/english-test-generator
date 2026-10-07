@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q6",
+      "sentence": "Ms. Thompson will present ___ findings to the board on Friday.",
+      "options": {
+        "A": "she",
+        "B": "her",
+        "C": "hers",
+        "D": "herself"
+      },
+      "correct": "B",
+      "explanation": "Possessive adjective 'her' modifies 'findings.'",
+      "focus": "pronoun"
+    }
+  ]
+}

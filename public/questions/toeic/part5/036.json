@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q6",
+      "sentence": "Our customer support team will contact you as soon as your request ___ processed.",
+      "options": {
+        "A": "is",
+        "B": "was",
+        "C": "will be",
+        "D": "has been"
+      },
+      "correct": "A",
+      "explanation": "In time clauses with 'as soon as,' use present tense for future meaning.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

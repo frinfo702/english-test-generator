@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q19",
+      "sentence": "The memo explains the steps employees should take ___ they encounter a security issue.",
+      "options": {
+        "A": "whether",
+        "B": "if",
+        "C": "unless",
+        "D": "until"
+      },
+      "correct": "B",
+      "explanation": "'If' introduces the condition of encountering a security issue.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

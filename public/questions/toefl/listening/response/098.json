@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Daily Encounters",
+  "voices": {
+    "Student": "eve",
+    "Friend": "leo"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "f4",
+      "context": "Responding to good news",
+      "stem": "My advisor approved my research proposal! I can finally start collecting data.",
+      "options": {
+        "A": "That's wonderful news! Your proposal was very well written.",
+        "B": "Research proposals require ethics board approval too.",
+        "C": "Data collection can take several months."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing exciting academic news, so sharing their enthusiasm and complimenting their work is encouraging."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "My advisor approved my research proposal! I can finally start collecting data."
+    }
+  ]
+}

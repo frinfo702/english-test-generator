@@ -1,0 +1,37 @@
+{
+  "texts": [
+    {
+      "id": "t3",
+      "textType": "online post",
+      "content": "Neighborhood Alert — Lost Cat\n\nHi everyone — our cat Oliver went missing on the evening of Tuesday, April 8. He's a 4-year-old orange tabby with a white chest and paws. He is microchipped and was wearing a blue collar with a bell.\n\nHe was last seen on Cedar Avenue near the park. Oliver is very friendly but can be easily startled by loud noises.\n\nIf you see him, please contact Sarah at 555-0238. No questions asked — we just want him home safely.\n\nPlease share this post!",
+      "questions": [
+        {
+          "id": "q5",
+          "stem": "What is the primary purpose of this post?",
+          "options": [
+            "A. To complain about the neighborhood's pet policies",
+            "B. To ask the community for help finding a lost pet",
+            "C. To warn residents about a dangerous animal",
+            "D. To advertise a pet adoption opportunity"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The post describes a lost cat and asks neighbors to contact the owner if they see it, clearly seeking help in locating the missing pet."
+        },
+        {
+          "id": "q6",
+          "stem": "The phrase 'no questions asked' in the post suggests that the owner:",
+          "options": [
+            "A. does not need proof that the cat belongs to them",
+            "B. will not inquire about how or why the cat went missing",
+            "C. wants the cat returned regardless of any circumstances",
+            "D. cannot answer questions about the cat's description"
+          ],
+          "correctIndex": 2,
+          "type": "vocabulary",
+          "explanation": "'No questions asked' is a common expression indicating the owner simply wants the cat back safely without any complications or explanations."
+        }
+      ]
+    }
+  ]
+}

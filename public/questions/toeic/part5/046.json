@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q16",
+      "sentence": "The conference room is available ___ reservation on a first-come, first-served basis.",
+      "options": {
+        "A": "for",
+        "B": "to",
+        "C": "at",
+        "D": "in"
+      },
+      "correct": "A",
+      "explanation": "Use 'for' with 'reservation' to indicate purpose/availability.",
+      "focus": "preposition"
+    }
+  ]
+}

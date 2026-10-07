@@ -1,0 +1,29 @@
+{
+  "title": "Listen and Choose a Response — Academic and Personal",
+  "voices": {
+    "Student": "ara",
+    "Classmate": "rex",
+    "Friend": "sal"
+  },
+  "questions": [
+    {
+      "id": "q7",
+      "speaker": "f4",
+      "context": "Suggesting an alternative",
+      "stem": "The bookstore is sold out of the required textbook. What should I do?",
+      "options": {
+        "A": "You can order it online or check the library's course reserves.",
+        "B": "Textbooks are overpriced anyway.",
+        "C": "I bought mine during orientation."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking for alternatives after encountering an obstacle, so providing practical options directly helps solve their problem."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The bookstore is sold out of the required textbook. What should I do?"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Business & Travel Dictation",
+  "sentences": [
+    {
+      "id": "s6",
+      "text": "Could you reschedule the appointment for Tuesday?",
+      "wordCount": 7,
+      "distractors": [
+        "cancel",
+        "meeting",
+        "Thursday"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Daily Situations",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "f4",
+      "context": "Expressing confusion",
+      "stem": "I don't understand the homework assignment. Are we supposed to write a summary or an analysis?",
+      "options": {
+        "A": "A summary just restates the main points.",
+        "B": "Professor Lee said it should be an analysis with your own interpretation.",
+        "C": "The assignment is due next Friday."
+      },
+      "correct": "B",
+      "explanation": "The speaker is confused about instructions, so clarifying the requirement is most helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I don't understand the homework assignment. Are we supposed to write a summary or an analysis?"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q25",
+      "sentence": "The consultant’s recommendations were ___ helpful that the company adopted them immediately.",
+      "options": {
+        "A": "such",
+        "B": "so",
+        "C": "too",
+        "D": "enough"
+      },
+      "correct": "B",
+      "explanation": "Use 'so + adjective + that' to express cause and result.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

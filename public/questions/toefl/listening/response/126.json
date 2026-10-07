@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Housing & Dining",
+  "voices": {
+    "Student": "ara",
+    "Friend": "rex"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "speaker": "f4",
+      "context": "Complaining about dining hall food",
+      "stem": "The dining hall has been serving the same meals every week. I'm getting tired of it.",
+      "options": {
+        "A": "You should fill out the feedback form. They actually consider student suggestions.",
+        "B": "Dining halls serve hundreds of students every day.",
+        "C": "I usually cook my own meals in the dorm kitchen."
+      },
+      "correct": "A",
+      "explanation": "The speaker is complaining about repetitive food, so suggesting a constructive way to address the issue is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The dining hall has been serving the same meals every week. I'm getting tired of it."
+    }
+  ]
+}

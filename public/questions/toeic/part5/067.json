@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q7",
+      "sentence": "Please keep your receipt in case you need to ___ the item.",
+      "options": {
+        "A": "return",
+        "B": "returned",
+        "C": "returning",
+        "D": "returns"
+      },
+      "correct": "A",
+      "explanation": "After 'to', use the base verb form: 'to return'.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

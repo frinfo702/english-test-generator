@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Daily Situations",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q4",
+      "speaker": "f4",
+      "context": "Asking for an opinion",
+      "stem": "What do you think about the new cafeteria menu?",
+      "options": {
+        "A": "I had lunch at 12:30.",
+        "B": "It's much better than last year's options.",
+        "C": "The cafeteria is on the first floor."
+      },
+      "correct": "B",
+      "explanation": "The speaker is asking for an opinion, so sharing a personal assessment is most appropriate."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "What do you think about the new cafeteria menu?"
+    }
+  ]
+}

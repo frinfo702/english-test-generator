@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q2",
+      "sentence": "The brochures were printed ___ recycled paper to reduce waste.",
+      "options": {
+        "A": "on",
+        "B": "by",
+        "C": "at",
+        "D": "with"
+      },
+      "correct": "A",
+      "explanation": "'Printed on' is the standard collocation for the material/surface used.",
+      "focus": "preposition"
+    }
+  ]
+}

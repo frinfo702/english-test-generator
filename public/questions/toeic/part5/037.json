@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q7",
+      "sentence": "The accountant recommended that the receipts ___ kept for at least seven years.",
+      "options": {
+        "A": "are",
+        "B": "be",
+        "C": "being",
+        "D": "were"
+      },
+      "correct": "B",
+      "explanation": "Subjunctive 'be' is used after verbs like 'recommend' in that-clauses.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

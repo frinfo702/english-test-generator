@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Extracurricular",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "speaker": "m6",
+      "context": "Asking about sports facilities",
+      "stem": "Are the basketball courts open for free play during lunch hours?",
+      "options": {
+        "A": "Yes, they're open from noon to 2 PM for anyone with a student ID.",
+        "B": "Basketball is a popular sport on campus.",
+        "C": "I prefer playing tennis myself."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about facility availability, so providing the schedule and access requirements directly answers their question."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Are the basketball courts open for free play during lunch hours?"
+    }
+  ]
+}

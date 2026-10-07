@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q3",
+      "sentence": "The new safety guidelines must be followed ___ all employees without exception.",
+      "options": {
+        "A": "by",
+        "B": "to",
+        "C": "for",
+        "D": "with"
+      },
+      "correct": "A",
+      "explanation": "Guidelines are followed 'by' people.",
+      "focus": "preposition"
+    }
+  ]
+}

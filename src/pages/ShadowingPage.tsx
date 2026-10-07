@@ -175,8 +175,6 @@ export function ShadowingPage() {
         title="Shadowing Practice"
         subtitle={data?.title ?? "Listen and repeat to improve pronunciation."}
         backTo="/"
-        current={0}
-        total={0}
       />
 
       <div className={styles.topBar}>
@@ -191,7 +189,7 @@ export function ShadowingPage() {
         <NextQuestionButton taskId={TASK_ID} variant="secondary" size="sm" />
       </div>
 
-      {loading && <LoadingSpinner message="Loading shadowing set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>

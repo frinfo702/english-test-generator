@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Travel & Transportation",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "speaker": "f4",
+      "context": "Asking about airport shuttle",
+      "stem": "Is there a campus shuttle to the airport during winter break?",
+      "options": {
+        "A": "Yes, we run a shuttle every two hours. You need to sign up in advance.",
+        "B": "Airport shuttles are usually shared rides.",
+        "C": "I'm taking a taxi to the airport."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about transportation availability, so confirming the service and explaining the booking process is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Is there a campus shuttle to the airport during winter break?"
+    }
+  ]
+}

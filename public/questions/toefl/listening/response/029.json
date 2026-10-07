@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Campus Facilities",
+  "voices": {
+    "Student": "rex",
+    "Lab Assistant": "sal"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "m5",
+      "context": "Giving a reminder",
+      "stem": "Don't forget to return your lab coat before leaving today.",
+      "options": {
+        "A": "Thanks for the reminder. I'll drop it off after class.",
+        "B": "I bought my own lab coat.",
+        "C": "The lab is closed on weekends."
+      },
+      "correct": "A",
+      "explanation": "The speaker is giving a reminder, so acknowledging it and confirming compliance is the appropriate response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lab Assistant",
+      "text": "Don't forget to return your lab coat before leaving today."
+    }
+  ]
+}

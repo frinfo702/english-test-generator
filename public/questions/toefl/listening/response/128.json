@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Housing & Dining",
+  "voices": {
+    "Student": "ara",
+    "Friend": "rex"
+  },
+  "questions": [
+    {
+      "id": "q3",
+      "speaker": "f4",
+      "context": "Asking about meal plan options",
+      "stem": "I'm thinking of switching from the 14-meal plan to the unlimited plan. Can I do that?",
+      "options": {
+        "A": "Yes, you can change your meal plan during the first two weeks of the semester.",
+        "B": "Unlimited meal plans are more expensive.",
+        "C": "I have the 10-meal plan."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about changing a service plan, so confirming it's possible and explaining the window for changes is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I'm thinking of switching from the 14-meal plan to the unlimited plan. Can I do that?"
+    }
+  ]
+}

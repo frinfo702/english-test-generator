@@ -1,0 +1,15 @@
+{
+  "title": "Business & Travel Dictation",
+  "sentences": [
+    {
+      "id": "s2",
+      "text": "I need to book a flight to London next week.",
+      "wordCount": 9,
+      "distractors": [
+        "hotel",
+        "Paris",
+        "month"
+      ]
+    }
+  ]
+}

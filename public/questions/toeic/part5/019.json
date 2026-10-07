@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q19",
+      "sentence": "We need a candidate with ___ experience in project management.",
+      "options": {
+        "A": "extend",
+        "B": "extension",
+        "C": "extensive",
+        "D": "extensively"
+      },
+      "correct": "C",
+      "explanation": "Adjective 'extensive.'",
+      "focus": "word form"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "sentences": [
+    {
+      "id": "s6",
+      "reference": "Lecturer: How does climate change affect farming?",
+      "chunks": [
+        "regions",
+        "agricultural",
+        "many",
+        "It",
+        "sector",
+        "in",
+        "threatens",
+        "the"
+      ],
+      "correctOrder": [
+        3,
+        6,
+        7,
+        1,
+        4,
+        5,
+        2,
+        0
+      ],
+      "fullSentence": "It threatens the agricultural sector in many regions"
+    }
+  ]
+}

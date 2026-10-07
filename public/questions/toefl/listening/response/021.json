@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Social Interactions",
+  "voices": {
+    "Student": "ara",
+    "Friend": "rex"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "f4",
+      "context": "Making a complaint",
+      "stem": "The Wi-Fi in the dorm has been really slow for the past three days.",
+      "options": {
+        "A": "You should buy a new laptop.",
+        "B": "That's frustrating. Have you reported it to IT services?",
+        "C": "I don't use Wi-Fi very often."
+      },
+      "correct": "B",
+      "explanation": "The speaker is complaining about a problem, so acknowledging their frustration and suggesting a constructive next step is appropriate."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The Wi-Fi in the dorm has been really slow for the past three days."
+    }
+  ]
+}

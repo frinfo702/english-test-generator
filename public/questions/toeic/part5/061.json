@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "sentence": "If you ___ the form by Friday, your application will be processed immediately.",
+      "options": {
+        "A": "submit",
+        "B": "submitted",
+        "C": "submitting",
+        "D": "will submit"
+      },
+      "correct": "A",
+      "explanation": "In an if-clause referring to the future, use the present simple: 'If you submit..., will be processed...'.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

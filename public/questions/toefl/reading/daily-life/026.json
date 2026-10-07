@@ -1,0 +1,50 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "content": "From: Dr. Martinez\nTo: History 201 Students\nSubject: Field Trip to City Museum\n\nDear Students,\n\nThis is a reminder that our field trip to the City Museum of History is scheduled for this Friday, November 8. We will depart from the main entrance at 9:00 AM sharp and return by 3:30 PM.\n\nPlease bring your student ID, a notebook, and comfortable walking shoes. Admission is free for students, but you will need to cover the cost of your own lunch. The museum cafe has reasonable prices, or you may bring a packed lunch.\n\nIf you have not yet submitted the permission form, please do so by Wednesday at noon. Late submissions cannot be accepted.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the purpose of this email?",
+          "options": [
+            "A. To announce the cancellation of a field trip",
+            "B. To inform students about an upcoming museum visit",
+            "C. To request donations for the museum admission",
+            "D. To assign a research project at the museum"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The email provides details about the scheduled field trip, including meeting time, what to bring, and the permission form deadline."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about students who miss the Wednesday deadline?",
+          "options": [
+            "A. They can pay a late fee to submit the form",
+            "B. They will not be permitted to attend the trip",
+            "C. They must get the professor's special approval",
+            "D. They can submit the form on the day of the trip"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The email states that late submissions 'cannot be accepted,' implying that students who miss the deadline will be unable to participate."
+        },
+        {
+          "id": "q3",
+          "stem": "Which expense is the university covering for this trip?",
+          "options": [
+            "A. Lunch at the museum cafe",
+            "B. Museum admission fees",
+            "C. Transportation to the museum",
+            "D. Notebooks for note-taking"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The email states that 'Admission is free for students,' meaning the museum entry is covered."
+        }
+      ]
+    }
+  ]
+}

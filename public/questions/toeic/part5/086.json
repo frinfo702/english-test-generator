@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q26",
+      "sentence": "Please do not hesitate to contact me if you have ___ questions.",
+      "options": {
+        "A": "further",
+        "B": "farther",
+        "C": "farthest",
+        "D": "furthest"
+      },
+      "correct": "A",
+      "explanation": "'Further questions' means 'additional questions' (not physical distance).",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

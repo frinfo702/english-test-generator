@@ -1,0 +1,29 @@
+{
+  "sentences": [
+    {
+      "id": "s6",
+      "reference": "Lecturer: Why is biodiversity important?",
+      "chunks": [
+        "ecosystems",
+        "Biodiversity",
+        "to",
+        "resilient",
+        "makes",
+        "environmental",
+        "more",
+        "changes"
+      ],
+      "correctOrder": [
+        1,
+        4,
+        0,
+        6,
+        3,
+        2,
+        5,
+        7
+      ],
+      "fullSentence": "Biodiversity makes ecosystems more resilient to environmental changes"
+    }
+  ]
+}

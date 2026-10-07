@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q11",
+      "sentence": "The restaurant offers a discount to customers ___ present a valid membership card.",
+      "options": {
+        "A": "what",
+        "B": "who",
+        "C": "where",
+        "D": "when"
+      },
+      "correct": "B",
+      "explanation": "'Customers who present...' needs a relative pronoun referring to people.",
+      "focus": "pronoun"
+    }
+  ]
+}

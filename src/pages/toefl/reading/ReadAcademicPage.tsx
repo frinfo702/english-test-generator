@@ -122,8 +122,6 @@ export function ReadAcademicPage() {
         title="Read an Academic Passage"
         subtitle="Read the academic passage and answer all questions."
         backTo="/toefl"
-        current={totalAnswered}
-        total={totalQ}
       />
 
       <div className={styles.topBar}>

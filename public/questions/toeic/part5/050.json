@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q20",
+      "sentence": "The finance department will finalize the annual budget after it ___ the latest sales forecast.",
+      "options": {
+        "A": "reviews",
+        "B": "reviewed",
+        "C": "will review",
+        "D": "is reviewing"
+      },
+      "correct": "A",
+      "explanation": "In time clauses with 'after,' use present tense for future actions.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

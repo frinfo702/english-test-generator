@@ -135,7 +135,7 @@ describe("ListenRepeatPage", () => {
     });
 
     renderPage();
-    expect(screen.getByText("Loading question set...")).toBeTruthy();
+    expect(screen.getByText("Loading question...")).toBeTruthy();
   });
 
   it("plays the first sentence audio when loaded", async () => {

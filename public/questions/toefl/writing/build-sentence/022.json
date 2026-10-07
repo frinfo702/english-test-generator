@@ -1,0 +1,29 @@
+{
+  "sentences": [
+    {
+      "id": "s2",
+      "reference": "Lecturer: How does exercise affect academic performance?",
+      "chunks": [
+        "regular",
+        "exercise",
+        "blood",
+        "flow",
+        "to",
+        "the",
+        "improves",
+        "brain"
+      ],
+      "correctOrder": [
+        0,
+        1,
+        6,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "fullSentence": "Regular exercise improves blood flow to the brain"
+    }
+  ]
+}

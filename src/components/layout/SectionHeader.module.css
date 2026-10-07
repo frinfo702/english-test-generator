@@ -62,11 +62,6 @@
   max-width: 62ch;
 }
 
-/* Progress rides under the header as a hairline */
-.wrapper > div:last-child {
-  margin-top: var(--spacing-5);
-}
-
 @media (max-width: 620px) {
   .title {
     font-size: var(--text-xl);

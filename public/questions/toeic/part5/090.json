@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q30",
+      "sentence": "The customer service representative handled the complaint ___ and resolved the issue quickly.",
+      "options": {
+        "A": "professional",
+        "B": "professionally",
+        "C": "professionalism",
+        "D": "profession"
+      },
+      "correct": "B",
+      "explanation": "An adverb is needed to modify the verb 'handled': 'handled ... professionally'.",
+      "focus": "word form"
+    }
+  ]
+}

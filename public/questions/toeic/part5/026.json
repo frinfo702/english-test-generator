@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q26",
+      "sentence": "___ customers complete their purchase, they receive a confirmation email.",
+      "options": {
+        "A": "Once",
+        "B": "Since",
+        "C": "Despite",
+        "D": "However"
+      },
+      "correct": "A",
+      "explanation": "'Once' introduces a time clause.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

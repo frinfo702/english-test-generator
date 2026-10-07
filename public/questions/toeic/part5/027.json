@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q27",
+      "sentence": "The manager asked that all reports ___ submitted before noon.",
+      "options": {
+        "A": "are",
+        "B": "were",
+        "C": "be",
+        "D": "being"
+      },
+      "correct": "C",
+      "explanation": "Subjunctive 'be' after 'asked that.'",
+      "focus": "verb tense/form"
+    }
+  ]
+}

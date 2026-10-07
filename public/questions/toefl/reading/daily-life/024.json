@@ -1,0 +1,50 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "schedule",
+      "content": "Community Center — Summer Workshop Schedule\n\nJuly 10–14: Digital Photography for Beginners (9 AM – 11 AM, Room 201)\nJuly 17–21: Introduction to Creative Writing (1 PM – 3 PM, Room 105)\nJuly 24–28: Basic Web Design (9 AM – 12 PM, Computer Lab)\nAugust 7–11: Yoga and Mindfulness (7 AM – 8 AM, Main Hall)\n\nAll workshops require advance registration. Registration opens two weeks before each start date. Materials are included except for the photography workshop, where participants must bring their own camera. Class sizes are limited to 15 participants.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Which workshop has the longest daily session time?",
+          "options": [
+            "A. Digital Photography for Beginners",
+            "B. Introduction to Creative Writing",
+            "C. Basic Web Design",
+            "D. Yoga and Mindfulness"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "Basic Web Design runs from 9 AM to 12 PM (3 hours), which is longer than the other workshops."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about the photography workshop?",
+          "options": [
+            "A. It is the most popular workshop offered",
+            "B. It requires an additional equipment fee",
+            "C. It will take place in the computer lab",
+            "D. It has a separate registration process"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "Since participants 'must bring their own camera' and materials are included for other workshops, the photography workshop likely involves an additional equipment cost that participants must cover themselves."
+        },
+        {
+          "id": "q3",
+          "stem": "When can a participant register for the yoga workshop?",
+          "options": [
+            "A. Any time before July 24",
+            "B. Starting July 24",
+            "C. Starting August 7",
+            "D. Anytime during the summer"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "Registration opens two weeks before each start date. The yoga workshop starts August 7, so registration opens July 24."
+        }
+      ]
+    }
+  ]
+}

@@ -2,106 +2,47 @@
   "texts": [
     {
       "id": "t1",
-      "textType": "advertisement",
-      "layout": "notice",
-      "icon": "calendar",
-      "title": "Weekend Pottery Workshops at Harbor Arts Studio",
-      "content": "Four-week course begins Saturday, March 8\nNo experience necessary — all materials included\nSmall groups of eight students or fewer\nRegister by March 1 at www.harborarts.example.com",
+      "textType": "notice",
+      "content": "Important Update: Visitor Parking Policy\n\nEffective March 1, all visitors must register their vehicles at the security kiosk before parking in the main lot. A valid driver's license and proof of insurance are required upon registration. Designated visitor spaces on Level 2 will now be limited to four hours maximum. Visitors who exceed the time limit may receive a citation.\n\nContractors and delivery drivers should continue using the loading bay on the east side of the building. Annual parking permits are no longer available for purchase at the front desk; all permit applications must now be submitted through the online portal.",
       "questions": [
         {
           "id": "q1",
-          "stem": "What is indicated about the workshops?",
+          "stem": "What is the main change being announced in this notice?",
           "options": [
-            "A. Participants must bring their own clay.",
-            "B. They are designed for experienced potters.",
-            "C. Class sizes are kept small.",
-            "D. They meet on weekday evenings."
+            "A. The parking lot will be closed for construction",
+            "B. Visitors must now register their vehicles at the security kiosk",
+            "C. All parking permits are being discontinued",
+            "D. Contractor parking has been moved to the main lot"
           ],
-          "correctIndex": 2,
+          "correctIndex": 1,
           "type": "factual",
-          "explanation": "The advertisement says the course has 'small groups of eight students or fewer.' Materials are included, beginners are welcome, and classes are on weekends."
+          "explanation": "The notice states that 'all visitors must register their vehicles at the security kiosk before parking in the main lot,' which is the primary policy change."
         },
         {
           "id": "q2",
-          "stem": "What is the main purpose of the advertisement?",
+          "stem": "What can be inferred about applying for an annual parking permit?",
           "options": [
-            "A. To announce a change to an existing course",
-            "B. To attract people to sign up for a class",
-            "C. To thank students for completing a workshop",
-            "D. To request volunteers for an art studio"
+            "A. It can now only be done through the online portal",
+            "B. It is no longer possible under the new policy",
+            "C. It requires approval from the building manager",
+            "D. It can still be done at the front desk until March"
           ],
-          "correctIndex": 1,
-          "type": "purpose",
-          "explanation": "It describes a new course, highlights its benefits, and tells readers how and when to register, so its purpose is to attract new participants."
-        }
-      ]
-    },
-    {
-      "id": "t2",
-      "textType": "live chat",
-      "layout": "live-chat",
-      "title": "Live Chat",
-      "messages": [
-        {
-          "sender": "Priya Nair",
-          "time": "2:10 P.M.",
-          "text": "The catering company just called. They can't deliver to the conference hall on Friday because the loading dock will be closed for repairs."
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "The notice states annual permits are 'no longer available for purchase at the front desk' and 'must now be submitted through the online portal,' implying that in-person applications are no longer accepted."
         },
-        {
-          "sender": "Tom Whitaker",
-          "time": "2:12 P.M.",
-          "text": "That's a setback. Could they use the side entrance on Elm Street instead?"
-        },
-        {
-          "sender": "Priya Nair",
-          "time": "2:14 P.M.",
-          "text": "I asked. The carts are too wide for that door, but they offered to bring everything in smaller trays if we push lunch back thirty minutes."
-        },
-        {
-          "sender": "Tom Whitaker",
-          "time": "2:16 P.M.",
-          "text": "That works. The keynote can run a little longer. I'll let the speaker know and revise the printed agenda."
-        },
-        {
-          "sender": "Priya Nair",
-          "time": "2:17 P.M.",
-          "text": "Great. I'll confirm with the caterer and ask facilities to keep the side door unlocked from noon."
-        }
-      ],
-      "questions": [
         {
           "id": "q3",
-          "stem": "What problem does Ms. Nair report?",
+          "stem": "The word 'citation' in the notice most likely means a:",
           "options": [
-            "A. The caterer has canceled the order.",
-            "B. A delivery area will be unavailable.",
-            "C. The keynote speaker will arrive late.",
-            "D. The conference hall has been double-booked."
+            "A. written warning from security",
+            "B. note of appreciation for compliance",
+            "C. formal penalty for violating the rule",
+            "D. request to extend parking time"
           ],
-          "correctIndex": 1,
-          "type": "factual",
-          "explanation": "Ms. Nair says the caterer cannot deliver because 'the loading dock will be closed for repairs.'"
-        },
-        {
-          "id": "q4",
-          "stem": "At 2:16 P.M., why does Mr. Whitaker write, \"The keynote can run a little longer\"?",
-          "options": [
-            "A. To complain that the speaker talks too much",
-            "B. To suggest canceling the lunch break",
-            "C. To show that the schedule can absorb the delay",
-            "D. To ask Ms. Nair to contact the speaker"
-          ],
-          "correctIndex": 2,
-          "type": "inference",
-          "explanation": "Lunch must be pushed back thirty minutes. By extending the keynote, Mr. Whitaker shows the delay can be filled without leaving a gap in the program. He says he will contact the speaker himself."
-        },
-        {
-          "id": "q5",
-          "stem": "The word \"revise\" in Mr. Whitaker's message at 2:16 P.M. is closest in meaning to",
-          "options": ["A. review", "B. distribute", "C. update", "D. shorten"],
           "correctIndex": 2,
           "type": "vocabulary",
-          "explanation": "Mr. Whitaker will change the printed agenda to reflect the new lunch time, so 'revise' means 'update.' 'Review' only means to look over, without changing."
+          "explanation": "In the context of exceeding the time limit, 'citation' refers to a formal notice of a violation that typically carries a fine or penalty."
         }
       ]
     }

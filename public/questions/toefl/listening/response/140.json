@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Library & Resources",
+  "voices": {
+    "Student": "rex",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q7",
+      "speaker": "m6",
+      "context": "Asking about quiet zone rules",
+      "stem": "Which floor of the library is the silent study area? I need complete quiet.",
+      "options": {
+        "A": "The fourth floor is designated as a silent study zone. No talking allowed.",
+        "B": "Quiet study areas are popular during exam week.",
+        "C": "I study best with background music."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about specific study environment locations, so providing the exact floor and its rules is the most useful response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Which floor of the library is the silent study area? I need complete quiet."
+    }
+  ]
+}

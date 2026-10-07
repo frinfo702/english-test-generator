@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q29",
+      "sentence": "The company plans to expand its operations to Asia ___ the next two years.",
+      "options": {
+        "A": "during",
+        "B": "for",
+        "C": "in",
+        "D": "over"
+      },
+      "correct": "D",
+      "explanation": "'Over' is commonly used to indicate a time span covering a period.",
+      "focus": "preposition"
+    }
+  ]
+}

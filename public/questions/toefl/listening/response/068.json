@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Campus Services",
+  "voices": {
+    "Student": "eve"
+  },
+  "questions": [
+    {
+      "id": "q4",
+      "speaker": "f4",
+      "context": "Requesting an extension politely",
+      "stem": "Would it be possible to get a two-day extension on the lab report? I've been sick.",
+      "options": {
+        "A": "That's fine. Please submit it by Friday and attach a brief note.",
+        "B": "Extensions are rarely granted in this department.",
+        "C": "You should take better care of your health."
+      },
+      "correct": "A",
+      "explanation": "The speaker is politely requesting an extension with a valid reason, so a compassionate approval with clear conditions is appropriate."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Would it be possible to get a two-day extension on the lab report? I've been sick."
+    }
+  ]
+}

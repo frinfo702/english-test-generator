@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Extracurricular",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q2",
+      "speaker": "f4",
+      "context": "Inviting to a cultural event",
+      "stem": "There's a Korean film festival at the student center this Friday. Want to go?",
+      "options": {
+        "A": "That sounds great! What time does it start?",
+        "B": "Korean films are very popular internationally.",
+        "C": "I watched a Korean movie last weekend."
+      },
+      "correct": "A",
+      "explanation": "The speaker is inviting you to an event, so showing enthusiasm and asking for details is the natural accepting response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "There's a Korean film festival at the student center this Friday. Want to go?"
+    }
+  ]
+}

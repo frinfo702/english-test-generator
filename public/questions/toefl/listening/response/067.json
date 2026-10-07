@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Campus Services",
+  "voices": {
+    "Student": "eve"
+  },
+  "questions": [
+    {
+      "id": "q3",
+      "speaker": "f4",
+      "context": "Asking about job openings",
+      "stem": "Are there any work-study positions still available in the admissions office?",
+      "options": {
+        "A": "We have one opening for a front desk assistant. Would you like to apply?",
+        "B": "Work-study jobs are popular among students.",
+        "C": "The admissions office is very busy in the fall."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about job availability, so providing specific information about an opening and next steps is directly helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Are there any work-study positions still available in the admissions office?"
+    }
+  ]
+}

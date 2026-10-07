@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Campus Services",
+  "voices": {
+    "Student": "eve"
+  },
+  "questions": [
+    {
+      "id": "q7",
+      "speaker": "f4",
+      "context": "Asking about transcript requests",
+      "stem": "How long does it take to get an official transcript mailed to my home address?",
+      "options": {
+        "A": "Official transcripts are mailed within 3 to 5 business days.",
+        "B": "Transcripts include all courses you've taken.",
+        "C": "You can also request an unofficial copy online."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a processing timeline, so providing the specific timeframe directly answers their question."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "How long does it take to get an official transcript mailed to my home address?"
+    }
+  ]
+}

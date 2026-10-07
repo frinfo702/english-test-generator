@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q8",
+      "sentence": "The candidate spoke ___ about his previous experience leading teams.",
+      "options": {
+        "A": "persuasive",
+        "B": "persuasion",
+        "C": "persuasively",
+        "D": "persuade"
+      },
+      "correct": "C",
+      "explanation": "An adverb is needed to modify the verb 'spoke': 'spoke persuasively'.",
+      "focus": "word form"
+    }
+  ]
+}

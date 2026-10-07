@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q9",
+      "sentence": "The report contains the most ___ sales figures to date.",
+      "options": {
+        "A": "up-to-date",
+        "B": "update",
+        "C": "updated",
+        "D": "updating"
+      },
+      "correct": "A",
+      "explanation": "'Up-to-date' is the adjective meaning 'current' and fits before a noun.",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

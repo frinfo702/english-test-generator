@@ -1,0 +1,63 @@
+{
+  "passages": [
+    {
+      "id": "p4",
+      "textType": "report excerpt",
+      "text": "Quarterly Vendor Performance Summary: Paper Supply Co.\n\nDuring Q4, Paper Supply Co. delivered 98% of orders within the agreed timeframe. The average delivery time was 3.1 days, which is [1] the target of 4 days. In addition, the vendor reduced packaging waste by 12% compared to Q3.\n\n[2]\n\nTo maintain this performance, Procurement will [3] the contract terms in early February and confirm stock levels for the next quarter. Any price adjustments must be communicated [4] the next order cycle begins.",
+      "questions": [
+        {
+          "id": "q13",
+          "blankNumber": 1,
+          "type": "vocabulary",
+          "options": {
+            "A": "below",
+            "B": "between",
+            "C": "beside",
+            "D": "behind"
+          },
+          "correct": "A",
+          "explanation": "'Below the target' means lower than the target number of days (faster delivery)."
+        },
+        {
+          "id": "q14",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "The few late deliveries were mainly due to a temporary staffing shortage at the regional warehouse.",
+            "B": "Employees are encouraged to join the company running club on weekends.",
+            "C": "The reception desk will close early on national holidays.",
+            "D": "The cafeteria will introduce a new payment system next year."
+          },
+          "correct": "A",
+          "explanation": "Option A adds a relevant explanation connected to delivery performance in the summary."
+        },
+        {
+          "id": "q15",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "review",
+            "B": "borrow",
+            "C": "divide",
+            "D": "prevent"
+          },
+          "correct": "A",
+          "explanation": "Procurement would 'review' contract terms as part of regular vendor management."
+        },
+        {
+          "id": "q16",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "before",
+            "B": "while",
+            "C": "since",
+            "D": "unless"
+          },
+          "correct": "A",
+          "explanation": "Price adjustments must be communicated earlier than the next cycle, so 'before' fits."
+        }
+      ]
+    }
+  ]
+}

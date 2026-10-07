@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Travel & Transportation",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q4",
+      "speaker": "f3",
+      "context": "Expressing frustration with traffic",
+      "stem": "The traffic on Main Street was terrible this morning. I was stuck for forty minutes.",
+      "options": {
+        "A": "Tell me about it. There's construction near the campus entrance.",
+        "B": "Traffic jams are measured by vehicle density.",
+        "C": "I take the back roads to avoid traffic."
+      },
+      "correct": "A",
+      "explanation": "The speaker is complaining about traffic, so showing shared understanding and providing context is the natural empathetic response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "The traffic on Main Street was terrible this morning. I was stuck for forty minutes."
+    }
+  ]
+}

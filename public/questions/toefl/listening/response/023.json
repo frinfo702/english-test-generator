@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Social Interactions",
+  "voices": {
+    "Student": "ara",
+    "Friend": "rex"
+  },
+  "questions": [
+    {
+      "id": "q7",
+      "speaker": "f4",
+      "context": "Asking for confirmation",
+      "stem": "So, the meeting is at 3 PM in Room 302, not Room 203, right?",
+      "options": {
+        "A": "Yes, 302 on the third floor.",
+        "B": "I have another meeting at 4 PM.",
+        "C": "Room 203 is bigger than 302."
+      },
+      "correct": "A",
+      "explanation": "The speaker is seeking confirmation of specific details, so directly confirming or correcting the information is appropriate."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "So, the meeting is at 3 PM in Room 302, not Room 203, right?"
+    }
+  ]
+}

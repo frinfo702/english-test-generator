@@ -1,81 +1,35 @@
 {
   "texts": [
     {
-      "id": "t1",
-      "textType": "announcement",
-      "content": "Notice to All Tenants\nSubject: Building Maintenance — Elevator Outage\n\nPlease be advised that the passenger elevators in Tower B will be out of service from 8:00 PM on Friday, September 12, until 6:00 AM on Monday, September 15, for scheduled maintenance. Freight elevators will remain operational during this period.\n\nWe apologize for any inconvenience. Residents on floors 8 and above who require assistance with heavy items may contact the front desk to schedule a time slot for freight elevator use.\n\nManagement recommends using the staircase for floors 1 through 7 during the outage.",
-      "questions": [
-        {
-          "id": "q1",
-          "stem": "What is the primary reason for this announcement?",
-          "options": [
-            "A. To warn tenants about a building emergency",
-            "B. To inform tenants about planned elevator maintenance",
-            "C. To announce the installation of new elevators",
-            "D. To notify tenants about a change in building management"
-          ],
-          "correctIndex": 1,
-          "type": "purpose",
-          "explanation": "The announcement is about 'scheduled maintenance' of the passenger elevators, informing tenants in advance."
-        },
-        {
-          "id": "q2",
-          "stem": "What can be inferred about the freight elevators during the maintenance period?",
-          "options": [
-            "A. They will be available for all tenants to use freely",
-            "B. They will be exclusively for maintenance workers",
-            "C. They can be used by arrangement for moving heavy items",
-            "D. They will also be undergoing maintenance at the same time"
-          ],
-          "correctIndex": 2,
-          "type": "inference",
-          "explanation": "The announcement says residents can 'contact the front desk to schedule a time slot for freight elevator use,' implying it is available by appointment for specific needs."
-        }
-      ]
-    },
-    {
       "id": "t2",
-      "textType": "webpage",
-      "content": "Monthly Budget Planner — Step 1: Track Your Income\n\nBefore you can build a budget that works, you need to know exactly how much money is coming in each month. Start by listing all sources of income:\n\n• Primary job salary (after taxes)\n• Freelance or side business earnings\n• Investment dividends\n• Government benefits or student grants\n\nPro Tip: Use your net income (after-tax amount), not your gross income. This gives you a realistic picture of what you actually have available to spend and save.\n\nNext week: Step 2 — Categorize Your Expenses.",
+      "textType": "schedule",
+      "content": "Workshop Sessions – March 12\n\n9:00 AM – AI Ethics (Room 301) – Dr. Lin\n10:30 AM – Cloud Security (Room 302) – Mr. Patel\n1:00 PM – UX Design Trends (Room 301) – Ms. Garcia\n2:30 PM – Data Privacy Laws (Room 303) – Prof. Andersen\n\nAll workshops require pre-registration. Walk-ins will be admitted only if space permits.",
       "questions": [
         {
           "id": "q3",
-          "stem": "What is the main topic of this webpage?",
+          "stem": "Which two workshops take place in the same room?",
           "options": [
-            "A. How to reduce monthly expenses",
-            "B. How to invest money for retirement",
-            "C. The first step in creating a monthly budget",
-            "D. How to apply for government benefits"
+            "A. AI Ethics and Cloud Security",
+            "B. Cloud Security and Data Privacy Laws",
+            "C. AI Ethics and UX Design Trends",
+            "D. Data Privacy Laws and UX Design Trends"
           ],
           "correctIndex": 2,
-          "type": "purpose",
-          "explanation": "The webpage is titled 'Monthly Budget Planner — Step 1' and focuses on tracking income as the first step in budgeting."
-        },
-        {
-          "id": "q4",
-          "stem": "The word 'net' in 'net income' most likely refers to:",
-          "options": [
-            "A. the total earnings before any deductions",
-            "B. the amount remaining after taxes and deductions",
-            "C. the estimated income for the next quarter",
-            "D. the combined income of all household members"
-          ],
-          "correctIndex": 1,
-          "type": "vocabulary",
-          "explanation": "The webpage defines net income as 'after-tax amount,' meaning what remains after taxes and deductions."
+          "type": "factual",
+          "explanation": "Both AI Ethics (9:00 AM) and UX Design Trends (1:00 PM) are scheduled in Room 301."
         },
         {
           "id": "q5",
-          "stem": "What does the webpage imply about using gross income for budgeting?",
+          "stem": "What must attendees do to guarantee a spot in a workshop?",
           "options": [
-            "A. It is the preferred method for most experts",
-            "B. It leads to an unrealistic spending plan",
-            "C. It works better for freelance workers",
-            "D. It is required for government grant applications"
+            "A. Arrive 30 minutes early",
+            "B. Pre-register for the session",
+            "C. Purchase a full-day ticket",
+            "D. Download the mobile app"
           ],
           "correctIndex": 1,
-          "type": "inference",
-          "explanation": "The webpage advises using net income because it 'gives you a realistic picture,' implying that gross income would overstate what is actually available."
+          "type": "factual",
+          "explanation": "The schedule states that 'all workshops require pre-registration.'"
         }
       ]
     }

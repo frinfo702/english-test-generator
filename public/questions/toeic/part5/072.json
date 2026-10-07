@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q12",
+      "sentence": "The CEO asked that the proposal ___ revised before the meeting.",
+      "options": {
+        "A": "is",
+        "B": "was",
+        "C": "be",
+        "D": "being"
+      },
+      "correct": "C",
+      "explanation": "In formal requests ('ask that'), the subjunctive base form is used: 'be revised'.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q23",
+      "sentence": "A significant amount of time ___ spent on resolving the issue last week.",
+      "options": {
+        "A": "were",
+        "B": "has",
+        "C": "was",
+        "D": "have"
+      },
+      "correct": "C",
+      "explanation": "'A significant amount' is singular, and the sentence describes a completed past action.",
+      "focus": "subject-verb agreement"
+    }
+  ]
+}

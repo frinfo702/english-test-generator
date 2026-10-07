@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q4",
+      "sentence": "The supplier offered a discount ___ we placed the order before the end of the week.",
+      "options": {
+        "A": "provide",
+        "B": "provided",
+        "C": "providing",
+        "D": "provision"
+      },
+      "correct": "B",
+      "explanation": "'Provided (that)' introduces a condition meaning 'on the condition that'.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

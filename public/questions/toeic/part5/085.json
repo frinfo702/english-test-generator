@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q25",
+      "sentence": "The project manager met with the team to discuss the tasks ___ for the next phase.",
+      "options": {
+        "A": "assigning",
+        "B": "assigned",
+        "C": "assignment",
+        "D": "assign"
+      },
+      "correct": "B",
+      "explanation": "'Assigned' is a past participle used as an adjective: 'the tasks assigned...'.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

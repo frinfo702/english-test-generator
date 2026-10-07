@@ -270,8 +270,6 @@ export function ListeningTaskBase({
         title={title}
         subtitle={subtitle}
         backTo={backTo}
-        current={Object.keys(selections).length}
-        total={totalQuestions}
       />
 
       <div className={styles.topBar}>
@@ -285,7 +283,7 @@ export function ListeningTaskBase({
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="Loading question set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.errorText}>
           <p>{error}</p>

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q23",
+      "sentence": "We are looking for a candidate with ___ attention to detail.",
+      "options": {
+        "A": "carefully",
+        "B": "careful",
+        "C": "carefulness",
+        "D": "care"
+      },
+      "correct": "B",
+      "explanation": "An adjective is needed to modify the noun phrase 'attention to detail': 'careful attention'.",
+      "focus": "word form"
+    }
+  ]
+}

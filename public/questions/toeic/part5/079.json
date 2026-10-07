@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q19",
+      "sentence": "The invoice should be paid within 30 days of ___.",
+      "options": {
+        "A": "issue",
+        "B": "issues",
+        "C": "issuing",
+        "D": "issued"
+      },
+      "correct": "A",
+      "explanation": "'Issue' is a noun here meaning the act/date of being issued: 'within 30 days of issue'.",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q20",
+      "sentence": "Mr. Garcia is the employee ___ ideas helped improve the process.",
+      "options": {
+        "A": "whose",
+        "B": "who",
+        "C": "whom",
+        "D": "which"
+      },
+      "correct": "A",
+      "explanation": "Use 'whose' to show possession: 'whose ideas'.",
+      "focus": "relative pronoun"
+    }
+  ]
+}

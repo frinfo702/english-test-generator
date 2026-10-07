@@ -3,112 +3,46 @@
     {
       "id": "t1",
       "textType": "email",
-      "content": "From: Dr. Martinez\nTo: History 201 Students\nSubject: Field Trip to City Museum\n\nDear Students,\n\nThis is a reminder that our field trip to the City Museum of History is scheduled for this Friday, November 8. We will depart from the main entrance at 9:00 AM sharp and return by 3:30 PM.\n\nPlease bring your student ID, a notebook, and comfortable walking shoes. Admission is free for students, but you will need to cover the cost of your own lunch. The museum cafe has reasonable prices, or you may bring a packed lunch.\n\nIf you have not yet submitted the permission form, please do so by Wednesday at noon. Late submissions cannot be accepted.",
+      "content": "From: Event Management Team\nTo: All Registered Attendees\nSubject: TechForward Conference 2024 – Important Updates\n\nThe opening keynote has been moved from Hall A to the Grand Ballroom to accommodate increased registration numbers.\n\nAll sessions on March 12 will begin 30 minutes earlier than originally scheduled. Please check the updated agenda on our mobile app.\n\nLunch is provided for full-day ticket holders only. Half-day attendees may purchase meal vouchers at the registration desk for $18.",
       "questions": [
         {
           "id": "q1",
-          "stem": "What is the purpose of this email?",
+          "stem": "Why was the keynote venue changed?",
           "options": [
-            "A. To announce the cancellation of a field trip",
-            "B. To inform students about an upcoming museum visit",
-            "C. To request donations for the museum admission",
-            "D. To assign a research project at the museum"
+            "A. Hall A was double-booked",
+            "B. More people registered than expected",
+            "C. The speaker requested a larger stage",
+            "D. The Grand Ballroom has better lighting"
           ],
           "correctIndex": 1,
           "type": "purpose",
-          "explanation": "The email provides details about the scheduled field trip, including meeting time, what to bring, and the permission form deadline."
+          "explanation": "The email states the move was 'to accommodate increased registration numbers.'"
         },
         {
           "id": "q2",
-          "stem": "What can be inferred about students who miss the Wednesday deadline?",
+          "stem": "What can be inferred about half-day ticket holders?",
           "options": [
-            "A. They can pay a late fee to submit the form",
-            "B. They will not be permitted to attend the trip",
-            "C. They must get the professor's special approval",
-            "D. They can submit the form on the day of the trip"
-          ],
-          "correctIndex": 1,
-          "type": "inference",
-          "explanation": "The email states that late submissions 'cannot be accepted,' implying that students who miss the deadline will be unable to participate."
-        },
-        {
-          "id": "q3",
-          "stem": "Which expense is the university covering for this trip?",
-          "options": [
-            "A. Lunch at the museum cafe",
-            "B. Museum admission fees",
-            "C. Transportation to the museum",
-            "D. Notebooks for note-taking"
-          ],
-          "correctIndex": 1,
-          "type": "factual",
-          "explanation": "The email states that 'Admission is free for students,' meaning the museum entry is covered."
-        }
-      ]
-    },
-    {
-      "id": "t2",
-      "textType": "receipt",
-      "content": "GreenLeaf Electronics\n123 Oak Avenue, Portland, OR\nTel: 555-0198\n\nRECEIPT\nDate: 2025/03/15 14:23\nCashier: #1042\n\nItem                           Qty     Price\n------------------------------------------\nWireless Mouse                  1     $29.99\nUSB-C Hub                       1     $45.50\nLaptop Sleeve (13-inch)         1     $24.99\nScreen Cleaning Kit             1     $12.99\n------------------------------------------\nSubtotal:                             $113.47\nTax (8.5%):                             $9.64\nTotal:                                $123.11\n\nPayment: Visa ****4321\n\nReturn policy: 30-day full refund with original receipt. Items must be in original packaging.",
-      "questions": [
-        {
-          "id": "q4",
-          "stem": "What is the most expensive single item purchased?",
-          "options": [
-            "A. The wireless mouse",
-            "B. The USB-C hub",
-            "C. The laptop sleeve",
-            "D. The screen cleaning kit"
-          ],
-          "correctIndex": 1,
-          "type": "factual",
-          "explanation": "The USB-C hub costs $45.50, which is the highest price among the items listed."
-        },
-        {
-          "id": "q5",
-          "stem": "According to the receipt, what condition must be met for a refund?",
-          "options": [
-            "A. The items must be unopened",
-            "B. The customer must show photo identification",
-            "C. The items must be returned within 30 days with the original receipt",
-            "D. The purchase must have been made with a credit card"
+            "A. They cannot attend any workshops",
+            "B. They must leave the venue by noon",
+            "C. They do not receive complimentary lunch",
+            "D. They have priority access to walk-in sessions"
           ],
           "correctIndex": 2,
-          "type": "factual",
-          "explanation": "The return policy states '30-day full refund with original receipt' and items 'must be in original packaging.'"
-        }
-      ]
-    },
-    {
-      "id": "t3",
-      "textType": "announcement",
-      "content": "Attention all residents:\n\nThe pool will open for the season on Saturday, May 25. Operating hours are 6:00 AM to 9:00 PM daily. Please note the following:\n\n- All residents must scan their key fob at the gate for entry.\n- Guests must be signed in by a resident and are limited to two per household.\n- Glass containers are strictly prohibited in the pool area.\n- The pool will close at 6:00 PM on June 15 for a private event.\n\nThank you, and enjoy the summer!",
-      "questions": [
-        {
-          "id": "q6",
-          "stem": "What is the main purpose of this announcement?",
-          "options": [
-            "A. To inform residents about pool rules and schedule",
-            "B. To announce that the pool will be closed all summer",
-            "C. To notify residents about a fee increase for pool access",
-            "D. To promote swimming lessons for children"
-          ],
-          "correctIndex": 0,
-          "type": "purpose",
-          "explanation": "The announcement covers the opening date, hours, entry requirements, guest policy, and a specific closure — all essential information about pool usage."
+          "type": "inference",
+          "explanation": "The email states that 'lunch is provided for full-day ticket holders only,' implying half-day holders do not receive it."
         },
         {
-          "id": "q7",
-          "stem": "What can be inferred about the event on June 15?",
+          "id": "q6",
+          "stem": "The word 'accommodate' in the email is closest in meaning to:",
           "options": [
-            "A. It is a regular maintenance day",
-            "B. It is a private function that requires early pool closure",
-            "C. It is open to all residents free of charge",
-            "D. It will feature guest instructors from outside the community"
+            "A. reject",
+            "B. provide space for",
+            "C. ignore",
+            "D. limit"
           ],
           "correctIndex": 1,
-          "type": "inference",
-          "explanation": "The announcement states the pool 'will close at 6:00 PM on June 15 for a private event,' implying the event is not open to all residents."
+          "type": "vocabulary",
+          "explanation": "'Accommodate' in this context means to provide sufficient space for a larger number of people."
         }
       ]
     }

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q29",
+      "sentence": "Each department head ___ required to submit a quarterly review.",
+      "options": {
+        "A": "are",
+        "B": "have been",
+        "C": "is",
+        "D": "were"
+      },
+      "correct": "C",
+      "explanation": "'Each' is singular.",
+      "focus": "subject-verb agreement"
+    }
+  ]
+}

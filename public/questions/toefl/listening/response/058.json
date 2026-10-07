@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Practical Matters",
+  "voices": {
+    "Student": "rex"
+  },
+  "questions": [
+    {
+      "id": "q2",
+      "speaker": "m6",
+      "context": "Offering a ride",
+      "stem": "I'm driving to the conference center. Do you need a lift?",
+      "options": {
+        "A": "That would be great, thanks!",
+        "B": "I prefer to take public transit.",
+        "C": "The conference center is far from campus."
+      },
+      "correct": "A",
+      "explanation": "The speaker is offering transportation, so accepting gratefully is the natural and polite response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I'm driving to the conference center. Do you need a lift?"
+    }
+  ]
+}

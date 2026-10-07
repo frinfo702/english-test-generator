@@ -1,0 +1,37 @@
+{
+  "texts": [
+    {
+      "id": "t2",
+      "textType": "advertisement",
+      "content": "SpeakFluently Language School\n\nLearn a new language in just 10 weeks!\n\n- Small group classes (max 6 students)\n- Native-speaking instructors\n- Flexible evening and weekend schedules\n- Free trial class — no obligation\n\nLanguages offered: Spanish, French, German, Mandarin, Japanese, and Italian.\n\nSummer enrollment is now open. Early bird discount: 15% off if you register before June 1.\n\nVisit www.speakfluently.example.com or call 555-0147 to book your free trial.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "What is the main selling point emphasized by this advertisement?",
+          "options": [
+            "A. The lowest prices in the city",
+            "B. The convenience and flexibility of the classes",
+            "C. The opportunity to travel abroad",
+            "D. The use of digital learning tools"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The ad highlights small class sizes, native-speaking instructors, and flexible schedules — all pointing to quality and convenience."
+        },
+        {
+          "id": "q4",
+          "stem": "What can be inferred about the early bird discount?",
+          "options": [
+            "A. It applies to all language courses equally",
+            "B. It is only available for the first 50 registrants",
+            "C. It offers a reduced rate for those who sign up early",
+            "D. It requires a minimum payment upfront"
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The ad states '15% off if you register before June 1,' meaning early registrants receive a discount on the regular price."
+        }
+      ]
+    }
+  ]
+}

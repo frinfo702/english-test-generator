@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Academic Situations",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q3",
+      "speaker": "m6",
+      "context": "Seeking permission to record a lecture",
+      "stem": "Professor, would it be alright if I recorded today's lecture? I'm an auditory learner.",
+      "options": {
+        "A": "As long as it's for personal use only, that's fine with me.",
+        "B": "Lectures are already posted online every week.",
+        "C": "You should take notes instead."
+      },
+      "correct": "A",
+      "explanation": "The speaker is politely asking for permission to record, so granting it with reasonable conditions is appropriate."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor, would it be alright if I recorded today's lecture? I'm an auditory learner."
+    }
+  ]
+}

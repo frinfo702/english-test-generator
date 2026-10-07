@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q18",
+      "sentence": "The new product was developed to meet the needs of customers in the ___ market.",
+      "options": {
+        "A": "compete",
+        "B": "competition",
+        "C": "competitive",
+        "D": "competitively"
+      },
+      "correct": "C",
+      "explanation": "An adjective is needed before 'market.'",
+      "focus": "word form"
+    }
+  ]
+}

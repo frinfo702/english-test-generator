@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q17",
+      "sentence": "Mr. Lee will attend the seminar ___ he can learn more about international tax regulations.",
+      "options": {
+        "A": "because",
+        "B": "so that",
+        "C": "even if",
+        "D": "whereas"
+      },
+      "correct": "B",
+      "explanation": "'So that' expresses purpose: he attends in order to learn.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

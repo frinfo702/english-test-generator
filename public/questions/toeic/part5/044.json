@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q14",
+      "sentence": "The marketing report was not ___ detailed to support the proposed budget increase.",
+      "options": {
+        "A": "enough",
+        "B": "so",
+        "C": "too",
+        "D": "very"
+      },
+      "correct": "A",
+      "explanation": "'Not ... enough + adjective + to' expresses insufficient degree.",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

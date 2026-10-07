@@ -1,0 +1,34 @@
+{
+  "title": "Question-Response - Travel & Logistics",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "How long does it take to get to the airport from here?",
+      "options": {
+        "A": "About thirty minutes by taxi.",
+        "B": "Yes, I've been there before.",
+        "C": "The flight was delayed."
+      },
+      "correct": "A",
+      "explanation": "The question asks about duration ('How long'), so 'About thirty minutes' correctly answers the question."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Man",
+      "text": "Number 1. How long does it take to get to the airport from here?"
+    },
+    {
+      "role": "Woman",
+      "text": "(A) About thirty minutes by taxi."
+    },
+    {
+      "role": "Woman",
+      "text": "(B) Yes, I've been there before."
+    },
+    {
+      "role": "Woman",
+      "text": "(C) The flight was delayed."
+    }
+  ]
+}

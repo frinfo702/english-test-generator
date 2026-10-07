@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q22",
+      "sentence": "Employees are encouraged to submit ___ suggestions.",
+      "options": {
+        "A": "they",
+        "B": "their",
+        "C": "them",
+        "D": "theirs"
+      },
+      "correct": "B",
+      "explanation": "Possessive adjective 'their.'",
+      "focus": "pronoun"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Study Related",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q6",
+      "speaker": "f3",
+      "context": "Reacting to a funny story",
+      "stem": "You won't believe what happened — the professor walked into class with his shirt buttoned wrong!",
+      "options": {
+        "A": "No way! Did anyone tell him? That's hilarious.",
+        "B": "Professors are very busy people.",
+        "C": "I always check my clothes before leaving."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing an amusing anecdote, so reacting with surprise and engaging with the story is the natural social response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "You won't believe what happened — the professor walked into class with his shirt buttoned wrong!"
+    }
+  ]
+}

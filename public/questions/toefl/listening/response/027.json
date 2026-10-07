@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Campus Facilities",
+  "voices": {
+    "Student": "rex",
+    "Lab Assistant": "sal"
+  },
+  "questions": [
+    {
+      "id": "q3",
+      "speaker": "m6",
+      "context": "Requesting a favor",
+      "stem": "Could you keep an eye on my bag while I grab a coffee? I'll be right back.",
+      "options": {
+        "A": "Sure, I'll watch it for you.",
+        "B": "I prefer tea over coffee.",
+        "C": "The cafe is on the first floor."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking a small favor, so a straightforward agreement is the expected response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Could you keep an eye on my bag while I grab a coffee? I'll be right back."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q10",
+      "sentence": "The training session is open to employees ___ work in the sales division.",
+      "options": {
+        "A": "who",
+        "B": "whom",
+        "C": "whose",
+        "D": "which"
+      },
+      "correct": "A",
+      "explanation": "Use 'who' for people as the subject of the relative clause.",
+      "focus": "pronoun"
+    }
+  ]
+}

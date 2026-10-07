@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q5",
+      "sentence": "The new software is ___ compatible with older systems.",
+      "options": {
+        "A": "full",
+        "B": "fullness",
+        "C": "fully",
+        "D": "fuller"
+      },
+      "correct": "C",
+      "explanation": "Adverb 'fully' modifies the adjective.",
+      "focus": "word form"
+    }
+  ]
+}

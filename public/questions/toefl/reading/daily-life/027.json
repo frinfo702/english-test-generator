@@ -1,0 +1,37 @@
+{
+  "texts": [
+    {
+      "id": "t2",
+      "textType": "receipt",
+      "content": "GreenLeaf Electronics\n123 Oak Avenue, Portland, OR\nTel: 555-0198\n\nRECEIPT\nDate: 2025/03/15 14:23\nCashier: #1042\n\nItem                           Qty     Price\n------------------------------------------\nWireless Mouse                  1     $29.99\nUSB-C Hub                       1     $45.50\nLaptop Sleeve (13-inch)         1     $24.99\nScreen Cleaning Kit             1     $12.99\n------------------------------------------\nSubtotal:                             $113.47\nTax (8.5%):                             $9.64\nTotal:                                $123.11\n\nPayment: Visa ****4321\n\nReturn policy: 30-day full refund with original receipt. Items must be in original packaging.",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "What is the most expensive single item purchased?",
+          "options": [
+            "A. The wireless mouse",
+            "B. The USB-C hub",
+            "C. The laptop sleeve",
+            "D. The screen cleaning kit"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The USB-C hub costs $45.50, which is the highest price among the items listed."
+        },
+        {
+          "id": "q5",
+          "stem": "According to the receipt, what condition must be met for a refund?",
+          "options": [
+            "A. The items must be unopened",
+            "B. The customer must show photo identification",
+            "C. The items must be returned within 30 days with the original receipt",
+            "D. The purchase must have been made with a credit card"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The return policy states '30-day full refund with original receipt' and items 'must be in original packaging.'"
+        }
+      ]
+    }
+  ]
+}

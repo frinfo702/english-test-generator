@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q21",
+      "sentence": "___ the high cost, many companies are adopting the new software.",
+      "options": {
+        "A": "Despite",
+        "B": "Although",
+        "C": "Even if",
+        "D": "Unless"
+      },
+      "correct": "A",
+      "explanation": "'Despite' + noun phrase.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

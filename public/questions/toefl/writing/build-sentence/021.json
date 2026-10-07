@@ -1,0 +1,31 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Professor: What is one advantage of interdisciplinary study?",
+      "chunks": [
+        "perspectives",
+        "solutions",
+        "It",
+        "complex",
+        "brings",
+        "to",
+        "together",
+        "diverse",
+        "problems"
+      ],
+      "correctOrder": [
+        2,
+        4,
+        6,
+        7,
+        0,
+        5,
+        3,
+        8,
+        1
+      ],
+      "fullSentence": "It brings together diverse perspectives to complex problems"
+    }
+  ]
+}

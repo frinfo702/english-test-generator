@@ -70,7 +70,6 @@ export function Part6Page() {
   const passage = data?.passages[passageIdx];
   const totalQ =
     data?.passages.reduce((s, p) => s + p.questions.length, 0) ?? 0;
-  const totalAnswered = Object.keys(selected).length;
   const totalCorrect = (data?.passages ?? [])
     .flatMap((p) => p.questions)
     .filter((q) => selected[q.id] === q.correct).length;
@@ -152,8 +151,6 @@ export function Part6Page() {
         title="Part 6: Text Completion"
         subtitle="Choose the best words or sentence for each blank."
         backTo="/toeic"
-        current={totalAnswered}
-        total={totalQ}
       />
 
       <div className={styles.topBar}>
@@ -167,7 +164,7 @@ export function Part6Page() {
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="Loading question set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>

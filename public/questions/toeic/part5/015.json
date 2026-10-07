@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q15",
+      "sentence": "The program is designed ___ new employees integrate into the team.",
+      "options": {
+        "A": "helping",
+        "B": "helped",
+        "C": "to help",
+        "D": "helps"
+      },
+      "correct": "C",
+      "explanation": "Infinitive of purpose 'to help.'",
+      "focus": "verb tense/form"
+    }
+  ]
+}

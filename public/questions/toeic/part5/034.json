@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q4",
+      "sentence": "Ms. Rivera is responsible for ___ the weekly inventory report.",
+      "options": {
+        "A": "prepare",
+        "B": "prepares",
+        "C": "preparing",
+        "D": "to preparing"
+      },
+      "correct": "C",
+      "explanation": "'Responsible for' is followed by a gerund (-ing).",
+      "focus": "verb tense/form"
+    }
+  ]
+}

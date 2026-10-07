@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q23",
+      "sentence": "The product line was ___ received by retailers and consumers.",
+      "options": {
+        "A": "enthusiasm",
+        "B": "enthusiast",
+        "C": "enthusiastically",
+        "D": "enthusiastic"
+      },
+      "correct": "C",
+      "explanation": "Adverb 'enthusiastically.'",
+      "focus": "word form"
+    }
+  ]
+}

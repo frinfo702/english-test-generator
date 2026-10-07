@@ -2,80 +2,47 @@
   "texts": [
     {
       "id": "t1",
-      "textType": "email",
-      "content": "From: Event Management Team\nTo: All Registered Attendees\nSubject: TechForward Conference 2024 – Important Updates\n\nThe opening keynote has been moved from Hall A to the Grand Ballroom to accommodate increased registration numbers.\n\nAll sessions on March 12 will begin 30 minutes earlier than originally scheduled. Please check the updated agenda on our mobile app.\n\nLunch is provided for full-day ticket holders only. Half-day attendees may purchase meal vouchers at the registration desk for $18.",
+      "textType": "notice",
+      "content": "BrightMart Return Policy – Updated January 2024\n\nItems may be returned within 30 days of purchase with original receipt. Electronics must be returned within 14 days and are subject to a 15% restocking fee.\n\nSale items marked 'Final Sale' cannot be returned or exchanged. Gift receipts allow store credit only.\n\nOnline purchases can be returned to any physical location or mailed using the prepaid label included in your package.",
       "questions": [
         {
           "id": "q1",
-          "stem": "Why was the keynote venue changed?",
+          "stem": "According to the policy, which item has the shortest return window?",
           "options": [
-            "A. Hall A was double-booked",
-            "B. More people registered than expected",
-            "C. The speaker requested a larger stage",
-            "D. The Grand Ballroom has better lighting"
+            "A. Clothing",
+            "B. Electronics",
+            "C. Items with gift receipts",
+            "D. Sale items"
           ],
           "correctIndex": 1,
-          "type": "purpose",
-          "explanation": "The email states the move was 'to accommodate increased registration numbers.'"
+          "type": "factual",
+          "explanation": "Electronics must be returned within 14 days, while general items have 30 days."
         },
         {
           "id": "q2",
-          "stem": "What can be inferred about half-day ticket holders?",
+          "stem": "What can be inferred about the winter scarf purchased on this receipt?",
           "options": [
-            "A. They cannot attend any workshops",
-            "B. They must leave the venue by noon",
-            "C. They do not receive complimentary lunch",
-            "D. They have priority access to walk-in sessions"
+            "A. It can be returned for a full refund",
+            "B. It can only be exchanged for another color",
+            "C. It cannot be returned under any circumstances",
+            "D. It is eligible for store credit only"
           ],
           "correctIndex": 2,
           "type": "inference",
-          "explanation": "The email states that 'lunch is provided for full-day ticket holders only,' implying half-day holders do not receive it."
+          "explanation": "The scarf is marked 'Final Sale,' and the policy states that 'Final Sale' items cannot be returned or exchanged."
         },
-        {
-          "id": "q6",
-          "stem": "The word 'accommodate' in the email is closest in meaning to:",
-          "options": [
-            "A. reject",
-            "B. provide space for",
-            "C. ignore",
-            "D. limit"
-          ],
-          "correctIndex": 1,
-          "type": "vocabulary",
-          "explanation": "'Accommodate' in this context means to provide sufficient space for a larger number of people."
-        }
-      ]
-    },
-    {
-      "id": "t2",
-      "textType": "schedule",
-      "content": "Workshop Sessions – March 12\n\n9:00 AM – AI Ethics (Room 301) – Dr. Lin\n10:30 AM – Cloud Security (Room 302) – Mr. Patel\n1:00 PM – UX Design Trends (Room 301) – Ms. Garcia\n2:30 PM – Data Privacy Laws (Room 303) – Prof. Andersen\n\nAll workshops require pre-registration. Walk-ins will be admitted only if space permits.",
-      "questions": [
         {
           "id": "q3",
-          "stem": "Which two workshops take place in the same room?",
+          "stem": "What is the main purpose of the return policy notice?",
           "options": [
-            "A. AI Ethics and Cloud Security",
-            "B. Cloud Security and Data Privacy Laws",
-            "C. AI Ethics and UX Design Trends",
-            "D. Data Privacy Laws and UX Design Trends"
-          ],
-          "correctIndex": 2,
-          "type": "factual",
-          "explanation": "Both AI Ethics (9:00 AM) and UX Design Trends (1:00 PM) are scheduled in Room 301."
-        },
-        {
-          "id": "q5",
-          "stem": "What must attendees do to guarantee a spot in a workshop?",
-          "options": [
-            "A. Arrive 30 minutes early",
-            "B. Pre-register for the session",
-            "C. Purchase a full-day ticket",
-            "D. Download the mobile app"
+            "A. To discourage customers from making returns",
+            "B. To inform customers of the rules and conditions for returns",
+            "C. To advertise upcoming sales events",
+            "D. To compare BrightMart with competitors"
           ],
           "correctIndex": 1,
-          "type": "factual",
-          "explanation": "The schedule states that 'all workshops require pre-registration.'"
+          "type": "purpose",
+          "explanation": "The notice explains time limits, fees, exceptions, and methods for returning items."
         }
       ]
     }

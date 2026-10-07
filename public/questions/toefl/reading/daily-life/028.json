@@ -1,0 +1,37 @@
+{
+  "texts": [
+    {
+      "id": "t3",
+      "textType": "announcement",
+      "content": "Attention all residents:\n\nThe pool will open for the season on Saturday, May 25. Operating hours are 6:00 AM to 9:00 PM daily. Please note the following:\n\n- All residents must scan their key fob at the gate for entry.\n- Guests must be signed in by a resident and are limited to two per household.\n- Glass containers are strictly prohibited in the pool area.\n- The pool will close at 6:00 PM on June 15 for a private event.\n\nThank you, and enjoy the summer!",
+      "questions": [
+        {
+          "id": "q6",
+          "stem": "What is the main purpose of this announcement?",
+          "options": [
+            "A. To inform residents about pool rules and schedule",
+            "B. To announce that the pool will be closed all summer",
+            "C. To notify residents about a fee increase for pool access",
+            "D. To promote swimming lessons for children"
+          ],
+          "correctIndex": 0,
+          "type": "purpose",
+          "explanation": "The announcement covers the opening date, hours, entry requirements, guest policy, and a specific closure — all essential information about pool usage."
+        },
+        {
+          "id": "q7",
+          "stem": "What can be inferred about the event on June 15?",
+          "options": [
+            "A. It is a regular maintenance day",
+            "B. It is a private function that requires early pool closure",
+            "C. It is open to all residents free of charge",
+            "D. It will feature guest instructors from outside the community"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The announcement states the pool 'will close at 6:00 PM on June 15 for a private event,' implying the event is not open to all residents."
+        }
+      ]
+    }
+  ]
+}

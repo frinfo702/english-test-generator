@@ -248,7 +248,7 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
         </p>
         <div className={styles.btnRow}>
           <Button variant="primary" onClick={handleRestart}>
-            Try another set
+            Try another question
           </Button>
           <Button variant="ghost" onClick={() => navigate("/dashboard")}>
             View progress
@@ -445,7 +445,7 @@ export function DictationPage() {
         <NextQuestionButton taskId={TASK_ID} variant="secondary" size="sm" />
       </div>
 
-      {loading && <LoadingSpinner message="Loading dictation set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>

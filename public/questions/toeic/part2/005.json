@@ -1,0 +1,34 @@
+{
+  "title": "Question-Response - Travel & Logistics",
+  "questions": [
+    {
+      "id": "q2",
+      "stem": "Who should I contact regarding the shipment delay?",
+      "options": {
+        "A": "It arrived this morning.",
+        "B": "Please speak to Ms. Tanaka in logistics.",
+        "C": "The shipment was very large."
+      },
+      "correct": "B",
+      "explanation": "The question asks for a person ('Who'), so directing to Ms. Tanaka is the appropriate response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Woman",
+      "text": "Number 2. Who should I contact regarding the shipment delay?"
+    },
+    {
+      "role": "Man",
+      "text": "(A) It arrived this morning."
+    },
+    {
+      "role": "Man",
+      "text": "(B) Please speak to Ms. Tanaka in logistics."
+    },
+    {
+      "role": "Man",
+      "text": "(C) The shipment was very large."
+    }
+  ]
+}

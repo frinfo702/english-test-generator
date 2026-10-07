@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q5",
+      "sentence": "Each of the invoices ___ checked for accuracy before payment is approved.",
+      "options": {
+        "A": "were",
+        "B": "have",
+        "C": "is",
+        "D": "are"
+      },
+      "correct": "C",
+      "explanation": "'Each of' is treated as singular: 'Each of the invoices is checked...'.",
+      "focus": "subject-verb agreement"
+    }
+  ]
+}

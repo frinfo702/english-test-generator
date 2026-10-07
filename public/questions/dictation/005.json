@@ -1,0 +1,16 @@
+{
+  "title": "Daily Life Dictation",
+  "sentences": [
+    {
+      "id": "s5",
+      "text": "The library is closed on Sundays.",
+      "wordCount": 6,
+      "distractors": [
+        "open",
+        "Mondays",
+        "always"
+      ],
+      "note": "closed is part of the sentence — distractors are open, Mondays, always"
+    }
+  ]
+}

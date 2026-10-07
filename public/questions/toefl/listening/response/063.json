@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Practical Matters",
+  "voices": {
+    "Student": "rex"
+  },
+  "questions": [
+    {
+      "id": "q7",
+      "speaker": "m6",
+      "context": "Asking to reschedule a meeting",
+      "stem": "Something urgent came up. Could we move our meeting from 2 PM to 4 PM?",
+      "options": {
+        "A": "No problem. I'll see you at 4 PM in the same room.",
+        "B": "You should manage your time better.",
+        "C": "I have another meeting at 4 PM too."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking to reschedule, so confirming the new time and place is the cooperative response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Something urgent came up. Could we move our meeting from 2 PM to 4 PM?"
+    }
+  ]
+}

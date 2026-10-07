@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Requests and Offers",
+  "voices": {
+    "Student": "rex",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q8",
+      "speaker": "m6",
+      "context": "Acknowledging a mistake",
+      "stem": "I accidentally deleted the shared folder. I feel terrible about it.",
+      "options": {
+        "A": "Don't panic. IT can probably restore it from backup.",
+        "B": "You should be more careful with shared files.",
+        "C": "I never use that folder anyway."
+      },
+      "correct": "A",
+      "explanation": "The speaker is upset about making a mistake, so a calming response with a practical solution is most supportive."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I accidentally deleted the shared folder. I feel terrible about it."
+    }
+  ]
+}

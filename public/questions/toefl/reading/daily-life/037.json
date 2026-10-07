@@ -1,0 +1,50 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "menu",
+      "content": "Riverside Cafe — Breakfast Menu\nServed 7:00 AM – 11:00 AM daily\n\nFarmhouse Breakfast — $14.95\nTwo eggs any style, bacon or sausage, toast, hash browns\n\nAvocado Toast — $12.50\nSourdough bread, smashed avocado, cherry tomatoes, poached egg\n\nButtermilk Pancakes — $11.00\nStack of three pancakes with maple syrup and fresh berries\n\nContinental Breakfast — $8.50\nCroissant, butter, jam, fresh fruit cup, orange juice\n\nCoffee, tea, or hot chocolate included with any breakfast item.\nSubstitute gluten-free toast: add $2.00.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the most expensive breakfast item on the menu?",
+          "options": [
+            "A. Avocado Toast",
+            "B. Farmhouse Breakfast",
+            "C. Buttermilk Pancakes",
+            "D. Continental Breakfast"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The Farmhouse Breakfast costs $14.95, which is the highest price on the menu."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about the beverage policy?",
+          "options": [
+            "A. Coffee and tea cost extra for Continental Breakfast customers",
+            "B. A hot drink is included with every breakfast order",
+            "C. Only hot chocolate is offered free of charge",
+            "D. Beverages are not included with the Avocado Toast"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The menu states 'Coffee, tea, or hot chocolate included with any breakfast item,' meaning a beverage is complementary regardless of which item is ordered."
+        },
+        {
+          "id": "q3",
+          "stem": "What does 'substitute' in 'substitute gluten-free toast' most likely mean?",
+          "options": [
+            "A. To remove an item from the meal",
+            "B. To replace one item with an alternative",
+            "C. To add an extra item to the order",
+            "D. To reduce the portion size"
+          ],
+          "correctIndex": 1,
+          "type": "vocabulary",
+          "explanation": "In this context, 'substitute' means to replace the regular toast with a gluten-free alternative at an additional cost."
+        }
+      ]
+    }
+  ]
+}

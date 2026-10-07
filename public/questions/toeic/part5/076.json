@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q16",
+      "sentence": "The auditorium was filled with guests, many of ___ had traveled from overseas.",
+      "options": {
+        "A": "who",
+        "B": "which",
+        "C": "whom",
+        "D": "that"
+      },
+      "correct": "C",
+      "explanation": "After the preposition 'of', use the object form 'whom': 'many of whom'.",
+      "focus": "relative pronoun"
+    }
+  ]
+}

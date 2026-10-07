@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q10",
+      "sentence": "The marketing budget for this quarter is ___ than last quarter's.",
+      "options": {
+        "A": "more large",
+        "B": "larger",
+        "C": "more larger",
+        "D": "largely"
+      },
+      "correct": "B",
+      "explanation": "Use the comparative form 'larger' to compare two things.",
+      "focus": "comparison"
+    }
+  ]
+}

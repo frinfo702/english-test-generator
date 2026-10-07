@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Study Related",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q4",
+      "speaker": "f3",
+      "context": "Admitting a mistake",
+      "stem": "I think I submitted the wrong file for the assignment. I'm panicking.",
+      "options": {
+        "A": "Don't worry, email the professor right now and explain. Most are understanding.",
+        "B": "Assignments should be checked before submission.",
+        "C": "I always double-check my files."
+      },
+      "correct": "A",
+      "explanation": "The speaker is panicking about a submission error, so offering a calming and actionable solution is the most helpful response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I think I submitted the wrong file for the assignment. I'm panicking."
+    }
+  ]
+}

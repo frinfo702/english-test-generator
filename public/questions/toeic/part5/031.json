@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "sentence": "Please review the attached contract and let me know if you have any ___.",
+      "options": {
+        "A": "concern",
+        "B": "concerns",
+        "C": "concerning",
+        "D": "concerned"
+      },
+      "correct": "B",
+      "explanation": "'Any' with a countable noun typically takes the plural form.",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

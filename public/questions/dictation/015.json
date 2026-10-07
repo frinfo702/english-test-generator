@@ -1,0 +1,15 @@
+{
+  "title": "Business & Travel Dictation",
+  "sentences": [
+    {
+      "id": "s3",
+      "text": "Please send the report by Friday morning.",
+      "wordCount": 7,
+      "distractors": [
+        "receive",
+        "email",
+        "afternoon"
+      ]
+    }
+  ]
+}

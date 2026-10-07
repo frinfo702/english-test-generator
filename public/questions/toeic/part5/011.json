@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q11",
+      "sentence": "Customers can contact us ___ phone, email, or live chat.",
+      "options": {
+        "A": "by",
+        "B": "with",
+        "C": "through",
+        "D": "via"
+      },
+      "correct": "D",
+      "explanation": "'Via' is used with communication channels.",
+      "focus": "preposition"
+    }
+  ]
+}

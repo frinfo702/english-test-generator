@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q13",
+      "sentence": "The company’s new policy aims to improve employee ___ and reduce turnover.",
+      "options": {
+        "A": "satisfy",
+        "B": "satisfaction",
+        "C": "satisfied",
+        "D": "satisfying"
+      },
+      "correct": "B",
+      "explanation": "A noun is required after 'employee' to form the phrase 'employee satisfaction.'",
+      "focus": "word form"
+    }
+  ]
+}

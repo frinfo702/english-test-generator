@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Technology & Communication",
+  "voices": {
+    "Student": "leo",
+    "Friend": "rex"
+  },
+  "questions": [
+    {
+      "id": "q8",
+      "speaker": "m5",
+      "context": "Offering tech support",
+      "stem": "I can help you set up the citation manager if you're still struggling with it.",
+      "options": {
+        "A": "That would be amazing! I've been stuck on this for hours.",
+        "B": "Citation managers organize references automatically.",
+        "C": "I already finished my bibliography."
+      },
+      "correct": "A",
+      "explanation": "The speaker is offering assistance, so gratefully accepting the offer is the natural and polite response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I can help you set up the citation manager if you're still struggling with it."
+    }
+  ]
+}

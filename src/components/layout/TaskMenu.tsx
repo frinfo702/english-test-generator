@@ -21,7 +21,7 @@ interface TaskMenuProps {
   sections: TaskMenuSection[];
 }
 
-/** Number of problem sets registered in each task's index.json, keyed by path. */
+/** Number of problems registered in each task's index.json, keyed by path. */
 function useQuestionCounts(sections: TaskMenuSection[]) {
   const [counts, setCounts] = useState<Record<string, number>>({});
 
@@ -84,7 +84,7 @@ export function TaskMenu({ sections }: TaskMenuProps) {
                   </span>
                   {count !== undefined && (
                     <span className={styles.meta}>
-                      {count} {count === 1 ? "set" : "sets"}
+                      {count} {count === 1 ? "question" : "questions"}
                     </span>
                   )}
                   <span className={styles.arrow} aria-hidden="true">

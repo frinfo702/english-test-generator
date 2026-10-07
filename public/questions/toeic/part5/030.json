@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q30",
+      "sentence": "The director's ___ presentation impressed all the investors.",
+      "options": {
+        "A": "compelling",
+        "B": "compel",
+        "C": "compelled",
+        "D": "compulsion"
+      },
+      "correct": "A",
+      "explanation": "Adjective 'compelling.'",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

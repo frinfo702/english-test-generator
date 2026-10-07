@@ -1,0 +1,15 @@
+{
+  "title": "Academic Dictation",
+  "sentences": [
+    {
+      "id": "s2",
+      "text": "Our assignment is due next Friday afternoon.",
+      "wordCount": 7,
+      "distractors": [
+        "project",
+        "Monday",
+        "morning"
+      ]
+    }
+  ]
+}

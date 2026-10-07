@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q27",
+      "sentence": "This software license is valid for one year and must be renewed ___.",
+      "options": {
+        "A": "annual",
+        "B": "annually",
+        "C": "annuity",
+        "D": "annex"
+      },
+      "correct": "B",
+      "explanation": "An adverb is needed to modify 'renewed.'",
+      "focus": "word form"
+    }
+  ]
+}

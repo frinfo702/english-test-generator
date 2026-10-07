@@ -1,0 +1,63 @@
+{
+  "passages": [
+    {
+      "id": "p4",
+      "textType": "letter",
+      "text": "Dear Ms. Alvarez,\n\nThank you for meeting with us last week to discuss renewing your office-cleaning contract. We value the partnership your team has built with our facility staff over the past four years. [1], we are prepared to offer a two-year extension at the current monthly rate.\n\nAs requested, the updated agreement includes an option for weekend deep-cleaning services twice per month. [2]\n\nPlease review Section 5, which outlines response times for urgent maintenance calls. If the terms meet your needs, sign and return the document by July 12.\n\nTo avoid interruptions in service, we recommend completing the renewal [3] the current contract expires on July 31. If you need any clarification, feel free to [4] me directly.\n\nSincerely,\nDaniel Reed",
+      "questions": [
+        {
+          "id": "q13",
+          "blankNumber": 1,
+          "type": "vocabulary",
+          "options": {
+            "A": "Accordingly",
+            "B": "Instead",
+            "C": "Likewise",
+            "D": "Otherwise"
+          },
+          "correct": "A",
+          "explanation": "'Accordingly' links the positive partnership to the offer that follows."
+        },
+        {
+          "id": "q14",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "A separate pricing sheet is attached for any additional visits beyond that limit.",
+            "B": "Your security badges should be replaced every six months.",
+            "C": "Most candidates arrived early for the recruitment workshop.",
+            "D": "The accounting software upgrade was postponed to next quarter."
+          },
+          "correct": "A",
+          "explanation": "Option A adds relevant contract details directly tied to cleaning-service frequency."
+        },
+        {
+          "id": "q15",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "before",
+            "B": "while",
+            "C": "since",
+            "D": "unless"
+          },
+          "correct": "A",
+          "explanation": "Renewal should be completed earlier than the expiration date, so 'before' is correct."
+        },
+        {
+          "id": "q16",
+          "blankNumber": 4,
+          "type": "vocabulary",
+          "options": {
+            "A": "contact",
+            "B": "decline",
+            "C": "replace",
+            "D": "rent"
+          },
+          "correct": "A",
+          "explanation": "'Feel free to contact me' is the appropriate business expression."
+        }
+      ]
+    }
+  ]
+}

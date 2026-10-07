@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q21",
+      "sentence": "The hotel offers complimentary breakfast ___ all guests.",
+      "options": {
+        "A": "for",
+        "B": "to",
+        "C": "with",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "Use 'for' to indicate who receives a benefit: 'for all guests'.",
+      "focus": "preposition"
+    }
+  ]
+}

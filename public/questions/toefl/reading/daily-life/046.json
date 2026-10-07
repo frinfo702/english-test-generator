@@ -1,0 +1,78 @@
+{
+  "texts": [
+    {
+      "id": "t2",
+      "textType": "live chat",
+      "layout": "live-chat",
+      "title": "Live Chat",
+      "messages": [
+        {
+          "sender": "Priya Nair",
+          "time": "2:10 P.M.",
+          "text": "The catering company just called. They can't deliver to the conference hall on Friday because the loading dock will be closed for repairs."
+        },
+        {
+          "sender": "Tom Whitaker",
+          "time": "2:12 P.M.",
+          "text": "That's a setback. Could they use the side entrance on Elm Street instead?"
+        },
+        {
+          "sender": "Priya Nair",
+          "time": "2:14 P.M.",
+          "text": "I asked. The carts are too wide for that door, but they offered to bring everything in smaller trays if we push lunch back thirty minutes."
+        },
+        {
+          "sender": "Tom Whitaker",
+          "time": "2:16 P.M.",
+          "text": "That works. The keynote can run a little longer. I'll let the speaker know and revise the printed agenda."
+        },
+        {
+          "sender": "Priya Nair",
+          "time": "2:17 P.M.",
+          "text": "Great. I'll confirm with the caterer and ask facilities to keep the side door unlocked from noon."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "What problem does Ms. Nair report?",
+          "options": [
+            "A. The caterer has canceled the order.",
+            "B. A delivery area will be unavailable.",
+            "C. The keynote speaker will arrive late.",
+            "D. The conference hall has been double-booked."
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "Ms. Nair says the caterer cannot deliver because 'the loading dock will be closed for repairs.'"
+        },
+        {
+          "id": "q4",
+          "stem": "At 2:16 P.M., why does Mr. Whitaker write, \"The keynote can run a little longer\"?",
+          "options": [
+            "A. To complain that the speaker talks too much",
+            "B. To suggest canceling the lunch break",
+            "C. To show that the schedule can absorb the delay",
+            "D. To ask Ms. Nair to contact the speaker"
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "Lunch must be pushed back thirty minutes. By extending the keynote, Mr. Whitaker shows the delay can be filled without leaving a gap in the program. He says he will contact the speaker himself."
+        },
+        {
+          "id": "q5",
+          "stem": "The word \"revise\" in Mr. Whitaker's message at 2:16 P.M. is closest in meaning to",
+          "options": [
+            "A. review",
+            "B. distribute",
+            "C. update",
+            "D. shorten"
+          ],
+          "correctIndex": 2,
+          "type": "vocabulary",
+          "explanation": "Mr. Whitaker will change the printed agenda to reflect the new lunch time, so 'revise' means 'update.' 'Review' only means to look over, without changing."
+        }
+      ]
+    }
+  ]
+}

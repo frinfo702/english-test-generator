@@ -1,0 +1,31 @@
+{
+  "sentences": [
+    {
+      "id": "s9",
+      "reference": "Classmate: Is artificial intelligence only eliminating jobs?",
+      "chunks": [
+        "others",
+        "creating",
+        "job",
+        "while",
+        "new",
+        "It",
+        "opportunities",
+        "is",
+        "eliminating"
+      ],
+      "correctOrder": [
+        5,
+        7,
+        1,
+        4,
+        2,
+        6,
+        3,
+        8,
+        0
+      ],
+      "fullSentence": "It is creating new job opportunities while eliminating others"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Final Set",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q2",
+      "speaker": "m6",
+      "context": "Accepting an apology",
+      "stem": "I'm sorry I missed our study session. I completely lost track of time.",
+      "options": {
+        "A": "No worries. Let's reschedule for tomorrow afternoon.",
+        "B": "You should set reminders on your phone.",
+        "C": "I waited for twenty minutes."
+      },
+      "correct": "A",
+      "explanation": "The speaker is apologizing for missing a meeting, so graciously accepting the apology and proposing a new time is constructive."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I'm sorry I missed our study session. I completely lost track of time."
+    }
+  ]
+}

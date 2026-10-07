@@ -1,0 +1,29 @@
+{
+  "sentences": [
+    {
+      "id": "s10",
+      "reference": "Professor: What is a key feature of critical thinking?",
+      "chunks": [
+        "questioning",
+        "evidence",
+        "It",
+        "before",
+        "involves",
+        "accepting",
+        "assumptions",
+        "conclusions"
+      ],
+      "correctOrder": [
+        2,
+        4,
+        0,
+        6,
+        3,
+        5,
+        1,
+        7
+      ],
+      "fullSentence": "It involves questioning assumptions before accepting conclusions"
+    }
+  ]
+}

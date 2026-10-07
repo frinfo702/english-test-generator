@@ -8,7 +8,6 @@ import styles from "./HomePage.module.css";
 type TestItem = {
   title: string;
   subtitle: string;
-  meta: string;
   path: string;
   icon: PixelIconName;
 };
@@ -17,28 +16,24 @@ const tests: TestItem[] = [
   {
     title: "TOEFL iBT 2026",
     subtitle: "Reading, Writing, Listening, Speaking",
-    meta: "12 tasks",
     path: "/toefl",
     icon: "university",
   },
   {
     title: "TOEIC L&R",
     subtitle: "Parts 2–7 — listening and reading",
-    meta: "6 parts",
     path: "/toeic",
     icon: "briefcase",
   },
   {
     title: "Shadowing",
     subtitle: "Speak along with a model voice, sentence by sentence",
-    meta: "Sets",
     path: "/shadowing",
     icon: "microphone",
   },
   {
     title: "Dictation",
     subtitle: "Hear a line, then rebuild it word by word",
-    meta: "Sets",
     path: "/dictation",
     icon: "pencil",
   },
@@ -65,7 +60,6 @@ export function HomePage() {
                 {test.title}
                 <span className={table.titleMeta}>{test.subtitle}</span>
               </span>
-              <span className={table.badgeCell}>{test.meta}</span>
             </Link>
           ))}
         </div>

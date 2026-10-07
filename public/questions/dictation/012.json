@@ -1,0 +1,15 @@
+{
+  "title": "Academic Dictation",
+  "sentences": [
+    {
+      "id": "s6",
+      "text": "She received a scholarship for her excellent grades.",
+      "wordCount": 8,
+      "distractors": [
+        "awarded",
+        "poor",
+        "marks"
+      ]
+    }
+  ]
+}

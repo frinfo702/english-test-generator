@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q15",
+      "sentence": "Neither the printer nor the computers ___ functioning properly this morning.",
+      "options": {
+        "A": "is",
+        "B": "was",
+        "C": "are",
+        "D": "has been"
+      },
+      "correct": "C",
+      "explanation": "With 'neither...nor,' the verb agrees with the nearer subject 'computers' (plural).",
+      "focus": "subject-verb agreement"
+    }
+  ]
+}

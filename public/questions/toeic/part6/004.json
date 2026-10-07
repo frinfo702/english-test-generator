@@ -1,17 +1,63 @@
 {
-  "passage": "TODO: Passage with blanks (includes 4 blank positions)",
-  "questions": [
+  "passages": [
     {
-      "id": "q1",
-      "blankNumber": 1,
-      "options": {
-        "A": "TODO: Choice A",
-        "B": "TODO: Choice B",
-        "C": "TODO: Choice C",
-        "D": "TODO: Choice D"
-      },
-      "correct": "A",
-      "explanation": "TODO: Explanation"
+      "id": "p4",
+      "textType": "letter",
+      "text": "Dear Ms. Patel,\n\nWe are pleased to [1] you that your application for Regional Sales Manager has been successful.\n\nYour start date will be June 2nd. Please [2] to HR on your first day at 9:00 AM.\n\nA formal offer letter, [3] a detailed overview of your compensation, will be sent by Friday. Please sign the offer letter [4] returning it within five business days.\n\nSincerely,\nDavid Park",
+      "questions": [
+        {
+          "id": "q13",
+          "blankNumber": 1,
+          "type": "vocabulary",
+          "options": {
+            "A": "remind",
+            "B": "inform",
+            "C": "advise",
+            "D": "warn"
+          },
+          "correct": "B",
+          "explanation": "'Inform you that' is standard for conveying news."
+        },
+        {
+          "id": "q14",
+          "blankNumber": 2,
+          "type": "grammar",
+          "options": {
+            "A": "report",
+            "B": "reporting",
+            "C": "reported",
+            "D": "to report"
+          },
+          "correct": "A",
+          "explanation": "After 'Please,' use the base form."
+        },
+        {
+          "id": "q15",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "including",
+            "B": "included",
+            "C": "to include",
+            "D": "includes"
+          },
+          "correct": "A",
+          "explanation": "'Including' introduces additional details."
+        },
+        {
+          "id": "q16",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "prior to",
+            "B": "because of",
+            "C": "in spite of",
+            "D": "as well as"
+          },
+          "correct": "A",
+          "explanation": "'Prior to returning it' = before returning it."
+        }
+      ]
     }
   ]
 }

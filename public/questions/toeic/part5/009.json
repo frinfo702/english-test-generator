@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q9",
+      "sentence": "The policy applies to ___ employees who joined after January 1st.",
+      "options": {
+        "A": "each",
+        "B": "all",
+        "C": "every",
+        "D": "either"
+      },
+      "correct": "B",
+      "explanation": "'All' precedes plural nouns.",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

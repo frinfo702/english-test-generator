@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q7",
+      "sentence": "The report indicates that sales ___ by 15 percent this year.",
+      "options": {
+        "A": "increase",
+        "B": "have increased",
+        "C": "are increasing",
+        "D": "increased"
+      },
+      "correct": "B",
+      "explanation": "Present perfect for a period extending to the present.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

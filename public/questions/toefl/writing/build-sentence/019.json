@@ -1,0 +1,28 @@
+{
+  "sentences": [
+    {
+      "id": "s9",
+      "reference": "Classmate: Does social media help students network?",
+      "chunks": [
+        "academic",
+        "platforms",
+        "connect",
+        "Social",
+        "students",
+        "media",
+        "with",
+        "opportunities"
+      ],
+      "correctOrder": [
+        3,
+        5,
+        2,
+        4,
+        6,
+        0,
+        7
+      ],
+      "fullSentence": "Social media platforms connect students with academic opportunities"
+    }
+  ]
+}

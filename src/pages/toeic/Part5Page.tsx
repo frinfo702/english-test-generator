@@ -72,7 +72,6 @@ export function Part5Page() {
   const totalCorrect = questions.filter(
     (q) => selected[q.id] === q.correct,
   ).length;
-  const totalAnswered = Object.keys(selected).length;
 
   const handleSelect = (id: string, opt: string) => {
     if (!graded) setSelected((s) => ({ ...s, [id]: opt }));
@@ -117,8 +116,6 @@ export function Part5Page() {
         title="Part 5: Incomplete Sentences"
         subtitle="Choose the best word or phrase for each blank."
         backTo="/toeic"
-        current={totalAnswered}
-        total={questions.length}
       />
 
       <div className={styles.topBar}>
@@ -132,7 +129,7 @@ export function Part5Page() {
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="Loading question set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>

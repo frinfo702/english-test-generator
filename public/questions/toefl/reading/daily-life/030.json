@@ -1,0 +1,50 @@
+{
+  "texts": [
+    {
+      "id": "t2",
+      "textType": "webpage",
+      "content": "Monthly Budget Planner — Step 1: Track Your Income\n\nBefore you can build a budget that works, you need to know exactly how much money is coming in each month. Start by listing all sources of income:\n\n• Primary job salary (after taxes)\n• Freelance or side business earnings\n• Investment dividends\n• Government benefits or student grants\n\nPro Tip: Use your net income (after-tax amount), not your gross income. This gives you a realistic picture of what you actually have available to spend and save.\n\nNext week: Step 2 — Categorize Your Expenses.",
+      "questions": [
+        {
+          "id": "q3",
+          "stem": "What is the main topic of this webpage?",
+          "options": [
+            "A. How to reduce monthly expenses",
+            "B. How to invest money for retirement",
+            "C. The first step in creating a monthly budget",
+            "D. How to apply for government benefits"
+          ],
+          "correctIndex": 2,
+          "type": "purpose",
+          "explanation": "The webpage is titled 'Monthly Budget Planner — Step 1' and focuses on tracking income as the first step in budgeting."
+        },
+        {
+          "id": "q4",
+          "stem": "The word 'net' in 'net income' most likely refers to:",
+          "options": [
+            "A. the total earnings before any deductions",
+            "B. the amount remaining after taxes and deductions",
+            "C. the estimated income for the next quarter",
+            "D. the combined income of all household members"
+          ],
+          "correctIndex": 1,
+          "type": "vocabulary",
+          "explanation": "The webpage defines net income as 'after-tax amount,' meaning what remains after taxes and deductions."
+        },
+        {
+          "id": "q5",
+          "stem": "What does the webpage imply about using gross income for budgeting?",
+          "options": [
+            "A. It is the preferred method for most experts",
+            "B. It leads to an unrealistic spending plan",
+            "C. It works better for freelance workers",
+            "D. It is required for government grant applications"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The webpage advises using net income because it 'gives you a realistic picture,' implying that gross income would overstate what is actually available."
+        }
+      ]
+    }
+  ]
+}

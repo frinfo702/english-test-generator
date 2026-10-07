@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q24",
+      "sentence": "The new branch office is located ___ the corner of Pine Street and 3rd Avenue.",
+      "options": {
+        "A": "at",
+        "B": "in",
+        "C": "on",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "Use 'at' for a specific point/location such as 'the corner of' streets.",
+      "focus": "preposition"
+    }
+  ]
+}

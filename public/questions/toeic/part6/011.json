@@ -1,0 +1,63 @@
+{
+  "passages": [
+    {
+      "id": "p3",
+      "textType": "notice",
+      "text": "NOTICE: Customer Relationship Platform Training\n\nAs part of the CRM rollout, all customer-facing employees must complete a two-hour training session [1] April 18. Sessions will be offered both in Meeting Room C and online via Teams.\n\n[2]\n\nTo select a time slot, register on the intranet training page by April 12. Please arrive 10 minutes early to sign in and collect the practice worksheet.\n\nIf you cannot attend your assigned session, submit a change request to your supervisor [3] Friday so your seat can be reassigned. After completion, you will receive a confirmation email that you should [4] for your records.",
+      "questions": [
+        {
+          "id": "q9",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "by",
+            "B": "during",
+            "C": "until",
+            "D": "since"
+          },
+          "correct": "A",
+          "explanation": "'By April 18' indicates the deadline to complete the training."
+        },
+        {
+          "id": "q10",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "Bring a laptop and make sure you can log in to the CRM with your company credentials before the session begins.",
+            "B": "Most office supplies can be ordered through the new vendor portal.",
+            "C": "The parking garage will be repainted next month.",
+            "D": "Our social media policy was updated after the quarterly review."
+          },
+          "correct": "A",
+          "explanation": "Option A provides a practical instruction that matches training participation requirements."
+        },
+        {
+          "id": "q11",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "by",
+            "B": "to",
+            "C": "with",
+            "D": "from"
+          },
+          "correct": "A",
+          "explanation": "'By Friday' gives a deadline for submitting the change request."
+        },
+        {
+          "id": "q12",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "keep",
+            "B": "keeps",
+            "C": "kept",
+            "D": "keeping"
+          },
+          "correct": "A",
+          "explanation": "After 'should,' use the base verb form: 'should keep.'"
+        }
+      ]
+    }
+  ]
+}

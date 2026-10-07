@@ -154,8 +154,6 @@ export function Part2Page() {
         title="Part 2: Question-Response"
         subtitle="Listen to the question and choose the best response."
         backTo="/toeic"
-        current={Object.keys(selected).length}
-        total={totalQuestions}
       />
 
       <div className={styles.topBar}>
@@ -169,7 +167,7 @@ export function Part2Page() {
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="Loading question set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>

@@ -17,7 +17,6 @@ import {
   applyDrop,
   emptySlots,
   isCorrectOrder,
-  isFilled,
   poolChunks,
   type DragSource,
   type DropTarget,
@@ -121,10 +120,6 @@ export function BuildSentencePage() {
   const isOverSlot = (pos: number) =>
     over?.kind === "slot" && over.index === pos;
 
-  const isFilledFor = (idx: number) => {
-    const s = data?.sentences[idx];
-    return s != null && isFilled(slotsFor(idx), s.chunks.length);
-  };
   const totalSentences = data?.sentences.length ?? 0;
   const isLastSentence = data ? current + 1 >= totalSentences : false;
 
@@ -174,10 +169,6 @@ export function BuildSentencePage() {
         title="Build a Sentence"
         subtitle="Reorder word chunks to build a response to the prompt."
         backTo="/toefl"
-        current={
-          data ? data.sentences.filter((_, i) => isFilledFor(i)).length : 0
-        }
-        total={totalSentences}
       />
 
       <div className={styles.topBar}>
@@ -191,7 +182,7 @@ export function BuildSentencePage() {
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="Loading question set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>

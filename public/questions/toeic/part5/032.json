@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q2",
+      "sentence": "The software update will be installed automatically ___ midnight.",
+      "options": {
+        "A": "in",
+        "B": "at",
+        "C": "on",
+        "D": "by"
+      },
+      "correct": "D",
+      "explanation": "'By' indicates a deadline (no later than midnight).",
+      "focus": "preposition"
+    }
+  ]
+}

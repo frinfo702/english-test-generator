@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q27",
+      "sentence": "The equipment must be handled with care to prevent it from being ___.",
+      "options": {
+        "A": "damage",
+        "B": "damages",
+        "C": "damaged",
+        "D": "damaging"
+      },
+      "correct": "C",
+      "explanation": "After 'being', use the past participle: 'being damaged'.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

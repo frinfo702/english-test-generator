@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Academic Situations",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q8",
+      "speaker": "f4",
+      "context": "Expressing excitement about a professor",
+      "stem": "I just signed up for Dr. Martinez's class. I've heard she's an amazing lecturer!",
+      "options": {
+        "A": "She really is! Her classes are challenging but very rewarding.",
+        "B": "Dr. Martinez teaches several different courses.",
+        "C": "You should buy the textbook before the first class."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing excitement about a professor, so sharing in their enthusiasm and providing validation is the natural response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I just signed up for Dr. Martinez's class. I've heard she's an amazing lecturer!"
+    }
+  ]
+}

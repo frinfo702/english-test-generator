@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q26",
+      "sentence": "The CEO asked the department heads to submit the report ___ than Monday afternoon.",
+      "options": {
+        "A": "no later",
+        "B": "no latest",
+        "C": "not late",
+        "D": "later"
+      },
+      "correct": "A",
+      "explanation": "'No later than' is the correct fixed expression for deadlines.",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

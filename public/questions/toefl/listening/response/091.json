@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Academic Situations",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q6",
+      "speaker": "f4",
+      "context": "Returning a borrowed item",
+      "stem": "Thanks for letting me borrow your notes. Here they are back — I made some extra annotations too.",
+      "options": {
+        "A": "Oh nice, I'll take a look at those annotations later. Thanks!",
+        "B": "I hope my handwriting wasn't too messy.",
+        "C": "Notes are important for exam review."
+      },
+      "correct": "A",
+      "explanation": "The speaker is returning borrowed notes with added value, so acknowledging the gesture and showing appreciation is polite."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Thanks for letting me borrow your notes. Here they are back — I made some extra annotations too."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q18",
+      "sentence": "The proposal was ___ rejected due to budget constraints.",
+      "options": {
+        "A": "final",
+        "B": "finalize",
+        "C": "finalist",
+        "D": "finally"
+      },
+      "correct": "D",
+      "explanation": "Adverb 'finally.'",
+      "focus": "word form"
+    }
+  ]
+}

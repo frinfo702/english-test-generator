@@ -108,21 +108,6 @@
   letter-spacing: 0;
 }
 
-.badgeCell {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  color: var(--color-ink-secondary);
-  background: var(--color-surface-subtle);
-  padding: 3px 8px;
-  border-radius: var(--radius-xs);
-  white-space: nowrap;
-  justify-self: end;
-  border: 1px solid var(--color-border);
-  letter-spacing: 0.02em;
-}
-
 @media (max-width: 640px) {
   .header {
     grid-template-columns: 30px 1fr auto;

@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Everyday Situations",
+  "voices": {
+    "Student": "eve"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "f4",
+      "context": "Complimenting someone",
+      "stem": "Your presentation was incredible! How did you prepare so well?",
+      "options": {
+        "A": "Thank you! I practiced in front of a mirror every day.",
+        "B": "Presentations are required for this class.",
+        "C": "Yours was pretty good too, I guess."
+      },
+      "correct": "A",
+      "explanation": "The speaker is giving a compliment, so graciously accepting it and answering the follow-up question is polite and natural."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Your presentation was incredible! How did you prepare so well?"
+    }
+  ]
+}

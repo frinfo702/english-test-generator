@@ -1,0 +1,63 @@
+{
+  "passages": [
+    {
+      "id": "p2",
+      "textType": "memo",
+      "text": "MEMO\nTo: Retail Operations Managers\nFrom: Logistics Department\nSubject: Delay in Store Display Units\n\nDue to severe weather at the Osaka distribution center, delivery of spring display units will be delayed by up to three days. [1], stores in the western region should adjust their floor plans accordingly.\n\nThe revised shipping schedule is attached to this memo. [2]\n\nIf your location has a launch event before Friday, contact us immediately so we can prioritize partial shipments. Managers are also asked to [3] customer service teams about the updated timeline.\n\nThank you for your [4] while we resolve this issue.",
+      "questions": [
+        {
+          "id": "q5",
+          "blankNumber": 1,
+          "type": "vocabulary",
+          "options": {
+            "A": "Therefore",
+            "B": "However",
+            "C": "Meanwhile",
+            "D": "Otherwise"
+          },
+          "correct": "A",
+          "explanation": "The second sentence presents a result of the delay, so 'Therefore' fits best."
+        },
+        {
+          "id": "q6",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "Units for the Tokyo and Chiba stores are expected to arrive on Wednesday morning.",
+            "B": "The employee parking lot will be closed during repainting work.",
+            "C": "Please submit expense receipts before the end of each quarter.",
+            "D": "Our new internship program starts in late September."
+          },
+          "correct": "A",
+          "explanation": "Option A adds relevant shipment details that match the memo topic."
+        },
+        {
+          "id": "q7",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "inform",
+            "B": "define",
+            "C": "borrow",
+            "D": "cancel"
+          },
+          "correct": "A",
+          "explanation": "Managers should 'inform' teams about timeline changes."
+        },
+        {
+          "id": "q8",
+          "blankNumber": 4,
+          "type": "vocabulary",
+          "options": {
+            "A": "patience",
+            "B": "distance",
+            "C": "currency",
+            "D": "signal"
+          },
+          "correct": "A",
+          "explanation": "'Thank you for your patience' is the standard expression in delay notices."
+        }
+      ]
+    }
+  ]
+}

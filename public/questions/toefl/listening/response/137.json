@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Library & Resources",
+  "voices": {
+    "Student": "rex",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q4",
+      "speaker": "f4",
+      "context": "Asking about scanning equipment",
+      "stem": "Are there scanners available in the library for digitizing documents?",
+      "options": {
+        "A": "Yes, there are scanners on the first floor near the reference desk.",
+        "B": "Digital copies are easier to organize.",
+        "C": "I use a scanning app on my phone."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about available equipment, so confirming availability and providing the location is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Are there scanners available in the library for digitizing documents?"
+    }
+  ]
+}

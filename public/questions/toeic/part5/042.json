@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q12",
+      "sentence": "The shipment will be delivered tomorrow, ___ the weather conditions remain safe.",
+      "options": {
+        "A": "unless",
+        "B": "provided that",
+        "C": "in spite of",
+        "D": "even though"
+      },
+      "correct": "B",
+      "explanation": "'Provided that' introduces a condition that must be met.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

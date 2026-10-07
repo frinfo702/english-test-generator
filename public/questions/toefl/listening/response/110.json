@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Study Related",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "speaker": "f4",
+      "context": "Asking about textbook availability",
+      "stem": "Does the library have copies of the required textbooks on reserve?",
+      "options": {
+        "A": "Yes, there are two copies on reserve that can be checked out for two hours.",
+        "B": "Textbooks can be very expensive to buy new.",
+        "C": "I bought my textbook from the campus store."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about textbook access at the library, so providing specific information about availability and loan periods is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Does the library have copies of the required textbooks on reserve?"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "texts": [
+    {
+      "id": "t2",
+      "textType": "form",
+      "content": "City Public Library — New Membership Application\n\nPlease complete all fields marked with *.\n\nFull Name:* ________________________\nDate of Birth:* ____ / ____ / ________\nEmail Address:* ________________________\nPhone Number: ________________________\n\nAddress:*\nStreet: ________________________\nCity: ________________________ ZIP: ________\n\nIdentification Required: Please bring a valid government-issued photo ID and a proof of current address (utility bill, bank statement, or lease agreement).\n\nMembership Type (choose one):\n☐ Standard (up to 10 items, 3-week loan period)\n☐ Premium ($25/year, up to 25 items, 6-week loan period)\n\nI agree to the library's borrowing terms and conditions.\nSignature: ________________________ Date: ________",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "Which of the following is NOT listed as acceptable proof of address?",
+          "options": [
+            "A. A utility bill",
+            "B. A bank statement",
+            "C. A lease agreement",
+            "D. A pay stub"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "The form lists 'utility bill, bank statement, or lease agreement' as acceptable proof of address, but does not mention a pay stub."
+        },
+        {
+          "id": "q5",
+          "stem": "What can be inferred about the Premium membership?",
+          "options": [
+            "A. It is available only to city residents",
+            "B. It allows more items and a longer borrowing period for a fee",
+            "C. It includes free access to digital resources",
+            "D. It requires a separate application form"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The Premium membership costs $25/year and allows 'up to 25 items' with a '6-week loan period,' compared to the Standard's 10 items and 3 weeks."
+        }
+      ]
+    }
+  ]
+}

@@ -184,8 +184,6 @@ export function ListenResponsePage() {
         title="Listen and Choose a Response"
         subtitle="Listen to each utterance and choose the best response."
         backTo="/toefl"
-        current={Object.keys(selected).length}
-        total={totalQuestions}
       />
 
       <div className={styles.topBar}>
@@ -199,7 +197,7 @@ export function ListenResponsePage() {
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="Loading question set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>

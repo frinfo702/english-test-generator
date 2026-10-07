@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q25",
+      "sentence": "Sales figures this quarter are ___ those of last year.",
+      "options": {
+        "A": "exceeding",
+        "B": "exceeded",
+        "C": "excess",
+        "D": "excessive"
+      },
+      "correct": "A",
+      "explanation": "'Exceeding' means surpassing.",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

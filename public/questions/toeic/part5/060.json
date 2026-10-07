@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q30",
+      "sentence": "The manager apologized ___ the inconvenience caused by the delayed shipment.",
+      "options": {
+        "A": "for",
+        "B": "to",
+        "C": "with",
+        "D": "about"
+      },
+      "correct": "A",
+      "explanation": "Use 'apologize for' + noun/gerund to state what you are sorry about.",
+      "focus": "preposition"
+    }
+  ]
+}

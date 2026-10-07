@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q29",
+      "sentence": "Not only ___ the seminar informative, but it was also practical.",
+      "options": {
+        "A": "was",
+        "B": "were",
+        "C": "is",
+        "D": "has been"
+      },
+      "correct": "A",
+      "explanation": "With 'Not only' at the start, subject-auxiliary inversion is required: 'Not only was...'.",
+      "focus": "inversion"
+    }
+  ]
+}

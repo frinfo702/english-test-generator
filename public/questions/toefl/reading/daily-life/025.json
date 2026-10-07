@@ -1,0 +1,37 @@
+{
+  "texts": [
+    {
+      "id": "t2",
+      "textType": "online post",
+      "content": "BookReviewClub @ The Reading Nook\n\n⭐⭐⭐⭐⭐ \"The Unlikely Traveler\" by K. Morrison\n\nJust finished this novel and I cannot recommend it enough! The characters are richly developed and the plot twists genuinely surprised me. The descriptions of the Southeast Asian settings are so vivid that I felt like I was traveling alongside the protagonist.\n\nHas anyone else read this? Would love to discuss the ending — especially what happened in chapter 18!\n\n#BookReview #Fiction #TravelNovel",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "What is the reviewer's overall opinion of the book?",
+          "options": [
+            "A. The writing style is too descriptive",
+            "B. The plot was predictable",
+            "C. The book is highly enjoyable and well-written",
+            "D. The characters needed more development"
+          ],
+          "correctIndex": 2,
+          "type": "purpose",
+          "explanation": "The reviewer gives five stars and describes the characters as 'richly developed' and the plot twists as 'genuinely surprising,' indicating strong approval."
+        },
+        {
+          "id": "q5",
+          "stem": "What does the reviewer imply by mentioning chapter 18?",
+          "options": [
+            "A. The book becomes boring after that chapter",
+            "B. The ending was disappointing",
+            "C. There is a significant event in that chapter worth discussing",
+            "D. The reviewer did not finish reading the book"
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The reviewer says they 'would love to discuss the ending — especially what happened in chapter 18,' implying that chapter contains a key plot development."
+        }
+      ]
+    }
+  ]
+}

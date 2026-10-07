@@ -1,0 +1,63 @@
+{
+  "passages": [
+    {
+      "id": "p1",
+      "textType": "business email",
+      "text": "Dear Team,\n\nThank you for your work on last week's client training webinar. The feedback [1] from participants was overwhelmingly positive, and several attendees requested additional examples related to contract renewals.\n\nTo keep the momentum, we will host a 45-minute follow-up session next Thursday at 2:00 p.m. [2]\n\nPlease send any slide revisions to Keiko by Tuesday noon so she can finalize the materials. For the Q&A segment, assign one facilitator to technical questions and one to billing topics. This [3] of roles will help us respond more efficiently.\n\nAfter the session, we will share the recording through the partner portal. If you have scheduling conflicts, please [4] me by Monday so we can adjust coverage.\n\nBest,\nRina",
+      "questions": [
+        {
+          "id": "q1",
+          "blankNumber": 1,
+          "type": "grammar",
+          "options": {
+            "A": "we received",
+            "B": "receiving",
+            "C": "receive",
+            "D": "to receive"
+          },
+          "correct": "A",
+          "explanation": "'The feedback we received' is the correct relative-clause structure."
+        },
+        {
+          "id": "q2",
+          "blankNumber": 2,
+          "type": "sentence",
+          "options": {
+            "A": "A registration link will be sent to all account managers this afternoon.",
+            "B": "The weather report was updated after the meeting ended.",
+            "C": "Most office plants require very little direct sunlight.",
+            "D": "Our shipping containers were unloaded at the wrong port."
+          },
+          "correct": "A",
+          "explanation": "Only option A logically follows the session announcement and provides related next-step information."
+        },
+        {
+          "id": "q3",
+          "blankNumber": 3,
+          "type": "vocabulary",
+          "options": {
+            "A": "division",
+            "B": "permission",
+            "C": "shortage",
+            "D": "revision"
+          },
+          "correct": "A",
+          "explanation": "'Division of roles' is the natural collocation in this context."
+        },
+        {
+          "id": "q4",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "inform",
+            "B": "informs",
+            "C": "informed",
+            "D": "informing"
+          },
+          "correct": "A",
+          "explanation": "After 'please,' the base verb form is required: 'please inform me.'"
+        }
+      ]
+    }
+  ]
+}

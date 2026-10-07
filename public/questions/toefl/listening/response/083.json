@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Daily Situations",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q3",
+      "speaker": "f3",
+      "context": "Making an offer",
+      "stem": "I can give you a ride to the airport if you need one.",
+      "options": {
+        "A": "My flight was delayed by two hours.",
+        "B": "Are you sure you don't mind? That would be great.",
+        "C": "The airport shuttle costs 20 dollars."
+      },
+      "correct": "B",
+      "explanation": "The speaker is offering help, so a gracious acceptance is the expected response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I can give you a ride to the airport if you need one."
+    }
+  ]
+}

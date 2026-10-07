@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Campus Facilities",
+  "voices": {
+    "Student": "rex",
+    "Lab Assistant": "sal"
+  },
+  "questions": [
+    {
+      "id": "q4",
+      "speaker": "m6",
+      "context": "Expressing satisfaction",
+      "stem": "The new gym equipment is fantastic! I've been using it every day.",
+      "options": {
+        "A": "I'm glad you're enjoying it.",
+        "B": "Exercise is important for your health.",
+        "C": "The old equipment was cheaper."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing positive feedback, so acknowledging and validating their satisfaction is the natural response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The new gym equipment is fantastic! I've been using it every day."
+    }
+  ]
+}

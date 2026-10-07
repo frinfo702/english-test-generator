@@ -1,0 +1,27 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Professor: What is one reason students should join study groups?",
+      "chunks": [
+        "promote",
+        "of",
+        "Study",
+        "groups",
+        "collaborative",
+        "understanding",
+        "material"
+      ],
+      "correctOrder": [
+        2,
+        3,
+        0,
+        4,
+        5,
+        1,
+        6
+      ],
+      "fullSentence": "Study groups promote collaborative understanding of material"
+    }
+  ]
+}

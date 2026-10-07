@@ -1,0 +1,29 @@
+{
+  "title": "Listen and Choose a Response — Academic and Personal",
+  "voices": {
+    "Student": "ara",
+    "Classmate": "rex",
+    "Friend": "sal"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "speaker": "f4",
+      "context": "Asking about a grade",
+      "stem": "Could you tell me what I got wrong on question three? I thought my answer was correct.",
+      "options": {
+        "A": "Let's look at it together. The question tested application, not memorization.",
+        "B": "Question three was the hardest on the exam.",
+        "C": "You should review the textbook chapter."
+      },
+      "correct": "A",
+      "explanation": "The speaker is questioning their grade on a specific item, so offering to review it together and explain the reasoning is constructive."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Could you tell me what I got wrong on question three? I thought my answer was correct."
+    }
+  ]
+}

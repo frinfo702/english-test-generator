@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q24",
+      "sentence": "The committee will meet ___ Tuesday to discuss the budget.",
+      "options": {
+        "A": "on",
+        "B": "in",
+        "C": "at",
+        "D": "by"
+      },
+      "correct": "A",
+      "explanation": "'On' precedes days of the week.",
+      "focus": "preposition"
+    }
+  ]
+}

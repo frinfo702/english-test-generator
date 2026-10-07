@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Final Set",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q7",
+      "speaker": "m6",
+      "context": "Asking about fees",
+      "stem": "Is there an extra fee for using the 3D printing lab?",
+      "options": {
+        "A": "Yes, it's five dollars per hour of printing time.",
+        "B": "The 3D printing lab has new equipment.",
+        "C": "Labs are open to all engineering students."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about fees, so providing the specific cost structure directly answers their question."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Is there an extra fee for using the 3D printing lab?"
+    }
+  ]
+}

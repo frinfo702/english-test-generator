@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Requests and Offers",
+  "voices": {
+    "Student": "rex",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q2",
+      "speaker": "f4",
+      "context": "Declining an offer of food",
+      "stem": "Would you like some more pizza? There's still half a pie left.",
+      "options": {
+        "A": "No thanks, I'm full. It was delicious though!",
+        "B": "Pizza has too many calories.",
+        "C": "I ate lunch two hours ago."
+      },
+      "correct": "A",
+      "explanation": "The speaker is offering food, so politely declining with a compliment is courteous."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Would you like some more pizza? There's still half a pie left."
+    }
+  ]
+}

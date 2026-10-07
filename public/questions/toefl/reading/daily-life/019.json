@@ -2,132 +2,47 @@
   "texts": [
     {
       "id": "t1",
-      "textType": "text message",
-      "layout": "chat",
-      "messages": [
-        {
-          "sender": "Mia Torres",
-          "time": "4:15 P.M.",
-          "text": "Hey, are you still planning to sell your used textbooks this semester?"
-        },
-        {
-          "sender": "Jordan Lee",
-          "time": "4:21 P.M.",
-          "text": "Yeah, I listed them on the student exchange page yesterday. Three of them — intro to psych, calculus, and freshman comp."
-        },
-        {
-          "sender": "Mia Torres",
-          "time": "4:22 P.M.",
-          "text": "How much are you asking for the psych book? I might be interested."
-        },
-        {
-          "sender": "Jordan Lee",
-          "time": "4:25 P.M.",
-          "text": "$40. It's in really good condition, no highlighting. The retail price is over $120."
-        },
-        {
-          "sender": "Mia Torres",
-          "time": "4:26 P.M.",
-          "text": "That's a deal. Can I come by and pick it up this evening?"
-        },
-        {
-          "sender": "Jordan Lee",
-          "time": "4:30 P.M.",
-          "text": "Sure, text me when you're on your way."
-        }
-      ],
+      "textType": "notice",
+      "content": "Municipal Parks Department – Oakwood Park Renovation\n\nStarting April 1, Oakwood Park will be partially closed for six months while we upgrade the playground, walking paths, and irrigation system.\n\nThe north entrance and picnic areas will remain open throughout construction. The south entrance, tennis courts, and main playground will be closed until October 1.\n\nWe apologize for any inconvenience. A temporary dog park has been opened at Riverside Field during this period.",
       "questions": [
         {
           "id": "q1",
-          "stem": "What is the main purpose of this conversation?",
+          "stem": "Which area of Oakwood Park will stay open during renovation?",
           "options": [
-            "A. To discuss a group study session",
-            "B. To arrange the purchase of a used textbook",
-            "C. To compare prices at different bookstores",
-            "D. To ask for a recommendation about courses"
+            "A. The south entrance",
+            "B. The tennis courts",
+            "C. The north entrance and picnic areas",
+            "D. The main playground"
           ],
-          "correctIndex": 1,
-          "type": "purpose",
-          "explanation": "The exchange focuses on the sale of a used psychology textbook, from listing to price negotiation to pickup arrangement."
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The notice states that 'the north entrance and picnic areas will remain open throughout construction.'"
         },
         {
           "id": "q2",
-          "stem": "What does the seller imply about the price of $40?",
+          "stem": "What can be inferred about dog owners who usually visit Oakwood Park?",
           "options": [
-            "A. It is negotiable depending on the condition",
-            "B. It is significantly lower than the original price",
-            "C. It is the standard price for used textbooks",
-            "D. It includes all three textbooks as a bundle"
+            "A. They must keep their dogs on leashes at all times",
+            "B. They have been provided with an alternative location",
+            "C. They are prohibited from using the park until October",
+            "D. They must register their dogs with the Parks Department"
           ],
           "correctIndex": 1,
           "type": "inference",
-          "explanation": "The seller mentions the retail price is 'over $120,' implying that $40 represents a substantial saving."
-        }
-      ]
-    },
-    {
-      "id": "t2",
-      "textType": "advertisement",
-      "content": "SpeakFluently Language School\n\nLearn a new language in just 10 weeks!\n\n- Small group classes (max 6 students)\n- Native-speaking instructors\n- Flexible evening and weekend schedules\n- Free trial class — no obligation\n\nLanguages offered: Spanish, French, German, Mandarin, Japanese, and Italian.\n\nSummer enrollment is now open. Early bird discount: 15% off if you register before June 1.\n\nVisit www.speakfluently.example.com or call 555-0147 to book your free trial.",
-      "questions": [
-        {
-          "id": "q3",
-          "stem": "What is the main selling point emphasized by this advertisement?",
-          "options": [
-            "A. The lowest prices in the city",
-            "B. The convenience and flexibility of the classes",
-            "C. The opportunity to travel abroad",
-            "D. The use of digital learning tools"
-          ],
-          "correctIndex": 1,
-          "type": "purpose",
-          "explanation": "The ad highlights small class sizes, native-speaking instructors, and flexible schedules — all pointing to quality and convenience."
-        },
-        {
-          "id": "q4",
-          "stem": "What can be inferred about the early bird discount?",
-          "options": [
-            "A. It applies to all language courses equally",
-            "B. It is only available for the first 50 registrants",
-            "C. It offers a reduced rate for those who sign up early",
-            "D. It requires a minimum payment upfront"
-          ],
-          "correctIndex": 2,
-          "type": "inference",
-          "explanation": "The ad states '15% off if you register before June 1,' meaning early registrants receive a discount on the regular price."
-        }
-      ]
-    },
-    {
-      "id": "t3",
-      "textType": "online post",
-      "content": "Neighborhood Alert — Lost Cat\n\nHi everyone — our cat Oliver went missing on the evening of Tuesday, April 8. He's a 4-year-old orange tabby with a white chest and paws. He is microchipped and was wearing a blue collar with a bell.\n\nHe was last seen on Cedar Avenue near the park. Oliver is very friendly but can be easily startled by loud noises.\n\nIf you see him, please contact Sarah at 555-0238. No questions asked — we just want him home safely.\n\nPlease share this post!",
-      "questions": [
-        {
-          "id": "q5",
-          "stem": "What is the primary purpose of this post?",
-          "options": [
-            "A. To complain about the neighborhood's pet policies",
-            "B. To ask the community for help finding a lost pet",
-            "C. To warn residents about a dangerous animal",
-            "D. To advertise a pet adoption opportunity"
-          ],
-          "correctIndex": 1,
-          "type": "purpose",
-          "explanation": "The post describes a lost cat and asks neighbors to contact the owner if they see it, clearly seeking help in locating the missing pet."
+          "explanation": "The notice mentions that 'a temporary dog park has been opened at Riverside Field during this period.'"
         },
         {
           "id": "q6",
-          "stem": "The phrase 'no questions asked' in the post suggests that the owner:",
+          "stem": "The word 'irrigation' in the park notice is closest in meaning to:",
           "options": [
-            "A. does not need proof that the cat belongs to them",
-            "B. will not inquire about how or why the cat went missing",
-            "C. wants the cat returned regardless of any circumstances",
-            "D. cannot answer questions about the cat's description"
+            "A. a system for watering plants",
+            "B. a method of draining water",
+            "C. a type of playground equipment",
+            "D. a public transportation route"
           ],
-          "correctIndex": 2,
+          "correctIndex": 0,
           "type": "vocabulary",
-          "explanation": "'No questions asked' is a common expression indicating the owner simply wants the cat back safely without any complications or explanations."
+          "explanation": "'Irrigation' refers to a system that supplies water to land or plants."
         }
       ]
     }

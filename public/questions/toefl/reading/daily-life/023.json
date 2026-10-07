@@ -1,0 +1,37 @@
+{
+  "texts": [
+    {
+      "id": "t3",
+      "textType": "advertisement",
+      "content": "Need a workspace that works around your schedule?\n\nJoin MetroDesk — the city's most flexible co-working space. Open 24/7 with secure keycard access, high-speed fiber internet, and complimentary coffee.\n\nPlans start at $99/month for hot-desking access. Private offices available from $399/month. All members receive two hours of free meeting room booking per week.\n\nFirst week free — no contract required. Cancel anytime.\n\nVisit www.metrodesk.example.com or stop by our location on King Street for a tour.",
+      "questions": [
+        {
+          "id": "q6",
+          "stem": "What is the primary selling point of MetroDesk being emphasized in the advertisement?",
+          "options": [
+            "A. Its affordable private office rates",
+            "B. Its central downtown location",
+            "C. Its adaptability to different schedules",
+            "D. Its complimentary refreshment options"
+          ],
+          "correctIndex": 2,
+          "type": "purpose",
+          "explanation": "The ad opens with 'a workspace that works around your schedule' and highlights 24/7 access, no contract, and flexible plans — all pointing to schedule adaptability as the core selling point."
+        },
+        {
+          "id": "q7",
+          "stem": "What can be inferred about the meeting room booking policy?",
+          "options": [
+            "A. Meeting rooms require an additional membership fee",
+            "B. Members can book meeting rooms without extra charges up to a limit",
+            "C. Meeting rooms are only available during business hours",
+            "D. Hot-desk members cannot use meeting rooms"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The ad states 'All members receive two hours of free meeting room booking per week,' implying that the first two hours are included at no extra cost, beyond which additional charges may apply."
+        }
+      ]
+    }
+  ]
+}

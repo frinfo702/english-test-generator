@@ -1,0 +1,15 @@
+{
+  "title": "Academic Dictation",
+  "sentences": [
+    {
+      "id": "s5",
+      "text": "The lecture will start in ten minutes.",
+      "wordCount": 7,
+      "distractors": [
+        "end",
+        "seminar",
+        "hours"
+      ]
+    }
+  ]
+}

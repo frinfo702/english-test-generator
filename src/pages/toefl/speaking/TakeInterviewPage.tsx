@@ -293,8 +293,6 @@ export function TakeInterviewPage() {
         title="Take an Interview"
         subtitle="Listen, then speak your answer (45 seconds). Text is hidden like the real test."
         backTo="/toefl"
-        current={done ? data?.questions.length : current}
-        total={data?.questions.length}
       />
 
       <div className={styles.topBar}>
@@ -308,7 +306,7 @@ export function TakeInterviewPage() {
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="Loading question set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>

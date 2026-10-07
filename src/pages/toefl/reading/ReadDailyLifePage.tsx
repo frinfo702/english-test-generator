@@ -129,8 +129,6 @@ export function ReadDailyLifePage() {
         title="Read in Daily Life"
         subtitle="Read everyday texts and answer all questions."
         backTo="/toefl"
-        current={answeredCount}
-        total={totalQ}
       />
 
       <div className={styles.topBar}>

@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Extracurricular",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "m6",
+      "context": "Asking about volunteering opportunities",
+      "stem": "I want to get involved in community service. Are there any student organizations for that?",
+      "options": {
+        "A": "Definitely! The Community Outreach Club meets every Tuesday. I can introduce you.",
+        "B": "Community service is required for some scholarships.",
+        "C": "I volunteered at a shelter last semester."
+      },
+      "correct": "A",
+      "explanation": "The speaker is looking for volunteering options, so recommending a specific organization and offering to help connect is very helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I want to get involved in community service. Are there any student organizations for that?"
+    }
+  ]
+}

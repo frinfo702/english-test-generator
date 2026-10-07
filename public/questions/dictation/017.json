@@ -1,0 +1,15 @@
+{
+  "title": "Business & Travel Dictation",
+  "sentences": [
+    {
+      "id": "s5",
+      "text": "We decided to postpone the trip until spring.",
+      "wordCount": 8,
+      "distractors": [
+        "cancel",
+        "flight",
+        "summer"
+      ]
+    }
+  ]
+}

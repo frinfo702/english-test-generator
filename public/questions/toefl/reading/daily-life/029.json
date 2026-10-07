@@ -1,0 +1,37 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "announcement",
+      "content": "Notice to All Tenants\nSubject: Building Maintenance — Elevator Outage\n\nPlease be advised that the passenger elevators in Tower B will be out of service from 8:00 PM on Friday, September 12, until 6:00 AM on Monday, September 15, for scheduled maintenance. Freight elevators will remain operational during this period.\n\nWe apologize for any inconvenience. Residents on floors 8 and above who require assistance with heavy items may contact the front desk to schedule a time slot for freight elevator use.\n\nManagement recommends using the staircase for floors 1 through 7 during the outage.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the primary reason for this announcement?",
+          "options": [
+            "A. To warn tenants about a building emergency",
+            "B. To inform tenants about planned elevator maintenance",
+            "C. To announce the installation of new elevators",
+            "D. To notify tenants about a change in building management"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The announcement is about 'scheduled maintenance' of the passenger elevators, informing tenants in advance."
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about the freight elevators during the maintenance period?",
+          "options": [
+            "A. They will be available for all tenants to use freely",
+            "B. They will be exclusively for maintenance workers",
+            "C. They can be used by arrangement for moving heavy items",
+            "D. They will also be undergoing maintenance at the same time"
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The announcement says residents can 'contact the front desk to schedule a time slot for freight elevator use,' implying it is available by appointment for specific needs."
+        }
+      ]
+    }
+  ]
+}

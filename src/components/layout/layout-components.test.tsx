@@ -42,8 +42,6 @@ describe("layout components", () => {
                 <SectionHeader
                   title="Practice"
                   subtitle="Keep going"
-                  current={2}
-                  total={5}
                   backTo="/menu"
                 />
                 <LocationProbe />
@@ -56,7 +54,6 @@ describe("layout components", () => {
 
     expect(screen.getByText("Practice")).toBeTruthy();
     expect(screen.getByText("Keep going")).toBeTruthy();
-    expect(screen.getByText("2/5")).toBeTruthy();
 
     fireEvent.click(screen.getByRole("button", { name: "Go back" }));
     expect(screen.getByTestId("location").textContent).toBe("/menu");

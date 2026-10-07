@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q8",
+      "sentence": "The director spoke ___ about the company’s long-term strategy at the conference.",
+      "options": {
+        "A": "confident",
+        "B": "confidence",
+        "C": "confidently",
+        "D": "confidential"
+      },
+      "correct": "C",
+      "explanation": "An adverb is needed to modify the verb 'spoke.'",
+      "focus": "word form"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "passages": [
+    {
+      "id": "p3",
+      "textType": "notice",
+      "text": "NOTICE: Internal System Upgrade\n\nTo improve security, the company will migrate all expense-report data to the new FinanceCloud platform on June 8. Employees can continue submitting reports until 6:00 p.m. on June 7, after which the old system will become read-only. [1]\n\nBefore migration day, please download any receipts you still need for active reimbursement cases. A brief tutorial video is available on the intranet homepage and will [2] common submission errors.\n\nDepartment coordinators should collect questions from staff and submit them to IT by June 3. During the first week after launch, response times may be slightly longer than usual. For urgent reimbursement issues, [3] the Finance Help Desk directly at extension 421.\n\nThe migration plan was reviewed by both Finance and Compliance, [4] no policy changes are expected.",
+      "questions": [
+        {
+          "id": "q9",
+          "blankNumber": 1,
+          "type": "sentence",
+          "options": {
+            "A": "The new platform will be accessible beginning at 9:00 a.m. on June 9.",
+            "B": "Several conference rooms were repainted during the holiday period.",
+            "C": "Our cafeteria menu now includes two vegetarian lunch sets.",
+            "D": "The monthly newsletter is written by volunteers from each department."
+          },
+          "correct": "A",
+          "explanation": "Option A correctly continues the timeline for system availability."
+        },
+        {
+          "id": "q10",
+          "blankNumber": 2,
+          "type": "grammar",
+          "options": {
+            "A": "explain",
+            "B": "explaining",
+            "C": "explanation",
+            "D": "explained"
+          },
+          "correct": "A",
+          "explanation": "After 'will,' the base verb form is needed: 'will explain.'"
+        },
+        {
+          "id": "q11",
+          "blankNumber": 3,
+          "type": "grammar",
+          "options": {
+            "A": "contact",
+            "B": "contacts",
+            "C": "contacted",
+            "D": "contacting"
+          },
+          "correct": "A",
+          "explanation": "This is an imperative instruction, so the base form 'contact' is correct."
+        },
+        {
+          "id": "q12",
+          "blankNumber": 4,
+          "type": "grammar",
+          "options": {
+            "A": "so",
+            "B": "unless",
+            "C": "although",
+            "D": "despite"
+          },
+          "correct": "A",
+          "explanation": "The clause indicates a result, making 'so' the most appropriate connector."
+        }
+      ]
+    }
+  ]
+}

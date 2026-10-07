@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q21",
+      "sentence": "The receptionist placed the packages on the counter ___ the courier could pick them up.",
+      "options": {
+        "A": "so",
+        "B": "so that",
+        "C": "because of",
+        "D": "despite"
+      },
+      "correct": "B",
+      "explanation": "'So that' correctly introduces a purpose clause with a subject and verb.",
+      "focus": "conjunction/connector"
+    }
+  ]
+}

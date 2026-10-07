@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q20",
+      "sentence": "The seminar will be held ___ the conference center.",
+      "options": {
+        "A": "in",
+        "B": "on",
+        "C": "at",
+        "D": "into"
+      },
+      "correct": "C",
+      "explanation": "'At' is used with specific venues.",
+      "focus": "preposition"
+    }
+  ]
+}

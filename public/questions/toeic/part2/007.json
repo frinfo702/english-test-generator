@@ -1,0 +1,34 @@
+{
+  "title": "Question-Response - Service & Requests",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Could you help me carry these boxes to the storage room?",
+      "options": {
+        "A": "Sure, I'll give you a hand.",
+        "B": "They are in the storage room.",
+        "C": "No, the boxes are empty."
+      },
+      "correct": "A",
+      "explanation": "The question is a request for help ('Could you help me'), so 'Sure, I'll give you a hand' is an appropriate affirmative response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Woman",
+      "text": "Number 1. Could you help me carry these boxes to the storage room?"
+    },
+    {
+      "role": "Man",
+      "text": "(A) Sure, I'll give you a hand."
+    },
+    {
+      "role": "Man",
+      "text": "(B) They are in the storage room."
+    },
+    {
+      "role": "Man",
+      "text": "(C) No, the boxes are empty."
+    }
+  ]
+}

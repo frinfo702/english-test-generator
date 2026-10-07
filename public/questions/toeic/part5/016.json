@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q16",
+      "sentence": "The board expressed ___ satisfaction with the results.",
+      "options": {
+        "A": "they",
+        "B": "them",
+        "C": "their",
+        "D": "theirs"
+      },
+      "correct": "C",
+      "explanation": "Possessive adjective 'their.'",
+      "focus": "pronoun"
+    }
+  ]
+}

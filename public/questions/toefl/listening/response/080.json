@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Final Set",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q8",
+      "speaker": "m6",
+      "context": "Expressing relief",
+      "stem": "I was so worried about the exam, but I actually think I did okay!",
+      "options": {
+        "A": "I'm glad to hear that! All that studying paid off.",
+        "B": "Exams are always stressful.",
+        "C": "The exam was easier than last year's."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing relief after a stressful event, so sharing in their relief and validating their effort is encouraging."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I was so worried about the exam, but I actually think I did okay!"
+    }
+  ]
+}

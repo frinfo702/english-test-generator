@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q24",
+      "sentence": "The new branch office will open in May, ___ will create about 30 jobs.",
+      "options": {
+        "A": "that",
+        "B": "which",
+        "C": "what",
+        "D": "where"
+      },
+      "correct": "B",
+      "explanation": "Use 'which' to refer to the whole preceding clause in a non-restrictive relative clause.",
+      "focus": "relative clause"
+    }
+  ]
+}

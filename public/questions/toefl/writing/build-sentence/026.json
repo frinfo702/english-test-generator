@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s6",
+      "reference": "Lecturer: What role does diet play in cognitive function?",
+      "chunks": [
+        "diet",
+        "balanced",
+        "supports",
+        "concentration",
+        "and",
+        "memory"
+      ],
+      "correctOrder": [
+        1,
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "fullSentence": "A balanced diet supports concentration and memory"
+    }
+  ]
+}

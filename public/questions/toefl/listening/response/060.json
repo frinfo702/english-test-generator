@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Practical Matters",
+  "voices": {
+    "Student": "rex"
+  },
+  "questions": [
+    {
+      "id": "q4",
+      "speaker": "m6",
+      "context": "Mentioning bad weather impact",
+      "stem": "The snowstorm last night made the roads impossible. I barely made it to campus.",
+      "options": {
+        "A": "I'm glad you got here safely. Several students emailed that they're stuck.",
+        "B": "Snowstorms are common in January.",
+        "C": "I live on campus, so I don't have to commute."
+      },
+      "correct": "A",
+      "explanation": "The speaker is describing a difficult commute due to weather, so expressing relief for their safety and providing relevant context is empathetic."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The snowstorm last night made the roads impossible. I barely made it to campus."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q12",
+      "sentence": "Neither the manager nor the assistants ___ available.",
+      "options": {
+        "A": "was",
+        "B": "were",
+        "C": "is",
+        "D": "has been"
+      },
+      "correct": "B",
+      "explanation": "Verb agrees with nearer subject 'assistants' (plural).",
+      "focus": "subject-verb agreement"
+    }
+  ]
+}

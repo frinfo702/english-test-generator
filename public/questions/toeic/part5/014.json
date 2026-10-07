@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q14",
+      "sentence": "Ensure all safety equipment is ___ before beginning work.",
+      "options": {
+        "A": "inspecting",
+        "B": "inspected",
+        "C": "to inspect",
+        "D": "inspection"
+      },
+      "correct": "B",
+      "explanation": "Passive 'is inspected.'",
+      "focus": "verb tense/form"
+    }
+  ]
+}

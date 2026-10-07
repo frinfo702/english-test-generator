@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Daily Encounters",
+  "voices": {
+    "Student": "eve",
+    "Friend": "leo"
+  },
+  "questions": [
+    {
+      "id": "q4",
+      "speaker": "m6",
+      "context": "Inquiring about lost and found",
+      "stem": "I lost my student ID somewhere on campus. Is there a lost and found office?",
+      "options": {
+        "A": "Yes, check at the campus security office in the student center.",
+        "B": "Student IDs are required for library access.",
+        "C": "I found a wallet yesterday."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about where to find lost items, so providing the location of the lost and found is directly helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I lost my student ID somewhere on campus. Is there a lost and found office?"
+    }
+  ]
+}

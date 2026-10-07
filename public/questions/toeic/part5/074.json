@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q14",
+      "sentence": "A list of approved vendors will be sent to you ___.",
+      "options": {
+        "A": "short",
+        "B": "shortly",
+        "C": "shorten",
+        "D": "shortness"
+      },
+      "correct": "B",
+      "explanation": "'Shortly' is an adverb meaning 'soon' and fits after 'will be sent'.",
+      "focus": "vocabulary in context"
+    }
+  ]
+}

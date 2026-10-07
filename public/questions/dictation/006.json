@@ -1,0 +1,15 @@
+{
+  "title": "Daily Life Dictation",
+  "sentences": [
+    {
+      "id": "s6",
+      "text": "Please turn off the lights before you leave.",
+      "wordCount": 8,
+      "distractors": [
+        "on",
+        "after",
+        "arrive"
+      ]
+    }
+  ]
+}

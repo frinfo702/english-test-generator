@@ -1,0 +1,34 @@
+{
+  "title": "Question-Response - Travel & Logistics",
+  "questions": [
+    {
+      "id": "q3",
+      "stem": "The hotel reservation has been confirmed, hasn't it?",
+      "options": {
+        "A": "Yes, I received the confirmation email this morning.",
+        "B": "At the Grand Hotel downtown.",
+        "C": "I reserved it for three nights."
+      },
+      "correct": "A",
+      "explanation": "The question is a confirmation check ('hasn't it?'), so confirming with evidence is the best response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Man",
+      "text": "Number 3. The hotel reservation has been confirmed, hasn't it?"
+    },
+    {
+      "role": "Woman",
+      "text": "(A) Yes, I received the confirmation email this morning."
+    },
+    {
+      "role": "Woman",
+      "text": "(B) At the Grand Hotel downtown."
+    },
+    {
+      "role": "Woman",
+      "text": "(C) I reserved it for three nights."
+    }
+  ]
+}

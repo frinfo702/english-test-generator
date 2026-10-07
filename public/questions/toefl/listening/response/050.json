@@ -1,0 +1,29 @@
+{
+  "title": "Listen and Choose a Response — Academic and Personal",
+  "voices": {
+    "Student": "ara",
+    "Classmate": "rex",
+    "Friend": "sal"
+  },
+  "questions": [
+    {
+      "id": "q2",
+      "speaker": "m6",
+      "context": "Inviting to a study session",
+      "stem": "We're forming a study group for the chemistry final. Are you interested?",
+      "options": {
+        "A": "Absolutely! When and where are you meeting?",
+        "B": "Chemistry is a difficult subject.",
+        "C": "I prefer to study alone."
+      },
+      "correct": "A",
+      "explanation": "The speaker is inviting the listener to join a study group, so an enthusiastic acceptance with logistical follow-up is the natural response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Classmate",
+      "text": "We're forming a study group for the chemistry final. Are you interested?"
+    }
+  ]
+}

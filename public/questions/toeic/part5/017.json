@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q17",
+      "sentence": "A number of clients ___ reported issues with the billing system.",
+      "options": {
+        "A": "has",
+        "B": "have",
+        "C": "is",
+        "D": "was"
+      },
+      "correct": "B",
+      "explanation": "'A number of' takes a plural verb.",
+      "focus": "subject-verb agreement"
+    }
+  ]
+}

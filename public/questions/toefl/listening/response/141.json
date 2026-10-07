@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Library & Resources",
+  "voices": {
+    "Student": "rex",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q8",
+      "speaker": "f4",
+      "context": "Warning about a due date",
+      "stem": "Just a heads up — the book you borrowed is due tomorrow.",
+      "options": {
+        "A": "Thanks for the reminder! I'll return it later today.",
+        "B": "Books can be renewed twice per semester.",
+        "C": "I returned my books last week."
+      },
+      "correct": "A",
+      "explanation": "The speaker is giving a friendly reminder, so expressing thanks and confirming the action you'll take is the appropriate response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Just a heads up — the book you borrowed is due tomorrow."
+    }
+  ]
+}

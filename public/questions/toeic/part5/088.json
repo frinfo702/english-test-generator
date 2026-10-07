@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q28",
+      "sentence": "The company newsletter is distributed ___ a monthly basis.",
+      "options": {
+        "A": "in",
+        "B": "on",
+        "C": "at",
+        "D": "for"
+      },
+      "correct": "B",
+      "explanation": "'On a monthly basis' is the standard expression.",
+      "focus": "preposition"
+    }
+  ]
+}

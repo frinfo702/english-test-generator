@@ -1,94 +1,48 @@
 {
   "texts": [
     {
-      "id": "t1",
-      "textType": "memo",
-      "content": "TO: All Staff\nFROM: Operations Manager\nDATE: October 3\nRE: New Conference Room Booking System\n\nEffective October 15, all conference room reservations must be made through the new online portal. The old paper sign-up sheets outside each room will be removed.\n\nEach team is limited to two reservations per week in the large conference room. Small breakout rooms can be booked for up to three hours at a time.\n\nCancellations must be made at least 24 hours in advance so that others may use the space.",
-      "questions": [
-        {
-          "id": "q1",
-          "stem": "What change will take effect on October 15?",
-          "options": [
-            "A. Conference rooms will no longer be available",
-            "B. All reservations must be made online",
-            "C. Teams can book unlimited conference room time",
-            "D. Only managers can reserve meeting spaces"
-          ],
-          "correctIndex": 1,
-          "type": "factual",
-          "explanation": "The memo states that 'all conference room reservations must be made through the new online portal' effective October 15."
-        },
-        {
-          "id": "q2",
-          "stem": "What can be inferred about the old booking system?",
-          "options": [
-            "A. It was entirely digital",
-            "B. It involved physical sign-up sheets",
-            "C. It allowed unlimited reservations",
-            "D. It was managed by an external company"
-          ],
-          "correctIndex": 1,
-          "type": "inference",
-          "explanation": "The memo mentions that 'the old paper sign-up sheets outside each room will be removed.'"
-        },
-        {
-          "id": "q5",
-          "stem": "What is the main purpose of the memo?",
-          "options": [
-            "A. To complain about staff misuse of rooms",
-            "B. To announce policy changes for room reservations",
-            "C. To request feedback on meeting room designs",
-            "D. To cancel all upcoming department meetings"
-          ],
-          "correctIndex": 1,
-          "type": "purpose",
-          "explanation": "The memo introduces a new online booking system, sets limits on reservations, and establishes cancellation policies."
-        }
-      ]
-    },
-    {
       "id": "t2",
-      "textType": "schedule",
-      "content": "Q4 Department Meetings – November\n\nMarketing: Nov 5, 10:00 AM, Room B\nEngineering: Nov 7, 2:00 PM, Large Conference Room\nSales: Nov 12, 9:00 AM, Room A\nHR: Nov 14, 11:00 AM, Room B\nFinance: Nov 19, 3:00 PM, Large Conference Room\n\nAll meetings are mandatory for department heads. Remote attendees should join via the link sent 24 hours prior.",
+      "textType": "notice",
+      "content": "Campus Cafe – Winter Break Schedule\n\nDec 15–Dec 30: Reduced hours (7 AM – 3 PM)\nJan 2: Resume normal hours (6:30 AM – 8 PM)\n\nThe cafe will be completely closed on Dec 24, 25, and 31.\n\nDuring reduced hours, only grab-and-go items and coffee will be available. The hot breakfast menu returns January 2.",
       "questions": [
         {
           "id": "q3",
-          "stem": "According to the schedule, which department has the latest meeting time?",
+          "stem": "What is the main purpose of the cafe notice?",
           "options": [
-            "A. Marketing",
-            "B. Engineering",
-            "C. Sales",
-            "D. Finance"
+            "A. To announce a permanent closure",
+            "B. To inform customers of temporary schedule changes",
+            "C. To introduce a new winter menu",
+            "D. To recruit temporary holiday staff"
           ],
-          "correctIndex": 3,
-          "type": "factual",
-          "explanation": "Finance meets at 3:00 PM, which is later than Marketing (10:00 AM), Engineering (2:00 PM), and Sales (9:00 AM)."
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The notice informs customers about reduced hours, closure dates, and limited menu options during the winter break."
         },
         {
           "id": "q4",
-          "stem": "What is implied about attending the Engineering meeting remotely?",
+          "stem": "Which statement about the cafe is true during the reduced hours period?",
           "options": [
-            "A. Remote attendance is not permitted",
-            "B. Remote attendees will receive a link before the meeting",
-            "C. Only department heads can attend remotely",
-            "D. The meeting will be recorded for later viewing"
+            "A. The full breakfast menu is available all day",
+            "B. Hot meals can be ordered from the regular menu",
+            "C. Only grab-and-go items and coffee are served",
+            "D. The cafe opens at 6:30 AM as usual"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The notice explicitly states that 'only grab-and-go items and coffee will be available' during reduced hours."
+        },
+        {
+          "id": "q5",
+          "stem": "On which date will both the library and the cafe be operating on modified schedules?",
+          "options": [
+            "A. December 10",
+            "B. December 15",
+            "C. December 25",
+            "D. January 2"
           ],
           "correctIndex": 1,
           "type": "inference",
-          "explanation": "The schedule states that 'remote attendees should join via the link sent 24 hours prior.'"
-        },
-        {
-          "id": "q6",
-          "stem": "The word 'mandatory' in the schedule is closest in meaning to:",
-          "options": [
-            "A. optional",
-            "B. required",
-            "C. recommended",
-            "D. delayed"
-          ],
-          "correctIndex": 1,
-          "type": "vocabulary",
-          "explanation": "'Mandatory' means required or compulsory."
+          "explanation": "On December 15, the library is in its extended hours period (Dec 10–20) and the cafe begins reduced hours (Dec 15–30)."
         }
       ]
     }

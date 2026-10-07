@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Academic Situations",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "speaker": "m6",
+      "context": "Asking about registration",
+      "stem": "I'm trying to register for Psychology 201, but the system says it's full.",
+      "options": {
+        "A": "You can join the waitlist and check for openings during the first week.",
+        "B": "Psychology courses are very popular this semester.",
+        "C": "I took Psychology 101 last year."
+      },
+      "correct": "A",
+      "explanation": "The speaker is reporting a problem with course registration, so offering the waitlist as a solution is the most helpful response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I'm trying to register for Psychology 201, but the system says it's full."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "sentences": [
+    {
+      "id": "s10",
+      "reference": "Friend: Learning another language is just memorizing grammar.",
+      "chunks": [
+        "for",
+        "Learning",
+        "understanding",
+        "provides",
+        "foundation",
+        "other",
+        "second",
+        "a strong",
+        "language",
+        "cultures",
+        "a"
+      ],
+      "correctOrder": [
+        1,
+        10,
+        6,
+        8,
+        3,
+        7,
+        4,
+        0,
+        2,
+        5,
+        9
+      ],
+      "fullSentence": "Learning a second language provides a strong foundation for understanding other cultures"
+    }
+  ]
+}

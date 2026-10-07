@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q28",
+      "sentence": "The HR department is responsible ___ processing new employee paperwork.",
+      "options": {
+        "A": "of",
+        "B": "for",
+        "C": "with",
+        "D": "about"
+      },
+      "correct": "B",
+      "explanation": "'Responsible for' is a fixed collocation.",
+      "focus": "preposition"
+    }
+  ]
+}

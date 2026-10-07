@@ -1,0 +1,37 @@
+{
+  "texts": [
+    {
+      "id": "t2",
+      "textType": "notice",
+      "content": "Fitness Center — Temporary Equipment Closure\n\nPlease be advised that the following equipment will be temporarily unavailable from March 10 through March 14 for routine maintenance:\n\n- All treadmills (maintenance: belt replacement and calibration)\n- Leg press machine (parts replacement)\n\nAlternative equipment will remain available:\n- Ellipticals (4 units)\n- Stationary bikes (6 units)\n- Free weights section (fully accessible)\n\nWe apologize for any inconvenience. The fitness center will operate regular hours throughout the maintenance period.",
+      "questions": [
+        {
+          "id": "q4",
+          "stem": "What is the main reason for the equipment closure?",
+          "options": [
+            "A. The fitness center is undergoing renovation",
+            "B. The equipment requires routine maintenance",
+            "C. New equipment is being installed",
+            "D. There is a staffing shortage"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The notice states the closure is 'for routine maintenance,' including belt replacement and parts replacement."
+        },
+        {
+          "id": "q5",
+          "stem": "What can be inferred about the fitness center's operation during this period?",
+          "options": [
+            "A. It will close early each day during maintenance",
+            "B. It will remain open with alternative equipment available",
+            "C. Only members with premium memberships can enter",
+            "D. It will be closed to the public for the entire week"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The notice lists alternative equipment that 'will remain available' and states that 'regular hours' will be maintained throughout the period."
+        }
+      ]
+    }
+  ]
+}

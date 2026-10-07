@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q10",
+      "sentence": "Profits have ___ grown since the new CEO took charge.",
+      "options": {
+        "A": "steady",
+        "B": "steadiness",
+        "C": "steadied",
+        "D": "steadily"
+      },
+      "correct": "D",
+      "explanation": "Adverb 'steadily' modifies 'grown.'",
+      "focus": "word form"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q9",
+      "sentence": "All applicants must submit ___ resume and a cover letter by Friday.",
+      "options": {
+        "A": "they",
+        "B": "them",
+        "C": "their",
+        "D": "theirs"
+      },
+      "correct": "C",
+      "explanation": "Possessive adjective 'their' modifies 'resume.'",
+      "focus": "pronoun"
+    }
+  ]
+}

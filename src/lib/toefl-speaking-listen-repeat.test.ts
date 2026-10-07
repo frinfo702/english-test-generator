@@ -46,11 +46,10 @@ describe("TOEFL Speaking: Listen and Repeat JSON structure", () => {
     expect(Array.isArray(data.sentences)).toBe(true);
   });
 
-  // 7-10 sentences per file
-  it.each(files)("%s has 7〜10 sentences", (file) => {
+  // One problem per file: a single sentence.
+  it.each(files)("%s has exactly 1 sentence", (file) => {
     const data = loadJson(file);
-    expect(data.sentences.length).toBeGreaterThanOrEqual(7);
-    expect(data.sentences.length).toBeLessThanOrEqual(10);
+    expect(data.sentences).toHaveLength(1);
   });
 
   it.each(files)("%s sentences have required fields", (file) => {

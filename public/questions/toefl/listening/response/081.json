@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Daily Situations",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "speaker": "f4",
+      "context": "Requesting assistance",
+      "stem": "Could you help me carry these books to the library?",
+      "options": {
+        "A": "Sure, I'm heading that way anyway.",
+        "B": "The library closes at 9 PM.",
+        "C": "I read that book last semester."
+      },
+      "correct": "A",
+      "explanation": "The speaker is requesting help, so a willing agreement is the most natural response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Could you help me carry these books to the library?"
+    }
+  ]
+}

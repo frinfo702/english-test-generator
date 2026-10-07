@@ -1,0 +1,15 @@
+{
+  "title": "Academic Dictation",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "The professor explained the theory very clearly.",
+      "wordCount": 7,
+      "distractors": [
+        "student",
+        "confused",
+        "quickly"
+      ]
+    }
+  ]
+}

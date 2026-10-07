@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Library & Resources",
+  "voices": {
+    "Student": "rex",
+    "Friend": "eve"
+  },
+  "questions": [
+    {
+      "id": "q6",
+      "speaker": "f4",
+      "context": "Asking about laptop rentals",
+      "stem": "Can I borrow a laptop from the library if mine is being repaired?",
+      "options": {
+        "A": "Yes, we have laptops available for 24-hour checkout at the circulation desk.",
+        "B": "Laptops are essential for college students.",
+        "C": "I bought my laptop during orientation week."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about temporary equipment access, so confirming availability and explaining the checkout process is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Can I borrow a laptop from the library if mine is being repaired?"
+    }
+  ]
+}

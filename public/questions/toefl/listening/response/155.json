@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Technology & Communication",
+  "voices": {
+    "Student": "leo",
+    "Friend": "rex"
+  },
+  "questions": [
+    {
+      "id": "q6",
+      "speaker": "m5",
+      "context": "Sharing a useful discovery",
+      "stem": "I just found out the library has free access to LinkedIn Learning courses!",
+      "options": {
+        "A": "That's great to know! I've been wanting to learn graphic design.",
+        "B": "LinkedIn Learning has thousands of video tutorials.",
+        "C": "I already have a LinkedIn Learning subscription."
+      },
+      "correct": "A",
+      "explanation": "The speaker is sharing useful information, so showing enthusiasm and engaging with the opportunity is the natural response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I just found out the library has free access to LinkedIn Learning courses!"
+    }
+  ]
+}

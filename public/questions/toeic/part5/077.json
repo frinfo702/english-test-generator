@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q17",
+      "sentence": "Because the training session starts promptly at 9:00, please arrive ___ 8:45.",
+      "options": {
+        "A": "by",
+        "B": "at",
+        "C": "until",
+        "D": "for"
+      },
+      "correct": "A",
+      "explanation": "'By' indicates a deadline (no later than 8:45).",
+      "focus": "preposition"
+    }
+  ]
+}

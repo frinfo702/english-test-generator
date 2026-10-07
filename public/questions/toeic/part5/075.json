@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q15",
+      "sentence": "The staff members were thanked for ___ hard during the busy season.",
+      "options": {
+        "A": "work",
+        "B": "works",
+        "C": "working",
+        "D": "worked"
+      },
+      "correct": "C",
+      "explanation": "After 'for', use a noun or gerund: 'for working hard'.",
+      "focus": "verb tense/form"
+    }
+  ]
+}

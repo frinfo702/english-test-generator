@@ -123,8 +123,6 @@ export function Part7Page() {
         title="Part 7: Reading Comprehension"
         subtitle="Read the passage(s) and answer the questions."
         backTo="/toeic"
-        current={Object.keys(selected).length}
-        total={questions.length}
       />
 
       <div className={styles.topBar}>
@@ -138,7 +136,7 @@ export function Part7Page() {
         </Button>
       </div>
 
-      {loading && <LoadingSpinner message="Loading question set..." />}
+      {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
         <div className={styles.error}>
           <p>{error}</p>

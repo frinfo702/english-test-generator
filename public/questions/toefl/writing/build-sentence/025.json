@@ -1,0 +1,29 @@
+{
+  "sentences": [
+    {
+      "id": "s5",
+      "reference": "Classmate: Reading physical books is outdated.",
+      "chunks": [
+        "comprehension",
+        "books",
+        "often",
+        "Physical",
+        "lead",
+        "to",
+        "better",
+        "reading"
+      ],
+      "correctOrder": [
+        3,
+        1,
+        2,
+        4,
+        5,
+        6,
+        0,
+        7
+      ],
+      "fullSentence": "Physical books often lead to better reading comprehension"
+    }
+  ]
+}

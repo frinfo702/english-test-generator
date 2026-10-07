@@ -1,0 +1,31 @@
+{
+  "sentences": [
+    {
+      "id": "s5",
+      "reference": "Classmate: Is online learning worse than in-person classes?",
+      "chunks": [
+        "flexibility",
+        "Online",
+        "learning",
+        "offers",
+        "that",
+        "appeals",
+        "to",
+        "many",
+        "students"
+      ],
+      "correctOrder": [
+        1,
+        2,
+        3,
+        0,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "fullSentence": "Online learning offers flexibility that appeals to many students"
+    }
+  ]
+}

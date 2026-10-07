@@ -1,0 +1,27 @@
+{
+  "title": "Listen and Choose a Response — Campus Services",
+  "voices": {
+    "Student": "eve"
+  },
+  "questions": [
+    {
+      "id": "q2",
+      "speaker": "f4",
+      "context": "Reporting a maintenance issue",
+      "stem": "The light in my dorm room keeps flickering. Can someone fix it?",
+      "options": {
+        "A": "I'll submit a maintenance request for you right now.",
+        "B": "Flickering lights are usually a wiring issue.",
+        "C": "You should buy a new bulb."
+      },
+      "correct": "A",
+      "explanation": "The speaker is reporting a maintenance problem, so offering to take action and submit a request is the appropriate staff response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The light in my dorm room keeps flickering. Can someone fix it?"
+    }
+  ]
+}

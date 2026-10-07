@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Travel & Transportation",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q5",
+      "speaker": "f4",
+      "context": "Asking about carpool program",
+      "stem": "Does the university have a carpool program for students who commute?",
+      "options": {
+        "A": "Yes, you can register on the sustainability portal to find carpool partners.",
+        "B": "Carpooling reduces carbon emissions from commuting.",
+        "C": "I drive alone to campus every day."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about a specific program, so confirming its existence and explaining how to access it is helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Does the university have a carpool program for students who commute?"
+    }
+  ]
+}

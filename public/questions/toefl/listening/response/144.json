@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Travel & Transportation",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q3",
+      "speaker": "f4",
+      "context": "Asking about bike parking",
+      "stem": "Where can I park my bike on campus? I don't want it to get towed.",
+      "options": {
+        "A": "There are bike racks in front of every major building. Just avoid locking to railings.",
+        "B": "Biking is a great way to get around campus.",
+        "C": "I walk to class every day."
+      },
+      "correct": "A",
+      "explanation": "The speaker is asking about proper bike parking, so explaining where racks are and what to avoid is directly helpful."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Where can I park my bike on campus? I don't want it to get towed."
+    }
+  ]
+}

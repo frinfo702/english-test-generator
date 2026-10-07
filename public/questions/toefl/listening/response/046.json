@@ -1,0 +1,28 @@
+{
+  "title": "Listen and Choose a Response — Requests and Offers",
+  "voices": {
+    "Student": "rex",
+    "Friend": "ara"
+  },
+  "questions": [
+    {
+      "id": "q6",
+      "speaker": "m6",
+      "context": "Expressing excitement about plans",
+      "stem": "I can't believe we're going to present at the national conference! This is huge!",
+      "options": {
+        "A": "I know! We've worked so hard for this moment.",
+        "B": "Conferences are important for networking.",
+        "C": "The national conference is in Chicago this year."
+      },
+      "correct": "A",
+      "explanation": "The speaker is expressing excitement about shared success, so matching their enthusiasm and acknowledging the achievement is the natural response."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I can't believe we're going to present at the national conference! This is huge!"
+    }
+  ]
+}

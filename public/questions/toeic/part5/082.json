@@ -1,0 +1,17 @@
+{
+  "questions": [
+    {
+      "id": "q22",
+      "sentence": "The presentation was postponed due to technical problems, and the speakers apologized ___ the delay.",
+      "options": {
+        "A": "to",
+        "B": "for",
+        "C": "with",
+        "D": "about"
+      },
+      "correct": "B",
+      "explanation": "Use 'apologize for' + noun/gerund to state what you are sorry about.",
+      "focus": "preposition"
+    }
+  ]
+}
