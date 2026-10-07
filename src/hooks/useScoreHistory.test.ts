@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { useScoreHistory } from "./useScoreHistory";
+import { PERFECT_SCORE_EVENT, useScoreHistory } from "./useScoreHistory";
 import {
   clearAttempts,
   getAllAttempts,
@@ -33,6 +33,21 @@ describe("useScoreHistory", () => {
     });
 
     expect(saveAttempt).not.toHaveBeenCalled();
+  });
+
+  it("announces a perfect score, and only a perfect one", async () => {
+    const onPerfect = vi.fn();
+    window.addEventListener(PERFECT_SCORE_EVENT, onPerfect);
+    const { result } = renderHook(() => useScoreHistory());
+
+    await act(async () => {
+      const base = { taskId: "toeic/part5" as const, responses: [] };
+      await result.current.saveScore({ ...base, correct: 4, total: 5 });
+      await result.current.saveScore({ ...base, correct: 5, total: 5 });
+    });
+
+    window.removeEventListener(PERFECT_SCORE_EVENT, onPerfect);
+    expect(onPerfect).toHaveBeenCalledTimes(1);
   });
 
   it("saves the responses with the score they earned", async () => {

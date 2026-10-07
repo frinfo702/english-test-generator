@@ -11,6 +11,7 @@ import { PixelArt } from "../pixel/PixelArt";
 import { POODLE_BODY, POODLE_PALETTE } from "../pixel/poodleSprite";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { LegacyHistoryNotice } from "./LegacyHistoryNotice";
+import { PerfectCelebration } from "../pixel/PerfectCelebration";
 import styles from "./AppShell.module.css";
 
 // The mascot's head (sprite rows 1–15, ears to collar) as the logo mark.
@@ -166,6 +167,7 @@ export function AppShell({ children }: AppShellProps) {
       <main className={styles.main} id="main-content" tabIndex={-1}>
         <Fragment key={historyVersion}>{children}</Fragment>
       </main>
+      <PerfectCelebration />
       <LegacyHistoryNotice onMigrated={() => setHistoryVersion((v) => v + 1)} />
     </div>
   );
