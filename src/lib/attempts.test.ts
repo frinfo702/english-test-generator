@@ -5,7 +5,6 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 type AttemptsModule = typeof import("./attempts");
 
-/** A fresh module and an empty database: what a first launch sees. */
 async function freshStart(): Promise<AttemptsModule> {
   vi.stubGlobal("indexedDB", new IDBFactory());
   vi.resetModules();
@@ -63,7 +62,7 @@ describe("attempts", () => {
     expect(await db.getAllAttempts()).toEqual([]);
   });
 
-  it("round-trips a backup with recordings into another browser", async () => {
+  it("round-trips a backup with recordings, and re-importing adds nothing", async () => {
     const source = await freshStart();
     const saved = await source.saveAttempt({
       taskId: "toefl/speaking/interview",
@@ -74,7 +73,6 @@ describe("attempts", () => {
 
     const target = await freshStart();
     expect(await target.importBackup(backup)).toBe(1);
-    // Same IDs overwrite, so a second import adds nothing.
     expect(await target.importBackup(backup)).toBe(1);
 
     const all = await target.getAllAttempts();

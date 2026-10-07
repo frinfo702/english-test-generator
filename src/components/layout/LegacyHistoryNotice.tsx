@@ -10,14 +10,10 @@ import styles from "./LegacyHistoryNotice.module.css";
 
 type Step = "ask" | "confirm-discard" | "migrating" | "migrated";
 
-/**
- * Shown on launch while history from before the IndexedDB move is still in
- * localStorage. Closing it deletes nothing; it asks again next launch.
- */
+/** Closing deletes nothing: dismissing must never be how history is lost. */
 export function LegacyHistoryNotice({
   onMigrated,
 }: {
-  /** Lets the shell reload pages that already read the (empty) history. */
   onMigrated: () => void;
 }) {
   const navigate = useNavigate();

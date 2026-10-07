@@ -210,7 +210,6 @@ export function DashboardPage() {
 
   const load = useCallback(() => {
     getAll().then(setEntries);
-    // Ungraded attempts (Writing, Interview), newest first.
     getAllAttempts().then((all) =>
       setAnswers(all.filter((a) => !a.score).reverse()),
     );

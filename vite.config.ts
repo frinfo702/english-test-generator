@@ -8,7 +8,6 @@ const QUESTIONS_DIR = fileURLToPath(
   new URL("./public/questions", import.meta.url),
 );
 
-/** Rewrites each index.json under public/questions from the files beside it. */
 function writeQuestionIndexes(dir = QUESTIONS_DIR) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   const files = entries
@@ -22,6 +21,7 @@ function writeQuestionIndexes(dir = QUESTIONS_DIR) {
     const current = fs.existsSync(indexPath)
       ? fs.readFileSync(indexPath, "utf-8")
       : "";
+    // Rewriting public/ makes the dev server reload the page.
     if (current !== next) fs.writeFileSync(indexPath, next);
   }
   for (const e of entries) {
@@ -29,13 +29,13 @@ function writeQuestionIndexes(dir = QUESTIONS_DIR) {
   }
 }
 
-/** Adding or deleting a question file is all it takes; no index to edit. */
 function questionIndexes(): Plugin {
   return {
     name: "question-indexes",
     buildStart: () => writeQuestionIndexes(),
     configureServer(server) {
       const onChange = (file: string) => {
+        // index.json events are our own writes; reacting would loop.
         if (file.startsWith(QUESTIONS_DIR) && !file.endsWith("index.json")) {
           writeQuestionIndexes();
         }

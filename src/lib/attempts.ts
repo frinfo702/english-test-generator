@@ -1,45 +1,33 @@
 /**
- * Study history, kept in this browser's IndexedDB. The browser is the
- * account: there is no server copy, so backups go through export/import.
- *
- * An attempt records what the learner actually did (choices, typed text,
- * recordings, timings), not how it was graded. Scores and transcripts are
- * derived from those facts and kept only as a cache, labelled with the method
- * that produced them, so a better scorer can recompute them later.
+ * Attempts store what the learner did, not only how it was graded: a score
+ * can't be re-graded by a better method (Listen & Repeat speed and pauses need
+ * the audio). Scores and transcripts are a cache, labelled with the method
+ * that produced them.
  */
 import type { TaskId } from "../hooks/useScoreHistory";
 
 export interface ItemResponse {
-  /** Question/sentence ID in the problem file; absent for single-answer tasks. */
   itemId?: string;
-  /** Picked option: a letter ("A") or an index, as the problem file keys them. */
   choice?: string | number;
-  /** Typed answer, or the words built so far (Dictation). */
   text?: string;
-  /** Chunk index in each slot, in slot order (Build a Sentence). */
   order?: (number | null)[];
-  /** Wrong taps before the sentence was finished (Dictation). */
   misses?: number;
-  /** Spoken answer. */
   audio?: Blob;
-  /** Epoch ms when the recording started: the audio's t=0. */
+  // Wall-clock ms rather than offsets into the audio: latency spans the
+  // prompt's playback and the recording, which have separate clocks.
   recordedAt?: number;
-  /** Epoch ms when the prompt audio finished playing, for response latency. */
   promptEndedAt?: number;
-  /** Derived: speech-to-text of `audio` at save time. */
   transcript?: string;
 }
 
 export interface Attempt {
   id: string;
   taskId: TaskId;
-  /** Question file ID. Absent on legacy records saved without one. */
+  /** Optional only because the oldest localStorage scores never recorded it. */
   problemId?: string;
-  /** ISO time the attempt finished. */
   date: string;
   elapsedSeconds?: number;
   responses: ItemResponse[];
-  /** Derived: what `method` scored at save time. Absent for ungraded tasks. */
   score?: { method: string; correct: number; total: number };
 }
 
@@ -68,11 +56,8 @@ async function putAll(db: IDBDatabase, attempts: Attempt[]): Promise<void> {
 }
 
 /**
- * Database upgrades, one per version, applied in order when the database
- * opens: entry N upgrades version N to N+1, and the database version is the
- * list length. The browser runs pending steps before anything can read, so
- * upgrades are automatic. Never edit a shipped step; append a new one. A step
- * that reshapes records reads and rewrites them through `tx`.
+ * Append-only: a shipped step has already run in some browsers, so editing it
+ * would leave their data different from a fresh install's.
  */
 const UPGRADES: ((db: IDBDatabase, tx: IDBTransaction) => void)[] = [
   (db) => {
@@ -91,7 +76,7 @@ function openDb(): Promise<IDBDatabase> {
       }
     };
     const db = await request(req);
-    // Ask the browser not to evict our data under storage pressure.
+    // Best-effort storage can be evicted, and there is no server copy.
     void navigator.storage?.persist?.().catch(() => undefined);
     return db;
   })().catch((e) => {
@@ -113,17 +98,17 @@ export async function saveAttempt(
   return saved;
 }
 
-/** Stores attempts as they are; one with an existing ID replaces it. */
+/** put, not add: re-importing a backup must overwrite, not fail on its IDs. */
 export async function putAttempts(attempts: Attempt[]): Promise<void> {
   await putAll(await openDb(), attempts);
 }
 
-/** Every attempt, oldest first. */
 export async function getAllAttempts(): Promise<Attempt[]> {
   const db = await openDb();
   const all = await request<Attempt[]>(
     db.transaction(STORE).objectStore(STORE).getAll(),
   );
+  // Keys are random UUIDs, so store order says nothing about time.
   return all.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
 }
 
@@ -133,12 +118,10 @@ export async function clearAttempts(): Promise<void> {
   await committed(tx);
 }
 
-// ── Backup file ────────────────────────────────────────────────────────────
-
 const BACKUP_FORMAT = "english-test-generator/backup";
 const BACKUP_VERSION = 1;
 
-/** An attempt as written to a backup: audio becomes a data: URL, or is dropped. */
+/** Audio as data: URLs keeps a backup one self-contained JSON file. */
 export type BackupAttempt = Omit<Attempt, "responses"> & {
   responses: (Omit<ItemResponse, "audio"> & { audio?: string })[];
 };
@@ -153,8 +136,6 @@ async function blobToDataUrl(blob: Blob): Promise<string> {
   return `data:${blob.type};base64,${btoa(binary)}`;
 }
 
-// ponytail: whole backup is built as one string in memory; stream it (or zip
-// audio separately) if exports with audio grow past a few hundred MB.
 export async function exportBackup(includeAudio: boolean): Promise<Blob> {
   const attempts: BackupAttempt[] = await Promise.all(
     (await getAllAttempts()).map(async (a) => ({
@@ -177,20 +158,12 @@ export async function exportBackup(includeAudio: boolean): Promise<Blob> {
   return new Blob([JSON.stringify(backup)], { type: "application/json" });
 }
 
-/**
- * Whether one record from an imported backup is safe to store.
- * The file comes from outside the app, so nothing in it is trusted yet.
- */
+/** The file comes from outside the app, so nothing in it is trusted yet. */
 export function isBackupAttempt(value: unknown): value is BackupAttempt {
   // TODO(human)
   return typeof value === "object" && value !== null;
 }
 
-/**
- * Adds a backup's attempts to this browser. Attempts are keyed by ID and never
- * edited, so importing the same file twice changes nothing.
- * @returns how many attempts the file held
- */
 export async function importBackup(file: Blob): Promise<number> {
   let parsed: { format?: unknown; version?: unknown; attempts?: unknown };
   try {

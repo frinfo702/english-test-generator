@@ -230,7 +230,6 @@ export function ListenRepeatPage() {
   >(null);
 
   const durationRef = useRef(duration);
-  /** Each sentence's latest recording, saved with the score. */
   const takesRef = useRef<Record<number, ItemResponse>>({});
   const promptEndedAtRef = useRef<number | null>(null);
   const recordingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);

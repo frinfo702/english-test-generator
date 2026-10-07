@@ -62,7 +62,7 @@ export function AppShell({ children }: AppShellProps) {
   const navRef = useRef<HTMLElement | null>(null);
   const activeRef = useRef<HTMLAnchorElement | null>(null);
   const indicatorRef = useRef<HTMLSpanElement | null>(null);
-  /** Bumped after a history migration to remount pages that read history. */
+  /** Remounting after a migration beats making every page watch history. */
   const [historyVersion, setHistoryVersion] = useState(0);
 
   const activeItem =

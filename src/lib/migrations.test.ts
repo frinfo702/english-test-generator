@@ -1,5 +1,4 @@
 // @vitest-environment node
-// Same environment as attempts.test.ts: Node's Blob survives IndexedDB.
 import { IDBFactory } from "fake-indexeddb";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -17,7 +16,6 @@ function memoryStorage(): Storage {
   };
 }
 
-/** Fresh modules and an empty database: what a first launch sees. */
 async function freshStart() {
   vi.stubGlobal("indexedDB", new IDBFactory());
   vi.resetModules();
@@ -60,7 +58,6 @@ describe("legacy localStorage history", () => {
           elapsedSeconds: 600,
           questionFile: "004.json",
         },
-        // Old entries predate questionFile.
         {
           taskId: "toeic/part5",
           date: "2026-02-17T09:00:00.000Z",
@@ -93,7 +90,6 @@ describe("legacy localStorage history", () => {
     const { attempts, migrations } = await freshStart();
     expect(migrations.legacyHistoryCount()).toBe(4);
 
-    // Nothing moves until the learner asks.
     expect(await attempts.getAllAttempts()).toEqual([]);
     expect(await migrations.migrateLegacyHistory()).toBe(4);
 

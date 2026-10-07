@@ -7,11 +7,9 @@ import {
 import { transcribeAudio } from "../lib/transcribe";
 
 export interface Recording {
-  /** Speech-to-text of `audio`; "" when nothing was recognized. */
   text: string;
-  /** What the mic captured, kept even when transcription fails. */
+  /** Kept even when transcription fails: the audio, not the text, is the answer. */
   audio: Blob | null;
-  /** Epoch ms when recording started: the audio's t=0. */
   startedAt: number | null;
 }
 

@@ -1,9 +1,7 @@
 /**
- * History saved before the move to IndexedDB, still in localStorage.
- *
- * Unlike database upgrades (see UPGRADES in attempts.ts), this move lives in
- * a separate store, so it can wait for the learner: LegacyHistoryNotice asks
- * before running it. Delete this file once nobody has pre-IndexedDB history.
+ * Unlike UPGRADES in attempts.ts, this move waits for the learner's consent:
+ * the old data sits in localStorage, so nothing is blocked until it runs.
+ * Delete this file once nobody has pre-IndexedDB history.
  */
 import type { TaskId } from "../hooks/useScoreHistory";
 import { putAttempts, type Attempt } from "./attempts";
@@ -23,13 +21,12 @@ export interface LegacyScore {
 export interface LegacyAnswer {
   answerId: string;
   taskId: TaskId;
-  /** e.g. "toefl/speaking/interview/001#q2" */
   problemId: string;
   response: string;
   date: string;
 }
 
-/** Legacy scores kept no responses, so they carry only the score. */
+/** Responses stay empty: the old format never kept them. */
 export function fromLegacyScore(e: LegacyScore): Attempt {
   return {
     // Deterministic, so re-running an interrupted migration can't duplicate.
@@ -69,7 +66,6 @@ function readLegacy<T>(key: string): T[] {
   }
 }
 
-/** How many old records are waiting to be moved; 0 means nothing to ask. */
 export function legacyHistoryCount(): number {
   return readLegacy(LEGACY_SCORES).length + readLegacy(LEGACY_ANSWERS).length;
 }
@@ -79,7 +75,6 @@ export function discardLegacyHistory(): void {
   localStorage.removeItem(LEGACY_ANSWERS);
 }
 
-/** Copies the old records into IndexedDB, then removes them. */
 export async function migrateLegacyHistory(): Promise<number> {
   const legacy = [
     ...readLegacy<LegacyScore>(LEGACY_SCORES).map(fromLegacyScore),

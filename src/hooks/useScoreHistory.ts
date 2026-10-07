@@ -30,7 +30,6 @@ export type TaskId =
   | "shadowing"
   | "dictation";
 
-/** A graded attempt, flattened for charts and lists. */
 export interface ScoreEntry {
   taskId: TaskId;
   date: string;
@@ -43,14 +42,11 @@ export interface ScoreEntry {
 
 export interface SaveScoreInput {
   taskId: TaskId;
-  /** Question file the attempt was on, e.g. "001.json". */
   file?: string;
   correct: number;
   total: number;
   elapsedSeconds?: number;
-  /** What the learner actually did, item by item. */
   responses: ItemResponse[];
-  /** How correct/total were computed. */
   method?: string;
 }
 
@@ -99,7 +95,6 @@ export function useScoreHistory() {
     [],
   );
 
-  /** Deletes every attempt, graded or not, recordings included. */
   const clearAll = useCallback(() => clearAttempts(), []);
 
   return { saveScore, getAll, clearAll };
