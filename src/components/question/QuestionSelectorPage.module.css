@@ -67,10 +67,6 @@
   grid-template-columns: 40px 1fr 84px 84px 24px;
 }
 
-.row5Col::before {
-  background: var(--color-accent);
-}
-
 @media (max-width: 640px) {
   .headerRow {
     grid-template-columns: 32px 1fr 68px 68px 16px;

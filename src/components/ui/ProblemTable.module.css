@@ -46,19 +46,6 @@
     color var(--duration-fast) var(--ease-out);
 }
 
-.row::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 2px;
-  background: var(--color-ink);
-  transform: scaleY(0);
-  transform-origin: center;
-  transition: transform var(--duration-base) var(--ease-out);
-}
-
 .row:last-child {
   border-bottom: none;
 }
@@ -66,10 +53,6 @@
 .row:hover {
   background: var(--color-surface-hover);
   color: var(--color-ink);
-}
-
-.row:hover::before {
-  transform: scaleY(1);
 }
 
 .row:focus-visible {
