@@ -212,6 +212,13 @@
   color: var(--color-ink-tertiary);
 }
 
+.minimal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
 .error {
   font-size: var(--text-xs);
   color: var(--color-error);

@@ -16,6 +16,7 @@ export function LecturePage() {
   return (
     <ListeningTaskBase
       taskId="toefl/listening/lecture"
+      layout="talk"
       title="Listen to a Lecture"
       subtitle="Listen to the audio and answer the questions."
       backTo="/toefl"

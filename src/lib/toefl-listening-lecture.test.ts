@@ -7,6 +7,8 @@ const QUESTION_DIR = path.resolve(
   "../../public/questions/toefl/listening/lecture",
 );
 
+const SPEAKER_DIR = path.resolve(__dirname, "../../public/images/speakers");
+
 const VALID_QUESTION_TYPES = [
   "mainIdea",
   "detail",
@@ -31,6 +33,8 @@ interface AudioSegment {
 
 interface LectureData {
   title: string;
+  subject?: string;
+  speaker?: string;
   transcript: string;
   questions: LectureQuestion[];
   audioSegments: AudioSegment[];
@@ -149,5 +153,15 @@ describe("TOEFL Listening: Academic Talk (Lecture) JSON structure", () => {
       }
     }
     expect(allTypes.size).toBeGreaterThanOrEqual(3);
+  });
+
+  it.each(files)("%s speaker photo exists when set", (file) => {
+    const { speaker, subject } = loadJson(file);
+    if (speaker !== undefined) {
+      expect(fs.existsSync(path.join(SPEAKER_DIR, `${speaker}.jpg`))).toBe(
+        true,
+      );
+    }
+    if (subject !== undefined) expect(subject.trim()).not.toBe("");
   });
 });

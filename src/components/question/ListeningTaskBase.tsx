@@ -14,6 +14,8 @@ import { useTts } from "../../hooks/useTts";
 import { NextQuestionButton } from "./NextQuestionButton";
 import styles from "./ListeningTaskBase.module.css";
 import { PixelCheckIcon } from "../ui/PixelCheckIcon";
+import { ChoiceQuestionCard, QuestionNav, SplitView } from "./QuestionStepper";
+import { SpeakerFigure } from "./SpeakerFigure";
 
 interface ListeningQuestion {
   id: string;
@@ -26,6 +28,10 @@ interface ListeningQuestion {
 
 interface ProblemData {
   title: string;
+  /** Class the talk belongs to, e.g. "environmental science". */
+  subject?: string;
+  /** Speaker photo id under public/images/speakers/. */
+  speaker?: string;
   audioSegments: { role: string; text: string }[];
   transcript: string;
   questions: ListeningQuestion[];
@@ -38,6 +44,18 @@ interface ListeningTaskBaseProps {
   backTo: string;
   readQuestionsAloud?: boolean;
   showSpeedControl?: boolean;
+  /**
+   * "list": player above all questions.
+   * "talk": exam-style — listen first (speaker + player), then one question
+   * at a time beside the speaker.
+   */
+  layout?: "list" | "talk";
+}
+
+function talkPrompt(subject?: string): string {
+  if (!subject) return "Listen to an academic talk.";
+  const article = /^[aeiou]/i.test(subject) ? "an" : "a";
+  return `Listen to a talk in ${article} ${subject} class.`;
 }
 
 export function ListeningTaskBase({
@@ -47,6 +65,7 @@ export function ListeningTaskBase({
   backTo,
   readQuestionsAloud,
   showSpeedControl,
+  layout = "list",
 }: ListeningTaskBaseProps) {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
@@ -80,6 +99,8 @@ export function ListeningTaskBase({
 
   const [selections, setSelections] = useState<Record<number, number>>({});
   const [graded, setGraded] = useState(false);
+  const [stage, setStage] = useState<"listen" | "questions">("listen");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
@@ -121,6 +142,8 @@ export function ListeningTaskBase({
     }
     setGraded(true);
     stopTts();
+    setCurrentIndex(0);
+    if (layout === "talk") window.scrollTo({ top: 0 });
   };
 
   const handleBackToList = () => {
@@ -150,10 +173,82 @@ export function ListeningTaskBase({
         }
         void playSegmentsWithGaps(urls, gaps);
       } else {
-        void playSegments(urls);
+        // Talk layout: the questions open once the talk has played through.
+        void playSegments(
+          urls,
+          layout === "talk" && !graded
+            ? () => setStage("questions")
+            : undefined,
+        );
       }
     }
   };
+
+  const answersById: Record<string, number> = {};
+  data?.questions.forEach((q, i) => {
+    if (selections[i] !== undefined) answersById[q.id] = selections[i];
+  });
+
+  const goToQuestions = () => {
+    stopTts();
+    setStage("questions");
+  };
+
+  const audioPlayer = (seekable: boolean, minimal = false) =>
+    data && (
+      <AudioPlayer
+        minimal={minimal}
+        title={layout === "talk" ? undefined : data.title}
+        playing={playing}
+        loading={ttsLoading}
+        error={ttsError}
+        currentTime={currentTime}
+        duration={duration}
+        playbackRate={playbackRate}
+        onPlayPause={handlePlay}
+        onSeek={seek}
+        onPlaybackRateChange={setPlaybackRate}
+        seekable={seekable}
+        showSpeedControl={showSpeedControl}
+        src={
+          data.audioSegments.length === 1
+            ? `/audio/${taskId}/${fileBasename}/1.mp3`
+            : undefined
+        }
+      />
+    );
+
+  const resultCard = data && (
+    <div className={styles.resultCard}>
+      <p className="micro-label">Section complete</p>
+      <div className="doc-score">
+        <span className="doc-score-num">{correctCount}</span>
+        <span className="doc-score-den">/ {totalQuestions}</span>
+        <span className="doc-score-pct">
+          {Math.round((correctCount / totalQuestions) * 100)}%
+        </span>
+      </div>
+      <ProgressBar
+        current={correctCount}
+        total={totalQuestions}
+        label="Correct"
+      />
+      <details className={styles.transcript}>
+        <summary>Transcript</summary>
+        {data.audioSegments
+          .filter((seg) => seg.role !== "Narrator")
+          .map((seg, i) => (
+            <p key={i}>
+              <span className={styles.transcriptRole}>{seg.role}</span>
+              {seg.text}
+            </p>
+          ))}
+      </details>
+      <div className={styles.resultActions}>
+        <NextQuestionButton taskId={taskId} />
+      </div>
+    </div>
+  );
 
   return (
     <div>
@@ -192,27 +287,67 @@ export function ListeningTaskBase({
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && (
+      {data && !loading && hasValidQuestionNumber && layout === "talk" && (
         <>
-          <AudioPlayer
-            title={data.title}
-            playing={playing}
-            loading={ttsLoading}
-            error={ttsError}
-            currentTime={currentTime}
-            duration={duration}
-            playbackRate={playbackRate}
-            onPlayPause={handlePlay}
-            onSeek={seek}
-            onPlaybackRateChange={setPlaybackRate}
-            seekable={graded}
-            showSpeedControl={showSpeedControl}
-            src={
-              data.audioSegments.length === 1
-                ? `/audio/${taskId}/${fileBasename}/1.mp3`
-                : undefined
-            }
-          />
+          {stage === "listen" && (
+            <div className={styles.listenCard}>
+              <p className={styles.listenPrompt}>{talkPrompt(data.subject)}</p>
+              <SpeakerFigure
+                speaker={data.speaker}
+                className={styles.speaker}
+              />
+              {audioPlayer(false, true)}
+              <Button variant="ghost" size="sm" onClick={goToQuestions}>
+                Skip to questions
+              </Button>
+            </div>
+          )}
+
+          {stage === "questions" && (
+            <>
+              {graded && resultCard}
+              <SplitView
+                left={
+                  <div className={styles.speakerCard}>
+                    <SpeakerFigure
+                      speaker={data.speaker}
+                      className={styles.speakerSmall}
+                    />
+                    {graded && audioPlayer(true)}
+                  </div>
+                }
+                right={
+                  <ChoiceQuestionCard
+                    key={data.questions[currentIndex].id}
+                    question={data.questions[currentIndex]}
+                    index={currentIndex}
+                    total={totalQuestions}
+                    selected={selections[currentIndex]}
+                    graded={graded}
+                    onSelect={(_, optionIndex) =>
+                      handleSelect(currentIndex, optionIndex)
+                    }
+                  />
+                }
+              />
+              <QuestionNav
+                groups={[data.questions]}
+                answers={answersById}
+                currentIndex={currentIndex}
+                graded={graded}
+                onGo={(i) =>
+                  setCurrentIndex(Math.max(0, Math.min(i, totalQuestions - 1)))
+                }
+                onSubmit={handleSubmit}
+              />
+            </>
+          )}
+        </>
+      )}
+
+      {data && !loading && hasValidQuestionNumber && layout === "list" && (
+        <>
+          {audioPlayer(graded)}
 
           {!graded && (
             <div className={styles.submitArea}>
@@ -228,37 +363,7 @@ export function ListeningTaskBase({
             </div>
           )}
 
-          {graded && (
-            <div className={styles.resultCard}>
-              <p className="micro-label">Section complete</p>
-              <div className="doc-score">
-                <span className="doc-score-num">{correctCount}</span>
-                <span className="doc-score-den">/ {totalQuestions}</span>
-                <span className="doc-score-pct">
-                  {Math.round((correctCount / totalQuestions) * 100)}%
-                </span>
-              </div>
-              <ProgressBar
-                current={correctCount}
-                total={totalQuestions}
-                label="Correct"
-              />
-              <details className={styles.transcript}>
-                <summary>Transcript</summary>
-                {data.audioSegments
-                  .filter((seg) => seg.role !== "Narrator")
-                  .map((seg, i) => (
-                    <p key={i}>
-                      <span className={styles.transcriptRole}>{seg.role}</span>
-                      {seg.text}
-                    </p>
-                  ))}
-              </details>
-              <div className={styles.resultActions}>
-                <NextQuestionButton taskId={taskId} />
-              </div>
-            </div>
-          )}
+          {graded && resultCard}
 
           {data.questions.map((q, qIndex) => {
             const selected = selections[qIndex];

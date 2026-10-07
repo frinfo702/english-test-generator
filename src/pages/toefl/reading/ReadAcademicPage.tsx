@@ -10,7 +10,7 @@ import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ReadAcademicPage.module.css";
-import { ChoiceQuestionCard, QuestionNav, SplitView } from "./QuestionStepper";
+import { ChoiceQuestionCard, QuestionNav, SplitView } from "../../../components/question/QuestionStepper";
 
 interface Question {
   id: string;

@@ -10,7 +10,7 @@ import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ReadDailyLifePage.module.css";
 import { DailyLifeTextView } from "./DailyLifeTextView";
-import { ChoiceQuestionCard, QuestionNav, SplitView } from "./QuestionStepper";
+import { ChoiceQuestionCard, QuestionNav, SplitView } from "../../../components/question/QuestionStepper";
 import type {
   DailyLifeData,
   DailyLifeQuestion,

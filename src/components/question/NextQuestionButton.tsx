@@ -4,8 +4,10 @@ import { listQuestionFiles } from "../../lib/questions";
 import { Button, type ButtonProps } from "../ui/Button";
 import { PixelArrowIcon } from "../ui/PixelArrowIcon";
 
-interface NextQuestionButtonProps
-  extends Omit<ButtonProps, "children" | "onClick"> {
+interface NextQuestionButtonProps extends Omit<
+  ButtonProps,
+  "children" | "onClick"
+> {
   /** Task directory under public/questions/; also the route base path. */
   taskId: string;
   /** Runs before navigating, e.g. to stop audio. */

@@ -21,7 +21,6 @@
 .qBlock {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
   border-radius: var(--radius-doc);
   padding: var(--spacing-6);
   display: flex;
@@ -120,16 +119,25 @@
 
 /* ---- Question navigation ---- */
 
+/* Equal side columns keep the number buttons centred and still, whichever
+ * label (Next / Submit) the right-hand button carries. */
 .navBar {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: var(--spacing-4);
   margin-top: var(--spacing-8);
   padding: var(--spacing-4);
   background: var(--color-surface-subtle);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-doc);
+}
+
+.navBar > :first-child {
+  justify-self: start;
+}
+.navBar > :last-child {
+  justify-self: end;
 }
 
 .navGroups {
@@ -196,12 +204,12 @@
 
 @media (max-width: 620px) {
   .navBar {
-    flex-wrap: wrap;
+    grid-template-columns: 1fr 1fr;
     padding: var(--spacing-3);
   }
   .navGroups {
     order: -1;
-    width: 100%;
+    grid-column: 1 / -1;
   }
   .qBlock {
     padding: var(--spacing-4);

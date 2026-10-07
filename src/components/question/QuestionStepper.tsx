@@ -1,8 +1,8 @@
 import { useEffect, useRef, type ReactNode } from "react";
-import { Button } from "../../../components/ui/Button";
-import { FeedbackPanel } from "../../../components/ui/FeedbackPanel";
-import { PixelArrowIcon } from "../../../components/ui/PixelArrowIcon";
-import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
+import { Button } from "../ui/Button";
+import { FeedbackPanel } from "../ui/FeedbackPanel";
+import { PixelArrowIcon } from "../ui/PixelArrowIcon";
+import { PixelCheckIcon } from "../ui/PixelCheckIcon";
 import styles from "./QuestionStepper.module.css";
 
 // Shared by the split-view reading tasks: the passage stays on the left
