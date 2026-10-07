@@ -386,19 +386,24 @@ export function DictationPage() {
           data?.title ?? "Listen and arrange the words in the correct order."
         }
         backTo="/"
+        actions={
+          <>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleBackToList}
+              disabled={loading}
+            >
+              Question List
+            </Button>
+            <NextQuestionButton
+              taskId={TASK_ID}
+              variant="secondary"
+              size="sm"
+            />
+          </>
+        }
       />
-
-      <div className={styles.topBar}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={handleBackToList}
-          disabled={loading}
-        >
-          Question List
-        </Button>
-        <NextQuestionButton taskId={TASK_ID} variant="secondary" size="sm" />
-      </div>
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (

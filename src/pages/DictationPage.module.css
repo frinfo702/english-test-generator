@@ -4,14 +4,6 @@
   gap: var(--spacing-5);
 }
 
-.topBar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--spacing-2);
-  margin-bottom: var(--spacing-6);
-}
-
 .error {
   color: var(--color-error);
   background: var(--color-error-subtle);
