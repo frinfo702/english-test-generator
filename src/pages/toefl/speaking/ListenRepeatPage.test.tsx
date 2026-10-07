@@ -11,7 +11,9 @@ import { useScoreHistory } from "../../../hooks/useScoreHistory";
 const playMock = vi.fn();
 const stopTtsMock = vi.fn();
 const startSpeechMock = vi.fn();
-const stopSpeechMock = vi.fn().mockResolvedValue(undefined);
+const stopSpeechMock = vi
+  .fn()
+  .mockResolvedValue({ text: "", audio: null, startedAt: null });
 const loadByIdMock = vi.fn();
 const startTimerMock = vi.fn();
 const stopTimerMock = vi.fn().mockReturnValue(12);

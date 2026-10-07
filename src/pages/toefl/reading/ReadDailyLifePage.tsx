@@ -10,7 +10,11 @@ import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ReadDailyLifePage.module.css";
 import { DailyLifeTextView } from "./DailyLifeTextView";
-import { ChoiceQuestionCard, QuestionNav, SplitView } from "../../../components/question/QuestionStepper";
+import {
+  ChoiceQuestionCard,
+  QuestionNav,
+  SplitView,
+} from "../../../components/question/QuestionStepper";
 import type {
   DailyLifeData,
   DailyLifeQuestion,
@@ -33,8 +37,9 @@ interface FlatQuestion {
 export function ReadDailyLifePage() {
   const navigate = useNavigate();
   const { questionId = "" } = useParams<{ questionId: string }>();
-  const { data, file, loading, error, loadById } =
-    useQuestion<DailyLifeData>("toefl/reading/daily-life");
+  const { data, file, loading, error, loadById } = useQuestion<DailyLifeData>(
+    "toefl/reading/daily-life",
+  );
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -100,13 +105,17 @@ export function ReadDailyLifePage() {
 
   const handleSubmit = () => {
     const sessionSeconds = stop();
-    saveScore(
-      "toefl/reading/daily-life",
-      correctCount,
-      totalQ,
-      sessionSeconds,
-      sessionFileRef.current ?? file ?? undefined,
-    );
+    saveScore({
+      taskId: "toefl/reading/daily-life",
+      file: sessionFileRef.current ?? file ?? undefined,
+      correct: correctCount,
+      total: totalQ,
+      elapsedSeconds: sessionSeconds,
+      responses: Object.entries(answers).map(([itemId, choice]) => ({
+        itemId,
+        choice,
+      })),
+    });
     setGraded(true);
     setCurrentIndex(0);
     window.scrollTo({ top: 0 });

@@ -6,9 +6,7 @@ import {
   buildProblemId,
   clearDraft,
   copyText,
-  getAllAnswers,
   loadDraft,
-  saveAnswerSubmission,
   saveDraft,
 } from "./answerSubmission";
 
@@ -52,37 +50,6 @@ describe("answerSubmission", () => {
     saveDraft(problemId, "   \n  ");
 
     expect(localStorage.getItem(buildDraftKey(problemId))).toBeNull();
-  });
-
-  it("stores answer history and returns newest answers first", async () => {
-    await saveAnswerSubmission({
-      taskId: "toeic/part5",
-      problemId: "toeic/part5/001",
-      response: "First",
-    });
-    vi.advanceTimersByTime(1500);
-    await saveAnswerSubmission({
-      taskId: "toeic/part5",
-      problemId: "toeic/part5/002",
-      response: "Second",
-    });
-
-    expect(getAllAnswers()).toEqual([
-      {
-        answerId: "ans-1772359201500",
-        taskId: "toeic/part5",
-        problemId: "toeic/part5/002",
-        response: "Second",
-        date: "2026-03-01T10:00:01.500Z",
-      },
-      {
-        answerId: "ans-1772359200000",
-        taskId: "toeic/part5",
-        problemId: "toeic/part5/001",
-        response: "First",
-        date: "2026-03-01T10:00:00.000Z",
-      },
-    ]);
   });
 
   it("builds grading prompts and copies text when clipboard is available", async () => {

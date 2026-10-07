@@ -15,6 +15,7 @@ import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useTts } from "../../../hooks/useTts";
 import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
+import type { ItemResponse } from "../../../lib/attempts";
 import {
   alignWords,
   countCorrectWords,
@@ -229,6 +230,9 @@ export function ListenRepeatPage() {
   >(null);
 
   const durationRef = useRef(duration);
+  /** Each sentence's latest recording, saved with the score. */
+  const takesRef = useRef<Record<number, ItemResponse>>({});
+  const promptEndedAtRef = useRef<number | null>(null);
   const recordingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const processingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
@@ -287,7 +291,15 @@ export function ListenRepeatPage() {
 
     clearRecordingTimer();
     clearProcessingTimeout();
-    await stopSpeech();
+    const recording = await stopSpeech();
+    if (sentence) {
+      takesRef.current[current] = {
+        itemId: sentence.id,
+        audio: recording.audio ?? undefined,
+        recordedAt: recording.startedAt ?? undefined,
+        promptEndedAt: promptEndedAtRef.current ?? undefined,
+      };
+    }
     setPhase("processing");
     setProcessingMessage("Processing your speech...");
 
@@ -309,13 +321,19 @@ export function ListenRepeatPage() {
               (sum, a) => sum + countOriginalWords(a),
               0,
             );
-            saveScore(
-              TASK_ID,
+            saveScore({
+              taskId: TASK_ID,
+              file: file ?? undefined,
               correct,
               total,
-              sessionSeconds,
-              file ?? undefined,
-            );
+              elapsedSeconds: sessionSeconds,
+              method: "word-align",
+              responses: data.sentences.map((s, i) => ({
+                ...takesRef.current[i],
+                itemId: s.id,
+                transcript: next[i] ?? "",
+              })),
+            });
           }
           setGraded(true);
           setPhase("review");
@@ -335,6 +353,7 @@ export function ListenRepeatPage() {
     clearRecordingTimer,
     clearProcessingTimeout,
     stopSpeech,
+    sentence,
     current,
     isLastSentence,
     data,
@@ -374,6 +393,7 @@ export function ListenRepeatPage() {
     if (!sentence || !fileBasename) return;
     const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${current + 1}.mp3`;
     void play(url, () => {
+      promptEndedAtRef.current = Date.now();
       setPhase("ready");
     });
   }, [sentence, fileBasename, current, play]);
@@ -382,7 +402,10 @@ export function ListenRepeatPage() {
     (index: number) => {
       if (!fileBasename) return;
       const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${index + 1}.mp3`;
-      void play(url);
+      // A replay before answering moves the point latency is measured from.
+      void play(url, () => {
+        promptEndedAtRef.current = Date.now();
+      });
     },
     [fileBasename, play],
   );

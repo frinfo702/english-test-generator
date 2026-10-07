@@ -107,13 +107,17 @@ export function CompleteWordsPage() {
     setScore({ correct, total: data.items.length });
     setSubmitted(true);
     setFocusedIdx(null);
-    saveScore(
-      TASK_ID,
-      correct,
-      data.items.length,
-      sessionSeconds,
-      file ?? undefined,
-    );
+    saveScore({
+      taskId: TASK_ID,
+      file: file ?? undefined,
+      correct: correct,
+      total: data.items.length,
+      elapsedSeconds: sessionSeconds,
+      responses: data.items.map((item, i) => ({
+        itemId: String(item.index),
+        text: answers[i],
+      })),
+    });
   };
 
   const handleBackToList = () => {

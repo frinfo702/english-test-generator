@@ -44,7 +44,7 @@ describe("QuestionSelectorPage", () => {
         total: 4,
         pct: 75,
         elapsedSeconds: 45,
-        questionFile: "001.json",
+        problemId: "001",
       },
     ]);
     vi.spyOn(Math, "random").mockReturnValue(0.9);

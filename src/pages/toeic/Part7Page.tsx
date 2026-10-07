@@ -87,13 +87,17 @@ export function Part7Page() {
       const correct = data.questions.filter(
         (q) => selected[q.id] === q.correct,
       ).length;
-      saveScore(
-        "toeic/part7",
-        correct,
-        data.questions.length,
-        sessionSeconds,
-        file ?? undefined,
-      );
+      saveScore({
+        taskId: "toeic/part7",
+        file: file ?? undefined,
+        correct: correct,
+        total: data.questions.length,
+        elapsedSeconds: sessionSeconds,
+        responses: Object.entries(selected).map(([itemId, choice]) => ({
+          itemId,
+          choice,
+        })),
+      });
     }
     setGraded(true);
   };

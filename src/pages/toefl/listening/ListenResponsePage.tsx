@@ -124,13 +124,17 @@ export function ListenResponsePage() {
       const correct = data.questions.filter(
         (q) => selected[q.id] === q.correct,
       ).length;
-      saveScore(
-        TASK_ID,
-        correct,
-        data.questions.length,
-        sessionSeconds,
-        file ?? undefined,
-      );
+      saveScore({
+        taskId: TASK_ID,
+        file: file ?? undefined,
+        correct: correct,
+        total: data.questions.length,
+        elapsedSeconds: sessionSeconds,
+        responses: Object.entries(selected).map(([itemId, choice]) => ({
+          itemId,
+          choice,
+        })),
+      });
     }
     setGraded(true);
     stopTts();

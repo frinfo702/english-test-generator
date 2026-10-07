@@ -1,4 +1,13 @@
-import { lazy, Suspense, useState, useEffect, useMemo } from "react";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ChangeEvent,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
@@ -10,7 +19,12 @@ import {
   type TaskId,
 } from "../hooks/useScoreHistory";
 import { formatSecondsAsMmSs } from "../lib/time";
-import { getAllAnswers, type AnswerEntry } from "../lib/answerSubmission";
+import {
+  exportBackup,
+  getAllAttempts,
+  importBackup,
+  type Attempt,
+} from "../lib/attempts";
 import styles from "./DashboardPage.module.css";
 
 /** Charts are a dashboard-only concern — keep recharts out of the practice pages. */
@@ -106,7 +120,10 @@ function TaskCard({ taskId, entries }: TaskCardProps) {
   return (
     <div className={styles.taskCard}>
       <div className={styles.taskHeader}>
-        <span className={styles.taskDot} style={{ background: `var(${hue})` }} />
+        <span
+          className={styles.taskDot}
+          style={{ background: `var(${hue})` }}
+        />
         <span className={styles.taskLabel}>{TASK_LABELS[taskId]}</span>
         <span className={styles.taskCount}>
           {entries.length} session{entries.length !== 1 ? "s" : ""}
@@ -185,11 +202,21 @@ export function DashboardPage() {
   const { getAll, clearAll } = useScoreHistory();
   const [entries, setEntries] = useState<ScoreEntry[]>([]);
   const [confirmClear, setConfirmClear] = useState(false);
-  const [answers] = useState<AnswerEntry[]>(() => getAllAnswers());
+  const [answers, setAnswers] = useState<Attempt[]>([]);
+  const [includeAudio, setIncludeAudio] = useState(false);
+  const [backupBusy, setBackupBusy] = useState(false);
+  const [backupMessage, setBackupMessage] = useState<string | null>(null);
+  const importInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
+  const load = useCallback(() => {
     getAll().then(setEntries);
+    // Ungraded attempts (Writing, Interview), newest first.
+    getAllAttempts().then((all) =>
+      setAnswers(all.filter((a) => !a.score).reverse()),
+    );
   }, [getAll]);
+
+  useEffect(load, [load]);
 
   const byTask = entries.reduce<Partial<Record<TaskId, ScoreEntry[]>>>(
     (acc, e) => {
@@ -207,10 +234,47 @@ export function DashboardPage() {
     if (confirmClear) {
       clearAll().then(() => {
         setEntries([]);
+        setAnswers([]);
         setConfirmClear(false);
       });
     } else {
       setConfirmClear(true);
+    }
+  };
+
+  const handleExport = async () => {
+    setBackupBusy(true);
+    setBackupMessage(null);
+    try {
+      const url = URL.createObjectURL(await exportBackup(includeAudio));
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `english-test-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 0);
+    } catch (e) {
+      setBackupMessage(`Export failed: ${e instanceof Error ? e.message : e}`);
+    } finally {
+      setBackupBusy(false);
+    }
+  };
+
+  const handleImport = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setBackupBusy(true);
+    setBackupMessage(null);
+    try {
+      const count = await importBackup(file);
+      setBackupMessage(`Imported ${count} attempt${count === 1 ? "" : "s"}.`);
+      load();
+    } catch (err) {
+      setBackupMessage(
+        `Import failed: ${err instanceof Error ? err.message : err}`,
+      );
+    } finally {
+      setBackupBusy(false);
     }
   };
 
@@ -300,7 +364,7 @@ export function DashboardPage() {
               className={confirmClear ? styles.clearDanger : ""}
             >
               {confirmClear
-                ? "Delete all history? (Press again)"
+                ? "Delete all scores, answers, and recordings? (Press again)"
                 : "Clear All History"}
             </Button>
             {confirmClear && (
@@ -320,16 +384,21 @@ export function DashboardPage() {
           <h2 className={styles.answersHeading}>Answer History</h2>
           <div className={styles.answersList}>
             {answers.map((a) => {
+              const text = a.responses
+                .map((r) => r.text ?? r.transcript ?? "")
+                .join(" ");
               const preview =
-                a.response.length > 80
-                  ? a.response.slice(0, 80) + "..."
-                  : a.response;
+                text.length > 80 ? text.slice(0, 80) + "..." : text;
+              const itemId = a.responses[0]?.itemId;
               return (
-                <div key={a.answerId} className={styles.answerRow}>
+                <div key={a.id} className={styles.answerRow}>
                   <span className={styles.answerDate}>
                     {new Date(a.date).toLocaleDateString()}
                   </span>
-                  <span className={styles.answerProblem}>{a.problemId}</span>
+                  <span className={styles.answerProblem}>
+                    {a.taskId}/{a.problemId}
+                    {itemId ? `#${itemId}` : ""}
+                  </span>
                   <span className={styles.answerPreview}>{preview}</span>
                 </div>
               );
@@ -337,6 +406,53 @@ export function DashboardPage() {
           </div>
         </section>
       )}
+
+      <section className={styles.answersSection}>
+        <h2 className={styles.answersHeading}>Backup</h2>
+        <p className={styles.backupHint}>
+          Your history lives only in this browser. Export it to keep a copy or
+          to move to another browser. Importing adds to what is here, so
+          importing the same file twice is harmless.
+        </p>
+        <div className={styles.backupActions}>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleExport}
+            disabled={backupBusy}
+          >
+            Export
+          </Button>
+          <label className={styles.backupOption}>
+            <input
+              type="checkbox"
+              checked={includeAudio}
+              onChange={(e) => setIncludeAudio(e.target.checked)}
+            />
+            Include recordings
+          </label>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => importInputRef.current?.click()}
+            disabled={backupBusy}
+          >
+            Import…
+          </Button>
+          <input
+            ref={importInputRef}
+            type="file"
+            accept="application/json,.json"
+            hidden
+            onChange={handleImport}
+          />
+        </div>
+        {backupMessage && (
+          <p className={styles.backupHint} role="status">
+            {backupMessage}
+          </p>
+        )}
+      </section>
     </div>
   );
 }

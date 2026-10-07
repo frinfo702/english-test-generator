@@ -87,13 +87,17 @@ export function Part6Page() {
     if (data) {
       const allQ = data.passages.flatMap((p) => p.questions);
       const correct = allQ.filter((q) => selected[q.id] === q.correct).length;
-      saveScore(
-        "toeic/part6",
-        correct,
-        allQ.length,
-        sessionSeconds,
-        file ?? undefined,
-      );
+      saveScore({
+        taskId: "toeic/part6",
+        file: file ?? undefined,
+        correct: correct,
+        total: allQ.length,
+        elapsedSeconds: sessionSeconds,
+        responses: Object.entries(selected).map(([itemId, choice]) => ({
+          itemId,
+          choice,
+        })),
+      });
     }
     setGraded(true);
   };

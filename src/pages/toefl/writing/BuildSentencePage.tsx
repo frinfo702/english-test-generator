@@ -154,13 +154,17 @@ export function BuildSentencePage() {
     if (!data || graded) return;
     const sessionSeconds = stop();
     const correct = data.sentences.filter((_, i) => isCorrectFor(i)).length;
-    saveScore(
-      TASK_ID,
-      correct,
-      data.sentences.length,
-      sessionSeconds,
-      file ?? undefined,
-    );
+    saveScore({
+      taskId: TASK_ID,
+      file: file ?? undefined,
+      correct: correct,
+      total: data.sentences.length,
+      elapsedSeconds: sessionSeconds,
+      responses: data.sentences.map((s, i) => ({
+        itemId: s.id,
+        order: slotsFor(i),
+      })),
+    });
     setPhase("submitted");
   };
   const displayChunk = (chunk: string) => chunk.toLowerCase();

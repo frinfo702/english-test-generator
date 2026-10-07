@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { listQuestionFiles, questionIdFromFile } from "../../lib/questions";
+import { listQuestionFiles } from "../../lib/questions";
 import {
   loadNextMode,
   pickNext,
@@ -50,8 +50,8 @@ export function NextQuestionButton({
         setSolved(
           new Set(
             scores
-              .filter((s) => s.taskId === taskId && s.questionFile)
-              .map((s) => questionIdFromFile(s.questionFile!)),
+              .filter((s) => s.taskId === taskId && s.problemId)
+              .map((s) => s.problemId!),
           ),
         );
       })

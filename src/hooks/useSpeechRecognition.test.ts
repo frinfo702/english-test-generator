@@ -1,5 +1,6 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { Recording } from "./useSpeechRecognition";
 
 function createBlobEvent(data: Blob): Event {
   const event = new Event("dataavailable");
@@ -218,7 +219,7 @@ describe("useSpeechRecognition", () => {
     );
   });
 
-  it("returns transcribed text from stop()", async () => {
+  it("returns the text and the recording from stop()", async () => {
     const { useSpeechRecognition } = await import("./useSpeechRecognition");
     const { result } = renderHook(() => useSpeechRecognition());
 
@@ -235,12 +236,14 @@ describe("useSpeechRecognition", () => {
       recorder.emitData(new Blob(["fake-audio"], { type: "audio/webm" }));
     });
 
-    let returned = "";
+    let returned: Recording | undefined;
     await act(async () => {
       returned = await result.current.stop();
     });
 
-    expect(returned).toBe("hello world");
+    expect(returned?.text).toBe("hello world");
+    expect(returned?.audio?.size).toBe("fake-audio".length);
+    expect(typeof returned?.startedAt).toBe("number");
   });
 
   it("sets an error when the transcription request fails", async () => {

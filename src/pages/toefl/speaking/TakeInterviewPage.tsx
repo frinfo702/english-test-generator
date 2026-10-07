@@ -19,8 +19,9 @@ import {
   buildProblemId,
   clearDraft,
   copyText,
-  saveAnswerSubmission,
 } from "../../../lib/answerSubmission";
+import { saveAttempt } from "../../../lib/attempts";
+import { questionIdFromFile } from "../../../lib/questions";
 import { pickInterviewerVoice } from "../../../lib/voiceMapping";
 import { InterviewerCard } from "./InterviewerCard";
 import { InterviewTranscript } from "./InterviewTranscript";
@@ -130,19 +131,26 @@ export function TakeInterviewPage() {
     setPhase("processing");
 
     try {
-      const finalText = (await speech.stop()).trim();
+      const recording = await speech.stop();
+      const finalText = recording.text.trim();
       setUserText(finalText);
       setPhase("submitted");
 
-      if (q && problemId) {
+      if (q && file && problemId) {
         setSavingAnswer(true);
         setSaveError(null);
         try {
-          await saveAnswerSubmission({
+          await saveAttempt({
             taskId: INTERVIEW_TASK_ID,
-            problemId,
-            response: finalText,
-            question: q,
+            problemId: questionIdFromFile(file),
+            responses: [
+              {
+                itemId: q.id,
+                audio: recording.audio ?? undefined,
+                recordedAt: recording.startedAt ?? undefined,
+                transcript: finalText,
+              },
+            ],
           });
           clearDraft(problemId);
         } catch (e) {
@@ -159,7 +167,7 @@ export function TakeInterviewPage() {
     } finally {
       submittingRef.current = false;
     }
-  }, [audio, speech, q, problemId]);
+  }, [audio, speech, q, file, problemId]);
 
   const timer = useTimer(45, () => {
     void finishAnswer();

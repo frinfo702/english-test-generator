@@ -14,9 +14,10 @@ import {
   clearDraft,
   copyText,
   loadDraft,
-  saveAnswerSubmission,
   saveDraft,
 } from "../../../lib/answerSubmission";
+import { saveAttempt } from "../../../lib/attempts";
+import { questionIdFromFile } from "../../../lib/questions";
 import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./WriteDiscussionPage.module.css";
@@ -108,18 +109,17 @@ export function WriteDiscussionPage() {
 
   const submitAnswer = async () => {
     setPhase("submitted");
-    if (!problemId || answerId || savingAnswer) return;
+    if (!file || !problemId || answerId || savingAnswer) return;
     setSavingAnswer(true);
     setSaveError(null);
     try {
-      const result = await saveAnswerSubmission({
+      const attempt = await saveAttempt({
         taskId: TASK_ID,
-        problemId,
-        response: userText,
-        question: data ?? undefined,
+        problemId: questionIdFromFile(file),
+        responses: [{ text: userText }],
       });
       clearDraft(problemId);
-      setAnswerId(result.answerId);
+      setAnswerId(attempt.id);
     } catch (e) {
       setSaveError(
         e instanceof Error ? e.message : "Failed to save your answer.",

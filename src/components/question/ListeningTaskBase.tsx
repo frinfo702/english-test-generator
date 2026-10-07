@@ -141,13 +141,17 @@ export function ListeningTaskBase({
   const handleSubmit = () => {
     const sessionSeconds = stop();
     if (data) {
-      saveScore(
-        taskId,
-        correctCount,
-        totalQuestions,
-        sessionSeconds,
-        file ?? undefined,
-      );
+      saveScore({
+        taskId: taskId,
+        file: file ?? undefined,
+        correct: correctCount,
+        total: totalQuestions,
+        elapsedSeconds: sessionSeconds,
+        responses: Object.entries(selections).map(([i, choice]) => ({
+          itemId: data.questions[Number(i)].id,
+          choice,
+        })),
+      });
     }
     setGraded(true);
     stopTts();
@@ -264,11 +268,7 @@ export function ListeningTaskBase({
       {(running || elapsedSeconds > 0) && (
         <FloatingElapsedTimer display={display} running={running} />
       )}
-      <SectionHeader
-        title={title}
-        subtitle={subtitle}
-        backTo={backTo}
-      />
+      <SectionHeader title={title} subtitle={subtitle} backTo={backTo} />
 
       <div className={styles.topBar}>
         <Button

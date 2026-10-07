@@ -10,7 +10,11 @@ import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ReadAcademicPage.module.css";
-import { ChoiceQuestionCard, QuestionNav, SplitView } from "../../../components/question/QuestionStepper";
+import {
+  ChoiceQuestionCard,
+  QuestionNav,
+  SplitView,
+} from "../../../components/question/QuestionStepper";
 
 interface Question {
   id: string;
@@ -42,8 +46,9 @@ const TYPE_LABELS: Record<string, string> = {
 export function ReadAcademicPage() {
   const navigate = useNavigate();
   const { questionId = "" } = useParams<{ questionId: string }>();
-  const { data, file, loading, error, loadById } =
-    useQuestion<ProblemData>("toefl/reading/academic");
+  const { data, file, loading, error, loadById } = useQuestion<ProblemData>(
+    "toefl/reading/academic",
+  );
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -85,13 +90,17 @@ export function ReadAcademicPage() {
       const s = data.questions.filter(
         (q) => answers[q.id] === q.correctIndex,
       ).length;
-      saveScore(
-        "toefl/reading/academic",
-        s,
-        data.questions.length,
-        sessionSeconds,
-        file ?? undefined,
-      );
+      saveScore({
+        taskId: "toefl/reading/academic",
+        file: file ?? undefined,
+        correct: s,
+        total: data.questions.length,
+        elapsedSeconds: sessionSeconds,
+        responses: Object.entries(answers).map(([itemId, choice]) => ({
+          itemId,
+          choice,
+        })),
+      });
     }
     setGraded(true);
     setCurrentIndex(0);

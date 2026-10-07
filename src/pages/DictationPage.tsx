@@ -199,7 +199,19 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
     setSubmitted(true);
     // Unfinished sentences score zero; each wrong tap costs a point.
     const score = computeDictationScore(correctCount, totalWrongCount);
-    saveScore(TASK_ID, score, totalSentences, elapsedSeconds, file);
+    saveScore({
+      taskId: TASK_ID,
+      file,
+      correct: score,
+      total: totalSentences,
+      elapsedSeconds,
+      method: "dictation-taps",
+      responses: data.sentences.map((s, i) => ({
+        itemId: s.id,
+        text: (states[i]?.selected ?? []).map((t) => t.text).join(" "),
+        misses: states[i]?.wrongCount ?? 0,
+      })),
+    });
   };
 
   const handleRestart = () => {
