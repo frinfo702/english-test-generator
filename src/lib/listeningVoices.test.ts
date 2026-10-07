@@ -14,6 +14,7 @@ const LISTENING_DIR = path.resolve(
   "../../public/questions/toefl/listening",
 );
 const PHOTO_DIR = path.resolve(__dirname, "../../public/images/speakers");
+const AUDIO_DIR = path.resolve(__dirname, "../../public/audio/toefl/listening");
 
 interface ListeningFile {
   speaker?: string;
@@ -90,6 +91,24 @@ describe("speaker photo matches the voice gender", () => {
       const role = data.audioSegments[i].role;
       expect(SPEAKER_PHOTOS[q.speaker ?? ""], `${q.id} (${role})`).toBe(
         genderOf(data.voices![role]),
+      );
+    });
+  });
+});
+
+describe("audio was made with the JSON's voices (audio/…/voices.json)", () => {
+  // Without this, "voices" can say one thing while the mp3 says another,
+  // and the photo-vs-voice test above passes on a lie.
+  it.each(ALL)("%s", (name, data) => {
+    const dir = path.join(AUDIO_DIR, name.replace(/\.json$/, ""));
+    const manifestFile = path.join(dir, "voices.json");
+    expect(fs.existsSync(manifestFile), "run npm run generate-audio").toBe(
+      true,
+    );
+    const manifest = JSON.parse(fs.readFileSync(manifestFile, "utf-8"));
+    data.audioSegments.forEach((seg, i) => {
+      expect(manifest[`${i + 1}.mp3`], `${i + 1}.mp3 (${seg.role})`).toBe(
+        data.voices?.[seg.role],
       );
     });
   });

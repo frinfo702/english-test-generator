@@ -18,6 +18,8 @@ const PROJECT_ROOT = path.resolve(__dirname, "..");
 const QUESTIONS_DIR = path.join(PROJECT_ROOT, "public/questions");
 const AUDIO_OUT_DIR = path.join(PROJECT_ROOT, "public/audio");
 const AUDIO_CACHE_DIR = path.join(PROJECT_ROOT, "public/audio-cache");
+/** Per-set record of which voice made each mp3 (see listeningVoices.test). */
+const VOICE_MANIFEST = "voices.json";
 
 function hashText(text: string): number {
   let hash = 0;
@@ -167,8 +169,9 @@ async function writeMp3IfMissing(
   relativeLabel: string,
   text: string,
   voiceId: string,
+  overwrite = false,
 ): Promise<void> {
-  if (fs.existsSync(outFile)) {
+  if (!overwrite && fs.existsSync(outFile)) {
     console.log(`  SKIP (exists): ${relativeLabel}`);
     return;
   }
@@ -221,17 +224,25 @@ async function generateForQuestion(
       }
       return voice;
     };
+    // voices.json records the voice each mp3 was really made with; a clip
+    // whose recorded voice differs from the JSON is regenerated.
+    const manifestFile = path.join(outDirForSet, VOICE_MANIFEST);
+    const manifest: Record<string, string> = fs.existsSync(manifestFile)
+      ? JSON.parse(fs.readFileSync(manifestFile, "utf-8"))
+      : {};
     for (let i = 0; i < segments.length; i++) {
       const seg = segments[i];
       const voiceId = getVoiceForRole(seg.role);
-      const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
-      const outFile = path.join(outDir, `${i + 1}.mp3`);
+      const name = `${i + 1}.mp3`;
       await writeMp3IfMissing(
-        outFile,
-        path.join(dirname, basename, `${i + 1}.mp3`),
+        path.join(outDirForSet, name),
+        path.join(dirname, basename, name),
         seg.text,
         voiceId,
+        manifest[name] !== voiceId,
       );
+      manifest[name] = voiceId;
+      fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
     }
   }
 
