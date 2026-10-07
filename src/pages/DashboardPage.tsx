@@ -421,19 +421,27 @@ export function DashboardPage() {
           <Button
             variant="secondary"
             size="sm"
+            className={styles.backupBtn}
             onClick={() => exportDialogRef.current?.showModal()}
             disabled={backupBusy}
           >
-            <PixelIcon name="exportTray" className={styles.backupIcon} />
+            <PixelIcon
+              name="exportTray"
+              className={`${styles.backupIcon} ${styles.exportIcon}`}
+            />
             Export
           </Button>
           <Button
             variant="secondary"
             size="sm"
+            className={styles.backupBtn}
             onClick={() => importInputRef.current?.click()}
             disabled={backupBusy}
           >
-            <PixelIcon name="importTray" className={styles.backupIcon} />
+            <PixelIcon
+              name="importTray"
+              className={`${styles.backupIcon} ${styles.importIcon}`}
+            />
             Import
           </Button>
           <input
