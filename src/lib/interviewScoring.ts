@@ -38,6 +38,13 @@ export function parseAiScores(reply: string): AiInterviewScores {
   return { languageUse, organization };
 }
 
+/** The score block is for the parser; readers only need the feedback. */
+export function stripScoreBlock(reply: string): string {
+  return reply
+    .replace(new RegExp("```" + AI_SCORE_FENCE + "[\\s\\S]*?```", "g"), "")
+    .trim();
+}
+
 export function deliveryScores(assessment: PronunciationResult): {
   intelligibility: number;
   fluency: number;

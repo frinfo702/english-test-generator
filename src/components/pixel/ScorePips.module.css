@@ -1,0 +1,14 @@
+.pips {
+  height: 12px;
+  width: auto;
+}
+
+.on {
+  fill: var(--color-accent);
+}
+
+.off {
+  fill: var(--color-surface-subtle);
+  stroke: var(--color-border-strong);
+  stroke-width: 0.5;
+}

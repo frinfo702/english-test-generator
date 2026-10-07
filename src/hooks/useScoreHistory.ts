@@ -51,6 +51,7 @@ export interface SaveScoreInput {
   elapsedSeconds?: number;
   responses: ItemResponse[];
   method?: string;
+  question?: unknown;
 }
 
 function toScoreEntry(a: Attempt): ScoreEntry[] {
@@ -79,17 +80,19 @@ export function useScoreHistory() {
       elapsedSeconds = 0,
       responses,
       method = "answer-key",
-    }: SaveScoreInput) => {
+      question,
+    }: SaveScoreInput): Promise<Attempt | undefined> => {
       if (total === 0) return;
       // Every page saves through here, so one dispatch covers all tasks.
       if (correct >= total)
         window.dispatchEvent(new Event(PERFECT_SCORE_EVENT));
-      await saveAttempt({
+      return saveAttempt({
         taskId,
         problemId: file ? questionIdFromFile(file) : undefined,
         elapsedSeconds: Math.max(0, Math.floor(elapsedSeconds)),
         responses,
         score: { method, correct, total },
+        question,
       });
     },
     [],

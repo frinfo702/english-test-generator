@@ -1,5 +1,5 @@
 import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter, Route, Routes, useParams } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ListenRepeatPage } from "./ListenRepeatPage";
 import { useQuestion } from "../../../hooks/useQuestion";
@@ -50,6 +50,11 @@ const mockData = {
   ],
 };
 
+function ResultStub() {
+  const { id } = useParams();
+  return <p>Result {id}</p>;
+}
+
 function renderPage() {
   return render(
     <MemoryRouter initialEntries={["/toefl/speaking/listen-repeat/1"]}>
@@ -58,6 +63,7 @@ function renderPage() {
           path="/toefl/speaking/listen-repeat/:questionId"
           element={<ListenRepeatPage />}
         />
+        <Route path="/results/:id" element={<ResultStub />} />
       </Routes>
     </MemoryRouter>,
   );
@@ -410,7 +416,8 @@ describe("ListenRepeatPage", () => {
     });
   });
 
-  it("shows audio seek and pause controls in the review section after grading", async () => {
+  it("saves the set with rubric scores and opens its result page", async () => {
+    saveScoreMock.mockResolvedValue({ id: "attempt-1" });
     renderPage();
 
     // Sentence 1: audio plays → ends → record → finish
@@ -479,25 +486,25 @@ describe("ListenRepeatPage", () => {
       vi.advanceTimersByTime(4000);
     });
 
-    // Now in graded/review section. Check for audio controls on sentence cards.
     await waitFor(() => {
-      expect(screen.getByText("Section Complete")).toBeTruthy();
+      expect(screen.getByText("Result attempt-1")).toBeTruthy();
     });
-
-    const playButtons = screen.getAllByRole("button", { name: /Play Audio/i });
-    expect(playButtons.length).toBeGreaterThanOrEqual(2);
-
-    // Click play on first sentence card - this sets activeReviewSentence
-    act(() => {
-      playButtons[0].click();
-    });
-
-    // After clicking, seek controls should appear (shown regardless of playing state)
-    await waitFor(() => {
-      expect(
-        screen.getAllByRole("button", { name: /10s/i }).length,
-      ).toBeGreaterThanOrEqual(1);
-    });
+    expect(saveScoreMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        method: "ets-rubric",
+        correct: 0,
+        total: 10,
+        question: mockData,
+        responses: [
+          expect.objectContaining({
+            itemId: "s1",
+            prompt: "The library will be closed.",
+            itemScore: 0,
+          }),
+          expect.objectContaining({ itemId: "s2", itemScore: 0 }),
+        ],
+      }),
+    );
   });
 
   it("allows replaying audio in feedback phase after audio ends", async () => {
@@ -556,120 +563,5 @@ describe("ListenRepeatPage", () => {
     await waitFor(() => {
       expect(screen.getByText("Comparison:")).toBeTruthy();
     });
-  });
-
-  it("allows replaying audio in review section after audio ends", async () => {
-    renderPage();
-
-    // Go through both sentences to reach review
-    let onEnded: (() => void) | undefined;
-    await waitFor(() => {
-      onEnded = playMock.mock.calls[0][1];
-    });
-    act(() => {
-      onEnded?.();
-    });
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    vi.mocked(useSpeechRecognition).mockReturnValue({
-      supported: true,
-      recording: true,
-      transcript: "",
-      error: null,
-      start: startSpeechMock,
-      stop: stopSpeechMock,
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
-    });
-
-    await waitFor(() => {
-      expect(startSpeechMock).toHaveBeenCalled();
-    });
-
-    await act(async () => {
-      vi.advanceTimersByTime(4000);
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText("Comparison:")).toBeTruthy();
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Next Sentence/i }).click();
-    });
-
-    await waitFor(() => {
-      expect(playMock).toHaveBeenCalledTimes(2);
-    });
-    const onEnded2 = playMock.mock.calls[1][1];
-    act(() => {
-      onEnded2?.();
-    });
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
-    });
-
-    await waitFor(() => {
-      expect(startSpeechMock).toHaveBeenCalledTimes(2);
-    });
-
-    await act(async () => {
-      vi.advanceTimersByTime(4000);
-    });
-
-    // In review section
-    await waitFor(() => {
-      expect(screen.getByText("Section Complete")).toBeTruthy();
-    });
-
-    const playButtons = screen.getAllByRole("button", { name: /Play Audio/i });
-
-    // Play audio for first sentence
-    act(() => {
-      playButtons[0].click();
-    });
-
-    // Audio ends - currentTime resets to 0
-    vi.mocked(useTts).mockReturnValue({
-      playing: false,
-      loading: false,
-      error: null,
-      duration: 0,
-      currentTime: 0,
-      playbackRate: 1,
-      setPlaybackRate: vi.fn(),
-      play: playMock,
-      playSegments: vi.fn(),
-      playSegmentsWithGaps: vi.fn(),
-      pause: pauseMock,
-      resume: resumeMock,
-      stop: stopTtsMock,
-      seek: seekMock,
-    });
-
-    // After audio ends, should show Replay button for the active sentence
-    await waitFor(() => {
-      const replayButtons = screen.getAllByRole("button", {
-        name: /Replay/i,
-      });
-      expect(replayButtons.length).toBeGreaterThanOrEqual(1);
-    });
-
-    // Clicking Replay should call play again
-    const replayButtons = screen.getAllByRole("button", { name: /Replay/i });
-    act(() => {
-      replayButtons[0].click();
-    });
-
-    // play should be called again (4th time total: 2 auto-plays + 1 review play + 1 replay)
-    expect(playMock).toHaveBeenCalledTimes(4);
   });
 });

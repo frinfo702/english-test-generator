@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { interviewItemScore, parseAiScores } from "./interviewScoring";
+import {
+  interviewItemScore,
+  parseAiScores,
+  stripScoreBlock,
+} from "./interviewScoring";
 import type { PronunciationResult } from "./pronunciation";
 
 const assessment = (pronunciation: number, fluency: number) =>
@@ -74,5 +78,15 @@ describe("interviewItemScore", () => {
       interviewItemScore({ languageUse: 2, organization: 3 }, null)!.total,
     ).toBe(3);
     expect(interviewItemScore(null, null)).toBeNull();
+  });
+});
+
+describe("stripScoreBlock", () => {
+  it("removes the fenced score block and keeps the feedback", () => {
+    expect(
+      stripScoreBlock(
+        'Good answer.\n```toefl-score\n{"languageUse": 4, "organization": 4}\n```',
+      ),
+    ).toBe("Good answer.");
   });
 });

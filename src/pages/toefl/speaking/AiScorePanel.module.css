@@ -1,0 +1,31 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius);
+}
+
+.note {
+  color: var(--color-ink-secondary);
+  font-size: var(--text-sm);
+  line-height: var(--lh-normal);
+}
+
+.paste {
+  width: 100%;
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface-subtle);
+  font-size: var(--text-sm);
+  line-height: var(--lh-normal);
+  resize: vertical;
+}
+
+.error {
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}

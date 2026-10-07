@@ -396,18 +396,6 @@
   flex-wrap: wrap;
 }
 
-.pasteBox {
-  width: 100%;
-  padding: var(--spacing-3);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface-subtle);
-  font-family: var(--font-sans);
-  font-size: var(--text-sm);
-  line-height: var(--lh-normal);
-  resize: vertical;
-}
-
 .itemScore {
   width: 100%;
   display: flex;
@@ -415,17 +403,6 @@
   gap: var(--spacing-2);
 }
 
-.itemScore h3,
-.taskScore {
+.itemScore h3 {
   font-variant-numeric: tabular-nums;
-}
-
-.taskScore {
-  font-size: var(--text-3xl);
-  font-weight: var(--font-semibold);
-}
-
-.taskScore span {
-  font-size: var(--text-lg);
-  color: var(--color-ink-tertiary);
 }

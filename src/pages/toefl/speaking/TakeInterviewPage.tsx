@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
-import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { AudioPlayer } from "../../../components/ui/AudioPlayer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -18,14 +17,16 @@ import {
   buildInterviewQaCopyMessage,
   buildProblemId,
   clearDraft,
-  copyText,
 } from "../../../lib/answerSubmission";
-import { saveAttempt } from "../../../lib/attempts";
+import {
+  putAttempts,
+  rubricScore,
+  type Attempt,
+  type ItemResponse,
+} from "../../../lib/attempts";
 import {
   interviewItemScore,
-  parseAiScores,
   type AiInterviewScores,
-  type InterviewItemScore,
 } from "../../../lib/interviewScoring";
 import type { PronunciationResult } from "../../../lib/pronunciation";
 import { assessSpontaneousSpeech } from "../../../lib/pronunciationStream";
@@ -33,6 +34,7 @@ import { computeSpeedMetrics, speedScore } from "../../../lib/speakingRate";
 import { toWav16k } from "../../../lib/wav";
 import { questionIdFromFile } from "../../../lib/questions";
 import { pickInterviewerVoice } from "../../../lib/voiceMapping";
+import { AiScorePanel } from "./AiScorePanel";
 import { InterviewerCard } from "./InterviewerCard";
 import { InterviewTranscript } from "./InterviewTranscript";
 import {
@@ -57,21 +59,17 @@ export function TakeInterviewPage() {
   const [current, setCurrent] = useState(0);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<InterviewPhase>("pre");
-  const [done, setDone] = useState(false);
   const [savingAnswer, setSavingAnswer] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
   const [assessment, setAssessment] = useState<PronunciationResult | null>(
     null,
   );
   const [assessError, setAssessError] = useState<string | null>(null);
-  const [aiReply, setAiReply] = useState("");
   const [aiScores, setAiScores] = useState<AiInterviewScores | null>(null);
-  const [aiError, setAiError] = useState<string | null>(null);
-  const [itemScores, setItemScores] = useState<
-    Record<number, InterviewItemScore>
-  >({});
+  const [finishing, setFinishing] = useState(false);
   const assessGenerationRef = useRef(0);
+  const attemptRef = useRef<Attempt | null>(null);
+  const pendingRef = useRef<Promise<unknown>[]>([]);
   const submittingRef = useRef(false);
 
   const audio = useSingleAudio();
@@ -130,12 +128,9 @@ export function TakeInterviewPage() {
   const clearSessionBits = useCallback(() => {
     setUserText("");
     setSaveError(null);
-    setCopied(false);
     setAssessment(null);
     setAssessError(null);
-    setAiReply("");
     setAiScores(null);
-    setAiError(null);
     assessGenerationRef.current += 1;
     clearTranscript();
     clearSpeechError();
@@ -150,6 +145,43 @@ export function TakeInterviewPage() {
 
   const timerStopRef = useRef<() => void>(() => undefined);
 
+  /**
+   * One attempt per set, rewritten after every change, so a set abandoned
+   * halfway still keeps the answers already given.
+   */
+  const persist = useCallback(
+    async (index: number, patch: Partial<ItemResponse>) => {
+      if (!data || !file) return;
+      const attempt: Attempt = (attemptRef.current ??= {
+        id: crypto.randomUUID(),
+        date: new Date().toISOString(),
+        taskId: INTERVIEW_TASK_ID,
+        problemId: questionIdFromFile(file),
+        question: data,
+        responses: data.questions.map((question) => ({
+          itemId: question.id,
+          prompt: question.question,
+        })),
+      });
+      const merged = { ...attempt.responses[index], ...patch };
+      // Content is the part a transcript can't fake; without the AI half the
+      // item stays unscored rather than scored on delivery alone.
+      merged.itemScore = merged.ai
+        ? interviewItemScore(merged.ai.scores, merged.assessment ?? null)?.total
+        : undefined;
+      attempt.responses[index] = merged;
+      attempt.score = rubricScore(attempt.responses);
+      try {
+        await putAttempts([attempt]);
+      } catch (e) {
+        setSaveError(
+          e instanceof Error ? e.message : "Failed to save your answer.",
+        );
+      }
+    },
+    [data, file],
+  );
+
   const finishAnswer = useCallback(async () => {
     if (submittingRef.current) return;
     submittingRef.current = true;
@@ -160,55 +192,47 @@ export function TakeInterviewPage() {
     try {
       const recording = await speech.stop();
       const finalText = recording.text.trim();
+      const index = current;
       if (recording.audio) {
         const generation = assessGenerationRef.current;
         const isCurrent = () => generation === assessGenerationRef.current;
-        void toWav16k(recording.audio)
-          .then(assessSpontaneousSpeech)
-          .then((result) => isCurrent() && setAssessment(result))
-          .catch(
-            (e: unknown) =>
-              isCurrent() &&
-              setAssessError(e instanceof Error ? e.message : String(e)),
-          );
+        pendingRef.current.push(
+          toWav16k(recording.audio)
+            .then(assessSpontaneousSpeech)
+            .then(
+              (result) => {
+                if (isCurrent()) setAssessment(result);
+                return persist(index, { assessment: result });
+              },
+              (e: unknown) => {
+                const message = e instanceof Error ? e.message : String(e);
+                if (isCurrent()) setAssessError(message);
+                return persist(index, { assessmentError: message });
+              },
+            ),
+        );
       } else {
         setAssessError("No audio was recorded.");
       }
       setUserText(finalText);
       setPhase("submitted");
 
-      if (q && file && problemId) {
-        setSavingAnswer(true);
-        setSaveError(null);
-        try {
-          await saveAttempt({
-            taskId: INTERVIEW_TASK_ID,
-            problemId: questionIdFromFile(file),
-            responses: [
-              {
-                itemId: q.id,
-                audio: recording.audio ?? undefined,
-                recordedAt: recording.startedAt ?? undefined,
-                transcript: finalText,
-              },
-            ],
-          });
-          clearDraft(problemId);
-        } catch (e) {
-          setSaveError(
-            e instanceof Error ? e.message : "Failed to save your answer.",
-          );
-        } finally {
-          setSavingAnswer(false);
-        }
-      }
+      setSavingAnswer(true);
+      setSaveError(null);
+      await persist(index, {
+        audio: recording.audio ?? undefined,
+        recordedAt: recording.startedAt ?? undefined,
+        transcript: finalText,
+      });
+      setSavingAnswer(false);
+      if (problemId) clearDraft(problemId);
     } catch {
       setPhase("submitted");
       setSaveError("Failed to process your recording.");
     } finally {
       submittingRef.current = false;
     }
-  }, [audio, speech, q, file, problemId]);
+  }, [audio, speech, current, persist, problemId]);
 
   const timer = useTimer(45, () => {
     void finishAnswer();
@@ -287,54 +311,38 @@ export function TakeInterviewPage() {
     void speech.start();
   };
 
-  const handleCopyQa = async () => {
-    if (!qaCopyMessage) return;
-    try {
-      const ok = await copyText(qaCopyMessage);
-      if (!ok) {
-        setSaveError("Clipboard is not available in this environment.");
-        return;
-      }
-      setCopied(true);
-    } catch {
-      setSaveError("Failed to copy.");
-    }
-  };
-
   const goToQuestionList = () => {
     audio.stop();
     void speech.stop();
     setCurrent(0);
-    setDone(false);
-    setItemScores({});
+    attemptRef.current = null;
+    pendingRef.current = [];
     resetInteraction();
     timer.reset();
     navigate(`/${INTERVIEW_TASK_ID}`);
   };
 
-  const handleApplyAiReply = () => {
-    try {
-      setAiScores(parseAiScores(aiReply));
-      setAiError(null);
-    } catch (e) {
-      setAiError(e instanceof Error ? e.message : String(e));
-    }
+  const handleApplyAi = (ai: { reply: string; scores: AiInterviewScores }) => {
+    setAiScores(ai.scores);
+    void persist(current, { ai });
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!data) return;
-    if (itemScore) {
-      setItemScores((prev) => ({ ...prev, [current]: itemScore }));
-    }
     audio.stop();
     void speech.stop();
-    if (current + 1 >= data.questions.length) {
-      setDone(true);
+    if (current + 1 < data.questions.length) {
+      setCurrent((c) => c + 1);
+      resetInteraction();
+      timer.reset();
       return;
     }
-    setCurrent((c) => c + 1);
-    resetInteraction();
-    timer.reset();
+    setFinishing(true);
+    // The last answer's pronunciation is usually still in flight.
+    await Promise.allSettled(pendingRef.current);
+    const attempt = attemptRef.current;
+    if (attempt) navigate(`/results/${attempt.id}`);
+    else goToQuestionList();
   };
 
   const busyPhase =
@@ -347,7 +355,6 @@ export function TakeInterviewPage() {
   const modelActive = audio.isActive("model");
   const displayAnswer = userText || speech.transcript;
   const itemScore = interviewItemScore(aiScores, assessment);
-  const scoredItems = Object.values(itemScores);
   const speedMetrics = assessment
     ? computeSpeedMetrics([assessment.words])
     : null;
@@ -386,7 +393,7 @@ export function TakeInterviewPage() {
         </div>
       )}
 
-      {data && !loading && hasValidQuestionId && !done && q && chrome && (
+      {data && !loading && hasValidQuestionId && q && chrome && (
         <div className={styles.card}>
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>{chrome.tag}</span>
@@ -649,33 +656,12 @@ export function TakeInterviewPage() {
               </div>
 
               <div className={styles.copyCard}>
-                <p className={styles.preNote}>
-                  1. Copy the prompt and paste it into your AI chat. 2. Copy the
-                  whole reply and paste it below. Your score combines the AI's
-                  language and organization ratings with your pronunciation and
-                  fluency.
-                </p>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    void handleCopyQa();
-                  }}
-                  disabled={!qaCopyMessage}
-                >
-                  {copied ? "Copied" : "Copy for AI scoring"}
-                </Button>
-                <textarea
-                  className={styles.pasteBox}
-                  rows={5}
-                  placeholder="Paste the AI's reply here"
-                  aria-label="AI reply"
-                  value={aiReply}
-                  onChange={(e) => setAiReply(e.target.value)}
-                />
-                <Button onClick={handleApplyAiReply} disabled={!aiReply.trim()}>
-                  Apply AI score
-                </Button>
-                {aiError && <p className={styles.error}>{aiError}</p>}
+                {qaCopyMessage && (
+                  <AiScorePanel
+                    message={qaCopyMessage}
+                    onApply={handleApplyAi}
+                  />
+                )}
                 {itemScore && (
                   <div className={styles.itemScore}>
                     <h3>
@@ -747,8 +733,12 @@ export function TakeInterviewPage() {
               </div>
 
               <div className={styles.actions}>
-                <Button onClick={handleNext}>
-                  {current + 1 < data.questions.length ? "Continue" : "Finish"}
+                <Button onClick={() => void handleNext()} disabled={finishing}>
+                  {current + 1 < data.questions.length
+                    ? "Continue"
+                    : finishing
+                      ? "Finishing…"
+                      : "Finish"}
                 </Button>
                 <NextQuestionButton
                   taskId={INTERVIEW_TASK_ID}
@@ -757,37 +747,6 @@ export function TakeInterviewPage() {
               </div>
             </div>
           )}
-        </div>
-      )}
-
-      {done && data && hasValidQuestionId && (
-        <div className={styles.resultCard}>
-          <h2>Interview Complete</h2>
-          {scoredItems.length > 0 ? (
-            <>
-              <p className={styles.taskScore}>
-                {(
-                  scoredItems.reduce((sum, s) => sum + s.total, 0) /
-                  scoredItems.length
-                ).toFixed(1)}
-                <span>/5</span>
-              </p>
-              {data.questions.map((question, i) => (
-                <ProgressBar
-                  key={question.id}
-                  current={itemScores[i]?.total ?? 0}
-                  total={5}
-                  label={`Question ${i + 1}${itemScores[i] ? "" : " (not scored)"}`}
-                />
-              ))}
-            </>
-          ) : (
-            <p>You answered all {data.questions.length} questions.</p>
-          )}
-          <div className={styles.actions}>
-            <BackButton onClick={goToQuestionList} size="lg" />
-            <NextQuestionButton taskId={INTERVIEW_TASK_ID} size="lg" />
-          </div>
         </div>
       )}
     </div>

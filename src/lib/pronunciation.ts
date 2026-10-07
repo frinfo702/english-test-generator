@@ -74,6 +74,11 @@ export function parseAzureAssessment(raw: AzureResponse): PronunciationResult {
   };
 }
 
+// Azure gives omitted words no timing, so they'd read as 0-second words.
+export function spokenWords(result: PronunciationResult): AssessedWord[] {
+  return result.words.filter((w) => w.errorType !== "Omission");
+}
+
 /** Word-weighted, so a two-word fragment can't drag down a long answer. */
 export function mergeAssessments(
   segments: PronunciationResult[],
