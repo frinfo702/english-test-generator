@@ -56,7 +56,7 @@ export function BuildSentencePage() {
   } = useElapsedTimer();
   const [current, setCurrent] = useState(0);
   const [allSlots, setAllSlots] = useState<Record<number, Slots>>({});
-  const [phase, setPhase] = useState<"pre" | "answering" | "submitted">("pre");
+  const [phase, setPhase] = useState<"answering" | "submitted">("answering");
   const graded = phase === "submitted";
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
@@ -68,11 +68,24 @@ export function BuildSentencePage() {
     loadByQuestionNumber(parsedQuestionNumber);
   }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
 
+  // No "press start" step: the timer runs as soon as the problem is shown.
+  useEffect(() => {
+    if (
+      data &&
+      !loading &&
+      phase === "answering" &&
+      !running &&
+      elapsedSeconds === 0
+    ) {
+      start();
+    }
+  }, [data, loading, phase, running, elapsedSeconds, start]);
+
   const handleBackToList = () => {
     resetTimer();
     setCurrent(0);
     setAllSlots({});
-    setPhase("pre");
+    setPhase("answering");
     navigate(`/${TASK_ID}`);
   };
 
@@ -152,10 +165,6 @@ export function BuildSentencePage() {
     );
     setPhase("submitted");
   };
-  const handleStart = () => {
-    setPhase("answering");
-    start();
-  };
   const displayChunk = (chunk: string) => chunk.toLowerCase();
   const endMark = sentence ? endPunctuation(sentence.fullSentence) : ".";
 
@@ -199,22 +208,6 @@ export function BuildSentencePage() {
 
       {data && !loading && hasValidQuestionNumber && sentence && (
         <>
-          {phase === "pre" && (
-            <div className={styles.startCard}>
-              <p>Press Start when ready. The timer will begin immediately.</p>
-              <div className={styles.actions}>
-                <Button size="lg" onClick={handleStart}>
-                  Start
-                </Button>
-                <NextQuestionButton
-                  taskId={TASK_ID}
-                  variant="secondary"
-                  size="lg"
-                />
-              </div>
-            </div>
-          )}
-
           {graded && (
             <div className={styles.resultCard}>
               <h2>Section Complete</h2>
@@ -237,153 +230,151 @@ export function BuildSentencePage() {
             </div>
           )}
 
-          {phase !== "pre" && (
-            <CardStack index={current} total={totalSentences}>
-              <div className={styles.card}>
-                <p className={styles.qNum}>
-                  Question {current + 1} / {totalSentences}
-                </p>
-                <div className={styles.referenceBox}>
-                  <p className={styles.referenceLabel}>Reference</p>
-                  <p className={styles.referenceText}>{sentence.reference}</p>
-                </div>
-                <div className={styles.zone}>
-                  <p className={styles.zoneLabel}>Answer Area</p>
-                  <div className={styles.blanks}>
-                    {slots.map((chunkIdx, pos) => {
-                      const blank = (
-                        <span
-                          key={pos}
-                          data-drop="slot"
-                          data-slot={pos}
-                          className={[
-                            styles.blank,
-                            isOverSlot(pos) ? styles.blankOver : "",
-                          ].join(" ")}
-                        >
-                          {chunkIdx !== null && (
-                            <button
-                              className={[
-                                styles.chip,
-                                styles.placed,
-                                graded
-                                  ? isCorrect
-                                    ? styles.correctChip
-                                    : styles.wrongChip
-                                  : "",
-                                isDraggingSlot(pos) ? styles.dragging : "",
-                              ].join(" ")}
-                              onPointerDown={(e) =>
-                                startDrag(
-                                  e,
-                                  { kind: "slot", index: pos },
-                                  displayChunk(sentence.chunks[chunkIdx]),
-                                )
-                              }
-                              onClick={() => handleSlotClick(pos)}
-                              disabled={graded}
-                            >
-                              {displayChunk(sentence.chunks[chunkIdx])}
-                            </button>
-                          )}
-                        </span>
-                      );
-                      // Keep the end mark on the same line as the last blank.
-                      return pos === slots.length - 1 ? (
-                        <span key={pos} className={styles.lastBlank}>
-                          {blank}
-                          <span className={styles.endMark}>{endMark}</span>
-                        </span>
-                      ) : (
-                        blank
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className={styles.zone}>
-                  <p className={styles.zoneLabel}>
-                    Chunk Pool (drag onto a blank)
-                  </p>
-                  <div
-                    data-drop="pool"
-                    className={[
-                      styles.slots,
-                      over?.kind === "pool" && ghost?.source.kind === "slot"
-                        ? styles.poolOver
-                        : "",
-                    ].join(" ")}
-                  >
-                    {pool.map((chunkIdx) => (
-                      <button
-                        key={chunkIdx}
+          <CardStack index={current} total={totalSentences}>
+            <div className={styles.card}>
+              <p className={styles.qNum}>
+                Question {current + 1} / {totalSentences}
+              </p>
+              <div className={styles.referenceBox}>
+                <p className={styles.referenceLabel}>Reference</p>
+                <p className={styles.referenceText}>{sentence.reference}</p>
+              </div>
+              <div className={styles.zone}>
+                <p className={styles.zoneLabel}>Answer Area</p>
+                <div className={styles.blanks}>
+                  {slots.map((chunkIdx, pos) => {
+                    const blank = (
+                      <span
+                        key={pos}
+                        data-drop="slot"
+                        data-slot={pos}
                         className={[
-                          styles.chip,
-                          styles.poolChip,
-                          isDraggingChunk(chunkIdx) ? styles.dragging : "",
+                          styles.blank,
+                          isOverSlot(pos) ? styles.blankOver : "",
                         ].join(" ")}
-                        onPointerDown={(e) =>
-                          startDrag(
-                            e,
-                            { kind: "pool", chunk: chunkIdx },
-                            displayChunk(sentence.chunks[chunkIdx]),
-                          )
-                        }
-                        onClick={() => handlePoolClick(chunkIdx)}
-                        disabled={graded}
                       >
-                        {displayChunk(sentence.chunks[chunkIdx])}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {graded && (
-                  <div
-                    className={[
-                      styles.feedback,
-                      isCorrect ? styles.fbCorrect : styles.fbWrong,
-                    ].join(" ")}
-                  >
-                    <p className={styles.fbStatus}>
-                      {isCorrect ? "Correct" : "Incorrect"}
-                    </p>
-                    {!isCorrect && (
-                      <p className={styles.fbAnswer}>
-                        Correct answer:{" "}
-                        <strong>
-                          {sentence.fullSentence.replace(/[.?!]$/, "")}
-                          {endMark}
-                        </strong>
-                      </p>
-                    )}
-                  </div>
-                )}
-
-                <div className={styles.btnRow}>
-                  {current > 0 && (
-                    <Button variant="secondary" onClick={handlePrev}>
-                      Previous
-                    </Button>
-                  )}
-                  {!graded && !isLastSentence && (
-                    <Button onClick={handleNext}>Next</Button>
-                  )}
-                  {!graded && isLastSentence && (
-                    <Button onClick={handleSubmit} size="lg">
-                      Submit
-                      <PixelCheckIcon />
-                    </Button>
-                  )}
-                  {!graded && (
-                    <NextQuestionButton taskId={TASK_ID} variant="secondary" />
-                  )}
-                  {graded && current + 1 < totalSentences && (
-                    <Button onClick={handleNext}>Next</Button>
-                  )}
+                        {chunkIdx !== null && (
+                          <button
+                            className={[
+                              styles.chip,
+                              styles.placed,
+                              graded
+                                ? isCorrect
+                                  ? styles.correctChip
+                                  : styles.wrongChip
+                                : "",
+                              isDraggingSlot(pos) ? styles.dragging : "",
+                            ].join(" ")}
+                            onPointerDown={(e) =>
+                              startDrag(
+                                e,
+                                { kind: "slot", index: pos },
+                                displayChunk(sentence.chunks[chunkIdx]),
+                              )
+                            }
+                            onClick={() => handleSlotClick(pos)}
+                            disabled={graded}
+                          >
+                            {displayChunk(sentence.chunks[chunkIdx])}
+                          </button>
+                        )}
+                      </span>
+                    );
+                    // Keep the end mark on the same line as the last blank.
+                    return pos === slots.length - 1 ? (
+                      <span key={pos} className={styles.lastBlank}>
+                        {blank}
+                        <span className={styles.endMark}>{endMark}</span>
+                      </span>
+                    ) : (
+                      blank
+                    );
+                  })}
                 </div>
               </div>
-            </CardStack>
-          )}
+              <div className={styles.zone}>
+                <p className={styles.zoneLabel}>
+                  Chunk Pool (drag onto a blank)
+                </p>
+                <div
+                  data-drop="pool"
+                  className={[
+                    styles.slots,
+                    over?.kind === "pool" && ghost?.source.kind === "slot"
+                      ? styles.poolOver
+                      : "",
+                  ].join(" ")}
+                >
+                  {pool.map((chunkIdx) => (
+                    <button
+                      key={chunkIdx}
+                      className={[
+                        styles.chip,
+                        styles.poolChip,
+                        isDraggingChunk(chunkIdx) ? styles.dragging : "",
+                      ].join(" ")}
+                      onPointerDown={(e) =>
+                        startDrag(
+                          e,
+                          { kind: "pool", chunk: chunkIdx },
+                          displayChunk(sentence.chunks[chunkIdx]),
+                        )
+                      }
+                      onClick={() => handlePoolClick(chunkIdx)}
+                      disabled={graded}
+                    >
+                      {displayChunk(sentence.chunks[chunkIdx])}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {graded && (
+                <div
+                  className={[
+                    styles.feedback,
+                    isCorrect ? styles.fbCorrect : styles.fbWrong,
+                  ].join(" ")}
+                >
+                  <p className={styles.fbStatus}>
+                    {isCorrect ? "Correct" : "Incorrect"}
+                  </p>
+                  {!isCorrect && (
+                    <p className={styles.fbAnswer}>
+                      Correct answer:{" "}
+                      <strong>
+                        {sentence.fullSentence.replace(/[.?!]$/, "")}
+                        {endMark}
+                      </strong>
+                    </p>
+                  )}
+                </div>
+              )}
+
+              <div className={styles.btnRow}>
+                {current > 0 && (
+                  <Button variant="secondary" onClick={handlePrev}>
+                    Previous
+                  </Button>
+                )}
+                {!graded && !isLastSentence && (
+                  <Button onClick={handleNext}>Next</Button>
+                )}
+                {!graded && isLastSentence && (
+                  <Button onClick={handleSubmit} size="lg">
+                    Submit
+                    <PixelCheckIcon />
+                  </Button>
+                )}
+                {!graded && (
+                  <NextQuestionButton taskId={TASK_ID} variant="secondary" />
+                )}
+                {graded && current + 1 < totalSentences && (
+                  <Button onClick={handleNext}>Next</Button>
+                )}
+              </div>
+            </div>
+          </CardStack>
         </>
       )}
       {ghost &&

@@ -86,18 +86,6 @@
   color: var(--color-ink-secondary);
 }
 
-.startCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-2xl) var(--spacing-6);
-  background: var(--color-surface-subtle);
-  border-radius: var(--radius-doc);
-  text-align: center;
-  color: var(--color-ink-secondary);
-}
-
 .actions {
   display: flex;
   align-items: center;

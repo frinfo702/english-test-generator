@@ -52,7 +52,7 @@ export function WriteEmailPage() {
   const { data, file, loading, error, loadByQuestionNumber } =
     useQuestion<ProblemData>(TASK_ID);
   const [userText, setUserText] = useState("");
-  const [phase, setPhase] = useState<"pre" | "writing" | "submitted">("pre");
+  const [phase, setPhase] = useState<"writing" | "submitted">("writing");
   const [showModel, setShowModel] = useState(false);
   const [savingAnswer, setSavingAnswer] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
@@ -112,10 +112,18 @@ export function WriteEmailPage() {
     saveDraft(problemId, userText);
   }, [problemId, phase, userText]);
 
-  const handleStart = () => {
-    setPhase("writing");
-    timer.start();
-  };
+  // No "press start" step: the timer runs as soon as the problem is shown.
+  useEffect(() => {
+    if (
+      data &&
+      !loading &&
+      phase === "writing" &&
+      !timer.running &&
+      timer.seconds === 7 * 60
+    ) {
+      timer.start();
+    }
+  }, [data, loading, phase, timer]);
   const handleSubmit = () => {
     timer.stop();
     void submitAnswer();
@@ -135,7 +143,7 @@ export function WriteEmailPage() {
   };
   const handleBackToList = () => {
     setUserText("");
-    setPhase("pre");
+    setPhase("writing");
     setShowModel(false);
     setSavingAnswer(false);
     setSaveError(null);
@@ -147,14 +155,12 @@ export function WriteEmailPage() {
 
   return (
     <div>
-      {phase !== "pre" && (
-        <FloatingElapsedTimer
-          display={timer.display}
-          running={timer.running}
-          isWarning={timer.isWarning}
-          isExpired={timer.isExpired}
-        />
-      )}
+      <FloatingElapsedTimer
+        display={timer.display}
+        running={timer.running}
+        isWarning={timer.isWarning}
+        isExpired={timer.isExpired}
+      />
 
       <SectionHeader
         title="Write an Email"
@@ -167,7 +173,7 @@ export function WriteEmailPage() {
           variant="secondary"
           size="sm"
           onClick={handleBackToList}
-          disabled={loading || phase === "writing"}
+          disabled={loading}
         >
           Question List
         </Button>
@@ -221,53 +227,32 @@ export function WriteEmailPage() {
                 </p>
               </div>
 
-              {phase === "pre" && (
-                <div className={task.startCard}>
-                  <p>Press Start when ready. The 7-minute timer will begin.</p>
+              <>
+                <PoodlePerch>
+                  <textarea
+                    className={task.textarea}
+                    value={userText}
+                    onChange={(e) => setUserText(e.target.value)}
+                    placeholder="Type your email here..."
+                    disabled={phase === "submitted"}
+                    rows={14}
+                    aria-label="Your email"
+                  />
+                </PoodlePerch>
+                <p className={task.wordCount}>
+                  Word count:{" "}
+                  {userText.trim().split(/\s+/).filter(Boolean).length}
+                </p>
+                {phase === "writing" && (
                   <div className={task.actions}>
-                    <Button size="lg" onClick={handleStart}>
-                      Start
+                    <Button onClick={handleSubmit}>
+                      Submit
+                      <PixelCheckIcon />
                     </Button>
-                    <NextQuestionButton
-                      taskId={TASK_ID}
-                      variant="secondary"
-                      size="lg"
-                    />
+                    <NextQuestionButton taskId={TASK_ID} variant="secondary" />
                   </div>
-                </div>
-              )}
-
-              {(phase === "writing" || phase === "submitted") && (
-                <>
-                  <PoodlePerch>
-                    <textarea
-                      className={task.textarea}
-                      value={userText}
-                      onChange={(e) => setUserText(e.target.value)}
-                      placeholder="Type your email here..."
-                      disabled={phase === "submitted"}
-                      rows={14}
-                      aria-label="Your email"
-                    />
-                  </PoodlePerch>
-                  <p className={task.wordCount}>
-                    Word count:{" "}
-                    {userText.trim().split(/\s+/).filter(Boolean).length}
-                  </p>
-                  {phase === "writing" && (
-                    <div className={task.actions}>
-                      <Button onClick={handleSubmit}>
-                        Submit
-                        <PixelCheckIcon />
-                      </Button>
-                      <NextQuestionButton
-                        taskId={TASK_ID}
-                        variant="secondary"
-                      />
-                    </div>
-                  )}
-                </>
-              )}
+                )}
+              </>
             </div>
           </div>
 
