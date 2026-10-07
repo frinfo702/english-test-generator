@@ -22,7 +22,21 @@ npm run dev:vite
 # -> http://localhost:5173
 ```
 
-Deploy to Cloudflare Pages:
+### Releasing
+
+Production on Cloudflare Pages is deployed by GitHub Actions when a GitHub
+release is published, not when commits land on `main`. Tag releases as
+`vMAJOR.MINOR.PATCH`; bump MINOR for features and data-format changes,
+PATCH for fixes.
+
+```bash
+gh release create v0.2.0 --generate-notes
+```
+
+To re-deploy or roll back, run the **Deploy** workflow manually with an
+existing tag. Prereleases are not deployed.
+
+To deploy from your machine instead:
 
 ```bash
 npm run build

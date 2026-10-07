@@ -1,19 +1,31 @@
 name: Deploy
 
 on:
-  push:
-    branches: [main]
+  release:
+    types: [published]
+  # Re-deploys a release, or rolls back to an older one.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to deploy, e.g. v0.2.0
+        required: true
 
 jobs:
   deploy:
+    # Prereleases are for trying a build, not for shipping it to users.
+    if: ${{ !github.event.release.prerelease }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - run: npm ci
       - run: npm run build
-      - run: npx wrangler pages deploy dist --project-name english-test-generator
+      # A release is checked out at a tag, not a branch. Without --branch,
+      # Pages can't tell this is production and files it as a preview.
+      - run: npx wrangler pages deploy dist --project-name english-test-generator --branch main
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
