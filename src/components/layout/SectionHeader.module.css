@@ -45,6 +45,13 @@
   min-width: 0;
 }
 
+.actions {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 .title {
   font-family: var(--font-display);
   font-size: var(--text-2xl);

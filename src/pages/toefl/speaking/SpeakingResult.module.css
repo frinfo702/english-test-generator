@@ -98,6 +98,11 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Whole-pixel steps (6 units → 12px) keep the pixel art crisp. */
+.pipStrip svg {
+  height: 12px;
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;

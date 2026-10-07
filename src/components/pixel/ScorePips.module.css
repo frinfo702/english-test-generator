@@ -1,14 +1,16 @@
 .pips {
-  height: 12px;
+  height: 18px;
   width: auto;
 }
 
-.on {
-  fill: var(--color-accent);
+.outline {
+  fill: #2b2b3a;
 }
 
-.off {
+.offOutline {
+  fill: var(--color-border-strong);
+}
+
+.offFill {
   fill: var(--color-surface-subtle);
-  stroke: var(--color-border-strong);
-  stroke-width: 0.5;
 }

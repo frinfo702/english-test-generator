@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { PixelArrowIcon } from "../ui/PixelArrowIcon";
 import styles from "./SectionHeader.module.css";
@@ -6,12 +7,15 @@ interface SectionHeaderProps {
   title: string;
   subtitle?: string;
   backTo?: string;
+  /** Right-aligned controls; sharing the title row saves a row of height. */
+  actions?: ReactNode;
 }
 
 export function SectionHeader({
   title,
   subtitle,
   backTo,
+  actions,
 }: SectionHeaderProps) {
   const navigate = useNavigate();
   return (
@@ -31,6 +35,7 @@ export function SectionHeader({
           <h1 className={styles.title}>{title}</h1>
           {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
         </div>
+        {actions && <div className={styles.actions}>{actions}</div>}
       </div>
     </div>
   );

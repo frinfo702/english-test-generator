@@ -420,18 +420,17 @@ export function ListenRepeatPage() {
         title="Listen and Repeat"
         subtitle="Listen to the sentence, then repeat it into the microphone."
         backTo="/toefl"
+        actions={
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleBackToList}
+            disabled={loading}
+          >
+            Question List
+          </Button>
+        }
       />
-
-      <div className={styles.topBar}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={handleBackToList}
-          disabled={loading}
-        >
-          Question List
-        </Button>
-      </div>
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
