@@ -1,113 +1,6 @@
 # English Test Practice
 
-<img width="751" height="230" alt="image" src="https://github.com/user-attachments/assets/5f36faaa-2951-4500-9ad9-b57f84645319" />
-<img width="1891" height="916" alt="image" src="https://github.com/user-attachments/assets/9f89e5d9-9bc1-4e21-9fe6-ca4b230bdfff" />
-
-A practice app for the TOEFL iBT 2026 format and TOEIC Reading.
-The app loads question JSON files generated locally by an AI agent. The speaking "Listen and Repeat" task records audio and sends it to a Cloudflare Pages Function that uses Cloudflare Workers AI (Whisper) for transcription, so that feature requires a network connection and a Cloudflare account.
-
-## Setup
-
-```bash
-npm install
-npm run dev
-```
-
-`npm run dev` starts both the Wrangler Pages dev server (`http://localhost:8788`) and the Vite dev server (`http://localhost:5173`) at the same time. The Vite dev server proxies `/api/transcribe` to Wrangler, so the front-end can reach the Cloudflare Pages Function from the same origin.
-
-If you only need the front-end without the transcription API, use:
-
-```bash
-npm run dev:vite
-# -> http://localhost:5173
-```
-
-### Releasing
-
-Production on Cloudflare Pages ships only through the **Release** workflow,
-never on a push. Run it from the Actions tab (Release → Run workflow) or:
-
-```bash
-gh workflow run release.yml -f bump=minor   # patch | minor | major
-```
-
-It bumps that part of the latest `vX.Y.Z` tag (the first release is
-`v0.1.0` for `minor`), deploys `main`, then creates the tag and a GitHub
-release with generated notes. To roll back, use **Rollback** on an older
-deployment in the Cloudflare Pages dashboard.
-
-Every push to `main` is deployed to the `staging` preview
-(`https://staging.english-test-generator.pages.dev`), so merged work can be
-tried before it is released. Previews are public unless the Pages project is
-behind Cloudflare Access.
-
-To deploy from your machine instead:
-
-```bash
-npm run build
-npm run pages:deploy
-```
-
-The Cloudflare project must have a Workers AI binding named `AI`.
-
-## Adding Questions
-
-Generate questions with an AI agent (for example, Claude Code) and save the output JSON in the matching folder under `public/questions/`.
-
-### Directory Structure
-
-```text
-public/
-├── prompts/          # Prompt templates for AI question generation
-│   ├── toefl/reading/complete-the-words.json
-│   ├── toefl/reading/read-in-daily-life.json
-│   ├── ...
-│   └── toeic/part7-reading-comprehension.json
-│
-└── questions/        # AI-generated question files (add files here)
-    ├── toefl/
-    │   ├── reading/complete-words/
-    │   │   ├── index.json   <- generated, do not edit
-    │   │   ├── 001.json
-    │   │   └── 20261007-library-hours.json
-    │   ├── reading/daily-life/
-    │   ├── reading/academic/
-    │   ├── writing/build-sentence/
-    │   ├── writing/email/
-    │   ├── writing/discussion/
-    │   ├── speaking/listen-repeat/
-    │   └── speaking/interview/
-    └── toeic/
-        ├── part5/
-        ├── part6/
-        └── part7/
-```
-
-### Question IDs
-
-A question file's name (minus `.json`) is its permanent ID: study history
-and audio folders point at it. Name new files `<YYYYMMDD>-<slug>.json`
-(`./scripts/make-question.sh <task> [slug]` does this), never rename one,
-and never reuse a deleted name. Older `001.json`-style names stay valid.
-
-Each task folder's `index.json` is regenerated from the folder contents by
-Vite on `npm run dev` / `npm run build`, so adding or deleting a file is all
-it takes.
-
-At runtime, each task first shows its question list.
-You can pick a question or start with the random button.
-
-### Prompting an AI Agent
-
-Example request:
-
-```text
-Follow the schema in public/prompts/toefl/reading/complete-the-words.json,
-generate one TOEFL Reading Complete the Words question set,
-save it to public/questions/toefl/reading/complete-words/20261007-<slug>.json.
-```
-
-Each file in `public/prompts/` defines the output JSON schema for that task.
+A practice app for the TOEFL iBT 2026 format and TOEIC Reading, using AI-generated question JSON.
 
 ## Supported Content
 
@@ -127,6 +20,32 @@ Each file in `public/prompts/` defines the output JSON schema for that task.
 | Part 6 | Text Completion (4 passages x 4 questions)               |
 | Part 7 | Reading Comprehension (Single / Double / Triple passage) |
 
-## Sample Questions
+## Commands
 
-A sample set is included for each task, so you can start practicing immediately.
+```bash
+npm install
+npm run dev            # Vite (:5173) + Wrangler (:8788) for the transcription API
+npm run dev:vite       # front-end only, no transcription
+npm test               # vitest
+npm run lint
+npm run format
+npm run build
+npm run pages:deploy   # deploy dist/ to Cloudflare Pages from your machine
+```
+
+Add a question file (named `<YYYYMMDD>-<slug>.json`; never rename or reuse a name):
+
+```bash
+./scripts/make-question.sh <task> [slug]
+```
+
+## Releasing
+
+Every push to `main` deploys to staging (`https://staging.english-test-generator.pages.dev`).
+Production ships only through the Release workflow:
+
+```bash
+gh workflow run release.yml -f bump=minor   # patch | minor | major
+```
+
+Roll back from the Cloudflare Pages dashboard. The Pages project needs a Workers AI binding named `AI`.
