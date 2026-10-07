@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { listQuestionFiles } from "../../lib/questions";
 import {
-  loadNextMode,
+  getNextMode,
   pickNext,
-  saveNextMode,
+  setNextMode,
+  subscribeNextMode,
   type NextMode,
 } from "../../lib/nextMode";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
@@ -21,6 +22,8 @@ interface NextQuestionButtonProps extends Omit<
   taskId: string;
   /** Runs before navigating, e.g. to stop audio. */
   onBeforeNavigate?: () => void;
+  /** Hide the mode toggles where another instance on the page already shows them. */
+  showModes?: boolean;
 }
 
 /**
@@ -32,12 +35,13 @@ interface NextQuestionButtonProps extends Omit<
 export function NextQuestionButton({
   taskId,
   onBeforeNavigate,
+  showModes = true,
   ...props
 }: NextQuestionButtonProps) {
   const navigate = useNavigate();
   const { getAll } = useScoreHistory();
   const { questionId: current = "" } = useParams<{ questionId: string }>();
-  const [mode, setMode] = useState<NextMode>(loadNextMode);
+  const mode = useSyncExternalStore(subscribeNextMode, getNextMode);
   const [ids, setIds] = useState<string[]>([]);
   const [solved, setSolved] = useState<Set<string>>(new Set());
 
@@ -63,11 +67,8 @@ export function NextQuestionButton({
     };
   }, [taskId, getAll]);
 
-  const updateMode = (patch: Partial<NextMode>) => {
-    const nextMode = { ...mode, ...patch };
-    setMode(nextMode);
-    saveNextMode(nextMode);
-  };
+  const updateMode = (patch: Partial<NextMode>) =>
+    setNextMode({ ...mode, ...patch });
 
   const toggles = [
     {
@@ -96,32 +97,36 @@ export function NextQuestionButton({
 
   return (
     <>
-      <span
-        className={styles.modeGroup}
-        role="group"
-        aria-label="How the next question is chosen"
-      >
-        {toggles.map((t) => (
-          <Button
-            key={t.key}
-            variant="ghost"
-            size={props.size}
-            className={[styles.modeToggle, t.on ? styles.modeOn : ""].join(" ")}
-            onClick={t.onClick}
-            aria-pressed={t.on}
-            aria-label={t.label}
-            title={t.label}
-          >
-            <PixelArt
-              layers={[MODE_ICONS[t.key]]}
-              palette={{ x: "currentColor" }}
-              width={12}
-              height={12}
-              className={styles.modeIcon}
-            />
-          </Button>
-        ))}
-      </span>
+      {showModes && (
+        <span
+          className={styles.modeGroup}
+          role="group"
+          aria-label="How the next question is chosen"
+        >
+          {toggles.map((t) => (
+            <Button
+              key={t.key}
+              variant="ghost"
+              size={props.size}
+              className={[styles.modeToggle, t.on ? styles.modeOn : ""].join(
+                " ",
+              )}
+              onClick={t.onClick}
+              aria-pressed={t.on}
+              aria-label={t.label}
+              title={t.label}
+            >
+              <PixelArt
+                layers={[MODE_ICONS[t.key]]}
+                palette={{ x: "currentColor" }}
+                width={12}
+                height={12}
+                className={styles.modeIcon}
+              />
+            </Button>
+          ))}
+        </span>
+      )}
       {hasNext && (
         <Button
           {...props}

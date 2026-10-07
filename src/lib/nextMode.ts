@@ -13,7 +13,7 @@ export interface NextMode {
 const ORDER_KEY = "next-question-mode";
 const UNSOLVED_KEY = "next-question-unsolved-only";
 
-export function loadNextMode(): NextMode {
+function readNextMode(): NextMode {
   try {
     return {
       order:
@@ -25,13 +25,29 @@ export function loadNextMode(): NextMode {
   }
 }
 
-export function saveNextMode(mode: NextMode): void {
+// One shared value, not per-component state: pages render two
+// NextQuestionButtons, and toggling one must update the other.
+let cached: NextMode | null = null;
+const listeners = new Set<() => void>();
+
+export function subscribeNextMode(listener: () => void): () => void {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+export function getNextMode(): NextMode {
+  return (cached ??= readNextMode());
+}
+
+export function setNextMode(mode: NextMode): void {
+  cached = mode;
   try {
     localStorage.setItem(ORDER_KEY, mode.order);
     localStorage.setItem(UNSOLVED_KEY, mode.unsolvedOnly ? "1" : "0");
   } catch {
     // ignore quota / private mode
   }
+  listeners.forEach((l) => l());
 }
 
 /**
