@@ -1,28 +1,39 @@
 import { PixelArt } from "../pixel/PixelArt";
-import { PixelIcon } from "../pixel/PixelIcon";
 import { PixelPoodle } from "../pixel/PixelPoodle";
 import styles from "./HomeHero.module.css";
 
 // prettier-ignore
 const SPARKLES = [
-  "....s",
-  "...sss..........................s",
-  "....s...........................",
-  "...............s",
-  "..............sss",
-  "...............s",
+  "...s.......s..........................s",
+  "..sss................................sss",
+  "...s..................................s",
+  "",
+  "",
+  ".................s",
   "",
   "",
   "",
-  ".s...................................s",
+  "...........................s",
+  "",
+  ".....................................s",
+  "....................................sss",
+  ".....................................s",
+  "",
+  "",
+  "",
+  ".....................................s",
   "",
   "",
   "",
   "",
+  "......................................s",
   "",
-  "......................................",
+  "",
   "..s",
 ];
+
+// Back to front; each name is also its CSS class (position + tilt).
+const PHOTOS = ["hall", "tower"] as const;
 
 export function HomeHero() {
   return (
@@ -41,9 +52,19 @@ export function HomeHero() {
           layers={[SPARKLES]}
           palette={{ s: "var(--hero-lime)" }}
           width={40}
-          height={20}
+          height={27}
         />
-        <PixelIcon name="university" className={styles.building} />
+        {PHOTOS.map((name) => (
+          <img
+            key={name}
+            className={`${styles.photo} ${styles[name]}`}
+            src={`/images/hero/${name}.jpg`}
+            alt=""
+            width={96}
+            height={132}
+            decoding="async"
+          />
+        ))}
         <span className={styles.ground} aria-hidden="true" />
         <PixelPoodle className={styles.poodle} />
         <HelloBubble />
