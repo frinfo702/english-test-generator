@@ -20,10 +20,10 @@ description: >
 
 | タスク            | 音声時間  | 1音声あたりの設問数 | 主な評価スキル     |
 | ----------------- | --------- | ------------------- | ------------------ |
-| Choose a Response | 5〜15秒   | 1問                 | 実用的な応答理解   |
-| Conversation      | 30〜90秒  | 2問                 | 対話理解           |
-| Announcement      | 20〜40秒  | 2〜3問              | 詳細情報の保持     |
-| Academic Talk     | 45〜120秒 | 4問                 | 講義理解・構造把握 |
+| Choose a Response | 約5秒（5〜15語）       | 1問（4択）          | 実用的な応答理解   |
+| Conversation      | 50〜110語・5〜9ターン  | 2問                 | 対話理解           |
+| Announcement      | 50〜80語               | 2問                 | 目的・指示の把握   |
+| Academic Talk     | 150〜230語             | 4問                 | 講義理解・構造把握 |
 
 ## 各タスクの保存先
 
@@ -34,11 +34,22 @@ description: >
 | Announcement      | `public/questions/toefl/listening/announcement/` |
 | Academic Talk     | `public/questions/toefl/listening/lecture/`      |
 
-## 聞くポイント（Choose a Response）
+## 本番との差を生まないための指針
 
-- 話し手が何を求めているか（助け、確認、情報、付き合い）
-- 感情やトーン（不満、安堵、好奇心）
-- 隠された期待や次のステップ
+詳細仕様は `question-schemas.md` の Listening 節が正。出典は ETS 公式 Test Specifications (2026) と公式模試の観察。
+
+### Choose a Response
+
+- 新規は**4択（A〜D）**
+- 発話を混ぜる: wh-疑問、yes/no、否定疑問（Isn't…?）、依頼・提案、平叙文（報告・不満・感想）
+- 正解は間接的な応答を半分程度（「確認しておくね」「オンラインで見てみよう」「代わりに〜は？」）
+- distractor: 発話中の語・似た音の繰り返し、別の wh への回答、wh-疑問への Yes/No、代名詞・時制のズレ、"Yes" + 矛盾
+
+### Conversation / Announcement / Academic Talk
+
+- Conversation: キャンパス外の日常（家事、職場のトラブル、読書会、買い物の相談）も使う。慣用表現の機能を問う「Why does the woman say, "…"?」を入れる
+- Announcement: キャンパス・授業の連絡（ゲスト講演、施設閉鎖、行事）。主目的・言及の理由・聞き手がすべきこと
+- Academic Talk: 授業かポッドキャスト。主題・例の目的・詳細・次に話す内容
 
 ## 注意
 

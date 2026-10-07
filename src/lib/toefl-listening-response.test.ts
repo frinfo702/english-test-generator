@@ -84,15 +84,16 @@ describe("TOEFL Listening: Choose a Response JSON structure", () => {
       expect(q).toHaveProperty("options");
       expect(typeof q.options).toBe("object");
       const keys = Object.keys(q.options);
-      expect(keys.length).toBe(3);
-      expect(keys).toEqual(["A", "B", "C"]);
+      // Legacy sets have 3 options; the 2026 test has 4.
+      expect(keys).toEqual(["A", "B", "C", "D"].slice(0, keys.length));
+      expect(keys.length).toBeGreaterThanOrEqual(3);
       for (const key of keys) {
         expect(typeof q.options[key]).toBe("string");
         expect(q.options[key].trim()).not.toBe("");
       }
 
       expect(q).toHaveProperty("correct");
-      expect(["A", "B", "C"]).toContain(q.correct);
+      expect(keys).toContain(q.correct);
 
       expect(q).toHaveProperty("explanation");
       expect(typeof q.explanation).toBe("string");

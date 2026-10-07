@@ -26,7 +26,7 @@ interface ResponseQuestion {
   speaker?: string;
   context: string;
   stem: string;
-  options: { A: string; B: string; C: string };
+  options: { A: string; B: string; C: string; D?: string };
   correct: string;
   explanation: string;
 }
@@ -163,18 +163,18 @@ export function ListenResponsePage() {
 
   // The utterance is only revealed in review; before that the card asks for
   // the best response, as in the test.
-  const LETTERS = ["A", "B", "C"] as const;
+  const LETTERS = ["A", "B", "C", "D"] as const;
   const choiceQuestions: ChoiceQuestion[] = questions.map((q) => ({
     id: q.id,
     stem: graded ? `“${q.stem}”` : "Choose the best response.",
-    options: LETTERS.map((l) => q.options[l]),
+    options: LETTERS.flatMap((l) => q.options[l] ?? []),
     correctIndex: LETTERS.indexOf(q.correct as (typeof LETTERS)[number]),
     explanation: q.explanation,
   }));
   const answersByIndex: Record<string, number> = {};
   for (const q of questions) {
     const sel = selected[q.id];
-    if (sel) answersByIndex[q.id] = LETTERS.indexOf(sel as "A" | "B" | "C");
+    if (sel) answersByIndex[q.id] = LETTERS.indexOf(sel as (typeof LETTERS)[number]);
   }
 
   return (

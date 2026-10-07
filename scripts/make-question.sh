@@ -96,7 +96,9 @@ generate_template() {
         "TODO: word 4"
       ],
       "correctOrder": [0, 1, 2, 3],
-      "fullSentence": "TODO: Completed response sentence to reference (normally split into single words; combine minimally only to avoid ambiguity with repeated words)"
+      "prefix": "TODO: optional given words before the blanks (delete if none)",
+      "suffix": "TODO: optional given words after the blanks (delete if none)",
+      "fullSentence": "TODO: prefix + ordered chunks + suffix, ending in . or ? (chunks left out of correctOrder are distractors)"
     }
   ]
 }
@@ -147,7 +149,7 @@ TMPL
     toefl/speaking/interview)
       cat << 'TMPL'
 {
-  "scenario": "You have volunteered for a research study about TODO: topic.\nYou will have a short online interview with a researcher. The researcher will ask you some questions.",
+  "scenario": "You have agreed to take part in a research study about TODO: topic.\nYou will have a short online interview with a researcher. The researcher will ask you some questions.",
   "questions": [
     {
       "id": "q1",
@@ -206,7 +208,8 @@ TMPL
       "options": {
         "A": "TODO: Response A",
         "B": "TODO: Response B",
-        "C": "TODO: Response C"
+        "C": "TODO: Response C",
+        "D": "TODO: Response D"
       },
       "correct": "A",
       "explanation": "TODO: Why this response is the most appropriate"

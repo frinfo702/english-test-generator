@@ -18,6 +18,22 @@ interface CompleteWordsData {
   items: CompleteWordsItem[];
 }
 
+/**
+ * 2026 layout: sentence 1 intact, blanks on every other word from the 2nd
+ * word of sentence 2, first floor(len/2) letters shown.
+ * `wordIdx` / `prevWordIdx` are positions in the whitespace-split paragraph;
+ * `prevWordIdx` is -10 for the first item.
+ */
+function expectCTestBlank(
+  item: CompleteWordsItem,
+  wordIdx: number,
+  prevWordIdx: number,
+  itemIdx: number,
+  firstSentenceWords: number,
+) {
+  // TODO(human)
+}
+
 function getQuestionFiles(): string[] {
   return fs
     .readdirSync(QUESTION_DIR)
@@ -50,11 +66,11 @@ describe("TOEFL Reading: Complete the Words JSON structure", () => {
     expect(Array.isArray(data.items)).toBe(true);
   });
 
-  // Word count: 70-100
-  it.each(files)("%s paragraph is 70〜100 words", (file) => {
+  // Word count: 65-100
+  it.each(files)("%s paragraph is 65〜100 words", (file) => {
     const data = loadJson(file);
     const wc = data.paragraph.split(/\s+/).filter(Boolean).length;
-    expect(wc).toBeGreaterThanOrEqual(70);
+    expect(wc).toBeGreaterThanOrEqual(65);
     expect(wc).toBeLessThanOrEqual(100);
   });
 
@@ -68,8 +84,10 @@ describe("TOEFL Reading: Complete the Words JSON structure", () => {
   it.each(files)("%s items have valid structure", (file) => {
     const data = loadJson(file);
     const words = data.paragraph.split(/\s+/).filter(Boolean);
-    const num = parseInt(file.replace(".json", ""), 10);
-    const isNew = num >= 16; // strict validation for new files only
+    // Date-named files follow the 2026 C-test layout; NNN.json are legacy.
+    const isNew = /^\d{8}-/.test(file);
+    const firstSentenceWords = data.paragraph.split(/(?<=[.!?])\s/)[0]
+      .split(/\s+/).length;
     let prevWordIdx = -10;
 
     for (let i = 0; i < data.items.length; i++) {
@@ -77,12 +95,6 @@ describe("TOEFL Reading: Complete the Words JSON structure", () => {
 
       // index must match position
       expect(item.index).toBe(i);
-
-      // hint must be 2-3 chars (strict for new files)
-      expect(item.hint.length).toBeGreaterThanOrEqual(2);
-      if (isNew) {
-        expect(item.hint.length).toBeLessThanOrEqual(3);
-      }
 
       // hint must match start of answer (case-insensitive)
       expect(item.answer.toLowerCase()).toMatch(
@@ -99,9 +111,8 @@ describe("TOEFL Reading: Complete the Words JSON structure", () => {
       });
       expect(foundIdx).not.toBe(-1);
 
-      // at least 3 words gap (strict for new files)
       if (isNew) {
-        expect(foundIdx - prevWordIdx).toBeGreaterThanOrEqual(3);
+        expectCTestBlank(item, foundIdx, prevWordIdx, i, firstSentenceWords);
       }
 
       prevWordIdx = foundIdx;

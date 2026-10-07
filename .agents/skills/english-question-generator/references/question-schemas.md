@@ -40,7 +40,7 @@
 
 ## TOEFL Reading: Read in Daily Life
 
-everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設問を付ける。
+everyday text（実用文）1本に2〜3問の設問を付ける（1ファイル＝1テキスト）。
 
 ```json
 {
@@ -77,26 +77,6 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
           "explanation": "Resources are available 'digitally through the student portal.'"
         }
       ]
-    },
-    {
-      "id": "t2",
-      "textType": "SNS post",
-      "content": "Campus Cafe Update!\nNew autumn menu starting Monday! New items: Pumpkin Spice Latte & Apple Cider\nTemporarily unavailable: Iced drinks (equipment maintenance)",
-      "questions": [
-        {
-          "id": "q3",
-          "stem": "Which item is currently NOT available at the Campus Cafe?",
-          "options": [
-            "A. Pumpkin Spice Latte",
-            "B. Apple Cider",
-            "C. Iced drinks",
-            "D. The autumn menu"
-          ],
-          "correctIndex": 2,
-          "type": "factual",
-          "explanation": "The post states iced drinks are 'temporarily unavailable.'"
-        }
-      ]
     }
   ]
 }
@@ -104,7 +84,8 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `textType`: `"email"` / `"notice"` / `"schedule"` / `"menu"` / `"announcement"` / `"text message"` / `"online post"` / `"advertisement"` / `"poster"` / `"sign"` / `"webpage"` / `"news article"` / `"form"` / `"invoice"` / `"receipt"` など
+- 1ファイル = 1テキスト（`texts` は要素1つ）。アプリ側で2本を組み合わせてモジュールにする
+- `textType`: 本番で確認できたのは notice / social media post / email（予約確認・案内・招待）/ sign / menu。ほかに schedule, advertisement, text message, webpage, form, receipt など
 - `layout`（表示レイアウト。省略時は `textType` から推定）:
   - `"email"`: `content` を `From:` / `To:` / `Subject:` 行 → 空行 → 本文 の形で書く。ヘッダーが枠付きボックスで表示される
   - `"chat"`: スマホ画面の吹き出し。`content` の代わりに `messages: [{ "sender", "time", "text" }]`（2〜3人、最初の発言者が右寄せ）
@@ -114,13 +95,12 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 - chat / live-chat の設問は「At 9:03 A.M., what does Mr. X imply when he writes, "..."?」のように時刻と発言を引用する形式も使う
 - `type`（設問種別）: `"factual"` / `"inference"` / `"purpose"` / `"vocabulary"`
 - `correctIndex`: 0始まり（A=0, B=1, C=2, D=3）
-- テキスト数: 2〜3本（1セットあたり1〜2テキストの場合もある）
-- 各テキストの語数: 15〜150語
-- 各テキストあたりの設問数: 2〜3問
-- 合計設問数: 4〜9問（目安6〜7問）
-- 難易度: CEFR B2〜C1（実用文だが高度な推論や態度・意図の読み取りを含む）
-- 選択肢は4択。不正解選択肢は意味的に近いものを含め、容易に除外できない設計にする
-- 評価されるスキル: 非線形テキスト形式の理解、書面コミュニケーションの主目的の特定、非公式・慣用的表現の理解、推論、スキャン・スキミング
+- **長さと設問数は対で決める（本番準拠）**:
+  - 短いテキスト 40〜80語 → 2問
+  - 長いテキスト 100〜150語 → 3問
+  - 1モジュール = 短1本 + 長1本 = 5問
+- 難易度: CEFR A2〜B2 が中心（spec 上は A1〜C1）。語彙は日常語。難しさは「読み取り方」で出す
+- 選択肢は4択
 
 ---
 
@@ -165,38 +145,36 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `type`（設問種別）: `"vocabulary"` / `"detail"` / `"inference"` / `"mainIdea"` / `"paragraphRelation"` / `"importantIdea"` / `"negativeFactual"` / `"rhetoricalPurpose"` / `"insertSentence"`
-- `correctIndex`: 0始まり
-- パッセージ語数: 150〜250語（目安200語）
-- 設問数: 5問固定
-- 難易度: CEFR C1〜C2（学術語彙・複雑な構造を含む）
-- トピック領域: history, art and music, business and economics, life science, physical science, social science など。背景知識は不要
+- `type`（設問種別）。本番の公式練習問題で確認できたのは次の6種のみ:
+  - `"mainIdea"`（主旨）/ `"vocabulary"`（closest in meaning）/ `"detail"` / `"negativeFactual"`（NOT / EXCEPT）/ `"rhetoricalPurpose"`（Why does the author mention X?）/ `"inference"`
+  - `"paragraphRelation"` / `"importantIdea"` / `"insertSentence"` は旧形式の名残。新規では使わない（文挿入・要約問題は2026形式に存在しない）
+- `correctIndex`: 0始まり、4択、単一正解
+- パッセージ: 180〜230語、3段落（`\n\n` 区切り）、タイトル付き
+- 構成の定型: ①概念・現象の提示 → ②研究・証拠・具体例 → ③より広い含意・未解決点
+- 設問数: 5問固定。1問目は mainIdea か段落1の detail、vocabulary は1問まで
+- 難易度: CEFR B1〜C2（spec）。文は明快な説明文で、難しさは推論と修辞目的の問いで出す。専門語は本文中で定義する
+- トピック: 心理学・行動科学、動物の認知、生物、地学・天文、歴史、芸術、経済など。背景知識は不要
 
 ---
 
 ## TOEFL Reading: Complete the Words
 
-段落内の単語を表示時に部分マスクし、**hintの続きだけ**を入力させる。
+段落内の単語の後半を表示時に伏せ、**hintの続きだけ**を入力させる（C-test形式）。
 
 ```json
 {
-  "paragraph": "The process of photosynthesis allows plants to convert sunlight into chemical energy. Chlorophyll, the green pigment found in plant cells, absorbs light from the sun.",
+  "paragraph": "Glaciers are large masses of ice that move slowly over land. They form in places where more snow falls in winter than melts in summer. Over many years, the snow is pressed into dense ice. As a glacier moves, it carves valleys and carries rocks over long distances. Today, many glaciers are shrinking because temperatures around the world are rising. Scientists study glaciers to learn how the climate has changed.",
   "items": [
-    {
-      "index": 0,
-      "hint": "pho",
-      "answer": "photosynthesis"
-    },
-    {
-      "index": 1,
-      "hint": "con",
-      "answer": "convert"
-    },
-    {
-      "index": 2,
-      "hint": "che",
-      "answer": "chemical"
-    }
+    { "index": 0, "hint": "fo", "answer": "form" },
+    { "index": 1, "hint": "pla", "answer": "places" },
+    { "index": 2, "hint": "mo", "answer": "more" },
+    { "index": 3, "hint": "fa", "answer": "falls" },
+    { "index": 4, "hint": "win", "answer": "winter" },
+    { "index": 5, "hint": "me", "answer": "melts" },
+    { "index": 6, "hint": "sum", "answer": "summer" },
+    { "index": 7, "hint": "Ov", "answer": "Over" },
+    { "index": 8, "hint": "ye", "answer": "years" },
+    { "index": 9, "hint": "sn", "answer": "snow" }
   ]
 }
 ```
@@ -205,16 +183,24 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 - `paragraph`: 元の全文。伏せ字や `_` は保存しない
 - `items[].index`: 段落内の出現順（0始まり）
-- `items[].hint`: 最初の2〜3文字（文脈に応じて変動可）
-- `items[].answer`: 正解の完全な単語
-- `items[].hint` は `items[].answer` の先頭一致にする（大文字小文字は無視可）
-- `items` は段落内の出現順に並べる
-- 各 `answer` は段落内に対応する出現箇所を持たせる
-- UIでは hint 部分は表示済みで、解答者は続き部分のみ入力する
-- パッセージ語数: 70〜100語
-- 第1文は通常全文表示。第2文以降で単語の後半が欠落する形式
-- 穴埋め数: 10個固定
-- 連続する単語（隣接語）を両方とも空欄にしない。空欄同士は最低3語以上離す
+- `items[].answer`: 正解の完全な単語（句読点を含めない）
+- `items[].hint` = `answer` の先頭 **floor(len/2) 文字**（例: of→o, the→t, and→a, each→ea, which→wh, moves→mo, places→pla, training→trai, increased→incr, flexibility→flexi）。UIでは hint が表示済みで、解答者は残り ceil(len/2) 文字を入力する
+- 1文字語（a, I）は hint が空になるので空欄にしない。数字・固有名詞も空欄にしない
+
+**空欄の配置（公式練習問題の観察に基づく）:**
+
+- 段落: 4〜5文、65〜100語（目安75〜85語）
+- **第1文は完全に表示**（トピック提示）。空欄は第2文の2語目から始める
+- そこから **1語おき（every other word）** に連続して10個空欄化する。飛ばしてよいのは1文字語・数字・固有名詞だけ（その場合は次の語へずらす）
+- 10個目のあとは最後まで表示する。最終文（1〜2文）は空欄なし
+- 結果として空欄の約半数は機能語（the, of, in, and, that, with, its, is, have, from, into, such, may）、残りは日常的な内容語・活用形（places, falls, records, requires, surfaces）になる。2〜4文字の短い語が多く、欠落が1〜2文字だけの空欄も普通にある
+
+**難易度の作り方:**
+
+- 語彙レベルで難しくしない。CEFR B1〜B2 の高頻度語で書く（学術語彙リスト上位レベルの長い語を並べない）
+- 難しさは「文法・語法・形態」で決まる: 複数形 -s、三単現 -s、過去形・過去分詞、前置詞の選択（depend on / consist of）、接続詞・副詞（however, although, while, also）、冠詞、代名詞・its/their の一致
+- 正解が文脈から一意に決まり、hint から別の語に読めないこと（例: `th` → the/this/that/they の曖昧さは文法で一意に決まるか確認する）
+- 話題: 百科事典風の短い説明文（自然科学、歴史、芸術、心理学、技術、地理）。中立的な学術レジスター
 
 ---
 
@@ -246,6 +232,11 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 ```
 
 - `course`（任意）: 授業の科目名。画面では「Your professor is teaching a class on {course}.」と表示される
+- `professorQuestion`: 70〜90語。背景2〜3文 → 問い（Should …? / Do you think …? / Which … more important, A or B? Why?）
+- `student1` / `student2`: 各40〜60語。**反対の立場**で、それぞれ具体的理由を1つ持つ（受験者が第3の視点を足せる余地を残す）
+- `modelAnswer`: 120〜150語。片方に触れつつ新しい理由・例を加える
+- 本番は10分、"An effective response will contain at least 100 words"
+- 採点観点（0〜5）: 議論への関連性と明確さ、理由・例の展開、構文の多様さと慣用的で正確な語彙、誤りの少なさ
 
 ---
 
@@ -277,50 +268,47 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 }
 ```
 
-- `keyPoints`: 画面では「Write an email to {recipient}. In your email, do the following.」の下に箇条書きで表示される
+- `keyPoints`: 画面では「Write an email to {recipient}. In your email, do the following.」の下に箇条書きで表示される。**本番は3つ固定**。定型の流れ:
+  1. 状況・肯定的な点・背景を伝える（例: 楽しんだこと、参加した経緯）
+  2. 問題・事情を説明する
+  3. 依頼・質問・提案をする
+- `description`: 2〜3文。相手との関係（教授・大家・店・クラブの代表・友人など）と出来事を書く。キャンパス外の日常場面も多い
+- 本番は7分、語数指定なし（目安120〜150語）。`modelAnswer` もこの長さ
+- 採点観点（0〜5）: 目的を果たす展開、構文の多様さと慣用表現、丁寧さ・レジスターなど社会的慣習、誤りの少なさ。問題文の語句の丸写しは減点対象なので、`keyPoints` は modelAnswer と同じ言い回しにしない
 - `subject`（任意）: 解答欄上の Subject 行。省略時は `title` を表示する
 
 ---
 
 ## TOEFL Writing: Build a Sentence
 
-チャンクを正しい語順に並べる。10文セット。
+相手の発話（`reference`）への返答文を、チャンクを並べて完成させる。10文セット。
 
 ```json
 {
   "sentences": [
     {
       "id": "s1",
-      "reference": "Professor: How has remote work affected office culture?",
-      "chunks": [
-        "traditional",
-        "It",
-        "office",
-        "has",
-        "model",
-        "changed",
-        "the",
-        "significantly"
-      ],
-      "correctOrder": [1, 3, 7, 5, 6, 0, 2, 4],
-      "fullSentence": "It has significantly changed the traditional office model"
+      "reference": "I'm moving to a new apartment next month.",
+      "chunks": ["found", "to help", "you", "have", "helping", "someone"],
+      "correctOrder": [3, 2, 0, 5, 1],
+      "suffix": "you pack",
+      "fullSentence": "Have you found someone to help you pack?"
     },
     {
       "id": "s2",
-      "reference": "Professor: Why was the conclusion surprising?",
-      "chunks": [
-        "method",
-        "was",
-        "that we",
-        "showed",
-        "It",
-        "flawed",
-        "that",
-        "used",
-        "the"
-      ],
-      "correctOrder": [4, 3, 6, 8, 0, 2, 7, 1, 5],
-      "fullSentence": "It showed that the method that we used was flawed"
+      "reference": "Did the museum tour go well?",
+      "prefix": "Yes, the woman",
+      "chunks": ["the tour", "who", "was", "led", "really helpful"],
+      "correctOrder": [1, 3, 0, 2, 4],
+      "fullSentence": "Yes, the woman who led the tour was really helpful."
+    },
+    {
+      "id": "s3",
+      "reference": "What did the professor ask you after class?",
+      "prefix": "She wanted to know",
+      "chunks": ["I", "had", "the article", "whether", "finished", "did"],
+      "correctOrder": [3, 0, 1, 4, 2],
+      "fullSentence": "She wanted to know whether I had finished the article."
     }
   ]
 }
@@ -328,13 +316,29 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `reference`: 他者の発話（質問または文章）。この発話に対する回答を並べ替える
-- `chunks`: シャッフル済みの配列（表示順）。原則1単語ずつ分割する
-- `correctOrder`: `chunks` のインデックス列で正しい語順を示す
-  - 例: `[1, 0, 3, 2, 4]` → chunks[1], chunks[0], chunks[3], chunks[2], chunks[4] の順
-- `fullSentence`: `reference` への自然な回答として成立する正解文（末尾ピリオドなし）
-  - 解答欄の文末記号は画面側で自動表示する（助動詞・疑問詞で始まる文は `?`、それ以外は `.`）。`!` などそれ以外にしたい場合のみ `fullSentence` の末尾に付ける
-- 重複語（例: that, the）が複数あり識別が曖昧になる場合のみ、片方を隣接語と連結してよい（例: "that we"）。連結は1問あたり1〜2個まで
+- `reference`: 相手の一言（日常会話の発話。話者ラベルは付けない）。質問・報告・感想・誘いなど
+- `prefix`（任意）: 返答文の冒頭で既に表示されている語（例: `"She wanted to know"`, `"No, I"`, `"The"`）
+- `suffix`（任意）: 返答文の末尾で既に表示されている語（例: `"yet"`, `"for the trip"`）。末尾の `.` / `?` は含めない
+- `chunks`: シャッフル済みの配列（表示順）。UIでは小文字で表示される
+- `correctOrder`: 正解に使う `chunks` のインデックス列。**含まれないチャンクは distractor** として最後まで選択肢に残る
+- `fullSentence`: prefix・空欄部・suffix を合わせた完全な返答文。**末尾に `.` か `?` を必ず付ける**（画面の文末記号はここから取る）
+- `prefix + correctOrder の順に並べた chunks + suffix` を空白でつないだもの ＝ `fullSentence` から末尾記号を除いたもの、が成り立つこと（大文字小文字は無視）
+
+**本番の傾向（公式練習問題20問の観察）:**
+
+- 返答が**疑問文**の問題が多い（あるテストで7/10、別のテストで0/10。1セットで4〜6問を目安に混ぜる）
+- 全10問のうち約半数に `prefix` か `suffix` がある（文頭・文末どちらも出る）。残りは全部空欄
+- チャンク数は **5〜7個**（distractor 含む）。2〜3語の**複数語チャンクを1〜3個**含める（`"to help"`, `"the tour"`, `"a later train"`, `"looked into"`）
+- distractor は **0個か1個**。1セットで4〜6問に1個入れる。正解語の文法的な紛らわしい代替にする: was/were, already/yet, not/no, none/not, so/too, because, 余計な `it` / `do` / `did`, -ing と原形（`helping`）
+- 狙う文法:
+  - 間接疑問（Do you know if… / Can you tell me where… / I wonder why… ＝平叙文の語順）
+  - 報告疑問・報告文（She wanted to know where… / He asked when to…）
+  - do / will / have を使う直接疑問文（Did you… / Have you… / Will you need to…?）
+  - 関係詞節（who led the tour / that was recommended by）
+  - 否定（haven't … yet / have no interest in / didn't …）
+  - 完了形、受動態、to不定詞、動名詞、find X to be Y
+- 話題: 旅行、コンサート、買い物、試験、映画、料理、引っ越し、アルバイトなど日常の雑談。学術的な語彙は使わない
+- 全体の長さ: 返答文 7〜13語。正解が一通りに決まること（別の語順でも文法的に成立しないか確認する）
 - 文数: 10文固定
 
 ---
@@ -403,7 +407,7 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 **フィールド仕様:**
 
 - `scenario`（必須）: 受験者向け導入文（TTS で `scenario.mp3` 化。画面上は折りたたみ表示）。次の2文構成を基本とする
-  1. `You have volunteered for a research study about {topic}.`
+  1. `You have agreed to take part in a research study about {topic}.`（旧形式 `You have volunteered for…` も可）
   2. `You will have a short online interview with a researcher. The researcher will ask you some questions.`
 - `questions`（必須）: 4問固定。同一 `scenario` のトピックに沿った一連の会話にする
 - `type`: 出題順に対応するラベル
@@ -417,29 +421,33 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **出題ルール（本番寄せ）:**
 
-- 1セット＝1トピック（例: food preferences, free time, technology, travel）
-- Q1は導入を長めにし、研究目的と最初の質問をまとめる
-- Q2以降は短い相づち＋本問
-- 選択肢フレーム（traditional/modern, cook/eat out/ready-made, agree/other ways）を適度に使い、答えやすくする
+- 1セット＝1トピック（本番例: urban life, exercise habits。ほかに food, travel, technology, free time, shopping, work）
+- 準備時間なし、各45秒で回答
+- 4問は「事実 → 好み・反応 → 一般論への賛否 → 社会・政策・技術の是非」と抽象度を上げる:
+  - `opening`: 本人の事実・描写（Do you live in a city, a town, or a village? / Describe the exercise you usually do.）
+  - `personal`: 好み・経験への反応＋理由（What do you like most about…? Why?）
+  - `opinion`: 示された一般論への賛否（Some people say that… Do you agree? Why or why not?）
+  - `closing`: 社会・政策・技術の問い（Should city governments…? / Are fitness apps a good way to…? Why or why not?）
+- 各問は短い相づち（Great. / I see. / Interesting. / Good points.）＋前置き1〜2文＋問い。Q1だけ研究目的の導入を含める
 - アカデミックな孤立エッセイ質問（"Describe a time when..." 単体）にはしない
 
 ---
 
 ## TOEFL Speaking: Listen and Repeat
 
-短文7〜10文。`scripts/generate-audio.ts` で各文の音声を別途生成する。
+1つの場面設定で、研修担当者（manager / trainer）の言葉を7文リピートする。`scripts/generate-audio.ts` で各文の音声を別途生成する。
 
 ```json
 {
   "sentences": [
     {
       "id": "s1",
-      "text": "The library will be closed for maintenance next weekend.",
-      "wordCount": 9
+      "text": "Welcome to the city aquarium.",
+      "wordCount": 5
     },
     {
       "id": "s2",
-      "text": "Could you remind me when the assignment is due?",
+      "text": "Please keep your bags with you at all times.",
       "wordCount": 9
     }
   ]
@@ -448,8 +456,13 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `wordCount`: 単語数（参考値）
-- 文数: 7〜10文
+- `wordCount`: 単語数（空白区切り）
+- 文数: **7文固定**
+- 場面: 受験者が新人スタッフとして研修を受ける設定（動物園の来園者案内、図書館の貸出カウンター、美術館、ホテルのフロント、キャンパスツアー、ジム、カフェなど）。7文すべて同じ場面
+- 内容: あいさつ、規則（Please don't…, You must…）、場所の案内（The gift shop is next to…）、手順・説明
+- 長さ: 4〜6語から始め、最後は12〜15語。全体として長くなる（厳密な単調増加でなくてよい）
+- 構文の進み方: 単文 → 複合動詞・前置詞句 → 従属節・関係詞節（…, which is…, if you…, before you…）→ 複雑な名詞句
+- 縮約形（you'll, don't, it's）を自然に含める。数字・固有名詞は少なめにする
 
 ---
 
@@ -500,16 +513,22 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 **フィールド仕様:**
 
 - `context`: 状況ラベル（例: "Asking for information", "Expressing concern"）
-- `questions[].options`: オブジェクト形式（`"A"`〜`"C"`、3択）
-- `questions[].correct`: アルファベット文字列（`"A"` / `"B"` / `"C"`）
+- `questions[].options`: オブジェクト形式。**本番は4択（`"A"`〜`"D"`）**。旧データは3択
+- `questions[].correct`: アルファベット文字列
 - `audioSegments`: 各設問1セグメント（発言のみ、応答は音声不要）
 - 設問数: 8問／ファイル
+- 発話の長さ: 1文、5〜15語（約5秒）。難易度 CEFR A1〜B2
 
-**聞くポイント:**
+**本番の傾向:**
 
-- 話し手が何を求めているか（助け、確認、情報、付き合い）
-- 感情やトーン（不満、安堵、好奇心）
-- 隠された期待や次のステップ
+- 発話は wh-疑問、yes/no 疑問、**否定疑問**（Isn't the post office open today?）、依頼・提案、平叙文（報告・不満・感想）を混ぜる
+- 正解は**間接的な応答**が多い（「わからないけど調べておく」「スケジュールをオンラインで確認しよう」「代わりに〇〇はどう？」）。yes/no で直接答えない正解を半分程度にする
+- distractor の型:
+  - 発話中の語・似た音を繰り返す（bus → "I missed the bus"）
+  - 別の wh に答える（when ↔ where）
+  - wh-疑問に Yes/No で答える
+  - 代名詞・時制のズレ（she/he, will/did）
+  - "Yes" + 矛盾する内容
 
 ---
 
@@ -562,11 +581,13 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `transcript`: 全文文字起こし
+- `transcript`: 全文文字起こし。50〜110語、5〜9ターン、2名
 - `questions[].type`: `"purpose"` / `"detail"` / `"inference"` / `"attitude"`
 - `options`: 配列形式（4択）
 - `correctIndex`: 0始まり
-- 1会話あたり2問、8セットで16問がフルセット
+- 1会話あたり2問
+- 場面: キャンパスに限らない日常。家事・用事、職場（空調の修理、プリンターの故障）、読書会、機器選び、友人との予定
+- 設問の型: 暗示された意味、相手の提案、理由、慣用表現の機能（Why does the man say, "…"?）、次の行動
 
 ---
 
@@ -613,11 +634,13 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `transcript`: 全文文字起こし
+- `transcript`: 全文文字起こし。50〜80語、1名
 - `questions[].type`: `"detail"` / `"inference"` / `"vocabulary"`
 - `options`: 配列形式（4択）
 - `correctIndex`: 0始まり
-- 1アナウンスあたり2〜3問、8セットで16〜24問がフルセット
+- 1アナウンスあたり **2問**
+- 場面: キャンパス・授業内（ゲスト講演、ラウンジ閉鎖、春祭り、授業の変更）が中心。図書館・交通・博物館・店舗も可
+- 設問の型: 主目的、ある情報がなぜ述べられたか、聞き手がすべきこと
 
 ---
 
@@ -669,11 +692,13 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 **フィールド仕様:**
 
-- `transcript`: 全文文字起こし
+- `transcript`: 全文文字起こし。150〜230語（上限250語）、1名
 - `questions[].type`: `"mainIdea"` / `"detail"` / `"inference"` / `"vocabulary"` / `"attitude"`
 - `options`: 配列形式（4択）
 - `correctIndex`: 0始まり
-- 1講義あたり4問、4セットで16問がフルセット
+- 1講義あたり4問
+- 枠組み: 授業の一部（"a talk in an environmental science class"）またはポッドキャスト（"a podcast about psychology"）。`subject` で指定
+- 設問の型: 主題、例が挙げられた目的、詳細、次に話す内容（What will the speaker most likely discuss next?）
 
 ---
 

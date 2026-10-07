@@ -29,6 +29,10 @@ import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 interface Sentence {
   id: string;
   reference: string;
+  /** Given words shown before / after the blanks; not chunks. */
+  prefix?: string;
+  suffix?: string;
+  /** Chunks not in correctOrder are distractors and stay in the pool. */
   chunks: string[];
   correctOrder: number[];
   fullSentence: string;
@@ -89,7 +93,7 @@ export function BuildSentencePage() {
 
   const sentence = data?.sentences[current];
   const slotsFor = (idx: number): Slots =>
-    allSlots[idx] ?? emptySlots(data?.sentences[idx]?.chunks.length ?? 0);
+    allSlots[idx] ?? emptySlots(data?.sentences[idx]?.correctOrder.length ?? 0);
   const slots = slotsFor(current);
   const pool = sentence ? poolChunks(sentence.chunks.length, slots) : [];
 
@@ -98,7 +102,7 @@ export function BuildSentencePage() {
     setAllSlots((s) => ({
       ...s,
       [current]: applyDrop(
-        s[current] ?? emptySlots(sentence?.chunks.length ?? 0),
+        s[current] ?? emptySlots(sentence?.correctOrder.length ?? 0),
         source,
         target,
       ),
@@ -244,6 +248,9 @@ export function BuildSentencePage() {
               <div className={styles.zone}>
                 <p className={styles.zoneLabel}>Answer Area</p>
                 <div className={styles.blanks}>
+                  {sentence.prefix && (
+                    <span className={styles.given}>{sentence.prefix}</span>
+                  )}
                   {slots.map((chunkIdx, pos) => {
                     const blank = (
                       <span
@@ -283,7 +290,7 @@ export function BuildSentencePage() {
                       </span>
                     );
                     // Keep the end mark on the same line as the last blank.
-                    return pos === slots.length - 1 ? (
+                    return pos === slots.length - 1 && !sentence.suffix ? (
                       <span key={pos} className={styles.lastBlank}>
                         {blank}
                         <span className={styles.endMark}>{endMark}</span>
@@ -292,6 +299,12 @@ export function BuildSentencePage() {
                       blank
                     );
                   })}
+                  {sentence.suffix && (
+                    <span className={styles.given}>
+                      {sentence.suffix}
+                      <span className={styles.endMark}>{endMark}</span>
+                    </span>
+                  )}
                 </div>
               </div>
               <div className={styles.zone}>

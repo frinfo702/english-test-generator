@@ -1,0 +1,55 @@
+{
+  "paragraph": "Honeybees live in large colonies that can contain tens of thousands of insects. Each colony has one queen, whose main job is to lay eggs for the group. Most of the other bees are workers that collect food and protect the hive. When a worker finds a good source of flowers, it returns home and performs a special dance. This movement shows the other bees where to fly to find the food.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "col",
+      "answer": "colony"
+    },
+    {
+      "index": 1,
+      "hint": "o",
+      "answer": "one"
+    },
+    {
+      "index": 2,
+      "hint": "wh",
+      "answer": "whose"
+    },
+    {
+      "index": 3,
+      "hint": "j",
+      "answer": "job"
+    },
+    {
+      "index": 4,
+      "hint": "t",
+      "answer": "to"
+    },
+    {
+      "index": 5,
+      "hint": "eg",
+      "answer": "eggs"
+    },
+    {
+      "index": 6,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 7,
+      "hint": "Mo",
+      "answer": "Most"
+    },
+    {
+      "index": 8,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 9,
+      "hint": "be",
+      "answer": "bees"
+    }
+  ]
+}
