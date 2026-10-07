@@ -226,6 +226,7 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 ```json
 {
   "professorName": "Dr. Chen",
+  "course": "education policy",
   "professorQuestion": "Technology is increasingly used in K-12 classrooms. Do you believe integrating technology into education primarily benefits or hinders student learning? Support your position with specific reasons and examples.",
   "student1": {
     "name": "Marcus",
@@ -245,6 +246,8 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 }
 ```
 
+- `course`（任意）: 授業の科目名。画面では「Your professor is teaching a class on {course}.」と表示される
+
 ---
 
 ## TOEFL Writing: Write an Email
@@ -253,18 +256,30 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 ```json
 {
-  "situation": "You are a student who needs to request an extension on an assignment due to illness.",
-  "recipient": "Professor Johnson",
-  "subject": "Assignment Extension Request",
-  "modelAnswer": "Dear Professor Johnson,\n\nI am writing to request a short extension on the essay due this Friday...",
-  "evaluationPoints": [
-    "Opens with appropriate salutation",
-    "Clearly states the purpose in the first sentence",
-    "Provides a brief, credible reason",
-    "Closes politely"
+  "scenario": {
+    "title": "Requesting an Extension on an Assignment",
+    "description": "You are a student in Professor Martinez's Advanced Writing course. You have been ill for three days and cannot complete the research paper due this Friday.",
+    "recipient": "Professor Martinez",
+    "subject": "Request for an extension",
+    "purpose": "Request a one-week extension on the research paper",
+    "keyPoints": [
+      "Explain your illness and its impact",
+      "Specify how much additional time you need",
+      "Offer to provide a doctor note if required"
+    ]
+  },
+  "modelAnswer": "Dear Professor Martinez,\n\nI am writing to request...",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Clearly explains the reason and includes all key points."
+    }
   ]
 }
 ```
+
+- `keyPoints`: 画面では「Write an email to {recipient}. In your email, do the following.」の下に箇条書きで表示される
+- `subject`（任意）: 解答欄上の Subject 行。省略時は `title` を表示する
 
 ---
 

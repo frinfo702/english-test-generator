@@ -1,5 +1,5 @@
 .wrapper {
-  margin-bottom: var(--spacing-8);
+  margin-bottom: var(--spacing-4);
 }
 
 .top {
@@ -73,6 +73,6 @@
   }
 
   .wrapper {
-    margin-bottom: var(--spacing-6);
+    margin-bottom: var(--spacing-3);
   }
 }
