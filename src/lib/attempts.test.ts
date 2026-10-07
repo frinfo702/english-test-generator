@@ -107,6 +107,64 @@ describe("attempts", () => {
     ).rejects.toThrow("not a backup from this app");
   });
 
+  const backupOf = (...attempts: unknown[]) =>
+    new Blob([
+      JSON.stringify({
+        format: "english-test-generator/backup",
+        version: 1,
+        attempts,
+      }),
+    ]);
+
+  const valid = {
+    id: "a1",
+    taskId: "toeic/part5",
+    date: "2026-10-01T00:00:00.000Z",
+    problemId: "001",
+    elapsedSeconds: 30,
+    responses: [{ itemId: "q1", choice: "B" }],
+    score: { method: "answer-key", correct: 1, total: 1 },
+  };
+
+  it.each([
+    ["a non-object record", "oops"],
+    ["a missing id", { ...valid, id: undefined }],
+    ["an empty id", { ...valid, id: "" }],
+    ["a missing task", { ...valid, taskId: undefined }],
+    ["an unparseable date", { ...valid, date: "yesterday" }],
+    ["a numeric problem ID", { ...valid, problemId: 1 }],
+    ["a non-numeric elapsed time", { ...valid, elapsedSeconds: "30" }],
+    ["missing responses", { ...valid, responses: undefined }],
+    ["a non-object response", { ...valid, responses: ["B"] }],
+    ["non-string audio", { ...valid, responses: [{ audio: 42 }] }],
+    ["a score without a method", { ...valid, score: { correct: 1, total: 1 } }],
+    ["a score out of zero", { ...valid, score: { ...valid.score, total: 0 } }],
+  ])("refuses a whole backup containing %s", async (_, bad) => {
+    const db = await freshStart();
+    await expect(db.importBackup(backupOf(valid, bad))).rejects.toThrow(
+      "malformed records; nothing imported",
+    );
+    expect(await db.getAllAttempts()).toEqual([]);
+  });
+
+  it("accepts tasks this version does not know and ungraded attempts", async () => {
+    const db = await freshStart();
+    const future = { ...valid, id: "a2", taskId: "toefl/speaking/new-task" };
+    const ungraded = {
+      id: "a3",
+      taskId: "toefl/writing/email",
+      date: "2026-10-02T00:00:00.000Z",
+      responses: [{ text: "Dear Professor," }],
+    };
+
+    expect(await db.importBackup(backupOf(valid, future, ungraded))).toBe(3);
+    expect((await db.getAllAttempts()).map((a) => a.id)).toEqual([
+      "a1",
+      "a2",
+      "a3",
+    ]);
+  });
+
   it("never fetches a URL named by an imported file", async () => {
     const db = await freshStart();
     const fetchSpy = vi.spyOn(globalThis, "fetch");

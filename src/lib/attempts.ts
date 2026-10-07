@@ -158,10 +158,42 @@ export async function exportBackup(includeAudio: boolean): Promise<Blob> {
   return new Blob([JSON.stringify(backup)], { type: "application/json" });
 }
 
+const isRecord = (v: unknown): v is Record<string, unknown> =>
+  typeof v === "object" && v !== null && !Array.isArray(v);
+const isString = (v: unknown): v is string => typeof v === "string";
+const isFiniteNumber = (v: unknown): v is number =>
+  typeof v === "number" && Number.isFinite(v);
+const isOptional = (v: unknown, check: (v: unknown) => boolean) =>
+  v === undefined || check(v);
+
 /** The file comes from outside the app, so nothing in it is trusted yet. */
 export function isBackupAttempt(value: unknown): value is BackupAttempt {
-  // TODO(human)
-  return typeof value === "object" && value !== null;
+  if (!isRecord(value)) return false;
+  const { id, taskId, date, problemId, elapsedSeconds, responses, score } =
+    value;
+  return (
+    isString(id) &&
+    id !== "" &&
+    // Any string rather than today's task list: a backup from a newer
+    // version would otherwise be refused whole.
+    isString(taskId) &&
+    isString(date) &&
+    !Number.isNaN(Date.parse(date)) &&
+    isOptional(problemId, isString) &&
+    isOptional(elapsedSeconds, isFiniteNumber) &&
+    Array.isArray(responses) &&
+    responses.every((r) => isRecord(r) && isOptional(r.audio, isString)) &&
+    isOptional(
+      score,
+      (s) =>
+        isRecord(s) &&
+        isString(s.method) &&
+        isFiniteNumber(s.correct) &&
+        isFiniteNumber(s.total) &&
+        // A zero total turns the percentage, and every chart using it, NaN.
+        s.total > 0,
+    )
+  );
 }
 
 export async function importBackup(file: Blob): Promise<number> {
