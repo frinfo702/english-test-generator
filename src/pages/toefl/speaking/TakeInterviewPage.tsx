@@ -685,15 +685,15 @@ export function TakeInterviewPage() {
                   <BarGroup>
                     {itemScore?.languageUse !== undefined && (
                       <ProgressBar
-                        current={itemScore.languageUse}
-                        total={5}
+                        current={Math.round(itemScore.languageUse)}
+                        total={100}
                         label="Language use"
                       />
                     )}
                     {itemScore?.organization !== undefined && (
                       <ProgressBar
-                        current={itemScore.organization}
-                        total={5}
+                        current={Math.round(itemScore.organization)}
+                        total={100}
                         label="Organization"
                       />
                     )}

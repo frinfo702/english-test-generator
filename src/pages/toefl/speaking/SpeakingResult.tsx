@@ -465,8 +465,8 @@ export function InterviewResult({
                       value !== undefined && (
                         <ProgressBar
                           key={label}
-                          current={Math.round(value * 10) / 10}
-                          total={5}
+                          current={Math.round(value)}
+                          total={100}
                           label={label}
                         />
                       ),

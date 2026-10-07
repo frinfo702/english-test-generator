@@ -46,6 +46,12 @@ describe("parseAiScores", () => {
     expect(() => parseAiScores('{"languageUse": 3}')).toThrow(/toefl-score/);
   });
 
+  it("accepts half points", () => {
+    expect(
+      parseAiScores('{"languageUse": 3.5, "organization": 4}').languageUse,
+    ).toBe(3.5);
+  });
+
   it("rejects scores outside 0–5", () => {
     expect(() =>
       parseAiScores('{"languageUse": 7, "organization": 3}'),
@@ -54,13 +60,15 @@ describe("parseAiScores", () => {
 });
 
 describe("interviewItemScore", () => {
-  it("averages the four constructs into a 0–5 integer", () => {
+  it("reports facets on 0–100 and averages them into a 0–5 integer", () => {
     const score = interviewItemScore(
       { languageUse: 3, organization: 4 },
       assessment(80, 80),
     )!;
-    expect(score.intelligibility).toBeCloseTo(4);
-    expect(score.fluency).toBeCloseTo(4.5);
+    expect(score.languageUse).toBe(60);
+    expect(score.organization).toBe(80);
+    expect(score.intelligibility).toBe(80);
+    expect(score.fluency).toBeCloseTo(90);
     expect(score.total).toBe(4);
   });
 

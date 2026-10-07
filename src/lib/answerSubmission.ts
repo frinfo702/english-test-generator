@@ -89,7 +89,7 @@ export function buildInterviewQaCopyMessage(payload: InterviewCopyPayload) {
     "- languageUse: range and accuracy of grammar and vocabulary.",
     "- organization: relevance to the question, elaboration with reasons/examples, and connectors. Give 0 if the answer is unconnected to the question.",
     "",
-    "Give your feedback and a stronger version of my answer, then end your reply with this block exactly once, using integers:",
+    "Give your feedback and a stronger version of my answer, then end your reply with this block exactly once (half points such as 3.5 are allowed):",
     "",
     "```" + AI_SCORE_FENCE,
     '{"languageUse": 0, "organization": 0}',
