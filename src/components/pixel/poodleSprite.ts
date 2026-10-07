@@ -26,8 +26,8 @@ export const POODLE_BODY = [
   "....KKKDKKKKKKKKKDKKKK",
   "...KKDKKKKKKKKKKKKKKDKK",
   "...KKKKDKKKKKKKKKKDKKKK",
-  "..KKKKKDKWWKKKKWWKDKKKKK",
-  "..KDKKKDKWWKKKKWWKDKKKDK",
+  "..KKKKKDKKWKKKKWKKDKKKKK",
+  "..KDKKKDKKKKKKKKKKDKKKDK",
   "..KKKKKDKDDDDDDDDKDKKKKK",
   "..KDKKKDKDDDNNDDDKDKKKDK",
   "..KKKKKDKKDDDDDDKKDKKKKK",
@@ -50,8 +50,7 @@ export const POODLE_BODY = [
 // prettier-ignore
 export const POODLE_BLINK = [
   "", "", "", "", "", "", "", "",
-  ".........KK....KK",
-  ".........DD....DD",
+  "..........D....D",
 ];
 
 // Tail poses, raised → swept out. Played back and forth for the wag.
