@@ -15,25 +15,33 @@ export interface PronunciationResult {
   words: AssessedWord[];
 }
 
-interface AzureWord {
-  Word: string;
-  Offset?: number;
-  Duration?: number;
+interface AzureWordScores {
   AccuracyScore?: number;
   ErrorType?: string;
 }
 
+interface AzureWord extends AzureWordScores {
+  Word: string;
+  Offset?: number;
+  Duration?: number;
+  PronunciationAssessment?: AzureWordScores;
+}
+
+interface AzureScores {
+  AccuracyScore?: number;
+  FluencyScore?: number;
+  CompletenessScore?: number;
+  ProsodyScore?: number;
+  PronScore?: number;
+}
+
 interface AzureResponse {
   RecognitionStatus: string;
-  NBest?: {
+  NBest?: (AzureScores & {
     Display?: string;
-    AccuracyScore?: number;
-    FluencyScore?: number;
-    CompletenessScore?: number;
-    ProsodyScore?: number;
-    PronScore?: number;
+    PronunciationAssessment?: AzureScores;
     Words?: AzureWord[];
-  }[];
+  })[];
 }
 
 const TICKS_PER_SECOND = 10_000_000;
@@ -43,21 +51,24 @@ export function parseAzureAssessment(raw: AzureResponse): PronunciationResult {
   if (raw.RecognitionStatus !== "Success" || !best) {
     throw new Error(`Speech not recognized (${raw.RecognitionStatus}).`);
   }
+  // The REST API puts scores on the result itself; the SDK nests them.
+  const scores = best.PronunciationAssessment ?? best;
   return {
     recognized: best.Display ?? "",
-    pronunciation: best.PronScore ?? 0,
-    accuracy: best.AccuracyScore ?? 0,
-    fluency: best.FluencyScore ?? 0,
-    completeness: best.CompletenessScore ?? 0,
-    prosody: best.ProsodyScore ?? null,
+    pronunciation: scores.PronScore ?? 0,
+    accuracy: scores.AccuracyScore ?? 0,
+    fluency: scores.FluencyScore ?? 0,
+    completeness: scores.CompletenessScore ?? 0,
+    prosody: scores.ProsodyScore ?? null,
     words: (best.Words ?? []).map((w) => {
       const start = (w.Offset ?? 0) / TICKS_PER_SECOND;
+      const wordScores = w.PronunciationAssessment ?? w;
       return {
         word: w.Word,
         start,
         end: start + (w.Duration ?? 0) / TICKS_PER_SECOND,
-        accuracy: w.AccuracyScore ?? 0,
-        errorType: w.ErrorType ?? "None",
+        accuracy: wordScores.AccuracyScore ?? 0,
+        errorType: wordScores.ErrorType ?? "None",
       };
     }),
   };

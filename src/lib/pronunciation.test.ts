@@ -35,6 +35,28 @@ describe("parseAzureAssessment", () => {
     expect(result.words[1].errorType).toBe("Omission");
   });
 
+  it("reads the scores the Speech SDK nests under PronunciationAssessment", () => {
+    const result = parseAzureAssessment({
+      RecognitionStatus: "Success",
+      NBest: [
+        {
+          PronunciationAssessment: { PronScore: 93.1, ProsodyScore: 89.9 },
+          Words: [
+            {
+              Word: "the",
+              Offset: 400_000,
+              Duration: 900_000,
+              PronunciationAssessment: { AccuracyScore: 80, ErrorType: "None" },
+            },
+          ],
+        },
+      ],
+    });
+    expect(result.pronunciation).toBe(93.1);
+    expect(result.prosody).toBe(89.9);
+    expect(result.words[0].accuracy).toBe(80);
+  });
+
   it("throws when Azure recognized no speech", () => {
     expect(() =>
       parseAzureAssessment({ RecognitionStatus: "InitialSilenceTimeout" }),

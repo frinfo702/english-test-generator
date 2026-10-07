@@ -49,7 +49,7 @@ export default defineConfig({
   plugins: [react(), questionIndexes()],
   server: {
     proxy: {
-      "/api/transcribe": "http://localhost:8788",
+      "/api": "http://localhost:8788",
     },
   },
 });
