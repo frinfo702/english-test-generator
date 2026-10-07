@@ -146,6 +146,10 @@
   height: 96px;
   font-size: var(--text-3xl);
 }
+.avatarPhoto {
+  object-fit: cover;
+  background: var(--color-surface-subtle);
+}
 .avatar[data-tone="1"] {
   --tone: var(--color-reading);
 }

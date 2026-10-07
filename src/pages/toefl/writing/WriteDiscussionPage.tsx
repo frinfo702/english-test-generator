@@ -22,15 +22,23 @@ import { NextQuestionButton } from "../../../components/question/NextQuestionBut
 import styles from "./WriteDiscussionPage.module.css";
 import task from "./WritingTask.module.css";
 import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
+import {
+  studentPhotoUrl,
+  type StudentGender,
+} from "../../../lib/studentPhotos";
 
 interface Student {
   name: string;
+  /** The two students are always one male and one female. */
+  gender?: StudentGender;
   response: string;
 }
 
 interface ProblemData {
   professorQuestion: string;
   professorName: string;
+  /** Professor photo id under public/images/professors/ (e.g. "m1"). */
+  professorPhoto?: string;
   /** Class subject, e.g. "art history"; fills "teaching a class on …". */
   course?: string;
   student1: Student;
@@ -41,26 +49,40 @@ interface ProblemData {
 
 const MIN_WORDS = 100;
 
-/** Monogram stand-in for a profile photo ("Dr. Chen" → "C"). */
+/**
+ * Face photo when `photo` (a URL) is given, else a monogram
+ * ("Dr. Chen" → "C").
+ */
 function Avatar({
   name,
   tone,
   large = false,
+  photo,
 }: {
   name: string;
   tone: number;
   large?: boolean;
+  photo?: string;
 }) {
+  const className = [task.avatar, large ? task.avatarLarge : ""].join(" ");
+  if (photo) {
+    return (
+      <img
+        className={`${className} ${task.avatarPhoto}`}
+        src={photo}
+        alt=""
+        width={192}
+        height={192}
+        decoding="async"
+      />
+    );
+  }
   const initial = name
     .replace(/^(dr|prof|professor|mr|mrs|ms)\.?\s+/i, "")
     .charAt(0)
     .toUpperCase();
   return (
-    <span
-      className={[task.avatar, large ? task.avatarLarge : ""].join(" ")}
-      data-tone={tone}
-      aria-hidden="true"
-    >
+    <span className={className} data-tone={tone} aria-hidden="true">
       {initial}
     </span>
   );
@@ -245,7 +267,15 @@ export function WriteDiscussionPage() {
               </p>
               <div className={task.professor}>
                 <span>{data.professorName}</span>
-                <Avatar name={data.professorName} tone={0} large />
+                <Avatar
+                  name={data.professorName}
+                  tone={0}
+                  large
+                  photo={
+                    data.professorPhoto &&
+                    `/images/professors/${data.professorPhoto}.jpg`
+                  }
+                />
               </div>
               <p>{data.professorQuestion}</p>
             </div>
@@ -255,7 +285,14 @@ export function WriteDiscussionPage() {
                 {[data.student1, data.student2].map((s, i) => (
                   <li key={i} className={task.post}>
                     <div className={task.person}>
-                      <Avatar name={s.name} tone={i + 1} />
+                      <Avatar
+                        name={s.name}
+                        tone={i + 1}
+                        photo={
+                          s.gender &&
+                          studentPhotoUrl(s.gender, parsedQuestionNumber)
+                        }
+                      />
                       <span>{s.name}</span>
                     </div>
                     <p>{s.response}</p>
