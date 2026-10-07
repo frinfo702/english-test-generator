@@ -1,0 +1,24 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Did you finish the book I lent you?",
+      "prefix": "No, I",
+      "chunks": [
+        "the last",
+        "chapter",
+        "already",
+        "read",
+        "haven't"
+      ],
+      "correctOrder": [
+        4,
+        3,
+        0,
+        1
+      ],
+      "suffix": "yet",
+      "fullSentence": "No, I haven't read the last chapter yet."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "The gym near the station is closing next month.",
+      "chunks": [
+        "they",
+        "did",
+        "do you",
+        "why",
+        "decided",
+        "to close it",
+        "know"
+      ],
+      "correctOrder": [
+        2,
+        6,
+        3,
+        0,
+        4,
+        5
+      ],
+      "fullSentence": "Do you know why they decided to close it?"
+    }
+  ]
+}

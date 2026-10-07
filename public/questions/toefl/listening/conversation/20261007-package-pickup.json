@@ -1,0 +1,63 @@
+{
+  "voices": {
+    "Woman": "luna",
+    "Man": "zagan"
+  },
+  "title": "A Package at the Post Office",
+  "transcript": "Woman: Hey, are you heading out? Could you pick up a package for me at the post office?\nMan: Sure. Do I need anything to get it?\nWoman: The slip's on the fridge. They usually want the recipient's ID, but I signed the back, so you should be fine.\nMan: Okay, I'll grab it. Anything else while I'm out?\nWoman: We're out of dish soap. I keep forgetting to buy it.\nMan: Me too. Post office, then the store. I'll be back in an hour or so.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What does the woman ask the man to do first?",
+      "options": [
+        "Collect a package for her",
+        "Mail a letter to her family",
+        "Bring her ID to the post office",
+        "Clean the kitchen"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "She asks him to pick up a package for her at the post office."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the woman mention that she signed the slip?",
+      "options": [
+        "To show that she already paid the delivery fee",
+        "To explain why the package was delayed",
+        "To assure the man he can pick up the package for her",
+        "To remind the man to sign it as well"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "Normally the recipient's ID is needed, but her signature lets someone else collect it, so the man should be fine."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Woman",
+      "text": "Hey, are you heading out? Could you pick up a package for me at the post office?"
+    },
+    {
+      "role": "Man",
+      "text": "Sure. Do I need anything to get it?"
+    },
+    {
+      "role": "Woman",
+      "text": "The slip's on the fridge. They usually want the recipient's ID, but I signed the back, so you should be fine."
+    },
+    {
+      "role": "Man",
+      "text": "Okay, I'll grab it. Anything else while I'm out?"
+    },
+    {
+      "role": "Woman",
+      "text": "We're out of dish soap. I keep forgetting to buy it."
+    },
+    {
+      "role": "Man",
+      "text": "Me too. Post office, then the store. I'll be back in an hour or so."
+    }
+  ],
+  "speaker": "c2"
+}

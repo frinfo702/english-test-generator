@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "eve"
+  },
+  "title": "Listen and Choose a Response — Neighborhood Shops",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for a reason",
+      "stem": "Why is the café on the corner closed today?",
+      "options": {
+        "A": "It opens again at seven in the morning.",
+        "B": "I heard they're putting in new floors this week.",
+        "C": "Yes, I'd love a coffee right now.",
+        "D": "The corner of the room is a bit dark."
+      },
+      "correct": "B",
+      "explanation": "A why-question calls for a reason, and new floors explains the closure.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Why is the café on the corner closed today?"
+    }
+  ]
+}

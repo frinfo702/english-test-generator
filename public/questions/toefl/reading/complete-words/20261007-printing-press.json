@@ -1,0 +1,55 @@
+{
+  "paragraph": "Before the printing press was invented, books were copied by hand, one page at a time. This work was slow, so books were rare and very expensive. With the new machine, workers could make hundreds of copies in the time it once took to copy one. As a result, the price of books fell sharply across Europe. More people learned to read, and new ideas spread faster than ever before.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "wo",
+      "answer": "work"
+    },
+    {
+      "index": 1,
+      "hint": "sl",
+      "answer": "slow"
+    },
+    {
+      "index": 2,
+      "hint": "bo",
+      "answer": "books"
+    },
+    {
+      "index": 3,
+      "hint": "ra",
+      "answer": "rare"
+    },
+    {
+      "index": 4,
+      "hint": "ve",
+      "answer": "very"
+    },
+    {
+      "index": 5,
+      "hint": "Wi",
+      "answer": "With"
+    },
+    {
+      "index": 6,
+      "hint": "n",
+      "answer": "new"
+    },
+    {
+      "index": 7,
+      "hint": "wor",
+      "answer": "workers"
+    },
+    {
+      "index": 8,
+      "hint": "ma",
+      "answer": "make"
+    },
+    {
+      "index": 9,
+      "hint": "o",
+      "answer": "of"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "It's supposed to rain all weekend.",
+      "prefix": "Then",
+      "chunks": [
+        "postponed",
+        "be",
+        "will",
+        "postponing",
+        "have to",
+        "the hike"
+      ],
+      "correctOrder": [
+        5,
+        2,
+        4,
+        1,
+        0
+      ],
+      "fullSentence": "Then the hike will have to be postponed."
+    }
+  ]
+}

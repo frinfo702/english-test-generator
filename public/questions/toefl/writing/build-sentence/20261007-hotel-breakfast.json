@@ -1,0 +1,26 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "I booked our hotel for the trip.",
+      "chunks": [
+        "breakfast",
+        "you",
+        "did",
+        "if",
+        "is included",
+        "ask",
+        "does"
+      ],
+      "correctOrder": [
+        2,
+        1,
+        5,
+        3,
+        0,
+        4
+      ],
+      "fullSentence": "Did you ask if breakfast is included?"
+    }
+  ]
+}

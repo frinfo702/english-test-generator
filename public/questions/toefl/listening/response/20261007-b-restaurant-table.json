@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "eve"
+  },
+  "title": "Listen and Choose a Response — Eating Out",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a suggestion",
+      "stem": "Should we book a table at the Thai place for Friday?",
+      "options": {
+        "A": "They don't take reservations, so let's just go early.",
+        "B": "I booked my flight for Friday morning.",
+        "C": "The table in my kitchen is too small.",
+        "D": "No, I've never been to Thailand."
+      },
+      "correct": "A",
+      "explanation": "This gives a reason the suggestion won't work and a counter-plan. The distractors repeat 'book', 'table', and 'Thai' with the wrong meaning.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Should we book a table at the Thai place for Friday?"
+    }
+  ]
+}

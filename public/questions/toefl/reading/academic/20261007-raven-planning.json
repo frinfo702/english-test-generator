@@ -1,0 +1,71 @@
+{
+  "title": "Planning Ahead in Ravens",
+  "passage": "Planning for the future was long considered a uniquely human ability. To plan, an animal must imagine a situation that is not happening yet and act now to prepare for it. Many animals store food for winter, but such behavior may be driven by instinct rather than true foresight. To test for real planning, researchers need tasks that an animal would not perform by instinct.\n\nIn a 2017 study, scientists in Sweden trained ravens to use a tool: a small stone that, when dropped into a special box, released a treat. Later, the box was removed, and the birds were offered a choice among several objects, including the stone and a few distracting items. The box was returned only after a delay, sometimes as long as seventeen hours. Most ravens picked the correct tool, kept it during the wait, and used it successfully when the box reappeared. In a related test, they chose to save a token that could later be traded for a larger reward instead of eating a small treat right away.\n\nRavens are not closely related to apes, which had passed similar tests earlier. The results therefore suggest that planning may have evolved separately in birds and mammals. However, some scientists argue that the tasks could be solved through simple learned associations, and the debate over how much the birds truly imagine the future continues.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the passage mainly about?",
+      "options": [
+        "A. How ravens store food for the winter",
+        "B. Evidence that ravens may be able to plan for future events",
+        "C. The close relationship between ravens and apes",
+        "D. Methods for training birds to use tools"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage describes the question of animal planning, a raven experiment testing it, and what the results suggest."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 1, why might food storage fail to prove that an animal can plan?",
+      "options": [
+        "A. Few animals store food for long periods.",
+        "B. Stored food is usually eaten within a day.",
+        "C. The behavior may be driven by instinct.",
+        "D. Food storage does not involve any tools."
+      ],
+      "correctIndex": 2,
+      "explanation": "Paragraph 1 says food storage 'may be driven by instinct rather than true foresight.'"
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention a token in paragraph 2?",
+      "options": [
+        "A. To explain how the ravens were first trained",
+        "B. To show that ravens prefer objects to food",
+        "C. To suggest that the experiment had a serious flaw",
+        "D. To describe another task in which ravens gave up an immediate reward for a future benefit"
+      ],
+      "correctIndex": 3,
+      "explanation": "The ravens 'chose to save a token that could later be traded for a larger reward instead of eating a small treat right away,' another sign of planning."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "Paragraph 3 suggests that the ability to plan in ravens and apes",
+      "options": [
+        "A. may have developed independently",
+        "B. was inherited from a recent common ancestor",
+        "C. has now been disproven",
+        "D. works in exactly the same way"
+      ],
+      "correctIndex": 0,
+      "explanation": "Because ravens are 'not closely related to apes,' the author says 'planning may have evolved separately in birds and mammals.'"
+    },
+    {
+      "id": "q5",
+      "type": "negativeFactual",
+      "stem": "According to paragraph 2, all of the following were part of the raven study EXCEPT",
+      "options": [
+        "A. a delay before the box was returned",
+        "B. ravens making their own tools",
+        "C. a choice among several objects",
+        "D. a token that could be traded"
+      ],
+      "correctIndex": 1,
+      "explanation": "The ravens were given a stone; the passage never says they made tools. The delay, the choice of objects, and the token are all described."
+    }
+  ]
+}

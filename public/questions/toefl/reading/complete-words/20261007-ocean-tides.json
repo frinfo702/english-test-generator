@@ -1,0 +1,55 @@
+{
+  "paragraph": "Tides are the regular rise and fall of the sea along the coast. They result mainly from the pull of the moon on the oceans of the earth. As the planet turns, many coastal areas experience two high tides and two low tides every day. The sun also has an effect, although its pull is weaker because it is much farther away. When the sun and moon line up, the difference between high and low water becomes greater.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "res",
+      "answer": "result"
+    },
+    {
+      "index": 1,
+      "hint": "fr",
+      "answer": "from"
+    },
+    {
+      "index": 2,
+      "hint": "pu",
+      "answer": "pull"
+    },
+    {
+      "index": 3,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 4,
+      "hint": "o",
+      "answer": "on"
+    },
+    {
+      "index": 5,
+      "hint": "oce",
+      "answer": "oceans"
+    },
+    {
+      "index": 6,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 7,
+      "hint": "A",
+      "answer": "As"
+    },
+    {
+      "index": 8,
+      "hint": "pla",
+      "answer": "planet"
+    },
+    {
+      "index": 9,
+      "hint": "ma",
+      "answer": "many"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "lux"
+  },
+  "title": "Listen and Choose a Response — Student Council",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about news",
+      "stem": "Have you heard the election results yet?",
+      "options": {
+        "A": "I voted for her in the last election.",
+        "B": "Yes, they'll be posted next week.",
+        "C": "I can hear you fine from here.",
+        "D": "They're announcing them at five, I think."
+      },
+      "correct": "D",
+      "explanation": "Saying when results will be announced implies they aren't out yet; 'Yes' with 'next week' contradicts itself.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Have you heard the election results yet?"
+    }
+  ]
+}

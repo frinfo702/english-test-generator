@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Classmate": "ursa"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Can I borrow your notes from Tuesday's lecture?",
+      "options": {
+        "A": "The lecture hall was cold.",
+        "B": "I borrowed it from the library.",
+        "C": "Tuesday is my busy day.",
+        "D": "I missed that one too. Maybe ask Sam?"
+      },
+      "correct": "D",
+      "explanation": "The speaker can't help but suggests someone else. The others repeat 'lecture', 'borrow', and 'Tuesday'.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Classmate",
+      "text": "Can I borrow your notes from Tuesday's lecture?"
+    }
+  ]
+}

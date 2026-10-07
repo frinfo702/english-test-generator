@@ -1,0 +1,53 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "notice",
+      "layout": "notice",
+      "title": "Oakdale Public Library",
+      "icon": "info",
+      "content": "Changes at the Front Desk\nStarting January 6, the Oakdale Public Library will no longer print checkout receipts.\nInstead, a list of your borrowed items and due dates will be emailed to you.\nYou can also see this information anytime in the Oakdale Library app.\nThis change will save over 40,000 sheets of paper each year.\nIf we do not have your email address, please give it to a staff member at the front desk or add it under My Account on our website.\nPatrons without email may still ask for a printed list, and staff will be happy to help.\nWe will also stop mailing overdue reminders. You will receive these by email or by phone instead.\nThank you for helping us go green!",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why is the library making the change?",
+          "options": [
+            "A. To reduce paper use",
+            "B. To shorten checkout times",
+            "C. To sell more library cards",
+            "D. To encourage people to download books"
+          ],
+          "correctIndex": 0,
+          "type": "purpose",
+          "explanation": "The notice says the change \"will save over 40,000 sheets of paper each year\" and ends with \"Thank you for helping us go green!\""
+        },
+        {
+          "id": "q2",
+          "stem": "What can patrons without email do?",
+          "options": [
+            "A. Download the library app",
+            "B. Ask staff for a printed list",
+            "C. Receive receipts by mail",
+            "D. Check out fewer items"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "\"Patrons without email may still ask for a printed list, and staff will be happy to help.\""
+        },
+        {
+          "id": "q3",
+          "stem": "How will a patron be told that a book is late after January 6?",
+          "options": [
+            "A. By a letter sent to their home",
+            "B. By a printed receipt at the desk",
+            "C. By email or a phone call",
+            "D. By a note in the returned book"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "\"We will also stop mailing overdue reminders. You will receive these by email or by phone instead.\""
+        }
+      ]
+    }
+  ]
+}

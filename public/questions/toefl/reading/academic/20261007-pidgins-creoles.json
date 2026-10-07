@@ -1,0 +1,71 @@
+{
+  "title": "How New Languages Are Born",
+  "passage": "When groups of people who share no common language must communicate regularly, they often develop a pidgin. A pidgin is a simplified form of speech that combines words from different languages and has a small vocabulary and few grammar rules. Pidgins have typically formed in trading centers, on plantations, and in ports, where speakers needed to cooperate for practical purposes.\n\nA pidgin is no one's first language. However, when children grow up hearing a pidgin, something remarkable can happen: they expand it into a full language, known as a creole, with a richer vocabulary and consistent grammar. A well-known case resembling this process occurred in Nicaragua in the 1970s and 1980s. Deaf children brought together in new schools first communicated with a limited set of shared gestures. Younger students who joined them later turned these gestures into a complex sign language with its own rules, which the older students never fully mastered.\n\nLinguists study creoles because they offer a rare chance to observe a language forming. Some researchers believe creoles show that children have a natural ability to create grammar. Others argue that creoles mainly preserve features from the languages that contributed to them, and the debate continues.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to paragraph 1, what is a pidgin?",
+      "options": [
+        "A. The first language of most children in port cities",
+        "B. A full language with complex grammar",
+        "C. A simplified form of speech that mixes words from different languages",
+        "D. A written system used by traders"
+      ],
+      "correctIndex": 2,
+      "explanation": "A pidgin 'is a simplified form of speech that combines words from different languages.'"
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 2, what turns a pidgin into a creole?",
+      "options": [
+        "A. Children growing up with it expand it into a full language.",
+        "B. Adults agree on a set of written rules.",
+        "C. Traders replace it with one of their own languages.",
+        "D. Schools teach it as a second language."
+      ],
+      "correctIndex": 0,
+      "explanation": "'When children grow up hearing a pidgin... they expand it into a full language, known as a creole.'"
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention deaf children in Nicaragua in paragraph 2?",
+      "options": [
+        "A. To show that sign languages cannot become complex",
+        "B. To explain how pidgins form in ports",
+        "C. To argue that adults learn languages faster than children",
+        "D. To illustrate how children can turn a limited system into a full language"
+      ],
+      "correctIndex": 3,
+      "explanation": "Younger students 'turned these gestures into a complex sign language with its own rules,' a case resembling the change from pidgin to creole."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred from paragraph 2 about the older students in Nicaragua?",
+      "options": [
+        "A. They invented the complex sign language themselves.",
+        "B. Their signing remained simpler than that of the younger students.",
+        "C. They refused to communicate with the younger students.",
+        "D. They had learned a sign language before arriving."
+      ],
+      "correctIndex": 1,
+      "explanation": "The new language had rules 'which the older students never fully mastered,' so their signing was less complex."
+    },
+    {
+      "id": "q5",
+      "type": "negativeFactual",
+      "stem": "Which of the following is NOT mentioned in paragraph 1 as a setting where pidgins have formed?",
+      "options": [
+        "A. Universities",
+        "B. Ports",
+        "C. Plantations",
+        "D. Trading centers"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pidgins formed 'in trading centers, on plantations, and in ports.' Universities are not mentioned."
+    }
+  ]
+}

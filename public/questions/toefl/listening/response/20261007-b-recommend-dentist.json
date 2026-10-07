@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "liora"
+  },
+  "title": "Listen and Choose a Response — Everyday Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for a recommendation",
+      "stem": "Can you recommend a good dentist around here?",
+      "options": {
+        "A": "I brush my teeth twice a day.",
+        "B": "Yes, I recommended it to him.",
+        "C": "I go to Dr. Patel on Main Street, and she's great.",
+        "D": "It's around here somewhere, I think."
+      },
+      "correct": "C",
+      "explanation": "A recommendation request is answered with a specific dentist. The others give unrelated habits, a pronoun mismatch, or repeat 'around here'.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "Can you recommend a good dentist around here?"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "scenario": {
+    "title": "Reporting a Repair Problem to Your Landlord",
+    "description": "You have been renting an apartment from Ms. Rivera for about six months. Last week the kitchen faucet started leaking, and a repair worker she sent came by but did not finish the job. Water is now dripping into the cabinet under the sink.",
+    "recipient": "Ms. Rivera",
+    "subject": "Kitchen faucet still leaking",
+    "purpose": "Report an unfinished repair and arrange for it to be completed",
+    "keyPoints": [
+      "Say something positive about living in the apartment",
+      "Explain what went wrong with the repair",
+      "Ask when the problem can be fixed and suggest a time that works for you"
+    ]
+  },
+  "modelAnswer": "Dear Ms. Rivera,\n\nI hope you are doing well. I have really enjoyed my first six months here; the building is quiet, and you have always responded quickly whenever I needed anything.\n\nI am writing because the leak in the kitchen is still not fixed. The plumber who came on Tuesday replaced a washer, but he said he needed a different part and would return the next day. He never came back, and now water is collecting in the cabinet below the sink. I have put a bucket there, but I am worried the wood will be damaged.\n\nCould you let me know when someone might be able to finish the job? I am home every weekday after 4 p.m., and I would also be happy to leave a key with the building manager if that is easier.\n\nThank you for your help.\n\nBest regards,\nDaniel",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Gives friendly context, clearly explains the unfinished repair, and makes a specific request with availability."
+    },
+    {
+      "criterion": "Organization",
+      "description": "Opens with a greeting and positive note, moves logically to the problem, and closes with a request and thanks."
+    },
+    {
+      "criterion": "Language Use",
+      "description": "Polite but direct tone suitable for a tenant writing to a landlord; varied sentences and precise vocabulary."
+    }
+  ]
+}

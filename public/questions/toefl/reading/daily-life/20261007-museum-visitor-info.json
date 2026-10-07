@@ -1,0 +1,51 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "webpage",
+      "layout": "document",
+      "content": "Plan Your Visit — Carver Science Museum\n\nHours: Tuesday–Sunday, 10 A.M.–5 P.M. Closed Mondays. Open until 8 P.M. on the first Friday of each month.\n\nTickets: Adults $18, children (4–12) $10, children under 4 free. Tickets for the Space Theater show are sold separately and often sell out on weekends, so we recommend buying them online in advance.\n\nGetting here: The museum is a five-minute walk from Union Station. Our small parking lot fills quickly, especially on rainy days.\n\nFood: Our café on the second floor serves light meals. Visitors may also eat their own food in the picnic area outside, but no food is allowed in the exhibit halls.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is suggested about the Space Theater show?",
+          "options": [
+            "A. It is free for all visitors.",
+            "B. It is included in a regular ticket.",
+            "C. It is popular on Saturdays and Sundays.",
+            "D. It is shown only on the first Friday."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "Theater tickets \"often sell out on weekends,\" which shows the show is popular then."
+        },
+        {
+          "id": "q2",
+          "stem": "Why does the museum mention Union Station?",
+          "options": [
+            "A. To warn visitors about traffic",
+            "B. To explain where tickets are sold",
+            "C. To show where the café is",
+            "D. To suggest a way to get there without driving"
+          ],
+          "correctIndex": 3,
+          "type": "purpose",
+          "explanation": "It says the museum is \"a five-minute walk from Union Station\" and that the parking lot \"fills quickly,\" encouraging visitors to use the train."
+        },
+        {
+          "id": "q3",
+          "stem": "Where can visitors eat food they bring from home?",
+          "options": [
+            "A. In the picnic area",
+            "B. In the exhibit halls",
+            "C. In the Space Theater",
+            "D. In the second-floor café"
+          ],
+          "correctIndex": 0,
+          "type": "factual",
+          "explanation": "\"Visitors may also eat their own food in the picnic area outside.\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Student": "helios",
+    "Advisor": "ara"
+  },
+  "title": "Asking About a Room Change",
+  "transcript": "Student: Hi, I wanted to ask about switching rooms. My roommate and I have totally different schedules.\nAdvisor: I see. Have you two tried a roommate agreement? Setting quiet hours sometimes helps.\nStudent: We did, back in September. It lasted about a week.\nAdvisor: Okay. Room changes open on November first, but spaces are limited.\nStudent: Is there a waiting list I can get on now?\nAdvisor: There is. Fill out this form and list three buildings you'd accept. The more flexible you are, the better your chances.\nStudent: Got it. I'll put down every building, then.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What does the student imply about the roommate agreement?",
+      "options": [
+        "It was never signed by his roommate.",
+        "It was suggested by his parents.",
+        "It did not solve the problem for long.",
+        "It is required before a room change."
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "He says the agreement \"lasted about a week,\" meaning it didn't really work."
+    },
+    {
+      "id": "q2",
+      "stem": "According to the advisor, how can the student improve his chances of moving?",
+      "options": [
+        "By being willing to live in several buildings",
+        "By applying before November first",
+        "By finding a new roommate himself",
+        "By explaining his schedule in writing"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The advisor says, \"The more flexible you are, the better your chances.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi, I wanted to ask about switching rooms. My roommate and I have totally different schedules."
+    },
+    {
+      "role": "Advisor",
+      "text": "I see. Have you two tried a roommate agreement? Setting quiet hours sometimes helps."
+    },
+    {
+      "role": "Student",
+      "text": "We did, back in September. It lasted about a week."
+    },
+    {
+      "role": "Advisor",
+      "text": "Okay. Room changes open on November first, but spaces are limited."
+    },
+    {
+      "role": "Student",
+      "text": "Is there a waiting list I can get on now?"
+    },
+    {
+      "role": "Advisor",
+      "text": "There is. Fill out this form and list three buildings you'd accept. The more flexible you are, the better your chances."
+    },
+    {
+      "role": "Student",
+      "text": "Got it. I'll put down every building, then."
+    }
+  ],
+  "speaker": "c1"
+}

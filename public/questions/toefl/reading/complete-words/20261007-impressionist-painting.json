@@ -1,0 +1,55 @@
+{
+  "paragraph": "Impressionism was a style of painting that developed in France in the late nineteenth century. Its artists tried to show how light and color looked at different times of day. Instead of working inside studios, they often painted outdoors and finished their pictures quickly. They used short, visible strokes of bright paint rather than smooth surfaces. At first, many critics disliked the style, but today these paintings are among the most popular in the world.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "art",
+      "answer": "artists"
+    },
+    {
+      "index": 1,
+      "hint": "t",
+      "answer": "to"
+    },
+    {
+      "index": 2,
+      "hint": "h",
+      "answer": "how"
+    },
+    {
+      "index": 3,
+      "hint": "a",
+      "answer": "and"
+    },
+    {
+      "index": 4,
+      "hint": "loo",
+      "answer": "looked"
+    },
+    {
+      "index": 5,
+      "hint": "diff",
+      "answer": "different"
+    },
+    {
+      "index": 6,
+      "hint": "o",
+      "answer": "of"
+    },
+    {
+      "index": 7,
+      "hint": "Ins",
+      "answer": "Instead"
+    },
+    {
+      "index": 8,
+      "hint": "wor",
+      "answer": "working"
+    },
+    {
+      "index": 9,
+      "hint": "stu",
+      "answer": "studios"
+    }
+  ]
+}

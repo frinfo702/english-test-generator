@@ -1,0 +1,71 @@
+{
+  "title": "The Box That Changed Trade",
+  "passage": "Until the 1950s, loading a cargo ship was slow and costly. Goods arrived at ports in sacks, barrels, and crates of different sizes, and teams of dockworkers loaded each item by hand. A ship could spend as much time in port as at sea, and theft and damage were common. Shipping was so expensive that it often made little sense to trade ordinary goods across long distances.\n\nIn 1956, an American trucking businessman named Malcolm McLean sent a ship from New Jersey to Texas carrying fifty-eight large metal boxes. These standard-sized containers could be lifted by cranes directly from trucks onto the ship and then onto trucks or trains at the other end, without ever being opened. Loading costs fell dramatically. Over the following decades, ports were redesigned, ships grew larger, and international organizations agreed on standard container sizes so that any box could fit any ship, truck, or crane.\n\nMany economists believe containerization did more to expand global trade than most trade agreements did. Cheap transport allowed companies to make products in one country from parts produced in several others. The change also had costs: traditional dockworker jobs largely disappeared, and port cities that could not adapt lost much of their business.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to paragraph 1, which of the following was a problem with shipping before the 1950s?",
+      "options": [
+        "A. Ships were too small to cross oceans.",
+        "B. Ports had too many cranes.",
+        "C. Loading individual items by hand was slow.",
+        "D. Goods were all packed in identical boxes."
+      ],
+      "correctIndex": 2,
+      "explanation": "'Teams of dockworkers loaded each item by hand,' and ships 'could spend as much time in port as at sea.'"
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 2, what made McLean's containers efficient?",
+      "options": [
+        "A. They could be moved between trucks, ships, and trains without being opened.",
+        "B. They were lighter than wooden crates.",
+        "C. They could be loaded by hand more quickly.",
+        "D. They were made to fit only one type of ship."
+      ],
+      "correctIndex": 0,
+      "explanation": "The containers 'could be lifted by cranes directly from trucks onto the ship and then onto trucks or trains... without ever being opened.'"
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention international agreements on container sizes in paragraph 2?",
+      "options": [
+        "A. To show that McLean opposed standardization",
+        "B. To explain why loading costs increased",
+        "C. To describe a disadvantage of containers",
+        "D. To explain how containers became usable across all transport systems"
+      ],
+      "correctIndex": 3,
+      "explanation": "Standard sizes meant 'any box could fit any ship, truck, or crane.'"
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred from paragraph 3 about some port cities?",
+      "options": [
+        "A. They grew rapidly because of new trade agreements.",
+        "B. They declined because they did not modernize their ports.",
+        "C. They hired more traditional dockworkers.",
+        "D. They stopped trading with other countries."
+      ],
+      "correctIndex": 1,
+      "explanation": "'Port cities that could not adapt lost much of their business.'"
+    },
+    {
+      "id": "q5",
+      "type": "negativeFactual",
+      "stem": "According to the passage, all of the following were results of containerization EXCEPT",
+      "options": [
+        "A. larger ships",
+        "B. the loss of many dockworker jobs",
+        "C. higher rates of theft",
+        "D. production spread across several countries"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage mentions larger ships, lost dockworker jobs, and products made 'from parts produced in several others.' Theft was a problem before containers, not a result of them."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "lumen"
+  },
+  "title": "Listen and Choose a Response — Campus Jobs",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a yes/no question",
+      "stem": "Is Professor Lee still looking for a research assistant?",
+      "options": {
+        "A": "I think so. You should email her today.",
+        "B": "She's looking at the results.",
+        "C": "I researched it online.",
+        "D": "He assisted me with the move."
+      },
+      "correct": "A",
+      "explanation": "This answers and gives advice. The others reuse 'looking', 'research', and 'assist', and one uses the wrong pronoun.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Is Professor Lee still looking for a research assistant?"
+    }
+  ]
+}

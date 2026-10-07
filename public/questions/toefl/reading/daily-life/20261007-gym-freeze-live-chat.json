@@ -1,0 +1,88 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "live chat",
+      "layout": "live-chat",
+      "title": "Peak Fitness Chat",
+      "messages": [
+        {
+          "sender": "Agent (Mia)",
+          "time": "6:30 P.M.",
+          "text": "Hi, this is Mia from Peak Fitness. What can I do for you?"
+        },
+        {
+          "sender": "Daniel Moore",
+          "time": "6:31 P.M.",
+          "text": "I'm traveling for work for two months starting next week. Can I stop my membership without canceling it?"
+        },
+        {
+          "sender": "Agent (Mia)",
+          "time": "6:33 P.M.",
+          "text": "Yes, you can freeze it for up to three months. It costs $5 per month instead of your usual $40."
+        },
+        {
+          "sender": "Daniel Moore",
+          "time": "6:34 P.M.",
+          "text": "Great, that's much cheaper. Will I lose my locker?"
+        },
+        {
+          "sender": "Agent (Mia)",
+          "time": "6:35 P.M.",
+          "text": "Lockers aren't held during a freeze, so please empty it before you go. You can request a new one when you return."
+        },
+        {
+          "sender": "Daniel Moore",
+          "time": "6:36 P.M.",
+          "text": "Understood. Please freeze it starting Monday."
+        },
+        {
+          "sender": "Agent (Mia)",
+          "time": "6:37 P.M.",
+          "text": "Done! You'll get a confirmation email shortly, and your regular monthly payment will start again automatically after two months."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why does Mr. Moore contact Peak Fitness?",
+          "options": [
+            "A. To pause his membership while he is away",
+            "B. To cancel his membership permanently",
+            "C. To ask about a new locker",
+            "D. To complain about the monthly price"
+          ],
+          "correctIndex": 0,
+          "type": "purpose",
+          "explanation": "He asks, \"Can I stop my membership without canceling it?\" because he will be traveling for two months."
+        },
+        {
+          "id": "q2",
+          "stem": "How much will Mr. Moore most likely pay in total during his trip?",
+          "options": [
+            "A. $5",
+            "B. $10",
+            "C. $40",
+            "D. $80"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "A freeze costs \"$5 per month,\" and his trip lasts \"two months,\" so he will pay about $10."
+        },
+        {
+          "id": "q3",
+          "stem": "What does Mia tell Mr. Moore to do?",
+          "options": [
+            "A. Visit the gym on Monday",
+            "B. Remove his things from his locker",
+            "C. Reply to a confirmation email",
+            "D. Choose a new membership plan"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "She says, \"Lockers aren't held during a freeze, so please empty it before you go.\""
+        }
+      ]
+    }
+  ]
+}

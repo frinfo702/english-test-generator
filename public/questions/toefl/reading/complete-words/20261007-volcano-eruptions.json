@@ -1,0 +1,55 @@
+{
+  "paragraph": "Volcanoes are openings in the surface of the planet where hot melted rock can escape. When pressure builds up under the ground, the melted rock rises and flows out as lava. Some eruptions are quiet and slow, while others are violent and throw ash high into the sky. Over thousands of years, layers of cooled lava can build tall mountains. Although they can be dangerous, volcanoes also create rich soil that helps farmers grow crops.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "pres",
+      "answer": "pressure"
+    },
+    {
+      "index": 1,
+      "hint": "u",
+      "answer": "up"
+    },
+    {
+      "index": 2,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 3,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 4,
+      "hint": "ro",
+      "answer": "rock"
+    },
+    {
+      "index": 5,
+      "hint": "a",
+      "answer": "and"
+    },
+    {
+      "index": 6,
+      "hint": "o",
+      "answer": "out"
+    },
+    {
+      "index": 7,
+      "hint": "la",
+      "answer": "lava"
+    },
+    {
+      "index": 8,
+      "hint": "erup",
+      "answer": "eruptions"
+    },
+    {
+      "index": 9,
+      "hint": "qu",
+      "answer": "quiet"
+    }
+  ]
+}

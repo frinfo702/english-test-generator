@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "How was your trip to the mountains?",
+      "chunks": [
+        "was",
+        "colder",
+        "expected",
+        "it",
+        "than I",
+        "much"
+      ],
+      "correctOrder": [
+        3,
+        0,
+        5,
+        1,
+        4,
+        2
+      ],
+      "fullSentence": "It was much colder than I expected."
+    }
+  ]
+}

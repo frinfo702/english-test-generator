@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "celeste"
+  },
+  "title": "Listen and Choose a Response — Dorm Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Could you turn your music down a little? I'm studying.",
+      "options": {
+        "A": "Sorry, I'll use my headphones instead.",
+        "B": "I turned in my paper today.",
+        "C": "It's a little room, isn't it?",
+        "D": "I study music in the evening."
+      },
+      "correct": "A",
+      "explanation": "Apologizing and offering a solution fits the request. The others reuse 'turn', 'a little', and 'music'.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Could you turn your music down a little? I'm studying."
+    }
+  ]
+}

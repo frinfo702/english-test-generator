@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "luna"
+  },
+  "title": "Listen and Choose a Response — Home",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about plans",
+      "stem": "What should we make for dinner tonight?",
+      "options": {
+        "A": "We could just use up the vegetables in the fridge.",
+        "B": "I had dinner at seven last night.",
+        "C": "Yes, I'm really hungry.",
+        "D": "She made it to the station on time."
+      },
+      "correct": "A",
+      "explanation": "Suggesting a meal from leftover vegetables is a practical reply to a question about what to cook.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "What should we make for dinner tonight?"
+    }
+  ]
+}

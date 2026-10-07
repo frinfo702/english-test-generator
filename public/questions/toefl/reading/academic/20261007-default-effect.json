@@ -1,0 +1,71 @@
+{
+  "title": "The Power of Defaults",
+  "passage": "Many choices in modern life come with a preselected option, called a default, that takes effect if a person does nothing. Economists once assumed that defaults should matter little, since anyone who preferred a different option could simply switch. Behavioral scientists have shown that this assumption is wrong: people stick with defaults far more often than traditional theory predicts, a pattern known as the default effect.\n\nRetirement savings offer a clear example. In some companies, workers must actively sign up for a savings plan, while in others they are enrolled automatically and must fill out a form to leave. Studies of firms that switched from the first system to the second found that participation rose sharply, in some cases from under half of new employees to nearly all of them. The plans had not changed; only the starting point had. Researchers suggest several causes, including the effort needed to make a decision, a tendency to delay choices that feel unimportant, and a belief that the default reflects expert advice.\n\nThese findings have made defaults a popular tool for governments and businesses. Yet they also raise difficult questions. Because most people accept whatever is preselected, the person who designs a choice holds considerable influence, and critics ask who should decide which option deserves to be the default.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to paragraph 1, what did economists once assume about defaults?",
+      "options": [
+        "A. They would strongly influence most decisions.",
+        "B. They would have little effect because people could easily switch.",
+        "C. They were used mainly by governments.",
+        "D. They made choices more difficult to understand."
+      ],
+      "correctIndex": 1,
+      "explanation": "Economists 'assumed that defaults should matter little, since anyone who preferred a different option could simply switch.'"
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 2, what happened when companies began enrolling workers automatically?",
+      "options": [
+        "A. The benefits of the plans increased.",
+        "B. Fewer workers stayed with the company.",
+        "C. Participation in the savings plans rose sharply.",
+        "D. Workers had to fill out more forms to join."
+      ],
+      "correctIndex": 2,
+      "explanation": "Paragraph 2 states that 'participation rose sharply, in some cases from under half of new employees to nearly all of them.'"
+    },
+    {
+      "id": "q3",
+      "type": "negativeFactual",
+      "stem": "Which of the following is NOT mentioned in paragraph 2 as a possible cause of the default effect?",
+      "options": [
+        "A. The effort needed to make a decision",
+        "B. A tendency to delay unimportant choices",
+        "C. A belief that the default reflects expert advice",
+        "D. A desire to avoid paying extra fees"
+      ],
+      "correctIndex": 3,
+      "explanation": "The paragraph lists effort, delay, and a belief that 'the default reflects expert advice.' Fees are never mentioned."
+    },
+    {
+      "id": "q4",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention retirement savings in paragraph 2?",
+      "options": [
+        "A. To give a concrete example of the default effect",
+        "B. To argue that companies should offer better savings plans",
+        "C. To show that economists' original assumption was correct",
+        "D. To explain why workers change jobs"
+      ],
+      "correctIndex": 0,
+      "explanation": "The paragraph opens with 'Retirement savings offer a clear example' and then shows how changing the default changed participation."
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What does the author suggest in paragraph 3 about the people who design choices?",
+      "options": [
+        "A. They usually select the options people would choose anyway.",
+        "B. They have significant power over other people's decisions.",
+        "C. They are generally unaware of the default effect.",
+        "D. They should stop using defaults entirely."
+      ],
+      "correctIndex": 1,
+      "explanation": "Because people accept 'whatever is preselected, the person who designs a choice holds considerable influence.'"
+    }
+  ]
+}

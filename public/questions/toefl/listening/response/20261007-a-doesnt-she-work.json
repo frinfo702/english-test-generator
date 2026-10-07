@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "helix"
+  },
+  "title": "Listen and Choose a Response — Neighborhood",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking an assumption",
+      "stem": "Doesn't your sister work at that bakery?",
+      "options": {
+        "A": "The bakery makes great bread on weekends.",
+        "B": "He works there on weekends.",
+        "C": "She used to, but she switched jobs in May.",
+        "D": "Yes, I'll work there next year."
+      },
+      "correct": "C",
+      "explanation": "Explaining the sister's job change answers the question; the pronoun and tense mismatches are wrong.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Doesn't your sister work at that bakery?"
+    }
+  ]
+}

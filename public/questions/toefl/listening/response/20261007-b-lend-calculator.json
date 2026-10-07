@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Classmate": "sal"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Do you have a calculator I could use for the quiz?",
+      "options": {
+        "A": "The quiz was on chapter four.",
+        "B": "Yes, I used it for the quiz.",
+        "C": "I only have one, but the library lends them out.",
+        "D": "I'm not good at math."
+      },
+      "correct": "C",
+      "explanation": "The speaker can't lend theirs but suggests another source. The others change tense, repeat 'quiz', or give an opinion.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Classmate",
+      "text": "Do you have a calculator I could use for the quiz?"
+    }
+  ]
+}

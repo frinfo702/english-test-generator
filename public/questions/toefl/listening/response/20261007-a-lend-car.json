@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "castor"
+  },
+  "title": "Listen and Choose a Response — Weekend Errand",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Could I borrow your car to go to the hardware store?",
+      "options": {
+        "A": "My brother has it today, but you can take my bike.",
+        "B": "The hardware store sells paint and tools.",
+        "C": "Yes, I'll borrow your car.",
+        "D": "I parked it near the gym last night."
+      },
+      "correct": "A",
+      "explanation": "Offering an alternative because the car is unavailable is a natural indirect reply; the 'Yes' option switches the pronouns.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Could I borrow your car to go to the hardware store?"
+    }
+  ]
+}

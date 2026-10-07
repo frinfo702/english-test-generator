@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "I need to renew my bus pass.",
+      "chunks": [
+        "you",
+        "how much",
+        "can",
+        "costs",
+        "tell me",
+        "a monthly pass"
+      ],
+      "correctOrder": [
+        2,
+        0,
+        4,
+        1,
+        5,
+        3
+      ],
+      "fullSentence": "Can you tell me how much a monthly pass costs?"
+    }
+  ]
+}

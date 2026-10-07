@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "luna"
+  },
+  "title": "Listen and Choose a Response — Office Lobby",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about ownership",
+      "stem": "Whose umbrella is this by the front desk?",
+      "options": {
+        "A": "It's supposed to rain all afternoon.",
+        "B": "I think Maria left it there this morning.",
+        "C": "Yes, I need to buy a new umbrella.",
+        "D": "The front desk opens at eight."
+      },
+      "correct": "B",
+      "explanation": "A whose-question asks for the owner, and naming Maria answers it.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "Whose umbrella is this by the front desk?"
+    }
+  ]
+}

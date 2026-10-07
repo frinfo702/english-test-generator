@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "perseus"
+  },
+  "title": "Listen and Choose a Response — Errands",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about hours",
+      "stem": "Does the pharmacy stay open late on Sundays?",
+      "options": {
+        "A": "I stayed late at work on Sunday.",
+        "B": "It's next to the post office on Main Street.",
+        "C": "Yes, it closes at noon on Sundays.",
+        "D": "I think it closes early, but you could call to check."
+      },
+      "correct": "D",
+      "explanation": "The correct reply admits uncertainty and suggests calling; the 'Yes' option contradicts staying open late.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Does the pharmacy stay open late on Sundays?"
+    }
+  ]
+}

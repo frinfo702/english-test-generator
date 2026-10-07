@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "helios"
+  },
+  "title": "Listen and Choose a Response — Fitness",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about plans",
+      "stem": "Are you thinking of joining the new gym downtown?",
+      "options": {
+        "A": "I went to the gym downtown yesterday.",
+        "B": "It opened about a month ago.",
+        "C": "Yes, I've never thought about it.",
+        "D": "Maybe, if they offer a student discount."
+      },
+      "correct": "D",
+      "explanation": "A conditional answer fits a question about plans; the 'Yes' option contradicts itself.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Are you thinking of joining the new gym downtown?"
+    }
+  ]
+}

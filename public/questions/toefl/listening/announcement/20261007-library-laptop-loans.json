@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "iris"
+  },
+  "title": "Library Laptop Loans",
+  "transcript": "Hello, library visitors. Starting Monday, the library will lend laptops at the front desk. You can borrow one for up to four hours with your student card. Since we only have thirty machines, we recommend reserving one online, especially during exam weeks. Please return laptops to the desk, not the book drop, because the drop isn't padded and they can easily be damaged. Late returns will lose borrowing privileges for one week.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What new service is being introduced?",
+      "options": [
+        "Online book reservations",
+        "Laptop lending at the front desk",
+        "Longer opening hours during exams",
+        "A new book drop location"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The library will lend laptops at the front desk starting Monday."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker mention the book drop?",
+      "options": [
+        "To warn listeners not to return laptops there",
+        "To announce that it has been replaced",
+        "To explain where to return late books",
+        "To suggest a faster way to return items"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "Laptops should not go in the book drop because they could be damaged."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hello, library visitors. Starting Monday, the library will lend laptops at the front desk. You can borrow one for up to four hours with your student card. Since we only have thirty machines, we recommend reserving one online, especially during exam weeks. Please return laptops to the desk, not the book drop, because the drop isn't padded and they can easily be damaged. Late returns will lose borrowing privileges for one week."
+    }
+  ],
+  "speaker": "f3"
+}

@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "rigel"
+  },
+  "title": "Club Fair Information",
+  "transcript": "Hi everyone, welcome back. Next Wednesday, the student union is hosting the fall club fair from eleven to two in the main hall. More than eighty clubs will have tables, from chess and hiking to robotics. If you're already in a club and want a table, the deadline to register is this Friday, and spaces are filling up fast. Even if you just want to look around, it's a great way to meet people.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the announcement mainly about?",
+      "options": [
+        "A new club that is looking for members",
+        "A change in the student union's hours",
+        "An upcoming event where clubs share information",
+        "A competition between student clubs"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The speaker describes the fall club fair where clubs will have tables."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker say spaces are filling up fast?",
+      "options": [
+        "To apologize for a lack of tables",
+        "To explain why the fair was moved",
+        "To suggest that students arrive early",
+        "To urge club members to register soon"
+      ],
+      "correctIndex": 3,
+      "type": "inference",
+      "explanation": "The speaker mentions the Friday deadline and that spaces are filling up to encourage quick registration."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hi everyone, welcome back. Next Wednesday, the student union is hosting the fall club fair from eleven to two in the main hall. More than eighty clubs will have tables, from chess and hiking to robotics. If you're already in a club and want a table, the deadline to register is this Friday, and spaces are filling up fast. Even if you just want to look around, it's a great way to meet people."
+    }
+  ],
+  "speaker": "m6"
+}

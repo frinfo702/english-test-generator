@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "I just downloaded a new budgeting app.",
+      "chunks": [
+        "how",
+        "have",
+        "you",
+        "to use",
+        "already",
+        "figured out"
+      ],
+      "correctOrder": [
+        1,
+        2,
+        5,
+        0,
+        3
+      ],
+      "suffix": "it yet",
+      "fullSentence": "Have you figured out how to use it yet?"
+    }
+  ]
+}

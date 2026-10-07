@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "perseus"
+  },
+  "title": "Listen and Choose a Response — Box Office",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about availability",
+      "stem": "Are there any tickets left for Saturday's game?",
+      "options": {
+        "A": "The game starts at three o'clock.",
+        "B": "Only a few in the upper level, I'm afraid.",
+        "C": "I left my ticket at home on Saturday.",
+        "D": "Yes, we won the game on Saturday."
+      },
+      "correct": "B",
+      "explanation": "Stating that only a few upper-level seats remain answers the availability question.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Are there any tickets left for Saturday's game?"
+    }
+  ]
+}

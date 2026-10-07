@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "zagan"
+  },
+  "title": "Listen and Choose a Response — Grocery Store",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "The store was out of the bread you wanted.",
+      "options": {
+        "A": "I went out to the store this morning.",
+        "B": "The bread is on the top shelf.",
+        "C": "Thank you for buying the bread.",
+        "D": "No problem. I'll make sandwiches with crackers instead."
+      },
+      "correct": "D",
+      "explanation": "Accepting and proposing an alternative fits; thanking for the bread contradicts the news.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "The store was out of the bread you wanted."
+    }
+  ]
+}

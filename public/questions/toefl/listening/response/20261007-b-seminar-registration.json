@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "ara"
+  },
+  "title": "Listen and Choose a Response — Registration",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for advice",
+      "stem": "What should I do if the seminar I need is full?",
+      "options": {
+        "A": "The seminar is on Thursdays.",
+        "B": "Yes, it's full of good ideas.",
+        "C": "I need it by Friday.",
+        "D": "Get on the waitlist, and email the instructor too."
+      },
+      "correct": "D",
+      "explanation": "Advice answers 'what should I do'. The others answer when, misuse 'full', or repeat 'need'.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "What should I do if the seminar I need is full?"
+    }
+  ]
+}

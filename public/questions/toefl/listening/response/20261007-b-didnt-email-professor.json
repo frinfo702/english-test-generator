@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "celeste"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a negative question",
+      "stem": "Didn't you email the professor about the extension?",
+      "options": {
+        "A": "Extensions are hard to get.",
+        "B": "I did, but she hasn't replied yet.",
+        "C": "No, she emailed me back.",
+        "D": "I'll write the extension cord."
+      },
+      "correct": "B",
+      "explanation": "This confirms and adds the current status. 'No' plus 'she emailed me back' doesn't fit, and the others repeat 'extension'.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Didn't you email the professor about the extension?"
+    }
+  ]
+}

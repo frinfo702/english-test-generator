@@ -1,0 +1,88 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "live chat",
+      "layout": "live-chat",
+      "title": "FixIt Chat",
+      "messages": [
+        {
+          "sender": "Agent (Sofia)",
+          "time": "11:20 A.M.",
+          "text": "Hello! You've reached FixIt Phone Repair. How can I help?"
+        },
+        {
+          "sender": "Ethan Park",
+          "time": "11:21 A.M.",
+          "text": "I dropped my phone and the screen is cracked. It still turns on, though. How much is a repair?"
+        },
+        {
+          "sender": "Agent (Sofia)",
+          "time": "11:22 A.M.",
+          "text": "For your model, a new screen is $129, which includes a 90-day warranty. Most repairs take about an hour."
+        },
+        {
+          "sender": "Ethan Park",
+          "time": "11:23 A.M.",
+          "text": "Can I come in today?"
+        },
+        {
+          "sender": "Agent (Sofia)",
+          "time": "11:24 A.M.",
+          "text": "We have openings at 2 and 4 P.M. Before you come, please back up your photos and files, just in case. We have never lost anyone's data, but it's always safer."
+        },
+        {
+          "sender": "Ethan Park",
+          "time": "11:25 A.M.",
+          "text": "I'll take 4. I have class until 3."
+        },
+        {
+          "sender": "Agent (Sofia)",
+          "time": "11:26 A.M.",
+          "text": "Booked! Bring your phone charger too, since we test the battery after every repair."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is Mr. Park's problem?",
+          "options": [
+            "A. His phone will not turn on.",
+            "B. His phone's battery is dead.",
+            "C. He lost his photos and files.",
+            "D. His phone's screen is damaged."
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "He writes, \"the screen is cracked. It still turns on, though.\""
+        },
+        {
+          "id": "q2",
+          "stem": "At 11:25 A.M., why does Mr. Park write, \"I have class until 3\"?",
+          "options": [
+            "A. To explain why he cannot come at 2 P.M.",
+            "B. To ask for a student discount",
+            "C. To say he will be late for his appointment",
+            "D. To request a repair that takes less than an hour"
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "The openings are at 2 and 4 P.M.; being in class until 3 means the 2 P.M. slot does not work for him."
+        },
+        {
+          "id": "q3",
+          "stem": "What is Mr. Park asked to bring?",
+          "options": [
+            "A. A copy of his receipt",
+            "B. His phone charger",
+            "C. A backup phone",
+            "D. His student ID"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "Sofia says, \"Bring your phone charger too, since we test the battery after every repair.\""
+        }
+      ]
+    }
+  ]
+}

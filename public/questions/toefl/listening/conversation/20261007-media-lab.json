@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Student": "leo",
+    "Librarian": "eve"
+  },
+  "title": "No Study Rooms Left",
+  "transcript": "Student: Hi, I'd like to book a group study room for tonight.\nLibrarian: Let me check. I'm afraid they're all taken until ten. It's midterm week.\nStudent: Ugh, I should've seen that coming. Is there anywhere else we could go?\nLibrarian: The fourth floor has open tables, and it's usually quiet after seven.\nStudent: We need to practice a presentation, though. We'll be talking a lot.\nLibrarian: Then try the media lab in the basement. It isn't on the booking system, so people forget about it.\nStudent: Oh, perfect. Thanks!",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student say, \"I should've seen that coming\"?",
+      "options": [
+        "He noticed a sign saying the rooms were closed.",
+        "He realizes the rooms are always busy during exams.",
+        "He was warned by a friend about the library.",
+        "He expected the librarian to be unhelpful."
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The librarian mentions it's midterm week, and the student realizes he should have expected the rooms to be full."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the librarian recommend the media lab?",
+      "options": [
+        "It has better equipment than the study rooms.",
+        "It stays open later than the rest of the library.",
+        "It is the only room that can be reserved online.",
+        "It suits a group that needs to talk out loud."
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "The student says the group will be talking a lot, so the quiet fourth floor won't work, and the librarian suggests the media lab instead."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi, I'd like to book a group study room for tonight."
+    },
+    {
+      "role": "Librarian",
+      "text": "Let me check. I'm afraid they're all taken until ten. It's midterm week."
+    },
+    {
+      "role": "Student",
+      "text": "Ugh, I should've seen that coming. Is there anywhere else we could go?"
+    },
+    {
+      "role": "Librarian",
+      "text": "The fourth floor has open tables, and it's usually quiet after seven."
+    },
+    {
+      "role": "Student",
+      "text": "We need to practice a presentation, though. We'll be talking a lot."
+    },
+    {
+      "role": "Librarian",
+      "text": "Then try the media lab in the basement. It isn't on the booking system, so people forget about it."
+    },
+    {
+      "role": "Student",
+      "text": "Oh, perfect. Thanks!"
+    }
+  ],
+  "speaker": "c3"
+}

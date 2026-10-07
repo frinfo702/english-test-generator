@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "helios"
+  },
+  "title": "Listen and Choose a Response — Course Registration",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about a choice",
+      "stem": "Which section of statistics did you sign up for?",
+      "options": {
+        "A": "Statistics is a required course for my major.",
+        "B": "I signed the form and handed it in.",
+        "C": "Yes, I signed up last week.",
+        "D": "I haven't decided yet; both times are tricky for me."
+      },
+      "correct": "D",
+      "explanation": "The speaker asks which section; saying the choice isn't made yet and why is a natural indirect reply.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Which section of statistics did you sign up for?"
+    }
+  ]
+}

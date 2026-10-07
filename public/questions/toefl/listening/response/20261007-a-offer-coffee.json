@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "carina"
+  },
+  "title": "Listen and Choose a Response — Office",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making an offer",
+      "stem": "I'm heading to the café. Do you want anything?",
+      "options": {
+        "A": "I headed there yesterday after lunch.",
+        "B": "Just a small tea, if it's no trouble.",
+        "C": "The café is around the corner.",
+        "D": "Yes, I don't want anything."
+      },
+      "correct": "B",
+      "explanation": "Asking for a small item politely accepts the offer; the 'Yes' option contradicts itself.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "I'm heading to the café. Do you want anything?"
+    }
+  ]
+}

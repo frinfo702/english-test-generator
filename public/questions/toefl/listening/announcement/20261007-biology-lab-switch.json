@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "luna"
+  },
+  "title": "Lab Section Schedule Change",
+  "transcript": "Okay, before you leave, one quick change for next week. Because the department is installing new microscopes, Tuesday's lab section will meet on Wednesday instead, same time, same room. If Wednesday doesn't work for you, you can join the Thursday morning section, but you'll need to email the lab coordinator by Friday so she can hold a seat for you. The lab report deadline doesn't change.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why is the lab section being moved?",
+      "options": [
+        "The instructor will be away",
+        "The room is needed for an exam",
+        "New equipment is being installed",
+        "The lab report deadline was changed"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The department is installing new microscopes."
+    },
+    {
+      "id": "q2",
+      "stem": "What should students do if they cannot attend on Wednesday?",
+      "options": [
+        "Email the lab coordinator by Friday",
+        "Submit their lab report early",
+        "Talk to the instructor after class",
+        "Attend the Tuesday section as usual"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "Students who choose Thursday must email the lab coordinator by Friday."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Okay, before you leave, one quick change for next week. Because the department is installing new microscopes, Tuesday's lab section will meet on Wednesday instead, same time, same room. If Wednesday doesn't work for you, you can join the Thursday morning section, but you'll need to email the lab coordinator by Friday so she can hold a seat for you. The lab report deadline doesn't change."
+    }
+  ],
+  "speaker": "f3"
+}

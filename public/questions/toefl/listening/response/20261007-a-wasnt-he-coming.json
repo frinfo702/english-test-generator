@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "iris"
+  },
+  "title": "Listen and Choose a Response — Dinner Plans",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking an assumption",
+      "stem": "Wasn't Tom supposed to join us for dinner?",
+      "options": {
+        "A": "She's coming over for dinner on Friday.",
+        "B": "He texted that he's stuck at work.",
+        "C": "Dinner is at the Thai place on Elm.",
+        "D": "Yes, he joined us an hour ago."
+      },
+      "correct": "B",
+      "explanation": "Explaining why Tom isn't there answers the question; the distractors include a pronoun mismatch.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Wasn't Tom supposed to join us for dinner?"
+    }
+  ]
+}

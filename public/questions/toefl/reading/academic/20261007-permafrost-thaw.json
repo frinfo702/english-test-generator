@@ -1,0 +1,71 @@
+{
+  "title": "The Thawing of Permafrost",
+  "passage": "Permafrost is ground that remains frozen for at least two years in a row. It covers roughly a quarter of the land in the Northern Hemisphere, mostly in Siberia, Alaska, and northern Canada. Only a thin top layer, called the active layer, thaws each summer and refreezes in winter. Below it, soil and rock may stay frozen to depths of hundreds of meters.\n\nPermafrost contains huge amounts of carbon in the form of dead plants and animals that froze before they could decay. Scientists estimate that it holds about twice as much carbon as the atmosphere does today. As the Arctic warms, the active layer is becoming deeper, and long-frozen material is beginning to thaw. Microbes then break this material down and release carbon dioxide and methane, both of which trap heat. Thawing ground has also caused roads to crack and buildings to tilt in towns built on permafrost.\n\nResearchers worry that this process could create a feedback loop: warming releases gases, and the gases cause more warming. How quickly this might happen is difficult to predict, partly because new plant growth in a warmer Arctic could absorb some of the released carbon. Scientists are therefore expanding field measurements across the region to improve their forecasts.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the passage mainly about?",
+      "options": [
+        "A. How towns are built in the Arctic",
+        "B. Why the active layer refreezes each winter",
+        "C. What permafrost is and why its thawing concerns scientists",
+        "D. How microbes produce methane"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage defines permafrost, explains how thawing releases carbon, and describes the risk of a 'feedback loop.'"
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 1, what is the active layer?",
+      "options": [
+        "A. The top layer of ground that thaws and refreezes each year",
+        "B. The deepest layer of frozen rock",
+        "C. A layer made of dead plants and animals",
+        "D. A region of northern Siberia"
+      ],
+      "correctIndex": 0,
+      "explanation": "'Only a thin top layer, called the active layer, thaws each summer and refreezes in winter.'"
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention roads and buildings in paragraph 2?",
+      "options": [
+        "A. To explain how carbon is released from the ground",
+        "B. To argue that Arctic towns should be moved",
+        "C. To compare the Arctic with warmer regions",
+        "D. To show that thawing has direct effects on human structures"
+      ],
+      "correctIndex": 3,
+      "explanation": "Thawing ground 'has also caused roads to crack and buildings to tilt,' an effect separate from the release of gases."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What does paragraph 3 suggest about new plant growth in the Arctic?",
+      "options": [
+        "A. It could partly offset the release of carbon.",
+        "B. It is the main cause of thawing permafrost.",
+        "C. It will stop the feedback loop completely.",
+        "D. It releases large amounts of methane."
+      ],
+      "correctIndex": 0,
+      "explanation": "New plants 'could absorb some of the released carbon,' which would reduce, but not end, the effect."
+    },
+    {
+      "id": "q5",
+      "type": "negativeFactual",
+      "stem": "All of the following are mentioned in paragraph 2 EXCEPT",
+      "options": [
+        "A. microbes breaking down thawed material",
+        "B. gases that trap heat",
+        "C. rising sea levels along Arctic coasts",
+        "D. the active layer becoming deeper"
+      ],
+      "correctIndex": 2,
+      "explanation": "Paragraph 2 mentions microbes, heat-trapping gases, and a deeper active layer, but says nothing about sea levels."
+    }
+  ]
+}

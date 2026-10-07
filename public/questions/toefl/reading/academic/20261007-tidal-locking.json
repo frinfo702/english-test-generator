@@ -1,0 +1,71 @@
+{
+  "title": "Why We See One Side of the Moon",
+  "passage": "From Earth, people always see the same face of the Moon. This is not because the Moon does not spin. Instead, it rotates exactly once during each trip around Earth, so the same side always points toward us. Astronomers call this condition tidal locking, and it is common among moons in the solar system.\n\nTidal locking results from gravity. Earth's pull stretches the Moon slightly, creating two bulges on opposite sides. Long ago, when the Moon spun faster, these bulges were constantly pulled out of line with Earth. Gravity tugged on them, acting like a brake that gradually slowed the Moon's rotation until it matched its orbit. The same process is acting on Earth, though much more slowly, since Earth is far larger. Ancient coral fossils, which formed daily and yearly growth bands, show that a year about 400 million years ago contained roughly 400 days, meaning that each day was shorter than it is today.\n\nTidal locking matters beyond our solar system. Many planets discovered around small, cool stars orbit so close that they are probably locked, with one side in constant daylight and the other in permanent darkness. Scientists are still debating whether winds could spread heat around such planets enough to make them suitable for life.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to paragraph 1, why do people on Earth always see the same side of the Moon?",
+      "options": [
+        "A. The Moon does not rotate at all.",
+        "B. The Moon rotates once during each orbit.",
+        "C. Earth blocks the view of the other side.",
+        "D. The other side reflects no sunlight."
+      ],
+      "correctIndex": 1,
+      "explanation": "The Moon 'rotates exactly once during each trip around Earth, so the same side always points toward us.'"
+    },
+    {
+      "id": "q2",
+      "type": "vocabulary",
+      "stem": "The word \"gradually\" in paragraph 2 is closest in meaning to",
+      "options": [
+        "A. suddenly",
+        "B. completely",
+        "C. slowly over time",
+        "D. occasionally"
+      ],
+      "correctIndex": 2,
+      "explanation": "Gravity acted like a brake that 'gradually slowed' the Moon, meaning it slowed it little by little over a long period."
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention ancient coral fossils in paragraph 2?",
+      "options": [
+        "A. To provide evidence that Earth's rotation has slowed",
+        "B. To explain how the Moon's bulges formed",
+        "C. To show that corals are affected by the Moon",
+        "D. To describe how scientists measure the Moon's orbit"
+      ],
+      "correctIndex": 0,
+      "explanation": "The fossils show that a year once 'contained roughly 400 days,' so days were shorter, which supports the claim that the same braking 'process is acting on Earth.'"
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "Based on paragraph 2, which of the following can be inferred about the length of a day on Earth?",
+      "options": [
+        "A. It has not changed in 400 million years.",
+        "B. It will soon equal the length of a year.",
+        "C. It was longer in the distant past.",
+        "D. It is slowly becoming longer."
+      ],
+      "correctIndex": 3,
+      "explanation": "If Earth's spin is being slowed and past days were 'shorter than it is today,' days must be gradually getting longer."
+    },
+    {
+      "id": "q5",
+      "type": "detail",
+      "stem": "According to paragraph 3, what are scientists still debating about tidally locked planets around small stars?",
+      "options": [
+        "A. Whether the planets orbit close to their stars",
+        "B. Whether the planets could support life",
+        "C. Whether the planets have a dark side",
+        "D. Whether the planets actually exist"
+      ],
+      "correctIndex": 1,
+      "explanation": "Scientists debate 'whether winds could spread heat around such planets enough to make them suitable for life.'"
+    }
+  ]
+}

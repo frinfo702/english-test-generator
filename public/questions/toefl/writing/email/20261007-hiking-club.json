@@ -1,0 +1,29 @@
+{
+  "scenario": {
+    "title": "Writing to a Club Organizer",
+    "description": "You joined a local hiking club two months ago, and Mr. Tanaka organizes its weekend trips. The club has just announced that all future hikes will start at 6 a.m. on Saturdays, but you work a Saturday morning shift at a bakery.",
+    "recipient": "Mr. Tanaka",
+    "subject": "Question about the new hiking schedule",
+    "purpose": "Explain a scheduling conflict and propose an alternative",
+    "keyPoints": [
+      "Tell the organizer what you have enjoyed about the club",
+      "Explain why the new schedule is difficult for you",
+      "Suggest a change or an option that could help members in your situation"
+    ]
+  },
+  "modelAnswer": "Dear Mr. Tanaka,\n\nThank you for organizing such wonderful trips over the past two months. The hike to Eagle Lake was the highlight of my summer, and I have made several new friends through the club.\n\nI just read the announcement about the new 6 a.m. start time, and I am afraid it will be hard for me to keep participating. I work at a bakery every Saturday from five until noon, so I would miss nearly every outing. I understand that early starts help the group avoid the afternoon heat, though.\n\nWould it be possible to hold one hike a month on Sunday instead? I suspect a few other members also have weekend jobs, so a Sunday option might keep more people involved. I would be glad to help plan the route for the first one.\n\nWarm regards,\nPriya",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Expresses appreciation, explains the conflict with a concrete reason, and offers a realistic suggestion."
+    },
+    {
+      "criterion": "Organization",
+      "description": "Clear progression with a friendly opening, a balanced explanation, and a constructive proposal."
+    },
+    {
+      "criterion": "Language Use",
+      "description": "Friendly yet respectful register for a club member; idiomatic phrasing and varied sentence types."
+    }
+  ]
+}

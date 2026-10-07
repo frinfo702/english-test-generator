@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "cosmo"
+  },
+  "title": "Listen and Choose a Response — Shared Apartment",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Would you mind turning the music down a little?",
+      "options": {
+        "A": "I turned left at the music store.",
+        "B": "Sorry about that. Is this better?",
+        "C": "Yes, I'll turn it up for you.",
+        "D": "It's my favorite band from Brazil."
+      },
+      "correct": "B",
+      "explanation": "Apologizing and adjusting the volume responds to the request; 'turn it up' contradicts it.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Would you mind turning the music down a little?"
+    }
+  ]
+}

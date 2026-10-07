@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "altair"
+  },
+  "title": "Textbook Buyback Week",
+  "transcript": "Hi, shoppers. Textbook buyback week starts Monday at the campus bookstore. Bring in books from this semester, and we'll pay up to half of what you paid, depending on condition. Books with heavy highlighting or missing pages may not be accepted. And here's a tip: the earlier you come, the better, because once we have enough copies of a title, we stop buying it.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What can be inferred about books with missing pages?",
+      "options": [
+        "They will be accepted at full price",
+        "They may be turned down",
+        "They will be donated to the library",
+        "They can be exchanged for new books"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The speaker says such books may not be accepted."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker recommend coming early?",
+      "options": [
+        "The bookstore closes early on Monday",
+        "Prices drop later in the week",
+        "The store stops buying a title once it has enough copies",
+        "Lines will be shorter in the morning"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "Once the store has enough copies of a title, it stops buying it."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hi, shoppers. Textbook buyback week starts Monday at the campus bookstore. Bring in books from this semester, and we'll pay up to half of what you paid, depending on condition. Books with heavy highlighting or missing pages may not be accepted. And here's a tip: the earlier you come, the better, because once we have enough copies of a title, we stop buying it."
+    }
+  ],
+  "speaker": "m5"
+}

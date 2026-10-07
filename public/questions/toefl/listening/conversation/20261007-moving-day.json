@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Woman": "carina",
+    "Man": "altair"
+  },
+  "title": "Help With Moving",
+  "transcript": "Woman: Are you free Saturday? I'm moving into my new place and could use a hand.\nMan: I've got a dentist appointment at ten, but I'm free after that.\nWoman: That works. I've booked the truck from noon.\nMan: Is it just boxes, or furniture too?\nWoman: Mostly boxes. The couch is the only heavy thing, and my brother's coming for that.\nMan: Good, because my back's still sore from the gym. I'll bring lunch, too.\nWoman: You're the best. I'll text you the address.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the woman say she \"could use a hand\"?",
+      "options": [
+        "To explain that she hurt her hand",
+        "To ask the man for help",
+        "To offer to help the man move",
+        "To complain about her brother"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "\"Could use a hand\" is a request for help with the move."
+    },
+    {
+      "id": "q2",
+      "stem": "Why is the man glad that the woman's brother will move the couch?",
+      "options": [
+        "He has never met the woman's brother.",
+        "He wants to leave early for the dentist.",
+        "He doesn't want to lift anything heavy right now.",
+        "He thinks the couch won't fit in the truck."
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "He says his back is still sore, so he's relieved not to carry the heavy couch."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Woman",
+      "text": "Are you free Saturday? I'm moving into my new place and could use a hand."
+    },
+    {
+      "role": "Man",
+      "text": "I've got a dentist appointment at ten, but I'm free after that."
+    },
+    {
+      "role": "Woman",
+      "text": "That works. I've booked the truck from noon."
+    },
+    {
+      "role": "Man",
+      "text": "Is it just boxes, or furniture too?"
+    },
+    {
+      "role": "Woman",
+      "text": "Mostly boxes. The couch is the only heavy thing, and my brother's coming for that."
+    },
+    {
+      "role": "Man",
+      "text": "Good, because my back's still sore from the gym. I'll bring lunch, too."
+    },
+    {
+      "role": "Woman",
+      "text": "You're the best. I'll text you the address."
+    }
+  ],
+  "speaker": "c1"
+}

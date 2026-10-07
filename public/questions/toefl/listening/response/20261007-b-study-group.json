@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Classmate": "carina"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a suggestion",
+      "stem": "Do you want to form a study group for the midterm?",
+      "options": {
+        "A": "Sure, let's ask a few others from class too.",
+        "B": "I filled out the form already.",
+        "C": "The midterm was really hard.",
+        "D": "They studied in a group."
+      },
+      "correct": "A",
+      "explanation": "Agreeing and expanding the plan fits a suggestion. The others repeat 'form', 'midterm', and change the pronoun.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Classmate",
+      "text": "Do you want to form a study group for the midterm?"
+    }
+  ]
+}

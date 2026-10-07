@@ -1,0 +1,55 @@
+{
+  "paragraph": "The Silk Road was a network of trade routes that connected East Asia with the Mediterranean region. Merchants traveled along the roads for centuries, carrying goods such as silk, spices, and metal tools. However, few traders covered the whole distance themselves. Instead, products passed from one group to another at busy market towns. Along with goods, the routes also carried languages, religions, and inventions between distant cultures.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "trav",
+      "answer": "traveled"
+    },
+    {
+      "index": 1,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 2,
+      "hint": "f",
+      "answer": "for"
+    },
+    {
+      "index": 3,
+      "hint": "carr",
+      "answer": "carrying"
+    },
+    {
+      "index": 4,
+      "hint": "su",
+      "answer": "such"
+    },
+    {
+      "index": 5,
+      "hint": "si",
+      "answer": "silk"
+    },
+    {
+      "index": 6,
+      "hint": "a",
+      "answer": "and"
+    },
+    {
+      "index": 7,
+      "hint": "to",
+      "answer": "tools"
+    },
+    {
+      "index": 8,
+      "hint": "f",
+      "answer": "few"
+    },
+    {
+      "index": 9,
+      "hint": "cov",
+      "answer": "covered"
+    }
+  ]
+}

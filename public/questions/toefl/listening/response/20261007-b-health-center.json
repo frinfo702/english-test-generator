@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "leo"
+  },
+  "title": "Listen and Choose a Response — Campus Services",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for information",
+      "stem": "Does the health center accept walk-in patients?",
+      "options": {
+        "A": "I walked in the park this morning.",
+        "B": "Only in the mornings, so you'd better go early.",
+        "C": "She's a patient person.",
+        "D": "It's next to the gym."
+      },
+      "correct": "B",
+      "explanation": "This answers with a key condition. The others reuse 'walk' and 'patient' or answer where.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Does the health center accept walk-in patients?"
+    }
+  ]
+}

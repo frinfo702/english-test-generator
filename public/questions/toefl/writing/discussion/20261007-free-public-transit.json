@@ -1,0 +1,23 @@
+{
+  "professorName": "Dr. Chen",
+  "professorPhoto": "m1",
+  "course": "urban studies",
+  "professorQuestion": "Traffic congestion and air pollution are serious problems in many growing cities. To encourage people to leave their cars at home, some cities, such as Tallinn in Estonia, have made buses and trains completely free for residents. However, removing fares means the city loses ticket income, which must be replaced with tax money or cuts to other public services such as parks and libraries. Should cities make public transportation free for everyone? Explain your opinion.",
+  "student1": {
+    "name": "James",
+    "gender": "male",
+    "response": "Yes, I think public transportation should be free. Many low-income workers spend a large part of their salary just getting to their jobs. Removing fares would put money back in their pockets and make it easier for them to reach better job opportunities in other parts of the city."
+  },
+  "student2": {
+    "name": "Sofia",
+    "gender": "female",
+    "response": "I don't think free transit is the best use of city money. If the service is slow or unreliable, people will keep driving even if the bus costs nothing. Cities should first spend the money on more frequent buses and new routes, because quality matters more to commuters than price."
+  },
+  "modelAnswer": "Sofia makes a good point about reliability, but I still believe cities should make public transportation free, partly because fares themselves slow the system down. On many routes, a large share of travel time is spent waiting while passengers buy tickets or search for coins at the front door. If everyone could board through any door without paying, buses would move through the city much faster, which would directly improve the service quality Sofia cares about. In addition, collecting fares is surprisingly expensive, since cities must pay for ticket machines, inspectors, and payment software. In some cases, those costs consume a significant portion of the money the fares bring in. Therefore, eliminating fares may not be as costly as it first appears, and it could make transit both fairer and more efficient.",
+  "evaluationPoints": [
+    "Relevance and clarity: states a clear opinion on free public transportation and responds to the classmates",
+    "Elaboration: offers a new angle (such as boarding speed or fare-collection costs) supported by specific details",
+    "Language: demonstrates syntactic variety and accurate, idiomatic word choice",
+    "Accuracy: contains few grammatical, spelling, or lexical errors"
+  ]
+}

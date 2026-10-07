@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "perseus"
+  },
+  "title": "Listen and Choose a Response — Missed Class",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Could you send me your notes from Tuesday's lecture?",
+      "options": {
+        "A": "Sure, but they're handwritten. I'll take photos.",
+        "B": "The lecture was about the French Revolution.",
+        "C": "I'll send it to her by Tuesday.",
+        "D": "Yes, I missed the lecture too."
+      },
+      "correct": "A",
+      "explanation": "Agreeing and explaining how the notes will be shared fits the request; the pronoun mismatch is wrong.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Could you send me your notes from Tuesday's lecture?"
+    }
+  ]
+}

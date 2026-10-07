@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "ursa"
+  },
+  "title": "Listen and Choose a Response — Part-Time Job",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "The coffee machine in the break room is broken again.",
+      "options": {
+        "A": "The break was too short.",
+        "B": "I broke my phone screen.",
+        "C": "Coffee keeps me awake.",
+        "D": "I'll put a note on it and call the repair company."
+      },
+      "correct": "D",
+      "explanation": "Saying what you'll do about it responds to the problem. The distractors reuse 'break', 'broken', and 'coffee'.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "The coffee machine in the break room is broken again."
+    }
+  ]
+}

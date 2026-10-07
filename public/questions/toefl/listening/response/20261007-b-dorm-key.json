@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "kepler"
+  },
+  "title": "Listen and Choose a Response — Dorm Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "I locked my key inside my dorm room again.",
+      "options": {
+        "A": "I lock my bike outside.",
+        "B": "The dorm is very quiet.",
+        "C": "Yes, I have the key.",
+        "D": "The front desk can let you in with your ID."
+      },
+      "correct": "D",
+      "explanation": "This offers a practical solution. The others reuse 'lock', 'dorm', and 'key'.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I locked my key inside my dorm room again."
+    }
+  ]
+}

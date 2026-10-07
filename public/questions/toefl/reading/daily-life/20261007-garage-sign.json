@@ -1,0 +1,40 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "sign",
+      "layout": "notice",
+      "title": "Parking Information",
+      "icon": "info",
+      "content": "VISITOR PARKING\nLevels 1 and 2 only\nFirst hour free\nKeep your ticket and pay at the machine near the elevator before returning to your car\nLevels 3 and 4 are reserved for monthly permit holders\nVehicles without a permit on these levels will be towed",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Where should a visitor pay for parking?",
+          "options": [
+            "A. At the exit gate on Level 1",
+            "B. At the office on Level 3",
+            "C. At the permit desk on Level 4",
+            "D. At a machine near the elevator"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "The sign says to \"pay at the machine near the elevator before returning to your car.\""
+        },
+        {
+          "id": "q2",
+          "stem": "What will most likely happen to a visitor who parks on Level 4?",
+          "options": [
+            "A. The car may be removed.",
+            "B. The first hour will be free.",
+            "C. The visitor will receive a monthly permit.",
+            "D. The visitor will pay a lower rate."
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "Levels 3 and 4 are for permit holders, and \"Vehicles without a permit on these levels will be towed.\""
+        }
+      ]
+    }
+  ]
+}

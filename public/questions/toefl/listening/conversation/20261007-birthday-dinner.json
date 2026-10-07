@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Man": "lumen",
+    "Woman": "luna"
+  },
+  "title": "A Birthday Dinner",
+  "transcript": "Man: Did you book the restaurant for Jen's birthday?\nWoman: I tried. The Italian place is full on Friday.\nMan: Seriously? We should've called last week.\nWoman: I know. But the Thai place across the street has a table at eight.\nMan: Jen's not big on spicy food, though.\nWoman: They've got plenty of mild dishes. I checked the menu online.\nMan: Okay, then go for it. I'll tell everyone.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the man mention that Jen doesn't like spicy food?",
+      "options": [
+        "He wants to cook dinner for Jen himself.",
+        "He is unsure the Thai restaurant is a good choice.",
+        "He thinks the Italian place is too expensive.",
+        "He forgot that Jen's birthday is on Friday."
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "He raises it as a concern about choosing the Thai restaurant."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the woman say about the Thai restaurant?",
+      "options": [
+        "It is fully booked on Friday.",
+        "It is cheaper than the Italian place.",
+        "It is far from where they live.",
+        "It offers dishes that aren't spicy."
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "She says, \"They've got plenty of mild dishes. I checked the menu online.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Man",
+      "text": "Did you book the restaurant for Jen's birthday?"
+    },
+    {
+      "role": "Woman",
+      "text": "I tried. The Italian place is full on Friday."
+    },
+    {
+      "role": "Man",
+      "text": "Seriously? We should've called last week."
+    },
+    {
+      "role": "Woman",
+      "text": "I know. But the Thai place across the street has a table at eight."
+    },
+    {
+      "role": "Man",
+      "text": "Jen's not big on spicy food, though."
+    },
+    {
+      "role": "Woman",
+      "text": "They've got plenty of mild dishes. I checked the menu online."
+    },
+    {
+      "role": "Man",
+      "text": "Okay, then go for it. I'll tell everyone."
+    }
+  ],
+  "speaker": "c1"
+}

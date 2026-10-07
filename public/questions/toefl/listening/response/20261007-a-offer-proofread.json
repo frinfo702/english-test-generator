@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "orion"
+  },
+  "title": "Listen and Choose a Response — Writing Center",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making an offer",
+      "stem": "I'd be happy to look over your essay before you submit it.",
+      "options": {
+        "A": "I looked over the edge of the bridge.",
+        "B": "The essay is about renewable energy.",
+        "C": "Yes, I submitted it last week.",
+        "D": "That would really help. Can I send it tonight?"
+      },
+      "correct": "D",
+      "explanation": "Accepting gratefully and arranging a time fits the offer; the tense mismatch makes the offer pointless.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I'd be happy to look over your essay before you submit it."
+    }
+  ]
+}

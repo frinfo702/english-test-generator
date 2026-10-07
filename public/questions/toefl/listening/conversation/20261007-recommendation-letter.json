@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Student": "rex",
+    "Professor": "ursa"
+  },
+  "title": "A Recommendation Request",
+  "transcript": "Student: Professor Adams, I'm applying to a summer program in Japan. Would you be willing to write me a recommendation?\nProfessor: I'd be happy to. When's the deadline?\nStudent: March fifteenth.\nProfessor: So about three weeks. Could you send me your personal statement and a list of the courses you've taken with me?\nStudent: Sure. I'm still revising the statement, though.\nProfessor: Send the draft anyway. It'll help me write something that matches what you're saying.\nStudent: Okay, I'll email it tonight.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student visit the professor?",
+      "options": [
+        "To ask for help revising an essay",
+        "To get information about studying in Japan",
+        "To request a letter of recommendation",
+        "To sign up for a summer course"
+      ],
+      "correctIndex": 2,
+      "type": "purpose",
+      "explanation": "The student asks the professor to write a recommendation for a summer program."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the professor want to see the draft?",
+      "options": [
+        "So her letter is consistent with the student's application",
+        "So she can correct the student's grammar",
+        "Because the deadline is earlier than the student thinks",
+        "Because she needs it to register the student"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "She says the draft will help her write something \"that matches what you're saying.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor Adams, I'm applying to a summer program in Japan. Would you be willing to write me a recommendation?"
+    },
+    {
+      "role": "Professor",
+      "text": "I'd be happy to. When's the deadline?"
+    },
+    {
+      "role": "Student",
+      "text": "March fifteenth."
+    },
+    {
+      "role": "Professor",
+      "text": "So about three weeks. Could you send me your personal statement and a list of the courses you've taken with me?"
+    },
+    {
+      "role": "Student",
+      "text": "Sure. I'm still revising the statement, though."
+    },
+    {
+      "role": "Professor",
+      "text": "Send the draft anyway. It'll help me write something that matches what you're saying."
+    },
+    {
+      "role": "Student",
+      "text": "Okay, I'll email it tonight."
+    }
+  ],
+  "speaker": "c2"
+}

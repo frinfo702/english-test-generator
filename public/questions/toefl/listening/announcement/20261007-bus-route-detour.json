@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "castor"
+  },
+  "title": "Campus Shuttle Detour",
+  "transcript": "Attention, shuttle riders. Because of road construction on College Avenue, the Blue Line will skip the stop at the bookstore for the next two weeks. Instead, buses will stop on Elm Street, about a block north. Morning service will start fifteen minutes earlier to make up for the longer route. You can check real-time bus locations in the campus app. We appreciate your patience during the construction.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main purpose of the announcement?",
+      "options": [
+        "To introduce a new shuttle line",
+        "To promote the campus app",
+        "To announce the closing of the bookstore",
+        "To explain a temporary change to a bus route"
+      ],
+      "correctIndex": 3,
+      "type": "inference",
+      "explanation": "The speaker explains that the Blue Line will skip a stop for two weeks due to construction."
+    },
+    {
+      "id": "q2",
+      "stem": "Why will morning service start earlier?",
+      "options": [
+        "More students take classes in the morning",
+        "The bookstore will open earlier",
+        "The bus drivers' schedule has changed",
+        "The new route takes more time"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "Service starts earlier to make up for the longer route."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention, shuttle riders. Because of road construction on College Avenue, the Blue Line will skip the stop at the bookstore for the next two weeks. Instead, buses will stop on Elm Street, about a block north. Morning service will start fifteen minutes earlier to make up for the longer route. You can check real-time bus locations in the campus app. We appreciate your patience during the construction."
+    }
+  ],
+  "speaker": "m6"
+}

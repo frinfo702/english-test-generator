@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Traveler": "orion"
+  },
+  "title": "Listen and Choose a Response — Travel",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for directions",
+      "stem": "Do you know which gate the flight to Denver leaves from?",
+      "options": {
+        "A": "Let's check the departure screen over there.",
+        "B": "It leaves at a quarter past six.",
+        "C": "I've never been to Denver before.",
+        "D": "The gate was open when I came in."
+      },
+      "correct": "A",
+      "explanation": "Suggesting the departure board is a practical indirect answer. The others answer when, comment on Denver, or use 'gate' in a different sense.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Traveler",
+      "text": "Do you know which gate the flight to Denver leaves from?"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "social media post",
+      "layout": "document",
+      "content": "Elm Park Community Garden\n\nVolunteers needed this Sunday from 9 to noon! We're building new raised beds for the children's section. No experience necessary. Wear clothes that can get dirty, and bring gloves if you have them. We'll provide tools, water, and lunch afterward. Comment below so we know how many sandwiches to order.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why does the garden ask people to comment on the post?",
+          "options": [
+            "A. To vote on new plants",
+            "B. To estimate how much food to get",
+            "C. To ask for tools",
+            "D. To sign up for children's classes"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The post says \"Comment below so we know how many sandwiches to order.\""
+        },
+        {
+          "id": "q2",
+          "stem": "What is suggested about the volunteers?",
+          "options": [
+            "A. They should be trained gardeners.",
+            "B. They will need to bring their own lunch.",
+            "C. They may do physical outdoor work.",
+            "D. They must bring their own tools."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "Volunteers will be \"building new raised beds\" and should \"Wear clothes that can get dirty,\" which suggests physical work."
+        }
+      ]
+    }
+  ]
+}

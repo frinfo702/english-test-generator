@@ -1,0 +1,51 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "layout": "email",
+      "content": "From: Harborview Inn\nTo: Emily Chen\nSubject: Booking Confirmation #HV4402\n\nDear Ms. Chen,\nThank you for choosing Harborview Inn. We are pleased to confirm your stay:\n\nCheck-in: Friday, August 15 (from 3 P.M.)\nCheck-out: Sunday, August 17 (by 11 A.M.)\nRoom: Queen room with ocean view\nBreakfast: included each morning, 7–10 A.M.\n\nAs you requested, we have arranged an airport pickup for 2:30 P.M. on your arrival day. Your driver will hold a sign with your name outside Gate C.\n\nFree parking is not available, but guests receive a discount at the city garage across the street. You may cancel without charge until 48 hours before check-in.\n\nWe look forward to welcoming you.\nThe Harborview Inn Team",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "How many nights will Ms. Chen stay at the inn?",
+          "options": [
+            "A. One",
+            "B. Two",
+            "C. Three",
+            "D. Four"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "She checks in on \"Friday, August 15\" and checks out on \"Sunday, August 17,\" which is two nights."
+        },
+        {
+          "id": "q2",
+          "stem": "What is suggested about Ms. Chen?",
+          "options": [
+            "A. She will drive her own car to the inn.",
+            "B. She will travel to the city by plane.",
+            "C. She will arrive at the inn after 3 P.M.",
+            "D. She booked a room without breakfast."
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The inn \"arranged an airport pickup\" at her request, so she is most likely flying."
+        },
+        {
+          "id": "q3",
+          "stem": "What is mentioned about parking?",
+          "options": [
+            "A. Guests can park at the inn for free.",
+            "B. Parking must be reserved 48 hours ahead.",
+            "C. Guests can save money at a nearby garage.",
+            "D. Parking is located near Gate C."
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "\"Free parking is not available, but guests receive a discount at the city garage across the street.\""
+        }
+      ]
+    }
+  ]
+}

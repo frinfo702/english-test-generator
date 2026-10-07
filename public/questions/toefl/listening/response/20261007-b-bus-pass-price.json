@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "eve"
+  },
+  "title": "Listen and Choose a Response — Getting Around Town",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about cost",
+      "stem": "How much is a monthly bus pass these days?",
+      "options": {
+        "A": "The bus stops every fifteen minutes.",
+        "B": "It went up recently, so check the transit website.",
+        "C": "Yes, I passed my driving test.",
+        "D": "I usually sit near the back."
+      },
+      "correct": "B",
+      "explanation": "The question asks about price; saying it changed and pointing to the website is an appropriate indirect answer. 'Passed' only sounds like 'pass', and the others ignore the cost.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "How much is a monthly bus pass these days?"
+    }
+  ]
+}

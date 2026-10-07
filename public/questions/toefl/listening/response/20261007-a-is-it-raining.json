@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "eve"
+  },
+  "title": "Listen and Choose a Response — Home",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about weather",
+      "stem": "Is it still raining outside?",
+      "options": {
+        "A": "It rained all day last Tuesday.",
+        "B": "I'm staying inside to study.",
+        "C": "Yes, the sun is out now.",
+        "D": "Just a little, but take an umbrella anyway."
+      },
+      "correct": "D",
+      "explanation": "The answer describes the current rain and gives advice; the 'Yes' option contradicts itself.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Is it still raining outside?"
+    }
+  ]
+}

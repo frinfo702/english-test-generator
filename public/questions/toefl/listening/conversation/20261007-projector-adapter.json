@@ -1,0 +1,63 @@
+{
+  "voices": {
+    "Man": "cosmo",
+    "Woman": "luna"
+  },
+  "title": "The Missing Adapter",
+  "transcript": "Man: The projector in conference room B won't connect to my laptop. I've tried everything.\nWoman: Did you use the gray adapter in the drawer? The new laptops need it.\nMan: There's no adapter in the drawer. Someone must've walked off with it.\nWoman: Typical. I've got one at my desk you can borrow.\nMan: You're a lifesaver. My client call starts in ten minutes.\nWoman: Just bring it back afterward, or I'll be in the same boat tomorrow.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the woman say, \"I'll be in the same boat tomorrow\"?",
+      "options": [
+        "She also has a client call today.",
+        "She will need the adapter herself.",
+        "She plans to replace the projector.",
+        "She thinks the man will be late again."
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "\"In the same boat\" means in the same situation: without the adapter, she would have the man's problem tomorrow."
+    },
+    {
+      "id": "q2",
+      "stem": "What is the man's problem?",
+      "options": [
+        "He forgot the time of his client call.",
+        "He can't find conference room B.",
+        "His laptop battery is almost empty.",
+        "He can't connect his laptop to the projector."
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "He says the projector \"won't connect to my laptop.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Man",
+      "text": "The projector in conference room B won't connect to my laptop. I've tried everything."
+    },
+    {
+      "role": "Woman",
+      "text": "Did you use the gray adapter in the drawer? The new laptops need it."
+    },
+    {
+      "role": "Man",
+      "text": "There's no adapter in the drawer. Someone must've walked off with it."
+    },
+    {
+      "role": "Woman",
+      "text": "Typical. I've got one at my desk you can borrow."
+    },
+    {
+      "role": "Man",
+      "text": "You're a lifesaver. My client call starts in ten minutes."
+    },
+    {
+      "role": "Woman",
+      "text": "Just bring it back afterward, or I'll be in the same boat tomorrow."
+    }
+  ],
+  "speaker": "c2"
+}

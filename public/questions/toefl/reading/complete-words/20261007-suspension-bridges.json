@@ -1,0 +1,55 @@
+{
+  "paragraph": "A suspension bridge is a type of bridge in which the road hangs from above. These cables pass over tall towers and are fixed firmly to the ground at each end. The weight of the road is carried by the cables and moved down into the towers. Because of this design, suspension bridges can cross much wider spaces than most other bridges. Many of the longest bridges in the world are built in this way.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "cab",
+      "answer": "cables"
+    },
+    {
+      "index": 1,
+      "hint": "ov",
+      "answer": "over"
+    },
+    {
+      "index": 2,
+      "hint": "tow",
+      "answer": "towers"
+    },
+    {
+      "index": 3,
+      "hint": "a",
+      "answer": "are"
+    },
+    {
+      "index": 4,
+      "hint": "fir",
+      "answer": "firmly"
+    },
+    {
+      "index": 5,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 6,
+      "hint": "a",
+      "answer": "at"
+    },
+    {
+      "index": 7,
+      "hint": "e",
+      "answer": "end"
+    },
+    {
+      "index": 8,
+      "hint": "wei",
+      "answer": "weight"
+    },
+    {
+      "index": 9,
+      "hint": "t",
+      "answer": "the"
+    }
+  ]
+}

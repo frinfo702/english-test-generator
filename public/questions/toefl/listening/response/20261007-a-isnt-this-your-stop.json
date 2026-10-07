@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "perseus"
+  },
+  "title": "Listen and Choose a Response — On the Bus",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Giving a reminder",
+      "stem": "Isn't this your stop coming up?",
+      "options": {
+        "A": "Oh, thanks! I almost missed it.",
+        "B": "The bus stops running at midnight.",
+        "C": "I'll stop by your place later.",
+        "D": "Yes, I got off two stops ago."
+      },
+      "correct": "A",
+      "explanation": "Thanking the speaker for the reminder is natural; the distractors repeat 'stop' with other meanings or contradict.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Isn't this your stop coming up?"
+    }
+  ]
+}

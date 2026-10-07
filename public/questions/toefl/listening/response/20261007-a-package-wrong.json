@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "altair"
+  },
+  "title": "Listen and Choose a Response — Online Shopping",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "The package I got had the wrong size shoes in it.",
+      "options": {
+        "A": "I wrapped the package with brown paper.",
+        "B": "Those shoes look really nice on you.",
+        "C": "My size is a medium.",
+        "D": "You can usually return them for free online."
+      },
+      "correct": "D",
+      "explanation": "Pointing out the free return option is a helpful reply to the problem.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "The package I got had the wrong size shoes in it."
+    }
+  ]
+}

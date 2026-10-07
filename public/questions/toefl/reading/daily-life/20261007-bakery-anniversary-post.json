@@ -1,0 +1,38 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "social media post",
+      "layout": "document",
+      "content": "Crumb & Co. Bakery @crumbandco\n\nWe opened our doors five years ago this Saturday! To say thank you, the first 50 customers will get a free cinnamon roll with any coffee. Our owner, Lena, will also be giving a short bread-baking demo at 11 A.M. Come early, because last year the rolls were gone by 9:30!",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of the post?",
+          "options": [
+            "A. To advertise a new coffee shop",
+            "B. To announce a celebration at the bakery",
+            "C. To hire new bakers for the weekend",
+            "D. To change the bakery's opening hours"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The bakery says \"We opened our doors five years ago this Saturday! To say thank you...\" and lists special events for the day."
+        },
+        {
+          "id": "q2",
+          "stem": "Why does the bakery tell people to come early?",
+          "options": [
+            "A. The demo starts before the bakery opens.",
+            "B. Lena will only be there in the morning.",
+            "C. The free rolls may run out quickly.",
+            "D. Coffee is cheaper before 9:30."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "Only \"the first 50 customers\" get a roll, and \"last year the rolls were gone by 9:30,\" so arriving late may mean missing out."
+        }
+      ]
+    }
+  ]
+}

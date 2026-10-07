@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "carina"
+  },
+  "title": "Listen and Choose a Response — Summer Plans",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about ability",
+      "stem": "Can you swim well enough for the kayak trip?",
+      "options": {
+        "A": "I took lessons last summer, so I should be fine.",
+        "B": "The trip is planned for early August.",
+        "C": "I'll buy a new swimsuit tomorrow.",
+        "D": "Yes, the lake is very deep."
+      },
+      "correct": "A",
+      "explanation": "Mentioning past swimming lessons is an indirect yes to a question about ability.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Can you swim well enough for the kayak trip?"
+    }
+  ]
+}

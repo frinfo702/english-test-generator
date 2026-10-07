@@ -1,0 +1,27 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "What did the manager ask you in the interview?",
+      "prefix": "She wanted to know",
+      "chunks": [
+        "did",
+        "last job",
+        "worked",
+        "had",
+        "how long",
+        "at my",
+        "I"
+      ],
+      "correctOrder": [
+        4,
+        6,
+        3,
+        2,
+        5,
+        1
+      ],
+      "fullSentence": "She wanted to know how long I had worked at my last job."
+    }
+  ]
+}

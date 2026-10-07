@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Customer": "lumen"
+  },
+  "title": "Listen and Choose a Response — Coffee Shop",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for a recommendation",
+      "stem": "What smoothie would you recommend for someone who hates bananas?",
+      "options": {
+        "A": "The mango one is popular, and there's no banana.",
+        "B": "Bananas are in aisle three.",
+        "C": "Yes, I'd recommend it.",
+        "D": "I hate waiting in line."
+      },
+      "correct": "A",
+      "explanation": "A specific recommendation answers the question. The others say where bananas are, use Yes to a wh-question, or repeat 'hate'.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Customer",
+      "text": "What smoothie would you recommend for someone who hates bananas?"
+    }
+  ]
+}

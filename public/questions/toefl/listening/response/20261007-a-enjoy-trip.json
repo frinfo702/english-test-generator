@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "ursa"
+  },
+  "title": "Listen and Choose a Response — Travel",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about an experience",
+      "stem": "Did you enjoy your trip to the mountains?",
+      "options": {
+        "A": "I'm planning a trip there next spring.",
+        "B": "The views were great, but it rained most days.",
+        "C": "The mountains are about three hours away.",
+        "D": "Yes, I'll enjoy it a lot."
+      },
+      "correct": "B",
+      "explanation": "A balanced description of the trip answers the question; the 'Yes' option uses the wrong tense.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "Did you enjoy your trip to the mountains?"
+    }
+  ]
+}

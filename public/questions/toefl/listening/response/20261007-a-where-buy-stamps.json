@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "eve"
+  },
+  "title": "Listen and Choose a Response — Errands",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for a recommendation",
+      "stem": "Where can I buy stamps around here?",
+      "options": {
+        "A": "The grocery store sells them at the checkout.",
+        "B": "It costs about a dollar per letter.",
+        "C": "I stamped my foot on the floor.",
+        "D": "Yes, I need to mail something too."
+      },
+      "correct": "A",
+      "explanation": "The question asks where, so naming a store with stamps answers it.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Where can I buy stamps around here?"
+    }
+  ]
+}

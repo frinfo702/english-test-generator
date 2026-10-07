@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "iris"
+  },
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a yes/no question",
+      "stem": "Are you going to join the hiking club this year?",
+      "options": {
+        "A": "I joined you for lunch.",
+        "B": "The club meets on Mondays.",
+        "C": "I want to, but I'm worried about the time.",
+        "D": "He went hiking yesterday."
+      },
+      "correct": "C",
+      "explanation": "This gives an indirect answer with a reason. The others reuse 'join' or 'club', or shift pronoun and tense.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Are you going to join the hiking club this year?"
+    }
+  ]
+}

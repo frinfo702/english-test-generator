@@ -1,0 +1,38 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "menu",
+      "layout": "document",
+      "content": "Maple Street Café — Weekday Lunch (11 A.M.–2 P.M.)\n\nSoup of the Day with bread — $6\nGrilled Chicken Sandwich — $9\nGarden Salad (add chicken for $3) — $7\nVeggie Wrap — $8\n\nLunch Combo: any sandwich or wrap with a cup of soup — $12\nAll lunch items are available for takeout. Weekend brunch menu is different.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "How much would a customer pay for a veggie wrap with a cup of soup?",
+          "options": [
+            "A. $8",
+            "B. $12",
+            "C. $14",
+            "D. $6"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The \"Lunch Combo: any sandwich or wrap with a cup of soup\" costs $12."
+        },
+        {
+          "id": "q2",
+          "stem": "What is suggested about the café?",
+          "options": [
+            "A. It serves lunch only on weekends.",
+            "B. It does not allow takeout orders.",
+            "C. It offers different food on Saturdays and Sundays.",
+            "D. It closes at 11 A.M. on weekdays."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "The menu is for weekdays, and it notes \"Weekend brunch menu is different.\""
+        }
+      ]
+    }
+  ]
+}

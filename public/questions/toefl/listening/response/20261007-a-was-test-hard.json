@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "luna"
+  },
+  "title": "Listen and Choose a Response — Exam Week",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about an experience",
+      "stem": "Was the history midterm as hard as people said?",
+      "options": {
+        "A": "The history building is being renovated.",
+        "B": "I'll take the midterm next Monday.",
+        "C": "The essays were tough, but the multiple choice was easy.",
+        "D": "Yes, it was the easiest test ever."
+      },
+      "correct": "C",
+      "explanation": "A mixed evaluation answers the question honestly; the 'Yes' option contradicts the meaning of hard.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Was the history midterm as hard as people said?"
+    }
+  ]
+}

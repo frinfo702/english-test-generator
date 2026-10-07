@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "sal"
+  },
+  "title": "Listen and Choose a Response — Career",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing news",
+      "stem": "I'm starting a new job at the hospital next week.",
+      "options": {
+        "A": "That's great! What will you be doing there?",
+        "B": "I started there last week as well.",
+        "C": "The hospital is near the train station.",
+        "D": "She works the night shift."
+      },
+      "correct": "A",
+      "explanation": "Showing interest with a follow-up question is a natural reply to news; the other options mismatch tense or pronoun.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I'm starting a new job at the hospital next week."
+    }
+  ]
+}

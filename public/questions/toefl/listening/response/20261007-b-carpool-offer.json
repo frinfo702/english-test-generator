@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "castor"
+  },
+  "title": "Listen and Choose a Response — Part-Time Job",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making an offer",
+      "stem": "I drive past your street, so I can give you a ride tomorrow.",
+      "options": {
+        "A": "The street was repaired last month.",
+        "B": "That'd be great. I'll be ready by seven thirty.",
+        "C": "I gave him a ride yesterday.",
+        "D": "I drove past the store yesterday."
+      },
+      "correct": "B",
+      "explanation": "Accepting the offer and giving a time is natural. The others reuse 'drive', 'street', and 'ride' with the wrong tense or pronoun.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "I drive past your street, so I can give you a ride tomorrow."
+    }
+  ]
+}

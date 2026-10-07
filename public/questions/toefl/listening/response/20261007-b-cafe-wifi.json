@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Customer": "leo"
+  },
+  "title": "Listen and Choose a Response — Coffee Shop",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for information",
+      "stem": "Excuse me, what's the Wi-Fi password here?",
+      "options": {
+        "A": "We close at nine on weekdays.",
+        "B": "Yes, the coffee is free today.",
+        "C": "It's printed on the bottom of your receipt.",
+        "D": "I forgot my password again."
+      },
+      "correct": "C",
+      "explanation": "The customer asks for the password, and the receipt tells them where to find it. The others answer when, use Yes to a wh-question, or repeat 'password'.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Customer",
+      "text": "Excuse me, what's the Wi-Fi password here?"
+    }
+  ]
+}

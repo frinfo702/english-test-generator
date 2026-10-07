@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Neighbor": "aurora"
+  },
+  "title": "Listen and Choose a Response — Apartment Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Complaining about noise",
+      "stem": "The people upstairs were moving furniture until two in the morning.",
+      "options": {
+        "A": "I moved here about two years ago.",
+        "B": "The furniture store opens at ten.",
+        "C": "Maybe we should mention it to the building manager.",
+        "D": "Yes, they'll be upstairs in the morning."
+      },
+      "correct": "C",
+      "explanation": "The speaker is complaining, so suggesting a way to deal with the problem fits. The distractors reuse 'moving', 'furniture', and 'morning' with unrelated meanings.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Neighbor",
+      "text": "The people upstairs were moving furniture until two in the morning."
+    }
+  ]
+}

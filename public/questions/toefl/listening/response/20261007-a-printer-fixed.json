@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "iris"
+  },
+  "title": "Listen and Choose a Response — Office",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking on a repair",
+      "stem": "Did someone fix the printer on our floor?",
+      "options": {
+        "A": "I printed the report on our floor.",
+        "B": "Yes, it's still broken.",
+        "C": "A technician is coming this afternoon.",
+        "D": "The floor was cleaned last night."
+      },
+      "correct": "C",
+      "explanation": "Saying a technician is coming implies it isn't fixed yet; the 'Yes' option contradicts itself.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "Did someone fix the printer on our floor?"
+    }
+  ]
+}

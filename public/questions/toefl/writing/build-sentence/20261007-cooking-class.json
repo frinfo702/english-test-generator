@@ -1,0 +1,26 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "I signed up for a cooking class downtown.",
+      "chunks": [
+        "meets",
+        "that",
+        "it",
+        "meet",
+        "is",
+        "the one",
+        "on Thursdays"
+      ],
+      "correctOrder": [
+        4,
+        2,
+        5,
+        1,
+        0,
+        6
+      ],
+      "fullSentence": "Is it the one that meets on Thursdays?"
+    }
+  ]
+}

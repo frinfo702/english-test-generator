@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "orion"
+  },
+  "title": "Listen and Choose a Response — Club Event",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making an introduction",
+      "stem": "Haven't you met our new club president yet?",
+      "options": {
+        "A": "The club meets every Wednesday evening.",
+        "B": "Not yet. Could you introduce us?",
+        "C": "Yes, I'll meet the president next week.",
+        "D": "The president's office is upstairs."
+      },
+      "correct": "B",
+      "explanation": "Saying not yet and asking for an introduction is natural; the 'Yes' option contradicts having met.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Haven't you met our new club president yet?"
+    }
+  ]
+}

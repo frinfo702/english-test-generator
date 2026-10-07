@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Staff": "perseus"
+  },
+  "title": "Listen and Choose a Response — Dry Cleaner",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about timing",
+      "stem": "When would you like to pick up your jacket?",
+      "options": {
+        "A": "Pick it up from the shelf by the door.",
+        "B": "I bought this jacket last winter.",
+        "C": "At the shop on Maple Street.",
+        "D": "Is Thursday after work too soon?"
+      },
+      "correct": "D",
+      "explanation": "Replying with a proposed day phrased as a question is a natural indirect answer about timing.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Staff",
+      "text": "When would you like to pick up your jacket?"
+    }
+  ]
+}

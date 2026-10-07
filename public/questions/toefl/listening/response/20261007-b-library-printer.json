@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "castor"
+  },
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for information",
+      "stem": "Where can I print something on the third floor?",
+      "options": {
+        "A": "It prints in color and black and white.",
+        "B": "On the third of next month.",
+        "C": "The printers are by the elevator, but you need a card.",
+        "D": "Yes, I'll print it later."
+      },
+      "correct": "C",
+      "explanation": "A 'where' question is answered with a location and a tip. The others answer how, confuse 'third', or use Yes.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Where can I print something on the third floor?"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "rigel"
+  },
+  "title": "Listen and Choose a Response — Campus Library",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about hours",
+      "stem": "What time does the library close on Fridays?",
+      "options": {
+        "A": "I'm not sure, but the hours are posted by the door.",
+        "B": "I closed the window before I left the library.",
+        "C": "Yes, I go there every Friday afternoon.",
+        "D": "It's on the second floor, next to the café."
+      },
+      "correct": "A",
+      "explanation": "The speaker asks for a closing time; admitting uncertainty and pointing to where the hours are posted is a natural indirect reply.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "What time does the library close on Fridays?"
+    }
+  ]
+}

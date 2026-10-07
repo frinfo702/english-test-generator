@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "sal"
+  },
+  "title": "Listen and Choose a Response — Shared Apartment",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Complaining",
+      "stem": "Isn't the heater on? It's freezing in here.",
+      "options": {
+        "A": "It's on, but the window in the kitchen is open.",
+        "B": "I'll buy a new heater next winter.",
+        "C": "Yes, it's way too hot.",
+        "D": "The kitchen is on the left."
+      },
+      "correct": "A",
+      "explanation": "Explaining the real cause of the cold responds to the complaint; the 'Yes' option contradicts freezing.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Isn't the heater on? It's freezing in here."
+    }
+  ]
+}

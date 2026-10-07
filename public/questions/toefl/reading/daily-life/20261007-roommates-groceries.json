@@ -1,0 +1,59 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "text message",
+      "layout": "chat",
+      "messages": [
+        {
+          "sender": "Jordan",
+          "time": "5:42 P.M.",
+          "text": "I'm at the store. Do we still have eggs?"
+        },
+        {
+          "sender": "Sam",
+          "time": "5:44 P.M.",
+          "text": "Only two left. Can you also grab milk? Oh, and my sister is staying over tonight."
+        },
+        {
+          "sender": "Jordan",
+          "time": "5:45 P.M.",
+          "text": "Got it. Should I get something for dinner, then?"
+        },
+        {
+          "sender": "Sam",
+          "time": "5:46 P.M.",
+          "text": "Don't worry, I'm making pasta. Just maybe some extra bread."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What does Jordan offer to do?",
+          "options": [
+            "A. Cook pasta for everyone",
+            "B. Pick up Sam's sister",
+            "C. Return the eggs to the store",
+            "D. Buy food for dinner"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "Jordan asks, \"Should I get something for dinner, then?\""
+        },
+        {
+          "id": "q2",
+          "stem": "At 5:46 P.M., why does Sam most likely ask for extra bread?",
+          "options": [
+            "A. Because there will be an additional person at dinner",
+            "B. Because the store has run out of pasta",
+            "C. Because Jordan forgot to buy milk",
+            "D. Because Sam's sister is bringing eggs"
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "Sam mentions that \"my sister is staying over tonight,\" so more food will be needed for one more person."
+        }
+      ]
+    }
+  ]
+}

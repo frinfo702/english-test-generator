@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "eve"
+  },
+  "title": "Listen and Choose a Response — Personal Errand",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Giving information",
+      "stem": "I have a dentist appointment, so I'll leave at three today.",
+      "options": {
+        "A": "My teeth are fine, thanks.",
+        "B": "Okay. I'll cover your calls this afternoon.",
+        "C": "I left at three yesterday.",
+        "D": "The dentist's office is downtown."
+      },
+      "correct": "B",
+      "explanation": "Offering to cover for the coworker is a natural reply to being told they will leave early.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "I have a dentist appointment, so I'll leave at three today."
+    }
+  ]
+}

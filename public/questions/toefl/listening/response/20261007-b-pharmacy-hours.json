@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Neighbor": "perseus"
+  },
+  "title": "Listen and Choose a Response — Errands",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about store hours",
+      "stem": "What time does the pharmacy on Elm Street close tonight?",
+      "options": {
+        "A": "I'm not sure, but its hours are posted online.",
+        "B": "It's right across from the post office.",
+        "C": "Yes, the street is closed for repairs.",
+        "D": "I picked up my medicine there last week."
+      },
+      "correct": "A",
+      "explanation": "The speaker wants a closing time; offering a way to find it is a natural indirect reply. The others answer where, repeat 'closed', or describe a past visit.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Neighbor",
+      "text": "What time does the pharmacy on Elm Street close tonight?"
+    }
+  ]
+}

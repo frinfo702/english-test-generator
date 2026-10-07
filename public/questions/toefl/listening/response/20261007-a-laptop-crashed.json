@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "zagan"
+  },
+  "title": "Listen and Choose a Response — Computer Trouble",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "My laptop crashed and I lost half my paper.",
+      "options": {
+        "A": "I wrote the paper in the library.",
+        "B": "The IT help desk might be able to recover it.",
+        "C": "Did anyone get hurt in the crash?",
+        "D": "My new laptop is really light."
+      },
+      "correct": "B",
+      "explanation": "Pointing to the IT help desk is a helpful reply; 'crash' as an accident is the wrong meaning.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "My laptop crashed and I lost half my paper."
+    }
+  ]
+}

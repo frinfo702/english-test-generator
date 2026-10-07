@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "ara"
+  },
+  "title": "Lab Safety Reminder",
+  "transcript": "Before we start today, a quick safety note. Several people came to lab last week without goggles, and we had to send them home. Starting today, if you forget yours, you can borrow a pair from the cabinet by the door, but you'll have to sign them out and return them at the end of class. Also, please tie back long hair. It's one of the most common causes of accidents.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main purpose of the announcement?",
+      "options": [
+        "To introduce a new lab experiment",
+        "To explain a new rule about safety equipment",
+        "To report an accident that happened in lab",
+        "To ask students to buy new goggles"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The speaker explains that students can now borrow goggles but must sign them out."
+    },
+    {
+      "id": "q2",
+      "stem": "What must students do if they borrow goggles?",
+      "options": [
+        "Pay a small fee",
+        "Ask the instructor for permission",
+        "Sign them out and return them after class",
+        "Bring them back the next day"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "Borrowed goggles must be signed out and returned at the end of class."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Before we start today, a quick safety note. Several people came to lab last week without goggles, and we had to send them home. Starting today, if you forget yours, you can borrow a pair from the cabinet by the door, but you'll have to sign them out and return them at the end of class. Also, please tie back long hair. It's one of the most common causes of accidents."
+    }
+  ],
+  "speaker": "f4"
+}

@@ -1,0 +1,24 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "It was so hot last night.",
+      "prefix": "I",
+      "chunks": [
+        "because",
+        "working",
+        "couldn't sleep",
+        "my air conditioner",
+        "wasn't"
+      ],
+      "correctOrder": [
+        2,
+        0,
+        3,
+        4,
+        1
+      ],
+      "fullSentence": "I couldn't sleep because my air conditioner wasn't working."
+    }
+  ]
+}

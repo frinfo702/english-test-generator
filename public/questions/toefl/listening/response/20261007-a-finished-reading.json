@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "carina"
+  },
+  "title": "Listen and Choose a Response — Book Club",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking progress",
+      "stem": "Have you finished the book for Thursday's meeting?",
+      "options": {
+        "A": "I've got two chapters left, but I'll finish tonight.",
+        "B": "Thursday's meeting is at the library.",
+        "C": "Yes, I'll start reading it next month.",
+        "D": "The book was written by a local author."
+      },
+      "correct": "A",
+      "explanation": "Explaining how much is left answers the question indirectly; the 'Yes' option contradicts itself.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Have you finished the book for Thursday's meeting?"
+    }
+  ]
+}

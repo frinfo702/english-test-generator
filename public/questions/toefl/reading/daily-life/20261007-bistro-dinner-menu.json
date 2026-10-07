@@ -1,0 +1,51 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "menu",
+      "layout": "document",
+      "content": "Olive & Thyme Bistro — Dinner Menu\n\nStarters\nTomato Soup (V) — $7\nFried Calamari — $11\n\nMains\nLemon Herb Chicken with rice — $19\nMushroom Risotto (V, GF) — $17\nGrilled Salmon with seasonal vegetables (GF) — $24\nBeef Burger with fries — $16 (add cheese $1.50)\n\nDesserts\nChocolate Cake — $8\nFresh Fruit Plate (V, GF) — $6\n\nV = vegetarian   GF = gluten-free\nAsk your server about tonight's specials. Please tell your server about any food allergies before ordering. Groups of eight or more will have an 18% service charge added. Tuesday is Pasta Night: all pasta dishes half price.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Which main dish is suitable for a guest who eats neither meat nor fish and cannot have gluten?",
+          "options": [
+            "A. Lemon Herb Chicken",
+            "B. Mushroom Risotto",
+            "C. Grilled Salmon",
+            "D. Beef Burger"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The Mushroom Risotto is marked \"(V, GF),\" meaning vegetarian and gluten-free. The salmon is gluten-free but not vegetarian."
+        },
+        {
+          "id": "q2",
+          "stem": "What are guests asked to do before ordering?",
+          "options": [
+            "A. Pay an 18% service charge",
+            "B. Choose a dessert",
+            "C. Mention any allergies to their server",
+            "D. Make a reservation for Tuesday"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "\"Please tell your server about any food allergies before ordering.\""
+        },
+        {
+          "id": "q3",
+          "stem": "What is suggested about the bistro?",
+          "options": [
+            "A. It offers free dessert with every main dish.",
+            "B. It is open only on Tuesdays.",
+            "C. It does not serve large groups.",
+            "D. It serves pasta on some days."
+          ],
+          "correctIndex": 3,
+          "type": "inference",
+          "explanation": "The menu lists no pasta dishes but announces \"Tuesday is Pasta Night,\" so pasta is served at least on Tuesdays. Large groups are served with an added charge."
+        }
+      ]
+    }
+  ]
+}

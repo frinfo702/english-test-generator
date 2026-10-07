@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "castor"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about timing",
+      "stem": "When are Professor Kim's office hours this week?",
+      "options": {
+        "A": "Her office is in Hall B.",
+        "B": "They're on the syllabus, but I think Tuesday afternoon.",
+        "C": "Yes, she was in her office.",
+        "D": "I worked for about two hours."
+      },
+      "correct": "B",
+      "explanation": "This gives a likely time and where to confirm it. The others answer where, use Yes, or repeat 'hours'.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "When are Professor Kim's office hours this week?"
+    }
+  ]
+}

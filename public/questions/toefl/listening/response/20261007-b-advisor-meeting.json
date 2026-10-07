@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "helios"
+  },
+  "title": "Listen and Choose a Response — Registration",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about timing",
+      "stem": "How do I set up a meeting with my academic advisor?",
+      "options": {
+        "A": "You can book one through the student portal.",
+        "B": "I met her last Thursday.",
+        "C": "Yes, she's my advisor.",
+        "D": "In the student center."
+      },
+      "correct": "A",
+      "explanation": "A 'how' question is answered with a method. The others change tense, use Yes, or answer where.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "How do I set up a meeting with my academic advisor?"
+    }
+  ]
+}

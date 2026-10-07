@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Woman": "aurora",
+    "Man": "perseus"
+  },
+  "title": "The Jammed Printer",
+  "transcript": "Woman: Is the printer on the third floor still jammed? I need to print handouts for the two o'clock meeting.\nMan: Yeah, it's been flashing the same error all morning. I called IT, but they can't come until tomorrow.\nWoman: Tomorrow? That's cutting it close. The meeting's in an hour.\nMan: Have you tried the one in the mail room? It's slow, but it works.\nWoman: I didn't even know there was one down there.\nMan: Most people don't. Just don't print in color, or it'll take forever.\nWoman: Black and white's fine. I'll head down now.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the woman's problem?",
+      "options": [
+        "She missed an important meeting this morning.",
+        "She cannot find the IT department's phone number.",
+        "She needs handouts printed before a meeting starts.",
+        "She accidentally printed her handouts in color."
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The woman says she needs to print handouts for a two o'clock meeting, but the printer is jammed."
+    },
+    {
+      "id": "q2",
+      "stem": "What will the woman probably do next?",
+      "options": [
+        "Use the printer in the mail room",
+        "Wait for IT to repair the printer",
+        "Ask the man to print the handouts",
+        "Postpone the meeting until tomorrow"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The man suggests the mail room printer, and the woman says, \"I'll head down now.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Woman",
+      "text": "Is the printer on the third floor still jammed? I need to print handouts for the two o'clock meeting."
+    },
+    {
+      "role": "Man",
+      "text": "Yeah, it's been flashing the same error all morning. I called IT, but they can't come until tomorrow."
+    },
+    {
+      "role": "Woman",
+      "text": "Tomorrow? That's cutting it close. The meeting's in an hour."
+    },
+    {
+      "role": "Man",
+      "text": "Have you tried the one in the mail room? It's slow, but it works."
+    },
+    {
+      "role": "Woman",
+      "text": "I didn't even know there was one down there."
+    },
+    {
+      "role": "Man",
+      "text": "Most people don't. Just don't print in color, or it'll take forever."
+    },
+    {
+      "role": "Woman",
+      "text": "Black and white's fine. I'll head down now."
+    }
+  ],
+  "speaker": "c2"
+}

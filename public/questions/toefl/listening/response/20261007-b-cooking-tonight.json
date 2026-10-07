@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "celeste"
+  },
+  "title": "Listen and Choose a Response — Family",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about plans",
+      "stem": "Who's cooking dinner tonight, you or me?",
+      "options": {
+        "A": "I made dinner yesterday, so it's your turn.",
+        "B": "I'm cooking at seven thirty.",
+        "C": "Yes, dinner was delicious.",
+        "D": "Chicken and rice, I think."
+      },
+      "correct": "A",
+      "explanation": "The question asks who, and this answers with a reason. The others answer when or what, or use Yes.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Who's cooking dinner tonight, you or me?"
+    }
+  ]
+}

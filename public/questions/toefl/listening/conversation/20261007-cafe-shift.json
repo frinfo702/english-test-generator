@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Man": "lux",
+    "Woman": "celeste"
+  },
+  "title": "Covering a Shift",
+  "transcript": "Man: Hey, any chance you could cover my shift at the café on Saturday morning?\nWoman: Saturday? What time?\nMan: Seven to eleven. My cousin's getting married, and I totally forgot when I signed up.\nWoman: Seven's brutal. But I could use the hours.\nMan: I'll take your Tuesday night shift in exchange, if you want.\nWoman: Deal. Just tell the manager so it's official.\nMan: I'll text her right now.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the woman say, \"Seven's brutal\"?",
+      "options": [
+        "She thinks the shift is too long.",
+        "She is annoyed that the man forgot.",
+        "She has another job on Saturday.",
+        "She doesn't like starting work so early."
+      ],
+      "correctIndex": 3,
+      "type": "attitude",
+      "explanation": "She's reacting to the 7 a.m. start time, which she finds unpleasant, though she still agrees."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the man offer the woman?",
+      "options": [
+        "To pay her for the extra hours",
+        "To work one of her shifts",
+        "To invite her to the wedding",
+        "To talk to the manager for her later"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "He says, \"I'll take your Tuesday night shift in exchange.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Man",
+      "text": "Hey, any chance you could cover my shift at the café on Saturday morning?"
+    },
+    {
+      "role": "Woman",
+      "text": "Saturday? What time?"
+    },
+    {
+      "role": "Man",
+      "text": "Seven to eleven. My cousin's getting married, and I totally forgot when I signed up."
+    },
+    {
+      "role": "Woman",
+      "text": "Seven's brutal. But I could use the hours."
+    },
+    {
+      "role": "Man",
+      "text": "I'll take your Tuesday night shift in exchange, if you want."
+    },
+    {
+      "role": "Woman",
+      "text": "Deal. Just tell the manager so it's official."
+    },
+    {
+      "role": "Man",
+      "text": "I'll text her right now."
+    }
+  ],
+  "speaker": "c4"
+}

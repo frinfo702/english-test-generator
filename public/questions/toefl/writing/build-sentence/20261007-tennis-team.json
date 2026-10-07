@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "I'm thinking of trying out for the tennis team.",
+      "chunks": [
+        "sure",
+        "are",
+        "you",
+        "to practice",
+        "enough time",
+        "you have"
+      ],
+      "correctOrder": [
+        1,
+        2,
+        0,
+        5,
+        4,
+        3
+      ],
+      "fullSentence": "Are you sure you have enough time to practice?"
+    }
+  ]
+}

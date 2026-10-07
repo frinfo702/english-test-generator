@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "celeste"
+  },
+  "title": "Study Lounge Closure",
+  "transcript": "Good afternoon, residents. The second-floor study lounge in Maple Hall will be closed this Thursday and Friday while the carpet is replaced. The work is noisy, so we'd also suggest avoiding the rooms nearest the lounge during the day if you need to concentrate. The quiet room on the first floor will stay open twenty-four hours. Please remove any books or belongings from the lounge by Wednesday night.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why will the study lounge be closed?",
+      "options": [
+        "The furniture is being moved",
+        "The heating system is being repaired",
+        "The carpet is being replaced",
+        "The room is being painted"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The speaker says the lounge will be closed while the carpet is replaced."
+    },
+    {
+      "id": "q2",
+      "stem": "What are residents asked to do by Wednesday night?",
+      "options": [
+        "Reserve a time in the quiet room",
+        "Move to a different floor",
+        "Report any damage to the lounge",
+        "Take their belongings out of the lounge"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "Residents should remove books or belongings from the lounge by Wednesday night."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Good afternoon, residents. The second-floor study lounge in Maple Hall will be closed this Thursday and Friday while the carpet is replaced. The work is noisy, so we'd also suggest avoiding the rooms nearest the lounge during the day if you need to concentrate. The quiet room on the first floor will stay open twenty-four hours. Please remove any books or belongings from the lounge by Wednesday night."
+    }
+  ],
+  "speaker": "f4"
+}

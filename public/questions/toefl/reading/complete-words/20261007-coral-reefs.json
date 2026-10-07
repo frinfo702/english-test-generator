@@ -1,0 +1,55 @@
+{
+  "paragraph": "Coral reefs are large underwater structures built by tiny animals called corals. Each animal builds hard outer walls that protect its soft body. Over many years, these walls join together and form reefs that can stretch for long distances. Although reefs cover only a small part of the ocean floor, they provide homes for a quarter of all sea species. Rising water temperatures now threaten many reefs around the world.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "ani",
+      "answer": "animal"
+    },
+    {
+      "index": 1,
+      "hint": "ha",
+      "answer": "hard"
+    },
+    {
+      "index": 2,
+      "hint": "wa",
+      "answer": "walls"
+    },
+    {
+      "index": 3,
+      "hint": "pro",
+      "answer": "protect"
+    },
+    {
+      "index": 4,
+      "hint": "so",
+      "answer": "soft"
+    },
+    {
+      "index": 5,
+      "hint": "Ov",
+      "answer": "Over"
+    },
+    {
+      "index": 6,
+      "hint": "ye",
+      "answer": "years"
+    },
+    {
+      "index": 7,
+      "hint": "wa",
+      "answer": "walls"
+    },
+    {
+      "index": 8,
+      "hint": "toge",
+      "answer": "together"
+    },
+    {
+      "index": 9,
+      "hint": "fo",
+      "answer": "form"
+    }
+  ]
+}

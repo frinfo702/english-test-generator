@@ -1,0 +1,23 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Our flight was canceled this morning.",
+      "chunks": [
+        "to book",
+        "able",
+        "you",
+        "a later one",
+        "were"
+      ],
+      "correctOrder": [
+        4,
+        2,
+        1,
+        0,
+        3
+      ],
+      "fullSentence": "Were you able to book a later one?"
+    }
+  ]
+}

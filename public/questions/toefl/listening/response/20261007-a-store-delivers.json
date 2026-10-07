@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "carina"
+  },
+  "title": "Listen and Choose a Response — Furniture Store",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about a service",
+      "stem": "Does this store deliver to campus?",
+      "options": {
+        "A": "Only within ten miles, so you should be fine.",
+        "B": "I delivered the package this morning.",
+        "C": "Yes, but we don't deliver anywhere.",
+        "D": "It's a really large store."
+      },
+      "correct": "A",
+      "explanation": "Explaining the delivery range answers the question indirectly; the 'Yes' option contradicts itself.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Does this store deliver to campus?"
+    }
+  ]
+}

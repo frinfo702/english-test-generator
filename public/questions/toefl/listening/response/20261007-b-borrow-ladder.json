@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Neighbor": "luna"
+  },
+  "title": "Listen and Choose a Response — Neighbors",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Could I borrow your ladder to clean my gutters this afternoon?",
+      "options": {
+        "A": "I cleaned my room this afternoon.",
+        "B": "Sure, it's in the garage, so just knock when you come.",
+        "C": "The ladder is about six feet tall.",
+        "D": "I'd like to borrow it as well."
+      },
+      "correct": "B",
+      "explanation": "The request is granted with practical instructions. The other choices repeat 'clean', describe the ladder, or answer as if the speaker were also borrowing.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Neighbor",
+      "text": "Could I borrow your ladder to clean my gutters this afternoon?"
+    }
+  ]
+}

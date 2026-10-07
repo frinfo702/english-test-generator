@@ -1,0 +1,26 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "My new phone keeps freezing.",
+      "chunks": [
+        "it off",
+        "tried",
+        "have",
+        "turn",
+        "you",
+        "turning",
+        "and on again"
+      ],
+      "correctOrder": [
+        2,
+        4,
+        1,
+        5,
+        0,
+        6
+      ],
+      "fullSentence": "Have you tried turning it off and on again?"
+    }
+  ]
+}

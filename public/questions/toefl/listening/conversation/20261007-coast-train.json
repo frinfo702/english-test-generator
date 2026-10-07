@@ -1,0 +1,63 @@
+{
+  "voices": {
+    "Woman": "ara",
+    "Man": "naksh"
+  },
+  "title": "Getting to the Coast",
+  "transcript": "Woman: So for the trip to the coast, should we drive or take the train?\nMan: Driving's cheaper if we split gas. But parking near the beach is a nightmare in summer.\nWoman: True. And the train drops us right in town.\nMan: It's two hours, though, compared to ninety minutes by car.\nWoman: Yeah, but on the train I can actually sleep. You know I'd be the one driving.\nMan: Fair point. Train it is. I'll look up tickets tonight before they sell out.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the man mention parking near the beach?",
+      "options": [
+        "To suggest they leave very early",
+        "To point out a drawback of driving",
+        "To complain about the cost of the train",
+        "To recommend a different beach"
+      ],
+      "correctIndex": 1,
+      "type": "purpose",
+      "explanation": "After noting driving is cheaper, he says parking is \"a nightmare,\" a disadvantage of going by car."
+    },
+    {
+      "id": "q2",
+      "stem": "What will the man do tonight?",
+      "options": [
+        "Pack for the trip",
+        "Fill the car with gas",
+        "Book a parking space",
+        "Check train tickets"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "He says, \"I'll look up tickets tonight before they sell out.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Woman",
+      "text": "So for the trip to the coast, should we drive or take the train?"
+    },
+    {
+      "role": "Man",
+      "text": "Driving's cheaper if we split gas. But parking near the beach is a nightmare in summer."
+    },
+    {
+      "role": "Woman",
+      "text": "True. And the train drops us right in town."
+    },
+    {
+      "role": "Man",
+      "text": "It's two hours, though, compared to ninety minutes by car."
+    },
+    {
+      "role": "Woman",
+      "text": "Yeah, but on the train I can actually sleep. You know I'd be the one driving."
+    },
+    {
+      "role": "Man",
+      "text": "Fair point. Train it is. I'll look up tickets tonight before they sell out."
+    }
+  ],
+  "speaker": "c3"
+}

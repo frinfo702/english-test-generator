@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "perseus"
+  },
+  "title": "Campus Printing Update",
+  "transcript": "Attention, students. Over the weekend, the IT department is updating the campus printing system. From Saturday morning until Sunday evening, none of the printers in the library or computer labs will work. If you have an assignment due Monday, we strongly suggest printing it before Friday night. When the system comes back, you'll need to log in again with your new campus password, so make sure you've reset it.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "When will the printers be unavailable?",
+      "options": [
+        "On Friday night",
+        "From Saturday morning to Sunday evening",
+        "All day Monday",
+        "For the next two weeks"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The printers won't work from Saturday morning until Sunday evening."
+    },
+    {
+      "id": "q2",
+      "stem": "What can be inferred about students who have not reset their passwords?",
+      "options": [
+        "They will be charged for printing",
+        "They will lose their saved files",
+        "They will receive an email from IT",
+        "They may not be able to print after the update"
+      ],
+      "correctIndex": 3,
+      "type": "inference",
+      "explanation": "Students must log in with their new password, so those who haven't reset it may have trouble."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention, students. Over the weekend, the IT department is updating the campus printing system. From Saturday morning until Sunday evening, none of the printers in the library or computer labs will work. If you have an assignment due Monday, we strongly suggest printing it before Friday night. When the system comes back, you'll need to log in again with your new campus password, so make sure you've reset it."
+    }
+  ],
+  "speaker": "m6"
+}

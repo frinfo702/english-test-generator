@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Shopper": "lumen"
+  },
+  "title": "Listen and Choose a Response — Shopping",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about timing",
+      "stem": "When does the winter sale at this store end?",
+      "options": {
+        "A": "It's on the second floor.",
+        "B": "I'll ask the manager. One moment, please.",
+        "C": "Yes, these coats are on sale.",
+        "D": "Winter is my busiest season."
+      },
+      "correct": "B",
+      "explanation": "An indirect but helpful reply to a 'when' question. The others answer where, use Yes to a wh-question, or repeat 'winter'.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Shopper",
+      "text": "When does the winter sale at this store end?"
+    }
+  ]
+}

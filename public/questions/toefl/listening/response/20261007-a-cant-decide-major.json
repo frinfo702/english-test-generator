@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "lumen"
+  },
+  "title": "Listen and Choose a Response — Academic Advising",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Expressing uncertainty",
+      "stem": "I still can't decide between biology and psychology.",
+      "options": {
+        "A": "Why not talk to an advisor in each department?",
+        "B": "Biology is my favorite subject too.",
+        "C": "I decided to buy the blue one.",
+        "D": "Yes, I finally chose biology."
+      },
+      "correct": "A",
+      "explanation": "Suggesting talking to advisors helps with the uncertainty; the 'Yes' option contradicts it.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I still can't decide between biology and psychology."
+    }
+  ]
+}

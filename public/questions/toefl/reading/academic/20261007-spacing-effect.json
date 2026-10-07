@@ -1,0 +1,71 @@
+{
+  "title": "The Spacing Effect",
+  "passage": "When people study, they often review material many times in a single long session, a habit known as massed practice. Psychologists have found, however, that the same amount of study is usually more effective when it is divided into shorter sessions separated by time. This finding is called the spacing effect, and it is one of the most reliable results in memory research.\n\nThe effect was first documented in the 1880s by the German researcher Hermann Ebbinghaus, who memorized lists of nonsense syllables and tested himself at different intervals. Modern studies have confirmed his observations with more realistic material. In a typical experiment, students learn vocabulary words either in one session or across several days. On a test a month later, the spaced group usually remembers far more, even though both groups studied for the same amount of time. One explanation is that a gap allows some forgetting, so each review requires effort to recall the memory, and this effort strengthens it.\n\nDespite this evidence, spacing is rarely built into school schedules, and many students still prefer to cram before exams. Part of the reason may be that massed practice feels successful: information seems familiar during the session, which creates a false sense of mastery. Researchers are now exploring how digital study tools could schedule reviews automatically, though the ideal length of the gaps remains an open question.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the passage mainly about?",
+      "options": [
+        "A. Why nonsense syllables are difficult to memorize",
+        "B. A study method that improves long-term memory and the reasons it is underused",
+        "C. Differences in personality between students who cram and those who do not",
+        "D. How digital tools have replaced traditional ways of studying"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage defines the spacing effect (paragraph 1), presents evidence for it (paragraph 2), and explains why 'spacing is rarely built into school schedules' (paragraph 3)."
+    },
+    {
+      "id": "q2",
+      "type": "vocabulary",
+      "stem": "The word \"reliable\" in paragraph 1 is closest in meaning to",
+      "options": [
+        "A. dependable",
+        "B. surprising",
+        "C. recent",
+        "D. complicated"
+      ],
+      "correctIndex": 0,
+      "explanation": "A 'reliable' result is one that can be depended on because it appears consistently."
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention Hermann Ebbinghaus in paragraph 2?",
+      "options": [
+        "A. To argue that early memory research used unrealistic methods",
+        "B. To introduce a criticism of the spacing effect",
+        "C. To explain why modern studies still use nonsense syllables",
+        "D. To show that the spacing effect has been recognized for more than a century"
+      ],
+      "correctIndex": 3,
+      "explanation": "The effect 'was first documented in the 1880s' by Ebbinghaus, and 'modern studies have confirmed his observations,' showing how long it has been known."
+    },
+    {
+      "id": "q4",
+      "type": "detail",
+      "stem": "According to paragraph 2, why might spaced review strengthen memory?",
+      "options": [
+        "A. It reduces the total time spent studying.",
+        "B. It makes the material feel more familiar.",
+        "C. It requires effort to recall information that has been partly forgotten.",
+        "D. It prevents any forgetting between sessions."
+      ],
+      "correctIndex": 2,
+      "explanation": "Paragraph 2 says 'a gap allows some forgetting, so each review requires effort to recall the memory, and this effort strengthens it.'"
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What can be inferred from paragraph 3 about students who cram?",
+      "options": [
+        "A. They may overestimate how well they have learned the material.",
+        "B. They usually study for less time than other students.",
+        "C. They perform better on tests given a month later.",
+        "D. They prefer to use digital study tools."
+      ],
+      "correctIndex": 0,
+      "explanation": "Massed practice 'creates a false sense of mastery,' so students who cram may believe they know the material better than they do."
+    }
+  ]
+}

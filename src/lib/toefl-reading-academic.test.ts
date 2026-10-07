@@ -12,11 +12,8 @@ const VALID_QUESTION_TYPES = [
   "detail",
   "inference",
   "mainIdea",
-  "paragraphRelation",
-  "importantIdea",
   "negativeFactual",
   "rhetoricalPurpose",
-  "insertSentence",
 ];
 
 interface AcademicQuestion {

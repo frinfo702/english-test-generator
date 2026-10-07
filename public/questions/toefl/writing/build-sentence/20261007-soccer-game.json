@@ -1,0 +1,23 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Did you watch the soccer game last night?",
+      "prefix": "No, I",
+      "chunks": [
+        "that late",
+        "to stay up",
+        "was",
+        "too tired",
+        "so"
+      ],
+      "correctOrder": [
+        2,
+        3,
+        1,
+        0
+      ],
+      "fullSentence": "No, I was too tired to stay up that late."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Neighbor": "kepler"
+  },
+  "title": "Listen and Choose a Response — Neighbors",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Would you mind feeding my cat while I'm away?",
+      "options": {
+        "A": "Not at all. Just leave me the key and instructions.",
+        "B": "My cat is about six years old.",
+        "C": "I'm away from my desk right now.",
+        "D": "Yes, I'd mind it a lot."
+      },
+      "correct": "A",
+      "explanation": "'Not at all' accepts a 'Would you mind' request. 'Yes, I'd mind' refuses awkwardly, and the others repeat 'cat' or 'away'.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Neighbor",
+      "text": "Would you mind feeding my cat while I'm away?"
+    }
+  ]
+}

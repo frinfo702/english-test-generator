@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "leo"
+  },
+  "title": "Listen and Choose a Response — Job Search",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about an experience",
+      "stem": "How did your job interview go yesterday?",
+      "options": {
+        "A": "It's at the office downtown on Fifth Avenue.",
+        "B": "I'll go to the interview tomorrow.",
+        "C": "Yes, I had a job interview.",
+        "D": "Better than I expected; they asked me back next week."
+      },
+      "correct": "D",
+      "explanation": "Describing the outcome answers a how-did-it-go question; the distractors mismatch tense or answer yes/no.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "How did your job interview go yesterday?"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Classmate": "helix"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Complaining",
+      "stem": "Our group still hasn't finished the slides for Monday.",
+      "options": {
+        "A": "I finished the book last Monday.",
+        "B": "The slides at the park are fun.",
+        "C": "Why don't we meet tomorrow and divide the work?",
+        "D": "Yes, Monday is a holiday."
+      },
+      "correct": "C",
+      "explanation": "A suggestion to solve the problem fits the complaint. The others reuse 'finished', 'slides', and 'Monday'.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Classmate",
+      "text": "Our group still hasn't finished the slides for Monday."
+    }
+  ]
+}

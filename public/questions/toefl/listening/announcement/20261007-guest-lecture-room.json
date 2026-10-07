@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "lux"
+  },
+  "title": "Guest Lecture Moved",
+  "transcript": "Hi everyone, quick reminder about tomorrow's guest lecture. Dr. Amara Okafor from the city planning office is still coming, but we've moved the talk from Room 210 to the Hartley Auditorium, since more than a hundred people signed up. It starts at four, not three thirty, so she can finish a meeting downtown first. Please bring your questions about public transit design. She's saving the last twenty minutes for discussion.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main purpose of the announcement?",
+      "options": [
+        "To introduce a new course on city planning",
+        "To explain changes to the location and time of a talk",
+        "To ask students to sign up for a lecture",
+        "To cancel a meeting with the city planning office"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The speaker says the talk has moved to Hartley Auditorium and now starts at four."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker mention that more than a hundred people signed up?",
+      "options": [
+        "To explain why the room was changed",
+        "To encourage more students to register",
+        "To warn that seats are no longer available",
+        "To praise the guest speaker's reputation"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The talk moved to the auditorium because so many people signed up."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hi everyone, quick reminder about tomorrow's guest lecture. Dr. Amara Okafor from the city planning office is still coming, but we've moved the talk from Room 210 to the Hartley Auditorium, since more than a hundred people signed up. It starts at four, not three thirty, so she can finish a meeting downtown first. Please bring your questions about public transit design. She's saving the last twenty minutes for discussion."
+    }
+  ],
+  "speaker": "m5"
+}

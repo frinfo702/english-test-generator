@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "rigel"
+  },
+  "title": "Listen and Choose a Response — Everyday Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Expressing feelings",
+      "stem": "I think the barber cut my hair way too short.",
+      "options": {
+        "A": "The line at the barber was short.",
+        "B": "It'll grow back fast, and it actually looks good.",
+        "C": "I cut my finger while cooking.",
+        "D": "Yes, I need a haircut too."
+      },
+      "correct": "B",
+      "explanation": "Reassuring the friend responds to the worry. The distractors reuse 'short' and 'cut' or talk about the listener's own hair.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I think the barber cut my hair way too short."
+    }
+  ]
+}

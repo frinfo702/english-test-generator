@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "iris"
+  },
+  "title": "Listen and Choose a Response — Shared Apartment",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about a problem",
+      "stem": "Who locked the back door last night?",
+      "options": {
+        "A": "I'll lock it before I leave tomorrow.",
+        "B": "It wasn't me; I came in through the front.",
+        "C": "Yes, the back door was locked.",
+        "D": "Last night was really cold, wasn't it?"
+      },
+      "correct": "B",
+      "explanation": "The speaker wants to know who locked the door; denying it and giving a reason fits the question.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Who locked the back door last night?"
+    }
+  ]
+}

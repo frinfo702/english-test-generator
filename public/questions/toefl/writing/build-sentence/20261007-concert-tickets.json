@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "The concert tickets are almost sold out.",
+      "chunks": [
+        "should",
+        "ours",
+        "buy",
+        "as possible",
+        "then we",
+        "as soon"
+      ],
+      "correctOrder": [
+        4,
+        0,
+        2,
+        1,
+        5,
+        3
+      ],
+      "fullSentence": "Then we should buy ours as soon as possible."
+    }
+  ]
+}

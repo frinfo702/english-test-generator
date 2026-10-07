@@ -1,0 +1,23 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "I'm going to the grocery store later.",
+      "chunks": [
+        "for me",
+        "pick up",
+        "some milk",
+        "you",
+        "could"
+      ],
+      "correctOrder": [
+        4,
+        3,
+        1,
+        2,
+        0
+      ],
+      "fullSentence": "Could you pick up some milk for me?"
+    }
+  ]
+}

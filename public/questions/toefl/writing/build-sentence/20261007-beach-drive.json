@@ -1,0 +1,23 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "We're driving to the beach on Saturday.",
+      "chunks": [
+        "be",
+        "there",
+        "will",
+        "for my brother",
+        "enough room"
+      ],
+      "correctOrder": [
+        2,
+        1,
+        0,
+        4,
+        3
+      ],
+      "fullSentence": "Will there be enough room for my brother?"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "title": "The Paint Tube and Outdoor Painting",
+  "passage": "For centuries, most European painters worked indoors. One reason was practical. Oil paint had to be prepared by grinding colored powders, called pigments, with oil, and the mixture dried quickly once exposed to air. Artists or their assistants made paint in the studio and stored small amounts in pieces of animal bladder tied with string, which often burst or leaked.\n\nIn 1841, the American painter John Goffe Rand patented a squeezable metal tube that could be sealed with a cap. The tube kept paint fresh for long periods and was easy to carry. Paint makers soon sold ready-made colors in tubes, along with many new, brighter pigments. These changes made it far simpler to paint outdoors, directly in front of a scene. The French Impressionists, including Claude Monet and Pierre-Auguste Renoir, took full advantage, painting landscapes outside to capture changing light. Renoir is reported to have said that without paint in tubes, there would have been no Impressionism.\n\nArt historians caution, however, that technology alone did not create the movement. Artists had sketched outdoors long before 1841, and Impressionism also grew out of new ideas about what art should show. The tube is perhaps best understood as a tool that made a new artistic vision easier to pursue.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to paragraph 1, what was one problem with storing paint before 1841?",
+      "options": [
+        "A. The pigments were too bright.",
+        "B. The containers often burst or leaked.",
+        "C. The paint never dried.",
+        "D. Oil was difficult to obtain."
+      ],
+      "correctIndex": 1,
+      "explanation": "Paint was stored in 'pieces of animal bladder tied with string, which often burst or leaked.'"
+    },
+    {
+      "id": "q2",
+      "type": "negativeFactual",
+      "stem": "According to paragraph 2, all of the following were advantages of the metal paint tube EXCEPT",
+      "options": [
+        "A. It kept paint fresh.",
+        "B. It was easy to carry.",
+        "C. It could be sealed with a cap.",
+        "D. It lowered the price of pigments."
+      ],
+      "correctIndex": 3,
+      "explanation": "Paragraph 2 says the tube 'could be sealed with a cap,' 'kept paint fresh,' and 'was easy to carry.' Prices are not mentioned."
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention Renoir's reported statement in paragraph 2?",
+      "options": [
+        "A. To show how important some artists believed the paint tube was",
+        "B. To prove that Renoir invented the paint tube",
+        "C. To explain how Impressionists mixed their colors",
+        "D. To suggest that Renoir preferred painting indoors"
+      ],
+      "correctIndex": 0,
+      "explanation": "Renoir reportedly said that 'without paint in tubes, there would have been no Impressionism,' showing how much he valued the invention."
+    },
+    {
+      "id": "q4",
+      "type": "vocabulary",
+      "stem": "The word \"caution\" in paragraph 3 is closest in meaning to",
+      "options": [
+        "A. agree",
+        "B. celebrate",
+        "C. warn",
+        "D. forget"
+      ],
+      "correctIndex": 2,
+      "explanation": "Historians 'caution' that technology alone did not create the movement, meaning they warn against that conclusion."
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "Which of the following best reflects the view expressed in paragraph 3?",
+      "options": [
+        "A. Impressionism would have developed in exactly the same way without tubes.",
+        "B. The tube helped Impressionism but was not its only cause.",
+        "C. Painters never worked outdoors before 1841.",
+        "D. Technology played no part in the development of Impressionism."
+      ],
+      "correctIndex": 1,
+      "explanation": "Paragraph 3 says 'technology alone did not create the movement' but calls the tube 'a tool that made a new artistic vision easier to pursue.'"
+    }
+  ]
+}

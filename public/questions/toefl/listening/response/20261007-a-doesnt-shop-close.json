@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "ara"
+  },
+  "title": "Listen and Choose a Response — Shopping",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking information",
+      "stem": "Doesn't that shoe store close at six?",
+      "options": {
+        "A": "These shoes are a bit too close-fitting.",
+        "B": "The store is on the second floor.",
+        "C": "Let's hurry, then; we still have twenty minutes.",
+        "D": "No, it closes at six."
+      },
+      "correct": "C",
+      "explanation": "Reacting with urgency implies the store does close soon; the 'No' option contradicts itself.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Doesn't that shoe store close at six?"
+    }
+  ]
+}

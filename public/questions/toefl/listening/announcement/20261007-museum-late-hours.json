@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "sirius"
+  },
+  "title": "Museum Evening Hours",
+  "transcript": "Good evening, visitors. Just a reminder that the museum is open until nine tonight as part of our Thursday Late series. At seven, one of our curators will give a free twenty-minute talk on the new ancient textiles exhibit, starting by the entrance to Gallery Four. The café on the ground floor will close at eight, so if you'd like something to eat, now's a good time.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What will happen at seven o'clock?",
+      "options": [
+        "The museum will close",
+        "A new exhibit will open",
+        "The café will begin serving dinner",
+        "A curator will give a short talk"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "A curator will give a free twenty-minute talk at seven."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker mention that the café closes at eight?",
+      "options": [
+        "To suggest visitors eat soon",
+        "To explain why the museum closes early",
+        "To recommend a restaurant nearby",
+        "To announce a new café menu"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The speaker says now is a good time to eat because the café closes at eight."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Good evening, visitors. Just a reminder that the museum is open until nine tonight as part of our Thursday Late series. At seven, one of our curators will give a free twenty-minute talk on the new ancient textiles exhibit, starting by the entrance to Gallery Four. The café on the ground floor will close at eight, so if you'd like something to eat, now's a good time."
+    }
+  ],
+  "speaker": "m5"
+}

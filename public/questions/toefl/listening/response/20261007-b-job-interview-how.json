@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "aurora"
+  },
+  "title": "Listen and Choose a Response — Part-Time Job",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about an experience",
+      "stem": "How did your interview at the hotel go yesterday?",
+      "options": {
+        "A": "I'll go there tomorrow.",
+        "B": "Pretty well. They said they'd call me by Friday.",
+        "C": "The hotel is near the beach.",
+        "D": "By bus, it takes an hour."
+      },
+      "correct": "B",
+      "explanation": "This describes how the interview went. The others change tense, describe the hotel, or answer how the person traveled.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "How did your interview at the hotel go yesterday?"
+    }
+  ]
+}

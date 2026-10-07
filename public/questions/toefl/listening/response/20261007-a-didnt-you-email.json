@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "carina"
+  },
+  "title": "Listen and Choose a Response — Group Project",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking an assumption",
+      "stem": "Didn't you send the slides to the group already?",
+      "options": {
+        "A": "I did, but I'll resend them in case they got lost.",
+        "B": "The group meets every Tuesday at noon.",
+        "C": "No, I sent them this morning.",
+        "D": "The slides are about climate change."
+      },
+      "correct": "A",
+      "explanation": "Confirming and offering to resend fits; 'No, I sent them' is contradictory.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Didn't you send the slides to the group already?"
+    }
+  ]
+}

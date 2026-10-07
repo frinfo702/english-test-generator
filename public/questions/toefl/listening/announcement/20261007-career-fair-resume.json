@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "cosmo"
+  },
+  "title": "Career Fair Preparation",
+  "transcript": "Hello, seniors. The spring career fair is three weeks from today, and more than sixty employers have already confirmed. To help you prepare, the career center is offering résumé reviews every afternoon this week. You don't need an appointment. Just bring a printed copy. Employers have told us that a lot of students show up with résumés full of typos, so this really is worth your time.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the speaker mainly encouraging students to do?",
+      "options": [
+        "Apply for jobs online",
+        "Get their résumés reviewed before the fair",
+        "Volunteer at the career fair",
+        "Make an appointment with an employer"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The speaker promotes résumé reviews to help students prepare for the fair."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker mention what employers have said?",
+      "options": [
+        "To show how many employers will attend",
+        "To explain why the fair was postponed",
+        "To stress the value of having a résumé checked",
+        "To suggest that students write cover letters"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "Employers notice typos, which shows why a résumé review is worthwhile."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hello, seniors. The spring career fair is three weeks from today, and more than sixty employers have already confirmed. To help you prepare, the career center is offering résumé reviews every afternoon this week. You don't need an appointment. Just bring a printed copy. Employers have told us that a lot of students show up with résumés full of typos, so this really is worth your time."
+    }
+  ],
+  "speaker": "m6"
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "eve"
+  },
+  "title": "Listen and Choose a Response — Weekend Plans",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a suggestion",
+      "stem": "Let's try that new Korean place for lunch.",
+      "options": {
+        "A": "I tried to call you before lunch.",
+        "B": "It opened in the old bank building.",
+        "C": "Yes, I already had Korean food last week.",
+        "D": "I'd love to, but I only have thirty minutes."
+      },
+      "correct": "D",
+      "explanation": "Expressing interest with a time limit is a natural reply to a suggestion.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Let's try that new Korean place for lunch."
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "title": "The Language of Honeybees",
+  "passage": "When a honeybee worker finds a rich source of flowers, she returns to the hive and performs a series of movements known as the waggle dance. During the dance, she runs in a straight line while shaking her body from side to side, then circles back and repeats the run. Other bees crowd around her, and soon many of them fly off toward the same flowers.\n\nIn the mid-twentieth century, the Austrian scientist Karl von Frisch discovered that the dance contains information about location. The angle of the straight run, compared with straight up on the vertical honeycomb, shows the direction of the food relative to the sun. The length of the run indicates distance: the longer the waggle, the farther away the flowers are. Later experiments with small robotic bees showed that the movements alone could send other bees toward a chosen spot. Von Frisch shared a Nobel Prize in 1973 partly for this work.\n\nThe waggle dance shows that symbolic communication, in which one thing stands for another, is not limited to humans or to animals with large brains. Recent studies also suggest that young bees dance more accurately after watching experienced dancers, which raises new questions about the role of learning in insect behavior.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to paragraph 1, what does a worker bee do after finding a rich source of flowers?",
+      "options": [
+        "A. She marks the flowers with her scent.",
+        "B. She carries other bees to the flowers.",
+        "C. She returns to the hive and performs a dance.",
+        "D. She stays near the flowers to guard them."
+      ],
+      "correctIndex": 2,
+      "explanation": "Paragraph 1 says she 'returns to the hive and performs a series of movements known as the waggle dance.'"
+    },
+    {
+      "id": "q2",
+      "type": "vocabulary",
+      "stem": "The word \"indicates\" in paragraph 2 is closest in meaning to",
+      "options": [
+        "A. shows",
+        "B. hides",
+        "C. changes",
+        "D. follows"
+      ],
+      "correctIndex": 0,
+      "explanation": "The length of the run 'indicates distance,' meaning it shows how far away the flowers are."
+    },
+    {
+      "id": "q3",
+      "type": "detail",
+      "stem": "According to paragraph 2, how does the dance communicate the distance to food?",
+      "options": [
+        "A. Through the number of circles the bee makes",
+        "B. Through the angle of the straight run",
+        "C. Through the speed of the shaking",
+        "D. Through the length of the straight run"
+      ],
+      "correctIndex": 3,
+      "explanation": "'The length of the run indicates distance: the longer the waggle, the farther away the flowers are.' The angle shows direction, not distance."
+    },
+    {
+      "id": "q4",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention robotic bees in paragraph 2?",
+      "options": [
+        "A. To explain how young bees learn to dance",
+        "B. To show that the dance movements by themselves could direct other bees",
+        "C. To suggest that von Frisch's conclusions were incorrect",
+        "D. To describe a new method of collecting pollen"
+      ],
+      "correctIndex": 1,
+      "explanation": "The experiments 'showed that the movements alone could send other bees toward a chosen spot,' supporting von Frisch's discovery."
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What can be inferred from paragraph 3 about the waggle dance?",
+      "options": [
+        "A. All bees perform it perfectly from birth.",
+        "B. It is the only way bees locate food.",
+        "C. Its accuracy may depend partly on learning.",
+        "D. It is more complex than human language."
+      ],
+      "correctIndex": 2,
+      "explanation": "Young bees 'dance more accurately after watching experienced dancers,' which suggests learning plays a role."
+    }
+  ]
+}

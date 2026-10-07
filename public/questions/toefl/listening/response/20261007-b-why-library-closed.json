@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "luna"
+  },
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for a reason",
+      "stem": "Why is the library closed this morning?",
+      "options": {
+        "A": "It'll open around noon.",
+        "B": "There's a power outage in that part of campus.",
+        "C": "Yes, it's closed this morning.",
+        "D": "I closed my laptop."
+      },
+      "correct": "B",
+      "explanation": "A 'why' question needs a reason. The others answer when, use Yes, or repeat 'closed'.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Why is the library closed this morning?"
+    }
+  ]
+}

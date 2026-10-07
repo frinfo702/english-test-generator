@@ -1,0 +1,71 @@
+{
+  "title": "Surviving Without Water",
+  "passage": "Tardigrades are tiny animals, usually less than a millimeter long, that live in moss, soil, and ocean sediments. They are famous for surviving conditions that would kill almost any other creature. Their main strategy is a state called cryptobiosis, in which the body's chemical activity slows to nearly zero. When their surroundings dry out, tardigrades pull in their legs, lose most of their water, and curl into a dry shape known as a tun.\n\nIn the tun state, tardigrades have survived extreme cold, high levels of radiation, and even exposure to outer space. In 2007, European researchers sent dried tardigrades into orbit on a satellite for ten days. After the animals returned to Earth, many revived when water was added, and some went on to produce offspring. Scientists have since identified special proteins that seem to protect tardigrade cells. When water leaves the cells, these proteins form a glass-like material that holds other molecules in place and prevents damage.\n\nThese discoveries have practical interest. If similar proteins could be added to vaccines or medicines, such products might be stored without refrigeration, which would help in regions with limited electricity. Whether the proteins will work as well outside the animal, however, is still unknown.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "Which of the following best states the main idea of the passage?",
+      "options": [
+        "A. Tardigrades are the smallest animals on Earth.",
+        "B. Space travel has changed how tardigrades reproduce.",
+        "C. Vaccines can now be stored without refrigeration.",
+        "D. Tardigrades survive extreme conditions through a dry, inactive state that may have practical uses."
+      ],
+      "correctIndex": 3,
+      "explanation": "The passage explains cryptobiosis (paragraph 1), evidence of survival and protective proteins (paragraph 2), and possible uses in medicine (paragraph 3)."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 1, what happens when a tardigrade enters cryptobiosis?",
+      "options": [
+        "A. It grows longer legs.",
+        "B. Its chemical activity almost stops.",
+        "C. It absorbs extra water.",
+        "D. It moves from soil to the ocean."
+      ],
+      "correctIndex": 1,
+      "explanation": "In cryptobiosis, 'the body's chemical activity slows to nearly zero.'"
+    },
+    {
+      "id": "q3",
+      "type": "negativeFactual",
+      "stem": "Which of the following is NOT mentioned in paragraph 2 as a condition that tardigrades have survived in the tun state?",
+      "options": [
+        "A. Boiling water",
+        "B. Extreme cold",
+        "C. High levels of radiation",
+        "D. Exposure to outer space"
+      ],
+      "correctIndex": 0,
+      "explanation": "Paragraph 2 lists 'extreme cold, high levels of radiation, and even exposure to outer space.' Boiling water is not mentioned."
+    },
+    {
+      "id": "q4",
+      "type": "detail",
+      "stem": "According to paragraph 2, how do the special proteins protect tardigrade cells?",
+      "options": [
+        "A. By adding water back into the cells",
+        "B. By blocking radiation from entering the body",
+        "C. By forming a glass-like material that holds molecules in place",
+        "D. By speeding up the cells' chemical activity"
+      ],
+      "correctIndex": 2,
+      "explanation": "The proteins 'form a glass-like material that holds other molecules in place and prevents damage.'"
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What does the author imply in paragraph 3 about using tardigrade proteins in medicines?",
+      "options": [
+        "A. It has already been done successfully.",
+        "B. Its success is not yet certain.",
+        "C. It would require more electricity.",
+        "D. It is unlikely to be of any use."
+      ],
+      "correctIndex": 1,
+      "explanation": "The author says that whether the proteins 'will work as well outside the animal, however, is still unknown.'"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "iris"
+  },
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Complaining",
+      "stem": "The dining hall has served pasta four nights in a row.",
+      "options": {
+        "A": "The hall is down that row.",
+        "B": "I served on the student council.",
+        "C": "Let's try the food trucks by the stadium tonight.",
+        "D": "Yes, I'll have four."
+      },
+      "correct": "C",
+      "explanation": "A counter-suggestion is a natural reply to the complaint. The distractors reuse 'hall', 'row', 'served', and 'four'.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "The dining hall has served pasta four nights in a row."
+    }
+  ]
+}

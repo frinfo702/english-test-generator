@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "celeste"
+  },
+  "title": "Listen and Choose a Response — Everyday Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "I think I left my wallet on the bus this morning.",
+      "options": {
+        "A": "The bus was crowded this morning.",
+        "B": "I left work early this morning.",
+        "C": "My wallet is brown leather.",
+        "D": "You should call the transit office's lost and found."
+      },
+      "correct": "D",
+      "explanation": "Giving advice on recovering the wallet fits the problem. The distractors reuse 'bus', 'left', and 'wallet' without helping.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I think I left my wallet on the bus this morning."
+    }
+  ]
+}

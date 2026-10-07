@@ -1,0 +1,55 @@
+{
+  "paragraph": "Lighthouses are tall towers that help ships travel safely near the coast. Many stand on rocks, islands, or other places where the water is dangerous. At night, the bright light at the top of the tower turns slowly so that sailors can see it from far away. Each lighthouse flashes in its own pattern, which tells sailors exactly where they are. Today, satellite systems have replaced many of these towers.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "st",
+      "answer": "stand"
+    },
+    {
+      "index": 1,
+      "hint": "ro",
+      "answer": "rocks"
+    },
+    {
+      "index": 2,
+      "hint": "o",
+      "answer": "or"
+    },
+    {
+      "index": 3,
+      "hint": "pla",
+      "answer": "places"
+    },
+    {
+      "index": 4,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 5,
+      "hint": "i",
+      "answer": "is"
+    },
+    {
+      "index": 6,
+      "hint": "A",
+      "answer": "At"
+    },
+    {
+      "index": 7,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 8,
+      "hint": "li",
+      "answer": "light"
+    },
+    {
+      "index": 9,
+      "hint": "t",
+      "answer": "the"
+    }
+  ]
+}

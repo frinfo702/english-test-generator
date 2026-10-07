@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "celeste"
+  },
+  "title": "Art Studio Change",
+  "transcript": "Okay, everyone, one thing before we finish. Next Tuesday we're starting the watercolor unit, and the art store on Main Street has given our class a twenty percent discount on supplies. You'll need a set of brushes and a pad of heavy paper, but don't buy paints. The department is providing those. Just tell the cashier you're in my class, and remember to keep your receipt.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What does the speaker tell students not to buy?",
+      "options": [
+        "Paints",
+        "Brushes",
+        "Heavy paper",
+        "A sketchbook"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "The department is providing paints, so students shouldn't buy them."
+    },
+    {
+      "id": "q2",
+      "stem": "In the announcement, what does the speaker mean by \"supplies\"?",
+      "options": [
+        "Snacks for the class",
+        "Materials needed for the course",
+        "Textbooks about art history",
+        "Tools for cleaning the studio"
+      ],
+      "correctIndex": 1,
+      "type": "vocabulary",
+      "explanation": "Here supplies refers to the brushes, paper, and paints needed for the watercolor unit."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Okay, everyone, one thing before we finish. Next Tuesday we're starting the watercolor unit, and the art store on Main Street has given our class a twenty percent discount on supplies. You'll need a set of brushes and a pad of heavy paper, but don't buy paints. The department is providing those. Just tell the cashier you're in my class, and remember to keep your receipt."
+    }
+  ],
+  "speaker": "f3"
+}

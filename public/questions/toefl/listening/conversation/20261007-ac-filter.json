@@ -1,0 +1,71 @@
+{
+  "voices": {
+    "Tenant": "liora",
+    "Manager": "perseus"
+  },
+  "title": "A Weak Air Conditioner",
+  "transcript": "Tenant: Hi, I'm in 4B. My air conditioner stopped working right last night, and it's supposed to hit ninety today.\nManager: Oh no. Is it making any noise, or is it just blowing warm air?\nTenant: It's running, but the air's barely cool.\nManager: Sounds like the filter. When was it last changed?\nTenant: Honestly, I have no idea. I moved in back in March.\nManager: Then that's probably it. I've got spare filters in the office. I can swap it out after lunch.\nTenant: That'd be great. Do I need to be home?\nManager: Not at all. I'll let myself in and leave you a note.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What does the manager think is causing the problem?",
+      "options": [
+        "A broken fan",
+        "A power outage",
+        "An unusually hot day",
+        "A dirty filter"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "The manager says, \"Sounds like the filter,\" after hearing the unit runs but barely cools."
+    },
+    {
+      "id": "q2",
+      "stem": "What can be inferred about the filter?",
+      "options": [
+        "It was installed incorrectly by the woman.",
+        "It has probably not been replaced since before the woman moved in.",
+        "It is too expensive for the manager to replace.",
+        "It must be ordered from another company."
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The woman doesn't know when it was changed and moved in months ago, so the manager concludes it is overdue."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Tenant",
+      "text": "Hi, I'm in 4B. My air conditioner stopped working right last night, and it's supposed to hit ninety today."
+    },
+    {
+      "role": "Manager",
+      "text": "Oh no. Is it making any noise, or is it just blowing warm air?"
+    },
+    {
+      "role": "Tenant",
+      "text": "It's running, but the air's barely cool."
+    },
+    {
+      "role": "Manager",
+      "text": "Sounds like the filter. When was it last changed?"
+    },
+    {
+      "role": "Tenant",
+      "text": "Honestly, I have no idea. I moved in back in March."
+    },
+    {
+      "role": "Manager",
+      "text": "Then that's probably it. I've got spare filters in the office. I can swap it out after lunch."
+    },
+    {
+      "role": "Tenant",
+      "text": "That'd be great. Do I need to be home?"
+    },
+    {
+      "role": "Manager",
+      "text": "Not at all. I'll let myself in and leave you a note."
+    }
+  ],
+  "speaker": "c3"
+}

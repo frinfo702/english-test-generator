@@ -1,0 +1,53 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "notice",
+      "layout": "notice",
+      "title": "Office Kitchen",
+      "icon": "megaphone",
+      "content": "Kitchen Reminder: New Cleaning Policy\nOur office kitchen has become very crowded, and some food has been left in the refrigerator for weeks.\nStarting next Monday, please follow these simple rules:\nLabel all food with your name and the date.\nEvery Friday at 4 P.M., the cleaning staff will throw away anything left in the refrigerator, labeled or not.\nWash and put away your own dishes; the sink is not a storage area.\nThe coffee machine is cleaned on Wednesday mornings and cannot be used before 10 A.M. that day.\nThanks for helping keep our shared space clean.\n— Office Management",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why was the notice written?",
+          "options": [
+            "A. To explain new rules for a shared space",
+            "B. To introduce new cleaning staff",
+            "C. To announce a new coffee machine",
+            "D. To invite employees to a Friday party"
+          ],
+          "correctIndex": 0,
+          "type": "purpose",
+          "explanation": "It says the kitchen \"has become very crowded\" and introduces \"these simple rules\" for the shared space."
+        },
+        {
+          "id": "q2",
+          "stem": "What will happen to a labeled lunch left in the refrigerator on Friday evening?",
+          "options": [
+            "A. It will be moved to the sink.",
+            "B. It will be thrown away.",
+            "C. It will be kept until Monday.",
+            "D. It will be returned to its owner."
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "\"Every Friday at 4 P.M., the cleaning staff will throw away anything left in the refrigerator, labeled or not.\""
+        },
+        {
+          "id": "q3",
+          "stem": "When can employees NOT use the coffee machine?",
+          "options": [
+            "A. Friday afternoons",
+            "B. Monday mornings",
+            "C. Early Wednesday mornings",
+            "D. After 10 A.M. on Wednesdays"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "The machine \"is cleaned on Wednesday mornings and cannot be used before 10 A.M. that day.\""
+        }
+      ]
+    }
+  ]
+}

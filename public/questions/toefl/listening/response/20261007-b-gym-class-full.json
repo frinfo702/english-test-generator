@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "iris"
+  },
+  "title": "Listen and Choose a Response — At the Gym",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing news",
+      "stem": "The spin class I wanted was already full when I signed up.",
+      "options": {
+        "A": "I spin the dial to set the timer.",
+        "B": "It was full of interesting people.",
+        "C": "Yes, I'll sign the form for you.",
+        "D": "There's another one on Thursday evenings, isn't there?"
+      },
+      "correct": "D",
+      "explanation": "Suggesting an alternative class responds naturally to the disappointment. The others reuse 'spin', 'full', and 'sign' in different senses.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "The spin class I wanted was already full when I signed up."
+    }
+  ]
+}

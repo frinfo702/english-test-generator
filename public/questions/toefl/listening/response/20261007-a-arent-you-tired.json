@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "eve"
+  },
+  "title": "Listen and Choose a Response — Late Night Study",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Expressing concern",
+      "stem": "Aren't you tired after studying all night?",
+      "options": {
+        "A": "I'm tired of the same food every day.",
+        "B": "I studied in the library last night.",
+        "C": "No, I'm exhausted and need to sleep.",
+        "D": "A little, but the exam is in an hour."
+      },
+      "correct": "D",
+      "explanation": "Admitting tiredness and giving a reason to keep going fits; the 'No' option contradicts itself.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Aren't you tired after studying all night?"
+    }
+  ]
+}
