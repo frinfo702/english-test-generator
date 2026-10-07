@@ -1,0 +1,21 @@
+name: Preview
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run build
+      # Any branch other than the production one is a preview deploy, and
+      # "staging" gets a stable alias URL instead of one per commit.
+      - run: npx wrangler pages deploy dist --project-name english-test-generator --branch staging
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}

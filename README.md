@@ -36,6 +36,11 @@ It bumps that part of the latest `vX.Y.Z` tag (the first release is
 release with generated notes. To roll back, use **Rollback** on an older
 deployment in the Cloudflare Pages dashboard.
 
+Every push to `main` is deployed to the `staging` preview
+(`https://staging.english-test-generator.pages.dev`), so merged work can be
+tried before it is released. Previews are public unless the Pages project is
+behind Cloudflare Access.
+
 To deploy from your machine instead:
 
 ```bash
