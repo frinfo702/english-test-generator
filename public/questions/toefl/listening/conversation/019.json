@@ -1,5 +1,10 @@
 {
   "title": "Campus Health Center Visit",
+  "voices": {
+    "Student": "ara",
+    "Receptionist": "leo"
+  },
+  "speaker": "c3",
   "transcript": "Student: Excuse me, I'd like to make an appointment to see a doctor. I've been having headaches and trouble concentrating in class. Receptionist: I'm sorry to hear that. Are you a registered patient at the campus health center? Student: Yes, I came in for a checkup last semester. Receptionist: Great. Let me check the schedule. Dr. Kim has an opening tomorrow at 2 PM. Does that work for you? Student: I have a class at that time. Is there anything earlier? Receptionist: Let me see... We have a same-day walk-in clinic this afternoon from 1 to 4 PM. You can come in anytime and see the nurse practitioner. Student: That would be better. What do I need to bring? Receptionist: Just your student ID. The visit is covered by your student health fee, so there's no charge. Student: That's good to know. How long does the walk-in usually take? Receptionist: It depends, but typically about 30 to 45 minutes. I'd recommend coming right at 1 PM to avoid the longest wait. Student: I'll do that. Should I also bring my class schedule or any medical records? Receptionist: If you have any records from previous visits regarding headaches, bring those. Otherwise, just your ID is fine. Student: Thanks for the help. I'll be there at 1.",
   "questions": [
     {

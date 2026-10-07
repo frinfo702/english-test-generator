@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Daily Situations",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Requesting assistance",
       "stem": "Could you help me carry these books to the library?",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f4",
       "context": "Expressing disappointment",
       "stem": "I was really hoping to get into that photography workshop, but it's full.",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f3",
       "context": "Making an offer",
       "stem": "I can give you a ride to the airport if you need one.",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f4",
       "context": "Asking for an opinion",
       "stem": "What do you think about the new cafeteria menu?",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Expressing confusion",
       "stem": "I don't understand the homework assignment. Are we supposed to write a summary or an analysis?",
       "options": {

@@ -1,7 +1,10 @@
 {
   "title": "The Great Divergence",
+  "voices": {
+    "Lecturer": "rex"
+  },
   "subject": "economic history",
-  "speaker": "f1",
+  "speaker": "m3",
   "transcript": "Today we will explore a concept in economic history known as the Great Divergence. This term refers to the process by which Western Europe and parts of North America dramatically overtook the rest of the world in terms of economic output and living standards during the late eighteenth and nineteenth centuries. Prior to this period, the global distribution of wealth was relatively even. Regions such as China and India were economically comparable to Europe. So what changed? Historians and economists have proposed several explanations. One influential theory points to the Industrial Revolution, which began in Britain around 1760. Mechanization, steam power, and factory systems allowed for unprecedented productivity gains. Another theory emphasizes institutional factors, such as secure property rights and competitive markets, which encouraged innovation and investment. A third perspective focuses on geography and access to natural resources like coal. However, recent scholarship has challenged the idea that the divergence was purely a Western achievement. Some scholars argue that external factors, including colonial extraction and unequal trade relationships, played a major role in enabling European industrial growth while suppressing development elsewhere. Understanding the Great Divergence remains essential because it shaped the modern global economy and continues to influence discussions about development and inequality today.",
   "questions": [
     {

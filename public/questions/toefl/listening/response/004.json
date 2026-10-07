@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Campus Facilities",
+  "voices": {
+    "Student": "rex",
+    "Lab Assistant": "sal"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "m6",
       "context": "Reporting a problem",
       "stem": "Excuse me, the printer on the second floor is out of paper again.",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "m6",
       "context": "Asking about rules",
       "stem": "Am I allowed to eat in the study area?",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "m6",
       "context": "Requesting a favor",
       "stem": "Could you keep an eye on my bag while I grab a coffee? I'll be right back.",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "m6",
       "context": "Expressing satisfaction",
       "stem": "The new gym equipment is fantastic! I've been using it every day.",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "m5",
       "context": "Giving a reminder",
       "stem": "Don't forget to return your lab coat before leaving today.",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "m6",
       "context": "Asking for a recommendation",
       "stem": "I'm looking for a quiet place to study. Any suggestions?",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "m6",
       "context": "Mentioning a schedule conflict",
       "stem": "I can't make it to the seminar because I have a doctor's appointment.",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "m6",
       "context": "Asking about availability",
       "stem": "Is the tutoring center open on Sunday afternoons?",
       "options": {

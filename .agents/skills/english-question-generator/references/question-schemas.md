@@ -454,6 +454,18 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 ---
 
+## TOEFL Listening 共通: 声とスピーカー画像
+
+- `voices`: 役割ごとの xAI TTS 声ID（例: `{"Student": "eve", "Professor": "leo"}`）。`npm run generate-audio` はこの声で音声を作る。未指定で音声もまだ無いセットは、生成時に自動で配役して JSON に書き戻す。声の一覧は `src/lib/voiceMapping.ts`（API との差分は `npm run check-voices`）。
+- `speaker`: `public/images/speakers/<id>.jpg` の人物画像。各画像の性別は `src/lib/speakerPhotos.ts`。Choose a Response は設問ごとに `questions[].speaker`。
+- 制約（`src/lib/listeningVoices.test.ts` で検証）:
+  - Conversation は話者2人で、男性の声と女性の声を1人ずつ。画像は男女ペア（`c1`〜`c4`）
+  - その他のタスクは画像の性別 = 声の性別
+  - 同じセット内で声を重複させない
+- Academic Talk は `"subject"`（例: `"biology"`）も任意で指定でき、「Listen to a talk in a biology class.」と表示される。
+
+---
+
 ## TOEFL Listening: Choose a Response
 
 短い発言（5〜15秒）を聞き、最も適切な応答を3つの中から選ぶ。

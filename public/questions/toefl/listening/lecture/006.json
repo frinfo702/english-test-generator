@@ -1,7 +1,10 @@
 {
   "title": "Introduction to Photosynthesis",
+  "voices": {
+    "Lecturer": "rex"
+  },
   "subject": "biology",
-  "speaker": "m3",
+  "speaker": "m2",
   "transcript": "Today we'll discuss photosynthesis, the process by which plants, algae, and some bacteria convert light energy into chemical energy. The word itself comes from Greek: 'photo' meaning light and 'synthesis' meaning putting together. During photosynthesis, organisms use sunlight, water, and carbon dioxide to create glucose and oxygen. This process occurs primarily in the chloroplasts of plant cells, where a green pigment called chlorophyll captures light energy. There are two main stages of photosynthesis: the light-dependent reactions and the Calvin cycle. In the light-dependent reactions, which occur in the thylakoid membranes, light energy is captured and converted into chemical energy in the form of ATP and NADPH. Water molecules are split during this stage, releasing oxygen as a byproduct. The Calvin cycle, which takes place in the stroma, uses the ATP and NADPH from the first stage to convert carbon dioxide into glucose through a series of enzyme-controlled reactions. Photosynthesis is arguably the most important biological process on Earth because it provides the oxygen we breathe and forms the base of nearly all food chains. Without it, most life as we know it would cease to exist.",
   "questions": [
     {

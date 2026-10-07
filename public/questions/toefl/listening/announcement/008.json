@@ -1,5 +1,9 @@
 {
   "title": "Campus Job Fair",
+  "voices": {
+    "Speaker": "rex"
+  },
+  "speaker": "m6",
   "transcript": "Attention students. The annual campus job fair will be held this Wednesday from 10 AM to 3 PM in the University Center Ballroom. Over fifty employers from industries including technology, healthcare, education, and finance will be present. Please bring multiple copies of your resume and dress in professional attire. Career counselors will be available for quick resume reviews at the entrance. A workshop on interview skills will take place at noon in Room 102. All students, both undergraduate and graduate, are encouraged to attend. Parking is free in Lot C for job fair participants.",
   "questions": [
     {

@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Social Interactions",
+  "voices": {
+    "Student": "ara",
+    "Friend": "rex"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Expressing disappointment",
       "stem": "I just found out I didn't get the internship I applied for.",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f4",
       "context": "Offering assistance",
       "stem": "These boxes are really heavy. Could you give me a hand?",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Sharing good news",
       "stem": "Guess what? I got accepted into the graduate program!",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f4",
       "context": "Expressing confusion",
       "stem": "I'm not sure I understand how to use this software. It's so complicated.",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Making a complaint",
       "stem": "The Wi-Fi in the dorm has been really slow for the past three days.",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "m6",
       "context": "Inviting someone",
       "stem": "A few of us are going to the concert on Saturday. Want to come?",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Asking for confirmation",
       "stem": "So, the meeting is at 3 PM in Room 302, not Room 203, right?",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f4",
       "context": "Expressing gratitude",
       "stem": "I really appreciate you covering my shift yesterday. You saved me!",
       "options": {

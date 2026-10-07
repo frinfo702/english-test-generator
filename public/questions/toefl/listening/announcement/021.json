@@ -1,5 +1,9 @@
 {
   "title": "Office Hours Change Announcement",
+  "voices": {
+    "Speaker": "rex"
+  },
+  "speaker": "m5",
   "transcript": "I want to let everyone know that my office hours will be changing. Starting next week, I will be available on Mondays and Wednesdays from 2 to 4 p.m., instead of the current 1 to 3 p.m. If you have an urgent need to meet with me and these times don't work for you, please email me and I can schedule an appointment. Keep in mind that office hours are a great opportunity to discuss any questions or concerns you have about the course material.",
   "questions": [
     {

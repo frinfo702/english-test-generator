@@ -1,5 +1,10 @@
 {
   "title": "Library Book Renewal",
+  "voices": {
+    "Student": "rex",
+    "Librarian": "celeste"
+  },
+  "speaker": "c4",
   "transcript": "Student: Hi, I received an email saying that two of my library books are due tomorrow, but I haven't finished them yet. Can I renew them? Librarian: Let me check your account. Yes, I see you have Introduction to Sociology and Modern Art History. Student: That's right. I need them for my midterm papers. Librarian: Unfortunately, Modern Art History has a hold request from another student, so it cannot be renewed. However, Introduction to Sociology can be renewed for another two weeks. Student: Oh, I see. What should I do about the art history book? Librarian: You can return it tomorrow and place a new request. The waiting list is usually about three days. Alternatively, we have an electronic version available if you need immediate access. Student: The e-book would be helpful. How do I access it? Librarian: You can find it through the library's digital catalog using your student ID. You can download chapters or read online. Student: That works perfectly. Also, how many times can I renew the sociology book? Librarian: You can renew it up to two times as long as there are no holds. After that, you will need to return it. Student: Got it. Thank you so much for your help.",
   "questions": [
     {

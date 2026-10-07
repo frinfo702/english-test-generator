@@ -1,5 +1,10 @@
 {
   "title": "Peer Tutoring Request",
+  "voices": {
+    "Student": "eve",
+    "Tutor": "sal"
+  },
+  "speaker": "c1",
   "transcript": "Student: Hey, I heard you're really good at calculus. Would you be willing to tutor me before the midterm? Tutor: Sure, I'd be happy to help. When were you thinking? Student: Maybe this weekend? I'm free Saturday afternoon and all day Sunday. Tutor: Saturday afternoon works for me. Let's meet at the library at 2 PM. Student: Great. Should I bring anything specific? Tutor: Bring your textbook, your notes, and any practice problems you've been struggling with. Also, it helps if you identify the topics you find most confusing. Student: Definitely integration by parts and related rates. Tutor: Perfect. We'll start there. I usually charge fifteen dollars an hour, but since we're classmates, ten is fine. Student: That sounds fair. Can we do two hours? Tutor: Sure. If you need more sessions after that, just let me know. Student: Thanks so much. I really need to pass this exam.",
   "questions": [
     {

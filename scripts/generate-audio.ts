@@ -8,6 +8,8 @@ import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import {
   ALL_VOICE_IDS,
+  assignVoices,
+  getVoiceInfo,
   pickInterviewerVoice,
 } from "../src/lib/voiceMapping.ts";
 
@@ -42,7 +44,7 @@ interface InterviewQuestion {
 
 function hasAudioSegments(
   obj: unknown,
-): obj is { audioSegments: AudioSegment[] } {
+): obj is { audioSegments: AudioSegment[]; voices?: Record<string, string> } {
   return (
     typeof obj === "object" &&
     obj !== null &&
@@ -188,18 +190,36 @@ async function generateForQuestion(
 
   if (hasAudioSegments(data)) {
     const segments = data.audioSegments;
-    const voiceForRole = new Map<string, string>();
-    const usedVoices = new Set<string>();
+    // The JSON's "voices" (role -> voice id) is the source of truth, shared
+    // with the speaker photos. Cast and save it on first generation.
+    const outDirForSet = path.join(AUDIO_OUT_DIR, dirname, basename);
+    const hasAudio = segments.some((_, i) =>
+      fs.existsSync(path.join(outDirForSet, `${i + 1}.mp3`)),
+    );
+    if (!data.voices && hasAudio) {
+      // Casting now could contradict the voices already in the audio.
+      console.log(`  SKIP: ${relativePath} has audio but no "voices"`);
+      return;
+    }
+    if (!data.voices) {
+      const roles = [...new Set(segments.map((s) => s.role))];
+      data.voices = assignVoices(basename, roles, {
+        mixedPair: relativePath.includes("listening/conversation"),
+      });
+      const withVoices = { voices: data.voices, ...data };
+      fs.writeFileSync(
+        questionPath,
+        JSON.stringify(withVoices, null, 2) + "\n",
+      );
+      console.log(`  Cast voices: ${JSON.stringify(data.voices)}`);
+    }
+    const voices = data.voices;
     const getVoiceForRole = (role: string): string => {
-      if (!voiceForRole.has(role)) {
-        const available = ALL_VOICE_IDS.filter((v) => !usedVoices.has(v));
-        const pool = available.length > 0 ? available : ALL_VOICE_IDS;
-        const idx = Math.abs(hashText(`${basename}:${role}`)) % pool.length;
-        const voice = pool[idx];
-        voiceForRole.set(role, voice);
-        usedVoices.add(voice);
+      const voice = voices[role];
+      if (!voice || !getVoiceInfo(voice)) {
+        throw new Error(`${relativePath}: no valid voice for role "${role}"`);
       }
-      return voiceForRole.get(role)!;
+      return voice;
     };
     for (let i = 0; i < segments.length; i++) {
       const seg = segments[i];

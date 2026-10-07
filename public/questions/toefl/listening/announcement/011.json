@@ -1,5 +1,9 @@
 {
   "title": "Campus Safety Drill Announcement",
+  "voices": {
+    "Speaker": "rex"
+  },
+  "speaker": "m6",
   "transcript": "Attention all students and staff. This is a reminder that the annual campus safety drill will take place this Thursday at 10 AM. When the alarm sounds, please evacuate the building immediately using the nearest exit. Do not use the elevators. Gather at the designated assembly point in the parking lot behind the student center. Instructors should take attendance once all students have arrived. The drill is expected to last approximately 20 minutes. If you have mobility concerns or require assistance, please inform your department office in advance. Thank you for your cooperation.",
   "questions": [
     {

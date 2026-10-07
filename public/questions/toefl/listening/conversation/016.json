@@ -1,5 +1,10 @@
 {
   "title": "Scholarship Application Assistance",
+  "voices": {
+    "Student": "leo",
+    "Professor": "ursa"
+  },
+  "speaker": "c4",
   "transcript": "Student: Good morning, Professor Thompson. Thank you for meeting with me. I'm applying for the Johnson Memorial Scholarship, and I was hoping you could give me some feedback on my application essay. Professor: Of course, I'd be happy to help. Let me take a look. Student: Here it is. The prompt asks about my academic goals and how this scholarship would help me achieve them. Professor: This is a strong start. Your introduction is compelling, but I think you could strengthen the second paragraph where you discuss your community service. Can you give a specific example of how your volunteering has shaped your career goals? Student: I've been tutoring at the local community center for two years. I could mention how that experience made me realize I want to work in educational policy. Professor: Exactly. Specific stories are much more memorable than general statements. Also, make sure to explain how the scholarship would reduce your financial burden so you can focus on research. Student: That's a good point. I didn't include that part. Professor: Keep it to one or two sentences. The committee wants to see that you've thought practically about how the funds will be used. Student: Understood. Could you also look at my resume before I submit it? Professor: Sure, send it to me by email, and I'll review it this weekend. The deadline is next Friday, right? Student: Yes, April 14th. I'll send it to you tonight. Thank you so much.",
   "questions": [
     {

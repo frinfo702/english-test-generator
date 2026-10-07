@@ -1,7 +1,10 @@
 {
   "title": "Cellular Respiration and Energy Production",
+  "voices": {
+    "Lecturer": "rex"
+  },
   "subject": "biology",
-  "speaker": "m1",
+  "speaker": "m2",
   "transcript": "Today we will examine cellular respiration, the process by which cells convert nutrients into usable energy. While photosynthesis captures energy from sunlight, cellular respiration releases that energy to power cellular activities. The primary energy currency of the cell is a molecule called adenosine triphosphate, or ATP. Cellular respiration can be divided into three main stages: glycolysis, the Krebs cycle, and the electron transport chain. Glycolysis occurs in the cytoplasm and breaks down one molecule of glucose into two molecules of pyruvate, producing a small amount of ATP. This stage does not require oxygen and is therefore anaerobic. If oxygen is present, the pyruvate enters the mitochondria for the next stages. The Krebs cycle, which takes place in the mitochondrial matrix, further breaks down the pyruvate and generates electron carriers. Finally, the electron transport chain, located in the inner mitochondrial membrane, uses these electron carriers to produce the majority of ATP. This stage requires oxygen and is therefore aerobic. In total, one molecule of glucose can yield up to thirty-eight molecules of ATP through aerobic respiration. However, when oxygen is scarce, cells can resort to fermentation, which produces much less ATP but allows glycolysis to continue. Understanding cellular respiration is fundamental to biology because it explains how living organisms obtain and use energy.",
   "questions": [
     {
