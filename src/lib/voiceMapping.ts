@@ -195,28 +195,40 @@ export const NARRATOR_ROLE = "Narrator";
  * Cast a voice for each role of a listening set, deterministically from the
  * file basename. Roles never share a voice. With `mixedPair`, the first two
  * on-screen roles get one male and one female voice (Conversation photos
- * always show a man and a woman).
+ * always show a man and a woman). `genders` pins a role's voice gender, so a
+ * recast keeps matching the photos already chosen for it.
  */
 export function assignVoices(
   basename: string,
   roles: string[],
-  { mixedPair = false }: { mixedPair?: boolean } = {},
+  {
+    mixedPair = false,
+    genders = {},
+  }: { mixedPair?: boolean; genders?: Record<string, VoiceGender> } = {},
 ): Record<string, string> {
   const used = new Set<string>();
   const voices: Record<string, string> = {};
   const speakers = roles.filter((r) => r !== NARRATOR_ROLE);
-  const firstGender =
+  const firstGender: VoiceGender =
     hashText(`${basename}:gender`) % 2 === 0 ? "male" : "female";
+  const other = (g: VoiceGender): VoiceGender =>
+    g === "male" ? "female" : "male";
   for (const role of roles) {
-    let pool = ALL_VOICES.filter((v) => !used.has(v.id));
-    if (mixedPair && role !== NARRATOR_ROLE) {
-      const idx = speakers.indexOf(role);
-      if (idx < 2) {
-        const want =
-          idx === 0 ? firstGender : firstGender === "male" ? "female" : "male";
-        pool = pool.filter((v) => v.gender === want);
-      }
-    }
+    // Gender first, 50/50: the catalog has twice as many male voices, so
+    // picking straight from it would cast mostly men.
+    const idx = speakers.indexOf(role);
+    const gender: VoiceGender =
+      genders[role] ??
+      (mixedPair && idx >= 0 && idx < 2
+        ? idx === 0
+          ? firstGender
+          : other(firstGender)
+        : hashText(`${basename}:${role}:gender`) % 2 === 0
+          ? "male"
+          : "female");
+    const pool = ALL_VOICES.filter(
+      (v) => !used.has(v.id) && v.gender === gender,
+    );
     const voice = pool[hashText(`${basename}:${role}`) % pool.length];
     voices[role] = voice.id;
     used.add(voice.id);

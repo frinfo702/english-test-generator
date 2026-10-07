@@ -1,10 +1,10 @@
 {
   "title": "Einstein's Theory of Relativity",
   "voices": {
-    "Lecturer": "rex"
+    "Lecturer": "iris"
   },
   "subject": "physics",
-  "speaker": "m3",
+  "speaker": "f2",
   "transcript": "Today we will discuss Albert Einstein's theory of relativity, which fundamentally changed our understanding of space, time, and gravity. Einstein actually proposed two theories: special relativity in 1905 and general relativity in 1915. Special relativity is based on two postulates: the laws of physics are the same for all observers moving at constant speed, and the speed of light is constant regardless of the observer's motion. One of the most famous consequences is the equation E equals mc squared, which shows that mass and energy are equivalent. This equation revealed that a small amount of mass can be converted into an enormous amount of energy, which later explained nuclear reactions. General relativity extended these ideas to include gravity. Einstein proposed that gravity is not a force pulling objects together, as Newton had described, but rather a curvature of spacetime caused by the presence of mass and energy. Imagine placing a heavy ball on a stretched rubber sheet—the ball creates a depression, and other objects roll toward it not because they are being pulled, but because they follow the curved surface. This model explains why planets orbit the sun and why light bends when passing near massive objects. General relativity has been confirmed through numerous experiments and observations, including the bending of starlight during a solar eclipse in 1919, which brought Einstein worldwide fame.",
   "questions": [
     {

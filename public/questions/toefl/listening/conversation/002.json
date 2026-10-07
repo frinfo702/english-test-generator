@@ -1,8 +1,8 @@
 {
   "title": "Library Research Access",
   "voices": {
-    "Student": "rex",
-    "Librarian": "ara"
+    "Student": "perseus",
+    "Librarian": "carina"
   },
   "speaker": "c2",
   "transcript": "Student: Hi, I'm trying to access the online journal archives for my research paper, but it says my account doesn't have permission. Librarian: Let me check. Are you logging in through the university portal? Student: Yes, but when I click on JSTOR and ScienceDirect, it says access denied. Librarian: Ah, I see the issue. Your library account is set to undergraduate basic access. For senior thesis research, you need extended database access. Student: Oh, I didn't know that. How do I upgrade it? Librarian: You need to fill out a Database Access Request form and have your faculty advisor sign it. Student: Professor Chen is my advisor. Can I email the form to her? Librarian: Yes, but she needs to send it back to us directly from her university email for verification. Once we receive it, the upgrade takes about 24 hours. Student: That's manageable. Is there anything else I should know about the extended access? Librarian: Yes, with extended access you also get interlibrary loan privileges and remote VPN access to specialty databases. Student: Great, that will be really helpful for my research on urban planning trends. Librarian: Good luck with your paper. The form is available on the library website under Student Services.",

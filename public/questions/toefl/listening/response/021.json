@@ -1,8 +1,8 @@
 {
   "title": "Listen and Choose a Response — Social Interactions",
   "voices": {
-    "Student": "ara",
-    "Friend": "rex"
+    "Student": "eve",
+    "Friend": "sal"
   },
   "questions": [
     {

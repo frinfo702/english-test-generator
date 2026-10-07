@@ -1,9 +1,9 @@
 {
   "title": "Listen and Choose a Response — Academic and Personal",
   "voices": {
-    "Student": "ara",
-    "Classmate": "rex",
-    "Friend": "sal"
+    "Student": "eve",
+    "Classmate": "perseus",
+    "Friend": "altair"
   },
   "questions": [
     {

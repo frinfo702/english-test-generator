@@ -1,8 +1,8 @@
 {
   "title": "Listen and Choose a Response — Academic and Personal",
   "voices": {
-    "Student": "ara",
-    "Classmate": "rex",
+    "Student": "iris",
+    "Classmate": "kepler",
     "Friend": "sal"
   },
   "questions": [

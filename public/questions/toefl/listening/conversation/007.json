@@ -1,8 +1,8 @@
 {
   "title": "Lab Safety Concern",
   "voices": {
-    "Student": "ara",
-    "Professor": "leo"
+    "Student": "aurora",
+    "Professor": "sal"
   },
   "speaker": "c3",
   "transcript": "Student: Professor Lee, could I talk to you about the chemistry lab? I have some safety concerns. Professor: Certainly. What's on your mind? Student: During last week's experiment, the ventilation fan wasn't working properly, and several students noticed a strong chemical odor. Professor: That's concerning. Did anyone report it to the lab technician? Student: I mentioned it to the TA, but I'm not sure if it was logged. Professor: I'll check the maintenance log immediately. In the meantime, if the fan isn't working during your next session, stop the experiment and evacuate the lab. Student: Should we reschedule the lab if that happens? Professor: Yes. Safety comes first. I'll also send an email to all students reminding them to report equipment issues right away. Student: Thank you. I just want to make sure everyone stays safe. Professor: I appreciate you bringing this to my attention. Please let me know if you notice anything else.",

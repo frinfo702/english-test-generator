@@ -62,6 +62,35 @@ describe("listening voice settings (the voice ids sent to the TTS API)", () => {
   });
 });
 
+describe("casting uses the whole voice catalog", () => {
+  // Guards against a fixed role→voice map (e.g. every Lecturer = rex).
+  it.each(["conversation", "lecture", "announcement", "response"])(
+    "%s: no voice takes more than a quarter of the roles",
+    (task) => {
+      const counts = new Map<string, number>();
+      let total = 0;
+      for (const [, data] of load(task)) {
+        for (const voice of Object.values(data.voices ?? {})) {
+          counts.set(voice, (counts.get(voice) ?? 0) + 1);
+          total++;
+        }
+      }
+      expect(Math.max(...counts.values()) / total).toBeLessThanOrEqual(0.25);
+    },
+  );
+});
+
+describe("single-speaker tasks alternate men and women", () => {
+  it.each(["lecture", "announcement"])("%s is 40–60% female", (task) => {
+    const sets = load(task);
+    const women = sets.filter(([, d]) =>
+      Object.values(d.voices ?? {}).some((v) => genderOf(v) === "female"),
+    ).length;
+    expect(women / sets.length).toBeGreaterThanOrEqual(0.4);
+    expect(women / sets.length).toBeLessThanOrEqual(0.6);
+  });
+});
+
 describe("Conversation: one man and one woman", () => {
   it.each(load("conversation"))(
     "%s pairs a male and a female voice",
@@ -133,6 +162,17 @@ describe("assignVoices", () => {
         assignVoices(seed, ["Student", "Professor"], { mixedPair: true }),
       ).toEqual(voices);
     }
+  });
+
+  it("casts men and women about equally, despite a male-heavy catalog", () => {
+    const seeds = Array.from({ length: 200 }, (_, i) =>
+      String(i + 1).padStart(3, "0"),
+    );
+    const women = seeds.filter(
+      (s) => genderOf(assignVoices(s, ["Lecturer"]).Lecturer) === "female",
+    ).length;
+    expect(women / seeds.length).toBeGreaterThan(0.4);
+    expect(women / seeds.length).toBeLessThan(0.6);
   });
 
   it("never reuses a voice within a set", () => {

@@ -1,8 +1,8 @@
 {
   "title": "Financial Aid Inquiry",
   "voices": {
-    "Student": "rex",
-    "Officer": "ara"
+    "Student": "kepler",
+    "Officer": "celeste"
   },
   "speaker": "c4",
   "transcript": "Student: Hi, I'm calling because my financial aid package for next semester seems lower than expected. Could someone help me understand it? Officer: I'd be happy to help. Can you give me your student ID? Student: It's 556-7734. Officer: I see. Your aid was reduced because your expected family contribution increased based on the new tax documents you submitted. Student: But my family's income didn't go up. We just sold a property, which was a one-time thing. Officer: I understand. A change in assets can affect the calculation. You can file an appeal explaining that the property sale was a non-recurring event. Student: How do I do that? Officer: You'll need to submit a Financial Aid Appeal Form along with a letter from your family explaining the situation and any supporting documents. Student: How long does the appeal take? Officer: Typically two to three weeks. If approved, your aid will be adjusted before the tuition deadline. Student: That's a relief. I'll start the appeal today. Officer: Good. You can find the form on our website under Appeals and Special Circumstances.",
