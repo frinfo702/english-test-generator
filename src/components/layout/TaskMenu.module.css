@@ -16,10 +16,9 @@
   margin-bottom: var(--spacing-3);
 }
 
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: var(--radius-full);
+.icon {
+  height: 16px;
+  width: auto;
   flex-shrink: 0;
 }
 

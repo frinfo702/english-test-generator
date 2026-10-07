@@ -21,6 +21,70 @@ interface TaskMenuProps {
   sections: TaskMenuSection[];
 }
 
+/** Pixel-art section icons, keyed by section key. "#" = filled pixel. */
+const PIXEL_ICONS: Record<string, string[]> = {
+  reading: [
+    "##.....##",
+    "#.##.##.#",
+    "#...#...#",
+    "#...#...#",
+    "#...#...#",
+    "#...#...#",
+    "###.#.###",
+    "...###...",
+  ],
+  writing: [
+    "......##",
+    ".....#.#",
+    "....#.##",
+    "...#.#..",
+    "..#.#...",
+    ".#.#....",
+    "#.#.....",
+    "##......",
+  ],
+  listening: [
+    "..####..",
+    ".#....#.",
+    "#......#",
+    "#......#",
+    "##....##",
+    "##....##",
+    "##....##",
+    "........",
+  ],
+  speaking: [
+    ".######.",
+    "#......#",
+    "#.#.#.##",
+    "#......#",
+    ".##.###.",
+    "..##....",
+    "..#.....",
+    "........",
+  ],
+};
+
+function PixelIcon({ grid, color }: { grid: string[]; color: string }) {
+  return (
+    <svg
+      className={styles.icon}
+      viewBox={`0 0 ${grid[0].length} ${grid.length}`}
+      shapeRendering="crispEdges"
+      fill={color}
+      aria-hidden="true"
+    >
+      {grid.flatMap((row, y) =>
+        [...row].map((cell, x) =>
+          cell === "#" ? (
+            <rect key={`${x},${y}`} x={x} y={y} width={1} height={1} />
+          ) : null,
+        ),
+      )}
+    </svg>
+  );
+}
+
 /** Number of problems registered in each task's index.json, keyed by path. */
 function useQuestionCounts(sections: TaskMenuSection[]) {
   const [counts, setCounts] = useState<Record<string, number>>({});
@@ -56,11 +120,12 @@ export function TaskMenu({ sections }: TaskMenuProps) {
       {sections.map((section) => (
         <section key={section.key} className={styles.section}>
           <div className={styles.head}>
-            <span
-              className={styles.dot}
-              style={{ background: section.color }}
-              aria-hidden="true"
-            />
+            {PIXEL_ICONS[section.key] && (
+              <PixelIcon
+                grid={PIXEL_ICONS[section.key]}
+                color={section.color}
+              />
+            )}
             <h2 className={styles.label}>{section.label}</h2>
             <span className={styles.rule} aria-hidden="true" />
           </div>
