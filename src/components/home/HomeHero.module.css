@@ -45,7 +45,7 @@
 }
 
 .lead {
-  max-width: 40ch;
+  max-width: 48ch;
   font-size: var(--text-sm);
   line-height: var(--lh-normal);
   color: rgba(255, 255, 255, 0.82);

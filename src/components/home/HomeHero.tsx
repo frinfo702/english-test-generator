@@ -42,8 +42,7 @@ export function HomeHero() {
         <p className={styles.eyebrow}>TOEFL iBT 2026 · TOEIC L&amp;R</p>
         <h1 className={styles.title}>English Test Practice</h1>
         <p className={styles.lead}>
-          Fresh questions every session. Read, write, listen and speak — a
-          little bit every day.
+          Software and learning should be fun! Let's practice to read, write, listen and speak — a little bit every day.
         </p>
       </div>
       <div className={styles.art}>
