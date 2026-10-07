@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
 import { PixelHamster } from "../components/pixel/PixelHamster";
+import { PixelIcon } from "../components/pixel/PixelIcon";
 import { StreakCalendar } from "../components/ui/StreakCalendar";
 import {
   useScoreHistory,
@@ -26,6 +27,7 @@ import {
   type Attempt,
 } from "../lib/attempts";
 import styles from "./DashboardPage.module.css";
+import dialogStyles from "../components/layout/LegacyHistoryNotice.module.css";
 
 /** Charts are a dashboard-only concern — keep recharts out of the practice pages. */
 const ScoreTrendChart = lazy(() =>
@@ -207,6 +209,7 @@ export function DashboardPage() {
   const [backupBusy, setBackupBusy] = useState(false);
   const [backupMessage, setBackupMessage] = useState<string | null>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
+  const exportDialogRef = useRef<HTMLDialogElement>(null);
 
   const load = useCallback(() => {
     getAll().then(setEntries);
@@ -242,6 +245,7 @@ export function DashboardPage() {
   };
 
   const handleExport = async () => {
+    exportDialogRef.current?.close();
     setBackupBusy(true);
     setBackupMessage(null);
     try {
@@ -417,26 +421,20 @@ export function DashboardPage() {
           <Button
             variant="secondary"
             size="sm"
-            onClick={handleExport}
+            onClick={() => exportDialogRef.current?.showModal()}
             disabled={backupBusy}
           >
+            <PixelIcon name="exportTray" className={styles.backupIcon} />
             Export
           </Button>
-          <label className={styles.backupOption}>
-            <input
-              type="checkbox"
-              checked={includeAudio}
-              onChange={(e) => setIncludeAudio(e.target.checked)}
-            />
-            Include recordings
-          </label>
           <Button
             variant="secondary"
             size="sm"
             onClick={() => importInputRef.current?.click()}
             disabled={backupBusy}
           >
-            Import…
+            <PixelIcon name="importTray" className={styles.backupIcon} />
+            Import
           </Button>
           <input
             ref={importInputRef}
@@ -446,6 +444,35 @@ export function DashboardPage() {
             onChange={handleImport}
           />
         </div>
+        <dialog
+          ref={exportDialogRef}
+          className={dialogStyles.dialog}
+          aria-labelledby="export-dialog-title"
+        >
+          <h2 id="export-dialog-title" className={dialogStyles.title}>
+            Export backup
+          </h2>
+          <label className={`${styles.backupOption} ${dialogStyles.body}`}>
+            <input
+              type="checkbox"
+              checked={includeAudio}
+              onChange={(e) => setIncludeAudio(e.target.checked)}
+            />
+            Include speaking recordings (makes the file much larger)
+          </label>
+          <div className={dialogStyles.actions}>
+            <Button size="sm" onClick={handleExport}>
+              Export
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={() => exportDialogRef.current?.close()}
+            >
+              Cancel
+            </Button>
+          </div>
+        </dialog>
         {backupMessage && (
           <p className={styles.backupHint} role="status">
             {backupMessage}
