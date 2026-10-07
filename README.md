@@ -24,17 +24,17 @@ npm run dev:vite
 
 ### Releasing
 
-Production on Cloudflare Pages is deployed by GitHub Actions when a GitHub
-release is published, not when commits land on `main`. Tag releases as
-`vMAJOR.MINOR.PATCH`; bump MINOR for features and data-format changes,
-PATCH for fixes.
+Production on Cloudflare Pages ships only through the **Release** workflow,
+never on a push. Run it from the Actions tab (Release → Run workflow) or:
 
 ```bash
-gh release create v0.2.0 --generate-notes
+gh workflow run release.yml -f bump=minor   # patch | minor | major
 ```
 
-To re-deploy or roll back, run the **Deploy** workflow manually with an
-existing tag. Prereleases are not deployed.
+It bumps that part of the latest `vX.Y.Z` tag (the first release is
+`v0.1.0` for `minor`), deploys `main`, then creates the tag and a GitHub
+release with generated notes. To roll back, use **Rollback** on an older
+deployment in the Cloudflare Pages dashboard.
 
 To deploy from your machine instead:
 
