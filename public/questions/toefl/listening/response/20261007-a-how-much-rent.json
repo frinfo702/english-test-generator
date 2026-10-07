@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "lumen"
+  },
+  "title": "Listen and Choose a Response — Apartment Hunting",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about cost",
+      "stem": "How much is the rent for your new place?",
+      "options": {
+        "A": "I moved in at the start of the month.",
+        "B": "It's just ten minutes from campus.",
+        "C": "It's a bit more than my old one, but utilities are included.",
+        "D": "Yes, I really like my new place."
+      },
+      "correct": "C",
+      "explanation": "Comparing the rent to the old apartment and mentioning included utilities responds to a question about cost.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "How much is the rent for your new place?"
+    }
+  ]
+}

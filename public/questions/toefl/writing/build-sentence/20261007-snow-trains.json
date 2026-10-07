@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "It looks like it's going to snow today.",
+      "prefix": "I wonder",
+      "chunks": [
+        "do",
+        "the trains",
+        "are",
+        "on time",
+        "running",
+        "if"
+      ],
+      "correctOrder": [
+        5,
+        1,
+        2,
+        4,
+        3
+      ],
+      "fullSentence": "I wonder if the trains are running on time."
+    }
+  ]
+}

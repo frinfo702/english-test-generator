@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "helix"
+  },
+  "title": "Listen and Choose a Response — Campus Jobs",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a suggestion",
+      "stem": "We should go to the job fair in the gym on Wednesday.",
+      "options": {
+        "A": "The gym was really crowded.",
+        "B": "It's not fair to the others.",
+        "C": "I went there on Wednesday.",
+        "D": "Good idea. I'll update my résumé before then."
+      },
+      "correct": "D",
+      "explanation": "Agreeing with a plan to prepare fits the suggestion. The others reuse 'gym', 'fair', and 'Wednesday'.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "We should go to the job fair in the gym on Wednesday."
+    }
+  ]
+}

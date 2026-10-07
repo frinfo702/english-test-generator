@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Neighbor": "helios"
+  },
+  "title": "Listen and Choose a Response — Neighbors",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for location",
+      "stem": "Where's the closest laundromat to our building?",
+      "options": {
+        "A": "It opens at seven every morning.",
+        "B": "Yes, I do my laundry on Sundays.",
+        "C": "Our building was built in the 1980s.",
+        "D": "There's one on Fifth Avenue, next to the bakery."
+      },
+      "correct": "D",
+      "explanation": "A 'where' question is answered with a location. The others answer when, use Yes to a wh-question, or repeat 'building'.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Neighbor",
+      "text": "Where's the closest laundromat to our building?"
+    }
+  ]
+}

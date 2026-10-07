@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "luna"
+  },
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing news",
+      "stem": "I just found out I got the scholarship I applied for!",
+      "options": {
+        "A": "I applied for a job yesterday.",
+        "B": "She got it last year.",
+        "C": "Congratulations! That's going to help a lot.",
+        "D": "Where did you find it?"
+      },
+      "correct": "C",
+      "explanation": "Congratulating fits good news. The others change tense, switch pronoun, or misunderstand 'found out'.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I just found out I got the scholarship I applied for!"
+    }
+  ]
+}

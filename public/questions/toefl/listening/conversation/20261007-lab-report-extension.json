@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Student": "perseus",
+    "Professor": "aurora"
+  },
+  "title": "A Lab Report Deadline",
+  "transcript": "Student: Professor Lin, do you have a minute? It's about the lab report.\nProfessor: Sure. Is something wrong?\nStudent: My group's data got corrupted, so we have to rerun the experiment. I'm worried we won't make Friday's deadline.\nProfessor: That happens more often than you'd think. When can you get back into the lab?\nStudent: It's booked until Wednesday, so Thursday at the earliest.\nProfessor: Then let's say Monday. But I'll need a short note from each of you explaining what happened.\nStudent: That's fair. I'll let the others know.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student go to see the professor?",
+      "options": [
+        "To ask for more time on an assignment",
+        "To reserve the lab for Wednesday",
+        "To report a problem with the lab equipment",
+        "To change lab groups"
+      ],
+      "correctIndex": 0,
+      "type": "purpose",
+      "explanation": "The student explains the data was lost and worries the group won't meet Friday's deadline."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the professor require?",
+      "options": [
+        "A copy of the corrupted data",
+        "A meeting with the whole group on Thursday",
+        "A written explanation from every group member",
+        "A shorter version of the lab report"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The professor says, \"I'll need a short note from each of you explaining what happened.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor Lin, do you have a minute? It's about the lab report."
+    },
+    {
+      "role": "Professor",
+      "text": "Sure. Is something wrong?"
+    },
+    {
+      "role": "Student",
+      "text": "My group's data got corrupted, so we have to rerun the experiment. I'm worried we won't make Friday's deadline."
+    },
+    {
+      "role": "Professor",
+      "text": "That happens more often than you'd think. When can you get back into the lab?"
+    },
+    {
+      "role": "Student",
+      "text": "It's booked until Wednesday, so Thursday at the earliest."
+    },
+    {
+      "role": "Professor",
+      "text": "Then let's say Monday. But I'll need a short note from each of you explaining what happened."
+    },
+    {
+      "role": "Student",
+      "text": "That's fair. I'll let the others know."
+    }
+  ],
+  "speaker": "c4"
+}

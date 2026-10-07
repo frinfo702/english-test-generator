@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "ursa"
+  },
+  "title": "Midterm Room Change",
+  "transcript": "Attention, students in Economics 101. Thursday's midterm will not be held in our usual classroom. Because of the class size, we'll be splitting into two rooms. If your last name begins with A through L, go to Room 140 in Baker Hall. M through Z, stay here in Room 305. Please bring your student ID, since we'll be checking it at the door. Calculators are allowed, but phones are not.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why will the midterm be held in two rooms?",
+      "options": [
+        "The usual classroom is being repaired",
+        "The class is too large for one room",
+        "Some students need extra time",
+        "The exam has two different versions"
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "The speaker says the class will split into two rooms because of the class size."
+    },
+    {
+      "id": "q2",
+      "stem": "What are students asked to bring to the exam?",
+      "options": [
+        "A phone",
+        "Their textbook",
+        "A printed schedule",
+        "Their student ID"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "Student IDs will be checked at the door."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Attention, students in Economics 101. Thursday's midterm will not be held in our usual classroom. Because of the class size, we'll be splitting into two rooms. If your last name begins with A through L, go to Room 140 in Baker Hall. M through Z, stay here in Room 305. Please bring your student ID, since we'll be checking it at the door. Calculators are allowed, but phones are not."
+    }
+  ],
+  "speaker": "f4"
+}

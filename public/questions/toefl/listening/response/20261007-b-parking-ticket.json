@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "leo"
+  },
+  "title": "Listen and Choose a Response — Getting Around Town",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Complaining",
+      "stem": "I got a parking ticket even though I paid the meter.",
+      "options": {
+        "A": "I bought tickets for the game.",
+        "B": "The parking lot is full.",
+        "C": "You should take a photo of your receipt and appeal it.",
+        "D": "I paid him back yesterday."
+      },
+      "correct": "C",
+      "explanation": "This gives practical advice on the complaint. The distractors repeat 'ticket', 'parking', and 'paid' in other senses.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "I got a parking ticket even though I paid the meter."
+    }
+  ]
+}

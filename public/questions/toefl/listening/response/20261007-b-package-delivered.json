@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Neighbor": "rigel"
+  },
+  "title": "Listen and Choose a Response — Apartment Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a yes/no question",
+      "stem": "Did a package for apartment 4B get left with you?",
+      "options": {
+        "A": "Yes, I left a few minutes ago.",
+        "B": "Not with me, but try asking at the front desk.",
+        "C": "I'm planning to pack this weekend.",
+        "D": "The apartment has four bedrooms."
+      },
+      "correct": "B",
+      "explanation": "The neighbor didn't receive it but offers a helpful place to check. The other choices play on 'left', 'package' and 'four'.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Neighbor",
+      "text": "Did a package for apartment 4B get left with you?"
+    }
+  ]
+}

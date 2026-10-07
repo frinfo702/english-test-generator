@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "cosmo"
+  },
+  "title": "Listen and Choose a Response — Campus Services",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about cost",
+      "stem": "How much does a campus parking permit cost for a semester?",
+      "options": {
+        "A": "It's listed on the transportation office website.",
+        "B": "In the lot behind the library.",
+        "C": "Yes, I need a permit.",
+        "D": "About four months long."
+      },
+      "correct": "A",
+      "explanation": "An indirect answer pointing to where the price is listed. The others answer where, use Yes, or give a length of time.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "How much does a campus parking permit cost for a semester?"
+    }
+  ]
+}

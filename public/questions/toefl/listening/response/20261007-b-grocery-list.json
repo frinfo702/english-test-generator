@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "carina"
+  },
+  "title": "Listen and Choose a Response — Errands",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Offering help",
+      "stem": "I'm going to the grocery store. Do you need anything?",
+      "options": {
+        "A": "I went to the grocery store yesterday.",
+        "B": "Could you pick up some eggs and a loaf of bread?",
+        "C": "The store is about ten minutes away.",
+        "D": "No, I don't need to go there."
+      },
+      "correct": "B",
+      "explanation": "Answering an offer with a specific request is natural. The other choices change the tense, answer where, or misunderstand who is going.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "I'm going to the grocery store. Do you need anything?"
+    }
+  ]
+}

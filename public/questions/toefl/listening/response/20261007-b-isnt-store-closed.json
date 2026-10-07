@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Shopper": "celeste"
+  },
+  "title": "Listen and Choose a Response — Shopping",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a negative question",
+      "stem": "Isn't this store closing early because of the holiday?",
+      "options": {
+        "A": "I closed the window early.",
+        "B": "The holiday is in December.",
+        "C": "Yes, at five, so we'd better hurry.",
+        "D": "No, it's not very close."
+      },
+      "correct": "C",
+      "explanation": "This confirms the time and draws a conclusion. The others repeat 'closed', 'holiday', and confuse 'closing' with 'close' (near).",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Shopper",
+      "text": "Isn't this store closing early because of the holiday?"
+    }
+  ]
+}

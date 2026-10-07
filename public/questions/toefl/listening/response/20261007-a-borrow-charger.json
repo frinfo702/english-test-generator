@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "ursa"
+  },
+  "title": "Listen and Choose a Response — Library",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Could I borrow your phone charger for a few minutes?",
+      "options": {
+        "A": "Sure, but I'll need it back before I leave.",
+        "B": "I charged my phone last night.",
+        "C": "The library closes in an hour.",
+        "D": "Yes, I borrowed it from my brother."
+      },
+      "correct": "A",
+      "explanation": "Agreeing with a condition is a natural response to a request; the tense-shifted option refers to a different action.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Could I borrow your phone charger for a few minutes?"
+    }
+  ]
+}

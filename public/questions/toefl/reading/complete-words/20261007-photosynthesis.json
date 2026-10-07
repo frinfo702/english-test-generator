@@ -1,0 +1,55 @@
+{
+  "paragraph": "Photosynthesis is the process that green plants use to make their own food. In this process, plants take in light from the sun, water from the soil, and carbon dioxide from the air. They then turn these simple materials into sugar, which gives them energy to grow. As part of the process, they also release oxygen. Almost all animals, including humans, depend on this oxygen to breathe.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "th",
+      "answer": "this"
+    },
+    {
+      "index": 1,
+      "hint": "pla",
+      "answer": "plants"
+    },
+    {
+      "index": 2,
+      "hint": "i",
+      "answer": "in"
+    },
+    {
+      "index": 3,
+      "hint": "fr",
+      "answer": "from"
+    },
+    {
+      "index": 4,
+      "hint": "s",
+      "answer": "sun"
+    },
+    {
+      "index": 5,
+      "hint": "fr",
+      "answer": "from"
+    },
+    {
+      "index": 6,
+      "hint": "so",
+      "answer": "soil"
+    },
+    {
+      "index": 7,
+      "hint": "car",
+      "answer": "carbon"
+    },
+    {
+      "index": 8,
+      "hint": "fr",
+      "answer": "from"
+    },
+    {
+      "index": 9,
+      "hint": "a",
+      "answer": "air"
+    }
+  ]
+}

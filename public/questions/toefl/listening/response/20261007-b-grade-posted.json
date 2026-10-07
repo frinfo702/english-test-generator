@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Classmate": "iris"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a yes/no question",
+      "stem": "Have our exam grades been posted online yet?",
+      "options": {
+        "A": "I posted the letter yesterday.",
+        "B": "Not yet. She said they'd be up by Thursday.",
+        "C": "Yes, I'll take the exam soon.",
+        "D": "Online classes are convenient."
+      },
+      "correct": "B",
+      "explanation": "This answers and adds when the grades will appear. The others reuse 'posted', 'exam', and 'online'.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Classmate",
+      "text": "Have our exam grades been posted online yet?"
+    }
+  ]
+}

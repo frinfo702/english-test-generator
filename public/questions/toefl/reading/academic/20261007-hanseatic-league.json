@@ -1,0 +1,71 @@
+{
+  "title": "The Hanseatic League",
+  "passage": "Between the thirteenth and fifteenth centuries, much of the trade in northern Europe was controlled by the Hanseatic League, an alliance of merchant towns. The League was not a country and had no single ruler. Instead, cities such as Lübeck, Hamburg, and Danzig cooperated to protect their merchants, reduce taxes on goods, and secure trading rights in foreign ports.\n\nThe League's strength came from its network of trading posts, called kontors, in places such as London, Bergen in Norway, and Novgorod in Russia. Through these posts, Hanseatic merchants moved grain, timber, furs, and fish across the Baltic and North Seas. When a foreign ruler treated its merchants unfairly, the League could respond with a boycott, refusing to trade with that region until conditions improved. In 1370, after a war with Denmark, the League won a treaty that gave it major influence over the narrow waters connecting the two seas.\n\nBy the sixteenth century, however, the League was declining. Powerful national states, such as England and Sweden, began supporting their own merchants, and major trade routes shifted toward the Atlantic. Historians still study the League as an early example of how independent cities can gain power through economic cooperation rather than military conquest.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to paragraph 1, which of the following best describes the Hanseatic League?",
+      "options": [
+        "A. A kingdom ruled from Lübeck",
+        "B. A cooperative alliance of merchant towns",
+        "C. A group of Danish ports",
+        "D. A military force that conquered northern Europe"
+      ],
+      "correctIndex": 1,
+      "explanation": "The League was 'an alliance of merchant towns' that 'was not a country and had no single ruler.'"
+    },
+    {
+      "id": "q2",
+      "type": "vocabulary",
+      "stem": "The word \"secure\" in paragraph 1 is closest in meaning to",
+      "options": [
+        "A. obtain",
+        "B. lock",
+        "C. reject",
+        "D. hide"
+      ],
+      "correctIndex": 0,
+      "explanation": "The cities cooperated to 'secure trading rights,' meaning to obtain or gain them."
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention a boycott in paragraph 2?",
+      "options": [
+        "A. To explain why the League eventually declined",
+        "B. To describe a type of trading post",
+        "C. To illustrate how the League could pressure foreign rulers",
+        "D. To show that the League always avoided conflict"
+      ],
+      "correctIndex": 2,
+      "explanation": "When a ruler 'treated its merchants unfairly, the League could respond with a boycott,' an example of its economic power."
+    },
+    {
+      "id": "q4",
+      "type": "negativeFactual",
+      "stem": "Which of the following is NOT mentioned in paragraph 2 as a good traded by Hanseatic merchants?",
+      "options": [
+        "A. Grain",
+        "B. Timber",
+        "C. Furs",
+        "D. Wine"
+      ],
+      "correctIndex": 3,
+      "explanation": "Merchants 'moved grain, timber, furs, and fish.' Wine is not listed."
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What does paragraph 3 suggest about the League's decline?",
+      "options": [
+        "A. It began when the kontor in London closed.",
+        "B. It was connected to the growth of national states that supported their own traders.",
+        "C. It resulted from a single military defeat.",
+        "D. It led to an increase in Baltic trade."
+      ],
+      "correctIndex": 1,
+      "explanation": "The decline is linked to 'powerful national states' that 'began supporting their own merchants' and to routes shifting toward the Atlantic."
+    }
+  ]
+}

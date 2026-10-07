@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "ursa"
+  },
+  "title": "Listen and Choose a Response — Computer Lab",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for help",
+      "stem": "Which printer should I send my file to?",
+      "options": {
+        "A": "I filed the papers in the top drawer.",
+        "B": "It takes about a minute to print.",
+        "C": "The one by the window is the only one working today.",
+        "D": "Yes, I printed it this morning."
+      },
+      "correct": "C",
+      "explanation": "Identifying the working printer directly answers the which-question.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Which printer should I send my file to?"
+    }
+  ]
+}

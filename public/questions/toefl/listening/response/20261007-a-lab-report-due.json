@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "lux"
+  },
+  "title": "Listen and Choose a Response — Biology Class",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about a deadline",
+      "stem": "When is the lab report due?",
+      "options": {
+        "A": "In the chemistry building, room 204.",
+        "B": "Yes, the lab was really interesting.",
+        "C": "Let's check the course page; it should be listed there.",
+        "D": "She reported it to the professor last week."
+      },
+      "correct": "C",
+      "explanation": "Suggesting they look up the deadline online is an indirect but appropriate reply to a when-question.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "When is the lab report due?"
+    }
+  ]
+}

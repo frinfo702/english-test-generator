@@ -1,0 +1,29 @@
+{
+  "scenario": {
+    "title": "Asking a Former Coworker for Advice",
+    "description": "Until last year, you worked with Jordan at a marketing agency, and Jordan has since moved to a company that you are now very interested in. You recently saw a job opening there, but the posting asks for experience with software you have never used.",
+    "recipient": "Jordan",
+    "subject": "Catching up and a quick question",
+    "purpose": "Reconnect with a former colleague and ask for advice about a job application",
+    "keyPoints": [
+      "Recall something positive about working together",
+      "Explain your concern about the job requirements",
+      "Ask for advice or suggest a way to talk about it"
+    ]
+  },
+  "modelAnswer": "Hi Jordan,\n\nIt has been far too long! I still think about the product launch we managed together two springs ago. Staying late to finish those presentations was exhausting, but I learned so much from the way you kept everyone calm and organized.\n\nI am writing because I noticed that your company is hiring a digital campaign coordinator, and the role sounds like a perfect fit for me. My only worry is that the listing mentions a data analysis program I have never had the chance to use. I am a fast learner, but I am not sure how heavily the team relies on it day to day.\n\nWould you have time for a short phone call or coffee next week? I would love to hear your honest opinion about whether I should apply, and of course I am curious to hear how you are doing.\n\nAll the best,\nSam",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Reconnects warmly, states the concern about the requirement clearly, and makes a specific request."
+    },
+    {
+      "criterion": "Organization",
+      "description": "Moves naturally from shared memory to purpose to request; appropriate opening and closing."
+    },
+    {
+      "criterion": "Language Use",
+      "description": "Semi-formal, friendly register suited to a former colleague; idiomatic and varied language."
+    }
+  ]
+}

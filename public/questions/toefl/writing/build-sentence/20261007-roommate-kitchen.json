@@ -1,0 +1,24 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Our roommate still hasn't washed his dishes.",
+      "prefix": "I know. He",
+      "chunks": [
+        "hasn't",
+        "didn't",
+        "the kitchen",
+        "since",
+        "cleaned"
+      ],
+      "correctOrder": [
+        0,
+        4,
+        2,
+        3
+      ],
+      "suffix": "last weekend",
+      "fullSentence": "I know. He hasn't cleaned the kitchen since last weekend."
+    }
+  ]
+}

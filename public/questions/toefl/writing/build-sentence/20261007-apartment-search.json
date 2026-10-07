@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "I've been looking at apartments all week.",
+      "chunks": [
+        "one",
+        "you",
+        "found",
+        "have",
+        "that is",
+        "close to campus"
+      ],
+      "correctOrder": [
+        3,
+        1,
+        2,
+        0,
+        4,
+        5
+      ],
+      "fullSentence": "Have you found one that is close to campus?"
+    }
+  ]
+}

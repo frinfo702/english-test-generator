@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "rigel"
+  },
+  "title": "Listen and Choose a Response — Classroom",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Complaining",
+      "stem": "It's really cold in this classroom.",
+      "options": {
+        "A": "The class is about cold-weather animals.",
+        "B": "I'll wear shorts to class tomorrow.",
+        "C": "Should I ask the professor to adjust the heat?",
+        "D": "Yes, it's so hot in here."
+      },
+      "correct": "C",
+      "explanation": "Offering to ask about the heat responds helpfully to a complaint; the 'Yes' option contradicts it.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "It's really cold in this classroom."
+    }
+  ]
+}

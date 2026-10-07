@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Professor": "helix"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making an announcement",
+      "stem": "Tomorrow's class will meet in Room 210 instead of here.",
+      "options": {
+        "A": "I'll meet you here instead.",
+        "B": "Is that in the same building or across campus?",
+        "C": "The room was too hot today.",
+        "D": "Yes, I'm in class now."
+      },
+      "correct": "B",
+      "explanation": "Asking for clarification about the new room is natural. The others reuse 'meet', 'instead', 'room', and 'class'.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Professor",
+      "text": "Tomorrow's class will meet in Room 210 instead of here."
+    }
+  ]
+}

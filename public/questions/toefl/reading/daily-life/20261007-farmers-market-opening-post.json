@@ -1,0 +1,51 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "social media post",
+      "layout": "document",
+      "content": "Downtown Farmers Market @dtfarmersmarket\n\nWe're back! Opening day is this Saturday, May 10, from 8 A.M. to 1 P.M. in the Central Library parking lot.\n\nThis year we have more than 30 vendors, including six new farms selling fresh eggs, honey, flowers, and spring vegetables. Don't miss the cooking demo by Chef Ana Ruiz at 10 A.M., where she'll make a salad using only market ingredients.\n\nA few reminders: Most vendors accept cards, but bring cash for the smaller stands. Dogs are welcome on a short leash. Parking is free in the garage on 2nd Street.\n\nThe market runs every Saturday through October. See you there! 🌻",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of the post?",
+          "options": [
+            "A. To introduce a new cooking school",
+            "B. To advertise a new library service",
+            "C. To invite farmers to sell at the market",
+            "D. To announce the start of the market season"
+          ],
+          "correctIndex": 3,
+          "type": "purpose",
+          "explanation": "The post begins, \"We're back! Opening day is this Saturday,\" and gives details about the first market day."
+        },
+        {
+          "id": "q2",
+          "stem": "Why should visitors bring cash?",
+          "options": [
+            "A. Some sellers may not accept cards.",
+            "B. Chef Ruiz's demo costs money.",
+            "C. The garage on 2nd Street charges a fee.",
+            "D. Cash is needed to buy dog permits."
+          ],
+          "correctIndex": 0,
+          "type": "factual",
+          "explanation": "\"Most vendors accept cards, but bring cash for the smaller stands.\""
+        },
+        {
+          "id": "q3",
+          "stem": "What is suggested about the market?",
+          "options": [
+            "A. It is held every day in May.",
+            "B. It has grown since last year.",
+            "C. It is moving to a new parking lot.",
+            "D. It will end in May."
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The post says \"This year we have more than 30 vendors, including six new farms,\" suggesting it is larger than before."
+        }
+      ]
+    }
+  ]
+}

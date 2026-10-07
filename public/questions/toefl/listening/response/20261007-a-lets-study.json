@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "eve"
+  },
+  "title": "Listen and Choose a Response — Exam Prep",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a suggestion",
+      "stem": "Why don't we study together for the chemistry final?",
+      "options": {
+        "A": "Because the final is on Thursday.",
+        "B": "I studied chemistry in high school.",
+        "C": "Good idea. How about the library after lunch?",
+        "D": "The library has a chemistry section."
+      },
+      "correct": "C",
+      "explanation": "Accepting the suggestion and proposing a place and time is appropriate; the first distractor treats 'why' as a real question.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Why don't we study together for the chemistry final?"
+    }
+  ]
+}

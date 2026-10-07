@@ -1,0 +1,24 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "It's Mia's birthday on Friday.",
+      "prefix": "Let's ask",
+      "chunks": [
+        "she",
+        "what",
+        "her roommate",
+        "like",
+        "would"
+      ],
+      "correctOrder": [
+        2,
+        1,
+        0,
+        4,
+        3
+      ],
+      "fullSentence": "Let's ask her roommate what she would like."
+    }
+  ]
+}

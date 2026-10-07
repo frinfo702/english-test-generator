@@ -1,0 +1,71 @@
+{
+  "title": "Finding Planets by Their Shadows",
+  "passage": "Planets around other stars, called exoplanets, are extremely difficult to see directly because the stars they orbit are millions of times brighter. Astronomers therefore usually detect them indirectly. One of the most successful approaches is the transit method. A transit occurs when a planet passes between its star and an observer, blocking a tiny fraction of the star's light.\n\nBy measuring a star's brightness very precisely over time, astronomers can spot regular dips that reveal a planet. The amount of dimming indicates the planet's size: a large planet blocks more light than a small one. The time between dips shows how long the planet takes to complete one orbit. NASA's Kepler space telescope, launched in 2009, used this method to watch about 150,000 stars at once and identified thousands of planets. Its results suggested that most stars in our galaxy have at least one planet.\n\nThe transit method has an important limitation. It works only when a planet's orbit is lined up almost exactly with our view, so most planetary systems can never be detected this way. Even so, transits offer another advantage: when starlight passes through a planet's atmosphere, it can carry chemical signatures that newer telescopes are beginning to read.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the passage mainly about?",
+      "options": [
+        "A. The history of NASA's space program",
+        "B. A technique for detecting planets by measuring changes in starlight",
+        "C. Why stars are brighter than the planets around them",
+        "D. The chemistry of planetary atmospheres"
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage explains what a transit is, how it reveals planets, and the method's limits and advantages."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 2, what does the time between dips in brightness reveal?",
+      "options": [
+        "A. The size of the planet",
+        "B. The temperature of the star",
+        "C. How long the planet takes to orbit its star",
+        "D. What the planet's atmosphere contains"
+      ],
+      "correctIndex": 2,
+      "explanation": "'The time between dips shows how long the planet takes to complete one orbit.'"
+    },
+    {
+      "id": "q3",
+      "type": "negativeFactual",
+      "stem": "According to paragraph 2, all of the following can be learned from transit measurements EXCEPT",
+      "options": [
+        "A. the planet's mass",
+        "B. the planet's size",
+        "C. the length of the planet's orbit",
+        "D. the presence of a planet"
+      ],
+      "correctIndex": 0,
+      "explanation": "Paragraph 2 says dips 'reveal a planet,' dimming 'indicates the planet's size,' and timing shows the orbit. Mass is not mentioned."
+    },
+    {
+      "id": "q4",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention the Kepler space telescope in paragraph 2?",
+      "options": [
+        "A. To explain why direct observation of planets failed",
+        "B. To describe a limitation of the transit method",
+        "C. To compare different types of telescopes",
+        "D. To show how productive the transit method has been"
+      ],
+      "correctIndex": 3,
+      "explanation": "Kepler used the method to watch 'about 150,000 stars at once and identified thousands of planets,' illustrating its success."
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What can be inferred from paragraph 3 about the transit method?",
+      "options": [
+        "A. It can detect every planet in a system.",
+        "B. It misses many planets whose orbits are not aligned with our view.",
+        "C. It cannot be used with newer telescopes.",
+        "D. It reveals nothing beyond a planet's size."
+      ],
+      "correctIndex": 1,
+      "explanation": "It 'works only when a planet's orbit is lined up almost exactly with our view, so most planetary systems can never be detected this way.'"
+    }
+  ]
+}

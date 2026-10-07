@@ -1,0 +1,55 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "live chat",
+      "layout": "live-chat",
+      "title": "Bluewave Support",
+      "messages": [
+        {
+          "sender": "Agent (Rita)",
+          "time": "8:14 P.M.",
+          "text": "Hi, thanks for contacting Bluewave Internet. How can I help?"
+        },
+        {
+          "sender": "Omar",
+          "time": "8:15 P.M.",
+          "text": "My internet stopped working an hour ago. I already restarted the router twice."
+        },
+        {
+          "sender": "Agent (Rita)",
+          "time": "8:17 P.M.",
+          "text": "Thanks for trying that. There's an outage in your area. Our team expects service to return by 11 P.M. tonight."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What has Omar already done?",
+          "options": [
+            "A. Called a technician",
+            "B. Bought a new router",
+            "C. Moved to a different area",
+            "D. Restarted his equipment"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "Omar writes, \"I already restarted the router twice.\""
+        },
+        {
+          "id": "q2",
+          "stem": "What does the agent imply about Omar's problem?",
+          "options": [
+            "A. It is not limited to his home.",
+            "B. It is caused by his router.",
+            "C. It will last for several days.",
+            "D. It can be fixed by restarting again."
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "Rita explains, \"There's an outage in your area,\" meaning other customers nearby are also affected."
+        }
+      ]
+    }
+  ]
+}

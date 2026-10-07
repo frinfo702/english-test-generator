@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "eve"
+  },
+  "title": "Spring Festival Volunteers",
+  "transcript": "Hey everyone, the Spring Festival is only two weeks away, and we're still short on volunteers for Saturday morning. We especially need people to help set up tables and tents on the main lawn starting at seven. I know that's early, but volunteers get a free festival T-shirt and lunch from the food trucks. If you can help, just add your name to the sheet outside the student activities office.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the speaker mainly doing?",
+      "options": [
+        "Describing the festival's food options",
+        "Asking for help with festival preparations",
+        "Announcing a change to the festival date",
+        "Explaining how to buy festival T-shirts"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The speaker says they are short on volunteers and asks people to help set up."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker mention the T-shirt and lunch?",
+      "options": [
+        "To list items sold at the festival",
+        "To explain what volunteers must bring",
+        "To make an early start more appealing",
+        "To thank people who already volunteered"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "Right after admitting seven is early, the speaker mentions the free shirt and lunch as a reward."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hey everyone, the Spring Festival is only two weeks away, and we're still short on volunteers for Saturday morning. We especially need people to help set up tables and tents on the main lawn starting at seven. I know that's early, but volunteers get a free festival T-shirt and lunch from the food trucks. If you can help, just add your name to the sheet outside the student activities office."
+    }
+  ],
+  "speaker": "f4"
+}

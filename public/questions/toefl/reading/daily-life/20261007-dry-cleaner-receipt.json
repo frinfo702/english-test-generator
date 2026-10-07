@@ -1,0 +1,38 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "receipt",
+      "layout": "document",
+      "content": "Fresh Press Cleaners\nTicket #2271\nCustomer: D. Kim\nDropped off: Mon., Nov. 4\n\n2 dress shirts — $7.00\n1 wool coat — $18.00\nTotal: $25.00 (paid)\n\nReady for pickup: Thurs., Nov. 7, after 4 P.M.\nItems not picked up within 30 days will be donated.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "When can the customer collect the items?",
+          "options": [
+            "A. Monday, November 4",
+            "B. Within the next 30 minutes",
+            "C. Any time after 4 P.M. on Monday",
+            "D. Thursday, November 7"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "The receipt says \"Ready for pickup: Thurs., Nov. 7, after 4 P.M.\""
+        },
+        {
+          "id": "q2",
+          "stem": "What is indicated about the customer?",
+          "options": [
+            "A. The customer has already paid.",
+            "B. The customer will donate the coat.",
+            "C. The customer owes $18.00.",
+            "D. The customer dropped off three coats."
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "The total is marked \"$25.00 (paid),\" so nothing more is owed at pickup."
+        }
+      ]
+    }
+  ]
+}

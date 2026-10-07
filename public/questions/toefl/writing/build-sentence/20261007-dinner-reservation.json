@@ -1,0 +1,26 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Did you make a reservation for dinner?",
+      "prefix": "Yes, but",
+      "chunks": [
+        "said",
+        "no tables",
+        "there",
+        "not",
+        "were",
+        "they"
+      ],
+      "correctOrder": [
+        5,
+        0,
+        2,
+        4,
+        1
+      ],
+      "suffix": "by the window",
+      "fullSentence": "Yes, but they said there were no tables by the window."
+    }
+  ]
+}

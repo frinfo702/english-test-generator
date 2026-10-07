@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "cosmo"
+  },
+  "title": "Listen and Choose a Response — Getting Around Town",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for directions",
+      "stem": "Where do I catch the bus to the train station?",
+      "options": {
+        "A": "It usually comes every fifteen minutes or so.",
+        "B": "Yes, I took the train there yesterday.",
+        "C": "I missed the bus because I overslept.",
+        "D": "Right across the street, in front of the bank."
+      },
+      "correct": "D",
+      "explanation": "The speaker asks where to catch the bus, so naming the location answers the question.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Where do I catch the bus to the train station?"
+    }
+  ]
+}

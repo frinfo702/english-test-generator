@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Teaching Assistant": "naksh"
+  },
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Giving an instruction",
+      "stem": "Everyone needs to wear goggles before we begin the experiment.",
+      "options": {
+        "A": "I began the experiment yesterday.",
+        "B": "Everyone wore a blue shirt.",
+        "C": "The pears are in the fridge.",
+        "D": "Are there extra pairs for people who forgot theirs?"
+      },
+      "correct": "D",
+      "explanation": "Asking about extra goggles responds naturally to the rule. The others reuse 'begin' and 'everyone', and confuse 'pairs' with 'pears'.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Teaching Assistant",
+      "text": "Everyone needs to wear goggles before we begin the experiment."
+    }
+  ]
+}

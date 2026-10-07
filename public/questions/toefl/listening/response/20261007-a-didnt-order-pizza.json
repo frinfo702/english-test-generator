@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "iris"
+  },
+  "title": "Listen and Choose a Response — Home",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking on a task",
+      "stem": "Didn't you order the pizza an hour ago?",
+      "options": {
+        "A": "The pizza place is next to the cinema.",
+        "B": "I'll order a salad next time.",
+        "C": "No, I ordered it an hour ago.",
+        "D": "I did. Let me call and see what's taking so long."
+      },
+      "correct": "D",
+      "explanation": "Confirming and offering to call the restaurant addresses the concern; the 'No' option contradicts itself.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Didn't you order the pizza an hour ago?"
+    }
+  ]
+}

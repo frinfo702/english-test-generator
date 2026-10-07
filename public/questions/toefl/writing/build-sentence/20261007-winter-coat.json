@@ -1,0 +1,27 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "I'm looking for a new winter coat.",
+      "chunks": [
+        "have",
+        "works",
+        "you",
+        "my sister",
+        "checked",
+        "the store",
+        "where"
+      ],
+      "correctOrder": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        3,
+        1
+      ],
+      "fullSentence": "Have you checked the store where my sister works?"
+    }
+  ]
+}

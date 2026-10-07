@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "aurora"
+  },
+  "title": "Listen and Choose a Response — Travel",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a suggestion",
+      "stem": "Let's drive to the coast this weekend instead of flying.",
+      "options": {
+        "A": "I flew there last summer.",
+        "B": "Good idea, but who's going to drive the whole way?",
+        "C": "The coat is in my closet.",
+        "D": "Yes, the weekend flew by."
+      },
+      "correct": "B",
+      "explanation": "Agreeing with a practical follow-up question fits a suggestion. The others confuse 'coast' and 'coat', or reuse 'flying'.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Let's drive to the coast this weekend instead of flying."
+    }
+  ]
+}

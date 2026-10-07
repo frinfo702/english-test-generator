@@ -1,0 +1,25 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Are you coming to the study group tonight?",
+      "prefix": "I can't. I",
+      "chunks": [
+        "is due",
+        "haven't",
+        "finished",
+        "that",
+        "the assignment"
+      ],
+      "correctOrder": [
+        1,
+        2,
+        4,
+        3,
+        0
+      ],
+      "suffix": "tomorrow",
+      "fullSentence": "I can't. I haven't finished the assignment that is due tomorrow."
+    }
+  ]
+}

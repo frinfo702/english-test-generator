@@ -1,0 +1,55 @@
+{
+  "paragraph": "A rainbow appears when sunlight shines through drops of water in the air. As light enters each drop, it bends and separates into different colors. The light is then reflected off the back of the drop and leaves it at a slightly different angle. Because each color bends by a different amount, the colors spread out into a curved band. People usually see rainbows when the sun is behind them and rain is falling in front of them.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "li",
+      "answer": "light"
+    },
+    {
+      "index": 1,
+      "hint": "ea",
+      "answer": "each"
+    },
+    {
+      "index": 2,
+      "hint": "i",
+      "answer": "it"
+    },
+    {
+      "index": 3,
+      "hint": "a",
+      "answer": "and"
+    },
+    {
+      "index": 4,
+      "hint": "in",
+      "answer": "into"
+    },
+    {
+      "index": 5,
+      "hint": "col",
+      "answer": "colors"
+    },
+    {
+      "index": 6,
+      "hint": "li",
+      "answer": "light"
+    },
+    {
+      "index": 7,
+      "hint": "th",
+      "answer": "then"
+    },
+    {
+      "index": 8,
+      "hint": "o",
+      "answer": "off"
+    },
+    {
+      "index": 9,
+      "hint": "ba",
+      "answer": "back"
+    }
+  ]
+}

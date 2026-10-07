@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "helios"
+  },
+  "title": "Listen and Choose a Response — Good News",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing news",
+      "stem": "I just found out I got the scholarship!",
+      "options": {
+        "A": "I found my scholarship form yesterday.",
+        "B": "I'll find out about it next week.",
+        "C": "I'm so sorry to hear that news.",
+        "D": "Congratulations! You really deserve it."
+      },
+      "correct": "D",
+      "explanation": "Congratulating the speaker is the natural response to good news.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I just found out I got the scholarship!"
+    }
+  ]
+}

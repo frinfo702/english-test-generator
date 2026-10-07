@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "castor"
+  },
+  "title": "Listen and Choose a Response — Dorm Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for permission",
+      "stem": "Is it okay if my cousin sleeps on our couch Friday?",
+      "options": {
+        "A": "Sure, but I have friends over that evening.",
+        "B": "My cousin lives in Texas.",
+        "C": "I slept well last Friday.",
+        "D": "The couch is new."
+      },
+      "correct": "A",
+      "explanation": "Agreeing with a note about plans is natural. The others reuse 'cousin', 'sleep', and 'couch'.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Is it okay if my cousin sleeps on our couch Friday?"
+    }
+  ]
+}

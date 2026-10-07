@@ -1,0 +1,23 @@
+{
+  "professorName": "Dr. Okafor",
+  "professorPhoto": "m2",
+  "course": "environmental science",
+  "professorQuestion": "Over the past century, many animal species have become endangered because of hunting, pollution, and the loss of natural areas. Conservation groups have limited money, so they must decide where to focus. Some groups protect and restore wild habitats, while others fund breeding programs in zoos and research centers that later release animals into the wild. Which do you think is more important for saving endangered species: protecting natural habitats or supporting breeding programs? Why?",
+  "student1": {
+    "name": "Elena",
+    "gender": "female",
+    "response": "I think protecting habitats is far more important. Breeding animals in zoos does little good if there is nowhere safe to release them. For example, if a rainforest keeps being cleared for farms, any monkeys raised in captivity will face the same dangers that made them endangered in the first place."
+  },
+  "student2": {
+    "name": "Kevin",
+    "gender": "male",
+    "response": "I disagree. Restoring habitats takes decades, but some species may disappear within a few years. Breeding programs can act like an emergency rescue. The California condor is a good example: there were only twenty-seven left in the 1980s, and captive breeding is the reason hundreds now fly in the wild again."
+  },
+  "modelAnswer": "Both Elena and Kevin make strong points, but I would argue that habitat protection deserves most of the funding because it helps far more than one species at a time. When a wetland is protected, for instance, it shelters not only the birds that attract public attention but also countless insects, fish, and plants that rarely make the news. A breeding program, by contrast, usually focuses on a single, well-known animal and can cost millions of dollars per year. Kevin is right that captive breeding is sometimes the only way to prevent immediate extinction, so I would not eliminate it completely. However, it should be a last resort rather than the main strategy. Spending limited money on entire ecosystems produces benefits that last longer and reach many more species.",
+  "evaluationPoints": [
+    "Relevance and clarity: states a clear position on habitats versus breeding programs and stays on topic",
+    "Elaboration: adds a new reason or example (such as protecting many species at once) instead of repeating Elena or Kevin",
+    "Language: uses varied sentence structures and precise, idiomatic word choice",
+    "Accuracy: contains few grammatical, spelling, or word-choice errors"
+  ]
+}

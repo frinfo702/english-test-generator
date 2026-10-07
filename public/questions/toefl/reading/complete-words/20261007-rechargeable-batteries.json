@@ -1,0 +1,55 @@
+{
+  "paragraph": "Rechargeable batteries store electrical energy that can be used again and again. Inside each battery, tiny charged particles move from one side to the other as power is used. When the battery is connected to a charger, the particles are pushed back to their starting side. This cycle can be repeated hundreds of times before the battery begins to wear out. Today, such batteries are found in phones, laptops, and electric cars.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "ea",
+      "answer": "each"
+    },
+    {
+      "index": 1,
+      "hint": "ti",
+      "answer": "tiny"
+    },
+    {
+      "index": 2,
+      "hint": "part",
+      "answer": "particles"
+    },
+    {
+      "index": 3,
+      "hint": "fr",
+      "answer": "from"
+    },
+    {
+      "index": 4,
+      "hint": "si",
+      "answer": "side"
+    },
+    {
+      "index": 5,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 6,
+      "hint": "a",
+      "answer": "as"
+    },
+    {
+      "index": 7,
+      "hint": "i",
+      "answer": "is"
+    },
+    {
+      "index": 8,
+      "hint": "Wh",
+      "answer": "When"
+    },
+    {
+      "index": 9,
+      "hint": "bat",
+      "answer": "battery"
+    }
+  ]
+}

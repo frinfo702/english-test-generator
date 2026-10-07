@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Traveler": "ursa"
+  },
+  "title": "Listen and Choose a Response — Getting Around Town",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for directions",
+      "stem": "Which platform does the express train leave from?",
+      "options": {
+        "A": "It leaves every half hour.",
+        "B": "I prefer express mail.",
+        "C": "Yes, it's an express train.",
+        "D": "I'm not sure. Let's ask at the information desk."
+      },
+      "correct": "D",
+      "explanation": "An indirect answer that suggests a way to find out. The others answer how often, repeat 'express', or use Yes.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Traveler",
+      "text": "Which platform does the express train leave from?"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "altair"
+  },
+  "title": "Listen and Choose a Response — Registration",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for information",
+      "stem": "Is it too late to drop a class this semester?",
+      "options": {
+        "A": "I dropped my phone in class.",
+        "B": "Class starts late on Fridays.",
+        "C": "She's taking five classes.",
+        "D": "You'd have to ask your advisor; the deadline was yesterday."
+      },
+      "correct": "D",
+      "explanation": "This gives the key fact and next step. The others reuse 'drop', 'late', and 'class' in other ways.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Is it too late to drop a class this semester?"
+    }
+  ]
+}

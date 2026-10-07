@@ -1,0 +1,38 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "layout": "email",
+      "content": "From: Greenleaf Home Goods\nTo: Alex Turner\nSubject: Your order has shipped!\n\nGood news, Alex! Order #58130 (1 table lamp, 2 throw pillows) left our warehouse today. It should arrive by Friday. The pillows were packed separately, so you may receive two boxes on different days. Track your package with the link below.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What type of business most likely sent the email?",
+          "options": [
+            "A. A furniture repair shop",
+            "B. A home goods store",
+            "C. A shipping company",
+            "D. A warehouse cleaning service"
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "The sender is \"Greenleaf Home Goods,\" and the order contains \"1 table lamp, 2 throw pillows.\" The warehouse and shipping are only parts of delivering the order."
+        },
+        {
+          "id": "q2",
+          "stem": "What does the email say Alex might notice?",
+          "options": [
+            "A. The lamp is missing a part.",
+            "B. The order will arrive after Friday.",
+            "C. His items may come at different times.",
+            "D. The tracking link does not work."
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "\"The pillows were packed separately, so you may receive two boxes on different days.\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "layout": "email",
+      "content": "From: Brightview Dental\nTo: Maria Lopez\nSubject: Appointment Reminder\n\nHi Maria,\nThis is a reminder of your cleaning on Thursday, March 6, at 3:30 P.M. with Dr. Patel. Please arrive 10 minutes early and bring your new insurance card. If you need to reschedule, reply to this email at least 24 hours before your visit.\nSee you soon!",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is Maria asked to bring?",
+          "options": [
+            "A. A list of her medicines",
+            "B. Her updated insurance card",
+            "C. A copy of this email",
+            "D. A form from Dr. Patel"
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The email asks her to \"bring your new insurance card.\""
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about Maria?",
+          "options": [
+            "A. She wants to see a different dentist.",
+            "B. She has never visited Brightview Dental.",
+            "C. She recently changed her insurance.",
+            "D. She has already rescheduled once."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "She is asked to bring her \"new insurance card,\" which suggests her insurance has recently changed."
+        }
+      ]
+    }
+  ]
+}

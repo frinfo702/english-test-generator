@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "luna"
+  },
+  "title": "Listen and Choose a Response — Intramural Sports",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making an invitation",
+      "stem": "Do you want to join our volleyball team this semester?",
+      "options": {
+        "A": "The team won last semester.",
+        "B": "I'm not very good, but I'd be glad to try.",
+        "C": "I joined the two pieces together.",
+        "D": "No, I joined the team last semester."
+      },
+      "correct": "B",
+      "explanation": "Accepting modestly fits an invitation; the 'Yes' option contradicts itself.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Do you want to join our volleyball team this semester?"
+    }
+  ]
+}

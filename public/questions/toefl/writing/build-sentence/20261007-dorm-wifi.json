@@ -1,0 +1,23 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "The Wi-Fi in our dorm is so slow.",
+      "chunks": [
+        "to the front desk",
+        "the problem",
+        "reported",
+        "has",
+        "anyone"
+      ],
+      "correctOrder": [
+        3,
+        4,
+        2,
+        1,
+        0
+      ],
+      "fullSentence": "Has anyone reported the problem to the front desk?"
+    }
+  ]
+}

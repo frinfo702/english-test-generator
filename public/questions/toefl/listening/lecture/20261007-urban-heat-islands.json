@@ -1,0 +1,69 @@
+{
+  "voices": {
+    "Lecturer": "altair"
+  },
+  "title": "Urban Heat Islands",
+  "subject": "environmental science",
+  "transcript": "Okay, let's pick up where we left off last week. We talked about how cities change the landscape, and today I want to look at one consequence: the urban heat island effect. Basically, cities tend to be warmer than the countryside around them, sometimes by as much as five degrees Celsius at night. Why? A big part of it is surfaces. Asphalt and concrete absorb sunlight during the day and release that heat slowly after dark. In a forest or a field, plants cool the air by releasing water through their leaves, but a parking lot can't do that. Here's an example that surprised a lot of people. When researchers measured temperatures across one large city on a summer afternoon, a neighborhood with lots of trees was nearly four degrees cooler than a neighborhood just two kilometers away with almost none. Same weather, same sunshine. The only real difference was the tree cover. So this isn't just about comfort. Higher temperatures mean more air conditioning, which means more energy use, and during heat waves, more health emergencies. Now, cities have started fighting back, and next I want to walk you through a few of the strategies they're using, starting with something called cool roofs.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main topic of the talk?",
+      "options": [
+        "How forests release water into the air",
+        "Why summer heat waves are becoming longer",
+        "Why cities are often warmer than surrounding areas",
+        "How cities measure their energy use"
+      ],
+      "correctIndex": 2,
+      "type": "mainIdea",
+      "explanation": "The lecturer introduces the urban heat island effect: cities being warmer than the countryside around them."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the lecturer describe the two neighborhoods?",
+      "options": [
+        "To show how much trees can affect local temperatures",
+        "To explain why some neighborhoods use more energy",
+        "To compare the weather in two different cities",
+        "To argue that parking lots should be removed"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The two areas had the same weather; the only difference was tree cover, yet one was nearly four degrees cooler."
+    },
+    {
+      "id": "q3",
+      "stem": "According to the lecturer, what do asphalt and concrete do?",
+      "options": [
+        "They reflect most sunlight back into the sky.",
+        "They release water that cools the air.",
+        "They cool down faster than fields after dark.",
+        "They absorb heat during the day and release it slowly at night."
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "The lecturer says these surfaces absorb sunlight during the day and release the heat slowly after dark."
+    },
+    {
+      "id": "q4",
+      "stem": "What will the lecturer most likely discuss next?",
+      "options": [
+        "The health effects of heat waves on older people",
+        "Ways cities are trying to reduce heat, such as cool roofs",
+        "How plants release water through their leaves",
+        "The history of building materials in cities"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The lecturer ends by saying the class will next walk through strategies cities are using, starting with cool roofs."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Lecturer",
+      "text": "Okay, let's pick up where we left off last week. We talked about how cities change the landscape, and today I want to look at one consequence: the urban heat island effect. Basically, cities tend to be warmer than the countryside around them, sometimes by as much as five degrees Celsius at night. Why? A big part of it is surfaces. Asphalt and concrete absorb sunlight during the day and release that heat slowly after dark. In a forest or a field, plants cool the air by releasing water through their leaves, but a parking lot can't do that. Here's an example that surprised a lot of people. When researchers measured temperatures across one large city on a summer afternoon, a neighborhood with lots of trees was nearly four degrees cooler than a neighborhood just two kilometers away with almost none. Same weather, same sunshine. The only real difference was the tree cover. So this isn't just about comfort. Higher temperatures mean more air conditioning, which means more energy use, and during heat waves, more health emergencies. Now, cities have started fighting back, and next I want to walk you through a few of the strategies they're using, starting with something called cool roofs."
+    }
+  ],
+  "speaker": "m1"
+}

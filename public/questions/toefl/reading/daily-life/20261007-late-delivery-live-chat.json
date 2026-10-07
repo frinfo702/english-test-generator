@@ -1,0 +1,88 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "live chat",
+      "layout": "live-chat",
+      "title": "QuickCart Support",
+      "messages": [
+        {
+          "sender": "Agent (Leo)",
+          "time": "1:02 P.M.",
+          "text": "Welcome to QuickCart support. How can I help you today?"
+        },
+        {
+          "sender": "Hannah Reyes",
+          "time": "1:03 P.M.",
+          "text": "My grocery delivery was supposed to arrive between 10 and 11 this morning, but it still hasn't come."
+        },
+        {
+          "sender": "Agent (Leo)",
+          "time": "1:05 P.M.",
+          "text": "I'm sorry about that. I see your driver had car trouble. Your order has been given to a new driver and should arrive by 2:30."
+        },
+        {
+          "sender": "Hannah Reyes",
+          "time": "1:06 P.M.",
+          "text": "That's a problem. I'm leaving for work at 2, and there's ice cream in the order."
+        },
+        {
+          "sender": "Agent (Leo)",
+          "time": "1:08 P.M.",
+          "text": "I understand. I can cancel the frozen items and refund them, or move the whole order to tomorrow morning at no charge."
+        },
+        {
+          "sender": "Hannah Reyes",
+          "time": "1:09 P.M.",
+          "text": "Tomorrow morning is better. Will I still have to pay the delivery fee?"
+        },
+        {
+          "sender": "Agent (Leo)",
+          "time": "1:10 P.M.",
+          "text": "No, we will remove the fee for this order. Your groceries will arrive between 8 and 9 A.M."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why is Ms. Reyes's order late?",
+          "options": [
+            "A. The store ran out of ice cream.",
+            "B. The original driver had a vehicle problem.",
+            "C. She entered the wrong address.",
+            "D. Her order was sent to her office."
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "Leo explains, \"I see your driver had car trouble.\""
+        },
+        {
+          "id": "q2",
+          "stem": "At 1:06 P.M., why does Ms. Reyes mention ice cream?",
+          "options": [
+            "A. To add another item to her order",
+            "B. To complain that it arrived melted",
+            "C. To explain why a late delivery would not work",
+            "D. To ask for a discount on frozen food"
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "She will leave at 2, before the 2:30 delivery, so frozen items would be left outside and melt."
+        },
+        {
+          "id": "q3",
+          "stem": "What will most likely happen next?",
+          "options": [
+            "A. She will pick up the order at the store.",
+            "B. Her frozen items will be refunded.",
+            "C. A driver will arrive at 2:30 today.",
+            "D. Her groceries will be delivered the next morning."
+          ],
+          "correctIndex": 3,
+          "type": "inference",
+          "explanation": "She chooses the second option: \"Tomorrow morning is better.\""
+        }
+      ]
+    }
+  ]
+}

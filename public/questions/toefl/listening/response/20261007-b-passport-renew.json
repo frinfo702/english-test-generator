@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "luna"
+  },
+  "title": "Listen and Choose a Response — Travel",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for information",
+      "stem": "How long does it take to renew a passport?",
+      "options": {
+        "A": "It depends, but you can pay extra to speed it up.",
+        "B": "About five hundred miles from here.",
+        "C": "Yes, it's time to renew it.",
+        "D": "I keep my passport in a drawer."
+      },
+      "correct": "A",
+      "explanation": "A 'how long' question is answered indirectly with useful information. The others answer distance, use Yes, or say where the passport is.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "How long does it take to renew a passport?"
+    }
+  ]
+}

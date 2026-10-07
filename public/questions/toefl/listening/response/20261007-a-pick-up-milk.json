@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "aurora"
+  },
+  "title": "Listen and Choose a Response — Home",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Can you pick up some milk on your way home?",
+      "options": {
+        "A": "I picked up my sister from school.",
+        "B": "The store is on the way to campus.",
+        "C": "Sure. Do we need anything else?",
+        "D": "Yes, I drank it this morning."
+      },
+      "correct": "C",
+      "explanation": "Agreeing and asking if more is needed responds naturally; the first option repeats 'pick up' with a different meaning.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Can you pick up some milk on your way home?"
+    }
+  ]
+}

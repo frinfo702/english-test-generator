@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "zagan"
+  },
+  "title": "Listen and Choose a Response — Weekend Plans",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a negative question",
+      "stem": "Didn't we order a pizza almost an hour ago?",
+      "options": {
+        "A": "We did. I'll call and see where it is.",
+        "B": "Pizza is my favorite food.",
+        "C": "In order to save time.",
+        "D": "No, it's half past one."
+      },
+      "correct": "A",
+      "explanation": "This confirms the order and offers to follow up. The others repeat 'pizza', 'order', and 'hour' differently.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Didn't we order a pizza almost an hour ago?"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "schedule",
+      "layout": "document",
+      "content": "Lakeside Community Center — Fall Class Schedule (Sept. 8–Nov. 28)\n\nMonday\n6:00–7:00 P.M. Beginner Spanish (Room 2) — $60\n\nTuesday\n10:00–11:00 A.M. Gentle Stretching for Seniors (Gym) — Free for members 65+\n7:00–8:30 P.M. Digital Photography (Computer Lab) — $75, bring your own camera\n\nWednesday\n4:00–5:00 P.M. Kids' Art Club, ages 6–10 (Room 3) — $50, supplies included\n\nThursday\n6:30–8:00 P.M. Home Cooking Basics (Kitchen) — $90, includes ingredients\n\nEach class meets once a week for 12 weeks. Center members receive 10% off all paid classes.\nRegistration opens August 25 online or at the front desk. Classes with fewer than five students by September 1 may be canceled.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Which class requires students to provide their own equipment?",
+          "options": [
+            "A. Kids' Art Club",
+            "B. Home Cooking Basics",
+            "C. Digital Photography",
+            "D. Beginner Spanish"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "Digital Photography lists \"bring your own camera.\" The art and cooking classes include supplies and ingredients."
+        },
+        {
+          "id": "q2",
+          "stem": "What is indicated about the stretching class?",
+          "options": [
+            "A. It is held in the evening.",
+            "B. It takes place in the kitchen.",
+            "C. It is designed for children.",
+            "D. Some participants do not pay for it."
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "Gentle Stretching for Seniors is \"Free for members 65+.\""
+        },
+        {
+          "id": "q3",
+          "stem": "What will most likely happen to a class that has only three students on September 1?",
+          "options": [
+            "A. It may not take place.",
+            "B. It will be moved to another room.",
+            "C. It will be offered for free.",
+            "D. It will start on August 25."
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "\"Classes with fewer than five students by September 1 may be canceled.\""
+        }
+      ]
+    }
+  ]
+}

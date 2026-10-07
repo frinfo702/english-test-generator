@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "iris"
+  },
+  "title": "Listen and Choose a Response — Work Meeting",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about location",
+      "stem": "Where's the team meeting this afternoon?",
+      "options": {
+        "A": "It starts at two and should run an hour.",
+        "B": "I met the new team last week.",
+        "C": "Didn't you get the email? It moved to the third floor.",
+        "D": "Yes, everyone needs to be there."
+      },
+      "correct": "C",
+      "explanation": "The answer gives the new location while pointing out the email, which fits a where-question.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "Where's the team meeting this afternoon?"
+    }
+  ]
+}

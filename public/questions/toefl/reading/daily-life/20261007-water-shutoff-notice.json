@@ -1,0 +1,53 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "notice",
+      "layout": "notice",
+      "title": "Water Service Interruption",
+      "icon": "info",
+      "content": "Attention Maple Court Residents\nThe city will be replacing the main water pipe on our street on Tuesday, September 23.\nWater will be turned off in all apartments from 9 A.M. to about 4 P.M.\nWe suggest filling a few containers with drinking water the night before.\nWhen service returns, the water may look brown for a few minutes. This is normal. Run your cold tap until it is clear before drinking or doing laundry.\nThe building laundry room will also be closed that day.\nIf the work runs late, we will post an update in the lobby and send a text message to everyone on our contact list.\nQuestions? Contact the building office at 555-0147.\nThank you for your patience.\nMaple Court Management",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of the notice?",
+          "options": [
+            "A. To announce that the laundry room is moving",
+            "B. To warn residents about a planned water stoppage",
+            "C. To ask residents to report brown water",
+            "D. To explain a new text message service"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The notice explains that \"Water will be turned off in all apartments from 9 A.M. to about 4 P.M.\" because of pipe work."
+        },
+        {
+          "id": "q2",
+          "stem": "What are residents advised to do on Monday, September 22?",
+          "options": [
+            "A. Do their laundry in the building",
+            "B. Contact the building office",
+            "C. Store some water to drink",
+            "D. Run their cold taps"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "Residents should be \"filling a few containers with drinking water the night before\" the Tuesday work."
+        },
+        {
+          "id": "q3",
+          "stem": "What is suggested about the work?",
+          "options": [
+            "A. It will cause the water to stay brown for days.",
+            "B. It will be done by building staff.",
+            "C. It will happen every Tuesday.",
+            "D. It might take longer than planned."
+          ],
+          "correctIndex": 3,
+          "type": "inference",
+          "explanation": "Water will be off until \"about 4 P.M.,\" and management says, \"If the work runs late, we will post an update.\""
+        }
+      ]
+    }
+  ]
+}

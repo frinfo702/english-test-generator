@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Neighbor": "celeste"
+  },
+  "title": "Listen and Choose a Response — Neighbors",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Can you help me carry these boxes up the stairs?",
+      "options": {
+        "A": "The stairs were just painted.",
+        "B": "They're carrying the boxes now.",
+        "C": "I have a few boxes at home.",
+        "D": "Sure, let me just put my bag down first."
+      },
+      "correct": "D",
+      "explanation": "Accepting and preparing to help is natural. The others repeat 'stairs' or 'boxes', or change the pronoun.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Neighbor",
+      "text": "Can you help me carry these boxes up the stairs?"
+    }
+  ]
+}

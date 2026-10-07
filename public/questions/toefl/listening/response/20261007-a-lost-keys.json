@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "ara"
+  },
+  "title": "Listen and Choose a Response — Home",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "I can't find my keys anywhere.",
+      "options": {
+        "A": "Did you check the pocket of your jacket?",
+        "B": "I found a nice place for lunch.",
+        "C": "The keys to success are hard work and patience.",
+        "D": "I can't find time to cook anymore."
+      },
+      "correct": "A",
+      "explanation": "Suggesting where to look is a helpful response to someone reporting lost keys.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "I can't find my keys anywhere."
+    }
+  ]
+}

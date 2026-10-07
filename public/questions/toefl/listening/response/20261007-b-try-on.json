@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Shopper": "luna"
+  },
+  "title": "Listen and Choose a Response — Shopping",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for permission",
+      "stem": "May I try this jacket on in a larger size?",
+      "options": {
+        "A": "Sure, it's a large store.",
+        "B": "I tried it yesterday.",
+        "C": "We're out of large, but medium runs big.",
+        "D": "The jacket costs sixty dollars."
+      },
+      "correct": "C",
+      "explanation": "This gives the size situation and a useful suggestion. The others reuse 'large' or 'try' or mention price without answering.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Shopper",
+      "text": "May I try this jacket on in a larger size?"
+    }
+  ]
+}

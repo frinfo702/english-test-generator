@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "celeste"
+  },
+  "title": "Listen and Choose a Response — Seminar",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about a schedule",
+      "stem": "Who's presenting first in seminar on Monday?",
+      "options": {
+        "A": "The present was wrapped in blue paper.",
+        "B": "The order should be on the sign-up sheet.",
+        "C": "Monday at ten in the usual room.",
+        "D": "Yes, I'm presenting on Monday."
+      },
+      "correct": "B",
+      "explanation": "Pointing to the sign-up sheet is an indirect but helpful answer about who goes first.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Who's presenting first in seminar on Monday?"
+    }
+  ]
+}

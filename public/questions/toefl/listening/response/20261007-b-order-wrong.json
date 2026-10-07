@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Customer": "carina"
+  },
+  "title": "Listen and Choose a Response — Eating Out",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Complaining",
+      "stem": "Excuse me, I ordered the soup, but this is a salad.",
+      "options": {
+        "A": "The soup of the day is tomato.",
+        "B": "I ordered a new phone online.",
+        "C": "I'm so sorry, I'll bring the soup right away.",
+        "D": "Salads are very healthy."
+      },
+      "correct": "C",
+      "explanation": "An apology and a fix responds to the customer's complaint. The others repeat 'soup', 'ordered', and 'salad' without addressing the mistake.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Customer",
+      "text": "Excuse me, I ordered the soup, but this is a salad."
+    }
+  ]
+}

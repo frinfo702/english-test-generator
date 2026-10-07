@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "eve"
+  },
+  "title": "Listen and Choose a Response — Travel Plans",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about transportation",
+      "stem": "How are you getting to the airport tomorrow?",
+      "options": {
+        "A": "My brother offered to drive me.",
+        "B": "My flight leaves at six in the evening.",
+        "C": "I got there just in time for the meeting.",
+        "D": "Yes, it's a pretty big airport."
+      },
+      "correct": "A",
+      "explanation": "The question asks about the means of transport, and being driven by a brother answers it.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "How are you getting to the airport tomorrow?"
+    }
+  ]
+}

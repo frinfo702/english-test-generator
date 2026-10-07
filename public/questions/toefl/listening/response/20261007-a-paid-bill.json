@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "helix"
+  },
+  "title": "Listen and Choose a Response — Shared Apartment",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking on a task",
+      "stem": "Did you pay the electricity bill this month?",
+      "options": {
+        "A": "Oh no, I completely forgot. I'll do it tonight.",
+        "B": "The electricity went out during the storm.",
+        "C": "Yes, I'll pay it next month.",
+        "D": "Bill is coming over this evening."
+      },
+      "correct": "A",
+      "explanation": "Admitting forgetting and promising to pay answers the question; the 'Bill' option plays on the word's other meaning.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Did you pay the electricity bill this month?"
+    }
+  ]
+}

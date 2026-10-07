@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "rigel"
+  },
+  "title": "Listen and Choose a Response — Lecture",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Expressing feelings",
+      "stem": "This statistics lecture is putting me to sleep.",
+      "options": {
+        "A": "I slept for eight hours last night.",
+        "B": "The lecture hall is on the left.",
+        "C": "The second half is supposed to be more interesting.",
+        "D": "Yes, it's really exciting."
+      },
+      "correct": "C",
+      "explanation": "Encouraging the speaker with information about the second half is appropriate; the 'Yes' option contradicts.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "This statistics lecture is putting me to sleep."
+    }
+  ]
+}

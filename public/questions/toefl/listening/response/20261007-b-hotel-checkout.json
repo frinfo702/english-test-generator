@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Guest": "zenith"
+  },
+  "title": "Listen and Choose a Response — Travel",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about a policy",
+      "stem": "Is it possible to check out a little later than eleven?",
+      "options": {
+        "A": "I checked in around eleven last night.",
+        "B": "The checkout counter is by the elevator.",
+        "C": "It's a little later than I thought.",
+        "D": "We can give you until one for a small fee."
+      },
+      "correct": "D",
+      "explanation": "The guest asks about late checkout, and the reply offers a specific option. The others shift tense, answer where, or repeat 'a little later'.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Guest",
+      "text": "Is it possible to check out a little later than eleven?"
+    }
+  ]
+}

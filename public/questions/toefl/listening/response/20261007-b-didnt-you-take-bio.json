@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Classmate": "altair"
+  },
+  "title": "Listen and Choose a Response — Registration",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a negative question",
+      "stem": "Didn't you take Biology 101 last year?",
+      "options": {
+        "A": "Biology is a hard subject.",
+        "B": "I'll take it next year.",
+        "C": "No, I took it over the summer at a community college.",
+        "D": "He took the bus last year."
+      },
+      "correct": "C",
+      "explanation": "This corrects the detail of when and where the course was taken. The others give an opinion, change tense, or change the pronoun.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Classmate",
+      "text": "Didn't you take Biology 101 last year?"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "cosmo"
+  },
+  "title": "Listen and Choose a Response — Family",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing plans",
+      "stem": "My mom is coming to stay with us for the weekend.",
+      "options": {
+        "A": "Then I'll clean the living room before she gets here.",
+        "B": "My mom is a teacher in Ohio.",
+        "C": "I stayed home last weekend.",
+        "D": "He's coming at about six."
+      },
+      "correct": "A",
+      "explanation": "Offering to prepare for the guest is a fitting response. The distractors switch to the listener's mom, change tense, or use the wrong pronoun.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "My mom is coming to stay with us for the weekend."
+    }
+  ]
+}

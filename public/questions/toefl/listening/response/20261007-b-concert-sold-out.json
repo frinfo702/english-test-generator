@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "aurora"
+  },
+  "title": "Listen and Choose a Response — Weekend Plans",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing news",
+      "stem": "The concert tickets sold out in less than an hour.",
+      "options": {
+        "A": "I bought it an hour ago.",
+        "B": "Maybe they'll add a second show later.",
+        "C": "The concert hall is very old.",
+        "D": "Yes, the shop is out of salt."
+      },
+      "correct": "B",
+      "explanation": "Suggesting a new show is a hopeful reply to bad news. The distractors repeat 'hour', 'concert', and the sound of 'sold'.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "The concert tickets sold out in less than an hour."
+    }
+  ]
+}

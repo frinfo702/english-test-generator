@@ -1,0 +1,24 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "I think I left my umbrella on the bus.",
+      "chunks": [
+        "did",
+        "which bus",
+        "can you",
+        "tell me",
+        "you",
+        "took"
+      ],
+      "correctOrder": [
+        2,
+        3,
+        1,
+        4,
+        5
+      ],
+      "fullSentence": "Can you tell me which bus you took?"
+    }
+  ]
+}

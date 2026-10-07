@@ -1,0 +1,59 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "text message",
+      "layout": "chat",
+      "messages": [
+        {
+          "sender": "Nadia",
+          "time": "10:05 A.M.",
+          "text": "Hi Chris, the 2 P.M. meeting with the design team is now at 3. Their flight was delayed."
+        },
+        {
+          "sender": "Chris",
+          "time": "10:07 A.M.",
+          "text": "No problem. Same room?"
+        },
+        {
+          "sender": "Nadia",
+          "time": "10:08 A.M.",
+          "text": "Room B is taken at 3, so we'll use the small room upstairs."
+        },
+        {
+          "sender": "Chris",
+          "time": "10:09 A.M.",
+          "text": "OK. I'll bring the extra chairs from my office."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why was the meeting changed?",
+          "options": [
+            "A. Room B was being cleaned.",
+            "B. The design team canceled.",
+            "C. Chris has another meeting at 2.",
+            "D. Some attendees are arriving late."
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "Nadia says the time changed because \"Their flight was delayed.\""
+        },
+        {
+          "id": "q2",
+          "stem": "Why will Chris most likely bring extra chairs?",
+          "options": [
+            "A. The new room may not have enough seats.",
+            "B. Room B has broken furniture.",
+            "C. His office will be used for the meeting.",
+            "D. The design team asked for them."
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "The meeting moved to \"the small room upstairs,\" so it probably lacks enough chairs."
+        }
+      ]
+    }
+  ]
+}

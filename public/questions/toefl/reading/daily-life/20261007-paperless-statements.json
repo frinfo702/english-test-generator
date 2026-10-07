@@ -1,0 +1,40 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "notice",
+      "layout": "notice",
+      "title": "Going Paperless",
+      "icon": "info",
+      "content": "Starting October 1, Hillside Water will stop mailing paper bills.\nYour monthly statement will be sent to the email address on your account.\nTo check or update your email address, log in at hillsidewater.com or call 555-0182.\nCustomers who still prefer paper bills can request them for a $2 monthly fee.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of the notice?",
+          "options": [
+            "A. To advertise a new paper supplier",
+            "B. To remind customers to pay an overdue bill",
+            "C. To explain why water prices are rising",
+            "D. To announce a change in how bills are delivered"
+          ],
+          "correctIndex": 3,
+          "type": "purpose",
+          "explanation": "The notice says Hillside Water \"will stop mailing paper bills\" and will send statements by email instead."
+        },
+        {
+          "id": "q2",
+          "stem": "What can customers do if they want to keep receiving bills by mail?",
+          "options": [
+            "A. Pay a small extra charge each month",
+            "B. Update their email address online",
+            "C. Call 555-0182 before October 1",
+            "D. Visit the Hillside Water office"
+          ],
+          "correctIndex": 0,
+          "type": "factual",
+          "explanation": "\"Customers who still prefer paper bills can request them for a $2 monthly fee.\" The phone number is for checking or updating an email address."
+        }
+      ]
+    }
+  ]
+}

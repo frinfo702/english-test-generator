@@ -1,0 +1,71 @@
+{
+  "title": "Underground Partnerships",
+  "passage": "Most land plants live in close partnership with fungi. Thin fungal threads called hyphae wrap around or enter plant roots and spread far into the surrounding soil. This relationship, known as a mycorrhiza, benefits both partners. The fungus gathers water and minerals such as phosphorus and passes them to the plant. In return, the plant supplies the fungus with sugars that it produces through photosynthesis.\n\nBecause a single fungus can connect to the roots of many plants at once, forests may contain large underground networks linking neighboring trees. In the 1990s, the Canadian ecologist Suzanne Simard labeled carbon in a traceable form and found that it moved from one tree to another, apparently through fungal connections. Later studies reported that large, older trees seemed to be linked to many younger ones. These findings led to popular descriptions of a \"wood wide web\" through which trees share resources and even warn one another of danger.\n\nRecently, however, some researchers have argued that such claims go beyond the evidence. They point out that carbon could travel between trees in other ways, such as through soil water, and that few field studies have proven that the networks help young trees survive. The basic partnership between plants and fungi is well established, but how much forests truly function as cooperative communities remains uncertain.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to paragraph 1, what does the plant provide to the fungus?",
+      "options": [
+        "A. Water",
+        "B. Phosphorus",
+        "C. Sugars",
+        "D. Soil"
+      ],
+      "correctIndex": 2,
+      "explanation": "'The plant supplies the fungus with sugars that it produces through photosynthesis.' The fungus provides water and minerals."
+    },
+    {
+      "id": "q2",
+      "type": "vocabulary",
+      "stem": "The word \"traceable\" in paragraph 2 is closest in meaning to",
+      "options": [
+        "A. dangerous",
+        "B. able to be tracked",
+        "C. very rare",
+        "D. easily dissolved"
+      ],
+      "correctIndex": 1,
+      "explanation": "Simard used carbon in a 'traceable form' so that she could follow, or track, where it moved."
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention the phrase \"wood wide web\" in paragraph 2?",
+      "options": [
+        "A. To criticize the methods Simard used",
+        "B. To explain how fungi absorb minerals",
+        "C. To compare forests to computers in detail",
+        "D. To show how the research findings were popularly described"
+      ],
+      "correctIndex": 3,
+      "explanation": "The findings 'led to popular descriptions of a \"wood wide web\"' in which trees share resources."
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "Which of the following can be inferred about the researchers mentioned in paragraph 3?",
+      "options": [
+        "A. They think claims about tree cooperation need stronger support.",
+        "B. They deny that fungi connect to plant roots.",
+        "C. They have shown that young trees die without networks.",
+        "D. They were the first to describe the wood wide web."
+      ],
+      "correctIndex": 0,
+      "explanation": "They argue 'such claims go beyond the evidence' and note that 'few field studies have proven' the benefits, yet they accept that the basic partnership is 'well established.'"
+    },
+    {
+      "id": "q5",
+      "type": "negativeFactual",
+      "stem": "According to the passage, all of the following are true of mycorrhizal fungi EXCEPT",
+      "options": [
+        "A. They gather water for plants.",
+        "B. They can connect to several plants at once.",
+        "C. They produce sugars through photosynthesis.",
+        "D. They spread far into the soil."
+      ],
+      "correctIndex": 2,
+      "explanation": "It is the plant, not the fungus, that produces sugars 'through photosynthesis.' The other statements appear in paragraphs 1 and 2."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "layout": "email",
+      "content": "From: Valley Auto Care\nTo: Robert Hughes\nSubject: Service Appointment Confirmed\n\nHi Robert,\nYour appointment is confirmed for Wednesday, April 2, at 8:00 A.M. at our Main Street location.\n\nVehicle: 2019 Honda Civic\nServices: oil change, tire rotation, and brake check\nEstimated time: about 2 hours\n\nYou are welcome to wait in our lounge, which has free Wi-Fi and coffee. If you'd prefer, our free shuttle can take you anywhere within three miles and pick you up when your car is ready.\n\nIf our technician finds any other problems, we will call you for approval before doing any extra work.\n\nSee you soon,\nValley Auto Care",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of the email?",
+          "options": [
+            "A. To advertise a discount on tires",
+            "B. To confirm the details of a car service visit",
+            "C. To report a problem with Robert's brakes",
+            "D. To offer Robert a new car"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "The subject is \"Service Appointment Confirmed,\" and the email lists the date, vehicle, and services."
+        },
+        {
+          "id": "q2",
+          "stem": "What is one option offered to Robert while he waits?",
+          "options": [
+            "A. A free car wash",
+            "B. A rental car",
+            "C. A ride to a nearby place",
+            "D. A discount on coffee"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "\"Our free shuttle can take you anywhere within three miles and pick you up when your car is ready.\""
+        },
+        {
+          "id": "q3",
+          "stem": "What will most likely happen if the technician finds a new problem?",
+          "options": [
+            "A. The work will be done right away.",
+            "B. Robert will be asked to return on April 3.",
+            "C. The appointment will be canceled.",
+            "D. Robert will be contacted first."
+          ],
+          "correctIndex": 3,
+          "type": "inference",
+          "explanation": "The shop says, \"we will call you for approval before doing any extra work.\""
+        }
+      ]
+    }
+  ]
+}

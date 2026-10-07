@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "ara"
+  },
+  "title": "Listen and Choose a Response — Family",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing news",
+      "stem": "My sister just told me she's getting married next spring.",
+      "options": {
+        "A": "I think spring is my favorite season.",
+        "B": "He got married two years ago.",
+        "C": "That's wonderful! Have they picked a place yet?",
+        "D": "I'll tell her you said that."
+      },
+      "correct": "C",
+      "explanation": "Congratulating and asking a follow-up question fits happy news. The others focus on 'spring', switch pronoun and tense, or don't respond to the news.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "My sister just told me she's getting married next spring."
+    }
+  ]
+}

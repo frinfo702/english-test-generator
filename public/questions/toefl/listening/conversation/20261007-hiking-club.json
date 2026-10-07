@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Woman": "celeste",
+    "Man": "orion"
+  },
+  "title": "Joining the Hiking Club",
+  "transcript": "Woman: Hey, you're in the hiking club, right? I saw your table at the club fair.\nMan: Yeah! Are you thinking about joining?\nWoman: Maybe. But I don't have any gear. No boots, no backpack, nothing.\nMan: Don't let that stop you. The club lends equipment to new members for their first semester.\nWoman: Seriously? That's a weight off my shoulders.\nMan: And our first trip's an easy one. Just three miles around the lake.\nWoman: Okay, sign me up.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the woman say, \"That's a weight off my shoulders\"?",
+      "options": [
+        "To complain about carrying a heavy backpack",
+        "To explain that she has a back injury",
+        "To suggest that the hikes are too difficult",
+        "To show that she is relieved about the equipment"
+      ],
+      "correctIndex": 3,
+      "type": "attitude",
+      "explanation": "She was worried about not having gear, so learning the club lends equipment relieves that worry."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the man say about the first trip?",
+      "options": [
+        "It is only for experienced members.",
+        "It is not difficult.",
+        "It requires special boots.",
+        "It has already been canceled."
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "He says the first trip is \"an easy one,\" just three miles around the lake."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Woman",
+      "text": "Hey, you're in the hiking club, right? I saw your table at the club fair."
+    },
+    {
+      "role": "Man",
+      "text": "Yeah! Are you thinking about joining?"
+    },
+    {
+      "role": "Woman",
+      "text": "Maybe. But I don't have any gear. No boots, no backpack, nothing."
+    },
+    {
+      "role": "Man",
+      "text": "Don't let that stop you. The club lends equipment to new members for their first semester."
+    },
+    {
+      "role": "Woman",
+      "text": "Seriously? That's a weight off my shoulders."
+    },
+    {
+      "role": "Man",
+      "text": "And our first trip's an easy one. Just three miles around the lake."
+    },
+    {
+      "role": "Woman",
+      "text": "Okay, sign me up."
+    }
+  ],
+  "speaker": "c1"
+}

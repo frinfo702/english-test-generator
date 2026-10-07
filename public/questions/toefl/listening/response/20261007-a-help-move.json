@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "ursa"
+  },
+  "title": "Listen and Choose a Response — Moving Day",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for help",
+      "stem": "Can you help me move some boxes this weekend?",
+      "options": {
+        "A": "The boxes are in the garage.",
+        "B": "I moved here three years ago.",
+        "C": "Yes, I'm busy all weekend.",
+        "D": "I'm away Saturday, but Sunday works for me."
+      },
+      "correct": "D",
+      "explanation": "Offering the available day is an indirect yes; the 'Yes' option contradicts itself.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Can you help me move some boxes this weekend?"
+    }
+  ]
+}

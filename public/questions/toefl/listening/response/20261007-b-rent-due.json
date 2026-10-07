@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "carina"
+  },
+  "title": "Listen and Choose a Response — Apartment Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a yes/no question",
+      "stem": "Is the rent due on the first or the fifteenth?",
+      "options": {
+        "A": "Yes, it's due soon.",
+        "B": "I rented a car for the trip.",
+        "C": "The first, but they give us five days of grace.",
+        "D": "It's about twelve hundred."
+      },
+      "correct": "C",
+      "explanation": "A choice question needs one of the options, plus a helpful detail. The others answer Yes, repeat 'rent', or give the amount.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "Is the rent due on the first or the fifteenth?"
+    }
+  ]
+}

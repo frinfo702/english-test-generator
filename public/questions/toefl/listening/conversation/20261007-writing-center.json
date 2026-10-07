@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Student": "rigel",
+    "Tutor": "liora"
+  },
+  "title": "A Comment on an Essay",
+  "transcript": "Student: Hi, I have an appointment at three. It's for my history essay.\nTutor: Great, have a seat. What would you like to focus on?\nStudent: My professor said my argument gets lost in the middle. I'm not sure what she means.\nTutor: Let's look. Okay, see these two paragraphs? They're interesting, but they don't connect back to your thesis.\nStudent: So should I cut them?\nTutor: Not necessarily. Try adding a sentence to each that ties it to your main point. Then read it again.\nStudent: That sounds doable.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student come to the writing center?",
+      "options": [
+        "To ask for a higher grade",
+        "To choose a topic for a new paper",
+        "To check his citations",
+        "To understand a comment on his essay"
+      ],
+      "correctIndex": 3,
+      "type": "purpose",
+      "explanation": "He says his professor said his argument gets lost and he isn't sure what she means."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the tutor suggest?",
+      "options": [
+        "Linking two paragraphs to his main argument",
+        "Removing the paragraphs completely",
+        "Writing a new thesis statement",
+        "Asking the professor for an example"
+      ],
+      "correctIndex": 0,
+      "type": "detail",
+      "explanation": "She suggests adding a sentence to each paragraph that ties it to his main point."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Hi, I have an appointment at three. It's for my history essay."
+    },
+    {
+      "role": "Tutor",
+      "text": "Great, have a seat. What would you like to focus on?"
+    },
+    {
+      "role": "Student",
+      "text": "My professor said my argument gets lost in the middle. I'm not sure what she means."
+    },
+    {
+      "role": "Tutor",
+      "text": "Let's look. Okay, see these two paragraphs? They're interesting, but they don't connect back to your thesis."
+    },
+    {
+      "role": "Student",
+      "text": "So should I cut them?"
+    },
+    {
+      "role": "Tutor",
+      "text": "Not necessarily. Try adding a sentence to each that ties it to your main point. Then read it again."
+    },
+    {
+      "role": "Student",
+      "text": "That sounds doable."
+    }
+  ],
+  "speaker": "c3"
+}

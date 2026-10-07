@@ -1,0 +1,23 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "My bike got a flat tire again.",
+      "chunks": [
+        "you know",
+        "is open",
+        "the repair shop",
+        "if",
+        "do"
+      ],
+      "correctOrder": [
+        4,
+        0,
+        3,
+        2,
+        1
+      ],
+      "fullSentence": "Do you know if the repair shop is open?"
+    }
+  ]
+}

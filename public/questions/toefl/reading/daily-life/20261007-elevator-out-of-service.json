@@ -1,0 +1,40 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "sign",
+      "layout": "notice",
+      "title": "Notice",
+      "icon": "info",
+      "content": "ELEVATOR OUT OF SERVICE\nRepairs are expected to finish by Wednesday evening\nPlease use the stairs at the end of the hall\nResidents who need help carrying groceries or packages can call the front desk at extension 0\nWe are sorry for the trouble",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What can residents do if they need help with heavy items?",
+          "options": [
+            "A. Use the freight elevator",
+            "B. Wait until Wednesday morning",
+            "C. Leave packages in the hall",
+            "D. Contact the front desk"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "Residents \"who need help carrying groceries or packages can call the front desk at extension 0.\""
+        },
+        {
+          "id": "q2",
+          "stem": "Where would this sign most likely be found?",
+          "options": [
+            "A. In an apartment building",
+            "B. In a grocery store",
+            "C. In a post office",
+            "D. In a repair shop"
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "The sign addresses \"Residents\" and mentions a front desk, which suggests a residential building."
+        }
+      ]
+    }
+  ]
+}

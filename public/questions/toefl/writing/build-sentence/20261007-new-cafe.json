@@ -1,0 +1,26 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "The new café on Main Street is really popular.",
+      "chunks": [
+        "what time",
+        "opens",
+        "tell me",
+        "you",
+        "does",
+        "it",
+        "can"
+      ],
+      "correctOrder": [
+        6,
+        3,
+        2,
+        0,
+        5,
+        1
+      ],
+      "fullSentence": "Can you tell me what time it opens?"
+    }
+  ]
+}

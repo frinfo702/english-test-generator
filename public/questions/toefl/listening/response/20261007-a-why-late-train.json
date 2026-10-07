@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "zenith"
+  },
+  "title": "Listen and Choose a Response — Commuting",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for a reason",
+      "stem": "Why were you so late this morning?",
+      "options": {
+        "A": "I'll be on time tomorrow, I promise.",
+        "B": "Yes, it was late in the morning.",
+        "C": "The train stopped between stations for twenty minutes.",
+        "D": "I usually leave home around seven."
+      },
+      "correct": "C",
+      "explanation": "A why-question needs a reason, and a delayed train explains the lateness.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "Why were you so late this morning?"
+    }
+  ]
+}

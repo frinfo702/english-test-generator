@@ -1,0 +1,55 @@
+{
+  "paragraph": "Sleep plays an important role in how the brain stores new information. At night, the brain reviews events from the day and decides which ones to keep. Some of the memories are moved into long-term storage, while others are slowly lost. People who sleep well after studying usually remember more than those who stay awake. For this reason, experts advise students to rest properly before an exam.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "ni",
+      "answer": "night"
+    },
+    {
+      "index": 1,
+      "hint": "br",
+      "answer": "brain"
+    },
+    {
+      "index": 2,
+      "hint": "eve",
+      "answer": "events"
+    },
+    {
+      "index": 3,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 4,
+      "hint": "a",
+      "answer": "and"
+    },
+    {
+      "index": 5,
+      "hint": "wh",
+      "answer": "which"
+    },
+    {
+      "index": 6,
+      "hint": "t",
+      "answer": "to"
+    },
+    {
+      "index": 7,
+      "hint": "So",
+      "answer": "Some"
+    },
+    {
+      "index": 8,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 9,
+      "hint": "a",
+      "answer": "are"
+    }
+  ]
+}

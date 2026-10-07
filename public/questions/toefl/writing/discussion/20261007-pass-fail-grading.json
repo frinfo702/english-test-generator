@@ -1,0 +1,23 @@
+{
+  "professorName": "Dr. Brennan",
+  "professorPhoto": "f2",
+  "course": "education policy",
+  "professorQuestion": "First-year university students face many new challenges, from living away from home to managing much heavier reading loads. To reduce pressure, a few universities have replaced letter grades with a simple pass or fail system for all first-year courses, so students simply need to meet a minimum standard to earn credit. Supporters say it helps students adjust, but critics worry it lowers academic standards. Do you think universities should use pass/fail grading for first-year students? Why or why not?",
+  "student1": {
+    "name": "Aisha",
+    "gender": "female",
+    "response": "Yes, I think it is a good idea. During my first semester, I was so anxious about my grade point average that I avoided a philosophy class I was curious about. With pass/fail grading, students would feel free to explore new subjects without worrying that one difficult course could hurt their record."
+  },
+  "student2": {
+    "name": "Noah",
+    "gender": "male",
+    "response": "I don't agree. Letter grades motivate students to do their best work. If passing is all that matters, many people will do the minimum and develop bad study habits in their first year. Those habits could be very hard to change later, when grades actually count for scholarships and graduate school."
+  },
+  "modelAnswer": "I understand Noah's concern about motivation, but I still support pass/fail grading for first-year students, mainly because letter grades often measure how well students have adjusted to university life rather than what they have actually learned. A student who comes from a small rural school, for example, may struggle at first simply because large lecture halls and independent research are completely unfamiliar. If that student earns a C in the first semester, the grade can follow them for years, even if they become an excellent scholar later on. A pass/fail year would give everyone a fairer starting point. To address Noah's point, professors could still provide detailed written feedback, so students would know exactly where they need to improve without being permanently penalized for a difficult transition.",
+  "evaluationPoints": [
+    "Relevance and clarity: takes a clear stance on pass/fail grading for first-year students",
+    "Elaboration: contributes a new idea (such as fairness for students from different backgrounds) supported by an example",
+    "Language: shows syntactic variety and precise, idiomatic vocabulary",
+    "Accuracy: makes few errors in grammar, spelling, and word choice"
+  ]
+}

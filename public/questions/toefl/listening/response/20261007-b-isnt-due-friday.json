@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Classmate": "aurora"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a negative question",
+      "stem": "Isn't the lab report due this Friday?",
+      "options": {
+        "A": "I reported it to the office.",
+        "B": "Yes, and it's due next Wednesday.",
+        "C": "The lab is on the second floor.",
+        "D": "It was, but the professor moved it to Monday."
+      },
+      "correct": "D",
+      "explanation": "This explains a change to the due date. 'Yes' with a different day contradicts itself, and the others reuse 'report' and 'lab'.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Classmate",
+      "text": "Isn't the lab report due this Friday?"
+    }
+  ]
+}

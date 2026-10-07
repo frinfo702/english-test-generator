@@ -1,0 +1,71 @@
+{
+  "title": "Tuning the Keyboard",
+  "passage": "Musical notes are produced by vibrations, and two notes sound pleasant together when their vibration rates form simple ratios. For example, two notes an octave apart vibrate at a ratio of 2 to 1. For centuries, musicians tuned keyboard instruments so that certain intervals, or distances between notes, followed these ratios exactly. This approach produced beautifully smooth harmonies, but only in some keys.\n\nThe problem is mathematical. If a keyboard is tuned with perfect ratios starting from one note, small errors add up as a player moves to other keys, and some combinations sound clearly out of tune. Musicians therefore experimented with compromise systems. The solution that eventually spread was equal temperament, in which the octave is divided into twelve exactly equal steps. Every interval except the octave is slightly imperfect, but each key sounds equally good. Johann Sebastian Bach's collection The Well-Tempered Clavier, begun in 1722, contains pieces in all twenty-four major and minor keys, demonstrating that a suitably tuned keyboard could handle them all.\n\nEqual temperament became standard in Western music by the nineteenth century, allowing composers to move freely between keys. Some musicians argue, though, that something was lost, and performers of early music sometimes return to older tunings to hear the purer harmonies that earlier listeners knew.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the passage mainly about?",
+      "options": [
+        "A. The life and career of Bach",
+        "B. Why notes an octave apart sound pleasant",
+        "C. The development of a tuning system that allowed music in every key",
+        "D. The habits of modern performers of early music"
+      ],
+      "correctIndex": 2,
+      "explanation": "The passage describes the problem with exact-ratio tuning, the spread of equal temperament, and its effects."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 1, what was a drawback of tuning keyboards with exact ratios?",
+      "options": [
+        "A. Harmonies sounded smooth in only some keys.",
+        "B. Octaves sounded out of tune.",
+        "C. The instruments were difficult to build.",
+        "D. Musicians could not play quickly."
+      ],
+      "correctIndex": 0,
+      "explanation": "Exact ratios 'produced beautifully smooth harmonies, but only in some keys.'"
+    },
+    {
+      "id": "q3",
+      "type": "detail",
+      "stem": "According to paragraph 2, which of the following is true of equal temperament?",
+      "options": [
+        "A. Every interval follows a perfect ratio.",
+        "B. The octave is divided into twelve equal steps.",
+        "C. Only major keys sound good.",
+        "D. It was invented by Bach in 1722."
+      ],
+      "correctIndex": 1,
+      "explanation": "In equal temperament, 'the octave is divided into twelve exactly equal steps.'"
+    },
+    {
+      "id": "q4",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention The Well-Tempered Clavier in paragraph 2?",
+      "options": [
+        "A. To show that Bach disliked equal temperament",
+        "B. To explain why some keys sound out of tune",
+        "C. To compare major keys with minor keys",
+        "D. To give an example of music showing that a keyboard could be played in every key"
+      ],
+      "correctIndex": 3,
+      "explanation": "The collection 'contains pieces in all twenty-four major and minor keys, demonstrating that a suitably tuned keyboard could handle them all.'"
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What can be inferred from paragraph 3 about some performers of early music?",
+      "options": [
+        "A. They refuse to perform music by Bach.",
+        "B. They believe equal temperament is perfect.",
+        "C. They value the purer harmonies of older tunings.",
+        "D. They play in only one key."
+      ],
+      "correctIndex": 2,
+      "explanation": "They 'return to older tunings to hear the purer harmonies that earlier listeners knew,' suggesting they value those harmonies."
+    }
+  ]
+}

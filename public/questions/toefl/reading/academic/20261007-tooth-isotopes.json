@@ -1,0 +1,71 @@
+{
+  "title": "Teeth as Travel Records",
+  "passage": "Archaeologists often want to know where ancient people grew up and how far they traveled. Written records rarely answer such questions, but human teeth can. Tooth enamel, the hard outer layer of a tooth, forms during childhood and does not change afterward. As it grows, it absorbs chemical elements from the food and water a child consumes, and these elements reflect the local rocks and soil.\n\nOne useful element is strontium, which exists in slightly different forms called isotopes. The ratio of these isotopes varies with the geology of a region. By comparing the ratio in a person's enamel with the ratio where the person was buried, researchers can tell whether he or she grew up locally. Chemical analysis of a man buried near Stonehenge around 2300 BCE, known as the Amesbury Archer, suggested that he spent his childhood in central Europe, hundreds of kilometers from his grave.\n\nSuch studies have shown that people in the ancient world often moved more than scholars once believed. Still, the method has limits. Different regions can share similar geology, so a single ratio may match several possible homelands. For this reason, researchers combine chemical results with other evidence, such as the style of objects found in a grave.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "Which of the following best expresses the main idea of the passage?",
+      "options": [
+        "A. Chemical analysis of tooth enamel can help reveal where ancient people grew up.",
+        "B. Stonehenge was built by people from central Europe.",
+        "C. Strontium is the most common element in human teeth.",
+        "D. Written records are the best source of information about ancient travel."
+      ],
+      "correctIndex": 0,
+      "explanation": "The passage explains how enamel records childhood location, gives the Amesbury Archer example, and discusses the method's limits."
+    },
+    {
+      "id": "q2",
+      "type": "vocabulary",
+      "stem": "The word \"consumes\" in paragraph 1 is closest in meaning to",
+      "options": [
+        "A. sells",
+        "B. avoids",
+        "C. eats or drinks",
+        "D. prepares"
+      ],
+      "correctIndex": 2,
+      "explanation": "Enamel absorbs elements 'from the food and water a child consumes,' that is, eats and drinks."
+    },
+    {
+      "id": "q3",
+      "type": "detail",
+      "stem": "According to paragraph 2, how do researchers decide whether a person grew up locally?",
+      "options": [
+        "A. By measuring the size of the person's teeth",
+        "B. By counting the objects in the grave",
+        "C. By reading written records from the period",
+        "D. By comparing the isotope ratio in the enamel with the ratio at the burial site"
+      ],
+      "correctIndex": 3,
+      "explanation": "Researchers compare 'the ratio in a person's enamel with the ratio where the person was buried.'"
+    },
+    {
+      "id": "q4",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention the Amesbury Archer in paragraph 2?",
+      "options": [
+        "A. To argue that Stonehenge was designed in central Europe",
+        "B. To illustrate that the method can show a person traveled far from home",
+        "C. To explain how strontium isotopes form",
+        "D. To show that the method usually fails"
+      ],
+      "correctIndex": 1,
+      "explanation": "Analysis suggested he 'spent his childhood in central Europe, hundreds of kilometers from his grave.'"
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What does paragraph 3 suggest about a strontium ratio on its own?",
+      "options": [
+        "A. It always identifies a person's exact birthplace.",
+        "B. It is more reliable than evidence from grave objects.",
+        "C. It may point to more than one possible place of origin.",
+        "D. It changes as a person grows older."
+      ],
+      "correctIndex": 2,
+      "explanation": "'A single ratio may match several possible homelands,' so other evidence is needed."
+    }
+  ]
+}

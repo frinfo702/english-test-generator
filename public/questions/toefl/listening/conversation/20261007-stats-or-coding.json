@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Student": "lux",
+    "Professor": "aurora"
+  },
+  "title": "Choosing a Course",
+  "transcript": "Student: Professor Ortiz, I'm trying to decide between your statistics seminar and the intro coding course next term.\nProfessor: Both are useful. What are you hoping to do after graduation?\nStudent: Probably something in public health research.\nProfessor: Then statistics will come up constantly. But honestly, most research teams expect some coding now, too.\nStudent: So you're saying I should take both?\nProfessor: If your schedule allows it. If not, take coding first. Statistics makes more sense once you can run your own analyses.\nStudent: Huh, I hadn't thought of it that way.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the student talk to the professor?",
+      "options": [
+        "To ask about research jobs",
+        "To complain about his schedule",
+        "To join the professor's research team",
+        "To get advice on choosing a course"
+      ],
+      "correctIndex": 3,
+      "type": "purpose",
+      "explanation": "He says he's trying to decide between two courses."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the professor recommend taking coding first?",
+      "options": [
+        "It is only offered next term.",
+        "It will help him apply what he learns in statistics.",
+        "It is easier than the statistics seminar.",
+        "It is required for graduation."
+      ],
+      "correctIndex": 1,
+      "type": "detail",
+      "explanation": "She says statistics \"makes more sense once you can run your own analyses.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Professor Ortiz, I'm trying to decide between your statistics seminar and the intro coding course next term."
+    },
+    {
+      "role": "Professor",
+      "text": "Both are useful. What are you hoping to do after graduation?"
+    },
+    {
+      "role": "Student",
+      "text": "Probably something in public health research."
+    },
+    {
+      "role": "Professor",
+      "text": "Then statistics will come up constantly. But honestly, most research teams expect some coding now, too."
+    },
+    {
+      "role": "Student",
+      "text": "So you're saying I should take both?"
+    },
+    {
+      "role": "Professor",
+      "text": "If your schedule allows it. If not, take coding first. Statistics makes more sense once you can run your own analyses."
+    },
+    {
+      "role": "Student",
+      "text": "Huh, I hadn't thought of it that way."
+    }
+  ],
+  "speaker": "c3"
+}

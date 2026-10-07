@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "helix"
+  },
+  "title": "Class Moves Online",
+  "transcript": "Hello, everyone. Because I'll be presenting at a conference in Chicago, Thursday's history class will meet online instead of in our classroom. The link will be posted on the course page Wednesday night. Please make sure you've finished the reading on the Industrial Revolution, because we'll spend most of the session in small discussion groups. If your internet connection is unreliable, let me know beforehand.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why will Thursday's class be held online?",
+      "options": [
+        "The classroom is being renovated",
+        "The university closed for a holiday",
+        "Many students are sick",
+        "The professor will be at a conference"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "The professor will be presenting at a conference in Chicago."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker mention small discussion groups?",
+      "options": [
+        "To explain why the reading must be done",
+        "To show that the class will end early",
+        "To ask students to form study groups",
+        "To describe a change to the final exam"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "Students need to finish the reading because the session will be spent in discussion groups."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hello, everyone. Because I'll be presenting at a conference in Chicago, Thursday's history class will meet online instead of in our classroom. The link will be posted on the course page Wednesday night. Please make sure you've finished the reading on the Industrial Revolution, because we'll spend most of the session in small discussion groups. If your internet connection is unreliable, let me know beforehand."
+    }
+  ],
+  "speaker": "m6"
+}

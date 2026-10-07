@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "zagan"
+  },
+  "title": "Listen and Choose a Response — Getting Around Town",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "My train's been delayed again, so I'll be about twenty minutes late.",
+      "options": {
+        "A": "The train station is downtown.",
+        "B": "I'll be twenty next month.",
+        "C": "Yes, I trained for the race all summer.",
+        "D": "No problem, I'll grab us a table in the meantime."
+      },
+      "correct": "D",
+      "explanation": "Reassuring the friend and saying what you'll do while waiting fits the news. The distractors reuse 'train' and 'twenty' in unrelated ways.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "My train's been delayed again, so I'll be about twenty minutes late."
+    }
+  ]
+}

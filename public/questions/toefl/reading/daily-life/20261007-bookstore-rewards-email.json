@@ -1,0 +1,51 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "layout": "email",
+      "content": "From: Page Turner Books\nTo: Valued Customer\nSubject: Introducing Page Turner Rewards\n\nHello reader,\nWe're excited to launch Page Turner Rewards, our new free membership program. Starting this month, you'll earn one point for every dollar you spend in our stores or on our website. Every 100 points gives you $10 off your next purchase.\n\nMembers also receive early invitations to author events and a free coffee in our café on their birthday.\n\nJoining is simple: show this email at any register, or create an account online. If you sign up before April 30, we'll add 50 bonus points to your account right away.\n\nHappy reading,\nThe Page Turner Team",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of the email?",
+          "options": [
+            "A. To announce a new author event",
+            "B. To advertise a new café menu",
+            "C. To apologize for a website problem",
+            "D. To introduce a customer program"
+          ],
+          "correctIndex": 3,
+          "type": "purpose",
+          "explanation": "The email says, \"We're excited to launch Page Turner Rewards, our new free membership program.\""
+        },
+        {
+          "id": "q2",
+          "stem": "How much must a member spend to receive $10 off?",
+          "options": [
+            "A. $100",
+            "B. $50",
+            "C. $10",
+            "D. $30"
+          ],
+          "correctIndex": 0,
+          "type": "factual",
+          "explanation": "Members earn \"one point for every dollar,\" and \"Every 100 points gives you $10 off,\" so they must spend $100."
+        },
+        {
+          "id": "q3",
+          "stem": "What is one benefit of joining before April 30?",
+          "options": [
+            "A. Members get a free book.",
+            "B. Members receive extra points.",
+            "C. Members can meet authors at no cost.",
+            "D. Members pay no membership fee."
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "\"If you sign up before April 30, we'll add 50 bonus points to your account right away.\" The program is free for everyone, not only early members."
+        }
+      ]
+    }
+  ]
+}

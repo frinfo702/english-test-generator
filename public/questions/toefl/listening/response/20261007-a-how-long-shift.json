@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "lumen"
+  },
+  "title": "Listen and Choose a Response — Part-time Job",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about duration",
+      "stem": "How long is your shift at the bookstore on Saturday?",
+      "options": {
+        "A": "The bookstore is next to the main gate.",
+        "B": "I shifted my desk closer to the window.",
+        "C": "Yes, I work there on Saturdays.",
+        "D": "Only four hours, so I'm free in the evening."
+      },
+      "correct": "D",
+      "explanation": "The question asks about length, and four hours answers it directly.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "How long is your shift at the bookstore on Saturday?"
+    }
+  ]
+}

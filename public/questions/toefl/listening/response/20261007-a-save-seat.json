@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "atlas"
+  },
+  "title": "Listen and Choose a Response — Lecture Hall",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Could you save me a seat near the front?",
+      "options": {
+        "A": "I saved some money for the trip.",
+        "B": "I'll put my bag on the one next to me.",
+        "C": "The front door is locked.",
+        "D": "Yes, I sat in the back last time."
+      },
+      "correct": "B",
+      "explanation": "Explaining how the seat will be saved responds to the request.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Could you save me a seat near the front?"
+    }
+  ]
+}

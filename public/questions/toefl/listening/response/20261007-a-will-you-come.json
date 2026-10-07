@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "luna"
+  },
+  "title": "Listen and Choose a Response — Birthday Party",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about attendance",
+      "stem": "Will you be at Sarah's party on Friday?",
+      "options": {
+        "A": "She had a party last Friday, too.",
+        "B": "I have to work late, but I'll try to stop by.",
+        "C": "Yes, I was there all night.",
+        "D": "It's her twenty-first birthday."
+      },
+      "correct": "B",
+      "explanation": "The answer gives a reason and a tentative plan, which suits a question about attendance; the tense-mismatched option refers to the past.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Will you be at Sarah's party on Friday?"
+    }
+  ]
+}

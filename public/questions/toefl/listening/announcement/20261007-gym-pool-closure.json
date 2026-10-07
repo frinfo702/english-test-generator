@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "carina"
+  },
+  "title": "Recreation Center Pool",
+  "transcript": "Hi, everyone, this is an update from the recreation center. The indoor pool will be closed for the next ten days so that the water filters can be replaced. During that time, the outdoor pool will open an hour earlier, at six a.m., for lap swimming only. Swim lessons are postponed, and instructors will email participants with new dates. The gym and fitness rooms are not affected.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What will happen to swim lessons during the closure?",
+      "options": [
+        "They will move to the outdoor pool",
+        "They will be canceled for the semester",
+        "They will be held in the gym",
+        "They will be rescheduled for later dates"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "Swim lessons are postponed, and instructors will email new dates."
+    },
+    {
+      "id": "q2",
+      "stem": "What is the main purpose of the announcement?",
+      "options": [
+        "To advertise new swim lessons",
+        "To introduce a new fitness room",
+        "To inform users about a temporary closure",
+        "To explain how water filters work"
+      ],
+      "correctIndex": 2,
+      "type": "inference",
+      "explanation": "The speaker explains that the indoor pool will be closed for ten days and what alternatives exist."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hi, everyone, this is an update from the recreation center. The indoor pool will be closed for the next ten days so that the water filters can be replaced. During that time, the outdoor pool will open an hour earlier, at six a.m., for lap swimming only. Swim lessons are postponed, and instructors will email participants with new dates. The gym and fitness rooms are not affected."
+    }
+  ],
+  "speaker": "f3"
+}

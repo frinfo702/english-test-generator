@@ -1,0 +1,87 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "group chat",
+      "layout": "chat",
+      "messages": [
+        {
+          "sender": "Kenji",
+          "time": "7:12 P.M.",
+          "text": "Still on for the Bear Creek hike Saturday? I can drive. My car fits four."
+        },
+        {
+          "sender": "Lucy",
+          "time": "7:14 P.M.",
+          "text": "Yes! But the weather app says rain after 1 P.M. Can we start earlier than 10?"
+        },
+        {
+          "sender": "Kenji",
+          "time": "7:15 P.M.",
+          "text": "Sure. How about leaving at 7:30? The trail takes about four hours round-trip."
+        },
+        {
+          "sender": "Priya",
+          "time": "7:17 P.M.",
+          "text": "Ugh, that's early, but fine. I'll bring sandwiches for everyone."
+        },
+        {
+          "sender": "Lucy",
+          "time": "7:18 P.M.",
+          "text": "Perfect. My cousin Tom is visiting this weekend and wants to come too. Is that OK?"
+        },
+        {
+          "sender": "Kenji",
+          "time": "7:19 P.M.",
+          "text": "Of course. That makes four, so we're all set. I'll pick everyone up at Lucy's place."
+        },
+        {
+          "sender": "Priya",
+          "time": "7:20 P.M.",
+          "text": "Don't forget your rain jackets, just in case! And wear good shoes, since that trail gets muddy."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why does Lucy want to start the hike earlier?",
+          "options": [
+            "A. To eat lunch at the trail",
+            "B. To pick up her cousin",
+            "C. To avoid bad weather",
+            "D. To return before Kenji's work"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "Lucy says, \"the weather app says rain after 1 P.M. Can we start earlier than 10?\""
+        },
+        {
+          "id": "q2",
+          "stem": "At 7:17 P.M., what does Priya mean when she writes, \"Ugh, that's early, but fine\"?",
+          "options": [
+            "A. She will not join the hike.",
+            "B. She would like to drive instead.",
+            "C. She thinks the trail is too long.",
+            "D. She agrees to a time she does not love."
+          ],
+          "correctIndex": 3,
+          "type": "inference",
+          "explanation": "\"Ugh, that's early\" shows she dislikes the 7:30 start, but \"fine\" shows she accepts it."
+        },
+        {
+          "id": "q3",
+          "stem": "What is suggested about Kenji's car?",
+          "options": [
+            "A. It will be full on Saturday.",
+            "B. It will need to make two trips.",
+            "C. It is parked at Lucy's place.",
+            "D. It cannot be used in the rain."
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "Kenji says \"My car fits four,\" and with Tom joining, \"That makes four.\""
+        }
+      ]
+    }
+  ]
+}

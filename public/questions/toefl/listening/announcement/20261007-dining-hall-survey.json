@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "liora"
+  },
+  "title": "Dining Hall Survey",
+  "transcript": "Hi everyone, quick announcement from dining services. We're planning next semester's menu, and we'd like to hear from you. There's a short survey on the campus app, and it takes about five minutes. Everyone who finishes it by the end of the month gets a coupon for a free smoothie at the café. Last year, the survey is how we added the vegetarian station, so your answers really do make a difference.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What are listeners asked to do?",
+      "options": [
+        "Try the new vegetarian station",
+        "Buy a smoothie at the café",
+        "Download a new campus app",
+        "Complete a survey about the menu"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "Dining services asks students to fill out a short survey on the campus app."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker mention the vegetarian station?",
+      "options": [
+        "To advertise a new menu item",
+        "To show that survey responses lead to changes",
+        "To explain why the café is closing",
+        "To compare this year's menu with last year's"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "The vegetarian station was added because of last year's survey, showing that answers matter."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hi everyone, quick announcement from dining services. We're planning next semester's menu, and we'd like to hear from you. There's a short survey on the campus app, and it takes about five minutes. Everyone who finishes it by the end of the month gets a coupon for a free smoothie at the café. Last year, the survey is how we added the vegetarian station, so your answers really do make a difference."
+    }
+  ],
+  "speaker": "f3"
+}

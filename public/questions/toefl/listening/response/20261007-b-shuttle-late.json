@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "zenith"
+  },
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Complaining",
+      "stem": "The campus shuttle hasn't come in thirty minutes.",
+      "options": {
+        "A": "I'll come in thirty minutes.",
+        "B": "Let's just walk. It's only fifteen minutes from here.",
+        "C": "The shuttle is blue and white.",
+        "D": "Yes, it came a minute ago."
+      },
+      "correct": "B",
+      "explanation": "Suggesting an alternative is a natural reply. The others repeat 'come' and 'thirty minutes', or contradict the complaint with 'Yes'.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "The campus shuttle hasn't come in thirty minutes."
+    }
+  ]
+}

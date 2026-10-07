@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Roommate": "liora"
+  },
+  "title": "Listen and Choose a Response — Apartment",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a suggestion",
+      "stem": "You should call the landlord about the leaking sink.",
+      "options": {
+        "A": "The sink is in the kitchen.",
+        "B": "I'll lend you my phone tomorrow.",
+        "C": "Yes, the landlord lives downstairs.",
+        "D": "I already left a message this morning."
+      },
+      "correct": "D",
+      "explanation": "Saying they have already contacted the landlord is a natural indirect response to the suggestion.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Roommate",
+      "text": "You should call the landlord about the leaking sink."
+    }
+  ]
+}

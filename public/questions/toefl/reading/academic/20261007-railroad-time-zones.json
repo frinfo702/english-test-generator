@@ -1,0 +1,71 @@
+{
+  "title": "How Railroads Changed Time",
+  "passage": "Before the late nineteenth century, most towns set their clocks by the sun. Noon was the moment when the sun stood highest in the sky, so it arrived a few minutes earlier in a town to the east than in one to the west. This system, known as local time, worked well when travel was slow and few people moved quickly between distant places.\n\nRailroads created a problem. A train crossing the United States passed through dozens of local times, and each railroad company kept its own schedule based on the time in a particular city. By the 1880s, travelers faced timetables that listed more than fifty different times. The confusion caused missed connections and, in some cases, dangerous accidents when two trains on the same track followed different clocks. To solve the problem, North American railroads adopted a system of standard time zones on November 18, 1883. Within each zone, every clock showed the same hour.\n\nThe change was made by private companies, not governments; the United States did not make time zones official law until 1918. The episode shows how a new technology can reshape something as basic as the way people measure the day, often before governments act.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the passage mainly about?",
+      "options": [
+        "A. How towns built accurate sundials",
+        "B. Why early trains were dangerous",
+        "C. The details of a law passed in 1918",
+        "D. How railroads led to the adoption of standard time zones"
+      ],
+      "correctIndex": 3,
+      "explanation": "The passage describes local time, the problems railroads faced with it, and the railroads' adoption of 'standard time zones' in 1883."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 1, why did noon occur at different times in different towns?",
+      "options": [
+        "A. Noon was based on the sun's highest point, which comes earlier farther east.",
+        "B. Each town chose its own noon by vote.",
+        "C. Railroads set the time in each town.",
+        "D. Clocks in the nineteenth century were inaccurate."
+      ],
+      "correctIndex": 0,
+      "explanation": "Noon was when 'the sun stood highest in the sky, so it arrived a few minutes earlier in a town to the east.'"
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention timetables that listed more than fifty different times in paragraph 2?",
+      "options": [
+        "A. To show that railroads were well organized",
+        "B. To explain how local time was calculated",
+        "C. To emphasize how confusing rail travel had become",
+        "D. To compare American railroads with European ones"
+      ],
+      "correctIndex": 2,
+      "explanation": "The fifty-plus times illustrate the 'confusion' that 'caused missed connections' and accidents."
+    },
+    {
+      "id": "q4",
+      "type": "negativeFactual",
+      "stem": "According to paragraph 2, all of the following were problems caused by the use of many local times EXCEPT",
+      "options": [
+        "A. missed connections",
+        "B. higher ticket prices",
+        "C. dangerous accidents",
+        "D. confusing timetables"
+      ],
+      "correctIndex": 1,
+      "explanation": "Paragraph 2 mentions confusing timetables, 'missed connections,' and 'dangerous accidents.' Ticket prices are not mentioned."
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What can be inferred from paragraph 3?",
+      "options": [
+        "A. Standard time was used for many years before it became law.",
+        "B. Governments strongly opposed time zones.",
+        "C. Railroads stopped using time zones after 1918.",
+        "D. Most American towns still use local time."
+      ],
+      "correctIndex": 0,
+      "explanation": "Railroads adopted time zones in 1883, but the United States 'did not make time zones official law until 1918,' decades later."
+    }
+  ]
+}

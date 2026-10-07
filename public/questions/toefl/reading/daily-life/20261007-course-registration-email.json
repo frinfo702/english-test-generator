@@ -1,0 +1,51 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "layout": "email",
+      "content": "From: Registrar's Office\nTo: All Continuing Students\nSubject: Spring Registration Opens Next Week\n\nDear students,\nRegistration for spring classes will open on Monday, November 10, at 8 A.M. Students who have completed 60 or more credits may register first. All other students may register beginning Thursday, November 13.\n\nBefore registering, please check your student account for any holds. A hold is placed when there is an unpaid fee or a missing document, and it will block you from signing up for classes. Holds can take up to three business days to remove, so don't wait.\n\nYou can view the full spring class list on the student portal now.\n\nBest regards,\nRegistrar's Office",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "When can a student with 40 credits begin registering?",
+          "options": [
+            "A. Monday, November 10",
+            "B. Any time this week",
+            "C. Three business days after November 10",
+            "D. Thursday, November 13"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "Students with \"60 or more credits may register first. All other students may register beginning Thursday, November 13.\""
+        },
+        {
+          "id": "q2",
+          "stem": "The word \"block\" in the email is closest in meaning to",
+          "options": [
+            "A. prevent",
+            "B. build",
+            "C. remind",
+            "D. allow"
+          ],
+          "correctIndex": 0,
+          "type": "vocabulary",
+          "explanation": "A hold \"will block you from signing up for classes,\" meaning it will stop or prevent you from registering."
+        },
+        {
+          "id": "q3",
+          "stem": "Why does the office advise students not to wait?",
+          "options": [
+            "A. The class list will be removed soon.",
+            "B. Fixing an account problem may take time.",
+            "C. Fees will increase after November 10.",
+            "D. The portal will close at 8 A.M."
+          ],
+          "correctIndex": 1,
+          "type": "inference",
+          "explanation": "\"Holds can take up to three business days to remove, so don't wait.\" Students who find a hold late may miss their registration date."
+        }
+      ]
+    }
+  ]
+}

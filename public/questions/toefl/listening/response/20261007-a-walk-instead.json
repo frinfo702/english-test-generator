@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "atlas"
+  },
+  "title": "Listen and Choose a Response — Getting Around",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a suggestion",
+      "stem": "Maybe we should take a taxi to the museum.",
+      "options": {
+        "A": "It's only ten minutes on foot, though.",
+        "B": "The museum has a new dinosaur exhibit.",
+        "C": "I took a picture of the taxi.",
+        "D": "Yes, let's walk instead of taking a taxi."
+      },
+      "correct": "A",
+      "explanation": "A counter-suggestion pointing out the short walk is a natural reply; the 'Yes' option contradicts itself.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Maybe we should take a taxi to the museum."
+    }
+  ]
+}

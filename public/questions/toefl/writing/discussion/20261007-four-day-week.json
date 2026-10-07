@@ -1,0 +1,23 @@
+{
+  "professorName": "Dr. Patel",
+  "professorPhoto": "f1",
+  "course": "business management",
+  "professorQuestion": "In recent years, a number of companies have experimented with a four-day work week. Employees work the same number of weekly hours over four days or, in some trials, they simply work fewer hours for the same pay. Supporters point to happier, more productive staff, but early results have been mixed, and managers disagree about whether the idea makes sense for most businesses. Do you think companies should adopt a four-day work week? Why or why not?",
+  "student1": {
+    "name": "Liam",
+    "gender": "male",
+    "response": "I think companies should try it. When people have a three-day weekend, they come back rested and focused. My cousin's software company switched last year, and she says her team now finishes projects faster because people waste less time in long meetings and are more careful with their working hours."
+  },
+  "student2": {
+    "name": "Mei",
+    "gender": "female",
+    "response": "I'm not convinced. A four-day week might work in an office, but many businesses need to serve customers every day. Hospitals, restaurants, and stores would still have to stay open, so they would need to hire extra staff to cover the missing day, and that could be very expensive."
+  },
+  "modelAnswer": "Both Liam and Mei raise valid points, but I believe companies should seriously consider a four-day week because it can be a powerful tool for attracting and keeping talented employees. Today, many skilled workers choose an employer based on flexibility as much as salary. If a company offers a shorter week, it can compete with larger firms that pay more, and it may spend less on replacing staff who quit. Training a new employee can take months and cost thousands of dollars, so lower turnover could easily make up for the change. Mei is right that businesses open every day face real challenges, yet they could rotate schedules so that each worker still gets three days off. In short, the policy should be adapted to each industry rather than rejected outright.",
+  "evaluationPoints": [
+    "Relevance and clarity: clearly answers whether companies should adopt a four-day week",
+    "Elaboration: introduces a new reason (such as hiring and staff retention) with supporting details",
+    "Language: uses a range of sentence structures and precise, idiomatic expressions",
+    "Accuracy: has few errors in grammar, spelling, and usage"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Tenant": "atlas"
+  },
+  "title": "Listen and Choose a Response — Apartment Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "The kitchen faucet has been dripping all night.",
+      "options": {
+        "A": "The kitchen is my favorite room.",
+        "B": "I'll send someone from maintenance this afternoon.",
+        "C": "It rained all night long.",
+        "D": "I'll drop it off later."
+      },
+      "correct": "B",
+      "explanation": "The landlord responds to the problem with a plan. The distractors use 'kitchen', 'all night', and a similar sound ('drop' / 'dripping').",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Tenant",
+      "text": "The kitchen faucet has been dripping all night."
+    }
+  ]
+}

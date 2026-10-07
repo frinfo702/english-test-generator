@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Classmate": "carina"
+  },
+  "title": "Listen and Choose a Response — Coursework",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Expressing feelings",
+      "stem": "I'm really nervous about my presentation tomorrow.",
+      "options": {
+        "A": "I'll present it to you tomorrow.",
+        "B": "The present was a nice surprise.",
+        "C": "Yes, it was yesterday.",
+        "D": "You've practiced a lot, so I'm sure you'll do fine."
+      },
+      "correct": "D",
+      "explanation": "Encouragement is the natural reply to nervousness. The distractors use 'present' and confuse the time.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Classmate",
+      "text": "I'm really nervous about my presentation tomorrow."
+    }
+  ]
+}

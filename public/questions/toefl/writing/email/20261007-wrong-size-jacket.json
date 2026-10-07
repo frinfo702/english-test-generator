@@ -1,0 +1,29 @@
+{
+  "scenario": {
+    "title": "Contacting an Online Store About an Order",
+    "description": "You recently ordered a winter jacket from an online clothing store called Northline Outfitters. The package arrived quickly, but the jacket inside is a different size from the one you selected.",
+    "recipient": "Northline Outfitters Customer Service",
+    "subject": "Order #48213: incorrect size received",
+    "purpose": "Report a shipping error and arrange an exchange",
+    "keyPoints": [
+      "Mention what you liked about your experience with the store",
+      "Describe the problem with your order",
+      "Ask how you can get the correct item before a trip you have planned"
+    ]
+  },
+  "modelAnswer": "Dear Customer Service Team,\n\nI placed an order with your store for the first time last week, and I was impressed by how easy the website was to use. The package also arrived two days earlier than expected, which I really appreciated.\n\nUnfortunately, when I opened the box, I found that the jacket was a size large, even though I chose a small. My order confirmation clearly shows the correct size, so I believe there was a mistake in the warehouse. The color and style are exactly what I wanted, so I would prefer an exchange rather than a refund.\n\nI am leaving for a ski trip on December 15, so I would be grateful if the replacement could be sent as soon as possible. Could you tell me whether I should return the large jacket first, or whether both can be shipped at the same time?\n\nThank you,\nMaya Chen",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Shows appreciation, explains the size error with supporting detail, and asks a clear question about the exchange and timing."
+    },
+    {
+      "criterion": "Organization",
+      "description": "Logical sequence from positive experience to problem to request, with a proper greeting and sign-off."
+    },
+    {
+      "criterion": "Language Use",
+      "description": "Courteous customer register; uses varied structures and avoids copying the task wording."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Staff": "ursa"
+  },
+  "title": "Listen and Choose a Response — At the Gym",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making an offer",
+      "stem": "We're offering a free week for anyone who signs up today.",
+      "options": {
+        "A": "I signed my name on the form yesterday.",
+        "B": "I'd like to try it, but can I cancel anytime?",
+        "C": "The week went by quickly.",
+        "D": "Yes, I was free last weekend."
+      },
+      "correct": "B",
+      "explanation": "Showing interest and asking about conditions is a natural reply. The others reuse 'sign', 'week', and 'free'.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Staff",
+      "text": "We're offering a free week for anyone who signs up today."
+    }
+  ]
+}

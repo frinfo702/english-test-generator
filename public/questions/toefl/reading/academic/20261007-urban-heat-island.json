@@ -1,0 +1,71 @@
+{
+  "title": "Cities as Heat Islands",
+  "passage": "Cities are often noticeably warmer than the countryside around them, a pattern known as the urban heat island effect. The difference is usually greatest at night, when a large city may be several degrees warmer than nearby farmland. The effect occurs because urban areas replace plants and soil with materials such as asphalt, concrete, and brick.\n\nThese materials absorb sunlight during the day and release the stored heat slowly after sunset. Dark surfaces, such as roads and roofs, absorb especially large amounts of energy. Cities also have fewer trees, which normally cool the air by providing shade and by releasing water vapor from their leaves. In addition, tall buildings can block wind and trap warm air, while cars and air conditioners give off heat of their own. Studies using satellite images have shown that neighborhoods with little greenery can be much hotter at the surface than nearby areas with parks.\n\nRising temperatures in cities increase energy use and can endanger health during heat waves. In response, some cities are painting roofs white, planting trees, and creating green roofs covered with plants. Measuring how much these strategies help, though, is complicated, since their effects depend on local climate and building design.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "What is the passage mainly about?",
+      "options": [
+        "A. How satellites measure surface temperatures",
+        "B. Why farmland is cooler during the day",
+        "C. The benefits of air conditioning in large cities",
+        "D. Why cities are warmer than surrounding areas and what is being done about it"
+      ],
+      "correctIndex": 3,
+      "explanation": "The passage defines the urban heat island effect, explains its causes, and describes responses such as white roofs and tree planting."
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 1, when is the urban heat island effect usually strongest?",
+      "options": [
+        "A. In the early morning",
+        "B. At night",
+        "C. At midday",
+        "D. During the spring"
+      ],
+      "correctIndex": 1,
+      "explanation": "'The difference is usually greatest at night.'"
+    },
+    {
+      "id": "q3",
+      "type": "negativeFactual",
+      "stem": "All of the following are mentioned in paragraph 2 as contributing to the urban heat island effect EXCEPT",
+      "options": [
+        "A. dark surfaces",
+        "B. a lack of trees",
+        "C. heavy rainfall",
+        "D. tall buildings that block wind"
+      ],
+      "correctIndex": 2,
+      "explanation": "Paragraph 2 names dark surfaces, 'fewer trees,' and buildings that 'block wind.' Rainfall is not mentioned."
+    },
+    {
+      "id": "q4",
+      "type": "vocabulary",
+      "stem": "The word \"endanger\" in paragraph 3 is closest in meaning to",
+      "options": [
+        "A. threaten",
+        "B. improve",
+        "C. measure",
+        "D. ignore"
+      ],
+      "correctIndex": 0,
+      "explanation": "Heat can 'endanger health,' meaning it can threaten or put health at risk."
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "What does paragraph 2 suggest about parks in cities?",
+      "options": [
+        "A. They make nearby neighborhoods hotter.",
+        "B. They help keep the surrounding surfaces cooler.",
+        "C. They block wind and trap warm air.",
+        "D. They are visible only in satellite images."
+      ],
+      "correctIndex": 1,
+      "explanation": "Areas with 'little greenery can be much hotter at the surface than nearby areas with parks,' implying parks have a cooling effect."
+    }
+  ]
+}

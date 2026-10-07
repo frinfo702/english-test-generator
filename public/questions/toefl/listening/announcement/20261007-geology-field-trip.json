@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "zagan"
+  },
+  "title": "Geology Field Trip Reminder",
+  "transcript": "Hi all, a reminder about Saturday's field trip to Pine Creek Canyon. The bus leaves from the science building parking lot at eight sharp, and it won't wait, so please arrive a few minutes early. The trail can get muddy, so wear boots, not sneakers. We'll eat lunch at the canyon, but there's nowhere to buy food out there. Oh, and the forecast says it'll be cold in the morning.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is the main purpose of the announcement?",
+      "options": [
+        "To give practical information about a class trip",
+        "To explain why a trip has been canceled",
+        "To ask students to choose a trip destination",
+        "To describe the geology of a canyon"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The speaker reminds students of the departure time, footwear, and food for the trip."
+    },
+    {
+      "id": "q2",
+      "stem": "What can be inferred about lunch?",
+      "options": [
+        "It will be served on the bus",
+        "Students should bring their own food",
+        "It will be paid for by the department",
+        "Students will stop at a restaurant"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "There is nowhere to buy food at the canyon, so students need to bring lunch."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hi all, a reminder about Saturday's field trip to Pine Creek Canyon. The bus leaves from the science building parking lot at eight sharp, and it won't wait, so please arrive a few minutes early. The trail can get muddy, so wear boots, not sneakers. We'll eat lunch at the canyon, but there's nowhere to buy food out there. Oh, and the forecast says it'll be cold in the morning."
+    }
+  ],
+  "speaker": "m5"
+}

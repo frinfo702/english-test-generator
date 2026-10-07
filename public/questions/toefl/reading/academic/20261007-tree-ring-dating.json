@@ -1,0 +1,71 @@
+{
+  "title": "Reading History in Tree Rings",
+  "passage": "Each year, a tree in a temperate climate adds a new layer of wood beneath its bark. When the trunk is cut, these layers appear as rings. In years with good growing conditions, such as plenty of rain, a ring is wide; in dry or cold years, it is narrow. Dendrochronology is the science of dating events by studying these patterns of tree rings.\n\nBecause trees in the same region experience the same weather, they share the same sequence of wide and narrow rings. Researchers can match the pattern in a living tree with the pattern in an older piece of wood, such as a beam from an old building, and then extend the record further back using even older timber. In this way, scientists have built continuous records covering more than 10,000 years in parts of Europe. Archaeologists use such records to find the exact year in which wood for a building was cut. In the American Southwest, for example, beams from ancient pueblo dwellings have been dated to specific years.\n\nTree rings also reveal past climates, showing droughts that may have caused people to abandon settlements. The method has limits, however. It requires well-preserved wood, and it works poorly in tropical regions, where many trees grow year-round and do not form clear annual rings.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "detail",
+      "stem": "According to paragraph 1, what does a narrow tree ring usually indicate?",
+      "options": [
+        "A. A very old tree",
+        "B. A year with plenty of rain",
+        "C. A dry or cold year",
+        "D. The year the tree was cut"
+      ],
+      "correctIndex": 2,
+      "explanation": "'In dry or cold years, it is narrow.'"
+    },
+    {
+      "id": "q2",
+      "type": "detail",
+      "stem": "According to paragraph 2, why can rings from different trees in a region be matched?",
+      "options": [
+        "A. The trees are always the same age.",
+        "B. The trees experienced the same weather.",
+        "C. The trees belong to the same species.",
+        "D. The trees were cut in the same year."
+      ],
+      "correctIndex": 1,
+      "explanation": "'Because trees in the same region experience the same weather, they share the same sequence of wide and narrow rings.'"
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention beams from ancient pueblo dwellings in paragraph 2?",
+      "options": [
+        "A. To explain why tropical trees lack rings",
+        "B. To show that old wood decays quickly",
+        "C. To describe how pueblos were constructed",
+        "D. To give an example of how archaeologists date buildings with tree rings"
+      ],
+      "correctIndex": 3,
+      "explanation": "The pueblo beams 'have been dated to specific years,' illustrating how archaeologists 'find the exact year in which wood for a building was cut.'"
+    },
+    {
+      "id": "q4",
+      "type": "inference",
+      "stem": "What can be inferred from paragraph 3 about tropical regions?",
+      "options": [
+        "A. Dendrochronology is less useful there.",
+        "B. Trees there grow only in summer.",
+        "C. Droughts there have never occurred.",
+        "D. Wood there is better preserved than elsewhere."
+      ],
+      "correctIndex": 0,
+      "explanation": "The method 'works poorly in tropical regions, where many trees grow year-round and do not form clear annual rings.'"
+    },
+    {
+      "id": "q5",
+      "type": "negativeFactual",
+      "stem": "According to the passage, all of the following are true of dendrochronology EXCEPT",
+      "options": [
+        "A. It can reveal past droughts.",
+        "B. It requires well-preserved wood.",
+        "C. It works equally well in all climates.",
+        "D. It can identify the year wood was cut."
+      ],
+      "correctIndex": 2,
+      "explanation": "Paragraph 3 says it 'works poorly in tropical regions,' so it does not work equally well everywhere."
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "lux"
+  },
+  "title": "Listen and Choose a Response — Graduate School",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing news",
+      "stem": "I finally turned in my thesis this morning.",
+      "options": {
+        "A": "I'll turn it in tomorrow morning.",
+        "B": "My thesis is about city planning.",
+        "C": "You must be so relieved. Let's celebrate!",
+        "D": "She turned left at the corner."
+      },
+      "correct": "C",
+      "explanation": "Responding with relief and a celebration fits the news; the other options mismatch tense or pronoun.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "I finally turned in my thesis this morning."
+    }
+  ]
+}

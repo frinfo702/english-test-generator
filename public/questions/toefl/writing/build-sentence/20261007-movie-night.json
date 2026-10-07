@@ -1,0 +1,26 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "reference": "Which movie should we watch tonight?",
+      "chunks": [
+        "seen",
+        "won",
+        "the one",
+        "you",
+        "that",
+        "have"
+      ],
+      "correctOrder": [
+        5,
+        3,
+        0,
+        2,
+        4,
+        1
+      ],
+      "suffix": "the award",
+      "fullSentence": "Have you seen the one that won the award?"
+    }
+  ]
+}

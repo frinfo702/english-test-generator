@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "lumen"
+  },
+  "title": "Listen and Choose a Response — Part-time Job",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a request",
+      "stem": "Can we switch shifts next Wednesday?",
+      "options": {
+        "A": "The light switch is by the door.",
+        "B": "My shift ended an hour ago.",
+        "C": "Let me check my class schedule first.",
+        "D": "Yes, I worked last Wednesday."
+      },
+      "correct": "C",
+      "explanation": "Saying they need to check first is an indirect but appropriate reply to a request.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "Can we switch shifts next Wednesday?"
+    }
+  ]
+}

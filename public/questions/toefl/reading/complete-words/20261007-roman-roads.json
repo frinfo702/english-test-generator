@@ -1,0 +1,55 @@
+{
+  "paragraph": "The ancient Romans built a huge system of roads across their empire. These routes were designed to move soldiers and supplies from one region to another as quickly as possible. Most of them were made with several layers of stone and sand, which helped water drain away. Because they were built so carefully, some of these roads are still used today. They show how much the Romans valued planning and organization.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "rou",
+      "answer": "routes"
+    },
+    {
+      "index": 1,
+      "hint": "desi",
+      "answer": "designed"
+    },
+    {
+      "index": 2,
+      "hint": "mo",
+      "answer": "move"
+    },
+    {
+      "index": 3,
+      "hint": "a",
+      "answer": "and"
+    },
+    {
+      "index": 4,
+      "hint": "fr",
+      "answer": "from"
+    },
+    {
+      "index": 5,
+      "hint": "reg",
+      "answer": "region"
+    },
+    {
+      "index": 6,
+      "hint": "ano",
+      "answer": "another"
+    },
+    {
+      "index": 7,
+      "hint": "qui",
+      "answer": "quickly"
+    },
+    {
+      "index": 8,
+      "hint": "poss",
+      "answer": "possible"
+    },
+    {
+      "index": 9,
+      "hint": "o",
+      "answer": "of"
+    }
+  ]
+}

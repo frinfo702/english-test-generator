@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "zagan"
+  },
+  "title": "Listen and Choose a Response — Campus Services",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a negative question",
+      "stem": "Isn't tutoring at the writing center free for students?",
+      "options": {
+        "A": "It is, but you need to book a session first.",
+        "B": "I wrote it at the center.",
+        "C": "Yes, it costs twenty dollars.",
+        "D": "I'm free after three."
+      },
+      "correct": "A",
+      "explanation": "This confirms it and adds an important condition. 'Yes, it costs' is contradictory, and the others reuse 'writing', 'center', and 'free'.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Isn't tutoring at the writing center free for students?"
+    }
+  ]
+}

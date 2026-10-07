@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "luna"
+  },
+  "title": "Writing Center Hours",
+  "transcript": "Hi everyone, I want to let you know about some changes at the writing center. Starting next week, we'll be open on Sunday afternoons, which students have been asking about for a long time. At the same time, Friday hours will end at three instead of five. Tutoring sessions still last thirty minutes. Appointments are strongly recommended, but we'll take walk-ins whenever a tutor is free.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the speaker mention that students have been asking about Sunday hours?",
+      "options": [
+        "To explain why the center needs more tutors",
+        "To show the change responds to student requests",
+        "To complain that students ask too many questions",
+        "To announce that Sunday hours are canceled"
+      ],
+      "correctIndex": 1,
+      "type": "inference",
+      "explanation": "Sunday hours are being added because students have been asking for them."
+    },
+    {
+      "id": "q2",
+      "stem": "What is said about walk-in students?",
+      "options": [
+        "They must wait until Sunday",
+        "They are no longer accepted",
+        "They will be seen if a tutor is available",
+        "They can only stay for fifteen minutes"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "Walk-ins are accepted whenever a tutor is free."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hi everyone, I want to let you know about some changes at the writing center. Starting next week, we'll be open on Sunday afternoons, which students have been asking about for a long time. At the same time, Friday hours will end at three instead of five. Tutoring sessions still last thirty minutes. Appointments are strongly recommended, but we'll take walk-ins whenever a tutor is free."
+    }
+  ],
+  "speaker": "f4"
+}

@@ -1,0 +1,51 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "email",
+      "layout": "email",
+      "content": "From: Grace Okafor\nTo: Willow Lane Neighbors\nSubject: Summer Potluck – Saturday, July 19\n\nHi neighbors,\nIt's that time of year again! Our annual summer potluck will be held on Saturday, July 19, from 5 to 8 P.M. in the shared yard behind Building C.\n\nPlease bring one dish to share. To make sure we don't end up with ten salads, add your dish to the sign-up sheet on the lobby bulletin board by July 16. Plates, cups, and drinks will be provided.\n\nIf it rains, we'll move inside to the community room. Kids are welcome, and Ben from 4B will be bringing his lawn games again.\n\nHope to see you there!\nGrace (Apartment 2A)",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why are neighbors asked to use the sign-up sheet?",
+          "options": [
+            "A. To reserve a seat in the community room",
+            "B. To request a ride to Building C",
+            "C. To avoid having too many of the same dish",
+            "D. To vote on the date of the event"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "Grace asks them to sign up \"To make sure we don't end up with ten salads.\""
+        },
+        {
+          "id": "q2",
+          "stem": "What can be inferred about the potluck?",
+          "options": [
+            "A. It is being held for the first time.",
+            "B. It will be canceled if it rains.",
+            "C. It is only for children.",
+            "D. It has been held in previous years."
+          ],
+          "correctIndex": 3,
+          "type": "inference",
+          "explanation": "Grace calls it \"Our annual summer potluck\" and says \"It's that time of year again,\" and Ben is bringing his games \"again.\""
+        },
+        {
+          "id": "q3",
+          "stem": "Who is Grace most likely?",
+          "options": [
+            "A. A resident of the building",
+            "B. A professional caterer",
+            "C. The owner of a party store",
+            "D. A teacher at a local school"
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "She writes to \"Willow Lane Neighbors\" and signs her name with \"Apartment 2A,\" so she lives there."
+        }
+      ]
+    }
+  ]
+}

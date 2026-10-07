@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "iris"
+  },
+  "title": "Listen and Choose a Response — Course Planning",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking an assumption",
+      "stem": "Aren't you taking Professor Lee's writing class this term?",
+      "options": {
+        "A": "She teaches in the humanities building.",
+        "B": "Yes, I took it two years ago.",
+        "C": "The writing center is open till nine.",
+        "D": "I wanted to, but it was already full."
+      },
+      "correct": "D",
+      "explanation": "Explaining why the class couldn't be taken answers the question; the 'Yes' option uses the wrong tense.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Aren't you taking Professor Lee's writing class this term?"
+    }
+  ]
+}

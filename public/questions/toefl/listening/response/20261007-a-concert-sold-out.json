@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "sirius"
+  },
+  "title": "Listen and Choose a Response — Weekend Plans",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing bad news",
+      "stem": "The concert tickets sold out in five minutes.",
+      "options": {
+        "A": "The concert hall holds five thousand people.",
+        "B": "I sold my old guitar last week.",
+        "C": "Great, so we got tickets.",
+        "D": "That's too bad. Maybe they'll add another show."
+      },
+      "correct": "D",
+      "explanation": "Sympathizing and hoping for another show is a natural reply; the last option contradicts the news.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "The concert tickets sold out in five minutes."
+    }
+  ]
+}

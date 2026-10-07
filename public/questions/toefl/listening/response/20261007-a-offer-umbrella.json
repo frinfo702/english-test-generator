@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "castor"
+  },
+  "title": "Listen and Choose a Response — After Class",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making an offer",
+      "stem": "You can use my umbrella if you're walking to the bus.",
+      "options": {
+        "A": "The bus is usually on time.",
+        "B": "I walked here this morning.",
+        "C": "Thanks, I'll give it back to you tomorrow.",
+        "D": "Yes, I'm using my own umbrella."
+      },
+      "correct": "C",
+      "explanation": "Accepting the offer and promising to return it is appropriate; the 'Yes' option contradicts accepting.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "You can use my umbrella if you're walking to the bus."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Man": "rex",
+    "Woman": "luna"
+  },
+  "title": "The Book Club Novel",
+  "transcript": "Man: So, did you finish the novel for book club? We're meeting Thursday.\nWoman: I got about halfway. Mysteries aren't really my cup of tea.\nMan: Really? I couldn't put it down. I stayed up till two finishing it.\nWoman: I can tell. Maybe the second half's better.\nMan: It gets much better once the detective shows up. That's all I'll say.\nWoman: Good, no spoilers. Actually, could we pick something nonfiction next month?\nMan: Bring a few suggestions on Thursday, and we'll vote.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the woman say, \"Mysteries aren't really my cup of tea\"?",
+      "options": [
+        "To suggest that the man read a different novel",
+        "To admit that she lost her copy of the book",
+        "To explain why she hasn't enjoyed the book much",
+        "To show that she prefers reading in the evening"
+      ],
+      "correctIndex": 2,
+      "type": "attitude",
+      "explanation": "\"Not my cup of tea\" means something isn't to her taste, which explains why she's only halfway through."
+    },
+    {
+      "id": "q2",
+      "stem": "What does the man suggest?",
+      "options": [
+        "That the club meet on a different day",
+        "That the woman skip to the last chapter",
+        "That they watch the film version instead",
+        "That the woman bring ideas for the next book"
+      ],
+      "correctIndex": 3,
+      "type": "detail",
+      "explanation": "He tells her to bring a few suggestions on Thursday so the group can vote."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Man",
+      "text": "So, did you finish the novel for book club? We're meeting Thursday."
+    },
+    {
+      "role": "Woman",
+      "text": "I got about halfway. Mysteries aren't really my cup of tea."
+    },
+    {
+      "role": "Man",
+      "text": "Really? I couldn't put it down. I stayed up till two finishing it."
+    },
+    {
+      "role": "Woman",
+      "text": "I can tell. Maybe the second half's better."
+    },
+    {
+      "role": "Man",
+      "text": "It gets much better once the detective shows up. That's all I'll say."
+    },
+    {
+      "role": "Woman",
+      "text": "Good, no spoilers. Actually, could we pick something nonfiction next month?"
+    },
+    {
+      "role": "Man",
+      "text": "Bring a few suggestions on Thursday, and we'll vote."
+    }
+  ],
+  "speaker": "c3"
+}

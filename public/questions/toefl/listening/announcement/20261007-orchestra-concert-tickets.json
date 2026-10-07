@@ -1,0 +1,42 @@
+{
+  "voices": {
+    "Speaker": "luna"
+  },
+  "title": "Free Concert Tickets",
+  "transcript": "Hi everyone, this is a message from the music department. Our student orchestra is performing this Saturday night at the Rowan Concert Hall. Tickets are free for students, but you do need to pick one up at the box office beforehand, since seating is limited. Last semester, we turned away almost fifty people at the door. The program includes works by Dvořák and a new piece by one of our composition students.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What are students asked to do?",
+      "options": [
+        "Arrive early on Saturday night",
+        "Pay for tickets at the box office",
+        "Get a ticket from the box office in advance",
+        "Sign up to perform in the orchestra"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "Students need to pick up a free ticket at the box office beforehand."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the speaker mention what happened last semester?",
+      "options": [
+        "To show why getting a ticket early is important",
+        "To apologize for a past mistake",
+        "To explain why the concert hall changed",
+        "To prove that the orchestra is popular with faculty"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "Fifty people were turned away, which shows why students should get tickets ahead of time."
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Speaker",
+      "text": "Hi everyone, this is a message from the music department. Our student orchestra is performing this Saturday night at the Rowan Concert Hall. Tickets are free for students, but you do need to pick one up at the box office beforehand, since seating is limited. Last semester, we turned away almost fifty people at the door. The program includes works by Dvořák and a new piece by one of our composition students."
+    }
+  ],
+  "speaker": "f4"
+}

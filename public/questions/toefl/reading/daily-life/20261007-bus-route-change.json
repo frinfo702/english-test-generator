@@ -1,0 +1,40 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "notice",
+      "layout": "notice",
+      "title": "Rider Alert",
+      "icon": "calendar",
+      "content": "Route 14 Schedule Change\nBeginning May 3, Route 14 buses will no longer stop at Oak Avenue.\nThe nearest stop will be Pine Street, two blocks north.\nBuses will also run every 15 minutes instead of every 20 minutes during morning rush hour.\nUpdated timetables are available on our app.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is one change to Route 14?",
+          "options": [
+            "A. It will run less often in the evening.",
+            "B. It will no longer stop at one location.",
+            "C. It will stop skipping Pine Street.",
+            "D. It will start running on May 15."
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "\"Route 14 buses will no longer stop at Oak Avenue.\""
+        },
+        {
+          "id": "q2",
+          "stem": "What is suggested about morning riders?",
+          "options": [
+            "A. They will need to walk to Oak Avenue.",
+            "B. They must buy new tickets on the app.",
+            "C. They will wait less time for a bus.",
+            "D. They should take Route 20 instead."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "Buses will \"run every 15 minutes instead of every 20 minutes during morning rush hour,\" so waits will be shorter."
+        }
+      ]
+    }
+  ]
+}

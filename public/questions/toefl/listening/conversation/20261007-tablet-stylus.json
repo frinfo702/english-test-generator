@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Customer": "carina",
+    "Clerk": "naksh"
+  },
+  "title": "Choosing a Tablet",
+  "transcript": "Customer: Hi, I'm looking for a tablet, mostly for reading and taking notes in class.\nClerk: Okay. Do you want one that works with a stylus?\nCustomer: I think so. I hate typing notes on a screen.\nClerk: Then I'd skip this cheaper model. It doesn't support a pen at all.\nCustomer: Oh. What about the one next to it?\nClerk: That one does, but the pen's sold separately. Even with the pen, it's still less than the premium model.\nCustomer: Okay, I'll take that one and the pen.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the clerk advise against the cheaper model?",
+      "options": [
+        "It is too heavy to carry to class.",
+        "It has a small screen for reading.",
+        "It cannot be used with a pen.",
+        "It is no longer being made."
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The clerk says the cheaper model \"doesn't support a pen at all,\" and the customer wants a stylus."
+    },
+    {
+      "id": "q2",
+      "stem": "How does the woman feel about typing on a screen?",
+      "options": [
+        "She dislikes it.",
+        "She finds it faster than writing.",
+        "She has never tried it.",
+        "She thinks it is fine for short notes."
+      ],
+      "correctIndex": 0,
+      "type": "attitude",
+      "explanation": "She says, \"I hate typing notes on a screen.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Customer",
+      "text": "Hi, I'm looking for a tablet, mostly for reading and taking notes in class."
+    },
+    {
+      "role": "Clerk",
+      "text": "Okay. Do you want one that works with a stylus?"
+    },
+    {
+      "role": "Customer",
+      "text": "I think so. I hate typing notes on a screen."
+    },
+    {
+      "role": "Clerk",
+      "text": "Then I'd skip this cheaper model. It doesn't support a pen at all."
+    },
+    {
+      "role": "Customer",
+      "text": "Oh. What about the one next to it?"
+    },
+    {
+      "role": "Clerk",
+      "text": "That one does, but the pen's sold separately. Even with the pen, it's still less than the premium model."
+    },
+    {
+      "role": "Customer",
+      "text": "Okay, I'll take that one and the pen."
+    }
+  ],
+  "speaker": "c2"
+}

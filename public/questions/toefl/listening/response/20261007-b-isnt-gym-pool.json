@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "luna"
+  },
+  "title": "Listen and Choose a Response — Campus Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a negative question",
+      "stem": "Isn't the campus pool closed for cleaning this week?",
+      "options": {
+        "A": "Until Wednesday, so we can swim on Thursday.",
+        "B": "I cleaned my room this week.",
+        "C": "Yes, and it's open all week.",
+        "D": "The pool is about fifty meters."
+      },
+      "correct": "A",
+      "explanation": "This gives the reopening day and a plan. 'Yes, and it's open' contradicts itself; the others repeat 'cleaning' or describe the pool.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "Isn't the campus pool closed for cleaning this week?"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "carina"
+  },
+  "title": "Listen and Choose a Response — Weekend Plans",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about a time",
+      "stem": "What time does the movie start?",
+      "options": {
+        "A": "Let me look it up on the theater's website.",
+        "B": "It's the new one about the space mission.",
+        "C": "At the theater downtown, near the park.",
+        "D": "I moved to a new apartment last month."
+      },
+      "correct": "A",
+      "explanation": "Offering to check the time online is an appropriate indirect response.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "What time does the movie start?"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "paragraph": "Octopuses are known for their remarkable ability to change color. Their skin contains thousands of special cells that hold different colors. When the animal tightens the muscles around these cells, the colors become visible on the surface. In this way, an octopus can match the rocks or plants around it in less than a second. This skill helps it hide from enemies and also allows it to surprise the small animals it hunts.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "sk",
+      "answer": "skin"
+    },
+    {
+      "index": 1,
+      "hint": "thou",
+      "answer": "thousands"
+    },
+    {
+      "index": 2,
+      "hint": "spe",
+      "answer": "special"
+    },
+    {
+      "index": 3,
+      "hint": "th",
+      "answer": "that"
+    },
+    {
+      "index": 4,
+      "hint": "diff",
+      "answer": "different"
+    },
+    {
+      "index": 5,
+      "hint": "Wh",
+      "answer": "When"
+    },
+    {
+      "index": 6,
+      "hint": "ani",
+      "answer": "animal"
+    },
+    {
+      "index": 7,
+      "hint": "t",
+      "answer": "the"
+    },
+    {
+      "index": 8,
+      "hint": "aro",
+      "answer": "around"
+    },
+    {
+      "index": 9,
+      "hint": "ce",
+      "answer": "cells"
+    }
+  ]
+}

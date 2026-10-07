@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Student": "eve"
+  },
+  "title": "Listen and Choose a Response — Hiking Club",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about frequency",
+      "stem": "How often does the hiking club go out?",
+      "options": {
+        "A": "We went out for pizza after the meeting.",
+        "B": "Usually twice a month, depending on the weather.",
+        "C": "The trail is about five miles long.",
+        "D": "Yes, I joined the club last year."
+      },
+      "correct": "B",
+      "explanation": "The answer gives a frequency, which is what how-often asks for.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Student",
+      "text": "How often does the hiking club go out?"
+    }
+  ]
+}

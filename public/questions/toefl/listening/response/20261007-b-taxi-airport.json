@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Traveler": "altair"
+  },
+  "title": "Listen and Choose a Response — Travel",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about cost",
+      "stem": "About how much would a taxi to the airport cost?",
+      "options": {
+        "A": "The airport is very crowded today.",
+        "B": "Yes, I'll take a taxi.",
+        "C": "It takes about thirty minutes.",
+        "D": "Probably forty dollars, but the train is much cheaper."
+      },
+      "correct": "D",
+      "explanation": "This estimates the cost and adds a useful tip. The others repeat 'airport', use Yes, or answer how long.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Traveler",
+      "text": "About how much would a taxi to the airport cost?"
+    }
+  ]
+}

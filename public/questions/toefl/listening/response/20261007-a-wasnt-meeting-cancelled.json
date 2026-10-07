@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "carina"
+  },
+  "title": "Listen and Choose a Response — Office",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Checking information",
+      "stem": "Wasn't today's staff meeting canceled?",
+      "options": {
+        "A": "The staff room needs a new coffee machine.",
+        "B": "Yes, it'll start in ten minutes as planned.",
+        "C": "It was moved to Thursday, actually.",
+        "D": "I'll cancel my dentist appointment."
+      },
+      "correct": "C",
+      "explanation": "Clarifying that the meeting was rescheduled responds to the assumption; the 'Yes' option contradicts itself.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "Wasn't today's staff meeting canceled?"
+    }
+  ]
+}

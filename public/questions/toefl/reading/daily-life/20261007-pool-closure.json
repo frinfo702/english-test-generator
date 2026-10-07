@@ -1,0 +1,40 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "notice",
+      "layout": "notice",
+      "title": "Temporary Pool Closure",
+      "icon": "info",
+      "content": "Riverside Community Pool\nThe indoor pool will be closed from Monday, June 9, to Sunday, June 15, while we replace the water heater.\nSwim lessons scheduled for that week will be moved to the following week at the same times.\nThe fitness room and outdoor courts will stay open as usual.\nMembers do not need to take any action.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "Why will the pool be closed?",
+          "options": [
+            "A. Swim lessons are being moved to another location.",
+            "B. A piece of equipment is being replaced.",
+            "C. The outdoor courts are being repaired.",
+            "D. Members have asked for new opening hours."
+          ],
+          "correctIndex": 1,
+          "type": "factual",
+          "explanation": "The notice says the pool will close \"while we replace the water heater.\""
+        },
+        {
+          "id": "q2",
+          "stem": "What is suggested about members who signed up for swim lessons?",
+          "options": [
+            "A. They can use the fitness room instead of swimming.",
+            "B. They must sign up again for a new class.",
+            "C. They will have their lessons one week later.",
+            "D. They will receive a refund for the canceled week."
+          ],
+          "correctIndex": 2,
+          "type": "inference",
+          "explanation": "Lessons \"will be moved to the following week at the same times,\" and \"Members do not need to take any action,\" so they simply attend a week later."
+        }
+      ]
+    }
+  ]
+}

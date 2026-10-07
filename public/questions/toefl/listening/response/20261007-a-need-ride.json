@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "carina"
+  },
+  "title": "Listen and Choose a Response — Getting Around",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking about plans",
+      "stem": "Do you need a ride to the concert?",
+      "options": {
+        "A": "The concert was amazing last night.",
+        "B": "I rode my bike to class today.",
+        "C": "Thanks, but Ken is already picking me up.",
+        "D": "Yes, the band plays rock music."
+      },
+      "correct": "C",
+      "explanation": "Politely declining because a ride is already arranged answers the offer-like question.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Do you need a ride to the concert?"
+    }
+  ]
+}

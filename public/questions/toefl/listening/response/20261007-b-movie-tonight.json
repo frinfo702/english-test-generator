@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "eve"
+  },
+  "title": "Listen and Choose a Response — Weekend Plans",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Making a suggestion",
+      "stem": "Why don't we go see that new movie tonight?",
+      "options": {
+        "A": "Because I saw it last night.",
+        "B": "The theater is new, too.",
+        "C": "I have to work late, but how about Saturday?",
+        "D": "Yes, it's been a long night."
+      },
+      "correct": "C",
+      "explanation": "'Why don't we' is a suggestion, and offering another day is a natural counter-suggestion. One option treats it as a real 'why' question.",
+      "speaker": "f4"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Why don't we go see that new movie tonight?"
+    }
+  ]
+}

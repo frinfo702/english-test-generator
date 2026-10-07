@@ -1,0 +1,40 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "advertisement",
+      "layout": "notice",
+      "title": "Stillwater Yoga",
+      "icon": "tag",
+      "content": "New to yoga? Your first class is on us!\nStillwater Yoga offers beginner classes every Tuesday and Thursday at 6 P.M.\nMats are provided, so just bring water and wear comfortable clothes.\nBook online at stillwateryoga.com and enter code FIRSTFREE.\nOffer valid for new students only.",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What is the main purpose of the advertisement?",
+          "options": [
+            "A. To sell yoga mats",
+            "B. To attract new customers",
+            "C. To announce new class times for current members",
+            "D. To hire yoga teachers"
+          ],
+          "correctIndex": 1,
+          "type": "purpose",
+          "explanation": "It invites people who are \"New to yoga\" to try a free first class, an offer \"valid for new students only.\""
+        },
+        {
+          "id": "q2",
+          "stem": "What should a person do to get the free class?",
+          "options": [
+            "A. Bring their own mat",
+            "B. Visit on a Tuesday morning",
+            "C. Use a code when booking",
+            "D. Pay at the front desk"
+          ],
+          "correctIndex": 2,
+          "type": "factual",
+          "explanation": "People should \"Book online at stillwateryoga.com and enter code FIRSTFREE.\""
+        }
+      ]
+    }
+  ]
+}

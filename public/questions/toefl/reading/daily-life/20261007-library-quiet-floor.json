@@ -1,0 +1,40 @@
+{
+  "texts": [
+    {
+      "id": "t1",
+      "textType": "sign",
+      "layout": "notice",
+      "title": "Please Read",
+      "icon": "info",
+      "content": "THIRD FLOOR: SILENT STUDY\nPhones on silent\nNo group work or phone calls\nFood is not allowed; covered drinks are fine\nNeed to talk? Group study rooms are available on the second floor and can be booked at the front desk",
+      "questions": [
+        {
+          "id": "q1",
+          "stem": "What are students allowed to do on the third floor?",
+          "options": [
+            "A. Make short phone calls",
+            "B. Eat a light snack",
+            "C. Work together in small groups",
+            "D. Drink from a covered cup"
+          ],
+          "correctIndex": 3,
+          "type": "factual",
+          "explanation": "The sign says \"Food is not allowed; covered drinks are fine.\""
+        },
+        {
+          "id": "q2",
+          "stem": "Where would the sign most likely be posted?",
+          "options": [
+            "A. In a library",
+            "B. In a restaurant",
+            "C. In a phone store",
+            "D. In an office lobby"
+          ],
+          "correctIndex": 0,
+          "type": "inference",
+          "explanation": "It refers to a \"silent study\" floor and \"group study rooms\" booked \"at the front desk,\" which suggests a library."
+        }
+      ]
+    }
+  ]
+}

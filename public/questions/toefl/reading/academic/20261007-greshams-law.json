@@ -1,0 +1,71 @@
+{
+  "title": "When Bad Money Drives Out Good",
+  "passage": "Gresham's law is the observation that \"bad money drives out good.\" It is named after Sir Thomas Gresham, a sixteenth-century English financier, although others had described the idea earlier. The law applies when two forms of money have the same official value but different real worth. In such cases, people tend to spend the less valuable money and keep the more valuable money for themselves.\n\nHistory provides many examples. In the past, coins were made of silver or gold, and their real worth depended on the metal they contained. When rulers issued new coins with less silver but the same official value as older coins, people saved or melted down the older, purer coins and spent only the new ones. As a result, the good coins disappeared from circulation. A similar pattern appeared in the United States in the 1960s. When the government stopped putting silver in most coins, people quickly began hoarding, or secretly storing, older silver coins, and these soon became rare in everyday use.\n\nEconomists note that the law depends on the official value being enforced, so that sellers must accept both types of money at the same price. Where people are free to refuse poor money, the opposite can happen, and good money may push out bad.",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "mainIdea",
+      "stem": "Which of the following best describes the main point of the passage?",
+      "options": [
+        "A. Silver coins are more valuable than gold coins.",
+        "B. It explains an economic principle about money and gives historical examples of it.",
+        "C. Governments should never change the metal in coins.",
+        "D. Thomas Gresham was the first person to study money."
+      ],
+      "correctIndex": 1,
+      "explanation": "The passage defines Gresham's law, gives examples from the past and the 1960s, and explains when it applies."
+    },
+    {
+      "id": "q2",
+      "type": "vocabulary",
+      "stem": "The word \"circulation\" in paragraph 2 is closest in meaning to",
+      "options": [
+        "A. production",
+        "B. melting",
+        "C. value",
+        "D. general use in buying and selling"
+      ],
+      "correctIndex": 3,
+      "explanation": "The good coins 'disappeared from circulation,' meaning they were no longer used in everyday exchanges."
+    },
+    {
+      "id": "q3",
+      "type": "rhetoricalPurpose",
+      "stem": "Why does the author mention the United States in the 1960s in paragraph 2?",
+      "options": [
+        "A. To show that Gresham's law also applies in modern times",
+        "B. To argue that silver coins should be brought back",
+        "C. To explain why gold coins disappeared",
+        "D. To show an exception to Gresham's law"
+      ],
+      "correctIndex": 0,
+      "explanation": "The author calls it 'a similar pattern,' showing the law at work in a recent case."
+    },
+    {
+      "id": "q4",
+      "type": "negativeFactual",
+      "stem": "According to paragraph 2, people did all of the following with older, purer coins EXCEPT",
+      "options": [
+        "A. saved them",
+        "B. melted them down",
+        "C. used them to pay taxes",
+        "D. stored them secretly"
+      ],
+      "correctIndex": 2,
+      "explanation": "People 'saved or melted down the older, purer coins' and were 'hoarding, or secretly storing' them. Paying taxes is not mentioned."
+    },
+    {
+      "id": "q5",
+      "type": "inference",
+      "stem": "Based on paragraph 3, under what condition might good money push out bad?",
+      "options": [
+        "A. When rulers issue new coins",
+        "B. When sellers are free to refuse poor money",
+        "C. When coins contain no silver",
+        "D. When official values are strictly enforced"
+      ],
+      "correctIndex": 1,
+      "explanation": "'Where people are free to refuse poor money, the opposite can happen, and good money may push out bad.'"
+    }
+  ]
+}

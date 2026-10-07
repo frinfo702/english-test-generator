@@ -1,0 +1,63 @@
+{
+  "voices": {
+    "Woman": "aurora",
+    "Man": "perseus"
+  },
+  "title": "A Deadline Moved Up",
+  "transcript": "Woman: Did you see Karen's email? The report's due Wednesday now, not Friday.\nMan: You're kidding. I haven't even started the budget section.\nWoman: I can take the charts off your plate if that helps. I've done them before.\nMan: Really? That'd save me a whole day.\nWoman: No problem. Just send me the spreadsheet by lunch.\nMan: I'll send it in a few minutes. I owe you one.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "Why does the woman say, \"I can take the charts off your plate\"?",
+      "options": [
+        "To ask the man to make the charts",
+        "To suggest removing the charts from the report",
+        "To offer to do part of the man's work",
+        "To complain about having too much work"
+      ],
+      "correctIndex": 2,
+      "type": "purpose",
+      "explanation": "\"Take something off your plate\" means to take over a task for someone."
+    },
+    {
+      "id": "q2",
+      "stem": "What will the man probably do next?",
+      "options": [
+        "Ask Karen for more time",
+        "Start making the charts",
+        "Go to lunch with the woman",
+        "Send the woman a file"
+      ],
+      "correctIndex": 3,
+      "type": "inference",
+      "explanation": "The woman asks for the spreadsheet, and he says, \"I'll send it in a few minutes.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Woman",
+      "text": "Did you see Karen's email? The report's due Wednesday now, not Friday."
+    },
+    {
+      "role": "Man",
+      "text": "You're kidding. I haven't even started the budget section."
+    },
+    {
+      "role": "Woman",
+      "text": "I can take the charts off your plate if that helps. I've done them before."
+    },
+    {
+      "role": "Man",
+      "text": "Really? That'd save me a whole day."
+    },
+    {
+      "role": "Woman",
+      "text": "No problem. Just send me the spreadsheet by lunch."
+    },
+    {
+      "role": "Man",
+      "text": "I'll send it in a few minutes. I owe you one."
+    }
+  ],
+  "speaker": "c2"
+}

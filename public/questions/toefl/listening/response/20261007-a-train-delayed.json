@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "celeste"
+  },
+  "title": "Listen and Choose a Response — Train Station",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Sharing news",
+      "stem": "They just announced that our train is delayed an hour.",
+      "options": {
+        "A": "Let's grab something to eat while we wait.",
+        "B": "The train station has six platforms.",
+        "C": "I'll announce it at the meeting.",
+        "D": "Great, we'll leave right on time."
+      },
+      "correct": "A",
+      "explanation": "Suggesting how to use the waiting time is a natural reply; the last option contradicts the delay.",
+      "speaker": "f3"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "They just announced that our train is delayed an hour."
+    }
+  ]
+}

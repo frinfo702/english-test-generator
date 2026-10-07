@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Coworker": "kepler"
+  },
+  "title": "Listen and Choose a Response — Workplace",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Reporting a problem",
+      "stem": "I left my lunch on the kitchen counter at home.",
+      "options": {
+        "A": "I left the office early yesterday.",
+        "B": "There's a sandwich shop downstairs if you want.",
+        "C": "The kitchen counter is made of stone.",
+        "D": "I had a big lunch today."
+      },
+      "correct": "B",
+      "explanation": "Suggesting a nearby shop is a helpful reply; the distractors repeat words from the statement.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Coworker",
+      "text": "I left my lunch on the kitchen counter at home."
+    }
+  ]
+}

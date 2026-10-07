@@ -1,0 +1,55 @@
+{
+  "paragraph": "Jazz is a form of music that began in the southern United States in the early twentieth century. It grew out of several older traditions, including the blues and church songs. One of its most important features is that players often create new melodies while they perform. As a result, the same piece can sound quite different each time it is played. Jazz later spread around the world and influenced many other styles of music.",
+  "items": [
+    {
+      "index": 0,
+      "hint": "gr",
+      "answer": "grew"
+    },
+    {
+      "index": 1,
+      "hint": "o",
+      "answer": "of"
+    },
+    {
+      "index": 2,
+      "hint": "ol",
+      "answer": "older"
+    },
+    {
+      "index": 3,
+      "hint": "incl",
+      "answer": "including"
+    },
+    {
+      "index": 4,
+      "hint": "bl",
+      "answer": "blues"
+    },
+    {
+      "index": 5,
+      "hint": "chu",
+      "answer": "church"
+    },
+    {
+      "index": 6,
+      "hint": "O",
+      "answer": "One"
+    },
+    {
+      "index": 7,
+      "hint": "i",
+      "answer": "its"
+    },
+    {
+      "index": 8,
+      "hint": "impo",
+      "answer": "important"
+    },
+    {
+      "index": 9,
+      "hint": "i",
+      "answer": "is"
+    }
+  ]
+}

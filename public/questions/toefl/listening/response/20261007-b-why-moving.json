@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "sirius"
+  },
+  "title": "Listen and Choose a Response — Apartment Life",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking for a reason",
+      "stem": "Why are you moving out of your apartment so soon?",
+      "options": {
+        "A": "The rent is going up by almost two hundred dollars.",
+        "B": "I'm moving it to the other room.",
+        "C": "At the end of next month.",
+        "D": "Yes, I'm moving out soon."
+      },
+      "correct": "A",
+      "explanation": "A 'why' question needs a reason, and a rent increase gives one. The distractors answer when, use Yes, or use 'moving' differently.",
+      "speaker": "m6"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Why are you moving out of your apartment so soon?"
+    }
+  ]
+}

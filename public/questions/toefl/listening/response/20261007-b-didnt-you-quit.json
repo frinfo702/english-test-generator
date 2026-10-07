@@ -1,0 +1,28 @@
+{
+  "voices": {
+    "Friend": "perseus"
+  },
+  "title": "Listen and Choose a Response — Part-Time Job",
+  "questions": [
+    {
+      "id": "q1",
+      "context": "Asking a negative question",
+      "stem": "Didn't you quit your job at the bookstore?",
+      "options": {
+        "A": "No, I've read every book there.",
+        "B": "The bookstore has a nice café.",
+        "C": "She quit last summer.",
+        "D": "I did, but they asked me to help during the holidays."
+      },
+      "correct": "D",
+      "explanation": "This confirms the fact and explains why the speaker is still there. The others reuse 'book' or change the pronoun.",
+      "speaker": "m5"
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Friend",
+      "text": "Didn't you quit your job at the bookstore?"
+    }
+  ]
+}

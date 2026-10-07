@@ -1,0 +1,63 @@
+{
+  "voices": {
+    "Customer": "cosmo",
+    "Mechanic": "ara"
+  },
+  "title": "A Clicking Bicycle",
+  "transcript": "Customer: Hi, my bike's been making a clicking sound whenever I shift gears.\nMechanic: Probably the chain just needs adjusting. Can you leave it with me?\nCustomer: For how long? I ride it to work every day.\nMechanic: If it's only the chain, an hour. If the gears are worn, I'd have to order parts, and that takes a few days.\nCustomer: Let's hope it's just the chain, then.\nMechanic: Grab a coffee next door. I'll call you as soon as I know.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What will the man probably do next?",
+      "options": [
+        "Wait at a café nearby",
+        "Ride the bike to work",
+        "Order new gears online",
+        "Come back in a few days"
+      ],
+      "correctIndex": 0,
+      "type": "inference",
+      "explanation": "The mechanic suggests getting coffee next door while she checks the bike."
+    },
+    {
+      "id": "q2",
+      "stem": "Why does the man ask how long the repair will take?",
+      "options": [
+        "He wants to compare prices with another shop.",
+        "He is worried about the cost of parts.",
+        "He needs the bike to get to work.",
+        "He has to leave town soon."
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "He says, \"I ride it to work every day.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Customer",
+      "text": "Hi, my bike's been making a clicking sound whenever I shift gears."
+    },
+    {
+      "role": "Mechanic",
+      "text": "Probably the chain just needs adjusting. Can you leave it with me?"
+    },
+    {
+      "role": "Customer",
+      "text": "For how long? I ride it to work every day."
+    },
+    {
+      "role": "Mechanic",
+      "text": "If it's only the chain, an hour. If the gears are worn, I'd have to order parts, and that takes a few days."
+    },
+    {
+      "role": "Customer",
+      "text": "Let's hope it's just the chain, then."
+    },
+    {
+      "role": "Mechanic",
+      "text": "Grab a coffee next door. I'll call you as soon as I know."
+    }
+  ],
+  "speaker": "c3"
+}

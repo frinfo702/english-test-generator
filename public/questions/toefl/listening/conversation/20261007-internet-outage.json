@@ -1,0 +1,67 @@
+{
+  "voices": {
+    "Customer": "aurora",
+    "Agent": "perseus"
+  },
+  "title": "Unreliable Internet",
+  "transcript": "Customer: Hi, my internet's been dropping every few minutes since yesterday.\nAgent: Sorry about that. Have you tried restarting the router?\nCustomer: Twice. It helps for maybe ten minutes.\nAgent: Okay, I'm seeing some maintenance work in your area. It should be finished by tonight.\nCustomer: Tonight? I work from home, and I've got video calls all afternoon.\nAgent: I understand. I can credit your account for today, and if it's not fixed by tomorrow morning, call back and we'll send a technician.\nCustomer: Fine. I guess I'll work from the library.",
+  "questions": [
+    {
+      "id": "q1",
+      "stem": "What is causing the problem with the woman's internet?",
+      "options": [
+        "A broken router",
+        "An unpaid bill",
+        "Maintenance work in her area",
+        "Too many devices on her network"
+      ],
+      "correctIndex": 2,
+      "type": "detail",
+      "explanation": "The agent says there is maintenance work in her area."
+    },
+    {
+      "id": "q2",
+      "stem": "What will the woman probably do this afternoon?",
+      "options": [
+        "Wait at home for a technician",
+        "Cancel all of her video calls",
+        "Buy a new router",
+        "Work somewhere other than her home"
+      ],
+      "correctIndex": 3,
+      "type": "inference",
+      "explanation": "She says, \"I guess I'll work from the library.\""
+    }
+  ],
+  "audioSegments": [
+    {
+      "role": "Customer",
+      "text": "Hi, my internet's been dropping every few minutes since yesterday."
+    },
+    {
+      "role": "Agent",
+      "text": "Sorry about that. Have you tried restarting the router?"
+    },
+    {
+      "role": "Customer",
+      "text": "Twice. It helps for maybe ten minutes."
+    },
+    {
+      "role": "Agent",
+      "text": "Okay, I'm seeing some maintenance work in your area. It should be finished by tonight."
+    },
+    {
+      "role": "Customer",
+      "text": "Tonight? I work from home, and I've got video calls all afternoon."
+    },
+    {
+      "role": "Agent",
+      "text": "I understand. I can credit your account for today, and if it's not fixed by tomorrow morning, call back and we'll send a technician."
+    },
+    {
+      "role": "Customer",
+      "text": "Fine. I guess I'll work from the library."
+    }
+  ],
+  "speaker": "c1"
+}
