@@ -20,7 +20,11 @@ import {
   assessPronunciation,
   type PronunciationResult,
 } from "../../../lib/pronunciation";
-import { computeSpeedMetrics, speedScore } from "../../../lib/speakingRate";
+import {
+  computeSpeedMetrics,
+  speedScore,
+  type SpeedMetrics,
+} from "../../../lib/speakingRate";
 import { toWav16k } from "../../../lib/wav";
 import {
   alignWords,
@@ -98,6 +102,47 @@ function DiffLegend() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Azure gives omitted words no timing, so they'd read as 0-second words.
+function spokenWords(result: PronunciationResult) {
+  return result.words.filter((w) => w.errorType !== "Omission");
+}
+
+function ScoreBars({
+  correct,
+  total,
+  pronunciation,
+  speed,
+}: {
+  correct: number;
+  total: number;
+  pronunciation: number | null;
+  speed: SpeedMetrics | null;
+}) {
+  return (
+    <>
+      <ProgressBar current={correct} total={total} label="Words Correct" />
+      {pronunciation !== null && speed && (
+        <>
+          <ProgressBar
+            current={Math.round(pronunciation)}
+            total={100}
+            label="Pronunciation"
+          />
+          <ProgressBar
+            current={Math.round(speedScore(speed))}
+            total={100}
+            label="Speed"
+          />
+          <p className={styles.hint}>
+            {Math.round(speed.speakingRate)} words/min ·{" "}
+            {speed.longPausesPerMinute.toFixed(1)} long pauses/min
+          </p>
+        </>
+      )}
+    </>
   );
 }
 
@@ -547,13 +592,7 @@ export function ListenRepeatPage() {
         )
       : null;
   const speedMetrics =
-    assessed.length > 0
-      ? computeSpeedMetrics(
-          assessed.map((a) =>
-            a.words.filter((w) => w.errorType !== "Omission"),
-          ),
-        )
-      : null;
+    assessed.length > 0 ? computeSpeedMetrics(assessed.map(spokenWords)) : null;
 
   return (
     <div>
@@ -732,8 +771,6 @@ export function ListenRepeatPage() {
         <>
           <div className={styles.resultCard}>
             <h2>Section Complete</h2>
-            <p className={styles.hint}>Review your answers below.</p>
-            <DiffLegend />
             <div className={styles.scoreBox}>
               <span className={styles.scoreNum}>{correctWords}</span>
               <span className={styles.scoreDen}>/{totalWords}</span>
@@ -745,29 +782,17 @@ export function ListenRepeatPage() {
                 %)
               </span>
             </div>
-            <ProgressBar
-              current={correctWords}
+            <ScoreBars
+              correct={correctWords}
               total={totalWords}
-              label="Words Correct"
+              pronunciation={pronunciationScore}
+              speed={speedMetrics}
             />
-            {pronunciationScore !== null && speedMetrics && (
-              <>
-                <ProgressBar
-                  current={pronunciationScore}
-                  total={100}
-                  label="Pronunciation"
-                />
-                <ProgressBar
-                  current={Math.round(speedScore(speedMetrics))}
-                  total={100}
-                  label="Speed"
-                />
-                <p className={styles.hint}>
-                  {Math.round(speedMetrics.speakingRate)} words/min ·{" "}
-                  {speedMetrics.longPausesPerMinute.toFixed(1)} long pauses/min
-                  · scored {assessed.length}/{totalSentences} sentences
-                </p>
-              </>
+            {assessed.length > 0 && assessed.length < totalSentences && (
+              <p className={styles.hint}>
+                Pronunciation scored for {assessed.length}/{totalSentences}{" "}
+                sentences
+              </p>
             )}
             {assessmentError && pronunciationScore === null && (
               <p className={styles.hint}>
@@ -784,21 +809,10 @@ export function ListenRepeatPage() {
             const alignment = alignWords(s.text, transcripts[i] ?? "");
             const correct = countCorrectWords(alignment);
             const total = countOriginalWords(alignment);
+            const assessment = assessments[i];
             return (
               <div key={s.id} className={styles.card}>
-                <p className={styles.qNum}>
-                  Question {i + 1} — {correct}/{total} words
-                  {assessments[i] &&
-                    ` · pronunciation ${Math.round(assessments[i].pronunciation)}`}
-                </p>
-                {assessments[i] && (
-                  <p className={styles.hint}>
-                    {assessments[i].words
-                      .filter((w) => w.errorType === "Mispronunciation")
-                      .map((w) => w.word)
-                      .join(", ") || "No mispronounced words"}
-                  </p>
-                )}
+                <p className={styles.qNum}>Question {i + 1}</p>
                 <div className={styles.feedbackPhase}>
                   <AudioPlayer
                     playing={playing && activeReviewSentence === i}
@@ -833,8 +847,28 @@ export function ListenRepeatPage() {
                             : "Play Audio"
                     }
                   />
+                  <ScoreBars
+                    correct={correct}
+                    total={total}
+                    pronunciation={assessment?.pronunciation ?? null}
+                    speed={
+                      assessment
+                        ? computeSpeedMetrics([spokenWords(assessment)])
+                        : null
+                    }
+                  />
+                  {i === 0 && <DiffLegend />}
                   <p className={styles.fbLabel}>Comparison:</p>
                   <ListenRepeatDiffView alignment={alignment} />
+                  {assessment && (
+                    <p className={styles.hint}>
+                      Mispronounced:{" "}
+                      {assessment.words
+                        .filter((w) => w.errorType === "Mispronunciation")
+                        .map((w) => w.word)
+                        .join(", ") || "none"}
+                    </p>
+                  )}
                 </div>
               </div>
             );
