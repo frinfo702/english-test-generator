@@ -311,6 +311,11 @@
   margin-bottom: var(--spacing-3);
 }
 
+.backupIcon {
+  width: 16px;
+  height: 16px;
+}
+
 .backupOption {
   display: inline-flex;
   align-items: center;
