@@ -270,6 +270,20 @@
     background var(--duration-fast) var(--ease-out);
 }
 
+.lastBlank {
+  display: inline-flex;
+  align-items: flex-end;
+}
+
+/* Sentence-final . or ? — given, not one of the chunks. */
+.endMark {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-ink);
+  padding: 0 0 6px 3px;
+  line-height: 1;
+}
+
 .blankOver {
   border-bottom-color: var(--color-accent);
   background: var(--color-surface-subtle);

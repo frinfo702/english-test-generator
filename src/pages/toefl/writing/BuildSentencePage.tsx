@@ -21,6 +21,7 @@ import {
   poolChunks,
   type DragSource,
   type DropTarget,
+  endPunctuation,
   type Slots,
 } from "./buildSentence";
 import { useChunkDrag } from "./useChunkDrag";
@@ -161,6 +162,7 @@ export function BuildSentencePage() {
     start();
   };
   const displayChunk = (chunk: string) => chunk.toLowerCase();
+  const endMark = sentence ? endPunctuation(sentence.fullSentence) : ".";
 
   return (
     <div>
@@ -257,43 +259,54 @@ export function BuildSentencePage() {
                 <div className={styles.zone}>
                   <p className={styles.zoneLabel}>Answer Area</p>
                   <div className={styles.blanks}>
-                    {slots.map((chunkIdx, pos) => (
-                      <span
-                        key={pos}
-                        data-drop="slot"
-                        data-slot={pos}
-                        className={[
-                          styles.blank,
-                          isOverSlot(pos) ? styles.blankOver : "",
-                        ].join(" ")}
-                      >
-                        {chunkIdx !== null && (
-                          <button
-                            className={[
-                              styles.chip,
-                              styles.placed,
-                              graded
-                                ? isCorrect
-                                  ? styles.correctChip
-                                  : styles.wrongChip
-                                : "",
-                              isDraggingSlot(pos) ? styles.dragging : "",
-                            ].join(" ")}
-                            onPointerDown={(e) =>
-                              startDrag(
-                                e,
-                                { kind: "slot", index: pos },
-                                displayChunk(sentence.chunks[chunkIdx]),
-                              )
-                            }
-                            onClick={() => handleSlotClick(pos)}
-                            disabled={graded}
-                          >
-                            {displayChunk(sentence.chunks[chunkIdx])}
-                          </button>
-                        )}
-                      </span>
-                    ))}
+                    {slots.map((chunkIdx, pos) => {
+                      const blank = (
+                        <span
+                          key={pos}
+                          data-drop="slot"
+                          data-slot={pos}
+                          className={[
+                            styles.blank,
+                            isOverSlot(pos) ? styles.blankOver : "",
+                          ].join(" ")}
+                        >
+                          {chunkIdx !== null && (
+                            <button
+                              className={[
+                                styles.chip,
+                                styles.placed,
+                                graded
+                                  ? isCorrect
+                                    ? styles.correctChip
+                                    : styles.wrongChip
+                                  : "",
+                                isDraggingSlot(pos) ? styles.dragging : "",
+                              ].join(" ")}
+                              onPointerDown={(e) =>
+                                startDrag(
+                                  e,
+                                  { kind: "slot", index: pos },
+                                  displayChunk(sentence.chunks[chunkIdx]),
+                                )
+                              }
+                              onClick={() => handleSlotClick(pos)}
+                              disabled={graded}
+                            >
+                              {displayChunk(sentence.chunks[chunkIdx])}
+                            </button>
+                          )}
+                        </span>
+                      );
+                      // Keep the end mark on the same line as the last blank.
+                      return pos === slots.length - 1 ? (
+                        <span key={pos} className={styles.lastBlank}>
+                          {blank}
+                          <span className={styles.endMark}>{endMark}</span>
+                        </span>
+                      ) : (
+                        blank
+                      );
+                    })}
                   </div>
                 </div>
                 <div className={styles.zone}>
@@ -345,7 +358,11 @@ export function BuildSentencePage() {
                     </p>
                     {!isCorrect && (
                       <p className={styles.fbAnswer}>
-                        Correct answer: <strong>{sentence.fullSentence}</strong>
+                        Correct answer:{" "}
+                        <strong>
+                          {sentence.fullSentence.replace(/[.?!]$/, "")}
+                          {endMark}
+                        </strong>
                       </p>
                     )}
                   </div>
