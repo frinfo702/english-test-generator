@@ -1,28 +1,34 @@
-/** How "Next Question" picks the following problem, like a music player. */
-export type NextMode = "shuffle" | "order" | "unsolved";
+/**
+ * How "Next Question" picks the following problem, like a music player:
+ * shuffle or in order (exactly one is on), plus an independent
+ * "unsolved only" filter.
+ */
+export type NextOrder = "shuffle" | "order";
 
-export const NEXT_MODES: readonly NextMode[] = ["shuffle", "order", "unsolved"];
+export interface NextMode {
+  order: NextOrder;
+  unsolvedOnly: boolean;
+}
 
-export const NEXT_MODE_LABELS: Record<NextMode, string> = {
-  shuffle: "Shuffle",
-  order: "In order",
-  unsolved: "Unsolved",
-};
-
-const STORAGE_KEY = "next-question-mode";
+const ORDER_KEY = "next-question-mode";
+const UNSOLVED_KEY = "next-question-unsolved-only";
 
 export function loadNextMode(): NextMode {
   try {
-    const value = localStorage.getItem(STORAGE_KEY);
-    return NEXT_MODES.includes(value as NextMode) ? (value as NextMode) : "order";
+    return {
+      order:
+        localStorage.getItem(ORDER_KEY) === "shuffle" ? "shuffle" : "order",
+      unsolvedOnly: localStorage.getItem(UNSOLVED_KEY) === "1",
+    };
   } catch {
-    return "order";
+    return { order: "order", unsolvedOnly: false };
   }
 }
 
 export function saveNextMode(mode: NextMode): void {
   try {
-    localStorage.setItem(STORAGE_KEY, mode);
+    localStorage.setItem(ORDER_KEY, mode.order);
+    localStorage.setItem(UNSOLVED_KEY, mode.unsolvedOnly ? "1" : "0");
   } catch {
     // ignore quota / private mode
   }
@@ -36,21 +42,20 @@ export function saveNextMode(mode: NextMode): void {
  * @param solved   problem numbers that already have a saved score
  */
 export function pickNext(
-  mode: NextMode,
+  { order, unsolvedOnly }: NextMode,
   numbers: readonly number[],
   current: number,
   solved: ReadonlySet<number>,
 ): number | null {
-  const others = numbers.filter((n) => n !== current);
-  if (mode === "shuffle") {
-    return others.length
-      ? others[Math.floor(Math.random() * others.length)]
+  const candidates = numbers.filter(
+    (n) => n !== current && !(unsolvedOnly && solved.has(n)),
+  );
+  if (order === "shuffle") {
+    return candidates.length
+      ? candidates[Math.floor(Math.random() * candidates.length)]
       : null;
   }
-  if (mode === "order") {
-    return numbers.find((n) => n > current) ?? null;
-  }
-  // unsolved: the next unsolved one after current, wrapping to the start.
-  const unsolved = others.filter((n) => !solved.has(n));
-  return unsolved.find((n) => n > current) ?? unsolved[0] ?? null;
+  const after = candidates.find((n) => n > current);
+  // Unsolved ones before `current` still need doing, so wrap around for them.
+  return after ?? (unsolvedOnly ? (candidates[0] ?? null) : null);
 }

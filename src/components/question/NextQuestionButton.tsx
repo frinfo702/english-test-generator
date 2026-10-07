@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { listQuestionFiles } from "../../lib/questions";
 import {
-  NEXT_MODES,
-  NEXT_MODE_LABELS,
   loadNextMode,
   pickNext,
   saveNextMode,
@@ -28,9 +26,10 @@ interface NextQuestionButtonProps extends Omit<
 const fileNumber = (file: string) => Number.parseInt(file, 10);
 
 /**
- * Moves to another problem of the same task, chosen by the play mode
- * (shuffle / in order / unsolved only). The mode toggle sits beside it and
- * stays visible even when there is no next problem, so it can be changed.
+ * Moves to another problem of the same task, chosen by the play mode:
+ * shuffle or in order (exactly one is on) plus an independent "unsolved
+ * only" filter. The mode toggles sit beside it and stay visible even when
+ * there is no next problem, so they can be changed.
  */
 export function NextQuestionButton({
   taskId,
@@ -67,11 +66,32 @@ export function NextQuestionButton({
     };
   }, [taskId, getAll]);
 
-  const cycleMode = () => {
-    const nextMode = NEXT_MODES[(NEXT_MODES.indexOf(mode) + 1) % NEXT_MODES.length];
+  const updateMode = (patch: Partial<NextMode>) => {
+    const nextMode = { ...mode, ...patch };
     setMode(nextMode);
     saveNextMode(nextMode);
   };
+
+  const toggles = [
+    {
+      key: "shuffle",
+      label: "Shuffle",
+      on: mode.order === "shuffle",
+      onClick: () => updateMode({ order: "shuffle" }),
+    },
+    {
+      key: "order",
+      label: "In order",
+      on: mode.order === "order",
+      onClick: () => updateMode({ order: "order" }),
+    },
+    {
+      key: "unsolved",
+      label: "Unsolved only",
+      on: mode.unsolvedOnly,
+      onClick: () => updateMode({ unsolvedOnly: !mode.unsolvedOnly }),
+    },
+  ] as const;
 
   // Shuffle is random per call, but whether a next problem exists is not.
   const hasNext =
@@ -80,22 +100,32 @@ export function NextQuestionButton({
 
   return (
     <>
-      <Button
-        variant="ghost"
-        size={props.size}
-        onClick={cycleMode}
-        title="Change how the next question is chosen"
-        aria-label={`Next question order: ${NEXT_MODE_LABELS[mode]}. Click to change.`}
+      <span
+        className={styles.modeGroup}
+        role="group"
+        aria-label="How the next question is chosen"
       >
-        <PixelArt
-          layers={[MODE_ICONS[mode]]}
-          palette={{ x: "currentColor" }}
-          width={8}
-          height={8}
-          className={styles.modeIcon}
-        />
-        {NEXT_MODE_LABELS[mode]}
-      </Button>
+        {toggles.map((t) => (
+          <Button
+            key={t.key}
+            variant="ghost"
+            size={props.size}
+            className={[styles.modeToggle, t.on ? styles.modeOn : ""].join(" ")}
+            onClick={t.onClick}
+            aria-pressed={t.on}
+            aria-label={t.label}
+            title={t.label}
+          >
+            <PixelArt
+              layers={[MODE_ICONS[t.key]]}
+              palette={{ x: "currentColor" }}
+              width={12}
+              height={12}
+              className={styles.modeIcon}
+            />
+          </Button>
+        ))}
+      </span>
       {hasNext && (
         <Button
           {...props}
@@ -114,37 +144,51 @@ export function NextQuestionButton({
   );
 }
 
+// 12×12 grids, drawn at 2px per cell.
 // prettier-ignore
-const MODE_ICONS: Record<NextMode, readonly string[]> = {
-  // a die
+const MODE_ICONS: Record<"shuffle" | "order" | "unsolved", readonly string[]> = {
+  // two crossing arrows
   shuffle: [
-    ".xxxxxx.",
-    "xxxxxxxx",
-    "xx.xx.xx",
-    "xxxxxxxx",
-    "xxxxxxxx",
-    "xx.xx.xx",
-    "xxxxxxxx",
-    ".xxxxxx.",
+    ".........x",
+    "..........x",
+    "xx......xxxx",
+    "..x....x..x",
+    "...x..x..x",
+    "....xx",
+    "....xx",
+    "...x..x..x",
+    "..x....x..x",
+    "xx......xxxx",
+    "..........x",
+    ".........x",
   ],
-  // a numbered list
+  // a repeat loop
   order: [
     "",
-    "xx.xxxxx",
-    "",
-    "xx.xxxxx",
-    "",
-    "xx.xxxxx",
+    "........x",
+    ".........x",
+    "..xxxxxxxxx",
+    ".x.......x",
+    ".x......x",
+    "...x......x",
+    "..x.......x",
+    ".xxxxxxxxx",
+    "..x",
+    "...x",
   ],
   // an empty circle: not done yet
   unsolved: [
-    "..xxxx..",
-    ".x....x.",
-    "x......x",
-    "x......x",
-    "x......x",
-    "x......x",
-    ".x....x.",
-    "..xxxx..",
+    "....xxxx",
+    "..xx....xx",
+    ".x........x",
+    ".x........x",
+    "x..........x",
+    "x..........x",
+    "x..........x",
+    "x..........x",
+    ".x........x",
+    ".x........x",
+    "..xx....xx",
+    "....xxxx",
   ],
 };
