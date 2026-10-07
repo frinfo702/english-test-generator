@@ -21,6 +21,10 @@ import {
   copyText,
 } from "../../../lib/answerSubmission";
 import { saveAttempt } from "../../../lib/attempts";
+import type { PronunciationResult } from "../../../lib/pronunciation";
+import { assessSpontaneousSpeech } from "../../../lib/pronunciationStream";
+import { computeSpeedMetrics, speedScore } from "../../../lib/speakingRate";
+import { toWav16k } from "../../../lib/wav";
 import { questionIdFromFile } from "../../../lib/questions";
 import { pickInterviewerVoice } from "../../../lib/voiceMapping";
 import { InterviewerCard } from "./InterviewerCard";
@@ -51,6 +55,11 @@ export function TakeInterviewPage() {
   const [savingAnswer, setSavingAnswer] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [assessment, setAssessment] = useState<PronunciationResult | null>(
+    null,
+  );
+  const [assessError, setAssessError] = useState<string | null>(null);
+  const assessGenerationRef = useRef(0);
   const submittingRef = useRef(false);
 
   const audio = useSingleAudio();
@@ -110,6 +119,9 @@ export function TakeInterviewPage() {
     setUserText("");
     setSaveError(null);
     setCopied(false);
+    setAssessment(null);
+    setAssessError(null);
+    assessGenerationRef.current += 1;
     clearTranscript();
     clearSpeechError();
     submittingRef.current = false;
@@ -133,6 +145,20 @@ export function TakeInterviewPage() {
     try {
       const recording = await speech.stop();
       const finalText = recording.text.trim();
+      if (recording.audio) {
+        const generation = assessGenerationRef.current;
+        const isCurrent = () => generation === assessGenerationRef.current;
+        void toWav16k(recording.audio)
+          .then(assessSpontaneousSpeech)
+          .then((result) => isCurrent() && setAssessment(result))
+          .catch(
+            (e: unknown) =>
+              isCurrent() &&
+              setAssessError(e instanceof Error ? e.message : String(e)),
+          );
+      } else {
+        setAssessError("No audio was recorded.");
+      }
       setUserText(finalText);
       setPhase("submitted");
 
@@ -292,6 +318,9 @@ export function TakeInterviewPage() {
   const questionActive = audio.isActive("question");
   const modelActive = audio.isActive("model");
   const displayAnswer = userText || speech.transcript;
+  const speedMetrics = assessment
+    ? computeSpeedMetrics([assessment.words])
+    : null;
 
   return (
     <div>
@@ -549,6 +578,44 @@ export function TakeInterviewPage() {
                 )}
                 {saveError && <p className={styles.error}>{saveError}</p>}
                 {speech.error && <p className={styles.error}>{speech.error}</p>}
+              </div>
+
+              <div className={styles.userAnswerCard}>
+                <h3>Delivery</h3>
+                {assessment && speedMetrics ? (
+                  <>
+                    <ProgressBar
+                      current={Math.round(assessment.pronunciation)}
+                      total={100}
+                      label="Pronunciation"
+                    />
+                    <ProgressBar
+                      current={Math.round(speedScore(speedMetrics))}
+                      total={100}
+                      label="Speed"
+                    />
+                    <p className={styles.preNote}>
+                      {Math.round(speedMetrics.speakingRate)} words/min ·{" "}
+                      {speedMetrics.longPausesPerMinute.toFixed(1)} long
+                      pauses/min
+                    </p>
+                    {assessment.words.some((w) => w.accuracy < 60) && (
+                      <p className={styles.preNote}>
+                        Unclear words:{" "}
+                        {assessment.words
+                          .filter((w) => w.accuracy < 60)
+                          .map((w) => w.word)
+                          .join(", ")}
+                      </p>
+                    )}
+                  </>
+                ) : assessError ? (
+                  <p className={styles.preNote}>
+                    Pronunciation scoring unavailable: {assessError}
+                  </p>
+                ) : (
+                  <p className={styles.preNote}>Scoring pronunciation…</p>
+                )}
               </div>
 
               <div className={styles.copyCard}>

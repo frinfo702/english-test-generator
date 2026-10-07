@@ -17,6 +17,12 @@ import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import type { ItemResponse } from "../../../lib/attempts";
 import {
+  assessPronunciation,
+  type PronunciationResult,
+} from "../../../lib/pronunciation";
+import { computeSpeedMetrics, speedScore } from "../../../lib/speakingRate";
+import { toWav16k } from "../../../lib/wav";
+import {
   alignWords,
   countCorrectWords,
   countOriginalWords,
@@ -220,6 +226,10 @@ export function ListenRepeatPage() {
   const [current, setCurrent] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [transcripts, setTranscripts] = useState<Record<number, string>>({});
+  const [assessments, setAssessments] = useState<
+    Record<number, PronunciationResult>
+  >({});
+  const [assessmentError, setAssessmentError] = useState<string | null>(null);
   const [graded, setGraded] = useState(false);
   const [recordingTimeLeft, setRecordingTimeLeft] = useState(0);
   const [processingMessage, setProcessingMessage] = useState<string | null>(
@@ -291,6 +301,18 @@ export function ListenRepeatPage() {
     clearRecordingTimer();
     clearProcessingTimeout();
     const recording = await stopSpeech();
+    if (sentence && recording.audio) {
+      const index = current;
+      // Runs beside transcription so a missing Azure key never blocks the flow.
+      void toWav16k(recording.audio)
+        .then((wav) => assessPronunciation(wav, sentence.text))
+        .then((result) =>
+          setAssessments((prev) => ({ ...prev, [index]: result })),
+        )
+        .catch((e: unknown) =>
+          setAssessmentError(e instanceof Error ? e.message : String(e)),
+        );
+    }
     if (sentence) {
       takesRef.current[current] = {
         itemId: sentence.id,
@@ -471,6 +493,8 @@ export function ListenRepeatPage() {
     resetTimer();
     setCurrent(0);
     setTranscripts({});
+    setAssessments({});
+    setAssessmentError(null);
     setPhase("playing");
     setGraded(false);
     setRecordingTimeLeft(0);
@@ -514,6 +538,22 @@ export function ListenRepeatPage() {
     (sum, a) => sum + countOriginalWords(a),
     0,
   );
+  const assessed = Object.values(assessments);
+  const pronunciationScore =
+    assessed.length > 0
+      ? Math.round(
+          assessed.reduce((sum, a) => sum + a.pronunciation, 0) /
+            assessed.length,
+        )
+      : null;
+  const speedMetrics =
+    assessed.length > 0
+      ? computeSpeedMetrics(
+          assessed.map((a) =>
+            a.words.filter((w) => w.errorType !== "Omission"),
+          ),
+        )
+      : null;
 
   return (
     <div>
@@ -710,6 +750,30 @@ export function ListenRepeatPage() {
               total={totalWords}
               label="Words Correct"
             />
+            {pronunciationScore !== null && speedMetrics && (
+              <>
+                <ProgressBar
+                  current={pronunciationScore}
+                  total={100}
+                  label="Pronunciation"
+                />
+                <ProgressBar
+                  current={Math.round(speedScore(speedMetrics))}
+                  total={100}
+                  label="Speed"
+                />
+                <p className={styles.hint}>
+                  {Math.round(speedMetrics.speakingRate)} words/min ·{" "}
+                  {speedMetrics.longPausesPerMinute.toFixed(1)} long pauses/min
+                  · scored {assessed.length}/{totalSentences} sentences
+                </p>
+              </>
+            )}
+            {assessmentError && pronunciationScore === null && (
+              <p className={styles.hint}>
+                Pronunciation scoring unavailable: {assessmentError}
+              </p>
+            )}
             <div className={styles.actions}>
               <BackButton onClick={handleBackToList} size="lg" />
               <NextQuestionButton taskId={TASK_ID} size="lg" />
@@ -724,7 +788,17 @@ export function ListenRepeatPage() {
               <div key={s.id} className={styles.card}>
                 <p className={styles.qNum}>
                   Question {i + 1} — {correct}/{total} words
+                  {assessments[i] &&
+                    ` · pronunciation ${Math.round(assessments[i].pronunciation)}`}
                 </p>
+                {assessments[i] && (
+                  <p className={styles.hint}>
+                    {assessments[i].words
+                      .filter((w) => w.errorType === "Mispronunciation")
+                      .map((w) => w.word)
+                      .join(", ") || "No mispronounced words"}
+                  </p>
+                )}
                 <div className={styles.feedbackPhase}>
                   <AudioPlayer
                     playing={playing && activeReviewSentence === i}
