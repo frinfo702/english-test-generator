@@ -5,7 +5,7 @@ import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { GradingRequestPanel } from "../../../components/ui/GradingRequestPanel";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { Timer } from "../../../components/ui/Timer";
+import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import {
@@ -20,12 +20,15 @@ import {
 import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./WriteEmailPage.module.css";
+import task from "./WritingTask.module.css";
 import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 
 interface Scenario {
   title: string;
   description: string;
   recipient: string;
+  /** Subject line shown above the answer box; defaults to `title`. */
+  subject?: string;
   purpose: string;
   keyPoints: string[];
 }
@@ -144,6 +147,15 @@ export function WriteEmailPage() {
 
   return (
     <div>
+      {phase !== "pre" && (
+        <FloatingElapsedTimer
+          display={timer.display}
+          running={timer.running}
+          isWarning={timer.isWarning}
+          isExpired={timer.isExpired}
+        />
+      )}
+
       <SectionHeader
         title="Write an Email"
         subtitle="Read the scenario and write an email (7 minutes)."
@@ -178,76 +190,86 @@ export function WriteEmailPage() {
 
       {data && !loading && hasValidQuestionNumber && (
         <>
-          <div className={styles.scenarioCard}>
-            <h2 className={styles.scenarioTitle}>{data.scenario.title}</h2>
-            <p className={styles.scenarioDesc}>{data.scenario.description}</p>
-            <div className={styles.scenarioMeta}>
-              <span>
-                <strong>Recipient:</strong> {data.scenario.recipient}
-              </span>
-              <span>
-                <strong>Purpose:</strong> {data.scenario.purpose}
-              </span>
-            </div>
-            <div className={styles.keyPoints}>
-              <p className={styles.keyPointsLabel}>Include:</p>
-              <ul>
-                {data.scenario.keyPoints.map((pt, i) => (
-                  <li key={i}>{pt}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {phase === "pre" && (
-            <div className={styles.startCard}>
-              <p>Press Start when ready. The 7-minute timer will begin.</p>
-              <div className={styles.actions}>
-                <Button size="lg" onClick={handleStart}>
-                  Start
-                </Button>
-                <NextQuestionButton
-                  taskId={TASK_ID}
-                  variant="secondary"
-                  size="lg"
-                />
+          <div className={task.split}>
+            <div className={task.prompt}>
+              <p>{data.scenario.description}</p>
+              <div>
+                <p>
+                  Write an email to {data.scenario.recipient}. In your email, do
+                  the following.
+                </p>
+                <ul className={task.bullets}>
+                  {data.scenario.keyPoints.map((pt, i) => (
+                    <li key={i}>{pt}</li>
+                  ))}
+                </ul>
               </div>
+              <p className={task.centered}>
+                Write as much as you can and in complete sentences.
+              </p>
             </div>
-          )}
 
-          {(phase === "writing" || phase === "submitted") && (
-            <div className={styles.writingArea}>
-              <div className={styles.writingHeader}>
-                <Timer
-                  display={timer.display}
-                  isWarning={timer.isWarning}
-                  isExpired={timer.isExpired}
-                />
-                <span className={styles.wordCount}>
-                  {userText.trim().split(/\s+/).filter(Boolean).length} words
-                </span>
+            <div className={task.right}>
+              <p className={task.responseLabel}>Your Response:</p>
+              <div className={task.responseMeta}>
+                <p>
+                  <strong>To:</strong> {data.scenario.recipient}
+                </p>
+                <p>
+                  <strong>Subject:</strong>{" "}
+                  {data.scenario.subject ?? data.scenario.title}
+                </p>
               </div>
-              <PoodlePerch>
-                <textarea
-                  className={styles.textarea}
-                  value={userText}
-                  onChange={(e) => setUserText(e.target.value)}
-                  placeholder="Type your email here..."
-                  disabled={phase === "submitted"}
-                  rows={14}
-                />
-              </PoodlePerch>
-              {phase === "writing" && (
-                <div className={styles.actions}>
-                  <Button onClick={handleSubmit}>
-                    Submit
-                    <PixelCheckIcon />
-                  </Button>
-                  <NextQuestionButton taskId={TASK_ID} variant="secondary" />
+
+              {phase === "pre" && (
+                <div className={task.startCard}>
+                  <p>Press Start when ready. The 7-minute timer will begin.</p>
+                  <div className={task.actions}>
+                    <Button size="lg" onClick={handleStart}>
+                      Start
+                    </Button>
+                    <NextQuestionButton
+                      taskId={TASK_ID}
+                      variant="secondary"
+                      size="lg"
+                    />
+                  </div>
                 </div>
               )}
+
+              {(phase === "writing" || phase === "submitted") && (
+                <>
+                  <PoodlePerch>
+                    <textarea
+                      className={task.textarea}
+                      value={userText}
+                      onChange={(e) => setUserText(e.target.value)}
+                      placeholder="Type your email here..."
+                      disabled={phase === "submitted"}
+                      rows={14}
+                      aria-label="Your email"
+                    />
+                  </PoodlePerch>
+                  <p className={task.wordCount}>
+                    Word count:{" "}
+                    {userText.trim().split(/\s+/).filter(Boolean).length}
+                  </p>
+                  {phase === "writing" && (
+                    <div className={task.actions}>
+                      <Button onClick={handleSubmit}>
+                        Submit
+                        <PixelCheckIcon />
+                      </Button>
+                      <NextQuestionButton
+                        taskId={TASK_ID}
+                        variant="secondary"
+                      />
+                    </div>
+                  )}
+                </>
+              )}
             </div>
-          )}
+          </div>
 
           {phase === "submitted" && (
             <div className={styles.feedbackSection}>

@@ -106,6 +106,13 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 **フィールド仕様:**
 
 - `textType`: `"email"` / `"notice"` / `"schedule"` / `"menu"` / `"announcement"` / `"text message"` / `"online post"` / `"advertisement"` / `"poster"` / `"sign"` / `"webpage"` / `"news article"` / `"form"` / `"invoice"` / `"receipt"` など
+- `layout`（表示レイアウト。省略時は `textType` から推定）:
+  - `"email"`: `content` を `From:` / `To:` / `Subject:` 行 → 空行 → 本文 の形で書く。ヘッダーが枠付きボックスで表示される
+  - `"chat"`: スマホ画面の吹き出し。`content` の代わりに `messages: [{ "sender", "time", "text" }]`（2〜3人、最初の発言者が右寄せ）
+  - `"live-chat"`: 「Live Chat」パネル。`messages` を使う。`title` で見出しを変更可（既定 `"Live Chat"`）
+  - `"notice"`: announcement / advertisement / poster / sign 用の角丸枠。`title` が見出し、`content` は `\n` 区切りの短い行（12語以下の行だけなら中央揃え）。任意で `icon`: `"globe"` / `"megaphone"` / `"calendar"` / `"info"` / `"tag"`
+  - `"document"`: その他（schedule, menu, form, receipt, online post など）
+- chat / live-chat の設問は「At 9:03 A.M., what does Mr. X imply when he writes, "..."?」のように時刻と発言を引用する形式も使う
 - `type`（設問種別）: `"factual"` / `"inference"` / `"purpose"` / `"vocabulary"`
 - `correctIndex`: 0始まり（A=0, B=1, C=2, D=3）
 - テキスト数: 2〜3本（1セットあたり1〜2テキストの場合もある）
@@ -219,6 +226,7 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 ```json
 {
   "professorName": "Dr. Chen",
+  "course": "education policy",
   "professorQuestion": "Technology is increasingly used in K-12 classrooms. Do you believe integrating technology into education primarily benefits or hinders student learning? Support your position with specific reasons and examples.",
   "student1": {
     "name": "Marcus",
@@ -238,6 +246,8 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 }
 ```
 
+- `course`（任意）: 授業の科目名。画面では「Your professor is teaching a class on {course}.」と表示される
+
 ---
 
 ## TOEFL Writing: Write an Email
@@ -246,18 +256,30 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 ```json
 {
-  "situation": "You are a student who needs to request an extension on an assignment due to illness.",
-  "recipient": "Professor Johnson",
-  "subject": "Assignment Extension Request",
-  "modelAnswer": "Dear Professor Johnson,\n\nI am writing to request a short extension on the essay due this Friday...",
-  "evaluationPoints": [
-    "Opens with appropriate salutation",
-    "Clearly states the purpose in the first sentence",
-    "Provides a brief, credible reason",
-    "Closes politely"
+  "scenario": {
+    "title": "Requesting an Extension on an Assignment",
+    "description": "You are a student in Professor Martinez's Advanced Writing course. You have been ill for three days and cannot complete the research paper due this Friday.",
+    "recipient": "Professor Martinez",
+    "subject": "Request for an extension",
+    "purpose": "Request a one-week extension on the research paper",
+    "keyPoints": [
+      "Explain your illness and its impact",
+      "Specify how much additional time you need",
+      "Offer to provide a doctor note if required"
+    ]
+  },
+  "modelAnswer": "Dear Professor Martinez,\n\nI am writing to request...",
+  "rubric": [
+    {
+      "criterion": "Content",
+      "description": "Clearly explains the reason and includes all key points."
+    }
   ]
 }
 ```
+
+- `keyPoints`: 画面では「Write an email to {recipient}. In your email, do the following.」の下に箇条書きで表示される
+- `subject`（任意）: 解答欄上の Subject 行。省略時は `title` を表示する
 
 ---
 
@@ -312,6 +334,7 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 - `correctOrder`: `chunks` のインデックス列で正しい語順を示す
   - 例: `[1, 0, 3, 2, 4]` → chunks[1], chunks[0], chunks[3], chunks[2], chunks[4] の順
 - `fullSentence`: `reference` への自然な回答として成立する正解文（末尾ピリオドなし）
+  - 解答欄の文末記号は画面側で自動表示する（助動詞・疑問詞で始まる文は `?`、それ以外は `.`）。`!` などそれ以外にしたい場合のみ `fullSentence` の末尾に付ける
 - 重複語（例: that, the）が複数あり識別が曖昧になる場合のみ、片方を隣接語と連結してよい（例: "that we"）。連結は1問あたり1〜2個まで
 - 文数: 10文固定
 
@@ -428,6 +451,18 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 
 - `wordCount`: 単語数（参考値）
 - 文数: 7〜10文
+
+---
+
+## TOEFL Listening 共通: 声とスピーカー画像
+
+- `voices`: 役割ごとの xAI TTS 声ID（例: `{"Student": "eve", "Professor": "leo"}`）。`npm run generate-audio` はこの声で音声を作る。未指定で音声もまだ無いセットは、生成時に自動で配役して JSON に書き戻す。声の一覧は `src/lib/voiceMapping.ts`（API との差分は `npm run check-voices`）。
+- `speaker`: `public/images/speakers/<id>.jpg` の人物画像。各画像の性別は `src/lib/speakerPhotos.ts`。Choose a Response は設問ごとに `questions[].speaker`。
+- 制約（`src/lib/listeningVoices.test.ts` で検証）:
+  - Conversation は話者2人で、男性の声と女性の声を1人ずつ。画像は男女ペア（`c1`〜`c4`）
+  - その他のタスクは画像の性別 = 声の性別
+  - 同じセット内で声を重複させない
+- Academic Talk は `"subject"`（例: `"biology"`）も任意で指定でき、「Listen to a talk in a biology class.」と表示される。
 
 ---
 

@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Study Related",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Asking about textbook availability",
       "stem": "Does the library have copies of the required textbooks on reserve?",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f3",
       "context": "Encouraging a friend",
       "stem": "I'm so nervous about the oral presentation. What if I forget what to say?",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Asking about group study rooms",
       "stem": "How do I book a group study room in the library?",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f3",
       "context": "Admitting a mistake",
       "stem": "I think I submitted the wrong file for the assignment. I'm panicking.",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Asking about a research database",
       "stem": "Which database should I use to find peer-reviewed articles on climate change?",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "f3",
       "context": "Reacting to a funny story",
       "stem": "You won't believe what happened — the professor walked into class with his shirt buttoned wrong!",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Asking about citation format",
       "stem": "Does the department prefer APA or MLA format for research papers?",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f3",
       "context": "Agreeing to a plan",
       "stem": "Let's meet at the library at 10 AM tomorrow to work on the project.",
       "options": {

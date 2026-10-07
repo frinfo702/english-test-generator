@@ -13,6 +13,7 @@
     "test": "vitest run",
     "format": "prettier --write .",
     "generate-audio": "tsx scripts/generate-audio.ts",
+    "check-voices": "tsx scripts/check-voices.ts",
     "pages:dev": "wrangler pages dev dist --compatibility-date=2026-06-13",
     "pages:deploy": "wrangler pages deploy dist"
   },

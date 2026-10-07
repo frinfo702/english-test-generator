@@ -1,5 +1,10 @@
 {
   "title": "Plate Tectonics",
+  "voices": {
+    "Lecturer": "rex"
+  },
+  "subject": "geology",
+  "speaker": "m1",
   "transcript": "Today we will discuss plate tectonics, the theory that explains the movement of Earth's lithosphere. The lithosphere is divided into several large and small plates that float on the semi-fluid asthenosphere beneath them. There are three main types of plate boundaries. At divergent boundaries, plates move away from each other, allowing magma to rise and create new crust. This process occurs along mid-ocean ridges and is responsible for seafloor spreading. At convergent boundaries, plates move toward each other. When an oceanic plate collides with a continental plate, the denser oceanic plate is forced beneath the continental plate in a process called subduction. This often creates deep ocean trenches and volcanic mountain ranges. When two continental plates collide, neither is dense enough to subduct, so the crust crumples and folds, forming massive mountain ranges like the Himalayas. The third type is transform boundaries, where plates slide past each other horizontally. The San Andreas Fault in California is a well-known example. Earthquakes are common along all three boundary types. The theory of plate tectonics revolutionized geology by providing a unified explanation for earthquakes, volcanic activity, and the distribution of continents and oceans over geological time.",
   "questions": [
     {

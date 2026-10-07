@@ -14,7 +14,8 @@ function loadWaveform(src: string): Promise<number[]> {
 
   const promise = (async () => {
     const response = await fetch(src);
-    if (!response.ok) throw new Error(`Failed to load audio: ${response.status}`);
+    if (!response.ok)
+      throw new Error(`Failed to load audio: ${response.status}`);
     const buffer = await response.arrayBuffer();
     const context = new OfflineAudioContext(1, 1, 44100);
     const audio = await context.decodeAudioData(buffer);
@@ -25,7 +26,11 @@ function loadWaveform(src: string): Promise<number[]> {
     for (let i = 0; i < BAR_COUNT; i++) {
       let peak = 0;
       const start = i * bucketSize;
-      for (let j = start; j < start + bucketSize && j < channel.length; j += 8) {
+      for (
+        let j = start;
+        j < start + bucketSize && j < channel.length;
+        j += 8
+      ) {
         const value = Math.abs(channel[j]);
         if (value > peak) peak = value;
       }
@@ -43,14 +48,26 @@ function loadWaveform(src: string): Promise<number[]> {
 function PlayIcon({ playing }: { playing: boolean }) {
   if (playing) {
     return (
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
         <rect x="6.5" y="5" width="3.6" height="14" rx="1" />
         <rect x="13.9" y="5" width="3.6" height="14" rx="1" />
       </svg>
     );
   }
   return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
       <path d="M8 5.4c0-.9 1-1.5 1.8-1L18 9.9c.7.5.7 1.7 0 2.2l-8.2 5.5c-.8.5-1.8-.1-1.8-1z" />
     </svg>
   );
@@ -97,6 +114,11 @@ export interface AudioPlayerProps {
   /** Accessible label for the transport button (defaults to Play/Pause/Resume). */
   playLabel?: string;
   className?: string;
+  /**
+   * Only the play/pause button — no time, skip, speed or waveform. For a
+   * first, exam-style listen where position and length stay hidden.
+   */
+  minimal?: boolean;
 }
 
 export function AudioPlayer({
@@ -116,6 +138,7 @@ export function AudioPlayer({
   title,
   playLabel,
   className,
+  minimal = false,
 }: AudioPlayerProps) {
   const [waveform, setWaveform] = useState<{
     src: string;
@@ -171,17 +194,46 @@ export function AudioPlayer({
     [scrubbing, onSeek, duration, ratioFromEvent],
   );
 
-  const endPointer = useCallback((event: React.PointerEvent<HTMLDivElement>) => {
-    if (waveformRef.current?.hasPointerCapture(event.pointerId)) {
-      waveformRef.current.releasePointerCapture(event.pointerId);
-    }
-    setScrubbing(false);
-  }, []);
+  const endPointer = useCallback(
+    (event: React.PointerEvent<HTMLDivElement>) => {
+      if (waveformRef.current?.hasPointerCapture(event.pointerId)) {
+        waveformRef.current.releasePointerCapture(event.pointerId);
+      }
+      setScrubbing(false);
+    },
+    [],
+  );
 
   const bars = useMemo(
     () => (waveform && waveform.src === src ? waveform.peaks : []),
     [waveform, src],
   );
+
+  const playButton = (
+    <button
+      type="button"
+      className={styles.playButton}
+      onClick={onPlayPause}
+      disabled={loading}
+      aria-label={
+        playLabel ?? (playing ? "Pause" : currentTime > 0 ? "Resume" : "Play")
+      }
+    >
+      <PlayIcon playing={playing} />
+    </button>
+  );
+
+  if (minimal) {
+    return (
+      <div
+        className={[styles.minimal, className].filter(Boolean).join(" ")}
+        data-playing={playing || undefined}
+      >
+        {playButton}
+        {error && <p className={styles.error}>{error}</p>}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -191,18 +243,7 @@ export function AudioPlayer({
       {title && <p className={styles.title}>{title}</p>}
 
       <div className={styles.controls}>
-        <button
-          type="button"
-          className={styles.playButton}
-          onClick={onPlayPause}
-          disabled={loading}
-          aria-label={
-            playLabel ??
-            (playing ? "Pause" : currentTime > 0 ? "Resume" : "Play")
-          }
-        >
-          <PlayIcon playing={playing} />
-        </button>
+        {playButton}
 
         <div className={styles.transport}>
           <button
@@ -217,7 +258,9 @@ export function AudioPlayer({
           <button
             type="button"
             className={styles.skipButton}
-            onClick={() => onSeek(Math.min(duration, currentTime + skipSeconds))}
+            onClick={() =>
+              onSeek(Math.min(duration, currentTime + skipSeconds))
+            }
             disabled={duration <= 0}
             aria-label={`Forward ${skipSeconds}s`}
           >
@@ -226,9 +269,7 @@ export function AudioPlayer({
         </div>
 
         <span className={styles.time}>
-          <span className={styles.timeCurrent}>
-            {formatClock(currentTime)}
-          </span>
+          <span className={styles.timeCurrent}>{formatClock(currentTime)}</span>
           <span className={styles.timeDivider}>/</span>
           <span>{formatClock(duration)}</span>
         </span>

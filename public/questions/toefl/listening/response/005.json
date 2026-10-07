@@ -1,8 +1,12 @@
 {
   "title": "Listen and Choose a Response — Everyday Situations",
+  "voices": {
+    "Student": "eve"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Apologizing for being late",
       "stem": "Sorry I'm late. The bus broke down and I had to wait for the next one.",
       "options": {
@@ -15,6 +19,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f4",
       "context": "Asking to borrow something",
       "stem": "Do you have a pen I could borrow? Mine just ran out of ink.",
       "options": {
@@ -27,6 +32,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Expressing worry",
       "stem": "I have three exams next week and I'm really stressed about it.",
       "options": {
@@ -39,6 +45,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f4",
       "context": "Checking understanding",
       "stem": "So, you're saying the deadline was moved to Thursday instead of Friday?",
       "options": {
@@ -51,6 +58,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Complimenting someone",
       "stem": "Your presentation was incredible! How did you prepare so well?",
       "options": {
@@ -63,6 +71,7 @@
     },
     {
       "id": "q6",
+      "speaker": "f4",
       "context": "Making an excuse",
       "stem": "I won't be able to finish the report today because the data files got corrupted.",
       "options": {
@@ -75,6 +84,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Asking for an opinion",
       "stem": "What do you think of the new campus dining options?",
       "options": {
@@ -87,6 +97,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f4",
       "context": "Saying goodbye temporarily",
       "stem": "I'll be right back. I need to return this book to the front desk.",
       "options": {

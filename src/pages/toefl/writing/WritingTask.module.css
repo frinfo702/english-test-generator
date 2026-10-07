@@ -1,0 +1,186 @@
+/* Shared exam layout for the writing tasks: the prompt sits in a narrow
+ * left column, the material to respond to and the answer box on the right. */
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.8fr);
+  gap: var(--spacing-8);
+  align-items: start;
+  margin-bottom: var(--spacing-xl);
+}
+
+.prompt {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-doc);
+  padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  line-height: var(--lh-relaxed);
+}
+
+.bullets {
+  padding-left: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.centered {
+  text-align: center;
+}
+
+.right {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+
+/* ---- Answer box ---- */
+
+.responseLabel {
+  font-weight: var(--font-bold);
+}
+
+.responseMeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.wordCount {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-secondary);
+}
+.ok {
+  color: var(--color-success);
+  font-weight: var(--font-semibold);
+}
+.notOk {
+  color: var(--color-warning);
+  font-weight: var(--font-semibold);
+}
+
+.textarea {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  width: 100%;
+  padding: var(--spacing-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-doc);
+  resize: vertical;
+  line-height: var(--lh-relaxed);
+  background: var(--color-surface-subtle);
+  color: var(--color-ink);
+  outline: none;
+}
+/* No focus ring: the caret is enough inside a large writing box. */
+.textarea:focus,
+.textarea:focus-visible {
+  box-shadow: none;
+  border-radius: var(--radius-doc);
+}
+.textarea:disabled {
+  color: var(--color-ink-secondary);
+}
+
+.startCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-2xl) var(--spacing-6);
+  background: var(--color-surface-subtle);
+  border-radius: var(--radius-doc);
+  text-align: center;
+  color: var(--color-ink-secondary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+/* ---- Discussion people ---- */
+
+.professor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.posts {
+  list-style: none;
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.post {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) 0;
+  border-bottom: 1px solid var(--color-border-strong);
+  line-height: var(--lh-relaxed);
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-1);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.avatar {
+  --tone: var(--color-writing);
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--tone);
+  background: color-mix(in srgb, var(--tone) 14%, var(--color-surface));
+  border: 1.5px solid color-mix(in srgb, var(--tone) 45%, transparent);
+  flex-shrink: 0;
+}
+.avatarLarge {
+  width: 96px;
+  height: 96px;
+  font-size: var(--text-3xl);
+}
+.avatar[data-tone="1"] {
+  --tone: var(--color-reading);
+}
+.avatar[data-tone="2"] {
+  --tone: var(--color-speaking);
+}
+
+@media (max-width: 860px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-5);
+  }
+}
+
+@media (max-width: 620px) {
+  .prompt {
+    padding: var(--spacing-4);
+  }
+  .post {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: var(--spacing-3);
+  }
+  .textarea {
+    padding: var(--spacing-4);
+  }
+}

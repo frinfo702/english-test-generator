@@ -1,8 +1,14 @@
 {
   "title": "Listen and Choose a Response — Academic and Personal",
+  "voices": {
+    "Student": "ara",
+    "Classmate": "rex",
+    "Friend": "sal"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Asking about a grade",
       "stem": "Could you tell me what I got wrong on question three? I thought my answer was correct.",
       "options": {
@@ -15,6 +21,7 @@
     },
     {
       "id": "q2",
+      "speaker": "m6",
       "context": "Inviting to a study session",
       "stem": "We're forming a study group for the chemistry final. Are you interested?",
       "options": {
@@ -27,6 +34,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Mentioning an achievement",
       "stem": "I finally finished reading that 500-page book for literature class.",
       "options": {
@@ -39,6 +47,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f4",
       "context": "Asking for technical help",
       "stem": "My laptop keeps crashing whenever I open the design software. Any ideas?",
       "options": {
@@ -51,6 +60,7 @@
     },
     {
       "id": "q5",
+      "speaker": "m5",
       "context": "Expressing concern about a friend",
       "stem": "You haven't been to class in three days. Is everything okay?",
       "options": {
@@ -63,6 +73,7 @@
     },
     {
       "id": "q6",
+      "speaker": "f4",
       "context": "Asking about a refund policy",
       "stem": "I dropped the course last week. When will the tuition refund appear on my account?",
       "options": {
@@ -75,6 +86,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Suggesting an alternative",
       "stem": "The bookstore is sold out of the required textbook. What should I do?",
       "options": {
@@ -87,6 +99,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f4",
       "context": "Congratulating on an award",
       "stem": "I heard you won the undergraduate research award. That's fantastic!",
       "options": {

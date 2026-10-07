@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Travel & Transportation",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Asking about airport shuttle",
       "stem": "Is there a campus shuttle to the airport during winter break?",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f3",
       "context": "Asking about directions to a building",
       "stem": "Excuse me, can you tell me how to get to the engineering building from here?",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Asking about bike parking",
       "stem": "Where can I park my bike on campus? I don't want it to get towed.",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f3",
       "context": "Expressing frustration with traffic",
       "stem": "The traffic on Main Street was terrible this morning. I was stuck for forty minutes.",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Asking about carpool program",
       "stem": "Does the university have a carpool program for students who commute?",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "f3",
       "context": "Asking about taxi services",
       "stem": "Is there a taxi stand near the dorms, or should I call one in advance?",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Mentioning a flat tire",
       "stem": "My bike has a flat tire and I need to get to class in fifteen minutes.",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f3",
       "context": "Asking about international travel documentation",
       "stem": "I'm studying abroad next semester. Do I need any special travel documents?",
       "options": {

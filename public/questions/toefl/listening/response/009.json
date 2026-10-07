@@ -1,8 +1,12 @@
 {
   "title": "Listen and Choose a Response — Campus Services",
+  "voices": {
+    "Student": "eve"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Asking about health services",
       "stem": "Can I make an appointment at the health center for a flu shot?",
       "options": {
@@ -15,6 +19,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f4",
       "context": "Reporting a maintenance issue",
       "stem": "The light in my dorm room keeps flickering. Can someone fix it?",
       "options": {
@@ -27,6 +32,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Asking about job openings",
       "stem": "Are there any work-study positions still available in the admissions office?",
       "options": {
@@ -39,6 +45,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f4",
       "context": "Requesting an extension politely",
       "stem": "Would it be possible to get a two-day extension on the lab report? I've been sick.",
       "options": {
@@ -51,6 +58,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Asking about club activities",
       "stem": "When does the debate club usually meet? I'm interested in joining.",
       "options": {
@@ -63,6 +71,7 @@
     },
     {
       "id": "q6",
+      "speaker": "f4",
       "context": "Complimenting a service",
       "stem": "The writing center tutors were so helpful with my thesis. I wanted to share that feedback.",
       "options": {
@@ -75,6 +84,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Asking about transcript requests",
       "stem": "How long does it take to get an official transcript mailed to my home address?",
       "options": {
@@ -87,6 +97,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f4",
       "context": "Expressing preference",
       "stem": "I'd rather work on the presentation than the research paper. Is that okay?",
       "options": {

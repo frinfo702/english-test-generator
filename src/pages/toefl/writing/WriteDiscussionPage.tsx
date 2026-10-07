@@ -5,7 +5,7 @@ import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { GradingRequestPanel } from "../../../components/ui/GradingRequestPanel";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { Timer } from "../../../components/ui/Timer";
+import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import {
@@ -20,6 +20,7 @@ import {
 import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./WriteDiscussionPage.module.css";
+import task from "./WritingTask.module.css";
 import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 
 interface Student {
@@ -30,6 +31,8 @@ interface Student {
 interface ProblemData {
   professorQuestion: string;
   professorName: string;
+  /** Class subject, e.g. "art history"; fills "teaching a class on …". */
+  course?: string;
   student1: Student;
   student2: Student;
   modelAnswer: string;
@@ -37,6 +40,31 @@ interface ProblemData {
 }
 
 const MIN_WORDS = 100;
+
+/** Monogram stand-in for a profile photo ("Dr. Chen" → "C"). */
+function Avatar({
+  name,
+  tone,
+  large = false,
+}: {
+  name: string;
+  tone: number;
+  large?: boolean;
+}) {
+  const initial = name
+    .replace(/^(dr|prof|professor|mr|mrs|ms)\.?\s+/i, "")
+    .charAt(0)
+    .toUpperCase();
+  return (
+    <span
+      className={[task.avatar, large ? task.avatarLarge : ""].join(" ")}
+      data-tone={tone}
+      aria-hidden="true"
+    >
+      {initial}
+    </span>
+  );
+}
 const TASK_ID = "toefl/writing/discussion";
 
 export function WriteDiscussionPage() {
@@ -143,6 +171,15 @@ export function WriteDiscussionPage() {
 
   return (
     <div>
+      {phase !== "pre" && (
+        <FloatingElapsedTimer
+          display={timer.display}
+          running={timer.running}
+          isWarning={timer.isWarning}
+          isExpired={timer.isExpired}
+        />
+      )}
+
       <SectionHeader
         title="Write for an Academic Discussion"
         subtitle="Read the prompt and student opinions, then write your own view (10 minutes, 100+ words)."
@@ -177,80 +214,104 @@ export function WriteDiscussionPage() {
 
       {data && !loading && hasValidQuestionNumber && (
         <>
-          <div className={styles.discussionCard}>
-            <div className={styles.professorBlock}>
-              <span className={styles.roleTag}>
-                Professor {data.professorName}
-              </span>
-              <p className={styles.professorQ}>{data.professorQuestion}</p>
-            </div>
-            <div className={styles.students}>
-              {[data.student1, data.student2].map((s, i) => (
-                <div key={i} className={styles.studentBlock}>
-                  <span className={styles.studentTag}>{s.name}</span>
-                  <p>{s.response}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {phase === "pre" && (
-            <div className={styles.startCard}>
+          <div className={task.split}>
+            <div className={task.prompt}>
               <p>
-                Press Start when ready. The 10-minute timer will begin. Write at
-                least 100 words.
+                Your professor is teaching a class
+                {data.course ? ` on ${data.course}` : ""}. Write a post
+                responding to the professor&rsquo;s question.
               </p>
-              <div className={styles.actions}>
-                <Button size="lg" onClick={handleStart}>
-                  Start
-                </Button>
-                <NextQuestionButton
-                  taskId={TASK_ID}
-                  variant="secondary"
-                  size="lg"
-                />
+              <div>
+                <p>
+                  <strong>
+                    In your response, you should do the following.
+                  </strong>
+                </p>
+                <ul className={task.bullets}>
+                  <li>Express and support your opinion.</li>
+                  <li>
+                    Make a contribution to the discussion in your own words.
+                  </li>
+                </ul>
               </div>
+              <p>
+                An effective response will contain at least {MIN_WORDS} words.
+              </p>
+              <div className={task.professor}>
+                <span>{data.professorName}</span>
+                <Avatar name={data.professorName} tone={0} large />
+              </div>
+              <p>{data.professorQuestion}</p>
             </div>
-          )}
 
-          {(phase === "writing" || phase === "submitted") && (
-            <div className={styles.writingArea}>
-              <div className={styles.writingHeader}>
-                <Timer
-                  display={timer.display}
-                  isWarning={timer.isWarning}
-                  isExpired={timer.isExpired}
-                />
-                <span
-                  className={[
-                    styles.wordCount,
-                    meetsMinWords ? styles.ok : styles.notOk,
-                  ].join(" ")}
-                >
-                  {wordCount} / {MIN_WORDS}+ words
-                </span>
-              </div>
-              <PoodlePerch>
-                <textarea
-                  className={styles.textarea}
-                  value={userText}
-                  onChange={(e) => setUserText(e.target.value)}
-                  placeholder="Type your response here..."
-                  disabled={phase === "submitted"}
-                  rows={14}
-                />
-              </PoodlePerch>
-              {phase === "writing" && (
-                <div className={styles.actions}>
-                  <Button onClick={handleSubmit}>
-                    Submit
-                    <PixelCheckIcon />
-                  </Button>
-                  <NextQuestionButton taskId={TASK_ID} variant="secondary" />
+            <div className={task.right}>
+              <ul className={task.posts}>
+                {[data.student1, data.student2].map((s, i) => (
+                  <li key={i} className={task.post}>
+                    <div className={task.person}>
+                      <Avatar name={s.name} tone={i + 1} />
+                      <span>{s.name}</span>
+                    </div>
+                    <p>{s.response}</p>
+                  </li>
+                ))}
+              </ul>
+
+              {phase === "pre" && (
+                <div className={task.startCard}>
+                  <p>
+                    Press Start when ready. The 10-minute timer will begin.
+                    Write at least {MIN_WORDS} words.
+                  </p>
+                  <div className={task.actions}>
+                    <Button size="lg" onClick={handleStart}>
+                      Start
+                    </Button>
+                    <NextQuestionButton
+                      taskId={TASK_ID}
+                      variant="secondary"
+                      size="lg"
+                    />
+                  </div>
                 </div>
               )}
+
+              {(phase === "writing" || phase === "submitted") && (
+                <>
+                  <PoodlePerch>
+                    <textarea
+                      className={task.textarea}
+                      value={userText}
+                      onChange={(e) => setUserText(e.target.value)}
+                      placeholder="Type your response here..."
+                      disabled={phase === "submitted"}
+                      rows={14}
+                      aria-label="Your response"
+                    />
+                  </PoodlePerch>
+                  <p className={task.wordCount}>
+                    Word count:{" "}
+                    <span className={meetsMinWords ? task.ok : task.notOk}>
+                      {wordCount}
+                    </span>{" "}
+                    / {MIN_WORDS}+
+                  </p>
+                  {phase === "writing" && (
+                    <div className={task.actions}>
+                      <Button onClick={handleSubmit}>
+                        Submit
+                        <PixelCheckIcon />
+                      </Button>
+                      <NextQuestionButton
+                        taskId={TASK_ID}
+                        variant="secondary"
+                      />
+                    </div>
+                  )}
+                </>
+              )}
             </div>
-          )}
+          </div>
 
           {phase === "submitted" && (
             <div className={styles.feedbackSection}>

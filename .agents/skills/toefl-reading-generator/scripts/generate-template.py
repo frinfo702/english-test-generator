@@ -34,7 +34,8 @@ TEMPLATES = {
             {
                 "id": "t1",
                 "textType": "email",
-                "content": "TODO: Add an everyday text (email / social post / notice / etc.)",
+                "layout": "email",
+                "content": "From: TODO\nTo: TODO\nSubject: TODO\n\nTODO: Email body",
                 "questions": [
                     {
                         "id": "q1",

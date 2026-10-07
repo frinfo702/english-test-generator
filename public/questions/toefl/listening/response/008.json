@@ -1,8 +1,12 @@
 {
   "title": "Listen and Choose a Response — Practical Matters",
+  "voices": {
+    "Student": "rex"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "m6",
       "context": "Asking for a signature",
       "stem": "Professor, would you mind signing my course withdrawal form?",
       "options": {
@@ -15,6 +19,7 @@
     },
     {
       "id": "q2",
+      "speaker": "m6",
       "context": "Offering a ride",
       "stem": "I'm driving to the conference center. Do you need a lift?",
       "options": {
@@ -27,6 +32,7 @@
     },
     {
       "id": "q3",
+      "speaker": "m6",
       "context": "Asking about office hours",
       "stem": "Are your office hours only on Tuesdays, or can I come in another day?",
       "options": {
@@ -39,6 +45,7 @@
     },
     {
       "id": "q4",
+      "speaker": "m6",
       "context": "Mentioning bad weather impact",
       "stem": "The snowstorm last night made the roads impossible. I barely made it to campus.",
       "options": {
@@ -51,6 +58,7 @@
     },
     {
       "id": "q5",
+      "speaker": "m6",
       "context": "Asking about volunteer opportunities",
       "stem": "I'd like to volunteer at the community center this semester. How do I sign up?",
       "options": {
@@ -63,6 +71,7 @@
     },
     {
       "id": "q6",
+      "speaker": "m6",
       "context": "Expressing confusion about directions",
       "stem": "The map says the science building is east of the quad, but I think I'm going in circles.",
       "options": {
@@ -75,6 +84,7 @@
     },
     {
       "id": "q7",
+      "speaker": "m6",
       "context": "Asking to reschedule a meeting",
       "stem": "Something urgent came up. Could we move our meeting from 2 PM to 4 PM?",
       "options": {
@@ -87,6 +97,7 @@
     },
     {
       "id": "q8",
+      "speaker": "m6",
       "context": "Inquiring about a waitlist",
       "stem": "I'm number five on the waitlist for Biology 201. What are my chances of getting in?",
       "options": {

@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Campus Life",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Asking for information",
       "stem": "Excuse me, do you know when the library opens on weekends?",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f4",
       "context": "Asking for help",
       "stem": "I'm having trouble with this math problem. Could you take a look?",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Making a suggestion",
       "stem": "I'm starving, but I don't know what to eat around here.",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f3",
       "context": "Expressing concern",
       "stem": "You've been studying for hours. Don't you think you should take a break?",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Confirming plans",
       "stem": "We're still on for the group presentation tomorrow, right?",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "f4",
       "context": "Apologizing",
       "stem": "I'm really sorry I forgot to bring your textbook. I'll bring it tomorrow.",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Seeking permission",
       "stem": "Would it be alright if I submitted my paper a day late? I've been sick.",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f4",
       "context": "Expressing surprise",
       "stem": "Wait, you mean the campus tour starts at 8 AM, not 9?",
       "options": {

@@ -5,158 +5,15 @@
   padding-bottom: var(--spacing-3);
   border-bottom: var(--doc-rule-soft);
 }
+
 .errorHint {
   margin-top: var(--spacing-sm);
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
 }
 
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-xl);
-}
-
-.difficultySelector {
-  display: flex;
-  gap: var(--spacing-sm);
-  flex-wrap: wrap;
-}
-
-.diffBtn {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
-  padding: 6px 14px;
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-  transition:
-    border-color var(--duration-fast) var(--ease-out),
-    background var(--duration-fast) var(--ease-out),
-    color var(--duration-fast) var(--ease-out);
-}
-.diffBtn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-.diffBtn.active {
-  background: var(--color-ink);
-  border-color: var(--color-ink);
-  color: var(--color-ink-inverse);
-  font-weight: 600;
-}
-
-.layout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-}
-
-.passageCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
-  padding: var(--spacing-xl);
-}
-
-.passageTitle {
-  font-family: var(--font-sans);
-  font-size: var(--text-lg);
-  color: var(--color-ink);
-  margin-bottom: var(--spacing-md);
-}
-
-.passage {
-  font-family: var(--font-sans);
-  line-height: 1.9;
-  white-space: pre-wrap;
-}
-
-.questionCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
-  padding: var(--spacing-xl);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.qNum {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-}
-
-.stem {
-  font-family: var(--font-sans);
-  font-size: var(--text-lg);
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.option {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-sm);
-  padding: 12px var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
-  background: var(--color-surface);
-  text-align: left;
-  font-size: var(--text-base);
-  line-height: 1.5;
-  transition:
-    border-color 0.15s,
-    background 0.15s;
-}
-
-.option:hover:not(:disabled) {
-  border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
-}
-
-.option.selected {
-  border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
-}
-
-.option.correctOpt {
-  border-color: var(--color-success);
-  background: var(--color-success-subtle);
-}
-
-.option.wrongOpt {
-  border-color: var(--color-error);
-  background: var(--color-error-subtle);
-}
-
-.optLabel {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  color: var(--color-ink);
-  min-width: 20px;
-}
-
-.btnRow {
-  display: flex;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-sm);
-}
-
 .resultCard {
+  margin-bottom: var(--spacing-xl);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: var(--doc-rule);
@@ -167,11 +24,6 @@
   align-items: center;
   gap: var(--spacing-lg);
   text-align: center;
-}
-
-.resultTitle {
-  font-family: var(--font-sans);
-  font-size: var(--text-xl);
 }
 
 .scoreBox {
@@ -189,10 +41,12 @@
   color: var(--color-ink);
   line-height: 1;
 }
+
 .scoreDen {
   font-size: var(--text-2xl);
   color: var(--color-ink-secondary);
 }
+
 .scorePct {
   font-size: var(--text-lg);
   color: var(--color-ink-secondary);
@@ -205,47 +59,18 @@
   border-radius: var(--radius-doc);
 }
 
-.questions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
-.qHeader {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.qNum {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-doc);
-  border: 1.5px solid var(--color-ink);
-  background: transparent;
-  color: var(--color-ink);
-  font-weight: 700;
-  font-size: var(--text-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.qType {
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-}
-
 .submitRow {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   gap: var(--spacing-3);
   flex-wrap: wrap;
-  margin-top: var(--spacing-xl);
+  margin-top: var(--spacing-3);
+}
+
+.unanswered {
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
 }
 
 .resultActions {
@@ -254,4 +79,39 @@
   justify-content: center;
   gap: var(--spacing-3);
   flex-wrap: wrap;
+}
+
+/* Reading-room passage: centred title, plain paragraphs, hairline frame. */
+.passageCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-doc);
+  padding: var(--spacing-6) var(--spacing-6) var(--spacing-8);
+}
+
+.passageTitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-ink-secondary);
+  text-align: center;
+  text-wrap: balance;
+  margin-bottom: var(--spacing-6);
+}
+
+.passage {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--lh-doc);
+  color: var(--color-ink);
+}
+
+.passage + .passage {
+  margin-top: var(--spacing-4);
+}
+
+@media (max-width: 620px) {
+  .passageCard {
+    padding: var(--spacing-4) var(--spacing-4) var(--spacing-6);
+  }
 }

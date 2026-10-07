@@ -2,8 +2,7 @@
 export type Slots = (number | null)[];
 
 export type DragSource =
-  | { kind: "pool"; chunk: number }
-  | { kind: "slot"; index: number };
+  { kind: "pool"; chunk: number } | { kind: "slot"; index: number };
 
 export type DropTarget = { kind: "pool" } | { kind: "slot"; index: number };
 
@@ -56,4 +55,49 @@ export function isCorrectOrder(slots: Slots, correctOrder: number[]): boolean {
     slots.length === correctOrder.length &&
     slots.every((chunk, pos) => chunk === correctOrder[pos])
   );
+}
+
+const QUESTION_STARTERS = new Set([
+  "am",
+  "is",
+  "are",
+  "was",
+  "were",
+  "do",
+  "does",
+  "did",
+  "have",
+  "has",
+  "had",
+  "can",
+  "could",
+  "will",
+  "would",
+  "shall",
+  "should",
+  "may",
+  "might",
+  "must",
+  "what",
+  "where",
+  "when",
+  "why",
+  "who",
+  "whom",
+  "whose",
+  "which",
+  "how",
+]);
+
+/**
+ * Terminal mark shown after the last blank. `fullSentence` is stored without
+ * it, so use one if present, else "?" for a sentence opening with an
+ * auxiliary or wh-word ("Do you know where…"), else ".".
+ */
+export function endPunctuation(fullSentence: string): string {
+  const trimmed = fullSentence.trim();
+  const mark = /[.?!]$/.exec(trimmed);
+  if (mark) return mark[0];
+  const first = trimmed.split(/\s+/)[0]?.toLowerCase() ?? "";
+  return QUESTION_STARTERS.has(first) ? "?" : ".";
 }

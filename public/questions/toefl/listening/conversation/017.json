@@ -1,5 +1,10 @@
 {
   "title": "Career Counseling Session",
+  "voices": {
+    "Student": "eve",
+    "Advisor": "atlas"
+  },
+  "speaker": "c1",
   "transcript": "Student: Hi, I have an appointment with Dr. Patel for career counseling. I'm trying to decide between pursuing graduate school and looking for a job after graduation. Advisor: Welcome, come in. That's a big decision. Let's talk about your options. What is your major? Student: I'm majoring in environmental science with a minor in economics. Advisor: That's a great combination. With that background, you have strong prospects both ways. What interests you about graduate school? Student: I really enjoyed my research methods class, and my professor suggested I consider a master's degree. But I'm also worried about student debt. Advisor: That's understandable. Have you looked into funded master's programs? Many offer teaching or research assistantships that cover tuition and provide a stipend. Student: I didn't know that. I thought all graduate programs were expensive. Advisor: Not necessarily. For environmental policy, there are several well-funded programs. Meanwhile, if you want to work first, you could look into environmental consulting firms or government agencies. Many offer tuition reimbursement for employees who later pursue a master's. Student: That's a good point. Would I be at a disadvantage if I worked for a few years first? Advisor: Not at all. Work experience can actually strengthen your graduate school application. It shows maturity and practical knowledge. Student: I think I'll explore both options and attend the career fair next week to see what's available. Advisor: That's a smart approach. Let's meet again after the fair to discuss what you find.",
   "questions": [
     {

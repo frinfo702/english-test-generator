@@ -1,5 +1,10 @@
 {
   "title": "The Art of the Renaissance",
+  "voices": {
+    "Lecturer": "eve"
+  },
+  "subject": "art history",
+  "speaker": "f1",
   "transcript": "Today we will explore the Renaissance, a cultural movement that spanned roughly the fourteenth to the seventeenth centuries, originating in Italy before spreading across Europe. The term 'Renaissance' means 'rebirth,' and it refers to a renewed interest in the classical art, literature, and philosophy of ancient Greece and Rome. In the visual arts, this revival manifested in a focus on realism, human emotion, and perspective. Artists like Leonardo da Vinci, Michelangelo, and Raphael sought to depict the human body and the natural world with unprecedented accuracy. One of the key innovations of this period was the development of linear perspective, which allowed artists to create the illusion of depth on a flat surface. This technique, pioneered by Filippo Brunelleschi and later codified by Leon Battista Alberti, revolutionized how space was represented in painting. Patronage played a crucial role in Renaissance art. Wealthy families, particularly the Medici in Florence, and the Catholic Church commissioned works that often combined religious themes with humanist ideals. The Renaissance was not merely an artistic movement; it represented a fundamental shift in how people viewed themselves and their place in the world, emphasizing individual achievement and the potential of human reason.",
   "questions": [
     {

@@ -1,5 +1,10 @@
 {
   "title": "The History of Photography",
+  "voices": {
+    "Lecturer": "rex"
+  },
+  "subject": "art history",
+  "speaker": "m4",
   "transcript": "Today we will explore the history of photography, from its earliest experiments to the digital revolution. The concept of capturing images dates back centuries, but practical photography was born in the early nineteenth century. In 1826, a French inventor named Joseph Nicéphore Niépce produced the first permanent photograph using a process called heliography. It required an extremely long exposure time—about eight hours—and the image was quite faint.\n\nA few years later, Louis Daguerre developed the daguerreotype, which significantly reduced exposure time and produced much clearer images. This invention, announced in 1839, is often considered the birth of practical photography. Portraiture became popular almost immediately, though subjects had to remain perfectly still for several minutes.\n\nIn the late nineteenth century, George Eastman revolutionized photography by introducing flexible film and the Kodak camera. His famous slogan, 'You press the button, we do the rest,' made photography accessible to ordinary people for the first time. No longer limited to professionals, photography became a mass medium.\n\nThe twentieth century brought color film, 35mm cameras, and eventually digital technology. Digital cameras, which emerged in the 1990s, eliminated the need for film and darkrooms entirely. Today, smartphones have made photography an everyday activity, with billions of images shared online every day. Despite these technological shifts, the fundamental goal of photography remains unchanged: to capture and preserve moments in time.",
   "questions": [
     {

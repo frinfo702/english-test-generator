@@ -37,6 +37,8 @@ description: >
 
 - everyday text（email, notice, schedule, menu, announcement, text message, online post, ad, poster, sign, webpage, news article, form, invoice, receipt など）2〜3本
 - 各テキスト15〜150語、設問2〜3問
+- 各テキストに `layout`（email / chat / live-chat / notice / document）を指定する。chat / live-chat は `messages`（sender, time, text）で書く。詳細は `question-schemas.md`
+- 1セット内で layout を散らす（例: email + chat、notice + live-chat）
 - 合計4〜9問（目安6〜7問）
 - 設問タイプ: factual / inference / purpose / vocabulary
 - CEFR B2〜C1レベル。高度な推論や態度・意図の読み取りを含む

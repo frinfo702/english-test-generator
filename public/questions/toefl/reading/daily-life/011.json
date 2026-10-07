@@ -49,7 +49,34 @@
     {
       "id": "t2",
       "textType": "text message",
-      "content": "Hi Emma — are you still coming to the study session this afternoon?\n\nYes, I'll be there around 3. Do you still have the notes from Tuesday's lecture?\n\nI do, but I only have the first half — my recorder ran out of battery halfway through.\n\nNo problem, I think I have the rest. I can share my screen during the session so we can fill in the gaps together.\n\nThat would be great. See you at 3!",
+      "layout": "chat",
+      "messages": [
+        {
+          "sender": "Ryan Patel",
+          "time": "12:40 P.M.",
+          "text": "Hi Emma — are you still coming to the study session this afternoon?"
+        },
+        {
+          "sender": "Emma Lopez",
+          "time": "12:43 P.M.",
+          "text": "Yes, I'll be there around 3. Do you still have the notes from Tuesday's lecture?"
+        },
+        {
+          "sender": "Ryan Patel",
+          "time": "12:45 P.M.",
+          "text": "I do, but I only have the first half — my recorder ran out of battery halfway through."
+        },
+        {
+          "sender": "Emma Lopez",
+          "time": "12:47 P.M.",
+          "text": "No problem, I think I have the rest. I can share my screen during the session so we can fill in the gaps together."
+        },
+        {
+          "sender": "Ryan Patel",
+          "time": "12:48 P.M.",
+          "text": "That would be great. See you at 3!"
+        }
+      ],
       "questions": [
         {
           "id": "q4",
@@ -66,7 +93,7 @@
         },
         {
           "id": "q5",
-          "stem": "What does the second speaker imply about her notes?",
+          "stem": "What does Ms. Lopez imply about her notes?",
           "options": [
             "A. They are more detailed than the first speaker's notes",
             "B. They were lost due to a technical issue",

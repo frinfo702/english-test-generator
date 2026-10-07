@@ -1,5 +1,10 @@
 {
   "title": "Campus Housing Issue",
+  "voices": {
+    "Student": "ara",
+    "Housing Officer": "rex"
+  },
+  "speaker": "c1",
   "transcript": "Student: Hi, I'm calling about my housing application for next semester. I submitted it last month, but I haven't received any confirmation. Housing Officer: Let me look that up. Can I have your student ID? Student: It's 884-2910. Housing Officer: I see the issue. Your application was received, but it was flagged because you didn't indicate a roommate preference. Student: Oh, I didn't realize that was required. I don't have a specific roommate in mind. Housing Officer: That's fine. We can assign you to a random roommate or a single room if any are available. Single rooms cost an extra eight hundred dollars per semester. Student: I'll stick with a random roommate. How will I find out my assignment? Housing Officer: Room assignments will be emailed by July 15th. You'll also get your roommate's contact information so you can coordinate what to bring. Student: Great. Is there anything else I need to do? Housing Officer: Just make sure your deposit is paid by June 1st. Otherwise, your application will be cancelled. Student: I'll check my account right now. Thanks for your help.",
   "questions": [
     {

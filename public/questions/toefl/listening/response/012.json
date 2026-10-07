@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Academic Situations",
+  "voices": {
+    "Student": "leo",
+    "Friend": "eve"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "m6",
       "context": "Asking about registration",
       "stem": "I'm trying to register for Psychology 201, but the system says it's full.",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f4",
       "context": "Responding to an invitation",
       "stem": "We're ordering takeout for the study group tonight. Do you want anything?",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "m6",
       "context": "Seeking permission to record a lecture",
       "stem": "Professor, would it be alright if I recorded today's lecture? I'm an auditory learner.",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f4",
       "context": "Complaining about group work",
       "stem": "I'm frustrated because my group members haven't done their part of the project.",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "m6",
       "context": "Asking about study abroad",
       "stem": "I'm considering the exchange program in Japan. Do you know anyone who's done it?",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "f4",
       "context": "Returning a borrowed item",
       "stem": "Thanks for letting me borrow your notes. Here they are back — I made some extra annotations too.",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "m6",
       "context": "Asking about graduation requirements",
       "stem": "Do I need to complete an internship to graduate, or are there other options?",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f4",
       "context": "Expressing excitement about a professor",
       "stem": "I just signed up for Dr. Martinez's class. I've heard she's an amazing lecturer!",
       "options": {

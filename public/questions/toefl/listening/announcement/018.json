@@ -1,5 +1,9 @@
 {
   "title": "Tutoring Center Extended Hours",
+  "voices": {
+    "Speaker": "ara"
+  },
+  "speaker": "f3",
   "transcript": "Good news for students. The Academic Support Center will be extending its hours during final exam preparation week, from December 8th to December 14th. The center will remain open until 9 PM on weekdays and from 10 AM to 6 PM on weekends. Tutoring services are available for all core subjects including mathematics, writing, sciences, and foreign languages. Walk-ins are welcome, but appointments are recommended and can be booked through the Academic Support Center website. Free coffee and light snacks will be provided in the study lounge during extended hours.",
   "questions": [
     {

@@ -1,0 +1,293 @@
+/* Left-pane renderings of Read in Daily Life texts, one per layout.
+ * Each layout carries its own frame hue, muted to sit inside the
+ * "Quiet Instrument" palette. */
+
+.frame {
+  --frame-email: #2f6e70;
+  --frame-chat: var(--color-speaking);
+  --frame-live: var(--color-listening);
+  --frame-notice: #86b8b6;
+  --notice-ink: #1f5654;
+
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-doc);
+  padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
+
+:global([data-theme="dark"]) .frame {
+  --frame-email: #6fa7a5;
+  --frame-notice: #4f8381;
+  --notice-ink: #9cc9c6;
+}
+
+.prompt {
+  text-align: center;
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-ink-secondary);
+}
+
+.msgHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--spacing-2);
+}
+
+.sender {
+  font-weight: var(--font-bold);
+  color: var(--color-ink);
+}
+
+.time {
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.msgText {
+  line-height: var(--lh-normal);
+  white-space: pre-wrap;
+}
+
+/* ---- Email ---- */
+
+.email {
+  border: 2px solid var(--frame-email);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.emailHeader {
+  background: var(--frame-email);
+  padding: var(--spacing-4) var(--spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.emailField {
+  background: var(--color-surface);
+  border-radius: var(--radius-xs);
+  padding: var(--spacing-2) var(--spacing-4);
+  overflow-wrap: anywhere;
+}
+
+.emailBody {
+  padding: var(--spacing-5) var(--spacing-6) var(--spacing-6);
+  line-height: var(--lh-relaxed);
+  white-space: pre-wrap;
+}
+
+/* ---- Chat (phone) ---- */
+
+.phone {
+  border: 10px solid var(--frame-chat);
+  border-radius: 34px;
+  padding: 3px;
+  background: color-mix(in srgb, var(--frame-chat) 35%, var(--color-surface));
+  max-width: 560px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.phoneScreen {
+  background: var(--color-surface);
+  border-radius: 22px;
+  border: 1.5px solid var(--frame-chat);
+  padding: 0 var(--spacing-3) var(--spacing-4);
+}
+
+.notch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  width: 120px;
+  height: 24px;
+  margin: 0 auto var(--spacing-3);
+  border: 1.5px solid var(--frame-chat);
+  border-top: none;
+  border-radius: 0 0 14px 14px;
+  background: color-mix(in srgb, var(--frame-chat) 35%, var(--color-surface));
+}
+
+.speaker {
+  width: 36px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-ink);
+}
+
+.camera {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background: var(--color-ink);
+}
+
+.bubbles {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.bubble {
+  max-width: 88%;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius);
+}
+
+.bubbleSelf {
+  align-self: flex-end;
+  text-align: right;
+  background: color-mix(in srgb, var(--frame-chat) 22%, var(--color-surface));
+}
+
+.bubbleSelf .msgHeading {
+  justify-content: flex-end;
+}
+
+.bubbleOther {
+  align-self: flex-start;
+  background: color-mix(in srgb, var(--frame-chat) 8%, var(--color-surface));
+}
+
+/* ---- Live chat ---- */
+
+.liveChat {
+  border: 2px solid var(--frame-live);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.liveHeader {
+  background: var(--frame-live);
+  padding: var(--spacing-4) var(--spacing-5);
+}
+
+.liveTitle {
+  background: var(--color-surface);
+  border-radius: var(--radius-xs);
+  padding: var(--spacing-2) var(--spacing-4);
+  font-weight: var(--font-bold);
+  font-size: var(--text-lg);
+}
+
+.liveRows {
+  list-style: none;
+}
+
+.liveRow {
+  --tone: var(--frame-live);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4) var(--spacing-5);
+  border-left: 5px solid var(--tone);
+}
+
+.liveRow + .liveRow {
+  border-top: 1px solid
+    color-mix(in srgb, var(--frame-live) 25%, var(--color-border));
+}
+
+.liveRow[data-tone="1"] {
+  --tone: var(--color-speaking);
+}
+.liveRow[data-tone="2"] {
+  --tone: var(--color-reading);
+}
+.liveRow[data-tone="3"] {
+  --tone: var(--color-writing);
+}
+
+/* ---- Notice (announcement, advertisement, poster, sign) ---- */
+
+.notice {
+  border: 6px solid var(--frame-notice);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+}
+
+.noticeHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-5) var(--spacing-5) var(--spacing-4);
+  border-bottom: 2px solid var(--frame-notice);
+  text-align: center;
+}
+
+.noticeIcon {
+  width: 56px;
+  height: 56px;
+  color: var(--notice-ink);
+}
+
+.noticeTitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  line-height: var(--lh-snug);
+  text-wrap: balance;
+}
+
+.noticeBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-6) var(--spacing-5);
+  border-bottom: 2px solid var(--frame-notice);
+  margin-bottom: var(--spacing-3);
+  line-height: var(--lh-relaxed);
+  white-space: pre-wrap;
+}
+
+.noticeCentered {
+  text-align: center;
+  font-size: var(--text-lg);
+}
+
+/* ---- Document (notice, schedule, menu, ...) ---- */
+
+.document {
+  border: 1px solid var(--color-border-strong);
+  border-top: var(--doc-rule);
+  border-radius: var(--radius-doc);
+  padding: var(--spacing-5) var(--spacing-6);
+}
+
+.docType {
+  font-size: var(--text-xs);
+  color: var(--color-ink-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--spacing-3);
+}
+
+.docContent {
+  line-height: var(--lh-relaxed);
+  white-space: pre-wrap;
+}
+
+@media (max-width: 620px) {
+  .frame {
+    padding: var(--spacing-4);
+  }
+  .phone {
+    border-width: 7px;
+    border-radius: 26px;
+  }
+  .emailBody,
+  .liveRow,
+  .noticeBody,
+  .document {
+    padding-inline: var(--spacing-4);
+  }
+}

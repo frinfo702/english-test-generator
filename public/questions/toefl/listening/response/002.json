@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Academic Life",
+  "voices": {
+    "Student": "eve",
+    "Friend": "ara"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Requesting clarification",
       "stem": "Professor, I didn't quite follow the assignment. Could you explain it again?",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f4",
       "context": "Making an offer",
       "stem": "I'm heading to the coffee shop. Can I get you anything?",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Expressing doubt",
       "stem": "Do you really think we can finish this research paper by Friday?",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f3",
       "context": "Declining politely",
       "stem": "We're having a study group session tonight. Want to join us?",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Seeking advice",
       "stem": "I can't decide between taking economics or psychology this semester. What do you think?",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "f4",
       "context": "Showing appreciation",
       "stem": "Thank you so much for reviewing my draft. Your feedback was really helpful.",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Asking for direction",
       "stem": "I'm looking for the science building. Is it near here?",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f4",
       "context": "Proposing a change",
       "stem": "I think we should move our meeting to Thursday instead. Does that work for everyone?",
       "options": {

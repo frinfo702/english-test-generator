@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Daily Encounters",
+  "voices": {
+    "Student": "eve",
+    "Friend": "leo"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Asking for the time",
       "stem": "Excuse me, do you have the time? My phone battery died.",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "m6",
       "context": "Apologizing for spilling something",
       "stem": "Oh no, I'm so sorry! I spilled my coffee on your notes.",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Making small talk about weather",
       "stem": "It's been raining nonstop for three days. I'm tired of it.",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "m6",
       "context": "Inquiring about lost and found",
       "stem": "I lost my student ID somewhere on campus. Is there a lost and found office?",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Responding to good news",
       "stem": "My advisor approved my research proposal! I can finally start collecting data.",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "m6",
       "context": "Asking about a package delivery",
       "stem": "I'm expecting a package. Where do dorm residents usually pick up mail?",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Expressing appreciation for a favor",
       "stem": "I can't thank you enough for taking notes for me while I was sick.",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "m6",
       "context": "Asking about a bus route",
       "stem": "Does the campus shuttle go to the train station, or do I need to take the city bus?",
       "options": {

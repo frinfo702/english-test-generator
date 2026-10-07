@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Library & Resources",
+  "voices": {
+    "Student": "rex",
+    "Friend": "eve"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "m6",
       "context": "Asking about library hours during break",
       "stem": "Is the library open during spring break? I need a place to study.",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "f4",
       "context": "Asking about borrowing limits",
       "stem": "How many books can I check out at once with my student ID?",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "m6",
       "context": "Asking about interlibrary loans",
       "stem": "What if the library doesn't have the book I need? Can you get it from another library?",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "f4",
       "context": "Asking about scanning equipment",
       "stem": "Are there scanners available in the library for digitizing documents?",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "m6",
       "context": "Expressing gratitude for library help",
       "stem": "The research librarian was incredibly helpful with my thesis sources. I just wanted to say thanks.",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "f4",
       "context": "Asking about laptop rentals",
       "stem": "Can I borrow a laptop from the library if mine is being repaired?",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "m6",
       "context": "Asking about quiet zone rules",
       "stem": "Which floor of the library is the silent study area? I need complete quiet.",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "f4",
       "context": "Warning about a due date",
       "stem": "Just a heads up — the book you borrowed is due tomorrow.",
       "options": {

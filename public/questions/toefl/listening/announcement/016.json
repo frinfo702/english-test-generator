@@ -1,5 +1,9 @@
 {
   "title": "Health Services Flu Shot Clinic",
+  "voices": {
+    "Speaker": "ara"
+  },
+  "speaker": "f4",
   "transcript": "Attention students and staff. Campus Health Services will be hosting a flu shot clinic on Monday, November 7th from 9 AM to 4 PM in the Student Health Center lobby. Flu shots are available at no cost for all currently enrolled students with a valid student ID. Staff and faculty can receive the vaccine for a fee of twenty dollars. No appointment is necessary, but you are encouraged to arrive early as supplies are limited. Please wear clothing that allows easy access to your upper arm. The entire process takes approximately ten minutes.",
   "questions": [
     {

@@ -1,5 +1,10 @@
 {
   "title": "Thesis Advisor Meeting",
+  "voices": {
+    "Student": "leo",
+    "Professor": "ara"
+  },
+  "speaker": "c2",
   "transcript": "Student: Professor Adams, I've been working on my thesis proposal, but I'm struggling to narrow down my research question. Professor: Let's discuss it. What is your general area of interest? Student: I'm interested in renewable energy policy, specifically how government subsidies affect solar adoption. Professor: That's a broad topic. Have you decided on a geographic focus? Student: I was thinking about comparing Germany and the United States. Professor: Good choice. Both have different subsidy structures and adoption rates. You might also consider adding a time dimension—how policies evolved over the last decade. Student: That's a great idea. Should I focus on residential or commercial adoption? Professor: Residential might be more manageable for an undergraduate thesis. There's also more accessible data. Student: I'll go with that. How many sources should my literature review include? Professor: Aim for twenty to thirty peer-reviewed sources. Make sure they span policy analysis, economic evaluation, and case studies. Student: Understood. I'll revise my proposal and send you a draft by Friday. Professor: Looking forward to reading it.",
   "questions": [
     {

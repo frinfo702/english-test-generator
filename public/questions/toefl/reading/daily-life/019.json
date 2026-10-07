@@ -3,7 +3,39 @@
     {
       "id": "t1",
       "textType": "text message",
-      "content": "Hey, are you still planning to sell your used textbooks this semester?\n\nYeah, I listed them on the student exchange page yesterday. Three of them — intro to psych, calculus, and freshman comp.\n\nHow much are you asking for the psych book? I might be interested.\n\n$40. It's in really good condition, no highlighting. The retail price is over $120.\n\nThat's a deal. Can I come by and pick it up this evening?\n\nSure, text me when you're on your way.",
+      "layout": "chat",
+      "messages": [
+        {
+          "sender": "Mia Torres",
+          "time": "4:15 P.M.",
+          "text": "Hey, are you still planning to sell your used textbooks this semester?"
+        },
+        {
+          "sender": "Jordan Lee",
+          "time": "4:21 P.M.",
+          "text": "Yeah, I listed them on the student exchange page yesterday. Three of them — intro to psych, calculus, and freshman comp."
+        },
+        {
+          "sender": "Mia Torres",
+          "time": "4:22 P.M.",
+          "text": "How much are you asking for the psych book? I might be interested."
+        },
+        {
+          "sender": "Jordan Lee",
+          "time": "4:25 P.M.",
+          "text": "$40. It's in really good condition, no highlighting. The retail price is over $120."
+        },
+        {
+          "sender": "Mia Torres",
+          "time": "4:26 P.M.",
+          "text": "That's a deal. Can I come by and pick it up this evening?"
+        },
+        {
+          "sender": "Jordan Lee",
+          "time": "4:30 P.M.",
+          "text": "Sure, text me when you're on your way."
+        }
+      ],
       "questions": [
         {
           "id": "q1",

@@ -1,8 +1,13 @@
 {
   "title": "Listen and Choose a Response — Housing & Dining",
+  "voices": {
+    "Student": "ara",
+    "Friend": "rex"
+  },
   "questions": [
     {
       "id": "q1",
+      "speaker": "f4",
       "context": "Complaining about dining hall food",
       "stem": "The dining hall has been serving the same meals every week. I'm getting tired of it.",
       "options": {
@@ -15,6 +20,7 @@
     },
     {
       "id": "q2",
+      "speaker": "m6",
       "context": "Asking about guest policy",
       "stem": "Can I have a guest stay overnight in my dorm room over the weekend?",
       "options": {
@@ -27,6 +33,7 @@
     },
     {
       "id": "q3",
+      "speaker": "f4",
       "context": "Asking about meal plan options",
       "stem": "I'm thinking of switching from the 14-meal plan to the unlimited plan. Can I do that?",
       "options": {
@@ -39,6 +46,7 @@
     },
     {
       "id": "q4",
+      "speaker": "m6",
       "context": "Reporting a broken appliance",
       "stem": "The refrigerator in my dorm room stopped working. All my food is spoiling.",
       "options": {
@@ -51,6 +59,7 @@
     },
     {
       "id": "q5",
+      "speaker": "f4",
       "context": "Suggesting a roommate activity",
       "stem": "We should decorate our dorm room together. It looks a bit plain right now.",
       "options": {
@@ -63,6 +72,7 @@
     },
     {
       "id": "q6",
+      "speaker": "m6",
       "context": "Inquiring about housing deposit",
       "stem": "When do I get my housing deposit back after moving out of the dorm?",
       "options": {
@@ -75,6 +85,7 @@
     },
     {
       "id": "q7",
+      "speaker": "f4",
       "context": "Asking about dietary restrictions",
       "stem": "Does the dining hall offer gluten-free options? I have celiac disease.",
       "options": {
@@ -87,6 +98,7 @@
     },
     {
       "id": "q8",
+      "speaker": "m6",
       "context": "Complimenting a neighbor",
       "stem": "Your room looks so cozy! I love how you arranged the furniture.",
       "options": {

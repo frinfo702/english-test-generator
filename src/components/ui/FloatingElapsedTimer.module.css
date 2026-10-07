@@ -50,6 +50,30 @@
   background: var(--color-border-strong);
 }
 
+.warning {
+  border-color: color-mix(
+    in srgb,
+    var(--color-warning) 45%,
+    var(--color-border)
+  );
+  background: color-mix(
+    in srgb,
+    var(--color-warning) 10%,
+    var(--color-surface)
+  );
+}
+.warning .value {
+  color: var(--color-warning);
+}
+
+.expired {
+  border-color: color-mix(in srgb, var(--color-error) 45%, var(--color-border));
+  background: color-mix(in srgb, var(--color-error) 10%, var(--color-surface));
+}
+.expired .value {
+  color: var(--color-error);
+}
+
 @keyframes pulse {
   0%,
   100% {

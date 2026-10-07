@@ -1,4 +1,7 @@
-/** xAI TTS built-in voices (from GET /v1/tts/voices). */
+/**
+ * xAI TTS built-in voices (from GET /v1/tts/voices).
+ * Keep in sync with the API: `npm run check-voices`.
+ */
 export type VoiceGender = "male" | "female";
 
 export interface VoiceInfo {
@@ -22,6 +25,7 @@ export const ALL_VOICES: VoiceInfo[] = [
     gender: "male",
     description: "Steady, confident",
   },
+  { id: "aurora", name: "Aurora", gender: "female" },
   {
     id: "carina",
     name: "Carina",
@@ -67,6 +71,7 @@ export const ALL_VOICES: VoiceInfo[] = [
     gender: "male",
     description: "Mature, professorial",
   },
+  { id: "liora", name: "Liora", gender: "female" },
   { id: "lumen", name: "Lumen", gender: "male" },
   {
     id: "luna",
@@ -181,4 +186,40 @@ export function pickInterviewerVoice(seed: string): InterviewerVoiceId {
 
 export function getInterviewerDisplayName(voiceId: string): string {
   return getVoiceInfo(voiceId)?.name ?? voiceId;
+}
+
+/** Narration is not a person on screen, so it is excluded from casting. */
+export const NARRATOR_ROLE = "Narrator";
+
+/**
+ * Cast a voice for each role of a listening set, deterministically from the
+ * file basename. Roles never share a voice. With `mixedPair`, the first two
+ * on-screen roles get one male and one female voice (Conversation photos
+ * always show a man and a woman).
+ */
+export function assignVoices(
+  basename: string,
+  roles: string[],
+  { mixedPair = false }: { mixedPair?: boolean } = {},
+): Record<string, string> {
+  const used = new Set<string>();
+  const voices: Record<string, string> = {};
+  const speakers = roles.filter((r) => r !== NARRATOR_ROLE);
+  const firstGender =
+    hashText(`${basename}:gender`) % 2 === 0 ? "male" : "female";
+  for (const role of roles) {
+    let pool = ALL_VOICES.filter((v) => !used.has(v.id));
+    if (mixedPair && role !== NARRATOR_ROLE) {
+      const idx = speakers.indexOf(role);
+      if (idx < 2) {
+        const want =
+          idx === 0 ? firstGender : firstGender === "male" ? "female" : "male";
+        pool = pool.filter((v) => v.gender === want);
+      }
+    }
+    const voice = pool[hashText(`${basename}:${role}`) % pool.length];
+    voices[role] = voice.id;
+    used.add(voice.id);
+  }
+  return voices;
 }

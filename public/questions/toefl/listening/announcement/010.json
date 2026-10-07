@@ -1,5 +1,9 @@
 {
   "title": "Art Gallery Opening",
+  "voices": {
+    "Speaker": "ara"
+  },
+  "speaker": "f3",
   "transcript": "Good morning. The campus art gallery is pleased to announce the opening of its new exhibition, 'Perspectives in Modern Sculpture,' featuring works by graduating Master of Fine Arts students. The opening reception will take place this Friday from 5 PM to 8 PM. Admission is free for all students with a valid ID. The exhibition will run for three weeks, and guided tours are available every Tuesday and Thursday at 1 PM. Several of the featured artists will be present at the opening to discuss their creative process. Light refreshments will be provided. We hope to see you there.",
   "questions": [
     {
