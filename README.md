@@ -22,7 +22,21 @@ npm run dev:vite
 # -> http://localhost:5173
 ```
 
-Deploy to Cloudflare Pages:
+### Releasing
+
+Production on Cloudflare Pages ships only through the **Release** workflow,
+never on a push. Run it from the Actions tab (Release → Run workflow) or:
+
+```bash
+gh workflow run release.yml -f bump=minor   # patch | minor | major
+```
+
+It bumps that part of the latest `vX.Y.Z` tag (the first release is
+`v0.1.0` for `minor`), deploys `main`, then creates the tag and a GitHub
+release with generated notes. To roll back, use **Rollback** on an older
+deployment in the Cloudflare Pages dashboard.
+
+To deploy from your machine instead:
 
 ```bash
 npm run build

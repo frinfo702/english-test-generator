@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Part of the version to bump
+        type: choice
+        options: [patch, minor, major]
+        default: patch
+
+# Two runs at once would both pick the same next version.
+concurrency: release
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    # The run form lets you pick any branch; only main ships.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: version
+        run: |
+          latest=$(git tag --list 'v*.*.*' --sort=-v:refname | head -n 1)
+          IFS=. read -r major minor patch <<< "${latest:-v0.0.0}"
+          major=${major#v}
+          case "${{ inputs.bump }}" in
+            major) major=$((major + 1)); minor=0; patch=0 ;;
+            minor) minor=$((minor + 1)); patch=0 ;;
+            patch) patch=$((patch + 1)) ;;
+          esac
+          echo "tag=v$major.$minor.$patch" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run build
+      # Deploy here rather than in a workflow triggered by the release: events
+      # caused by GITHUB_TOKEN never start other workflows.
+      # --branch main: Pages can't infer production from a detached checkout.
+      - run: npx wrangler pages deploy dist --project-name english-test-generator --branch main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      # Tagged only after the deploy succeeds, so a tag always means "went live".
+      - run: gh release create "${{ steps.version.outputs.tag }}" --target "$GITHUB_SHA" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
