@@ -51,8 +51,30 @@ export function computeSpeedMetrics(utterances: TimedWord[][]): SpeedMetrics {
   };
 }
 
-/** Maps metrics to the 0–100 "Needs Work → On Target" bar. */
+const TARGET_WPM_MIN = 130;
+const TARGET_WPM_MAX = 160;
+const ZERO_SCORE_WPM_SLOW = 60;
+const ZERO_SCORE_WPM_FAST = 220;
+// About one breath pause per sentence is natural, so only pauses beyond that
+// cost points.
+const FREE_LONG_PAUSES_PER_MINUTE = 4;
+const POINTS_PER_EXTRA_PAUSE = 5;
+
+/**
+ * Maps metrics to the 0–100 "Needs Work → On Target" bar. Scores a band
+ * rather than "faster is better": rushing past ~160 wpm hurts clarity.
+ */
 export function speedScore(metrics: SpeedMetrics): number {
-  // TODO(human)
-  return 0;
+  if (metrics.words === 0) return 0;
+  const wpm = metrics.speakingRate;
+  const rate =
+    wpm < TARGET_WPM_MIN
+      ? (wpm - ZERO_SCORE_WPM_SLOW) / (TARGET_WPM_MIN - ZERO_SCORE_WPM_SLOW)
+      : wpm > TARGET_WPM_MAX
+        ? (ZERO_SCORE_WPM_FAST - wpm) / (ZERO_SCORE_WPM_FAST - TARGET_WPM_MAX)
+        : 1;
+  const pausePenalty =
+    Math.max(0, metrics.longPausesPerMinute - FREE_LONG_PAUSES_PER_MINUTE) *
+    POINTS_PER_EXTRA_PAUSE;
+  return Math.min(100, Math.max(0, rate * 100 - pausePenalty));
 }
