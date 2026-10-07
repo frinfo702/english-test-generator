@@ -187,23 +187,6 @@
   color: var(--color-ink-tertiary);
 }
 
-/* Flattening each ProgressBar into one grid lines every track up, whatever
-   its label's width. */
-.bars {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--spacing-2) var(--spacing-3);
-}
-
-.bars > div {
-  display: contents;
-}
-
-.bars > p {
-  grid-column: 1 / -1;
-}
-
 .details {
   grid-column: 1 / -1;
 }

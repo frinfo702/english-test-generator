@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
+import { BarGroup } from "../../../components/ui/BarGroup";
 import { Button } from "../../../components/ui/Button";
+import { ScorePips } from "../../../components/pixel/ScorePips";
 import { AudioPlayer } from "../../../components/ui/AudioPlayer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { MicSelector } from "../../../components/ui/MicSelector";
@@ -394,7 +396,12 @@ export function TakeInterviewPage() {
       )}
 
       {data && !loading && hasValidQuestionId && q && chrome && (
-        <div className={styles.card}>
+        <div
+          className={[
+            styles.card,
+            phase === "submitted" ? styles.cardWide : "",
+          ].join(" ")}
+        >
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>{chrome.tag}</span>
             {chrome.position !== chrome.tag && (
@@ -600,136 +607,142 @@ export function TakeInterviewPage() {
 
           {phase === "submitted" && (
             <div className={styles.feedbackArea}>
-              <div className={styles.userAnswerCard}>
-                <h3>Your spoken answer</h3>
-                {displayAnswer ? (
-                  <p className={styles.userAnswerText}>{displayAnswer}</p>
-                ) : (
-                  <p className={styles.userAnswerEmpty}>
-                    No speech was detected. Try the next question, or retry if
-                    you can.
-                  </p>
-                )}
-                {savingAnswer && (
-                  <p className={styles.preNote}>Saving your answer…</p>
-                )}
-                {saveError && <p className={styles.error}>{saveError}</p>}
-                {speech.error && <p className={styles.error}>{speech.error}</p>}
-              </div>
-
-              <div className={styles.userAnswerCard}>
-                <h3>Delivery</h3>
-                {assessment && speedMetrics ? (
-                  <>
-                    <ProgressBar
-                      current={Math.round(assessment.pronunciation)}
-                      total={100}
-                      label="Pronunciation"
-                    />
-                    <ProgressBar
-                      current={Math.round(speedScore(speedMetrics))}
-                      total={100}
-                      label="Speed"
-                    />
-                    <p className={styles.preNote}>
-                      {Math.round(speedMetrics.speakingRate)} words/min ·{" "}
-                      {speedMetrics.longPausesPerMinute.toFixed(1)} long
-                      pauses/min
-                    </p>
-                    {assessment.words.some((w) => w.accuracy < 60) && (
-                      <p className={styles.preNote}>
-                        Unclear words:{" "}
-                        {assessment.words
-                          .filter((w) => w.accuracy < 60)
-                          .map((w) => w.word)
-                          .join(", ")}
+              <div className={styles.feedbackGrid}>
+                <div className={styles.feedbackMain}>
+                  <section className={styles.userAnswerCard}>
+                    <h3>Your spoken answer</h3>
+                    {displayAnswer ? (
+                      <p className={styles.userAnswerText}>{displayAnswer}</p>
+                    ) : (
+                      <p className={styles.userAnswerEmpty}>
+                        No speech was detected. Try the next question, or retry
+                        if you can.
                       </p>
                     )}
-                  </>
-                ) : assessError ? (
-                  <p className={styles.preNote}>
-                    Pronunciation scoring unavailable: {assessError}
-                  </p>
-                ) : (
-                  <p className={styles.preNote}>Scoring pronunciation…</p>
-                )}
-              </div>
+                    {savingAnswer && (
+                      <p className={styles.preNote}>Saving your answer…</p>
+                    )}
+                    {saveError && <p className={styles.error}>{saveError}</p>}
+                    {speech.error && (
+                      <p className={styles.error}>{speech.error}</p>
+                    )}
+                  </section>
 
-              <div className={styles.copyCard}>
-                {qaCopyMessage && (
-                  <AiScorePanel
-                    message={qaCopyMessage}
-                    onApply={handleApplyAi}
-                  />
-                )}
-                {itemScore && (
-                  <div className={styles.itemScore}>
-                    <h3>
-                      Score {itemScore.total}/5
-                      {(!aiScores || !assessment) && " (partial)"}
-                    </h3>
-                    {(
-                      [
-                        ["Language use", itemScore.languageUse],
-                        ["Organization", itemScore.organization],
-                        ["Intelligibility", itemScore.intelligibility],
-                        ["Fluency", itemScore.fluency],
-                      ] as const
-                    ).map(
-                      ([label, value]) =>
-                        value !== undefined && (
-                          <ProgressBar
-                            key={label}
-                            current={Math.round(value * 10) / 10}
-                            total={5}
-                            label={label}
+                  {qaCopyMessage && !aiScores && (
+                    <AiScorePanel
+                      message={qaCopyMessage}
+                      onApply={handleApplyAi}
+                    />
+                  )}
+
+                  <details className={styles.sampleDetails}>
+                    <summary>Sample answer</summary>
+                    <div className={styles.modelAnswer}>
+                      <p>{q.modelAnswer}</p>
+                      {modelUrl && (
+                        <div className={styles.modelPlayer}>
+                          <AudioPlayer
+                            playing={audio.playing && modelActive}
+                            loading={audio.loading && modelActive}
+                            error={modelActive ? audio.error : null}
+                            currentTime={modelActive ? audio.currentTime : 0}
+                            duration={modelActive ? audio.duration : 0}
+                            playbackRate={audio.playbackRate}
+                            onPlayPause={() => audio.toggle("model", modelUrl)}
+                            onSeek={audio.seek}
+                            onPlaybackRateChange={audio.setPlaybackRate}
+                            seekable
+                            src={modelUrl}
+                            playLabel={
+                              audio.loading && modelActive
+                                ? "Loading..."
+                                : audio.playing && modelActive
+                                  ? "Pause"
+                                  : audio.currentTime > 0 && modelActive
+                                    ? "Resume"
+                                    : "Play sample answer"
+                            }
                           />
-                        ),
+                        </div>
+                      )}
+                    </div>
+                  </details>
+                </div>
+
+                <aside className={styles.feedbackSide}>
+                  <div className={styles.scoreHead}>
+                    <ScorePips
+                      score={aiScores ? (itemScore?.total ?? null) : null}
+                    />
+                    {aiScores && itemScore ? (
+                      <p>
+                        <strong>{itemScore.total}</strong>/5
+                        {!assessment && " · partial"}
+                      </p>
+                    ) : (
+                      <p>Waiting for the AI score</p>
                     )}
                   </div>
-                )}
-              </div>
-
-              <div className={styles.evalCard}>
-                <h3>Evaluation Points</h3>
-                <ul>
-                  {q.evaluationPoints.map((pt, i) => (
-                    <li key={i}>{pt}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className={styles.modelArea}>
-                <div className={styles.modelAnswer}>
-                  <h3>Sample Answer</h3>
-                  <p>{q.modelAnswer}</p>
-                  {modelUrl && (
-                    <div className={styles.modelPlayer}>
-                      <AudioPlayer
-                        playing={audio.playing && modelActive}
-                        loading={audio.loading && modelActive}
-                        error={modelActive ? audio.error : null}
-                        currentTime={modelActive ? audio.currentTime : 0}
-                        duration={modelActive ? audio.duration : 0}
-                        playbackRate={audio.playbackRate}
-                        onPlayPause={() => audio.toggle("model", modelUrl)}
-                        onSeek={audio.seek}
-                        onPlaybackRateChange={audio.setPlaybackRate}
-                        seekable
-                        src={modelUrl}
-                        playLabel={
-                          audio.loading && modelActive
-                            ? "Loading..."
-                            : audio.playing && modelActive
-                              ? "Pause"
-                              : audio.currentTime > 0 && modelActive
-                                ? "Resume"
-                                : "Play sample answer"
-                        }
+                  <BarGroup>
+                    {itemScore?.languageUse !== undefined && (
+                      <ProgressBar
+                        current={itemScore.languageUse}
+                        total={5}
+                        label="Language use"
                       />
-                    </div>
-                  )}
-                </div>
+                    )}
+                    {itemScore?.organization !== undefined && (
+                      <ProgressBar
+                        current={itemScore.organization}
+                        total={5}
+                        label="Organization"
+                      />
+                    )}
+                    {assessment && speedMetrics ? (
+                      <>
+                        <ProgressBar
+                          current={Math.round(assessment.pronunciation)}
+                          total={100}
+                          label="Pronunciation"
+                        />
+                        <ProgressBar
+                          current={Math.round(speedScore(speedMetrics))}
+                          total={100}
+                          label="Speed"
+                        />
+                        <p className={styles.preNote}>
+                          {Math.round(speedMetrics.speakingRate)} words/min ·{" "}
+                          {speedMetrics.longPausesPerMinute.toFixed(1)} long
+                          pauses/min
+                        </p>
+                        {assessment.words.some((w) => w.accuracy < 60) && (
+                          <p className={styles.preNote}>
+                            Unclear words:{" "}
+                            {assessment.words
+                              .filter((w) => w.accuracy < 60)
+                              .map((w) => w.word)
+                              .join(", ")}
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <p className={styles.preNote}>
+                        {assessError
+                          ? `Pronunciation not scored: ${assessError}`
+                          : "Scoring pronunciation…"}
+                      </p>
+                    )}
+                  </BarGroup>
+
+                  <div className={styles.evalCard}>
+                    <h3>Evaluation points</h3>
+                    <ul>
+                      {q.evaluationPoints.map((pt, i) => (
+                        <li key={i}>{pt}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </aside>
               </div>
 
               <div className={styles.actions}>

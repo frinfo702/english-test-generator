@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { PixelIcon } from "../../../components/pixel/PixelIcon";
 import { ScorePips } from "../../../components/pixel/ScorePips";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
+import { BarGroup } from "../../../components/ui/BarGroup";
 import { Button } from "../../../components/ui/Button";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useSingleAudio } from "../../../hooks/useSingleAudio";
@@ -202,7 +203,7 @@ function ItemRow({
             </>
           )}
         </p>
-        <div className={styles.bars}>{side}</div>
+        <BarGroup>{side}</BarGroup>
       </div>
       {/* Unscored items need the AI paste panel inside, so start them open. */}
       <details className={styles.details} open={score === undefined}>
