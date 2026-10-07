@@ -75,10 +75,12 @@
   background: var(--color-surface-subtle);
   color: var(--color-ink);
   outline: none;
-  transition: border-color var(--duration-fast) var(--ease-out);
 }
-.textarea:focus {
-  border-color: var(--color-accent);
+/* No focus ring: the caret is enough inside a large writing box. */
+.textarea:focus,
+.textarea:focus-visible {
+  box-shadow: none;
+  border-radius: var(--radius-doc);
 }
 .textarea:disabled {
   color: var(--color-ink-secondary);
