@@ -21,6 +21,12 @@ import {
   copyText,
 } from "../../../lib/answerSubmission";
 import { saveAttempt } from "../../../lib/attempts";
+import {
+  interviewItemScore,
+  parseAiScores,
+  type AiInterviewScores,
+  type InterviewItemScore,
+} from "../../../lib/interviewScoring";
 import type { PronunciationResult } from "../../../lib/pronunciation";
 import { assessSpontaneousSpeech } from "../../../lib/pronunciationStream";
 import { computeSpeedMetrics, speedScore } from "../../../lib/speakingRate";
@@ -59,6 +65,12 @@ export function TakeInterviewPage() {
     null,
   );
   const [assessError, setAssessError] = useState<string | null>(null);
+  const [aiReply, setAiReply] = useState("");
+  const [aiScores, setAiScores] = useState<AiInterviewScores | null>(null);
+  const [aiError, setAiError] = useState<string | null>(null);
+  const [itemScores, setItemScores] = useState<
+    Record<number, InterviewItemScore>
+  >({});
   const assessGenerationRef = useRef(0);
   const submittingRef = useRef(false);
 
@@ -121,6 +133,9 @@ export function TakeInterviewPage() {
     setCopied(false);
     setAssessment(null);
     setAssessError(null);
+    setAiReply("");
+    setAiScores(null);
+    setAiError(null);
     assessGenerationRef.current += 1;
     clearTranscript();
     clearSpeechError();
@@ -291,13 +306,26 @@ export function TakeInterviewPage() {
     void speech.stop();
     setCurrent(0);
     setDone(false);
+    setItemScores({});
     resetInteraction();
     timer.reset();
     navigate(`/${INTERVIEW_TASK_ID}`);
   };
 
+  const handleApplyAiReply = () => {
+    try {
+      setAiScores(parseAiScores(aiReply));
+      setAiError(null);
+    } catch (e) {
+      setAiError(e instanceof Error ? e.message : String(e));
+    }
+  };
+
   const handleNext = () => {
     if (!data) return;
+    if (itemScore) {
+      setItemScores((prev) => ({ ...prev, [current]: itemScore }));
+    }
     audio.stop();
     void speech.stop();
     if (current + 1 >= data.questions.length) {
@@ -318,6 +346,8 @@ export function TakeInterviewPage() {
   const questionActive = audio.isActive("question");
   const modelActive = audio.isActive("model");
   const displayAnswer = userText || speech.transcript;
+  const itemScore = interviewItemScore(aiScores, assessment);
+  const scoredItems = Object.values(itemScores);
   const speedMetrics = assessment
     ? computeSpeedMetrics([assessment.words])
     : null;
@@ -620,8 +650,10 @@ export function TakeInterviewPage() {
 
               <div className={styles.copyCard}>
                 <p className={styles.preNote}>
-                  Copy the question and your answer, then paste into your own AI
-                  chat for detailed feedback.
+                  1. Copy the prompt and paste it into your AI chat. 2. Copy the
+                  whole reply and paste it below. Your score combines the AI's
+                  language and organization ratings with your pronunciation and
+                  fluency.
                 </p>
                 <Button
                   variant="secondary"
@@ -630,8 +662,46 @@ export function TakeInterviewPage() {
                   }}
                   disabled={!qaCopyMessage}
                 >
-                  {copied ? "Copied" : "Copy question and answer"}
+                  {copied ? "Copied" : "Copy for AI scoring"}
                 </Button>
+                <textarea
+                  className={styles.pasteBox}
+                  rows={5}
+                  placeholder="Paste the AI's reply here"
+                  aria-label="AI reply"
+                  value={aiReply}
+                  onChange={(e) => setAiReply(e.target.value)}
+                />
+                <Button onClick={handleApplyAiReply} disabled={!aiReply.trim()}>
+                  Apply AI score
+                </Button>
+                {aiError && <p className={styles.error}>{aiError}</p>}
+                {itemScore && (
+                  <div className={styles.itemScore}>
+                    <h3>
+                      Score {itemScore.total}/5
+                      {(!aiScores || !assessment) && " (partial)"}
+                    </h3>
+                    {(
+                      [
+                        ["Language use", itemScore.languageUse],
+                        ["Organization", itemScore.organization],
+                        ["Intelligibility", itemScore.intelligibility],
+                        ["Fluency", itemScore.fluency],
+                      ] as const
+                    ).map(
+                      ([label, value]) =>
+                        value !== undefined && (
+                          <ProgressBar
+                            key={label}
+                            current={Math.round(value * 10) / 10}
+                            total={5}
+                            label={label}
+                          />
+                        ),
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className={styles.evalCard}>
@@ -693,12 +763,27 @@ export function TakeInterviewPage() {
       {done && data && hasValidQuestionId && (
         <div className={styles.resultCard}>
           <h2>Interview Complete</h2>
-          <p>You answered all {data.questions.length} questions.</p>
-          <ProgressBar
-            current={data.questions.length}
-            total={data.questions.length}
-            label="Complete"
-          />
+          {scoredItems.length > 0 ? (
+            <>
+              <p className={styles.taskScore}>
+                {(
+                  scoredItems.reduce((sum, s) => sum + s.total, 0) /
+                  scoredItems.length
+                ).toFixed(1)}
+                <span>/5</span>
+              </p>
+              {data.questions.map((question, i) => (
+                <ProgressBar
+                  key={question.id}
+                  current={itemScores[i]?.total ?? 0}
+                  total={5}
+                  label={`Question ${i + 1}${itemScores[i] ? "" : " (not scored)"}`}
+                />
+              ))}
+            </>
+          ) : (
+            <p>You answered all {data.questions.length} questions.</p>
+          )}
           <div className={styles.actions}>
             <BackButton onClick={goToQuestionList} size="lg" />
             <NextQuestionButton taskId={INTERVIEW_TASK_ID} size="lg" />

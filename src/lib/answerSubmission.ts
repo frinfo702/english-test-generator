@@ -1,3 +1,5 @@
+import { AI_SCORE_FENCE } from "./interviewScoring";
+
 const DRAFT_KEY_PREFIX = "answer-draft:";
 
 export function buildProblemId(
@@ -47,11 +49,12 @@ export interface InterviewCopyPayload {
 }
 
 /**
- * Clipboard text for pasting into an external LLM chat for feedback.
+ * Clipboard text for an external LLM. It asks for a fixed score block so the
+ * pasted reply can be parsed and combined with the Azure delivery scores.
  */
 export function buildInterviewQaCopyMessage(payload: InterviewCopyPayload) {
   const lines: string[] = [
-    "Please evaluate my TOEFL Speaking (Take an Interview) response and give constructive feedback on fluency, coherence, vocabulary, and grammar.",
+    "Please evaluate my TOEFL Speaking (Take an Interview) response and give constructive feedback.",
     "",
     "## Question",
     payload.question.trim(),
@@ -63,7 +66,7 @@ export function buildInterviewQaCopyMessage(payload: InterviewCopyPayload) {
 
   lines.push(
     "",
-    "## My spoken answer (transcribed)",
+    "## My spoken answer (automatic transcript)",
     payload.userAnswer.trim() || "(no speech detected)",
   );
 
@@ -80,7 +83,17 @@ export function buildInterviewQaCopyMessage(payload: InterviewCopyPayload) {
 
   lines.push(
     "",
-    "Please score me roughly on a TOEFL Speaking scale and suggest a stronger version of my answer.",
+    "## How to score",
+    "My pronunciation and fluency are scored separately from the audio, so judge only what the transcript shows. It comes from speech recognition: ignore punctuation and capitalization, and don't penalize obvious recognition errors.",
+    "Use the official TOEFL Take an Interview scale (0–5) for each:",
+    "- languageUse: range and accuracy of grammar and vocabulary.",
+    "- organization: relevance to the question, elaboration with reasons/examples, and connectors. Give 0 if the answer is unconnected to the question.",
+    "",
+    "Give your feedback and a stronger version of my answer, then end your reply with this block exactly once, using integers:",
+    "",
+    "```" + AI_SCORE_FENCE,
+    '{"languageUse": 0, "organization": 0}',
+    "```",
   );
 
   return lines.join("\n");

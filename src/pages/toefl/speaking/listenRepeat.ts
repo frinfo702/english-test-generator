@@ -128,3 +128,38 @@ export function countCorrectWords(alignment: AlignedWord[]): number {
 export function countOriginalWords(alignment: AlignedWord[]): number {
   return alignment.filter((a) => a.original != null).length;
 }
+
+/**
+ * Official Listen & Repeat rubric (0–5) from word errors, capped by Azure
+ * pronunciation because the rubric requires the repetition to be intelligible.
+ */
+export function listenRepeatItemScore(
+  alignment: AlignedWord[],
+  pronunciation: number | null,
+): number {
+  const total = countOriginalWords(alignment);
+  const correct = countCorrectWords(alignment);
+  if (total === 0 || correct === 0) return 0;
+  const errors = alignment.filter((a) => !a.correct).length;
+  const ratio = correct / total;
+  const byWords =
+    errors === 0
+      ? 5
+      : errors <= 2 && ratio >= 0.8
+        ? 4
+        : ratio >= 0.6
+          ? 3
+          : ratio >= 0.3
+            ? 2
+            : 1;
+  if (pronunciation === null) return byWords;
+  const cap =
+    pronunciation < 40
+      ? 2
+      : pronunciation < 60
+        ? 3
+        : pronunciation < 75
+          ? 4
+          : 5;
+  return Math.min(byWords, cap);
+}

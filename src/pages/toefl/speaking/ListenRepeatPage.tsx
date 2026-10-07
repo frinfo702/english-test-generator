@@ -30,6 +30,7 @@ import {
   alignWords,
   countCorrectWords,
   countOriginalWords,
+  listenRepeatItemScore,
   type AlignedWord,
 } from "./listenRepeat";
 import styles from "./ListenRepeatPage.module.css";
@@ -583,6 +584,13 @@ export function ListenRepeatPage() {
     (sum, a) => sum + countOriginalWords(a),
     0,
   );
+  const itemScores = alignments.map((a, i) =>
+    listenRepeatItemScore(a, assessments[i]?.pronunciation ?? null),
+  );
+  const averageItemScore =
+    itemScores.length > 0
+      ? itemScores.reduce((sum, n) => sum + n, 0) / itemScores.length
+      : 0;
   const assessed = Object.values(assessments);
   const pronunciationScore =
     assessed.length > 0
@@ -772,15 +780,10 @@ export function ListenRepeatPage() {
           <div className={styles.resultCard}>
             <h2>Section Complete</h2>
             <div className={styles.scoreBox}>
-              <span className={styles.scoreNum}>{correctWords}</span>
-              <span className={styles.scoreDen}>/{totalWords}</span>
-              <span className={styles.scorePct}>
-                (
-                {totalWords > 0
-                  ? Math.round((correctWords / totalWords) * 100)
-                  : 0}
-                %)
+              <span className={styles.scoreNum}>
+                {averageItemScore.toFixed(1)}
               </span>
+              <span className={styles.scoreDen}>/5</span>
             </div>
             <ScoreBars
               correct={correctWords}
@@ -812,7 +815,9 @@ export function ListenRepeatPage() {
             const assessment = assessments[i];
             return (
               <div key={s.id} className={styles.card}>
-                <p className={styles.qNum}>Question {i + 1}</p>
+                <p className={styles.qNum}>
+                  Question {i + 1} — Score {itemScores[i]}/5
+                </p>
                 <div className={styles.feedbackPhase}>
                   <AudioPlayer
                     playing={playing && activeReviewSentence === i}
