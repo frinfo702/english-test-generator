@@ -210,18 +210,17 @@ export function WriteDiscussionPage() {
         title="Write for an Academic Discussion"
         subtitle="Read the prompt and student opinions, then write your own view (10 minutes, 100+ words)."
         backTo="/toefl"
+        actions={
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleBackToList}
+            disabled={loading}
+          >
+            Question List
+          </Button>
+        }
       />
-
-      <div className={styles.topBar}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={handleBackToList}
-          disabled={loading}
-        >
-          Question List
-        </Button>
-      </div>
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (

@@ -272,18 +272,17 @@ export function CompleteWordsPage() {
         title="Complete the Words"
         subtitle="Type only the missing continuation after the visible prefix. Tab / Enter to move between blanks."
         backTo="/toefl"
+        actions={
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleBackToList}
+            disabled={loading}
+          >
+            Question List
+          </Button>
+        }
       />
-
-      <div className={styles.topBar}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={handleBackToList}
-          disabled={loading}
-        >
-          Question List
-        </Button>
-      </div>
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (

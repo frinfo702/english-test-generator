@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
-import { BackButton } from "../../../components/ui/BackButton";
+import { BarGroup } from "../../../components/ui/BarGroup";
 import { Button } from "../../../components/ui/Button";
+import { ScorePips } from "../../../components/pixel/ScorePips";
 import { AudioPlayer } from "../../../components/ui/AudioPlayer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { MicSelector } from "../../../components/ui/MicSelector";
@@ -18,11 +19,24 @@ import {
   buildInterviewQaCopyMessage,
   buildProblemId,
   clearDraft,
-  copyText,
 } from "../../../lib/answerSubmission";
-import { saveAttempt } from "../../../lib/attempts";
+import {
+  putAttempts,
+  rubricScore,
+  type Attempt,
+  type ItemResponse,
+} from "../../../lib/attempts";
+import {
+  interviewItemScore,
+  type AiInterviewScores,
+} from "../../../lib/interviewScoring";
+import type { PronunciationResult } from "../../../lib/pronunciation";
+import { assessSpontaneousSpeech } from "../../../lib/pronunciationStream";
+import { computeSpeedMetrics, speedScore } from "../../../lib/speakingRate";
+import { toWav16k } from "../../../lib/wav";
 import { questionIdFromFile } from "../../../lib/questions";
 import { pickInterviewerVoice } from "../../../lib/voiceMapping";
+import { AiScorePanel } from "./AiScorePanel";
 import { InterviewerCard } from "./InterviewerCard";
 import { InterviewTranscript } from "./InterviewTranscript";
 import {
@@ -47,10 +61,17 @@ export function TakeInterviewPage() {
   const [current, setCurrent] = useState(0);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<InterviewPhase>("pre");
-  const [done, setDone] = useState(false);
   const [savingAnswer, setSavingAnswer] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
+  const [assessment, setAssessment] = useState<PronunciationResult | null>(
+    null,
+  );
+  const [assessError, setAssessError] = useState<string | null>(null);
+  const [aiScores, setAiScores] = useState<AiInterviewScores | null>(null);
+  const [finishing, setFinishing] = useState(false);
+  const assessGenerationRef = useRef(0);
+  const attemptRef = useRef<Attempt | null>(null);
+  const pendingRef = useRef<Promise<unknown>[]>([]);
   const submittingRef = useRef(false);
 
   const audio = useSingleAudio();
@@ -109,7 +130,10 @@ export function TakeInterviewPage() {
   const clearSessionBits = useCallback(() => {
     setUserText("");
     setSaveError(null);
-    setCopied(false);
+    setAssessment(null);
+    setAssessError(null);
+    setAiScores(null);
+    assessGenerationRef.current += 1;
     clearTranscript();
     clearSpeechError();
     submittingRef.current = false;
@@ -123,6 +147,43 @@ export function TakeInterviewPage() {
 
   const timerStopRef = useRef<() => void>(() => undefined);
 
+  /**
+   * One attempt per set, rewritten after every change, so a set abandoned
+   * halfway still keeps the answers already given.
+   */
+  const persist = useCallback(
+    async (index: number, patch: Partial<ItemResponse>) => {
+      if (!data || !file) return;
+      const attempt: Attempt = (attemptRef.current ??= {
+        id: crypto.randomUUID(),
+        date: new Date().toISOString(),
+        taskId: INTERVIEW_TASK_ID,
+        problemId: questionIdFromFile(file),
+        question: data,
+        responses: data.questions.map((question) => ({
+          itemId: question.id,
+          prompt: question.question,
+        })),
+      });
+      const merged = { ...attempt.responses[index], ...patch };
+      // Content is the part a transcript can't fake; without the AI half the
+      // item stays unscored rather than scored on delivery alone.
+      merged.itemScore = merged.ai
+        ? interviewItemScore(merged.ai.scores, merged.assessment ?? null)?.total
+        : undefined;
+      attempt.responses[index] = merged;
+      attempt.score = rubricScore(attempt.responses);
+      try {
+        await putAttempts([attempt]);
+      } catch (e) {
+        setSaveError(
+          e instanceof Error ? e.message : "Failed to save your answer.",
+        );
+      }
+    },
+    [data, file],
+  );
+
   const finishAnswer = useCallback(async () => {
     if (submittingRef.current) return;
     submittingRef.current = true;
@@ -133,41 +194,47 @@ export function TakeInterviewPage() {
     try {
       const recording = await speech.stop();
       const finalText = recording.text.trim();
+      const index = current;
+      if (recording.audio) {
+        const generation = assessGenerationRef.current;
+        const isCurrent = () => generation === assessGenerationRef.current;
+        pendingRef.current.push(
+          toWav16k(recording.audio)
+            .then(assessSpontaneousSpeech)
+            .then(
+              (result) => {
+                if (isCurrent()) setAssessment(result);
+                return persist(index, { assessment: result });
+              },
+              (e: unknown) => {
+                const message = e instanceof Error ? e.message : String(e);
+                if (isCurrent()) setAssessError(message);
+                return persist(index, { assessmentError: message });
+              },
+            ),
+        );
+      } else {
+        setAssessError("No audio was recorded.");
+      }
       setUserText(finalText);
       setPhase("submitted");
 
-      if (q && file && problemId) {
-        setSavingAnswer(true);
-        setSaveError(null);
-        try {
-          await saveAttempt({
-            taskId: INTERVIEW_TASK_ID,
-            problemId: questionIdFromFile(file),
-            responses: [
-              {
-                itemId: q.id,
-                audio: recording.audio ?? undefined,
-                recordedAt: recording.startedAt ?? undefined,
-                transcript: finalText,
-              },
-            ],
-          });
-          clearDraft(problemId);
-        } catch (e) {
-          setSaveError(
-            e instanceof Error ? e.message : "Failed to save your answer.",
-          );
-        } finally {
-          setSavingAnswer(false);
-        }
-      }
+      setSavingAnswer(true);
+      setSaveError(null);
+      await persist(index, {
+        audio: recording.audio ?? undefined,
+        recordedAt: recording.startedAt ?? undefined,
+        transcript: finalText,
+      });
+      setSavingAnswer(false);
+      if (problemId) clearDraft(problemId);
     } catch {
       setPhase("submitted");
       setSaveError("Failed to process your recording.");
     } finally {
       submittingRef.current = false;
     }
-  }, [audio, speech, q, file, problemId]);
+  }, [audio, speech, current, persist, problemId]);
 
   const timer = useTimer(45, () => {
     void finishAnswer();
@@ -246,41 +313,38 @@ export function TakeInterviewPage() {
     void speech.start();
   };
 
-  const handleCopyQa = async () => {
-    if (!qaCopyMessage) return;
-    try {
-      const ok = await copyText(qaCopyMessage);
-      if (!ok) {
-        setSaveError("Clipboard is not available in this environment.");
-        return;
-      }
-      setCopied(true);
-    } catch {
-      setSaveError("Failed to copy.");
-    }
-  };
-
   const goToQuestionList = () => {
     audio.stop();
     void speech.stop();
     setCurrent(0);
-    setDone(false);
+    attemptRef.current = null;
+    pendingRef.current = [];
     resetInteraction();
     timer.reset();
     navigate(`/${INTERVIEW_TASK_ID}`);
   };
 
-  const handleNext = () => {
+  const handleApplyAi = (ai: { reply: string; scores: AiInterviewScores }) => {
+    setAiScores(ai.scores);
+    void persist(current, { ai });
+  };
+
+  const handleNext = async () => {
     if (!data) return;
     audio.stop();
     void speech.stop();
-    if (current + 1 >= data.questions.length) {
-      setDone(true);
+    if (current + 1 < data.questions.length) {
+      setCurrent((c) => c + 1);
+      resetInteraction();
+      timer.reset();
       return;
     }
-    setCurrent((c) => c + 1);
-    resetInteraction();
-    timer.reset();
+    setFinishing(true);
+    // The last answer's pronunciation is usually still in flight.
+    await Promise.allSettled(pendingRef.current);
+    const attempt = attemptRef.current;
+    if (attempt) navigate(`/results/${attempt.id}`);
+    else goToQuestionList();
   };
 
   const busyPhase =
@@ -292,6 +356,10 @@ export function TakeInterviewPage() {
   const questionActive = audio.isActive("question");
   const modelActive = audio.isActive("model");
   const displayAnswer = userText || speech.transcript;
+  const itemScore = interviewItemScore(aiScores, assessment);
+  const speedMetrics = assessment
+    ? computeSpeedMetrics([assessment.words])
+    : null;
 
   return (
     <div>
@@ -299,18 +367,17 @@ export function TakeInterviewPage() {
         title="Take an Interview"
         subtitle="Listen, then speak your answer (45 seconds). Text is hidden like the real test."
         backTo="/toefl"
+        actions={
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={goToQuestionList}
+            disabled={loading || busyPhase}
+          >
+            Question List
+          </Button>
+        }
       />
-
-      <div className={styles.topBar}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={goToQuestionList}
-          disabled={loading || busyPhase}
-        >
-          Question List
-        </Button>
-      </div>
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
@@ -327,8 +394,13 @@ export function TakeInterviewPage() {
         </div>
       )}
 
-      {data && !loading && hasValidQuestionId && !done && q && chrome && (
-        <div className={styles.card}>
+      {data && !loading && hasValidQuestionId && q && chrome && (
+        <div
+          className={[
+            styles.card,
+            phase === "submitted" ? styles.cardWide : "",
+          ].join(" ")}
+        >
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>{chrome.tag}</span>
             {chrome.position !== chrome.tag && (
@@ -534,84 +606,151 @@ export function TakeInterviewPage() {
 
           {phase === "submitted" && (
             <div className={styles.feedbackArea}>
-              <div className={styles.userAnswerCard}>
-                <h3>Your spoken answer</h3>
-                {displayAnswer ? (
-                  <p className={styles.userAnswerText}>{displayAnswer}</p>
-                ) : (
-                  <p className={styles.userAnswerEmpty}>
-                    No speech was detected. Try the next question, or retry if
-                    you can.
-                  </p>
-                )}
-                {savingAnswer && (
-                  <p className={styles.preNote}>Saving your answer…</p>
-                )}
-                {saveError && <p className={styles.error}>{saveError}</p>}
-                {speech.error && <p className={styles.error}>{speech.error}</p>}
-              </div>
+              <div className={styles.feedbackGrid}>
+                <div className={styles.feedbackMain}>
+                  <section className={styles.userAnswerCard}>
+                    <h3>Your spoken answer</h3>
+                    {displayAnswer ? (
+                      <p className={styles.userAnswerText}>{displayAnswer}</p>
+                    ) : (
+                      <p className={styles.userAnswerEmpty}>
+                        No speech was detected. Try the next question, or retry
+                        if you can.
+                      </p>
+                    )}
+                    {savingAnswer && (
+                      <p className={styles.preNote}>Saving your answer…</p>
+                    )}
+                    {saveError && <p className={styles.error}>{saveError}</p>}
+                    {speech.error && (
+                      <p className={styles.error}>{speech.error}</p>
+                    )}
+                  </section>
 
-              <div className={styles.copyCard}>
-                <p className={styles.preNote}>
-                  Copy the question and your answer, then paste into your own AI
-                  chat for detailed feedback.
-                </p>
-                <Button
-                  variant="secondary"
-                  onClick={() => {
-                    void handleCopyQa();
-                  }}
-                  disabled={!qaCopyMessage}
-                >
-                  {copied ? "Copied" : "Copy question and answer"}
-                </Button>
-              </div>
-
-              <div className={styles.evalCard}>
-                <h3>Evaluation Points</h3>
-                <ul>
-                  {q.evaluationPoints.map((pt, i) => (
-                    <li key={i}>{pt}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className={styles.modelArea}>
-                <div className={styles.modelAnswer}>
-                  <h3>Sample Answer</h3>
-                  <p>{q.modelAnswer}</p>
-                  {modelUrl && (
-                    <div className={styles.modelPlayer}>
-                      <AudioPlayer
-                        playing={audio.playing && modelActive}
-                        loading={audio.loading && modelActive}
-                        error={modelActive ? audio.error : null}
-                        currentTime={modelActive ? audio.currentTime : 0}
-                        duration={modelActive ? audio.duration : 0}
-                        playbackRate={audio.playbackRate}
-                        onPlayPause={() => audio.toggle("model", modelUrl)}
-                        onSeek={audio.seek}
-                        onPlaybackRateChange={audio.setPlaybackRate}
-                        seekable
-                        src={modelUrl}
-                        playLabel={
-                          audio.loading && modelActive
-                            ? "Loading..."
-                            : audio.playing && modelActive
-                              ? "Pause"
-                              : audio.currentTime > 0 && modelActive
-                                ? "Resume"
-                                : "Play sample answer"
-                        }
-                      />
-                    </div>
+                  {qaCopyMessage && !aiScores && (
+                    <AiScorePanel
+                      message={qaCopyMessage}
+                      onApply={handleApplyAi}
+                    />
                   )}
+
+                  <details className={styles.sampleDetails}>
+                    <summary>Sample answer</summary>
+                    <div className={styles.modelAnswer}>
+                      <p>{q.modelAnswer}</p>
+                      {modelUrl && (
+                        <div className={styles.modelPlayer}>
+                          <AudioPlayer
+                            playing={audio.playing && modelActive}
+                            loading={audio.loading && modelActive}
+                            error={modelActive ? audio.error : null}
+                            currentTime={modelActive ? audio.currentTime : 0}
+                            duration={modelActive ? audio.duration : 0}
+                            playbackRate={audio.playbackRate}
+                            onPlayPause={() => audio.toggle("model", modelUrl)}
+                            onSeek={audio.seek}
+                            onPlaybackRateChange={audio.setPlaybackRate}
+                            seekable
+                            src={modelUrl}
+                            playLabel={
+                              audio.loading && modelActive
+                                ? "Loading..."
+                                : audio.playing && modelActive
+                                  ? "Pause"
+                                  : audio.currentTime > 0 && modelActive
+                                    ? "Resume"
+                                    : "Play sample answer"
+                            }
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </details>
                 </div>
+
+                <aside className={styles.feedbackSide}>
+                  <div className={styles.scoreHead}>
+                    <ScorePips
+                      score={aiScores ? (itemScore?.total ?? null) : null}
+                    />
+                    {aiScores && itemScore ? (
+                      <p>
+                        <strong>{itemScore.total}</strong>/5
+                        {!assessment && " · partial"}
+                      </p>
+                    ) : (
+                      <p>Waiting for the AI score</p>
+                    )}
+                  </div>
+                  <BarGroup>
+                    {itemScore?.languageUse !== undefined && (
+                      <ProgressBar
+                        current={Math.round(itemScore.languageUse)}
+                        total={100}
+                        label="Language use"
+                      />
+                    )}
+                    {itemScore?.organization !== undefined && (
+                      <ProgressBar
+                        current={Math.round(itemScore.organization)}
+                        total={100}
+                        label="Organization"
+                      />
+                    )}
+                    {assessment && speedMetrics ? (
+                      <>
+                        <ProgressBar
+                          current={Math.round(assessment.pronunciation)}
+                          total={100}
+                          label="Pronunciation"
+                        />
+                        <ProgressBar
+                          current={Math.round(speedScore(speedMetrics))}
+                          total={100}
+                          label="Speed"
+                        />
+                        <p className={styles.preNote}>
+                          {Math.round(speedMetrics.speakingRate)} words/min ·{" "}
+                          {speedMetrics.longPausesPerMinute.toFixed(1)} long
+                          pauses/min
+                        </p>
+                        {assessment.words.some((w) => w.accuracy < 60) && (
+                          <p className={styles.preNote}>
+                            Unclear words:{" "}
+                            {assessment.words
+                              .filter((w) => w.accuracy < 60)
+                              .map((w) => w.word)
+                              .join(", ")}
+                          </p>
+                        )}
+                      </>
+                    ) : (
+                      <p className={styles.preNote}>
+                        {assessError
+                          ? `Pronunciation not scored: ${assessError}`
+                          : "Scoring pronunciation…"}
+                      </p>
+                    )}
+                  </BarGroup>
+
+                  <div className={styles.evalCard}>
+                    <h3>Evaluation points</h3>
+                    <ul>
+                      {q.evaluationPoints.map((pt, i) => (
+                        <li key={i}>{pt}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </aside>
               </div>
 
               <div className={styles.actions}>
-                <Button onClick={handleNext}>
-                  {current + 1 < data.questions.length ? "Continue" : "Finish"}
+                <Button onClick={() => void handleNext()} disabled={finishing}>
+                  {current + 1 < data.questions.length
+                    ? "Continue"
+                    : finishing
+                      ? "Finishing…"
+                      : "Finish"}
                 </Button>
                 <NextQuestionButton
                   taskId={INTERVIEW_TASK_ID}
@@ -620,22 +759,6 @@ export function TakeInterviewPage() {
               </div>
             </div>
           )}
-        </div>
-      )}
-
-      {done && data && hasValidQuestionId && (
-        <div className={styles.resultCard}>
-          <h2>Interview Complete</h2>
-          <p>You answered all {data.questions.length} questions.</p>
-          <ProgressBar
-            current={data.questions.length}
-            total={data.questions.length}
-            label="Complete"
-          />
-          <div className={styles.actions}>
-            <BackButton onClick={goToQuestionList} size="lg" />
-            <NextQuestionButton taskId={INTERVIEW_TASK_ID} size="lg" />
-          </div>
         </div>
       )}
     </div>

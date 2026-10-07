@@ -222,12 +222,10 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
   return (
     <div className={styles.dictationPage}>
       <div className={styles.progressRow}>
-        <span className="micro-label">Sentence</span>
         <span className={styles.progressText}>
           {String(current + 1).padStart(2, "0")} /{" "}
           {String(totalSentences).padStart(2, "0")}
         </span>
-        <span className={styles.streakBadge}>{correctCount} correct</span>
         {timerDisplay && (
           <span className={styles.progressTimer}>{timerDisplay}</span>
         )}
@@ -386,19 +384,24 @@ export function DictationPage() {
           data?.title ?? "Listen and arrange the words in the correct order."
         }
         backTo="/"
+        actions={
+          <>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleBackToList}
+              disabled={loading}
+            >
+              Question List
+            </Button>
+            <NextQuestionButton
+              taskId={TASK_ID}
+              variant="secondary"
+              size="sm"
+            />
+          </>
+        }
       />
-
-      <div className={styles.topBar}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={handleBackToList}
-          disabled={loading}
-        >
-          Question List
-        </Button>
-        <NextQuestionButton taskId={TASK_ID} variant="secondary" size="sm" />
-      </div>
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (

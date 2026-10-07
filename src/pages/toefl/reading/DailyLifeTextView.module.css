@@ -258,7 +258,6 @@
 
 .document {
   border: 1px solid var(--color-border-strong);
-  border-top: var(--doc-rule);
   border-radius: var(--radius-doc);
   padding: var(--spacing-5) var(--spacing-6);
 }

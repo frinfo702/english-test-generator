@@ -30,6 +30,7 @@ import { Part7Page } from "./pages/toeic/Part7Page";
 import { QuestionSelectorPage } from "./components/question/QuestionSelectorPage";
 import type { ReactElement, ReactNode } from "react";
 import type { TaskId } from "./hooks/useScoreHistory";
+import { ResultPage } from "./pages/results/ResultPage";
 
 interface TaskRoute {
   basePath: string;
@@ -216,6 +217,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/results/:attemptId" element={<ResultPage />} />
           <Route path="/toefl" element={<ToeflMenuPage />} />
           <Route path="/toeic" element={<ToeicMenuPage />} />
 

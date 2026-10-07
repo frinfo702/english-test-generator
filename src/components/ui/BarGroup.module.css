@@ -1,0 +1,15 @@
+.group {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--spacing-2) var(--spacing-3);
+}
+
+/* Flattening each ProgressBar into the grid is what lines the tracks up. */
+.group > div {
+  display: contents;
+}
+
+.group > p {
+  grid-column: 1 / -1;
+}

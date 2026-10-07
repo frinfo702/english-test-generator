@@ -33,3 +33,9 @@ _worker.bundle/
 
 # AI
 .cursor
+
+# Terraform (state holds the Azure Speech key)
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars

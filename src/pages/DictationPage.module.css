@@ -4,14 +4,6 @@
   gap: var(--spacing-5);
 }
 
-.topBar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: var(--spacing-2);
-  margin-bottom: var(--spacing-6);
-}
-
 .error {
   color: var(--color-error);
   background: var(--color-error-subtle);
@@ -49,18 +41,6 @@
   font-size: var(--text-xs);
   font-variant-numeric: tabular-nums;
   color: var(--color-ink-tertiary);
-}
-
-.streakBadge {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-2xs);
-  letter-spacing: 0.04em;
-  color: var(--color-ink-secondary);
-  background: var(--color-surface-subtle);
-  border: 1px solid var(--color-border);
-  padding: 2px 8px;
-  border-radius: var(--radius-xs);
 }
 
 /* ---- Card ---- */

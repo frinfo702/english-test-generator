@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
-import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { AudioPlayer } from "../../../components/ui/AudioPlayer";
 import { MicSelector } from "../../../components/ui/MicSelector";
@@ -15,13 +13,23 @@ import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useTts } from "../../../hooks/useTts";
 import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
-import type { ItemResponse } from "../../../lib/attempts";
+import {
+  RUBRIC_METHOD,
+  rubricScore,
+  type ItemResponse,
+} from "../../../lib/attempts";
+import {
+  assessPronunciation,
+  type PronunciationResult,
+} from "../../../lib/pronunciation";
+import { toWav16k } from "../../../lib/wav";
 import {
   alignWords,
   countCorrectWords,
   countOriginalWords,
-  type AlignedWord,
+  listenRepeatItemScore,
 } from "./listenRepeat";
+import { DiffLegend, ListenRepeatDiffView } from "./ListenRepeatDiff";
 import styles from "./ListenRepeatPage.module.css";
 
 interface Sentence {
@@ -38,146 +46,7 @@ const DEFAULT_WORDS_PER_SECOND = 2.2;
 const RECORDING_MULTIPLIER = 1.5;
 const PROCESSING_DELAY_MS = 400;
 
-type Phase =
-  "playing" | "ready" | "recording" | "processing" | "feedback" | "review";
-
-function DiffLegend() {
-  return (
-    <div className={styles.legend}>
-      <p className={styles.fbLabel}>How to read the answer</p>
-      <div className={styles.legendItems}>
-        <div className={styles.legendItem}>
-          <span
-            className={[styles.diffWord, styles.diffCorrect].join(" ")}
-            title="Correctly spoken"
-          >
-            correct
-          </span>
-          <span className={styles.legendLabel}>Correctly spoken</span>
-        </div>
-        <div className={styles.legendItem}>
-          <span
-            className={[styles.diffWord, styles.diffWrong].join(" ")}
-            title="Wrong word"
-          >
-            wrong
-          </span>
-          <span className={styles.legendLabel}>Wrong word</span>
-        </div>
-        <div className={styles.legendItem}>
-          <span
-            className={[
-              styles.diffWord,
-              styles.diffWrong,
-              styles.diffMissing,
-            ].join(" ")}
-            title="Missing word"
-          >
-            ▪
-          </span>
-          <span className={styles.legendLabel}>Missing word</span>
-        </div>
-        <div className={styles.legendItem}>
-          <span
-            className={[
-              styles.diffWord,
-              styles.diffWrong,
-              styles.diffExtra,
-            ].join(" ")}
-            title="Extra word"
-          >
-            extra
-          </span>
-          <span className={styles.legendLabel}>Extra word</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ListenRepeatDiffView({
-  alignment,
-  showLabels = true,
-}: {
-  alignment: AlignedWord[];
-  showLabels?: boolean;
-}) {
-  return (
-    <div className={styles.sideBySideDiff}>
-      {showLabels && (
-        <div className={styles.diffColumn}>
-          <div
-            className={[styles.diffCell, styles.diffRowLabel].join(" ")}
-            aria-hidden="true"
-          >
-            Prompt
-          </div>
-          <div
-            className={[styles.diffCell, styles.diffRowLabel].join(" ")}
-            aria-hidden="true"
-          >
-            Response
-          </div>
-        </div>
-      )}
-      {alignment.map((a, j) => {
-        const isMatch = a.type === "match";
-        const isDeletion = a.type === "deletion";
-        const isInsertion = a.type === "insertion";
-
-        const topClasses = [styles.diffCell];
-        const bottomClasses = [styles.diffCell];
-
-        if (isMatch) {
-          topClasses.push(styles.diffCorrect);
-          bottomClasses.push(styles.diffCorrect);
-        } else if (isDeletion) {
-          topClasses.push(styles.diffWrong, styles.diffMissing);
-          bottomClasses.push(styles.diffPlaceholder);
-        } else if (isInsertion) {
-          topClasses.push(styles.diffPlaceholder);
-          bottomClasses.push(styles.diffWrong, styles.diffExtra);
-        } else {
-          topClasses.push(styles.diffWrong);
-          bottomClasses.push(styles.diffWrong);
-        }
-
-        return (
-          <div key={j} className={styles.diffColumn}>
-            <div
-              className={topClasses.join(" ")}
-              title={
-                a.type === "match"
-                  ? "Correct"
-                  : a.type === "deletion"
-                    ? `Missing: ${a.original}`
-                    : a.type === "insertion"
-                      ? "(not in original)"
-                      : `Expected: ${a.original}`
-              }
-            >
-              {a.original ?? "▪"}
-            </div>
-            <div
-              className={bottomClasses.join(" ")}
-              title={
-                a.type === "match"
-                  ? "Correct"
-                  : a.type === "deletion"
-                    ? "(not spoken)"
-                    : a.type === "insertion"
-                      ? `Extra: ${a.recognized}`
-                      : `Got: ${a.recognized}`
-              }
-            >
-              {a.recognized ?? "▪"}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+type Phase = "playing" | "ready" | "recording" | "processing" | "feedback";
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
@@ -221,16 +90,19 @@ export function ListenRepeatPage() {
   const [phase, setPhase] = useState<Phase>("playing");
   const [transcripts, setTranscripts] = useState<Record<number, string>>({});
   const [graded, setGraded] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [recordingTimeLeft, setRecordingTimeLeft] = useState(0);
   const [processingMessage, setProcessingMessage] = useState<string | null>(
     null,
   );
-  const [activeReviewSentence, setActiveReviewSentence] = useState<
-    number | null
-  >(null);
 
   const durationRef = useRef(duration);
   const takesRef = useRef<Record<number, ItemResponse>>({});
+  const transcriptsRef = useRef<Record<number, string>>({});
+  const assessmentsRef = useRef<
+    Record<number, PronunciationResult | { error: string }>
+  >({});
+  const pendingAssessmentsRef = useRef<Promise<void>[]>([]);
   const promptEndedAtRef = useRef<number | null>(null);
   const recordingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const processingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
@@ -284,6 +156,57 @@ export function ListenRepeatPage() {
 
   const finishingRef = useRef(false);
 
+  const finishSet = useCallback(
+    async (finalTranscripts: Record<number, string>) => {
+      if (!data) return;
+      setGraded(true);
+      setPhase("processing");
+      setProcessingMessage("Scoring your answers...");
+      const sessionSeconds = stop();
+      stopTts();
+      await Promise.allSettled(pendingAssessmentsRef.current);
+
+      const responses: ItemResponse[] = data.sentences.map((s, i) => {
+        const result = assessmentsRef.current[i];
+        const assessment = result && "words" in result ? result : undefined;
+        const transcript = finalTranscripts[i] ?? "";
+        return {
+          ...takesRef.current[i],
+          itemId: s.id,
+          prompt: s.text,
+          transcript,
+          assessment,
+          assessmentError:
+            result && "error" in result ? result.error : undefined,
+          itemScore: listenRepeatItemScore(
+            alignWords(s.text, transcript),
+            assessment?.pronunciation ?? null,
+          ),
+        };
+      });
+      const score = rubricScore(responses)!;
+      try {
+        const saved = await saveScore({
+          taskId: TASK_ID,
+          file: file ?? undefined,
+          correct: score.correct,
+          total: score.total,
+          elapsedSeconds: sessionSeconds,
+          method: RUBRIC_METHOD,
+          responses,
+          question: data,
+        });
+        if (saved) navigate(`/results/${saved.id}`);
+      } catch (e) {
+        setProcessingMessage(null);
+        setSaveError(
+          `Couldn't save your result: ${e instanceof Error ? e.message : String(e)}`,
+        );
+      }
+    },
+    [data, stop, stopTts, saveScore, file, navigate],
+  );
+
   const finishSentence = useCallback(async () => {
     if (finishingRef.current) return;
     finishingRef.current = true;
@@ -291,6 +214,24 @@ export function ListenRepeatPage() {
     clearRecordingTimer();
     clearProcessingTimeout();
     const recording = await stopSpeech();
+    if (sentence && recording.audio) {
+      const index = current;
+      // Runs beside transcription so a missing Azure key never blocks the flow.
+      pendingAssessmentsRef.current.push(
+        toWav16k(recording.audio)
+          .then((wav) => assessPronunciation(wav, sentence.text))
+          .then(
+            (result) => {
+              assessmentsRef.current[index] = result;
+            },
+            (e: unknown) => {
+              assessmentsRef.current[index] = {
+                error: e instanceof Error ? e.message : String(e),
+              };
+            },
+          ),
+      );
+    }
     if (sentence) {
       takesRef.current[current] = {
         itemId: sentence.id,
@@ -303,50 +244,19 @@ export function ListenRepeatPage() {
     setProcessingMessage("Processing your speech...");
 
     processingTimeoutRef.current = setTimeout(() => {
-      setTranscripts((prev) => {
-        const next = { ...prev, [current]: transcriptRef.current.trim() };
-
-        if (isLastSentence) {
-          const sessionSeconds = stop();
-          if (data) {
-            const allAlignments = data.sentences.map((s, i) =>
-              alignWords(s.text, next[i] ?? ""),
-            );
-            const correct = allAlignments.reduce(
-              (sum, a) => sum + countCorrectWords(a),
-              0,
-            );
-            const total = allAlignments.reduce(
-              (sum, a) => sum + countOriginalWords(a),
-              0,
-            );
-            saveScore({
-              taskId: TASK_ID,
-              file: file ?? undefined,
-              correct,
-              total,
-              elapsedSeconds: sessionSeconds,
-              method: "word-align",
-              responses: data.sentences.map((s, i) => ({
-                ...takesRef.current[i],
-                itemId: s.id,
-                transcript: next[i] ?? "",
-              })),
-            });
-          }
-          setGraded(true);
-          setPhase("review");
-          stopTts();
-        }
-
-        return next;
-      });
-
-      if (!isLastSentence) {
-        setPhase("feedback");
-      }
+      const next = {
+        ...transcriptsRef.current,
+        [current]: transcriptRef.current.trim(),
+      };
+      transcriptsRef.current = next;
+      setTranscripts(next);
       setProcessingMessage(null);
       finishingRef.current = false;
+      if (isLastSentence) {
+        void finishSet(next);
+      } else {
+        setPhase("feedback");
+      }
     }, PROCESSING_DELAY_MS);
   }, [
     clearRecordingTimer,
@@ -355,11 +265,7 @@ export function ListenRepeatPage() {
     sentence,
     current,
     isLastSentence,
-    data,
-    stop,
-    saveScore,
-    file,
-    stopTts,
+    finishSet,
   ]);
 
   const startRecording = useCallback(() => {
@@ -471,12 +377,14 @@ export function ListenRepeatPage() {
     resetTimer();
     setCurrent(0);
     setTranscripts({});
+    transcriptsRef.current = {};
+    assessmentsRef.current = {};
+    pendingAssessmentsRef.current = [];
     setPhase("playing");
     setGraded(false);
     setRecordingTimeLeft(0);
     setProcessingMessage(null);
     finishingRef.current = false;
-    setActiveReviewSentence(null);
     navigate(`/${TASK_ID}`);
   };
 
@@ -503,18 +411,6 @@ export function ListenRepeatPage() {
     setPhase("playing");
   };
 
-  const alignments: AlignedWord[][] = data
-    ? data.sentences.map((s, i) => alignWords(s.text, transcripts[i] ?? ""))
-    : [];
-  const correctWords = alignments.reduce(
-    (sum, a) => sum + countCorrectWords(a),
-    0,
-  );
-  const totalWords = alignments.reduce(
-    (sum, a) => sum + countOriginalWords(a),
-    0,
-  );
-
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
@@ -524,18 +420,17 @@ export function ListenRepeatPage() {
         title="Listen and Repeat"
         subtitle="Listen to the sentence, then repeat it into the microphone."
         backTo="/toefl"
+        actions={
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleBackToList}
+            disabled={loading}
+          >
+            Question List
+          </Button>
+        }
       />
-
-      <div className={styles.topBar}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={handleBackToList}
-          disabled={loading}
-        >
-          Question List
-        </Button>
-      </div>
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
@@ -688,84 +583,14 @@ export function ListenRepeatPage() {
         </div>
       )}
 
-      {graded && data && hasValidQuestionId && (
-        <>
-          <div className={styles.resultCard}>
-            <h2>Section Complete</h2>
-            <p className={styles.hint}>Review your answers below.</p>
-            <DiffLegend />
-            <div className={styles.scoreBox}>
-              <span className={styles.scoreNum}>{correctWords}</span>
-              <span className={styles.scoreDen}>/{totalWords}</span>
-              <span className={styles.scorePct}>
-                (
-                {totalWords > 0
-                  ? Math.round((correctWords / totalWords) * 100)
-                  : 0}
-                %)
-              </span>
-            </div>
-            <ProgressBar
-              current={correctWords}
-              total={totalWords}
-              label="Words Correct"
-            />
-            <div className={styles.actions}>
-              <BackButton onClick={handleBackToList} size="lg" />
-              <NextQuestionButton taskId={TASK_ID} size="lg" />
-            </div>
-          </div>
-
-          {data.sentences.map((s, i) => {
-            const alignment = alignWords(s.text, transcripts[i] ?? "");
-            const correct = countCorrectWords(alignment);
-            const total = countOriginalWords(alignment);
-            return (
-              <div key={s.id} className={styles.card}>
-                <p className={styles.qNum}>
-                  Question {i + 1} — {correct}/{total} words
-                </p>
-                <div className={styles.feedbackPhase}>
-                  <AudioPlayer
-                    playing={playing && activeReviewSentence === i}
-                    loading={ttsLoading && activeReviewSentence === i}
-                    error={null}
-                    currentTime={activeReviewSentence === i ? currentTime : 0}
-                    duration={activeReviewSentence === i ? duration : 0}
-                    playbackRate={playbackRate}
-                    onPlayPause={() => {
-                      setActiveReviewSentence(i);
-                      if (playing && activeReviewSentence === i) {
-                        pause();
-                      } else if (
-                        activeReviewSentence === i &&
-                        currentTime > 0
-                      ) {
-                        resume();
-                      } else {
-                        playSentence(i);
-                      }
-                    }}
-                    onSeek={seek}
-                    onPlaybackRateChange={setPlaybackRate}
-                    src={`/audio/toefl/speaking/listen-repeat/${fileBasename}/${i + 1}.mp3`}
-                    playLabel={
-                      playing && activeReviewSentence === i
-                        ? "Pause"
-                        : activeReviewSentence === i && currentTime > 0
-                          ? "Resume"
-                          : activeReviewSentence === i
-                            ? "Replay"
-                            : "Play Audio"
-                    }
-                  />
-                  <p className={styles.fbLabel}>Comparison:</p>
-                  <ListenRepeatDiffView alignment={alignment} />
-                </div>
-              </div>
-            );
-          })}
-        </>
+      {graded && (
+        <div className={styles.card}>
+          {saveError ? (
+            <div className={styles.error}>{saveError}</div>
+          ) : (
+            <LoadingSpinner message={processingMessage ?? "Saving..."} />
+          )}
+        </div>
       )}
     </div>
   );

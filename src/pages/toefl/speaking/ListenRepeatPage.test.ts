@@ -3,6 +3,7 @@ import {
   alignWords,
   countCorrectWords,
   countOriginalWords,
+  listenRepeatItemScore,
   normalizeWord,
 } from "./listenRepeat";
 
@@ -125,5 +126,37 @@ describe("alignWords with number equivalence", () => {
     const result = alignWords("She is twenty", "she is 20");
     expect(result.every((a) => a.correct)).toBe(true);
     expect(countCorrectWords(result)).toBe(3);
+  });
+});
+
+describe("listenRepeatItemScore", () => {
+  const score = (prompt: string, said: string, pron: number | null = 90) =>
+    listenRepeatItemScore(alignWords(prompt, said), pron);
+  const prompt = "The professor canceled class because of a conference.";
+
+  it("gives 5 for an exact, intelligible repetition", () => {
+    expect(score(prompt, prompt)).toBe(5);
+  });
+
+  it("gives 4 for one or two minor word changes", () => {
+    expect(
+      score(prompt, "The professor cancels the class because of a conference."),
+    ).toBe(4);
+  });
+
+  it("gives 3 when a majority of words survive", () => {
+    expect(score(prompt, "The professor is busy because of conference.")).toBe(
+      3,
+    );
+  });
+
+  it("gives 1 for a few words and 0 for nothing", () => {
+    expect(score(prompt, "professor")).toBe(1);
+    expect(score(prompt, "")).toBe(0);
+  });
+
+  it("caps an exact repetition by low pronunciation", () => {
+    expect(score(prompt, prompt, 65)).toBe(4);
+    expect(score(prompt, prompt, 30)).toBe(2);
   });
 });

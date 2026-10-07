@@ -88,11 +88,13 @@ describe("answerSubmission", () => {
 
     expect(message).toContain("## Question");
     expect(message).toContain("Do you prefer studying alone?");
-    expect(message).toContain("## My spoken answer (transcribed)");
+    expect(message).toContain("## My spoken answer (automatic transcript)");
     expect(message).toContain("I prefer studying alone");
     expect(message).toContain("## Sample answer");
     expect(message).toContain("## Evaluation criteria");
     expect(message).toContain("States a clear position");
     expect(message).toContain("Please evaluate my TOEFL Speaking");
+    expect(message).toContain("```toefl-score");
+    expect(message).toContain('{"languageUse": 0, "organization": 0}');
   });
 });

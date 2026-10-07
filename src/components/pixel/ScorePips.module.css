@@ -1,0 +1,16 @@
+.pips {
+  height: 18px;
+  width: auto;
+}
+
+.outline {
+  fill: #2b2b3a;
+}
+
+.offOutline {
+  fill: var(--color-border-strong);
+}
+
+.offFill {
+  fill: var(--color-surface-subtle);
+}

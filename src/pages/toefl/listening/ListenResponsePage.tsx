@@ -174,7 +174,8 @@ export function ListenResponsePage() {
   const answersByIndex: Record<string, number> = {};
   for (const q of questions) {
     const sel = selected[q.id];
-    if (sel) answersByIndex[q.id] = LETTERS.indexOf(sel as (typeof LETTERS)[number]);
+    if (sel)
+      answersByIndex[q.id] = LETTERS.indexOf(sel as (typeof LETTERS)[number]);
   }
 
   return (
@@ -186,18 +187,17 @@ export function ListenResponsePage() {
         title="Listen and Choose a Response"
         subtitle="Listen to each utterance and choose the best response."
         backTo="/toefl"
+        actions={
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleBackToList}
+            disabled={loading}
+          >
+            Question List
+          </Button>
+        }
       />
-
-      <div className={styles.topBar}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={handleBackToList}
-          disabled={loading}
-        >
-          Question List
-        </Button>
-      </div>
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (

@@ -136,18 +136,17 @@ export function ReadDailyLifePage() {
         title="Read in Daily Life"
         subtitle="Read everyday texts and answer all questions."
         backTo="/toefl"
+        actions={
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => navigate("/toefl/reading/daily-life")}
+            disabled={loading}
+          >
+            Question List
+          </Button>
+        }
       />
-
-      <div className={styles.topBar}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => navigate("/toefl/reading/daily-life")}
-          disabled={loading}
-        >
-          Question List
-        </Button>
-      </div>
 
       {!hasValidQuestionId && (
         <div className={styles.error}>

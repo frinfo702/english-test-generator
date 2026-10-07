@@ -5,6 +5,8 @@
  * that produced them.
  */
 import type { TaskId } from "../hooks/useScoreHistory";
+import type { AiInterviewScores } from "./interviewScoring";
+import type { PronunciationResult } from "./pronunciation";
 
 export interface ItemResponse {
   itemId?: string;
@@ -18,6 +20,13 @@ export interface ItemResponse {
   recordedAt?: number;
   promptEndedAt?: number;
   transcript?: string;
+  /** The sentence or question as shown, so a later edit can't change history. */
+  prompt?: string;
+  assessment?: PronunciationResult;
+  assessmentError?: string;
+  ai?: { reply: string; scores: AiInterviewScores };
+  /** 0–5 on the ETS rubric. */
+  itemScore?: number;
 }
 
 export interface Attempt {
@@ -29,6 +38,23 @@ export interface Attempt {
   elapsedSeconds?: number;
   responses: ItemResponse[];
   score?: { method: string; correct: number; total: number };
+  /** Snapshot of the question JSON; question files get regenerated. */
+  question?: unknown;
+}
+
+export const RUBRIC_METHOD = "ets-rubric";
+
+/** Undefined until an item is scored: an empty 0/0 score breaks every chart. */
+export function rubricScore(
+  responses: ItemResponse[],
+): Attempt["score"] | undefined {
+  const scored = responses.filter((r) => r.itemScore !== undefined);
+  if (scored.length === 0) return undefined;
+  return {
+    method: RUBRIC_METHOD,
+    correct: scored.reduce((sum, r) => sum + r.itemScore!, 0),
+    total: scored.length * 5,
+  };
 }
 
 const DB_NAME = "english-test";
@@ -101,6 +127,13 @@ export async function saveAttempt(
 /** put, not add: re-importing a backup must overwrite, not fail on its IDs. */
 export async function putAttempts(attempts: Attempt[]): Promise<void> {
   await putAll(await openDb(), attempts);
+}
+
+export async function getAttempt(id: string): Promise<Attempt | undefined> {
+  const db = await openDb();
+  return request<Attempt | undefined>(
+    db.transaction(STORE).objectStore(STORE).get(id),
+  );
 }
 
 export async function getAllAttempts(): Promise<Attempt[]> {

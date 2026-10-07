@@ -8,7 +8,7 @@ import {
   useState,
   type ChangeEvent,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
 import { PixelHamster } from "../components/pixel/PixelHamster";
@@ -205,6 +205,7 @@ export function DashboardPage() {
   const [entries, setEntries] = useState<ScoreEntry[]>([]);
   const [confirmClear, setConfirmClear] = useState(false);
   const [answers, setAnswers] = useState<Attempt[]>([]);
+  const [results, setResults] = useState<Attempt[]>([]);
   const [includeAudio, setIncludeAudio] = useState(false);
   const [backupBusy, setBackupBusy] = useState(false);
   const [backupMessage, setBackupMessage] = useState<string | null>(null);
@@ -213,9 +214,12 @@ export function DashboardPage() {
 
   const load = useCallback(() => {
     getAll().then(setEntries);
-    getAllAttempts().then((all) =>
-      setAnswers(all.filter((a) => !a.score).reverse()),
-    );
+    getAllAttempts().then((all) => {
+      // Only attempts with a question snapshot can be rendered as a result.
+      const withResult = (a: Attempt) => a.question !== undefined;
+      setAnswers(all.filter((a) => !a.score && !withResult(a)).reverse());
+      setResults(all.filter(withResult).reverse());
+    });
   }, [getAll]);
 
   useEffect(load, [load]);
@@ -381,6 +385,33 @@ export function DashboardPage() {
             )}
           </div>
         </>
+      )}
+
+      {results.length > 0 && (
+        <section className={styles.answersSection}>
+          <h2 className={styles.answersHeading}>Results</h2>
+          <div className={styles.answersList}>
+            {results.map((a) => (
+              <Link
+                key={a.id}
+                to={`/results/${a.id}`}
+                className={[styles.answerRow, styles.resultLink].join(" ")}
+              >
+                <span className={styles.answerDate}>
+                  {new Date(a.date).toLocaleDateString()}
+                </span>
+                <span className={styles.answerProblem}>
+                  {a.taskId}/{a.problemId}
+                </span>
+                <span className={styles.answerPreview}>
+                  {a.score
+                    ? `${((a.score.correct / a.score.total) * 5).toFixed(1)} / 5`
+                    : "Not scored yet"}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
       )}
 
       {answers.length > 0 && (
