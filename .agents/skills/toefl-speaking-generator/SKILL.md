@@ -19,7 +19,7 @@ description: >
 
 | タスク            | 保存先                                           | 出題数  |
 | ----------------- | ------------------------------------------------ | ------- |
-| Listen and Repeat | `public/questions/toefl/speaking/listen-repeat/` | 7文     |
+| Listen and Repeat | `public/questions/toefl/speaking/listen-repeat/` | 1ファイル1文 |
 | Take an Interview | `public/questions/toefl/speaking/interview/`     | 4問     |
 
 ## 本番との差を生まないための指針

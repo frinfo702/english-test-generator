@@ -27,7 +27,7 @@ function load(task: string): [string, ListeningFile][] {
   const dir = path.join(LISTENING_DIR, task);
   return fs
     .readdirSync(dir)
-    .filter((f) => /^\d+\.json$/.test(f))
+    .filter((f) => f.endsWith(".json") && f !== "index.json")
     .sort()
     .map((f) => [
       `${task}/${f}`,

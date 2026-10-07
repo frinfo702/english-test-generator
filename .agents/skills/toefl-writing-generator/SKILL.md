@@ -18,7 +18,7 @@ description: >
 
 | タスク                           | 保存先                                           | 出題数          |
 | -------------------------------- | ------------------------------------------------ | --------------- |
-| Build a Sentence                 | `public/questions/toefl/writing/build-sentence/` | 10文            |
+| Build a Sentence                 | `public/questions/toefl/writing/build-sentence/` | 1ファイル1文    |
 | Write an Email                   | `public/questions/toefl/writing/email/`          | 1問（7分、keyPoints 3つ） |
 | Write for an Academic Discussion | `public/questions/toefl/writing/discussion/`     | 1問（10分想定） |
 

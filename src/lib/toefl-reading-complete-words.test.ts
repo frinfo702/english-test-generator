@@ -20,18 +20,30 @@ interface CompleteWordsData {
 
 /**
  * 2026 layout: sentence 1 intact, blanks on every other word from the 2nd
- * word of sentence 2, first floor(len/2) letters shown.
- * `wordIdx` / `prevWordIdx` are positions in the whitespace-split paragraph;
- * `prevWordIdx` is -10 for the first item.
+ * word of sentence 2, first floor(len/2) letters shown. A 1-letter word,
+ * number or proper noun can't be blanked, so the run may step over one.
  */
 function expectCTestBlank(
   item: CompleteWordsItem,
+  words: string[],
   wordIdx: number,
   prevWordIdx: number,
   itemIdx: number,
   firstSentenceWords: number,
 ) {
-  // TODO(human)
+  const answer = item.answer;
+  expect(item.hint).toBe(answer.slice(0, Math.floor(answer.length / 2)));
+  if (itemIdx === 0) {
+    expect(wordIdx).toBe(firstSentenceWords + 1);
+    return;
+  }
+  const gap = wordIdx - prevWordIdx;
+  if (gap === 3) {
+    const skipped = words[prevWordIdx + 2].replace(/[^A-Za-z0-9]/g, "");
+    expect(skipped.length === 1 || /^[0-9A-Z]/.test(skipped)).toBe(true);
+  } else {
+    expect(gap).toBe(2);
+  }
 }
 
 function getQuestionFiles(): string[] {
@@ -88,7 +100,8 @@ describe("TOEFL Reading: Complete the Words JSON structure", () => {
     const isNew = /^\d{8}-/.test(file);
     const firstSentenceWords = data.paragraph.split(/(?<=[.!?])\s/)[0]
       .split(/\s+/).length;
-    let prevWordIdx = -10;
+    // Sentence 1 has no blanks, so an answer word there is not the blank.
+    let prevWordIdx = isNew ? firstSentenceWords - 1 : -10;
 
     for (let i = 0; i < data.items.length; i++) {
       const item = data.items[i];
@@ -112,7 +125,14 @@ describe("TOEFL Reading: Complete the Words JSON structure", () => {
       expect(foundIdx).not.toBe(-1);
 
       if (isNew) {
-        expectCTestBlank(item, foundIdx, prevWordIdx, i, firstSentenceWords);
+        expectCTestBlank(
+          item,
+          words,
+          foundIdx,
+          prevWordIdx,
+          i,
+          firstSentenceWords,
+        );
       }
 
       prevWordIdx = foundIdx;
