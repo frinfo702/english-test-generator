@@ -10,12 +10,14 @@ import {
   HAMSTER_PAWS_DOWN,
   HAMSTER_PAWS_UP,
   HAMSTER_W,
+  PEARL_HAMSTER_PALETTE,
 } from "./hamsterSprite";
 import styles from "./PixelHamster.module.css";
 
 const NIBBLE_MS = 110;
 
 interface PixelHamsterProps {
+  variant?: "kinkuma" | "pearl";
   className?: string;
 }
 
@@ -61,7 +63,10 @@ function useBursts(
   }, [flip, gapMin, gapMax, beats, beatMs]);
 }
 
-export function PixelHamster({ className }: PixelHamsterProps) {
+export function PixelHamster({
+  variant = "kinkuma",
+  className,
+}: PixelHamsterProps) {
   const [pawsUp, setPawsUp] = useState(false);
   const [blinking, setBlinking] = useState(false);
   const [twitching, setTwitching] = useState(false);
@@ -75,7 +80,12 @@ export function PixelHamster({ className }: PixelHamsterProps) {
     beatMs: NIBBLE_MS,
   });
   useBursts(setBlinking, { gapMin: 2400, gapMax: 5200, beats: 1, beatMs: 150 });
-  useBursts(setTwitching, { gapMin: 3000, gapMax: 7000, beats: 3, beatMs: 120 });
+  useBursts(setTwitching, {
+    gapMin: 3000,
+    gapMax: 7000,
+    beats: 3,
+    beatMs: 120,
+  });
 
   useEffect(() => {
     if (!petted) return;
@@ -97,13 +107,15 @@ export function PixelHamster({ className }: PixelHamsterProps) {
         .filter(Boolean)
         .join(" ")}
       onClick={() => setPetted(true)}
-      aria-label="Pet the hamster"
+      aria-label={
+        variant === "pearl" ? "Pet the pearl white hamster" : "Pet the hamster"
+      }
       title="Nom nom"
     >
       <PixelArt
         className={styles.sprite}
         layers={layers}
-        palette={HAMSTER_PALETTE}
+        palette={variant === "pearl" ? PEARL_HAMSTER_PALETTE : HAMSTER_PALETTE}
         width={HAMSTER_W}
         height={HAMSTER_H}
       />

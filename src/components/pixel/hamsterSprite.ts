@@ -24,6 +24,19 @@ export const HAMSTER_PALETTE: Record<string, string> = {
   t: "#d9d3c4",
 };
 
+// Pearl white Djungarian: same sprite, white coat with a faint grey back.
+export const PEARL_HAMSTER_PALETTE: Record<string, string> = {
+  ...HAMSTER_PALETTE,
+  o: "#8e8e9c",
+  d: "#dcdde4",
+  f: "#eeeff3",
+  l: "#f7f7fa",
+  c: "#ffffff",
+  g: "#b4b4c0",
+  p: "#e6c4ca",
+  w: "#141014", // all-black eyes, no shine
+};
+
 // prettier-ignore
 export const HAMSTER_BODY = [
   "",

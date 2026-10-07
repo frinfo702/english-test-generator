@@ -329,6 +329,7 @@ export function DashboardPage() {
       </div>
 
       <div className={styles.streakPerch}>
+        <PixelHamster variant="pearl" className={styles.pearlHamster} />
         <PixelHamster className={styles.hamster} />
         <StreakCalendar dates={sessionDates} />
       </div>
