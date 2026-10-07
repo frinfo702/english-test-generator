@@ -7,7 +7,7 @@ import {
   getVoiceInfo,
   type VoiceGender,
 } from "./voiceMapping";
-import { SPEAKER_PHOTOS } from "./speakerPhotos";
+import { SPEAKER_PHOTOS, pickSpeakerPhotos } from "./speakerPhotos";
 
 const LISTENING_DIR = path.resolve(
   __dirname,
@@ -178,5 +178,53 @@ describe("assignVoices", () => {
   it("never reuses a voice within a set", () => {
     const voices = assignVoices("007", ["Narrator", "Student", "Friend"]);
     expect(new Set(Object.values(voices)).size).toBe(3);
+  });
+});
+
+describe("pickSpeakerPhotos (new sets in generate-audio)", () => {
+  const seeds = Array.from({ length: 50 }, (_, i) => String(900 + i));
+  const cast = (
+    task: "conversation" | "lecture" | "announcement" | "response",
+    roles: string[],
+    seed: string,
+  ) => {
+    const data: ListeningFile = {
+      audioSegments: roles.map((role) => ({ role, text: "" })),
+      questions: roles.map((_, i) => ({ id: `q${i + 1}` })),
+    };
+    data.voices = assignVoices(seed, [...new Set(roles)], {
+      mixedPair: task === "conversation",
+    });
+    pickSpeakerPhotos(task, data, (r) => genderOf(data.voices![r])!);
+    return data;
+  };
+
+  it.each(["lecture", "announcement"] as const)(
+    "%s: photo matches the voice gender",
+    (task) => {
+      for (const seed of seeds) {
+        const data = cast(task, ["Lecturer"], seed);
+        expect(SPEAKER_PHOTOS[data.speaker!]).toBe(
+          genderOf(data.voices!.Lecturer),
+        );
+      }
+    },
+  );
+
+  it("response: each item's photo matches its speaker's voice", () => {
+    for (const seed of seeds) {
+      const data = cast("response", ["Student", "Friend", "Student"], seed);
+      data.questions.forEach((q, i) => {
+        const role = data.audioSegments[i].role;
+        expect(SPEAKER_PHOTOS[q.speaker!]).toBe(genderOf(data.voices![role]));
+      });
+    }
+  });
+
+  it("conversation: a man–woman pair photo", () => {
+    for (const seed of seeds) {
+      const data = cast("conversation", ["Student", "Professor"], seed);
+      expect(SPEAKER_PHOTOS[data.speaker!]).toBe("pair");
+    }
   });
 });

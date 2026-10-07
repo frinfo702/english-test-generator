@@ -12,6 +12,17 @@ import {
   getVoiceInfo,
   pickInterviewerVoice,
 } from "../src/lib/voiceMapping.ts";
+import {
+  pickSpeakerPhotos,
+  type ListeningTask,
+} from "../src/lib/speakerPhotos.ts";
+
+const LISTENING_TASKS: ListeningTask[] = [
+  "conversation",
+  "lecture",
+  "announcement",
+  "response",
+];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..");
@@ -205,16 +216,29 @@ async function generateForQuestion(
       return;
     }
     if (!data.voices) {
+      // New set: cast voices (half men, half women), then photos that
+      // match each voice's gender. Both are saved into the JSON.
+      const task = LISTENING_TASKS.find((t) =>
+        relativePath.startsWith(`toefl/listening/${t}/`),
+      );
       const roles = [...new Set(segments.map((s) => s.role))];
-      data.voices = assignVoices(basename, roles, {
-        mixedPair: relativePath.includes("listening/conversation"),
+      const voices = assignVoices(basename, roles, {
+        mixedPair: task === "conversation",
       });
-      const withVoices = { voices: data.voices, ...data };
+      data.voices = voices;
+      if (task) {
+        pickSpeakerPhotos(
+          task,
+          data,
+          (role) => getVoiceInfo(voices[role])!.gender,
+        );
+      }
+      const withVoices = { voices, ...data };
       fs.writeFileSync(
         questionPath,
         JSON.stringify(withVoices, null, 2) + "\n",
       );
-      console.log(`  Cast voices: ${JSON.stringify(data.voices)}`);
+      console.log(`  Cast voices: ${JSON.stringify(voices)}`);
     }
     const voices = data.voices;
     const getVoiceForRole = (role: string): string => {
