@@ -42,8 +42,8 @@ const TASK_ID = "toefl/writing/build-sentence";
 
 export function BuildSentencePage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
@@ -59,14 +59,12 @@ export function BuildSentencePage() {
   const [phase, setPhase] = useState<"answering" | "submitted">("answering");
   const graded = phase === "submitted";
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   // No "press start" step: the timer runs as soon as the problem is shown.
   useEffect(() => {
@@ -200,13 +198,13 @@ export function BuildSentencePage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && sentence && (
+      {data && !loading && hasValidQuestionId && sentence && (
         <>
           {graded && (
             <div className={styles.resultCard}>

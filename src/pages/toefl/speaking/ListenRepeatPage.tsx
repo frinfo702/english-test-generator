@@ -180,8 +180,8 @@ function ListenRepeatDiffView({
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
@@ -237,9 +237,7 @@ export function ListenRepeatPage() {
     transcriptRef.current = transcript;
   }, [transcript]);
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
   const totalSentences = data?.sentences.length ?? 0;
@@ -251,9 +249,9 @@ export function ListenRepeatPage() {
   }, [duration]);
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -415,7 +413,7 @@ export function ListenRepeatPage() {
       data &&
       !loading &&
       !graded &&
-      hasValidQuestionNumber &&
+      hasValidQuestionId &&
       phase === "playing" &&
       !playing &&
       !ttsLoading
@@ -426,7 +424,7 @@ export function ListenRepeatPage() {
     data,
     loading,
     graded,
-    hasValidQuestionNumber,
+    hasValidQuestionId,
     phase,
     playing,
     ttsLoading,
@@ -527,9 +525,9 @@ export function ListenRepeatPage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
       {!speechSupported && !loading && (
@@ -543,7 +541,7 @@ export function ListenRepeatPage() {
       {speechError && <div className={styles.error}>{speechError}</div>}
       {ttsError && <div className={styles.error}>{ttsError}</div>}
 
-      {data && !loading && hasValidQuestionNumber && !graded && sentence && (
+      {data && !loading && hasValidQuestionId && !graded && sentence && (
         <div className={styles.card}>
           <p className={styles.qNum}>
             Question {current + 1} / {totalSentences}
@@ -668,7 +666,7 @@ export function ListenRepeatPage() {
         </div>
       )}
 
-      {graded && data && hasValidQuestionNumber && (
+      {graded && data && hasValidQuestionId && (
         <>
           <div className={styles.resultCard}>
             <h2>Section Complete</h2>

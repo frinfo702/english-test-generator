@@ -32,8 +32,8 @@ interface FlatQuestion {
 
 export function ReadDailyLifePage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<DailyLifeData>("toefl/reading/daily-life");
   const { saveScore } = useScoreHistory();
   const {
@@ -49,15 +49,13 @@ export function ReadDailyLifePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const sessionFileRef = useRef<string | null>(null);
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
+    if (!hasValidQuestionId) return;
     sessionFileRef.current = null;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (file && !sessionFileRef.current) {
@@ -142,9 +140,9 @@ export function ReadDailyLifePage() {
         </Button>
       </div>
 
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
@@ -158,7 +156,7 @@ export function ReadDailyLifePage() {
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && current && (
+      {data && !loading && hasValidQuestionId && current && (
         <>
           {graded && (
             <div className={styles.resultCard}>

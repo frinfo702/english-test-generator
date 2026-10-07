@@ -32,8 +32,8 @@ const PAGE_SIZE = 10;
 
 export function Part5Page() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>("toeic/part5");
   const { saveScore } = useScoreHistory();
   const {
@@ -48,14 +48,12 @@ export function Part5Page() {
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -138,13 +136,13 @@ export function Part5Page() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && (
+      {data && !loading && hasValidQuestionId && (
         <>
           {graded && (
             <div className={styles.resultCard}>

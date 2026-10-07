@@ -41,8 +41,8 @@ const TYPE_LABELS: Record<string, string> = {
 
 export function ReadAcademicPage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>("toefl/reading/academic");
   const { saveScore } = useScoreHistory();
   const {
@@ -57,14 +57,12 @@ export function ReadAcademicPage() {
   const [graded, setGraded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -144,13 +142,13 @@ export function ReadAcademicPage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && current && (
+      {data && !loading && hasValidQuestionId && current && (
         <>
           {graded && (
             <div className={styles.resultCard}>

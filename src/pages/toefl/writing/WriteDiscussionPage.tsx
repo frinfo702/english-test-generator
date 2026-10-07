@@ -91,8 +91,8 @@ const TASK_ID = "toefl/writing/discussion";
 
 export function WriteDiscussionPage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<"writing" | "submitted">("writing");
@@ -133,14 +133,12 @@ export function WriteDiscussionPage() {
     void submitAnswer();
   });
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (!problemId) return;
@@ -234,13 +232,13 @@ export function WriteDiscussionPage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && (
+      {data && !loading && hasValidQuestionId && (
         <>
           <div className={task.split}>
             <div className={task.prompt}>
@@ -289,8 +287,7 @@ export function WriteDiscussionPage() {
                         name={s.name}
                         tone={i + 1}
                         photo={
-                          s.gender &&
-                          studentPhotoUrl(s.gender, parsedQuestionNumber)
+                          s.gender && studentPhotoUrl(s.gender, questionId)
                         }
                       />
                       <span>{s.name}</span>

@@ -81,14 +81,14 @@ export function QuestionSelectorPage({
     [scores],
   );
 
-  const handlePick = (questionNumber: number) => {
-    navigate(`${basePath}/${questionNumber}`);
+  const handlePick = (questionId: string) => {
+    navigate(`${basePath}/${questionId}`);
   };
 
   const handleRandom = () => {
     if (files.length === 0) return;
     const item = files[Math.floor(Math.random() * files.length)];
-    handlePick(item.number);
+    handlePick(item.id);
   };
 
   return (
@@ -141,7 +141,7 @@ export function QuestionSelectorPage({
                   styles.row5Col,
                   completed ? table.rowCompleted : "",
                 ].join(" ")}
-                onClick={() => handlePick(item.number)}
+                onClick={() => handlePick(item.id)}
               >
                 <span className={table.statusCol}>
                   {completed ? (
@@ -150,7 +150,7 @@ export function QuestionSelectorPage({
                     <span className={table.statusNone}>{i + 1}</span>
                   )}
                 </span>
-                <span className={styles.number}>Q{item.number}</span>
+                <span className={styles.number}>Q{i + 1}</span>
                 <span className={styles.metricValue}>{elapsed}</span>
                 <span
                   className={[

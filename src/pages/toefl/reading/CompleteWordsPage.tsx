@@ -26,8 +26,8 @@ interface ProblemData {
 
 export function CompleteWordsPage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
@@ -46,14 +46,12 @@ export function CompleteWordsPage() {
   const [focusedIdx, setFocusedIdx] = useState<number | null>(null);
   const inputRefs = useRef<Array<HTMLTextAreaElement | null>>([]);
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (data) {
@@ -293,13 +291,13 @@ export function CompleteWordsPage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && (
+      {data && !loading && hasValidQuestionId && (
         <>
           <div className={styles.paragraph}>{renderParagraph()}</div>
 

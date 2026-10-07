@@ -18,7 +18,12 @@
  *   toeic/part7/                       *.json
  *
  * Each directory has an index.json listing available files:
- *   { "files": ["001.json", "002.json", ...] }
+ *   { "files": ["001.json", "20261007-library-hours.json", ...] }
+ * It is generated from the directory contents (see vite.config.ts), so
+ * adding or deleting a file is all it takes.
+ *
+ * A file's basename is the problem's ID: stored attempts point at it, so it
+ * must never change or be reused. Display numbers are just list positions.
  */
 
 export interface QuestionIndex {
@@ -32,7 +37,13 @@ export interface LoadedQuestion<T> {
 
 export interface QuestionFileEntry {
   file: string;
-  number: number;
+  id: string;
+}
+
+const QUESTION_ID = /^[a-z0-9-]+$/i;
+
+export function questionIdFromFile(file: string): string {
+  return file.replace(/\.json$/i, "");
 }
 
 export async function fetchQuestionIndex(
@@ -53,20 +64,10 @@ export async function listQuestionFiles(
   taskPath: string,
 ): Promise<QuestionFileEntry[]> {
   const index = await fetchQuestionIndex(taskPath);
+  // Plain code-unit order, so `>` on IDs agrees with list order.
   return index.files
-    .map((file) => {
-      const basename = file.replace(/\.[^.]+$/, "");
-      if (!/^\d+$/.test(basename)) {
-        throw new Error(
-          `Question file "${file}" in ${taskPath} must use numeric filename like 001.json.`,
-        );
-      }
-      return {
-        file,
-        number: Number.parseInt(basename, 10),
-      };
-    })
-    .sort((a, b) => a.number - b.number || a.file.localeCompare(b.file));
+    .map((file) => ({ file, id: questionIdFromFile(file) }))
+    .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 }
 
 export async function fetchQuestionByFileWithMeta<T>(
@@ -79,18 +80,14 @@ export async function fetchQuestionByFileWithMeta<T>(
   return { data, file };
 }
 
-export async function fetchQuestionByNumberWithMeta<T>(
+export async function fetchQuestionByIdWithMeta<T>(
   taskPath: string,
-  questionNumber: number,
+  id: string,
 ): Promise<LoadedQuestion<T>> {
-  const files = await listQuestionFiles(taskPath);
-  const selected = files.find((item) => item.number === questionNumber);
-  if (!selected) {
-    throw new Error(
-      `Question ${questionNumber} not found in ${taskPath}. Generate or register it first.`,
-    );
+  if (!QUESTION_ID.test(id)) {
+    throw new Error(`Invalid question ID "${id}".`);
   }
-  return fetchQuestionByFileWithMeta<T>(taskPath, selected.file);
+  return fetchQuestionByFileWithMeta<T>(taskPath, `${id}.json`);
 }
 
 export async function fetchRandomQuestionWithMeta<T>(

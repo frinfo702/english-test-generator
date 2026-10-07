@@ -21,11 +21,10 @@ description: >
 
 1. 依頼から難易度・トピックカテゴリを特定する
 2. 難易度未指定なら Daily Life（標準）を採用する
-3. `public/questions/dictation/` に `NNN.json` を作成する
-4. `index.json` の `files` 配列に新ファイル名を追記する
-5. JSON構造を `references/dictation-schema.md` と照合する
-6. `npm run generate-audio` で音声を生成する
-7. 保存先パスとファイル名を明示して完了報告する
+3. `public/questions/dictation/` に `<YYYYMMDD>-<slug>.json` を作成する（`index.json` は自動生成されるので編集しない）
+4. JSON構造を `references/dictation-schema.md` と照合する
+5. `npm run generate-audio` で音声を生成する
+6. 保存先パスとファイル名を明示して完了報告する
 
 ## task パス
 

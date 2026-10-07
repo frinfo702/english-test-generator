@@ -12,7 +12,7 @@ const playMock = vi.fn();
 const stopTtsMock = vi.fn();
 const startSpeechMock = vi.fn();
 const stopSpeechMock = vi.fn().mockResolvedValue(undefined);
-const loadByQuestionNumberMock = vi.fn();
+const loadByIdMock = vi.fn();
 const startTimerMock = vi.fn();
 const stopTimerMock = vi.fn().mockReturnValue(12);
 const resetTimerMock = vi.fn();
@@ -53,7 +53,7 @@ function renderPage() {
     <MemoryRouter initialEntries={["/toefl/speaking/listen-repeat/1"]}>
       <Routes>
         <Route
-          path="/toefl/speaking/listen-repeat/:questionNumber"
+          path="/toefl/speaking/listen-repeat/:questionId"
           element={<ListenRepeatPage />}
         />
       </Routes>
@@ -72,7 +72,7 @@ describe("ListenRepeatPage", () => {
       error: null,
       load: vi.fn(),
       loadByFile: vi.fn(),
-      loadByQuestionNumber: loadByQuestionNumberMock,
+      loadById: loadByIdMock,
     });
 
     vi.mocked(useTts).mockReturnValue({
@@ -131,7 +131,7 @@ describe("ListenRepeatPage", () => {
       error: null,
       load: vi.fn(),
       loadByFile: vi.fn(),
-      loadByQuestionNumber: loadByQuestionNumberMock,
+      loadById: loadByIdMock,
     });
 
     renderPage();
@@ -343,7 +343,7 @@ describe("ListenRepeatPage", () => {
       <MemoryRouter initialEntries={["/toefl/speaking/listen-repeat/1"]}>
         <Routes>
           <Route
-            path="/toefl/speaking/listen-repeat/:questionNumber"
+            path="/toefl/speaking/listen-repeat/:questionId"
             element={<ListenRepeatPage />}
           />
         </Routes>
@@ -394,7 +394,7 @@ describe("ListenRepeatPage", () => {
       <MemoryRouter initialEntries={["/toefl/speaking/listen-repeat/1"]}>
         <Routes>
           <Route
-            path="/toefl/speaking/listen-repeat/:questionNumber"
+            path="/toefl/speaking/listen-repeat/:questionId"
             element={<ListenRepeatPage />}
           />
         </Routes>

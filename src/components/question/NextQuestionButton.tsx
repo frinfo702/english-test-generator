@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { listQuestionFiles } from "../../lib/questions";
+import { listQuestionFiles, questionIdFromFile } from "../../lib/questions";
 import {
   loadNextMode,
   pickNext,
@@ -23,8 +23,6 @@ interface NextQuestionButtonProps extends Omit<
   onBeforeNavigate?: () => void;
 }
 
-const fileNumber = (file: string) => Number.parseInt(file, 10);
-
 /**
  * Moves to another problem of the same task, chosen by the play mode:
  * shuffle or in order (exactly one is on) plus an independent "unsolved
@@ -38,28 +36,27 @@ export function NextQuestionButton({
 }: NextQuestionButtonProps) {
   const navigate = useNavigate();
   const { getAll } = useScoreHistory();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const current = Number.parseInt(questionNumber ?? "", 10);
+  const { questionId: current = "" } = useParams<{ questionId: string }>();
   const [mode, setMode] = useState<NextMode>(loadNextMode);
-  const [numbers, setNumbers] = useState<number[]>([]);
-  const [solved, setSolved] = useState<Set<number>>(new Set());
+  const [ids, setIds] = useState<string[]>([]);
+  const [solved, setSolved] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     let cancelled = false;
     Promise.all([listQuestionFiles(taskId), getAll()])
       .then(([files, scores]) => {
         if (cancelled) return;
-        setNumbers(files.map((f) => f.number));
+        setIds(files.map((f) => f.id));
         setSolved(
           new Set(
             scores
               .filter((s) => s.taskId === taskId && s.questionFile)
-              .map((s) => fileNumber(s.questionFile!)),
+              .map((s) => questionIdFromFile(s.questionFile!)),
           ),
         );
       })
       .catch(() => {
-        if (!cancelled) setNumbers([]);
+        if (!cancelled) setIds([]);
       });
     return () => {
       cancelled = true;
@@ -95,8 +92,7 @@ export function NextQuestionButton({
 
   // Shuffle is random per call, but whether a next problem exists is not.
   const hasNext =
-    Number.isInteger(current) &&
-    pickNext(mode, numbers, current, solved) !== null;
+    current !== "" && pickNext(mode, ids, current, solved) !== null;
 
   return (
     <>
@@ -130,7 +126,7 @@ export function NextQuestionButton({
         <Button
           {...props}
           onClick={() => {
-            const next = pickNext(mode, numbers, current, solved);
+            const next = pickNext(mode, ids, current, solved);
             if (next === null) return;
             onBeforeNavigate?.();
             navigate(`/${taskId}/${next}`);

@@ -39,8 +39,8 @@ import styles from "./TakeInterviewPage.module.css";
 
 export function TakeInterviewPage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<InterviewProblemData>(INTERVIEW_TASK_ID);
 
   const [current, setCurrent] = useState(0);
@@ -166,14 +166,12 @@ export function TakeInterviewPage() {
   });
   timerStopRef.current = timer.stop;
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (!problemId) return;
@@ -315,13 +313,13 @@ export function TakeInterviewPage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && !done && q && chrome && (
+      {data && !loading && hasValidQuestionId && !done && q && chrome && (
         <div className={styles.card}>
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>{chrome.tag}</span>
@@ -617,7 +615,7 @@ export function TakeInterviewPage() {
         </div>
       )}
 
-      {done && data && hasValidQuestionNumber && (
+      {done && data && hasValidQuestionId && (
         <div className={styles.resultCard}>
           <h2>Interview Complete</h2>
           <p>You answered all {data.questions.length} questions.</p>

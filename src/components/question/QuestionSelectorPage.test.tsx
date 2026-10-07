@@ -33,8 +33,8 @@ describe("QuestionSelectorPage", () => {
 
   it("loads question files, formats latest scores, and navigates to a random item", async () => {
     vi.mocked(listQuestionFiles).mockResolvedValue([
-      { file: "001.json", number: 1 },
-      { file: "002.json", number: 2 },
+      { file: "001.json", id: "001" },
+      { file: "002.json", id: "002" },
     ]);
     getAllMock.mockResolvedValue([
       {
@@ -80,7 +80,7 @@ describe("QuestionSelectorPage", () => {
     expect(screen.getByText("75%")).toBeTruthy();
 
     fireEvent.click(screen.getByRole("button", { name: "Pick Random" }));
-    expect(screen.getByTestId("location").textContent).toBe("/toeic/part5/2");
+    expect(screen.getByTestId("location").textContent).toBe("/toeic/part5/002");
   });
 
   it("shows loading and then an error state", async () => {
