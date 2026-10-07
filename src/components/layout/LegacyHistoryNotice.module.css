@@ -1,0 +1,56 @@
+.dialog {
+  /* The global reset zeroes margins; auto is what centers a modal dialog. */
+  margin: auto;
+  width: min(440px, calc(100vw - 32px));
+  padding: var(--spacing-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-xl);
+}
+
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--spacing-3);
+}
+
+.body {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-secondary);
+  margin-bottom: var(--spacing-5);
+}
+
+.error {
+  font-size: var(--text-xs);
+  color: var(--color-error);
+  margin-bottom: var(--spacing-4);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.discard {
+  margin-top: var(--spacing-4);
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-ink-tertiary);
+  font-size: var(--text-xs);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.discard:hover:not(:disabled) {
+  color: var(--color-ink);
+}

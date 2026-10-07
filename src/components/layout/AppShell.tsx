@@ -1,8 +1,16 @@
-import { useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PixelArt } from "../pixel/PixelArt";
 import { POODLE_BODY, POODLE_PALETTE } from "../pixel/poodleSprite";
 import { ThemeToggle } from "../ui/ThemeToggle";
+import { LegacyHistoryNotice } from "./LegacyHistoryNotice";
 import styles from "./AppShell.module.css";
 
 // The mascot's head (sprite rows 1–15, ears to collar) as the logo mark.
@@ -54,6 +62,8 @@ export function AppShell({ children }: AppShellProps) {
   const navRef = useRef<HTMLElement | null>(null);
   const activeRef = useRef<HTMLAnchorElement | null>(null);
   const indicatorRef = useRef<HTMLSpanElement | null>(null);
+  /** Bumped after a history migration to remount pages that read history. */
+  const [historyVersion, setHistoryVersion] = useState(0);
 
   const activeItem =
     navItems.find((item) => item.matches(location.pathname)) ??
@@ -154,8 +164,9 @@ export function AppShell({ children }: AppShellProps) {
         </div>
       </header>
       <main className={styles.main} id="main-content" tabIndex={-1}>
-        {children}
+        <Fragment key={historyVersion}>{children}</Fragment>
       </main>
+      <LegacyHistoryNotice onMigrated={() => setHistoryVersion((v) => v + 1)} />
     </div>
   );
 }

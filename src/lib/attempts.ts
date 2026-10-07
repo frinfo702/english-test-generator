@@ -67,16 +67,30 @@ async function putAll(db: IDBDatabase, attempts: Attempt[]): Promise<void> {
   await committed(tx);
 }
 
+/**
+ * Database upgrades, one per version, applied in order when the database
+ * opens: entry N upgrades version N to N+1, and the database version is the
+ * list length. The browser runs pending steps before anything can read, so
+ * upgrades are automatic. Never edit a shipped step; append a new one. A step
+ * that reshapes records reads and rewrites them through `tx`.
+ */
+const UPGRADES: ((db: IDBDatabase, tx: IDBTransaction) => void)[] = [
+  (db) => {
+    db.createObjectStore(STORE, { keyPath: "id" });
+  },
+];
+
 let dbPromise: Promise<IDBDatabase> | null = null;
 
 function openDb(): Promise<IDBDatabase> {
   dbPromise ??= (async () => {
-    const req = indexedDB.open(DB_NAME, 1);
-    req.onupgradeneeded = () => {
-      req.result.createObjectStore(STORE, { keyPath: "id" });
+    const req = indexedDB.open(DB_NAME, UPGRADES.length);
+    req.onupgradeneeded = (e) => {
+      for (const step of UPGRADES.slice(e.oldVersion)) {
+        step(req.result, req.transaction!);
+      }
     };
     const db = await request(req);
-    await migrateLegacy(db);
     // Ask the browser not to evict our data under storage pressure.
     void navigator.storage?.persist?.().catch(() => undefined);
     return db;
@@ -99,6 +113,11 @@ export async function saveAttempt(
   return saved;
 }
 
+/** Stores attempts as they are; one with an existing ID replaces it. */
+export async function putAttempts(attempts: Attempt[]): Promise<void> {
+  await putAll(await openDb(), attempts);
+}
+
 /** Every attempt, oldest first. */
 export async function getAllAttempts(): Promise<Attempt[]> {
   const db = await openDb();
@@ -112,81 +131,6 @@ export async function clearAttempts(): Promise<void> {
   const tx = (await openDb()).transaction(STORE, "readwrite");
   tx.objectStore(STORE).clear();
   await committed(tx);
-}
-
-// ── Legacy localStorage history ────────────────────────────────────────────
-
-const LEGACY_SCORES = "score-history";
-const LEGACY_ANSWERS = "answer-history";
-
-export interface LegacyScore {
-  taskId: TaskId;
-  date: string;
-  correct: number;
-  total: number;
-  elapsedSeconds?: number;
-  questionFile?: string;
-}
-
-export interface LegacyAnswer {
-  answerId: string;
-  taskId: TaskId;
-  /** e.g. "toefl/speaking/interview/001#q2" */
-  problemId: string;
-  response: string;
-  date: string;
-}
-
-/** Legacy scores kept no responses, so they carry only the score. */
-export function fromLegacyScore(e: LegacyScore): Attempt {
-  return {
-    // Deterministic, so re-running an interrupted migration can't duplicate.
-    id: `legacy-score:${e.date}:${e.taskId}`,
-    taskId: e.taskId,
-    problemId: e.questionFile?.replace(/\.json$/i, ""),
-    date: e.date,
-    elapsedSeconds: e.elapsedSeconds,
-    responses: [],
-    score: { method: "legacy", correct: e.correct, total: e.total },
-  };
-}
-
-export function fromLegacyAnswer(e: LegacyAnswer): Attempt {
-  const [path, itemId] = e.problemId.split("#");
-  // Interview answers were speech-to-text output, not typed text.
-  const spoken = e.taskId === "toefl/speaking/interview";
-  return {
-    id: e.answerId,
-    taskId: e.taskId,
-    problemId: path.slice(path.lastIndexOf("/") + 1),
-    date: e.date,
-    responses: [
-      spoken
-        ? { itemId, transcript: e.response }
-        : { itemId, text: e.response },
-    ],
-  };
-}
-
-function readLegacy<T>(key: string): T[] {
-  try {
-    const parsed: unknown = JSON.parse(localStorage.getItem(key) ?? "[]");
-    return Array.isArray(parsed) ? (parsed as T[]) : [];
-  } catch {
-    return [];
-  }
-}
-
-async function migrateLegacy(db: IDBDatabase): Promise<void> {
-  const legacy = [
-    ...readLegacy<LegacyScore>(LEGACY_SCORES).map(fromLegacyScore),
-    ...readLegacy<LegacyAnswer>(LEGACY_ANSWERS).map(fromLegacyAnswer),
-  ];
-  if (legacy.length === 0) return;
-  await putAll(db, legacy);
-  // Only after the write committed, so a failure keeps the originals.
-  localStorage.removeItem(LEGACY_SCORES);
-  localStorage.removeItem(LEGACY_ANSWERS);
 }
 
 // ── Backup file ────────────────────────────────────────────────────────────
@@ -283,6 +227,6 @@ export async function importBackup(file: Blob): Promise<number> {
       ),
     })),
   );
-  await putAll(await openDb(), attempts);
+  await putAttempts(attempts);
   return attempts.length;
 }
