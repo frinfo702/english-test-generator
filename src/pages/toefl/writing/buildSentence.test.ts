@@ -61,6 +61,12 @@ describe("buildSentence helpers", () => {
     expect(isCorrectOrder([1, 0], [1, 0])).toBe(true);
     expect(isCorrectOrder([0, 1], [1, 0])).toBe(false);
   });
+
+  it("leaves a distractor chunk in the pool once every blank is filled", () => {
+    const slots = [2, 0];
+    expect(poolChunks(3, slots)).toEqual([1]);
+    expect(isCorrectOrder(slots, [2, 0])).toBe(true);
+  });
 });
 
 describe("endPunctuation", () => {

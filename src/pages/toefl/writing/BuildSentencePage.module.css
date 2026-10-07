@@ -261,6 +261,16 @@
   align-items: flex-end;
 }
 
+/* Words of the answer shown as-is around the blanks. */
+.given {
+  display: inline-flex;
+  align-items: flex-end;
+  font-size: var(--text-lg);
+  color: var(--color-ink);
+  padding-bottom: 6px;
+  line-height: 1;
+}
+
 /* Sentence-final . or ? — given, not one of the chunks. */
 .endMark {
   font-size: var(--text-lg);

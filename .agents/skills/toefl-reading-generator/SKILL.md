@@ -18,40 +18,44 @@ description: >
 
 | タスク                | 保存先                                           | パッセージの長さ | 設問数                       |
 | --------------------- | ------------------------------------------------ | ---------------- | ---------------------------- |
-| Complete the Words    | `public/questions/toefl/reading/complete-words/` | 70-100 words     | 1パッセージにつき10 blanks   |
-| Read in Daily Life    | `public/questions/toefl/reading/daily-life/`     | 80-150 words     | pacage × 2〜3 questions each |
-| Read Academic Passage | `public/questions/toefl/reading/academic/`       | 170-230 words    | 1 pacage x 5 questions       |
+| Complete the Words    | `public/questions/toefl/reading/complete-words/` | 65-100 words     | 1パッセージにつき10 blanks   |
+| Read in Daily Life    | `public/questions/toefl/reading/daily-life/`     | 40-150 words     | 1 text × 2〜3 questions      |
+| Read Academic Passage | `public/questions/toefl/reading/academic/`       | 180-230 words    | 1 passage × 5 questions      |
 
-## 必須仕様（2026年新形式準拠）
+## 本番との差を生まないための指針
 
-### Complete the Words
+仕様（語数・設問数・JSON）は `question-schemas.md` が正。ここでは「本番らしさ」を作るコツをまとめる。
+出典: ETS公式 Test Blueprint & Specifications (2026) と公式フル模試の観察。市販教材の問題は流用しない。
 
-- 70〜100語の学術段落、空欄10個固定
-- `paragraph` には元の全文のみを入れ、`___` や `hint + _` の伏せ字は保存しない
-- 空欄化する単語は段落中の出現順に `items` へ並べる
-- `hint` は2〜3文字、`answer` の先頭と一致させる
-- 文脈から一意に特定できる語のみ選ぶ
-- 連続する単語（隣接語）を両方とも空欄にしない。空欄同士は最低3語以上離す
+### Complete the Words（Reading 50問中30問を占める最重要タスク）
+
+- **書き方の順番**: 先に B1〜B2 の平易な5文の説明文を書く → 第2文の2語目から1語おきに10語を機械的に選ぶ → hint = 先頭 floor(len/2) 文字。空欄にしたい難語を選んでから文を作るのは禁止（旧データの失敗パターン）
+- 空欄の約半数が the / of / and / in / that / its / with / is / have / from などの短い機能語になるのが正常。`a__`（and）や `o_`（of）のような短い空欄が多いのが本番の手触り
+- 内容語は高頻度語の活用形（places, falls, required, surfaces, discovered）にする。`constructive` `vulnerable` `testimony` のような学術語は使わない
+- 解答の決め手は文法（数の一致、時制、前置詞の相性、接続詞の論理）。hint から複数の語が考えられる場合は、文法で一意に決まるかを確認する
+- 第1文で話題を立て、最後の1〜2文はまとめ・一般化で空欄なし
 
 ### Read in Daily Life
 
-- everyday text（email, notice, schedule, menu, announcement, text message, online post, ad, poster, sign, webpage, news article, form, invoice, receipt など）2〜3本
-- 各テキスト15〜150語、設問2〜3問
-- 各テキストに `layout`（email / chat / live-chat / notice / document）を指定する。chat / live-chat は `messages`（sender, time, text）で書く。詳細は `question-schemas.md`
-- 1セット内で layout を散らす（例: email + chat、notice + live-chat）
-- 合計4〜9問（目安6〜7問）
-- 設問タイプ: factual / inference / purpose / vocabulary
-- CEFR B2〜C1レベル。高度な推論や態度・意図の読み取りを含む
-- 選択肢は4択。不正解選択肢は意味的に近いものを含め、容易に除外できない設計
-- 評価されるスキル: 非線形テキスト形式の理解、書面コミュニケーションの主目的の特定、非公式・慣用的表現の理解、推論、スキャン・スキミング
+- 1本ずつ作る。短い（40〜80語・2問）か長い（100〜150語・3問）のどちらかに寄せる
+- 本番らしい素材: 掲示（ペーパーレス化・施設閉鎖）、SNS投稿（イベント告知）、予約確認メール、販促・招待メール、標識、メニュー
+- 設問の型: 主目的（What is the main purpose of…?）、詳細（いつ・何を持参・どう申し込む）、読み手や関係についての推論、発信者の特定（What type of business most likely…?）
+- distractor は本文の語を別の役割で再利用する（ペーパーレス化の掲示なのに "a paper supplier"、本文中の別の日付など）
+- 語彙は日常語。難しさは推論・目的把握で出し、難語では出さない
 
-### Read Academic Passage
+### Read an Academic Passage
 
-- 学術段落1本、150〜250語（目安200語）
-- 5問固定
-- 設問タイプ: vocabulary / detail / inference / mainIdea / paragraphRelation / importantIdea / negativeFactual / rhetoricalPurpose / insertSentence
-- トピック領域: history, art and music, business and economics, life science, physical science, social science など。背景知識は不要
-- CEFR C1〜C2レベル
+- 180〜230語・3段落・タイトル付き。「概念 → 研究・証拠 → 含意」の流れ
+- 5問は mainIdea / vocabulary / detail / negativeFactual / rhetoricalPurpose / inference から重複少なく選ぶ。文挿入・要約は作らない
+- rhetoricalPurpose は「Why does the author mention X?」で、正解は「〜を例証するため」型
+
+## 自己チェック（保存前に必ず確認）
+
+- [ ] Complete the Words: 第1文に空欄がない／空欄は1語おきに連続／hint が floor(len/2) 文字／機能語が3〜6個含まれる／最後の文に空欄がない
+- [ ] Complete the Words: 10個の answer に CEFR C1 以上の語がない
+- [ ] Daily Life: 語数と設問数の組（40〜80語→2問、100〜150語→3問）が合っている
+- [ ] 正解の根拠が本文中に1か所で特定でき、distractor が本文の語を流用している
+- [ ] `npx vitest run src/lib/toefl-reading` が通る
 
 ## 実行手順
 

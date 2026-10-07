@@ -25,7 +25,7 @@ TEMPLATES = {
         "items": [
             {
                 "index": 0,
-                "hint": "abc",
+                "hint": "TODO: first floor(len/2) letters of answer",
                 "answer": "TODO: Correct word",
             }
         ],
