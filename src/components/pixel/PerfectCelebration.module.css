@@ -1,0 +1,87 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Each piece starts just below the bottom edge, centred; the keyframes
+ * offset it sideways to its corner. */
+.x {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  animation-name: drift;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+.y {
+  display: block;
+  animation-name: toss;
+  animation-fill-mode: both;
+}
+
+.sprite {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0 0 0 -32px;
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.3));
+}
+
+.mirror {
+  transform: scaleX(-1);
+}
+
+.bit,
+.streamer {
+  display: block;
+  margin-left: -4px;
+}
+
+.bit {
+  width: 8px;
+  height: 8px;
+}
+
+.streamer {
+  width: 6px;
+  height: 14px;
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(var(--sx));
+  }
+  to {
+    transform: translateX(var(--ex));
+  }
+}
+
+/* Quadratic in and out (the exact bezier for a parabola): cubic curves stall
+ * at the peak and read as hovering. The fall accelerates like gravity while
+ * the piece fades out. */
+@keyframes toss {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.33, 0.67, 0.67, 1);
+  }
+  38% {
+    transform: translateY(var(--peak)) rotate(calc(var(--spin) * 0.4));
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.33, 0, 0.67, 0.33);
+  }
+  100% {
+    transform: translateY(-5vh) rotate(var(--spin));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay {
+    display: none;
+  }
+}

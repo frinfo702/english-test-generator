@@ -177,9 +177,7 @@ export function reconstructSentence(words: string[]): string {
 
 /**
  * Score a dictation set: one point per completed sentence, minus one per
- * wrong tap (clamped to 0). Unfinished sentences earn nothing, so submitting
- * an incomplete set counts the missing sentences as wrong. When every
- * sentence is complete this equals `total - wrongCount`.
+ * wrong tap (clamped to 0).
  */
 export function computeDictationScore(
   completedCount: number,

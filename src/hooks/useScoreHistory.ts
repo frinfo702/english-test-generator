@@ -30,6 +30,9 @@ export type TaskId =
   | "shadowing"
   | "dictation";
 
+/** Fired on window when an all-correct score is saved. */
+export const PERFECT_SCORE_EVENT = "perfect-score";
+
 export interface ScoreEntry {
   taskId: TaskId;
   date: string;
@@ -78,6 +81,9 @@ export function useScoreHistory() {
       method = "answer-key",
     }: SaveScoreInput) => {
       if (total === 0) return;
+      // Every page saves through here, so one dispatch covers all tasks.
+      if (correct >= total)
+        window.dispatchEvent(new Event(PERFECT_SCORE_EVENT));
       await saveAttempt({
         taskId,
         problemId: file ? questionIdFromFile(file) : undefined,

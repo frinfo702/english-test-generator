@@ -95,5 +95,54 @@ const pencil: PixelSprite = {
   ],
 };
 
-export const PIXEL_ICONS = { university, briefcase, microphone, pencil };
+// prettier-ignore
+const exportTray: PixelSprite = {
+  palette: { o: "#2b2b3a", a: "#3ec46d", t: "#c9c9d8" },
+  rows: [
+    "",
+    ".......oo",
+    "......oaao",
+    ".....oaaaao",
+    "....oaaaaaao",
+    "...oaaaaaaaao",
+    "...ooooaaoooo",
+    "......oaao",
+    "......oaao",
+    "......oaao",
+    ".ot...oooo...to.",
+    ".ot..........to.",
+    ".otttttttttttto.",
+    ".oooooooooooooo.",
+  ],
+};
+
+// prettier-ignore
+const importTray: PixelSprite = {
+  palette: { o: "#2b2b3a", a: "#55b3fb", t: "#c9c9d8" },
+  rows: [
+    "",
+    "......oooo",
+    "......oaao",
+    "......oaao",
+    "...ooooaaoooo",
+    "...oaaaaaaaao",
+    "....oaaaaaao",
+    ".....oaaaao",
+    "......oaao",
+    ".......oo",
+    ".ot..........to.",
+    ".ot..........to.",
+    ".otttttttttttto.",
+    ".oooooooooooooo.",
+  ],
+};
+
+export const PIXEL_ICONS = {
+  university,
+  briefcase,
+  microphone,
+  pencil,
+  exportTray,
+  importTray,
+};
 export type PixelIconName = keyof typeof PIXEL_ICONS;

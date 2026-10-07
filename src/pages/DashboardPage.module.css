@@ -23,7 +23,7 @@
 .summaryLabel {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
 }
 
 .summaryValue {
@@ -53,6 +53,15 @@
   position: absolute;
   top: 0;
   right: var(--spacing-8);
+  z-index: 1;
+}
+
+/* Smaller cells make a smaller hamster; pushed down so both sit on the card. */
+.pearlHamster {
+  --hamster-cell: 2px;
+  position: absolute;
+  top: calc((3px - 2px) * 21);
+  right: calc(var(--spacing-8) + 3px * 26 + var(--spacing-1));
   z-index: 1;
 }
 
@@ -122,7 +131,7 @@
   font-family: var(--font-sans);
   font-variant-numeric: tabular-nums;
   font-size: 10px;
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
 }
 
 .statValue {
@@ -309,6 +318,65 @@
   align-items: center;
   gap: var(--spacing-3);
   margin-bottom: var(--spacing-3);
+}
+
+.backupIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* PixelArt has no per-cell hooks, so arrow cells are picked by their fill
+   (the arrow colour in pixelIcons.ts) and row. Bands flash in turn so the
+   arrow reads as moving. */
+.exportIcon {
+  --arrow: #3ec46d;
+  --flash: #d4ffe0;
+}
+
+.importIcon {
+  --arrow: #55b3fb;
+  --flash: #e3f3ff;
+}
+
+@keyframes arrowChase {
+  0%,
+  24% {
+    fill: var(--flash);
+  }
+  25%,
+  100% {
+    fill: var(--arrow);
+  }
+}
+
+:is(.backupBtn:hover, .backupBtn:focus-visible)
+  :is(.exportIcon rect[fill="#3ec46d"], .importIcon rect[fill="#55b3fb"]) {
+  /* Longhands: the shorthand would reset the per-row delays below. */
+  animation-name: arrowChase;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.backupBtn .exportIcon :is(rect[y="6"], rect[y="7"]),
+.backupBtn .importIcon :is(rect[y="4"], rect[y="5"]) {
+  animation-delay: 0.125s;
+}
+
+.backupBtn .exportIcon :is(rect[y="4"], rect[y="5"]),
+.backupBtn .importIcon :is(rect[y="6"], rect[y="7"]) {
+  animation-delay: 0.25s;
+}
+
+.backupBtn .exportIcon :is(rect[y="1"], rect[y="2"], rect[y="3"]),
+.backupBtn .importIcon rect[y="8"] {
+  animation-delay: 0.375s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backupBtn rect {
+    animation: none !important;
+  }
 }
 
 .backupOption {

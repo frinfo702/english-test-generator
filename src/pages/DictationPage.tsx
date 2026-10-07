@@ -10,7 +10,6 @@ import { useQuestion } from "../hooks/useQuestion";
 import { useScoreHistory } from "../hooks/useScoreHistory";
 import { useElapsedTimer } from "../hooks/useElapsedTimer";
 import { NextQuestionButton } from "../components/question/NextQuestionButton";
-import { formatSecondsAsMmSs } from "../lib/time";
 import {
   buildWordPool,
   shufflePool,
@@ -21,7 +20,6 @@ import {
   type WordToken,
 } from "./dictation";
 import styles from "./DictationPage.module.css";
-import { PixelCheckIcon } from "../components/ui/PixelCheckIcon";
 
 interface DictationSentence {
   id: string;
@@ -52,7 +50,6 @@ function createSentenceState(): SentenceState {
 }
 
 function DictationContent({ data, file }: { data: ProblemData; file: string }) {
-  const navigate = useNavigate();
   const {
     playing,
     loading: ttsLoading,
@@ -72,12 +69,10 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
     elapsedSeconds,
     start: startTimer,
     stop: stopTimer,
-    reset: resetTimer,
   } = useElapsedTimer();
 
   const [current, setCurrent] = useState(0);
   const [states, setStates] = useState<Record<number, SentenceState>>({});
-  const [submitted, setSubmitted] = useState(false);
 
   const fileBasename = file.replace(/\.json$/i, "");
   const totalSentences = data.sentences.length;
@@ -123,18 +118,39 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
     else play(audioUrl);
   }, [playing, currentTime, play, pause, resume, audioUrl]);
 
+  const correctCount = useMemo(
+    () =>
+      data.sentences.reduce(
+        (n, _, i) => n + (states[i]?.phase === "correct" ? 1 : 0),
+        0,
+      ),
+    [data.sentences, states],
+  );
+  const allCorrect = correctCount === totalSentences;
+  const isLastSentence = current + 1 >= totalSentences;
+
+  /** Total wrong taps across all sentences (lower is better) */
+  const totalWrongCount = useMemo(
+    () =>
+      data.sentences.reduce((n, _, i) => n + (states[i]?.wrongCount ?? 0), 0),
+    [data.sentences, states],
+  );
+
   const handleSelectWord = (token: WordToken) => {
     if (state.phase === "correct") return;
     const newSelected = [...state.selected, token];
     if (isCorrectSoFar(newSelected, correctWords)) {
+      const complete = isCompleteAndCorrect(newSelected, correctWords);
       setState((prev) => ({
         ...prev,
         selected: newSelected,
-        phase: isCompleteAndCorrect(newSelected, correctWords)
-          ? "correct"
-          : "answering",
+        phase: complete ? "correct" : "answering",
         wrongToken: null,
       }));
+      // Saved from the tap, not an effect, so StrictMode can't record it twice.
+      if (complete && correctCount + 1 === totalSentences) {
+        finish(newSelected);
+      }
     } else {
       // Wrong word: do NOT add to selected — record it as a red chip.
       // The user can immediately continue tapping other words.
@@ -175,101 +191,33 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
     if (current > 0) setCurrent((c) => c - 1);
   };
 
-  const correctCount = useMemo(
-    () =>
-      data.sentences.reduce(
-        (n, _, i) => n + (states[i]?.phase === "correct" ? 1 : 0),
-        0,
-      ),
-    [data.sentences, states],
-  );
-  const allCorrect = correctCount === totalSentences;
-  const unfinishedCount = totalSentences - correctCount;
-  const isLastSentence = current + 1 >= totalSentences;
-
-  /** Total wrong taps across all sentences (lower is better) */
-  const totalWrongCount = useMemo(
-    () =>
-      data.sentences.reduce((n, _, i) => n + (states[i]?.wrongCount ?? 0), 0),
-    [data.sentences, states],
-  );
-
-  const handleSubmit = () => {
+  // `lastSelected` is passed in because the final tap's state update hasn't landed yet.
+  const finish = (lastSelected: WordToken[]) => {
     stopTimer();
-    setSubmitted(true);
-    // Unfinished sentences score zero; each wrong tap costs a point.
-    const score = computeDictationScore(correctCount, totalWrongCount);
     saveScore({
       taskId: TASK_ID,
       file,
-      correct: score,
+      correct: computeDictationScore(totalSentences, totalWrongCount),
       total: totalSentences,
       elapsedSeconds,
       method: "dictation-taps",
       responses: data.sentences.map((s, i) => ({
         itemId: s.id,
-        text: (states[i]?.selected ?? []).map((t) => t.text).join(" "),
+        text: (i === current ? lastSelected : (states[i]?.selected ?? []))
+          .map((t) => t.text)
+          .join(" "),
         misses: states[i]?.wrongCount ?? 0,
       })),
     });
   };
 
-  const handleRestart = () => {
-    stop();
-    resetTimer();
-    setStates({});
-    setSubmitted(false);
-    setCurrent(0);
-    navigate("/dictation");
-  };
-
   useEffect(() => {
-    if (data && !submitted && elapsedSeconds === 0) startTimer();
-  }, [data, submitted, elapsedSeconds, startTimer]);
+    if (data && elapsedSeconds === 0) startTimer();
+  }, [data, elapsedSeconds, startTimer]);
 
   const remainingPool = pool.filter(
     (t) => !state.selected.some((s) => s.id === t.id),
   );
-
-  if (submitted) {
-    return (
-      <div className={styles.resultCard}>
-        <p className="micro-label">Dictation complete</p>
-        <div className="doc-score">
-          <span className="doc-score-num">{totalWrongCount}</span>
-          <span className="doc-score-den">
-            mistake{totalWrongCount === 1 ? "" : "s"}
-          </span>
-        </div>
-        {unfinishedCount > 0 && (
-          <p className={styles.scorePct}>
-            {unfinishedCount} of {totalSentences} sentence
-            {totalSentences === 1 ? "" : "s"} left unfinished (counted as
-            wrong).
-          </p>
-        )}
-        <p className={styles.scorePct}>
-          {totalWrongCount === 0 && unfinishedCount === 0
-            ? "No mistakes — every sentence exactly right."
-            : totalWrongCount + unfinishedCount <= 3
-              ? "Close. A few words slipped."
-              : "Keep going — the word order will stick."}
-        </p>
-        <p className={styles.timeText}>
-          Time {formatSecondsAsMmSs(elapsedSeconds)}
-        </p>
-        <div className={styles.btnRow}>
-          <Button variant="primary" onClick={handleRestart}>
-            Try another question
-          </Button>
-          <Button variant="ghost" onClick={() => navigate("/dashboard")}>
-            View progress
-          </Button>
-          <NextQuestionButton taskId={TASK_ID} />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className={styles.dictationPage}>
@@ -403,11 +351,8 @@ function DictationContent({ data, file }: { data: ProblemData; file: string }) {
                 Next →
               </Button>
             )}
-            {(allCorrect || isLastSentence) && (
-              <Button size="lg" onClick={handleSubmit}>
-                Submit
-                <PixelCheckIcon />
-              </Button>
+            {allCorrect && (
+              <NextQuestionButton taskId={TASK_ID} showModes={false} />
             )}
           </div>
         </div>

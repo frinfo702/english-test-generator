@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { pickNext, type NextMode } from "./nextMode";
+import {
+  getNextMode,
+  pickNext,
+  setNextMode,
+  subscribeNextMode,
+  type NextMode,
+} from "./nextMode";
 
 const all = ["001", "002", "20261007-a", "20261007-b"];
 const [a, b, c, d] = all;
@@ -34,5 +40,17 @@ describe("pickNext", () => {
     for (let i = 0; i < 50; i++) {
       expect(pickNext(mode, all, a, new Set([b, c]))).toBe(d);
     }
+  });
+});
+
+describe("shared next mode", () => {
+  it("notifies every subscriber and persists the change", () => {
+    const seen: NextMode[] = [];
+    const off = subscribeNextMode(() => seen.push(getNextMode()));
+    const mode: NextMode = { order: "shuffle", unsolvedOnly: true };
+    setNextMode(mode);
+    off();
+    expect(seen).toEqual([mode]);
+    expect(localStorage.getItem("next-question-unsolved-only")).toBe("1");
   });
 });
