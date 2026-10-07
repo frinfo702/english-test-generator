@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
+import {
+  DAILY_LIFE_LAYOUTS,
+  NOTICE_ICONS,
+  textBody,
+  type DailyLifeData,
+} from "../pages/toefl/reading/dailyLife";
 
 const QUESTION_DIR = path.resolve(
   __dirname,
@@ -12,26 +18,6 @@ const VALID_QUESTION_TYPES = ["factual", "inference", "purpose", "vocabulary"];
 // 必須仕様: 各テキスト15〜150語
 const MIN_TEXT_WORDS = 15;
 const MAX_TEXT_WORDS = 150;
-
-interface DailyLifeQuestion {
-  id: string;
-  stem: string;
-  options: string[];
-  correctIndex: number;
-  type: string;
-  explanation: string;
-}
-
-interface DailyLifeText {
-  id: string;
-  textType: string;
-  content: string;
-  questions: DailyLifeQuestion[];
-}
-
-interface DailyLifeData {
-  texts: DailyLifeText[];
-}
 
 function getQuestionFiles(): string[] {
   return fs
@@ -76,9 +62,32 @@ describe("TOEFL Reading: Daily Life JSON structure", () => {
       expect(typeof text.textType).toBe("string");
       expect(text.textType.trim()).not.toBe("");
 
-      expect(text).toHaveProperty("content");
-      expect(typeof text.content).toBe("string");
-      expect(text.content.trim()).not.toBe("");
+      if (text.layout !== undefined) {
+        expect(DAILY_LIFE_LAYOUTS).toContain(text.layout);
+      }
+      if (text.icon !== undefined) {
+        expect(NOTICE_ICONS).toContain(text.icon);
+      }
+
+      // chat / live-chat are drawn from messages; everything else from content
+      if (text.layout === "chat" || text.layout === "live-chat") {
+        expect(Array.isArray(text.messages)).toBe(true);
+        expect(text.messages!.length).toBeGreaterThanOrEqual(2);
+        for (const m of text.messages!) {
+          expect(typeof m.sender).toBe("string");
+          expect(m.sender.trim()).not.toBe("");
+          expect(typeof m.text).toBe("string");
+          expect(m.text.trim()).not.toBe("");
+          if (m.time !== undefined) expect(typeof m.time).toBe("string");
+        }
+        // at least two people talking
+        expect(
+          new Set(text.messages!.map((m) => m.sender)).size,
+        ).toBeGreaterThanOrEqual(2);
+      } else {
+        expect(typeof text.content).toBe("string");
+        expect(text.content!.trim()).not.toBe("");
+      }
 
       expect(text).toHaveProperty("questions");
       expect(Array.isArray(text.questions)).toBe(true);
@@ -151,7 +160,7 @@ describe("TOEFL Reading: Daily Life JSON structure", () => {
     (file) => {
       const data = loadJson(file);
       for (const text of data.texts) {
-        const wordCount = text.content.split(/\s+/).filter(Boolean).length;
+        const wordCount = textBody(text).split(/\s+/).filter(Boolean).length;
         expect(wordCount).toBeGreaterThanOrEqual(MIN_TEXT_WORDS);
         expect(wordCount).toBeLessThanOrEqual(MAX_TEXT_WORDS);
       }
@@ -170,7 +179,7 @@ describe("TOEFL Reading: Daily Life JSON structure", () => {
     for (const file of files) {
       const data = loadJson(file);
       for (const text of data.texts) {
-        const wordCount = text.content.split(/\s+/).filter(Boolean).length;
+        const wordCount = textBody(text).split(/\s+/).filter(Boolean).length;
         expect(wordCount).toBeGreaterThanOrEqual(MIN_TEXT_WORDS);
         expect(wordCount).toBeLessThanOrEqual(MAX_TEXT_WORDS);
       }

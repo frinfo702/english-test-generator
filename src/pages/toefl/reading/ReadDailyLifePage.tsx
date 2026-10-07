@@ -1,37 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { FeedbackPanel } from "../../../components/ui/FeedbackPanel";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
-import { useState } from "react";
 import styles from "./ReadDailyLifePage.module.css";
-import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
-
-interface Question {
-  id: string;
-  stem: string;
-  options: string[];
-  correctIndex: number;
-  type: string;
-  explanation: string;
-}
-
-interface TextBlock {
-  id: string;
-  textType: string;
-  content: string;
-  questions: Question[];
-}
-
-interface ProblemData {
-  texts: TextBlock[];
-}
+import { DailyLifeTextView } from "./DailyLifeTextView";
+import { ChoiceQuestionCard, QuestionNav, SplitView } from "./QuestionStepper";
+import type {
+  DailyLifeData,
+  DailyLifeQuestion,
+  DailyLifeText,
+} from "./dailyLife";
 
 const TYPE_LABELS: Record<string, string> = {
   factual: "Factual",
@@ -40,15 +24,17 @@ const TYPE_LABELS: Record<string, string> = {
   vocabulary: "Vocabulary",
 };
 
-function cleanOptionText(text: string): string {
-  return text.replace(/^[A-Da-d][.)]\s*/, "");
+interface FlatQuestion {
+  text: DailyLifeText;
+  textIndex: number;
+  question: DailyLifeQuestion;
 }
 
 export function ReadDailyLifePage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
   const { data, file, loading, error, loadByQuestionNumber } =
-    useQuestion<ProblemData>("toefl/reading/daily-life");
+    useQuestion<DailyLifeData>("toefl/reading/daily-life");
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -60,6 +46,7 @@ export function ReadDailyLifePage() {
   } = useElapsedTimer();
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [graded, setGraded] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const sessionFileRef = useRef<string | null>(null);
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
@@ -85,15 +72,19 @@ export function ReadDailyLifePage() {
   }, [data, loading, graded, running, elapsedSeconds, start]);
 
   // Flatten questions across all texts so we can number them globally.
-  const allQ: { text: TextBlock; question: Question }[] = [];
+  const allQ: FlatQuestion[] = [];
   if (data) {
-    data.texts.forEach((t) =>
-      t.questions.forEach((q) => allQ.push({ text: t, question: q })),
+    data.texts.forEach((text, textIndex) =>
+      text.questions.forEach((question) =>
+        allQ.push({ text, textIndex, question }),
+      ),
     );
   }
 
   const totalQ = allQ.length;
+  const totalTexts = data?.texts.length ?? 0;
   const answeredCount = Object.keys(answers).length;
+  const current = allQ[Math.min(currentIndex, Math.max(totalQ - 1, 0))];
 
   const correctCount = allQ.filter(
     ({ question }) => answers[question.id] === question.correctIndex,
@@ -103,6 +94,10 @@ export function ReadDailyLifePage() {
     if (!graded) {
       setAnswers((s) => ({ ...s, [questionId]: optionIndex }));
     }
+  };
+
+  const goTo = (index: number) => {
+    setCurrentIndex(Math.max(0, Math.min(index, totalQ - 1)));
   };
 
   const handleSubmit = () => {
@@ -115,6 +110,8 @@ export function ReadDailyLifePage() {
       sessionFileRef.current ?? file ?? undefined,
     );
     setGraded(true);
+    setCurrentIndex(0);
+    window.scrollTo({ top: 0 });
   };
 
   const handleRestart = () => {
@@ -163,7 +160,7 @@ export function ReadDailyLifePage() {
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && (
+      {data && !loading && hasValidQuestionNumber && current && (
         <>
           {graded && (
             <div className={styles.resultCard}>
@@ -178,6 +175,9 @@ export function ReadDailyLifePage() {
                   </span>
                 </div>
               </div>
+              <p className={styles.reviewHint}>
+                Step through the questions below to review each answer.
+              </p>
               <div className={styles.resultActions}>
                 <Button size="lg" onClick={handleRestart}>
                   Try Again
@@ -190,79 +190,52 @@ export function ReadDailyLifePage() {
             </div>
           )}
 
-          <div className={styles.texts}>
-            {data.texts.map((text) => (
-              <section key={text.id} className={styles.textSection}>
-                <div className={styles.textCard}>
-                  <div className={styles.textMeta}>{text.textType}</div>
-                  <p className={styles.textContent}>{text.content}</p>
-                </div>
+          <SplitView
+            leftKey={current.text.id}
+            left={
+              <DailyLifeTextView key={current.text.id} text={current.text} />
+            }
+            right={
+              <ChoiceQuestionCard
+                key={current.question.id}
+                question={current.question}
+                index={currentIndex}
+                total={totalQ}
+                context={
+                  totalTexts > 1
+                    ? `Text ${current.textIndex + 1} of ${totalTexts}`
+                    : undefined
+                }
+                typeLabel={
+                  TYPE_LABELS[current.question.type] ?? current.question.type
+                }
+                selected={answers[current.question.id]}
+                graded={graded}
+                onSelect={handleSelect}
+              />
+            }
+          />
 
-                <div className={styles.questions}>
-                  {text.questions.map((q) => {
-                    const globalIdx = allQ.findIndex(
-                      (item) => item.question.id === q.id,
-                    );
-                    const selected = answers[q.id];
-                    return (
-                      <div key={q.id} className={styles.qBlock}>
-                        <div className={styles.qHeader}>
-                          <span className={styles.qNum}>{globalIdx + 1}</span>
-                          <span className={styles.qType}>
-                            {TYPE_LABELS[q.type] ?? q.type}
-                          </span>
-                        </div>
-                        <p className={styles.stem}>{q.stem}</p>
-                        <div className={styles.options}>
-                          {q.options.map((opt, i) => (
-                            <button
-                              key={i}
-                              className={[
-                                styles.option,
-                                selected === i ? styles.selected : "",
-                                graded && i === q.correctIndex
-                                  ? styles.correctOpt
-                                  : "",
-                                graded && selected === i && i !== q.correctIndex
-                                  ? styles.wrongOpt
-                                  : "",
-                              ].join(" ")}
-                              onClick={() => handleSelect(q.id, i)}
-                            >
-                              <span className={styles.optLabel}>
-                                {String.fromCharCode(65 + i)}
-                              </span>
-                              {cleanOptionText(opt)}
-                            </button>
-                          ))}
-                        </div>
-                        {graded && (
-                          <FeedbackPanel
-                            correct={selected === q.correctIndex}
-                            explanation={q.explanation}
-                            correctAnswer={`(${String.fromCharCode(
-                              65 + q.correctIndex,
-                            )}) ${cleanOptionText(q.options[q.correctIndex])}`}
-                          />
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            ))}
-          </div>
+          <QuestionNav
+            groups={data.texts.map((t) => t.questions)}
+            answers={answers}
+            currentIndex={currentIndex}
+            graded={graded}
+            onGo={goTo}
+            onSubmit={handleSubmit}
+          />
 
           {!graded && (
             <div className={styles.submitRow}>
-              <Button onClick={handleSubmit} size="lg">
-                Submit
-                <PixelCheckIcon />
-              </Button>
+              {answeredCount < totalQ && (
+                <span className={styles.unanswered}>
+                  {totalQ - answeredCount} unanswered
+                </span>
+              )}
               <NextQuestionButton
                 taskId="toefl/reading/daily-life"
-                variant="secondary"
-                size="lg"
+                variant="ghost"
+                size="sm"
               />
             </div>
           )}

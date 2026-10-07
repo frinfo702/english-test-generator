@@ -106,6 +106,13 @@ everyday text（実用文）2〜3本を含み、各テキストに2〜3問の設
 **フィールド仕様:**
 
 - `textType`: `"email"` / `"notice"` / `"schedule"` / `"menu"` / `"announcement"` / `"text message"` / `"online post"` / `"advertisement"` / `"poster"` / `"sign"` / `"webpage"` / `"news article"` / `"form"` / `"invoice"` / `"receipt"` など
+- `layout`（表示レイアウト。省略時は `textType` から推定）:
+  - `"email"`: `content` を `From:` / `To:` / `Subject:` 行 → 空行 → 本文 の形で書く。ヘッダーが枠付きボックスで表示される
+  - `"chat"`: スマホ画面の吹き出し。`content` の代わりに `messages: [{ "sender", "time", "text" }]`（2〜3人、最初の発言者が右寄せ）
+  - `"live-chat"`: 「Live Chat」パネル。`messages` を使う。`title` で見出しを変更可（既定 `"Live Chat"`）
+  - `"notice"`: announcement / advertisement / poster / sign 用の角丸枠。`title` が見出し、`content` は `\n` 区切りの短い行（12語以下の行だけなら中央揃え）。任意で `icon`: `"globe"` / `"megaphone"` / `"calendar"` / `"info"` / `"tag"`
+  - `"document"`: その他（schedule, menu, form, receipt, online post など）
+- chat / live-chat の設問は「At 9:03 A.M., what does Mr. X imply when he writes, "..."?」のように時刻と発言を引用する形式も使う
 - `type`（設問種別）: `"factual"` / `"inference"` / `"purpose"` / `"vocabulary"`
 - `correctIndex`: 0始まり（A=0, B=1, C=2, D=3）
 - テキスト数: 2〜3本（1セットあたり1〜2テキストの場合もある）

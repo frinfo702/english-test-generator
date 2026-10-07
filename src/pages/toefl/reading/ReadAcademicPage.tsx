@@ -4,14 +4,13 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { FeedbackPanel } from "../../../components/ui/FeedbackPanel";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ReadAcademicPage.module.css";
-import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
+import { ChoiceQuestionCard, QuestionNav, SplitView } from "./QuestionStepper";
 
 interface Question {
   id: string;
@@ -40,10 +39,6 @@ const TYPE_LABELS: Record<string, string> = {
   insertSentence: "Insert Sentence",
 };
 
-function cleanOptionText(text: string): string {
-  return text.replace(/^[A-Da-d][.)]\s*/, "");
-}
-
 export function ReadAcademicPage() {
   const navigate = useNavigate();
   const { questionNumber } = useParams<{ questionNumber: string }>();
@@ -60,6 +55,7 @@ export function ReadAcademicPage() {
   } = useElapsedTimer();
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [graded, setGraded] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
   const hasValidQuestionNumber =
@@ -100,9 +96,16 @@ export function ReadAcademicPage() {
       );
     }
     setGraded(true);
+    setCurrentIndex(0);
+    window.scrollTo({ top: 0 });
   };
 
   const totalQ = data?.questions.length ?? 0;
+  const current = data?.questions[Math.min(currentIndex, totalQ - 1)];
+  const paragraphs = (data?.passage ?? "")
+    .split(/\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
   const totalAnswered = Object.keys(answers).length;
 
   const score = data
@@ -149,7 +152,7 @@ export function ReadAcademicPage() {
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && (
+      {data && !loading && hasValidQuestionNumber && current && (
         <>
           {graded && (
             <div className={styles.resultCard}>
@@ -168,72 +171,51 @@ export function ReadAcademicPage() {
             </div>
           )}
 
-          <div className={styles.layout}>
-            <div className={styles.passageCard}>
-              <h2 className={styles.passageTitle}>{data.title}</h2>
-              <p className={styles.passage}>{data.passage}</p>
-            </div>
+          <SplitView
+            left={
+              <article className={styles.passageCard}>
+                <h2 className={styles.passageTitle}>{data.title}</h2>
+                {paragraphs.map((p, i) => (
+                  <p key={i} className={styles.passage}>
+                    {p}
+                  </p>
+                ))}
+              </article>
+            }
+            right={
+              <ChoiceQuestionCard
+                key={current.id}
+                question={current}
+                index={currentIndex}
+                total={totalQ}
+                typeLabel={TYPE_LABELS[current.type] ?? current.type}
+                selected={answers[current.id]}
+                graded={graded}
+                onSelect={handleSelect}
+              />
+            }
+          />
 
-            <div className={styles.questions}>
-              {data.questions.map((q, idx) => {
-                const selected = answers[q.id];
-                return (
-                  <div key={q.id} className={styles.questionCard}>
-                    <div className={styles.qHeader}>
-                      <span className={styles.qNum}>{idx + 1}</span>
-                      <span className={styles.qType}>
-                        {TYPE_LABELS[q.type] ?? q.type}
-                      </span>
-                    </div>
-                    <p className={styles.stem}>{q.stem}</p>
-                    <div className={styles.options}>
-                      {q.options.map((opt, i) => (
-                        <button
-                          key={i}
-                          className={[
-                            styles.option,
-                            selected === i ? styles.selected : "",
-                            graded && i === q.correctIndex
-                              ? styles.correctOpt
-                              : "",
-                            graded && selected === i && i !== q.correctIndex
-                              ? styles.wrongOpt
-                              : "",
-                          ].join(" ")}
-                          onClick={() => handleSelect(q.id, i)}
-                        >
-                          <span className={styles.optLabel}>
-                            {String.fromCharCode(65 + i)}
-                          </span>
-                          {cleanOptionText(opt)}
-                        </button>
-                      ))}
-                    </div>
-                    {graded && (
-                      <FeedbackPanel
-                        correct={selected === q.correctIndex}
-                        explanation={q.explanation}
-                        correctAnswer={`(${String.fromCharCode(
-                          65 + q.correctIndex,
-                        )}) ${cleanOptionText(q.options[q.correctIndex])}`}
-                      />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <QuestionNav
+            groups={[data.questions]}
+            answers={answers}
+            currentIndex={currentIndex}
+            graded={graded}
+            onGo={(i) => setCurrentIndex(Math.max(0, Math.min(i, totalQ - 1)))}
+            onSubmit={handleSubmit}
+          />
 
           {!graded && (
             <div className={styles.submitRow}>
-              <Button onClick={handleSubmit} size="lg">
-                Submit
-                <PixelCheckIcon />
-              </Button>
+              {totalAnswered < totalQ && (
+                <span className={styles.unanswered}>
+                  {totalQ - totalAnswered} unanswered
+                </span>
+              )}
               <NextQuestionButton
                 taskId="toefl/reading/academic"
-                variant="secondary"
-                size="lg"
+                variant="ghost"
+                size="sm"
               />
             </div>
           )}

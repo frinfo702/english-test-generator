@@ -11,197 +11,36 @@
   color: var(--color-ink-secondary);
 }
 
-.moduleBar {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-xl);
-  flex-wrap: wrap;
-}
-
-.moduleTag {
-  border: 1px solid var(--color-ink);
-  background: transparent;
-  color: var(--color-ink);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: var(--radius-doc);
-  white-space: nowrap;
-}
-
-.layout {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-}
-
-.textCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
-  padding: var(--spacing-xl);
-}
-
-.textMeta {
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-  letter-spacing: 0.5px;
-  margin-bottom: var(--spacing-sm);
-}
-
-.textContent {
-  font-family: var(--font-sans);
-  line-height: 1.9;
-  white-space: pre-wrap;
-}
-
-.questionCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
-  padding: var(--spacing-xl);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.qNum {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-}
-
-.stem {
-  font-family: var(--font-sans);
-  font-size: var(--text-lg);
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.options {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.option {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-sm);
-  padding: 12px var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
-  background: var(--color-surface);
-  text-align: left;
-  font-size: var(--text-base);
-  line-height: 1.5;
-  transition:
-    border-color 0.15s,
-    background 0.15s;
-}
-
-.option:hover {
-  border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
-}
-.option.selected {
-  border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
-}
-.option.correctOpt {
-  border-color: var(--color-success);
-  background: var(--color-success-subtle);
-}
-.option.wrongOpt {
-  border-color: var(--color-error);
+.error {
+  color: var(--color-error);
   background: var(--color-error-subtle);
-}
-
-.optLabel {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  color: var(--color-ink);
-  min-width: 20px;
-}
-
-.btnRow {
-  display: flex;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-sm);
-}
-
-/* Branching card */
-.branchCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  padding: var(--spacing-md);
   border-radius: var(--radius-doc);
-  padding: var(--spacing-2xl);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-lg);
-  text-align: center;
-  animation: fadeIn 0.4s ease;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.branchHeader {
+.submitRow {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-3);
 }
 
-.branchIcon {
-  font-size: 32px;
-  color: var(--color-success);
+.unanswered {
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
 }
 
-.branchScore {
-  font-size: var(--text-lg);
-}
+/* ---- Result card ---- */
 
-.branchBadge {
-  padding: 10px 24px;
-  border-radius: var(--radius-doc);
-  font-weight: 600;
-  font-size: var(--text-base);
-}
-
-.hard {
-  background: var(--color-info-subtle);
-  color: var(--color-info);
-  border: 1px solid
-    color-mix(in srgb, var(--color-info) 30%, var(--color-border));
-}
-
-.easy {
-  background: var(--color-warning-subtle);
-  color: var(--color-warning);
-  border: 1px solid
-    color-mix(in srgb, var(--color-warning) 30%, var(--color-border));
-}
-
-/* Result card */
 .resultCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: var(--doc-rule);
   border-radius: var(--radius-doc);
   padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -238,103 +77,9 @@
   font-weight: 600;
 }
 
-.bandScore {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  background: var(--color-surface-subtle);
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-doc);
-  padding: 12px 24px;
-}
-
-.bandLabel {
-  color: var(--color-ink-secondary);
-  font-size: var(--text-sm);
-}
-
-.bandValue {
-  font-size: var(--text-xl);
-  font-weight: 700;
-  color: var(--color-accent);
-}
-
-.branchInfo {
-  color: var(--color-ink-secondary);
-  font-size: var(--text-sm);
-}
-
-.error {
-  color: var(--color-error);
-  background: var(--color-error-subtle);
-  padding: var(--spacing-md);
-  border-radius: var(--radius-doc);
-}
-
-.texts {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2xl);
-}
-
-.textSection {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-}
-
-.questions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
-.qBlock {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
-  padding: var(--spacing-xl);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.qHeader {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.qNum {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-doc);
-  border: 1.5px solid var(--color-ink);
-  background: transparent;
-  color: var(--color-ink);
-  font-weight: 700;
-  font-size: var(--text-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.qType {
+.reviewHint {
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
-}
-
-.submitRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-3);
-  flex-wrap: wrap;
-  margin-top: var(--spacing-xl);
 }
 
 .resultActions {
