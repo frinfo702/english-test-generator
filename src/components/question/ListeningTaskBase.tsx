@@ -79,8 +79,8 @@ export function ListeningTaskBase({
   listenPrompt = talkPrompt,
 }: ListeningTaskBaseProps) {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ListeningProblemData>(taskId);
   const { saveScore } = useScoreHistory();
   const {
@@ -113,14 +113,12 @@ export function ListeningTaskBase({
   const [stage, setStage] = useState<"listen" | "questions">("listen");
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -143,13 +141,17 @@ export function ListeningTaskBase({
   const handleSubmit = () => {
     const sessionSeconds = stop();
     if (data) {
-      saveScore(
-        taskId,
-        correctCount,
-        totalQuestions,
-        sessionSeconds,
-        file ?? undefined,
-      );
+      saveScore({
+        taskId: taskId,
+        file: file ?? undefined,
+        correct: correctCount,
+        total: totalQuestions,
+        elapsedSeconds: sessionSeconds,
+        responses: Object.entries(selections).map(([i, choice]) => ({
+          itemId: data.questions[Number(i)].id,
+          choice,
+        })),
+      });
     }
     setGraded(true);
     stopTts();
@@ -266,11 +268,7 @@ export function ListeningTaskBase({
       {(running || elapsedSeconds > 0) && (
         <FloatingElapsedTimer display={display} running={running} />
       )}
-      <SectionHeader
-        title={title}
-        subtitle={subtitle}
-        backTo={backTo}
-      />
+      <SectionHeader title={title} subtitle={subtitle} backTo={backTo} />
 
       <div className={styles.topBar}>
         <Button
@@ -290,13 +288,13 @@ export function ListeningTaskBase({
           <p>questions/{taskId}/</p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.errorText}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && layout === "talk" && (
+      {data && !loading && hasValidQuestionId && layout === "talk" && (
         <>
           {stage === "listen" && (
             <div className={styles.listenCard}>
@@ -356,7 +354,7 @@ export function ListeningTaskBase({
         </>
       )}
 
-      {data && !loading && hasValidQuestionNumber && layout === "list" && (
+      {data && !loading && hasValidQuestionId && layout === "list" && (
         <>
           {audioPlayer(graded)}
 

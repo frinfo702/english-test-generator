@@ -10,7 +10,11 @@ import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./ReadAcademicPage.module.css";
-import { ChoiceQuestionCard, QuestionNav, SplitView } from "../../../components/question/QuestionStepper";
+import {
+  ChoiceQuestionCard,
+  QuestionNav,
+  SplitView,
+} from "../../../components/question/QuestionStepper";
 
 interface Question {
   id: string;
@@ -41,9 +45,10 @@ const TYPE_LABELS: Record<string, string> = {
 
 export function ReadAcademicPage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
-    useQuestion<ProblemData>("toefl/reading/academic");
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } = useQuestion<ProblemData>(
+    "toefl/reading/academic",
+  );
   const { saveScore } = useScoreHistory();
   const {
     display,
@@ -57,14 +62,12 @@ export function ReadAcademicPage() {
   const [graded, setGraded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -87,13 +90,17 @@ export function ReadAcademicPage() {
       const s = data.questions.filter(
         (q) => answers[q.id] === q.correctIndex,
       ).length;
-      saveScore(
-        "toefl/reading/academic",
-        s,
-        data.questions.length,
-        sessionSeconds,
-        file ?? undefined,
-      );
+      saveScore({
+        taskId: "toefl/reading/academic",
+        file: file ?? undefined,
+        correct: s,
+        total: data.questions.length,
+        elapsedSeconds: sessionSeconds,
+        responses: Object.entries(answers).map(([itemId, choice]) => ({
+          itemId,
+          choice,
+        })),
+      });
     }
     setGraded(true);
     setCurrentIndex(0);
@@ -144,13 +151,13 @@ export function ReadAcademicPage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && current && (
+      {data && !loading && hasValidQuestionId && current && (
         <>
           {graded && (
             <div className={styles.resultCard}>

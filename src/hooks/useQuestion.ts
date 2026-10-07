@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import {
   fetchQuestionByFileWithMeta,
-  fetchQuestionByNumberWithMeta,
+  fetchQuestionByIdWithMeta,
   fetchRandomQuestionWithMeta,
 } from "../lib/questions";
 
@@ -53,15 +53,12 @@ export function useQuestion<T>(taskPath: string) {
     [taskPath],
   );
 
-  const loadByQuestionNumber = useCallback(
-    async (questionNumber: number) => {
+  const loadById = useCallback(
+    async (id: string) => {
       setLoading(true);
       setError(null);
       try {
-        const result = await fetchQuestionByNumberWithMeta<T>(
-          taskPath,
-          questionNumber,
-        );
+        const result = await fetchQuestionByIdWithMeta<T>(taskPath, id);
         setData(result.data);
         setFile(result.file);
       } catch (e) {
@@ -75,5 +72,5 @@ export function useQuestion<T>(taskPath: string) {
     [taskPath],
   );
 
-  return { data, file, loading, error, load, loadByFile, loadByQuestionNumber };
+  return { data, file, loading, error, load, loadByFile, loadById };
 }

@@ -1,4 +1,12 @@
 import { useCallback } from "react";
+import {
+  clearAttempts,
+  getAllAttempts,
+  saveAttempt,
+  type Attempt,
+  type ItemResponse,
+} from "../lib/attempts";
+import { questionIdFromFile } from "../lib/questions";
 
 export type TaskId =
   | "toefl/reading/complete-words"
@@ -29,59 +37,65 @@ export interface ScoreEntry {
   total: number;
   pct: number;
   elapsedSeconds?: number;
-  questionFile?: string;
+  problemId?: string;
 }
 
-const STORAGE_KEY = "score-history";
-
-function readScores(): ScoreEntry[] {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as ScoreEntry[]) : [];
-  } catch {
-    return [];
-  }
+export interface SaveScoreInput {
+  taskId: TaskId;
+  file?: string;
+  correct: number;
+  total: number;
+  elapsedSeconds?: number;
+  responses: ItemResponse[];
+  method?: string;
 }
 
-function writeScores(entries: ScoreEntry[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+function toScoreEntry(a: Attempt): ScoreEntry[] {
+  if (!a.score) return [];
+  const { correct, total } = a.score;
+  return [
+    {
+      taskId: a.taskId,
+      date: a.date,
+      correct,
+      total,
+      pct: Math.round((correct / total) * 100),
+      elapsedSeconds: a.elapsedSeconds,
+      problemId: a.problemId,
+    },
+  ];
 }
 
 export function useScoreHistory() {
   const saveScore = useCallback(
-    async (
-      taskId: TaskId,
-      correct: number,
-      total: number,
+    async ({
+      taskId,
+      file,
+      correct,
+      total,
       elapsedSeconds = 0,
-      questionFile?: string,
-    ) => {
+      responses,
+      method = "answer-key",
+    }: SaveScoreInput) => {
       if (total === 0) return;
-      const entry: ScoreEntry = {
+      await saveAttempt({
         taskId,
-        date: new Date().toISOString(),
-        correct,
-        total,
-        pct: Math.round((correct / total) * 100),
+        problemId: file ? questionIdFromFile(file) : undefined,
         elapsedSeconds: Math.max(0, Math.floor(elapsedSeconds)),
-      };
-      if (questionFile) {
-        entry.questionFile = questionFile;
-      }
-      const entries = readScores();
-      entries.push(entry);
-      writeScores(entries);
+        responses,
+        score: { method, correct, total },
+      });
     },
     [],
   );
 
-  const getAll = useCallback(async (): Promise<ScoreEntry[]> => {
-    return readScores();
-  }, []);
+  const getAll = useCallback(
+    async (): Promise<ScoreEntry[]> =>
+      (await getAllAttempts()).flatMap(toScoreEntry),
+    [],
+  );
 
-  const clearAll = useCallback(async () => {
-    localStorage.removeItem(STORAGE_KEY);
-  }, []);
+  const clearAll = useCallback(() => clearAttempts(), []);
 
   return { saveScore, getAll, clearAll };
 }

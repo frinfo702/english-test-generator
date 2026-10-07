@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   fetchAllQuestions,
-  fetchQuestionByNumberWithMeta,
+  fetchQuestionByIdWithMeta,
   fetchQuestionIndex,
   fetchRandomQuestion,
   listQuestionFiles,
@@ -96,34 +96,43 @@ describe("questions loader", () => {
     );
   });
 
-  it("lists question files sorted by numeric number", async () => {
+  it("lists question files sorted by ID, old numeric ones first", async () => {
     fetchMock.mockResolvedValue(
-      mockResponse({ files: ["010.json", "002.json", "001.json"] }),
+      mockResponse({
+        files: ["20261007-library.json", "010.json", "002.json"],
+      }),
     );
 
     const result = await listQuestionFiles("toeic/part5");
 
     expect(result).toEqual([
-      { file: "001.json", number: 1 },
-      { file: "002.json", number: 2 },
-      { file: "010.json", number: 10 },
+      { file: "002.json", id: "002" },
+      { file: "010.json", id: "010" },
+      { file: "20261007-library.json", id: "20261007-library" },
     ]);
   });
 
-  it("loads question by question number", async () => {
-    fetchMock
-      .mockResolvedValueOnce(mockResponse({ files: ["001.json", "002.json"] }))
-      .mockResolvedValueOnce(mockResponse({ id: "q2" }));
+  it("loads a question straight from its ID", async () => {
+    fetchMock.mockResolvedValueOnce(mockResponse({ id: "q2" }));
 
-    const result = await fetchQuestionByNumberWithMeta<{ id: string }>(
+    const result = await fetchQuestionByIdWithMeta<{ id: string }>(
       "toeic/part5",
-      2,
+      "20261007-library",
     );
 
-    expect(result).toEqual({ file: "002.json", data: { id: "q2" } });
-    expect(fetchMock).toHaveBeenNthCalledWith(
-      2,
-      "/questions/toeic/part5/002.json",
+    expect(result).toEqual({
+      file: "20261007-library.json",
+      data: { id: "q2" },
+    });
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/questions/toeic/part5/20261007-library.json",
     );
+  });
+
+  it("rejects IDs that could escape the task directory", async () => {
+    await expect(
+      fetchQuestionByIdWithMeta("toeic/part5", "../../secret"),
+    ).rejects.toThrow('Invalid question ID "../../secret".');
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 });

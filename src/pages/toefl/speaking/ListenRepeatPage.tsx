@@ -15,6 +15,7 @@ import { useScoreHistory } from "../../../hooks/useScoreHistory";
 import { useTts } from "../../../hooks/useTts";
 import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
+import type { ItemResponse } from "../../../lib/attempts";
 import {
   alignWords,
   countCorrectWords,
@@ -180,8 +181,8 @@ function ListenRepeatDiffView({
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
@@ -229,6 +230,8 @@ export function ListenRepeatPage() {
   >(null);
 
   const durationRef = useRef(duration);
+  const takesRef = useRef<Record<number, ItemResponse>>({});
+  const promptEndedAtRef = useRef<number | null>(null);
   const recordingTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const processingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
@@ -237,9 +240,7 @@ export function ListenRepeatPage() {
     transcriptRef.current = transcript;
   }, [transcript]);
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
   const totalSentences = data?.sentences.length ?? 0;
@@ -251,9 +252,9 @@ export function ListenRepeatPage() {
   }, [duration]);
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -289,7 +290,15 @@ export function ListenRepeatPage() {
 
     clearRecordingTimer();
     clearProcessingTimeout();
-    await stopSpeech();
+    const recording = await stopSpeech();
+    if (sentence) {
+      takesRef.current[current] = {
+        itemId: sentence.id,
+        audio: recording.audio ?? undefined,
+        recordedAt: recording.startedAt ?? undefined,
+        promptEndedAt: promptEndedAtRef.current ?? undefined,
+      };
+    }
     setPhase("processing");
     setProcessingMessage("Processing your speech...");
 
@@ -311,13 +320,19 @@ export function ListenRepeatPage() {
               (sum, a) => sum + countOriginalWords(a),
               0,
             );
-            saveScore(
-              TASK_ID,
+            saveScore({
+              taskId: TASK_ID,
+              file: file ?? undefined,
               correct,
               total,
-              sessionSeconds,
-              file ?? undefined,
-            );
+              elapsedSeconds: sessionSeconds,
+              method: "word-align",
+              responses: data.sentences.map((s, i) => ({
+                ...takesRef.current[i],
+                itemId: s.id,
+                transcript: next[i] ?? "",
+              })),
+            });
           }
           setGraded(true);
           setPhase("review");
@@ -337,6 +352,7 @@ export function ListenRepeatPage() {
     clearRecordingTimer,
     clearProcessingTimeout,
     stopSpeech,
+    sentence,
     current,
     isLastSentence,
     data,
@@ -376,6 +392,7 @@ export function ListenRepeatPage() {
     if (!sentence || !fileBasename) return;
     const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${current + 1}.mp3`;
     void play(url, () => {
+      promptEndedAtRef.current = Date.now();
       setPhase("ready");
     });
   }, [sentence, fileBasename, current, play]);
@@ -384,7 +401,10 @@ export function ListenRepeatPage() {
     (index: number) => {
       if (!fileBasename) return;
       const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${index + 1}.mp3`;
-      void play(url);
+      // A replay before answering moves the point latency is measured from.
+      void play(url, () => {
+        promptEndedAtRef.current = Date.now();
+      });
     },
     [fileBasename, play],
   );
@@ -415,7 +435,7 @@ export function ListenRepeatPage() {
       data &&
       !loading &&
       !graded &&
-      hasValidQuestionNumber &&
+      hasValidQuestionId &&
       phase === "playing" &&
       !playing &&
       !ttsLoading
@@ -426,7 +446,7 @@ export function ListenRepeatPage() {
     data,
     loading,
     graded,
-    hasValidQuestionNumber,
+    hasValidQuestionId,
     phase,
     playing,
     ttsLoading,
@@ -527,9 +547,9 @@ export function ListenRepeatPage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
       {!speechSupported && !loading && (
@@ -543,7 +563,7 @@ export function ListenRepeatPage() {
       {speechError && <div className={styles.error}>{speechError}</div>}
       {ttsError && <div className={styles.error}>{ttsError}</div>}
 
-      {data && !loading && hasValidQuestionNumber && !graded && sentence && (
+      {data && !loading && hasValidQuestionId && !graded && sentence && (
         <div className={styles.card}>
           <p className={styles.qNum}>
             Question {current + 1} / {totalSentences}
@@ -668,7 +688,7 @@ export function ListenRepeatPage() {
         </div>
       )}
 
-      {graded && data && hasValidQuestionNumber && (
+      {graded && data && hasValidQuestionId && (
         <>
           <div className={styles.resultCard}>
             <h2>Section Complete</h2>

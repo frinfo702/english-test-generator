@@ -21,21 +21,19 @@ interface QuestionSelectorPageProps {
   basePath: string;
 }
 
-function buildLatestByQuestionFile(
-  entries: ScoreEntry[],
-): Map<string, ScoreEntry> {
-  const latestByFile = new Map<string, ScoreEntry>();
+function buildLatestByProblem(entries: ScoreEntry[]): Map<string, ScoreEntry> {
+  const latestByProblem = new Map<string, ScoreEntry>();
   entries.forEach((entry) => {
-    if (!entry.questionFile) return;
-    const existing = latestByFile.get(entry.questionFile);
+    if (!entry.problemId) return;
+    const existing = latestByProblem.get(entry.problemId);
     if (
       !existing ||
       new Date(existing.date).getTime() < new Date(entry.date).getTime()
     ) {
-      latestByFile.set(entry.questionFile, entry);
+      latestByProblem.set(entry.problemId, entry);
     }
   });
-  return latestByFile;
+  return latestByProblem;
 }
 
 export function QuestionSelectorPage({
@@ -76,19 +74,16 @@ export function QuestionSelectorPage({
     };
   }, [getAll, taskId]);
 
-  const latestByFile = useMemo(
-    () => buildLatestByQuestionFile(scores),
-    [scores],
-  );
+  const latestByProblem = useMemo(() => buildLatestByProblem(scores), [scores]);
 
-  const handlePick = (questionNumber: number) => {
-    navigate(`${basePath}/${questionNumber}`);
+  const handlePick = (questionId: string) => {
+    navigate(`${basePath}/${questionId}`);
   };
 
   const handleRandom = () => {
     if (files.length === 0) return;
     const item = files[Math.floor(Math.random() * files.length)];
-    handlePick(item.number);
+    handlePick(item.id);
   };
 
   return (
@@ -123,7 +118,7 @@ export function QuestionSelectorPage({
             <span aria-hidden="true" />
           </div>
           {files.map((item, i) => {
-            const latest = latestByFile.get(item.file);
+            const latest = latestByProblem.get(item.id);
             const elapsed =
               typeof latest?.elapsedSeconds === "number"
                 ? formatSecondsAsMmSs(latest.elapsedSeconds)
@@ -141,7 +136,7 @@ export function QuestionSelectorPage({
                   styles.row5Col,
                   completed ? table.rowCompleted : "",
                 ].join(" ")}
-                onClick={() => handlePick(item.number)}
+                onClick={() => handlePick(item.id)}
               >
                 <span className={table.statusCol}>
                   {completed ? (
@@ -150,7 +145,7 @@ export function QuestionSelectorPage({
                     <span className={table.statusNone}>{i + 1}</span>
                   )}
                 </span>
-                <span className={styles.number}>Q{item.number}</span>
+                <span className={styles.number}>Q{i + 1}</span>
                 <span className={styles.metricValue}>{elapsed}</span>
                 <span
                   className={[

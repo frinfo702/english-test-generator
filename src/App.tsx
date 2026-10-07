@@ -205,8 +205,8 @@ const taskRoutes: TaskRoute[] = [
 
 /** Remounts the page per question so "Next Question" starts from clean state. */
 function KeyedByQuestion({ children }: { children: ReactNode }) {
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  return <Fragment key={questionNumber}>{children}</Fragment>;
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  return <Fragment key={questionId}>{children}</Fragment>;
 }
 
 export default function App() {
@@ -234,7 +234,7 @@ export default function App() {
                 }
               />
               <Route
-                path={`${r.basePath}/:questionNumber`}
+                path={`${r.basePath}/:questionId`}
                 element={<KeyedByQuestion>{r.page}</KeyedByQuestion>}
               />
             </Route>

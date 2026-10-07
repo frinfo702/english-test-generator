@@ -6,6 +6,13 @@ import {
 } from "../lib/microphonePreference";
 import { transcribeAudio } from "../lib/transcribe";
 
+export interface Recording {
+  text: string;
+  /** Kept even when transcription fails: the audio, not the text, is the answer. */
+  audio: Blob | null;
+  startedAt: number | null;
+}
+
 export interface UseSpeechRecognitionReturn {
   supported: boolean;
   recording: boolean;
@@ -17,8 +24,8 @@ export interface UseSpeechRecognitionReturn {
   /** deviceId of the track opened for the current recording. */
   activeDeviceId: string | null;
   start: () => Promise<void>;
-  /** Stops recording, transcribes, updates transcript, returns text. */
-  stop: () => Promise<string>;
+  /** Stops recording, transcribes, updates transcript, returns both. */
+  stop: () => Promise<Recording>;
   clearTranscript: () => void;
   clearError: () => void;
 }
@@ -80,11 +87,13 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   const streamRef = useRef<MediaStream | null>(null);
   const recorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
-  const stopPromiseRef = useRef<((text: string) => void) | null>(null);
+  const stopPromiseRef = useRef<((recording: Recording) => void) | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
   const meterRef = useRef<{ stop: () => void } | null>(null);
   const startPromiseRef = useRef<Promise<void> | null>(null);
   const transcriptRef = useRef("");
+  const audioRef = useRef<Blob | null>(null);
+  const startedAtRef = useRef<number | null>(null);
   /** Generation token so stale stop handlers ignore themselves. */
   const sessionIdRef = useRef(0);
 
@@ -94,10 +103,22 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
     setLevels(emptyLevels());
   }, []);
 
-  const resolveStop = useCallback((text: string) => {
-    stopPromiseRef.current?.(text);
-    stopPromiseRef.current = null;
-  }, []);
+  const recordingWith = useCallback(
+    (text: string): Recording => ({
+      text,
+      audio: audioRef.current,
+      startedAt: startedAtRef.current,
+    }),
+    [],
+  );
+
+  const resolveStop = useCallback(
+    (text: string) => {
+      stopPromiseRef.current?.(recordingWith(text));
+      stopPromiseRef.current = null;
+    },
+    [recordingWith],
+  );
 
   const releaseHardware = useCallback(() => {
     stopMeter();
@@ -141,6 +162,8 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
       const sessionId = sessionIdRef.current;
       setTranscript("");
       transcriptRef.current = "";
+      audioRef.current = null;
+      startedAtRef.current = null;
       setError(null);
       setProcessing(false);
       chunksRef.current = [];
@@ -206,6 +229,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
               type: recorder.mimeType || "audio/webm",
             });
             chunksRef.current = [];
+            if (blob.size > 0) audioRef.current = blob;
 
             if (blob.size === 0) {
               setError("No audio recorded. Please try again.");
@@ -250,6 +274,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
         };
 
         recorder.start(250);
+        startedAtRef.current = Date.now();
       } catch (micError) {
         if (sessionId !== sessionIdRef.current) return;
         setError(getMicrophoneErrorMessage(micError));
@@ -268,7 +293,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   }, [supported, cleanup, resolveStop, stopMeter]);
 
   const stop = useCallback(() => {
-    return new Promise<string>((resolve) => {
+    return new Promise<Recording>((resolve) => {
       void (async () => {
         if (startPromiseRef.current) {
           await startPromiseRef.current.catch(() => undefined);
@@ -276,7 +301,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
 
         const recorder = recorderRef.current;
         if (!recorder || recorder.state === "inactive") {
-          resolve(transcriptRef.current);
+          resolve(recordingWith(transcriptRef.current));
           return;
         }
 
@@ -290,11 +315,11 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
           setRecording(false);
           setProcessing(false);
           stopPromiseRef.current = null;
-          resolve("");
+          resolve(recordingWith(""));
         }
       })();
     });
-  }, []);
+  }, [recordingWith]);
 
   const clearTranscript = useCallback(() => {
     setTranscript("");

@@ -35,19 +35,19 @@ export function saveNextMode(mode: NextMode): void {
 }
 
 /**
- * Picks the problem number to go to after `current`, or null when there is
+ * Picks the problem ID to go to after `current`, or null when there is
  * nothing to go to (the button then hides).
  *
- * @param numbers  every problem number of the task, ascending
- * @param solved   problem numbers that already have a saved score
+ * @param ids     every problem ID of the task, ascending
+ * @param solved  problem IDs that already have a saved score
  */
 export function pickNext(
   { order, unsolvedOnly }: NextMode,
-  numbers: readonly number[],
-  current: number,
-  solved: ReadonlySet<number>,
-): number | null {
-  const candidates = numbers.filter(
+  ids: readonly string[],
+  current: string,
+  solved: ReadonlySet<string>,
+): string | null {
+  const candidates = ids.filter(
     (n) => n !== current && !(unsolvedOnly && solved.has(n)),
   );
   if (order === "shuffle") {

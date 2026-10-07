@@ -43,8 +43,8 @@ const TASK_ID = "toefl/listening/response";
 
 export function ListenResponsePage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
   const {
@@ -69,14 +69,12 @@ export function ListenResponsePage() {
   const [graded, setGraded] = useState(false);
   const audioStartedRef = useRef<Set<number>>(new Set());
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -126,13 +124,17 @@ export function ListenResponsePage() {
       const correct = data.questions.filter(
         (q) => selected[q.id] === q.correct,
       ).length;
-      saveScore(
-        TASK_ID,
-        correct,
-        data.questions.length,
-        sessionSeconds,
-        file ?? undefined,
-      );
+      saveScore({
+        taskId: TASK_ID,
+        file: file ?? undefined,
+        correct: correct,
+        total: data.questions.length,
+        elapsedSeconds: sessionSeconds,
+        responses: Object.entries(selected).map(([itemId, choice]) => ({
+          itemId,
+          choice,
+        })),
+      });
     }
     setGraded(true);
     stopTts();
@@ -206,13 +208,13 @@ export function ListenResponsePage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && currentQuestion && (
+      {data && !loading && hasValidQuestionId && currentQuestion && (
         <>
           {graded && (
             <div className={styles.resultCard}>

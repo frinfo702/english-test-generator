@@ -3,13 +3,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useQuestion } from "./useQuestion";
 import {
   fetchQuestionByFileWithMeta,
-  fetchQuestionByNumberWithMeta,
+  fetchQuestionByIdWithMeta,
   fetchRandomQuestionWithMeta,
 } from "../lib/questions";
 
 vi.mock("../lib/questions", () => ({
   fetchQuestionByFileWithMeta: vi.fn(),
-  fetchQuestionByNumberWithMeta: vi.fn(),
+  fetchQuestionByIdWithMeta: vi.fn(),
   fetchRandomQuestionWithMeta: vi.fn(),
 }));
 
@@ -17,7 +17,7 @@ describe("useQuestion", () => {
   beforeEach(() => {
     vi.mocked(fetchRandomQuestionWithMeta).mockReset();
     vi.mocked(fetchQuestionByFileWithMeta).mockReset();
-    vi.mocked(fetchQuestionByNumberWithMeta).mockReset();
+    vi.mocked(fetchQuestionByIdWithMeta).mockReset();
   });
 
   afterEach(() => {
@@ -72,9 +72,7 @@ describe("useQuestion", () => {
       file: "001.json",
       data: { id: "q1" },
     });
-    vi.mocked(fetchQuestionByNumberWithMeta).mockRejectedValue(
-      new Error("boom"),
-    );
+    vi.mocked(fetchQuestionByIdWithMeta).mockRejectedValue(new Error("boom"));
 
     const { result } = renderHook(() =>
       useQuestion<{ id: string }>("toeic/part5"),
@@ -88,12 +86,12 @@ describe("useQuestion", () => {
     expect(result.current.file).toBe("001.json");
 
     await act(async () => {
-      await result.current.loadByQuestionNumber(2);
+      await result.current.loadById("002");
     });
 
-    expect(fetchQuestionByNumberWithMeta).toHaveBeenCalledWith(
+    expect(fetchQuestionByIdWithMeta).toHaveBeenCalledWith(
       "toeic/part5",
-      2,
+      "002",
     );
     expect(result.current.error).toBe("boom");
     expect(result.current.data).toBeNull();

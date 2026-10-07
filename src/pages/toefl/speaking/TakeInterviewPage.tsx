@@ -19,8 +19,9 @@ import {
   buildProblemId,
   clearDraft,
   copyText,
-  saveAnswerSubmission,
 } from "../../../lib/answerSubmission";
+import { saveAttempt } from "../../../lib/attempts";
+import { questionIdFromFile } from "../../../lib/questions";
 import { pickInterviewerVoice } from "../../../lib/voiceMapping";
 import { InterviewerCard } from "./InterviewerCard";
 import { InterviewTranscript } from "./InterviewTranscript";
@@ -39,8 +40,8 @@ import styles from "./TakeInterviewPage.module.css";
 
 export function TakeInterviewPage() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<InterviewProblemData>(INTERVIEW_TASK_ID);
 
   const [current, setCurrent] = useState(0);
@@ -130,19 +131,26 @@ export function TakeInterviewPage() {
     setPhase("processing");
 
     try {
-      const finalText = (await speech.stop()).trim();
+      const recording = await speech.stop();
+      const finalText = recording.text.trim();
       setUserText(finalText);
       setPhase("submitted");
 
-      if (q && problemId) {
+      if (q && file && problemId) {
         setSavingAnswer(true);
         setSaveError(null);
         try {
-          await saveAnswerSubmission({
+          await saveAttempt({
             taskId: INTERVIEW_TASK_ID,
-            problemId,
-            response: finalText,
-            question: q,
+            problemId: questionIdFromFile(file),
+            responses: [
+              {
+                itemId: q.id,
+                audio: recording.audio ?? undefined,
+                recordedAt: recording.startedAt ?? undefined,
+                transcript: finalText,
+              },
+            ],
           });
           clearDraft(problemId);
         } catch (e) {
@@ -159,21 +167,19 @@ export function TakeInterviewPage() {
     } finally {
       submittingRef.current = false;
     }
-  }, [audio, speech, q, problemId]);
+  }, [audio, speech, q, file, problemId]);
 
   const timer = useTimer(45, () => {
     void finishAnswer();
   });
   timerStopRef.current = timer.stop;
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (!problemId) return;
@@ -315,13 +321,13 @@ export function TakeInterviewPage() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && !done && q && chrome && (
+      {data && !loading && hasValidQuestionId && !done && q && chrome && (
         <div className={styles.card}>
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>{chrome.tag}</span>
@@ -617,7 +623,7 @@ export function TakeInterviewPage() {
         </div>
       )}
 
-      {done && data && hasValidQuestionNumber && (
+      {done && data && hasValidQuestionId && (
         <div className={styles.resultCard}>
           <h2>Interview Complete</h2>
           <p>You answered all {data.questions.length} questions.</p>

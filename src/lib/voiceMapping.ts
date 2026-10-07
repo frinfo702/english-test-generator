@@ -166,7 +166,7 @@ export function getInterviewerPortraitUrl(voiceId: string): string {
   return `/images/voices/${voiceId.toLowerCase()}.jpg`;
 }
 
-function hashText(text: string): number {
+export function hashText(text: string): number {
   let hash = 0;
   for (let i = 0; i < text.length; i++) {
     hash = (hash << 5) - hash + text.charCodeAt(i);

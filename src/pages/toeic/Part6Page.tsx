@@ -36,8 +36,8 @@ interface ProblemData {
 
 export function Part6Page() {
   const navigate = useNavigate();
-  const { questionNumber } = useParams<{ questionNumber: string }>();
-  const { data, file, loading, error, loadByQuestionNumber } =
+  const { questionId = "" } = useParams<{ questionId: string }>();
+  const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>("toeic/part6");
   const { saveScore } = useScoreHistory();
   const {
@@ -52,14 +52,12 @@ export function Part6Page() {
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
 
-  const parsedQuestionNumber = Number.parseInt(questionNumber ?? "", 10);
-  const hasValidQuestionNumber =
-    Number.isInteger(parsedQuestionNumber) && parsedQuestionNumber > 0;
+  const hasValidQuestionId = questionId !== "";
 
   useEffect(() => {
-    if (!hasValidQuestionNumber) return;
-    loadByQuestionNumber(parsedQuestionNumber);
-  }, [hasValidQuestionNumber, loadByQuestionNumber, parsedQuestionNumber]);
+    if (!hasValidQuestionId) return;
+    loadById(questionId);
+  }, [hasValidQuestionId, loadById, questionId]);
 
   useEffect(() => {
     if (data && !loading && !graded && !running && elapsedSeconds === 0) {
@@ -89,13 +87,17 @@ export function Part6Page() {
     if (data) {
       const allQ = data.passages.flatMap((p) => p.questions);
       const correct = allQ.filter((q) => selected[q.id] === q.correct).length;
-      saveScore(
-        "toeic/part6",
-        correct,
-        allQ.length,
-        sessionSeconds,
-        file ?? undefined,
-      );
+      saveScore({
+        taskId: "toeic/part6",
+        file: file ?? undefined,
+        correct: correct,
+        total: allQ.length,
+        elapsedSeconds: sessionSeconds,
+        responses: Object.entries(selected).map(([itemId, choice]) => ({
+          itemId,
+          choice,
+        })),
+      });
     }
     setGraded(true);
   };
@@ -173,13 +175,13 @@ export function Part6Page() {
           </p>
         </div>
       )}
-      {!hasValidQuestionNumber && (
+      {!hasValidQuestionId && (
         <div className={styles.error}>
-          <p>Invalid question number in URL.</p>
+          <p>Invalid question ID in URL.</p>
         </div>
       )}
 
-      {data && !loading && hasValidQuestionNumber && passage && (
+      {data && !loading && hasValidQuestionId && passage && (
         <>
           {graded && (
             <div className={styles.resultCard}>

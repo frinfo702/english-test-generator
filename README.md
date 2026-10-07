@@ -67,9 +67,9 @@ public/
 └── questions/        # AI-generated question files (add files here)
     ├── toefl/
     │   ├── reading/complete-words/
-    │   │   ├── index.json   <- {"files":["001.json","002.json",...]}
+    │   │   ├── index.json   <- generated, do not edit
     │   │   ├── 001.json
-    │   │   └── 002.json
+    │   │   └── 20261007-library-hours.json
     │   ├── reading/daily-life/
     │   ├── reading/academic/
     │   ├── writing/build-sentence/
@@ -83,16 +83,19 @@ public/
         └── part7/
 ```
 
-### `index.json` Format
+### Question IDs
 
-Each task folder must include an `index.json` file:
+A question file's name (minus `.json`) is its permanent ID: study history
+and audio folders point at it. Name new files `<YYYYMMDD>-<slug>.json`
+(`./scripts/make-question.sh <task> [slug]` does this), never rename one,
+and never reuse a deleted name. Older `001.json`-style names stay valid.
 
-```json
-{ "files": ["001.json", "002.json"] }
-```
+Each task folder's `index.json` is regenerated from the folder contents by
+Vite on `npm run dev` / `npm run build`, so adding or deleting a file is all
+it takes.
 
-At runtime, each task first shows a question-number list.
-You can pick a specific number or start with the random button.
+At runtime, each task first shows its question list.
+You can pick a question or start with the random button.
 
 ### Prompting an AI Agent
 
@@ -101,8 +104,7 @@ Example request:
 ```text
 Follow the schema in public/prompts/toefl/reading/complete-the-words.json,
 generate one TOEFL Reading Complete the Words question set,
-save it to public/questions/toefl/reading/complete-words/002.json,
-and update index.json as well.
+save it to public/questions/toefl/reading/complete-words/20261007-<slug>.json.
 ```
 
 Each file in `public/prompts/` defines the output JSON schema for that task.

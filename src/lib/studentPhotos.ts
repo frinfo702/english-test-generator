@@ -1,3 +1,5 @@
+import { hashText } from "./voiceMapping";
+
 export type StudentGender = "male" | "female";
 
 /** Face photos under public/images/students/{id}.jpg, by gender. */
@@ -8,13 +10,17 @@ export const STUDENT_PHOTOS: Record<StudentGender, readonly string[]> = {
 
 /**
  * Photo URL for a discussion student. Only the gender has to match, so the
- * face is picked from the problem number; a male/female pair never repeats.
+ * face is picked from the problem ID; a male/female pair never repeats.
+ * Numeric IDs keep the faces they had when IDs were numbers.
  */
 export function studentPhotoUrl(
   gender: StudentGender,
-  problemNumber: number,
+  problemId: string,
 ): string {
   const photos = STUDENT_PHOTOS[gender];
-  const id = photos[(problemNumber - 1) % photos.length];
+  const seed = /^\d+$/.test(problemId)
+    ? Number(problemId) - 1
+    : hashText(problemId);
+  const id = photos[seed % photos.length];
   return `/images/students/${id}.jpg`;
 }
