@@ -187,7 +187,38 @@ describe("ListenRepeatPage", () => {
         expect.any(Function),
       );
     });
-    expect(screen.getByText("Listen carefully...")).toBeTruthy();
+    expect(screen.getByText("Listen and repeat only once.")).toBeTruthy();
+  });
+
+  it("plays the scene introduction first, then the first sentence", async () => {
+    vi.mocked(useQuestion).mockReturnValue({
+      data: { ...mockData, scenario: "You are working at the library." },
+      file: "001.json",
+      loading: false,
+      error: null,
+      load: vi.fn(),
+      loadByFile: vi.fn(),
+      loadById: loadByIdMock,
+    });
+    renderPage();
+    pressStart();
+
+    expect(screen.getByText("You are working at the library.")).toBeTruthy();
+    expect(playMock).toHaveBeenCalledWith(
+      "/audio/toefl/speaking/listen-repeat/001/scenario.mp3",
+      expect.any(Function),
+    );
+    expect(startSpeechMock).not.toHaveBeenCalled();
+
+    await finishPrompt(0);
+
+    await waitFor(() => {
+      expect(playMock).toHaveBeenLastCalledWith(
+        "/audio/toefl/speaking/listen-repeat/001/1.mp3",
+        expect.any(Function),
+      );
+    });
+    expect(screen.getByText("Question 1 / 2")).toBeTruthy();
   });
 
   it("starts recording as soon as the sentence finishes playing", async () => {
@@ -200,7 +231,7 @@ describe("ListenRepeatPage", () => {
       expect(startSpeechMock).toHaveBeenCalledTimes(1);
     });
     expect(screen.getByText("Repeat the sentence now")).toBeTruthy();
-    expect(screen.getByText("3s")).toBeTruthy();
+    expect(screen.getByText("8s")).toBeTruthy();
     expect(
       screen.queryByRole("button", { name: /Start Recording/i }),
     ).toBeNull();
@@ -216,9 +247,9 @@ describe("ListenRepeatPage", () => {
     await finishPrompt(0);
     expect(nextButton().disabled).toBe(true);
 
-    // recording (3s) + processing delay (400ms)
+    // recording (8s) + processing delay (400ms)
     await act(async () => {
-      vi.advanceTimersByTime(4000);
+      vi.advanceTimersByTime(9000);
     });
 
     await waitFor(() => {
@@ -314,7 +345,7 @@ describe("ListenRepeatPage", () => {
 
     await finishPrompt(0);
     await act(async () => {
-      vi.advanceTimersByTime(4000);
+      vi.advanceTimersByTime(9000);
     });
     await waitFor(() => {
       expect(nextButton().disabled).toBe(false);
@@ -328,7 +359,7 @@ describe("ListenRepeatPage", () => {
       expect(startSpeechMock).toHaveBeenCalledTimes(2);
     });
     await act(async () => {
-      vi.advanceTimersByTime(4000);
+      vi.advanceTimersByTime(9000);
     });
 
     await waitFor(() => {

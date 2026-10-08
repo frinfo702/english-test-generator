@@ -67,7 +67,6 @@
   margin-top: var(--spacing-2);
 }
 
-
 .playerControls {
   display: flex;
   justify-content: center;
@@ -225,4 +224,15 @@
   align-items: center;
   gap: var(--spacing-3);
   flex-wrap: wrap;
+}
+
+.scenario {
+  max-width: 34rem;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  line-height: var(--lh-relaxed);
+  color: var(--color-ink);
+  text-align: center;
 }
