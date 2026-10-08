@@ -24,10 +24,7 @@ export function BandTable({
       <div className={`${styles.bandRow} ${styles.bandTotal}`}>
         <dt>{single ? `${result.sections[0].label} Score` : "Total Score"}</dt>
         <dd
-          className={[
-            styles.bandCell,
-            finished ? "" : styles.bandNs,
-          ].join(" ")}
+          className={[styles.bandCell, finished ? "" : styles.bandNs].join(" ")}
         >
           {finished
             ? formatBand(single ? result.sections[0].band : result.overall)

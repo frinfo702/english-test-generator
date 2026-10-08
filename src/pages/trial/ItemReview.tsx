@@ -287,9 +287,9 @@ export function ItemReview({
           <tbody>
             {items.map((it) => {
               const yours = typed.get(String(it.index)) ?? "";
-              const full = it.answer.toLowerCase().startsWith(
-                it.hint.toLowerCase(),
-              )
+              const full = it.answer
+                .toLowerCase()
+                .startsWith(it.hint.toLowerCase())
                 ? it.hint + yours
                 : yours;
               const ok = full.toLowerCase() === it.answer.toLowerCase();

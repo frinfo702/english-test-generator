@@ -6,20 +6,43 @@ import {
   TRIAL_SECTIONS,
   TRIAL_TASK_ID,
   buildTrialPlan,
-  formatMinutes,
+  estimateScore,
+  formatBand,
   isTrial,
   modeMinutes,
   scoreTrial,
   trialTitle,
   type TrialMode,
 } from "../../lib/trial";
-import { BandTable } from "./BandTable";
+import { TASK_NAMES } from "./taskNames";
 import styles from "./Trial.module.css";
 
-const MODES: { mode: TrialMode; label: string }[] = [
-  { mode: "full", label: "Full Test" },
-  ...TRIAL_SECTIONS.map((s) => ({ mode: s.key, label: s.label })),
+const MODES: { mode: TrialMode; label: string; contents: string }[] = [
+  {
+    mode: "full",
+    label: "Full test",
+    contents: "All four sections in test-day order",
+  },
+  ...TRIAL_SECTIONS.map((s) => ({
+    mode: s.key,
+    label: s.label,
+    contents:
+      (s.adaptive ? "Two adaptive modules · " : "") +
+      s.tasks.map((t) => TASK_NAMES[t.taskId]).join(", "),
+  })),
 ];
+
+const CHECKLIST = [
+  ["Microphone", "Speaking records you; check it on the first speaking task."],
+  ["Time", "Sections are timed and keep running if you leave the page."],
+  [
+    "AI chat",
+    "Writing and Interview answers are scored at the end by pasting a prompt into your AI chat.",
+  ],
+] as const;
+
+const clock = (minutes: number) =>
+  `${Math.floor(minutes / 60)}:${String(minutes % 60).padStart(2, "0")}`;
 
 export function TrialHomePage() {
   const navigate = useNavigate();
@@ -34,9 +57,7 @@ export function TrialHomePage() {
 
   const trials = (attempts ?? []).filter(isTrial);
   const byId = new Map((attempts ?? []).map((a) => [a.id, a]));
-  const recent = [...trials].reverse().slice(0, 3);
-  const minutes = modeMinutes(mode);
-  const modeLabel = MODES.find((m) => m.mode === mode)!.label;
+  const estimate = estimateScore(attempts ?? []);
 
   const start = async () => {
     setStarting(true);
@@ -59,131 +80,143 @@ export function TrialHomePage() {
   return (
     <div className={styles.home}>
       <header className={styles.homeHeader}>
-        <h1 className={styles.homeTitle}>TOEFL Practice Test</h1>
+        <h1 className={styles.homeTitle}>Practice Test</h1>
         <p className={styles.lede}>
-          Practice tests simulate the real exam experience and give you an
-          estimated score on the 1–6 scale.
+          A timed TOEFL iBT run with answers hidden until the end, scored on the
+          1–6 band scale.
         </p>
       </header>
 
-      <div className={styles.homeGrid}>
-        <section aria-labelledby="take-test">
-          <h2 id="take-test" className={styles.columnHeading}>
-            Take a Practice Test
-          </h2>
-          <div className={styles.panel}>
-            <div
-              className={styles.chips}
-              role="radiogroup"
-              aria-label="Test length"
+      <section aria-labelledby="choose-test" className={styles.block}>
+        <h2 id="choose-test" className={styles.blockHeading}>
+          Choose a test
+        </h2>
+        <div role="radiogroup" aria-labelledby="choose-test">
+          {MODES.map((m) => (
+            <button
+              key={m.mode}
+              type="button"
+              role="radio"
+              aria-checked={mode === m.mode}
+              className={[
+                styles.modeRow,
+                mode === m.mode ? styles.modeRowOn : "",
+              ].join(" ")}
+              onClick={() => setMode(m.mode)}
             >
-              {MODES.map((m) => (
-                <button
-                  key={m.mode}
-                  type="button"
-                  role="radio"
-                  aria-checked={mode === m.mode}
-                  className={[
-                    styles.chip,
-                    mode === m.mode ? styles.chipOn : "",
-                  ].join(" ")}
-                  onClick={() => setMode(m.mode)}
-                >
-                  {m.label}
-                  <span className={styles.chipMeta}>
-                    {formatMinutes(modeMinutes(m.mode))}
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <h3 className={styles.subheading}>What's Included</h3>
-            <p className={styles.body}>
-              When you finish, you get <strong>section band scores</strong>, a{" "}
-              <strong>total score</strong>, and an{" "}
-              <strong>estimated real-test score</strong> that also draws on your
-              practice history. Answers stay hidden until the end, as on test
-              day.
-            </p>
-            <p className={styles.body}>
-              Reading and Listening are <strong>adaptive</strong>: your
-              Module 1 score picks an easier or harder Module 2. Afterwards you
-              can <strong>review every answer</strong> next to the correct one,
-              with explanations.
-            </p>
-
-            <h3 className={styles.subheading}>What You'll Need</h3>
-            <p className={styles.body}>
-              Scratch paper, headphones, and a <strong>microphone</strong> for
-              Speaking. Set aside <strong>{formatMinutes(minutes)}</strong> and
-              take it in one sitting. Each section is timed; when the clock
-              runs out, the section ends.
-            </p>
-            <p className={styles.body}>
-              Writing and Interview answers are scored at the end: you paste
-              each prompt into your AI chat and paste its reply back.
-            </p>
-
-            <h3 className={styles.startHeading}>{modeLabel} Practice Test</h3>
-            <p className={styles.note}>
-              Questions are drawn automatically: ones you haven't solved first,
-              then the ones you saw longest ago.
-            </p>
-            {error && <p className={styles.error}>{error}</p>}
-            <Button
-              size="lg"
-              onClick={() => void start()}
-              disabled={starting || attempts === null}
-            >
-              {starting ? "Preparing…" : "Start Practice Test"}
-            </Button>
-          </div>
-        </section>
-
-        <aside aria-labelledby="recent-results">
-          <div className={styles.columnHead}>
-            <h2 id="recent-results" className={styles.columnHeading}>
-              Recent Results
-            </h2>
-            <Link to="/dashboard#practice-tests" className={styles.quietLink}>
-              All Results
-            </Link>
-          </div>
-          {recent.length === 0 && (
-            <p className={styles.note}>No practice tests yet.</p>
-          )}
-          {recent.map((t) => (
-            <article key={t.id} className={styles.resultCard}>
-              <div className={styles.resultHead}>
-                <div>
-                  <h3 className={styles.resultTitle}>
-                    {trialTitle(t, trials)}
-                  </h3>
-                  <p className={styles.resultDate}>
-                    {new Date(t.date).toLocaleDateString(undefined, {
-                      dateStyle: "long",
-                    })}
-                  </p>
-                </div>
-                <Link
-                  to={
-                    t.trial.finishedAt
-                      ? `/trial/${t.id}/report`
-                      : `/trial/${t.id}`
-                  }
-                  className={styles.quietLink}
-                >
-                  {t.trial.finishedAt ? "View Details" : "Resume"}
-                </Link>
-              </div>
-              <BandTable
-                result={scoreTrial(t.trial, byId)}
-                finished={Boolean(t.trial.finishedAt)}
-              />
-            </article>
+              <span className={styles.modeName}>{m.label}</span>
+              <span className={styles.modeContents}>{m.contents}</span>
+              <span className={styles.modeTime}>
+                {clock(modeMinutes(m.mode))}
+              </span>
+            </button>
           ))}
-        </aside>
-      </div>
+        </div>
+
+        <dl className={styles.checklist}>
+          {CHECKLIST.map(([term, detail]) => (
+            <div key={term}>
+              <dt>{term}</dt>
+              <dd>{detail}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <div className={styles.startRow}>
+          <Button
+            size="lg"
+            onClick={() => void start()}
+            disabled={starting || attempts === null}
+          >
+            {starting ? "Preparing…" : "Start"}
+          </Button>
+          <p className={styles.note}>
+            Questions you haven't solved come first, then the ones you saw
+            longest ago.
+          </p>
+        </div>
+        {error && <p className={styles.error}>{error}</p>}
+      </section>
+
+      <section aria-labelledby="results" className={styles.block}>
+        <div className={styles.blockHead}>
+          <h2 id="results" className={styles.blockHeading}>
+            Results
+          </h2>
+          {estimate.overall !== null && (
+            <span className={styles.note}>
+              Estimated real-test score{" "}
+              <strong className={styles.estimate}>
+                {formatBand(estimate.overall)}
+              </strong>
+            </span>
+          )}
+        </div>
+        {trials.length === 0 ? (
+          <p className={styles.note}>No practice tests yet.</p>
+        ) : (
+          <table className={styles.scoreSheet}>
+            <thead>
+              <tr>
+                <th scope="col">Test</th>
+                {TRIAL_SECTIONS.map((s) => (
+                  <th key={s.key} scope="col" className={styles.num}>
+                    <abbr title={s.label}>{s.label[0]}</abbr>
+                  </th>
+                ))}
+                <th scope="col" className={styles.num}>
+                  Total
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...trials].reverse().map((t) => {
+                const result = scoreTrial(t.trial, byId);
+                const done = Boolean(t.trial.finishedAt);
+                const single = result.sections.length === 1;
+                const total = single ? result.sections[0].band : result.overall;
+                return (
+                  <tr key={t.id}>
+                    <th scope="row">
+                      <Link
+                        to={done ? `/trial/${t.id}/report` : `/trial/${t.id}`}
+                        className={styles.sheetLink}
+                      >
+                        {trialTitle(t, trials).replace("TOEFL ", "")}
+                      </Link>
+                      <span className={styles.sheetMeta}>
+                        {new Date(t.date).toLocaleDateString(undefined, {
+                          month: "short",
+                          day: "numeric",
+                        })}
+                        {single && ` · ${result.sections[0].label}`}
+                        {!done && " · Resume"}
+                      </span>
+                    </th>
+                    {TRIAL_SECTIONS.map((s) => {
+                      const section = result.sections.find(
+                        (x) => x.key === s.key,
+                      );
+                      return (
+                        <td key={s.key} className={styles.num}>
+                          {!section
+                            ? ""
+                            : done
+                              ? formatBand(section.band)
+                              : "NS"}
+                        </td>
+                      );
+                    })}
+                    <td className={`${styles.num} ${styles.sheetTotal}`}>
+                      {done ? formatBand(total) : "NS"}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
+      </section>
     </div>
   );
 }

@@ -3,10 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import type { TaskId } from "../../hooks/useScoreHistory";
-import {
-  TrialItemContext,
-  type TrialItemApi,
-} from "../../hooks/useTrialItem";
+import { TrialItemContext, type TrialItemApi } from "../../hooks/useTrialItem";
 import {
   getAllAttempts,
   getAttempt,
@@ -228,9 +225,9 @@ export function TrialRunPage({
         </p>
         {section.adaptive && (
           <p className={styles.body}>
-            This section has <strong>two modules</strong>. How you do on
-            Module 1 decides whether Module 2 is easier or harder, and only
-            the harder Module 2 can lead to the top bands.
+            This section has <strong>two modules</strong>. How you do on Module
+            1 decides whether Module 2 is easier or harder, and only the harder
+            Module 2 can lead to the top bands.
           </p>
         )}
         <ul className={styles.taskList}>
@@ -310,9 +307,7 @@ export function TrialRunPage({
       )}
       {api && (
         <TrialItemContext.Provider key={itemIndex} value={api}>
-          <div hidden={advancing || holding !== null}>
-            {pages[item.taskId]}
-          </div>
+          <div hidden={advancing || holding !== null}>{pages[item.taskId]}</div>
         </TrialItemContext.Provider>
       )}
     </div>

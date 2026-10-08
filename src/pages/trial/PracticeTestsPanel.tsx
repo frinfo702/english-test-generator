@@ -33,7 +33,9 @@ export function PracticeTestsPanel({ attempts }: { attempts: Attempt[] }) {
     .map((t) => ({ t, result: scoreTrial(t.trial, byId) }));
   const estimate = estimateScore(attempts);
 
-  const series = (pick: (r: (typeof finished)[number]["result"]) => number | null) =>
+  const series = (
+    pick: (r: (typeof finished)[number]["result"]) => number | null,
+  ) =>
     finished.flatMap(({ t, result }) => {
       const band = pick(result);
       return band === null
@@ -110,7 +112,8 @@ export function PracticeTestsPanel({ attempts }: { attempts: Attempt[] }) {
         <ol className={styles.itemRows}>
           {[...trials].reverse().map((t) => {
             const r = scoreTrial(t.trial, byId);
-            const total = r.sections.length === 1 ? r.sections[0].band : r.overall;
+            const total =
+              r.sections.length === 1 ? r.sections[0].band : r.overall;
             return (
               <li key={t.id}>
                 <Link

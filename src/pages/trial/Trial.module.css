@@ -98,67 +98,6 @@
   margin-top: var(--spacing-2);
 }
 
-.homeGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: var(--spacing-8);
-  align-items: start;
-}
-
-.homeGrid > section > .columnHeading {
-  padding-bottom: var(--spacing-3);
-  margin-bottom: var(--spacing-4);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-2);
-  margin-bottom: var(--spacing-2);
-}
-
-.chip {
-  display: inline-flex;
-  align-items: baseline;
-  gap: var(--spacing-2);
-  padding: var(--spacing-2) var(--spacing-4);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-full);
-  background: var(--color-surface);
-  color: var(--color-ink);
-  font: inherit;
-  font-size: var(--text-sm);
-  cursor: pointer;
-  transition:
-    background var(--duration-base) var(--ease-out),
-    transform var(--duration-fast) var(--ease-out);
-}
-
-.chip:active {
-  transform: scale(0.975);
-}
-
-.chipOn {
-  background: var(--color-ink);
-  border-color: var(--color-ink);
-  color: var(--color-ink-inverse);
-}
-
-.chipMeta {
-  font-size: var(--text-xs);
-  opacity: 0.7;
-  font-variant-numeric: tabular-nums;
-}
-
-.startHeading {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: var(--font-semibold);
-  color: var(--color-ink);
-  margin: var(--spacing-8) 0 var(--spacing-2);
-}
-
 /* ---- Result cards and band table ---- */
 
 .resultCard {
@@ -170,24 +109,12 @@
   box-shadow: var(--shadow-xs);
 }
 
-.resultHead {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--spacing-3);
-  margin-bottom: var(--spacing-4);
-}
-
 .resultTitle {
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: var(--font-semibold);
   color: var(--color-ink);
   margin: 0 0 var(--spacing-3);
-}
-
-.resultHead .resultTitle {
-  margin: 0;
 }
 
 .resultDate {
@@ -202,52 +129,205 @@
 
 .bandRow {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   gap: var(--spacing-3);
+  padding: var(--spacing-2) 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .bandRow dt {
-  font-weight: var(--font-medium);
-  color: var(--color-ink);
+  color: var(--color-ink-secondary);
 }
 
 .bandCell {
   margin: 0;
-  width: 88px;
-  padding: var(--spacing-2) 0;
-  text-align: center;
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: var(--font-semibold);
   font-variant-numeric: tabular-nums;
-  background: var(--color-surface-subtle);
-  border: 1px solid var(--color-border);
-  border-top: none;
+  color: var(--color-ink);
 }
 
-.bandRow:first-child .bandCell {
-  border-top: 1px solid var(--color-border);
-  border-radius: var(--radius) var(--radius) 0 0;
-}
-
-.bandTotal .bandCell {
-  border: 2px solid var(--color-ink);
-  border-radius: 0 0 var(--radius) var(--radius);
-  background: var(--color-surface);
-}
-
-.bandTotal:first-child .bandCell {
-  border-radius: var(--radius);
+.bandTotal {
+  border-bottom: none;
+  border-top: 1px solid var(--color-ink);
+  padding-top: var(--spacing-3);
 }
 
 .bandTotal dt {
+  color: var(--color-ink);
   font-weight: var(--font-semibold);
 }
 
+.bandTotal .bandCell {
+  font-size: var(--text-3xl);
+  letter-spacing: var(--tracking-tight);
+}
+
 .bandCell.bandNs {
-  border-color: var(--color-border-strong);
   color: var(--color-ink-tertiary);
+}
+
+/* ---- Start screen: test rows, checklist, score sheet ---- */
+
+.block {
+  margin-bottom: var(--spacing-12);
+}
+
+.blockHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.blockHeading {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--color-ink);
+  margin: 0 0 var(--spacing-3);
+}
+
+.modeRow {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--spacing-4);
+  width: 100%;
+  padding: var(--spacing-4) var(--spacing-3);
+  border: none;
+  border-top: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  /* The selected row's left rule; transparent keeps every row the same width. */
+  box-shadow: inset 2px 0 0 transparent;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+
+.modeRow:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modeRow:hover {
+  background: var(--color-surface-hover);
+}
+
+.modeRowOn {
+  background: var(--color-surface);
+  box-shadow: inset 2px 0 0 var(--color-accent);
+}
+
+.modeName {
+  font-family: var(--font-display);
+  font-weight: var(--font-semibold);
+}
+
+.modeContents {
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+}
+
+.modeTime {
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-secondary);
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-6);
+  margin: var(--spacing-6) 0;
+}
+
+.checklist dt {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-ink);
+  margin-bottom: var(--spacing-1);
+}
+
+.checklist dd {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--lh-relaxed);
+  color: var(--color-ink-tertiary);
+}
+
+.startRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.startRow .note {
+  margin: 0;
+}
+
+.estimate {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+  margin-left: var(--spacing-2);
+}
+
+.scoreSheet {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scoreSheet th,
+.scoreSheet td {
+  padding: var(--spacing-3);
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  font-weight: var(--font-normal);
+}
+
+.scoreSheet thead th {
+  border-top: none;
+  font-size: var(--text-xs);
+  color: var(--color-ink-tertiary);
+}
+
+.scoreSheet abbr {
+  text-decoration: none;
+}
+
+.scoreSheet .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  width: 4.5rem;
+}
+
+.sheetLink {
+  color: var(--color-ink);
+  font-weight: var(--font-semibold);
+  text-decoration: none;
+}
+
+.sheetLink:hover {
+  text-decoration: underline;
+}
+
+.sheetMeta {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+}
+
+.scoreSheet .sheetTotal {
+  font-family: var(--font-display);
+  font-weight: var(--font-semibold);
+  color: var(--color-ink);
 }
 
 /* ---- Runner ---- */
@@ -470,7 +550,28 @@
 }
 
 @media (max-width: 760px) {
-  .homeGrid,
+  .checklist {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .modeRow {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .modeContents {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .scoreSheet th,
+  .scoreSheet td {
+    padding: var(--spacing-3) var(--spacing-1);
+  }
+
+  .scoreSheet .num {
+    width: 2.75rem;
+  }
+
   .reportGrid {
     grid-template-columns: minmax(0, 1fr);
   }

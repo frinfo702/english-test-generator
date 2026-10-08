@@ -96,15 +96,14 @@ export function TrialReportPage() {
         <section className={styles.panel}>
           <h2 className={styles.subheading}>Score your Writing and Speaking</h2>
           <p className={styles.body}>
-            {pending.length} {pending.length === 1 ? "response needs" : "responses need"}{" "}
-            an AI score before your report is ready. For each one, copy the
-            prompt into your AI chat and paste its whole reply back here.
+            {pending.length}{" "}
+            {pending.length === 1 ? "response needs" : "responses need"} an AI
+            score before your report is ready. For each one, copy the prompt
+            into your AI chat and paste its whole reply back here.
           </p>
           {pending.map((i) => (
             <div key={questionKey(i)} className={styles.scoreGroup}>
-              <h3 className={styles.reviewHeading}>
-                {TASK_NAMES[i.taskId]}
-              </h3>
+              <h3 className={styles.reviewHeading}>{TASK_NAMES[i.taskId]}</h3>
               {questions.has(questionKey(i)) ? (
                 <AiScoring
                   taskId={i.taskId}
