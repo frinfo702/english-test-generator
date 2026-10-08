@@ -44,7 +44,7 @@ export function CompleteWordsPage() {
     null,
   );
   const [focusedIdx, setFocusedIdx] = useState<number | null>(null);
-  const inputRefs = useRef<Array<HTMLTextAreaElement | null>>([]);
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   const hasValidQuestionId = questionId !== "";
 
@@ -68,19 +68,6 @@ export function CompleteWordsPage() {
       start();
     }
   }, [data, loading, submitted, running, elapsedSeconds, start]);
-
-  useEffect(() => {
-    if (focusedIdx !== null) {
-      autoResize(focusedIdx);
-    }
-  }, [answers, focusedIdx]);
-
-  const autoResize = (idx: number) => {
-    const el = inputRefs.current[idx];
-    if (!el) return;
-    el.style.height = "auto";
-    el.style.height = `${el.scrollHeight}px`;
-  };
 
   const findNextBlank = (fromIdx: number): number | null => {
     for (let i = fromIdx + 1; i < (data?.items.length ?? 0); i++) {
@@ -220,24 +207,49 @@ export function CompleteWordsPage() {
             ].join(" ")}
           >
             <span className={styles.hint}>{item.hint}</span>
-            <textarea
-              ref={(el) => {
-                inputRefs.current[itemIdx] = el;
-              }}
-              className={styles.blankInput}
-              value={userInput}
-              onChange={(e) => handleAnswerChange(itemIdx, e.target.value)}
-              onFocus={() => setFocusedIdx(itemIdx)}
-              onBlur={() => setFocusedIdx(null)}
-              onKeyDown={(e) => handleKeyDown(itemIdx, e)}
-              style={{ width: `${Math.max(expectedSuffix.length, 1)}ch` }}
-              rows={1}
-              maxLength={expectedSuffix.length * 2}
-              autoComplete="off"
-              spellCheck={false}
-              disabled={submitted}
-              aria-label={`Blank ${itemIdx + 1}`}
-            />
+            {/* One cell per hidden letter: Inter is proportional, so a
+                fixed-width dashed underline never lines up with the text. */}
+            <span className={styles.cells}>
+              {Array.from(expectedSuffix, (_, c) => (
+                <span
+                  key={c}
+                  className={[
+                    styles.cell,
+                    isFocused && c === userInput.length
+                      ? styles.cellActive
+                      : "",
+                  ].join(" ")}
+                >
+                  {/* An empty inline-block sits on its bottom edge, a
+                      filled one on its text: keep text in every cell. */}
+                  {userInput[c] ?? "\u00a0"}
+                </span>
+              ))}
+              <input
+                ref={(el) => {
+                  inputRefs.current[itemIdx] = el;
+                }}
+                className={styles.blankInput}
+                value={userInput}
+                onChange={(e) =>
+                  handleAnswerChange(
+                    itemIdx,
+                    e.target.value
+                      .replace(/\s/g, "")
+                      .slice(0, expectedSuffix.length),
+                  )
+                }
+                onFocus={() => setFocusedIdx(itemIdx)}
+                onBlur={() => setFocusedIdx(null)}
+                onKeyDown={(e) => handleKeyDown(itemIdx, e)}
+                maxLength={expectedSuffix.length}
+                autoComplete="off"
+                autoCapitalize="off"
+                spellCheck={false}
+                disabled={submitted}
+                aria-label={`Blank ${itemIdx + 1}, ${expectedSuffix.length} letters`}
+              />
+            </span>
           </span>,
         );
         if (isWrong) {
