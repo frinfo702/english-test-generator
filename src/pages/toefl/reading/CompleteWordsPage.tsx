@@ -215,7 +215,9 @@ export function CompleteWordsPage() {
                   key={c}
                   className={[
                     styles.cell,
-                    isFocused && c === userInput.length ? styles.cellActive : "",
+                    isFocused && c === userInput.length
+                      ? styles.cellActive
+                      : "",
                   ].join(" ")}
                 >
                   {userInput[c] ?? ""}
@@ -230,7 +232,9 @@ export function CompleteWordsPage() {
                 onChange={(e) =>
                   handleAnswerChange(
                     itemIdx,
-                    e.target.value.replace(/\s/g, "").slice(0, expectedSuffix.length),
+                    e.target.value
+                      .replace(/\s/g, "")
+                      .slice(0, expectedSuffix.length),
                   )
                 }
                 onFocus={() => setFocusedIdx(itemIdx)}
