@@ -23,7 +23,11 @@ import {
   type PronunciationResult,
 } from "../../../lib/pronunciation";
 import { toWav16k } from "../../../lib/wav";
-import { alignWords, listenRepeatItemScore } from "./listenRepeat";
+import {
+  alignWords,
+  listenRepeatItemScore,
+  recordingSeconds,
+} from "./listenRepeat";
 import styles from "./ListenRepeatPage.module.css";
 
 interface Sentence {
@@ -38,9 +42,6 @@ interface ProblemData {
 }
 
 const TASK_ID = "toefl/speaking/listen-repeat";
-// The test gives every sentence the same window; one scaled to the prompt's
-// length left short sentences only 3–5 seconds.
-const RECORDING_SECONDS = 8;
 const PROCESSING_DELAY_MS = 400;
 
 // Like the real test: one Start, then each prompt plays and recording
@@ -260,7 +261,7 @@ export function ListenRepeatPage() {
 
   const startRecording = useCallback(() => {
     if (!speechSupported) return;
-    setRecordingTimeLeft(RECORDING_SECONDS);
+    setRecordingTimeLeft(recordingSeconds(current));
     setPhase("recording");
     startSpeech();
 
@@ -273,7 +274,7 @@ export function ListenRepeatPage() {
         return prev - 1;
       });
     }, 1000);
-  }, [speechSupported, startSpeech, finishSentence]);
+  }, [speechSupported, current, startSpeech, finishSentence]);
 
   const playCurrentSentence = useCallback(() => {
     if (!sentence || !fileBasename) return;
