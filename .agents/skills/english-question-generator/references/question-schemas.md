@@ -439,6 +439,7 @@ everyday text（実用文）1本に2〜3問の設問を付ける（1ファイル
 
 ```json
 {
+  "scenario": "You are working at the city aquarium. Your manager is showing you how to help visitors. Listen to the manager and repeat what the manager says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",
@@ -456,8 +457,9 @@ everyday text（実用文）1本に2〜3問の設問を付ける（1ファイル
 
 **フィールド仕様:**
 
+- `scenario`: 最初に表示・読み上げる場面紹介。`You are working at …. Your {manager} is …. Listen to the {manager} and repeat what the {manager} says. Repeat only once.` の形。音声は `scenario.mp3`（研修担当者とは別のナレーターの声）
 - `wordCount`: 単語数（空白区切り）
-- 1ファイル＝1文（`sentences` は要素1つ）。下の「場面」「長さ」は7ファイルで1シリーズとして作るときの目安
+- 1ファイル＝1場面7文（`sentences` は要素7つ）
 - 場面: 受験者が新人スタッフとして研修を受ける設定（動物園の来園者案内、図書館の貸出カウンター、美術館、ホテルのフロント、キャンパスツアー、ジム、カフェなど）。7文すべて同じ場面
 - 内容: あいさつ、規則（Please don't…, You must…）、場所の案内（The gift shop is next to…）、手順・説明
 - 長さ: 4〜6語から始め、最後は12〜15語。全体として長くなる（厳密な単調増加でなくてよい）

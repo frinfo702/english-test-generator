@@ -1,4 +1,5 @@
 {
+  "scenario": "You are working at a bike share office. Your manager is teaching you how to take care of the bikes and the riders. Listen to the manager and repeat what the manager says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",

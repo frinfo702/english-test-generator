@@ -1,4 +1,5 @@
 {
+  "scenario": "You are working at the university library. Your supervisor is explaining how the circulation desk works. Listen to the supervisor and repeat what the supervisor says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",

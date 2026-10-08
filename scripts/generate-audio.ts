@@ -272,12 +272,22 @@ async function generateForQuestion(
 
   if (hasTextSentences(data)) {
     const sentences = data.sentences;
+    const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
+    // One trainer speaks the whole scene, so the voice follows the set.
+    const voiceIdx = Math.abs(hashText(basename)) % ALL_VOICE_IDS.length;
+    const voiceId = ALL_VOICE_IDS[voiceIdx];
+    const scenario = (data as { scenario?: unknown }).scenario;
+    if (typeof scenario === "string" && scenario.trim()) {
+      // A narrator sets the scene, as on the test: never the trainer's voice.
+      await writeMp3IfMissing(
+        path.join(outDir, "scenario.mp3"),
+        path.join(dirname, basename, "scenario.mp3"),
+        scenario.trim(),
+        ALL_VOICE_IDS[(voiceIdx + 1) % ALL_VOICE_IDS.length],
+      );
+    }
     for (let i = 0; i < sentences.length; i++) {
-      const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
       const outFile = path.join(outDir, `${i + 1}.mp3`);
-      // One trainer speaks the whole scene, so the voice follows the set.
-      const voiceIdx = Math.abs(hashText(basename)) % ALL_VOICE_IDS.length;
-      const voiceId = ALL_VOICE_IDS[voiceIdx];
       await writeMp3IfMissing(
         outFile,
         path.join(dirname, basename, `${i + 1}.mp3`),

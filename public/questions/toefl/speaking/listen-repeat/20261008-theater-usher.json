@@ -1,4 +1,5 @@
 {
+  "scenario": "You are working as an usher at a theater. Your manager is explaining what to do before, during, and after the show. Listen to the manager and repeat what the manager says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",

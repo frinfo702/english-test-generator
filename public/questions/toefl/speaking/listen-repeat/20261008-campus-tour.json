@@ -1,4 +1,5 @@
 {
+  "scenario": "You are working in the admissions office. Your supervisor is training you to lead campus tours for visiting families. Listen to the supervisor and repeat what the supervisor says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",

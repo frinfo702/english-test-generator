@@ -1,4 +1,5 @@
 {
+  "scenario": "You are working at a bookstore. Your manager is teaching you how to serve customers at the register. Listen to the manager and repeat what the manager says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",

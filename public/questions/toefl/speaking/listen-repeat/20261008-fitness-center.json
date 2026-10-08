@@ -1,4 +1,5 @@
 {
+  "scenario": "You are working at the campus fitness center. Your manager is teaching you how to help new members use the gym. Listen to the manager and repeat what the manager says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",

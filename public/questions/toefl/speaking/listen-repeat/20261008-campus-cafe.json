@@ -1,4 +1,5 @@
 {
+  "scenario": "You are working at the campus cafe. Your manager is showing you how the cafe runs during the day. Listen to the manager and repeat what the manager says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",

@@ -14,6 +14,7 @@ interface ListenRepeatSentence {
 }
 
 interface ListenRepeatData {
+  scenario: string;
   sentences: ListenRepeatSentence[];
 }
 
@@ -44,6 +45,12 @@ describe("TOEFL Speaking: Listen and Repeat JSON structure", () => {
     const data = loadJson(file);
     expect(data).toHaveProperty("sentences");
     expect(Array.isArray(data.sentences)).toBe(true);
+  });
+
+  it.each(files)("%s introduces its scene and says to repeat once", (file) => {
+    const { scenario } = loadJson(file);
+    expect(scenario).toMatch(/^You are /);
+    expect(scenario).toMatch(/Repeat only once\.$/);
   });
 
   // One file is one scene: seven sentences from the same trainer.

@@ -1,4 +1,5 @@
 {
+  "scenario": "You are working at a science museum. Your manager is training you to assist visitors at the space exhibit. Listen to the manager and repeat what the manager says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",

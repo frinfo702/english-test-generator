@@ -1,4 +1,5 @@
 {
+  "scenario": "You are working at a hotel. Your manager is teaching you how to check guests in at the front desk. Listen to the manager and repeat what the manager says. Repeat only once.",
   "sentences": [
     {
       "id": "s1",
