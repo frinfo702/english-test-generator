@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "Let's start at the front desk.",
+      "wordCount": 6
+    },
+    {
+      "id": "s2",
+      "text": "Check-in begins at three in the afternoon.",
+      "wordCount": 7
+    },
+    {
+      "id": "s3",
+      "text": "Always ask guests for a photo ID and card.",
+      "wordCount": 9
+    },
+    {
+      "id": "s4",
+      "text": "Breakfast is served in the lobby restaurant until ten thirty.",
+      "wordCount": 10
+    },
+    {
+      "id": "s5",
+      "text": "If a guest requests a late checkout, check the booking first.",
+      "wordCount": 11
+    },
+    {
+      "id": "s6",
+      "text": "We keep spare room keys in the locked drawer under the counter.",
+      "wordCount": 12
+    },
+    {
+      "id": "s7",
+      "text": "When the phone rings during check-in, apologize to the guest and answer it quickly.",
+      "wordCount": 14
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "This is the circulation desk.",
+      "wordCount": 5
+    },
+    {
+      "id": "s2",
+      "text": "Students need their ID card to borrow books.",
+      "wordCount": 8
+    },
+    {
+      "id": "s3",
+      "text": "Most books can be kept for three full weeks.",
+      "wordCount": 9
+    },
+    {
+      "id": "s4",
+      "text": "Reference books have to stay inside the library at all times.",
+      "wordCount": 11
+    },
+    {
+      "id": "s5",
+      "text": "If a book is overdue, the system will add a small fine.",
+      "wordCount": 12
+    },
+    {
+      "id": "s6",
+      "text": "You'll scan the barcode on the back cover before you stamp it.",
+      "wordCount": 12
+    },
+    {
+      "id": "s7",
+      "text": "When someone wants a book that's already checked out, help them place a hold online.",
+      "wordCount": 15
+    }
+  ]
+}

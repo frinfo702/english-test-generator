@@ -275,8 +275,8 @@ async function generateForQuestion(
     for (let i = 0; i < sentences.length; i++) {
       const outDir = path.join(AUDIO_OUT_DIR, dirname, basename);
       const outFile = path.join(outDir, `${i + 1}.mp3`);
-      const voiceIdx =
-        Math.abs(hashText(sentences[i].text)) % ALL_VOICE_IDS.length;
+      // One trainer speaks the whole scene, so the voice follows the set.
+      const voiceIdx = Math.abs(hashText(basename)) % ALL_VOICE_IDS.length;
       const voiceId = ALL_VOICE_IDS[voiceIdx];
       await writeMp3IfMissing(
         outFile,

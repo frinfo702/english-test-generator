@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "Welcome to the science museum.",
+      "wordCount": 5
+    },
+    {
+      "id": "s2",
+      "text": "Your station today is the space exhibit.",
+      "wordCount": 7
+    },
+    {
+      "id": "s3",
+      "text": "Children love pressing the buttons on the rocket display.",
+      "wordCount": 9
+    },
+    {
+      "id": "s4",
+      "text": "Make sure that no one climbs on the model of the moon.",
+      "wordCount": 12
+    },
+    {
+      "id": "s5",
+      "text": "If a visitor asks a question you can't answer, call a supervisor.",
+      "wordCount": 12
+    },
+    {
+      "id": "s6",
+      "text": "The planetarium show starts every hour, and the seats fill up very fast.",
+      "wordCount": 13
+    },
+    {
+      "id": "s7",
+      "text": "When the museum is crowded, guide people toward the quieter rooms on the second floor.",
+      "wordCount": 15
+    }
+  ]
+}

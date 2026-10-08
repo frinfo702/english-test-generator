@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "This is our community garden.",
+      "wordCount": 5
+    },
+    {
+      "id": "s2",
+      "text": "Each family is given its own small plot.",
+      "wordCount": 8
+    },
+    {
+      "id": "s3",
+      "text": "The tools are stored in the shed by the gate.",
+      "wordCount": 10
+    },
+    {
+      "id": "s4",
+      "text": "Please water the vegetable beds early in the morning or evening.",
+      "wordCount": 11
+    },
+    {
+      "id": "s5",
+      "text": "If you see any weeds, pull them out before they spread.",
+      "wordCount": 11
+    },
+    {
+      "id": "s6",
+      "text": "Volunteers who help on weekends can take home some of the vegetables.",
+      "wordCount": 12
+    },
+    {
+      "id": "s7",
+      "text": "When the compost bin gets full, move it to the back corner.",
+      "wordCount": 12
+    }
+  ]
+}

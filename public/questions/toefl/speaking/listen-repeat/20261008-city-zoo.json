@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "Welcome to the city zoo.",
+      "wordCount": 5
+    },
+    {
+      "id": "s2",
+      "text": "Your job today is helping at the entrance.",
+      "wordCount": 8
+    },
+    {
+      "id": "s3",
+      "text": "Visitors can pick up a free map at the gate.",
+      "wordCount": 10
+    },
+    {
+      "id": "s4",
+      "text": "Feeding the animals is not allowed anywhere in the park.",
+      "wordCount": 10
+    },
+    {
+      "id": "s5",
+      "text": "If a child gets lost, bring them to the information booth.",
+      "wordCount": 11
+    },
+    {
+      "id": "s6",
+      "text": "The penguin show takes place twice a day near the main lake.",
+      "wordCount": 12
+    },
+    {
+      "id": "s7",
+      "text": "When it gets very hot, remind families that there are water stations along every path.",
+      "wordCount": 15
+    }
+  ]
+}

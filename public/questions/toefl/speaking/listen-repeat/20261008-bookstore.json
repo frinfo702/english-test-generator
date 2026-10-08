@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "You'll start at the register.",
+      "wordCount": 5
+    },
+    {
+      "id": "s2",
+      "text": "New arrivals go on the table by the window.",
+      "wordCount": 9
+    },
+    {
+      "id": "s3",
+      "text": "Customers can order any book that we don't carry.",
+      "wordCount": 9
+    },
+    {
+      "id": "s4",
+      "text": "Gift cards are sold at the counter but can't be returned.",
+      "wordCount": 11
+    },
+    {
+      "id": "s5",
+      "text": "If someone wants to return a book, they need their receipt.",
+      "wordCount": 11
+    },
+    {
+      "id": "s6",
+      "text": "We shelve the fiction section alphabetically by the author's last name.",
+      "wordCount": 11
+    },
+    {
+      "id": "s7",
+      "text": "When the line gets long, call someone to open a second register.",
+      "wordCount": 12
+    }
+  ]
+}

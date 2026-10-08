@@ -1,0 +1,39 @@
+{
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "Tonight you'll work as an usher.",
+      "wordCount": 6
+    },
+    {
+      "id": "s2",
+      "text": "The doors open thirty minutes before the show.",
+      "wordCount": 8
+    },
+    {
+      "id": "s3",
+      "text": "Check each ticket and point guests toward their seats.",
+      "wordCount": 9
+    },
+    {
+      "id": "s4",
+      "text": "Late arrivals have to wait until the first scene has ended.",
+      "wordCount": 11
+    },
+    {
+      "id": "s5",
+      "text": "If someone's phone rings during the play, quietly remind them later.",
+      "wordCount": 11
+    },
+    {
+      "id": "s6",
+      "text": "Programs are handed out at the door, and they're free for every guest.",
+      "wordCount": 13
+    },
+    {
+      "id": "s7",
+      "text": "When the play ends, stand by the exits and thank people for coming.",
+      "wordCount": 13
+    }
+  ]
+}
