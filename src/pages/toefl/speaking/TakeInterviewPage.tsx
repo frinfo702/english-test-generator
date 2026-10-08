@@ -449,6 +449,7 @@ export function TakeInterviewPage() {
             <div className={styles.answerArea}>
               <PixelTimer seconds={timer.seconds} total={ANSWER_SECONDS} />
               <VoiceButton
+                className={styles.recordButton}
                 state={
                   phase === "answering" && speech.recording
                     ? "recording"

@@ -12,8 +12,9 @@
 }
 
 .face {
-  width: 75px;
-  height: 75px;
+  /* 3px per cell of the 15-cell grid keeps the pixels whole. */
+  width: 45px;
+  height: 45px;
 }
 
 .digits {

@@ -94,6 +94,10 @@
   gap: var(--spacing-4);
 }
 
+.recordButton {
+  align-self: center;
+}
+
 .resultCard {
   max-width: var(--max-reading);
   margin: 0 auto;
