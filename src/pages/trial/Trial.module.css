@@ -645,6 +645,10 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .reportGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .checklist {
     grid-template-columns: minmax(0, 1fr);
   }

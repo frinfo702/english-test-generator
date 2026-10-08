@@ -95,9 +95,13 @@
   }
 }
 
+/* Phones: the page head's actions own the top-right and the hamster owns
+   the bottom-right, so the clock takes the free bottom-left corner. */
 @media (max-width: 620px) {
   .floatingTimer {
-    right: var(--spacing-4);
-    top: calc(var(--header-height) + var(--spacing-2));
+    top: auto;
+    right: auto;
+    bottom: var(--spacing-4);
+    left: var(--spacing-4);
   }
 }

@@ -80,8 +80,21 @@
     font-size: var(--text-sm);
   }
 
+  /* Actions drop to their own row so the title keeps the full width. */
   .top {
+    flex-wrap: wrap;
     gap: var(--spacing-3);
+  }
+
+  .titles {
+    flex: 1 1 calc(100% - 42px);
+  }
+
+  .actions {
+    flex: 1 1 100%;
+    flex-wrap: wrap;
+    margin-top: 0;
+    padding-left: 42px;
   }
 
   .back {
