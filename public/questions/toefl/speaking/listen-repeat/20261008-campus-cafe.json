@@ -1,0 +1,40 @@
+{
+  "scenario": "You are working at the campus cafe. Your manager is showing you how the cafe runs during the day. Listen to the manager and repeat what the manager says. Repeat only once.",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "This is the campus cafe.",
+      "wordCount": 5
+    },
+    {
+      "id": "s2",
+      "text": "We open at seven on weekday mornings.",
+      "wordCount": 7
+    },
+    {
+      "id": "s3",
+      "text": "Always ask customers whether they want their drink hot.",
+      "wordCount": 9
+    },
+    {
+      "id": "s4",
+      "text": "The pastries are delivered fresh from the bakery each morning.",
+      "wordCount": 10
+    },
+    {
+      "id": "s5",
+      "text": "If we run out of oat milk, offer almond or soy instead.",
+      "wordCount": 12
+    },
+    {
+      "id": "s6",
+      "text": "Students who bring their own cups get a small discount on coffee.",
+      "wordCount": 12
+    },
+    {
+      "id": "s7",
+      "text": "Before closing, wipe the counters and write down what we need to reorder.",
+      "wordCount": 13
+    }
+  ]
+}

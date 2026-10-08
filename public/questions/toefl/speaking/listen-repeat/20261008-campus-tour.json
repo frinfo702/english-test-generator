@@ -1,0 +1,40 @@
+{
+  "scenario": "You are working in the admissions office. Your supervisor is training you to lead campus tours for visiting families. Listen to the supervisor and repeat what the supervisor says. Repeat only once.",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "Today you'll lead campus tours.",
+      "wordCount": 5
+    },
+    {
+      "id": "s2",
+      "text": "Every tour begins in front of the admissions office.",
+      "wordCount": 9
+    },
+    {
+      "id": "s3",
+      "text": "Walk slowly so that families can keep up with you.",
+      "wordCount": 10
+    },
+    {
+      "id": "s4",
+      "text": "Our first stop is the science building with its new labs.",
+      "wordCount": 11
+    },
+    {
+      "id": "s5",
+      "text": "Point out the dining hall, since parents always ask about meals.",
+      "wordCount": 11
+    },
+    {
+      "id": "s6",
+      "text": "If it's raining, we take the covered path behind the main library.",
+      "wordCount": 12
+    },
+    {
+      "id": "s7",
+      "text": "At the end, give each visitor a map and show them the bookstore.",
+      "wordCount": 13
+    }
+  ]
+}

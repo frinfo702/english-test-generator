@@ -1,0 +1,40 @@
+{
+  "scenario": "You are working at the campus fitness center. Your manager is teaching you how to help new members use the gym. Listen to the manager and repeat what the manager says. Repeat only once.",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "Welcome to the fitness center.",
+      "wordCount": 5
+    },
+    {
+      "id": "s2",
+      "text": "Members must scan their card at the door.",
+      "wordCount": 8
+    },
+    {
+      "id": "s3",
+      "text": "Please wipe down each machine after every single use.",
+      "wordCount": 9
+    },
+    {
+      "id": "s4",
+      "text": "Towels are kept in the cabinet next to the water fountain.",
+      "wordCount": 11
+    },
+    {
+      "id": "s5",
+      "text": "If someone looks unsure, offer to show them how a machine works.",
+      "wordCount": 12
+    },
+    {
+      "id": "s6",
+      "text": "The pool is closed for cleaning every morning between six and seven.",
+      "wordCount": 12
+    },
+    {
+      "id": "s7",
+      "text": "When a new member signs up, explain the class schedule and booking rules.",
+      "wordCount": 13
+    }
+  ]
+}

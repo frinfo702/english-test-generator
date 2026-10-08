@@ -19,7 +19,7 @@ description: >
 
 | タスク            | 保存先                                           | 出題数  |
 | ----------------- | ------------------------------------------------ | ------- |
-| Listen and Repeat | `public/questions/toefl/speaking/listen-repeat/` | 1ファイル1文 |
+| Listen and Repeat | `public/questions/toefl/speaking/listen-repeat/` | 1ファイル＝1場面7文 |
 | Take an Interview | `public/questions/toefl/speaking/interview/`     | 4問     |
 
 ## 本番との差を生まないための指針
@@ -29,6 +29,7 @@ description: >
 ### Listen and Repeat
 
 - 1セット＝1場面。受験者は新人スタッフで、manager / trainer の説明を復唱する（動物園、図書館の貸出、美術館、ホテル、キャンパスツアー、ジム）
+- 冒頭の場面紹介 `scenario` を必ず書く（画面に表示され、そのまま読み上げられる）。最後は `Repeat only once.`
 - 7文の語数の目安: 5 → 7 → 9 → 11 → 11 → 12 → 14（4〜15語で全体として増加）
 - 後半ほど従属節・関係詞節・長い名詞句を入れる。縮約形を含める
 - 例（自作）: "Welcome to the city aquarium." → "Please keep your bags with you at all times." → "If a child gets separated from a parent, bring them to the front desk right away."

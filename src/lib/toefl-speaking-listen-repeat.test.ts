@@ -14,6 +14,7 @@ interface ListenRepeatSentence {
 }
 
 interface ListenRepeatData {
+  scenario: string;
   sentences: ListenRepeatSentence[];
 }
 
@@ -46,11 +47,32 @@ describe("TOEFL Speaking: Listen and Repeat JSON structure", () => {
     expect(Array.isArray(data.sentences)).toBe(true);
   });
 
-  // One problem per file: a single sentence.
-  it.each(files)("%s has exactly 1 sentence", (file) => {
-    const data = loadJson(file);
-    expect(data.sentences).toHaveLength(1);
+  it.each(files)("%s introduces its scene and says to repeat once", (file) => {
+    const { scenario } = loadJson(file);
+    expect(scenario).toMatch(/^You are /);
+    expect(scenario).toMatch(/Repeat only once\.$/);
   });
+
+  // One file is one scene: seven sentences from the same trainer.
+  it.each(files)("%s has exactly 7 sentences", (file) => {
+    const data = loadJson(file);
+    expect(data.sentences).toHaveLength(7);
+  });
+
+  it.each(files)(
+    "%s sentences never get shorter and stay 4–15 words",
+    (file) => {
+      const counts = loadJson(file).sentences.map(
+        (s) => s.text.trim().split(/\s+/).length,
+      );
+      counts.forEach((n, i) => {
+        expect(n).toBeGreaterThanOrEqual(4);
+        expect(n).toBeLessThanOrEqual(15);
+        if (i > 0) expect(n).toBeGreaterThanOrEqual(counts[i - 1]);
+      });
+      expect(counts[6]).toBeGreaterThan(counts[0]);
+    },
+  );
 
   it.each(files)("%s sentences have required fields", (file) => {
     const data = loadJson(file);

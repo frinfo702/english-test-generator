@@ -1,0 +1,40 @@
+{
+  "scenario": "You are working at a bike share office. Your manager is teaching you how to take care of the bikes and the riders. Listen to the manager and repeat what the manager says. Repeat only once.",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "This is the bike share office.",
+      "wordCount": 6
+    },
+    {
+      "id": "s2",
+      "text": "Riders rent bikes with the app on their phone.",
+      "wordCount": 9
+    },
+    {
+      "id": "s3",
+      "text": "Check the tires and brakes on every returned bike.",
+      "wordCount": 9
+    },
+    {
+      "id": "s4",
+      "text": "Helmets are free to borrow, but they must come back clean.",
+      "wordCount": 11
+    },
+    {
+      "id": "s5",
+      "text": "If a rider reports a problem, mark the bike out of service.",
+      "wordCount": 12
+    },
+    {
+      "id": "s6",
+      "text": "We move extra bikes to the busy stations near campus every afternoon.",
+      "wordCount": 12
+    },
+    {
+      "id": "s7",
+      "text": "When a customer can't unlock a bike, reset it from the office computer.",
+      "wordCount": 13
+    }
+  ]
+}

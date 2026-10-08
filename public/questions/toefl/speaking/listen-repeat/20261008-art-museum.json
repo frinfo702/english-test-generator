@@ -1,0 +1,40 @@
+{
+  "scenario": "You are working at a city art museum. Your manager is showing you how to help visitors in the galleries. Listen to the manager and repeat what the manager says. Repeat only once.",
+  "sentences": [
+    {
+      "id": "s1",
+      "text": "Welcome to the art museum.",
+      "wordCount": 5
+    },
+    {
+      "id": "s2",
+      "text": "Visitors must check large bags at the entrance.",
+      "wordCount": 8
+    },
+    {
+      "id": "s3",
+      "text": "Please remind guests not to touch the paintings.",
+      "wordCount": 8
+    },
+    {
+      "id": "s4",
+      "text": "The east gallery closes an hour earlier than the others.",
+      "wordCount": 10
+    },
+    {
+      "id": "s5",
+      "text": "If anyone asks about tours, they start at the front desk.",
+      "wordCount": 11
+    },
+    {
+      "id": "s6",
+      "text": "We don't allow flash photography, but small phone cameras are perfectly fine.",
+      "wordCount": 12
+    },
+    {
+      "id": "s7",
+      "text": "When a school group arrives, count the students before they enter the galleries.",
+      "wordCount": 13
+    }
+  ]
+}
