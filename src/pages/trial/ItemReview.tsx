@@ -66,6 +66,8 @@ interface SentenceData {
 
 const noop = () => undefined;
 
+const GONE = "This question is no longer available.";
+
 function choicesOf(attempt: Attempt | undefined): Map<string, number> {
   return new Map(
     (attempt?.responses ?? []).flatMap((r) =>
@@ -126,6 +128,9 @@ export function AiScoring({
 }) {
   const pending = pendingAiResponses(attempt);
   if (pending.length === 0) return null;
+  if (question === null && attempt.question === undefined) {
+    return <p className={styles.note}>{GONE}</p>;
+  }
 
   if (taskId === "toefl/speaking/interview") {
     const data = (attempt.question ?? question) as InterviewProblemData;
@@ -201,6 +206,9 @@ export function ItemReview({
   onChange: (next: Attempt) => void;
 }) {
   if (question === undefined) return <p className={styles.note}>Loading…</p>;
+  // null: the file failed to load, e.g. a question removed from the pool
+  // after the test; the rest of the report must still render.
+  if (question === null) return <p className={styles.note}>{GONE}</p>;
 
   switch (taskId) {
     case "toefl/reading/academic": {

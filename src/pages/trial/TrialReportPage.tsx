@@ -14,7 +14,7 @@ import {
   type SectionKey,
   type TrialItem,
 } from "../../lib/trial";
-import { BandTable } from "./BandTable";
+import { ScoreHeader } from "./ScoreHeader";
 import { AiScoring, ItemReview } from "./ItemReview";
 import { TASK_NAMES } from "./taskNames";
 import styles from "./Trial.module.css";
@@ -126,30 +126,14 @@ export function TrialReportPage() {
 
   return (
     <div className={styles.report}>
-      {header}
-
-      <div className={styles.reportGrid}>
-        <section className={styles.resultCard} aria-label="This test">
-          <h2 className={styles.resultTitle}>This test</h2>
-          <BandTable result={result} finished />
-        </section>
-        <section className={styles.resultCard} aria-label="Estimated score">
-          <h2 className={styles.resultTitle}>Estimated real-test score</h2>
-          <BandTable
-            finished
-            result={{
-              overall: estimate.overall,
-              sections: result.sections.map((s) => ({
-                ...s,
-                band: estimate.sections[s.key],
-              })),
-            }}
-          />
-          <p className={styles.note}>
-            Combines all your practice tests and task practice.
-          </p>
-        </section>
-      </div>
+      <ScoreHeader
+        title={trialTitle(trial, trials)}
+        date={trial.date}
+        result={result}
+        estimate={estimate}
+        routes={trial.trial.routes}
+      />
+      {error && <p className={styles.error}>{error}</p>}
 
       {result.sections.map((s) => (
         <SectionReview

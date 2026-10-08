@@ -271,6 +271,111 @@
   margin: 0;
 }
 
+/* ---- Report header: the speaking result's sprite, band and pips ---- */
+
+.scoreHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--spacing-8);
+  align-items: end;
+  padding-bottom: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.scoreHeaderText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+}
+
+.scoreTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  margin: var(--spacing-3) 0 0;
+}
+
+.stat dt {
+  font-size: var(--text-xs);
+  color: var(--color-ink-tertiary);
+}
+
+.stat dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+
+.scoreCard {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-5);
+  padding: var(--spacing-5) var(--spacing-6);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+.sprite {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+}
+
+.bigScore {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 52px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+
+.bigScore span {
+  font-size: var(--text-xl);
+  color: var(--color-ink-tertiary);
+  margin-left: 2px;
+}
+
+.pipStrip {
+  list-style: none;
+  display: grid;
+  gap: var(--spacing-1);
+  margin: var(--spacing-3) 0 0;
+  padding: 0;
+}
+
+.pipStrip li {
+  display: grid;
+  grid-template-columns: 5rem auto;
+  align-items: center;
+  font-size: var(--text-xs);
+  color: var(--color-ink-tertiary);
+}
+
+/* Whole-pixel steps (6 units → 12px) keep the pixel art crisp. */
+.pipStrip svg {
+  height: 12px;
+}
+
 /* ---- Runner ---- */
 
 .intro {
@@ -491,6 +596,10 @@
 }
 
 @media (max-width: 760px) {
+  .scoreHeader {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .checklist {
     grid-template-columns: minmax(0, 1fr);
   }
