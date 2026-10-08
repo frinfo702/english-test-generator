@@ -1,19 +1,27 @@
 import { Link } from "react-router-dom";
-import { PixelIcon } from "../../components/pixel/PixelIcon";
-import type { PixelIconName } from "../../components/pixel/pixelIcons";
-import { PixelPoodle } from "../../components/pixel/PixelPoodle";
+import { PixelArt } from "../../components/pixel/PixelArt";
 import styles from "./IntroducePage.module.css";
+import {
+  LOAF_HAMSTER,
+  LOAF_HAMSTER_H,
+  LOAF_HAMSTER_PALETTE,
+  LOAF_HAMSTER_W,
+  LYING_HAMSTER,
+  LYING_HAMSTER_H,
+  LYING_HAMSTER_PALETTE,
+  LYING_HAMSTER_W,
+  Z,
+} from "./introSprites";
 
-// Mistral's stepped warm bars, red → yellow; each is one pixel-block row.
-const BARS = ["#e10500", "#fa500f", "#ff8205", "#ffaf00", "#ffd800"];
+// The home hero's indigo, stepped darkest at the bottom, with one lime step
+// on top; each is one pixel-block row.
+const BARS = ["#1f1e52", "#34337a", "#4a49a3", "#6e6dc4", "#eef59a"];
 
 const SECTIONS: {
-  icon: PixelIconName;
   title: string;
   body: React.ReactNode;
 }[] = [
   {
-    icon: "book",
     title: "What is available",
     body: (
       <>
@@ -32,7 +40,6 @@ const SECTIONS: {
     ),
   },
   {
-    icon: "microphone",
     title: "What to expect",
     body: (
       <p>
@@ -43,15 +50,18 @@ const SECTIONS: {
     ),
   },
   {
-    icon: "briefcase",
     title: "What it costs",
     body: <p>Nothing. No sign-up, no account. Open it and start.</p>,
   },
   {
-    icon: "pencil",
     title: "What is next",
-    // TODO(human)
-    body: <p />,
+    body: (
+      <p>
+        More question sets for every task, added a few at a time. The score
+        estimate gets sharper with each practice test you take. When something
+        new lands, the hamster in the corner will tell you.
+      </p>
+    ),
   },
 ];
 
@@ -67,7 +77,7 @@ export function IntroducePage() {
         </p>
         <p className={styles.lead}>
           A practice room for the new TOEFL and TOEIC. Fresh questions, real
-          timing, and a small black poodle keeping you company.
+          timing, and two sleepy hamsters keeping you company.
         </p>
       </header>
 
@@ -80,19 +90,40 @@ export function IntroducePage() {
             />
           ))}
         </div>
-        <PixelPoodle excited className={styles.poodle} />
-        <span className={styles.bubble} aria-hidden="true">
-          Let&apos;s practice!
-        </span>
+        <PixelArt
+          layers={[LOAF_HAMSTER]}
+          palette={LOAF_HAMSTER_PALETTE}
+          width={LOAF_HAMSTER_W}
+          height={LOAF_HAMSTER_H}
+          className={styles.loaf}
+          title="A cream hamster curled up asleep"
+        />
+        <PixelArt
+          layers={[LYING_HAMSTER]}
+          palette={LYING_HAMSTER_PALETTE}
+          width={LYING_HAMSTER_W}
+          height={LYING_HAMSTER_H}
+          className={styles.splat}
+          title="A white hamster asleep on its side"
+        />
+        <div className={styles.zs} aria-hidden="true">
+          {[0, 1, 2].map((i) => (
+            <PixelArt
+              key={i}
+              layers={[Z]}
+              palette={{ o: "currentColor" }}
+              width={5}
+              height={5}
+              className={styles.z}
+            />
+          ))}
+        </div>
       </figure>
 
       {SECTIONS.map((s) => (
         <section key={s.title} className={styles.section}>
-          <PixelIcon name={s.icon} className={styles.icon} />
-          <div>
-            <h2 className={styles.h2}>{s.title}</h2>
-            {s.body}
-          </div>
+          <h2 className={styles.h2}>{s.title}</h2>
+          {s.body}
         </section>
       ))}
 

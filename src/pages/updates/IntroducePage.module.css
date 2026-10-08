@@ -1,5 +1,5 @@
-/* An announcement, not a tool page: the Mistral warm bars get to be loud here
- * the way the home hero does, and nowhere else. */
+/* An announcement, not a tool page: it borrows the home hero's indigo
+ * and lime and gets to be loud with them, the way that banner does. */
 
 .page {
   max-width: var(--max-reading);
@@ -10,7 +10,11 @@
 .eyebrow {
   font-family: var(--font-pixel);
   font-size: var(--text-xs);
-  color: #fa500f;
+  color: #4a49a3;
+}
+
+[data-theme="dark"] .eyebrow {
+  color: #eef59a;
 }
 
 .title {
@@ -36,7 +40,7 @@
   color: var(--color-ink-secondary);
 }
 
-/* ---- Pixel hero: stepped bars with the poodle standing on them ---- */
+/* ---- Pixel hero: stepped bars with the hamsters asleep on them ---- */
 
 .hero {
   position: relative;
@@ -44,12 +48,12 @@
   height: 220px;
   padding: var(--spacing-6);
   border-radius: var(--radius-xl);
-  background: #fff0c2;
+  background: #eceaf9;
   overflow: hidden;
 }
 
 [data-theme="dark"] .hero {
-  background: #2a2016;
+  background: #1d1c3f;
 }
 
 .bars {
@@ -64,40 +68,55 @@
   height: 12px;
 }
 
-.poodle {
-  --poodle-cell: 5px;
+/* Each sleeper lies on its own step, at whole pixels per cell. Step tops
+ * are 12px apart: 60px for the top bar, then 48, 36, 24. */
+.loaf,
+.splat {
   position: absolute;
-  left: 12%;
-  bottom: 60px;
 }
 
-.bubble {
+.loaf {
+  left: 12%;
+  bottom: 60px;
+  width: 100px; /* 4px per cell */
+}
+
+.splat {
+  left: 48%;
+  bottom: 36px;
+  width: 104px; /* 4px per cell */
+}
+
+/* Zs drift up from the cream hamster's head. */
+.zs {
   position: absolute;
-  left: calc(12% + 168px);
-  bottom: 150px;
-  padding: 6px 10px;
-  font-family: var(--font-pixel);
-  font-size: var(--text-xs);
-  color: #1c1917;
-  background: #fffdfa;
-  box-shadow:
-    0 0 0 2px #1c1917,
-    4px 4px 0 0 #1c1917;
+  left: calc(12% + 28px);
+  bottom: 112px;
+  color: #8c7763;
+}
+
+.z {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 10px;
+}
+
+.z:nth-child(2) {
+  left: 14px;
+  width: 15px;
+}
+
+.z:nth-child(3) {
+  left: 32px;
+  width: 20px;
 }
 
 /* ---- Sections ---- */
 
 .section {
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  gap: var(--spacing-4);
   padding: var(--spacing-6) 0;
   border-top: 1px solid var(--color-border);
-}
-
-.icon {
-  width: 32px;
-  height: 32px;
 }
 
 .h2 {
@@ -137,8 +156,8 @@
   margin-top: var(--spacing-8);
   padding: var(--spacing-8);
   border-radius: var(--radius-xl);
-  background: var(--color-ink);
-  color: var(--color-surface);
+  background: #34337a;
+  color: #ffffff;
   overflow: hidden;
   position: relative;
 }
@@ -168,11 +187,11 @@
 
 .primary {
   color: #1c1917;
-  background: #ffaf00;
+  background: #eef59a;
 }
 
 .primary:hover {
-  background: #ffd800;
+  background: #f6fbc8;
 }
 
 .secondary {
@@ -182,7 +201,7 @@
 
 .primary:focus-visible,
 .secondary:focus-visible {
-  outline: 2px solid #ffd800;
+  outline: 2px solid #eef59a;
   outline-offset: 2px;
 }
 
@@ -202,14 +221,19 @@
     padding: var(--spacing-8) var(--spacing-4);
   }
 
-  .poodle {
-    --poodle-cell: 4px;
-    left: 4%;
+  .loaf {
+    left: 8%;
+    width: 75px;
   }
 
-  .bubble {
-    left: calc(4% + 132px);
-    bottom: 132px;
+  .splat {
+    left: 48%;
+    width: 78px;
+  }
+
+  .zs {
+    left: calc(8% + 20px);
+    bottom: 100px;
   }
 
   .cta {
@@ -218,6 +242,18 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .z {
+    animation: drift 3s steps(12) infinite both;
+  }
+
+  .z:nth-child(2) {
+    animation-delay: 1s;
+  }
+
+  .z:nth-child(3) {
+    animation-delay: 2s;
+  }
+
   .bars span {
     animation: grow 600ms steps(6) both;
   }
@@ -244,5 +280,19 @@
   to {
     transform: scaleX(1);
     transform-origin: left;
+  }
+}
+
+@keyframes drift {
+  from {
+    opacity: 0;
+    transform: translate(0, 12px);
+  }
+  30% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(8px, -24px);
   }
 }

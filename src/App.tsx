@@ -34,6 +34,7 @@ import { ResultPage } from "./pages/results/ResultPage";
 import { TrialHomePage } from "./pages/trial/TrialHomePage";
 import { TrialRunPage } from "./pages/trial/TrialRunPage";
 import { TrialReportPage } from "./pages/trial/TrialReportPage";
+import { IntroducePage } from "./pages/updates/IntroducePage";
 
 interface TaskRoute {
   basePath: string;
@@ -228,6 +229,7 @@ export default function App() {
           <Route path="/toefl" element={<ToeflMenuPage />} />
           <Route path="/toeic" element={<ToeicMenuPage />} />
           <Route path="/trial" element={<TrialHomePage />} />
+          <Route path="/updates/introduce" element={<IntroducePage />} />
           <Route
             path="/trial/:trialId"
             element={<TrialRunPage pages={trialPages} />}

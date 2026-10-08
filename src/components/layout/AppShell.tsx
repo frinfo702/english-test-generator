@@ -11,6 +11,7 @@ import { PixelArt } from "../pixel/PixelArt";
 import { POODLE_BODY, POODLE_PALETTE } from "../pixel/poodleSprite";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { LegacyHistoryNotice } from "./LegacyHistoryNotice";
+import { UpdateNotice } from "./UpdateNotice";
 import { PerfectCelebration } from "../pixel/PerfectCelebration";
 import styles from "./AppShell.module.css";
 
@@ -173,6 +174,7 @@ export function AppShell({ children }: AppShellProps) {
         <Fragment key={historyVersion}>{children}</Fragment>
       </main>
       <PerfectCelebration />
+      <UpdateNotice />
       <LegacyHistoryNotice onMigrated={() => setHistoryVersion((v) => v + 1)} />
     </div>
   );
