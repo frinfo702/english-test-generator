@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { emptyLevels, startAudioMeter } from "../../lib/audioMeter";
 import {
   loadPreferredMicrophoneId,
@@ -17,7 +17,14 @@ type CheckState = "idle" | "opening" | "recording" | "playing" | "done";
  * microphone check. The meter reads the same stream it records, since a
  * second getUserMedia stream steals exclusive access on many USB mics.
  */
-export function MicCheck({ disabled = false }: { disabled?: boolean }) {
+export function MicCheck({
+  disabled = false,
+  selector,
+}: {
+  disabled?: boolean;
+  /** The mic picker, kept on the same line as the test it belongs to. */
+  selector?: ReactNode;
+}) {
   const [state, setState] = useState<CheckState>("idle");
   const [levels, setLevels] = useState<number[]>(emptyLevels);
   const [secondsLeft, setSecondsLeft] = useState(CHECK_SECONDS);
@@ -84,6 +91,7 @@ export function MicCheck({ disabled = false }: { disabled?: boolean }) {
   return (
     <div className={styles.check}>
       <div className={styles.row}>
+        {selector}
         <Button
           variant="secondary"
           size="sm"
@@ -92,12 +100,10 @@ export function MicCheck({ disabled = false }: { disabled?: boolean }) {
         >
           {state === "done" ? "Test again" : "Test microphone"}
         </Button>
-        <MicWaveform
-          levels={levels}
-          active={state === "recording"}
-          label="Microphone check level"
-        />
       </div>
+      {state === "recording" && (
+        <MicWaveform levels={levels} active label="Microphone check level" />
+      )}
       <p className={styles.status} aria-live="polite">
         {state === "idle" &&
           `Say a sentence when recording starts; it plays back after ${CHECK_SECONDS} seconds.`}

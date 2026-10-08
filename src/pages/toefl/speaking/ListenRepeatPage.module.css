@@ -67,18 +67,6 @@
   margin-top: var(--spacing-2);
 }
 
-.liveTranscript {
-  max-width: 46ch;
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
-  line-height: var(--lh-normal);
-  color: var(--color-ink-secondary);
-  padding: var(--spacing-3) var(--spacing-4);
-  border: 1px solid color-mix(in srgb, var(--color-accent) 35%, transparent);
-  border-radius: var(--radius);
-  background: var(--color-accent-subtle);
-  text-align: left;
-}
 
 .playerControls {
   display: flex;

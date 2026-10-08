@@ -308,14 +308,23 @@ export function TakeInterviewPage() {
         subtitle="Listen, then speak your answer (45 seconds). Text is hidden like the real test."
         backTo="/toefl"
         actions={
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={goToQuestionList}
-            disabled={loading || busyPhase}
-          >
-            Question List
-          </Button>
+          <>
+            {/* Moves to another set, so it lives with Question List and away
+                from Next, which moves within this set. */}
+            <NextQuestionButton
+              taskId={INTERVIEW_TASK_ID}
+              variant="secondary"
+              size="sm"
+            />
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={goToQuestionList}
+              disabled={loading || busyPhase}
+            >
+              Question List
+            </Button>
+          </>
         }
       />
 
@@ -369,8 +378,12 @@ export function TakeInterviewPage() {
                 ends. You have 45 seconds to answer, with no preparation time.
                 When time is up, recording stops and you move on with Next.
               </p>
-              <MicSelector disabled={!speech.supported} previewEnabled />
-              <MicCheck disabled={!speech.supported} />
+              <MicCheck
+                disabled={!speech.supported}
+                selector={
+                  <MicSelector disabled={!speech.supported} previewEnabled />
+                }
+              />
               {!speech.supported && (
                 <p className={styles.error}>
                   Microphone recording is not supported in this browser.
@@ -384,11 +397,6 @@ export function TakeInterviewPage() {
                 >
                   Start
                 </Button>
-                <NextQuestionButton
-                  taskId={INTERVIEW_TASK_ID}
-                  variant="secondary"
-                  size="lg"
-                />
               </div>
             </div>
           )}
@@ -467,10 +475,6 @@ export function TakeInterviewPage() {
                     ? "Finishing…"
                     : "Finish"}
               </Button>
-              <NextQuestionButton
-                taskId={INTERVIEW_TASK_ID}
-                variant="secondary"
-              />
             </div>
           )}
         </div>

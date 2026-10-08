@@ -366,14 +366,23 @@ export function ListenRepeatPage() {
         subtitle="Listen to the sentence, then repeat it into the microphone."
         backTo="/toefl"
         actions={
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={handleBackToList}
-            disabled={loading}
-          >
-            Question List
-          </Button>
+          <>
+            {/* Moves to another set, so it lives with Question List and away
+                from Next, which moves within this set. */}
+            <NextQuestionButton
+              taskId={TASK_ID}
+              variant="secondary"
+              size="sm"
+            />
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleBackToList}
+              disabled={loading}
+            >
+              Question List
+            </Button>
+          </>
         }
       />
 
@@ -430,8 +439,12 @@ export function ListenRepeatPage() {
                 time, and each sentence plays only once.
               </p>
               <div className={styles.recordControls}>
-                <MicSelector disabled={!speechSupported} previewEnabled />
-                <MicCheck disabled={!speechSupported} />
+                <MicCheck
+                  disabled={!speechSupported}
+                  selector={
+                    <MicSelector disabled={!speechSupported} previewEnabled />
+                  }
+                />
                 <Button
                   size="lg"
                   onClick={() => setPhase("playing")}
@@ -466,9 +479,6 @@ export function ListenRepeatPage() {
                 disabled={phase !== "recording"}
                 onPress={() => void finishSentence()}
               />
-              {transcript && (
-                <p className={styles.liveTranscript}>{transcript}</p>
-              )}
               {speechError && (
                 <Button onClick={handleRetryRecording} variant="primary">
                   Retry this sentence
@@ -488,14 +498,6 @@ export function ListenRepeatPage() {
               </Button>
             </div>
           )}
-
-          <div className={styles.playerControls}>
-            <NextQuestionButton
-              taskId={TASK_ID}
-              variant="secondary"
-              size="sm"
-            />
-          </div>
         </div>
       )}
 

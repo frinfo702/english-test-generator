@@ -17,6 +17,15 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* The top-right corner is only free while the side margin is wider than
+   the pill; below that it would sit on the page header's actions. */
+@media (max-width: 1400px) {
+  .floatingTimer {
+    top: auto;
+    bottom: var(--spacing-6);
+  }
+}
+
 .label {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
