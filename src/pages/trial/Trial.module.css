@@ -192,7 +192,7 @@
 
 .modeRow {
   display: grid;
-  grid-template-columns: 9rem minmax(0, 1fr) auto;
+  grid-template-columns: 18px 8rem minmax(0, 1fr) auto;
   align-items: baseline;
   gap: var(--spacing-4);
   width: 100%;
@@ -204,11 +204,7 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
-  /* The selected row's left rule; transparent keeps every row the same width. */
-  box-shadow: inset 2px 0 0 transparent;
-  transition:
-    background var(--duration-fast) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out);
+  transition: background var(--duration-fast) var(--ease-out);
 }
 
 .modeRow:last-child {
@@ -221,7 +217,19 @@
 
 .modeRowOn {
   background: var(--color-surface);
-  box-shadow: inset 2px 0 0 var(--color-accent);
+}
+
+.modeRadio {
+  width: 18px;
+  height: 18px;
+  /* Beside the name's line, not centred on a wrapped description. */
+  align-self: start;
+  margin-top: 3px;
+  color: var(--color-ink-tertiary);
+}
+
+.modeRowOn .modeRadio {
+  color: var(--color-ink);
 }
 
 .modeName {
@@ -555,11 +563,11 @@
   }
 
   .modeRow {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: 18px minmax(0, 1fr) auto;
   }
 
   .modeContents {
-    grid-column: 1 / -1;
+    grid-column: 2 / -1;
     grid-row: 2;
   }
 

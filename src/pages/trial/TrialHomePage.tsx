@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { PixelArt } from "../../components/pixel/PixelArt";
 import { Button } from "../../components/ui/Button";
 import { getAllAttempts, saveAttempt, type Attempt } from "../../lib/attempts";
 import {
@@ -40,6 +41,38 @@ const CHECKLIST = [
     "Writing and Interview answers are scored at the end by pasting a prompt into your AI chat.",
   ],
 ] as const;
+
+// 12×12 grids like the other pixel controls: a ring, and the dot that
+// marks the chosen test.
+// prettier-ignore
+const RADIO_RING = [
+  "....xxxx",
+  "..xx....xx",
+  ".x........x",
+  ".x........x",
+  "x..........x",
+  "x..........x",
+  "x..........x",
+  "x..........x",
+  ".x........x",
+  ".x........x",
+  "..xx....xx",
+  "....xxxx",
+];
+// prettier-ignore
+const RADIO_DOT = ["", "", "", "....dddd", "...dddddd", "...dddddd", "...dddddd", "...dddddd", "....dddd"];
+
+function PixelRadio({ on }: { on: boolean }) {
+  return (
+    <PixelArt
+      layers={on ? [RADIO_RING, RADIO_DOT] : [RADIO_RING]}
+      palette={{ x: "currentColor", d: "var(--color-accent)" }}
+      width={12}
+      height={12}
+      className={styles.modeRadio}
+    />
+  );
+}
 
 const clock = (minutes: number) =>
   `${Math.floor(minutes / 60)}:${String(minutes % 60).padStart(2, "0")}`;
@@ -104,6 +137,7 @@ export function TrialHomePage() {
               ].join(" ")}
               onClick={() => setMode(m.mode)}
             >
+              <PixelRadio on={mode === m.mode} />
               <span className={styles.modeName}>{m.label}</span>
               <span className={styles.modeContents}>{m.contents}</span>
               <span className={styles.modeTime}>
