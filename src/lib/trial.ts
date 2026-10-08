@@ -58,7 +58,7 @@ export const TRIAL_SECTIONS: TrialSection[] = [
     label: "Speaking",
     minutes: 8,
     tasks: [
-      { taskId: "toefl/speaking/listen-repeat", count: 7 },
+      { taskId: "toefl/speaking/listen-repeat", count: 1 },
       { taskId: "toefl/speaking/interview", count: 1 },
     ],
   },
