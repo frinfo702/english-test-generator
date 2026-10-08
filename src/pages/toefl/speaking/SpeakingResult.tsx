@@ -1,4 +1,4 @@
-import { useEffect, useMemo, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { PixelIcon } from "../../../components/pixel/PixelIcon";
 import { ScorePips } from "../../../components/pixel/ScorePips";
@@ -40,16 +40,21 @@ function average(values: number[]): number | null {
     : null;
 }
 
-/** Recordings live in IndexedDB as Blobs; the player needs URLs. */
+/**
+ * Recordings live in IndexedDB as Blobs; the player needs URLs. Created in the
+ * effect, not useMemo: StrictMode's mount→cleanup→mount keeps the memo but runs
+ * the cleanup, which left the "You" buttons holding revoked URLs.
+ */
 function useResponseUrls(responses: ItemResponse[]): (string | null)[] {
-  const urls = useMemo(
-    () => responses.map((r) => (r.audio ? URL.createObjectURL(r.audio) : null)),
-    [responses],
-  );
-  useEffect(
-    () => () => urls.forEach((u) => u && URL.revokeObjectURL(u)),
-    [urls],
-  );
+  const [urls, setUrls] = useState<(string | null)[]>([]);
+  useEffect(() => {
+    const created = responses.map((r) =>
+      r.audio ? URL.createObjectURL(r.audio) : null,
+    );
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- URLs are an external resource that must be revoked
+    setUrls(created);
+    return () => created.forEach((u) => u && URL.revokeObjectURL(u));
+  }, [responses]);
   return urls;
 }
 
@@ -65,16 +70,24 @@ function PlayButton({
   label: string;
 }) {
   const active = audio.isActive(id) && audio.playing;
+  const error = audio.isActive(id) ? audio.error : null;
   return (
-    <Button
-      variant="secondary"
-      size="sm"
-      disabled={!url}
-      aria-pressed={active}
-      onClick={() => url && audio.toggle(id, url)}
-    >
-      {active ? "Pause" : label}
-    </Button>
+    <>
+      <Button
+        variant="secondary"
+        size="sm"
+        disabled={!url}
+        aria-pressed={active}
+        onClick={() => url && audio.toggle(id, url)}
+      >
+        {active ? "Pause" : label}
+      </Button>
+      {error && (
+        <span className={styles.playError} role="alert">
+          {label} audio failed to play
+        </span>
+      )}
+    </>
   );
 }
 
