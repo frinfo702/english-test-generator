@@ -7,6 +7,7 @@ import { useTts } from "../../../hooks/useTts";
 import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
+import { TrialItemContext } from "../../../hooks/useTrialItem";
 
 const playMock = vi.fn();
 const stopTtsMock = vi.fn();
@@ -43,6 +44,29 @@ vi.mock("../../../hooks/useScoreHistory", () => ({
   useScoreHistory: vi.fn(),
 }));
 
+const wavResolvers: ((wav: Blob) => void)[] = [];
+vi.mock("../../../lib/wav", () => ({
+  toWav16k: vi.fn(
+    () => new Promise<Blob>((resolve) => wavResolvers.push(resolve)),
+  ),
+}));
+
+vi.mock("../../../lib/pronunciation", () => ({
+  assessPronunciation: vi.fn(async () => ({
+    pronunciation: 90,
+    accuracy: 90,
+    fluency: 90,
+    completeness: 100,
+    words: [],
+  })),
+}));
+
+const putAttemptsMock = vi.fn();
+vi.mock("../../../lib/attempts", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("../../../lib/attempts")>()),
+  putAttempts: (...args: unknown[]) => putAttemptsMock(...args),
+}));
+
 const mockData = {
   sentences: [
     { id: "s1", text: "The library will be closed.", wordCount: 6 },
@@ -72,6 +96,11 @@ function renderPage() {
 describe("ListenRepeatPage", () => {
   beforeEach(() => {
     vi.useFakeTimers({ shouldAdvanceTime: true });
+    stopSpeechMock.mockResolvedValue({
+      text: "",
+      audio: null,
+      startedAt: null,
+    });
 
     vi.mocked(useQuestion).mockReturnValue({
       data: mockData,
@@ -271,6 +300,66 @@ describe("ListenRepeatPage", () => {
         expect.any(Function),
       );
     });
+  });
+
+  it("in a test, hands the set in without waiting for pronunciation", async () => {
+    const saved = { id: "attempt-1", responses: [] };
+    saveScoreMock.mockResolvedValue(saved);
+    stopSpeechMock.mockResolvedValue({
+      text: "",
+      audio: new Blob(["a"]),
+      startedAt: 1,
+    });
+    const complete = vi.fn();
+    render(
+      <MemoryRouter>
+        <TrialItemContext.Provider
+          value={{ problemId: "001", complete, onTimeout: vi.fn() }}
+        >
+          <ListenRepeatPage />
+        </TrialItemContext.Provider>
+      </MemoryRouter>,
+    );
+    pressStart();
+    recordingSpeech();
+
+    for (const call of [0, 1]) {
+      await finishPrompt(call);
+      await act(async () => {
+        vi.advanceTimersByTime(9000);
+      });
+      if (call === 0) {
+        await waitFor(() => expect(nextButton().disabled).toBe(false));
+        act(() => nextButton().click());
+      }
+    }
+
+    // The last take's processing delay starts only once stopSpeech settles.
+    await act(async () => {
+      vi.advanceTimersByTime(1000);
+    });
+    // Pronunciation is still pending (toWav16k never resolved).
+    await waitFor(() => expect(complete).toHaveBeenCalledTimes(1));
+    expect(saveScoreMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        responses: [
+          expect.objectContaining({ assessment: undefined }),
+          expect.objectContaining({ assessment: undefined }),
+        ],
+      }),
+    );
+    expect(putAttemptsMock).not.toHaveBeenCalled();
+
+    await act(async () => {
+      wavResolvers.forEach((resolve) => resolve(new Blob(["wav"])));
+    });
+
+    await waitFor(() => expect(putAttemptsMock).toHaveBeenCalledTimes(1));
+    const [[rewritten]] = putAttemptsMock.mock.calls[0] as [
+      [{ id: string; responses: { assessment?: unknown }[] }],
+    ];
+    expect(rewritten.id).toBe("attempt-1");
+    expect(rewritten.responses.some((r) => r.assessment)).toBe(true);
   });
 
   it("displays unsupported browser message when speech recognition is unavailable", async () => {
