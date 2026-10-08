@@ -6,7 +6,7 @@ import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { MicCheck } from "../../../components/ui/MicCheck";
 import { MicSelector } from "../../../components/ui/MicSelector";
 import { VoiceButton } from "../../../components/ui/VoiceButton";
-import { Timer } from "../../../components/ui/Timer";
+import { PixelTimer } from "../../../components/ui/PixelTimer";
 import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
@@ -38,6 +38,8 @@ import {
 } from "./interviewTypes";
 import styles from "./TakeInterviewPage.module.css";
 
+const ANSWER_SECONDS = 45;
+
 export function TakeInterviewPage() {
   const navigate = useNavigate();
   const { questionId = "" } = useParams<{ questionId: string }>();
@@ -49,6 +51,8 @@ export function TakeInterviewPage() {
   const [savingAnswer, setSavingAnswer] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [finishing, setFinishing] = useState(false);
+  // The scenario waits for Next rather than running into Question 1.
+  const [scenarioEnded, setScenarioEnded] = useState(false);
   const attemptRef = useRef<Attempt | null>(null);
   const pendingRef = useRef<Promise<unknown>[]>([]);
   const submittingRef = useRef(false);
@@ -100,6 +104,7 @@ export function TakeInterviewPage() {
 
   const resetInteraction = useCallback(() => {
     setPhase("pre");
+    setScenarioEnded(false);
     setSavingAnswer(false);
     clearSessionBits();
   }, [clearSessionBits]);
@@ -187,7 +192,7 @@ export function TakeInterviewPage() {
     }
   }, [audio, speech, current, persist, problemId]);
 
-  const timer = useTimer(45, () => {
+  const timer = useTimer(ANSWER_SECONDS, () => {
     void finishAnswer();
   });
   timerStopRef.current = timer.stop;
@@ -238,7 +243,8 @@ export function TakeInterviewPage() {
       return;
     }
     setPhase("scenario");
-    audio.play("scenario", scenarioUrl, playQuestion);
+    setScenarioEnded(false);
+    audio.play("scenario", scenarioUrl, () => setScenarioEnded(true));
   }, [audio, scenarioUrl, playQuestion]);
 
   const handleStart = () => {
@@ -361,7 +367,11 @@ export function TakeInterviewPage() {
             }
           />
 
-          <p className={styles.questionHidden}>{phasePrompt(phase)}</p>
+          <p className={styles.questionHidden}>
+            {phase === "scenario" && scenarioEnded
+              ? "The scenario has finished."
+              : phasePrompt(phase)}
+          </p>
 
           <InterviewTranscript
             kind={onScenarioStep ? "scenario" : "question"}
@@ -404,9 +414,11 @@ export function TakeInterviewPage() {
           {(phase === "scenario" || phase === "listening") && (
             <div className={styles.listeningBox}>
               <p className={styles.preNote}>
-                {phase === "scenario"
-                  ? "Listen to the scenario. The first question follows it."
-                  : "Listen carefully. Recording starts when the question ends."}
+                {phase !== "scenario"
+                  ? "Listen carefully. Recording starts when the question ends."
+                  : scenarioEnded
+                    ? "Press Next to hear the first question."
+                    : "Listen to the scenario."}
               </p>
             </div>
           )}
@@ -417,11 +429,7 @@ export function TakeInterviewPage() {
             phase === "processing" ||
             phase === "recorded") && (
             <div className={styles.answerArea}>
-              <Timer
-                display={timer.display}
-                isWarning={timer.isWarning}
-                isExpired={timer.isExpired}
-              />
+              <PixelTimer seconds={timer.seconds} total={ANSWER_SECONDS} />
               <VoiceButton
                 state={
                   phase === "answering" && speech.recording
@@ -466,8 +474,17 @@ export function TakeInterviewPage() {
             <div className={styles.actions}>
               <Button
                 size="lg"
-                onClick={() => void handleNext()}
-                disabled={phase !== "recorded" || finishing || savingAnswer}
+                onClick={() =>
+                  phase === "scenario" ? playQuestion() : void handleNext()
+                }
+                disabled={
+                  !(
+                    phase === "recorded" ||
+                    (phase === "scenario" && scenarioEnded)
+                  ) ||
+                  finishing ||
+                  savingAnswer
+                }
               >
                 {current + 1 < data.questions.length
                   ? "Next"

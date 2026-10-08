@@ -10,7 +10,7 @@ import { LoadingSpinner } from "./LoadingSpinner";
 import { ProgressBar } from "./ProgressBar";
 import { SpeedControl } from "./SpeedControl";
 import { ThemeToggle } from "./ThemeToggle";
-import { Timer } from "./Timer";
+import { PixelTimer } from "./PixelTimer";
 
 describe("ui components", () => {
   it("renders BackButton as an arrow with an accessible label", () => {
@@ -40,16 +40,19 @@ describe("ui components", () => {
     expect(button.className).toContain("extra");
   });
 
-  it("renders Timer text and stateful classes", () => {
-    const { rerender } = render(
-      <Timer display="00:42" isWarning={false} isExpired={false} />,
+  it("renders PixelTimer digits and turns urgent in the last 10 seconds", () => {
+    const { rerender, unmount } = render(
+      <PixelTimer seconds={45} total={45} />,
     );
-    const timer = screen.getByText("00:42");
-    const baseClassName = timer.className;
+    const timer = screen.getByRole("timer", { name: "45 seconds left" });
+    expect(screen.getByText("0:45")).toBeTruthy();
+    const calm = timer.className;
 
-    rerender(<Timer display="00:00" isWarning isExpired />);
+    rerender(<PixelTimer seconds={9} total={45} />);
 
-    expect(screen.getByText("00:00").className).not.toBe(baseClassName);
+    expect(screen.getByText("0:09")).toBeTruthy();
+    expect(screen.getByRole("timer").className).not.toBe(calm);
+    unmount();
   });
 
   it("renders ProgressBar label, count, and fill width", () => {

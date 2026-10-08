@@ -1,0 +1,27 @@
+.timer {
+  --clock-sweep: var(--color-accent);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-1);
+  color: var(--color-ink);
+}
+
+.urgent {
+  --clock-sweep: var(--color-error);
+}
+
+.face {
+  width: 75px;
+  height: 75px;
+}
+
+.digits {
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink-secondary);
+}
+
+.urgent .digits {
+  color: var(--color-error);
+}

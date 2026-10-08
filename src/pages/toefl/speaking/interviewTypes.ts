@@ -14,8 +14,8 @@ export interface InterviewProblemData {
 
 /**
  * Interview UI step machine, paced like the real test: after Start the
- * scenario runs into Question 1, every question starts recording when it
- * ends, and only moving on from a recorded answer takes a click.
+ * scenario plays and Next opens Question 1; every question starts
+ * recording when it ends, and Next moves on from a recorded answer.
  */
 export type InterviewPhase =
   "pre" | "scenario" | "listening" | "answering" | "processing" | "recorded";
