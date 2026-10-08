@@ -1,11 +1,12 @@
 .card {
   --cell: 13px;
   --gap: 3px;
+  /* Pixel heat: the collar orange, stepped like the sprites' shading. */
   --level-0: var(--color-surface-subtle);
-  --level-1: color-mix(in srgb, var(--color-success) 28%, var(--color-surface));
-  --level-2: color-mix(in srgb, var(--color-success) 52%, var(--color-surface));
-  --level-3: color-mix(in srgb, var(--color-success) 76%, var(--color-surface));
-  --level-4: var(--color-success);
+  --level-1: color-mix(in srgb, var(--color-signal) 25%, var(--color-surface));
+  --level-2: color-mix(in srgb, var(--color-signal) 50%, var(--color-surface));
+  --level-3: color-mix(in srgb, var(--color-signal) 75%, var(--color-surface));
+  --level-4: var(--color-signal);
 
   position: relative;
   display: flex;
@@ -14,9 +15,8 @@
   margin-top: var(--spacing-6);
   padding: var(--spacing-5);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--rule-ink);
   background: var(--color-surface);
-  box-shadow: var(--shadow-xs);
 }
 
 .head {
@@ -28,9 +28,9 @@
 }
 
 .title {
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
-  letter-spacing: -0.01em;
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  letter-spacing: -0.015em;
 }
 
 .streaks {
@@ -45,7 +45,10 @@
 }
 
 .streak dt {
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   color: var(--color-ink-tertiary);
 }
 
@@ -90,6 +93,7 @@
 
 .months span,
 .days span {
+  font-family: var(--font-mono);
   font-size: 10px;
   line-height: 1;
   color: var(--color-ink-tertiary);
@@ -121,7 +125,7 @@
 .future {
   width: var(--cell);
   height: var(--cell);
-  border-radius: 2px;
+  border-radius: 0;
 }
 
 .cell {
@@ -156,6 +160,7 @@
   border-radius: var(--radius-sm);
   background: var(--color-ink);
   color: var(--color-ink-inverse);
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
   white-space: nowrap;
   pointer-events: none;
@@ -168,7 +173,10 @@
   align-items: center;
   justify-content: flex-end;
   gap: var(--gap);
+  font-family: var(--font-mono);
   font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-meta);
   color: var(--color-ink-tertiary);
 }
 

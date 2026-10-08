@@ -42,31 +42,34 @@ export function HomeHero() {
         <p className={styles.eyebrow}>TOEFL iBT 2026 · TOEIC L&amp;R</p>
         <h1 className={styles.title}>English Test Practice</h1>
         <p className={styles.lead}>
-          Software and learning should be fun! Let's practice to read, write, listen and speak — a little bit every day.
+          Software and learning should be fun! Let's practice to read, write,
+          listen and speak — a little bit every day.
         </p>
       </div>
-      <div className={styles.art}>
-        <PixelArt
-          className={styles.sparkles}
-          layers={[SPARKLES]}
-          palette={{ s: "var(--hero-lime)" }}
-          width={40}
-          height={27}
-        />
-        {PHOTOS.map((name) => (
-          <img
-            key={name}
-            className={`${styles.photo} ${styles[name]}`}
-            src={`/images/hero/${name}.jpg`}
-            alt=""
-            width={96}
-            height={132}
-            decoding="async"
+      <div className={styles.stage}>
+        <div className={styles.art}>
+          <PixelArt
+            className={styles.sparkles}
+            layers={[SPARKLES]}
+            palette={{ s: "var(--stage-lime)" }}
+            width={40}
+            height={27}
           />
-        ))}
-        <span className={styles.ground} aria-hidden="true" />
-        <PixelPoodle className={styles.poodle} />
-        <HelloBubble />
+          {PHOTOS.map((name) => (
+            <img
+              key={name}
+              className={`${styles.photo} ${styles[name]}`}
+              src={`/images/hero/${name}.jpg`}
+              alt=""
+              width={96}
+              height={132}
+              decoding="async"
+            />
+          ))}
+          <span className={styles.ground} aria-hidden="true" />
+          <PixelPoodle className={styles.poodle} />
+          <HelloBubble />
+        </div>
       </div>
     </header>
   );
@@ -89,7 +92,7 @@ function HelloBubble() {
     <div className={styles.bubble} aria-hidden="true">
       <PixelArt
         layers={[BUBBLE]}
-        palette={{ o: "var(--hero-ink)", l: "var(--hero-lime)" }}
+        palette={{ o: "var(--stage-ink)", l: "var(--stage-lime)" }}
         width={26}
         height={13}
         className={styles.bubbleArt}

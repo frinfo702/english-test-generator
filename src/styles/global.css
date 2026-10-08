@@ -18,9 +18,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings:
-    "cv05" 1,
-    "ss03" 1;
   text-underline-offset: 0.2em;
   color-scheme: light dark;
   overflow-y: scroll;
@@ -43,22 +40,6 @@ body {
     color var(--duration-slow) var(--ease-out);
 }
 
-/* Paper grain — barely there, gives the flat surface a material. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
-}
-
-[data-theme="dark"] body::before {
-  opacity: 0.045;
-  mix-blend-mode: screen;
-}
-
 #root {
   position: relative;
   z-index: 1;
@@ -72,7 +53,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-accent);
+  color: var(--color-ink);
 }
 
 button {
@@ -97,7 +78,7 @@ h4,
 h5,
 h6 {
   line-height: var(--lh-tight);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-medium);
   color: var(--color-ink);
   font-family: var(--font-display);
   letter-spacing: var(--tracking-tight);
@@ -106,7 +87,6 @@ h6 {
 
 h1 {
   font-size: var(--text-3xl);
-  font-weight: var(--font-semibold);
   letter-spacing: var(--tracking-tighter);
 }
 h2 {
@@ -176,12 +156,14 @@ samp {
 
 /* ---- Shared micro-typography ------------------------------------------- */
 
-/* Quiet caption: section eyebrows, metric captions, meta. */
+/* Metadata voice: section eyebrows, metric captions, indexes. Mono, caps,
+ * tracked out — it labels content, it never is content. */
 .micro-label {
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
   font-weight: var(--font-medium);
-  letter-spacing: 0;
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   color: var(--color-ink-tertiary);
 }
 

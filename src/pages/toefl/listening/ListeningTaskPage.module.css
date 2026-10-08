@@ -1,7 +1,7 @@
 .playerCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   padding: var(--spacing-6);
   margin-bottom: var(--spacing-6);
   text-align: center;
@@ -52,7 +52,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   padding: var(--spacing-6);
   margin-bottom: var(--spacing-4);
 }
@@ -70,7 +70,7 @@
   gap: var(--spacing-3);
   padding: var(--spacing-3) var(--spacing-4);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   cursor: pointer;
   background: var(--color-surface);
   transition:
@@ -80,28 +80,35 @@
 }
 
 .option:hover {
+  border-color: var(--color-border-strong);
   background: var(--color-surface-hover);
 }
 
 .optionSelected {
   border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
+  background: var(--color-surface);
+  box-shadow: inset 3px 0 0 var(--color-ink);
 }
 
 .optionCorrect {
   border-color: var(--color-success);
   background: var(--color-success-subtle);
+  box-shadow: inset 3px 0 0 var(--color-success);
 }
 
 .optionIncorrect {
   border-color: var(--color-error);
   background: var(--color-error-subtle);
+  box-shadow: inset 3px 0 0 var(--color-error);
 }
 
 .optionIndex {
-  font-weight: 600;
-  color: var(--color-ink);
-  min-width: 20px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-ink-tertiary);
+  min-width: 14px;
+  flex-shrink: 0;
 }
 
 .submitArea {
@@ -113,7 +120,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   padding: var(--spacing-6);
   margin-bottom: var(--spacing-6);
   text-align: center;
@@ -125,25 +132,29 @@
 
 .scoreNum {
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-display);
   color: var(--color-ink);
+  line-height: 1;
 }
 
 .scoreDen {
+  font-family: var(--font-mono);
   font-size: var(--text-xl);
-  color: var(--color-ink-secondary);
+  color: var(--color-ink-tertiary);
 }
 
 .scorePct {
-  font-size: var(--text-lg);
-  color: var(--color-ink-tertiary);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
   margin-left: var(--spacing-2);
 }
 
 .transcript {
   background: var(--color-surface-subtle);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   padding: var(--spacing-4);
   margin-top: var(--spacing-4);
   font-size: var(--text-sm);
@@ -155,7 +166,7 @@
   margin-top: var(--spacing-3);
   padding: var(--spacing-3);
   background: var(--color-surface-subtle);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
 }

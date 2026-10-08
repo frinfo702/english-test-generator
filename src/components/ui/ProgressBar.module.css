@@ -27,7 +27,7 @@
 }
 
 .count {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-variant-numeric: tabular-nums;
   color: var(--color-ink-tertiary);

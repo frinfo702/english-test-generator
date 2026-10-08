@@ -1,155 +1,170 @@
-/* Design tokens — "Quiet Instrument"
+/* Design tokens — "Field Notes"
  *
- * One warm achromatic scale carries structure; colour is reserved for
- * meaning: a single ochre signal (progress, focus, the marker) plus
- * semantic green/red for grading. Dark mode is a soft near-black, not OLED
- * pure black, so surfaces can layer instead of glowing off a void.
+ * Paper, ink and one signal. Structure is achromatic: hierarchy comes from
+ * the type scale, hairline rules and whitespace, never from tinted boxes.
+ * The single signal is the poodle's collar orange (#fa500f) — the same
+ * orange the pixel art is drawn in — so the chrome and the mascots share
+ * one palette. Indigo + lime belong to the pixel stages only (home hero,
+ * update page), where the mascots perform.
  */
 
 :root,
 [data-theme="light"] {
   color-scheme: light;
 
-  /* ---- Ink (warm neutral, WCAG AA on paper) ---- */
-  --color-ink: #1c1917;
-  --color-ink-secondary: #57534e;
-  --color-ink-tertiary: #8d857c;
-  --color-ink-disabled: #c4bdb3;
-  --color-ink-inverse: #fffdfa;
+  /* ---- Ink (neutral, faintly warm) ---- */
+  --color-ink: #131312;
+  --color-ink-secondary: #4d4c47;
+  --color-ink-tertiary: #6f6d66;
+  --color-ink-disabled: #b9b7af;
+  --color-ink-inverse: #fbfaf7;
 
-  /* ---- Surface (warm paper, not cold gray) ---- */
-  --color-surface: #fffdfa;
-  --color-surface-elevated: #faf8f4;
-  --color-surface-subtle: #f3f0ea;
-  --color-surface-hover: #eeeae3;
-  --color-surface-overlay: rgba(255, 253, 250, 0.86);
+  /* ---- Paper ---- */
+  --color-surface: #fbfaf7;
+  --color-surface-elevated: #f4f3ef;
+  --color-surface-subtle: #ecebe5;
+  --color-surface-hover: #efeee9;
+  --color-surface-overlay: rgba(244, 243, 239, 0.88);
 
   /* ---- Navbar ---- */
-  --color-nav: rgba(250, 248, 244, 0.82);
-  --color-nav-hover: #f3f0ea;
+  --color-nav: rgba(244, 243, 239, 0.86);
+  --color-nav-hover: #ecebe5;
   --color-nav-active: transparent;
-  --color-nav-text: #1c1917;
-  --color-nav-text-secondary: #6b645c;
-  --color-nav-border: #e8e3da;
-  --color-nav-divider: #e8e3da;
+  --color-nav-text: #131312;
+  --color-nav-text-secondary: #6f6d66;
+  --color-nav-border: #dcdad3;
+  --color-nav-divider: #dcdad3;
 
-  /* ---- Border ---- */
-  --color-border: #e8e3da;
-  --color-border-strong: #d6cfc4;
+  /* ---- Rules ---- */
+  --color-border: #dcdad3;
+  --color-border-strong: #bdbab1;
 
-  /* ---- Signal (burnished ochre — the marker) ---- */
-  --color-accent: #a15c07;
-  --color-accent-hover: #8a4f06;
-  --color-accent-subtle: rgba(161, 92, 7, 0.09);
-  --color-accent-pressed: #744204;
-  --color-on-accent: #fffdfa;
+  /* ---- Signal (collar orange) ----
+   * --color-signal is the raw pixel orange for marks that carry no text
+   * (indicator bars, live dots, progress fills). --color-accent is the same
+   * hue darkened to pass AA as text and as a button fill. */
+  --color-signal: #fa500f;
+  --color-accent: #c23a06;
+  --color-accent-hover: #a83204;
+  --color-accent-subtle: rgba(250, 80, 15, 0.08);
+  --color-accent-pressed: #8f2b03;
+  --color-on-accent: #ffffff;
 
-  --color-brand: #a15c07;
-  --color-brand-hover: #8a4f06;
-  --color-brand-subtle: rgba(161, 92, 7, 0.09);
-  --color-on-brand: #fffdfa;
-  --color-on-danger: #fffdfa;
+  --color-brand: #c23a06;
+  --color-brand-hover: #a83204;
+  --color-brand-subtle: rgba(250, 80, 15, 0.08);
+  --color-on-brand: #ffffff;
+  --color-on-danger: #ffffff;
+
+  /* ---- Pixel stage (hero + update scenes only) ---- */
+  --stage-bg: #2f2e73;
+  --stage-ink: #131312;
+  --stage-lime: #eef59a;
+  --stage-text: #f4f3ef;
 
   /* ---- Feedback ---- */
-  --color-success: #2f6b4f;
-  --color-success-subtle: rgba(47, 107, 79, 0.1);
-  --color-error: #a8321f;
-  --color-error-subtle: rgba(168, 50, 31, 0.09);
-  --color-warning: #a15c07;
-  --color-warning-subtle: rgba(161, 92, 7, 0.09);
-  --color-info: #3f5f7d;
-  --color-info-subtle: rgba(63, 95, 125, 0.09);
+  --color-success: #2c6a4c;
+  --color-success-subtle: rgba(44, 106, 76, 0.09);
+  --color-error: #b02f1c;
+  --color-error-subtle: rgba(176, 47, 28, 0.08);
+  --color-warning: #a35a00;
+  --color-warning-subtle: rgba(163, 90, 0, 0.09);
+  --color-info: #2f5a86;
+  --color-info-subtle: rgba(47, 90, 134, 0.08);
 
-  /* ---- Section hues (muted, used only as small marks) ---- */
-  --color-reading: #3f5f7d;
-  --color-reading-subtle: rgba(63, 95, 125, 0.1);
-  --color-writing: #43644c;
-  --color-writing-subtle: rgba(67, 100, 76, 0.1);
-  --color-speaking: #8a5a24;
-  --color-speaking-subtle: rgba(138, 90, 36, 0.1);
-  --color-listening: #5b5478;
-  --color-listening-subtle: rgba(91, 84, 120, 0.1);
-  --color-toeic: #7d4a56;
-  --color-toeic-subtle: rgba(125, 74, 86, 0.1);
+  /* ---- Section hues (small marks + chart series only) ---- */
+  --color-reading: #2f5a86;
+  --color-reading-subtle: rgba(47, 90, 134, 0.09);
+  --color-writing: #3d6a4a;
+  --color-writing-subtle: rgba(61, 106, 74, 0.09);
+  --color-speaking: #c23a06;
+  --color-speaking-subtle: rgba(194, 58, 6, 0.08);
+  --color-listening: #57509a;
+  --color-listening-subtle: rgba(87, 80, 154, 0.09);
+  --color-toeic: #8a4a5c;
+  --color-toeic-subtle: rgba(138, 74, 92, 0.09);
 
   /* ---- Chart / canvas ---- */
-  --color-chart-grid: #e8e3da;
-  --color-chart-label: #8d857c;
-  --color-chart-point: #fffdfa;
+  --color-chart-grid: #dcdad3;
+  --color-chart-label: #6f6d66;
+  --color-chart-point: #fbfaf7;
 
   /* ---- Scrollbar ---- */
-  --color-scrollbar: #d6cfc4;
-  --color-scrollbar-hover: #a9a196;
+  --color-scrollbar: #cfccc4;
+  --color-scrollbar-hover: #9c9990;
 
   /* ---- Selection ---- */
-  --color-selection: rgba(161, 92, 7, 0.16);
+  --color-selection: rgba(250, 80, 15, 0.18);
 
-  /* ---- Shadows (hairline-first, warm-tinted) ---- */
+  /* ---- Elevation: rules first; shadows only for things that float ---- */
   --shadow-none: 0 0 0 0 transparent;
-  --shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.04);
-  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.05);
-  --shadow: 0 1px 3px rgba(28, 25, 23, 0.06);
-  --shadow-md: 0 4px 10px -2px rgba(28, 25, 23, 0.08);
-  --shadow-lg: 0 12px 28px -8px rgba(28, 25, 23, 0.16), 0 2px 6px rgba(28, 25, 23, 0.06);
-  --shadow-xl: 0 24px 48px -12px rgba(28, 25, 23, 0.2);
+  --shadow-xs: 0 0 0 0 transparent;
+  --shadow-sm: 0 1px 2px rgba(19, 19, 18, 0.05);
+  --shadow: 0 1px 3px rgba(19, 19, 18, 0.06);
+  --shadow-md: 0 6px 16px -6px rgba(19, 19, 18, 0.12);
+  --shadow-lg: 0 16px 36px -12px rgba(19, 19, 18, 0.18), 0 0 0 1px rgba(19, 19, 18, 0.04);
+  --shadow-xl: 0 28px 56px -16px rgba(19, 19, 18, 0.22);
 
-  --shadow-accent: 0 0 0 3px rgba(161, 92, 7, 0.16);
-  --shadow-error: 0 0 0 3px rgba(168, 50, 31, 0.14);
+  --shadow-accent: 0 0 0 3px rgba(250, 80, 15, 0.18);
+  --shadow-error: 0 0 0 3px rgba(176, 47, 28, 0.14);
 
   /* ---- Focus ring ---- */
-  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-accent);
+  --focus-ring: 0 0 0 2px var(--color-surface-elevated), 0 0 0 4px var(--color-signal);
 }
 
-/* Dark mode — soft black, layered surfaces */
+/* Dark mode — carbon paper, same structure */
 [data-theme="dark"] {
   color-scheme: dark;
 
   /* Pixel mascot outline on dark surfaces (see PixelPoodle) */
-  --poodle-rim: drop-shadow(1px 0 0 rgba(255, 253, 250, 0.3))
-    drop-shadow(-1px 0 0 rgba(255, 253, 250, 0.3))
-    drop-shadow(0 -1px 0 rgba(255, 253, 250, 0.3));
+  --poodle-rim: drop-shadow(1px 0 0 rgba(244, 243, 239, 0.3))
+    drop-shadow(-1px 0 0 rgba(244, 243, 239, 0.3))
+    drop-shadow(0 -1px 0 rgba(244, 243, 239, 0.3));
 
-  --color-ink: #f2efea;
-  --color-ink-secondary: #a8a29a;
-  --color-ink-tertiary: #78716a;
-  --color-ink-disabled: #57534e;
-  --color-ink-inverse: #14110f;
+  --color-ink: #ecebe6;
+  --color-ink-secondary: #a3a19a;
+  --color-ink-tertiary: #8a8880;
+  --color-ink-disabled: #4d4c47;
+  --color-ink-inverse: #0f0f0e;
 
-  --color-surface: #1a1817;
-  --color-surface-elevated: #121110;
-  --color-surface-subtle: #232120;
-  --color-surface-hover: #292624;
-  --color-surface-overlay: rgba(18, 17, 16, 0.85);
+  --color-surface: #161615;
+  --color-surface-elevated: #0f0f0e;
+  --color-surface-subtle: #1f1f1d;
+  --color-surface-hover: #1c1c1a;
+  --color-surface-overlay: rgba(15, 15, 14, 0.86);
 
-  --color-nav: rgba(18, 17, 16, 0.8);
-  --color-nav-hover: #232120;
+  --color-nav: rgba(15, 15, 14, 0.84);
+  --color-nav-hover: #1f1f1d;
   --color-nav-active: transparent;
-  --color-nav-text: #f2efea;
-  --color-nav-text-secondary: #a8a29a;
-  --color-nav-border: #2a2725;
-  --color-nav-divider: #2a2725;
+  --color-nav-text: #ecebe6;
+  --color-nav-text-secondary: #8a8880;
+  --color-nav-border: #282826;
+  --color-nav-divider: #282826;
 
-  --color-border: #2a2725;
-  --color-border-strong: #3d3936;
+  --color-border: #282826;
+  --color-border-strong: #3d3c39;
 
-  --color-accent: #e0a044;
-  --color-accent-hover: #edb463;
-  --color-accent-subtle: rgba(224, 160, 68, 0.13);
-  --color-accent-pressed: #f0c078;
-  --color-on-accent: #1c1917;
+  --color-signal: #ff6a2b;
+  --color-accent: #ff6a2b;
+  --color-accent-hover: #ff8550;
+  --color-accent-subtle: rgba(255, 106, 43, 0.12);
+  --color-accent-pressed: #ff9a6e;
+  --color-on-accent: #0f0f0e;
 
-  --color-brand: #e0a044;
-  --color-brand-hover: #edb463;
-  --color-brand-subtle: rgba(224, 160, 68, 0.13);
-  --color-on-brand: #1c1917;
-  --color-on-danger: #fffdfa;
+  --color-brand: #ff6a2b;
+  --color-brand-hover: #ff8550;
+  --color-brand-subtle: rgba(255, 106, 43, 0.12);
+  --color-on-brand: #0f0f0e;
+  --color-on-danger: #0f0f0e;
+
+  --stage-bg: #24235a;
 
   --color-success: #6cc08b;
   --color-success-subtle: rgba(108, 192, 139, 0.12);
-  --color-error: #e4776b;
-  --color-error-subtle: rgba(228, 119, 107, 0.12);
-  --color-warning: #e0a044;
-  --color-warning-subtle: rgba(224, 160, 68, 0.12);
+  --color-error: #f0806f;
+  --color-error-subtle: rgba(240, 128, 111, 0.12);
+  --color-warning: #f0b45a;
+  --color-warning-subtle: rgba(240, 180, 90, 0.12);
   --color-info: #8fb0cc;
   --color-info-subtle: rgba(143, 176, 204, 0.12);
 
@@ -157,52 +172,51 @@
   --color-reading-subtle: rgba(143, 176, 204, 0.12);
   --color-writing: #8fbb9c;
   --color-writing-subtle: rgba(143, 187, 156, 0.12);
-  --color-speaking: #d9a86a;
-  --color-speaking-subtle: rgba(217, 168, 106, 0.12);
-  --color-listening: #a9a2c9;
-  --color-listening-subtle: rgba(169, 162, 201, 0.12);
-  --color-toeic: #cc9aa8;
-  --color-toeic-subtle: rgba(204, 154, 168, 0.12);
+  --color-speaking: #ff8550;
+  --color-speaking-subtle: rgba(255, 133, 80, 0.12);
+  --color-listening: #aaa3dd;
+  --color-listening-subtle: rgba(170, 163, 221, 0.12);
+  --color-toeic: #d79bad;
+  --color-toeic-subtle: rgba(215, 155, 173, 0.12);
 
-  --color-chart-grid: #2a2725;
-  --color-chart-label: #78716a;
-  --color-chart-point: #1a1817;
+  --color-chart-grid: #282826;
+  --color-chart-label: #8a8880;
+  --color-chart-point: #161615;
 
-  --color-scrollbar: #3d3936;
-  --color-scrollbar-hover: #57534e;
+  --color-scrollbar: #3d3c39;
+  --color-scrollbar-hover: #5a5954;
 
-  --color-selection: rgba(224, 160, 68, 0.22);
+  --color-selection: rgba(255, 106, 43, 0.26);
 
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-xs: 0 0 0 0 transparent;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.45);
   --shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 6px 16px -4px rgba(0, 0, 0, 0.55);
-  --shadow-lg: 0 18px 36px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.04);
-  --shadow-xl: 0 32px 64px -16px rgba(0, 0, 0, 0.7);
+  --shadow-md: 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 18px 40px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-xl: 0 32px 64px -16px rgba(0, 0, 0, 0.75);
 
-  --shadow-accent: 0 0 0 3px rgba(224, 160, 68, 0.2);
-  --shadow-error: 0 0 0 3px rgba(228, 119, 107, 0.18);
+  --shadow-accent: 0 0 0 3px rgba(255, 106, 43, 0.22);
+  --shadow-error: 0 0 0 3px rgba(240, 128, 111, 0.2);
 
   --focus-ring:
-    0 0 0 2px var(--color-surface-elevated), 0 0 0 4px var(--color-accent);
+    0 0 0 2px var(--color-surface-elevated), 0 0 0 4px var(--color-signal);
 }
 
 /* Shared non-color tokens (both themes) */
 :root {
   /* ---- Typography ---- */
   --font-sans:
-    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-display:
-    "Inter Tight", "Inter", ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-  /* Code only. UI text never uses this — it reads as developer decoration. */
-  /* Pixel accents only (eyebrows, the mascot's speech) — never body text. */
-  --font-pixel: "Silkscreen", var(--font-mono);
-  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+  --font-display: var(--font-sans);
+  /* Metadata voice: indexes, counts, eyebrows, timers. Never sentences. */
+  --font-mono:
+    "Geist Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
     "Liberation Mono", monospace;
+  /* Pixel accents only (the mascots' speech) — never UI text. */
+  --font-pixel: "Silkscreen", var(--font-mono);
 
+  /* Type scale — 4 display steps, 5 text steps, 2 meta steps */
   --text-2xs: 11px;
   --text-xs: 12px;
   --text-sm: 13px;
@@ -210,8 +224,10 @@
   --text-lg: 17px;
   --text-xl: 20px;
   --text-2xl: 24px;
-  --text-3xl: 30px;
-  --text-4xl: 40px;
+  --text-3xl: 32px;
+  --text-4xl: 44px;
+  --text-5xl: 60px;
+  --text-6xl: 76px;
 
   --font-normal: 400;
   --font-medium: 500;
@@ -219,13 +235,15 @@
   --font-bold: 700;
   --font-extrabold: 800;
 
-  --lh-tight: 1.15;
-  --lh-snug: 1.35;
+  --lh-tight: 1.1;
+  --lh-snug: 1.3;
   --lh-normal: 1.55;
   --lh-relaxed: 1.7;
 
   --tracking-tight: -0.02em;
-  --tracking-tighter: -0.03em;
+  --tracking-tighter: -0.035em;
+  --tracking-display: -0.045em;
+  --tracking-meta: 0.04em;
 
   /* ---- Spacing (4px system) ---- */
   --spacing-1: 4px;
@@ -239,24 +257,24 @@
   --spacing-12: 48px;
   --spacing-16: 64px;
   --spacing-20: 80px;
+  --spacing-24: 96px;
 
-  /* ---- Radius (site chrome soft; documents sharper) ---- */
-  --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius: 8px;
-  --radius-lg: 10px;
-  --radius-xl: 14px;
-  --radius-2xl: 18px;
+  /* ---- Radius: near-square; only floating chips round off ---- */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 10px;
   --radius-full: 9999px;
-  /* Official-document surfaces: near-rectilinear, still slightly eased */
-  --radius-doc: 3px;
+  --radius-doc: 2px;
 
   /* Document / exam surface helpers (question pages) */
-  --doc-border: 1px solid var(--color-border-strong);
-  --doc-rule: 2px solid var(--color-ink);
-  --doc-rule-soft: 1px solid var(--color-border-strong);
+  --doc-border: 1px solid var(--color-border);
+  --doc-rule: 1px solid var(--color-ink);
+  --doc-rule-soft: 1px solid var(--color-border);
   --lh-doc: 1.75;
-  --doc-padding: var(--spacing-6);
+  --doc-padding: var(--spacing-8);
 
   /* ---- Animation ---- */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -269,10 +287,12 @@
   --duration-modal: 320ms;
 
   /* ---- Layout ---- */
-  --max-content: 1040px;
-  --max-reading: 680px;
-  --header-height: 56px;
+  --max-content: 1120px;
+  --max-reading: 720px;
+  --gutter: var(--spacing-8);
+  --header-height: 60px;
   --rule: 1px solid var(--color-border);
+  --rule-ink: 1px solid var(--color-ink);
 
   /* ---- Legacy aliases ---- */
   --color-text: var(--color-ink);
@@ -301,4 +321,11 @@
   --spacing-lg: var(--spacing-6);
   --spacing-xl: var(--spacing-8);
   --spacing-2xl: var(--spacing-12);
+}
+
+@media (max-width: 620px) {
+  :root {
+    --gutter: var(--spacing-4);
+    --doc-padding: var(--spacing-5);
+  }
 }

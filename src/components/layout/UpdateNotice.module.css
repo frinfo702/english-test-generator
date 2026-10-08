@@ -65,8 +65,8 @@
   padding: 0 4px;
   font-family: var(--font-pixel);
   font-size: var(--text-2xs);
-  color: #eef59a;
-  background: #34337a;
+  color: var(--stage-lime);
+  background: var(--stage-bg);
 }
 
 .close {
@@ -88,7 +88,7 @@
 
 .bubble a:focus-visible,
 .close:focus-visible {
-  outline: 2px solid #4a49a3;
+  outline: 2px solid var(--color-signal);
   outline-offset: 2px;
 }
 

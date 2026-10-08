@@ -4,7 +4,8 @@
   width: min(440px, calc(100vw - 32px));
   padding: var(--spacing-6);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-top: var(--rule-ink);
+  border-radius: 0;
   background: var(--color-surface);
   color: var(--color-ink);
   box-shadow: var(--shadow-xl);
@@ -15,8 +16,9 @@
 }
 
 .title {
-  font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-xl);
+  font-weight: var(--font-medium);
+  letter-spacing: -0.015em;
   margin-bottom: var(--spacing-3);
 }
 

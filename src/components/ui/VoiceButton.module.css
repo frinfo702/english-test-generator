@@ -64,7 +64,7 @@
 }
 
 .trailingOutside {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
   font-variant-numeric: tabular-nums;
   color: var(--color-ink-secondary);

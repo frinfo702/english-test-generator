@@ -21,7 +21,7 @@
 .diffBtn {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   padding: 6px 14px;
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
@@ -38,13 +38,13 @@
   background: var(--color-ink);
   border-color: var(--color-ink);
   color: var(--color-ink-inverse);
-  font-weight: 600;
 }
 
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-top: var(--doc-rule);
+  border-radius: 0;
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -52,22 +52,27 @@
 }
 
 .qNum {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
 }
 
 .referenceBox {
-  padding: var(--spacing-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
-  background: var(--color-surface-subtle);
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-5);
+  border: none;
+  border-left: 2px solid var(--color-ink);
+  background: transparent;
 }
 .referenceLabel {
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
   margin-bottom: 6px;
 }
 .referenceText {
@@ -83,15 +88,18 @@
 }
 
 .zoneLabel {
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--color-ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
 }
 
 .slots {
   min-height: 56px;
-  border: 2px dashed var(--color-border);
-  border-radius: var(--radius-doc);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-xs);
   padding: var(--spacing-sm);
   display: flex;
   flex-wrap: wrap;
@@ -107,7 +115,7 @@
 
 .chip {
   padding: 8px 16px;
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   font-size: var(--text-base);
   font-weight: 500;
   border: 1px solid;
@@ -127,12 +135,12 @@
 }
 
 .poolChip {
-  background: transparent;
-  border-color: transparent;
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
   color: var(--color-ink);
 }
 .poolChip:hover:not(:disabled) {
-  border-color: var(--color-accent);
+  border-color: var(--color-ink);
 }
 .poolChip:disabled {
   opacity: 0.5;
@@ -152,7 +160,7 @@
 
 .feedback {
   padding: var(--spacing-md);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   border: 1px solid transparent;
 }
 .fbCorrect {
@@ -165,7 +173,7 @@
 }
 
 .fbStatus {
-  font-weight: 700;
+  font-weight: var(--font-medium);
   font-size: var(--text-lg);
 }
 .fbCorrect .fbStatus {
@@ -187,7 +195,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   padding: var(--spacing-2xl);
   display: flex;
   flex-direction: column;
@@ -203,19 +211,20 @@
 }
 .scoreNum {
   font-family: var(--font-display);
-  font-size: var(--text-4xl);
-  font-weight: var(--font-semibold);
-  letter-spacing: -0.02em;
-  font-weight: var(--font-semibold);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-display);
   color: var(--color-ink);
   line-height: 1;
 }
 .scoreDen {
-  font-size: var(--text-2xl);
-  color: var(--color-ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  color: var(--color-ink-tertiary);
 }
 .scorePct {
-  font-size: var(--text-lg);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
   color: var(--color-ink-secondary);
 }
 
@@ -223,7 +232,7 @@
   color: var(--color-error);
   background: var(--color-error-subtle);
   padding: var(--spacing-md);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
 }
 
 /* Answer blanks: one underline per chunk, filled by drag and drop */

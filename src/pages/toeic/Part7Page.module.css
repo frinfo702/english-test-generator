@@ -1,18 +1,21 @@
 .setTypeBadge {
   display: inline-block;
-  background: transparent;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   color: var(--color-ink);
   border: 1px solid var(--color-ink);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
+  padding: 3px 8px;
   margin-bottom: var(--spacing-lg);
 }
 .typeBtn {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   padding: 6px 14px;
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
@@ -29,7 +32,6 @@
   background: var(--color-ink);
   border-color: var(--color-ink);
   color: var(--color-ink-inverse);
-  font-weight: 600;
 }
 
 .passages {
@@ -43,7 +45,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -55,27 +57,35 @@
   gap: var(--spacing-sm);
 }
 .passageNum {
-  background: transparent;
-  color: var(--color-ink);
-  border: 1.5px solid var(--color-ink);
-  font-family: var(--font-sans);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 6px;
+  border: none;
+  border-radius: var(--radius-xs);
+  background: var(--color-ink);
+  color: var(--color-ink-inverse);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
   font-variant-numeric: tabular-nums;
-  font-size: var(--text-sm);
-  font-weight: 700;
-  padding: 2px 10px;
-  border-radius: var(--radius-doc);
+  flex-shrink: 0;
 }
 .passageType {
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-  background: var(--color-border);
-  padding: 2px 8px;
-  border-radius: var(--radius-doc);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
 }
 .passageTitle {
-  font-family: var(--font-sans);
-  font-size: var(--text-lg);
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-medium);
+  letter-spacing: -0.015em;
 }
 .passageText {
   line-height: 1.9;
@@ -92,7 +102,7 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -104,32 +114,40 @@
   gap: var(--spacing-sm);
 }
 .qNum {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-doc);
-  border: 1.5px solid var(--color-ink);
-  background: transparent;
-  color: var(--color-ink);
-  font-weight: 700;
-  font-size: var(--text-sm);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 6px;
+  border: none;
+  border-radius: var(--radius-xs);
+  background: var(--color-ink);
+  color: var(--color-ink-inverse);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  font-variant-numeric: tabular-nums;
   flex-shrink: 0;
 }
 .qType {
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
 }
 .crossTag {
-  font-size: 11px;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   background: var(--color-warning-subtle);
   color: var(--color-warning);
   padding: 2px 8px;
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
 }
 .stem {
   font-family: var(--font-sans);
@@ -149,36 +167,40 @@
   gap: var(--spacing-sm);
   padding: 10px var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   background: var(--color-surface);
   text-align: left;
   font-size: var(--text-base);
   line-height: 1.5;
   transition:
-    border-color 0.15s,
-    background 0.15s;
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
 }
 .option:hover {
-  border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-hover);
 }
 .option.selected {
   border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
+  background: var(--color-surface);
+  box-shadow: inset 3px 0 0 var(--color-ink);
 }
 .option.correctOpt {
   border-color: var(--color-success);
   background: var(--color-success-subtle);
+  box-shadow: inset 3px 0 0 var(--color-success);
 }
 .option.wrongOpt {
   border-color: var(--color-error);
   background: var(--color-error-subtle);
+  box-shadow: inset 3px 0 0 var(--color-error);
 }
 .optLabel {
-  font-family: var(--font-sans);
-  font-weight: 700;
-  color: var(--color-ink);
-  min-width: 20px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-ink-tertiary);
+  min-width: 14px;
   flex-shrink: 0;
 }
 
@@ -187,7 +209,7 @@
   padding: var(--spacing-xl);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -202,7 +224,7 @@
   color: var(--color-error);
   background: var(--color-error-subtle);
   padding: var(--spacing-md);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
 }
 
 .resultActions {

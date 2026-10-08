@@ -2,89 +2,114 @@
 
 ## Philosophy
 
-**Quiet instrument.** The app is a practice tool, not a marketing site: warm
-paper, ink-first hierarchy, and rows instead of cards. Nothing on screen should
-exist to decorate — if a rule, tint, or icon does not carry state it is removed.
+**Field notes.** The app is a study instrument set like a well-made journal:
+paper, ink, ruled lines, and one signal colour. The pixel mascots are the only
+illustration and get a stage of their own; everything else is typography.
 
-Two ideas hold the system together:
+Three ideas hold the system together:
 
-1. **Structure is achromatic.** Warm neutrals carry every surface, border and
-   label. Hierarchy comes from type, spacing and hairlines — not colour.
-2. **Colour means something.** One ochre signal marks progress, focus and the
-   live take; green/red mark grading. Nothing else competes.
+1. **Type carries hierarchy.** Big, quiet display type (Geist 500, tight
+   tracking) does the work that boxes, fills and shadows used to do.
+2. **Rules, not cards.** Lists and sections open with a 1px ink rule and are
+   divided by hairlines. Boxes are reserved for one focused sheet at a time
+   (a question, a passage, a recorder).
+3. **One signal.** The poodle's collar orange (`#fa500f`) — the same orange
+   the pixel art is drawn in — marks progress, focus, the active nav item and
+   the live take. Green/red are reserved for grading. Indigo + lime belong to
+   the pixel stages only.
 
 ## Colour
 
-### Light (warm paper)
+### Light (paper)
 
-| Token                      | Hex                    | Usage                        |
-| -------------------------- | ---------------------- | ---------------------------- |
-| `--color-ink`              | `#1c1917`              | Primary text, primary button |
-| `--color-ink-secondary`    | `#57534e`              | Body, descriptions           |
-| `--color-ink-tertiary`     | `#8d857c`              | Meta, labels                 |
-| `--color-surface`          | `#fffdfa`              | Cards, rows                  |
-| `--color-surface-elevated` | `#faf8f4`              | Page background              |
-| `--color-surface-subtle`   | `#f3f0ea`              | Chips, wells, table headers  |
-| `--color-border`           | `#e8e3da`              | Hairlines                    |
-| `--color-border-strong`    | `#d6cfc4`              | Emphasised borders           |
-| `--color-accent`           | `#a15c07`              | Signal: progress, focus, live |
-| `--color-success`          | `#2f6b4f`              | Correct                      |
-| `--color-error`            | `#a8321f`              | Incorrect                    |
+| Token                      | Hex       | Usage                                  |
+| -------------------------- | --------- | -------------------------------------- |
+| `--color-ink`              | `#131312` | Text, primary button, opening rules    |
+| `--color-ink-secondary`    | `#4d4c47` | Body, descriptions                     |
+| `--color-ink-tertiary`     | `#6f6d66` | Meta, captions (AA on paper)           |
+| `--color-surface-elevated` | `#f4f3ef` | Page background                        |
+| `--color-surface`          | `#fbfaf7` | Sheets (question cards, passages)      |
+| `--color-surface-subtle`   | `#ecebe5` | Wells, empty calendar cells            |
+| `--color-border`           | `#dcdad3` | Hairlines                              |
+| `--color-border-strong`    | `#bdbab1` | Control outlines                       |
+| `--color-signal`           | `#fa500f` | Non-text marks: bars, dots, fills      |
+| `--color-accent`           | `#c23a06` | Signal as text / button fill (AA)      |
+| `--color-success`          | `#2c6a4c` | Correct                                |
+| `--color-error`            | `#b02f1c` | Incorrect                              |
 
-### Dark (soft black, layered)
+### Dark (carbon)
 
-`--color-surface-elevated` `#121110` → `--color-surface` `#1a1817` →
-`--color-surface-subtle` `#232120`. Accent lifts to `#e0a044`; shadows stay
-hairline-plus-soft, never glow.
+`--color-surface-elevated` `#0f0f0e` → `--color-surface` `#161615` →
+`--color-surface-subtle` `#1f1f1d`. Signal and accent both lift to `#ff6a2b`.
+Same structure, no glows.
+
+### Pixel stage
+
+`--stage-bg` (`#2f2e73`, dark `#24235a`), `--stage-lime` `#eef59a`,
+`--stage-ink`. Used only behind the mascots: the home hero plate and the
+update page's call to action. Never on tool surfaces.
 
 ### Section hues
 
-Reading / Writing / Listening / Speaking / TOEIC keep distinct but **muted**
-hues, used only as 6px dots, small marks and dashboard series — never as tints
-on large surfaces.
+Reading / Writing / Listening / Speaking / TOEIC keep distinct muted hues,
+used only as 8px square marks and chart series — never as tints on surfaces.
 
 ## Typography
 
-| Token            | Family           | Usage                                 |
-| ---------------- | ---------------- | ------------------------------------- |
-| `--font-display` | Inter Tight      | Titles, task names, display numerals  |
-| `--font-sans`    | Inter            | Everything else — passages included   |
-| `--font-mono`    | system monospace | `<code>`, `<kbd>` — never UI text     |
+| Token            | Family     | Usage                                              |
+| ---------------- | ---------- | -------------------------------------------------- |
+| `--font-display` | Geist      | Titles, task names, big numerals (weight 500)      |
+| `--font-sans`    | Geist      | Body, passages, controls                           |
+| `--font-mono`    | Geist Mono | Metadata: eyebrows, indexes, counts, timers, tags  |
+| `--font-pixel`   | Silkscreen | The mascots' speech only                           |
 
-One sans does the whole job: passages, transcripts, labels and numbers are all
-Inter, with Inter Tight only where a tighter optical fit helps (titles, big
-scores). Numbers always get `font-variant-numeric: tabular-nums`.
+Scale: `2xs 11 · xs 12 · sm 13 · base 15 · lg 17 · xl 20 · 2xl 24 · 3xl 32 ·
+4xl 44 · 5xl 60 · 6xl 76`. Display sizes use `--tracking-tighter` (-0.035em)
+or `--tracking-display` (-0.045em).
 
-**Never set UI text in a monospace face.** Mono labels, mono metrics and mono
-timestamps read as developer decoration and are an anti-pattern here.
+**The mono voice labels content; it never is content.** Eyebrows, column
+headers, question numbers, option letters, counts, timers and tags are mono,
+uppercase, `--tracking-meta` (0.04em), 11px. Sentences are never mono. The
+shared `.micro-label` class is this voice.
 
-Captions use `.micro-label`: 12px sans, sentence case, tertiary ink.
+Numbers that count (timers, scores' denominators, percentages, dates) use
+mono with `tabular-nums`; headline numerals use the display face.
 
 ## Layout
 
-- Header 56px, translucent, hairline bottom rule; nav is one hairline strip with
-  a sliding surface indicator (measured imperatively, never animated on first
-  paint).
-- `--max-content` 1040px for pages; `--max-reading` 680px for a single task card.
-- Lists are the default navigation surface: index | title + meta | badge.
-  Cards are reserved for one focused task at a time.
+- Header 60px, translucent paper, hairline bottom rule. Nav is plain text
+  links; the active one stands on a 2px signal bar on the header rule.
+- `--max-content` 1120px; `--gutter` 32px (16px on phones);
+  `--max-reading` 720px for a single focused sheet.
+- **Index pattern** (home, TOEFL/TOEIC menus, question lists): mono label →
+  ink rule → ruled rows of `index | title + meta | count | →`. Grouped menus
+  hang the group name in a sticky left column.
+- **Page head**: round back button, 32px display title, one line of context.
 
 ## Components
 
 ### Buttons
 
-Radius `--radius` (8px). **Primary is ink**, not coloured — the ink button is the
-only "loud" control on a page, and there is usually one.
+Radius `--radius` (4px). **Primary is ink** — the one loud control on a page.
 
-| Variant       | Style                        |
-| ------------- | ---------------------------- |
-| **Primary**   | Ink fill, inverse text       |
-| **Secondary** | Surface fill, strong border  |
-| **Accent**    | Ochre — signal actions only (e.g. recording) |
-| **Ghost**     | Transparent                  |
-| **Danger**    | Error fill                   |
+| Variant       | Style                                         |
+| ------------- | --------------------------------------------- |
+| **Primary**   | Ink fill, inverse text                        |
+| **Secondary** | Transparent, strong hairline; ink on hover    |
+| **Accent**    | Signal — live actions only (e.g. recording)   |
+| **Ghost**     | Transparent                                   |
+| **Danger**    | Error fill                                    |
 
-Sizes: `sm` 30px · `md` 36px · `lg` 42px. Every button scales to 0.975 on press.
+Sizes: `sm` 30px · `md` 38px · `lg` 46px. Every button scales to 0.98 on press.
+
+### Question sheets
+
+`src/styles/question-document.css` and the task modules share one register:
+a sheet opens with a 1px ink top rule and square corners; item numbers are
+solid ink chips in mono; option letters are mono, tertiary; options are ruled
+rows whose selected / correct / wrong state adds a 3px inset bar on the left
+(ink / green / red). Large writing boxes frame in ink on focus instead of
+showing a ring.
 
 ### Audio (ported from ElevenLabs UI, MIT)
 
@@ -98,44 +123,41 @@ Sizes: `sm` 30px · `md` 36px · `lg` 42px. Every button scales to 0.975 on pres
 | `ScrubBar`      | Fallback transport while a waveform decodes                   |
 | `Matrix`        | Dot-matrix display used for loading/empty states              |
 
-Charts use **Recharts**, styled entirely from tokens (hairline grid, tertiary
-ticks, token-coloured series). The chart bundle is loaded lazily and only the
-dashboard pulls it — practice pages stay free of it.
-
 Rule: **never open a second microphone stream while recording.** Live levels
 come from `useSpeechRecognition().levels`; `LiveWaveform active` is only used
 for pre-recording device previews (mic selector).
 
-### Charts
+### Charts and the streak calendar
 
 Recharts, styled from tokens (hairline grid, tertiary ticks, token-coloured
 series, hairline tooltip). The chart bundle is loaded lazily and only the
 dashboard pulls it. The plot is `aria-hidden`; the same numbers are also
-rendered as a visually hidden list, so no data depends on hovering.
+rendered as a visually hidden list, so no data depends on hovering. The
+streak calendar is square pixel cells stepped in the signal orange.
 
-### Documents (question surfaces)
+### Pixel art
 
-`src/styles/question-document.css` holds the U.S.-official-document register
-used by every question page: letterhead top rule, `--radius-doc: 3px`, long
-passages at `--lh-doc`, boxed mono item numbers, form-row options
-(`.doc-option`), outlined tags, formal score blocks (`.doc-score`).
+Poodle, hamsters, pixel icons, the pixel clock and score pips are kept as
+drawn. They may be restaged (scaled by whole steps, framed on a stage) but
+never redrawn or recoloured.
 
 ## Motion
 
 - `--duration-fast` 120ms (press, hover) · `--duration-base` 180ms (state) ·
-  `--duration-slow` 260ms (indicator, panels).
+  `--duration-slow` 260ms (nav bar, panels).
 - Easing: `--ease-out` `cubic-bezier(0.23, 1, 0.32, 1)` for enter/UI,
   `--ease-in-out` `cubic-bezier(0.77, 0, 0.175, 1)` for on-screen movement.
 - Animate `transform` / `opacity` only. Respect `prefers-reduced-motion`.
+- Row arrows nudge 3–4px and turn signal on hover; nothing else moves.
 - Keyboard-repeated actions (nav, ⌘D) never animate.
 
 ## Anti-patterns
 
-- Filled blue accent pills for navigation or primary actions
-- Rainbow section tints on surfaces, gradient chips, neon glows
-- Emoji as status icons (use SVG or plain words)
-- Monospace for anything that is not code — labels, metrics, timestamps
-- Serif faces: the app is sans-only, one voice for UI and content
-- Card grids for navigation — keep rows
-- Per-page option/score styling; use the shared `doc-*` classes
+- Rounded cards with drop shadows as the default container
+- Tinted fills to group content — use a rule and whitespace
+- Section hues as surface tints; gradients; glows
+- Semibold/bold display type — display is 500, size does the work
+- Mono for sentences; sans for metadata labels
+- Emoji as status icons (use SVG, pixel icons or plain words)
+- Per-page option/score styling that drifts from the shared sheet register
 - Decorative animation, staggered entrances, or motion on frequent actions
