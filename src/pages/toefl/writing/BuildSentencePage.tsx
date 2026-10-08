@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../../hooks/useTrialItem";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
@@ -46,10 +51,11 @@ const TASK_ID = "toefl/writing/build-sentence";
 
 export function BuildSentencePage() {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
+  const trial = useTrialItem();
   const {
     display,
     elapsedSeconds,
@@ -158,7 +164,7 @@ export function BuildSentencePage() {
     if (!data || graded) return;
     const sessionSeconds = stop();
     const correct = data.sentences.filter((_, i) => isCorrectFor(i)).length;
-    saveScore({
+    const saved = saveScore({
       taskId: TASK_ID,
       file: file ?? undefined,
       correct: correct,
@@ -169,8 +175,10 @@ export function BuildSentencePage() {
         order: slotsFor(i),
       })),
     });
+    trial?.complete(saved);
     setPhase("submitted");
   };
+  useTrialTimeout(handleSubmit);
   const displayChunk = (chunk: string) => chunk.toLowerCase();
   const endMark = sentence ? endPunctuation(sentence.fullSentence) : ".";
 

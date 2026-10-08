@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../../hooks/useTrialItem";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
@@ -26,10 +31,11 @@ interface ProblemData {
 
 export function CompleteWordsPage() {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
+  const trial = useTrialItem();
   const {
     display,
     elapsedSeconds,
@@ -94,7 +100,7 @@ export function CompleteWordsPage() {
     setScore({ correct, total: data.items.length });
     setSubmitted(true);
     setFocusedIdx(null);
-    saveScore({
+    const saved = saveScore({
       taskId: TASK_ID,
       file: file ?? undefined,
       correct: correct,
@@ -105,7 +111,9 @@ export function CompleteWordsPage() {
         text: answers[i],
       })),
     });
+    trial?.complete(saved);
   };
+  useTrialTimeout(handleSubmit);
 
   const handleBackToList = () => {
     resetTimer();
@@ -319,7 +327,7 @@ export function CompleteWordsPage() {
           {!submitted ? (
             <div className={styles.actions}>
               <Button onClick={handleSubmit}>
-                Check Answers
+                {trial ? "Next" : "Check Answers"}
                 <PixelCheckIcon />
               </Button>
               <NextQuestionButton taskId={TASK_ID} variant="secondary" />

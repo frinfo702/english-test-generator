@@ -137,6 +137,46 @@ const importTray: PixelSprite = {
   ],
 };
 
+// prettier-ignore
+const book: PixelSprite = {
+  palette: { o: "#2b2b3a", p: "#f4efe4", s: "#c9c2b2", l: "#8a8aa0", c: "#3e7bd6" },
+  rows: [
+    "",
+    "",
+    ".ooo........ooo.",
+    "opppoo....oopppo",
+    "opppppoooopppppo",
+    "opllllpsspllllpo",
+    "oppppppssppppppo",
+    "opllllpsspllllpo",
+    "oppppppssppppppo",
+    "oplllppsspplllpo",
+    "oppppppssppppppo",
+    "oppppppssppppppo",
+    "occcccccccccccco",
+    ".oooooooooooooo.",
+  ],
+};
+
+// prettier-ignore
+const headphones: PixelSprite = {
+  palette: { o: "#2b2b3a", l: "#c9c9d8", r: "#fa500f" },
+  rows: [
+    "",
+    "....oooooooo....",
+    "...ollllllllo...",
+    "..oloooooooolo..",
+    ".olo........olo.",
+    ".olo........olo.",
+    "oooo........oooo",
+    "orro........orro",
+    "orro........orro",
+    "orro........orro",
+    "orro........orro",
+    "oooo........oooo",
+  ],
+};
+
 export const PIXEL_ICONS = {
   university,
   briefcase,
@@ -144,5 +184,7 @@ export const PIXEL_ICONS = {
   pencil,
   exportTray,
   importTray,
+  book,
+  headphones,
 };
 export type PixelIconName = keyof typeof PIXEL_ICONS;

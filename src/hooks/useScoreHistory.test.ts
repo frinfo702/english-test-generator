@@ -1,6 +1,8 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { createElement } from "react";
 import { PERFECT_SCORE_EVENT, useScoreHistory } from "./useScoreHistory";
+import { TrialItemContext } from "./useTrialItem";
 import {
   clearAttempts,
   getAllAttempts,
@@ -48,6 +50,28 @@ describe("useScoreHistory", () => {
 
     window.removeEventListener(PERFECT_SCORE_EVENT, onPerfect);
     expect(onPerfect).toHaveBeenCalledTimes(1);
+  });
+
+  it("stays quiet about a perfect score inside a practice test", async () => {
+    const onPerfect = vi.fn();
+    window.addEventListener(PERFECT_SCORE_EVENT, onPerfect);
+    const trial = { problemId: "001", complete: vi.fn(), onTimeout: vi.fn() };
+    const { result } = renderHook(() => useScoreHistory(), {
+      wrapper: ({ children }) =>
+        createElement(TrialItemContext.Provider, { value: trial }, children),
+    });
+
+    await act(async () => {
+      await result.current.saveScore({
+        taskId: "toeic/part5",
+        responses: [],
+        correct: 5,
+        total: 5,
+      });
+    });
+
+    window.removeEventListener(PERFECT_SCORE_EVENT, onPerfect);
+    expect(onPerfect).not.toHaveBeenCalled();
   });
 
   it("saves the responses with the score they earned", async () => {

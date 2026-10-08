@@ -70,7 +70,9 @@ export function PixelPoodle({ excited = false, className }: PixelPoodleProps) {
   }, [petted]);
 
   const tail = POODLE_TAILS[WAG[tick % WAG.length]];
-  const layers = blinking ? [POODLE_BODY, tail, POODLE_BLINK] : [POODLE_BODY, tail];
+  const layers = blinking
+    ? [POODLE_BODY, tail, POODLE_BLINK]
+    : [POODLE_BODY, tail];
 
   return (
     <button

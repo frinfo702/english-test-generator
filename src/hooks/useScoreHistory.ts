@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import {
   clearAttempts,
   getAllAttempts,
@@ -7,6 +7,7 @@ import {
   type ItemResponse,
 } from "../lib/attempts";
 import { questionIdFromFile } from "../lib/questions";
+import { TrialItemContext } from "./useTrialItem";
 
 export type TaskId =
   | "toefl/reading/complete-words"
@@ -21,6 +22,7 @@ export type TaskId =
   | "toefl/writing/discussion"
   | "toefl/speaking/listen-repeat"
   | "toefl/speaking/interview"
+  | "toefl/trial"
   | "toeic/part2"
   | "toeic/part3"
   | "toeic/part4"
@@ -71,6 +73,8 @@ function toScoreEntry(a: Attempt): ScoreEntry[] {
 }
 
 export function useScoreHistory() {
+  // A practice test must not reveal, item by item, that an answer was right.
+  const inTrial = useContext(TrialItemContext) !== null;
   const saveScore = useCallback(
     async ({
       taskId,
@@ -84,7 +88,7 @@ export function useScoreHistory() {
     }: SaveScoreInput): Promise<Attempt | undefined> => {
       if (total === 0) return;
       // Every page saves through here, so one dispatch covers all tasks.
-      if (correct >= total)
+      if (correct >= total && !inTrial)
         window.dispatchEvent(new Event(PERFECT_SCORE_EVENT));
       return saveAttempt({
         taskId,
@@ -95,7 +99,7 @@ export function useScoreHistory() {
         question,
       });
     },
-    [],
+    [inTrial],
   );
 
   const getAll = useCallback(

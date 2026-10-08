@@ -1,4 +1,4 @@
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useContext, useEffect, useState, useSyncExternalStore } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { listQuestionFiles } from "../../lib/questions";
 import {
@@ -9,6 +9,7 @@ import {
   type NextMode,
 } from "../../lib/nextMode";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
+import { TrialItemContext } from "../../hooks/useTrialItem";
 import { PixelArt } from "../pixel/PixelArt";
 import { Button, type ButtonProps } from "../ui/Button";
 import { PixelArrowIcon } from "../ui/PixelArrowIcon";
@@ -32,7 +33,11 @@ interface NextQuestionButtonProps extends Omit<
  * only" filter. The mode toggles sit beside it and stay visible even when
  * there is no next problem, so they can be changed.
  */
-export function NextQuestionButton({
+export function NextQuestionButton(props: NextQuestionButtonProps) {
+  return useContext(TrialItemContext) ? null : <NextQuestion {...props} />;
+}
+
+function NextQuestion({
   taskId,
   onBeforeNavigate,
   showModes = true,

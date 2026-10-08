@@ -99,6 +99,46 @@ export function buildInterviewQaCopyMessage(payload: InterviewCopyPayload) {
   return lines.join("\n");
 }
 
+export interface WritingCopyPayload {
+  task: "Write an Email" | "Write for an Academic Discussion";
+  prompt: string;
+  userAnswer: string;
+  modelAnswer?: string;
+  criteria?: string[];
+}
+
+/** Same contract as the interview prompt: feedback, then one parseable score block. */
+export function buildWritingCopyMessage(payload: WritingCopyPayload) {
+  const lines: string[] = [
+    `Please evaluate my TOEFL Writing (${payload.task}) response and give constructive feedback.`,
+    "",
+    "## Task",
+    payload.prompt.trim(),
+    "",
+    "## My response",
+    payload.userAnswer.trim() || "(no response)",
+  ];
+  if (payload.modelAnswer?.trim()) {
+    lines.push("", "## Sample response", payload.modelAnswer.trim());
+  }
+  if (payload.criteria && payload.criteria.length > 0) {
+    lines.push("", "## Evaluation criteria");
+    for (const c of payload.criteria) lines.push(`- ${c}`);
+  }
+  lines.push(
+    "",
+    "## How to score",
+    `Use the official TOEFL ${payload.task} scale (0–5), judging task completion, elaboration, organization, and range and accuracy of grammar and vocabulary.`,
+    "",
+    "Give your feedback and a stronger version of my response, then end your reply with this block exactly once (whole numbers only):",
+    "",
+    "```" + AI_SCORE_FENCE,
+    '{"score": 0}',
+    "```",
+  );
+  return lines.join("\n");
+}
+
 export async function copyText(text: string) {
   if (typeof navigator.clipboard?.writeText !== "function") {
     return false;

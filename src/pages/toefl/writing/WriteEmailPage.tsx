@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../../hooks/useTrialItem";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
@@ -49,7 +54,7 @@ const TASK_ID = "toefl/writing/email";
 
 export function WriteEmailPage() {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const [userText, setUserText] = useState("");
@@ -59,6 +64,7 @@ export function WriteEmailPage() {
   const [saveError, setSaveError] = useState<string | null>(null);
   const [answerId, setAnswerId] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const trial = useTrialItem();
 
   const problemId = file ? buildProblemId(TASK_ID, file) : null;
   const gradingMessage =
@@ -70,11 +76,13 @@ export function WriteEmailPage() {
     setSavingAnswer(true);
     setSaveError(null);
     try {
-      const attempt = await saveAttempt({
+      const saving = saveAttempt({
         taskId: TASK_ID,
         problemId: questionIdFromFile(file),
         responses: [{ text: userText }],
       });
+      trial?.complete(saving);
+      const attempt = await saving;
       clearDraft(problemId);
       setAnswerId(attempt.id);
     } catch (e) {
@@ -126,6 +134,7 @@ export function WriteEmailPage() {
     timer.stop();
     void submitAnswer();
   };
+  useTrialTimeout(handleSubmit);
   const handleCopy = async () => {
     if (!gradingMessage) return;
     try {

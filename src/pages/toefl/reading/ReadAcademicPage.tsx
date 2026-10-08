@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../../hooks/useTrialItem";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
@@ -45,11 +50,12 @@ const TYPE_LABELS: Record<string, string> = {
 
 export function ReadAcademicPage() {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } = useQuestion<ProblemData>(
     "toefl/reading/academic",
   );
   const { saveScore } = useScoreHistory();
+  const trial = useTrialItem();
   const {
     display,
     elapsedSeconds,
@@ -90,7 +96,7 @@ export function ReadAcademicPage() {
       const s = data.questions.filter(
         (q) => answers[q.id] === q.correctIndex,
       ).length;
-      saveScore({
+      const saved = saveScore({
         taskId: "toefl/reading/academic",
         file: file ?? undefined,
         correct: s,
@@ -101,11 +107,13 @@ export function ReadAcademicPage() {
           choice,
         })),
       });
+      trial?.complete(saved);
     }
     setGraded(true);
     setCurrentIndex(0);
     window.scrollTo({ top: 0 });
   };
+  useTrialTimeout(handleSubmit);
 
   const totalQ = data?.questions.length ?? 0;
   const current = data?.questions[Math.min(currentIndex, totalQ - 1)];

@@ -9,14 +9,11 @@ import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useSingleAudio } from "../../../hooks/useSingleAudio";
 import type { TaskId } from "../../../hooks/useScoreHistory";
 import { buildInterviewQaCopyMessage } from "../../../lib/answerSubmission";
-import {
-  rubricScore,
-  type Attempt,
-  type ItemResponse,
-} from "../../../lib/attempts";
+import type { Attempt, ItemResponse } from "../../../lib/attempts";
 import {
   interviewItemScore,
   stripScoreBlock,
+  withInterviewAi,
   type AiInterviewScores,
 } from "../../../lib/interviewScoring";
 import { spokenWords } from "../../../lib/pronunciation";
@@ -376,19 +373,7 @@ export function InterviewResult({
   const applyAi = (
     index: number,
     ai: { reply: string; scores: AiInterviewScores },
-  ) => {
-    const responses = attempt.responses.map((r, i) =>
-      i === index
-        ? {
-            ...r,
-            ai,
-            itemScore: interviewItemScore(ai.scores, r.assessment ?? null)
-              ?.total,
-          }
-        : r,
-    );
-    onChange({ ...attempt, responses, score: rubricScore(responses) });
-  };
+  ) => onChange(withInterviewAi(attempt, index, ai));
 
   return (
     <div className={styles.page}>

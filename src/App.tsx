@@ -31,6 +31,9 @@ import { QuestionSelectorPage } from "./components/question/QuestionSelectorPage
 import type { ReactElement, ReactNode } from "react";
 import type { TaskId } from "./hooks/useScoreHistory";
 import { ResultPage } from "./pages/results/ResultPage";
+import { TrialHomePage } from "./pages/trial/TrialHomePage";
+import { TrialRunPage } from "./pages/trial/TrialRunPage";
+import { TrialReportPage } from "./pages/trial/TrialReportPage";
 
 interface TaskRoute {
   basePath: string;
@@ -204,6 +207,10 @@ const taskRoutes: TaskRoute[] = [
   },
 ];
 
+const trialPages = Object.fromEntries(
+  taskRoutes.map((r) => [r.taskId, r.page]),
+) as Partial<Record<TaskId, ReactElement>>;
+
 /** Remounts the page per question so "Next Question" starts from clean state. */
 function KeyedByQuestion({ children }: { children: ReactNode }) {
   const { questionId = "" } = useParams<{ questionId: string }>();
@@ -220,6 +227,12 @@ export default function App() {
           <Route path="/results/:attemptId" element={<ResultPage />} />
           <Route path="/toefl" element={<ToeflMenuPage />} />
           <Route path="/toeic" element={<ToeicMenuPage />} />
+          <Route path="/trial" element={<TrialHomePage />} />
+          <Route
+            path="/trial/:trialId"
+            element={<TrialRunPage pages={trialPages} />}
+          />
+          <Route path="/trial/:trialId/report" element={<TrialReportPage />} />
 
           {taskRoutes.map((r) => (
             <Route key={r.basePath}>

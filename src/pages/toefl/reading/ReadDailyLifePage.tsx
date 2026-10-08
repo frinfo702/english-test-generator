@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../../hooks/useTrialItem";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -36,11 +41,12 @@ interface FlatQuestion {
 
 export function ReadDailyLifePage() {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } = useQuestion<DailyLifeData>(
     "toefl/reading/daily-life",
   );
   const { saveScore } = useScoreHistory();
+  const trial = useTrialItem();
   const {
     display,
     elapsedSeconds,
@@ -105,7 +111,7 @@ export function ReadDailyLifePage() {
 
   const handleSubmit = () => {
     const sessionSeconds = stop();
-    saveScore({
+    const saved = saveScore({
       taskId: "toefl/reading/daily-life",
       file: sessionFileRef.current ?? file ?? undefined,
       correct: correctCount,
@@ -116,10 +122,12 @@ export function ReadDailyLifePage() {
         choice,
       })),
     });
+    trial?.complete(saved);
     setGraded(true);
     setCurrentIndex(0);
     window.scrollTo({ top: 0 });
   };
+  useTrialTimeout(handleSubmit);
 
   const handleRestart = () => {
     resetTimer();

@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../../hooks/useTrialItem";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -15,6 +20,7 @@ import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import {
   RUBRIC_METHOD,
+  putAttempts,
   rubricScore,
   type ItemResponse,
 } from "../../../lib/attempts";
@@ -56,10 +62,11 @@ type Phase =
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
+  const trial = useTrialItem();
   const {
     display,
     elapsedSeconds,
@@ -154,32 +161,32 @@ export function ListenRepeatPage() {
       if (!data) return;
       setGraded(true);
       setPhase("processing");
-      setProcessingMessage("Scoring your answers...");
       const sessionSeconds = stop();
       stopTts();
-      await Promise.allSettled(pendingAssessmentsRef.current);
 
-      const responses: ItemResponse[] = data.sentences.map((s, i) => {
-        const result = assessmentsRef.current[i];
-        const assessment = result && "words" in result ? result : undefined;
-        const transcript = finalTranscripts[i] ?? "";
-        return {
-          ...takesRef.current[i],
-          itemId: s.id,
-          prompt: s.text,
-          transcript,
-          assessment,
-          assessmentError:
-            result && "error" in result ? result.error : undefined,
-          itemScore: listenRepeatItemScore(
-            alignWords(s.text, transcript),
-            assessment?.pronunciation ?? null,
-          ),
-        };
-      });
-      const score = rubricScore(responses)!;
-      try {
-        const saved = await saveScore({
+      // Reads the assessments that have landed so far.
+      const buildResponses = (): ItemResponse[] =>
+        data.sentences.map((s, i) => {
+          const result = assessmentsRef.current[i];
+          const assessment = result && "words" in result ? result : undefined;
+          const transcript = finalTranscripts[i] ?? "";
+          return {
+            ...takesRef.current[i],
+            itemId: s.id,
+            prompt: s.text,
+            transcript,
+            assessment,
+            assessmentError:
+              result && "error" in result ? result.error : undefined,
+            itemScore: listenRepeatItemScore(
+              alignWords(s.text, transcript),
+              assessment?.pronunciation ?? null,
+            ),
+          };
+        });
+      const save = (responses: ItemResponse[]) => {
+        const score = rubricScore(responses)!;
+        return saveScore({
           taskId: TASK_ID,
           file: file ?? undefined,
           correct: score.correct,
@@ -189,6 +196,31 @@ export function ListenRepeatPage() {
           responses,
           question: data,
         });
+      };
+
+      if (trial) {
+        // A test moves straight on to the next task; pronunciation keeps
+        // scoring here and rewrites the saved attempt when it lands.
+        const saving = save(buildResponses());
+        trial.complete(saving);
+        void Promise.all([
+          saving,
+          Promise.allSettled(pendingAssessmentsRef.current),
+        ]).then(([saved]) => {
+          if (!saved) return;
+          const responses = buildResponses();
+          return putAttempts([
+            { ...saved, responses, score: rubricScore(responses) },
+          ]);
+        });
+        return;
+      }
+
+      // Practice opens the result page, which should show pronunciation.
+      setProcessingMessage("Scoring your answers...");
+      await Promise.allSettled(pendingAssessmentsRef.current);
+      try {
+        const saved = await save(buildResponses());
         if (saved) navigate(`/results/${saved.id}`);
       } catch (e) {
         setProcessingMessage(null);
@@ -197,8 +229,9 @@ export function ListenRepeatPage() {
         );
       }
     },
-    [data, stop, stopTts, saveScore, file, navigate],
+    [data, stop, stopTts, saveScore, file, navigate, trial],
   );
+  useTrialTimeout(() => void finishSet(transcriptsRef.current));
 
   const finishSentence = useCallback(async () => {
     if (finishingRef.current) return;
