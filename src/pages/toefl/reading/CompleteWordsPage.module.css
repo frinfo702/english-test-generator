@@ -74,6 +74,11 @@
   cursor: text;
 }
 
+/* The blank's underline colour and active cell already show focus. */
+.blankInput:focus-visible {
+  box-shadow: none;
+}
+
 .correctHint {
   font-size: var(--text-sm);
   color: var(--color-error);

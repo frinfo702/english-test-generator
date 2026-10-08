@@ -220,7 +220,9 @@ export function CompleteWordsPage() {
                       : "",
                   ].join(" ")}
                 >
-                  {userInput[c] ?? ""}
+                  {/* An empty inline-block sits on its bottom edge, a
+                      filled one on its text: keep text in every cell. */}
+                  {userInput[c] ?? "\u00a0"}
                 </span>
               ))}
               <input
