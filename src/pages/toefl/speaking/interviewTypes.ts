@@ -13,16 +13,12 @@ export interface InterviewProblemData {
 }
 
 /**
- * Interview UI step machine.
- * `scenario` is a first-class step (no auto-advance to the question).
+ * Interview UI step machine, paced like the real test: after Start the
+ * scenario runs into Question 1, every question starts recording when it
+ * ends, and only moving on from a recorded answer takes a click.
  */
 export type InterviewPhase =
-  | "pre"
-  | "scenario"
-  | "listening"
-  | "answering"
-  | "processing"
-  | "submitted";
+  "pre" | "scenario" | "listening" | "answering" | "processing" | "recorded";
 
 export const INTERVIEW_TASK_ID = "toefl/speaking/interview";
 
@@ -99,8 +95,9 @@ export function phasePrompt(phase: InterviewPhase): string {
       return "Speak your answer now.";
     case "processing":
       return "Transcribing your answer…";
+    case "recorded":
+      return "Response recorded.";
     case "pre":
-    case "submitted":
       return "Audio only — text stays hidden like the real test.";
     default: {
       const _exhaustive: never = phase;

@@ -86,14 +86,6 @@
   gap: var(--spacing-2);
 }
 
-/* ---- Feedback ---- */
-
-.feedbackPhase {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
 .fbLabel {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);

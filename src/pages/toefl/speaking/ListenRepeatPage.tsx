@@ -4,7 +4,6 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
-import { AudioPlayer } from "../../../components/ui/AudioPlayer";
 import { MicSelector } from "../../../components/ui/MicSelector";
 import { VoiceButton } from "../../../components/ui/VoiceButton";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
@@ -23,13 +22,7 @@ import {
   type PronunciationResult,
 } from "../../../lib/pronunciation";
 import { toWav16k } from "../../../lib/wav";
-import {
-  alignWords,
-  countCorrectWords,
-  countOriginalWords,
-  listenRepeatItemScore,
-} from "./listenRepeat";
-import { DiffLegend, ListenRepeatDiffView } from "./ListenRepeatDiff";
+import { alignWords, listenRepeatItemScore } from "./listenRepeat";
 import styles from "./ListenRepeatPage.module.css";
 
 interface Sentence {
@@ -46,7 +39,9 @@ const DEFAULT_WORDS_PER_SECOND = 2.2;
 const RECORDING_MULTIPLIER = 1.5;
 const PROCESSING_DELAY_MS = 400;
 
-type Phase = "playing" | "ready" | "recording" | "processing" | "feedback";
+// Like the real test: one Start, then each prompt plays and recording
+// starts on its own; only moving to the next sentence takes a click.
+type Phase = "directions" | "playing" | "recording" | "processing" | "recorded";
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
@@ -66,15 +61,9 @@ export function ListenRepeatPage() {
     playing,
     loading: ttsLoading,
     error: ttsError,
-    currentTime,
     duration,
-    playbackRate,
-    setPlaybackRate,
     play,
-    pause,
-    resume,
     stop: stopTts,
-    seek,
   } = useTts();
   const {
     supported: speechSupported,
@@ -87,8 +76,7 @@ export function ListenRepeatPage() {
   const transcriptRef = useRef(transcript);
 
   const [current, setCurrent] = useState(0);
-  const [phase, setPhase] = useState<Phase>("playing");
-  const [transcripts, setTranscripts] = useState<Record<number, string>>({});
+  const [phase, setPhase] = useState<Phase>("directions");
   const [graded, setGraded] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [recordingTimeLeft, setRecordingTimeLeft] = useState(0);
@@ -249,13 +237,12 @@ export function ListenRepeatPage() {
         [current]: transcriptRef.current.trim(),
       };
       transcriptsRef.current = next;
-      setTranscripts(next);
       setProcessingMessage(null);
       finishingRef.current = false;
       if (isLastSentence) {
         void finishSet(next);
       } else {
-        setPhase("feedback");
+        setPhase("recorded");
       }
     }, PROCESSING_DELAY_MS);
   }, [
@@ -299,36 +286,9 @@ export function ListenRepeatPage() {
     const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${current + 1}.mp3`;
     void play(url, () => {
       promptEndedAtRef.current = Date.now();
-      setPhase("ready");
+      startRecording();
     });
-  }, [sentence, fileBasename, current, play]);
-
-  const playSentence = useCallback(
-    (index: number) => {
-      if (!fileBasename) return;
-      const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${index + 1}.mp3`;
-      // A replay before answering moves the point latency is measured from.
-      void play(url, () => {
-        promptEndedAtRef.current = Date.now();
-      });
-    },
-    [fileBasename, play],
-  );
-
-  const handlePlay = useCallback(() => {
-    if (playing) {
-      pause();
-    } else if (currentTime > 0) {
-      resume();
-    } else {
-      // Replay from start (either never played or audio ended)
-      playSentence(current);
-    }
-  }, [playing, currentTime, pause, resume, playSentence, current]);
-
-  const handleStartRecording = useCallback(() => {
-    startRecording();
-  }, [startRecording]);
+  }, [sentence, fileBasename, current, play, startRecording]);
 
   const handleNextSentence = useCallback(() => {
     if (isLastSentence) return;
@@ -376,30 +336,15 @@ export function ListenRepeatPage() {
     stopTts();
     resetTimer();
     setCurrent(0);
-    setTranscripts({});
     transcriptsRef.current = {};
     assessmentsRef.current = {};
     pendingAssessmentsRef.current = [];
-    setPhase("playing");
+    setPhase("directions");
     setGraded(false);
     setRecordingTimeLeft(0);
     setProcessingMessage(null);
     finishingRef.current = false;
     navigate(`/${TASK_ID}`);
-  };
-
-  const handleReplayAudio = () => {
-    clearRecordingTimer();
-    clearProcessingTimeout();
-    void stopSpeech();
-    finishingRef.current = false;
-    setProcessingMessage(null);
-    // During feedback, replay audio without changing phase (keep feedback visible)
-    if (phase === "feedback") {
-      playSentence(current);
-    } else {
-      setPhase("playing");
-    }
   };
 
   const handleRetryRecording = () => {
@@ -460,9 +405,11 @@ export function ListenRepeatPage() {
 
       {data && !loading && hasValidQuestionId && !graded && sentence && (
         <div className={styles.card}>
-          <p className={styles.qNum}>
-            Question {current + 1} / {totalSentences}
-          </p>
+          {phase !== "directions" && (
+            <p className={styles.qNum}>
+              Question {current + 1} / {totalSentences}
+            </p>
+          )}
 
           {phase === "playing" && (
             <div className={styles.showPhase}>
@@ -473,22 +420,24 @@ export function ListenRepeatPage() {
             </div>
           )}
 
-          {phase === "ready" && (
+          {phase === "directions" && (
             <div className={styles.showPhase}>
-              <p className={styles.sentenceDisplay}>Ready to record</p>
+              <p className={styles.sentenceDisplay}>Listen and Repeat</p>
               <p className={styles.hint}>
-                Listen once more if you need to, then say the sentence back.
+                You will listen as someone speaks to you. Listen carefully, then
+                repeat what you heard. Recording starts by itself when each
+                sentence ends and stops when time is up. There is no preparation
+                time, and each sentence plays only once.
               </p>
               <div className={styles.recordControls}>
                 <MicSelector disabled={!speechSupported} previewEnabled />
-                <VoiceButton
-                  state="idle"
-                  label="Start Recording"
-                  variant="primary"
+                <Button
                   size="lg"
-                  onPress={handleStartRecording}
+                  onClick={() => setPhase("playing")}
                   disabled={!speechSupported}
-                />
+                >
+                  Start
+                </Button>
               </div>
             </div>
           )}
@@ -522,58 +471,16 @@ export function ListenRepeatPage() {
             </div>
           )}
 
-          {phase === "feedback" && (
-            <div className={styles.feedbackPhase}>
-              <AudioPlayer
-                playing={playing}
-                loading={ttsLoading}
-                error={ttsError}
-                currentTime={currentTime}
-                duration={duration}
-                playbackRate={playbackRate}
-                onPlayPause={handlePlay}
-                onSeek={seek}
-                onPlaybackRateChange={setPlaybackRate}
-                src={`/audio/toefl/speaking/listen-repeat/${fileBasename}/${current + 1}.mp3`}
-                playLabel={
-                  playing ? "Pause" : currentTime > 0 ? "Resume" : "Play Audio"
-                }
-              />
-              <DiffLegend />
-              <p className={styles.fbLabel}>Comparison:</p>
-              <ListenRepeatDiffView
-                alignment={alignWords(
-                  sentence.text,
-                  transcripts[current] ?? "",
-                )}
-              />
-              <p className={styles.hint}>
-                {countCorrectWords(
-                  alignWords(sentence.text, transcripts[current] ?? ""),
-                )}
-                /
-                {countOriginalWords(
-                  alignWords(sentence.text, transcripts[current] ?? ""),
-                )}{" "}
-                words correct
-              </p>
+          {phase === "recorded" && !processingMessage && (
+            <div className={styles.showPhase}>
+              <p className={styles.sentenceDisplay}>Response recorded</p>
               <Button onClick={handleNextSentence} size="lg">
-                Next Sentence
+                Next
               </Button>
             </div>
           )}
 
           <div className={styles.playerControls}>
-            {phase !== "feedback" && (
-              <Button
-                onClick={handleReplayAudio}
-                disabled={phase === "playing" || ttsLoading}
-                size="sm"
-                variant="secondary"
-              >
-                Replay audio
-              </Button>
-            )}
             <NextQuestionButton
               taskId={TASK_ID}
               variant="secondary"

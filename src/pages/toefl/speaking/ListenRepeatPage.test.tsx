@@ -146,86 +146,7 @@ describe("ListenRepeatPage", () => {
     expect(screen.getByText("Loading question...")).toBeTruthy();
   });
 
-  it("plays the first sentence audio when loaded", async () => {
-    renderPage();
-
-    await waitFor(() => {
-      expect(playMock).toHaveBeenCalledWith(
-        "/audio/toefl/speaking/listen-repeat/001/1.mp3",
-        expect.any(Function),
-      );
-    });
-
-    expect(screen.getByText("Listen carefully...")).toBeTruthy();
-  });
-
-  it("transitions to ready phase after audio ends", async () => {
-    renderPage();
-
-    let onEnded: (() => void) | undefined;
-    await waitFor(() => {
-      expect(playMock).toHaveBeenCalled();
-      onEnded = playMock.mock.calls[0][1];
-    });
-
-    act(() => {
-      onEnded?.();
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    expect(
-      screen.getByRole("button", { name: /Start Recording/i }),
-    ).toBeTruthy();
-  });
-
-  it("starts recording when user clicks Start Recording button", async () => {
-    renderPage();
-
-    let onEnded: (() => void) | undefined;
-    await waitFor(() => {
-      expect(playMock).toHaveBeenCalled();
-      onEnded = playMock.mock.calls[0][1];
-    });
-
-    act(() => {
-      onEnded?.();
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
-    });
-
-    await waitFor(() => {
-      expect(startSpeechMock).toHaveBeenCalled();
-    });
-
-    expect(screen.getByText("Repeat the sentence now")).toBeTruthy();
-    expect(screen.getByText("3s")).toBeTruthy();
-  });
-
-  it("shows per-question feedback after recording and advances on Next Sentence", async () => {
-    renderPage();
-
-    let onEnded: (() => void) | undefined;
-    await waitFor(() => {
-      onEnded = playMock.mock.calls[0][1];
-    });
-
-    act(() => {
-      onEnded?.();
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
+  const recordingSpeech = () =>
     vi.mocked(useSpeechRecognition).mockReturnValue({
       supported: true,
       recording: true,
@@ -235,62 +156,82 @@ describe("ListenRepeatPage", () => {
       stop: stopSpeechMock,
     });
 
+  const pressStart = () =>
     act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
+      screen.getByRole("button", { name: /^Start$/ }).click();
     });
+
+  /** Ends the prompt that started playing on the given (0-based) call. */
+  async function finishPrompt(call: number) {
+    await waitFor(() => expect(playMock).toHaveBeenCalledTimes(call + 1));
+    act(() => {
+      playMock.mock.calls[call][1]?.();
+    });
+  }
+
+  it("shows the directions first and plays nothing until Start", async () => {
+    renderPage();
+
+    expect(screen.getByRole("button", { name: /^Start$/ })).toBeTruthy();
+    expect(screen.getByText(/There is no\s+preparation time/)).toBeTruthy();
+    expect(playMock).not.toHaveBeenCalled();
+
+    pressStart();
 
     await waitFor(() => {
-      expect(startSpeechMock).toHaveBeenCalled();
+      expect(playMock).toHaveBeenCalledWith(
+        "/audio/toefl/speaking/listen-repeat/001/1.mp3",
+        expect.any(Function),
+      );
     });
+    expect(screen.getByText("Listen carefully...")).toBeTruthy();
+  });
 
-    // Advance through recording (3s) + processing delay (400ms)
+  it("starts recording as soon as the sentence finishes playing", async () => {
+    renderPage();
+    pressStart();
+    recordingSpeech();
+    await finishPrompt(0);
+
+    await waitFor(() => {
+      expect(startSpeechMock).toHaveBeenCalledTimes(1);
+    });
+    expect(screen.getByText("Repeat the sentence now")).toBeTruthy();
+    expect(screen.getByText("3s")).toBeTruthy();
+    expect(
+      screen.queryByRole("button", { name: /Start Recording/i }),
+    ).toBeNull();
+  });
+
+  it("stops at the time limit, waits for Next, then plays the next sentence", async () => {
+    renderPage();
+    pressStart();
+    recordingSpeech();
+    await finishPrompt(0);
+
+    // recording (3s) + processing delay (400ms)
     await act(async () => {
       vi.advanceTimersByTime(4000);
     });
 
     await waitFor(() => {
-      expect(screen.getByText("Comparison:")).toBeTruthy();
-      expect(screen.getByText("Prompt")).toBeTruthy();
-      expect(screen.getByText("Response")).toBeTruthy();
+      expect(screen.getByText("Response recorded")).toBeTruthy();
     });
-
-    expect(screen.getByRole("button", { name: /Next Sentence/i })).toBeTruthy();
+    expect(stopSpeechMock).toHaveBeenCalled();
+    expect(playMock).toHaveBeenCalledTimes(1);
+    expect(screen.queryByText("Comparison:")).toBeNull();
 
     act(() => {
-      screen.getByRole("button", { name: /Next Sentence/i }).click();
+      screen.getByRole("button", { name: /^Next$/ }).click();
     });
 
     await waitFor(() => {
       expect(screen.getByText("Question 2 / 2")).toBeTruthy();
-      expect(screen.getByText("Listen carefully...")).toBeTruthy();
+      expect(playMock).toHaveBeenCalledWith(
+        "/audio/toefl/speaking/listen-repeat/001/2.mp3",
+        expect.any(Function),
+      );
     });
-  });
-
-  it("shows recording UI after clicking Start Recording", async () => {
-    renderPage();
-
-    let onEnded: (() => void) | undefined;
-    await waitFor(() => {
-      onEnded = playMock.mock.calls[0][1];
-    });
-
-    act(() => {
-      onEnded?.();
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
-    });
-
-    await waitFor(() => {
-      expect(startSpeechMock).toHaveBeenCalled();
-    });
-
-    expect(screen.getByText("Repeat the sentence now")).toBeTruthy();
   });
 
   it("displays unsupported browser message when speech recognition is unavailable", async () => {
@@ -312,27 +253,19 @@ describe("ListenRepeatPage", () => {
         ),
       ).toBeTruthy();
     });
+    expect(
+      (screen.getByRole("button", { name: /^Start$/ }) as HTMLButtonElement)
+        .disabled,
+    ).toBe(true);
   });
 
-  it("shows a retry button when speech recognition fails", async () => {
+  it.each([
+    "Speech recognition failed due to a network error.",
+    "Recording stopped unexpectedly. Please try again.",
+  ])("offers a retry when recording fails: %s", async (message) => {
     const { rerender } = renderPage();
-
-    let onEnded: (() => void) | undefined;
-    await waitFor(() => {
-      onEnded = playMock.mock.calls[0][1];
-    });
-
-    act(() => {
-      onEnded?.();
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
-    });
+    pressStart();
+    await finishPrompt(0);
 
     await waitFor(() => {
       expect(startSpeechMock).toHaveBeenCalled();
@@ -342,60 +275,9 @@ describe("ListenRepeatPage", () => {
       supported: true,
       recording: false,
       transcript: "",
-      error: "Speech recognition failed due to a network error.",
+      error: message,
       start: startSpeechMock,
       stop: stopSpeechMock,
-    });
-
-    rerender(
-      <MemoryRouter initialEntries={["/toefl/speaking/listen-repeat/1"]}>
-        <Routes>
-          <Route
-            path="/toefl/speaking/listen-repeat/:questionId"
-            element={<ListenRepeatPage />}
-          />
-        </Routes>
-      </MemoryRouter>,
-    );
-
-    await waitFor(() => {
-      expect(
-        screen.getByRole("button", { name: /Retry This Sentence/i }),
-      ).toBeTruthy();
-    });
-  });
-
-  it("shows error when recording stops unexpectedly during recording phase", async () => {
-    vi.mocked(useSpeechRecognition).mockReturnValue({
-      supported: true,
-      recording: false,
-      transcript: "",
-      error: "Recording stopped unexpectedly. Please try again.",
-      start: startSpeechMock,
-      stop: stopSpeechMock,
-    });
-
-    const { rerender } = renderPage();
-
-    let onEnded: (() => void) | undefined;
-    await waitFor(() => {
-      onEnded = playMock.mock.calls[0][1];
-    });
-
-    act(() => {
-      onEnded?.();
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
-    });
-
-    await waitFor(() => {
-      expect(startSpeechMock).toHaveBeenCalled();
     });
 
     rerender(
@@ -419,69 +301,24 @@ describe("ListenRepeatPage", () => {
   it("saves the set with rubric scores and opens its result page", async () => {
     saveScoreMock.mockResolvedValue({ id: "attempt-1" });
     renderPage();
+    pressStart();
+    recordingSpeech();
 
-    // Sentence 1: audio plays → ends → record → finish
-    let onEnded: (() => void) | undefined;
-    await waitFor(() => {
-      onEnded = playMock.mock.calls[0][1];
-    });
-    act(() => {
-      onEnded?.();
-    });
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    vi.mocked(useSpeechRecognition).mockReturnValue({
-      supported: true,
-      recording: true,
-      transcript: "",
-      error: null,
-      start: startSpeechMock,
-      stop: stopSpeechMock,
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
-    });
-
-    await waitFor(() => {
-      expect(startSpeechMock).toHaveBeenCalled();
-    });
-
+    await finishPrompt(0);
     await act(async () => {
       vi.advanceTimersByTime(4000);
     });
-
-    // Now in feedback phase for sentence 1. Click Next Sentence.
     await waitFor(() => {
-      expect(screen.getByText("Comparison:")).toBeTruthy();
+      expect(screen.getByText("Response recorded")).toBeTruthy();
     });
-
     act(() => {
-      screen.getByRole("button", { name: /Next Sentence/i }).click();
+      screen.getByRole("button", { name: /^Next$/ }).click();
     });
 
-    // Sentence 2: audio plays → ends → record → finish (last sentence → review)
-    await waitFor(() => {
-      expect(playMock).toHaveBeenCalledTimes(2);
-    });
-    const onEnded2 = playMock.mock.calls[1][1];
-    act(() => {
-      onEnded2?.();
-    });
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
-    });
-
+    await finishPrompt(1);
     await waitFor(() => {
       expect(startSpeechMock).toHaveBeenCalledTimes(2);
     });
-
     await act(async () => {
       vi.advanceTimersByTime(4000);
     });
@@ -505,63 +342,5 @@ describe("ListenRepeatPage", () => {
         ],
       }),
     );
-  });
-
-  it("allows replaying audio in feedback phase after audio ends", async () => {
-    renderPage();
-
-    let onEnded: (() => void) | undefined;
-    await waitFor(() => {
-      onEnded = playMock.mock.calls[0][1];
-    });
-    act(() => {
-      onEnded?.();
-    });
-    await waitFor(() => {
-      expect(screen.getByText("Ready to record")).toBeTruthy();
-    });
-
-    vi.mocked(useSpeechRecognition).mockReturnValue({
-      supported: true,
-      recording: true,
-      transcript: "",
-      error: null,
-      start: startSpeechMock,
-      stop: stopSpeechMock,
-    });
-
-    act(() => {
-      screen.getByRole("button", { name: /Start Recording/i }).click();
-    });
-
-    await waitFor(() => {
-      expect(startSpeechMock).toHaveBeenCalled();
-    });
-
-    await act(async () => {
-      vi.advanceTimersByTime(4000);
-    });
-
-    // In feedback phase
-    await waitFor(() => {
-      expect(screen.getByText("Comparison:")).toBeTruthy();
-    });
-
-    // The play button in feedback phase should show "Play Audio" when currentTime === 0
-    const playButton = screen.getByRole("button", { name: /Play Audio/i });
-    expect(playButton).toBeTruthy();
-
-    // Click play to replay audio from start
-    act(() => {
-      playButton.click();
-    });
-
-    // play should be called again (2nd time for replay)
-    expect(playMock).toHaveBeenCalledTimes(2);
-
-    // Feedback should still be visible
-    await waitFor(() => {
-      expect(screen.getByText("Comparison:")).toBeTruthy();
-    });
   });
 });

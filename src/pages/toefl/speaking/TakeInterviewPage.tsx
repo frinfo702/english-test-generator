@@ -1,47 +1,32 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
-import { BarGroup } from "../../../components/ui/BarGroup";
 import { Button } from "../../../components/ui/Button";
-import { ScorePips } from "../../../components/pixel/ScorePips";
-import { AudioPlayer } from "../../../components/ui/AudioPlayer";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { MicSelector } from "../../../components/ui/MicSelector";
 import { VoiceButton } from "../../../components/ui/VoiceButton";
 import { Timer } from "../../../components/ui/Timer";
-import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
 import { useSingleAudio } from "../../../hooks/useSingleAudio";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
-import {
-  buildInterviewQaCopyMessage,
-  buildProblemId,
-  clearDraft,
-} from "../../../lib/answerSubmission";
+import { buildProblemId, clearDraft } from "../../../lib/answerSubmission";
 import {
   putAttempts,
   rubricScore,
   type Attempt,
   type ItemResponse,
 } from "../../../lib/attempts";
-import {
-  interviewItemScore,
-  type AiInterviewScores,
-} from "../../../lib/interviewScoring";
-import type { PronunciationResult } from "../../../lib/pronunciation";
+import { interviewItemScore } from "../../../lib/interviewScoring";
 import { assessSpontaneousSpeech } from "../../../lib/pronunciationStream";
-import { computeSpeedMetrics, speedScore } from "../../../lib/speakingRate";
 import { toWav16k } from "../../../lib/wav";
 import { questionIdFromFile } from "../../../lib/questions";
 import { pickInterviewerVoice } from "../../../lib/voiceMapping";
-import { AiScorePanel } from "./AiScorePanel";
 import { InterviewerCard } from "./InterviewerCard";
 import { InterviewTranscript } from "./InterviewTranscript";
 import {
   INTERVIEW_TASK_ID,
-  INTERVIEW_TYPE_LABELS,
   type InterviewPhase,
   type InterviewProblemData,
   interviewAudioUrl,
@@ -59,17 +44,10 @@ export function TakeInterviewPage() {
     useQuestion<InterviewProblemData>(INTERVIEW_TASK_ID);
 
   const [current, setCurrent] = useState(0);
-  const [userText, setUserText] = useState("");
   const [phase, setPhase] = useState<InterviewPhase>("pre");
   const [savingAnswer, setSavingAnswer] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
-  const [assessment, setAssessment] = useState<PronunciationResult | null>(
-    null,
-  );
-  const [assessError, setAssessError] = useState<string | null>(null);
-  const [aiScores, setAiScores] = useState<AiInterviewScores | null>(null);
   const [finishing, setFinishing] = useState(false);
-  const assessGenerationRef = useRef(0);
   const attemptRef = useRef<Attempt | null>(null);
   const pendingRef = useRef<Promise<unknown>[]>([]);
   const submittingRef = useRef(false);
@@ -98,10 +76,6 @@ export function TakeInterviewPage() {
     fileBasename && q
       ? interviewAudioUrl(fileBasename, current, "question")
       : null;
-  const modelUrl =
-    fileBasename && q
-      ? interviewAudioUrl(fileBasename, current, "model")
-      : null;
 
   const onScenarioStep = isScenarioStep(phase, current, hasScenario);
   const chrome = q
@@ -114,26 +88,10 @@ export function TakeInterviewPage() {
       )
     : null;
 
-  const qaCopyMessage = useMemo(() => {
-    if (!q) return null;
-    return buildInterviewQaCopyMessage({
-      question: q.question,
-      userAnswer: userText,
-      modelAnswer: q.modelAnswer,
-      evaluationPoints: q.evaluationPoints,
-      questionType: INTERVIEW_TYPE_LABELS[q.type] ?? q.type,
-    });
-  }, [q, userText]);
-
   const { clearTranscript, clearError: clearSpeechError } = speech;
 
   const clearSessionBits = useCallback(() => {
-    setUserText("");
     setSaveError(null);
-    setAssessment(null);
-    setAssessError(null);
-    setAiScores(null);
-    assessGenerationRef.current += 1;
     clearTranscript();
     clearSpeechError();
     submittingRef.current = false;
@@ -195,29 +153,21 @@ export function TakeInterviewPage() {
       const recording = await speech.stop();
       const finalText = recording.text.trim();
       const index = current;
+      // Scored beside the flow so a missing Azure key never blocks the test.
       if (recording.audio) {
-        const generation = assessGenerationRef.current;
-        const isCurrent = () => generation === assessGenerationRef.current;
         pendingRef.current.push(
           toWav16k(recording.audio)
             .then(assessSpontaneousSpeech)
             .then(
-              (result) => {
-                if (isCurrent()) setAssessment(result);
-                return persist(index, { assessment: result });
-              },
-              (e: unknown) => {
-                const message = e instanceof Error ? e.message : String(e);
-                if (isCurrent()) setAssessError(message);
-                return persist(index, { assessmentError: message });
-              },
+              (result) => persist(index, { assessment: result }),
+              (e: unknown) =>
+                persist(index, {
+                  assessmentError: e instanceof Error ? e.message : String(e),
+                }),
             ),
         );
-      } else {
-        setAssessError("No audio was recorded.");
       }
-      setUserText(finalText);
-      setPhase("submitted");
+      setPhase("recorded");
 
       setSavingAnswer(true);
       setSaveError(null);
@@ -229,7 +179,7 @@ export function TakeInterviewPage() {
       setSavingAnswer(false);
       if (problemId) clearDraft(problemId);
     } catch {
-      setPhase("submitted");
+      setPhase("recorded");
       setSaveError("Failed to process your recording.");
     } finally {
       submittingRef.current = false;
@@ -268,7 +218,6 @@ export function TakeInterviewPage() {
     setPhase("answering");
     clearSpeechError();
     clearTranscript();
-    setUserText("");
     timerStart();
     void startSpeech();
   }, [timerStart, startSpeech, clearSpeechError, clearTranscript]);
@@ -287,9 +236,8 @@ export function TakeInterviewPage() {
       playQuestion();
       return;
     }
-    // Scenario only — do not auto-advance; user presses Continue.
     setPhase("scenario");
-    audio.play("scenario", scenarioUrl);
+    audio.play("scenario", scenarioUrl, playQuestion);
   }, [audio, scenarioUrl, playQuestion]);
 
   const handleStart = () => {
@@ -297,11 +245,6 @@ export function TakeInterviewPage() {
       playScenario();
       return;
     }
-    playQuestion();
-  };
-
-  const handleContinueFromScenario = () => {
-    audio.stop();
     playQuestion();
   };
 
@@ -324,19 +267,22 @@ export function TakeInterviewPage() {
     navigate(`/${INTERVIEW_TASK_ID}`);
   };
 
-  const handleApplyAi = (ai: { reply: string; scores: AiInterviewScores }) => {
-    setAiScores(ai.scores);
-    void persist(current, { ai });
-  };
-
   const handleNext = async () => {
     if (!data) return;
     audio.stop();
     void speech.stop();
     if (current + 1 < data.questions.length) {
-      setCurrent((c) => c + 1);
-      resetInteraction();
+      const next = current + 1;
+      setCurrent(next);
+      clearSessionBits();
       timer.reset();
+      // The next question plays at once and records when it ends, as on test day.
+      setPhase("listening");
+      audio.play(
+        "question",
+        interviewAudioUrl(fileBasename, next, "question"),
+        startAnswering,
+      );
       return;
     }
     setFinishing(true);
@@ -354,13 +300,6 @@ export function TakeInterviewPage() {
     phase === "processing";
   const scenarioActive = audio.isActive("scenario");
   const questionActive = audio.isActive("question");
-  const modelActive = audio.isActive("model");
-  const displayAnswer = userText || speech.transcript;
-  const itemScore = interviewItemScore(aiScores, assessment);
-  const speedMetrics = assessment
-    ? computeSpeedMetrics([assessment.words])
-    : null;
-
   return (
     <div>
       <SectionHeader
@@ -395,12 +334,7 @@ export function TakeInterviewPage() {
       )}
 
       {data && !loading && hasValidQuestionId && q && chrome && (
-        <div
-          className={[
-            styles.card,
-            phase === "submitted" ? styles.cardWide : "",
-          ].join(" ")}
-        >
+        <div className={styles.card}>
           <div className={styles.cardHeader}>
             <span className={styles.typeTag}>{chrome.tag}</span>
             {chrome.position !== chrome.tag && (
@@ -417,26 +351,22 @@ export function TakeInterviewPage() {
             }
           />
 
-          {phase === "submitted" ? (
-            <p className={styles.question}>{q.question}</p>
-          ) : (
-            <p className={styles.questionHidden}>{phasePrompt(phase)}</p>
-          )}
+          <p className={styles.questionHidden}>{phasePrompt(phase)}</p>
 
-          {phase !== "submitted" && (
-            <InterviewTranscript
-              kind={onScenarioStep ? "scenario" : "question"}
-              scenario={data.scenario}
-              question={q.question}
-            />
-          )}
+          <InterviewTranscript
+            kind={onScenarioStep ? "scenario" : "question"}
+            scenario={data.scenario}
+            question={q.question}
+          />
 
           {phase === "pre" && (
             <div className={styles.preBox}>
               <p className={styles.preNote}>
-                {onScenarioStep
-                  ? "Step 1 of 2 — Scenario. Press Start Scenario to hear the research-study introduction (audio only). Continue to Question 1 with a button after the scenario."
-                  : "There is no prep time. Press Start to hear the question, then speak your answer within 45 seconds."}
+                You will take part in a short interview. After you press Start,{" "}
+                {onScenarioStep ? "you will hear the scenario, then " : ""}
+                each question plays once and recording starts as soon as it
+                ends. You have 45 seconds to answer, with no preparation time.
+                When time is up, recording stops and you move on with Next.
               </p>
               <MicSelector disabled={!speech.supported} previewEnabled />
               {!speech.supported && (
@@ -450,7 +380,7 @@ export function TakeInterviewPage() {
                   onClick={handleStart}
                   disabled={!speech.supported}
                 >
-                  {onScenarioStep ? "Start Scenario" : "Start"}
+                  Start
                 </Button>
                 <NextQuestionButton
                   taskId={INTERVIEW_TASK_ID}
@@ -461,102 +391,18 @@ export function TakeInterviewPage() {
             </div>
           )}
 
-          {phase === "scenario" && scenarioUrl && (
+          {(phase === "scenario" || phase === "listening") && (
             <div className={styles.listeningBox}>
               <p className={styles.preNote}>
-                Listen carefully to the scenario. It will not advance
-                automatically — press Continue to Question 1 when you are ready.
+                {phase === "scenario"
+                  ? "Listen to the scenario. The first question follows it."
+                  : "Listen carefully. Recording starts when the question ends."}
               </p>
-              <AudioPlayer
-                playing={audio.playing && scenarioActive}
-                loading={audio.loading && scenarioActive}
-                error={scenarioActive ? audio.error : null}
-                currentTime={scenarioActive ? audio.currentTime : 0}
-                duration={scenarioActive ? audio.duration : 0}
-                playbackRate={audio.playbackRate}
-                onPlayPause={() => audio.toggle("scenario", scenarioUrl)}
-                onSeek={audio.seek}
-                onPlaybackRateChange={audio.setPlaybackRate}
-                seekable
-                src={scenarioUrl}
-                playLabel={
-                  audio.loading && scenarioActive
-                    ? "Loading..."
-                    : audio.playing && scenarioActive
-                      ? "Pause"
-                      : "Replay scenario"
-                }
-              />
-              <div className={styles.listeningActions}>
-                <Button
-                  size="lg"
-                  onClick={handleContinueFromScenario}
-                  disabled={audio.loading && scenarioActive}
-                >
-                  Continue to Question 1
-                </Button>
-              </div>
-            </div>
-          )}
-
-          {phase === "listening" && questionUrl && (
-            <div className={styles.listeningBox}>
-              <p className={styles.preNote}>
-                Listen carefully. Recording starts when the question finishes.
-              </p>
-              <AudioPlayer
-                playing={audio.playing && questionActive}
-                loading={audio.loading && questionActive}
-                error={questionActive ? audio.error : null}
-                currentTime={questionActive ? audio.currentTime : 0}
-                duration={questionActive ? audio.duration : 0}
-                playbackRate={audio.playbackRate}
-                onPlayPause={() =>
-                  audio.toggle("question", questionUrl, startAnswering)
-                }
-                onSeek={audio.seek}
-                onPlaybackRateChange={audio.setPlaybackRate}
-                seekable
-                src={questionUrl}
-                playLabel={
-                  audio.loading && questionActive
-                    ? "Loading..."
-                    : audio.playing && questionActive
-                      ? "Pause"
-                      : "Replay question"
-                }
-              />
-              <div className={styles.listeningActions}>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => {
-                    audio.stop();
-                    startAnswering();
-                  }}
-                >
-                  Skip to answer
-                </Button>
-              </div>
             </div>
           )}
 
           {phase === "answering" && (
             <div className={styles.answerArea}>
-              {questionUrl && (
-                <div className={styles.replayRow}>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={() => audio.toggle("question", questionUrl)}
-                    disabled={audio.loading || speech.recording}
-                  >
-                    {audio.playing && questionActive
-                      ? "Pause question"
-                      : "Replay question"}
-                  </Button>
-                </div>
-              )}
               <Timer
                 display={timer.display}
                 isWarning={timer.isWarning}
@@ -604,150 +450,21 @@ export function TakeInterviewPage() {
             </div>
           )}
 
-          {phase === "submitted" && (
-            <div className={styles.feedbackArea}>
-              <div className={styles.feedbackGrid}>
-                <div className={styles.feedbackMain}>
-                  <section className={styles.userAnswerCard}>
-                    <h3>Your spoken answer</h3>
-                    {displayAnswer ? (
-                      <p className={styles.userAnswerText}>{displayAnswer}</p>
-                    ) : (
-                      <p className={styles.userAnswerEmpty}>
-                        No speech was detected. Try the next question, or retry
-                        if you can.
-                      </p>
-                    )}
-                    {savingAnswer && (
-                      <p className={styles.preNote}>Saving your answer…</p>
-                    )}
-                    {saveError && <p className={styles.error}>{saveError}</p>}
-                    {speech.error && (
-                      <p className={styles.error}>{speech.error}</p>
-                    )}
-                  </section>
-
-                  {qaCopyMessage && !aiScores && (
-                    <AiScorePanel
-                      message={qaCopyMessage}
-                      onApply={handleApplyAi}
-                    />
-                  )}
-
-                  <details className={styles.sampleDetails}>
-                    <summary>Sample answer</summary>
-                    <div className={styles.modelAnswer}>
-                      <p>{q.modelAnswer}</p>
-                      {modelUrl && (
-                        <div className={styles.modelPlayer}>
-                          <AudioPlayer
-                            playing={audio.playing && modelActive}
-                            loading={audio.loading && modelActive}
-                            error={modelActive ? audio.error : null}
-                            currentTime={modelActive ? audio.currentTime : 0}
-                            duration={modelActive ? audio.duration : 0}
-                            playbackRate={audio.playbackRate}
-                            onPlayPause={() => audio.toggle("model", modelUrl)}
-                            onSeek={audio.seek}
-                            onPlaybackRateChange={audio.setPlaybackRate}
-                            seekable
-                            src={modelUrl}
-                            playLabel={
-                              audio.loading && modelActive
-                                ? "Loading..."
-                                : audio.playing && modelActive
-                                  ? "Pause"
-                                  : audio.currentTime > 0 && modelActive
-                                    ? "Resume"
-                                    : "Play sample answer"
-                            }
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </details>
-                </div>
-
-                <aside className={styles.feedbackSide}>
-                  <div className={styles.scoreHead}>
-                    <ScorePips
-                      score={aiScores ? (itemScore?.total ?? null) : null}
-                    />
-                    {aiScores && itemScore ? (
-                      <p>
-                        <strong>{itemScore.total}</strong>/5
-                        {!assessment && " · partial"}
-                      </p>
-                    ) : (
-                      <p>Waiting for the AI score</p>
-                    )}
-                  </div>
-                  <BarGroup>
-                    {itemScore?.languageUse !== undefined && (
-                      <ProgressBar
-                        current={Math.round(itemScore.languageUse)}
-                        total={100}
-                        label="Language use"
-                      />
-                    )}
-                    {itemScore?.organization !== undefined && (
-                      <ProgressBar
-                        current={Math.round(itemScore.organization)}
-                        total={100}
-                        label="Organization"
-                      />
-                    )}
-                    {assessment && speedMetrics ? (
-                      <>
-                        <ProgressBar
-                          current={Math.round(assessment.pronunciation)}
-                          total={100}
-                          label="Pronunciation"
-                        />
-                        <ProgressBar
-                          current={Math.round(speedScore(speedMetrics))}
-                          total={100}
-                          label="Speed"
-                        />
-                        <p className={styles.preNote}>
-                          {Math.round(speedMetrics.speakingRate)} words/min ·{" "}
-                          {speedMetrics.longPausesPerMinute.toFixed(1)} long
-                          pauses/min
-                        </p>
-                        {assessment.words.some((w) => w.accuracy < 60) && (
-                          <p className={styles.preNote}>
-                            Unclear words:{" "}
-                            {assessment.words
-                              .filter((w) => w.accuracy < 60)
-                              .map((w) => w.word)
-                              .join(", ")}
-                          </p>
-                        )}
-                      </>
-                    ) : (
-                      <p className={styles.preNote}>
-                        {assessError
-                          ? `Pronunciation not scored: ${assessError}`
-                          : "Scoring pronunciation…"}
-                      </p>
-                    )}
-                  </BarGroup>
-
-                  <div className={styles.evalCard}>
-                    <h3>Evaluation points</h3>
-                    <ul>
-                      {q.evaluationPoints.map((pt, i) => (
-                        <li key={i}>{pt}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </aside>
-              </div>
-
+          {phase === "recorded" && (
+            <div className={styles.answerArea}>
+              <p className={styles.preNote}>
+                {savingAnswer ? "Saving your answer…" : "Response recorded."}
+              </p>
+              {saveError && <p className={styles.error}>{saveError}</p>}
+              {speech.error && <p className={styles.error}>{speech.error}</p>}
               <div className={styles.actions}>
-                <Button onClick={() => void handleNext()} disabled={finishing}>
+                <Button
+                  size="lg"
+                  onClick={() => void handleNext()}
+                  disabled={finishing || savingAnswer}
+                >
                   {current + 1 < data.questions.length
-                    ? "Continue"
+                    ? "Next"
                     : finishing
                       ? "Finishing…"
                       : "Finish"}
