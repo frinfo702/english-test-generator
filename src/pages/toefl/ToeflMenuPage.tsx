@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
+import { Button } from "../../components/ui/Button";
 import {
   TaskMenu,
   type TaskMenuSection,
@@ -96,12 +98,18 @@ const sections: TaskMenuSection[] = [
 ];
 
 export function ToeflMenuPage() {
+  const navigate = useNavigate();
   return (
     <div>
       <SectionHeader
         title="TOEFL iBT 2026"
         subtitle="January 2026 format — choose a section and task."
         backTo="/"
+        actions={
+          <Button size="sm" onClick={() => navigate("/trial")}>
+            Take a practice test
+          </Button>
+        }
       />
       <TaskMenu sections={sections} />
     </div>

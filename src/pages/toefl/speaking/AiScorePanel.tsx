@@ -7,12 +7,19 @@ import {
 } from "../../../lib/interviewScoring";
 import styles from "./AiScorePanel.module.css";
 
-export function AiScorePanel({
+const INTERVIEW_NOTE =
+  "1. Copy the prompt into your AI chat. 2. Paste its whole reply here. The AI rates language use and organization; pronunciation and fluency come from your audio.";
+
+export function AiScorePanel<T = AiInterviewScores>({
   message,
   onApply,
+  parse = parseAiScores as unknown as (reply: string) => T,
+  note = INTERVIEW_NOTE,
 }: {
   message: string;
-  onApply: (ai: { reply: string; scores: AiInterviewScores }) => void;
+  onApply: (ai: { reply: string; scores: T }) => void;
+  parse?: (reply: string) => T;
+  note?: string;
 }) {
   const [reply, setReply] = useState("");
   const [copied, setCopied] = useState(false);
@@ -32,7 +39,7 @@ export function AiScorePanel({
 
   const handleApply = () => {
     try {
-      onApply({ reply, scores: parseAiScores(reply) });
+      onApply({ reply, scores: parse(reply) });
       setError(null);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -41,11 +48,7 @@ export function AiScorePanel({
 
   return (
     <div className={styles.panel}>
-      <p className={styles.note}>
-        1. Copy the prompt into your AI chat. 2. Paste its whole reply here. The
-        AI rates language use and organization; pronunciation and fluency come
-        from your audio.
-      </p>
+      <p className={styles.note}>{note}</p>
       <Button variant="secondary" size="sm" onClick={() => void handleCopy()}>
         {copied ? "Copied" : "Copy for AI scoring"}
       </Button>

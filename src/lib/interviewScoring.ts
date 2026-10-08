@@ -1,3 +1,4 @@
+import { rubricScore, type Attempt } from "./attempts";
 import type { PronunciationResult } from "./pronunciation";
 import { computeSpeedMetrics, speedScore } from "./speakingRate";
 
@@ -39,6 +40,43 @@ export function parseAiScores(reply: string): AiInterviewScores {
     );
   }
   return { languageUse, organization };
+}
+
+export function parseWritingScore(reply: string): number {
+  const score = lastScore(reply, "score");
+  if (score === null) {
+    throw new Error(
+      `Couldn't find the ${AI_SCORE_FENCE} block. Paste the whole AI reply, including "score".`,
+    );
+  }
+  return score;
+}
+
+export function withInterviewAi(
+  attempt: Attempt,
+  index: number,
+  ai: { reply: string; scores: AiInterviewScores },
+): Attempt {
+  const responses = attempt.responses.map((r, i) =>
+    i === index
+      ? {
+          ...r,
+          ai,
+          itemScore: interviewItemScore(ai.scores, r.assessment ?? null)?.total,
+        }
+      : r,
+  );
+  return { ...attempt, responses, score: rubricScore(responses) };
+}
+
+export function withWritingAi(
+  attempt: Attempt,
+  ai: { reply: string; scores: number },
+): Attempt {
+  const responses = attempt.responses.map((r, i) =>
+    i === 0 ? { ...r, aiReply: ai.reply, itemScore: ai.scores } : r,
+  );
+  return { ...attempt, responses, score: rubricScore(responses) };
 }
 
 /** The score block is for the parser; readers only need the feedback. */

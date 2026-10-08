@@ -35,6 +35,11 @@ const navItems: NavItem[] = [
     matches: (p) => p.startsWith("/toefl"),
   },
   {
+    to: "/trial",
+    label: "Practice Test",
+    matches: (p) => p.startsWith("/trial"),
+  },
+  {
     to: "/toeic",
     label: "TOEIC L&R",
     matches: (p) => p.startsWith("/toeic"),

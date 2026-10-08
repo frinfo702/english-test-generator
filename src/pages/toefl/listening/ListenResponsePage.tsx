@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../../hooks/useTrialItem";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -43,10 +48,11 @@ const TASK_ID = "toefl/listening/response";
 
 export function ListenResponsePage() {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
+  const trial = useTrialItem();
   const {
     display,
     elapsedSeconds,
@@ -124,7 +130,7 @@ export function ListenResponsePage() {
       const correct = data.questions.filter(
         (q) => selected[q.id] === q.correct,
       ).length;
-      saveScore({
+      const saved = saveScore({
         taskId: TASK_ID,
         file: file ?? undefined,
         correct: correct,
@@ -135,12 +141,14 @@ export function ListenResponsePage() {
           choice,
         })),
       });
+      trial?.complete(saved);
     }
     setGraded(true);
     stopTts();
     setCurrentIndex(0);
     window.scrollTo({ top: 0 });
   };
+  useTrialTimeout(handleSubmit);
 
   const handleReplayAudio = () => {
     if (!data) return;

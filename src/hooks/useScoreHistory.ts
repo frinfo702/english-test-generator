@@ -21,6 +21,7 @@ export type TaskId =
   | "toefl/writing/discussion"
   | "toefl/speaking/listen-repeat"
   | "toefl/speaking/interview"
+  | "toefl/trial"
   | "toeic/part2"
   | "toeic/part3"
   | "toeic/part4"

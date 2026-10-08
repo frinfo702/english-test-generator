@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../../hooks/useTrialItem";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -56,10 +61,11 @@ type Phase =
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } =
     useQuestion<ProblemData>(TASK_ID);
   const { saveScore } = useScoreHistory();
+  const trial = useTrialItem();
   const {
     display,
     elapsedSeconds,
@@ -179,7 +185,7 @@ export function ListenRepeatPage() {
       });
       const score = rubricScore(responses)!;
       try {
-        const saved = await saveScore({
+        const saving = saveScore({
           taskId: TASK_ID,
           file: file ?? undefined,
           correct: score.correct,
@@ -189,6 +195,11 @@ export function ListenRepeatPage() {
           responses,
           question: data,
         });
+        if (trial) {
+          trial.complete(saving);
+          return;
+        }
+        const saved = await saving;
         if (saved) navigate(`/results/${saved.id}`);
       } catch (e) {
         setProcessingMessage(null);
@@ -197,8 +208,9 @@ export function ListenRepeatPage() {
         );
       }
     },
-    [data, stop, stopTts, saveScore, file, navigate],
+    [data, stop, stopTts, saveScore, file, navigate, trial],
   );
+  useTrialTimeout(() => void finishSet(transcriptsRef.current));
 
   const finishSentence = useCallback(async () => {
     if (finishingRef.current) return;

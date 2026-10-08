@@ -1,5 +1,10 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../../hooks/useTrialItem";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
@@ -42,7 +47,7 @@ const ANSWER_SECONDS = 45;
 
 export function TakeInterviewPage() {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } =
     useQuestion<InterviewProblemData>(INTERVIEW_TASK_ID);
 
@@ -56,6 +61,14 @@ export function TakeInterviewPage() {
   const attemptRef = useRef<Attempt | null>(null);
   const pendingRef = useRef<Promise<unknown>[]>([]);
   const submittingRef = useRef(false);
+  const trial = useTrialItem();
+  useTrialTimeout(() =>
+    trial?.complete(
+      Promise.allSettled(pendingRef.current).then(
+        () => attemptRef.current ?? undefined,
+      ),
+    ),
+  );
 
   const audio = useSingleAudio();
   const speech = useSpeechRecognition();
@@ -294,7 +307,12 @@ export function TakeInterviewPage() {
     }
     setFinishing(true);
     // The last answer's pronunciation is usually still in flight.
-    await Promise.allSettled(pendingRef.current);
+    const settled = Promise.allSettled(pendingRef.current);
+    if (trial) {
+      trial.complete(settled.then(() => attemptRef.current ?? undefined));
+      return;
+    }
+    await settled;
     const attempt = attemptRef.current;
     if (attempt) navigate(`/results/${attempt.id}`);
     else goToQuestionList();

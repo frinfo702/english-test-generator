@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import {
+  useQuestionId,
+  useTrialItem,
+  useTrialTimeout,
+} from "../../hooks/useTrialItem";
 import { SectionHeader } from "../layout/SectionHeader";
 import { Button } from "../ui/Button";
 import { LoadingSpinner } from "../ui/LoadingSpinner";
@@ -79,10 +84,11 @@ export function ListeningTaskBase({
   listenPrompt = talkPrompt,
 }: ListeningTaskBaseProps) {
   const navigate = useNavigate();
-  const { questionId = "" } = useParams<{ questionId: string }>();
+  const questionId = useQuestionId();
   const { data, file, loading, error, loadById } =
     useQuestion<ListeningProblemData>(taskId);
   const { saveScore } = useScoreHistory();
+  const trial = useTrialItem();
   const {
     display,
     elapsedSeconds,
@@ -141,7 +147,7 @@ export function ListeningTaskBase({
   const handleSubmit = () => {
     const sessionSeconds = stop();
     if (data) {
-      saveScore({
+      const saved = saveScore({
         taskId: taskId,
         file: file ?? undefined,
         correct: correctCount,
@@ -152,12 +158,14 @@ export function ListeningTaskBase({
           choice,
         })),
       });
+      trial?.complete(saved);
     }
     setGraded(true);
     stopTts();
     setCurrentIndex(0);
     if (layout === "talk") window.scrollTo({ top: 0 });
   };
+  useTrialTimeout(handleSubmit);
 
   const handleBackToList = () => {
     resetTimer();

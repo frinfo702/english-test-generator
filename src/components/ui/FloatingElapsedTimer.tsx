@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { TrialItemContext } from "../../hooks/useTrialItem";
 import styles from "./FloatingElapsedTimer.module.css";
 
 interface FloatingElapsedTimerProps {
@@ -12,9 +14,12 @@ interface FloatingElapsedTimerProps {
 export function FloatingElapsedTimer({
   display,
   running,
-  isWarning = false,
+  isWarning,
   isExpired = false,
 }: FloatingElapsedTimerProps) {
+  const inTrial = useContext(TrialItemContext) !== null;
+  // A test shows the section clock; only countdowns (writing tasks) pass isWarning.
+  if (inTrial && isWarning === undefined) return null;
   return (
     <div
       className={[

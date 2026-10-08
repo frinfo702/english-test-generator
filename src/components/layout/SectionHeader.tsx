@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { TrialItemContext } from "../../hooks/useTrialItem";
 import { PixelArrowIcon } from "../ui/PixelArrowIcon";
 import styles from "./SectionHeader.module.css";
 
@@ -18,6 +20,11 @@ export function SectionHeader({
   actions,
 }: SectionHeaderProps) {
   const navigate = useNavigate();
+  // Inside a practice test, leaving a task goes through the test runner only.
+  if (useContext(TrialItemContext)) {
+    backTo = undefined;
+    actions = undefined;
+  }
   return (
     <div className={styles.wrapper}>
       <div className={styles.top}>

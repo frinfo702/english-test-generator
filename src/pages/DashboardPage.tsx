@@ -27,6 +27,8 @@ import {
   type Attempt,
 } from "../lib/attempts";
 import styles from "./DashboardPage.module.css";
+import { PracticeTestsPanel } from "./trial/PracticeTestsPanel";
+import { TRIAL_TASK_ID } from "../lib/trial";
 import dialogStyles from "../components/layout/LegacyHistoryNotice.module.css";
 
 /** Charts are a dashboard-only concern — keep recharts out of the practice pages. */
@@ -49,6 +51,7 @@ const TASK_LABELS: Record<TaskId, string> = {
   "toefl/writing/discussion": "TOEFL Writing: Discussion",
   "toefl/speaking/listen-repeat": "TOEFL Speaking: Listen & Repeat",
   "toefl/speaking/interview": "TOEFL Speaking: Interview",
+  "toefl/trial": "TOEFL Practice Test",
   "toeic/part2": "TOEIC Part 2: Question-Response",
   "toeic/part3": "TOEIC Part 3: Conversations",
   "toeic/part4": "TOEIC Part 4: Talks",
@@ -206,6 +209,7 @@ export function DashboardPage() {
   const [confirmClear, setConfirmClear] = useState(false);
   const [answers, setAnswers] = useState<Attempt[]>([]);
   const [results, setResults] = useState<Attempt[]>([]);
+  const [allAttempts, setAllAttempts] = useState<Attempt[]>([]);
   const [includeAudio, setIncludeAudio] = useState(false);
   const [backupBusy, setBackupBusy] = useState(false);
   const [backupMessage, setBackupMessage] = useState<string | null>(null);
@@ -215,9 +219,16 @@ export function DashboardPage() {
   const load = useCallback(() => {
     getAll().then(setEntries);
     getAllAttempts().then((all) => {
+      setAllAttempts(all);
       // Only attempts with a question snapshot can be rendered as a result.
       const withResult = (a: Attempt) => a.question !== undefined;
-      setAnswers(all.filter((a) => !a.score && !withResult(a)).reverse());
+      setAnswers(
+        all
+          .filter(
+            (a) => !a.score && !withResult(a) && a.taskId !== TRIAL_TASK_ID,
+          )
+          .reverse(),
+      );
       setResults(all.filter(withResult).reverse());
     });
   }, [getAll]);
@@ -337,6 +348,8 @@ export function DashboardPage() {
         <PixelHamster className={styles.hamster} />
         <StreakCalendar dates={sessionDates} />
       </div>
+
+      <PracticeTestsPanel attempts={allAttempts} />
 
       {taskIds.length === 0 ? (
         <div className={styles.empty}>

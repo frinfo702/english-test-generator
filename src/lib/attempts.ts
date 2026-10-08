@@ -7,6 +7,7 @@
 import type { TaskId } from "../hooks/useScoreHistory";
 import type { AiInterviewScores } from "./interviewScoring";
 import type { PronunciationResult } from "./pronunciation";
+import type { TrialRecord } from "./trial";
 
 export interface ItemResponse {
   itemId?: string;
@@ -25,6 +26,8 @@ export interface ItemResponse {
   assessment?: PronunciationResult;
   assessmentError?: string;
   ai?: { reply: string; scores: AiInterviewScores };
+  /** Writing tasks: the pasted AI feedback behind `itemScore`. */
+  aiReply?: string;
   /** 0–5 on the ETS rubric. */
   itemScore?: number;
 }
@@ -40,6 +43,8 @@ export interface Attempt {
   score?: { method: string; correct: number; total: number };
   /** Snapshot of the question JSON; question files get regenerated. */
   question?: unknown;
+  /** Only on the `toefl/trial` record that links a practice test's items. */
+  trial?: TrialRecord;
 }
 
 export const RUBRIC_METHOD = "ets-rubric";
