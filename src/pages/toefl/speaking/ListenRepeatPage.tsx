@@ -4,6 +4,7 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { MicCheck } from "../../../components/ui/MicCheck";
 import { MicSelector } from "../../../components/ui/MicSelector";
 import { VoiceButton } from "../../../components/ui/VoiceButton";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
@@ -229,7 +230,6 @@ export function ListenRepeatPage() {
       };
     }
     setPhase("processing");
-    setProcessingMessage("Processing your speech...");
 
     processingTimeoutRef.current = setTimeout(() => {
       const next = {
@@ -431,6 +431,7 @@ export function ListenRepeatPage() {
               </p>
               <div className={styles.recordControls}>
                 <MicSelector disabled={!speechSupported} previewEnabled />
+                <MicCheck disabled={!speechSupported} />
                 <Button
                   size="lg"
                   onClick={() => setPhase("playing")}
@@ -442,16 +443,27 @@ export function ListenRepeatPage() {
             </div>
           )}
 
-          {phase === "recording" && (
+          {/* Recording, processing and recorded share one view: only the
+              button state changes, and Next below unlocks when it's done. */}
+          {(phase === "recording" ||
+            phase === "processing" ||
+            phase === "recorded") && (
             <div className={styles.showPhase}>
               <p className={styles.sentenceDisplay}>Repeat the sentence now</p>
               <VoiceButton
-                state="recording"
-                label="Recording"
+                state={
+                  phase === "recording"
+                    ? "recording"
+                    : phase === "processing"
+                      ? "processing"
+                      : "idle"
+                }
+                label={phase === "recording" ? "Recording" : "Recorded"}
                 trailing={`${recordingTimeLeft}s`}
                 variant="secondary"
                 size="lg"
                 levels={levels}
+                disabled={phase !== "recording"}
                 onPress={() => void finishSentence()}
               />
               {transcript && (
@@ -465,16 +477,13 @@ export function ListenRepeatPage() {
             </div>
           )}
 
-          {(phase === "processing" || processingMessage) && (
-            <div className={styles.showPhase}>
-              <LoadingSpinner message={processingMessage ?? "Processing..."} />
-            </div>
-          )}
-
-          {phase === "recorded" && !processingMessage && (
-            <div className={styles.showPhase}>
-              <p className={styles.sentenceDisplay}>Response recorded</p>
-              <Button onClick={handleNextSentence} size="lg">
+          {phase !== "directions" && (
+            <div className={styles.recordControls}>
+              <Button
+                onClick={handleNextSentence}
+                size="lg"
+                disabled={phase !== "recorded" || isLastSentence}
+              >
                 Next
               </Button>
             </div>

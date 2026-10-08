@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
+import { MicCheck } from "../../../components/ui/MicCheck";
 import { MicSelector } from "../../../components/ui/MicSelector";
 import { VoiceButton } from "../../../components/ui/VoiceButton";
 import { Timer } from "../../../components/ui/Timer";
@@ -369,6 +370,7 @@ export function TakeInterviewPage() {
                 When time is up, recording stops and you move on with Next.
               </p>
               <MicSelector disabled={!speech.supported} previewEnabled />
+              <MicCheck disabled={!speech.supported} />
               {!speech.supported && (
                 <p className={styles.error}>
                   Microphone recording is not supported in this browser.
@@ -401,7 +403,11 @@ export function TakeInterviewPage() {
             </div>
           )}
 
-          {phase === "answering" && (
+          {/* Answering, processing and recorded share one view: only the
+              button state changes, and Next below unlocks when it's done. */}
+          {(phase === "answering" ||
+            phase === "processing" ||
+            phase === "recorded") && (
             <div className={styles.answerArea}>
               <Timer
                 display={timer.display}
@@ -409,11 +415,18 @@ export function TakeInterviewPage() {
                 isExpired={timer.isExpired}
               />
               <VoiceButton
-                state={speech.recording ? "recording" : "processing"}
-                label="Recording"
+                state={
+                  phase === "answering" && speech.recording
+                    ? "recording"
+                    : phase === "recorded"
+                      ? "idle"
+                      : "processing"
+                }
+                label={phase === "recorded" ? "Recorded" : "Recording"}
                 size="lg"
                 variant="primary"
                 levels={speech.levels}
+                disabled={phase !== "answering"}
                 onPress={() => {
                   void finishAnswer();
                 }}
@@ -423,57 +436,41 @@ export function TakeInterviewPage() {
                 requestPermissionOnMount={false}
                 activeDeviceId={speech.activeDeviceId}
               />
+              {saveError && <p className={styles.error}>{saveError}</p>}
               {speech.error && (
                 <div className={styles.error}>
                   <p>{speech.error}</p>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    onClick={handleRetryRecording}
-                  >
-                    Retry recording
-                  </Button>
+                  {phase === "answering" && (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={handleRetryRecording}
+                    >
+                      Retry recording
+                    </Button>
+                  )}
                 </div>
               )}
             </div>
           )}
 
-          {phase === "processing" && (
-            <div className={styles.answerArea}>
-              <LoadingSpinner
-                message={
-                  speech.processing
-                    ? "Transcribing your answer…"
-                    : "Processing your answer…"
-                }
+          {phase !== "pre" && (
+            <div className={styles.actions}>
+              <Button
+                size="lg"
+                onClick={() => void handleNext()}
+                disabled={phase !== "recorded" || finishing || savingAnswer}
+              >
+                {current + 1 < data.questions.length
+                  ? "Next"
+                  : finishing
+                    ? "Finishing…"
+                    : "Finish"}
+              </Button>
+              <NextQuestionButton
+                taskId={INTERVIEW_TASK_ID}
+                variant="secondary"
               />
-            </div>
-          )}
-
-          {phase === "recorded" && (
-            <div className={styles.answerArea}>
-              <p className={styles.preNote}>
-                {savingAnswer ? "Saving your answer…" : "Response recorded."}
-              </p>
-              {saveError && <p className={styles.error}>{saveError}</p>}
-              {speech.error && <p className={styles.error}>{speech.error}</p>}
-              <div className={styles.actions}>
-                <Button
-                  size="lg"
-                  onClick={() => void handleNext()}
-                  disabled={finishing || savingAnswer}
-                >
-                  {current + 1 < data.questions.length
-                    ? "Next"
-                    : finishing
-                      ? "Finishing…"
-                      : "Finish"}
-                </Button>
-                <NextQuestionButton
-                  taskId={INTERVIEW_TASK_ID}
-                  variant="secondary"
-                />
-              </div>
             </div>
           )}
         </div>

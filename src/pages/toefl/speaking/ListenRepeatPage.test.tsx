@@ -173,7 +173,10 @@ describe("ListenRepeatPage", () => {
     renderPage();
 
     expect(screen.getByRole("button", { name: /^Start$/ })).toBeTruthy();
-    expect(screen.getByText(/There is no\s+preparation time/)).toBeTruthy();
+    expect(screen.getByText(/There is no\s+preparation\s+time/)).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: /Test microphone/ }),
+    ).toBeTruthy();
     expect(playMock).not.toHaveBeenCalled();
 
     pressStart();
@@ -203,11 +206,15 @@ describe("ListenRepeatPage", () => {
     ).toBeNull();
   });
 
+  const nextButton = () =>
+    screen.getByRole("button", { name: /^Next$/ }) as HTMLButtonElement;
+
   it("stops at the time limit, waits for Next, then plays the next sentence", async () => {
     renderPage();
     pressStart();
     recordingSpeech();
     await finishPrompt(0);
+    expect(nextButton().disabled).toBe(true);
 
     // recording (3s) + processing delay (400ms)
     await act(async () => {
@@ -215,14 +222,15 @@ describe("ListenRepeatPage", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText("Response recorded")).toBeTruthy();
+      expect(nextButton().disabled).toBe(false);
     });
     expect(stopSpeechMock).toHaveBeenCalled();
     expect(playMock).toHaveBeenCalledTimes(1);
+    expect(screen.getByText("Repeat the sentence now")).toBeTruthy();
     expect(screen.queryByText("Comparison:")).toBeNull();
 
     act(() => {
-      screen.getByRole("button", { name: /^Next$/ }).click();
+      nextButton().click();
     });
 
     await waitFor(() => {
@@ -309,10 +317,10 @@ describe("ListenRepeatPage", () => {
       vi.advanceTimersByTime(4000);
     });
     await waitFor(() => {
-      expect(screen.getByText("Response recorded")).toBeTruthy();
+      expect(nextButton().disabled).toBe(false);
     });
     act(() => {
-      screen.getByRole("button", { name: /^Next$/ }).click();
+      nextButton().click();
     });
 
     await finishPrompt(1);
