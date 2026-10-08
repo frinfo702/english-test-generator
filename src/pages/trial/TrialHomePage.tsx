@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PixelArt } from "../../components/pixel/PixelArt";
 import { Button } from "../../components/ui/Button";
 import { getAllAttempts, saveAttempt, type Attempt } from "../../lib/attempts";
@@ -7,12 +7,7 @@ import {
   TRIAL_SECTIONS,
   TRIAL_TASK_ID,
   buildTrialPlan,
-  estimateScore,
-  formatBand,
-  isTrial,
   modeMinutes,
-  scoreTrial,
-  trialTitle,
   type TrialMode,
 } from "../../lib/trial";
 import { TASK_NAMES } from "./taskNames";
@@ -74,9 +69,6 @@ function PixelRadio({ on }: { on: boolean }) {
   );
 }
 
-const clock = (minutes: number) =>
-  `${Math.floor(minutes / 60)}:${String(minutes % 60).padStart(2, "0")}`;
-
 export function TrialHomePage() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<TrialMode>("full");
@@ -87,10 +79,6 @@ export function TrialHomePage() {
   useEffect(() => {
     getAllAttempts().then(setAttempts, () => setAttempts([]));
   }, []);
-
-  const trials = (attempts ?? []).filter(isTrial);
-  const byId = new Map((attempts ?? []).map((a) => [a.id, a]));
-  const estimate = estimateScore(attempts ?? []);
 
   const start = async () => {
     setStarting(true);
@@ -140,9 +128,7 @@ export function TrialHomePage() {
               <PixelRadio on={mode === m.mode} />
               <span className={styles.modeName}>{m.label}</span>
               <span className={styles.modeContents}>{m.contents}</span>
-              <span className={styles.modeTime}>
-                {clock(modeMinutes(m.mode))}
-              </span>
+              <span className={styles.modeTime}>{modeMinutes(m.mode)} min</span>
             </button>
           ))}
         </div>
@@ -170,86 +156,6 @@ export function TrialHomePage() {
           </p>
         </div>
         {error && <p className={styles.error}>{error}</p>}
-      </section>
-
-      <section aria-labelledby="results" className={styles.block}>
-        <div className={styles.blockHead}>
-          <h2 id="results" className={styles.blockHeading}>
-            Results
-          </h2>
-          {estimate.overall !== null && (
-            <span className={styles.note}>
-              Estimated real-test score{" "}
-              <strong className={styles.estimate}>
-                {formatBand(estimate.overall)}
-              </strong>
-            </span>
-          )}
-        </div>
-        {trials.length === 0 ? (
-          <p className={styles.note}>No practice tests yet.</p>
-        ) : (
-          <table className={styles.scoreSheet}>
-            <thead>
-              <tr>
-                <th scope="col">Test</th>
-                {TRIAL_SECTIONS.map((s) => (
-                  <th key={s.key} scope="col" className={styles.num}>
-                    <abbr title={s.label}>{s.label[0]}</abbr>
-                  </th>
-                ))}
-                <th scope="col" className={styles.num}>
-                  Total
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {[...trials].reverse().map((t) => {
-                const result = scoreTrial(t.trial, byId);
-                const done = Boolean(t.trial.finishedAt);
-                const single = result.sections.length === 1;
-                const total = single ? result.sections[0].band : result.overall;
-                return (
-                  <tr key={t.id}>
-                    <th scope="row">
-                      <Link
-                        to={done ? `/trial/${t.id}/report` : `/trial/${t.id}`}
-                        className={styles.sheetLink}
-                      >
-                        {trialTitle(t, trials).replace("TOEFL ", "")}
-                      </Link>
-                      <span className={styles.sheetMeta}>
-                        {new Date(t.date).toLocaleDateString(undefined, {
-                          month: "short",
-                          day: "numeric",
-                        })}
-                        {single && ` · ${result.sections[0].label}`}
-                        {!done && " · Resume"}
-                      </span>
-                    </th>
-                    {TRIAL_SECTIONS.map((s) => {
-                      const section = result.sections.find(
-                        (x) => x.key === s.key,
-                      );
-                      return (
-                        <td key={s.key} className={styles.num}>
-                          {!section
-                            ? ""
-                            : done
-                              ? formatBand(section.band)
-                              : "NS"}
-                        </td>
-                      );
-                    })}
-                    <td className={`${styles.num} ${styles.sheetTotal}`}>
-                      {done ? formatBand(total) : "NS"}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
       </section>
     </div>
   );

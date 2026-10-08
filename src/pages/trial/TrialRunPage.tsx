@@ -262,7 +262,8 @@ export function TrialRunPage({
           >
             Begin {section.label}
           </Button>
-          <Link to="/trial" className={styles.quietLink}>
+          {/* Unfinished tests are resumed from the dashboard's list. */}
+          <Link to="/dashboard#practice-tests" className={styles.quietLink}>
             Leave for now
           </Link>
         </div>
