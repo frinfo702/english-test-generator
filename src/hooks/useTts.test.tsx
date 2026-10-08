@@ -274,6 +274,36 @@ describe("useTts", () => {
     expect(revokeObjectURL).toHaveBeenCalled();
   });
 
+  it("keeps the next clip's onEnded when onEnded starts that clip", async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      blob: vi
+        .fn()
+        .mockResolvedValue(new Blob(["audio"], { type: "audio/mpeg" })),
+    });
+
+    const { useTts } = await import("./useTts");
+    const { result } = renderHook(() => useTts());
+    const secondEnded = vi.fn();
+    let secondStarted: Promise<void> = Promise.resolve();
+
+    await act(async () => {
+      await result.current.play("/scenario.mp3", () => {
+        secondStarted = result.current.play("/question.mp3", secondEnded);
+      });
+    });
+    await act(async () => {
+      FakeAudio.instances.at(-1)?.onended?.();
+      await secondStarted;
+    });
+    act(() => {
+      FakeAudio.instances.at(-1)?.onended?.();
+    });
+
+    expect(FakeAudio.instances.at(-1)?.src).not.toContain("scenario");
+    expect(secondEnded).toHaveBeenCalledTimes(1);
+  });
+
   it("resets playback time when audio finishes so replay works", async () => {
     fetchMock.mockResolvedValue({
       ok: true,

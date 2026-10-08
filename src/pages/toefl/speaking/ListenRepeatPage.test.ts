@@ -5,6 +5,7 @@ import {
   countOriginalWords,
   listenRepeatItemScore,
   normalizeWord,
+  recordingSeconds,
 } from "./listenRepeat";
 
 describe("alignWords", () => {
@@ -158,5 +159,13 @@ describe("listenRepeatItemScore", () => {
   it("caps an exact repetition by low pronunciation", () => {
     expect(score(prompt, prompt, 65)).toBe(4);
     expect(score(prompt, prompt, 30)).toBe(2);
+  });
+});
+
+describe("recordingSeconds", () => {
+  it("gives 8 s to sentences 1-2, 10 s to 3-5 and 12 s to 6-7", () => {
+    expect([0, 1, 2, 3, 4, 5, 6].map(recordingSeconds)).toEqual([
+      8, 8, 10, 10, 10, 12, 12,
+    ]);
   });
 });

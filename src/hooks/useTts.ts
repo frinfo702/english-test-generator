@@ -183,7 +183,9 @@ export function useTts(): UseTtsReturn {
           cancelAnimationFrame(rafRef.current);
           rafRef.current = 0;
         }
-        onEndedRef.current?.();
+        // Taken before release: the callback may start the next clip, whose
+        // own onEnded a later reset would otherwise wipe out.
+        const ended = onEndedRef.current;
         onEndedRef.current = null;
         // Release the audio element and blob URL so Safari can free the audio
         // session before speech recognition starts. Remove the error handler
@@ -200,6 +202,7 @@ export function useTts(): UseTtsReturn {
         }
         setCurrentTime(0);
         setDuration(0);
+        ended?.();
       };
       audio.onerror = () => {
         if (session !== sessionRef.current) return;

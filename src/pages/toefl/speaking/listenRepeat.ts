@@ -163,3 +163,12 @@ export function listenRepeatItemScore(
           : 5;
   return Math.min(byWords, cap);
 }
+
+/**
+ * Response window for the sentence at a 0-based position, stepped as on the
+ * test (8 s for 1–2, 10 s for 3–5, 12 s for 6–7) rather than scaled to the
+ * prompt's audio, which left short sentences only 3–5 seconds.
+ */
+export function recordingSeconds(index: number): number {
+  return index < 2 ? 8 : index < 5 ? 10 : 12;
+}

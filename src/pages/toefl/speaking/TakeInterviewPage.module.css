@@ -52,14 +52,6 @@
   color: var(--color-ink-tertiary);
 }
 
-.question {
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-weight: var(--font-medium);
-  line-height: var(--lh-snug);
-  letter-spacing: -0.01em;
-}
-
 .questionHidden {
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -96,113 +88,10 @@
   gap: var(--spacing-4);
 }
 
-.listeningActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-2);
-}
-
 .answerArea {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
-}
-
-.replayRow {
-  display: flex;
-  justify-content: flex-start;
-}
-
-/* ---- Feedback ---- */
-
-.feedbackArea {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-5);
-}
-
-.modelPlayer {
-  margin-top: var(--spacing-3);
-}
-
-.modelAnswer {
-  background: var(--color-surface);
-  border: var(--doc-border);
-  border-radius: var(--radius-doc);
-  padding: var(--spacing-5);
-}
-
-.modelAnswer h3 {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  color: var(--color-ink-tertiary);
-  margin-bottom: var(--spacing-3);
-}
-
-.modelAnswer p {
-  font-family: var(--font-sans);
-  line-height: var(--lh-doc);
-  color: var(--color-ink);
-}
-
-.userAnswerCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: var(--spacing-5);
-}
-
-.userAnswerCard h3 {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  color: var(--color-ink-tertiary);
-  margin-bottom: var(--spacing-3);
-}
-
-.userAnswerText {
-  font-family: var(--font-sans);
-  line-height: var(--lh-doc);
-  margin: 0;
-  white-space: pre-wrap;
-}
-
-.userAnswerEmpty {
-  margin: 0;
-  color: var(--color-ink-tertiary);
-  font-size: var(--text-sm);
-}
-
-.evalCard {
-  background: var(--color-surface-subtle);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: var(--spacing-5);
-}
-
-.evalCard h3 {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  color: var(--color-ink-tertiary);
-  margin-bottom: var(--spacing-3);
-}
-
-.evalCard ul {
-  padding-left: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.evalCard li {
-  font-size: var(--text-sm);
-  line-height: var(--lh-normal);
-  color: var(--color-ink-secondary);
 }
 
 .resultCard {
@@ -371,56 +260,4 @@
   align-items: center;
   gap: var(--spacing-3);
   flex-wrap: wrap;
-}
-
-.cardWide {
-  max-width: var(--max-content);
-}
-
-.feedbackGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  gap: var(--spacing-6);
-  align-items: start;
-}
-
-.feedbackMain,
-.feedbackSide {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-  min-width: 0;
-}
-
-.scoreHead {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-3);
-  font-size: var(--text-sm);
-  color: var(--color-ink-tertiary);
-  font-variant-numeric: tabular-nums;
-}
-
-.scoreHead svg {
-  height: 24px;
-}
-
-.scoreHead strong {
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  color: var(--color-ink);
-  margin-right: 2px;
-}
-
-.sampleDetails summary {
-  cursor: pointer;
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-  margin-bottom: var(--spacing-3);
-}
-
-@media (max-width: 860px) {
-  .feedbackGrid {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }

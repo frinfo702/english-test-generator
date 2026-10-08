@@ -4,7 +4,7 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
-import { AudioPlayer } from "../../../components/ui/AudioPlayer";
+import { MicCheck } from "../../../components/ui/MicCheck";
 import { MicSelector } from "../../../components/ui/MicSelector";
 import { VoiceButton } from "../../../components/ui/VoiceButton";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
@@ -25,11 +25,9 @@ import {
 import { toWav16k } from "../../../lib/wav";
 import {
   alignWords,
-  countCorrectWords,
-  countOriginalWords,
   listenRepeatItemScore,
+  recordingSeconds,
 } from "./listenRepeat";
-import { DiffLegend, ListenRepeatDiffView } from "./ListenRepeatDiff";
 import styles from "./ListenRepeatPage.module.css";
 
 interface Sentence {
@@ -38,15 +36,23 @@ interface Sentence {
   wordCount: number;
 }
 interface ProblemData {
+  /** Shown and read aloud before the first sentence. */
+  scenario?: string;
   sentences: Sentence[];
 }
 
 const TASK_ID = "toefl/speaking/listen-repeat";
-const DEFAULT_WORDS_PER_SECOND = 2.2;
-const RECORDING_MULTIPLIER = 1.5;
 const PROCESSING_DELAY_MS = 400;
 
-type Phase = "playing" | "ready" | "recording" | "processing" | "feedback";
+// Like the real test: one Start, then each prompt plays and recording
+// starts on its own; only moving to the next sentence takes a click.
+type Phase =
+  | "directions"
+  | "scenario"
+  | "playing"
+  | "recording"
+  | "processing"
+  | "recorded";
 
 export function ListenRepeatPage() {
   const navigate = useNavigate();
@@ -66,15 +72,8 @@ export function ListenRepeatPage() {
     playing,
     loading: ttsLoading,
     error: ttsError,
-    currentTime,
-    duration,
-    playbackRate,
-    setPlaybackRate,
     play,
-    pause,
-    resume,
     stop: stopTts,
-    seek,
   } = useTts();
   const {
     supported: speechSupported,
@@ -87,8 +86,7 @@ export function ListenRepeatPage() {
   const transcriptRef = useRef(transcript);
 
   const [current, setCurrent] = useState(0);
-  const [phase, setPhase] = useState<Phase>("playing");
-  const [transcripts, setTranscripts] = useState<Record<number, string>>({});
+  const [phase, setPhase] = useState<Phase>("directions");
   const [graded, setGraded] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
   const [recordingTimeLeft, setRecordingTimeLeft] = useState(0);
@@ -96,7 +94,6 @@ export function ListenRepeatPage() {
     null,
   );
 
-  const durationRef = useRef(duration);
   const takesRef = useRef<Record<number, ItemResponse>>({});
   const transcriptsRef = useRef<Record<number, string>>({});
   const assessmentsRef = useRef<
@@ -118,10 +115,6 @@ export function ListenRepeatPage() {
   const totalSentences = data?.sentences.length ?? 0;
   const sentence = data?.sentences[current];
   const isLastSentence = current + 1 >= totalSentences;
-
-  useEffect(() => {
-    durationRef.current = duration;
-  }, [duration]);
 
   useEffect(() => {
     if (!hasValidQuestionId) return;
@@ -241,7 +234,6 @@ export function ListenRepeatPage() {
       };
     }
     setPhase("processing");
-    setProcessingMessage("Processing your speech...");
 
     processingTimeoutRef.current = setTimeout(() => {
       const next = {
@@ -249,13 +241,12 @@ export function ListenRepeatPage() {
         [current]: transcriptRef.current.trim(),
       };
       transcriptsRef.current = next;
-      setTranscripts(next);
       setProcessingMessage(null);
       finishingRef.current = false;
       if (isLastSentence) {
         void finishSet(next);
       } else {
-        setPhase("feedback");
+        setPhase("recorded");
       }
     }, PROCESSING_DELAY_MS);
   }, [
@@ -270,16 +261,7 @@ export function ListenRepeatPage() {
 
   const startRecording = useCallback(() => {
     if (!speechSupported) return;
-    const audioDuration =
-      durationRef.current > 0
-        ? durationRef.current
-        : (sentence?.wordCount ?? 0) / DEFAULT_WORDS_PER_SECOND;
-    const recordingDuration = Math.max(
-      3,
-      Math.round(audioDuration * RECORDING_MULTIPLIER),
-    );
-
-    setRecordingTimeLeft(recordingDuration);
+    setRecordingTimeLeft(recordingSeconds(current));
     setPhase("recording");
     startSpeech();
 
@@ -292,43 +274,28 @@ export function ListenRepeatPage() {
         return prev - 1;
       });
     }, 1000);
-  }, [speechSupported, sentence, startSpeech, finishSentence]);
+  }, [speechSupported, current, startSpeech, finishSentence]);
 
   const playCurrentSentence = useCallback(() => {
     if (!sentence || !fileBasename) return;
     const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${current + 1}.mp3`;
     void play(url, () => {
       promptEndedAtRef.current = Date.now();
-      setPhase("ready");
+      startRecording();
     });
-  }, [sentence, fileBasename, current, play]);
+  }, [sentence, fileBasename, current, play, startRecording]);
 
-  const playSentence = useCallback(
-    (index: number) => {
-      if (!fileBasename) return;
-      const url = `/audio/toefl/speaking/listen-repeat/${fileBasename}/${index + 1}.mp3`;
-      // A replay before answering moves the point latency is measured from.
-      void play(url, () => {
-        promptEndedAtRef.current = Date.now();
-      });
-    },
-    [fileBasename, play],
-  );
-
-  const handlePlay = useCallback(() => {
-    if (playing) {
-      pause();
-    } else if (currentTime > 0) {
-      resume();
-    } else {
-      // Replay from start (either never played or audio ended)
-      playSentence(current);
+  const startSet = () => {
+    if (!data?.scenario || !fileBasename) {
+      setPhase("playing");
+      return;
     }
-  }, [playing, currentTime, pause, resume, playSentence, current]);
-
-  const handleStartRecording = useCallback(() => {
-    startRecording();
-  }, [startRecording]);
+    setPhase("scenario");
+    void play(
+      `/audio/toefl/speaking/listen-repeat/${fileBasename}/scenario.mp3`,
+      () => setPhase("playing"),
+    );
+  };
 
   const handleNextSentence = useCallback(() => {
     if (isLastSentence) return;
@@ -376,30 +343,15 @@ export function ListenRepeatPage() {
     stopTts();
     resetTimer();
     setCurrent(0);
-    setTranscripts({});
     transcriptsRef.current = {};
     assessmentsRef.current = {};
     pendingAssessmentsRef.current = [];
-    setPhase("playing");
+    setPhase("directions");
     setGraded(false);
     setRecordingTimeLeft(0);
     setProcessingMessage(null);
     finishingRef.current = false;
     navigate(`/${TASK_ID}`);
-  };
-
-  const handleReplayAudio = () => {
-    clearRecordingTimer();
-    clearProcessingTimeout();
-    void stopSpeech();
-    finishingRef.current = false;
-    setProcessingMessage(null);
-    // During feedback, replay audio without changing phase (keep feedback visible)
-    if (phase === "feedback") {
-      playSentence(current);
-    } else {
-      setPhase("playing");
-    }
   };
 
   const handleRetryRecording = () => {
@@ -421,14 +373,23 @@ export function ListenRepeatPage() {
         subtitle="Listen to the sentence, then repeat it into the microphone."
         backTo="/toefl"
         actions={
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={handleBackToList}
-            disabled={loading}
-          >
-            Question List
-          </Button>
+          <>
+            {/* Moves to another set, so it lives with Question List and away
+                from Next, which moves within this set. */}
+            <NextQuestionButton
+              taskId={TASK_ID}
+              variant="secondary"
+              size="sm"
+            />
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleBackToList}
+              disabled={loading}
+            >
+              Question List
+            </Button>
+          </>
         }
       />
 
@@ -460,54 +421,82 @@ export function ListenRepeatPage() {
 
       {data && !loading && hasValidQuestionId && !graded && sentence && (
         <div className={styles.card}>
-          <p className={styles.qNum}>
-            Question {current + 1} / {totalSentences}
-          </p>
+          {phase !== "directions" && phase !== "scenario" && (
+            <p className={styles.qNum}>
+              Question {current + 1} / {totalSentences}
+            </p>
+          )}
+
+          {phase === "scenario" && (
+            <div className={styles.showPhase}>
+              <p className={styles.scenario}>{data.scenario}</p>
+              <p className={styles.hint}>
+                {ttsLoading ? "Loading audio…" : "Audio is playing."}
+              </p>
+            </div>
+          )}
 
           {phase === "playing" && (
             <div className={styles.showPhase}>
-              <p className={styles.sentenceDisplay}>Listen carefully...</p>
+              <p className={styles.sentenceDisplay}>
+                Listen and repeat only once.
+              </p>
               <p className={styles.hint}>
                 {ttsLoading ? "Loading audio…" : "The sentence is playing."}
               </p>
             </div>
           )}
 
-          {phase === "ready" && (
+          {phase === "directions" && (
             <div className={styles.showPhase}>
-              <p className={styles.sentenceDisplay}>Ready to record</p>
+              <p className={styles.sentenceDisplay}>Listen and Repeat</p>
               <p className={styles.hint}>
-                Listen once more if you need to, then say the sentence back.
+                You will listen as someone speaks to you. Listen carefully, then
+                repeat what you heard. Recording starts by itself when each
+                sentence ends and stops when time is up. There is no preparation
+                time, and each sentence plays only once.
               </p>
               <div className={styles.recordControls}>
-                <MicSelector disabled={!speechSupported} previewEnabled />
-                <VoiceButton
-                  state="idle"
-                  label="Start Recording"
-                  variant="primary"
-                  size="lg"
-                  onPress={handleStartRecording}
+                <MicCheck
                   disabled={!speechSupported}
+                  selector={
+                    <MicSelector disabled={!speechSupported} previewEnabled />
+                  }
                 />
+                <Button
+                  size="lg"
+                  onClick={startSet}
+                  disabled={!speechSupported}
+                >
+                  Start
+                </Button>
               </div>
             </div>
           )}
 
-          {phase === "recording" && (
+          {/* Recording, processing and recorded share one view: only the
+              button state changes, and Next below unlocks when it's done. */}
+          {(phase === "recording" ||
+            phase === "processing" ||
+            phase === "recorded") && (
             <div className={styles.showPhase}>
               <p className={styles.sentenceDisplay}>Repeat the sentence now</p>
               <VoiceButton
-                state="recording"
-                label="Recording"
+                state={
+                  phase === "recording"
+                    ? "recording"
+                    : phase === "processing"
+                      ? "processing"
+                      : "idle"
+                }
+                label={phase === "recording" ? "Recording" : "Recorded"}
                 trailing={`${recordingTimeLeft}s`}
                 variant="secondary"
                 size="lg"
                 levels={levels}
+                disabled={phase !== "recording"}
                 onPress={() => void finishSentence()}
               />
-              {transcript && (
-                <p className={styles.liveTranscript}>{transcript}</p>
-              )}
               {speechError && (
                 <Button onClick={handleRetryRecording} variant="primary">
                   Retry this sentence
@@ -516,70 +505,17 @@ export function ListenRepeatPage() {
             </div>
           )}
 
-          {(phase === "processing" || processingMessage) && (
-            <div className={styles.showPhase}>
-              <LoadingSpinner message={processingMessage ?? "Processing..."} />
-            </div>
-          )}
-
-          {phase === "feedback" && (
-            <div className={styles.feedbackPhase}>
-              <AudioPlayer
-                playing={playing}
-                loading={ttsLoading}
-                error={ttsError}
-                currentTime={currentTime}
-                duration={duration}
-                playbackRate={playbackRate}
-                onPlayPause={handlePlay}
-                onSeek={seek}
-                onPlaybackRateChange={setPlaybackRate}
-                src={`/audio/toefl/speaking/listen-repeat/${fileBasename}/${current + 1}.mp3`}
-                playLabel={
-                  playing ? "Pause" : currentTime > 0 ? "Resume" : "Play Audio"
-                }
-              />
-              <DiffLegend />
-              <p className={styles.fbLabel}>Comparison:</p>
-              <ListenRepeatDiffView
-                alignment={alignWords(
-                  sentence.text,
-                  transcripts[current] ?? "",
-                )}
-              />
-              <p className={styles.hint}>
-                {countCorrectWords(
-                  alignWords(sentence.text, transcripts[current] ?? ""),
-                )}
-                /
-                {countOriginalWords(
-                  alignWords(sentence.text, transcripts[current] ?? ""),
-                )}{" "}
-                words correct
-              </p>
-              <Button onClick={handleNextSentence} size="lg">
-                Next Sentence
-              </Button>
-            </div>
-          )}
-
-          <div className={styles.playerControls}>
-            {phase !== "feedback" && (
+          {phase !== "directions" && (
+            <div className={styles.recordControls}>
               <Button
-                onClick={handleReplayAudio}
-                disabled={phase === "playing" || ttsLoading}
-                size="sm"
-                variant="secondary"
+                onClick={handleNextSentence}
+                size="lg"
+                disabled={phase !== "recorded" || isLastSentence}
               >
-                Replay audio
+                Next
               </Button>
-            )}
-            <NextQuestionButton
-              taskId={TASK_ID}
-              variant="secondary"
-              size="sm"
-            />
-          </div>
+            </div>
+          )}
         </div>
       )}
 
