@@ -100,7 +100,6 @@ function ScenarioRow({ audio, attempt }: { audio: Audio; attempt: Attempt }) {
   return (
     <section className={styles.scenario} aria-label="Scenario">
       <div className={styles.rowHead}>
-        <span className={styles.tag}>Scenario</span>
         <PlayButton
           audio={audio}
           id="scenario"
