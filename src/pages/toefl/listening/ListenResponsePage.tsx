@@ -76,6 +76,12 @@ export function ListenResponsePage() {
   const [graded, setGraded] = useState(false);
   const audioStartedRef = useRef<Set<number>>(new Set());
   const [playedIndex, setPlayedIndex] = useState(0);
+  const [failed, setFailed] = useState<Set<number>>(new Set());
+  const [seenError, setSeenError] = useState<string | null>(null);
+  if (ttsError !== seenError) {
+    setSeenError(ttsError);
+    if (ttsError) setFailed(new Set(failed).add(playedIndex));
+  }
 
   const hasValidQuestionId = questionId !== "";
 
@@ -126,6 +132,7 @@ export function ListenResponsePage() {
     setGraded(false);
     audioStartedRef.current = new Set();
     setPlayedIndex(0);
+    setFailed(new Set());
     resetTimer();
   };
 
@@ -157,7 +164,7 @@ export function ListenResponsePage() {
 
   // Each utterance plays on its own once, as in the exam; replay opens in
   // review. A failed playback can be tried again on its own question.
-  const locked = !graded && !(ttsError && playedIndex === currentIndex);
+  const locked = !graded && !failed.has(currentIndex);
 
   const handleReplayAudio = () => {
     if (!data) return;
@@ -166,6 +173,12 @@ export function ListenResponsePage() {
       return;
     }
     const url = `/audio/${TASK_ID}/${fileBasename}/${currentIndex + 1}.mp3`;
+    setPlayedIndex(currentIndex);
+    if (!graded) {
+      const rest = new Set(failed);
+      rest.delete(currentIndex);
+      setFailed(rest);
+    }
     playSegmentsWithGaps([url], []);
   };
 
