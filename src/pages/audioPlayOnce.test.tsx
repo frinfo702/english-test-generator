@@ -260,6 +260,54 @@ describe("TOEFL Listen and Choose a Response", () => {
     fireEvent.click(playButton(/^Play audio$/));
     expect(tts.playSegmentsWithGaps).toHaveBeenCalledTimes(2);
   });
+
+  it("keeps a heard utterance locked when another one failed to play", () => {
+    const response = DATA["toefl/listening/response"] as {
+      questions: object[];
+    };
+    DATA["toefl/listening/response"] = {
+      ...response,
+      questions: [
+        ...response.questions,
+        {
+          id: "r2",
+          context: "Two students talk.",
+          stem: "Where is the library?",
+          options: { A: "Next to the gym.", B: "At noon.", C: "Yes." },
+          correct: "A",
+          explanation: "A gives a place.",
+        },
+      ],
+    };
+    try {
+      const { rerender } = renderAt(
+        "toefl/listening/response",
+        <ListenResponsePage />,
+      );
+      fireEvent.click(screen.getByRole("button", { name: "Next question" }));
+      expect(tts.playSegmentsWithGaps).toHaveBeenCalledTimes(2);
+
+      ttsError = "Audio fetch failed (404)";
+      rerender(
+        <MemoryRouter initialEntries={["/toefl/listening/response/001"]}>
+          <Routes>
+            <Route
+              path="/toefl/listening/response/:questionId"
+              element={<ListenResponsePage />}
+            />
+          </Routes>
+        </MemoryRouter>,
+      );
+      expect(playButton(/^Play audio$/).disabled).toBe(false);
+
+      fireEvent.click(
+        screen.getByRole("button", { name: "Previous question" }),
+      );
+      expect(playButton(/Audio plays once/).disabled).toBe(true);
+    } finally {
+      DATA["toefl/listening/response"] = response;
+    }
+  });
 });
 
 describe("TOEIC Part 2", () => {

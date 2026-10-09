@@ -75,6 +75,7 @@ export function ListenResponsePage() {
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
   const audioStartedRef = useRef<Set<number>>(new Set());
+  const [playedIndex, setPlayedIndex] = useState(0);
 
   const hasValidQuestionId = questionId !== "";
 
@@ -113,7 +114,9 @@ export function ListenResponsePage() {
   };
 
   const goTo = (index: number) => {
-    setCurrentIndex(Math.max(0, Math.min(index, totalQuestions - 1)));
+    const next = Math.max(0, Math.min(index, totalQuestions - 1));
+    if (!audioStartedRef.current.has(next)) setPlayedIndex(next);
+    setCurrentIndex(next);
   };
 
   const retake = () => {
@@ -122,6 +125,7 @@ export function ListenResponsePage() {
     setCurrentIndex(0);
     setGraded(false);
     audioStartedRef.current = new Set();
+    setPlayedIndex(0);
     resetTimer();
   };
 
@@ -152,8 +156,8 @@ export function ListenResponsePage() {
   useTrialTimeout(handleSubmit);
 
   // Each utterance plays on its own once, as in the exam; replay opens in
-  // review. A failed playback can be tried again.
-  const locked = !graded && !ttsError;
+  // review. A failed playback can be tried again on its own question.
+  const locked = !graded && !(ttsError && playedIndex === currentIndex);
 
   const handleReplayAudio = () => {
     if (!data) return;
