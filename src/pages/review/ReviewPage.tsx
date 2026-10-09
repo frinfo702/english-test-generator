@@ -29,10 +29,10 @@ import {
   sectionOf,
   sortItems,
   testOf,
+  toSort,
   type Difficulty,
   type ReviewFilter,
   type ReviewItem,
-  type ReviewSort,
   type Test,
 } from "../../lib/review";
 import { readingGrade } from "../../lib/trial";
@@ -124,7 +124,7 @@ export function ReviewPage() {
       ReviewFilter["result"] | undefined,
     dueOnly: params.get("due") === "1",
   };
-  const sort = (params.get("sort") || "mistakes") as ReviewSort;
+  const sort = toSort(params.get("sort"));
   // In the URL, so coming back from a question keeps the filters.
   const setParam = (key: string, value: string) =>
     setParams(

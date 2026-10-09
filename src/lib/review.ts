@@ -150,6 +150,10 @@ const SORT_KEYS: Record<ReviewSort, (i: ReviewItem) => number> = {
   due: (i) => i.card?.due.getTime() ?? Infinity,
 };
 
+/** A sort named in a URL; anything unknown falls back to most mistakes. */
+export const toSort = (value: string | null): ReviewSort =>
+  value && Object.hasOwn(SORT_KEYS, value) ? (value as ReviewSort) : "mistakes";
+
 /** Stable, so ties keep the order they came in. */
 export function sortItems(items: ReviewItem[], by: ReviewSort): ReviewItem[] {
   const key = SORT_KEYS[by];

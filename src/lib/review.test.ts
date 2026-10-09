@@ -12,6 +12,7 @@ import {
   sectionOf,
   sortItems,
   testOf,
+  toSort,
   type Difficulty,
 } from "./review";
 
@@ -283,6 +284,13 @@ describe("sortItems", () => {
     expect(sorted.at(-1)!.problemId).toBe("unscored");
     const dues = sorted.slice(0, -1).map((i) => i.card!.due.getTime());
     expect(dues).toEqual([...dues].sort((a, b) => a - b));
+  });
+
+  it("reads a sort from the URL, defaulting unknown ones to most mistakes", () => {
+    expect(toSort("accuracy")).toBe("accuracy");
+    expect(toSort(null)).toBe("mistakes");
+    expect(toSort("foo")).toBe("mistakes");
+    expect(toSort("toString")).toBe("mistakes");
   });
 
   it("leaves the input untouched", () => {
