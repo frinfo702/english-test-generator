@@ -22,20 +22,20 @@ Three ideas hold the system together:
 
 ### Light (paper)
 
-| Token                      | Hex       | Usage                                  |
-| -------------------------- | --------- | -------------------------------------- |
-| `--color-ink`              | `#131312` | Text, primary button, opening rules    |
-| `--color-ink-secondary`    | `#4d4c47` | Body, descriptions                     |
-| `--color-ink-tertiary`     | `#6f6d66` | Meta, captions (AA on paper)           |
-| `--color-surface-elevated` | `#f4f3ef` | Page background                        |
-| `--color-surface`          | `#fbfaf7` | Sheets (question cards, passages)      |
-| `--color-surface-subtle`   | `#ecebe5` | Wells, empty calendar cells            |
-| `--color-border`           | `#dcdad3` | Hairlines                              |
-| `--color-border-strong`    | `#bdbab1` | Control outlines                       |
-| `--color-signal`           | `#fa500f` | Non-text marks: bars, dots, fills      |
-| `--color-accent`           | `#c23a06` | Signal as text / button fill (AA)      |
-| `--color-success`          | `#2c6a4c` | Correct                                |
-| `--color-error`            | `#b02f1c` | Incorrect                              |
+| Token                      | Hex       | Usage                               |
+| -------------------------- | --------- | ----------------------------------- |
+| `--color-ink`              | `#131312` | Text, primary button, opening rules |
+| `--color-ink-secondary`    | `#4d4c47` | Body, descriptions                  |
+| `--color-ink-tertiary`     | `#6f6d66` | Meta, captions (AA on paper)        |
+| `--color-surface-elevated` | `#f4f3ef` | Page background                     |
+| `--color-surface`          | `#fbfaf7` | Sheets (question cards, passages)   |
+| `--color-surface-subtle`   | `#ecebe5` | Wells, empty calendar cells         |
+| `--color-border`           | `#dcdad3` | Hairlines                           |
+| `--color-border-strong`    | `#bdbab1` | Control outlines                    |
+| `--color-signal`           | `#fa500f` | Non-text marks: bars, dots, fills   |
+| `--color-accent`           | `#c23a06` | Signal as text / button fill (AA)   |
+| `--color-success`          | `#2c6a4c` | Correct                             |
+| `--color-error`            | `#b02f1c` | Incorrect                           |
 
 ### Dark (carbon)
 
@@ -56,12 +56,12 @@ used only as 8px square marks and chart series — never as tints on surfaces.
 
 ## Typography
 
-| Token            | Family     | Usage                                              |
-| ---------------- | ---------- | -------------------------------------------------- |
-| `--font-display` | Geist      | Titles, task names, big numerals (weight 500)      |
-| `--font-sans`    | Geist      | Body, passages, controls                           |
-| `--font-mono`    | Geist Mono | Metadata: eyebrows, indexes, counts, timers, tags  |
-| `--font-pixel`   | Silkscreen | The mascots' speech only                           |
+| Token            | Family     | Usage                                             |
+| ---------------- | ---------- | ------------------------------------------------- |
+| `--font-display` | Geist      | Titles, task names, big numerals (weight 500)     |
+| `--font-sans`    | Geist      | Body, passages, controls                          |
+| `--font-mono`    | Geist Mono | Metadata: eyebrows, indexes, counts, timers, tags |
+| `--font-pixel`   | Silkscreen | The mascots' speech only                          |
 
 Scale: `2xs 11 · xs 12 · sm 13 · base 15 · lg 17 · xl 20 · 2xl 24 · 3xl 32 ·
 4xl 44 · 5xl 60 · 6xl 76`. Display sizes use `--tracking-tighter` (-0.035em)
@@ -92,13 +92,13 @@ mono with `tabular-nums`; headline numerals use the display face.
 
 Radius `--radius` (4px). **Primary is ink** — the one loud control on a page.
 
-| Variant       | Style                                         |
-| ------------- | --------------------------------------------- |
-| **Primary**   | Ink fill, inverse text                        |
-| **Secondary** | Transparent, strong hairline; ink on hover    |
-| **Accent**    | Signal — live actions only (e.g. recording)   |
-| **Ghost**     | Transparent                                   |
-| **Danger**    | Error fill                                    |
+| Variant       | Style                                       |
+| ------------- | ------------------------------------------- |
+| **Primary**   | Ink fill, inverse text                      |
+| **Secondary** | Transparent, strong hairline; ink on hover  |
+| **Accent**    | Signal — live actions only (e.g. recording) |
+| **Ghost**     | Transparent                                 |
+| **Danger**    | Error fill                                  |
 
 Sizes: `sm` 30px · `md` 38px · `lg` 46px. Every button scales to 0.98 on press.
 
@@ -113,15 +113,15 @@ showing a ring.
 
 ### Audio (ported from ElevenLabs UI, MIT)
 
-| Component       | Role                                                          |
-| --------------- | ------------------------------------------------------------- |
-| `AudioPlayer`   | Decoded waveform scrubber + ink transport + mono speed chips  |
-| `LiveWaveform`  | Canvas waveform; `processing` mode animates without a mic     |
-| `MicWaveform`   | Level bars fed by the already-open recorder stream            |
-| `VoiceButton`   | Idle → recording → processing → success/error with waveform   |
-| `MicSelector`   | Device listbox with the live device marked                    |
-| `ScrubBar`      | Fallback transport while a waveform decodes                   |
-| `Matrix`        | Dot-matrix display used for loading/empty states              |
+| Component      | Role                                                         |
+| -------------- | ------------------------------------------------------------ |
+| `AudioPlayer`  | Decoded waveform scrubber + ink transport + mono speed chips |
+| `LiveWaveform` | Canvas waveform; `processing` mode animates without a mic    |
+| `MicWaveform`  | Level bars fed by the already-open recorder stream           |
+| `VoiceButton`  | Idle → recording → processing → success/error with waveform  |
+| `MicSelector`  | Device listbox with the live device marked                   |
+| `ScrubBar`     | Fallback transport while a waveform decodes                  |
+| `Matrix`       | Dot-matrix display used for loading/empty states             |
 
 Rule: **never open a second microphone stream while recording.** Live levels
 come from `useSpeechRecognition().levels`; `LiveWaveform active` is only used

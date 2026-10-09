@@ -73,7 +73,6 @@
     gap: var(--spacing-2);
   }
 
-
   .row5Col {
     grid-template-columns: 32px 1fr 68px 68px 16px;
     gap: var(--spacing-2);

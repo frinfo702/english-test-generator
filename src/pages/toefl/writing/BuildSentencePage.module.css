@@ -61,7 +61,8 @@
 }
 
 .referenceBox {
-  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) var(--spacing-5);
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md)
+    var(--spacing-5);
   border: none;
   border-left: 2px solid var(--color-ink);
   background: transparent;

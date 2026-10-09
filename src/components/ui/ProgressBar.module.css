@@ -7,7 +7,7 @@
 .label {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
 }
 
 .track {
