@@ -138,8 +138,9 @@ streak calendar is square pixel cells stepped in the signal orange.
 ### Pixel art
 
 Poodle, hamsters, pixel icons, the pixel clock and score pips are kept as
-drawn. They may be restaged (scaled by whole steps, framed on a stage) but
-never redrawn or recoloured.
+drawn. They may be restaged (scaled uniformly, framed on a stage; the home
+hero's stage enlarges the scene 1.4× on wide screens) but never redrawn or
+recoloured.
 
 ## Motion
 

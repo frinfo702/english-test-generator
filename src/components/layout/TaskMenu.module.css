@@ -37,10 +37,6 @@
   white-space: nowrap;
 }
 
-.rule {
-  display: none;
-}
-
 .list {
   border-top: var(--rule-ink);
 }
