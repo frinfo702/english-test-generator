@@ -172,6 +172,10 @@
   margin-bottom: var(--spacing-md);
 }
 
+.replayButton {
+  margin-left: auto;
+}
+
 .reviewCorrect {
   color: var(--color-success);
   font-weight: 600;

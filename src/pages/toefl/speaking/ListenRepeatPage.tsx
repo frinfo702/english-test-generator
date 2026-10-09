@@ -387,13 +387,13 @@ export function ListenRepeatPage() {
     navigate(`/${TASK_ID}`);
   };
 
+  // Records again without replaying: each sentence plays only once.
   const handleRetryRecording = () => {
     clearRecordingTimer();
     clearProcessingTimeout();
-    void stopSpeech();
     finishingRef.current = false;
     setProcessingMessage(null);
-    setPhase("playing");
+    void stopSpeech().then(startRecording);
   };
 
   return (

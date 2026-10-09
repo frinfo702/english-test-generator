@@ -119,6 +119,10 @@ export interface AudioPlayerProps {
    * first, exam-style listen where position and length stay hidden.
    */
   minimal?: boolean;
+  /**
+   * Turns off play and skip, e.g. once an exam clip has had its one play.
+   */
+  disabled?: boolean;
 }
 
 export function AudioPlayer({
@@ -139,6 +143,7 @@ export function AudioPlayer({
   playLabel,
   className,
   minimal = false,
+  disabled = false,
 }: AudioPlayerProps) {
   const [waveform, setWaveform] = useState<{
     src: string;
@@ -214,7 +219,7 @@ export function AudioPlayer({
       type="button"
       className={styles.playButton}
       onClick={onPlayPause}
-      disabled={loading}
+      disabled={loading || disabled}
       aria-label={
         playLabel ?? (playing ? "Pause" : currentTime > 0 ? "Resume" : "Play")
       }
@@ -250,7 +255,7 @@ export function AudioPlayer({
             type="button"
             className={styles.skipButton}
             onClick={() => onSeek(Math.max(0, currentTime - skipSeconds))}
-            disabled={duration <= 0}
+            disabled={disabled || duration <= 0}
             aria-label={`Back ${skipSeconds}s`}
           >
             <SkipIcon back />
@@ -261,7 +266,7 @@ export function AudioPlayer({
             onClick={() =>
               onSeek(Math.min(duration, currentTime + skipSeconds))
             }
-            disabled={duration <= 0}
+            disabled={disabled || duration <= 0}
             aria-label={`Forward ${skipSeconds}s`}
           >
             <SkipIcon />

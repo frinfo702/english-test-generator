@@ -64,6 +64,7 @@ export function ListenResponsePage() {
   const {
     loading: ttsLoading,
     playing: ttsPlaying,
+    error: ttsError,
     currentTime,
     playSegmentsWithGaps,
     stop: stopTts,
@@ -149,6 +150,10 @@ export function ListenResponsePage() {
     window.scrollTo({ top: 0 });
   };
   useTrialTimeout(handleSubmit);
+
+  // Each utterance plays on its own once, as in the exam; replay opens in
+  // review. A failed playback can be tried again.
+  const locked = !graded && !ttsError;
 
   const handleReplayAudio = () => {
     if (!data) return;
@@ -260,13 +265,21 @@ export function ListenResponsePage() {
                   minimal
                   playing={ttsPlaying}
                   loading={ttsLoading}
+                  error={ttsError}
+                  disabled={locked}
                   currentTime={currentTime}
                   duration={0}
                   playbackRate={1}
                   onPlayPause={handleReplayAudio}
                   onSeek={() => undefined}
                   onPlaybackRateChange={() => undefined}
-                  playLabel={ttsPlaying ? "Playing audio" : "Play audio"}
+                  playLabel={
+                    locked
+                      ? "Audio plays once"
+                      : ttsPlaying
+                        ? "Playing audio"
+                        : "Play audio"
+                  }
                 />
               </div>
             }

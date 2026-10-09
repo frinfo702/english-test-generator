@@ -91,6 +91,39 @@ function PlayButton({
   );
 }
 
+/** The spoken scenario, replayable in review with its script. */
+function ScenarioRow({ audio, attempt }: { audio: Audio; attempt: Attempt }) {
+  const question = attempt.question as { scenario?: unknown } | undefined;
+  const text =
+    typeof question?.scenario === "string" ? question.scenario.trim() : "";
+  if (!text) return null;
+  return (
+    <section className={styles.scenario} aria-label="Scenario">
+      <div className={styles.rowHead}>
+        <span className={styles.tag}>Scenario</span>
+        <PlayButton
+          audio={audio}
+          id="scenario"
+          url={
+            attempt.problemId
+              ? `/audio/${attempt.taskId}/${attempt.problemId}/scenario.mp3`
+              : null
+          }
+          label="Scenario"
+        />
+      </div>
+      {text
+        .split("\n")
+        .filter((line) => line.length > 0)
+        .map((line, i) => (
+          <p key={i} className={styles.prompt}>
+            {line}
+          </p>
+        ))}
+    </section>
+  );
+}
+
 function ResultHeader({
   attempt,
   title,
@@ -303,6 +336,7 @@ export function ListenRepeatResult({ attempt }: { attempt: Attempt }) {
         ]}
       />
       <DiffLegend />
+      <ScenarioRow audio={audio} attempt={attempt} />
       <ol className={styles.rows}>
         {rows.map(({ r, alignment, correct, total }, i) => (
           <ItemRow
@@ -409,6 +443,7 @@ export function InterviewResult({
           },
         ]}
       />
+      <ScenarioRow audio={audio} attempt={attempt} />
       <ol className={styles.rows}>
         {attempt.responses.map((r, i) => {
           const q = data?.questions[i];

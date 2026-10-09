@@ -31,6 +31,14 @@ interface ProblemData {
 const TASK_ID = "toeic/part2";
 const SEGMENTS_PER_QUESTION = 4;
 
+/** The question and its three responses, played as one clip. */
+function clipUrls(data: ProblemData, fileBasename: string, qIndex: number) {
+  const startIdx = qIndex * SEGMENTS_PER_QUESTION;
+  return data.audioSegments
+    .slice(startIdx, startIdx + SEGMENTS_PER_QUESTION)
+    .map((_, i) => `/audio/${TASK_ID}/${fileBasename}/${startIdx + i + 1}.mp3`);
+}
+
 export function Part2Page() {
   const navigate = useNavigate();
   const { questionId = "" } = useParams<{ questionId: string }>();
@@ -45,13 +53,20 @@ export function Part2Page() {
     stop,
     reset: resetTimer,
   } = useElapsedTimer();
-  const { loading: ttsLoading, playSegmentsWithGaps } = useTts();
+  const {
+    loading: ttsLoading,
+    playing: ttsPlaying,
+    playSegmentsWithGaps,
+    stop: stopTts,
+  } = useTts();
   const fileBasename = file ? file.replace(/\.json$/i, "") : "";
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
   const audioStartedRef = useRef<Set<number>>(new Set());
+  /** Question whose audio was last replayed in review. */
+  const [replayIndex, setReplayIndex] = useState<number | null>(null);
 
   const hasValidQuestionId = questionId !== "";
 
@@ -68,14 +83,11 @@ export function Part2Page() {
 
   const questions = data?.questions ?? [];
 
+  // Each question plays once, on its own, as in the exam; there is no replay
+  // until review.
   useEffect(() => {
     if (data && !graded && !audioStartedRef.current.has(currentIndex)) {
-      const startIdx = currentIndex * SEGMENTS_PER_QUESTION;
-      const urls = data.audioSegments
-        .slice(startIdx, startIdx + SEGMENTS_PER_QUESTION)
-        .map(
-          (_, i) => `/audio/${TASK_ID}/${fileBasename}/${startIdx + i + 1}.mp3`,
-        );
+      const urls = clipUrls(data, fileBasename, currentIndex);
       if (urls.length > 0) {
         audioStartedRef.current = new Set(audioStartedRef.current).add(
           currentIndex,
@@ -108,8 +120,22 @@ export function Part2Page() {
     }
   };
 
+  const toggleReplay = (qIndex: number) => {
+    if (ttsPlaying && replayIndex === qIndex) {
+      stopTts();
+      return;
+    }
+    setReplayIndex(qIndex);
+    if (data)
+      void playSegmentsWithGaps(
+        clipUrls(data, fileBasename, qIndex),
+        [3, 3, 3],
+      );
+  };
+
   const retake = () => {
     if (!graded) return;
+    stopTts();
     setSelected({});
     setCurrentIndex(0);
     setGraded(false);
@@ -136,9 +162,11 @@ export function Part2Page() {
       });
     }
     setGraded(true);
+    stopTts();
   };
 
   const handleBackToList = () => {
+    stopTts();
     resetTimer();
     setCurrentIndex(0);
     setSelected({});
@@ -212,6 +240,7 @@ export function Part2Page() {
               {questions.map((q, qIndex) => {
                 const sel = selected[q.id];
                 const isCorrect = sel === q.correct;
+                const replaying = ttsPlaying && replayIndex === qIndex;
                 return (
                   <div key={q.id} className={styles.reviewCard}>
                     <div className={styles.reviewHeader}>
@@ -225,6 +254,16 @@ export function Part2Page() {
                       >
                         {isCorrect ? "Correct" : "Incorrect"}
                       </span>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        className={styles.replayButton}
+                        aria-pressed={replaying}
+                        disabled={ttsLoading && replayIndex === qIndex}
+                        onClick={() => toggleReplay(qIndex)}
+                      >
+                        {replaying ? "Stop audio" : "Replay audio"}
+                      </Button>
                     </div>
                     <p className={styles.reviewStem}>{q.stem}</p>
                     <div className={styles.reviewOptions}>
