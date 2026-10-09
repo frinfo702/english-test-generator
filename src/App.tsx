@@ -35,6 +35,8 @@ import { TrialHomePage } from "./pages/trial/TrialHomePage";
 import { TrialRunPage } from "./pages/trial/TrialRunPage";
 import { TrialReportPage } from "./pages/trial/TrialReportPage";
 import { IntroducePage } from "./pages/updates/IntroducePage";
+import { RecallFrame, ReviewPage } from "./pages/review/ReviewPage";
+import { RECALL_PATH } from "./lib/review";
 
 interface TaskRoute {
   basePath: string;
@@ -225,6 +227,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/review" element={<ReviewPage />} />
           <Route path="/results/:attemptId" element={<ResultPage />} />
           <Route path="/toefl" element={<ToeflMenuPage />} />
           <Route path="/toeic" element={<ToeicMenuPage />} />
@@ -253,6 +256,14 @@ export default function App() {
               <Route
                 path={`${r.basePath}/:questionId`}
                 element={<KeyedByQuestion>{r.page}</KeyedByQuestion>}
+              />
+              <Route
+                path={`${RECALL_PATH}${r.taskId}/:questionId`}
+                element={
+                  <KeyedByQuestion>
+                    <RecallFrame>{r.page}</RecallFrame>
+                  </KeyedByQuestion>
+                }
               />
             </Route>
           ))}

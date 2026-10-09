@@ -34,14 +34,16 @@ interface ChoiceData {
   transcript?: string;
   questions: ChoiceQuestion[];
 }
+/** Options keyed by letter, as the TOEIC files and Choose a Response store them. */
+interface LetterQuestion {
+  id: string;
+  stem: string;
+  options: Record<string, string>;
+  correct: string;
+  explanation: string;
+}
 interface ResponseData {
-  questions: {
-    id: string;
-    stem: string;
-    options: Record<string, string>;
-    correct: string;
-    explanation: string;
-  }[];
+  questions: LetterQuestion[];
 }
 interface EmailData {
   scenario: { description: string; recipient: string; keyPoints: string[] };
@@ -100,6 +102,33 @@ function Choices({
       ))}
     </div>
   );
+}
+
+/** Letter-keyed options shown through the same graded card as the rest. */
+function LetterChoices({
+  questions,
+  attempt,
+}: {
+  questions: LetterQuestion[];
+  attempt: Attempt | undefined;
+}) {
+  const picked = new Map(
+    (attempt?.responses ?? []).map((r) => [r.itemId, String(r.choice)]),
+  );
+  const choices = new Map<string, number>();
+  const cards = questions.map((q) => {
+    const keys = Object.keys(q.options);
+    const selected = keys.indexOf(picked.get(q.id) ?? "");
+    if (selected >= 0) choices.set(q.id, selected);
+    return {
+      id: q.id,
+      stem: q.stem,
+      options: Object.values(q.options),
+      correctIndex: keys.indexOf(q.correct),
+      explanation: q.explanation,
+    };
+  });
+  return <Choices questions={cards} choices={choices} />;
 }
 
 function Source({ label, text }: { label: string; text?: string }) {
@@ -222,7 +251,9 @@ export function ItemReview({
     }
     case "toefl/listening/conversation":
     case "toefl/listening/announcement":
-    case "toefl/listening/lecture": {
+    case "toefl/listening/lecture":
+    case "toeic/part3":
+    case "toeic/part4": {
       const d = question as ChoiceData;
       return (
         <>
@@ -248,35 +279,64 @@ export function ItemReview({
         </>
       );
     }
-    case "toefl/listening/response": {
+    case "toefl/listening/response":
+    case "toeic/part2": {
       const d = question as ResponseData;
-      const picked = new Map(
-        (attempt?.responses ?? []).map((r) => [r.itemId, String(r.choice)]),
-      );
-      const questions = d.questions.map((q) => {
-        const keys = Object.keys(q.options);
-        return {
-          q: {
-            id: q.id,
-            stem: `“${q.stem}”`,
-            options: Object.values(q.options),
-            correctIndex: keys.indexOf(q.correct),
-            explanation: q.explanation,
-          },
-          selected: picked.has(q.id) ? keys.indexOf(picked.get(q.id)!) : -1,
-        };
-      });
       return (
-        <Choices
-          questions={questions.map((x) => x.q)}
-          choices={
-            new Map(
-              questions
-                .filter((x) => x.selected >= 0)
-                .map((x) => [x.q.id, x.selected]),
-            )
-          }
+        <LetterChoices
+          questions={d.questions.map((q) => ({ ...q, stem: `“${q.stem}”` }))}
+          attempt={attempt}
         />
+      );
+    }
+    case "toeic/part5": {
+      const d = question as {
+        questions: (LetterQuestion & { sentence: string })[];
+      };
+      return (
+        <LetterChoices
+          questions={d.questions.map((q) => ({ ...q, stem: q.sentence }))}
+          attempt={attempt}
+        />
+      );
+    }
+    case "toeic/part6": {
+      const d = question as {
+        passages: {
+          id: string;
+          text: string;
+          questions: (LetterQuestion & { blankNumber: number })[];
+        }[];
+      };
+      return (
+        <>
+          {d.passages.map((p) => (
+            <div key={p.id}>
+              <Source label="Text" text={p.text} />
+              <LetterChoices
+                questions={p.questions.map((q) => ({
+                  ...q,
+                  stem: `Blank ${q.blankNumber}`,
+                }))}
+                attempt={attempt}
+              />
+            </div>
+          ))}
+        </>
+      );
+    }
+    case "toeic/part7": {
+      const d = question as {
+        passages: { id: string; title?: string; content: string }[];
+        questions: LetterQuestion[];
+      };
+      return (
+        <>
+          {d.passages.map((p) => (
+            <Source key={p.id} label={p.title ?? "Text"} text={p.content} />
+          ))}
+          <LetterChoices questions={d.questions} attempt={attempt} />
+        </>
       );
     }
     case "toefl/reading/complete-words": {
@@ -382,6 +442,33 @@ export function ItemReview({
           )}
           <Source label="Model answer" text={d.modelAnswer} />
         </div>
+      );
+    }
+    case "dictation": {
+      const d = question as { sentences: { id: string; text: string }[] };
+      const misses = new Map(
+        (attempt?.responses ?? []).map((r) => [r.itemId, r.misses ?? 0]),
+      );
+      return (
+        <table className={styles.reviewTable}>
+          <thead>
+            <tr>
+              <th>Sentence</th>
+              <th>Wrong taps</th>
+            </tr>
+          </thead>
+          <tbody>
+            {d.sentences.map((s) => {
+              const m = misses.get(s.id) ?? 0;
+              return (
+                <tr key={s.id}>
+                  <td>{s.text}</td>
+                  <td className={m > 0 ? styles.wrong : styles.ok}>{m}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       );
     }
     case "toefl/speaking/listen-repeat":

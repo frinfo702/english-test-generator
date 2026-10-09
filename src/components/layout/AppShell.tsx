@@ -56,6 +56,11 @@ const navItems: NavItem[] = [
     matches: (p) => p.startsWith("/dictation"),
   },
   {
+    to: "/review",
+    label: "Review",
+    matches: (p) => p.startsWith("/review"),
+  },
+  {
     to: "/dashboard",
     label: "Dashboard",
     shortcut: "⌘D",
