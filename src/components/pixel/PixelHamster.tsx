@@ -19,6 +19,10 @@ const NIBBLE_MS = 110;
 interface PixelHamsterProps {
   variant?: "kinkuma" | "pearl";
   className?: string;
+  /** Called on click, after the pet. */
+  onClick?: () => void;
+  label?: string;
+  expanded?: boolean;
 }
 
 function prefersReducedMotion() {
@@ -66,6 +70,9 @@ function useBursts(
 export function PixelHamster({
   variant = "kinkuma",
   className,
+  onClick,
+  label,
+  expanded,
 }: PixelHamsterProps) {
   const [pawsUp, setPawsUp] = useState(false);
   const [blinking, setBlinking] = useState(false);
@@ -106,10 +113,17 @@ export function PixelHamster({
       className={[styles.hamster, petted ? styles.petted : "", className ?? ""]
         .filter(Boolean)
         .join(" ")}
-      onClick={() => setPetted(true)}
+      onClick={() => {
+        setPetted(true);
+        onClick?.();
+      }}
       aria-label={
-        variant === "pearl" ? "Pet the pearl white hamster" : "Pet the hamster"
+        label ??
+        (variant === "pearl"
+          ? "Pet the pearl white hamster"
+          : "Pet the hamster")
       }
+      aria-expanded={expanded}
       title="Nom nom"
     >
       <PixelArt
