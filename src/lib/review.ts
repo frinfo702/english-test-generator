@@ -6,6 +6,9 @@
  * question's card is its attempts replayed oldest first. History saved before
  * this feature therefore schedules like any other, and answering a question
  * anywhere in the app — practice, a practice test, or recall — reschedules it.
+ *
+ * Only reading and listening are reviewed: their answers are right or wrong,
+ * while writing and speaking get rubric scores with no clear pass.
  */
 import { createEmptyCard, fsrs, Rating, type Card, type Grade } from "ts-fsrs";
 import type { TaskId } from "../hooks/useScoreHistory";
@@ -21,8 +24,7 @@ const scheduler = fsrs({ enable_short_term: false });
 /**
  * Full marks recalled the question (Good). Partial credit, the only other
  * signal the app records, is Hard when at least half was right and Again
- * below that. Unscored attempts (e.g. writing waiting for AI feedback) rate
- * nothing.
+ * below that. Unscored attempts rate nothing.
  */
 export function ratingFor(score: Attempt["score"]): Grade | null {
   if (!score) return null;
@@ -70,6 +72,10 @@ export interface ReviewItem {
   correct: boolean | null;
   /** Scored attempts that were not full marks. */
   mistakes: number;
+  /** Share of scored items answered right; null until an attempt is scored. */
+  accuracy: number | null;
+  /** Date of the latest scored attempt that was not full marks. */
+  lastWrong: string | null;
   /** Null until an attempt is scored: there is nothing to schedule yet. */
   card: Card | null;
 }
@@ -80,6 +86,8 @@ export function buildReviewItems(attempts: Attempt[]): ReviewItem[] {
   for (const a of attempts) {
     // No problemId (the oldest scores) means no question to show or recall.
     if (a.taskId === TRIAL_TASK_ID || !a.problemId) continue;
+    const section = sectionOf(a.taskId);
+    if (section === "writing" || section === "speaking") continue;
     const key = `${a.taskId}/${a.problemId}`;
     if (!byKey.has(key)) byKey.set(key, []);
     byKey.get(key)!.push(a);
@@ -88,13 +96,21 @@ export function buildReviewItems(attempts: Attempt[]): ReviewItem[] {
     let card: Card | null = null;
     let correct: boolean | null = null;
     let mistakes = 0;
+    let lastWrong: string | null = null;
+    let right = 0;
+    let asked = 0;
     for (const a of group) {
       const grade = ratingFor(a.score);
       if (grade === null) continue;
       const at = new Date(a.date);
       card = scheduler.next(card ?? createEmptyCard(at), at, grade).card;
       correct = grade === Rating.Good;
-      if (!correct) mistakes++;
+      right += a.score!.correct;
+      asked += a.score!.total;
+      if (!correct) {
+        mistakes++;
+        lastWrong = a.date;
+      }
     }
     return {
       key,
@@ -104,6 +120,8 @@ export function buildReviewItems(attempts: Attempt[]): ReviewItem[] {
       latest: group[group.length - 1],
       correct,
       mistakes,
+      accuracy: asked ? right / asked : null,
+      lastWrong,
       card,
     };
   });
@@ -122,10 +140,30 @@ export function dueItems(items: ReviewItem[], now: Date): ReviewItem[] {
     .sort((a, b) => a.card!.due.getTime() - b.card!.due.getTime());
 }
 
+export type ReviewSort = "mistakes" | "accuracy" | "recent-wrong" | "due";
+
+/** Weakest first by the chosen measure; items without one go last. */
+const SORT_KEYS: Record<ReviewSort, (i: ReviewItem) => number> = {
+  mistakes: (i) => -i.mistakes,
+  accuracy: (i) => i.accuracy ?? Infinity,
+  "recent-wrong": (i) => (i.lastWrong ? -Date.parse(i.lastWrong) : Infinity),
+  due: (i) => i.card?.due.getTime() ?? Infinity,
+};
+
+/** Stable, so ties keep the order they came in. */
+export function sortItems(items: ReviewItem[], by: ReviewSort): ReviewItem[] {
+  const key = SORT_KEYS[by];
+  return [...items].sort((a, b) => {
+    const x = key(a);
+    const y = key(b);
+    return x === y ? 0 : x < y ? -1 : 1;
+  });
+}
+
 /** Every set field must match; unset fields don't filter. */
 export interface ReviewFilter {
   test?: Test;
-  section?: SectionKey;
+  section?: "reading" | "listening";
   taskId?: TaskId;
   difficulty?: Difficulty;
   minMistakes?: number;

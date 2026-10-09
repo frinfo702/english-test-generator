@@ -27,13 +27,15 @@ import {
   isDue,
   RECALL_PATH,
   sectionOf,
+  sortItems,
   testOf,
   type Difficulty,
   type ReviewFilter,
   type ReviewItem,
+  type ReviewSort,
   type Test,
 } from "../../lib/review";
-import { readingGrade, type SectionKey } from "../../lib/trial";
+import { readingGrade } from "../../lib/trial";
 import { ItemReview } from "../trial/ItemReview";
 import { TASK_NAMES } from "../trial/taskNames";
 import styles from "./ReviewPage.module.css";
@@ -112,7 +114,8 @@ export function ReviewPage() {
 
   const filter: ReviewFilter = {
     test: (params.get("test") || undefined) as Test | undefined,
-    section: (params.get("section") || undefined) as SectionKey | undefined,
+    section: (params.get("section") || undefined) as
+      ReviewFilter["section"] | undefined,
     taskId: (params.get("type") || undefined) as TaskId | undefined,
     difficulty: (params.get("difficulty") || undefined) as
       Difficulty | undefined,
@@ -121,6 +124,7 @@ export function ReviewPage() {
       ReviewFilter["result"] | undefined,
     dueOnly: params.get("due") === "1",
   };
+  const sort = (params.get("sort") || "mistakes") as ReviewSort;
   // In the URL, so coming back from a question keeps the filters.
   const setParam = (key: string, value: string) =>
     setParams(
@@ -137,7 +141,7 @@ export function ReviewPage() {
 
   const { items, now } = loaded;
   const due = dueItems(items, now);
-  const shown = filterItems(items, filter, now, difficulty);
+  const shown = sortItems(filterItems(items, filter, now, difficulty), sort);
   const types = [...new Set(items.map((i) => i.taskId))].sort();
 
   const update = (next: Attempt) =>
@@ -149,7 +153,7 @@ export function ReviewPage() {
     <div>
       <SectionHeader
         title="Review"
-        subtitle="Every question you've answered, with what's due to recall."
+        subtitle="Every reading and listening question you've answered, with what's due to recall."
         backTo="/"
       />
 
@@ -213,8 +217,6 @@ export function ReviewPage() {
               options={[
                 ["reading", "Reading"],
                 ["listening", "Listening"],
-                ["speaking", "Speaking"],
-                ["writing", "Writing"],
               ]}
             />
             <Select
@@ -248,10 +250,27 @@ export function ReviewPage() {
               value={filter.result}
               onChange={(v) => setParam("result", v)}
               options={[
-                ["correct", "Correct"],
-                ["incorrect", "Incorrect"],
+                ["correct", "Solved"],
+                ["incorrect", "Unsolved"],
               ]}
             />
+            <label className={styles.select}>
+              <span className="micro-label">Sort</span>
+              <select
+                value={sort}
+                onChange={(e) =>
+                  setParam(
+                    "sort",
+                    e.target.value === "mistakes" ? "" : e.target.value,
+                  )
+                }
+              >
+                <option value="mistakes">Most mistakes</option>
+                <option value="accuracy">Lowest accuracy</option>
+                <option value="recent-wrong">Recently wrong</option>
+                <option value="due">Due soonest</option>
+              </select>
+            </label>
             <label className={styles.check}>
               <input
                 type="checkbox"

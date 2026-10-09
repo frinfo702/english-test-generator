@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { Rating, State } from "ts-fsrs";
 import type { TaskId } from "../hooks/useScoreHistory";
 import type { Attempt } from "./attempts";
-import { fromLegacyAnswer, fromLegacyScore } from "./migrations";
+import { fromLegacyScore } from "./migrations";
 import {
   buildReviewItems,
   difficultyOf,
@@ -10,6 +10,7 @@ import {
   filterItems,
   ratingFor,
   sectionOf,
+  sortItems,
   testOf,
   type Difficulty,
 } from "./review";
@@ -119,6 +120,20 @@ describe("buildReviewItems", () => {
   });
 });
 
+describe("writing and speaking", () => {
+  it("are left out of review and recall", () => {
+    const items = buildReviewItems([
+      attempt("toefl/writing/email", "w1", 0, 4, 5),
+      attempt("toefl/writing/build-sentence", "b1", 0, 3, 10),
+      attempt("toefl/speaking/interview", "s1", 0, 3, 5),
+      attempt("shadowing", "sh1", 0, 2, 5),
+      attempt("toefl/reading/academic", "r1", 0, 3, 10),
+    ]);
+    expect(items.map((i) => i.problemId)).toEqual(["r1"]);
+    expect(dueItems(items, at(100)).map((i) => i.problemId)).toEqual(["r1"]);
+  });
+});
+
 describe("history saved before review existed", () => {
   it("replays every scored attempt as a review instead of starting over", () => {
     const old = [
@@ -139,17 +154,10 @@ describe("history saved before review existed", () => {
   });
 
   it("lists unscored answers without scheduling them", () => {
-    const answer = fromLegacyAnswer({
-      answerId: "legacy-1",
-      taskId: "toefl/writing/email",
-      problemId: "toefl/writing/email/003.json#e1",
-      response: "Dear team, ...",
-      date: at(0).toISOString(),
-    });
-    const [item] = buildReviewItems([answer]);
-    expect(item.problemId).toBe("003.json");
+    const [item] = buildReviewItems([attempt("toeic/part7", "003", 0)]);
     expect(item.card).toBeNull();
     expect(item.correct).toBeNull();
+    expect(item.accuracy).toBeNull();
     expect(dueItems([item], at(100))).toEqual([]);
   });
 
@@ -224,5 +232,61 @@ describe("filterItems", () => {
     expect(
       filterItems(items, { dueOnly: true }, now).map((i) => i.problemId),
     ).toEqual(["p1"]);
+  });
+});
+
+describe("sortItems", () => {
+  const items = buildReviewItems([
+    attempt("toeic/part5", "once", 0, 5),
+    attempt("toeic/part5", "twice", 0, 9),
+    attempt("toeic/part5", "twice", 4, 9),
+    attempt("toeic/part5", "clean", 1, 10),
+    attempt("toeic/part5", "lowest", 2, 1),
+    attempt("toeic/part5", "lowest", 3, 10),
+    attempt("toeic/part5", "unscored", 5),
+  ]);
+  const order = (by: Parameters<typeof sortItems>[1]) =>
+    sortItems(items, by).map((i) => i.problemId);
+
+  it("puts the most mistakes first", () => {
+    expect(order("mistakes")).toEqual([
+      "twice",
+      "once",
+      "lowest",
+      "clean",
+      "unscored",
+    ]);
+  });
+
+  it("puts the lowest accuracy first, unscored last", () => {
+    expect(order("accuracy")).toEqual([
+      "once",
+      "lowest",
+      "twice",
+      "clean",
+      "unscored",
+    ]);
+  });
+
+  it("puts the most recently wrong first, never-wrong last", () => {
+    expect(order("recent-wrong")).toEqual([
+      "twice",
+      "lowest",
+      "once",
+      "clean",
+      "unscored",
+    ]);
+  });
+
+  it("puts the soonest due first, unscheduled last", () => {
+    const sorted = sortItems(items, "due");
+    expect(sorted.at(-1)!.problemId).toBe("unscored");
+    const dues = sorted.slice(0, -1).map((i) => i.card!.due.getTime());
+    expect(dues).toEqual([...dues].sort((a, b) => a - b));
+  });
+
+  it("leaves the input untouched", () => {
+    sortItems(items, "accuracy");
+    expect(items.map((i) => i.problemId)[0]).toBe("once");
   });
 });
