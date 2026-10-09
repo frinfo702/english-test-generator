@@ -127,7 +127,6 @@ export function TaskMenu({ sections }: TaskMenuProps) {
               />
             )}
             <h2 className={styles.label}>{section.label}</h2>
-            <span className={styles.rule} aria-hidden="true" />
           </div>
 
           <div className={styles.list}>

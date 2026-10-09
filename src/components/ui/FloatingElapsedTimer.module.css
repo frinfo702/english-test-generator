@@ -6,36 +6,38 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: 32px;
+  height: 34px;
   padding: 0 12px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
   background: var(--color-surface-overlay);
-  backdrop-filter: saturate(1.5) blur(10px);
-  -webkit-backdrop-filter: saturate(1.5) blur(10px);
-  box-shadow: var(--shadow-sm);
+  backdrop-filter: saturate(1.2) blur(10px);
+  -webkit-backdrop-filter: saturate(1.2) blur(10px);
+  box-shadow: var(--shadow-md);
   font-variant-numeric: tabular-nums;
 }
 
 /* The top-right corner is only free while the side margin is wider than
    the pill; below that it would sit on the page header's actions. */
-@media (max-width: 1400px) {
+@media (max-width: 1520px) {
   .floatingTimer {
     top: auto;
-    bottom: var(--spacing-6);
+    bottom: var(--spacing-5);
+    /* Clear of the corner hamster (UpdateNotice), which owns bottom-right. */
+    right: calc(var(--spacing-4) + 72px);
   }
 }
 
 .label {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
   font-weight: var(--font-medium);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-meta);
   color: var(--color-ink-tertiary);
 }
 
 .value {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
@@ -45,13 +47,13 @@
 .dot {
   width: 6px;
   height: 6px;
-  border-radius: var(--radius-full);
+  border-radius: 1px;
   background: var(--color-ink-disabled);
   transition: background var(--duration-base) var(--ease-out);
 }
 
 .active {
-  background: var(--color-accent);
+  background: var(--color-signal);
   animation: pulse 2s var(--ease-in-out) infinite;
 }
 
@@ -93,9 +95,13 @@
   }
 }
 
+/* Phones: the page head's actions own the top-right and the hamster owns
+   the bottom-right, so the clock takes the free bottom-left corner. */
 @media (max-width: 620px) {
   .floatingTimer {
-    right: var(--spacing-4);
-    top: calc(var(--header-height) + var(--spacing-2));
+    top: auto;
+    right: auto;
+    bottom: var(--spacing-4);
+    left: var(--spacing-4);
   }
 }

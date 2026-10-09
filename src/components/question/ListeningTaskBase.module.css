@@ -11,7 +11,8 @@
 
 .playerCard h3 {
   font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-medium);
+  letter-spacing: -0.015em;
 }
 
 .errorText {
@@ -43,11 +44,11 @@
 }
 
 .verdict {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
   font-weight: var(--font-medium);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--tracking-meta);
 }
 
 .verdictCorrect {
@@ -113,8 +114,10 @@
 
 .transcript summary {
   cursor: pointer;
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   color: var(--color-ink-tertiary);
   list-style: none;
 }
@@ -141,8 +144,10 @@
 .transcriptRole {
   display: inline-block;
   min-width: 76px;
-  font-family: var(--font-sans);
-  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   font-weight: var(--font-medium);
   color: var(--color-ink-tertiary);
 }
@@ -154,8 +159,9 @@
   margin: 0 auto;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
-  padding: var(--spacing-6);
+  border-top: var(--doc-rule);
+  border-radius: 0;
+  padding: var(--spacing-8) var(--spacing-6);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,8 +173,10 @@
 }
 
 .listenPrompt {
-  font-size: var(--text-lg);
-  font-weight: var(--font-bold);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-medium);
+  letter-spacing: -0.015em;
   text-align: center;
   text-wrap: balance;
 }
@@ -181,7 +189,7 @@
 /* Speaker photos sit on a grey studio backdrop: show them as prints. */
 img.speaker,
 img.speakerSmall {
-  border-radius: var(--radius);
+  border-radius: var(--radius-xs);
 }
 
 .listenCard > :last-child {
@@ -191,7 +199,8 @@ img.speakerSmall {
 .speakerCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-top: var(--doc-rule);
+  border-radius: 0;
   padding: var(--spacing-6);
   display: flex;
   flex-direction: column;

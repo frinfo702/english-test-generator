@@ -1,63 +1,77 @@
-/* Home hero — a small, playful banner. Its palette is local on purpose:
- * the rest of the app stays quiet, this one card gets to smile. */
+/* Home hero — type on paper, mascots on a stage. The copy sits on the page
+ * like a magazine opener; the pixel scene gets its own indigo plate, the
+ * only large chromatic surface in the app. */
 
 .hero {
-  --hero-bg: #34337a;
-  --hero-lime: #eef59a;
-  --hero-ink: #1c1917;
   --poodle-rim: drop-shadow(2px 0 0 rgba(238, 245, 154, 0.55))
     drop-shadow(-2px 0 0 rgba(238, 245, 154, 0.55))
     drop-shadow(0 -2px 0 rgba(238, 245, 154, 0.55));
 
-  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 300px);
-  align-items: center;
-  gap: var(--spacing-6);
-  padding: var(--spacing-5) var(--spacing-8);
-  border-radius: var(--radius-xl);
-  background: var(--hero-bg);
-  overflow: hidden;
-}
-
-[data-theme="dark"] .hero {
-  --hero-bg: #2a2966;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: end;
+  gap: var(--spacing-12);
+  padding-top: var(--spacing-8);
 }
 
 .copy {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--spacing-6);
+  padding-bottom: var(--spacing-2);
 }
 
 .eyebrow {
-  font-family: var(--font-pixel);
-  font-size: var(--text-xs);
-  font-weight: var(--font-normal);
-  color: rgba(255, 255, 255, 0.6);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-secondary);
+}
+
+/* A single signal square: the orange from the poodle's collar. */
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--color-signal);
 }
 
 .title {
-  font-size: var(--text-2xl);
-  font-weight: var(--font-semibold);
-  letter-spacing: var(--tracking-tight);
-  color: var(--hero-lime);
+  font-size: clamp(44px, 7vw, var(--text-6xl));
+  font-weight: var(--font-medium);
+  line-height: 0.98;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-ink);
+  max-width: 9ch;
 }
 
 .lead {
-  max-width: 48ch;
-  font-size: var(--text-sm);
+  max-width: 44ch;
+  font-size: var(--text-lg);
   line-height: var(--lh-normal);
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--color-ink-secondary);
 }
 
-/* ---- Pixel scene ---- */
+/* ---- Pixel stage ---- */
+
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 5 / 4;
+  background: var(--stage-bg);
+  overflow: hidden;
+}
 
 .art {
   position: relative;
   width: 290px;
   height: 196px;
-  justify-self: end;
 }
 
 .sparkles {
@@ -76,7 +90,7 @@
   padding: 6px 6px 22px;
   object-fit: cover;
   background: #fbfaf5;
-  border-radius: 2px;
+  border-radius: 1px;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
 }
 
@@ -100,7 +114,7 @@
   height: 4px;
   background: repeating-linear-gradient(
     90deg,
-    var(--hero-lime) 0 12px,
+    var(--stage-lime) 0 12px,
     transparent 12px 16px
   );
   opacity: 0.35;
@@ -140,7 +154,7 @@
   font-family: var(--font-pixel);
   font-size: 15px;
   line-height: 1;
-  color: var(--hero-ink);
+  color: var(--stage-ink);
 }
 
 @keyframes bob {
@@ -159,18 +173,43 @@
   }
 }
 
-@media (max-width: 620px) {
+@media (min-width: 1100px) {
+  .art {
+    transform: scale(1.4);
+  }
+}
+
+@media (max-width: 900px) {
   .hero {
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--spacing-4);
-    padding: var(--spacing-5);
+    gap: var(--spacing-8);
+    padding-top: var(--spacing-4);
   }
 
   .title {
-    font-size: var(--text-xl);
+    max-width: none;
   }
 
-  .art {
-    justify-self: center;
+  .stage {
+    aspect-ratio: auto;
+    height: 300px;
+  }
+}
+
+@media (max-width: 620px) {
+  .copy {
+    gap: var(--spacing-4);
+  }
+
+  .title {
+    font-size: var(--text-4xl);
+  }
+
+  .lead {
+    font-size: var(--text-base);
+  }
+
+  .stage {
+    height: 260px;
   }
 }

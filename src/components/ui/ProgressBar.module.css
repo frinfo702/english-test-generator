@@ -7,7 +7,7 @@
 .label {
   font-family: var(--font-sans);
   font-size: var(--text-2xs);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
 }
 
 .track {
@@ -27,7 +27,7 @@
 }
 
 .count {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-variant-numeric: tabular-nums;
   color: var(--color-ink-tertiary);

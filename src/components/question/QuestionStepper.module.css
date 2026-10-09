@@ -21,7 +21,8 @@
 .qBlock {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-top: var(--doc-rule);
+  border-radius: 0;
   padding: var(--spacing-6);
   display: flex;
   flex-direction: column;
@@ -36,16 +37,17 @@
 }
 
 .qNum {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-doc);
-  border: 1.5px solid var(--color-ink);
-  background: transparent;
-  color: var(--color-ink);
-  font-weight: 700;
-  font-size: var(--text-sm);
+  min-width: 28px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: var(--radius-xs);
+  border: none;
+  background: var(--color-ink);
+  color: var(--color-ink-inverse);
+  font-weight: var(--font-medium);
+  font-size: var(--text-xs);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,21 +55,28 @@
 }
 
 .qMeta {
-  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   color: var(--color-ink-secondary);
   font-variant-numeric: tabular-nums;
 }
 
 .qType {
   margin-left: auto;
-  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   color: var(--color-ink-tertiary);
 }
 
 .stem {
   font-family: var(--font-sans);
   font-size: var(--text-lg);
-  font-weight: 500;
+  font-weight: var(--font-medium);
+  letter-spacing: -0.01em;
   line-height: 1.5;
 }
 
@@ -80,41 +89,50 @@
 .option {
   display: flex;
   align-items: flex-start;
-  gap: var(--spacing-sm);
+  gap: 14px;
   padding: 12px var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   background: var(--color-surface);
   text-align: left;
   font-size: var(--text-base);
   line-height: 1.5;
   transition:
-    border-color 0.15s,
-    background 0.15s;
+    border-color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
 }
 
 .option:hover {
-  border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-hover);
 }
 .option.selected {
   border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
+  background: var(--color-surface);
+  box-shadow: inset 3px 0 0 var(--color-ink);
 }
 .option.correctOpt {
   border-color: var(--color-success);
   background: var(--color-success-subtle);
+  box-shadow: inset 3px 0 0 var(--color-success);
 }
 .option.wrongOpt {
   border-color: var(--color-error);
   background: var(--color-error-subtle);
+  box-shadow: inset 3px 0 0 var(--color-error);
 }
 
 .optLabel {
-  font-family: var(--font-sans);
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: 1.75;
+  color: var(--color-ink-tertiary);
+  min-width: 14px;
+}
+
+.selected .optLabel {
   color: var(--color-ink);
-  min-width: 20px;
 }
 
 /* ---- Question navigation ---- */
@@ -127,10 +145,8 @@
   align-items: center;
   gap: var(--spacing-4);
   margin-top: var(--spacing-8);
-  padding: var(--spacing-4);
-  background: var(--color-surface-subtle);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  padding: var(--spacing-4) 0;
+  border-top: var(--rule-ink);
 }
 
 .navBar > :first-child {
@@ -160,10 +176,11 @@
   align-items: center;
   justify-content: center;
   border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-doc);
-  background: var(--color-surface);
+  border-radius: var(--radius-xs);
+  background: transparent;
   color: var(--color-ink-secondary);
-  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   font-variant-numeric: tabular-nums;
   transition:
     border-color var(--duration-fast) var(--ease-out),
@@ -186,10 +203,14 @@
   background: var(--color-error-subtle);
   color: var(--color-error);
 }
-.navDot.navCurrent {
-  border: 2px solid var(--color-ink);
-  color: var(--color-ink);
-  font-weight: 700;
+.navDot.navCurrent:not(.navCorrect):not(.navWrong) {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-ink-inverse);
+}
+/* Graded: keep the verdict colour, mark "current" with a second ring. */
+.navDot.navCurrent:is(.navCorrect, .navWrong) {
+  box-shadow: 0 0 0 1px currentColor;
 }
 
 @media (max-width: 860px) {
@@ -205,7 +226,7 @@
 @media (max-width: 620px) {
   .navBar {
     grid-template-columns: 1fr 1fr;
-    padding: var(--spacing-3);
+    padding: var(--spacing-3) 0;
   }
   .navGroups {
     order: -1;

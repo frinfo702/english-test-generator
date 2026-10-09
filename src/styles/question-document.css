@@ -1,40 +1,39 @@
 /**
- * Shared document/exam aesthetics for question surfaces.
- * Complements site chrome (soft nav, warm paper) with a formal
- * U.S. government–document register: ink rules, long passages,
- * boxed item numbers, form-like options.
+ * Shared document/exam register for question surfaces.
+ * An exam paper, not a widget: one ink rule opens the sheet, passages run at
+ * a long measure, item numbers and option letters speak in the mono meta
+ * voice, and options are ruled form rows rather than buttons.
  *
- * Pages still use CSS modules; this file provides:
- * 1) CSS custom-property shortcuts already on :root
- * 2) Utility classes usable as plain className="doc-*" (unhashed)
+ * Pages still use CSS modules; this file provides utility classes usable as
+ * plain className="doc-*" (unhashed).
  */
 
-/* ---- Document surface (letterhead card) ---- */
+/* ---- Document surface (the sheet) ---- */
 .doc-surface {
   background: var(--color-surface);
   border: var(--doc-border);
   border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
+  border-radius: 0;
   padding: var(--doc-padding);
 }
 
 .doc-surface-quiet {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: 0;
   padding: var(--doc-padding);
 }
 
 /* ---- Section eyebrow (PASSAGE · QUESTION · RESPONSE) ---- */
 .doc-eyebrow {
   display: block;
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
   font-weight: var(--font-medium);
-      color: var(--color-ink-tertiary);
+  color: var(--color-ink-tertiary);
   margin-bottom: var(--spacing-3);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--tracking-meta);
 }
 
 .doc-eyebrow-ink {
@@ -45,39 +44,30 @@
 }
 
 /* ---- Long-form reading (generous measure) ---- */
-.doc-prose {
-  font-family: var(--font-sans);
-  font-size: var(--text-base);
-  line-height: var(--lh-doc);
-  color: var(--color-ink);
-  white-space: pre-wrap;
-  max-width: 64ch;
-}
-
+.doc-prose,
 .doc-prose-lg {
   font-family: var(--font-sans);
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   line-height: var(--lh-doc);
   color: var(--color-ink);
   white-space: pre-wrap;
-  max-width: 64ch;
+  max-width: 66ch;
 }
 
-/* ---- Item / question number (boxed, not pill) ---- */
+/* ---- Item / question number ---- */
 .doc-item-num {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 26px;
-  height: 26px;
+  min-width: 28px;
+  height: 24px;
   padding: 0 6px;
-  border: 1.5px solid var(--color-ink);
-  border-radius: var(--radius-doc);
-  background: transparent;
-  color: var(--color-ink);
-  font-family: var(--font-sans);
+  border-radius: var(--radius-xs);
+  background: var(--color-ink);
+  color: var(--color-ink-inverse);
+  font-family: var(--font-mono);
   font-size: var(--text-xs);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-medium);
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
   letter-spacing: 0;
@@ -87,11 +77,11 @@
 .doc-option {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 14px;
   width: 100%;
-  padding: 12px 14px;
+  padding: 13px 16px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   background: var(--color-surface);
   text-align: left;
   font-family: var(--font-sans);
@@ -107,7 +97,7 @@
 @media (hover: hover) and (pointer: fine) {
   .doc-option:hover:not(:disabled) {
     border-color: var(--color-border-strong);
-    background: var(--color-surface-subtle);
+    background: var(--color-surface-hover);
   }
 }
 
@@ -123,34 +113,45 @@
 .doc-option[aria-pressed="true"],
 .doc-option-selected {
   border-color: var(--color-ink);
-  background: var(--color-surface-subtle);
-  font-weight: var(--font-medium);
+  background: var(--color-surface);
+  box-shadow: inset 3px 0 0 var(--color-ink);
 }
 
 .doc-option-correct {
   border-color: var(--color-success);
   background: var(--color-success-subtle);
+  box-shadow: inset 3px 0 0 var(--color-success);
 }
 
 .doc-option-wrong {
   border-color: var(--color-error);
   background: var(--color-error-subtle);
+  box-shadow: inset 3px 0 0 var(--color-error);
 }
 
 .doc-option-label {
-  font-family: var(--font-sans);
-  font-weight: var(--font-semibold);
-  color: var(--color-ink);
-  min-width: 16px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: 1.75;
+  color: var(--color-ink-tertiary);
+  min-width: 14px;
   flex-shrink: 0;
+}
+
+.doc-option[aria-pressed="true"] .doc-option-label,
+.doc-option-selected .doc-option-label {
+  color: var(--color-ink);
 }
 
 /* ---- Meta / progress strip ---- */
 .doc-meta {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
   font-weight: var(--font-medium);
-      color: var(--color-ink-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-meta);
+  color: var(--color-ink-tertiary);
 }
 
 .doc-divider {
@@ -175,21 +176,21 @@
 
 .doc-score-num {
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-medium);
   color: var(--color-ink);
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-tighter);
 }
 
 .doc-score-den {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-lg);
   color: var(--color-ink-tertiary);
 }
 
 .doc-score-pct {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
@@ -200,7 +201,7 @@
 .doc-field {
   width: 100%;
   border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-xs);
   background: var(--color-surface);
   color: var(--color-ink);
   padding: var(--spacing-4);
@@ -222,20 +223,21 @@
   background: var(--color-surface-subtle);
 }
 
-/* ---- Tag / module (outlined, not filled pill) ---- */
+/* ---- Tag / module (mono, outlined) ---- */
 .doc-tag {
   display: inline-flex;
   align-items: center;
-  font-size: 11px;
-  font-weight: var(--font-semibold);
-      color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  color: var(--color-ink);
   background: transparent;
   border: 1px solid var(--color-ink);
-  border-radius: var(--radius-doc);
-  padding: 3px 10px;
+  border-radius: var(--radius-xs);
+  padding: 3px 8px;
   white-space: nowrap;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--tracking-meta);
 }
 
 .doc-tag-muted {

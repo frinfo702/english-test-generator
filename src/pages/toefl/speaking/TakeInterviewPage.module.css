@@ -20,12 +20,12 @@
   margin: 0 auto;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-6);
+  border-top: var(--doc-rule);
+  border-radius: 0;
+  padding: var(--spacing-8);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-5);
-  box-shadow: var(--shadow-xs);
 }
 
 .cardHeader {
@@ -36,20 +36,22 @@
 }
 
 .typeTag {
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
-  color: var(--color-ink-secondary);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
-  padding: 3px 8px;
-  background: var(--color-surface-subtle);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
 }
 
 .qNum {
-  font-family: var(--font-sans);
-  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
   font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   color: var(--color-ink-tertiary);
+  font-variant-numeric: tabular-nums;
 }
 
 .questionHidden {
@@ -58,9 +60,9 @@
   color: var(--color-ink-tertiary);
   line-height: var(--lh-normal);
   padding: var(--spacing-6);
-  background: var(--color-surface-subtle);
+  background: transparent;
   border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius);
+  border-radius: var(--radius-xs);
   text-align: center;
 }
 
@@ -71,9 +73,8 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--spacing-4);
-  padding: var(--spacing-5);
-  background: var(--color-surface-subtle);
-  border-radius: var(--radius);
+  padding: var(--spacing-5) 0 0;
+  border-top: var(--rule);
 }
 
 .preNote {
@@ -103,7 +104,8 @@
   margin: 0 auto;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-top: var(--doc-rule);
+  border-radius: 0;
   padding: var(--spacing-8);
   display: flex;
   flex-direction: column;
@@ -124,10 +126,8 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
-  padding: var(--spacing-4);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-surface-subtle);
+  padding: var(--spacing-4) 0;
+  border-bottom: var(--rule);
 }
 
 .avatarWrap {
@@ -153,7 +153,7 @@
   justify-content: center;
   font-family: var(--font-display);
   font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-medium);
   background: var(--color-surface);
   color: var(--color-ink-secondary);
 }
@@ -189,7 +189,7 @@
 .interviewerName {
   font-family: var(--font-display);
   font-size: var(--text-base);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-medium);
   letter-spacing: -0.01em;
 }
 

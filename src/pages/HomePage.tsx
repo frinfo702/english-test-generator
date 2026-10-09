@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { HomeHero } from "../components/home/HomeHero";
 import { PixelIcon } from "../components/pixel/PixelIcon";
 import type { PixelIconName } from "../components/pixel/pixelIcons";
-import table from "../components/ui/ProblemTable.module.css";
 import styles from "./HomePage.module.css";
 
 type TestItem = {
@@ -50,19 +49,23 @@ export function HomePage() {
             Practice
           </h2>
         </div>
-        <div className={table.container}>
-          {tests.map((test) => (
-            <Link key={test.path} to={test.path} className={table.row}>
-              <span className={table.statusCol}>
+        <ol className={styles.list}>
+          {tests.map((test, i) => (
+            <li key={test.path}>
+              <Link to={test.path} className={styles.row}>
+                <span className={styles.index} aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <PixelIcon name={test.icon} className={styles.rowIcon} />
-              </span>
-              <span className={table.titleCell}>
-                {test.title}
-                <span className={table.titleMeta}>{test.subtitle}</span>
-              </span>
-            </Link>
+                <span className={styles.rowTitle}>{test.title}</span>
+                <span className={styles.rowMeta}>{test.subtitle}</span>
+                <span className={styles.arrow} aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
     </div>
   );

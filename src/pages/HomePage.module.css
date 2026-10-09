@@ -1,8 +1,10 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-10);
+  gap: var(--spacing-20);
 }
+
+/* ---- Index: the four practice tracks as an editorial table of contents ---- */
 
 .sectionHead {
   display: flex;
@@ -10,18 +12,124 @@
   justify-content: space-between;
   gap: var(--spacing-4);
   padding-bottom: var(--spacing-3);
-  margin-bottom: var(--spacing-4);
-  border-bottom: var(--rule);
+  border-bottom: var(--rule-ink);
 }
 
 .sectionTitle {
-  font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
-  letter-spacing: -0.01em;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.list {
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 56px 40px minmax(0, 1fr) minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-6) 0;
+  border-bottom: var(--rule);
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.row:hover {
+  color: var(--color-ink);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-surface-hover) 12%,
+    var(--color-surface-hover) 88%,
+    transparent
+  );
+}
+
+.row:focus-visible {
+  border-radius: 0;
+}
+
+.index {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-tertiary);
+  font-variant-numeric: tabular-nums;
 }
 
 .rowIcon {
   display: block;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
+}
+
+.rowTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--lh-tight);
+}
+
+.rowMeta {
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+  line-height: var(--lh-normal);
+}
+
+.arrow {
+  justify-self: end;
+  color: var(--color-ink-tertiary);
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.row:hover .arrow {
+  color: var(--color-signal);
+  transform: translateX(4px);
+}
+
+@media (max-width: 760px) {
+  .page {
+    gap: var(--spacing-12);
+  }
+
+  .row {
+    grid-template-columns: 36px minmax(0, 1fr) 20px;
+    grid-template-areas:
+      "icon title arrow"
+      "icon meta arrow";
+    column-gap: var(--spacing-3);
+    row-gap: 2px;
+    padding: var(--spacing-4) 0;
+  }
+
+  .index {
+    display: none;
+  }
+
+  .rowIcon {
+    grid-area: icon;
+    width: 28px;
+    height: 28px;
+  }
+
+  .rowTitle {
+    grid-area: title;
+    font-size: var(--text-xl);
+  }
+
+  .rowMeta {
+    grid-area: meta;
+  }
+
+  .arrow {
+    grid-area: arrow;
+  }
 }
