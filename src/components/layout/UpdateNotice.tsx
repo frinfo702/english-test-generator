@@ -16,6 +16,11 @@ export function UpdateNotice() {
   const { pathname } = useLocation();
   const [seen, setSeen] = useState(hasSeenLatestUpdate);
   const [open, setOpen] = useState(false);
+  const [openedOn, setOpenedOn] = useState(pathname);
+  if (openedOn !== pathname) {
+    setOpenedOn(pathname);
+    setOpen(false);
+  }
   const onUpdatePage = pathname === LATEST_UPDATE.path;
 
   // Reading the update counts, however you got there.
