@@ -21,6 +21,9 @@ html {
   text-underline-offset: 0.2em;
   color-scheme: light dark;
   overflow-y: scroll;
+  /* The sticky header overlays the top of the viewport: anchor jumps,
+     scrollIntoView and focus scrolling all stop below it. */
+  scroll-padding-top: calc(var(--header-height) + var(--spacing-4));
 }
 
 html[data-theme="light"] {

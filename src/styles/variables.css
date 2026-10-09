@@ -292,6 +292,8 @@
   --max-reading: 720px;
   --gutter: var(--spacing-8);
   --header-height: 60px;
+  /* Space between a page-level error banner and whatever follows it. */
+  --notice-gap: var(--spacing-8);
   --rule: 1px solid var(--color-border);
   --rule-ink: 1px solid var(--color-ink);
 
