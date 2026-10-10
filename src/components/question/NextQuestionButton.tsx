@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState, useSyncExternalStore } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { listQuestionFiles } from "../../lib/questions";
+import { RECALL_PATH } from "../../lib/review";
 import {
   getNextMode,
   pickNext,
@@ -34,7 +35,10 @@ interface NextQuestionButtonProps extends Omit<
  * there is no next problem, so they can be changed.
  */
 export function NextQuestionButton(props: NextQuestionButtonProps) {
-  return useContext(TrialItemContext) ? null : <NextQuestion {...props} />;
+  const trial = useContext(TrialItemContext);
+  // Recall picks the next question by due date, from its own bar.
+  const recall = useLocation().pathname.startsWith(RECALL_PATH);
+  return trial || recall ? null : <NextQuestion {...props} />;
 }
 
 function NextQuestion({
