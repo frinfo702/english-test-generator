@@ -7,8 +7,8 @@
  * this feature therefore schedules like any other, and answering a question
  * anywhere in the app — practice, a practice test, or recall — reschedules it.
  *
- * Only reading and listening are reviewed: their answers are right or wrong,
- * while writing and speaking get rubric scores with no clear pass.
+ * Writing and speaking are reviewed on their rubric scores, so only a perfect
+ * score counts as recalled; an unscored response is listed but not scheduled.
  */
 import { createEmptyCard, fsrs, Rating, type Card, type Grade } from "ts-fsrs";
 import type { TaskId } from "../hooks/useScoreHistory";
@@ -86,8 +86,6 @@ export function buildReviewItems(attempts: Attempt[]): ReviewItem[] {
   for (const a of attempts) {
     // No problemId (the oldest scores) means no question to show or recall.
     if (a.taskId === TRIAL_TASK_ID || !a.problemId) continue;
-    const section = sectionOf(a.taskId);
-    if (section === "writing" || section === "speaking") continue;
     const key = `${a.taskId}/${a.problemId}`;
     if (!byKey.has(key)) byKey.set(key, []);
     byKey.get(key)!.push(a);
@@ -167,13 +165,22 @@ export function sortItems(items: ReviewItem[], by: ReviewSort): ReviewItem[] {
 /** Every set field must match; unset fields don't filter. */
 export interface ReviewFilter {
   test?: Test;
-  section?: "reading" | "listening";
+  section?: SectionKey;
   taskId?: TaskId;
   difficulty?: Difficulty;
-  minMistakes?: number;
-  result?: "correct" | "incorrect";
   dueOnly?: boolean;
 }
+
+/** The tasks a test and section allow, so each filter offers only what fits the ones above it. */
+export const tasksWithin = (
+  tasks: TaskId[],
+  f: Pick<ReviewFilter, "test" | "section">,
+) =>
+  tasks.filter(
+    (t) =>
+      (!f.test || testOf(t) === f.test) &&
+      (!f.section || sectionOf(t) === f.section),
+  );
 
 export function filterItems(
   items: ReviewItem[],
@@ -188,8 +195,6 @@ export function filterItems(
       (!f.section || sectionOf(i.taskId) === f.section) &&
       (!f.taskId || i.taskId === f.taskId) &&
       (!f.difficulty || difficulty.get(i.key) === f.difficulty) &&
-      i.mistakes >= (f.minMistakes ?? 0) &&
-      (!f.result || i.correct === (f.result === "correct")) &&
       (!f.dueOnly || isDue(i, now)),
   );
 }
