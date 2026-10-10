@@ -7,6 +7,7 @@
 }
 
 .error {
+  margin-bottom: var(--notice-gap);
   padding: var(--spacing-4);
   border-radius: var(--radius-xs);
   border: 1px solid color-mix(in srgb, var(--color-error) 40%, transparent);

@@ -159,6 +159,7 @@
 }
 
 .error {
+  margin-bottom: var(--notice-gap);
   color: var(--color-error);
   background: var(--color-error-subtle);
   padding: var(--spacing-md);
