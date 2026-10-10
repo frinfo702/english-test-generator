@@ -35,9 +35,7 @@ afterEach(() => {
 
 describe("page layout", () => {
   it("separates boxed page error banners from the content below", () => {
-    const unstyled = getComputedStyle(
-      render(banner),
-    ).background;
+    const unstyled = getComputedStyle(render(banner)).background;
     let boxed = 0;
     for (const file of pageModules) {
       loadStylesheet(file);
