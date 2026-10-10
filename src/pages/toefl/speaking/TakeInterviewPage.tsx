@@ -314,7 +314,8 @@ export function TakeInterviewPage() {
     }
     await settled;
     const attempt = attemptRef.current;
-    if (attempt) navigate(`/results/${attempt.id}`, { state: { justAnswered: true } });
+    if (attempt)
+      navigate(`/results/${attempt.id}`, { state: { justAnswered: true } });
     else goToQuestionList();
   };
 
