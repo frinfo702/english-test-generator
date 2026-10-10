@@ -46,8 +46,9 @@ Same structure, no glows.
 ### Pixel stage
 
 `--stage-bg` (`#2f2e73`, dark `#24235a`), `--stage-lime` `#eef59a`,
-`--stage-ink`. Used only behind the mascots: the home hero plate and the
-update page's call to action. Never on tool surfaces.
+`--stage-ink`. Used only on announcement visuals: the home hero plate, the
+update pages' call to action and the AI scoring update's line-drawn score
+card. Never on tool surfaces.
 
 ### Test wordmarks
 
