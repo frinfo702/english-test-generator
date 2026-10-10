@@ -4,15 +4,12 @@ import {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
-  type ChangeEvent,
 } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
 import { PixelHamster } from "../components/pixel/PixelHamster";
-import { PixelIcon } from "../components/pixel/PixelIcon";
 import { StreakCalendar } from "../components/ui/StreakCalendar";
 import {
   useScoreHistory,
@@ -20,16 +17,10 @@ import {
   type TaskId,
 } from "../hooks/useScoreHistory";
 import { formatSecondsAsMmSs } from "../lib/time";
-import {
-  exportBackup,
-  getAllAttempts,
-  importBackup,
-  type Attempt,
-} from "../lib/attempts";
+import { getAllAttempts, type Attempt } from "../lib/attempts";
 import styles from "./DashboardPage.module.css";
 import { PracticeTestsPanel } from "./trial/PracticeTestsPanel";
 import { TRIAL_TASK_ID } from "../lib/trial";
-import dialogStyles from "../components/layout/LegacyHistoryNotice.module.css";
 
 /** Charts are a dashboard-only concern — keep recharts out of the practice pages. */
 const ScoreTrendChart = lazy(() =>
@@ -210,11 +201,6 @@ export function DashboardPage() {
   const [answers, setAnswers] = useState<Attempt[]>([]);
   const [results, setResults] = useState<Attempt[]>([]);
   const [allAttempts, setAllAttempts] = useState<Attempt[]>([]);
-  const [includeAudio, setIncludeAudio] = useState(false);
-  const [backupBusy, setBackupBusy] = useState(false);
-  const [backupMessage, setBackupMessage] = useState<string | null>(null);
-  const importInputRef = useRef<HTMLInputElement>(null);
-  const exportDialogRef = useRef<HTMLDialogElement>(null);
 
   const load = useCallback(() => {
     getAll().then(setEntries);
@@ -256,43 +242,6 @@ export function DashboardPage() {
       });
     } else {
       setConfirmClear(true);
-    }
-  };
-
-  const handleExport = async () => {
-    exportDialogRef.current?.close();
-    setBackupBusy(true);
-    setBackupMessage(null);
-    try {
-      const url = URL.createObjectURL(await exportBackup(includeAudio));
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `english-test-backup-${new Date().toISOString().slice(0, 10)}.json`;
-      link.click();
-      setTimeout(() => URL.revokeObjectURL(url), 0);
-    } catch (e) {
-      setBackupMessage(`Export failed: ${e instanceof Error ? e.message : e}`);
-    } finally {
-      setBackupBusy(false);
-    }
-  };
-
-  const handleImport = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    e.target.value = "";
-    if (!file) return;
-    setBackupBusy(true);
-    setBackupMessage(null);
-    try {
-      const count = await importBackup(file);
-      setBackupMessage(`Imported ${count} attempt${count === 1 ? "" : "s"}.`);
-      load();
-    } catch (err) {
-      setBackupMessage(
-        `Import failed: ${err instanceof Error ? err.message : err}`,
-      );
-    } finally {
-      setBackupBusy(false);
     }
   };
 
@@ -454,84 +403,6 @@ export function DashboardPage() {
           </div>
         </section>
       )}
-
-      <section className={styles.answersSection}>
-        <h2 className={styles.answersHeading}>Backup</h2>
-        <p className={styles.backupHint}>
-          Your history lives only in this browser. Export it to keep a copy or
-          to move to another browser. Importing adds to what is here, so
-          importing the same file twice is harmless.
-        </p>
-        <div className={styles.backupActions}>
-          <Button
-            variant="secondary"
-            size="sm"
-            className={styles.backupBtn}
-            onClick={() => exportDialogRef.current?.showModal()}
-            disabled={backupBusy}
-          >
-            <PixelIcon
-              name="exportTray"
-              className={`${styles.backupIcon} ${styles.exportIcon}`}
-            />
-            Export
-          </Button>
-          <Button
-            variant="secondary"
-            size="sm"
-            className={styles.backupBtn}
-            onClick={() => importInputRef.current?.click()}
-            disabled={backupBusy}
-          >
-            <PixelIcon
-              name="importTray"
-              className={`${styles.backupIcon} ${styles.importIcon}`}
-            />
-            Import
-          </Button>
-          <input
-            ref={importInputRef}
-            type="file"
-            accept="application/json,.json"
-            hidden
-            onChange={handleImport}
-          />
-        </div>
-        <dialog
-          ref={exportDialogRef}
-          className={dialogStyles.dialog}
-          aria-labelledby="export-dialog-title"
-        >
-          <h2 id="export-dialog-title" className={dialogStyles.title}>
-            Export backup
-          </h2>
-          <label className={`${styles.backupOption} ${dialogStyles.body}`}>
-            <input
-              type="checkbox"
-              checked={includeAudio}
-              onChange={(e) => setIncludeAudio(e.target.checked)}
-            />
-            Include speaking recordings (makes the file much larger)
-          </label>
-          <div className={dialogStyles.actions}>
-            <Button size="sm" onClick={handleExport}>
-              Export
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={() => exportDialogRef.current?.close()}
-            >
-              Cancel
-            </Button>
-          </div>
-        </dialog>
-        {backupMessage && (
-          <p className={styles.backupHint} role="status">
-            {backupMessage}
-          </p>
-        )}
-      </section>
     </div>
   );
 }

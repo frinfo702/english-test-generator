@@ -10,15 +10,18 @@ import { useSingleAudio } from "../../../hooks/useSingleAudio";
 import type { TaskId } from "../../../hooks/useScoreHistory";
 import { buildInterviewQaCopyMessage } from "../../../lib/answerSubmission";
 import type { Attempt, ItemResponse } from "../../../lib/attempts";
+import { ThinkingOrb } from "../../../components/ui/ThinkingOrb";
+import { useAttemptUpdater, useScoringJob } from "../../../hooks/useAutoScore";
 import {
   interviewItemScore,
+  parseAiScores,
   stripScoreBlock,
   withInterviewAi,
   type AiInterviewScores,
 } from "../../../lib/interviewScoring";
 import { spokenWords } from "../../../lib/pronunciation";
 import { computeSpeedMetrics, speedScore } from "../../../lib/speakingRate";
-import { AiScorePanel } from "./AiScorePanel";
+import { AiScore, PendingFacet } from "./AutoScore";
 import {
   INTERVIEW_TYPE_LABELS,
   interviewAudioUrl,
@@ -204,6 +207,7 @@ function ItemRow({
   index,
   score,
   partial,
+  scoring,
   controls,
   prompt,
   response,
@@ -213,6 +217,8 @@ function ItemRow({
   index: number;
   score: number | undefined;
   partial?: boolean;
+  /** The AI half is on its way: hold the score's place with the orb. */
+  scoring?: boolean;
   controls: ReactNode;
   prompt: string;
   response: string;
@@ -236,7 +242,11 @@ function ItemRow({
       <div className={styles.side}>
         <p className={styles.itemScore}>
           <ScorePips score={score ?? null} />
-          {score === undefined ? (
+          {score === undefined && scoring ? (
+            <span className={styles.unscored} role="status">
+              <ThinkingOrb /> Scoring
+            </span>
+          ) : score === undefined ? (
             <span className={styles.unscored}>Not scored</span>
           ) : (
             <>
@@ -399,6 +409,131 @@ function asInterviewData(question: unknown): InterviewProblemData | null {
     : null;
 }
 
+function InterviewItem({
+  attempt,
+  index: i,
+  audio,
+  url,
+  onApply,
+}: {
+  attempt: Attempt;
+  index: number;
+  audio: Audio;
+  url: string | null;
+  onApply: (ai: { reply: string; scores: AiInterviewScores }) => void;
+}) {
+  const r = attempt.responses[i];
+  const q = asInterviewData(attempt.question)?.questions[i];
+  const message = buildInterviewQaCopyMessage({
+    question: r.prompt ?? q?.question ?? "",
+    userAnswer: r.transcript ?? "",
+    modelAnswer: q?.modelAnswer,
+    evaluationPoints: q?.evaluationPoints,
+    questionType: q ? (INTERVIEW_TYPE_LABELS[q.type] ?? q.type) : undefined,
+  });
+  const canScore = !r.ai && r.transcript !== undefined;
+  // Started in the background when the answer was finished.
+  const job = useScoringJob(attempt.id, i);
+  const waiting = canScore ? job : undefined;
+  const breakdown = interviewItemScore(
+    r.ai?.scores ?? null,
+    r.assessment ?? null,
+  );
+  return (
+    <ItemRow
+      index={i}
+      score={r.itemScore}
+      partial={r.itemScore !== undefined && !r.assessment}
+      scoring={waiting?.status === "scoring"}
+      prompt={r.prompt ?? q?.question ?? ""}
+      response={r.transcript ?? ""}
+      controls={
+        <>
+          {q && (
+            <span className={styles.tag}>
+              {INTERVIEW_TYPE_LABELS[q.type] ?? q.type}
+            </span>
+          )}
+          <PlayButton
+            audio={audio}
+            id={`prompt-${i}`}
+            url={
+              attempt.problemId
+                ? interviewAudioUrl(attempt.problemId, i, "question")
+                : null
+            }
+            label="Prompt"
+          />
+          <PlayButton audio={audio} id={`you-${i}`} url={url} label="You" />
+        </>
+      }
+      side={
+        <>
+          {waiting && (
+            <>
+              <PendingFacet label="Language use" job={waiting} />
+              <PendingFacet label="Organization" job={waiting} />
+            </>
+          )}
+          {(
+            [
+              ["Language use", breakdown?.languageUse],
+              ["Organization", breakdown?.organization],
+              ["Intelligibility", breakdown?.intelligibility],
+              ["Fluency", breakdown?.fluency],
+            ] as const
+          ).map(
+            ([label, value]) =>
+              value !== undefined && (
+                <ProgressBar
+                  key={label}
+                  current={Math.round(value)}
+                  total={100}
+                  label={label}
+                />
+              ),
+          )}
+          {!r.assessment && <DeliveryBars response={r} />}
+        </>
+      }
+      details={
+        <>
+          {r.ai ? (
+            <div className={styles.aiReply}>
+              <h3>AI feedback</h3>
+              <p>{stripScoreBlock(r.ai.reply)}</p>
+            </div>
+          ) : (
+            canScore && (
+              <AiScore
+                attemptId={attempt.id}
+                index={i}
+                message={message}
+                parse={parseAiScores}
+                onApply={onApply}
+              />
+            )
+          )}
+          {q && (
+            <div className={styles.sample}>
+              <h3>Sample answer</h3>
+              <p>{q.modelAnswer}</p>
+              {attempt.problemId && (
+                <PlayButton
+                  audio={audio}
+                  id={`model-${i}`}
+                  url={interviewAudioUrl(attempt.problemId, i, "model")}
+                  label="Play sample"
+                />
+              )}
+            </div>
+          )}
+        </>
+      }
+    />
+  );
+}
+
 export function InterviewResult({
   attempt,
   onChange,
@@ -408,18 +543,13 @@ export function InterviewResult({
 }) {
   const audio = useSingleAudio();
   const urls = useResponseUrls(attempt.responses);
-  const data = asInterviewData(attempt.question);
+  const update = useAttemptUpdater(attempt, onChange);
   const assessed = attempt.responses.flatMap((r) =>
     r.assessment ? [r.assessment] : [],
   );
   const pron = average(assessed.map((a) => a.pronunciation));
   const speed =
     assessed.length > 0 ? computeSpeedMetrics(assessed.map(spokenWords)) : null;
-
-  const applyAi = (
-    index: number,
-    ai: { reply: string; scores: AiInterviewScores },
-  ) => onChange(withInterviewAi(attempt, index, ai));
 
   return (
     <div className={styles.page}>
@@ -444,110 +574,16 @@ export function InterviewResult({
       />
       <ScenarioRow audio={audio} attempt={attempt} />
       <ol className={styles.rows}>
-        {attempt.responses.map((r, i) => {
-          const q = data?.questions[i];
-          const breakdown = interviewItemScore(
-            r.ai?.scores ?? null,
-            r.assessment ?? null,
-          );
-          return (
-            <ItemRow
-              key={r.itemId ?? i}
-              index={i}
-              score={r.itemScore}
-              partial={r.itemScore !== undefined && !r.assessment}
-              prompt={r.prompt ?? q?.question ?? ""}
-              response={r.transcript ?? ""}
-              controls={
-                <>
-                  {q && (
-                    <span className={styles.tag}>
-                      {INTERVIEW_TYPE_LABELS[q.type] ?? q.type}
-                    </span>
-                  )}
-                  <PlayButton
-                    audio={audio}
-                    id={`prompt-${i}`}
-                    url={
-                      attempt.problemId
-                        ? interviewAudioUrl(attempt.problemId, i, "question")
-                        : null
-                    }
-                    label="Prompt"
-                  />
-                  <PlayButton
-                    audio={audio}
-                    id={`you-${i}`}
-                    url={urls[i]}
-                    label="You"
-                  />
-                </>
-              }
-              side={
-                <>
-                  {(
-                    [
-                      ["Language use", breakdown?.languageUse],
-                      ["Organization", breakdown?.organization],
-                      ["Intelligibility", breakdown?.intelligibility],
-                      ["Fluency", breakdown?.fluency],
-                    ] as const
-                  ).map(
-                    ([label, value]) =>
-                      value !== undefined && (
-                        <ProgressBar
-                          key={label}
-                          current={Math.round(value)}
-                          total={100}
-                          label={label}
-                        />
-                      ),
-                  )}
-                  {!r.assessment && <DeliveryBars response={r} />}
-                </>
-              }
-              details={
-                <>
-                  {r.ai ? (
-                    <div className={styles.aiReply}>
-                      <h3>AI feedback</h3>
-                      <p>{stripScoreBlock(r.ai.reply)}</p>
-                    </div>
-                  ) : (
-                    r.transcript !== undefined && (
-                      <AiScorePanel
-                        message={buildInterviewQaCopyMessage({
-                          question: r.prompt ?? q?.question ?? "",
-                          userAnswer: r.transcript,
-                          modelAnswer: q?.modelAnswer,
-                          evaluationPoints: q?.evaluationPoints,
-                          questionType: q
-                            ? (INTERVIEW_TYPE_LABELS[q.type] ?? q.type)
-                            : undefined,
-                        })}
-                        onApply={(ai) => applyAi(i, ai)}
-                      />
-                    )
-                  )}
-                  {q && (
-                    <div className={styles.sample}>
-                      <h3>Sample answer</h3>
-                      <p>{q.modelAnswer}</p>
-                      {attempt.problemId && (
-                        <PlayButton
-                          audio={audio}
-                          id={`model-${i}`}
-                          url={interviewAudioUrl(attempt.problemId, i, "model")}
-                          label="Play sample"
-                        />
-                      )}
-                    </div>
-                  )}
-                </>
-              }
-            />
-          );
-        })}
+        {attempt.responses.map((r, i) => (
+          <InterviewItem
+            key={r.itemId ?? i}
+            attempt={attempt}
+            index={i}
+            audio={audio}
+            url={urls[i] ?? null}
+            onApply={(ai) => update((a) => withInterviewAi(a, i, ai))}
+          />
+        ))}
       </ol>
     </div>
   );

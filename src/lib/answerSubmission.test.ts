@@ -4,10 +4,12 @@ import {
   buildGradingMessage,
   buildInterviewQaCopyMessage,
   buildProblemId,
+  buildWritingCopyMessage,
   clearDraft,
   copyText,
   loadDraft,
   saveDraft,
+  writingCriteria,
 } from "./answerSubmission";
 
 describe("answerSubmission", () => {
@@ -96,5 +98,33 @@ describe("answerSubmission", () => {
     expect(message).toContain("Please evaluate my TOEFL Speaking");
     expect(message).toContain("```toefl-score");
     expect(message).toContain('{"languageUse": 0, "organization": 0}');
+  });
+
+  it("numbers the writing criteria and asks for one rating per point", () => {
+    const message = buildWritingCopyMessage({
+      task: "Write an Email",
+      prompt: "Task",
+      userAnswer: "Answer",
+      criteria: ["Task completion: covers both", "Language use: grammar"],
+    });
+
+    expect(message).toContain("1. Task completion: covers both");
+    expect(message).toContain("2. Language use: grammar");
+    expect(message).toContain(
+      '{"criteria": [{"points": 0, "note": "..."}, {"points": 0, "note": "..."}], "score": 0}',
+    );
+  });
+
+  it("reads the rubric points of each writing task", () => {
+    expect(
+      writingCriteria("toefl/writing/email", {
+        rubric: [{ criterion: "Task completion", description: "Covers it." }],
+      }),
+    ).toEqual([{ name: "Task completion", detail: "Covers it." }]);
+    expect(
+      writingCriteria("toefl/writing/discussion", {
+        evaluationPoints: ["States a position"],
+      }),
+    ).toEqual([{ name: "States a position" }]);
   });
 });

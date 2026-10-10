@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+import { useAttemptUpdates, useScoringJobs } from "../../hooks/useAutoScore";
+import { autoScoring } from "../../lib/aiGateway";
+import { isScoring } from "../../lib/backgroundScoring";
 import { getAllAttempts, putAttempts, type Attempt } from "../../lib/attempts";
 import { fetchQuestionByIdWithMeta } from "../../lib/questions";
 import {
@@ -25,12 +28,18 @@ export function TrialReportPage() {
   const { trialId = "" } = useParams<{ trialId: string }>();
   const [attempts, setAttempts] = useState<Attempt[] | null>(null);
   const [questions, setQuestions] = useState<Map<string, unknown>>(new Map());
-  const [scoreLater, setScoreLater] = useState(false);
+  // With the user's key, answers were scored as they were finished, so the
+  // report never waits on a copy & paste gate.
+  const [scoreLater, setScoreLater] = useState(() => autoScoring() !== null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     getAllAttempts().then(setAttempts, () => setAttempts([]));
   }, []);
+  // Background scores still in flight from the test land here.
+  useAttemptUpdates((next) =>
+    setAttempts((all) => all && all.map((a) => (a.id === next.id ? next : a))),
+  );
 
   const trials = (attempts ?? []).filter(isTrial);
   const trial = trials.find((t) => t.id === trialId);
@@ -178,6 +187,13 @@ function SectionReview({
   questions: Map<string, unknown>;
   onChange: (next: Attempt) => void;
 }) {
+  const jobs = useScoringJobs();
+  const scoring = (i: TrialItem) => {
+    const attempt = linked(i);
+    return !!attempt && isScoring(jobs, attempt.id);
+  };
+  // Items still being scored open once, so their progress shows in place.
+  const [openAtFirst] = useState(() => new Set(items.filter(scoring)));
   return (
     <section className={styles.sectionReview} aria-label={section}>
       <div className={styles.columnHead}>
@@ -190,7 +206,10 @@ function SectionReview({
           const unscored = pendingAiResponses(attempt).length > 0;
           return (
             <li key={questionKey(i)}>
-              <details className={styles.itemRow}>
+              <details
+                className={styles.itemRow}
+                open={openAtFirst.has(i) || undefined}
+              >
                 <summary>
                   <span className={styles.itemIndex}>
                     {String(n + 1).padStart(2, "0")}
@@ -201,9 +220,11 @@ function SectionReview({
                   <span className={styles.itemScore}>
                     {!attempt
                       ? "Not answered"
-                      : unscored
-                        ? "Not scored"
-                        : `${attempt.score?.correct ?? 0} / ${i.maxPoints}`}
+                      : scoring(i)
+                        ? "Scoring…"
+                        : unscored
+                          ? "Not scored"
+                          : `${attempt.score?.correct ?? 0} / ${i.maxPoints}`}
                   </span>
                 </summary>
                 <div className={styles.itemBody}>

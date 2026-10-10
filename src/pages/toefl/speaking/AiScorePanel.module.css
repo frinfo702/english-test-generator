@@ -29,3 +29,18 @@
   color: var(--color-error);
   font-size: var(--text-sm);
 }
+
+.byok {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--text-xs);
+  color: var(--color-ink-tertiary);
+  text-decoration: none;
+}
+
+.byok:hover {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

@@ -121,19 +121,33 @@ export function buildWritingCopyMessage(payload: WritingCopyPayload) {
   if (payload.modelAnswer?.trim()) {
     lines.push("", "## Sample response", payload.modelAnswer.trim());
   }
-  if (payload.criteria && payload.criteria.length > 0) {
+  const criteria = payload.criteria ?? [];
+  if (criteria.length > 0) {
     lines.push("", "## Evaluation criteria");
-    for (const c of payload.criteria) lines.push(`- ${c}`);
+    criteria.forEach((c, i) => lines.push(`${i + 1}. ${c}`));
   }
   lines.push(
     "",
     "## How to score",
     `Use the official TOEFL ${payload.task} scale (0–5), judging task completion, elaboration, organization, and range and accuracy of grammar and vocabulary.`,
+  );
+  if (criteria.length > 0) {
+    lines.push(
+      "Also rate each numbered evaluation criterion on the same 0–5 scale, with one short sentence on how my response meets it.",
+    );
+  }
+  // Per-criterion ratings use "points" so the overall "score" stays the
+  // only "score" key the parser can find.
+  const block =
+    criteria.length > 0
+      ? `{"criteria": [${criteria.map(() => '{"points": 0, "note": "..."}').join(", ")}], "score": 0}`
+      : '{"score": 0}';
+  lines.push(
     "",
-    "Give your feedback and a stronger version of my response, then end your reply with this block exactly once (whole numbers only):",
+    `Give your feedback and a stronger version of my response, then end your reply with this block exactly once (whole numbers only${criteria.length > 0 ? `; one "criteria" entry per numbered criterion, in order` : ""}):`,
     "",
     "```" + AI_SCORE_FENCE,
-    '{"score": 0}',
+    block,
     "```",
   );
   return lines.join("\n");
@@ -146,3 +160,65 @@ export async function copyText(text: string) {
   await navigator.clipboard.writeText(text);
   return true;
 }
+
+/* The question-file fields the writing prompts read. */
+interface EmailQuestion {
+  scenario: { description: string; recipient: string; keyPoints: string[] };
+  modelAnswer: string;
+  rubric: { criterion: string; description: string }[];
+}
+interface DiscussionQuestion {
+  professorQuestion: string;
+  student1: { name: string; response: string };
+  student2: { name: string; response: string };
+  modelAnswer: string;
+  evaluationPoints: string[];
+}
+
+/**
+ * The rubric points a Writing task is scored on, in prompt order: the
+ * email rubric's criteria, or the discussion's evaluation points.
+ */
+export function writingCriteria(
+  taskId: "toefl/writing/email" | "toefl/writing/discussion",
+  question: unknown,
+): { name: string; detail?: string }[] {
+  if (taskId === "toefl/writing/email") {
+    return ((question as EmailQuestion | null)?.rubric ?? []).map((r) => ({
+      name: r.criterion,
+      detail: r.description,
+    }));
+  }
+  return ((question as DiscussionQuestion | null)?.evaluationPoints ?? []).map(
+    (name) => ({ name }),
+  );
+}
+
+/** The scoring prompt for a Writing task, built from its question file. */
+export function buildWritingTaskMessage(
+  taskId: "toefl/writing/email" | "toefl/writing/discussion",
+  question: unknown,
+  userAnswer: string,
+) {
+  if (taskId === "toefl/writing/email") {
+    const d = question as EmailQuestion;
+    return buildWritingCopyMessage({
+      task: "Write an Email",
+      prompt: `${d.scenario.description}\nWrite an email to ${d.scenario.recipient}. In your email, do the following:\n${d.scenario.keyPoints.map((p) => `- ${p}`).join("\n")}`,
+      userAnswer,
+      modelAnswer: d.modelAnswer,
+      criteria: writingCriteria(taskId, d).map((c) => `${c.name}: ${c.detail}`),
+    });
+  }
+  const d = question as DiscussionQuestion;
+  return buildWritingCopyMessage({
+    task: "Write for an Academic Discussion",
+    prompt: `Professor: ${d.professorQuestion}\n${d.student1.name}: ${d.student1.response}\n${d.student2.name}: ${d.student2.response}`,
+    userAnswer,
+    modelAnswer: d.modelAnswer,
+    criteria: writingCriteria(taskId, d).map((c) => c.name),
+  });
+}
+
+export const WRITING_SCORE_NOTE =
+  "1. Copy the prompt into your AI chat. 2. Paste its whole reply here. The AI scores your response on the 0–5 TOEFL rubric.";

@@ -2,6 +2,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { IDBFactory } from "fake-indexeddb";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { GATEWAY_URL, saveGatewayKey } from "../../lib/aiGateway";
 
 type AttemptsModule = typeof import("../../lib/attempts");
 
@@ -117,6 +118,78 @@ describe("ResultPage", () => {
         correct: 4,
         total: 5,
       });
+    });
+  });
+
+  describe("with an AI Gateway key", () => {
+    const interview = {
+      taskId: "toefl/speaking/interview" as const,
+      problemId: "001",
+      question: { scenario: "", questions: [] },
+      responses: [{ prompt: "Weekends?", transcript: "I play tennis." }],
+    };
+    const gatewayCalls = () =>
+      vi
+        .mocked(fetch)
+        .mock.calls.filter(([u]) => String(u).startsWith(GATEWAY_URL));
+
+    beforeEach(() => saveGatewayKey("vck_test"));
+    afterEach(() => localStorage.clear());
+
+    it("fills a background score in while the result is open", async () => {
+      const pending: ((r: Response) => void)[] = [];
+      vi.stubGlobal(
+        "fetch",
+        vi.fn((url: string) =>
+          String(url).startsWith(GATEWAY_URL)
+            ? new Promise<Response>((resolve) => pending.push(resolve))
+            : Promise.resolve(new Response(JSON.stringify({ files: [] }))),
+        ),
+      );
+      const { db, saved } = await setup(interview);
+      const bg = await import("../../lib/backgroundScoring");
+      bg.scoreInBackground({
+        attemptId: saved.id,
+        index: 0,
+        kind: "interview",
+        message: "PROMPT",
+      });
+
+      expect((await screen.findAllByText("Scoring")).length).toBeGreaterThan(0);
+      expect(gatewayCalls()).toHaveLength(1);
+
+      pending[0](
+        new Response(
+          JSON.stringify({
+            choices: [
+              {
+                message: {
+                  content:
+                    'Good.\n```toefl-score\n{"languageUse": 3, "organization": 4}\n```',
+                },
+              },
+            ],
+          }),
+        ),
+      );
+
+      expect(
+        await screen.findByText("· partial", { exact: false }),
+      ).toBeTruthy();
+      await vi.waitFor(async () => {
+        const stored = await db.getAttempt(saved.id);
+        expect(stored?.responses[0].itemScore).toBe(4);
+      });
+    });
+
+    it("shows a past unscored answer as Not scored without calling the gateway", async () => {
+      await setup(interview);
+      expect((await screen.findAllByText("Not scored")).length).toBeGreaterThan(
+        0,
+      );
+      expect(screen.queryByRole("button", { name: /^Score with/ })).toBeNull();
+      await new Promise((r) => setTimeout(r, 0));
+      expect(gatewayCalls()).toHaveLength(0);
     });
   });
 });

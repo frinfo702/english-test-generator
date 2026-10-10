@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import {
   interviewItemScore,
   parseAiScores,
+  parseWritingCriteria,
+  parseWritingScore,
   stripScoreBlock,
 } from "./interviewScoring";
 import type { PronunciationResult } from "./pronunciation";
@@ -96,5 +98,43 @@ describe("stripScoreBlock", () => {
         'Good answer.\n```toefl-score\n{"languageUse": 4, "organization": 4}\n```',
       ),
     ).toBe("Good answer.");
+  });
+});
+
+describe("parseWritingScore with criteria", () => {
+  const block = (body: string) =>
+    `Feedback.\n\`\`\`toefl-score\n${body}\n\`\`\``;
+
+  it("reads the overall score even when criteria come first", () => {
+    expect(
+      parseWritingScore(
+        block('{"criteria": [{"points": 3, "note": "Clear."}], "score": 4}'),
+      ),
+    ).toBe(4);
+  });
+
+  it("reads each criterion's points and note in order", () => {
+    expect(
+      parseWritingCriteria(
+        block(
+          '{"criteria": [{"points": 3, "note": "Clear."}, {"points": 5, "note": "Strong."}], "score": 4}',
+        ),
+      ),
+    ).toEqual([
+      { points: 3, note: "Clear." },
+      { points: 5, note: "Strong." },
+    ]);
+  });
+
+  it("returns nothing when an old reply has no criteria", () => {
+    expect(parseWritingCriteria(block('{"score": 4}'))).toEqual([]);
+  });
+
+  it("drops entries whose points are not on the 0–5 scale", () => {
+    expect(
+      parseWritingCriteria(
+        block('{"criteria": [{"points": 9, "note": "x"}], "score": 4}'),
+      ),
+    ).toEqual([]);
   });
 });

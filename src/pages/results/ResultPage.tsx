@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+import { useAttemptUpdates } from "../../hooks/useAutoScore";
 import { getAttempt, putAttempts, type Attempt } from "../../lib/attempts";
 import {
   InterviewResult,
@@ -16,6 +17,10 @@ export function ResultPage() {
   } | null>(null);
   const attempt = loaded?.id === attemptId ? loaded.attempt : undefined;
   const [saveError, setSaveError] = useState<string | null>(null);
+  // A score finishing in the background lands here while the page is open.
+  useAttemptUpdates((a) => {
+    if (a.id === attemptId) setLoaded({ id: a.id, attempt: a });
+  });
 
   useEffect(() => {
     let cancelled = false;

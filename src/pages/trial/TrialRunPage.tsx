@@ -93,7 +93,7 @@ export function TrialRunPage({
     }
   };
 
-  // Every section is over: the test is done and scoring starts.
+  // Every section is over: the test is done and the report opens.
   useEffect(() => {
     if (!trial || section || trial.trial.finishedAt) return;
     const next = {
