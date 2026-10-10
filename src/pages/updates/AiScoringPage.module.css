@@ -39,13 +39,6 @@
   stroke-linejoin: round;
 }
 
-.line,
-.faint,
-.track,
-.signal {
-  vector-effect: non-scaling-stroke;
-}
-
 .line {
   stroke: var(--stage-lime);
   stroke-width: 3;

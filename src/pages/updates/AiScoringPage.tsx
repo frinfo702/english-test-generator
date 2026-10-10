@@ -94,13 +94,14 @@ function ScoreDrawing() {
     svg.querySelectorAll<SVGGeometryElement>("[data-draw]").forEach((el) => {
       const len = el.getTotalLength();
       const duration = Number(el.dataset.draw) || 500;
+      const opacity = getComputedStyle(el).opacity;
       anims.push(
         el.animate(
           [
             // Opacity hides the round cap's dot that sits at the start.
             { strokeDasharray: `${len}`, strokeDashoffset: len, opacity: 0 },
-            { opacity: 1, offset: 0.02 },
-            { strokeDasharray: `${len}`, strokeDashoffset: 0, opacity: 1 },
+            { opacity, offset: 0.02 },
+            { strokeDasharray: `${len}`, strokeDashoffset: 0, opacity },
           ],
           {
             duration,
