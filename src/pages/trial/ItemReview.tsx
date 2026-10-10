@@ -155,14 +155,14 @@ export function AiScoring({
   attempt,
   question,
   onChange,
-  autoScore = true,
+  autoScore,
 }: {
   taskId: TaskId;
   attempt: Attempt;
   question: unknown;
   onChange: (next: Attempt) => void;
   /** False waits for a click instead of spending the user's credits. */
-  autoScore?: boolean;
+  autoScore: boolean;
 }) {
   const update = useAttemptUpdater(attempt, onChange);
   const pending = pendingAiResponses(attempt);
@@ -230,7 +230,7 @@ export function ItemReview({
   attempt: Attempt | undefined;
   question: unknown;
   onChange: (next: Attempt) => void;
-  autoScore?: boolean;
+  autoScore: boolean;
 }) {
   if (question === undefined) return <p className={styles.note}>Loading…</p>;
   // null: the file failed to load, e.g. a question removed from the pool

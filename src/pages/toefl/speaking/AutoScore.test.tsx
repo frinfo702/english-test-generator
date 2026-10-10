@@ -77,6 +77,7 @@ function Harness({ onSaved }: { onSaved: (a: Attempt) => void }) {
   return (
     <MemoryRouter>
       <InterviewResult
+        autoScore
         attempt={attempt}
         onChange={(next) => {
           setAttempt(next);
@@ -136,6 +137,7 @@ describe("auto scoring with the user's AI Gateway key", () => {
     render(
       <MemoryRouter>
         <InterviewResult
+          autoScore
           attempt={
             {
               ...interview,

@@ -5,6 +5,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { autoScoring, scoreWithGateway } from "../lib/aiGateway";
 import type { Attempt } from "../lib/attempts";
 
@@ -99,4 +100,24 @@ export function useAttemptUpdater(
     latest.current = update(latest.current);
     onChange(latest.current);
   };
+}
+
+/**
+ * True only on the visit that follows answering, so merely reopening a result
+ * later (or reloading it) never spends the user's credits.
+ */
+export function useJustAnswered(): boolean {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [justAnswered] = useState(
+    () =>
+      (location.state as { justAnswered?: boolean } | null)?.justAnswered ===
+      true,
+  );
+  useEffect(() => {
+    if (justAnswered)
+      navigate(location.pathname, { replace: true, state: null });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on arrival
+  }, []);
+  return justAnswered;
 }

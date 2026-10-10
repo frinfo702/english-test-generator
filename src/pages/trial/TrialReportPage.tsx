@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+import { useJustAnswered } from "../../hooks/useAutoScore";
 import { autoScoring } from "../../lib/aiGateway";
 import { getAllAttempts, putAttempts, type Attempt } from "../../lib/attempts";
 import { fetchQuestionByIdWithMeta } from "../../lib/questions";
@@ -26,8 +27,11 @@ export function TrialReportPage() {
   const { trialId = "" } = useParams<{ trialId: string }>();
   const [attempts, setAttempts] = useState<Attempt[] | null>(null);
   const [questions, setQuestions] = useState<Map<string, unknown>>(new Map());
-  // With the user's key, scoring runs inside the report instead of a gate.
-  const [scoreLater, setScoreLater] = useState(() => autoScoring() !== null);
+  const justAnswered = useJustAnswered();
+  // Right after the test, the user's key scores inside the report instead of a gate.
+  const [scoreLater, setScoreLater] = useState(
+    () => justAnswered && autoScoring() !== null,
+  );
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -112,6 +116,7 @@ export function TrialReportPage() {
                   attempt={linked(i)!}
                   question={questions.get(questionKey(i))}
                   onChange={update}
+                  autoScore={justAnswered}
                 />
               ) : (
                 <p className={styles.note}>Loading…</p>
@@ -151,6 +156,7 @@ export function TrialReportPage() {
           linked={linked}
           questions={questions}
           onChange={update}
+          autoScore={justAnswered}
         />
       ))}
 
@@ -171,6 +177,7 @@ function SectionReview({
   linked,
   questions,
   onChange,
+  autoScore,
 }: {
   section: SectionKey;
   title: string;
@@ -179,8 +186,9 @@ function SectionReview({
   linked: (i: TrialItem) => Attempt | undefined;
   questions: Map<string, unknown>;
   onChange: (next: Attempt) => void;
+  autoScore: boolean;
 }) {
-  const [auto] = useState(() => autoScoring() !== null);
+  const [auto] = useState(() => autoScore && autoScoring() !== null);
   // While the user's key scores them, waiting items open once to show it.
   const [openAtFirst] = useState(
     () =>
@@ -229,6 +237,7 @@ function SectionReview({
                     attempt={attempt}
                     question={questions.get(questionKey(i))}
                     onChange={onChange}
+                    autoScore={auto}
                   />
                 </div>
               </details>

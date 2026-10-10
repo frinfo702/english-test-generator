@@ -415,12 +415,14 @@ function InterviewItem({
   index: i,
   audio,
   url,
+  autoScore,
   onApply,
 }: {
   attempt: Attempt;
   index: number;
   audio: Audio;
   url: string | null;
+  autoScore: boolean;
   onApply: (ai: { reply: string; scores: AiInterviewScores }) => void;
 }) {
   const r = attempt.responses[i];
@@ -438,7 +440,7 @@ function InterviewItem({
     parse: parseAiScores,
     onApply,
     // Nothing was heard: no point paying to score silence.
-    autoStart: canScore && r.transcript!.trim() !== "",
+    autoStart: autoScore && canScore && r.transcript!.trim() !== "",
   });
   const waiting =
     canScore && (auto.phase === "scoring" || auto.phase === "error");
@@ -541,9 +543,12 @@ function InterviewItem({
 export function InterviewResult({
   attempt,
   onChange,
+  autoScore,
 }: {
   attempt: Attempt;
   onChange: (next: Attempt) => void;
+  /** Only right after answering; reopening a past result waits for a click. */
+  autoScore: boolean;
 }) {
   const audio = useSingleAudio();
   const urls = useResponseUrls(attempt.responses);
@@ -585,6 +590,7 @@ export function InterviewResult({
             index={i}
             audio={audio}
             url={urls[i] ?? null}
+            autoScore={autoScore}
             onApply={(ai) => update((a) => withInterviewAi(a, i, ai))}
           />
         ))}

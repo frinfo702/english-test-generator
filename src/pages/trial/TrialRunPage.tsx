@@ -50,6 +50,7 @@ export function TrialRunPage({
   const completedRef = useRef(-1);
   const routingRef = useRef<SectionKey | null>(null);
   const trialRef = useRef(trial);
+  const finishedHereRef = useRef(false);
   useEffect(() => {
     trialRef.current = trial;
   }, [trial]);
@@ -96,6 +97,7 @@ export function TrialRunPage({
   // Every section is over: the test is done and scoring starts.
   useEffect(() => {
     if (!trial || section || trial.trial.finishedAt) return;
+    finishedHereRef.current = true;
     const next = {
       ...trial,
       trial: { ...trial.trial, finishedAt: new Date().toISOString() },
@@ -143,7 +145,10 @@ export function TrialRunPage({
   }, [needsModule2, section]);
 
   useEffect(() => {
-    if (trial?.trial.finishedAt) navigate(`/trial/${trial.id}/report`);
+    if (trial?.trial.finishedAt)
+      navigate(`/trial/${trial.id}/report`, {
+        state: { justAnswered: finishedHereRef.current },
+      });
   }, [trial, navigate]);
 
   useEffect(() => {

@@ -2,17 +2,23 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { IDBFactory } from "fake-indexeddb";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { GATEWAY_URL, saveGatewayKey } from "../../lib/aiGateway";
 
 type AttemptsModule = typeof import("../../lib/attempts");
 
-async function setup(attempt: Parameters<AttemptsModule["saveAttempt"]>[0]) {
+async function setup(
+  attempt: Parameters<AttemptsModule["saveAttempt"]>[0],
+  state?: unknown,
+) {
   vi.stubGlobal("indexedDB", new IDBFactory());
   vi.resetModules();
   const db: AttemptsModule = await import("../../lib/attempts");
   const saved = await db.saveAttempt(attempt);
   const { ResultPage } = await import("./ResultPage");
   render(
-    <MemoryRouter initialEntries={[`/results/${saved.id}`]}>
+    <MemoryRouter
+      initialEntries={[{ pathname: `/results/${saved.id}`, state }]}
+    >
       <Routes>
         <Route path="/results/:attemptId" element={<ResultPage />} />
       </Routes>
@@ -117,6 +123,40 @@ describe("ResultPage", () => {
         correct: 4,
         total: 5,
       });
+    });
+  });
+
+  describe("with an AI Gateway key", () => {
+    const interview = {
+      taskId: "toefl/speaking/interview" as const,
+      problemId: "001",
+      question: { scenario: "", questions: [] },
+      responses: [{ prompt: "Weekends?", transcript: "I play tennis." }],
+    };
+    const gatewayCalls = () =>
+      vi
+        .mocked(fetch)
+        .mock.calls.filter(([u]) => String(u).startsWith(GATEWAY_URL));
+
+    beforeEach(() => saveGatewayKey("vck_test"));
+    afterEach(() => localStorage.clear());
+
+    it("auto-scores an interview right after it was answered", async () => {
+      await setup(interview, { justAnswered: true });
+      expect(await screen.findAllByText("Scoring")).not.toHaveLength(0);
+      await vi.waitFor(() => expect(gatewayCalls()).toHaveLength(1));
+    });
+
+    it("waits for a click when a past interview is opened later", async () => {
+      await setup(interview);
+      const button = await screen.findByRole("button", {
+        name: /^Score with/,
+      });
+      await new Promise((r) => setTimeout(r, 0));
+      expect(gatewayCalls()).toHaveLength(0);
+
+      fireEvent.click(button);
+      await vi.waitFor(() => expect(gatewayCalls()).toHaveLength(1));
     });
   });
 });
