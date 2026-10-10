@@ -118,6 +118,10 @@ export function ListeningTaskBase({
   const [graded, setGraded] = useState(false);
   const [stage, setStage] = useState<"listen" | "questions">("listen");
   const [currentIndex, setCurrentIndex] = useState(0);
+  // As in the exam, the audio plays once while answering; replay opens in
+  // review. A failed playback can be tried again.
+  const [heard, setHeard] = useState(false);
+  const locked = heard && !graded && !ttsError;
 
   const hasValidQuestionId = questionId !== "";
 
@@ -181,6 +185,7 @@ export function ListeningTaskBase({
     } else if (currentTime > 0) {
       resume();
     } else {
+      if (!graded) setHeard(true);
       const urls = data!.audioSegments.map(
         (_, i) => `/audio/${taskId}/${fileBasename}/${i + 1}.mp3`,
       );
@@ -230,6 +235,8 @@ export function ListeningTaskBase({
         onSeek={seek}
         onPlaybackRateChange={setPlaybackRate}
         seekable={seekable}
+        disabled={locked}
+        playLabel={locked ? "Audio plays once" : undefined}
         showSpeedControl={showSpeedControl}
         src={
           data.audioSegments.length === 1

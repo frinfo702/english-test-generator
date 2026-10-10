@@ -64,6 +64,7 @@ export function ListenResponsePage() {
   const {
     loading: ttsLoading,
     playing: ttsPlaying,
+    error: ttsError,
     currentTime,
     playSegmentsWithGaps,
     stop: stopTts,
@@ -74,6 +75,13 @@ export function ListenResponsePage() {
   const [selected, setSelected] = useState<Record<string, string>>({});
   const [graded, setGraded] = useState(false);
   const audioStartedRef = useRef<Set<number>>(new Set());
+  const [playedIndex, setPlayedIndex] = useState(0);
+  const [failed, setFailed] = useState<Set<number>>(new Set());
+  const [seenError, setSeenError] = useState<string | null>(null);
+  if (ttsError !== seenError) {
+    setSeenError(ttsError);
+    if (ttsError) setFailed(new Set(failed).add(playedIndex));
+  }
 
   const hasValidQuestionId = questionId !== "";
 
@@ -112,7 +120,9 @@ export function ListenResponsePage() {
   };
 
   const goTo = (index: number) => {
-    setCurrentIndex(Math.max(0, Math.min(index, totalQuestions - 1)));
+    const next = Math.max(0, Math.min(index, totalQuestions - 1));
+    if (!audioStartedRef.current.has(next)) setPlayedIndex(next);
+    setCurrentIndex(next);
   };
 
   const retake = () => {
@@ -121,6 +131,8 @@ export function ListenResponsePage() {
     setCurrentIndex(0);
     setGraded(false);
     audioStartedRef.current = new Set();
+    setPlayedIndex(0);
+    setFailed(new Set());
     resetTimer();
   };
 
@@ -150,6 +162,10 @@ export function ListenResponsePage() {
   };
   useTrialTimeout(handleSubmit);
 
+  // Each utterance plays on its own once, as in the exam; replay opens in
+  // review. A failed playback can be tried again on its own question.
+  const locked = !graded && !failed.has(currentIndex);
+
   const handleReplayAudio = () => {
     if (!data) return;
     if (ttsPlaying) {
@@ -157,6 +173,12 @@ export function ListenResponsePage() {
       return;
     }
     const url = `/audio/${TASK_ID}/${fileBasename}/${currentIndex + 1}.mp3`;
+    setPlayedIndex(currentIndex);
+    if (!graded) {
+      const rest = new Set(failed);
+      rest.delete(currentIndex);
+      setFailed(rest);
+    }
     playSegmentsWithGaps([url], []);
   };
 
@@ -260,13 +282,21 @@ export function ListenResponsePage() {
                   minimal
                   playing={ttsPlaying}
                   loading={ttsLoading}
+                  error={ttsError}
+                  disabled={locked}
                   currentTime={currentTime}
                   duration={0}
                   playbackRate={1}
                   onPlayPause={handleReplayAudio}
                   onSeek={() => undefined}
                   onPlaybackRateChange={() => undefined}
-                  playLabel={ttsPlaying ? "Playing audio" : "Play audio"}
+                  playLabel={
+                    locked
+                      ? "Audio plays once"
+                      : ttsPlaying
+                        ? "Playing audio"
+                        : "Play audio"
+                  }
                 />
               </div>
             }

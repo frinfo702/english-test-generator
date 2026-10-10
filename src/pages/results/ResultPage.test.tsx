@@ -61,6 +61,33 @@ describe("ResultPage", () => {
     expect(screen.getAllByLabelText("4 out of 5")).toHaveLength(2);
   });
 
+  it("replays the spoken scenario and prompts in review, next to their script", async () => {
+    await setup({
+      taskId: "toefl/speaking/listen-repeat",
+      problemId: "001",
+      question: {
+        scenario: "You are visiting a museum.\nA guide gives directions.",
+        sentences: [],
+      },
+      responses: [
+        { itemId: "s1", prompt: "Turn left at the fountain.", itemScore: 5 },
+      ],
+      score: { method: "ets-rubric", correct: 5, total: 5 },
+    });
+
+    expect(await screen.findByText("You are visiting a museum.")).toBeTruthy();
+    expect(screen.getByText("A guide gives directions.")).toBeTruthy();
+    expect(screen.getByText("Turn left at the fountain.")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Prompt" })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Scenario" }));
+    await vi.waitFor(() =>
+      expect(fetch).toHaveBeenCalledWith(
+        "/audio/toefl/speaking/listen-repeat/001/scenario.mp3",
+      ),
+    );
+  });
+
   it("scores an interview answer from a pasted AI reply and saves it", async () => {
     const { db, saved } = await setup({
       taskId: "toefl/speaking/interview",

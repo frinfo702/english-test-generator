@@ -424,6 +424,15 @@ describe("ListenRepeatPage", () => {
         screen.getByRole("button", { name: /Retry This Sentence/i }),
       ).toBeTruthy();
     });
+
+    // Retrying records again without replaying: each sentence plays once.
+    act(() => {
+      screen.getByRole("button", { name: /Retry This Sentence/i }).click();
+    });
+    await waitFor(() => {
+      expect(startSpeechMock).toHaveBeenCalledTimes(2);
+    });
+    expect(playMock).toHaveBeenCalledTimes(1);
   });
 
   it("saves the set with rubric scores and opens its result page", async () => {
