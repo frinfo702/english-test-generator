@@ -41,8 +41,8 @@ export function UpdateNotice() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // A timed section has a clock in the corner's place of attention.
-  if (/^\/trial\/[^/]+$/.test(pathname)) return null;
+  // Only the top page; elsewhere the corner belongs to the question.
+  if (pathname !== "/") return null;
 
   const dismiss = () => {
     markLatestUpdateSeen();
