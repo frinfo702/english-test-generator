@@ -1,0 +1,78 @@
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-height: 30px;
+}
+
+.label {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+}
+
+.via {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+.failed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.error {
+  color: var(--color-error);
+  font-size: var(--text-sm);
+  line-height: var(--lh-normal);
+}
+
+.quiet {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-border-strong);
+  cursor: pointer;
+}
+
+.quiet:hover {
+  color: var(--color-ink);
+  text-decoration-color: var(--color-ink);
+}
+
+/* Lines up with ProgressBar: label, then the slot its track will fill. */
+.facet {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-height: 20px;
+}
+
+.facetLabel {
+  font-size: var(--text-2xs);
+  color: var(--color-ink-tertiary);
+}
+
+.facetNote {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}

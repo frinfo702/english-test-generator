@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+import { autoScoring } from "../../lib/aiGateway";
 import { getAllAttempts, putAttempts, type Attempt } from "../../lib/attempts";
 import { fetchQuestionByIdWithMeta } from "../../lib/questions";
 import {
@@ -25,7 +26,8 @@ export function TrialReportPage() {
   const { trialId = "" } = useParams<{ trialId: string }>();
   const [attempts, setAttempts] = useState<Attempt[] | null>(null);
   const [questions, setQuestions] = useState<Map<string, unknown>>(new Map());
-  const [scoreLater, setScoreLater] = useState(false);
+  // With the user's key, scoring runs inside the report instead of a gate.
+  const [scoreLater, setScoreLater] = useState(() => autoScoring() !== null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -178,6 +180,16 @@ function SectionReview({
   questions: Map<string, unknown>;
   onChange: (next: Attempt) => void;
 }) {
+  const [auto] = useState(() => autoScoring() !== null);
+  // While the user's key scores them, waiting items open once to show it.
+  const [openAtFirst] = useState(
+    () =>
+      new Set(
+        auto
+          ? items.filter((i) => pendingAiResponses(linked(i)).length > 0)
+          : [],
+      ),
+  );
   return (
     <section className={styles.sectionReview} aria-label={section}>
       <div className={styles.columnHead}>
@@ -190,7 +202,10 @@ function SectionReview({
           const unscored = pendingAiResponses(attempt).length > 0;
           return (
             <li key={questionKey(i)}>
-              <details className={styles.itemRow}>
+              <details
+                className={styles.itemRow}
+                open={openAtFirst.has(i) || undefined}
+              >
                 <summary>
                   <span className={styles.itemIndex}>
                     {String(n + 1).padStart(2, "0")}
@@ -202,7 +217,9 @@ function SectionReview({
                     {!attempt
                       ? "Not answered"
                       : unscored
-                        ? "Not scored"
+                        ? auto
+                          ? "Awaiting AI score"
+                          : "Not scored"
                         : `${attempt.score?.correct ?? 0} / ${i.maxPoints}`}
                   </span>
                 </summary>

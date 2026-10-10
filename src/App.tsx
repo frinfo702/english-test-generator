@@ -38,6 +38,7 @@ import { IntroducePage } from "./pages/updates/IntroducePage";
 import { RedesignPage } from "./pages/updates/RedesignPage";
 import { RecallFrame, ReviewPage } from "./pages/review/ReviewPage";
 import { RECALL_PATH } from "./lib/review";
+import { AiScoringPage } from "./pages/settings/AiScoringPage";
 
 interface TaskRoute {
   basePath: string;
@@ -230,6 +231,7 @@ export default function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/review" element={<ReviewPage />} />
           <Route path="/results/:attemptId" element={<ResultPage />} />
+          <Route path="/settings/ai-scoring" element={<AiScoringPage />} />
           <Route path="/toefl" element={<ToeflMenuPage />} />
           <Route path="/toeic" element={<ToeicMenuPage />} />
           <Route path="/trial" element={<TrialHomePage />} />

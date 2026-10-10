@@ -1,0 +1,47 @@
+/* One focused sheet, opened by an ink rule like the question sheets. */
+.sheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  padding: var(--spacing-6);
+  border-top: 1px solid var(--color-ink);
+  background: var(--color-surface);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.score {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--lh-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+.score span {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  letter-spacing: 0;
+  color: var(--color-ink-tertiary);
+  margin-left: var(--spacing-1);
+}
+
+.feedback {
+  max-width: 72ch;
+  white-space: pre-wrap;
+  font-size: var(--text-sm);
+  line-height: var(--lh-relaxed);
+  color: var(--color-ink-secondary);
+}
+
+.error {
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}

@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "../../../components/ui/Button";
+import { VercelMark } from "../../../components/ui/VercelMark";
 import { copyText } from "../../../lib/answerSubmission";
 import {
   parseAiScores,
@@ -64,6 +66,10 @@ export function AiScorePanel<T = AiInterviewScores>({
         Apply AI score
       </Button>
       {error && <p className={styles.error}>{error}</p>}
+      <Link to="/settings/ai-scoring" className={styles.byok}>
+        <VercelMark size={10} />
+        Skip the copy &amp; paste: score here with your own AI Gateway key
+      </Link>
     </div>
   );
 }

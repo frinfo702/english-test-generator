@@ -4,12 +4,15 @@ import {
   type ChoiceQuestion,
 } from "../../components/question/QuestionStepper";
 import type { TaskId } from "../../hooks/useScoreHistory";
+import { useAttemptUpdater } from "../../hooks/useAutoScore";
 import {
   buildInterviewQaCopyMessage,
-  buildWritingCopyMessage,
+  buildWritingTaskMessage,
+  WRITING_SCORE_NOTE,
 } from "../../lib/answerSubmission";
 import type { Attempt } from "../../lib/attempts";
 import {
+  parseAiScores,
   parseWritingScore,
   stripScoreBlock,
   withInterviewAi,
@@ -20,7 +23,7 @@ import type { CompleteWordsItem } from "../toefl/reading/completeWords";
 import type { DailyLifeData } from "../toefl/reading/dailyLife";
 import { DailyLifeTextView } from "../toefl/reading/DailyLifeTextView";
 import { isCorrectOrder } from "../toefl/writing/buildSentence";
-import { AiScorePanel } from "../toefl/speaking/AiScorePanel";
+import { AiScore } from "../toefl/speaking/AutoScore";
 import {
   INTERVIEW_TYPE_LABELS,
   type InterviewProblemData,
@@ -143,18 +146,25 @@ function Source({ label, text }: { label: string; text?: string }) {
   );
 }
 
-/** Copy-and-paste AI scoring for whatever in this attempt is still unscored. */
+/**
+ * AI scoring for whatever in this attempt is still unscored: automatic with
+ * the user's AI Gateway key, otherwise copy and paste.
+ */
 export function AiScoring({
   taskId,
   attempt,
   question,
   onChange,
+  autoScore = true,
 }: {
   taskId: TaskId;
   attempt: Attempt;
   question: unknown;
   onChange: (next: Attempt) => void;
+  /** False waits for a click instead of spending the user's credits. */
+  autoScore?: boolean;
 }) {
+  const update = useAttemptUpdater(attempt, onChange);
   const pending = pendingAiResponses(attempt);
   if (pending.length === 0) return null;
   if (question === null && attempt.question === undefined) {
@@ -170,7 +180,7 @@ export function AiScoring({
           return (
             <div key={i} className={styles.scoreItem}>
               <p className="micro-label">Interview question {i + 1}</p>
-              <AiScorePanel
+              <AiScore
                 message={buildInterviewQaCopyMessage({
                   question: q.question,
                   userAnswer: attempt.responses[i].transcript ?? "",
@@ -178,7 +188,9 @@ export function AiScoring({
                   evaluationPoints: q.evaluationPoints,
                   questionType: INTERVIEW_TYPE_LABELS[q.type] ?? q.type,
                 })}
-                onApply={(ai) => onChange(withInterviewAi(attempt, i, ai))}
+                parse={parseAiScores}
+                autoStart={autoScore}
+                onApply={(ai) => update((a) => withInterviewAi(a, i, ai))}
               />
             </div>
           );
@@ -187,36 +199,20 @@ export function AiScoring({
     );
   }
 
-  const text = attempt.responses[0].text ?? "";
-  const message =
-    taskId === "toefl/writing/email"
-      ? (() => {
-          const d = question as EmailData;
-          return buildWritingCopyMessage({
-            task: "Write an Email",
-            prompt: `${d.scenario.description}\nWrite an email to ${d.scenario.recipient}. In your email, do the following:\n${d.scenario.keyPoints.map((p) => `- ${p}`).join("\n")}`,
-            userAnswer: text,
-            modelAnswer: d.modelAnswer,
-            criteria: d.rubric.map((r) => `${r.criterion}: ${r.description}`),
-          });
-        })()
-      : (() => {
-          const d = question as DiscussionData;
-          return buildWritingCopyMessage({
-            task: "Write for an Academic Discussion",
-            prompt: `Professor: ${d.professorQuestion}\n${d.student1.name}: ${d.student1.response}\n${d.student2.name}: ${d.student2.response}`,
-            userAnswer: text,
-            modelAnswer: d.modelAnswer,
-            criteria: d.evaluationPoints,
-          });
-        })();
+  if (taskId !== "toefl/writing/email" && taskId !== "toefl/writing/discussion")
+    return null;
   return (
     <div className={styles.scoreItem}>
-      <AiScorePanel
-        message={message}
+      <AiScore
+        message={buildWritingTaskMessage(
+          taskId,
+          question,
+          attempt.responses[0].text ?? "",
+        )}
         parse={parseWritingScore}
-        note="1. Copy the prompt into your AI chat. 2. Paste its whole reply here. The AI scores your response on the 0–5 TOEFL rubric."
-        onApply={(ai) => onChange(withWritingAi(attempt, ai))}
+        note={WRITING_SCORE_NOTE}
+        autoStart={autoScore}
+        onApply={(ai) => update((a) => withWritingAi(a, ai))}
       />
     </div>
   );
@@ -228,11 +224,13 @@ export function ItemReview({
   attempt,
   question,
   onChange,
+  autoScore,
 }: {
   taskId: TaskId;
   attempt: Attempt | undefined;
   question: unknown;
   onChange: (next: Attempt) => void;
+  autoScore?: boolean;
 }) {
   if (question === undefined) return <p className={styles.note}>Loading…</p>;
   // null: the file failed to load, e.g. a question removed from the pool
@@ -438,6 +436,7 @@ export function ItemReview({
               attempt={attempt}
               question={question}
               onChange={onChange}
+              autoScore={autoScore}
             />
           )}
           <Source label="Model answer" text={d.modelAnswer} />
@@ -481,6 +480,7 @@ export function ItemReview({
               attempt={attempt}
               question={question}
               onChange={onChange}
+              autoScore={autoScore}
             />
           )}
           {attempt ? (

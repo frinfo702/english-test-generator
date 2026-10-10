@@ -21,13 +21,15 @@ import {
   loadDraft,
   saveDraft,
 } from "../../../lib/answerSubmission";
-import { saveAttempt } from "../../../lib/attempts";
+import { autoScoring } from "../../../lib/aiGateway";
+import { putAttempts, saveAttempt, type Attempt } from "../../../lib/attempts";
 import { questionIdFromFile } from "../../../lib/questions";
 import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./WriteDiscussionPage.module.css";
 import task from "./WritingTask.module.css";
 import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
+import { WritingScore } from "./WritingScore";
 import {
   studentPhotoUrl,
   type StudentGender,
@@ -108,6 +110,9 @@ export function WriteDiscussionPage() {
   const [answerId, setAnswerId] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const trial = useTrialItem();
+  const [saved, setSaved] = useState<Attempt | null>(null);
+  // A practice test scores in its report; the page only hides there.
+  const [auto] = useState(() => !trial && autoScoring() !== null);
 
   const problemId = file ? buildProblemId(TASK_ID, file) : null;
   const gradingMessage =
@@ -128,6 +133,7 @@ export function WriteDiscussionPage() {
       const attempt = await saving;
       clearDraft(problemId);
       setAnswerId(attempt.id);
+      setSaved(attempt);
     } catch (e) {
       setSaveError(
         e instanceof Error ? e.message : "Failed to save your answer.",
@@ -339,15 +345,36 @@ export function WriteDiscussionPage() {
 
           {phase === "submitted" && (
             <div className={styles.feedbackSection}>
-              <GradingRequestPanel
-                saving={savingAnswer}
-                error={saveError}
-                message={gradingMessage}
-                copied={copied}
-                onCopy={() => {
-                  void handleCopy();
-                }}
-              />
+              {auto && saved ? (
+                <WritingScore
+                  taskId={TASK_ID}
+                  question={data}
+                  attempt={saved}
+                  error={saveError}
+                  onChange={(next) => {
+                    setSaved(next);
+                    putAttempts([next]).then(
+                      () => setSaveError(null),
+                      (e: unknown) =>
+                        setSaveError(
+                          e instanceof Error
+                            ? e.message
+                            : "Failed to save the score.",
+                        ),
+                    );
+                  }}
+                />
+              ) : (
+                <GradingRequestPanel
+                  saving={savingAnswer}
+                  error={saveError}
+                  message={gradingMessage}
+                  copied={copied}
+                  onCopy={() => {
+                    void handleCopy();
+                  }}
+                />
+              )}
               <div className={styles.evalCard}>
                 <h3>Evaluation Points</h3>
                 <ul className={styles.evalList}>

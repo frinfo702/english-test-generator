@@ -66,6 +66,11 @@ const navItems: NavItem[] = [
     shortcut: "⌘D",
     matches: (p) => p === "/dashboard",
   },
+  {
+    to: "/settings/ai-scoring",
+    label: "AI scoring",
+    matches: (p) => p.startsWith("/settings"),
+  },
 ];
 
 export function AppShell({ children }: AppShellProps) {

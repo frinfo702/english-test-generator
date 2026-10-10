@@ -1,0 +1,104 @@
+/* Two rings of dots. Each dot sits on its ring by rotation, and its ::before
+ * carries the wave (scale + opacity) so the two transforms never fight. */
+
+.orb {
+  --orb: 20px;
+  --dot: 2.5px;
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--orb);
+  height: var(--orb);
+  vertical-align: middle;
+}
+
+.lg {
+  --orb: 56px;
+  --dot: 4px;
+}
+
+.outer,
+.inner {
+  position: absolute;
+  inset: 0;
+  animation: spin 7s linear infinite;
+}
+
+.inner {
+  inset: 26%;
+  animation-direction: reverse;
+  animation-duration: 4.5s;
+}
+
+.dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--dot);
+  height: var(--dot);
+  margin: calc(var(--dot) / -2) 0 0 calc(var(--dot) / -2);
+  transform: rotate(calc(var(--i) * 360deg / var(--n)))
+    translateY(calc(var(--orb) * -0.5 + var(--dot)));
+}
+
+.inner .dot {
+  transform: rotate(calc(var(--i) * 360deg / var(--n)))
+    translateY(calc(var(--orb) * -0.24 + var(--dot) / 2));
+}
+
+.dot::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--color-ink);
+  animation: wave 1.4s var(--ease-in-out) infinite;
+  animation-delay: calc(var(--i) * -1.4s / var(--n));
+}
+
+/* The core is the one signal mark: the live take, per the design system. */
+.core {
+  position: absolute;
+  inset: 44%;
+  border-radius: 50%;
+  background: var(--color-signal);
+  animation: breathe 1.4s var(--ease-in-out) infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(0.6);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outer,
+  .inner,
+  .dot::before,
+  .core {
+    animation-play-state: paused;
+  }
+}

@@ -406,6 +406,8 @@ function Row({
             attempt={item.latest}
             question={question}
             onChange={onChange}
+            // Every row mounts at once, so scoring waits for a click here.
+            autoScore={false}
           />
           <div className={styles.actions}>
             <Link to={`/${item.key}`} className={styles.action}>

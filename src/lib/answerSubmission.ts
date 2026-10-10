@@ -146,3 +146,46 @@ export async function copyText(text: string) {
   await navigator.clipboard.writeText(text);
   return true;
 }
+
+/* The question-file fields the writing prompts read. */
+interface EmailQuestion {
+  scenario: { description: string; recipient: string; keyPoints: string[] };
+  modelAnswer: string;
+  rubric: { criterion: string; description: string }[];
+}
+interface DiscussionQuestion {
+  professorQuestion: string;
+  student1: { name: string; response: string };
+  student2: { name: string; response: string };
+  modelAnswer: string;
+  evaluationPoints: string[];
+}
+
+/** The scoring prompt for a Writing task, built from its question file. */
+export function buildWritingTaskMessage(
+  taskId: "toefl/writing/email" | "toefl/writing/discussion",
+  question: unknown,
+  userAnswer: string,
+) {
+  if (taskId === "toefl/writing/email") {
+    const d = question as EmailQuestion;
+    return buildWritingCopyMessage({
+      task: "Write an Email",
+      prompt: `${d.scenario.description}\nWrite an email to ${d.scenario.recipient}. In your email, do the following:\n${d.scenario.keyPoints.map((p) => `- ${p}`).join("\n")}`,
+      userAnswer,
+      modelAnswer: d.modelAnswer,
+      criteria: d.rubric.map((r) => `${r.criterion}: ${r.description}`),
+    });
+  }
+  const d = question as DiscussionQuestion;
+  return buildWritingCopyMessage({
+    task: "Write for an Academic Discussion",
+    prompt: `Professor: ${d.professorQuestion}\n${d.student1.name}: ${d.student1.response}\n${d.student2.name}: ${d.student2.response}`,
+    userAnswer,
+    modelAnswer: d.modelAnswer,
+    criteria: d.evaluationPoints,
+  });
+}
+
+export const WRITING_SCORE_NOTE =
+  "1. Copy the prompt into your AI chat. 2. Paste its whole reply here. The AI scores your response on the 0–5 TOEFL rubric.";
