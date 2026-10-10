@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Rating, State } from "ts-fsrs";
 import type { TaskId } from "../hooks/useScoreHistory";
-import type { Attempt } from "./attempts";
+import { RUBRIC_METHOD, type Attempt } from "./attempts";
 import { fromLegacyScore } from "./migrations";
 import {
   buildReviewItems,
@@ -11,6 +11,7 @@ import {
   ratingFor,
   sectionOf,
   sortItems,
+  tasksWithin,
   testOf,
   toSort,
   type Difficulty,
@@ -53,6 +54,20 @@ describe("ratingFor", () => {
       Rating.Again,
     );
     expect(ratingFor({ method: "x", correct: 0, total: 1 })).toBe(Rating.Again);
+  });
+
+  it("counts 80% of a rubric as recalled", () => {
+    const rubric = (correct: number, total = 5) =>
+      ratingFor({ method: RUBRIC_METHOD, correct, total });
+    expect(rubric(5)).toBe(Rating.Good);
+    expect(rubric(4)).toBe(Rating.Good);
+    expect(rubric(3)).toBe(Rating.Hard);
+    expect(rubric(2)).toBe(Rating.Again);
+    expect(rubric(8, 10)).toBe(Rating.Good);
+    expect(rubric(7, 10)).toBe(Rating.Hard);
+    expect(ratingFor({ method: "answer-key", correct: 4, total: 5 })).toBe(
+      Rating.Hard,
+    );
   });
 
   it("rates nothing for an unscored attempt", () => {
@@ -122,16 +137,21 @@ describe("buildReviewItems", () => {
 });
 
 describe("writing and speaking", () => {
-  it("are left out of review and recall", () => {
+  it("are reviewed on their rubric scores", () => {
     const items = buildReviewItems([
       attempt("toefl/writing/email", "w1", 0, 4, 5),
-      attempt("toefl/writing/build-sentence", "b1", 0, 3, 10),
-      attempt("toefl/speaking/interview", "s1", 0, 3, 5),
-      attempt("shadowing", "sh1", 0, 2, 5),
-      attempt("toefl/reading/academic", "r1", 0, 3, 10),
+      attempt("toefl/speaking/interview", "s1", 0, 5, 5),
+      attempt("toefl/writing/discussion", "d1", 0),
     ]);
-    expect(items.map((i) => i.problemId)).toEqual(["r1"]);
-    expect(dueItems(items, at(100)).map((i) => i.problemId)).toEqual(["r1"]);
+    expect(items.map((i) => [i.problemId, i.correct, i.mistakes])).toEqual([
+      ["w1", false, 1],
+      ["s1", true, 0],
+      ["d1", null, 0],
+    ]);
+    expect(dueItems(items, at(100)).map((i) => i.problemId)).toEqual([
+      "w1",
+      "s1",
+    ]);
   });
 });
 
@@ -200,22 +220,30 @@ describe("filterItems", () => {
     expect(keys({})).toEqual(["r1", "l1", "p1", "p2", "d1"]);
   });
 
-  it("combines test, section and result", () => {
+  it("combines test, section and question type", () => {
     expect(keys({ section: "reading" })).toEqual(["r1", "p1"]);
     expect(keys({ section: "reading", test: "toeic" })).toEqual(["p1"]);
-    expect(keys({ section: "listening", result: "correct" })).toEqual([
-      "l1",
-      "p2",
-      "d1",
-    ]);
-    expect(keys({ test: "toefl", result: "incorrect" })).toEqual(["r1"]);
+    expect(keys({ taskId: "toeic/part5" })).toEqual(["p1"]);
   });
 
-  it("filters by question type and mistake count", () => {
-    expect(keys({ taskId: "toeic/part5" })).toEqual(["p1"]);
-    expect(keys({ minMistakes: 1 })).toEqual(["r1", "p1"]);
-    expect(keys({ minMistakes: 2 })).toEqual(["r1"]);
-    expect(keys({ minMistakes: 2, test: "toeic" })).toEqual([]);
+  it("narrows the tasks offered to the chosen test and section", () => {
+    const tasks: TaskId[] = [
+      "toefl/reading/academic",
+      "toefl/writing/email",
+      "toefl/speaking/interview",
+      "toeic/part2",
+      "toeic/part5",
+    ];
+    expect(tasksWithin(tasks, { test: "toeic" })).toEqual([
+      "toeic/part2",
+      "toeic/part5",
+    ]);
+    expect(tasksWithin(tasks, { test: "toefl", section: "writing" })).toEqual([
+      "toefl/writing/email",
+    ]);
+    expect(tasksWithin(tasks, { test: "toeic", section: "writing" })).toEqual(
+      [],
+    );
   });
 
   it("filters by difficulty, leaving out questions not yet graded", () => {

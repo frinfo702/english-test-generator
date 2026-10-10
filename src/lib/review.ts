@@ -7,12 +7,13 @@
  * this feature therefore schedules like any other, and answering a question
  * anywhere in the app — practice, a practice test, or recall — reschedules it.
  *
- * Only reading and listening are reviewed: their answers are right or wrong,
- * while writing and speaking get rubric scores with no clear pass.
+ * Writing and speaking are reviewed on their rubric scores, where a perfect
+ * score is rare, so 80% of the rubric counts as recalled; an unscored response
+ * is listed but not scheduled.
  */
 import { createEmptyCard, fsrs, Rating, type Card, type Grade } from "ts-fsrs";
 import type { TaskId } from "../hooks/useScoreHistory";
-import type { Attempt } from "./attempts";
+import { RUBRIC_METHOD, type Attempt } from "./attempts";
 import { TRIAL_TASK_ID, type SectionKey } from "./trial";
 
 /**
@@ -22,13 +23,15 @@ import { TRIAL_TASK_ID, type SectionKey } from "./trial";
 const scheduler = fsrs({ enable_short_term: false });
 
 /**
- * Full marks recalled the question (Good). Partial credit, the only other
- * signal the app records, is Hard when at least half was right and Again
- * below that. Unscored attempts rate nothing.
+ * Full marks, or 80% on a rubric, recalled the question (Good). Partial
+ * credit, the only other signal the app records, is Hard when at least half
+ * was right and Again below that. Unscored attempts rate nothing.
  */
 export function ratingFor(score: Attempt["score"]): Grade | null {
   if (!score) return null;
-  if (score.correct >= score.total) return Rating.Good;
+  const recalled =
+    score.method === RUBRIC_METHOD ? score.total * 0.8 : score.total;
+  if (score.correct >= recalled) return Rating.Good;
   return score.correct * 2 >= score.total ? Rating.Hard : Rating.Again;
 }
 
@@ -70,11 +73,11 @@ export interface ReviewItem {
   latest: Attempt;
   /** Latest graded result; null until an attempt is scored. */
   correct: boolean | null;
-  /** Scored attempts that were not full marks. */
+  /** Scored attempts that did not count as recalled. */
   mistakes: number;
   /** Share of scored items answered right; null until an attempt is scored. */
   accuracy: number | null;
-  /** Date of the latest scored attempt that was not full marks. */
+  /** Date of the latest scored attempt that did not count as recalled. */
   lastWrong: string | null;
   /** Null until an attempt is scored: there is nothing to schedule yet. */
   card: Card | null;
@@ -86,8 +89,6 @@ export function buildReviewItems(attempts: Attempt[]): ReviewItem[] {
   for (const a of attempts) {
     // No problemId (the oldest scores) means no question to show or recall.
     if (a.taskId === TRIAL_TASK_ID || !a.problemId) continue;
-    const section = sectionOf(a.taskId);
-    if (section === "writing" || section === "speaking") continue;
     const key = `${a.taskId}/${a.problemId}`;
     if (!byKey.has(key)) byKey.set(key, []);
     byKey.get(key)!.push(a);
@@ -167,13 +168,22 @@ export function sortItems(items: ReviewItem[], by: ReviewSort): ReviewItem[] {
 /** Every set field must match; unset fields don't filter. */
 export interface ReviewFilter {
   test?: Test;
-  section?: "reading" | "listening";
+  section?: SectionKey;
   taskId?: TaskId;
   difficulty?: Difficulty;
-  minMistakes?: number;
-  result?: "correct" | "incorrect";
   dueOnly?: boolean;
 }
+
+/** The tasks a test and section allow, so each filter offers only what fits the ones above it. */
+export const tasksWithin = (
+  tasks: TaskId[],
+  f: Pick<ReviewFilter, "test" | "section">,
+) =>
+  tasks.filter(
+    (t) =>
+      (!f.test || testOf(t) === f.test) &&
+      (!f.section || sectionOf(t) === f.section),
+  );
 
 export function filterItems(
   items: ReviewItem[],
@@ -188,8 +198,6 @@ export function filterItems(
       (!f.section || sectionOf(i.taskId) === f.section) &&
       (!f.taskId || i.taskId === f.taskId) &&
       (!f.difficulty || difficulty.get(i.key) === f.difficulty) &&
-      i.mistakes >= (f.minMistakes ?? 0) &&
-      (!f.result || i.correct === (f.result === "correct")) &&
       (!f.dueOnly || isDue(i, now)),
   );
 }

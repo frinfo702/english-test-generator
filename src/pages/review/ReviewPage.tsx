@@ -28,6 +28,7 @@ import {
   RECALL_PATH,
   sectionOf,
   sortItems,
+  tasksWithin,
   testOf,
   toSort,
   type Difficulty,
@@ -35,7 +36,7 @@ import {
   type ReviewItem,
   type Test,
 } from "../../lib/review";
-import { readingGrade } from "../../lib/trial";
+import { readingGrade, type SectionKey } from "../../lib/trial";
 import { ItemReview } from "../trial/ItemReview";
 import { TASK_NAMES } from "../trial/taskNames";
 import styles from "./ReviewPage.module.css";
@@ -46,6 +47,20 @@ const TEST_NAMES: Record<Test, string> = {
   toeic: "TOEIC",
   other: "Extra",
 };
+
+const SECTION_NAMES: Record<SectionKey, string> = {
+  reading: "Reading",
+  listening: "Listening",
+  writing: "Writing",
+  speaking: "Speaking",
+};
+/** Every reviewable task; the filters offer what these cover. */
+const TASKS = Object.keys(TASK_NAMES) as TaskId[];
+
+const sectionsWithin = (test: Test | undefined) =>
+  (Object.keys(SECTION_NAMES) as SectionKey[]).filter(
+    (s) => tasksWithin(TASKS, { test, section: s }).length,
+  );
 
 const typeName = (taskId: TaskId) =>
   `${TEST_NAMES[testOf(taskId)]} · ${TASK_NAMES[taskId] ?? taskId}`;
@@ -114,14 +129,10 @@ export function ReviewPage() {
 
   const filter: ReviewFilter = {
     test: (params.get("test") || undefined) as Test | undefined,
-    section: (params.get("section") || undefined) as
-      ReviewFilter["section"] | undefined,
+    section: (params.get("section") || undefined) as SectionKey | undefined,
     taskId: (params.get("type") || undefined) as TaskId | undefined,
     difficulty: (params.get("difficulty") || undefined) as
       Difficulty | undefined,
-    minMistakes: Number(params.get("mistakes")) || undefined,
-    result: (params.get("result") || undefined) as
-      ReviewFilter["result"] | undefined,
     dueOnly: params.get("due") === "1",
   };
   const sort = toSort(params.get("sort"));
@@ -131,6 +142,18 @@ export function ReviewPage() {
       (p) => {
         if (value) p.set(key, value);
         else p.delete(key);
+        // A choice the filters above no longer offer goes back to All.
+        const test = (p.get("test") || undefined) as Test | undefined;
+        if (!sectionsWithin(test).includes(p.get("section") as SectionKey))
+          p.delete("section");
+        const section = (p.get("section") || undefined) as
+          SectionKey | undefined;
+        if (
+          !tasksWithin(TASKS, { test, section }).includes(
+            p.get("type") as TaskId,
+          )
+        )
+          p.delete("type");
         return p;
       },
       { replace: true },
@@ -142,7 +165,6 @@ export function ReviewPage() {
   const { items, now } = loaded;
   const due = dueItems(items, now);
   const shown = sortItems(filterItems(items, filter, now, difficulty), sort);
-  const types = [...new Set(items.map((i) => i.taskId))].sort();
 
   const update = (next: Attempt) =>
     putAttempts([next]).then(reload, (e: unknown) =>
@@ -153,7 +175,7 @@ export function ReviewPage() {
     <div>
       <SectionHeader
         title="Review"
-        subtitle="Every reading and listening question you've answered, with what's due to recall."
+        subtitle="Every question you've answered, with what's due to recall."
         backTo="/"
       />
 
@@ -214,16 +236,16 @@ export function ReviewPage() {
               label="Section"
               value={filter.section}
               onChange={(v) => setParam("section", v)}
-              options={[
-                ["reading", "Reading"],
-                ["listening", "Listening"],
-              ]}
+              options={sectionsWithin(filter.test).map((s) => [
+                s,
+                SECTION_NAMES[s],
+              ])}
             />
             <Select
               label="Question type"
               value={filter.taskId}
               onChange={(v) => setParam("type", v)}
-              options={types.map((t) => [t, typeName(t)])}
+              options={tasksWithin(TASKS, filter).map((t) => [t, typeName(t)])}
             />
             <Select
               label="Difficulty"
@@ -233,25 +255,6 @@ export function ReviewPage() {
                 ["easy", "Easy"],
                 ["medium", "Medium"],
                 ["hard", "Hard"],
-              ]}
-            />
-            <Select
-              label="Mistakes"
-              value={filter.minMistakes ? String(filter.minMistakes) : ""}
-              onChange={(v) => setParam("mistakes", v)}
-              options={[
-                ["1", "1 or more"],
-                ["2", "2 or more"],
-                ["3", "3 or more"],
-              ]}
-            />
-            <Select
-              label="Result"
-              value={filter.result}
-              onChange={(v) => setParam("result", v)}
-              options={[
-                ["correct", "Solved"],
-                ["incorrect", "Unsolved"],
               ]}
             />
             <label className={styles.select}>
