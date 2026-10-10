@@ -223,10 +223,6 @@ export function AiScoringPage() {
           <div className={own.ground} aria-hidden="true" />
           <ScoreDrawing />
         </div>
-        <figcaption className={styles.meta}>
-          The card from a Writing answer: 4/5 overall, then every rubric point
-          rated on its own row. Drawn in code, one stroke at a time.
-        </figcaption>
       </figure>
 
       {SECTIONS.map((s) => (
