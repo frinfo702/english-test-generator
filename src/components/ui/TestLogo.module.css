@@ -1,0 +1,21 @@
+/* Sized in em so the wordmark tracks the title it replaces. Both files carry
+ * their clear-space inside the viewBox (artwork is ~62% of the height), so
+ * the box runs taller than the text and drops to put the letters on the
+ * baseline. Aspect ratios are the viewBoxes'; the mask never stretches. */
+.logo {
+  display: inline-block;
+  height: 1.3em;
+  vertical-align: -0.24em;
+  background: currentColor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+.TOEFL {
+  aspect-ratio: 1220.48 / 491.48;
+}
+
+.TOEIC {
+  aspect-ratio: 89 / 35;
+}

@@ -1,4 +1,5 @@
 import { SectionHeader } from "../../components/layout/SectionHeader";
+import { TestLogo } from "../../components/ui/TestLogo";
 import {
   TaskMenu,
   type TaskMenuSection,
@@ -55,7 +56,7 @@ export function ToeicMenuPage() {
   return (
     <div>
       <SectionHeader
-        title="TOEIC L&R"
+        title={<TestLogo name="TOEIC" />}
         subtitle="Listening and Reading — choose a part to practice."
         backTo="/"
       />

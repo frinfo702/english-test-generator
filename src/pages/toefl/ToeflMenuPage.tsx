@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
+import { TestLogo } from "../../components/ui/TestLogo";
 import { Button } from "../../components/ui/Button";
 import {
   TaskMenu,
@@ -102,7 +103,7 @@ export function ToeflMenuPage() {
   return (
     <div>
       <SectionHeader
-        title="TOEFL iBT 2026"
+        title={<TestLogo name="TOEFL" />}
         subtitle="January 2026 format — choose a section and task."
         backTo="/"
         actions={

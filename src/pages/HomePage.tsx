@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { HomeHero } from "../components/home/HomeHero";
 import { PixelIcon } from "../components/pixel/PixelIcon";
 import type { PixelIconName } from "../components/pixel/pixelIcons";
+import { TestLogo } from "../components/ui/TestLogo";
 import styles from "./HomePage.module.css";
 
 type TestItem = {
@@ -9,17 +10,20 @@ type TestItem = {
   subtitle: string;
   path: string;
   icon: PixelIconName;
+  logo?: "TOEFL" | "TOEIC";
 };
 
 const tests: TestItem[] = [
   {
-    title: "TOEFL iBT 2026",
+    title: "iBT 2026",
+    logo: "TOEFL",
     subtitle: "Reading, Writing, Listening, Speaking",
     path: "/toefl",
     icon: "university",
   },
   {
-    title: "TOEIC L&R",
+    title: "L&R",
+    logo: "TOEIC",
     subtitle: "Parts 2–7 — listening and reading",
     path: "/toeic",
     icon: "briefcase",
@@ -57,7 +61,9 @@ export function HomePage() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <PixelIcon name={test.icon} className={styles.rowIcon} />
-                <span className={styles.rowTitle}>{test.title}</span>
+                <span className={styles.rowTitle}>
+                  {test.logo && <TestLogo name={test.logo} />} {test.title}
+                </span>
                 <span className={styles.rowMeta}>{test.subtitle}</span>
                 <span className={styles.arrow} aria-hidden="true">
                   →
