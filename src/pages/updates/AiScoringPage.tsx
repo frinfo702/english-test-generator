@@ -1,28 +1,8 @@
 import { Link } from "react-router-dom";
-import { PixelArt } from "../../components/pixel/PixelArt";
-import {
-  HAMSTER_BODY,
-  HAMSTER_EARS,
-  HAMSTER_H,
-  HAMSTER_PALETTE,
-  HAMSTER_PAWS_DOWN,
-  HAMSTER_W,
-} from "../../components/pixel/hamsterSprite";
+import { useLayoutEffect, useRef } from "react";
 // Same journal-entry layout as the introduce and redesign pages.
 import styles from "./IntroducePage.module.css";
 import own from "./AiScoringPage.module.css";
-import {
-  SCORE_SHEET,
-  SCORE_SHEET_H,
-  SCORE_SHEET_PALETTE,
-  SCORE_SHEET_W,
-  SPARK,
-  SPARK_H,
-  SPARK_SMALL,
-  SPARK_SMALL_H,
-  SPARK_SMALL_W,
-  SPARK_W,
-} from "./aiScoringSprites";
 
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
   {
@@ -88,6 +68,139 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
   },
 ];
 
+// Rubric rows as the card shows them, out of 5 (they average the 4/5 overall).
+const ROWS = [4, 3, 5, 4];
+const BAR_X = 284;
+const BAR_W = 132;
+
+/** The lead drawing: a score card in line art that draws itself stroke by
+ * stroke, then pops its score in. Every mark is in the markup, so with reduced
+ * motion (or no Web Animations) the finished drawing simply shows. */
+function ScoreDrawing() {
+  const ref = useRef<SVGSVGElement>(null);
+
+  // Layout effect: hide the strokes before first paint, so the finished
+  // drawing never flashes ahead of the animation.
+  useLayoutEffect(() => {
+    const svg = ref.current;
+    if (
+      !svg ||
+      typeof svg.animate !== "function" ||
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    const anims: Animation[] = [];
+    let at = 200;
+    svg.querySelectorAll<SVGGeometryElement>("[data-draw]").forEach((el) => {
+      const len = el.getTotalLength();
+      const duration = Number(el.dataset.draw) || 500;
+      anims.push(
+        el.animate(
+          [
+            // Opacity hides the round cap's dot that sits at the start.
+            { strokeDasharray: `${len}`, strokeDashoffset: len, opacity: 0 },
+            { opacity: 1, offset: 0.02 },
+            { strokeDasharray: `${len}`, strokeDashoffset: 0, opacity: 1 },
+          ],
+          {
+            duration,
+            delay: at,
+            easing: "cubic-bezier(.65,0,.35,1)",
+            fill: "backwards",
+          },
+        ),
+      );
+      at += duration * 0.45;
+    });
+    svg.querySelectorAll<SVGElement>("[data-pop]").forEach((el, i) => {
+      anims.push(
+        el.animate(
+          [
+            { opacity: 0, transform: "scale(0.4)" },
+            { opacity: 1, transform: "scale(1)" },
+          ],
+          {
+            duration: 360,
+            delay: at + i * 120,
+            easing: "cubic-bezier(.34,1.56,.64,1)",
+            fill: "backwards",
+          },
+        ),
+      );
+    });
+    return () => anims.forEach((a) => a.cancel());
+  }, []);
+
+  return (
+    <svg
+      ref={ref}
+      className={own.drawing}
+      viewBox="0 0 640 300"
+      role="img"
+      aria-label="A score card drawing itself: 4 out of 5 on a ring gauge, four rubric bars, and a check stamp"
+    >
+      {/* Registration marks in the corners, like a blueprint. */}
+      <path className={own.faint} d="M24 32h16M32 24v16M600 32h16M608 24v16" />
+      <rect
+        className={own.line}
+        data-draw="900"
+        x="200"
+        y="34"
+        width="240"
+        height="214"
+        rx="12"
+      />
+      <path className={own.line} data-draw="400" d="M224 66h96" />
+      <path className={own.faint} data-draw="300" d="M224 86h64" />
+      <circle className={own.faint} cx="390" cy="80" r="26" />
+      {/* 4/5 of the ring: clockwise from 12 o'clock to 288°. */}
+      <path
+        className={own.signal}
+        data-draw="800"
+        d="M390 54A26 26 0 1 1 365.27 71.97"
+      />
+      {ROWS.map((score, i) => {
+        const y = 136 + i * 28;
+        return (
+          <g key={y}>
+            <path className={own.faint} data-draw="250" d={`M224 ${y}h36`} />
+            <path className={own.track} d={`M${BAR_X} ${y}h${BAR_W}`} />
+            <path
+              className={own.signal}
+              data-draw="450"
+              d={`M${BAR_X} ${y}h${(BAR_W * score) / 5}`}
+            />
+          </g>
+        );
+      })}
+      <circle
+        className={`${own.line} ${own.stamp}`}
+        data-draw="500"
+        cx="448"
+        cy="244"
+        r="24"
+      />
+      <path className={own.line} data-draw="350" d="M437 244l8 8 15-16" />
+      <text className={own.score} data-pop x="390" y="85" textAnchor="middle">
+        4/5
+      </text>
+      {/* Sparks around the card. */}
+      <path
+        className={own.spark}
+        data-pop
+        d="M168 70l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"
+      />
+      <path
+        className={own.spark}
+        data-pop
+        d="M486 116l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"
+      />
+      <circle className={own.dot} data-pop cx="160" cy="200" r="4" />
+      <circle className={own.dot} data-pop cx="500" cy="60" r="3" />
+    </svg>
+  );
+}
+
 export function AiScoringPage() {
   return (
     <article className={styles.page}>
@@ -107,44 +220,11 @@ export function AiScoringPage() {
       <figure className={own.figure}>
         <div className={own.stage}>
           <div className={own.ground} aria-hidden="true" />
-          <PixelArt
-            layers={[SCORE_SHEET]}
-            palette={SCORE_SHEET_PALETTE}
-            width={SCORE_SHEET_W}
-            height={SCORE_SHEET_H}
-            className={own.sheet}
-            title="A score card: 4 out of 5, with four rubric rows of five score blocks"
-          />
-          <PixelArt
-            layers={[HAMSTER_EARS, HAMSTER_BODY, HAMSTER_PAWS_DOWN]}
-            palette={HAMSTER_PALETTE}
-            width={HAMSTER_W}
-            height={HAMSTER_H}
-            className={own.hamster}
-            title="A cream hamster nibbling a seed beside the score card"
-          />
-          <span className={own.sparkA} aria-hidden="true">
-            <PixelArt
-              layers={[SPARK]}
-              palette={{ s: "currentColor" }}
-              width={SPARK_W}
-              height={SPARK_H}
-              className={own.sparkArt}
-            />
-          </span>
-          <span className={own.sparkB} aria-hidden="true">
-            <PixelArt
-              layers={[SPARK_SMALL]}
-              palette={{ s: "currentColor" }}
-              width={SPARK_SMALL_W}
-              height={SPARK_SMALL_H}
-              className={own.sparkArt}
-            />
-          </span>
+          <ScoreDrawing />
         </div>
         <figcaption className={styles.meta}>
           The card from a Writing answer: 4/5 overall, then every rubric point
-          rated on its own row. Drawn in the page&apos;s own pixel grid.
+          rated on its own row. Drawn in code, one stroke at a time.
         </figcaption>
       </figure>
 

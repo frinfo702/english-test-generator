@@ -1,7 +1,6 @@
-/* The lead visual: the graded answer card with the hamster beside it, on the
- * same indigo stage as the home hero. Sheet and hamster are PixelArt sprites,
- * so the "thumbnail" is drawn in code; the sparks take the signal orange and
- * twinkle in whole steps. */
+/* The lead visual: a line-art score card on the same indigo stage as the home
+ * hero, drawn by ScoreDrawing in AiScoringPage.tsx. Lime strokes for the card,
+ * the signal orange for the score itself. */
 
 .figure {
   margin: var(--spacing-8) 0 var(--spacing-12);
@@ -29,89 +28,72 @@
   opacity: 0.35;
 }
 
-.sheet {
+/* The SVG scales the 640×300 drawing to the stage; strokes keep their weight. */
+.drawing {
   position: absolute;
-  left: 26%;
-  bottom: 40px;
-  width: 130px; /* 5px per cell */
-}
-
-.hamster {
-  position: absolute;
-  right: 20%;
-  bottom: 34px;
-  width: 104px; /* 4px per cell */
-}
-
-.sparkA,
-.sparkB {
-  position: absolute;
-  color: var(--color-signal);
-}
-
-.sparkA {
-  left: calc(26% + 100px);
-  top: 44px;
-  width: 24px;
-}
-
-.sparkB {
-  right: 26%;
-  bottom: 158px;
-  width: 16px;
-}
-
-.sparkArt {
-  display: block;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.line,
+.faint,
+.track,
+.signal {
+  vector-effect: non-scaling-stroke;
+}
+
+.line {
+  stroke: var(--stage-lime);
+  stroke-width: 3;
+}
+
+.faint {
+  stroke: var(--stage-lime);
+  stroke-width: 3;
+  opacity: 0.4;
+}
+
+.track {
+  stroke: var(--stage-lime);
+  stroke-width: 8;
+  opacity: 0.15;
+}
+
+/* The check stamp sits over the card corner, so it masks the border behind. */
+.stamp {
+  fill: var(--stage-bg);
+}
+
+.signal {
+  stroke: var(--color-signal);
+  stroke-width: 8;
+}
+
+.score {
+  fill: var(--stage-lime);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.spark,
+.dot {
+  fill: var(--color-signal);
+}
+
+.score,
+.spark,
+.dot {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 @media (max-width: 560px) {
   .stage {
     height: 240px;
-  }
-
-  .sheet {
-    left: 8%;
-    bottom: 30px;
-    width: 104px; /* 4px per cell */
-  }
-
-  .hamster {
-    right: 6%;
-    bottom: 24px;
-    width: 78px; /* 3px per cell */
-  }
-
-  .sparkA {
-    left: calc(8% + 78px);
-    top: 30px;
-    width: 18px;
-  }
-
-  .sparkB {
-    right: 20%;
-    bottom: 118px;
-    width: 13px;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .sparkA {
-    animation: twinkle 1.8s steps(2, jump-none) infinite;
-  }
-
-  .sparkB {
-    animation: twinkle 2.4s steps(2, jump-none) infinite 0.7s;
-  }
-}
-
-@keyframes twinkle {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0.35;
   }
 }
