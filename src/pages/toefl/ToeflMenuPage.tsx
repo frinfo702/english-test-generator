@@ -103,11 +103,7 @@ export function ToeflMenuPage() {
   return (
     <div>
       <SectionHeader
-        title={
-          <>
-            <TestLogo name="TOEFL" /> iBT 2026
-          </>
-        }
+        title={<TestLogo name="TOEFL" />}
         subtitle="January 2026 format — choose a section and task."
         backTo="/"
         actions={
