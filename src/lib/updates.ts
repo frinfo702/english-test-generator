@@ -1,8 +1,8 @@
 /** The newest announcement. Bump `id` to make the hamster speak up again. */
 export const LATEST_UPDATE = {
-  id: "2026-10-10-redesign",
-  path: "/updates/redesign",
-  label: "A new look: Field Notes",
+  id: "2026-10-10-ai-scoring",
+  path: "/updates/ai-scoring",
+  label: "Scored when you finish",
 };
 
 const SEEN_KEY = "etp-update-seen";

@@ -1,0 +1,92 @@
+/* The lead visual: a line-art score card on the same indigo stage as the home
+ * hero, drawn by ScoreDrawing in AiScoringPage.tsx. Lime strokes for the card,
+ * the signal orange for the score itself. */
+
+.figure {
+  margin: var(--spacing-8) 0 var(--spacing-12);
+}
+
+.stage {
+  position: relative;
+  height: 300px;
+  background: var(--stage-bg);
+  overflow: hidden;
+}
+
+/* Same dashed lime ground as the home hero, at a whisper. */
+.ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 12px;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--stage-lime) 0 12px,
+    transparent 12px 16px
+  );
+  opacity: 0.35;
+}
+
+/* The SVG scales the 640×300 drawing to the stage; strokes keep their weight. */
+.drawing {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.line {
+  stroke: var(--stage-lime);
+  stroke-width: 3;
+}
+
+.faint {
+  stroke: var(--stage-lime);
+  stroke-width: 3;
+  opacity: 0.4;
+}
+
+.track {
+  stroke: var(--stage-lime);
+  stroke-width: 8;
+  opacity: 0.15;
+}
+
+/* The check stamp sits over the card corner, so it masks the border behind. */
+.stamp {
+  fill: var(--stage-bg);
+}
+
+.signal {
+  stroke: var(--color-signal);
+  stroke-width: 8;
+}
+
+.score {
+  fill: var(--stage-lime);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.spark,
+.dot {
+  fill: var(--color-signal);
+}
+
+.score,
+.spark,
+.dot {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (max-width: 560px) {
+  .stage {
+    height: 240px;
+  }
+}

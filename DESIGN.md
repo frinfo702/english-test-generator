@@ -46,8 +46,9 @@ Same structure, no glows.
 ### Pixel stage
 
 `--stage-bg` (`#2f2e73`, dark `#24235a`), `--stage-lime` `#eef59a`,
-`--stage-ink`. Used only behind the mascots: the home hero plate and the
-update page's call to action. Never on tool surfaces.
+`--stage-ink`. Used only on announcement visuals: the home hero plate, the
+update pages' call to action and the AI scoring update's line-drawn score
+card. Never on tool surfaces.
 
 ### Test wordmarks
 
@@ -158,6 +159,9 @@ recoloured.
 - Animate `transform` / `opacity` only. Respect `prefers-reduced-motion`.
 - Row arrows nudge 3–4px and turn signal on hover; nothing else moves.
 - Keyboard-repeated actions (nav, ⌘D) never animate.
+- One exception: the AI scoring update page's cover drawing draws itself in
+  once with `stroke-dashoffset`, staggered, and is static under
+  `prefers-reduced-motion`. Nothing else follows its lead.
 
 ## Anti-patterns
 

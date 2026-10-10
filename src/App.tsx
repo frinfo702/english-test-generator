@@ -34,6 +34,7 @@ import { ResultPage } from "./pages/results/ResultPage";
 import { TrialHomePage } from "./pages/trial/TrialHomePage";
 import { TrialRunPage } from "./pages/trial/TrialRunPage";
 import { TrialReportPage } from "./pages/trial/TrialReportPage";
+import { AiScoringPage } from "./pages/updates/AiScoringPage";
 import { IntroducePage } from "./pages/updates/IntroducePage";
 import { RedesignPage } from "./pages/updates/RedesignPage";
 import { RecallFrame, ReviewPage } from "./pages/review/ReviewPage";
@@ -235,6 +236,7 @@ export default function App() {
           <Route path="/toefl" element={<ToeflMenuPage />} />
           <Route path="/toeic" element={<ToeicMenuPage />} />
           <Route path="/trial" element={<TrialHomePage />} />
+          <Route path="/updates/ai-scoring" element={<AiScoringPage />} />
           <Route path="/updates/introduce" element={<IntroducePage />} />
           <Route path="/updates/redesign" element={<RedesignPage />} />
           <Route
