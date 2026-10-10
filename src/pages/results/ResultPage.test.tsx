@@ -1,4 +1,10 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  within,
+} from "@testing-library/react";
 import { IDBFactory } from "fake-indexeddb";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -119,6 +125,32 @@ describe("ResultPage", () => {
         total: 5,
       });
     });
+  });
+
+  it("says why an interview's delivery stats are empty when Azure is not configured", async () => {
+    // As saved in production, where /api/speech-token has no Azure key.
+    const error =
+      "Pronunciation scoring is not configured. Set AZURE_SPEECH_KEY and AZURE_SPEECH_REGION.";
+    await setup({
+      taskId: "toefl/speaking/interview",
+      problemId: "001",
+      question: { scenario: "", questions: [] },
+      responses: [
+        {
+          itemId: "q1",
+          prompt: "What do you do on weekends?",
+          transcript: "I usually play tennis with friends.",
+          ai: { reply: "", scores: { languageUse: 3, organization: 2 } },
+          itemScore: 3,
+          assessmentError: error,
+        },
+      ],
+    });
+
+    await screen.findByText("Take an Interview");
+    const header = within(document.querySelector("header")!);
+    expect(header.getByText("Pace").nextElementSibling?.textContent).toBe("—");
+    expect(header.getByText(`Pronunciation not scored: ${error}`)).toBeTruthy();
   });
 
   describe("with an AI Gateway key", () => {

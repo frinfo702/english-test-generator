@@ -126,16 +126,28 @@ function ScenarioRow({ audio, attempt }: { audio: Audio; attempt: Attempt }) {
   );
 }
 
+/**
+ * Why the delivery stats are dashes: with no item assessed, the stored error
+ * (e.g. no Azure key on the server) is the reason, not a missing value.
+ */
+function deliveryNote(responses: ItemResponse[]): string | null {
+  if (responses.some((r) => r.assessment)) return null;
+  const error = responses.find((r) => r.assessmentError)?.assessmentError;
+  return error ? `Pronunciation not scored: ${error}` : null;
+}
+
 function ResultHeader({
   attempt,
   title,
   itemScores,
   stats,
+  note,
 }: {
   attempt: Attempt;
   title: string;
   itemScores: (number | undefined)[];
   stats: { label: string; value: string }[];
+  note?: string | null;
 }) {
   const navigate = useNavigate();
   const scored = itemScores.filter((s): s is number => s !== undefined);
@@ -161,6 +173,7 @@ function ResultHeader({
               </div>
             ))}
           </dl>
+          {note && <p className={styles.note}>{note}</p>}
         </div>
         <div className={styles.scoreCard}>
           <PixelIcon name="microphone" className={styles.sprite} />
@@ -326,6 +339,7 @@ export function ListenRepeatResult({ attempt }: { attempt: Attempt }) {
         attempt={attempt}
         title="Listen and Repeat"
         itemScores={attempt.responses.map((r) => r.itemScore)}
+        note={deliveryNote(attempt.responses)}
         stats={[
           {
             label: "Words correct",
@@ -557,6 +571,7 @@ export function InterviewResult({
         attempt={attempt}
         title="Take an Interview"
         itemScores={attempt.responses.map((r) => r.itemScore)}
+        note={deliveryNote(attempt.responses)}
         stats={[
           {
             label: "Pronunciation",
