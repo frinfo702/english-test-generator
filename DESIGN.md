@@ -159,6 +159,9 @@ recoloured.
 - Animate `transform` / `opacity` only. Respect `prefers-reduced-motion`.
 - Row arrows nudge 3–4px and turn signal on hover; nothing else moves.
 - Keyboard-repeated actions (nav, ⌘D) never animate.
+- One exception: the AI scoring update page's cover drawing draws itself in
+  once with `stroke-dashoffset`, staggered, and is static under
+  `prefers-reduced-motion`. Nothing else follows its lead.
 
 ## Anti-patterns
 
