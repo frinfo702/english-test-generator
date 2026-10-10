@@ -49,6 +49,13 @@ Same structure, no glows.
 `--stage-ink`. Used only behind the mascots: the home hero plate and the
 update page's call to action. Never on tool surfaces.
 
+### Test wordmarks
+
+The official TOEFL (ETS, 2024) and TOEIC (ets.org) one-colour logos, kept in
+`src/assets/brand/` unaltered, stand in for the test name on the home index
+rows and the TOEFL / TOEIC menu headers — nowhere else. `TestLogo` paints them
+in `currentColor` through a CSS mask, so they read as ink on paper and carbon.
+
 ### Section hues
 
 Reading / Writing / Listening / Speaking / TOEIC keep distinct muted hues,

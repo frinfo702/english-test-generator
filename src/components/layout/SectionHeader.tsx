@@ -6,7 +6,7 @@ import { PixelArrowIcon } from "../ui/PixelArrowIcon";
 import styles from "./SectionHeader.module.css";
 
 interface SectionHeaderProps {
-  title: string;
+  title: ReactNode;
   subtitle?: string;
   backTo?: string;
   /** Right-aligned controls; sharing the title row saves a row of height. */
