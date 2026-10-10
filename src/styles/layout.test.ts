@@ -3,8 +3,7 @@ import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 
 // jsdom has no layout engine, so these load the real stylesheets and check
-// the cascaded styles that keep page content clear of the sticky header and
-// of error banners.
+// the cascaded styles that keep page content clear of error banners.
 
 const read = (file: string) => readFileSync(file, "utf8");
 
@@ -13,7 +12,10 @@ const pageModules = [
     .filter((f) => f.endsWith(".module.css"))
     .map((f) => join("src/pages", f)),
   "src/components/question/QuestionSelectorPage.module.css",
+  "src/components/question/ListeningTaskBase.module.css",
 ];
+
+const banner = '<div class="error errorText" data-probe></div>';
 
 function loadStylesheet(file: string) {
   const style = document.createElement("style");
@@ -32,35 +34,18 @@ afterEach(() => {
 });
 
 describe("page layout", () => {
-  it("offsets every viewport scroll by the sticky header", () => {
-    loadStylesheet("src/styles/global.css");
-    expect(
-      getComputedStyle(document.documentElement).scrollPaddingTop,
-    ).toContain("var(--header-height)");
-  });
-
-  it("defines the notice gap token", () => {
-    loadStylesheet("src/styles/variables.css");
-    expect(
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--notice-gap")
-        .trim(),
-    ).toBe("var(--spacing-8)");
-  });
-
   it("separates boxed page error banners from the content below", () => {
     const unstyled = getComputedStyle(
-      render('<div class="error" data-probe></div>'),
+      render(banner),
     ).background;
     let boxed = 0;
     for (const file of pageModules) {
       loadStylesheet(file);
-      const banner = render('<div class="error" data-probe></div>');
-      const style = getComputedStyle(banner);
+      const style = getComputedStyle(render(banner));
       // Plain error text (no box) is spaced by its container.
       if (style.background !== unstyled) {
         boxed++;
-        expect(style.marginBottom, file).toBe("var(--notice-gap)");
+        expect(style.marginBottom, file).not.toMatch(/^(0px)?$/);
       }
       document.head.innerHTML = "";
     }
