@@ -35,6 +35,7 @@ import { TrialHomePage } from "./pages/trial/TrialHomePage";
 import { TrialRunPage } from "./pages/trial/TrialRunPage";
 import { TrialReportPage } from "./pages/trial/TrialReportPage";
 import { IntroducePage } from "./pages/updates/IntroducePage";
+import { RedesignPage } from "./pages/updates/RedesignPage";
 import { RecallFrame, ReviewPage } from "./pages/review/ReviewPage";
 import { RECALL_PATH } from "./lib/review";
 
@@ -233,6 +234,7 @@ export default function App() {
           <Route path="/toeic" element={<ToeicMenuPage />} />
           <Route path="/trial" element={<TrialHomePage />} />
           <Route path="/updates/introduce" element={<IntroducePage />} />
+          <Route path="/updates/redesign" element={<RedesignPage />} />
           <Route
             path="/trial/:trialId"
             element={<TrialRunPage pages={trialPages} />}
