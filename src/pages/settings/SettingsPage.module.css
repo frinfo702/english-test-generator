@@ -1,0 +1,374 @@
+/* Settings: sections open with an ink rule; each setting is a ruled row with
+ * its label hanging left. No hero, no boxes. */
+
+.page {
+  max-width: 820px;
+}
+
+.section {
+  margin-bottom: var(--spacing-12);
+  scroll-margin-top: calc(60px + var(--spacing-6));
+}
+
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--rule-ink);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-tighter);
+  color: var(--color-ink);
+}
+
+.lede {
+  padding: var(--spacing-4) 0;
+  font-size: var(--text-sm);
+  line-height: var(--lh-normal);
+  color: var(--color-ink-secondary);
+  border-bottom: var(--rule);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: var(--spacing-2) var(--spacing-6);
+  padding: var(--spacing-4) 0;
+  border-bottom: var(--rule);
+}
+
+.rowLabel {
+  padding-top: 6px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+.rowBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.hint {
+  font-size: var(--text-xs);
+  line-height: var(--lh-normal);
+  color: var(--color-ink-tertiary);
+}
+
+.hint a {
+  color: var(--color-accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.hint a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Mode */
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2) var(--spacing-6);
+}
+
+.choice {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-height: 30px;
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.choice input,
+.model input {
+  accent-color: var(--color-ink);
+}
+
+.disabled {
+  color: var(--color-ink-tertiary);
+  cursor: not-allowed;
+}
+
+/* Key */
+.inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.keyField {
+  position: relative;
+  display: flex;
+  flex: 1 1 240px;
+}
+
+.fill {
+  display: flex;
+  flex: 1 1 240px;
+}
+
+.input {
+  width: 100%;
+  height: 30px;
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.keyField .input {
+  padding-right: 56px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-ink);
+}
+
+.inputActive {
+  border-color: var(--color-ink);
+}
+
+.reveal {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-1);
+  transform: translateY(-50%);
+  padding: 2px 6px;
+  border: 0;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+  cursor: pointer;
+}
+
+.reveal:hover {
+  color: var(--color-ink);
+}
+
+.saved {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.savedKey {
+  margin-right: var(--spacing-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink);
+}
+
+.check {
+  min-height: 0;
+  font-size: var(--text-xs);
+  color: var(--color-success);
+}
+
+.check:empty {
+  display: none;
+}
+
+.checkError {
+  color: var(--color-error);
+}
+
+/* Models: ruled rows; the chosen one carries the ink bar on its left, the
+ * same register as a selected option on a question sheet. */
+.models {
+  display: flex;
+  flex-direction: column;
+  border-top: var(--rule);
+}
+
+.model {
+  display: grid;
+  grid-template-columns: auto 22px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) var(--spacing-3);
+  border-bottom: var(--rule);
+  box-shadow: inset 0 0 0 0 var(--color-ink);
+  cursor: pointer;
+  transition: box-shadow var(--duration-base) var(--ease-out);
+}
+
+.model:has(input:checked) {
+  box-shadow: inset 3px 0 0 0 var(--color-ink);
+}
+
+.model > svg {
+  justify-self: center;
+}
+
+.modelText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.modelName {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-ink);
+}
+
+.tag,
+.modelMeta {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+.tag {
+  color: var(--color-accent);
+}
+
+.modelMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-variant-numeric: tabular-nums;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.legal {
+  max-width: 72ch;
+  font-size: var(--text-2xs);
+  line-height: var(--lh-normal);
+  color: var(--color-ink-tertiary);
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rowLabel {
+    padding-top: 0;
+  }
+
+  .model {
+    grid-template-columns: auto 22px minmax(0, 1fr);
+  }
+
+  .modelMeta {
+    grid-column: 3;
+    flex-direction: row;
+    gap: var(--spacing-3);
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .model {
+    transition: none;
+  }
+}
+
+/* ---- Backup (moved from the dashboard) ---- */
+.backupActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.backupIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* PixelArt has no per-cell hooks, so arrow cells are picked by their fill
+   (the arrow colour in pixelIcons.ts) and row. Bands flash in turn so the
+   arrow reads as moving. */
+.exportIcon {
+  --arrow: #3ec46d;
+  --flash: #d4ffe0;
+}
+
+.importIcon {
+  --arrow: #55b3fb;
+  --flash: #e3f3ff;
+}
+
+@keyframes arrowChase {
+  0%,
+  24% {
+    fill: var(--flash);
+  }
+  25%,
+  100% {
+    fill: var(--arrow);
+  }
+}
+
+:is(.backupBtn:hover, .backupBtn:focus-visible)
+  :is(.exportIcon rect[fill="#3ec46d"], .importIcon rect[fill="#55b3fb"]) {
+  /* Longhands: the shorthand would reset the per-row delays below. */
+  animation-name: arrowChase;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.backupBtn .exportIcon :is(rect[y="6"], rect[y="7"]),
+.backupBtn .importIcon :is(rect[y="4"], rect[y="5"]) {
+  animation-delay: 0.125s;
+}
+
+.backupBtn .exportIcon :is(rect[y="4"], rect[y="5"]),
+.backupBtn .importIcon :is(rect[y="6"], rect[y="7"]) {
+  animation-delay: 0.25s;
+}
+
+.backupBtn .exportIcon :is(rect[y="1"], rect[y="2"], rect[y="3"]),
+.backupBtn .importIcon rect[y="8"] {
+  animation-delay: 0.375s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backupBtn rect {
+    animation: none !important;
+  }
+}
+
+.backupOption {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--text-xs);
+  color: var(--color-ink-secondary);
+}

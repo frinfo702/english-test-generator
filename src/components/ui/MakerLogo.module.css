@@ -1,0 +1,27 @@
+/* Colours are the makers' own: never tinted to match the app. */
+.logo {
+  flex-shrink: 0;
+  display: block;
+}
+
+.anthropic {
+  width: 18px;
+  height: 12.5px;
+  fill: #141413;
+}
+
+/* The Blossom's viewBox already carries its prescribed open space. */
+.openai {
+  width: 22px;
+  height: 22px;
+  margin: -4px -3px;
+  fill: #000;
+}
+
+:global([data-theme="dark"]) .anthropic {
+  fill: #faf9f5;
+}
+
+:global([data-theme="dark"]) .openai {
+  fill: #fff;
+}

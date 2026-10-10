@@ -17,37 +17,29 @@ export type ScoringMode = "auto" | "manual";
 export interface GatewayModel {
   id: string;
   name: string;
-  maker: string;
+  maker: "anthropic" | "openai";
   pitch: string;
   /** USD per million tokens, input / output, as listed on AI Gateway in Oct 2026. */
   price: [number, number];
 }
 
 /**
- * IDs checked against https://ai-gateway.vercel.sh/v1/models (Oct 2026).
- * "DeepSeek V4.1" ships on the gateway only as V4.1 Flash, and ChatGPT's
- * Luna as GPT-6 Luna.
+ * IDs checked against https://ai-gateway.vercel.sh/v1/models (Oct 2026);
+ * ChatGPT's Luna ships on the gateway as GPT-6 Luna.
  */
 export const RECOMMENDED_MODELS: GatewayModel[] = [
   {
-    id: "deepseek/deepseek-v4.1-flash",
-    name: "DeepSeek V4.1 Flash",
-    maker: "DeepSeek",
-    pitch: "Sharp reasoning on grammar and argument, with detailed rewrites.",
-    price: [0.3, 1.2],
+    id: "anthropic/claude-haiku-5.5",
+    name: "Claude Haiku 5.5",
+    maker: "anthropic",
+    pitch: "Warm, well-organized feedback that reads like a tutor's notes.",
+    price: [0.1, 0.5],
   },
   {
     id: "openai/gpt-6-luna",
     name: "GPT-6 Luna",
-    maker: "OpenAI · ChatGPT",
+    maker: "openai",
     pitch: "ChatGPT's efficient model: fast, steady rubric scores.",
-    price: [0.1, 0.5],
-  },
-  {
-    id: "anthropic/claude-haiku-5.5",
-    name: "Claude Haiku 5.5",
-    maker: "Anthropic",
-    pitch: "Warm, well-organized feedback that reads like a tutor's notes.",
     price: [0.1, 0.5],
   },
 ];

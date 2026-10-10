@@ -66,7 +66,7 @@ export function AiScorePanel<T = AiInterviewScores>({
         Apply AI score
       </Button>
       {error && <p className={styles.error}>{error}</p>}
-      <Link to="/settings/ai-scoring" className={styles.byok}>
+      <Link to="/settings" className={styles.byok}>
         <VercelMark size={10} />
         Skip the copy &amp; paste: score here with your own AI Gateway key
       </Link>

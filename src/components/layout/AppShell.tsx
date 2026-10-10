@@ -9,6 +9,7 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PixelArt } from "../pixel/PixelArt";
 import { POODLE_BODY, POODLE_PALETTE } from "../pixel/poodleSprite";
+import { Settings3LineIcon } from "../ui/SettingsIcon";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { LegacyHistoryNotice } from "./LegacyHistoryNotice";
 import { UpdateNotice } from "./UpdateNotice";
@@ -26,6 +27,7 @@ interface NavItem {
   to: string;
   label: string;
   shortcut?: string;
+  icon?: React.ReactNode;
   matches: (pathname: string) => boolean;
 }
 
@@ -67,8 +69,9 @@ const navItems: NavItem[] = [
     matches: (p) => p === "/dashboard",
   },
   {
-    to: "/settings/ai-scoring",
-    label: "AI scoring",
+    to: "/settings",
+    label: "Settings",
+    icon: <Settings3LineIcon size={15} aria-hidden="true" />,
     matches: (p) => p.startsWith("/settings"),
   },
 ];
@@ -166,6 +169,7 @@ export function AppShell({ children }: AppShellProps) {
                   ].join(" ")}
                   aria-current={active ? "page" : undefined}
                 >
+                  {item.icon}
                   {item.label}
                   {item.shortcut && (
                     <span className={styles.kbd} aria-hidden="true">

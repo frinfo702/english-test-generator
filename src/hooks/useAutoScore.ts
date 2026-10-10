@@ -58,7 +58,7 @@ export function useAutoScore<T>({
           apply(reply);
         } catch {
           throw new Error(
-            "The model replied without a score. Try again, or pick another model in AI scoring settings.",
+            "The model replied without a score. Try again, or pick another model in Settings.",
           );
         }
         setPhase("done");

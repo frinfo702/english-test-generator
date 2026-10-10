@@ -59,8 +59,8 @@ export function ScoringStatus({ auto }: { auto: AutoScore }) {
           >
             Copy &amp; paste instead
           </button>
-          <Link to="/settings/ai-scoring" className={styles.quiet}>
-            AI scoring settings
+          <Link to="/settings" className={styles.quiet}>
+            Settings
           </Link>
         </div>
       </div>
