@@ -77,9 +77,23 @@ it("keeps an unseen release bubble showing across navigation", () => {
   render(
     <MemoryRouter>
       <Link to="/elsewhere">elsewhere</Link>
+      <Link to="/">home</Link>
       <UpdateNotice />
     </MemoryRouter>,
   );
   fireEvent.click(screen.getByText("elsewhere"));
+  fireEvent.click(screen.getByText("home"));
   expect(screen.getByText("New")).toBeTruthy();
+});
+
+it("shows the hamster only on the top page", () => {
+  render(
+    <MemoryRouter initialEntries={["/toefl/reading/complete-words"]}>
+      <Link to="/">home</Link>
+      <UpdateNotice />
+    </MemoryRouter>,
+  );
+  expect(screen.queryByRole("complementary", { name: "Updates" })).toBeNull();
+  fireEvent.click(screen.getByText("home"));
+  expect(screen.getByRole("complementary", { name: "Updates" })).toBeTruthy();
 });
