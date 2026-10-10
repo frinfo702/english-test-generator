@@ -54,6 +54,7 @@ export function WritingScore({
           message={buildWritingTaskMessage(taskId, question, r.text ?? "")}
           parse={parseWritingScore}
           note={WRITING_SCORE_NOTE}
+          autoStart={!!r.text?.trim()}
           onApply={(ai) => onChange(withWritingAi(attempt, ai))}
         />
       )}

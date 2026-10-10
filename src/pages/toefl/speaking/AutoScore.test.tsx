@@ -130,6 +130,48 @@ describe("auto scoring with the user's AI Gateway key", () => {
     expect(screen.getAllByText("AI feedback")).toHaveLength(2);
   });
 
+  it("does not auto-score silent answers", async () => {
+    saveGatewayKey("vck_test");
+    const { gatewayCalls } = mockGateway();
+    render(
+      <MemoryRouter>
+        <InterviewResult
+          attempt={
+            {
+              ...interview,
+              responses: [
+                { prompt: "Q1?", transcript: "  ", assessment },
+                { prompt: "Q2?", transcript: "", assessment },
+              ],
+            } as Attempt
+          }
+          onChange={() => {}}
+        />
+        <WritingScore
+          taskId="toefl/writing/email"
+          question={{
+            scenario: { description: "d", recipient: "r", keyPoints: ["k"] },
+            modelAnswer: "m",
+            rubric: [],
+          }}
+          attempt={
+            {
+              id: "w1",
+              taskId: "toefl/writing/email",
+              date: "2026-10-10T00:00:00.000Z",
+              responses: [{ text: " \n " }],
+            } as unknown as Attempt
+          }
+          error={null}
+          onChange={() => {}}
+        />
+      </MemoryRouter>,
+    );
+    await new Promise((r) => setTimeout(r, 0));
+    expect(gatewayCalls()).toHaveLength(0);
+    expect(screen.queryByRole("status")).toBeNull();
+  });
+
   it("offers retry and copy & paste when scoring fails", async () => {
     saveGatewayKey("vck_test");
     const fetch = vi.fn(async (url: string) =>
