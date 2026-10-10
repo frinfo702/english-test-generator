@@ -16,12 +16,14 @@ import { useQuestion } from "../../../hooks/useQuestion";
 import {
   buildGradingMessage,
   buildProblemId,
+  buildWritingTaskMessage,
   clearDraft,
   copyText,
   loadDraft,
   saveDraft,
 } from "../../../lib/answerSubmission";
 import { autoScoring } from "../../../lib/aiGateway";
+import { scoreInBackground } from "../../../lib/backgroundScoring";
 import { putAttempts, saveAttempt, type Attempt } from "../../../lib/attempts";
 import { questionIdFromFile } from "../../../lib/questions";
 import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
@@ -30,6 +32,7 @@ import styles from "./WriteEmailPage.module.css";
 import task from "./WritingTask.module.css";
 import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
 import { WritingScore } from "./WritingScore";
+import { useAttemptUpdates } from "../../../hooks/useAutoScore";
 
 interface Scenario {
   title: string;
@@ -68,8 +71,11 @@ export function WriteEmailPage() {
   const [copied, setCopied] = useState(false);
   const trial = useTrialItem();
   const [saved, setSaved] = useState<Attempt | null>(null);
-  // A practice test scores in its report; the page only hides there.
-  const [auto] = useState(() => !trial && autoScoring() !== null);
+  // A finished score lands here whether or not this page is still open.
+  const [auto] = useState(() => autoScoring() !== null);
+  useAttemptUpdates((a) =>
+    setSaved((prev) => (prev && prev.id === a.id ? a : prev)),
+  );
 
   const problemId = file ? buildProblemId(TASK_ID, file) : null;
   const gradingMessage =
@@ -91,6 +97,16 @@ export function WriteEmailPage() {
       clearDraft(problemId);
       setAnswerId(attempt.id);
       setSaved(attempt);
+      // BYOK: score in the background so the user can move on; silent
+      // answers are not worth the spend.
+      if (data && userText.trim()) {
+        scoreInBackground({
+          attemptId: attempt.id,
+          index: 0,
+          kind: "writing",
+          message: buildWritingTaskMessage(TASK_ID, data, userText),
+        });
+      }
     } catch (e) {
       setSaveError(
         e instanceof Error ? e.message : "Failed to save your answer.",

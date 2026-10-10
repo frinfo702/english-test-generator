@@ -7,13 +7,17 @@ import { GATEWAY_URL, saveGatewayKey } from "../../lib/aiGateway";
 const question = {
   scenario: { description: "d", recipient: "r", keyPoints: ["k"] },
   modelAnswer: "m",
-  rubric: [],
+  rubric: [
+    { criterion: "Task completion", description: "Covers both points." },
+  ],
 };
 
-async function setup(state?: unknown) {
+type AttemptsModule = typeof import("../../lib/attempts");
+
+async function setup() {
   vi.stubGlobal("indexedDB", new IDBFactory());
   vi.resetModules();
-  const db = await import("../../lib/attempts");
+  const db: AttemptsModule = await import("../../lib/attempts");
   const email = await db.saveAttempt({
     taskId: "toefl/writing/email",
     problemId: "001",
@@ -37,17 +41,16 @@ async function setup(state?: unknown) {
       sectionStarts: {},
       finishedAt: "2026-10-10T00:00:00.000Z",
     },
-  } as Parameters<typeof db.saveAttempt>[0]);
+  } as Parameters<AttemptsModule["saveAttempt"]>[0]);
   const { TrialReportPage } = await import("./TrialReportPage");
   render(
-    <MemoryRouter
-      initialEntries={[{ pathname: `/trial/${trial.id}/report`, state }]}
-    >
+    <MemoryRouter initialEntries={[`/trial/${trial.id}/report`]}>
       <Routes>
         <Route path="/trial/:trialId/report" element={<TrialReportPage />} />
       </Routes>
     </MemoryRouter>,
   );
+  return { db, email };
 }
 
 const gatewayCalls = () =>
@@ -61,7 +64,7 @@ describe("TrialReportPage with an AI Gateway key", () => {
     vi.stubGlobal(
       "fetch",
       vi.fn((url: string) =>
-        url.startsWith(GATEWAY_URL)
+        String(url).startsWith(GATEWAY_URL)
           ? new Promise<Response>(() => {})
           : Promise.resolve(new Response(JSON.stringify(question))),
       ),
@@ -74,20 +77,52 @@ describe("TrialReportPage with an AI Gateway key", () => {
     vi.unstubAllGlobals();
   });
 
-  it("scores in the report right after the test is finished", async () => {
-    await setup({ justAnswered: true });
-    expect(await screen.findByText("Awaiting AI score")).toBeTruthy();
-    await vi.waitFor(() => expect(gatewayCalls()).toHaveLength(1));
+  it("shows a background score landing while the report is open", async () => {
+    const pending: ((r: Response) => void)[] = [];
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((url: string) =>
+        String(url).startsWith(GATEWAY_URL)
+          ? new Promise<Response>((resolve) => pending.push(resolve))
+          : Promise.resolve(new Response(JSON.stringify(question))),
+      ),
+    );
+    const { db, email } = await setup();
+    const bg = await import("../../lib/backgroundScoring");
+    bg.scoreInBackground({
+      attemptId: email.id,
+      index: 0,
+      kind: "writing",
+      message: "PROMPT",
+    });
+
+    expect((await screen.findAllByText("Scoring…")).length).toBeGreaterThan(0);
+    pending[0](
+      new Response(
+        JSON.stringify({
+          choices: [
+            {
+              message: {
+                content:
+                  'Good.\n```toefl-score\n{"criteria":[{"points":4,"note":"Clear."}],"score":4}\n```',
+              },
+            },
+          ],
+        }),
+      ),
+    );
+
+    expect(await screen.findByText("Clear.")).toBeTruthy();
+    expect(await db.getAttempt(email.id)).toMatchObject({
+      responses: [{ itemScore: 4 }],
+    });
   });
 
-  it("keeps the gate and waits for a click when opened later", async () => {
+  it("shows a past unscored answer as Not scored without spending credits", async () => {
     await setup();
-    expect(
-      await screen.findByText("Score your Writing and Speaking"),
-    ).toBeTruthy();
-    expect(
-      await screen.findByRole("button", { name: /^Score with/ }),
-    ).toBeTruthy();
+    expect((await screen.findAllByText("Not scored")).length).toBeGreaterThan(
+      0,
+    );
     await new Promise((r) => setTimeout(r, 0));
     expect(gatewayCalls()).toHaveLength(0);
   });

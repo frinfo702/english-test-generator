@@ -17,13 +17,21 @@ import { useQuestion } from "../../../hooks/useQuestion";
 import { useSpeechRecognition } from "../../../hooks/useSpeechRecognition";
 import { useSingleAudio } from "../../../hooks/useSingleAudio";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
-import { buildProblemId, clearDraft } from "../../../lib/answerSubmission";
 import {
-  putAttempts,
+  buildInterviewQaCopyMessage,
+  buildProblemId,
+  clearDraft,
+} from "../../../lib/answerSubmission";
+import { autoScoring } from "../../../lib/aiGateway";
+import {
   rubricScore,
   type Attempt,
   type ItemResponse,
 } from "../../../lib/attempts";
+import {
+  updateAttempt,
+  scoreInBackground,
+} from "../../../lib/backgroundScoring";
 import { interviewItemScore } from "../../../lib/interviewScoring";
 import { assessSpontaneousSpeech } from "../../../lib/pronunciationStream";
 import { toWav16k } from "../../../lib/wav";
@@ -40,6 +48,7 @@ import {
   interviewScenarioAudioUrl,
   isScenarioStep,
   phasePrompt,
+  INTERVIEW_TYPE_LABELS,
 } from "./interviewTypes";
 import styles from "./TakeInterviewPage.module.css";
 
@@ -126,7 +135,9 @@ export function TakeInterviewPage() {
 
   /**
    * One attempt per set, rewritten after every change, so a set abandoned
-   * halfway still keeps the answers already given.
+   * halfway still keeps the answers already given. Writes go through the
+   * scoring module's per-attempt queue: a background AI score landing
+   * mid-answer then merges instead of being overwritten.
    */
   const persist = useCallback(
     async (index: number, patch: Partial<ItemResponse>) => {
@@ -142,16 +153,23 @@ export function TakeInterviewPage() {
           prompt: question.question,
         })),
       });
-      const merged = { ...attempt.responses[index], ...patch };
-      // Content is the part a transcript can't fake; without the AI half the
-      // item stays unscored rather than scored on delivery alone.
-      merged.itemScore = merged.ai
-        ? interviewItemScore(merged.ai.scores, merged.assessment ?? null)?.total
-        : undefined;
-      attempt.responses[index] = merged;
-      attempt.score = rubricScore(attempt.responses);
       try {
-        await putAttempts([attempt]);
+        await updateAttempt(attempt.id, (stored) => {
+          const base = stored ?? attempt;
+          const merged = { ...base.responses[index], ...patch };
+          // Content is the part a transcript can't fake; without the AI half
+          // the item stays unscored rather than scored on delivery alone.
+          merged.itemScore = merged.ai
+            ? interviewItemScore(merged.ai.scores, merged.assessment ?? null)
+                ?.total
+            : undefined;
+          const responses = base.responses.map((r, i) =>
+            i === index ? merged : r,
+          );
+          const next = { ...base, responses, score: rubricScore(responses) };
+          attemptRef.current = next;
+          return next;
+        });
       } catch (e) {
         setSaveError(
           e instanceof Error ? e.message : "Failed to save your answer.",
@@ -197,13 +215,31 @@ export function TakeInterviewPage() {
       });
       setSavingAnswer(false);
       if (problemId) clearDraft(problemId);
+      // BYOK: score this answer now, so it finishes while the next question
+      // plays; copy & paste mode does nothing here.
+      const question = data?.questions[index];
+      const attempt = attemptRef.current;
+      if (attempt && question && finalText && autoScoring() !== null) {
+        scoreInBackground({
+          attemptId: attempt.id,
+          index,
+          kind: "interview",
+          message: buildInterviewQaCopyMessage({
+            question: question.question,
+            userAnswer: finalText,
+            modelAnswer: question.modelAnswer,
+            evaluationPoints: question.evaluationPoints,
+            questionType: INTERVIEW_TYPE_LABELS[question.type] ?? question.type,
+          }),
+        });
+      }
     } catch {
       setPhase("recorded");
       setSaveError("Failed to process your recording.");
     } finally {
       submittingRef.current = false;
     }
-  }, [audio, speech, current, persist, problemId]);
+  }, [audio, speech, current, persist, problemId, data]);
 
   const timer = useTimer(ANSWER_SECONDS, () => {
     void finishAnswer();
@@ -314,8 +350,7 @@ export function TakeInterviewPage() {
     }
     await settled;
     const attempt = attemptRef.current;
-    if (attempt)
-      navigate(`/results/${attempt.id}`, { state: { justAnswered: true } });
+    if (attempt) navigate(`/results/${attempt.id}`);
     else goToQuestionList();
   };
 

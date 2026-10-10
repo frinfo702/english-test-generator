@@ -52,6 +52,36 @@ export function parseWritingScore(reply: string): number {
   return score;
 }
 
+export interface CriterionScore {
+  points: number;
+  note: string;
+}
+
+/**
+ * Per-criterion ratings from a Writing reply's score block, in rubric order.
+ * Empty when the reply has none (older replies, or a model that skipped them).
+ */
+export function parseWritingCriteria(reply: string): CriterionScore[] {
+  const blocks = [
+    ...reply.matchAll(
+      new RegExp("```" + AI_SCORE_FENCE + "([\\s\\S]*?)```", "g"),
+    ),
+  ];
+  const body = blocks.at(-1)?.[1];
+  if (!body) return [];
+  try {
+    const parsed = JSON.parse(body) as { criteria?: unknown };
+    if (!Array.isArray(parsed.criteria)) return [];
+    return parsed.criteria.flatMap((c: { points?: unknown; note?: unknown }) =>
+      typeof c?.points === "number" && c.points >= 0 && c.points <= 5
+        ? [{ points: c.points, note: typeof c.note === "string" ? c.note : "" }]
+        : [],
+    );
+  } catch {
+    return [];
+  }
+}
+
 export function withInterviewAi(
   attempt: Attempt,
   index: number,

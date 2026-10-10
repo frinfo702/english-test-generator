@@ -1,40 +1,37 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../../components/ui/Button";
 import { ThinkingOrb } from "../../../components/ui/ThinkingOrb";
 import { VercelMark } from "../../../components/ui/VercelMark";
-import { useAutoScore, type AutoScore } from "../../../hooks/useAutoScore";
-import { modelName } from "../../../lib/aiGateway";
+import { useScoringJob } from "../../../hooks/useAutoScore";
+import {
+  autoScoring,
+  loadScoringSettings,
+  modelName,
+} from "../../../lib/aiGateway";
+import { retryScoring, type ScoringJob } from "../../../lib/backgroundScoring";
 import { AiScorePanel } from "./AiScorePanel";
 import styles from "./AutoScore.module.css";
 
 /**
- * Where the copy & paste panel would sit: the waiting orb, or an error with
- * retry and a way back to copy & paste. Renders nothing once scored.
+ * Where the copy & paste panel would sit while a background score runs: the
+ * waiting orb, or an error with retry and a way back to copy & paste.
  */
-export function ScoringStatus({ auto }: { auto: AutoScore }) {
-  const model = auto.model ? modelName(auto.model) : "";
-  if (auto.phase === "ready") {
-    return (
-      <div className={styles.status}>
-        <Button size="sm" onClick={auto.start}>
-          Score with {model}
-        </Button>
-        <button
-          type="button"
-          className={styles.quiet}
-          onClick={auto.switchToManual}
-        >
-          Copy &amp; paste instead
-        </button>
-      </div>
-    );
-  }
-  if (auto.phase === "scoring") {
+export function ScoringStatus({
+  job,
+  onRetry,
+  onManual,
+}: {
+  job: ScoringJob;
+  onRetry: () => void;
+  onManual: () => void;
+}) {
+  if (job.status === "scoring") {
     return (
       <div className={styles.status} role="status">
         <ThinkingOrb />
         <span className={styles.label}>
-          Scoring with {model}
+          Scoring with {modelName(loadScoringSettings().model)}
           <span className={styles.via}>
             <VercelMark size={9} /> AI Gateway
           </span>
@@ -42,45 +39,38 @@ export function ScoringStatus({ auto }: { auto: AutoScore }) {
       </div>
     );
   }
-  if (auto.phase === "error") {
-    return (
-      <div className={styles.failed}>
-        <p className={styles.error} role="alert">
-          {auto.error}
-        </p>
-        <div className={styles.status}>
-          <Button size="sm" variant="secondary" onClick={auto.start}>
-            Try again
-          </Button>
-          <button
-            type="button"
-            className={styles.quiet}
-            onClick={auto.switchToManual}
-          >
-            Copy &amp; paste instead
-          </button>
-          <Link to="/settings" className={styles.quiet}>
-            Settings
-          </Link>
-        </div>
+  return (
+    <div className={styles.failed}>
+      <p className={styles.error} role="alert">
+        {job.message}
+      </p>
+      <div className={styles.status}>
+        <Button size="sm" variant="secondary" onClick={onRetry}>
+          Try again
+        </Button>
+        <button type="button" className={styles.quiet} onClick={onManual}>
+          Copy &amp; paste instead
+        </button>
+        <Link to="/settings" className={styles.quiet}>
+          Settings
+        </Link>
       </div>
-    );
-  }
-  return null;
+    </div>
+  );
 }
 
 /** A facet the AI hasn't scored yet, in the slot its bar will take. */
 export function PendingFacet({
   label,
-  auto,
+  job,
 }: {
   label: string;
-  auto: AutoScore;
+  job: ScoringJob;
 }) {
   return (
     <div className={styles.facet}>
       <span className={styles.facetLabel}>{label}</span>
-      {auto.phase === "scoring" ? (
+      {job.status === "scoring" ? (
         <>
           <ThinkingOrb />
           <span className={styles.facetNote}>Scoring</span>
@@ -92,30 +82,46 @@ export function PendingFacet({
   );
 }
 
-/** Auto-scores with the user's key when set up; otherwise copy & paste. */
+/**
+ * The AI score slot for one unscored response. With the user's key, scoring
+ * started when the answer was finished, so this only shows its progress; an
+ * old answer nobody is scoring just reads "Not scored". Without a key, it is
+ * today's copy & paste panel.
+ */
 export function AiScore<T>({
+  attemptId,
+  index,
   message,
   parse,
   note,
   onApply,
-  autoStart,
 }: {
+  attemptId: string;
+  index: number;
   message: string;
   parse: (reply: string) => T;
   note?: string;
   onApply: (ai: { reply: string; scores: T }) => void;
-  autoStart?: boolean;
 }) {
-  const auto = useAutoScore({ message, parse, onApply, autoStart });
-  if (auto.phase === "off" || auto.phase === "manual") {
+  const job = useScoringJob(attemptId, index);
+  const [auto] = useState(() => autoScoring() !== null);
+  const [manual, setManual] = useState(false);
+  if (job && !manual) {
     return (
-      <AiScorePanel
-        message={message}
-        parse={parse}
-        note={note}
-        onApply={onApply}
+      <ScoringStatus
+        job={job}
+        onRetry={() => retryScoring(attemptId, index)}
+        onManual={() => setManual(true)}
       />
     );
   }
-  return <ScoringStatus auto={auto} />;
+  if (auto && !manual) return <p className={styles.unscored}>Not scored</p>;
+  return (
+    <AiScorePanel
+      message={message}
+      parse={parse}
+      note={note}
+      onApply={onApply}
+    />
+  );
 }

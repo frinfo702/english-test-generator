@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
-import { useJustAnswered } from "../../hooks/useAutoScore";
+import { useAttemptUpdates } from "../../hooks/useAutoScore";
 import { getAttempt, putAttempts, type Attempt } from "../../lib/attempts";
 import {
   InterviewResult,
@@ -17,7 +17,10 @@ export function ResultPage() {
   } | null>(null);
   const attempt = loaded?.id === attemptId ? loaded.attempt : undefined;
   const [saveError, setSaveError] = useState<string | null>(null);
-  const justAnswered = useJustAnswered();
+  // A score finishing in the background lands here while the page is open.
+  useAttemptUpdates((a) => {
+    if (a.id === attemptId) setLoaded({ id: a.id, attempt: a });
+  });
 
   useEffect(() => {
     let cancelled = false;
@@ -49,11 +52,7 @@ export function ResultPage() {
       {attempt.taskId === "toefl/speaking/listen-repeat" ? (
         <ListenRepeatResult attempt={attempt} />
       ) : attempt.taskId === "toefl/speaking/interview" ? (
-        <InterviewResult
-          attempt={attempt}
-          onChange={update}
-          autoScore={justAnswered}
-        />
+        <InterviewResult attempt={attempt} onChange={update} />
       ) : (
         <p>This task has no result page yet.</p>
       )}

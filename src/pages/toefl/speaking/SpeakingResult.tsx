@@ -11,7 +11,7 @@ import type { TaskId } from "../../../hooks/useScoreHistory";
 import { buildInterviewQaCopyMessage } from "../../../lib/answerSubmission";
 import type { Attempt, ItemResponse } from "../../../lib/attempts";
 import { ThinkingOrb } from "../../../components/ui/ThinkingOrb";
-import { useAttemptUpdater, useAutoScore } from "../../../hooks/useAutoScore";
+import { useAttemptUpdater, useScoringJob } from "../../../hooks/useAutoScore";
 import {
   interviewItemScore,
   parseAiScores,
@@ -21,8 +21,7 @@ import {
 } from "../../../lib/interviewScoring";
 import { spokenWords } from "../../../lib/pronunciation";
 import { computeSpeedMetrics, speedScore } from "../../../lib/speakingRate";
-import { AiScorePanel } from "./AiScorePanel";
-import { PendingFacet, ScoringStatus } from "./AutoScore";
+import { AiScore, PendingFacet } from "./AutoScore";
 import {
   INTERVIEW_TYPE_LABELS,
   interviewAudioUrl,
@@ -415,14 +414,12 @@ function InterviewItem({
   index: i,
   audio,
   url,
-  autoScore,
   onApply,
 }: {
   attempt: Attempt;
   index: number;
   audio: Audio;
   url: string | null;
-  autoScore: boolean;
   onApply: (ai: { reply: string; scores: AiInterviewScores }) => void;
 }) {
   const r = attempt.responses[i];
@@ -435,15 +432,9 @@ function InterviewItem({
     questionType: q ? (INTERVIEW_TYPE_LABELS[q.type] ?? q.type) : undefined,
   });
   const canScore = !r.ai && r.transcript !== undefined;
-  const auto = useAutoScore({
-    message,
-    parse: parseAiScores,
-    onApply,
-    // Nothing was heard: no point paying to score silence.
-    autoStart: autoScore && canScore && r.transcript!.trim() !== "",
-  });
-  const waiting =
-    canScore && (auto.phase === "scoring" || auto.phase === "error");
+  // Started in the background when the answer was finished.
+  const job = useScoringJob(attempt.id, i);
+  const waiting = canScore ? job : undefined;
   const breakdown = interviewItemScore(
     r.ai?.scores ?? null,
     r.assessment ?? null,
@@ -453,7 +444,7 @@ function InterviewItem({
       index={i}
       score={r.itemScore}
       partial={r.itemScore !== undefined && !r.assessment}
-      scoring={canScore && auto.phase === "scoring"}
+      scoring={waiting?.status === "scoring"}
       prompt={r.prompt ?? q?.question ?? ""}
       response={r.transcript ?? ""}
       controls={
@@ -480,8 +471,8 @@ function InterviewItem({
         <>
           {waiting && (
             <>
-              <PendingFacet label="Language use" auto={auto} />
-              <PendingFacet label="Organization" auto={auto} />
+              <PendingFacet label="Language use" job={waiting} />
+              <PendingFacet label="Organization" job={waiting} />
             </>
           )}
           {(
@@ -513,12 +504,15 @@ function InterviewItem({
               <p>{stripScoreBlock(r.ai.reply)}</p>
             </div>
           ) : (
-            canScore &&
-            (auto.phase === "off" || auto.phase === "manual" ? (
-              <AiScorePanel message={message} onApply={onApply} />
-            ) : (
-              <ScoringStatus auto={auto} />
-            ))
+            canScore && (
+              <AiScore
+                attemptId={attempt.id}
+                index={i}
+                message={message}
+                parse={parseAiScores}
+                onApply={onApply}
+              />
+            )
           )}
           {q && (
             <div className={styles.sample}>
@@ -543,12 +537,9 @@ function InterviewItem({
 export function InterviewResult({
   attempt,
   onChange,
-  autoScore,
 }: {
   attempt: Attempt;
   onChange: (next: Attempt) => void;
-  /** Only right after answering; reopening a past result waits for a click. */
-  autoScore: boolean;
 }) {
   const audio = useSingleAudio();
   const urls = useResponseUrls(attempt.responses);
@@ -590,7 +581,6 @@ export function InterviewResult({
             index={i}
             audio={audio}
             url={urls[i] ?? null}
-            autoScore={autoScore}
             onApply={(ai) => update((a) => withInterviewAi(a, i, ai))}
           />
         ))}

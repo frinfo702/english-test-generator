@@ -76,3 +76,8 @@
   text-transform: uppercase;
   color: var(--color-ink-tertiary);
 }
+
+.unscored {
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+}

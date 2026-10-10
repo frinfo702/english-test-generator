@@ -23,6 +23,7 @@ import type { CompleteWordsItem } from "../toefl/reading/completeWords";
 import type { DailyLifeData } from "../toefl/reading/dailyLife";
 import { DailyLifeTextView } from "../toefl/reading/DailyLifeTextView";
 import { isCorrectOrder } from "../toefl/writing/buildSentence";
+import { WritingCriteria } from "../toefl/writing/WritingScore";
 import { AiScore } from "../toefl/speaking/AutoScore";
 import {
   INTERVIEW_TYPE_LABELS,
@@ -147,22 +148,19 @@ function Source({ label, text }: { label: string; text?: string }) {
 }
 
 /**
- * AI scoring for whatever in this attempt is still unscored: automatic with
- * the user's AI Gateway key, otherwise copy and paste.
+ * AI scoring for whatever in this attempt is still unscored: the progress of
+ * background scoring with the user's key, otherwise copy and paste.
  */
 export function AiScoring({
   taskId,
   attempt,
   question,
   onChange,
-  autoScore,
 }: {
   taskId: TaskId;
   attempt: Attempt;
   question: unknown;
   onChange: (next: Attempt) => void;
-  /** False waits for a click instead of spending the user's credits. */
-  autoScore: boolean;
 }) {
   const update = useAttemptUpdater(attempt, onChange);
   const pending = pendingAiResponses(attempt);
@@ -181,6 +179,8 @@ export function AiScoring({
             <div key={i} className={styles.scoreItem}>
               <p className="micro-label">Interview question {i + 1}</p>
               <AiScore
+                attemptId={attempt.id}
+                index={i}
                 message={buildInterviewQaCopyMessage({
                   question: q.question,
                   userAnswer: attempt.responses[i].transcript ?? "",
@@ -189,7 +189,6 @@ export function AiScoring({
                   questionType: INTERVIEW_TYPE_LABELS[q.type] ?? q.type,
                 })}
                 parse={parseAiScores}
-                autoStart={autoScore}
                 onApply={(ai) => update((a) => withInterviewAi(a, i, ai))}
               />
             </div>
@@ -204,6 +203,8 @@ export function AiScoring({
   return (
     <div className={styles.scoreItem}>
       <AiScore
+        attemptId={attempt.id}
+        index={0}
         message={buildWritingTaskMessage(
           taskId,
           question,
@@ -211,7 +212,6 @@ export function AiScoring({
         )}
         parse={parseWritingScore}
         note={WRITING_SCORE_NOTE}
-        autoStart={autoScore}
         onApply={(ai) => update((a) => withWritingAi(a, ai))}
       />
     </div>
@@ -224,13 +224,11 @@ export function ItemReview({
   attempt,
   question,
   onChange,
-  autoScore,
 }: {
   taskId: TaskId;
   attempt: Attempt | undefined;
   question: unknown;
   onChange: (next: Attempt) => void;
-  autoScore: boolean;
 }) {
   if (question === undefined) return <p className={styles.note}>Loading…</p>;
   // null: the file failed to load, e.g. a question removed from the pool
@@ -428,6 +426,11 @@ export function ItemReview({
             <section>
               <h4 className={styles.reviewHeading}>AI feedback</h4>
               <p className={styles.prose}>{stripScoreBlock(r.aiReply)}</p>
+              <WritingCriteria
+                taskId={taskId}
+                question={question}
+                reply={r.aiReply}
+              />
             </section>
           )}
           {attempt && (
@@ -436,7 +439,6 @@ export function ItemReview({
               attempt={attempt}
               question={question}
               onChange={onChange}
-              autoScore={autoScore}
             />
           )}
           <Source label="Model answer" text={d.modelAnswer} />
@@ -480,7 +482,6 @@ export function ItemReview({
               attempt={attempt}
               question={question}
               onChange={onChange}
-              autoScore={autoScore}
             />
           )}
           {attempt ? (

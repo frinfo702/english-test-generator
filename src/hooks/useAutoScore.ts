@@ -3,90 +3,39 @@ import {
   useEffectEvent,
   useLayoutEffect,
   useRef,
-  useState,
+  useSyncExternalStore,
 } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { autoScoring, scoreWithGateway } from "../lib/aiGateway";
 import type { Attempt } from "../lib/attempts";
+import {
+  getJobs,
+  jobFor,
+  subscribeAttempts,
+  subscribeJobs,
+  type ScoringJob,
+} from "../lib/backgroundScoring";
 
-/**
- * off: no key or manual mode, so the copy & paste panel shows as before.
- * ready: a key is set but this surface waits for a click (see autoStart).
- * manual: the user chose copy & paste for this item after an error.
- */
-export type AutoScorePhase =
-  "off" | "ready" | "scoring" | "done" | "error" | "manual";
+/** Every background scoring job, live. */
+export function useScoringJobs() {
+  return useSyncExternalStore(subscribeJobs, getJobs);
+}
 
-export interface AutoScore {
-  phase: AutoScorePhase;
-  error: string | null;
-  model: string | null;
-  start: () => void;
-  switchToManual: () => void;
+/** The background job for one response, if one is running or failed. */
+export function useScoringJob(
+  attemptId: string,
+  index: number,
+): ScoringJob | undefined {
+  return jobFor(useScoringJobs(), attemptId, index);
+}
+
+/** Calls back with each attempt a background score saves. */
+export function useAttemptUpdates(listener: (attempt: Attempt) => void) {
+  const onUpdate = useEffectEvent(listener);
+  useEffect(() => subscribeAttempts((a) => onUpdate(a)), []);
 }
 
 /**
- * Scores one response through AI Gateway with the same prompt and parser the
- * copy & paste panel uses, so both paths store the same shape.
- */
-export function useAutoScore<T>({
-  message,
-  parse,
-  onApply,
-  autoStart = true,
-}: {
-  message: string;
-  parse: (reply: string) => T;
-  onApply: (ai: { reply: string; scores: T }) => void;
-  /** False where many unscored items render at once and each call costs money. */
-  autoStart?: boolean;
-}): AutoScore {
-  const [config] = useState(autoScoring);
-  const [phase, setPhase] = useState<AutoScorePhase>(
-    !config ? "off" : autoStart ? "scoring" : "ready",
-  );
-  const [error, setError] = useState<string | null>(null);
-  const apply = useEffectEvent((reply: string) => {
-    onApply({ reply, scores: parse(reply) });
-  });
-
-  useEffect(() => {
-    if (phase !== "scoring" || !config) return;
-    const controller = new AbortController();
-    scoreWithGateway(message, config, controller.signal)
-      .then((reply) => {
-        try {
-          apply(reply);
-        } catch {
-          throw new Error(
-            "The model replied without a score. Try again, or pick another model in Settings.",
-          );
-        }
-        setPhase("done");
-      })
-      .catch((e: unknown) => {
-        if (controller.signal.aborted) return;
-        setError(e instanceof Error ? e.message : String(e));
-        setPhase("error");
-      });
-    return () => controller.abort();
-  }, [phase, config, message]);
-
-  return {
-    phase,
-    error,
-    model: config?.model ?? null,
-    start: () => {
-      setError(null);
-      setPhase("scoring");
-    },
-    switchToManual: () => setPhase("manual"),
-  };
-}
-
-/**
- * Several items of one attempt can finish scoring before the parent
- * re-renders; chaining each update onto the latest result keeps them all.
+ * Several items of one attempt can be scored before the parent re-renders;
+ * chaining each update onto the latest result keeps them all.
  */
 export function useAttemptUpdater(
   attempt: Attempt,
@@ -100,24 +49,4 @@ export function useAttemptUpdater(
     latest.current = update(latest.current);
     onChange(latest.current);
   };
-}
-
-/**
- * True only on the visit that follows answering, so merely reopening a result
- * later (or reloading it) never spends the user's credits.
- */
-export function useJustAnswered(): boolean {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [justAnswered] = useState(
-    () =>
-      (location.state as { justAnswered?: boolean } | null)?.justAnswered ===
-      true,
-  );
-  useEffect(() => {
-    if (justAnswered)
-      navigate(location.pathname, { replace: true, state: null });
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on arrival
-  }, []);
-  return justAnswered;
 }

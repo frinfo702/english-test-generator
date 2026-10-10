@@ -6,19 +6,14 @@ import { GATEWAY_URL, saveGatewayKey } from "../../lib/aiGateway";
 
 type AttemptsModule = typeof import("../../lib/attempts");
 
-async function setup(
-  attempt: Parameters<AttemptsModule["saveAttempt"]>[0],
-  state?: unknown,
-) {
+async function setup(attempt: Parameters<AttemptsModule["saveAttempt"]>[0]) {
   vi.stubGlobal("indexedDB", new IDBFactory());
   vi.resetModules();
   const db: AttemptsModule = await import("../../lib/attempts");
   const saved = await db.saveAttempt(attempt);
   const { ResultPage } = await import("./ResultPage");
   render(
-    <MemoryRouter
-      initialEntries={[{ pathname: `/results/${saved.id}`, state }]}
-    >
+    <MemoryRouter initialEntries={[`/results/${saved.id}`]}>
       <Routes>
         <Route path="/results/:attemptId" element={<ResultPage />} />
       </Routes>
@@ -141,22 +136,60 @@ describe("ResultPage", () => {
     beforeEach(() => saveGatewayKey("vck_test"));
     afterEach(() => localStorage.clear());
 
-    it("auto-scores an interview right after it was answered", async () => {
-      await setup(interview, { justAnswered: true });
-      expect(await screen.findAllByText("Scoring")).not.toHaveLength(0);
-      await vi.waitFor(() => expect(gatewayCalls()).toHaveLength(1));
+    it("fills a background score in while the result is open", async () => {
+      const pending: ((r: Response) => void)[] = [];
+      vi.stubGlobal(
+        "fetch",
+        vi.fn((url: string) =>
+          String(url).startsWith(GATEWAY_URL)
+            ? new Promise<Response>((resolve) => pending.push(resolve))
+            : Promise.resolve(new Response(JSON.stringify({ files: [] }))),
+        ),
+      );
+      const { db, saved } = await setup(interview);
+      const bg = await import("../../lib/backgroundScoring");
+      bg.scoreInBackground({
+        attemptId: saved.id,
+        index: 0,
+        kind: "interview",
+        message: "PROMPT",
+      });
+
+      expect((await screen.findAllByText("Scoring")).length).toBeGreaterThan(0);
+      expect(gatewayCalls()).toHaveLength(1);
+
+      pending[0](
+        new Response(
+          JSON.stringify({
+            choices: [
+              {
+                message: {
+                  content:
+                    'Good.\n```toefl-score\n{"languageUse": 3, "organization": 4}\n```',
+                },
+              },
+            ],
+          }),
+        ),
+      );
+
+      expect(
+        await screen.findByText("· partial", { exact: false }),
+      ).toBeTruthy();
+      await vi.waitFor(async () => {
+        const stored = await db.getAttempt(saved.id);
+        expect(stored?.responses[0].itemScore).toBe(4);
+      });
     });
 
-    it("waits for a click when a past interview is opened later", async () => {
+    it("shows a past unscored answer as Not scored without calling the gateway", async () => {
       await setup(interview);
-      const button = await screen.findByRole("button", {
-        name: /^Score with/,
-      });
+      expect((await screen.findAllByText("Not scored")).length).toBeGreaterThan(
+        0,
+      );
+      expect(screen.queryByRole("button", { name: /^Score with/ })).toBeNull();
       await new Promise((r) => setTimeout(r, 0));
       expect(gatewayCalls()).toHaveLength(0);
-
-      fireEvent.click(button);
-      await vi.waitFor(() => expect(gatewayCalls()).toHaveLength(1));
     });
   });
 });

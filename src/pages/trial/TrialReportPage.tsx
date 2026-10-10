@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
-import { useJustAnswered } from "../../hooks/useAutoScore";
+import { useAttemptUpdates, useScoringJobs } from "../../hooks/useAutoScore";
 import { autoScoring } from "../../lib/aiGateway";
+import { isScoring } from "../../lib/backgroundScoring";
 import { getAllAttempts, putAttempts, type Attempt } from "../../lib/attempts";
 import { fetchQuestionByIdWithMeta } from "../../lib/questions";
 import {
@@ -27,16 +28,18 @@ export function TrialReportPage() {
   const { trialId = "" } = useParams<{ trialId: string }>();
   const [attempts, setAttempts] = useState<Attempt[] | null>(null);
   const [questions, setQuestions] = useState<Map<string, unknown>>(new Map());
-  const justAnswered = useJustAnswered();
-  // Right after the test, the user's key scores inside the report instead of a gate.
-  const [scoreLater, setScoreLater] = useState(
-    () => justAnswered && autoScoring() !== null,
-  );
+  // With the user's key, answers were scored as they were finished, so the
+  // report never waits on a copy & paste gate.
+  const [scoreLater, setScoreLater] = useState(() => autoScoring() !== null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     getAllAttempts().then(setAttempts, () => setAttempts([]));
   }, []);
+  // Background scores still in flight from the test land here.
+  useAttemptUpdates((next) =>
+    setAttempts((all) => all && all.map((a) => (a.id === next.id ? next : a))),
+  );
 
   const trials = (attempts ?? []).filter(isTrial);
   const trial = trials.find((t) => t.id === trialId);
@@ -116,7 +119,6 @@ export function TrialReportPage() {
                   attempt={linked(i)!}
                   question={questions.get(questionKey(i))}
                   onChange={update}
-                  autoScore={justAnswered}
                 />
               ) : (
                 <p className={styles.note}>Loading…</p>
@@ -156,7 +158,6 @@ export function TrialReportPage() {
           linked={linked}
           questions={questions}
           onChange={update}
-          autoScore={justAnswered}
         />
       ))}
 
@@ -177,7 +178,6 @@ function SectionReview({
   linked,
   questions,
   onChange,
-  autoScore,
 }: {
   section: SectionKey;
   title: string;
@@ -186,18 +186,14 @@ function SectionReview({
   linked: (i: TrialItem) => Attempt | undefined;
   questions: Map<string, unknown>;
   onChange: (next: Attempt) => void;
-  autoScore: boolean;
 }) {
-  const [auto] = useState(() => autoScore && autoScoring() !== null);
-  // While the user's key scores them, waiting items open once to show it.
-  const [openAtFirst] = useState(
-    () =>
-      new Set(
-        auto
-          ? items.filter((i) => pendingAiResponses(linked(i)).length > 0)
-          : [],
-      ),
-  );
+  const jobs = useScoringJobs();
+  const scoring = (i: TrialItem) => {
+    const attempt = linked(i);
+    return !!attempt && isScoring(jobs, attempt.id);
+  };
+  // Items still being scored open once, so their progress shows in place.
+  const [openAtFirst] = useState(() => new Set(items.filter(scoring)));
   return (
     <section className={styles.sectionReview} aria-label={section}>
       <div className={styles.columnHead}>
@@ -224,11 +220,11 @@ function SectionReview({
                   <span className={styles.itemScore}>
                     {!attempt
                       ? "Not answered"
-                      : unscored
-                        ? auto
-                          ? "Awaiting AI score"
-                          : "Not scored"
-                        : `${attempt.score?.correct ?? 0} / ${i.maxPoints}`}
+                      : scoring(i)
+                        ? "Scoring…"
+                        : unscored
+                          ? "Not scored"
+                          : `${attempt.score?.correct ?? 0} / ${i.maxPoints}`}
                   </span>
                 </summary>
                 <div className={styles.itemBody}>
@@ -237,7 +233,6 @@ function SectionReview({
                     attempt={attempt}
                     question={questions.get(questionKey(i))}
                     onChange={onChange}
-                    autoScore={auto}
                   />
                 </div>
               </details>
