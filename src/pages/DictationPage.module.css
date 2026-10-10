@@ -5,7 +5,7 @@
 }
 
 .error {
-  margin-bottom: var(--notice-gap);
+  margin-bottom: calc(var(--notice-gap) - var(--spacing-5));
   color: var(--color-error);
   background: var(--color-error-subtle);
   padding: var(--spacing-4);
