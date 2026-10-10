@@ -7,12 +7,13 @@
  * this feature therefore schedules like any other, and answering a question
  * anywhere in the app — practice, a practice test, or recall — reschedules it.
  *
- * Writing and speaking are reviewed on their rubric scores, so only a perfect
- * score counts as recalled; an unscored response is listed but not scheduled.
+ * Writing and speaking are reviewed on their rubric scores, where a perfect
+ * score is rare, so 80% of the rubric counts as recalled; an unscored response
+ * is listed but not scheduled.
  */
 import { createEmptyCard, fsrs, Rating, type Card, type Grade } from "ts-fsrs";
 import type { TaskId } from "../hooks/useScoreHistory";
-import type { Attempt } from "./attempts";
+import { RUBRIC_METHOD, type Attempt } from "./attempts";
 import { TRIAL_TASK_ID, type SectionKey } from "./trial";
 
 /**
@@ -22,13 +23,15 @@ import { TRIAL_TASK_ID, type SectionKey } from "./trial";
 const scheduler = fsrs({ enable_short_term: false });
 
 /**
- * Full marks recalled the question (Good). Partial credit, the only other
- * signal the app records, is Hard when at least half was right and Again
- * below that. Unscored attempts rate nothing.
+ * Full marks, or 80% on a rubric, recalled the question (Good). Partial
+ * credit, the only other signal the app records, is Hard when at least half
+ * was right and Again below that. Unscored attempts rate nothing.
  */
 export function ratingFor(score: Attempt["score"]): Grade | null {
   if (!score) return null;
-  if (score.correct >= score.total) return Rating.Good;
+  const recalled =
+    score.method === RUBRIC_METHOD ? score.total * 0.8 : score.total;
+  if (score.correct >= recalled) return Rating.Good;
   return score.correct * 2 >= score.total ? Rating.Hard : Rating.Again;
 }
 
@@ -70,11 +73,11 @@ export interface ReviewItem {
   latest: Attempt;
   /** Latest graded result; null until an attempt is scored. */
   correct: boolean | null;
-  /** Scored attempts that were not full marks. */
+  /** Scored attempts that did not count as recalled. */
   mistakes: number;
   /** Share of scored items answered right; null until an attempt is scored. */
   accuracy: number | null;
-  /** Date of the latest scored attempt that was not full marks. */
+  /** Date of the latest scored attempt that did not count as recalled. */
   lastWrong: string | null;
   /** Null until an attempt is scored: there is nothing to schedule yet. */
   card: Card | null;

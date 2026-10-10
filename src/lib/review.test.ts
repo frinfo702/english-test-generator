@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Rating, State } from "ts-fsrs";
 import type { TaskId } from "../hooks/useScoreHistory";
-import type { Attempt } from "./attempts";
+import { RUBRIC_METHOD, type Attempt } from "./attempts";
 import { fromLegacyScore } from "./migrations";
 import {
   buildReviewItems,
@@ -54,6 +54,20 @@ describe("ratingFor", () => {
       Rating.Again,
     );
     expect(ratingFor({ method: "x", correct: 0, total: 1 })).toBe(Rating.Again);
+  });
+
+  it("counts 80% of a rubric as recalled", () => {
+    const rubric = (correct: number, total = 5) =>
+      ratingFor({ method: RUBRIC_METHOD, correct, total });
+    expect(rubric(5)).toBe(Rating.Good);
+    expect(rubric(4)).toBe(Rating.Good);
+    expect(rubric(3)).toBe(Rating.Hard);
+    expect(rubric(2)).toBe(Rating.Again);
+    expect(rubric(8, 10)).toBe(Rating.Good);
+    expect(rubric(7, 10)).toBe(Rating.Hard);
+    expect(ratingFor({ method: "answer-key", correct: 4, total: 5 })).toBe(
+      Rating.Hard,
+    );
   });
 
   it("rates nothing for an unscored attempt", () => {
