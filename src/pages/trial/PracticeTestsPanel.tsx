@@ -79,34 +79,44 @@ export function PracticeTestsPanel({ attempts }: { attempts: Attempt[] }) {
             {finished.length === 1 ? "test" : "tests"} and your task practice.
           </p>
         </div>
-        <div className={styles.resultCard}>
-          <Suspense fallback={<p className={styles.note}>Loading chart…</p>}>
-            <BandTrendChart
-              title="Total"
-              colorVar="--color-ink"
-              points={series((r) =>
-                r.sections.length === 1 ? null : r.overall,
-              )}
-            />
-          </Suspense>
-        </div>
-      </div>
-
-      <div className={styles.chartGrid}>
-        <Suspense fallback={null}>
-          {TRIAL_SECTIONS.map((s) => (
-            <div key={s.key} className={styles.resultCard}>
+        {/* Empty trend charts are just five boxes saying "nothing yet". */}
+        {finished.length === 0 ? (
+          <p className={styles.note}>
+            Finish a practice test to see your band trend here.
+          </p>
+        ) : (
+          <div className={styles.resultCard}>
+            <Suspense fallback={<p className={styles.note}>Loading chart…</p>}>
               <BandTrendChart
-                title={s.label}
-                colorVar={SECTION_HUES[s.key]}
-                points={series(
-                  (r) => r.sections.find((x) => x.key === s.key)?.band ?? null,
+                title="Total"
+                colorVar="--color-ink"
+                points={series((r) =>
+                  r.sections.length === 1 ? null : r.overall,
                 )}
               />
-            </div>
-          ))}
-        </Suspense>
+            </Suspense>
+          </div>
+        )}
       </div>
+
+      {finished.length > 0 && (
+        <div className={styles.chartGrid}>
+          <Suspense fallback={null}>
+            {TRIAL_SECTIONS.map((s) => (
+              <div key={s.key} className={styles.resultCard}>
+                <BandTrendChart
+                  title={s.label}
+                  colorVar={SECTION_HUES[s.key]}
+                  points={series(
+                    (r) =>
+                      r.sections.find((x) => x.key === s.key)?.band ?? null,
+                  )}
+                />
+              </div>
+            ))}
+          </Suspense>
+        </div>
+      )}
 
       {trials.length > 0 && (
         <ol className={styles.itemRows}>

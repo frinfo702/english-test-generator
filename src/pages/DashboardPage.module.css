@@ -68,38 +68,86 @@
   z-index: 1;
 }
 
-.taskGrid {
+/* ---- Tasks: one ruled table, grouped by test section ---- */
+
+.tasks {
+  margin-top: var(--spacing-16);
+  /* Shared by the head and every row so the columns line up. */
+  --task-cols: minmax(0, 1fr) 96px repeat(3, 56px) 44px 64px 16px;
+}
+
+.tasksHeading {
+  padding-bottom: var(--spacing-3);
+  border-bottom: var(--rule-ink);
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-tighter);
+}
+
+.tableHead,
+.taskSummary {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: var(--task-cols);
+  align-items: center;
   gap: var(--spacing-4);
+}
+
+.tableHead {
+  padding: var(--spacing-3) 0;
+  border-bottom: var(--rule);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+.tableHead > span:nth-child(n + 3) {
+  text-align: right;
+}
+
+.taskGroup {
   margin-top: var(--spacing-6);
 }
 
-.taskCard {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-5);
-  padding: var(--spacing-5);
-  border: 1px solid var(--color-border);
-  border-top: var(--rule-ink);
-  background: var(--color-surface);
+.groupLabel {
+  padding-bottom: var(--spacing-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink);
 }
 
-.taskHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-3);
+.taskRow {
+  border-top: var(--rule);
 }
 
-.taskLabel {
-  display: inline-flex;
+.taskRow:last-child {
+  border-bottom: var(--rule);
+}
+
+.taskSummary {
+  padding: var(--spacing-3) 0;
+  cursor: pointer;
+  list-style: none;
+  transition: background-color var(--duration-fast) ease;
+}
+
+.taskSummary::-webkit-details-marker {
+  display: none;
+}
+
+.taskName {
+  display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  font-family: var(--font-display);
+  min-width: 0;
   font-size: var(--text-base);
   font-weight: var(--font-medium);
-  letter-spacing: -0.015em;
+  color: var(--color-ink);
 }
 
 .taskDot {
@@ -109,44 +157,92 @@
   flex-shrink: 0;
 }
 
-.taskCount {
+.focusTag {
+  padding: 1px 6px;
+  border: 1px solid var(--color-signal);
+  border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-meta);
-  font-variant-numeric: tabular-nums;
-  font-size: var(--text-2xs);
-  color: var(--color-ink-tertiary);
-  white-space: nowrap;
-}
-
-.statsRow {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--spacing-3);
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.statLabel {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
   font-size: 10px;
+  font-weight: var(--font-medium);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.spark,
+.sparkEmpty {
+  width: 96px;
+  height: 22px;
+}
+
+.spark {
+  overflow: visible;
+}
+
+.spark polyline {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--color-ink);
+}
+
+.minor {
   color: var(--color-ink-tertiary);
 }
 
-.statValue {
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  font-weight: var(--font-medium);
-  letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-ink);
+/* A 6px corner turned by 45°/225°: a chevron without an icon. */
+.chevron {
+  justify-self: end;
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid var(--color-ink-tertiary);
+  border-bottom: 1px solid var(--color-ink-tertiary);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.taskRow[open] .chevron {
+  transform: translateY(1px) rotate(225deg);
+}
+
+.taskDetail {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: var(--spacing-8);
+  align-items: start;
+  padding: var(--spacing-2) 0 var(--spacing-6) var(--spacing-4);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .taskSummary:hover {
+    background: var(--color-surface-hover);
+  }
+}
+
+@media (max-width: 720px) {
+  .tasks {
+    --task-cols: minmax(0, 1fr) repeat(3, 44px) 16px;
+  }
+
+  .tableHead > :nth-child(2),
+  .spark,
+  .sparkEmpty,
+  .minor {
+    display: none;
+  }
+
+  .taskDetail {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+  }
 }
 
 .chartFallback {

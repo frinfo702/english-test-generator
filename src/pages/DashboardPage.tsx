@@ -17,6 +17,7 @@ import {
   type TaskId,
 } from "../hooks/useScoreHistory";
 import { formatSecondsAsMmSs } from "../lib/time";
+import { pickFocusTask } from "../lib/focusTask";
 import { getAllAttempts, type Attempt } from "../lib/attempts";
 import styles from "./DashboardPage.module.css";
 import { PracticeTestsPanel } from "./trial/PracticeTestsPanel";
@@ -80,118 +81,131 @@ function shortDate(iso: string): string {
   return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-interface TaskCardProps {
+/** Hairline sparkline of the last runs; the full chart lives in the detail. */
+function Sparkline({ entries, hue }: { entries: ScoreEntry[]; hue: string }) {
+  const runs = entries.slice(-12);
+  if (runs.length < 2) return <span className={styles.sparkEmpty} />;
+  // Scaled to this task's own range: a 60→80% climb should read as a climb.
+  const pcts = runs.map((e) => e.pct);
+  const lo = Math.min(...pcts) - 5;
+  const span = Math.max(...pcts) + 5 - lo;
+  const points = pcts
+    .map(
+      (p, i) =>
+        `${(i / (pcts.length - 1)) * 100},${100 - ((p - lo) / span) * 100}`,
+    )
+    .join(" ");
+  return (
+    <svg
+      className={styles.spark}
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <polyline points={points} style={{ stroke: `var(${hue})` }} />
+    </svg>
+  );
+}
+
+const average = (xs: number[]) =>
+  xs.length > 0 ? Math.round(xs.reduce((s, x) => s + x, 0) / xs.length) : null;
+
+interface TaskRowProps {
   taskId: TaskId;
   entries: ScoreEntry[];
+  focus: boolean;
 }
 
-function TaskCard({ taskId, entries }: TaskCardProps) {
+function TaskRow({ taskId, entries, focus }: TaskRowProps) {
+  // The chart bundle only loads once a row is opened.
+  const [open, setOpen] = useState(false);
   const hue = TASK_HUES[taskId] ?? "--color-accent";
   const latest = entries[entries.length - 1];
-  const best = entries.reduce<ScoreEntry | null>(
-    (acc, e) => (acc === null || e.pct > acc.pct ? e : acc),
-    null,
+  const best = Math.max(...entries.map((e) => e.pct));
+  const avg = average(entries.map((e) => e.pct));
+  const avgSeconds = average(
+    entries.flatMap((e) =>
+      typeof e.elapsedSeconds === "number" ? [e.elapsedSeconds] : [],
+    ),
   );
-  const avg =
-    entries.length > 0
-      ? Math.round(entries.reduce((s, e) => s + e.pct, 0) / entries.length)
-      : 0;
-  const timedEntries = entries.filter(
-    (e) => typeof e.elapsedSeconds === "number",
-  );
-  const latestElapsed =
-    typeof latest?.elapsedSeconds === "number"
-      ? formatSecondsAsMmSs(latest.elapsedSeconds)
-      : "—";
-  const avgElapsed =
-    timedEntries.length > 0
-      ? formatSecondsAsMmSs(
-          Math.round(
-            timedEntries.reduce((s, e) => s + (e.elapsedSeconds ?? 0), 0) /
-              timedEntries.length,
-          ),
-        )
-      : "—";
+  // The group heading already names the test and section.
+  const label = TASK_LABELS[taskId]
+    .split(": ")
+    .pop()!
+    .replace(/^TOEIC /, "");
 
   return (
-    <div className={styles.taskCard}>
-      <div className={styles.taskHeader}>
-        <span
-          className={styles.taskDot}
-          style={{ background: `var(${hue})` }}
-        />
-        <span className={styles.taskLabel}>{TASK_LABELS[taskId]}</span>
-        <span className={styles.taskCount}>
-          {entries.length} session{entries.length !== 1 ? "s" : ""}
-        </span>
-      </div>
-
-      <div className={styles.statsRow}>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>Latest</span>
-          <span className={styles.statValue}>
-            {latest ? `${latest.pct}%` : "—"}
-          </span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>Best</span>
+    <details
+      className={styles.taskRow}
+      onToggle={(e) => setOpen(e.currentTarget.open)}
+    >
+      <summary className={styles.taskSummary}>
+        <span className={styles.taskName}>
           <span
-            className={styles.statValue}
-            style={{ color: "var(--color-success)" }}
-          >
-            {best ? `${best.pct}%` : "—"}
-          </span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>Average</span>
-          <span className={styles.statValue}>
-            {entries.length > 0 ? `${avg}%` : "—"}
-          </span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>Latest Time</span>
-          <span className={styles.statValue}>{latestElapsed}</span>
-        </div>
-        <div className={styles.stat}>
-          <span className={styles.statLabel}>Avg Time</span>
-          <span className={styles.statValue}>{avgElapsed}</span>
-        </div>
-      </div>
+            className={styles.taskDot}
+            style={{ background: `var(${hue})` }}
+          />
+          {label}
+          {focus && <span className={styles.focusTag}>Focus</span>}
+        </span>
+        <Sparkline entries={entries} hue={hue} />
+        <span className={styles.num}>{latest.pct}%</span>
+        <span className={styles.num}>{best}%</span>
+        <span className={styles.num}>{avg}%</span>
+        <span className={[styles.num, styles.minor].join(" ")}>
+          {entries.length}
+        </span>
+        <span className={[styles.num, styles.minor].join(" ")}>
+          {avgSeconds === null ? "—" : formatSecondsAsMmSs(avgSeconds)}
+        </span>
+        <span className={styles.chevron} aria-hidden="true" />
+      </summary>
 
-      <Suspense fallback={<div className={styles.chartFallback} />}>
-        <ScoreTrendChart entries={entries} colorVar={hue} />
-      </Suspense>
-
-      {entries.length > 0 && (
-        <div className={styles.recentList}>
-          {entries
-            .slice(-5)
-            .reverse()
-            .map((e, i) => (
-              <div key={i} className={styles.recentRow}>
-                <span className={styles.recentDate}>{shortDate(e.date)}</span>
-                <div className={styles.recentBar}>
-                  <div
-                    className={styles.recentFill}
-                    style={{ width: `${e.pct}%`, background: `var(${hue})` }}
-                  />
+      {open && (
+        <div className={styles.taskDetail}>
+          <Suspense fallback={<div className={styles.chartFallback} />}>
+            <ScoreTrendChart entries={entries} colorVar={hue} />
+          </Suspense>
+          <div className={styles.recentList}>
+            {entries
+              .slice(-5)
+              .reverse()
+              .map((e, i) => (
+                <div key={i} className={styles.recentRow}>
+                  <span className={styles.recentDate}>{shortDate(e.date)}</span>
+                  <div className={styles.recentBar}>
+                    <div
+                      className={styles.recentFill}
+                      style={{ width: `${e.pct}%`, background: `var(${hue})` }}
+                    />
+                  </div>
+                  <span className={styles.recentPct}>{e.pct}%</span>
+                  <span className={styles.recentDetail}>
+                    {e.correct}/{e.total}
+                  </span>
+                  <span className={styles.recentTime}>
+                    {typeof e.elapsedSeconds === "number"
+                      ? formatSecondsAsMmSs(e.elapsedSeconds)
+                      : "—"}
+                  </span>
                 </div>
-                <span className={styles.recentPct}>{e.pct}%</span>
-                <span className={styles.recentDetail}>
-                  {e.correct}/{e.total}
-                </span>
-                <span className={styles.recentTime}>
-                  {typeof e.elapsedSeconds === "number"
-                    ? formatSecondsAsMmSs(e.elapsedSeconds)
-                    : "—"}
-                </span>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
       )}
-    </div>
+    </details>
   );
 }
+
+const TASK_GROUPS: { label: string; has: (id: TaskId) => boolean }[] = [
+  { label: "TOEFL Reading", has: (id) => id.startsWith("toefl/reading/") },
+  { label: "TOEFL Listening", has: (id) => id.startsWith("toefl/listening/") },
+  { label: "TOEFL Writing", has: (id) => id.startsWith("toefl/writing/") },
+  { label: "TOEFL Speaking", has: (id) => id.startsWith("toefl/speaking/") },
+  { label: "TOEFL Practice Test", has: (id) => id === "toefl/trial" },
+  { label: "TOEIC L&R", has: (id) => id.startsWith("toeic/") },
+  { label: "Drills", has: (id) => id === "shadowing" || id === "dictation" },
+];
 
 export function DashboardPage() {
   const navigate = useNavigate();
@@ -230,7 +244,11 @@ export function DashboardPage() {
     {},
   );
 
-  const taskIds = Object.keys(byTask) as TaskId[];
+  // Fixed order, so rows don't reshuffle as new tasks get practised.
+  const taskIds = (Object.keys(TASK_LABELS) as TaskId[]).filter(
+    (id) => byTask[id],
+  );
+  const focusTask = pickFocusTask(byTask);
   const sessionDates = useMemo(() => entries.map((e) => e.date), [entries]);
 
   const handleClear = () => {
@@ -316,15 +334,38 @@ export function DashboardPage() {
         </div>
       ) : (
         <>
-          <div className={styles.taskGrid}>
-            {taskIds.map((taskId) => (
-              <TaskCard
-                key={taskId}
-                taskId={taskId}
-                entries={byTask[taskId]!}
-              />
-            ))}
-          </div>
+          <section className={styles.tasks} aria-labelledby="tasks-heading">
+            <h2 id="tasks-heading" className={styles.tasksHeading}>
+              Tasks
+            </h2>
+            <div className={styles.tableHead} aria-hidden="true">
+              <span>Task</span>
+              <span>Last 12</span>
+              <span>Latest</span>
+              <span>Best</span>
+              <span>Avg</span>
+              <span className={styles.minor}>Runs</span>
+              <span className={styles.minor}>Avg time</span>
+              <span />
+            </div>
+            {TASK_GROUPS.map((group) => {
+              const ids = taskIds.filter(group.has);
+              if (ids.length === 0) return null;
+              return (
+                <div key={group.label} className={styles.taskGroup}>
+                  <h3 className={styles.groupLabel}>{group.label}</h3>
+                  {ids.map((taskId) => (
+                    <TaskRow
+                      key={taskId}
+                      taskId={taskId}
+                      entries={byTask[taskId]!}
+                      focus={taskId === focusTask}
+                    />
+                  ))}
+                </div>
+              );
+            })}
+          </section>
 
           <div className={styles.clearSection}>
             <Button
