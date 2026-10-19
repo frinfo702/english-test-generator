@@ -383,7 +383,7 @@ export function DictationPage() {
         subtitle={
           data?.title ?? "Listen and arrange the words in the correct order."
         }
-        backTo="/"
+        backTo="/learn"
         actions={
           <>
             <Button

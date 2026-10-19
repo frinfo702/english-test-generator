@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route, useParams } from "react-router-dom";
 import { AppShell } from "./components/layout/AppShell";
 import { HomePage } from "./pages/HomePage";
 import { DashboardPage } from "./pages/DashboardPage";
+import { LearnPage } from "./pages/LearnPage";
 import { ToeflMenuPage } from "./pages/toefl/ToeflMenuPage";
 import { ToeicMenuPage } from "./pages/toeic/ToeicMenuPage";
 import { CompleteWordsPage } from "./pages/toefl/reading/CompleteWordsPage";
@@ -200,7 +201,7 @@ const taskRoutes: TaskRoute[] = [
     taskId: "shadowing",
     title: "Shadowing Practice",
     subtitle: "Select a question number or start with random.",
-    backTo: "/",
+    backTo: "/learn",
     page: <ShadowingPage />,
   },
   {
@@ -208,7 +209,7 @@ const taskRoutes: TaskRoute[] = [
     taskId: "dictation",
     title: "Dictation Practice",
     subtitle: "Select a question number or start with random.",
-    backTo: "/",
+    backTo: "/learn",
     page: <DictationPage />,
   },
 ];
@@ -229,6 +230,7 @@ export default function App() {
       <AppShell>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/learn" element={<LearnPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/review" element={<ReviewPage />} />
           <Route path="/results/:attemptId" element={<ResultPage />} />

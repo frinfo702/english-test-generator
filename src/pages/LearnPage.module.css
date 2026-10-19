@@ -1,0 +1,300 @@
+/* Learn hub: the one place cards are allowed (DESIGN.md, Motion). Each card's
+ * drawing wakes on hover and says what's behind the link; at rest it is ink. */
+
+.group {
+  margin-bottom: var(--spacing-12);
+}
+
+.groupLabel {
+  padding-bottom: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+  border-bottom: var(--rule-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-3);
+}
+
+.card {
+  display: flex;
+  gap: var(--spacing-4);
+  height: 100%;
+  min-height: 148px;
+  padding: var(--spacing-5);
+  border: var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
+}
+
+.text {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-tight);
+}
+
+.desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+}
+
+.cta {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+  transition: color var(--duration-fast) ease;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.art {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+}
+
+/* ---- TOEFL: section path ---- */
+
+.path {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.node {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-ink-tertiary);
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
+}
+
+.node:nth-child(odd) {
+  transform: translateX(-9px);
+}
+
+.node:nth-child(even) {
+  transform: translateX(9px);
+}
+
+/* ---- TOEIC: score bars ---- */
+
+.bars,
+.wave {
+  display: flex;
+  align-items: flex-end;
+  height: 56px;
+}
+
+.bars {
+  gap: 4px;
+  padding-bottom: 1px;
+  border-bottom: 1px solid var(--color-border-strong);
+}
+
+.bar {
+  width: 8px;
+  background: var(--color-border-strong);
+  transform-origin: bottom;
+  transition: background-color var(--duration-base) ease;
+}
+
+/* ---- Practice test: stacked sections ---- */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.block {
+  height: 9px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-xs);
+  transition: border-color var(--duration-base) ease;
+}
+
+.ground {
+  width: 80px;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+/* ---- Shadowing: waveform ---- */
+
+.wave {
+  align-items: center;
+  gap: 3px;
+}
+
+.waveBar {
+  width: 3px;
+  border-radius: var(--radius-full);
+  background: var(--color-border-strong);
+  transition: background-color var(--duration-base) ease;
+}
+
+/* ---- Dictation: word ticker ---- */
+
+.ticker {
+  height: 72px;
+  overflow: hidden;
+  /* Only the top word reads at full strength; the rest are still to come. */
+  mask-image: linear-gradient(
+    to bottom,
+    #000 18px,
+    rgba(0, 0, 0, 0.35) 40px,
+    transparent
+  );
+}
+
+.tickerTrack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  line-height: 18px;
+  color: var(--color-ink-secondary);
+}
+
+/* ---- Hover: touch fires false hovers on tap, so gate it. ---- */
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-strong);
+  }
+
+  .card:hover .cta {
+    color: var(--color-accent);
+  }
+
+  .card:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  /* Delay only on the way in, so leaving resets at once. */
+  .card:hover .node {
+    background: var(--hue);
+    border-color: var(--hue);
+    color: var(--color-ink-inverse);
+    transition-delay: calc(var(--i) * 70ms);
+  }
+
+  .card:hover .bar {
+    background: var(--color-signal);
+    animation: grow 420ms var(--ease-out) both;
+    animation-delay: calc(var(--i) * 40ms);
+  }
+
+  .card:hover .block {
+    border-color: var(--color-signal);
+    animation: drop 360ms var(--ease-out) both;
+    /* Bottom block lands first. */
+    animation-delay: calc((3 - var(--i)) * 70ms);
+  }
+
+  .card:hover .waveBar {
+    background: var(--color-signal);
+    animation: speak 900ms var(--ease-in-out) infinite alternate;
+    animation-delay: calc(var(--i) * -110ms);
+  }
+
+  .card:hover .tickerTrack {
+    animation: roll 4.8s var(--ease-in-out) infinite;
+  }
+}
+
+@keyframes grow {
+  from {
+    transform: scaleY(0.12);
+  }
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes speak {
+  from {
+    transform: scaleY(0.3);
+  }
+}
+
+/* Four words, each held, then the track sits on its copy (-4 rows). */
+@keyframes roll {
+  0%,
+  18% {
+    transform: translateY(0);
+  }
+  25%,
+  43% {
+    transform: translateY(-18px);
+  }
+  50%,
+  68% {
+    transform: translateY(-36px);
+  }
+  75%,
+  93% {
+    transform: translateY(-54px);
+  }
+  100% {
+    transform: translateY(-72px);
+  }
+}
+
+/* Colour still changes; nothing moves. */
+@media (prefers-reduced-motion: reduce) {
+  .art * {
+    animation: none !important;
+  }
+}

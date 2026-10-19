@@ -85,6 +85,8 @@ mono with `tabular-nums`; headline numerals use the display face.
 
 ## Layout
 
+- Nav: Learn (TOEFL, TOEIC, Practice Test, Shadowing, Dictation behind one
+  tab) · Review · Dashboard · Settings.
 - Header 60px, translucent paper, hairline bottom rule. Nav is plain text
   links; the active one stands on a 2px signal bar on the header rule.
 - `--max-content` 1120px; `--gutter` 32px (16px on phones);
@@ -162,6 +164,10 @@ recoloured.
 - One exception: the AI scoring update page's cover drawing draws itself in
   once with `stroke-dashoffset`, staggered, and is static under
   `prefers-reduced-motion`. Nothing else follows its lead.
+- Second exception: the Learn hub (`/learn`) is the one card grid. Each
+  card's small drawing (section path, score bars, stacked sections, waveform,
+  word ticker) wakes on hover only, gated by `(hover: hover) and (pointer:
+  fine)`; under `prefers-reduced-motion` only colour changes.
 
 ## Anti-patterns
 

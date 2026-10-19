@@ -77,9 +77,10 @@ describe("layout components", () => {
     );
 
     expect(screen.getByText("Page body")).toBeTruthy();
-    expect(screen.getByRole("link", { name: /TOEFL 2026/i })).toBeTruthy();
-    expect(screen.getByRole("link", { name: /TOEIC L&R/i })).toBeTruthy();
-    expect(screen.getByRole("link", { name: /Shadowing/i })).toBeTruthy();
+    // TOEIC sits under Learn, so Learn is the active tab.
+    expect(
+      screen.getByRole("link", { name: "Learn" }).getAttribute("aria-current"),
+    ).toBe("page");
     expect(screen.getByRole("link", { name: /Dashboard/i })).toBeTruthy();
 
     fireEvent.keyDown(window, { key: "d", ctrlKey: true });

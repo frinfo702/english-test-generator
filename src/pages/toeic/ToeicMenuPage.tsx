@@ -58,7 +58,7 @@ export function ToeicMenuPage() {
       <SectionHeader
         title={<TestLogo name="TOEIC" />}
         subtitle="Listening and Reading — choose a part to practice."
-        backTo="/"
+        backTo="/learn"
       />
       <TaskMenu sections={sections} />
     </div>
