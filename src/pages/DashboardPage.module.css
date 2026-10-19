@@ -387,7 +387,7 @@
 
 .answerRow {
   display: grid;
-  grid-template-columns: 96px 160px minmax(0, 1fr);
+  grid-template-columns: 96px 320px minmax(0, 1fr);
   gap: var(--spacing-4);
   padding: 10px 0;
   border-bottom: var(--rule);
@@ -408,6 +408,11 @@
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
   color: var(--color-ink-tertiary);
+}
+
+/* Wrap rather than run under the preview when a label outgrows its column. */
+.answerProblem {
+  overflow-wrap: anywhere;
 }
 
 .answerPreview {

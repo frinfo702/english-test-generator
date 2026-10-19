@@ -76,6 +76,13 @@ const TASK_HUES: Record<string, string> = {
   shadowing: "--color-speaking",
   dictation: "--color-writing",
 };
+/** "TOEFL Speaking: Interview · 001 · q1" instead of the raw storage path. */
+function attemptLabel(a: Attempt, itemId?: string): string {
+  return [TASK_LABELS[a.taskId] ?? a.taskId, a.problemId, itemId]
+    .filter(Boolean)
+    .join(" · ");
+}
+
 function shortDate(iso: string): string {
   const d = new Date(iso);
   return `${d.getMonth() + 1}/${d.getDate()}`;
@@ -403,9 +410,7 @@ export function DashboardPage() {
                 <span className={styles.answerDate}>
                   {new Date(a.date).toLocaleDateString()}
                 </span>
-                <span className={styles.answerProblem}>
-                  {a.taskId}/{a.problemId}
-                </span>
+                <span className={styles.answerProblem}>{attemptLabel(a)}</span>
                 <span className={styles.answerPreview}>
                   {a.score
                     ? `${((a.score.correct / a.score.total) * 5).toFixed(1)} / 5`
@@ -434,8 +439,7 @@ export function DashboardPage() {
                     {new Date(a.date).toLocaleDateString()}
                   </span>
                   <span className={styles.answerProblem}>
-                    {a.taskId}/{a.problemId}
-                    {itemId ? `#${itemId}` : ""}
+                    {attemptLabel(a, itemId)}
                   </span>
                   <span className={styles.answerPreview}>{preview}</span>
                 </div>
