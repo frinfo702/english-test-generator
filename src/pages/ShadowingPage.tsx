@@ -172,7 +172,7 @@ export function ShadowingPage() {
       <SectionHeader
         title="Shadowing Practice"
         subtitle={data?.title ?? "Listen and repeat to improve pronunciation."}
-        backTo="/"
+        backTo="/learn"
         actions={
           <>
             <Button

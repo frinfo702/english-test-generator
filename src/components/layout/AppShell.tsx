@@ -33,29 +33,10 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    to: "/toefl",
-    label: "TOEFL 2026",
-    matches: (p) => p.startsWith("/toefl"),
-  },
-  {
-    to: "/trial",
-    label: "Practice Test",
-    matches: (p) => p.startsWith("/trial"),
-  },
-  {
-    to: "/toeic",
-    label: "TOEIC L&R",
-    matches: (p) => p.startsWith("/toeic"),
-  },
-  {
-    to: "/shadowing",
-    label: "Shadowing",
-    matches: (p) => p.startsWith("/shadowing"),
-  },
-  {
-    to: "/dictation",
-    label: "Dictation",
-    matches: (p) => p.startsWith("/dictation"),
+    to: "/learn",
+    label: "Learn",
+    matches: (p) =>
+      /^\/(learn|toefl|trial|toeic|shadowing|dictation)(\/|$)/.test(p),
   },
   {
     to: "/review",
