@@ -1,4 +1,9 @@
 import { AI_SCORE_FENCE } from "./interviewScoring";
+import {
+  EDIT_THEMES,
+  WRITING_TEMPLATES,
+  type TemplatePart,
+} from "./writingFeedback";
 
 const DRAFT_KEY_PREFIX = "answer-draft:";
 
@@ -105,6 +110,8 @@ export interface WritingCopyPayload {
   userAnswer: string;
   modelAnswer?: string;
   criteria?: string[];
+  /** Response-template parts the AI marks as used or not. */
+  template?: TemplatePart[];
 }
 
 /** Same contract as the interview prompt: feedback, then one parseable score block. */
@@ -136,15 +143,33 @@ export function buildWritingCopyMessage(payload: WritingCopyPayload) {
       "Also rate each numbered evaluation criterion on the same 0–5 scale, with one short sentence on how my response meets it.",
     );
   }
-  // Per-criterion ratings use "points" so the overall "score" stays the
-  // only "score" key the parser can find.
-  const block =
-    criteria.length > 0
-      ? `{"criteria": [${criteria.map(() => '{"points": 0, "note": "..."}').join(", ")}], "score": 0}`
-      : '{"score": 0}';
+  const template = payload.template ?? [];
   lines.push(
     "",
-    `Give your feedback and a stronger version of my response, then end your reply with this block exactly once (whole numbers only${criteria.length > 0 ? `; one "criteria" entry per numbered criterion, in order` : ""}):`,
+    "## Suggested edits",
+    `Suggest up to 8 edits to my response that would raise its score by about one point. Copy each "from" exactly from my response, a phrase or sentence rather than a whole paragraph, in the order it appears; "to" replaces it ("" deletes it). Give each a "theme" (${Object.keys(EDIT_THEMES).join(", ")}) and a one-sentence "why".`,
+  );
+  if (template.length > 0) {
+    lines.push(
+      "",
+      "## Response template",
+      "Mark each part 1 if my response does it, 0 if not:",
+      ...template.map((p, i) => `${i + 1}. ${p.name}: ${p.does}`),
+    );
+  }
+  // Per-criterion ratings use "points" so the overall "score" stays the
+  // only "score" key the parser can find.
+  const fields = [
+    criteria.length > 0 &&
+      `"criteria": [${criteria.map(() => '{"points": 0, "note": "..."}').join(", ")}]`,
+    `"edits": [{"from": "...", "to": "...", "theme": "grammar", "why": "..."}]`,
+    template.length > 0 && `"template": [${template.map(() => 0).join(", ")}]`,
+    '"score": 0',
+  ].filter(Boolean);
+  const block = `{${fields.join(", ")}}`;
+  lines.push(
+    "",
+    `Give your feedback, then end your reply with this block exactly once (whole numbers only${criteria.length > 0 ? `; one "criteria" entry per numbered criterion, in order` : ""}):`,
     "",
     "```" + AI_SCORE_FENCE,
     block,
@@ -208,6 +233,7 @@ export function buildWritingTaskMessage(
       userAnswer,
       modelAnswer: d.modelAnswer,
       criteria: writingCriteria(taskId, d).map((c) => `${c.name}: ${c.detail}`),
+      template: WRITING_TEMPLATES[taskId],
     });
   }
   const d = question as DiscussionQuestion;
@@ -217,6 +243,7 @@ export function buildWritingTaskMessage(
     userAnswer,
     modelAnswer: d.modelAnswer,
     criteria: writingCriteria(taskId, d).map((c) => c.name),
+    template: WRITING_TEMPLATES[taskId],
   });
 }
 

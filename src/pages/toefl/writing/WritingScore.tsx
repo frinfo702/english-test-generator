@@ -11,10 +11,10 @@ import {
   stripScoreBlock,
   withWritingAi,
 } from "../../../lib/interviewScoring";
+import type { WritingTaskId } from "../../../lib/writingFeedback";
 import { AiScore } from "../speaking/AutoScore";
+import { WritingFeedback } from "./SuggestedEdits";
 import styles from "./WritingScore.module.css";
-
-type WritingTaskId = "toefl/writing/email" | "toefl/writing/discussion";
 
 /**
  * Every rubric point the AI rated, in prompt order, with its own 0–5 and a
@@ -89,6 +89,11 @@ export function WritingScore({
               <WritingCriteria
                 taskId={taskId}
                 question={question}
+                reply={r.aiReply}
+              />
+              <WritingFeedback
+                taskId={taskId}
+                text={r.text ?? ""}
                 reply={r.aiReply}
               />
             </>
