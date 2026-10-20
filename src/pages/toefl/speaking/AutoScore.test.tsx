@@ -43,7 +43,9 @@ function mockGateway() {
   );
   vi.stubGlobal("fetch", fetch);
   const gatewayCalls = () =>
-    fetch.mock.calls.filter(([u]) => String(u).startsWith(GATEWAY_URL));
+    fetch.mock.calls.filter(
+      ([u]) => String(u) === `${GATEWAY_URL}/chat/completions`,
+    );
   return { pending, gatewayCalls };
 }
 
@@ -133,7 +135,9 @@ describe("AI score slot with the user's AI Gateway key", () => {
     expect(within(details).getAllByRole("status").length).toBeGreaterThan(0);
     await waitFor(() =>
       expect(
-        fetch.mock.calls.filter(([u]) => String(u).startsWith(GATEWAY_URL)),
+        fetch.mock.calls.filter(
+          ([u]) => String(u) === `${GATEWAY_URL}/chat/completions`,
+        ),
       ).toHaveLength(2),
     );
 

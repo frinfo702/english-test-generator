@@ -4,7 +4,11 @@
  * on one question keeps running while the user moves on, and lands on the
  * stored attempt whichever page is showing.
  */
-import { autoScoring, scoreWithGateway } from "./aiGateway";
+import {
+  autoScoring,
+  scoreLanguageUseWithJev,
+  scoreWithGateway,
+} from "./aiGateway";
 import { getAttempt, putAttempts, type Attempt } from "./attempts";
 import {
   parseAiScores,
@@ -91,7 +95,14 @@ export function scoreInBackground(task: ScoringTask): boolean {
   setJob(key, { status: "scoring" });
   void (async () => {
     try {
-      const reply = await scoreWithGateway(task.message, config);
+      // Jev only adds a steadier language-use score; if it fails, the chat
+      // model's own languageUse still stands.
+      const [reply, jevLanguageUse] = await Promise.all([
+        scoreWithGateway(task.message, config),
+        task.kind === "interview"
+          ? scoreLanguageUseWithJev(task.message, config.key).catch(() => null)
+          : null,
+      ]);
       let apply: (a: Attempt) => Attempt;
       try {
         apply =
@@ -102,6 +113,8 @@ export function scoreInBackground(task: ScoringTask): boolean {
               })()
             : (() => {
                 const scores = parseAiScores(reply);
+                if (jevLanguageUse !== null)
+                  scores.languageUse = jevLanguageUse;
                 return (a) => withInterviewAi(a, task.index, { reply, scores });
               })();
       } catch {

@@ -203,6 +203,61 @@ export async function scoreWithGateway(
   return reply;
 }
 
+export const JEV_MODEL = "typesafe-ai/jev";
+
+/**
+ * Interview language use, as Jev scores it: levels lowest to highest, so its
+ * interpolated score lands on the 0–5 scale. Jev scored this facet within 0.5
+ * of Claude Haiku 5.5 on 11 of 12 test answers, with a tenth of the spread
+ * between repeat scores (scripts/compare-jev.ts); organization and Writing
+ * didn't match closely, so they stay with the chat model.
+ */
+export const JEV_LANGUAGE_USE = {
+  type: "score",
+  instructions:
+    "Rate the spoken answer (a speech-recognition transcript: ignore punctuation and capitalization) for range and accuracy of grammar and vocabulary.",
+  criteria: [
+    "0: no response or not English",
+    "1: very limited words; errors block meaning",
+    "2: basic vocabulary and grammar; frequent errors",
+    "3: adequate range; some errors that rarely block meaning",
+    "4: good range and control; minor errors",
+    "5: wide, precise range of grammar and vocabulary; almost no errors",
+  ],
+};
+
+/**
+ * Jev's 0–5 language-use score for an interview prompt. It reads the prompt
+ * minus the chat model's "How to score" text, since the rubric goes in as levels.
+ */
+export async function scoreLanguageUseWithJev(
+  prompt: string,
+  key: string,
+  signal?: AbortSignal,
+): Promise<number> {
+  const res = await fetch(`${GATEWAY_URL}/evaluate`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${key}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: JEV_MODEL,
+      state: prompt.split("\n## How to score")[0],
+      questions: { languageUse: JEV_LANGUAGE_USE },
+    }),
+    signal,
+  });
+  if (!res.ok) throw await errorFrom(res);
+  const body = (await res.json()) as {
+    answers?: { languageUse?: { score?: number } };
+  };
+  const score = body.answers?.languageUse?.score;
+  if (typeof score !== "number" || !(score >= 0 && score <= 5))
+    throw new GatewayError("Jev returned no language use score.", "other");
+  return score;
+}
+
 export function modelName(id: string): string {
   return RECOMMENDED_MODELS.find((m) => m.id === id)?.name ?? id;
 }

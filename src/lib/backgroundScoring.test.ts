@@ -87,11 +87,49 @@ describe("background scoring", () => {
     expect(saved).toEqual([attempt.id]);
   });
 
-  it("scores a finished interview answer beside its saved transcript", async () => {
+  it("takes interview language use from Jev and the rest from the chat model", async () => {
     saveGatewayKey("vck_test");
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () => gatewayReply('{"languageUse": 4, "organization": 4}')),
+      vi.fn(async (url: string) =>
+        url.endsWith("/evaluate")
+          ? new Response(
+              JSON.stringify({
+                answers: { languageUse: { type: "score", score: 3.4 } },
+              }),
+            )
+          : gatewayReply('{"languageUse": 4, "organization": 4}'),
+      ),
+    );
+    const attempt = await db.saveAttempt({
+      taskId: "toefl/speaking/interview",
+      problemId: "001",
+      responses: [{ prompt: "Weekends?", transcript: "I play tennis." }],
+    });
+
+    bg.scoreInBackground({
+      attemptId: attempt.id,
+      index: 0,
+      kind: "interview",
+      message: "PROMPT",
+    });
+
+    await vi.waitFor(async () => {
+      expect(
+        (await db.getAttempt(attempt.id))?.responses[0].ai?.scores,
+      ).toEqual({ languageUse: 3.4, organization: 4 });
+    });
+  });
+
+  it("keeps the chat model's language use when Jev fails", async () => {
+    saveGatewayKey("vck_test");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) =>
+        url.endsWith("/evaluate")
+          ? gatewayError("boom")
+          : gatewayReply('{"languageUse": 4, "organization": 4}'),
+      ),
     );
     const attempt = await db.saveAttempt({
       taskId: "toefl/speaking/interview",
