@@ -131,7 +131,9 @@ describe("ResultPage", () => {
     const gatewayCalls = () =>
       vi
         .mocked(fetch)
-        .mock.calls.filter(([u]) => String(u).startsWith(GATEWAY_URL));
+        .mock.calls.filter(
+          ([u]) => String(u) === `${GATEWAY_URL}/chat/completions`,
+        );
 
     beforeEach(() => saveGatewayKey("vck_test"));
     afterEach(() => localStorage.clear());
@@ -172,6 +174,8 @@ describe("ResultPage", () => {
           }),
         ),
       );
+      // Jev's language-use score; a failure keeps the chat model's.
+      pending[1](new Response(null, { status: 500 }));
 
       expect(
         await screen.findByText("· partial", { exact: false }),
