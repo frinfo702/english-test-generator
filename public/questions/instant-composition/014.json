@@ -1,0 +1,16 @@
+{
+  "title": "Relative clauses",
+  "point": "Use who, which, that, where and what to add information about a noun or to mean \"the thing that\".",
+  "sentences": [
+    { "id": "s1", "ja": "隣に住んでいる人は看護師です。", "text": "The guy who lives next door is a nurse." },
+    { "id": "s2", "ja": "先週貸してくれた本、すごく面白かったよ。", "text": "The book you lent me last week was really good.", "note": "In speech, drop \"that\" when it's the object of the clause." },
+    { "id": "s3", "ja": "ここは私が生まれた町です。", "text": "This is the town where I was born." },
+    { "id": "s4", "ja": "欲しいものが見つからなかった。", "text": "I couldn't find what I was looking for.", "note": "\"What\" means \"the thing that\"; don't say \"the thing what\"." },
+    { "id": "s5", "ja": "言いたいことはわかるよ。", "text": "I know what you mean." },
+    { "id": "s6", "ja": "日本語を話せる人を探しています。", "text": "We're looking for someone who can speak Japanese." },
+    { "id": "s7", "ja": "昨日行ったレストラン、高かったけどおいしかった。", "text": "The restaurant we went to yesterday was pricey but really good.", "note": "End with the preposition: \"we went to\", not \"to which we went\", in conversation." },
+    { "id": "s8", "ja": "この授業を担当している教授はとても有名です。", "text": "The professor who teaches this course is pretty famous." },
+    { "id": "s9", "ja": "大事なのは、毎日続けることです。", "text": "What matters is that you keep at it every day." },
+    { "id": "s10", "ja": "学生がよく集まるカフェが駅の近くにあります。", "text": "There's a cafe near the station where students often hang out." }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "title": "Comparatives and superlatives",
+  "point": "Compare two things with -er or more ... than, pick out one of a group with the -est or the most, and show equality with as ... as.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "電車で行ったほうがバスより早いよ。",
+      "text": "The train's faster than the bus.",
+      "note": "English compares the two things directly instead of saying \"it's better to go by\"."
+    },
+    {
+      "id": "s2",
+      "ja": "今日は昨日よりだいぶ寒いね。",
+      "text": "It's a lot colder today than yesterday.",
+      "note": "Use \"a lot\" or \"much\" before a comparative, never \"very\"."
+    },
+    {
+      "id": "s3",
+      "ja": "このカフェ、この辺で一番おいしいコーヒー出すんだよ。",
+      "text": "This cafe makes the best coffee around here."
+    },
+    {
+      "id": "s4",
+      "ja": "思ってたほど難しくなかった。",
+      "text": "It wasn't as hard as I expected."
+    },
+    {
+      "id": "s5",
+      "ja": "弟は僕と同じくらいの背の高さです。",
+      "text": "My brother is about as tall as I am."
+    },
+    {
+      "id": "s6",
+      "ja": "できるだけ早く返信します。",
+      "text": "I'll get back to you as soon as I can."
+    },
+    {
+      "id": "s7",
+      "ja": "もう少し安いのはありますか？",
+      "text": "Do you have anything a bit cheaper?",
+      "note": "\"Anything cheaper\" is the natural shop phrase; \"cheaper one\" needs a clear noun."
+    },
+    {
+      "id": "s8",
+      "ja": "この授業は今学期で一番面白い。",
+      "text": "This is the most interesting class I'm taking this semester."
+    },
+    {
+      "id": "s9",
+      "ja": "前回の実験結果のほうがずっと信頼できる。",
+      "text": "The results from the last experiment are far more reliable."
+    },
+    {
+      "id": "s10",
+      "ja": "人生で一番大変な一週間だった。",
+      "text": "That was the toughest week of my life."
+    }
+  ]
+}

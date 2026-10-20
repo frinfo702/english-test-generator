@@ -1,0 +1,16 @@
+{
+  "title": "Time and condition clauses",
+  "point": "After if, when, before, after, until and as soon as, use the present tense even when you talk about the future.",
+  "sentences": [
+    { "id": "s1", "ja": "明日雨が降ったら、家で映画を観よう。", "text": "If it rains tomorrow, let's just watch a movie at home.", "note": "Say \"if it rains\", not \"if it will rain\", for a future condition." },
+    { "id": "s2", "ja": "駅に着いたら電話するね。", "text": "I'll call you when I get to the station.", "note": "Use \"when I get\", not \"when I will get\"; \"get to\" is more natural than \"arrive at\" here." },
+    { "id": "s3", "ja": "出かける前に電気を消してね。", "text": "Turn off the lights before you leave." },
+    { "id": "s4", "ja": "授業が終わったら図書館に行きます。", "text": "I'm going to the library after class is over." },
+    { "id": "s5", "ja": "彼が来るまでここで待っていよう。", "text": "Let's wait here until he shows up." },
+    { "id": "s6", "ja": "結果が出たらすぐに知らせます。", "text": "I'll let you know as soon as I get the results." },
+    { "id": "s7", "ja": "急がないと終電に乗り遅れるよ。", "text": "If we don't hurry, we're going to miss the last train.", "note": "Japanese 〜ないと often becomes \"If we don't...\" in English." },
+    { "id": "s8", "ja": "わからないことがあったら、いつでも聞いてください。", "text": "If you have any questions, feel free to ask me anytime." },
+    { "id": "s9", "ja": "子どもの頃、よくこの公園で遊んだものです。", "text": "When I was a kid, I used to play in this park a lot." },
+    { "id": "s10", "ja": "データを集め終わるまで、結論は出せません。", "text": "We can't draw any conclusions until we finish collecting the data." }
+  ]
+}

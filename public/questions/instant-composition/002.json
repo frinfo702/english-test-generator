@@ -1,0 +1,16 @@
+{
+  "title": "be + adjectives: people, places, feelings",
+  "point": "Use am, is or are with an adjective to describe how someone or something is, including how you feel.",
+  "sentences": [
+    { "id": "s1", "ja": "今日はすごく疲れてる。", "text": "I'm really tired today." },
+    { "id": "s2", "ja": "この部屋、ちょっと寒くない？", "text": "Isn't it a little cold in here?", "note": "Native speakers describe room temperature with \"it\" and \"in here\" rather than \"this room is cold\"." },
+    { "id": "s3", "ja": "彼女はとても面倒見がいい。", "text": "She's very caring.", "note": "There's no one-word match for 面倒見がいい; \"caring\" or \"good at looking after people\" covers it." },
+    { "id": "s4", "ja": "明日の発表が不安です。", "text": "I'm nervous about tomorrow's presentation.", "note": "Feelings take \"about\": nervous about, excited about, worried about." },
+    { "id": "s5", "ja": "あのカフェはいつも混んでいる。", "text": "That cafe is always crowded." },
+    { "id": "s6", "ja": "このアプリは無料ですか？", "text": "Is this app free?" },
+    { "id": "s7", "ja": "統計学の授業はけっこう難しい。", "text": "The statistics class is pretty hard." },
+    { "id": "s8", "ja": "うちの両親は二人とも料理が上手です。", "text": "My parents are both good at cooking.", "note": "Put \"both\" after be: \"they are both\", not \"they both are\"." },
+    { "id": "s9", "ja": "駅はここから遠くないですよ。", "text": "The station isn't far from here." },
+    { "id": "s10", "ja": "彼はいつも時間に正確だ。", "text": "He's always on time.", "note": "\"On time\" is what people say; \"punctual\" is correct but more formal." }
+  ]
+}

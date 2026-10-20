@@ -40,6 +40,12 @@ const tests: TestItem[] = [
     path: "/dictation",
     icon: "pencil",
   },
+  {
+    title: "Instant Composition",
+    subtitle: "See the Japanese, say the English before the bar runs out",
+    path: "/instant-composition",
+    icon: "book",
+  },
 ];
 
 export function HomePage() {

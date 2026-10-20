@@ -89,6 +89,19 @@ function TickerArt() {
   );
 }
 
+/** Instant composition: a Japanese prompt turning into English as the bar drains. */
+function FlipArt() {
+  return (
+    <div className={styles.flip}>
+      <span lang="ja" className={styles.flipJa}>
+        行こう
+      </span>
+      <span className={styles.flipEn}>Let's go</span>
+      <span className={styles.flipBar} />
+    </div>
+  );
+}
+
 interface Card {
   title: string;
   desc: string;
@@ -140,6 +153,13 @@ const groups: { label: string; cards: Card[] }[] = [
         cta: "Start dictation",
         path: "/dictation",
         art: <TickerArt />,
+      },
+      {
+        title: "Instant Composition",
+        desc: "See the Japanese, say the English before the bar runs out.",
+        cta: "Start speaking",
+        path: "/instant-composition",
+        art: <FlipArt />,
       },
     ],
   },

@@ -1,0 +1,61 @@
+{
+  "title": "Sounding natural in conversation",
+  "point": "Soften requests and opinions, and react to what people say, with the small set phrases native speakers use all the time.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "もしよかったら、明日車で送ってもらえないかなと思って。",
+      "text": "I was wondering if you could give me a ride tomorrow.",
+      "note": "The past \"I was wondering\" is softer than \"I wonder\"; it's a polite way to ask a favor."
+    },
+    {
+      "id": "s2",
+      "ja": "窓、開けてもいいですか？",
+      "text": "Would you mind if I opened the window?",
+      "note": "To say yes to \"Would you mind…\", answer \"Not at all\" or \"Go ahead\", not \"Yes\"."
+    },
+    {
+      "id": "s3",
+      "ja": "今日は外食より家で食べたいな。",
+      "text": "I'd rather eat in tonight, if that's okay."
+    },
+    {
+      "id": "s4",
+      "ja": "その映画、ちょっと退屈だったかな。",
+      "text": "The movie was kind of boring, to be honest.",
+      "note": "\"Kind of\" softens a negative opinion, like Japanese \"ちょっと\"."
+    },
+    {
+      "id": "s5",
+      "ja": "まあ、そうなのかもね。",
+      "text": "Yeah, I guess you're right."
+    },
+    {
+      "id": "s6",
+      "ja": "なるほど、それなら納得。",
+      "text": "Oh, okay. That makes sense.",
+      "note": "\"That makes sense\" is the everyday \"なるほど\"; \"I see\" alone can sound flat."
+    },
+    {
+      "id": "s7",
+      "ja": "徹夜したの？どうりで眠そうなわけだ。",
+      "text": "You pulled an all-nighter? No wonder you look so tired."
+    },
+    {
+      "id": "s8",
+      "ja": "行くかどうかは天気次第だね。",
+      "text": "Whether we go really depends on the weather."
+    },
+    {
+      "id": "s9",
+      "ja": "えっ、本当に？それはついてなかったね。",
+      "text": "Wait, seriously? That's such bad luck."
+    },
+    {
+      "id": "s10",
+      "ja": "全然いいよ、気にしないで。",
+      "text": "Oh, no worries. It's totally fine.",
+      "note": "\"No worries\" answers both thanks and apologies in casual speech."
+    }
+  ]
+}

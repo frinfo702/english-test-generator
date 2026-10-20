@@ -30,7 +30,8 @@ export type TaskId =
   | "toeic/part6"
   | "toeic/part7"
   | "shadowing"
-  | "dictation";
+  | "dictation"
+  | "instant-composition";
 
 /** Fired on window when an all-correct score is saved. */
 export const PERFECT_SCORE_EVENT = "perfect-score";

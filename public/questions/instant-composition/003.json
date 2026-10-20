@@ -1,0 +1,16 @@
+{
+  "title": "Present progressive: now and for a while",
+  "point": "Use am, is or are plus -ing for what is happening right now and for temporary situations around now.",
+  "sentences": [
+    { "id": "s1", "ja": "ちょっと待って、今メール書いてるから。", "text": "Hang on, I'm writing an email." },
+    { "id": "s2", "ja": "外、雨降ってる？", "text": "Is it raining outside?" },
+    { "id": "s3", "ja": "今週は兄の家に泊まっています。", "text": "I'm staying at my brother's place this week.", "note": "A temporary stay takes the progressive; \"I live\" would sound permanent." },
+    { "id": "s4", "ja": "彼女は今、卒論に取り組んでいる。", "text": "She's working on her thesis at the moment.", "note": "\"Work on\" is the natural verb for an ongoing project." },
+    { "id": "s5", "ja": "最近、スペイン語を勉強してるんだ。", "text": "I'm learning Spanish these days." },
+    { "id": "s6", "ja": "子どもたちは庭で遊んでいます。", "text": "The kids are playing in the yard." },
+    { "id": "s7", "ja": "何してるの？", "text": "What are you doing?" },
+    { "id": "s8", "ja": "今、駅に向かってるところ。", "text": "I'm heading to the station now.", "note": "\"Head to\" is the everyday way to say you're on your way somewhere." },
+    { "id": "s9", "ja": "私たちは今、新しい実験の準備をしています。", "text": "We're getting ready for a new experiment right now." },
+    { "id": "s10", "ja": "物価がどんどん上がっている。", "text": "Prices are going up and up.", "note": "The progressive also shows a change in progress; どんどん maps to repeating the word." }
+  ]
+}

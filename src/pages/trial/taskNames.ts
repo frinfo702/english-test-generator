@@ -21,4 +21,5 @@ export const TASK_NAMES: Partial<Record<TaskId, string>> = {
   "toeic/part7": "Part 7: Reading Comprehension",
   shadowing: "Shadowing",
   dictation: "Dictation",
+  "instant-composition": "Instant Composition",
 };

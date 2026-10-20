@@ -16,6 +16,7 @@ import { ListenRepeatPage } from "./pages/toefl/speaking/ListenRepeatPage";
 import { TakeInterviewPage } from "./pages/toefl/speaking/TakeInterviewPage";
 import { ShadowingPage } from "./pages/ShadowingPage";
 import { DictationPage } from "./pages/DictationPage";
+import { InstantCompositionPage } from "./pages/InstantCompositionPage";
 import {
   ConversationPage,
   LecturePage,
@@ -211,6 +212,14 @@ const taskRoutes: TaskRoute[] = [
     subtitle: "Select a question number or start with random.",
     backTo: "/learn",
     page: <DictationPage />,
+  },
+  {
+    basePath: "/instant-composition",
+    taskId: "instant-composition",
+    title: "Instant Composition",
+    subtitle: "Units build up from the present tense to seminar English.",
+    backTo: "/learn",
+    page: <InstantCompositionPage />,
   },
 ];
 

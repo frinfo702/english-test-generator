@@ -451,6 +451,39 @@ export function ItemReview({
         </div>
       );
     }
+    case "instant-composition": {
+      const d = question as {
+        sentences: { id: string; ja: string; text: string }[];
+      };
+      const misses = new Map(
+        (attempt?.responses ?? []).map((r) => [r.itemId, r.misses ?? 0]),
+      );
+      return (
+        <table className={styles.reviewTable}>
+          <thead>
+            <tr>
+              <th>Prompt</th>
+              <th>English</th>
+              <th>On time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {d.sentences.map((s) => {
+              const missed = (misses.get(s.id) ?? 0) > 0;
+              return (
+                <tr key={s.id}>
+                  <td lang="ja">{s.ja}</td>
+                  <td>{s.text}</td>
+                  <td className={missed ? styles.wrong : styles.ok}>
+                    {missed ? "Missed" : "Got it"}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      );
+    }
     case "dictation": {
       const d = question as { sentences: { id: string; text: string }[] };
       const misses = new Map(

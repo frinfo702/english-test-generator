@@ -202,6 +202,36 @@
   color: var(--color-ink-secondary);
 }
 
+/* ---- Instant composition: prompt → English ---- */
+
+.flip {
+  display: grid;
+  width: 84px;
+  gap: 6px;
+}
+
+.flipJa,
+.flipEn {
+  grid-area: 1 / 1;
+  font-size: var(--text-sm);
+  text-align: right;
+}
+
+.flipJa {
+  color: var(--color-ink-secondary);
+}
+
+.flipEn {
+  opacity: 0;
+  font-weight: var(--font-medium);
+}
+
+.flipBar {
+  height: 2px;
+  background: var(--color-ink-disabled);
+  transform-origin: left;
+}
+
 /* ---- Hover: touch fires false hovers on tap, so gate it. ---- */
 
 @media (hover: hover) and (pointer: fine) {
@@ -247,6 +277,46 @@
 
   .card:hover .tickerTrack {
     animation: roll 4.8s var(--ease-in-out) infinite;
+  }
+
+  .card:hover .flipBar {
+    background: var(--color-signal);
+    animation: drain 1.2s linear both;
+  }
+
+  .card:hover .flipJa {
+    animation: hide 1.2s both;
+  }
+
+  .card:hover .flipEn {
+    animation: show 1.2s both;
+  }
+}
+
+@keyframes drain {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* The swap waits for the bar to empty, then flips in one step. */
+@keyframes show {
+  0%,
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hide {
+  0%,
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 

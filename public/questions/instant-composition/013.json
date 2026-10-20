@@ -1,0 +1,16 @@
+{
+  "title": "Passive voice",
+  "point": "Use be + past participle when what happens to something matters more than who did it.",
+  "sentences": [
+    { "id": "s1", "ja": "このお店は1950年に創業しました。", "text": "This shop was founded in 1950.", "note": "Businesses \"were founded\" or \"were opened\"; the passive is the natural choice." },
+    { "id": "s2", "ja": "昨日、自転車を盗まれました。", "text": "My bike was stolen yesterday.", "note": "Avoid \"I was stolen my bike\"; the thing stolen becomes the subject." },
+    { "id": "s3", "ja": "この部屋は毎朝掃除されています。", "text": "This room is cleaned every morning." },
+    { "id": "s4", "ja": "授業は台風のため休講になりました。", "text": "Class was canceled because of the typhoon." },
+    { "id": "s5", "ja": "彼はパーティーに招待されなかった。", "text": "He wasn't invited to the party." },
+    { "id": "s6", "ja": "この曲は世界中で愛されています。", "text": "This song is loved all over the world." },
+    { "id": "s7", "ja": "会議は来週に延期されました。", "text": "The meeting has been postponed until next week." },
+    { "id": "s8", "ja": "その論文はまだ出版されていません。", "text": "The paper hasn't been published yet." },
+    { "id": "s9", "ja": "この写真は祖父が撮ったものです。", "text": "This photo was taken by my grandfather.", "note": "Keep \"by\" only when the person really matters, as here." },
+    { "id": "s10", "ja": "ここでは英語とスペイン語が話されています。", "text": "English and Spanish are spoken here." }
+  ]
+}

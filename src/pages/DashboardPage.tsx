@@ -52,6 +52,7 @@ const TASK_LABELS: Record<TaskId, string> = {
   "toeic/part7": "TOEIC Part 7",
   shadowing: "Shadowing",
   dictation: "Dictation",
+  "instant-composition": "Instant Composition",
 };
 
 const TASK_HUES: Record<string, string> = {
@@ -75,6 +76,7 @@ const TASK_HUES: Record<string, string> = {
   "toeic/part7": "--color-toeic",
   shadowing: "--color-speaking",
   dictation: "--color-writing",
+  "instant-composition": "--color-speaking",
 };
 /** "TOEFL Speaking: Interview · 001 · q1" instead of the raw storage path. */
 function attemptLabel(a: Attempt, itemId?: string): string {
@@ -211,7 +213,11 @@ const TASK_GROUPS: { label: string; has: (id: TaskId) => boolean }[] = [
   { label: "TOEFL Speaking", has: (id) => id.startsWith("toefl/speaking/") },
   { label: "TOEFL Practice Test", has: (id) => id === "toefl/trial" },
   { label: "TOEIC L&R", has: (id) => id.startsWith("toeic/") },
-  { label: "Drills", has: (id) => id === "shadowing" || id === "dictation" },
+  {
+    label: "Drills",
+    has: (id) =>
+      id === "shadowing" || id === "dictation" || id === "instant-composition",
+  },
 ];
 
 export function DashboardPage() {

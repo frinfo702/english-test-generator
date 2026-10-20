@@ -1,0 +1,60 @@
+{
+  "title": "Causatives and phrasal verbs",
+  "point": "Use have/get something done when someone else does the job, let/make someone do for permission and pressure, and short phrasal verbs where Japanese uses one formal verb.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "昨日、髪を切ってきたんだ。",
+      "text": "I got my hair cut yesterday.",
+      "note": "\"I cut my hair\" sounds like you did it yourself; \"got my hair cut\" means a stylist did it."
+    },
+    {
+      "id": "s2",
+      "ja": "エアコンを修理してもらわないといけない。",
+      "text": "We need to have the air conditioner fixed."
+    },
+    {
+      "id": "s3",
+      "ja": "親は夜遅くまで外にいさせてくれなかった。",
+      "text": "My parents wouldn't let me stay out late."
+    },
+    {
+      "id": "s4",
+      "ja": "先生に、レポートを全部書き直させられた。",
+      "text": "The teacher made me rewrite the whole paper.",
+      "note": "\"Make someone do\" has no \"to\": made me rewrite, not made me to rewrite."
+    },
+    {
+      "id": "s5",
+      "ja": "この問題の解き方がまだ分からない。",
+      "text": "I still can't figure out how to solve this problem.",
+      "note": "\"Figure out\" is the everyday verb for working something out; \"understand\" sounds passive here."
+    },
+    {
+      "id": "s6",
+      "ja": "コピー用紙が切れちゃった。",
+      "text": "We've run out of printer paper."
+    },
+    {
+      "id": "s7",
+      "ja": "歯医者に行くのをずっと先延ばしにしてる。",
+      "text": "I keep putting off going to the dentist."
+    },
+    {
+      "id": "s8",
+      "ja": "週末は、たまったメールを片付けるつもり。",
+      "text": "I'm going to catch up on my emails this weekend."
+    },
+    {
+      "id": "s9",
+      "ja": "誰かもっといいアイデア思いつかない？",
+      "text": "Can anyone come up with a better idea?"
+    },
+    {
+      "id": "s10",
+      "ja": "少し考えさせてもらえますか？",
+      "text": "Can you let me think about it for a bit?",
+      "note": "Native speakers usually say \"Let me think about it\" rather than \"Please give me time to consider\"."
+    }
+  ]
+}
