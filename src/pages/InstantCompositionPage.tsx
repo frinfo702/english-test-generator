@@ -28,6 +28,39 @@ interface ProblemData {
 
 type Phase = "prompt" | "reveal" | "done";
 
+/** Marks the usage note: a hand jotting it down, the ink drawing in under the nib. */
+function WritingHand() {
+  return (
+    <svg
+      className={styles.hand}
+      viewBox="0 0 40 32"
+      width="40"
+      height="32"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path
+        className={styles.ink}
+        d="M.8 29.2c1.4-2.2 2.6-2.2 3.1 0s1.8 1.4 2.4-1.4"
+        pathLength={1}
+      />
+      <g className={styles.pen}>
+        <path className={styles.penBody} d="M6.6 26.4 31 2.6" />
+        <path className={styles.penBody} d="M6.6 26.4 5.6 28.6 8 27.6" />
+        <path
+          className={styles.palm}
+          d="M13 18.6C15 15.2 19 12.6 23 12.6C27 12.6 30 14 33 16L40 19.4V27.4L33.6 25.6C30.4 27.8 25.4 28.4 21.2 26.8C18.2 25.8 15.8 23.2 15.2 21Z"
+        />
+        <path d="M17 15.8C17.4 18.4 19.6 20.2 22.2 19.6" />
+        <path d="M21.2 26.8C22 24.4 21.4 22.4 19.8 21.2" />
+        <path d="M26.4 27.6C27.2 25.2 26.4 23.2 24.8 22.2" />
+      </g>
+    </svg>
+  );
+}
+
 function DrillContent({ data, file }: { data: ProblemData; file: string }) {
   const { playing, play, stop } = useTts();
   const { saveScore } = useScoreHistory();
@@ -261,7 +294,8 @@ function DrillContent({ data, file }: { data: ProblemData; file: string }) {
             <p className={styles.en}>{sentence.text}</p>
             {sentence.note && (
               <p className={styles.note}>
-                <span className="doc-meta">Note</span>
+                <WritingHand />
+                <span className="sr-only">Note:</span>
                 {sentence.note}
               </p>
             )}

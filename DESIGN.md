@@ -167,7 +167,11 @@ recoloured.
 - Second exception: the Learn hub (`/learn`) is the one card grid. Each
   card's small drawing (section path, score bars, stacked sections, waveform,
   word ticker) wakes on hover only, gated by `(hover: hover) and (pointer:
-  fine)`; under `prefers-reduced-motion` only colour changes.
+fine)`; under `prefers-reduced-motion` only colour changes.
+- Third exception: the instant composition drill marks its usage note with a
+  line-drawn writing hand that scribbles three strokes (ink drawing in under
+  the nib) when the answer reveals, then rests. Static under
+  `prefers-reduced-motion`.
 
 ## Anti-patterns
 
