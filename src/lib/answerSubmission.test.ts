@@ -106,12 +106,17 @@ describe("answerSubmission", () => {
       prompt: "Task",
       userAnswer: "Answer",
       criteria: ["Task completion: covers both", "Language use: grammar"],
+      template: [
+        { name: "Greeting", does: "opens politely", phrases: [] },
+        { name: "Sign-off", does: "closes politely", phrases: [] },
+      ],
     });
 
     expect(message).toContain("1. Task completion: covers both");
     expect(message).toContain("2. Language use: grammar");
+    expect(message).toContain("1. Greeting: opens politely");
     expect(message).toContain(
-      '{"criteria": [{"points": 0, "note": "..."}, {"points": 0, "note": "..."}], "score": 0}',
+      '{"criteria": [{"points": 0, "note": "..."}, {"points": 0, "note": "..."}], "edits": [{"from": "...", "to": "...", "theme": "grammar", "why": "..."}], "template": [0, 0], "score": 0}',
     );
   });
 

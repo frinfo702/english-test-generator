@@ -24,6 +24,7 @@ import type { DailyLifeData } from "../toefl/reading/dailyLife";
 import { DailyLifeTextView } from "../toefl/reading/DailyLifeTextView";
 import { isCorrectOrder } from "../toefl/writing/buildSentence";
 import { WritingCriteria } from "../toefl/writing/WritingScore";
+import { WritingFeedback } from "../toefl/writing/SuggestedEdits";
 import { AiScore } from "../toefl/speaking/AutoScore";
 import {
   INTERVIEW_TYPE_LABELS,
@@ -429,6 +430,11 @@ export function ItemReview({
               <WritingCriteria
                 taskId={taskId}
                 question={question}
+                reply={r.aiReply}
+              />
+              <WritingFeedback
+                taskId={taskId}
+                text={r.text ?? ""}
                 reply={r.aiReply}
               />
             </section>
