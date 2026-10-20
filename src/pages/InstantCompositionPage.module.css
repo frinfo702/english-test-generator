@@ -100,21 +100,20 @@
   color: var(--color-ink-secondary);
 }
 
-/* Writing hand: scribbles a few strokes as the note appears, then rests, so
+/* Writing pen: scribbles a few strokes as the note appears, then rests, so
  * it never keeps moving beside text being read. */
-.hand {
+.penMark {
   flex-shrink: 0;
   overflow: visible;
-  stroke: var(--color-ink-tertiary);
-  stroke-width: 1.3;
+  stroke-width: 1.4;
 }
 
-.penBody {
+.penMark .pen {
   stroke: var(--color-ink);
-  stroke-width: 2;
 }
 
-.palm {
+/* Filled so the ink line never shows through the pen. */
+.barrel {
   fill: var(--color-surface);
 }
 
@@ -125,7 +124,7 @@
 }
 
 .pen {
-  /* Pivot at the nib, so the hand rocks the way a wrist does. */
+  /* Pivot at the nib, so the pen rocks the way a wrist moves it. */
   transform-box: fill-box;
   transform-origin: 0% 100%;
   animation: scribble 0.9s var(--ease-in-out) 3 both;
@@ -140,7 +139,7 @@
   }
 }
 
-/* Small loops left to right, like cursive, then the hand lifts back. */
+/* Small loops left to right, like cursive, then the pen lifts back. */
 @keyframes scribble {
   0% {
     transform: translate(-3px, 0) rotate(0deg);

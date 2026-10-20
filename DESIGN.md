@@ -169,7 +169,7 @@ recoloured.
   word ticker) wakes on hover only, gated by `(hover: hover) and (pointer:
 fine)`; under `prefers-reduced-motion` only colour changes.
 - Third exception: the instant composition drill marks its usage note with a
-  line-drawn writing hand that scribbles three strokes (ink drawing in under
+  line-drawn pen that scribbles three strokes (ink drawing in under
   the nib) when the answer reveals, then rests. Static under
   `prefers-reduced-motion`.
 

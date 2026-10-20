@@ -28,14 +28,14 @@ interface ProblemData {
 
 type Phase = "prompt" | "reveal" | "done";
 
-/** Marks the usage note: a hand jotting it down, the ink drawing in under the nib. */
-function WritingHand() {
+/** Marks the usage note: a pen jotting it down, the ink drawing in under the nib. */
+function WritingPen() {
   return (
     <svg
-      className={styles.hand}
-      viewBox="0 0 40 32"
-      width="40"
-      height="32"
+      className={styles.penMark}
+      viewBox="0 0 32 32"
+      width="28"
+      height="28"
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -47,15 +47,20 @@ function WritingHand() {
         pathLength={1}
       />
       <g className={styles.pen}>
-        <path className={styles.penBody} d="M6.6 26.4 31 2.6" />
-        <path className={styles.penBody} d="M6.6 26.4 5.6 28.6 8 27.6" />
-        <path
-          className={styles.palm}
-          d="M13 18.6C15 15.2 19 12.6 23 12.6C27 12.6 30 14 33 16L40 19.4V27.4L33.6 25.6C30.4 27.8 25.4 28.4 21.2 26.8C18.2 25.8 15.8 23.2 15.2 21Z"
-        />
-        <path d="M17 15.8C17.4 18.4 19.6 20.2 22.2 19.6" />
-        <path d="M21.2 26.8C22 24.4 21.4 22.4 19.8 21.2" />
-        <path d="M26.4 27.6C27.2 25.2 26.4 23.2 24.8 22.2" />
+        {/* Drawn lying flat with the tip at the origin, then tilted onto the ink. */}
+        <g transform="translate(6 27.4) rotate(-45)">
+          <rect
+            className={styles.barrel}
+            x="5"
+            y="-2.2"
+            width="22"
+            height="4.4"
+            rx="1.2"
+          />
+          <path className={styles.barrel} d="M5 -2.2 .6 0 5 2.2" />
+          <path d="M9 -2.2v4.4" />
+          <path d="M24 -2.2V-3.8H15.5" />
+        </g>
       </g>
     </svg>
   );
@@ -294,7 +299,7 @@ function DrillContent({ data, file }: { data: ProblemData; file: string }) {
             <p className={styles.en}>{sentence.text}</p>
             {sentence.note && (
               <p className={styles.note}>
-                <WritingHand />
+                <WritingPen />
                 <span className="sr-only">Note:</span>
                 {sentence.note}
               </p>
