@@ -1,0 +1,60 @@
+{
+  "title": "Present perfect",
+  "point": "Use have + past participle for life experience, something just finished, or a state that started in the past and continues now.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "沖縄に行ったことある？",
+      "text": "Have you ever been to Okinawa?",
+      "note": "For visits, use \"been to\", not \"gone to\"."
+    },
+    {
+      "id": "s2",
+      "ja": "納豆は一回も食べたことがない。",
+      "text": "I've never tried natto."
+    },
+    {
+      "id": "s3",
+      "ja": "もうお昼食べた？",
+      "text": "Have you had lunch yet?",
+      "note": "\"Have lunch\" is more natural than \"eat lunch\" in this question."
+    },
+    {
+      "id": "s4",
+      "ja": "ちょうど課題を提出したところ。",
+      "text": "I've just turned in my assignment."
+    },
+    {
+      "id": "s5",
+      "ja": "鍵をなくしちゃった。",
+      "text": "I've lost my keys.",
+      "note": "The present perfect tells the listener the keys are still missing."
+    },
+    {
+      "id": "s6",
+      "ja": "ここに住んで五年になります。",
+      "text": "I've lived here for five years."
+    },
+    {
+      "id": "s7",
+      "ja": "月曜からずっと風邪気味なんだ。",
+      "text": "I've had a cold since Monday.",
+      "note": "English says you \"have\" a cold, so \"have had\" covers the whole stretch."
+    },
+    {
+      "id": "s8",
+      "ja": "久しぶり！元気だった？",
+      "text": "Long time no see! How have you been?"
+    },
+    {
+      "id": "s9",
+      "ja": "まだその論文読んでないんだ。",
+      "text": "I haven't read that paper yet."
+    },
+    {
+      "id": "s10",
+      "ja": "彼女とは高校時代からの知り合いです。",
+      "text": "I've known her since high school."
+    }
+  ]
+}

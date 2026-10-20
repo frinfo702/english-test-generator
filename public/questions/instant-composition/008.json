@@ -1,0 +1,60 @@
+{
+  "title": "Should, have to, must",
+  "point": "Should gives advice, have to states a real obligation, must is strong or written, and don't have to means it isn't necessary.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "今日は早く寝たほうがいいよ。",
+      "text": "You should get to bed early tonight.",
+      "note": "\"Had better\" sounds like a warning, so \"should\" is safer for friendly advice."
+    },
+    {
+      "id": "s2",
+      "ja": "明日は朝六時に起きなきゃいけないんだ。",
+      "text": "I have to get up at six tomorrow."
+    },
+    {
+      "id": "s3",
+      "ja": "急がなくていいよ、時間はたっぷりあるから。",
+      "text": "You don't have to rush. We've got plenty of time.",
+      "note": "\"Don't have to\" means it's not needed; \"mustn't\" would forbid it."
+    },
+    {
+      "id": "s4",
+      "ja": "このことは誰にも言っちゃダメだよ。",
+      "text": "You mustn't tell anyone about this, okay?"
+    },
+    {
+      "id": "s5",
+      "ja": "その件、上司に相談したほうがいいと思う。",
+      "text": "I think you should talk to your boss about it.",
+      "note": "Wrapping \"should\" in \"I think\" makes the advice sound less pushy."
+    },
+    {
+      "id": "s6",
+      "ja": "昨日は残業しなきゃいけなかった。",
+      "text": "I had to stay late at work yesterday."
+    },
+    {
+      "id": "s7",
+      "ja": "この薬は食後に飲まなければなりません。",
+      "text": "You must take this medicine after meals."
+    },
+    {
+      "id": "s8",
+      "ja": "全部の論文を読む必要はないよ。",
+      "text": "You don't have to read every single paper."
+    },
+    {
+      "id": "s9",
+      "ja": "レポートには参考文献を必ず載せること。",
+      "text": "You have to include a reference list in your report."
+    },
+    {
+      "id": "s10",
+      "ja": "何時までに着けばいいですか？",
+      "text": "What time should I be there by?",
+      "note": "English uses \"should\" here; a literal \"is it good if\" sounds odd."
+    }
+  ]
+}

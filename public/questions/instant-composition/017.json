@@ -1,0 +1,60 @@
+{
+  "title": "Reported speech and indirect questions",
+  "point": "Pass on what someone said with said/told/asked, and soften questions by tucking them inside \"Do you know…\" or \"I wonder…\" with normal word order.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "駅ってどこにあるか分かりますか？",
+      "text": "Do you know where the station is?",
+      "note": "After \"Do you know\", the question goes back to statement order: \"where the station is\", not \"where is the station\"."
+    },
+    {
+      "id": "s2",
+      "ja": "先生、来週は休講だって言ってたよ。",
+      "text": "The professor said there's no class next week.",
+      "note": "When the news is still true, native speakers often keep the present tense after \"said\"."
+    },
+    {
+      "id": "s3",
+      "ja": "彼女に、遅れるって伝えておいてくれる？",
+      "text": "Could you tell her I'm running a bit late?"
+    },
+    {
+      "id": "s4",
+      "ja": "店員さんに、席が空いてるか聞いてみるね。",
+      "text": "I'll ask the server if they have a table free."
+    },
+    {
+      "id": "s5",
+      "ja": "あの店、まだ開いてるかなあ。",
+      "text": "I wonder if that place is still open.",
+      "note": "\"I wonder if…\" is how English says \"〜かなあ\" when you're thinking out loud."
+    },
+    {
+      "id": "s6",
+      "ja": "このデータを使っていいのかどうか、よく分からないんです。",
+      "text": "I'm not sure whether we're allowed to use this data."
+    },
+    {
+      "id": "s7",
+      "ja": "上司に、報告書はもう終わったのかって聞かれた。",
+      "text": "My boss asked me if I'd finished the report yet."
+    },
+    {
+      "id": "s8",
+      "ja": "何時に始まるか教えてもらえますか？",
+      "text": "Could you tell me what time it starts?"
+    },
+    {
+      "id": "s9",
+      "ja": "彼、そのパーティーには行かないって言ってたけど。",
+      "text": "He told me he wasn't going to the party, though.",
+      "note": "\"Told\" needs a person after it (told me); \"said\" doesn't (said that…)."
+    },
+    {
+      "id": "s10",
+      "ja": "なんで彼があんなに怒ってたのか、いまだに分からない。",
+      "text": "I still don't get why he was so upset."
+    }
+  ]
+}

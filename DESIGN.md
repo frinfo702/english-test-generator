@@ -85,7 +85,7 @@ mono with `tabular-nums`; headline numerals use the display face.
 
 ## Layout
 
-- Nav: Learn (TOEFL, TOEIC, Practice Test, Shadowing, Dictation behind one
+- Nav: Learn (TOEFL, TOEIC, Practice Test, Shadowing, Dictation, Instant Composition behind one
   tab) · Review · Dashboard · Settings.
 - Header 60px, translucent paper, hairline bottom rule. Nav is plain text
   links; the active one stands on a 2px signal bar on the header rule.

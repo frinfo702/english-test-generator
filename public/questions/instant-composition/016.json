@@ -1,0 +1,61 @@
+{
+  "title": "Hypotheticals",
+  "point": "Shift the verb one step into the past to talk about things that aren't true now (if I had…, I'd…) or didn't happen (if I'd known…, I would've…).",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "もし車を持ってたら、週末は海までドライブするのになあ。",
+      "text": "If I had a car, I'd drive out to the coast on weekends.",
+      "note": "Use \"I'd\" for the result, not \"I will\": the whole situation is imaginary."
+    },
+    {
+      "id": "s2",
+      "ja": "もっと時間があったら、そのゼミも取りたいんだけど。",
+      "text": "If I had more time, I'd take that seminar too."
+    },
+    {
+      "id": "s3",
+      "ja": "私があなたの立場だったら、教授に直接メールするかな。",
+      "text": "If I were you, I'd just email the professor directly.",
+      "note": "\"If I were you\" is the set phrase for advice; \"just\" makes it sound casual rather than bossy."
+    },
+    {
+      "id": "s4",
+      "ja": "締め切りが変わったって知ってたら、昨日のうちに出してたよ。",
+      "text": "If I'd known the deadline had changed, I would've turned it in yesterday.",
+      "note": "In speech \"would have\" is usually \"would've\", which sounds like \"woulda\"."
+    },
+    {
+      "id": "s5",
+      "ja": "あの電車に間に合ってたら、面接に遅れなかったのに。",
+      "text": "If I'd caught that train, I wouldn't have been late for the interview."
+    },
+    {
+      "id": "s6",
+      "ja": "もっとちゃんと英語を勉強しておけばよかった。",
+      "text": "I wish I'd studied English more seriously when I was younger.",
+      "note": "Japanese \"〜しておけばよかった\" is \"I wish I'd…\" or \"I should've…\", not \"It was good if…\"."
+    },
+    {
+      "id": "s7",
+      "ja": "家がもうちょっと駅に近ければいいのに。",
+      "text": "I wish my place were a little closer to the station.",
+      "note": "\"My place\" is the natural casual way to say your home or apartment."
+    },
+    {
+      "id": "s8",
+      "ja": "せめてあと一日あればなあ。",
+      "text": "If only we had one more day to finish this."
+    },
+    {
+      "id": "s9",
+      "ja": "彼が手伝ってくれなかったら、引っ越しは終わらなかったと思う。",
+      "text": "If he hadn't helped us, we never would've finished the move."
+    },
+    {
+      "id": "s10",
+      "ja": "宝くじが当たったら、何に使う？",
+      "text": "What would you do if you won the lottery?"
+    }
+  ]
+}

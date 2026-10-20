@@ -1,0 +1,60 @@
+{
+  "title": "Seminar and discussion English",
+  "point": "Give an opinion, agree or push back politely, and ask for or offer clarification with the frames people use in seminars and meetings.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "私は、このデータだけでは結論は出せないと思います。",
+      "text": "I'd argue that this data alone isn't enough to draw a conclusion.",
+      "note": "\"I'd argue that…\" sounds confident but open; \"I think\" alone can sound weak in a seminar."
+    },
+    {
+      "id": "s2",
+      "ja": "確かにその通りですが、コストの問題も考える必要があると思います。",
+      "text": "That's a fair point, but we also need to think about the cost.",
+      "note": "Acknowledge first, then disagree: \"That's a fair point, but…\" keeps it polite."
+    },
+    {
+      "id": "s3",
+      "ja": "つまり、言いたいのは、サンプルが小さすぎるということです。",
+      "text": "What I mean is, the sample is just too small."
+    },
+    {
+      "id": "s4",
+      "ja": "さっきの田中さんの意見に付け加えると、地域差も大きいと思います。",
+      "text": "Building on what Tanaka said, I think regional differences matter a lot too."
+    },
+    {
+      "id": "s5",
+      "ja": "その点について、もう少し詳しく説明してもらえますか？",
+      "text": "Could you elaborate on that point a little?"
+    },
+    {
+      "id": "s6",
+      "ja": "ちょっと確認させてください。調査は去年行われたんですよね？",
+      "text": "Just to clarify, the survey was done last year, right?",
+      "note": "\"Just to clarify\" opens a check without sounding like you're challenging the speaker."
+    },
+    {
+      "id": "s7",
+      "ja": "完全には賛成できないんですが、理由を説明させてください。",
+      "text": "I don't completely agree, but let me explain why.",
+      "note": "\"I don't completely agree\" is softer and more natural than \"I disagree\"."
+    },
+    {
+      "id": "s8",
+      "ja": "言い換えると、原因と結果が逆かもしれないということです。",
+      "text": "In other words, the cause and effect might be the other way around."
+    },
+    {
+      "id": "s9",
+      "ja": "それは興味深い視点ですね。そういう風には考えたことがありませんでした。",
+      "text": "That's an interesting perspective. I hadn't thought of it that way."
+    },
+    {
+      "id": "s10",
+      "ja": "話がそれてしまいましたが、本題に戻ってもいいですか？",
+      "text": "Sorry, we've gotten a bit off track. Can we get back to the main question?"
+    }
+  ]
+}

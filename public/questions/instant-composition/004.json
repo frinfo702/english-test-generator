@@ -1,0 +1,16 @@
+{
+  "title": "Past simple: what happened",
+  "point": "Use the past simple for finished actions at a specific time in the past, and watch the irregular verbs.",
+  "sentences": [
+    { "id": "s1", "ja": "昨日の夜、友達と焼肉を食べに行った。", "text": "I went out for Korean barbecue with friends last night.", "note": "\"Go out for\" + food is how people say they went out to eat something." },
+    { "id": "s2", "ja": "財布を家に忘れてきちゃった。", "text": "I left my wallet at home.", "note": "When you say where, use \"leave\"; \"forget\" alone means it slipped your mind." },
+    { "id": "s3", "ja": "先週、成績のことで教授にメールした。", "text": "I emailed my professor about my grade last week." },
+    { "id": "s4", "ja": "その映画、どうだった？", "text": "How did you like the movie?" },
+    { "id": "s5", "ja": "彼は会議に間に合わなかった。", "text": "He didn't make it to the meeting on time.", "note": "\"Make it\" is the everyday way to say 間に合う." },
+    { "id": "s6", "ja": "私たちは三年前に大阪に引っ越しました。", "text": "We moved to Osaka three years ago." },
+    { "id": "s7", "ja": "昨日はほとんど寝られなかった。", "text": "I barely slept last night." },
+    { "id": "s8", "ja": "レポートは締め切り前に出した？", "text": "Did you turn in your paper before the deadline?" },
+    { "id": "s9", "ja": "駅で偶然高校の同級生に会った。", "text": "I ran into a high school classmate at the station.", "note": "\"Run into\" means meeting by chance; \"meet\" sounds planned." },
+    { "id": "s10", "ja": "そのパソコン、いくらだった？", "text": "How much did you pay for that laptop?" }
+  ]
+}

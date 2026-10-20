@@ -1,0 +1,16 @@
+{
+  "title": "Future: will, going to and plans",
+  "point": "Use will for decisions made on the spot and promises, be going to for intentions and things you can see coming, and the present progressive for fixed plans.",
+  "sentences": [
+    { "id": "s1", "ja": "電話が鳴ってる。私が出るよ。", "text": "The phone's ringing. I'll get it.", "note": "A decision made right now takes \"will\"; \"get it\" means answer the phone or the door." },
+    { "id": "s2", "ja": "この夏はバイトでお金を貯めるつもり。", "text": "I'm going to save up money from my part-time job this summer." },
+    { "id": "s3", "ja": "明日の午後、歯医者の予約があるんだ。", "text": "I'm seeing the dentist tomorrow afternoon.", "note": "An appointment already on the calendar takes the present progressive." },
+    { "id": "s4", "ja": "空を見て。雨が降りそうだ。", "text": "Look at the sky. It's going to rain." },
+    { "id": "s5", "ja": "それ、持ってあげるよ。", "text": "I'll carry that for you.", "note": "Offers made on the spot use \"will\", not \"going to\"." },
+    { "id": "s6", "ja": "彼らは来月結婚します。", "text": "They're getting married next month." },
+    { "id": "s7", "ja": "心配しないで。誰にも言わないから。", "text": "Don't worry. I won't tell anyone." },
+    { "id": "s8", "ja": "来学期は心理学の授業を取るつもりです。", "text": "I'm going to take a psychology class next semester." },
+    { "id": "s9", "ja": "今夜は何か予定ある？", "text": "What are you doing tonight?" },
+    { "id": "s10", "ja": "このペースだと、締め切りに間に合わないと思う。", "text": "At this rate, I don't think we'll make the deadline.", "note": "Say \"I don't think we'll\" rather than \"I think we won't\"." }
+  ]
+}

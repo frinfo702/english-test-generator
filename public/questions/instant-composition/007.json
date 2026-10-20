@@ -1,0 +1,60 @@
+{
+  "title": "Can, could, may",
+  "point": "Use can for ability and casual requests, could for softer requests or past ability, and may for formal permission.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "私、全然泳げないんだよね。",
+      "text": "I can't swim at all, actually."
+    },
+    {
+      "id": "s2",
+      "ja": "塩取ってもらえる？",
+      "text": "Can you pass me the salt?",
+      "note": "Between friends, \"Can you...?\" is a request, not a question about ability."
+    },
+    {
+      "id": "s3",
+      "ja": "もう少しゆっくり話していただけますか？",
+      "text": "Could you speak a little more slowly?"
+    },
+    {
+      "id": "s4",
+      "ja": "ちょっと質問してもよろしいでしょうか？",
+      "text": "May I ask you a quick question?"
+    },
+    {
+      "id": "s5",
+      "ja": "子どもの頃は逆立ちができたんだ。",
+      "text": "I could do a handstand when I was a kid."
+    },
+    {
+      "id": "s6",
+      "ja": "昨日は全然眠れなかった。",
+      "text": "I couldn't sleep at all last night.",
+      "note": "English says \"last night\" here, not \"yesterday\"."
+    },
+    {
+      "id": "s7",
+      "ja": "ここに荷物置いてもいい？",
+      "text": "Can I leave my bag here for a minute?"
+    },
+    {
+      "id": "s8",
+      "ja": "その資料、メールで送っていただけますか？",
+      "text": "Could you email me those slides?",
+      "note": "\"Email\" works as a verb, so \"send by email\" is rarely needed."
+    },
+    {
+      "id": "s9",
+      "ja": "図書館では辞書を三冊まで借りられます。",
+      "text": "You can borrow up to three dictionaries from the library."
+    },
+    {
+      "id": "s10",
+      "ja": "金曜までに課題を終わらせられるかわからない。",
+      "text": "I'm not sure I can finish the assignment by Friday.",
+      "note": "\"I'm not sure\" plus a clause sounds more natural than \"I don't know if\" here."
+    }
+  ]
+}

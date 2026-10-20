@@ -1,0 +1,60 @@
+{
+  "title": "Wh-questions",
+  "point": "Put the question word first, then do/does/did or the helper verb, then the subject.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "週末は何してたの？",
+      "text": "What did you get up to over the weekend?",
+      "note": "\"Get up to\" is the casual way friends ask what someone did."
+    },
+    {
+      "id": "s2",
+      "ja": "一番近い駅ってどこですか？",
+      "text": "Where's the nearest station from here?"
+    },
+    {
+      "id": "s3",
+      "ja": "レポートの締め切りっていつだっけ？",
+      "text": "When's the paper due again?",
+      "note": "\"Again\" at the end shows you knew once but forgot."
+    },
+    {
+      "id": "s4",
+      "ja": "誰がこのケーキ持ってきてくれたの？",
+      "text": "Who brought this cake in?",
+      "note": "When \"who\" is the subject, skip \"did\": not \"Who did bring\"."
+    },
+    {
+      "id": "s5",
+      "ja": "なんでそんなに早く帰っちゃったの？",
+      "text": "Why did you leave so early?"
+    },
+    {
+      "id": "s6",
+      "ja": "新しい仕事はどう？",
+      "text": "How's the new job going?",
+      "note": "\"How's it going\" fits ongoing things better than \"How is the new job?\"."
+    },
+    {
+      "id": "s7",
+      "ja": "ここから空港までどれくらいかかりますか？",
+      "text": "How long does it take to get to the airport from here?"
+    },
+    {
+      "id": "s8",
+      "ja": "どれくらいの頻度でジムに行ってるの？",
+      "text": "How often do you go to the gym?"
+    },
+    {
+      "id": "s9",
+      "ja": "このジャケット、いくらでした？",
+      "text": "How much did you pay for this jacket?"
+    },
+    {
+      "id": "s10",
+      "ja": "教授はどの章を読むようにって言ってた？",
+      "text": "Which chapters did the professor tell us to read?"
+    }
+  ]
+}

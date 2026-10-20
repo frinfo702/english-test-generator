@@ -48,7 +48,8 @@ export function testOf(taskId: TaskId): Test {
 
 export function sectionOf(taskId: TaskId): SectionKey {
   if (taskId.startsWith("toefl/")) return taskId.split("/")[1] as SectionKey;
-  if (taskId === "shadowing") return "speaking";
+  if (taskId === "shadowing" || taskId === "instant-composition")
+    return "speaking";
   if (taskId === "dictation") return "listening";
   return ["toeic/part2", "toeic/part3", "toeic/part4"].includes(taskId)
     ? "listening"
