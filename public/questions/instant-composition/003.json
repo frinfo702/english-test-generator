@@ -11,6 +11,6 @@
     { "id": "s7", "ja": "何してるの？", "text": "What are you doing?" },
     { "id": "s8", "ja": "今、駅に向かってるところ。", "text": "I'm heading to the station now.", "note": "\"Head to\" is the everyday way to say you're on your way somewhere." },
     { "id": "s9", "ja": "来週のプレゼンの準備をしているところです。", "text": "I'm getting ready for next week's presentation." },
-    { "id": "s10", "ja": "物価がどんどん上がっている。", "text": "Everything's getting more expensive.", "note": "The progressive shows a change in progress; \"get\" + comparative is the everyday way to say どんどん〜なる." }
+    { "id": "s10", "ja": "何もかもどんどん高くなってる。", "text": "Everything's getting more expensive.", "note": "The progressive shows a change in progress; \"get\" + comparative is the everyday way to say どんどん〜なる." }
   ]
 }
