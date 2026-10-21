@@ -28,7 +28,7 @@
     },
     {
       "id": "s5",
-      "ja": "ご連絡ありがとうございます。",
+      "ja": "ご返信ありがとうございます。",
       "text": "Thanks for getting back to me.",
       "note": "Use this when someone replies to you; \"Thanks for reaching out\" fits when they contact you first."
     },
@@ -57,7 +57,7 @@
     },
     {
       "id": "s10",
-      "ja": "引き続きよろしくお願いします。",
+      "ja": "これから一緒にお仕事できるのを楽しみにしています。よろしくお願いします。",
       "text": "Looking forward to working with you.",
       "note": "English has no single よろしくお願いします; pick the line that fits, such as this, \"Thanks in advance\" or just \"Best\"."
     }

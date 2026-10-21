@@ -22,8 +22,8 @@
     {
       "id": "s4",
       "ja": "会議を3時にずらしてもいいですか？",
-      "text": "Can we push the meeting to three?",
-      "note": "\"Push\" or \"push back\" moves something later; \"move up\" or \"bring forward\" moves it earlier."
+      "text": "Can we move the meeting to three?",
+      "note": "\"Move\" works for any change; \"push back\" means later and \"bring forward\" means earlier."
     },
     {
       "id": "s5",
