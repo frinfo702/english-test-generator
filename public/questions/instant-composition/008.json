@@ -22,7 +22,8 @@
     {
       "id": "s4",
       "ja": "このことは誰にも言っちゃダメだよ。",
-      "text": "You mustn't tell anyone about this, okay?"
+      "text": "You can't tell anyone about this, okay?",
+      "note": "In speech, \"can't\" is the usual way to forbid something; \"mustn't\" sounds formal or British."
     },
     {
       "id": "s5",
@@ -47,8 +48,8 @@
     },
     {
       "id": "s9",
-      "ja": "レポートには参考文献を必ず載せること。",
-      "text": "You have to include a reference list in your report."
+      "ja": "経費精算は月末までに出さないといけません。",
+      "text": "You have to submit your expense report by the end of the month."
     },
     {
       "id": "s10",

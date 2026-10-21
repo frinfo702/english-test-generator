@@ -217,7 +217,7 @@ const taskRoutes: TaskRoute[] = [
     basePath: "/instant-composition",
     taskId: "instant-composition",
     title: "Instant Composition",
-    subtitle: "Units build up from the present tense to seminar English.",
+    subtitle: "Units build up from the present tense to seminar and workplace English.",
     backTo: "/learn",
     page: <InstantCompositionPage />,
   },

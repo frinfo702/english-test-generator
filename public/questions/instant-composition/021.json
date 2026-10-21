@@ -1,0 +1,61 @@
+{
+  "title": "Meetings and scheduling",
+  "point": "Suggest a time, check that it works, move it, decline and close, with the short phrases used to book anything from a meeting to a quick call.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "木曜日のご都合はいかがですか？",
+      "text": "Does Thursday work for you?",
+      "note": "\"Does … work for you?\" is the everyday way to check a time; \"Is Thursday convenient?\" sounds stiffer."
+    },
+    {
+      "id": "s2",
+      "ja": "来週どこかで少しお話しできませんか？",
+      "text": "Could we find some time to talk next week?"
+    },
+    {
+      "id": "s3",
+      "ja": "申し訳ないのですが、金曜日は都合がつきません。",
+      "text": "I'm afraid I can't make it on Friday.",
+      "note": "\"I'm afraid\" softens bad news, and \"make it\" means being able to come."
+    },
+    {
+      "id": "s4",
+      "ja": "会議を3時にずらしてもいいですか？",
+      "text": "Can we push the meeting to three?",
+      "note": "\"Push\" or \"push back\" moves something later; \"move up\" or \"bring forward\" moves it earlier."
+    },
+    {
+      "id": "s5",
+      "ja": "では、火曜日の10時でどうでしょう？",
+      "text": "How about Tuesday at ten, then?"
+    },
+    {
+      "id": "s6",
+      "ja": "確認して、またご連絡します。",
+      "text": "Let me check and get back to you.",
+      "note": "\"Get back to someone\" is the standard way to promise a reply."
+    },
+    {
+      "id": "s7",
+      "ja": "今日の打ち合わせ、10分ほど遅れそうです。",
+      "text": "I'm going to be about ten minutes late for today's meeting."
+    },
+    {
+      "id": "s8",
+      "ja": "今日の決定事項を簡単にまとめますね。",
+      "text": "Let me quickly sum up what we decided today."
+    },
+    {
+      "id": "s9",
+      "ja": "その件はまた来週話しましょう。",
+      "text": "Let's come back to that next week."
+    },
+    {
+      "id": "s10",
+      "ja": "では、今日はこのへんで終わりにしましょう。",
+      "text": "Let's wrap it up here for today.",
+      "note": "\"Wrap up\" is the everyday way to end a meeting or a call."
+    }
+  ]
+}

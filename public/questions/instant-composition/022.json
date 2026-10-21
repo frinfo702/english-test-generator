@@ -1,0 +1,65 @@
+{
+  "title": "Email and follow-ups",
+  "point": "Open, chase, ask and sign off the way people write work emails and messages: short, direct and polite.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "返信が遅くなってすみません。",
+      "text": "Sorry for the late reply.",
+      "note": "In a more formal email, \"Apologies for the delay\" does the same job."
+    },
+    {
+      "id": "s2",
+      "ja": "先日お送りしたメールの件で、確認のご連絡です。",
+      "text": "I'm just following up on my last email.",
+      "note": "\"Just following up\" is the polite, standard way to chase a reply."
+    },
+    {
+      "id": "s3",
+      "ja": "資料を添付しました。",
+      "text": "I've attached the documents.",
+      "note": "\"Please find attached\" is older and more formal; most people now write \"I've attached\"."
+    },
+    {
+      "id": "s4",
+      "ja": "ご不明な点があれば、お気軽にご連絡ください。",
+      "text": "Let me know if you have any questions.",
+      "note": "This line closes most work emails; \"Feel free to reach out\" is a slightly warmer version."
+    },
+    {
+      "id": "s5",
+      "ja": "ご連絡ありがとうございます。",
+      "text": "Thanks for getting back to me.",
+      "note": "Use this when someone replies to you; \"Thanks for reaching out\" fits when they contact you first."
+    },
+    {
+      "id": "s6",
+      "ja": "金曜日までにお返事いただけると助かります。",
+      "text": "It would be great if you could get back to me by Friday.",
+      "note": "\"It would be great if you could…\" sets a deadline without sounding pushy."
+    },
+    {
+      "id": "s7",
+      "ja": "念のため確認ですが、会議は明日の2時からのままですか？",
+      "text": "Just to double-check, is the meeting still at two tomorrow?"
+    },
+    {
+      "id": "s8",
+      "ja": "このメールを担当者に転送しておきます。",
+      "text": "I'll forward this to the right person.",
+      "note": "\"The person in charge\" is fine too; \"the right person\" sounds less formal."
+    },
+    {
+      "id": "s9",
+      "ja": "サラさんもCCに入れておきますね。",
+      "text": "I'll cc Sarah on this.",
+      "note": "\"Cc\" works as a verb: you cc someone on an email."
+    },
+    {
+      "id": "s10",
+      "ja": "引き続きよろしくお願いします。",
+      "text": "Looking forward to working with you.",
+      "note": "English has no single よろしくお願いします; pick the line that fits, such as this, \"Thanks in advance\" or just \"Best\"."
+    }
+  ]
+}
