@@ -20,8 +20,8 @@
     },
     {
       "id": "s4",
-      "ja": "先生に、レポートを全部書き直させられた。",
-      "text": "The teacher made me rewrite the whole paper.",
+      "ja": "上司に、資料を一から全部作り直させられた。",
+      "text": "My boss made me redo the whole thing from scratch.",
       "note": "\"Make someone do\" has no \"to\": made me rewrite, not made me to rewrite."
     },
     {
@@ -53,8 +53,8 @@
     {
       "id": "s10",
       "ja": "少し考えさせてもらえますか？",
-      "text": "Can you let me think about it for a bit?",
-      "note": "Native speakers usually say \"Let me think about it\" rather than \"Please give me time to consider\"."
+      "text": "Let me think about it for a bit.",
+      "note": "\"Let me…\" is how English asks for a moment; \"Please give me time to consider\" sounds stiff."
     }
   ]
 }

@@ -54,7 +54,8 @@
     {
       "id": "s10",
       "ja": "話がそれてしまいましたが、本題に戻ってもいいですか？",
-      "text": "Sorry, we've gotten a bit off track. Can we get back to the main question?"
+      "text": "Sorry, we've gotten a bit off track. Can we get back to the main question?",
+      "note": "\"Gotten\" is American; British English says \"we've got a bit off track\"."
     }
   ]
 }

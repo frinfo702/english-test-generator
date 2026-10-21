@@ -6,11 +6,11 @@
     { "id": "s2", "ja": "待つのは全然平気だよ。", "text": "I don't mind waiting at all.", "note": "\"Mind\" takes -ing; \"I don't mind to wait\" is wrong." },
     { "id": "s3", "ja": "ちょっと待ってもらってもいい？", "text": "Would you mind waiting a minute?" },
     { "id": "s4", "ja": "レポートはもう書き終わった？", "text": "Have you finished writing your report yet?" },
-    { "id": "s5", "ja": "朝のラッシュを避けるようにしています。", "text": "I try to avoid taking the train during the morning rush." },
+    { "id": "s5", "ja": "朝のラッシュ時の電車は避けるようにしています。", "text": "I try to avoid taking the train during the morning rush." },
     { "id": "s6", "ja": "誘ってくれてありがとう。", "text": "Thanks for inviting me." },
     { "id": "s7", "ja": "人前で話すのは得意じゃないんです。", "text": "I'm not very good at speaking in public." },
     { "id": "s8", "ja": "近いうちに会えるのを楽しみにしています。", "text": "I'm looking forward to seeing you soon.", "note": "The \"to\" here is a preposition, so it takes -ing: not \"to see\"." },
-    { "id": "s9", "ja": "毎日少しずつ単語を覚えるのが一番効果的です。", "text": "Learning a few words every day is the most effective way." },
+    { "id": "s9", "ja": "毎日少しずつ単語を覚えるのが、語彙を増やす一番の方法です。", "text": "Learning a few words every day is the best way to build your vocabulary." },
     { "id": "s10", "ja": "寝る前にスマホを見るのはやめたほうがいいよ。", "text": "You should stop looking at your phone before going to bed." }
   ]
 }

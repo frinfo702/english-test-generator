@@ -1,0 +1,62 @@
+{
+  "title": "Calls, shops and restaurants",
+  "point": "Handle calls and video meetings, and ask for what you need in shops, restaurants and clinics, with the fixed phrases people use every day.",
+  "sentences": [
+    {
+      "id": "s1",
+      "ja": "ミュートになってますよ。",
+      "text": "I think you're on mute.",
+      "note": "\"I think\" makes it a gentle heads-up rather than a correction."
+    },
+    {
+      "id": "s2",
+      "ja": "画面、ちゃんと見えてますか？",
+      "text": "Can you see my screen okay?"
+    },
+    {
+      "id": "s3",
+      "ja": "すみません、もう一度言っていただけますか？",
+      "text": "Sorry, could you say that again?",
+      "note": "This works anywhere; a quick \"Sorry?\" also does the job."
+    },
+    {
+      "id": "s4",
+      "ja": "少々お待ちいただけますか？",
+      "text": "Could you hold on a moment?",
+      "note": "On the phone, \"hold on\" means stay on the line."
+    },
+    {
+      "id": "s5",
+      "ja": "後でかけ直してもいいですか？",
+      "text": "Can I call you back later?"
+    },
+    {
+      "id": "s6",
+      "ja": "お会計お願いします。",
+      "text": "Could we get the check, please?",
+      "note": "\"Check\" is American; British English says \"the bill\"."
+    },
+    {
+      "id": "s7",
+      "ja": "これの別のサイズはありますか？",
+      "text": "Do you have this in a different size?",
+      "note": "\"Have this in\" plus a size or color is the set shop phrase."
+    },
+    {
+      "id": "s8",
+      "ja": "この席、空いてますか？",
+      "text": "Is this seat taken?",
+      "note": "The question asks if it's taken, so \"No\" means you can sit down."
+    },
+    {
+      "id": "s9",
+      "ja": "昨日から頭痛がひどいんです。",
+      "text": "I've had a bad headache since yesterday."
+    },
+    {
+      "id": "s10",
+      "ja": "カードで払えますか？",
+      "text": "Can I pay by card?"
+    }
+  ]
+}

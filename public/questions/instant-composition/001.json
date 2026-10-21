@@ -8,7 +8,7 @@
     { "id": "s4", "ja": "彼は辛い食べ物を食べません。", "text": "He doesn't eat spicy food." },
     { "id": "s5", "ja": "このバスは駅に行きますか？", "text": "Does this bus go to the station?" },
     { "id": "s6", "ja": "私たちは週に二回ジムに行きます。", "text": "We go to the gym twice a week." },
-    { "id": "s7", "ja": "田中先生は毎週金曜に小テストをします。", "text": "Professor Tanaka gives a quiz every Friday.", "note": "Teachers \"give\" a quiz or test; students \"take\" one." },
+    { "id": "s7", "ja": "毎週月曜の朝にチームミーティングがあります。", "text": "We have a team meeting every Monday morning." },
     { "id": "s8", "ja": "図書館は日曜日は開いていません。", "text": "The library isn't open on Sundays." },
     { "id": "s9", "ja": "普段は何時に寝ますか？", "text": "What time do you usually go to bed?", "note": "\"Sleep\" is the state; \"go to bed\" is the moment you turn in." },
     { "id": "s10", "ja": "うちの猫は一日中寝ています。", "text": "My cat sleeps all day." }

@@ -9,7 +9,7 @@
     { "id": "s5", "ja": "彼は会議に間に合わなかった。", "text": "He didn't make it to the meeting on time.", "note": "\"Make it\" is the everyday way to say 間に合う." },
     { "id": "s6", "ja": "私たちは三年前に大阪に引っ越しました。", "text": "We moved to Osaka three years ago." },
     { "id": "s7", "ja": "昨日はほとんど寝られなかった。", "text": "I barely slept last night." },
-    { "id": "s8", "ja": "レポートは締め切り前に出した？", "text": "Did you turn in your paper before the deadline?" },
+    { "id": "s8", "ja": "見積もりはお客さんに送った？", "text": "Did you send the quote to the client?" },
     { "id": "s9", "ja": "駅で偶然高校の同級生に会った。", "text": "I ran into a high school classmate at the station.", "note": "\"Run into\" means meeting by chance; \"meet\" sounds planned." },
     { "id": "s10", "ja": "そのパソコン、いくらだった？", "text": "How much did you pay for that laptop?" }
   ]

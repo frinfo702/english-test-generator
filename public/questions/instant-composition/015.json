@@ -11,6 +11,6 @@
     { "id": "s7", "ja": "急がないと終電に乗り遅れるよ。", "text": "If we don't hurry, we're going to miss the last train.", "note": "Japanese 〜ないと often becomes \"If we don't...\" in English." },
     { "id": "s8", "ja": "わからないことがあったら、いつでも聞いてください。", "text": "If you have any questions, feel free to ask me anytime." },
     { "id": "s9", "ja": "子どもの頃、よくこの公園で遊んだものです。", "text": "When I was a kid, I used to play in this park a lot." },
-    { "id": "s10", "ja": "データを集め終わるまで、結論は出せません。", "text": "We can't draw any conclusions until we finish collecting the data." }
+    { "id": "s10", "ja": "先方から返事が来るまで、何も決められません。", "text": "We can't decide anything until we hear back from the client.", "note": "\"Hear back from\" means getting a reply; keep the present tense after \"until\"." }
   ]
 }

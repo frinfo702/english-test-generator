@@ -30,9 +30,9 @@
     },
     {
       "id": "s6",
-      "ja": "昨日は全然眠れなかった。",
-      "text": "I couldn't sleep at all last night.",
-      "note": "English says \"last night\" here, not \"yesterday\"."
+      "ja": "ごめん、今聞こえなかった。音声が途切れたみたい。",
+      "text": "Sorry, I couldn't hear you. You cut out for a second.",
+      "note": "\"Cut out\" is what people say when the sound drops on a call."
     },
     {
       "id": "s7",
@@ -41,14 +41,14 @@
     },
     {
       "id": "s8",
-      "ja": "その資料、メールで送っていただけますか？",
-      "text": "Could you email me those slides?",
-      "note": "\"Email\" works as a verb, so \"send by email\" is rarely needed."
+      "ja": "今日の会議の資料、メールで送っていただけますか？",
+      "text": "Could you email me the materials from today's meeting?",
+      "note": "\"Email\" works as a verb, and 資料 is usually \"materials\" or \"documents\"."
     },
     {
       "id": "s9",
-      "ja": "図書館では辞書を三冊まで借りられます。",
-      "text": "You can borrow up to three dictionaries from the library."
+      "ja": "図書館では本を一度に五冊まで借りられます。",
+      "text": "You can borrow up to five books at a time from the library."
     },
     {
       "id": "s10",

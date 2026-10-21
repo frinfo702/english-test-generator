@@ -5,8 +5,8 @@
     {
       "id": "s1",
       "ja": "週末は何してたの？",
-      "text": "What did you get up to over the weekend?",
-      "note": "\"Get up to\" is the casual way friends ask what someone did."
+      "text": "What did you do over the weekend?",
+      "note": "\"What did you get up to?\" is a common British alternative."
     },
     {
       "id": "s2",
@@ -48,13 +48,14 @@
     },
     {
       "id": "s9",
-      "ja": "このジャケット、いくらでした？",
-      "text": "How much did you pay for this jacket?"
+      "ja": "いつまでに必要ですか？",
+      "text": "When do you need it by?",
+      "note": "Ending with \"by\" asks for a deadline; \"until\" would ask how long you need it."
     },
     {
       "id": "s10",
-      "ja": "教授はどの章を読むようにって言ってた？",
-      "text": "Which chapters did the professor tell us to read?"
+      "ja": "この件は誰に聞けばいいですか？",
+      "text": "Who should I ask about this?"
     }
   ]
 }
