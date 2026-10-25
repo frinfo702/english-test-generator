@@ -101,6 +101,7 @@ export function TrialHomePage() {
   return (
     <div>
       <header className={styles.homeHeader}>
+        <title>Practice Test · English Test Practice</title>
         <h1 className={styles.homeTitle}>Practice Test</h1>
         <p className={styles.lede}>
           A timed TOEFL iBT run with answers hidden until the end, scored on the

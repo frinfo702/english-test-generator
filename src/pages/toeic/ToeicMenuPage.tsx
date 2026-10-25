@@ -57,6 +57,7 @@ export function ToeicMenuPage() {
     <div>
       <SectionHeader
         title={<TestLogo name="TOEIC" />}
+        documentTitle="TOEIC L&R"
         subtitle="Listening and Reading — choose a part to practice."
         backTo="/"
       />
