@@ -236,17 +236,3 @@
   color: var(--color-ink-secondary);
   line-height: var(--lh-relaxed);
 }
-
-.error {
-  margin-bottom: var(--notice-gap);
-  color: var(--color-error);
-  background: var(--color-error-subtle);
-  padding: var(--spacing-md);
-  border-radius: var(--radius-xs);
-}
-
-.errorHint {
-  margin-top: var(--spacing-sm);
-  font-size: var(--text-xs);
-  opacity: 0.7;
-}

@@ -172,7 +172,7 @@ export function ShadowingPage() {
       <SectionHeader
         title="Shadowing Practice"
         subtitle={data?.title ?? "Listen and repeat to improve pronunciation."}
-        backTo="/learn"
+        backTo="/"
         actions={
           <>
             <Button
@@ -194,15 +194,12 @@ export function ShadowingPage() {
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>{error}</p>
-          <p className={styles.errorHint}>
-            Add question JSON under public/questions/shadowing/
-          </p>
         </div>
       )}
       {!hasValidQuestionId && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>Invalid question ID in URL.</p>
         </div>
       )}

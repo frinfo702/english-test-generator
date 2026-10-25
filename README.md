@@ -1,24 +1,34 @@
 # English Test Practice
 
-A practice app for the TOEFL iBT 2026 format and TOEIC Reading, using AI-generated question JSON.
+A practice app for the TOEFL iBT 2026 format and TOEIC Listening & Reading, using pre-generated question JSON.
 
 ## Supported Content
 
 ### TOEFL iBT 2026 Format
 
-| Section  | Tasks                                                                                 |
-| -------- | ------------------------------------------------------------------------------------- |
-| Reading  | Complete the Words / Read in Daily Life (adaptive) / Read an Academic Passage         |
-| Writing  | Build a Sentence / Write an Email (7 min) / Write for an Academic Discussion (10 min) |
-| Speaking | Listen and Repeat / Take an Interview (4 questions x 45 sec)                          |
+| Section   | Tasks                                                                                 |
+| --------- | ------------------------------------------------------------------------------------- |
+| Reading   | Complete the Words / Read in Daily Life (adaptive) / Read an Academic Passage         |
+| Writing   | Build a Sentence / Write an Email (7 min) / Write for an Academic Discussion (10 min) |
+| Listening | Choose a Response / Conversation / Announcement / Lecture                             |
+| Speaking  | Listen and Repeat / Take an Interview (4 questions x 45 sec)                          |
 
-### TOEIC Reading
+**Practice Test** is a timed TOEFL run, scored on the 1–6 band scale.
+
+### TOEIC Listening & Reading
 
 | Part   | Content                                                  |
 | ------ | -------------------------------------------------------- |
+| Part 2 | Question-Response                                        |
+| Part 3 | Conversations                                            |
+| Part 4 | Talks                                                    |
 | Part 5 | Incomplete Sentences (30 questions)                      |
 | Part 6 | Text Completion (4 passages x 4 questions)               |
 | Part 7 | Reading Comprehension (Single / Double / Triple passage) |
+
+### Drills
+
+Shadowing, Dictation and Instant Composition (Japanese → English).
 
 ## Commands
 

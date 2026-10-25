@@ -95,12 +95,6 @@
   will-change: transform, width;
 }
 
-/* No active section (home, updates): the bar keeps its last inline position,
-   so hide it rather than let it point at the previous page. */
-.nav:not(:has([aria-current="page"])) .indicator {
-  opacity: 0 !important;
-}
-
 .navLink {
   position: relative;
   z-index: 1;
@@ -174,6 +168,17 @@
 
   .kbd {
     display: none;
+  }
+
+  /* Four tabs and the theme toggle don't fit at 390px; the icon carries
+     Settings so the bar never scrolls a tab out of view. */
+  .iconLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 }
 

@@ -85,12 +85,17 @@ mono with `tabular-nums`; headline numerals use the display face.
 
 ## Layout
 
-- Nav: Learn (TOEFL, TOEIC, Practice Test, Shadowing, Dictation, Instant Composition behind one
-  tab) · Review · Dashboard · Settings.
+- Nav: Learn (the home index: TOEFL, TOEIC, Practice Test, Shadowing,
+  Dictation, Instant Composition) · Review · Dashboard · Settings.
 - Header 60px, translucent paper, hairline bottom rule. Nav is plain text
   links; the active one stands on a 2px signal bar on the header rule.
 - `--max-content` 1120px; `--gutter` 32px (16px on phones);
   `--max-reading` 720px for a single focused sheet.
+- Pages never set their own `max-width`. They fill the shell's
+  `--max-content` column; a page that reads better narrow (Settings, update
+  notes) adds the global `.page-narrow` class, which owns its centring.
+- A page that can't show its content says why in the global `.notice-error`
+  banner. Errors inside a control stay plain error-coloured text.
 - **Index pattern** (home, TOEFL/TOEIC menus, question lists): mono label →
   ink rule → ruled rows of `index | title + meta | count | →`. Grouped menus
   hang the group name in a sticky left column.
@@ -164,11 +169,7 @@ recoloured.
 - One exception: the AI scoring update page's cover drawing draws itself in
   once with `stroke-dashoffset`, staggered, and is static under
   `prefers-reduced-motion`. Nothing else follows its lead.
-- Second exception: the Learn hub (`/learn`) is the one card grid. Each
-  card's small drawing (section path, score bars, stacked sections, waveform,
-  word ticker) wakes on hover only, gated by `(hover: hover) and (pointer:
-fine)`; under `prefers-reduced-motion` only colour changes.
-- Third exception: the instant composition drill marks its usage note with a
+- Second exception: the instant composition drill marks its usage note with a
   line-drawn pen that scribbles three strokes (ink drawing in under
   the nib) when the answer reveals, then rests. Static under
   `prefers-reduced-motion`.

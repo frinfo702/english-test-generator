@@ -45,20 +45,6 @@
   flex-wrap: wrap;
 }
 
-.error {
-  margin-bottom: var(--notice-gap);
-  color: var(--color-error);
-  background: var(--color-error-subtle);
-  padding: var(--spacing-md);
-  border-radius: var(--radius-xs);
-}
-
-.errorHint {
-  margin-top: var(--spacing-sm);
-  font-size: var(--text-xs);
-  opacity: 0.7;
-}
-
 .speakerCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);

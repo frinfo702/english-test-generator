@@ -11,6 +11,8 @@ interface SectionHeaderProps {
   backTo?: string;
   /** Right-aligned controls; sharing the title row saves a row of height. */
   actions?: ReactNode;
+  /** Tab title, for when `title` isn't plain text (a wordmark). */
+  documentTitle?: string;
 }
 
 export function SectionHeader({
@@ -18,6 +20,7 @@ export function SectionHeader({
   subtitle,
   backTo,
   actions,
+  documentTitle = typeof title === "string" ? title : undefined,
 }: SectionHeaderProps) {
   const navigate = useNavigate();
   // Inside a practice test, leaving a task goes through the test runner only.
@@ -27,6 +30,10 @@ export function SectionHeader({
   }
   return (
     <div className={styles.wrapper}>
+      {/* Most specific first, so a row of tabs still tells pages apart. */}
+      {documentTitle && (
+        <title>{`${documentTitle} · English Test Practice`}</title>
+      )}
       <div className={styles.top}>
         {backTo && (
           <button

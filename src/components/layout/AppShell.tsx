@@ -28,15 +28,14 @@ interface NavItem {
   label: string;
   shortcut?: string;
   icon?: React.ReactNode;
-  matches: (pathname: string) => boolean;
+  /** Omitted on Learn: whatever no other tab claims is practice. */
+  matches?: (pathname: string) => boolean;
 }
 
 const navItems: NavItem[] = [
   {
-    to: "/learn",
+    to: "/",
     label: "Learn",
-    matches: (p) =>
-      /^\/(learn|toefl|trial|toeic|shadowing|dictation)(\/|$)/.test(p),
   },
   {
     to: "/review",
@@ -67,8 +66,7 @@ export function AppShell({ children }: AppShellProps) {
   const [historyVersion, setHistoryVersion] = useState(0);
 
   const activeItem =
-    navItems.find((item) => item.matches(location.pathname)) ??
-    (location.pathname === "/" ? null : navItems[0]);
+    navItems.find((item) => item.matches?.(location.pathname)) ?? navItems[0];
 
   /**
    * The indicator is positioned imperatively: measuring in a layout effect and
@@ -151,7 +149,9 @@ export function AppShell({ children }: AppShellProps) {
                   aria-current={active ? "page" : undefined}
                 >
                   {item.icon}
-                  {item.label}
+                  <span className={item.icon ? styles.iconLabel : undefined}>
+                    {item.label}
+                  </span>
                   {item.shortcut && (
                     <span className={styles.kbd} aria-hidden="true">
                       {item.shortcut}

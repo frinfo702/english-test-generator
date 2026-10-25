@@ -209,15 +209,12 @@ export function WriteEmailPage() {
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>{error}</p>
-          <p className={styles.errorHint}>
-            Add question JSON under questions/toefl/writing/email/.
-          </p>
         </div>
       )}
       {!hasValidQuestionId && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>Invalid question ID in URL.</p>
         </div>
       )}

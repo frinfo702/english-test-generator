@@ -383,7 +383,7 @@ export function DictationPage() {
         subtitle={
           data?.title ?? "Listen and arrange the words in the correct order."
         }
-        backTo="/learn"
+        backTo="/"
         actions={
           <>
             <Button
@@ -405,15 +405,12 @@ export function DictationPage() {
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>{error}</p>
-          <p className={styles.errorHint}>
-            Add question JSON under public/questions/dictation/
-          </p>
         </div>
       )}
       {!hasValidQuestionId && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>Invalid question ID in URL.</p>
         </div>
       )}

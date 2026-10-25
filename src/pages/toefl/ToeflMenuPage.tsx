@@ -104,8 +104,9 @@ export function ToeflMenuPage() {
     <div>
       <SectionHeader
         title={<TestLogo name="TOEFL" />}
+        documentTitle="TOEFL iBT 2026"
         subtitle="January 2026 format — choose a section and task."
-        backTo="/learn"
+        backTo="/"
         actions={
           <Button size="sm" onClick={() => navigate("/trial")}>
             Take a practice test

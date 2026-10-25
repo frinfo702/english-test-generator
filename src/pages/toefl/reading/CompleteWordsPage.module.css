@@ -117,21 +117,6 @@
   color: var(--color-ink-secondary);
 }
 
-.error {
-  margin-bottom: var(--notice-gap);
-  color: var(--color-error);
-  background: var(--color-error-subtle);
-  padding: var(--spacing-4);
-  border-radius: var(--radius-doc);
-  font-size: var(--text-sm);
-}
-
-.errorHint {
-  margin-top: var(--spacing-2);
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-}
-
 @media (max-width: 620px) {
   .paragraph {
     font-size: var(--text-base);

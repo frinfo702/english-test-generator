@@ -344,7 +344,7 @@ export function InstantCompositionPage() {
           data?.point ??
           "See the Japanese, say the English. No time to translate."
         }
-        backTo="/learn"
+        backTo="/"
         actions={
           <>
             <Button
@@ -365,7 +365,7 @@ export function InstantCompositionPage() {
       />
 
       {loading && <LoadingSpinner message="Loading unit..." />}
-      {error && <p className={styles.error}>{error}</p>}
+      {error && <p className="notice-error">{error}</p>}
       {data && !loading && (
         <DrillContent key={questionId} data={data} file={file ?? ""} />
       )}

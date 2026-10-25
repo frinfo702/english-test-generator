@@ -206,15 +206,12 @@ export function BuildSentencePage() {
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>{error}</p>
-          <p className={styles.errorHint}>
-            Add question JSON under questions/toefl/writing/build-sentence/.
-          </p>
         </div>
       )}
       {!hasValidQuestionId && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>Invalid question ID in URL.</p>
         </div>
       )}

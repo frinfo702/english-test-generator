@@ -87,12 +87,6 @@
 
 /* ---- Start screen ---- */
 
-.home,
-.report {
-  max-width: var(--max-content);
-  margin: 0 auto;
-}
-
 .homeHeader {
   margin-bottom: var(--spacing-8);
 }

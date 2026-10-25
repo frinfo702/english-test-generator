@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { SectionHeader } from "../layout/SectionHeader";
 import { Button } from "../ui/Button";
 import { LoadingSpinner } from "../ui/LoadingSpinner";
-import { type QuestionFileEntry, listQuestionFiles } from "../../lib/questions";
+import {
+  type QuestionFileEntry,
+  listQuestionFiles,
+  questionLabel,
+} from "../../lib/questions";
 import {
   useScoreHistory,
   type ScoreEntry,
@@ -16,7 +20,7 @@ import styles from "./QuestionSelectorPage.module.css";
 interface QuestionSelectorPageProps {
   taskId: TaskId;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   backTo: string;
   basePath: string;
 }
@@ -39,7 +43,7 @@ function buildLatestByProblem(entries: ScoreEntry[]): Map<string, ScoreEntry> {
 export function QuestionSelectorPage({
   taskId,
   title,
-  subtitle,
+  subtitle = "Pick a question, or start with a random one.",
   backTo,
   basePath,
 }: QuestionSelectorPageProps) {
@@ -97,13 +101,13 @@ export function QuestionSelectorPage({
           disabled={loading || files.length === 0}
           size="md"
         >
-          Pick Random
+          Random question
         </Button>
       </div>
 
       {loading && <LoadingSpinner message="Loading question list..." />}
       {error && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>{error}</p>
         </div>
       )}
@@ -145,7 +149,9 @@ export function QuestionSelectorPage({
                     <span className={table.statusNone}>{i + 1}</span>
                   )}
                 </span>
-                <span className={styles.number}>Q{i + 1}</span>
+                <span className={styles.number}>
+                  {questionLabel(item.id, i + 1)}
+                </span>
                 <span className={styles.metricValue}>{elapsed}</span>
                 <span
                   className={[

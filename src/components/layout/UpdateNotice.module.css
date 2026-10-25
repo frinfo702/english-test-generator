@@ -1,12 +1,15 @@
-/* Bottom-right corner: the only one nothing else uses. Small on purpose; the
- * hamster is company, the bubble is the message. */
+/* Sits under the home index, right-aligned to the content column. Not fixed
+ * to the viewport corner: below ~1600px the corner overlaps the index rows,
+ * and on phones it covered their titles. Small on purpose; the hamster is
+ * company, the bubble is the message. It tucks into the bottom padding of
+ * <main>, which it follows in the shell. */
 
 .notice {
   --hamster-cell: 2px;
-  position: fixed;
-  right: var(--spacing-4);
-  bottom: var(--spacing-4);
-  z-index: 80;
+  width: 100%;
+  max-width: calc(var(--max-content) + var(--gutter) * 2);
+  margin: calc(var(--spacing-16) * -1) auto var(--spacing-8);
+  padding: 0 var(--gutter);
   display: flex;
   flex-direction: column;
   align-items: flex-end;

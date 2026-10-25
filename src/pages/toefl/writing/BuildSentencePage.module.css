@@ -1,9 +1,3 @@
-.errorHint {
-  margin-top: var(--spacing-sm);
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-}
-
 .controls {
   display: flex;
   align-items: center;
@@ -227,14 +221,6 @@
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
-}
-
-.error {
-  margin-bottom: var(--notice-gap);
-  color: var(--color-error);
-  background: var(--color-error-subtle);
-  padding: var(--spacing-md);
-  border-radius: var(--radius-xs);
 }
 
 /* Answer blanks: one underline per chunk, filled by drag and drop */

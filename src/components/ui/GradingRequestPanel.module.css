@@ -15,16 +15,11 @@
   font-size: var(--text-2xs);
   color: var(--color-ink-tertiary);
   font-weight: var(--font-medium);
-    }
+}
 
 .error {
   color: var(--color-error);
-  background: var(--color-error-subtle);
-  padding: var(--spacing-3) var(--spacing-4);
-  border-radius: var(--radius);
-  border: 1px solid color-mix(in srgb, var(--color-error) 40%, transparent);
   font-size: var(--text-sm);
-  font-weight: var(--font-medium);
 }
 
 .message {

@@ -100,7 +100,7 @@ export function TrialReportPage() {
 
   if (pending.length > 0 && !scoreLater) {
     return (
-      <div className={styles.report}>
+      <div>
         {header}
         <section className={styles.panel}>
           <h2 className={styles.subheading}>Score your Writing and Speaking</h2>
@@ -134,7 +134,7 @@ export function TrialReportPage() {
   }
 
   return (
-    <div className={styles.report}>
+    <div>
       <ScoreHeader
         title={trialTitle(trial, trials)}
         date={trial.date}

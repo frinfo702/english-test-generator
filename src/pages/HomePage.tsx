@@ -29,6 +29,12 @@ const tests: TestItem[] = [
     icon: "briefcase",
   },
   {
+    title: "Practice Test",
+    subtitle: "A timed TOEFL run, scored on the 1–6 band scale",
+    path: "/trial",
+    icon: "stopwatch",
+  },
+  {
     title: "Shadowing",
     subtitle: "Speak along with a model voice, sentence by sentence",
     path: "/shadowing",

@@ -428,29 +428,25 @@ export function ListenRepeatPage() {
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>{error}</p>
-          <p className={styles.errorHint}>
-            questions/toefl/speaking/listen-repeat/ Add question JSON under this
-            folder.
-          </p>
         </div>
       )}
       {!hasValidQuestionId && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>Invalid question ID in URL.</p>
         </div>
       )}
       {!speechSupported && !loading && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>
             Microphone recording is not supported in this browser. Please use
             Chrome, Edge, or Safari.
           </p>
         </div>
       )}
-      {speechError && <div className={styles.error}>{speechError}</div>}
-      {ttsError && <div className={styles.error}>{ttsError}</div>}
+      {speechError && <div className="notice-error">{speechError}</div>}
+      {ttsError && <div className="notice-error">{ttsError}</div>}
 
       {data && !loading && hasValidQuestionId && !graded && sentence && (
         <div className={styles.card}>
@@ -555,7 +551,7 @@ export function ListenRepeatPage() {
       {graded && (
         <div className={styles.card}>
           {saveError ? (
-            <div className={styles.error}>{saveError}</div>
+            <div className="notice-error">{saveError}</div>
           ) : (
             <LoadingSpinner message={processingMessage ?? "Saving..."} />
           )}

@@ -6,7 +6,8 @@ import { listQuestionFiles } from "../../lib/questions";
 
 const getAllMock = vi.fn();
 
-vi.mock("../../lib/questions", () => ({
+vi.mock("../../lib/questions", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("../../lib/questions")>()),
   listQuestionFiles: vi.fn(),
 }));
 
@@ -79,7 +80,7 @@ describe("QuestionSelectorPage", () => {
     expect(screen.getByText("00:45")).toBeTruthy();
     expect(screen.getByText("75%")).toBeTruthy();
 
-    fireEvent.click(screen.getByRole("button", { name: "Pick Random" }));
+    fireEvent.click(screen.getByRole("button", { name: "Random question" }));
     expect(screen.getByTestId("location").textContent).toBe("/toeic/part5/002");
   });
 
