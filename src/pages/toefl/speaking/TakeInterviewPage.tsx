@@ -390,15 +390,12 @@ export function TakeInterviewPage() {
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>{error}</p>
-          <p className={styles.errorHint}>
-            Add question JSON under questions/toefl/speaking/interview/.
-          </p>
         </div>
       )}
       {!hasValidQuestionId && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>Invalid question ID in URL.</p>
         </div>
       )}
@@ -449,7 +446,7 @@ export function TakeInterviewPage() {
                 }
               />
               {!speech.supported && (
-                <p className={styles.error}>
+                <p className="notice-error">
                   Microphone recording is not supported in this browser.
                 </p>
               )}
@@ -507,9 +504,9 @@ export function TakeInterviewPage() {
                 requestPermissionOnMount={false}
                 activeDeviceId={speech.activeDeviceId}
               />
-              {saveError && <p className={styles.error}>{saveError}</p>}
+              {saveError && <p className="notice-error">{saveError}</p>}
               {speech.error && (
-                <div className={styles.error}>
+                <div className="notice-error">
                   <p>{speech.error}</p>
                   {phase === "answering" && (
                     <Button

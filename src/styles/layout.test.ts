@@ -7,19 +7,16 @@ import { afterEach, describe, expect, it } from "vitest";
 
 const read = (file: string) => readFileSync(file, "utf8");
 
-const pageModules = [
-  ...readdirSync("src/pages", { recursive: true, encoding: "utf8" })
-    .filter((f) => f.endsWith(".module.css"))
-    .map((f) => join("src/pages", f)),
-  "src/components/question/QuestionSelectorPage.module.css",
-  "src/components/question/ListeningTaskBase.module.css",
-];
+const cssModules = readdirSync("src", { recursive: true, encoding: "utf8" })
+  .filter((f) => f.endsWith(".module.css"))
+  .map((f) => join("src", f));
 
-const banner = '<div class="error errorText" data-probe></div>';
+// jsdom drops rules it can't parse, and `:global()` is CSS Modules syntax.
+const unwrapGlobal = (css: string) => css.replace(/:global\(([^)]+)\)/g, "$1");
 
 function loadStylesheet(file: string) {
   const style = document.createElement("style");
-  style.textContent = read(file);
+  style.textContent = unwrapGlobal(read(file));
   document.head.append(style);
 }
 
@@ -34,20 +31,20 @@ afterEach(() => {
 });
 
 describe("page layout", () => {
-  it("separates boxed page error banners from the content below", () => {
-    const unstyled = getComputedStyle(render(banner)).background;
-    let boxed = 0;
-    for (const file of pageModules) {
+  it("separates the shared error banner from the content below", () => {
+    loadStylesheet("src/styles/global.css");
+    const banner = render('<div class="notice-error" data-probe></div>');
+    expect(getComputedStyle(banner).marginBottom).not.toMatch(/^(0px)?$/);
+  });
+
+  it("leaves no page module with its own boxed error banner", () => {
+    const probe = '<div class="error" data-probe></div>';
+    const unstyled = getComputedStyle(render(probe)).background;
+    for (const file of cssModules) {
       loadStylesheet(file);
-      const style = getComputedStyle(render(banner));
-      // Plain error text (no box) is spaced by its container.
-      if (style.background !== unstyled) {
-        boxed++;
-        expect(style.marginBottom, file).not.toMatch(/^(0px)?$/);
-      }
+      expect(getComputedStyle(render(probe)).background, file).toBe(unstyled);
       document.head.innerHTML = "";
     }
-    expect(boxed).toBeGreaterThan(10);
   });
 
   it("leaves banners inside a card to the card's own gap", () => {
@@ -55,9 +52,10 @@ describe("page layout", () => {
       "src/pages/toefl/speaking/ListenRepeatPage.module.css",
       "src/pages/toefl/speaking/TakeInterviewPage.module.css",
     ]) {
+      loadStylesheet("src/styles/global.css");
       loadStylesheet(file);
       const banner = render(
-        '<div class="card"><div class="error" data-probe></div></div>',
+        '<div class="card"><div class="notice-error" data-probe></div></div>',
       );
       expect(getComputedStyle(banner).marginBottom, file).toBe("0px");
       document.head.innerHTML = "";

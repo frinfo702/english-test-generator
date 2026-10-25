@@ -91,6 +91,8 @@ mono with `tabular-nums`; headline numerals use the display face.
   links; the active one stands on a 2px signal bar on the header rule.
 - `--max-content` 1120px; `--gutter` 32px (16px on phones);
   `--max-reading` 720px for a single focused sheet.
+- A page that can't show its content says why in the global `.notice-error`
+  banner. Errors inside a control stay plain error-coloured text.
 - **Index pattern** (home, TOEFL/TOEIC menus, question lists): mono label →
   ink rule → ruled rows of `index | title + meta | count | →`. Grouped menus
   hang the group name in a sticky left column.

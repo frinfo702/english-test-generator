@@ -191,6 +191,18 @@ samp {
   border-width: 0;
 }
 
+/* The one error banner: a page that can't show its content says why here.
+ * Inline errors inside a control stay plain error-coloured text. */
+.notice-error {
+  margin-bottom: var(--notice-gap);
+  padding: var(--spacing-4);
+  border: 1px solid color-mix(in srgb, var(--color-error) 40%, transparent);
+  border-radius: var(--radius);
+  background: var(--color-error-subtle);
+  color: var(--color-error);
+  font-size: var(--text-sm);
+}
+
 /* Skip to main content */
 .skip-link {
   position: absolute;

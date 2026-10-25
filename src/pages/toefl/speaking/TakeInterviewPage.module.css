@@ -1,21 +1,5 @@
-.errorHint {
-  margin-top: var(--spacing-2);
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-}
-
-.error {
-  margin-bottom: var(--notice-gap);
-  color: var(--color-error);
-  background: var(--color-error-subtle);
-  padding: var(--spacing-4);
-  border-radius: var(--radius);
-  border: 1px solid color-mix(in srgb, var(--color-error) 40%, transparent);
-  font-size: var(--text-sm);
-}
-
 /* Inside a card the card's own gap spaces the banner. */
-.card .error {
+.card :global(.notice-error) {
   margin-bottom: 0;
 }
 

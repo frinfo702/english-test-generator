@@ -103,7 +103,7 @@ export function QuestionSelectorPage({
 
       {loading && <LoadingSpinner message="Loading question list..." />}
       {error && (
-        <div className={styles.error}>
+        <div className="notice-error">
           <p>{error}</p>
         </div>
       )}
