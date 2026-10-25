@@ -56,12 +56,12 @@ export function questionIdFromFile(file: string): string {
 }
 
 /**
- * What a question list row calls a question: its topic for slugged IDs
- * (`20261007-roman-roads` → "Roman roads"), its position for numbered ones.
+ * The topic a slugged ID names (`20261007-roman-roads` → "Roman roads"), or
+ * null for numbered IDs, which only have their position to go by.
  */
-export function questionLabel(id: string, position: number): string {
+export function questionTopic(id: string): string | null {
   const slug = id.replace(/^\d{8}-/, "");
-  if (slug === id || /^\d+$/.test(slug)) return `Q${position}`;
+  if (slug === id || /^\d+$/.test(slug)) return null;
   const words = slug.replace(/-/g, " ");
   return words.charAt(0).toUpperCase() + words.slice(1);
 }

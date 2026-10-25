@@ -73,8 +73,8 @@ describe("QuestionSelectorPage", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText("Q1")).toBeTruthy();
-      expect(screen.getByText("Q2")).toBeTruthy();
+      expect(screen.getByText("Question 1")).toBeTruthy();
+      expect(screen.getByText("Question 2")).toBeTruthy();
     });
 
     expect(screen.getByText("00:45")).toBeTruthy();
