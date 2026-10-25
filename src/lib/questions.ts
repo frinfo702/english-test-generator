@@ -55,6 +55,17 @@ export function questionIdFromFile(file: string): string {
   return file.replace(/\.json$/i, "");
 }
 
+/**
+ * What a question list row calls a question: its topic for slugged IDs
+ * (`20261007-roman-roads` → "Roman roads"), its position for numbered ones.
+ */
+export function questionLabel(id: string, position: number): string {
+  const slug = id.replace(/^\d{8}-/, "");
+  if (slug === id || /^\d+$/.test(slug)) return `Q${position}`;
+  const words = slug.replace(/-/g, " ");
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
 export async function fetchQuestionIndex(
   taskPath: string,
 ): Promise<QuestionIndex> {

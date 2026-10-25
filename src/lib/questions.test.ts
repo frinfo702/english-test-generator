@@ -5,7 +5,19 @@ import {
   fetchQuestionIndex,
   fetchRandomQuestion,
   listQuestionFiles,
+  questionLabel,
 } from "./questions";
+
+describe("questionLabel", () => {
+  it("names slugged questions by topic", () => {
+    expect(questionLabel("20261007-roman-roads", 3)).toBe("Roman roads");
+  });
+
+  it("numbers questions without a topic", () => {
+    expect(questionLabel("007", 7)).toBe("Q7");
+    expect(questionLabel("20261007-1430", 2)).toBe("Q2");
+  });
+});
 
 const fetchMock = vi.fn();
 
