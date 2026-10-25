@@ -149,7 +149,9 @@ export function AppShell({ children }: AppShellProps) {
                   aria-current={active ? "page" : undefined}
                 >
                   {item.icon}
-                  {item.label}
+                  <span className={item.icon ? styles.iconLabel : undefined}>
+                    {item.label}
+                  </span>
                   {item.shortcut && (
                     <span className={styles.kbd} aria-hidden="true">
                       {item.shortcut}
