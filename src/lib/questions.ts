@@ -40,6 +40,17 @@ export interface QuestionFileEntry {
 
 const QUESTION_ID = /^[a-z0-9-]+$/i;
 
+// A missing file is not a 404 here: the dev server and Pages both answer with
+// the SPA's index.html and a 200, so `ok` alone can't catch it.
+async function readJson<T>(res: Response, missing: string): Promise<T> {
+  if (!res.ok) throw new Error(missing);
+  try {
+    return (await res.json()) as T;
+  } catch {
+    throw new Error(missing);
+  }
+}
+
 export function questionIdFromFile(file: string): string {
   return file.replace(/\.json$/i, "");
 }
@@ -48,9 +59,10 @@ export async function fetchQuestionIndex(
   taskPath: string,
 ): Promise<QuestionIndex> {
   const res = await fetch(`/questions/${taskPath}/index.json`);
-  if (!res.ok)
-    throw new Error(`No questions found for ${taskPath}. Generate some first!`);
-  return res.json();
+  return readJson(
+    res,
+    `No questions yet. Add JSON files under public/questions/${taskPath}/.`,
+  );
 }
 
 export async function fetchRandomQuestion<T>(taskPath: string): Promise<T> {
@@ -73,8 +85,10 @@ export async function fetchQuestionByFileWithMeta<T>(
   file: string,
 ): Promise<LoadedQuestion<T>> {
   const res = await fetch(`/questions/${taskPath}/${file}`);
-  if (!res.ok) throw new Error(`Failed to load question file: ${file}`);
-  const data = (await res.json()) as T;
+  const data = await readJson<T>(
+    res,
+    `Question ${questionIdFromFile(file)} doesn't exist. Pick another from the list.`,
+  );
   return { data, file };
 }
 
@@ -93,7 +107,9 @@ export async function fetchRandomQuestionWithMeta<T>(
 ): Promise<LoadedQuestion<T>> {
   const files = await listQuestionFiles(taskPath);
   if (files.length === 0) {
-    throw new Error(`No question files in ${taskPath}. Generate some first!`);
+    throw new Error(
+      `No questions yet. Add JSON files under public/questions/${taskPath}/.`,
+    );
   }
   const selected = files[Math.floor(Math.random() * files.length)];
   return fetchQuestionByFileWithMeta<T>(taskPath, selected.file);
@@ -104,8 +120,7 @@ export async function fetchAllQuestions<T>(taskPath: string): Promise<T[]> {
   const results = await Promise.all(
     index.files.map(async (file) => {
       const res = await fetch(`/questions/${taskPath}/${file}`);
-      if (!res.ok) throw new Error(`Failed to load: ${file}`);
-      return res.json() as Promise<T>;
+      return readJson<T>(res, `Failed to load: ${file}`);
     }),
   );
   return results;

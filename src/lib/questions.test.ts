@@ -40,7 +40,20 @@ describe("questions loader", () => {
     fetchMock.mockResolvedValue(mockResponse({}, false));
 
     await expect(fetchQuestionIndex("missing/task")).rejects.toThrow(
-      "No questions found for missing/task. Generate some first!",
+      "No questions yet. Add JSON files under public/questions/missing/task/.",
+    );
+  });
+
+  it("reports a missing question when the server answers with the SPA page", async () => {
+    fetchMock.mockResolvedValue({
+      ok: true,
+      json: vi.fn().mockRejectedValue(new SyntaxError("Unexpected token '<'")),
+    } as unknown as Response);
+
+    await expect(
+      fetchQuestionByIdWithMeta("toeic/part5", "20261007-gone"),
+    ).rejects.toThrow(
+      "Question 20261007-gone doesn't exist. Pick another from the list.",
     );
   });
 
@@ -63,7 +76,7 @@ describe("questions loader", () => {
     fetchMock.mockResolvedValue(mockResponse({ files: [] }));
 
     await expect(fetchRandomQuestion("toeic/part5")).rejects.toThrow(
-      "No question files in toeic/part5. Generate some first!",
+      "No questions yet. Add JSON files under public/questions/toeic/part5/.",
     );
   });
 
