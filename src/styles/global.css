@@ -191,6 +191,14 @@ samp {
   border-width: 0;
 }
 
+/* Page widths: every page inherits the shell's --max-content column. A page
+ * that reads better narrow opts in here rather than repeating max-width,
+ * because a copied max-width without its auto margins hugs the left edge. */
+.page-narrow {
+  max-width: var(--max-reading);
+  margin-inline: auto;
+}
+
 /* The one error banner: a page that can't show its content says why here.
  * Inline errors inside a control stay plain error-coloured text. */
 .notice-error {

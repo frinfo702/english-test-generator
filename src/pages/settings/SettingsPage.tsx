@@ -441,7 +441,7 @@ function DataSection() {
 
 export function SettingsPage() {
   return (
-    <div className={styles.page}>
+    <div className="page-narrow">
       <SectionHeader
         title="Settings"
         subtitle="Everything here stays in this browser."

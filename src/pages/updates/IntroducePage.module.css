@@ -2,8 +2,6 @@
  * headline, then the hamsters on the same indigo stage as the home hero. */
 
 .page {
-  max-width: 800px;
-  margin: 0 auto;
   padding: var(--spacing-12) 0;
 }
 

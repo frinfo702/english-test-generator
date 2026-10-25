@@ -91,6 +91,9 @@ mono with `tabular-nums`; headline numerals use the display face.
   links; the active one stands on a 2px signal bar on the header rule.
 - `--max-content` 1120px; `--gutter` 32px (16px on phones);
   `--max-reading` 720px for a single focused sheet.
+- Pages never set their own `max-width`. They fill the shell's
+  `--max-content` column; a page that reads better narrow (Settings, update
+  notes) adds the global `.page-narrow` class, which owns its centring.
 - A page that can't show its content says why in the global `.notice-error`
   banner. Errors inside a control stay plain error-coloured text.
 - **Index pattern** (home, TOEFL/TOEIC menus, question lists): mono label →

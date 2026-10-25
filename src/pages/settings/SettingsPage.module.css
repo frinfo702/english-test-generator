@@ -1,11 +1,6 @@
 /* Settings: sections open with an ink rule; each setting is a ruled row with
  * its label hanging left. No hero, no boxes. */
 
-.page {
-  max-width: 820px;
-  margin: 0 auto;
-}
-
 .section {
   margin-bottom: var(--spacing-12);
   scroll-margin-top: calc(60px + var(--spacing-6));

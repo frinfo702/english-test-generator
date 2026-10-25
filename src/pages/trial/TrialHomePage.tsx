@@ -99,7 +99,7 @@ export function TrialHomePage() {
   };
 
   return (
-    <div className={styles.home}>
+    <div>
       <header className={styles.homeHeader}>
         <h1 className={styles.homeTitle}>Practice Test</h1>
         <p className={styles.lede}>

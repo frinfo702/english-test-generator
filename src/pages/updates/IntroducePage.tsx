@@ -67,7 +67,7 @@ const SECTIONS: {
 
 export function IntroducePage() {
   return (
-    <article className={styles.page}>
+    <article className={["page-narrow", styles.page].join(" ")}>
       <header className={styles.header}>
         <p className={styles.eyebrow}>Update</p>
         <h1 className={styles.title}>English Test Practice is open</h1>
