@@ -1,9 +1,14 @@
 import { Fragment } from "react";
-import { HashRouter, Routes, Route, useParams } from "react-router-dom";
+import {
+  HashRouter,
+  Navigate,
+  Routes,
+  Route,
+  useParams,
+} from "react-router-dom";
 import { AppShell } from "./components/layout/AppShell";
 import { HomePage } from "./pages/HomePage";
 import { DashboardPage } from "./pages/DashboardPage";
-import { LearnPage } from "./pages/LearnPage";
 import { ToeflMenuPage } from "./pages/toefl/ToeflMenuPage";
 import { ToeicMenuPage } from "./pages/toeic/ToeicMenuPage";
 import { CompleteWordsPage } from "./pages/toefl/reading/CompleteWordsPage";
@@ -202,7 +207,7 @@ const taskRoutes: TaskRoute[] = [
     taskId: "shadowing",
     title: "Shadowing Practice",
     subtitle: "Select a question number or start with random.",
-    backTo: "/learn",
+    backTo: "/",
     page: <ShadowingPage />,
   },
   {
@@ -210,15 +215,16 @@ const taskRoutes: TaskRoute[] = [
     taskId: "dictation",
     title: "Dictation Practice",
     subtitle: "Select a question number or start with random.",
-    backTo: "/learn",
+    backTo: "/",
     page: <DictationPage />,
   },
   {
     basePath: "/instant-composition",
     taskId: "instant-composition",
     title: "Instant Composition",
-    subtitle: "Units build up from the present tense to seminar and workplace English.",
-    backTo: "/learn",
+    subtitle:
+      "Units build up from the present tense to seminar and workplace English.",
+    backTo: "/",
     page: <InstantCompositionPage />,
   },
 ];
@@ -239,7 +245,7 @@ export default function App() {
       <AppShell>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/learn" element={<LearnPage />} />
+          <Route path="/learn" element={<Navigate to="/" replace />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/review" element={<ReviewPage />} />
           <Route path="/results/:attemptId" element={<ResultPage />} />

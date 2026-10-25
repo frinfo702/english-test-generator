@@ -177,6 +177,28 @@ const headphones: PixelSprite = {
   ],
 };
 
+// prettier-ignore
+const stopwatch: PixelSprite = {
+  palette: { o: "#2b2b3a", g: "#8a8aa0", l: "#f4efe4", r: "#fa500f" },
+  rows: [
+    "......oooo",
+    "......oggo",
+    ".......oo",
+    "....oooooooo",
+    "...ollllllllo",
+    "..ollllllllllo",
+    ".olllllrllllllo",
+    ".olllllrllllllo",
+    ".olllllrllllllo",
+    ".olllllrrrrlllo",
+    ".ollllllllllllo",
+    ".ollllllllllllo",
+    "..ollllllllllo",
+    "...ollllllllo",
+    "....oooooooo",
+  ],
+};
+
 export const PIXEL_ICONS = {
   university,
   briefcase,
@@ -186,5 +208,6 @@ export const PIXEL_ICONS = {
   importTray,
   book,
   headphones,
+  stopwatch,
 };
 export type PixelIconName = keyof typeof PIXEL_ICONS;

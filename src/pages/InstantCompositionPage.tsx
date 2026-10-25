@@ -344,7 +344,7 @@ export function InstantCompositionPage() {
           data?.point ??
           "See the Japanese, say the English. No time to translate."
         }
-        backTo="/learn"
+        backTo="/"
         actions={
           <>
             <Button
