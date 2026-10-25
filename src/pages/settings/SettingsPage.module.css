@@ -310,14 +310,9 @@
 /* PixelArt has no per-cell hooks, so arrow cells are picked by their fill
    (the arrow colour in pixelIcons.ts) and row. Bands flash in turn so the
    arrow reads as moving. */
-.exportIcon {
-  --arrow: #3ec46d;
-  --flash: #d4ffe0;
-}
-
-.importIcon {
-  --arrow: #55b3fb;
-  --flash: #e3f3ff;
+.backupIcon {
+  --arrow: #ffffff;
+  --flash: #c9c9d8;
 }
 
 @keyframes arrowChase {
@@ -332,7 +327,7 @@
 }
 
 :is(.backupBtn:hover, .backupBtn:focus-visible)
-  :is(.exportIcon rect[fill="#3ec46d"], .importIcon rect[fill="#55b3fb"]) {
+  .backupIcon rect[fill="#ffffff"] {
   /* Longhands: the shorthand would reset the per-row delays below. */
   animation-name: arrowChase;
   animation-duration: 0.5s;
