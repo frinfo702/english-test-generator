@@ -86,6 +86,18 @@
       "skillPath": "skills/review-animations/SKILL.md",
       "computedHash": "b4e5f0f4fe3e2743c85bf7354108f48a0b9d502cb20ef5c4a9c195da91f93736"
     },
+    "ghost": {
+      "source": "frinfo702/skills",
+      "sourceType": "github",
+      "skillPath": "skills/ghost/SKILL.md",
+      "computedHash": "6482d91e98824555929b4062be8598379790be4065ae312ba8f1734f1664bf92"
+    },
+    "monk": {
+      "source": "frinfo702/skills",
+      "sourceType": "github",
+      "skillPath": "skills/monk/SKILL.md",
+      "computedHash": "260af1cbd64218f2e5b0c2d419c0fd1d0024fa7fac0cafba837ea9d7f3467a77"
+    },
     "web-design-guidelines": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
