@@ -132,7 +132,7 @@ export function Part7Page() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />

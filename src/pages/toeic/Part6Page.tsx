@@ -160,7 +160,7 @@ export function Part6Page() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -262,7 +262,7 @@ export function Part6Page() {
               </Button>
             )}
             {passageIdx + 1 < data.passages.length && (
-              <Button onClick={handleNextPassage}>Next Passage</Button>
+              <Button onClick={handleNextPassage}>Next passage</Button>
             )}
             {!graded && passageIdx + 1 >= data.passages.length && (
               <>

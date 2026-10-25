@@ -202,7 +202,7 @@ export function WriteEmailPage() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -314,7 +314,7 @@ export function WriteEmailPage() {
                 />
               )}
               <div className={styles.rubricCard}>
-                <h3>Scoring Criteria</h3>
+                <h3>Scoring criteria</h3>
                 {data.rubric.map((r, i) => (
                   <div key={i} className={styles.rubricItem}>
                     <span className={styles.criterion}>{r.criterion}</span>
@@ -329,11 +329,11 @@ export function WriteEmailPage() {
                   variant="secondary"
                   onClick={() => setShowModel((v) => !v)}
                 >
-                  {showModel ? "Hide Model Answer" : "Show Model Answer"}
+                  {showModel ? "Hide model answer" : "Show model answer"}
                 </Button>
                 {showModel && (
                   <div className={styles.modelAnswer}>
-                    <h3>Model Answer</h3>
+                    <h3>Model answer</h3>
                     <p>{data.modelAnswer}</p>
                   </div>
                 )}

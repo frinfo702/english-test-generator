@@ -224,7 +224,7 @@ export function ListenResponsePage() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -245,7 +245,7 @@ export function ListenResponsePage() {
         <>
           {graded && (
             <div className={styles.resultCard}>
-              <h2>Section Complete</h2>
+              <h2>Section complete</h2>
               <div className={styles.scoreBox}>
                 <span className={styles.scoreNum}>{totalCorrect}</span>
                 <span className={styles.scoreDen}>/{totalQuestions}</span>

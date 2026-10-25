@@ -199,7 +199,7 @@ export function BuildSentencePage() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -220,7 +220,7 @@ export function BuildSentencePage() {
         <>
           {graded && (
             <div className={styles.resultCard}>
-              <h2>Section Complete</h2>
+              <h2>Section complete</h2>
               <div className={styles.scoreBox}>
                 <span className={styles.scoreNum}>{score}</span>
                 <span className={styles.scoreDen}>/{totalSentences}</span>
@@ -250,7 +250,7 @@ export function BuildSentencePage() {
                 <p className={styles.referenceText}>{sentence.reference}</p>
               </div>
               <div className={styles.zone}>
-                <p className={styles.zoneLabel}>Answer Area</p>
+                <p className={styles.zoneLabel}>Answer area</p>
                 <div className={styles.blanks}>
                   {sentence.prefix && (
                     <span className={styles.given}>{sentence.prefix}</span>

@@ -299,7 +299,7 @@ export function CompleteWordsPage() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -323,7 +323,7 @@ export function CompleteWordsPage() {
           {!submitted ? (
             <div className={styles.actions}>
               <Button onClick={handleSubmit}>
-                {trial ? "Next" : "Check Answers"}
+                {trial ? "Next" : "Check answers"}
                 <PixelCheckIcon />
               </Button>
               <NextQuestionButton taskId={TASK_ID} variant="secondary" />

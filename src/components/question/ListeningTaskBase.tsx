@@ -294,7 +294,7 @@ export function ListeningTaskBase({
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -379,7 +379,7 @@ export function ListeningTaskBase({
           {!graded && (
             <div className={styles.submitArea}>
               <Button onClick={handleSubmit} size="lg">
-                Submit Answers
+                Submit answers
                 <PixelCheckIcon />
               </Button>
               <NextQuestionButton

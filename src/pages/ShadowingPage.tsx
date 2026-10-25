@@ -181,7 +181,7 @@ export function ShadowingPage() {
               onClick={handleBackToList}
               disabled={loading}
             >
-              Question List
+              All questions
             </Button>
             <NextQuestionButton
               taskId={TASK_ID}

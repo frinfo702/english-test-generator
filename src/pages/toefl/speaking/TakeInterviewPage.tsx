@@ -369,7 +369,7 @@ export function TakeInterviewPage() {
         backTo="/toefl"
         actions={
           <>
-            {/* Moves to another set, so it lives with Question List and away
+            {/* Moves to another set, so it lives with All questions and away
                 from Next, which moves within this set. */}
             <NextQuestionButton
               taskId={INTERVIEW_TASK_ID}
@@ -382,7 +382,7 @@ export function TakeInterviewPage() {
               onClick={goToQuestionList}
               disabled={loading || busyPhase}
             >
-              Question List
+              All questions
             </Button>
           </>
         }

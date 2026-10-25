@@ -125,7 +125,7 @@ export function Part5Page() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -223,7 +223,7 @@ export function Part5Page() {
               </Button>
             )}
             {page + 1 < totalPages && (
-              <Button onClick={handleNextPage}>Next Page</Button>
+              <Button onClick={handleNextPage}>Next page</Button>
             )}
             {!graded && page + 1 >= totalPages && (
               <>

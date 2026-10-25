@@ -151,7 +151,7 @@ export function ReadDailyLifePage() {
             onClick={() => navigate("/toefl/reading/daily-life")}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -189,7 +189,7 @@ export function ReadDailyLifePage() {
               </p>
               <div className={styles.resultActions}>
                 <Button size="lg" onClick={handleRestart}>
-                  Try Again
+                  Try again
                 </Button>
                 <NextQuestionButton
                   taskId="toefl/reading/daily-life"

@@ -392,7 +392,7 @@ export function DictationPage() {
               onClick={handleBackToList}
               disabled={loading}
             >
-              Question List
+              All questions
             </Button>
             <NextQuestionButton
               taskId={TASK_ID}

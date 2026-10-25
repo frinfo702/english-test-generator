@@ -393,7 +393,7 @@ export function DashboardPage() {
             >
               {confirmClear
                 ? "Delete all scores, answers, and recordings? (Press again)"
-                : "Clear All History"}
+                : "Clear all history"}
             </Button>
             {confirmClear && (
               <button
@@ -434,7 +434,7 @@ export function DashboardPage() {
 
       {answers.length > 0 && (
         <section className={styles.answersSection}>
-          <h2 className={styles.answersHeading}>Answer History</h2>
+          <h2 className={styles.answersHeading}>Answer history</h2>
           <div className={styles.answersList}>
             {answers.map((a) => {
               const text = a.responses

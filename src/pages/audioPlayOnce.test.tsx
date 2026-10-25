@@ -182,7 +182,7 @@ describe("list layout (TOEIC Part 3)", () => {
     expect(playButton(/Back 10s/).disabled).toBe(true);
     expect(screen.queryByText("Transcript")).toBeNull();
 
-    fireEvent.click(screen.getByRole("button", { name: /Submit Answers/ }));
+    fireEvent.click(screen.getByRole("button", { name: /Submit answers/ }));
 
     expect(screen.getByText("Transcript")).toBeTruthy();
     expect(screen.getByText("Are the boxes packed yet?")).toBeTruthy();
