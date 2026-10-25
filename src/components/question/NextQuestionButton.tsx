@@ -146,7 +146,7 @@ function NextQuestion({
             navigate(`/${taskId}/${next}`);
           }}
         >
-          Next Question
+          Next question
           <PixelArrowIcon />
         </Button>
       )}

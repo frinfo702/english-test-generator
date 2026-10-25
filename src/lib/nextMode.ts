@@ -1,5 +1,5 @@
 /**
- * How "Next Question" picks the following problem, like a music player:
+ * How "Next question" picks the following problem, like a music player:
  * shuffle or in order (exactly one is on), plus an independent
  * "unsolved only" filter.
  */

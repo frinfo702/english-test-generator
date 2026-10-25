@@ -5,7 +5,7 @@ import { Button } from "../../components/ui/Button";
 import { CardStack } from "../../components/ui/CardStack";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../components/ui/ProgressBar";
-import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../components/ui/HeaderClock";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
@@ -178,7 +178,7 @@ export function Part2Page() {
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
-        <FloatingElapsedTimer display={display} running={running} />
+        <HeaderClock display={display} running={running} />
       )}
       <SectionHeader
         title="Part 2: Question-Response"
@@ -191,7 +191,7 @@ export function Part2Page() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />

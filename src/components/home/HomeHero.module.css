@@ -196,7 +196,18 @@
   }
 }
 
+/* Phones: the practice list is what people come for, so it goes straight
+   under the title and the stage closes the page. display: contents lets the
+   stage join the page's own column to be reordered. */
 @media (max-width: 620px) {
+  .hero {
+    display: contents;
+  }
+
+  .stage {
+    order: 1;
+  }
+
   .copy {
     gap: var(--spacing-4);
   }

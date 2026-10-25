@@ -317,7 +317,7 @@ const trialPages = Object.fromEntries(
   taskRoutes.map((r) => [r.taskId, r.page]),
 ) as Partial<Record<TaskId, ReactElement>>;
 
-/** Remounts the page per question so "Next Question" starts from clean state. */
+/** Remounts the page per question so "Next question" starts from clean state. */
 function KeyedByQuestion({ children }: { children: ReactNode }) {
   const { questionId = "" } = useParams<{ questionId: string }>();
   return <Fragment key={questionId}>{children}</Fragment>;

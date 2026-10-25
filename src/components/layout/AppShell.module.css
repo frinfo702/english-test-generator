@@ -61,6 +61,16 @@
   filter: var(--poodle-rim);
 }
 
+/* A task page portals its clock in here (see HeaderClock). */
+.clockSlot {
+  display: flex;
+  align-items: center;
+}
+
+.clockSlot:empty {
+  display: none;
+}
+
 /* ---- Nav: plain text links; the active one stands on a signal bar that
  * sits on the header's bottom rule. ---- */
 
@@ -164,6 +174,12 @@
 
   .navLink {
     padding: 0 8px;
+  }
+
+  /* No room for both: during a task the clock takes the logo's place, and
+     the Learn tab still goes home. */
+  .headerInner:has(.clockSlot:not(:empty)) .logo {
+    display: none;
   }
 
   .kbd {

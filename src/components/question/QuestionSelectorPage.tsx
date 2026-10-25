@@ -6,7 +6,7 @@ import { LoadingSpinner } from "../ui/LoadingSpinner";
 import {
   type QuestionFileEntry,
   listQuestionFiles,
-  questionLabel,
+  questionTopic,
 } from "../../lib/questions";
 import {
   useScoreHistory,
@@ -113,7 +113,15 @@ export function QuestionSelectorPage({
       )}
 
       {!loading && !error && (
-        <div className={table.container}>
+        <div
+          className={[
+            table.container,
+            // Columns of dashes until something is answered say nothing.
+            files.some((f) => latestByProblem.has(f.id))
+              ? ""
+              : styles.noMetrics,
+          ].join(" ")}
+        >
           <div className={[table.header, styles.headerRow].join(" ")}>
             <span aria-hidden="true" />
             <span>Question</span>
@@ -130,6 +138,7 @@ export function QuestionSelectorPage({
             const accuracy =
               typeof latest?.pct === "number" ? `${latest.pct}%` : "—";
             const completed = !!latest;
+            const topic = questionTopic(item.id);
 
             return (
               <button
@@ -146,11 +155,12 @@ export function QuestionSelectorPage({
                   {completed ? (
                     <span className={table.statusSolved}>✓</span>
                   ) : (
-                    <span className={table.statusNone}>{i + 1}</span>
+                    // The title already is the number when there's no topic.
+                    topic && <span className={table.statusNone}>{i + 1}</span>
                   )}
                 </span>
                 <span className={styles.number}>
-                  {questionLabel(item.id, i + 1)}
+                  {topic ?? `Question ${i + 1}`}
                 </span>
                 <span className={styles.metricValue}>{elapsed}</span>
                 <span

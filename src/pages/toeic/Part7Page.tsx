@@ -5,7 +5,7 @@ import { BackButton } from "../../components/ui/BackButton";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
-import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../components/ui/HeaderClock";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
@@ -118,7 +118,7 @@ export function Part7Page() {
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
-        <FloatingElapsedTimer display={display} running={running} />
+        <HeaderClock display={display} running={running} />
       )}
 
       <SectionHeader
@@ -132,7 +132,7 @@ export function Part7Page() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />

@@ -97,7 +97,7 @@ const pencil: PixelSprite = {
 
 // prettier-ignore
 const exportTray: PixelSprite = {
-  palette: { o: "#2b2b3a", a: "#3ec46d", t: "#c9c9d8" },
+  palette: { o: "#2b2b3a", a: "#ffffff", t: "#c9c9d8" },
   rows: [
     "",
     ".......oo",
@@ -118,7 +118,7 @@ const exportTray: PixelSprite = {
 
 // prettier-ignore
 const importTray: PixelSprite = {
-  palette: { o: "#2b2b3a", a: "#55b3fb", t: "#c9c9d8" },
+  palette: { o: "#2b2b3a", a: "#ffffff", t: "#c9c9d8" },
   rows: [
     "",
     "......oooo",

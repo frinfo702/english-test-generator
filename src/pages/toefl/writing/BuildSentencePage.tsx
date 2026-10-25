@@ -10,7 +10,7 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { CardStack } from "../../../components/ui/CardStack";
-import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../../components/ui/HeaderClock";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
@@ -185,7 +185,7 @@ export function BuildSentencePage() {
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
-        <FloatingElapsedTimer display={display} running={running} />
+        <HeaderClock display={display} running={running} />
       )}
 
       <SectionHeader
@@ -199,7 +199,7 @@ export function BuildSentencePage() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -220,7 +220,7 @@ export function BuildSentencePage() {
         <>
           {graded && (
             <div className={styles.resultCard}>
-              <h2>Section Complete</h2>
+              <h2>Section complete</h2>
               <div className={styles.scoreBox}>
                 <span className={styles.scoreNum}>{score}</span>
                 <span className={styles.scoreDen}>/{totalSentences}</span>
@@ -250,7 +250,7 @@ export function BuildSentencePage() {
                 <p className={styles.referenceText}>{sentence.reference}</p>
               </div>
               <div className={styles.zone}>
-                <p className={styles.zoneLabel}>Answer Area</p>
+                <p className={styles.zoneLabel}>Answer area</p>
                 <div className={styles.blanks}>
                   {sentence.prefix && (
                     <span className={styles.given}>{sentence.prefix}</span>

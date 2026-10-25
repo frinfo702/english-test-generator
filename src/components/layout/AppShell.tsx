@@ -13,6 +13,7 @@ import { Settings3LineIcon } from "../ui/SettingsIcon";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { LegacyHistoryNotice } from "./LegacyHistoryNotice";
 import { UpdateNotice } from "./UpdateNotice";
+import { HeaderClockSlot } from "./headerSlot";
 import { PerfectCelebration } from "../pixel/PerfectCelebration";
 import styles from "./AppShell.module.css";
 
@@ -64,6 +65,7 @@ export function AppShell({ children }: AppShellProps) {
   const indicatorRef = useRef<HTMLSpanElement | null>(null);
   /** Remounting after a migration beats making every page watch history. */
   const [historyVersion, setHistoryVersion] = useState(0);
+  const [clockSlot, setClockSlot] = useState<HTMLDivElement | null>(null);
 
   const activeItem =
     navItems.find((item) => item.matches?.(location.pathname)) ?? navItems[0];
@@ -129,6 +131,8 @@ export function AppShell({ children }: AppShellProps) {
             <span className={styles.logoText}>English Test Practice</span>
           </Link>
 
+          <div className={styles.clockSlot} ref={setClockSlot} />
+
           <nav className={styles.nav} ref={navRef} aria-label="Main navigation">
             <span
               className={styles.indicator}
@@ -166,7 +170,9 @@ export function AppShell({ children }: AppShellProps) {
         </div>
       </header>
       <main className={styles.main} id="main-content" tabIndex={-1}>
-        <Fragment key={historyVersion}>{children}</Fragment>
+        <HeaderClockSlot.Provider value={clockSlot}>
+          <Fragment key={historyVersion}>{children}</Fragment>
+        </HeaderClockSlot.Provider>
       </main>
       <PerfectCelebration />
       <UpdateNotice />

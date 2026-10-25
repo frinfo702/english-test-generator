@@ -5,17 +5,17 @@ import {
   fetchQuestionIndex,
   fetchRandomQuestion,
   listQuestionFiles,
-  questionLabel,
+  questionTopic,
 } from "./questions";
 
-describe("questionLabel", () => {
+describe("questionTopic", () => {
   it("names slugged questions by topic", () => {
-    expect(questionLabel("20261007-roman-roads", 3)).toBe("Roman roads");
+    expect(questionTopic("20261007-roman-roads")).toBe("Roman roads");
   });
 
-  it("numbers questions without a topic", () => {
-    expect(questionLabel("007", 7)).toBe("Q7");
-    expect(questionLabel("20261007-1430", 2)).toBe("Q2");
+  it("has no topic for numbered questions", () => {
+    expect(questionTopic("007")).toBeNull();
+    expect(questionTopic("20261007-1430")).toBeNull();
   });
 });
 

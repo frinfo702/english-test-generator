@@ -7,7 +7,7 @@ import { CardStack } from "../../components/ui/CardStack";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
 import { ProgressBar } from "../../components/ui/ProgressBar";
-import { FloatingElapsedTimer } from "../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../components/ui/HeaderClock";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
 import { useScoreHistory } from "../../hooks/useScoreHistory";
@@ -111,7 +111,7 @@ export function Part5Page() {
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
-        <FloatingElapsedTimer display={display} running={running} />
+        <HeaderClock display={display} running={running} />
       )}
 
       <SectionHeader
@@ -125,7 +125,7 @@ export function Part5Page() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -223,7 +223,7 @@ export function Part5Page() {
               </Button>
             )}
             {page + 1 < totalPages && (
-              <Button onClick={handleNextPage}>Next Page</Button>
+              <Button onClick={handleNextPage}>Next page</Button>
             )}
             {!graded && page + 1 >= totalPages && (
               <>

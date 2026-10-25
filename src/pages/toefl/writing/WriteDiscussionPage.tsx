@@ -10,7 +10,7 @@ import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { GradingRequestPanel } from "../../../components/ui/GradingRequestPanel";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../../components/ui/HeaderClock";
 import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import {
@@ -230,7 +230,7 @@ export function WriteDiscussionPage() {
 
   return (
     <div>
-      <FloatingElapsedTimer
+      <HeaderClock
         display={timer.display}
         running={timer.running}
         isWarning={timer.isWarning}
@@ -248,7 +248,7 @@ export function WriteDiscussionPage() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -389,7 +389,7 @@ export function WriteDiscussionPage() {
                 />
               )}
               <div className={styles.evalCard}>
-                <h3>Evaluation Points</h3>
+                <h3>Evaluation points</h3>
                 <ul className={styles.evalList}>
                   {data.evaluationPoints.map((pt, i) => (
                     <li key={i}>{pt}</li>
@@ -401,11 +401,11 @@ export function WriteDiscussionPage() {
                   variant="secondary"
                   onClick={() => setShowModel((v) => !v)}
                 >
-                  {showModel ? "Hide Model Answer" : "Show Model Answer"}
+                  {showModel ? "Hide model answer" : "Show model answer"}
                 </Button>
                 {showModel && (
                   <div className={styles.modelAnswer}>
-                    <h3>Model Answer</h3>
+                    <h3>Model answer</h3>
                     <p>{data.modelAnswer}</p>
                   </div>
                 )}

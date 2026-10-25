@@ -9,7 +9,7 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../../components/ui/HeaderClock";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
@@ -130,7 +130,7 @@ export function ReadAcademicPage() {
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
-        <FloatingElapsedTimer display={display} running={running} />
+        <HeaderClock display={display} running={running} />
       )}
 
       <SectionHeader
@@ -144,7 +144,7 @@ export function ReadAcademicPage() {
             onClick={handleBackToList}
             disabled={loading}
           >
-            Question List
+            All questions
           </Button>
         }
       />
@@ -165,7 +165,7 @@ export function ReadAcademicPage() {
         <>
           {graded && (
             <div className={styles.resultCard}>
-              <h2>Section Complete</h2>
+              <h2>Section complete</h2>
               <div className={styles.scoreBox}>
                 <span className={styles.scoreNum}>{score}</span>
                 <span className={styles.scoreDen}>/{totalQ}</span>

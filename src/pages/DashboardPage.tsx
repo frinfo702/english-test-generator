@@ -221,17 +221,17 @@ const TASK_GROUPS: { label: string; has: (id: TaskId) => boolean }[] = [
 ];
 
 export function DashboardPage() {
-  const navigate = useNavigate();
   const { getAll, clearAll } = useScoreHistory();
   const [entries, setEntries] = useState<ScoreEntry[]>([]);
   const [confirmClear, setConfirmClear] = useState(false);
   const [answers, setAnswers] = useState<Attempt[]>([]);
   const [results, setResults] = useState<Attempt[]>([]);
   const [allAttempts, setAllAttempts] = useState<Attempt[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   const load = useCallback(() => {
-    getAll().then(setEntries);
-    getAllAttempts().then((all) => {
+    const scores = getAll().then(setEntries);
+    const attempts = getAllAttempts().then((all) => {
       setAllAttempts(all);
       // Only attempts with a question snapshot can be rendered as a result.
       const withResult = (a: Attempt) => a.question !== undefined;
@@ -244,6 +244,7 @@ export function DashboardPage() {
       );
       setResults(all.filter(withResult).reverse());
     });
+    Promise.all([scores, attempts]).finally(() => setLoaded(true));
   }, [getAll]);
 
   useEffect(load, [load]);
@@ -294,13 +295,28 @@ export function DashboardPage() {
         )
       : "—";
 
+  const header = (
+    <SectionHeader
+      title="Dashboard"
+      subtitle="Answer history and score trends"
+      backTo="/"
+    />
+  );
+
+  // Nothing yet: a page of zeros and an empty calendar says less than this.
+  // Waiting for the load keeps the empty state from flashing over real data.
+  if (!loaded || (entries.length === 0 && allAttempts.length === 0)) {
+    return (
+      <div>
+        {header}
+        {loaded && <EmptyHistory />}
+      </div>
+    );
+  }
+
   return (
     <div>
-      <SectionHeader
-        title="Dashboard"
-        subtitle="Answer history and score trends"
-        backTo="/"
-      />
+      {header}
 
       <div className={styles.summary}>
         <div className={styles.summaryCard}>
@@ -332,19 +348,7 @@ export function DashboardPage() {
       <PracticeTestsPanel attempts={allAttempts} />
 
       {taskIds.length === 0 ? (
-        <div className={styles.empty}>
-          <p className={styles.emptyText}>No answer history yet.</p>
-          <p className={styles.emptyHint}>
-            Scores will appear here after you complete questions on practice
-            pages.
-          </p>
-          <div className={styles.emptyActions}>
-            <Button onClick={() => navigate("/toefl")}>Practice TOEFL</Button>
-            <Button variant="secondary" onClick={() => navigate("/toeic")}>
-              Practice TOEIC
-            </Button>
-          </div>
-        </div>
+        <EmptyHistory />
       ) : (
         <>
           <section className={styles.tasks} aria-labelledby="tasks-heading">
@@ -389,7 +393,7 @@ export function DashboardPage() {
             >
               {confirmClear
                 ? "Delete all scores, answers, and recordings? (Press again)"
-                : "Clear All History"}
+                : "Clear all history"}
             </Button>
             {confirmClear && (
               <button
@@ -430,7 +434,7 @@ export function DashboardPage() {
 
       {answers.length > 0 && (
         <section className={styles.answersSection}>
-          <h2 className={styles.answersHeading}>Answer History</h2>
+          <h2 className={styles.answersHeading}>Answer history</h2>
           <div className={styles.answersList}>
             {answers.map((a) => {
               const text = a.responses
@@ -454,6 +458,24 @@ export function DashboardPage() {
           </div>
         </section>
       )}
+    </div>
+  );
+}
+
+function EmptyHistory() {
+  const navigate = useNavigate();
+  return (
+    <div className={styles.empty}>
+      <p className={styles.emptyText}>No answer history yet.</p>
+      <p className={styles.emptyHint}>
+        Finish a question and your scores, streak and trends show up here.
+      </p>
+      <div className={styles.emptyActions}>
+        <Button onClick={() => navigate("/toefl")}>Practice TOEFL</Button>
+        <Button variant="secondary" onClick={() => navigate("/toeic")}>
+          Practice TOEIC
+        </Button>
+      </div>
     </div>
   );
 }
