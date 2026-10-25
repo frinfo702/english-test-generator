@@ -10,7 +10,7 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { CardStack } from "../../../components/ui/CardStack";
-import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../../components/ui/HeaderClock";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
@@ -185,7 +185,7 @@ export function BuildSentencePage() {
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
-        <FloatingElapsedTimer display={display} running={running} />
+        <HeaderClock display={display} running={running} />
       )}
 
       <SectionHeader

@@ -8,7 +8,7 @@ import {
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../../components/ui/HeaderClock";
 import { MicCheck } from "../../../components/ui/MicCheck";
 import { MicSelector } from "../../../components/ui/MicSelector";
 import { VoiceButton } from "../../../components/ui/VoiceButton";
@@ -399,7 +399,7 @@ export function ListenRepeatPage() {
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
-        <FloatingElapsedTimer display={display} running={running} />
+        <HeaderClock display={display} running={running} />
       )}
       <SectionHeader
         title="Listen and Repeat"

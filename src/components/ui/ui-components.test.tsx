@@ -4,7 +4,7 @@ import { BackButton } from "./BackButton";
 import { Button } from "./Button";
 import { CardStack } from "./CardStack";
 import { FeedbackPanel } from "./FeedbackPanel";
-import { FloatingElapsedTimer } from "./FloatingElapsedTimer";
+import { HeaderClock } from "./HeaderClock";
 import { GradingRequestPanel } from "./GradingRequestPanel";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { ProgressBar } from "./ProgressBar";
@@ -162,8 +162,8 @@ describe("ui components", () => {
     expect(onChange).toHaveBeenCalledWith(1.4);
   });
 
-  it("renders FloatingElapsedTimer as a live timer", () => {
-    render(<FloatingElapsedTimer display="03:21" running={false} />);
+  it("renders HeaderClock as a live timer", () => {
+    render(<HeaderClock display="03:21" running={false} />);
 
     expect(screen.getByRole("timer").textContent).toContain("TIME");
     expect(screen.getByRole("timer").textContent).toContain("03:21");

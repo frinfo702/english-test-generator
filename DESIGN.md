@@ -89,6 +89,9 @@ mono with `tabular-nums`; headline numerals use the display face.
   Dictation, Instant Composition) · Review · Dashboard · Settings.
 - Header 60px, translucent paper, hairline bottom rule. Nav is plain text
   links; the active one stands on a 2px signal bar on the header rule.
+- A task's clock docks in the header after the wordmark, behind a hairline
+  (`HeaderClock`). On phones it takes the wordmark's place. Nothing floats
+  over a passage.
 - `--max-content` 1120px; `--gutter` 32px (16px on phones);
   `--max-reading` 720px for a single focused sheet.
 - Pages never set their own `max-width`. They fill the shell's

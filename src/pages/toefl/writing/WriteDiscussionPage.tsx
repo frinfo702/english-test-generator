@@ -10,7 +10,7 @@ import { BackButton } from "../../../components/ui/BackButton";
 import { Button } from "../../../components/ui/Button";
 import { GradingRequestPanel } from "../../../components/ui/GradingRequestPanel";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../../components/ui/HeaderClock";
 import { useTimer } from "../../../hooks/useTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import {
@@ -230,7 +230,7 @@ export function WriteDiscussionPage() {
 
   return (
     <div>
-      <FloatingElapsedTimer
+      <HeaderClock
         display={timer.display}
         running={timer.running}
         isWarning={timer.isWarning}

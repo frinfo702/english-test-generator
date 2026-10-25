@@ -1,0 +1,83 @@
+/* Sits in the app header after the wordmark, separated by a hairline. */
+.clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 24px;
+  padding-left: var(--spacing-4);
+  border-left: 1px solid var(--color-nav-border);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-meta);
+  color: var(--color-ink-tertiary);
+}
+
+.value {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-ink);
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--color-border-strong);
+  transition: background var(--duration-base) var(--ease-out);
+}
+
+.active {
+  background: var(--color-signal);
+  animation: pulse 2s var(--ease-in-out) infinite;
+}
+
+.warning .value {
+  color: var(--color-warning);
+}
+
+.expired .value {
+  color: var(--color-error);
+}
+
+.warning .dot,
+.expired .dot {
+  background: currentColor;
+}
+
+.warning .dot {
+  color: var(--color-warning);
+}
+
+.expired .dot {
+  color: var(--color-error);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* Phones: the header has no room for the caption; the digits carry it. */
+@media (max-width: 620px) {
+  .clock {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .label {
+    display: none;
+  }
+}

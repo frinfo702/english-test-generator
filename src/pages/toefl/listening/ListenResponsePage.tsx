@@ -9,7 +9,7 @@ import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
 import { ProgressBar } from "../../../components/ui/ProgressBar";
-import { FloatingElapsedTimer } from "../../../components/ui/FloatingElapsedTimer";
+import { HeaderClock } from "../../../components/ui/HeaderClock";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
@@ -211,7 +211,7 @@ export function ListenResponsePage() {
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
-        <FloatingElapsedTimer display={display} running={running} />
+        <HeaderClock display={display} running={running} />
       )}
       <SectionHeader
         title="Listen and Choose a Response"

@@ -10,7 +10,7 @@ import { Button } from "../ui/Button";
 import { LoadingSpinner } from "../ui/LoadingSpinner";
 import { ProgressBar } from "../ui/ProgressBar";
 import { FeedbackPanel } from "../ui/FeedbackPanel";
-import { FloatingElapsedTimer } from "../ui/FloatingElapsedTimer";
+import { HeaderClock } from "../ui/HeaderClock";
 import { AudioPlayer } from "../ui/AudioPlayer";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
@@ -281,7 +281,7 @@ export function ListeningTaskBase({
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
-        <FloatingElapsedTimer display={display} running={running} />
+        <HeaderClock display={display} running={running} />
       )}
       <SectionHeader
         title={title}
