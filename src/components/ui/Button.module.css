@@ -7,7 +7,7 @@
   justify-content: center;
   gap: 8px;
   border: 1px solid transparent;
-  border-radius: var(--radius);
+  border-radius: var(--radius-full);
   font-weight: var(--font-medium);
   font-family: var(--font-sans);
   transition:
@@ -27,7 +27,7 @@
 }
 
 .btn:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: scale(0.985);
 }
 
 .btn:disabled {
@@ -41,14 +41,15 @@
 }
 
 .primary {
-  background: var(--color-ink);
-  color: var(--color-ink-inverse);
-  border-color: var(--color-ink);
+  background: var(--color-action);
+  color: var(--color-action-inverse);
+  border-color: var(--color-action);
 }
 
 .primary:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-ink) 84%, var(--color-surface));
-  border-color: color-mix(in srgb, var(--color-ink) 84%, var(--color-surface));
+  background: var(--color-action-hover);
+  border-color: var(--color-action-hover);
+  color: var(--color-action-inverse);
 }
 
 .secondary {
@@ -58,8 +59,9 @@
 }
 
 .secondary:hover:not(:disabled) {
-  background: var(--color-surface);
+  background: var(--color-surface-hover);
   border-color: var(--color-ink);
+  color: var(--color-ink);
 }
 
 .secondary:active:not(:disabled) {
@@ -103,20 +105,19 @@
 }
 
 .sm {
-  height: 30px;
-  padding: 0 12px;
+  height: 34px;
+  padding: 0 15px;
   font-size: var(--text-xs);
-  border-radius: var(--radius-sm);
 }
 
 .md {
-  height: 38px;
-  padding: 0 16px;
+  height: 42px;
+  padding: 0 20px;
   font-size: var(--text-sm);
 }
 
 .lg {
-  height: 46px;
-  padding: 0 22px;
+  height: 52px;
+  padding: 0 28px;
   font-size: var(--text-base);
 }

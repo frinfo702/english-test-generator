@@ -197,6 +197,7 @@ export function CompleteWordsPage() {
         submitted && userInput.toLowerCase() === expectedSuffix.toLowerCase();
       const isWrong = submitted && !isCorrect;
       const isFocused = focusedIdx === itemIdx;
+      const isIncomplete = userInput.length < expectedSuffix.length;
 
       parts.push(<span key={`t${itemIdx}`}>{text.slice(lastIndex, pos)}</span>);
 
@@ -207,12 +208,16 @@ export function CompleteWordsPage() {
             className={[
               styles.blankWrapper,
               isFocused ? styles.blankFocused : "",
+              isIncomplete ? styles.blankIncomplete : styles.blankComplete,
               submitted
                 ? isCorrect
                   ? styles.blankCorrect
                   : styles.blankWrong
                 : "",
             ].join(" ")}
+            onClick={() => {
+              if (!submitted) inputRefs.current[itemIdx]?.focus();
+            }}
           >
             <span className={styles.hint}>{item.hint}</span>
             {/* One cell per hidden letter: Inter is proportional, so a

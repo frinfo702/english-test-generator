@@ -21,66 +21,49 @@ interface TaskMenuProps {
   sections: TaskMenuSection[];
 }
 
-/** Pixel-art section icons, keyed by section key. "#" = filled pixel. */
-const PIXEL_ICONS: Record<string, string[]> = {
-  reading: [
-    "##.....##",
-    "#.##.##.#",
-    "#...#...#",
-    "#...#...#",
-    "#...#...#",
-    "#...#...#",
-    "###.#.###",
-    "...###...",
-  ],
-  writing: [
-    "......##",
-    ".....#.#",
-    "....#.##",
-    "...#.#..",
-    "..#.#...",
-    ".#.#....",
-    "#.#.....",
-    "##......",
-  ],
-  listening: [
-    "..####..",
-    ".#....#.",
-    "#......#",
-    "#......#",
-    "##....##",
-    "##....##",
-    "##....##",
-    "........",
-  ],
-  speaking: [
-    ".######.",
-    "#......#",
-    "#.#.#.##",
-    "#......#",
-    ".##.###.",
-    "..##....",
-    "..#.....",
-    "........",
-  ],
+/** Thin-line section marks, drawn on the same 24px grid. */
+const LINE_ICONS: Record<string, React.ReactNode> = {
+  reading: (
+    <>
+      <path d="M3.5 5.5c2.8-.8 5.7-.5 8.5 1.2 2.8-1.7 5.7-2 8.5-1.2v13c-2.8-.8-5.7-.4-8.5 1.3-2.8-1.7-5.7-2.1-8.5-1.3z" />
+      <path d="M12 6.7v13" />
+    </>
+  ),
+  writing: (
+    <>
+      <path d="M4 20l4.2-1.1L19 8.1 15.9 5 5.1 15.8 4 20z" />
+      <path d="M13.9 7l3.1 3.1" />
+      <path d="M4 20h16" />
+    </>
+  ),
+  listening: (
+    <>
+      <path d="M4.5 13v-1a7.5 7.5 0 0 1 15 0v1" />
+      <path d="M4.5 12.5h2.2c.7 0 1.3.6 1.3 1.3v4c0 .7-.6 1.3-1.3 1.3H4.5z" />
+      <path d="M19.5 12.5h-2.2c-.7 0-1.3.6-1.3 1.3v4c0 .7.6 1.3 1.3 1.3h2.2z" />
+    </>
+  ),
+  speaking: (
+    <>
+      <path d="M4 5.5h16v10H9l-4.5 3.3v-3.3H4z" />
+      <path d="M8 9v3M12 8v5M16 9.5v2" />
+    </>
+  ),
 };
 
-function PixelIcon({ grid, color }: { grid: string[]; color: string }) {
+function LineIcon({ section }: { section: string }) {
   return (
     <svg
       className={styles.icon}
-      viewBox={`0 0 ${grid[0].length} ${grid.length}`}
-      shapeRendering="crispEdges"
-      fill={color}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       aria-hidden="true"
     >
-      {grid.flatMap((row, y) =>
-        [...row].map((cell, x) =>
-          cell === "#" ? (
-            <rect key={`${x},${y}`} x={x} y={y} width={1} height={1} />
-          ) : null,
-        ),
-      )}
+      {LINE_ICONS[section]}
     </svg>
   );
 }
@@ -120,11 +103,13 @@ export function TaskMenu({ sections }: TaskMenuProps) {
       {sections.map((section) => (
         <section key={section.key} className={styles.section}>
           <div className={styles.head}>
-            {PIXEL_ICONS[section.key] && (
-              <PixelIcon
-                grid={PIXEL_ICONS[section.key]}
-                color={section.color}
-              />
+            {LINE_ICONS[section.key] && (
+              <span
+                className={styles.iconWrap}
+                style={{ color: section.color }}
+              >
+                <LineIcon section={section.key} />
+              </span>
             )}
             <h2 className={styles.label}>{section.label}</h2>
           </div>

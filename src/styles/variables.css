@@ -1,215 +1,242 @@
-/* Design tokens — "Field Notes"
+/* Design tokens — "Quiet System"
  *
- * Paper, ink and one signal. Structure is achromatic: hierarchy comes from
- * the type scale, hairline rules and whitespace, never from tinted boxes.
- * The single signal is the poodle's collar orange (#fa500f) — the same
- * orange the pixel art is drawn in — so the chrome and the mascots share
- * one palette. Indigo + lime belong to the pixel stages only (home hero,
- * update page), where the mascots perform.
+ * A white editorial canvas, heavy display type and deep green product fields.
+ * Colour is earned: photography, coral taxonomy marks and blue editorial links
+ * carry it, while the working interface stays black, white and grey.
  */
 
 :root,
 [data-theme="light"] {
   color-scheme: light;
 
-  /* ---- Ink (neutral, faintly warm) ---- */
-  --color-ink: #131312;
-  --color-ink-secondary: #4d4c47;
-  --color-ink-tertiary: #6f6d66;
-  --color-ink-disabled: #b9b7af;
-  --color-ink-inverse: #fbfaf7;
+  /* ---- Ink ---- */
+  --color-ink: #212121;
+  --color-ink-secondary: #5f5f66;
+  --color-ink-tertiary: #74747e;
+  --color-ink-disabled: #bebec5;
+  --color-ink-inverse: #ffffff;
 
-  /* ---- Paper ---- */
-  --color-surface: #fbfaf7;
-  --color-surface-elevated: #f4f3ef;
-  --color-surface-subtle: #ecebe5;
-  --color-surface-hover: #efeee9;
-  --color-surface-overlay: rgba(244, 243, 239, 0.88);
+  /* ---- Canvas & surfaces ---- */
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-surface-subtle: #eeece7;
+  --color-surface-hover: #f5f4f0;
+  --color-surface-overlay: rgba(255, 255, 255, 0.88);
+  --color-surface-dark: #17171c;
+  --color-surface-green: #003c33;
+  --color-surface-navy: #071829;
+  --color-surface-pale-green: #edfce9;
+  --color-surface-pale-blue: #f1f5ff;
 
   /* ---- Navbar ---- */
-  --color-nav: rgba(244, 243, 239, 0.86);
-  --color-nav-hover: #ecebe5;
+  --color-nav: rgba(255, 255, 255, 0.9);
+  --color-nav-hover: #f5f4f0;
   --color-nav-active: transparent;
-  --color-nav-text: #131312;
-  --color-nav-text-secondary: #6f6d66;
-  --color-nav-border: #dcdad3;
-  --color-nav-divider: #dcdad3;
+  --color-nav-text: #212121;
+  --color-nav-text-secondary: #666670;
+  --color-nav-border: #e5e5e8;
+  --color-nav-divider: #e5e5e8;
 
   /* ---- Rules ---- */
-  --color-border: #dcdad3;
-  --color-border-strong: #bdbab1;
+  --color-border: #d9d9dd;
+  --color-border-strong: #b8b8c0;
+  --color-border-soft: #f2f2f2;
 
-  /* ---- Signal (collar orange) ----
-   * --color-signal is the raw pixel orange for marks that carry no text
-   * (indicator bars, live dots, progress fills). --color-accent is the same
-   * hue darkened to pass AA as text and as a button fill. */
-  --color-signal: #fa500f;
-  --color-accent: #c23a06;
-  --color-accent-hover: #a83204;
-  --color-accent-subtle: rgba(250, 80, 15, 0.08);
-  --color-accent-pressed: #8f2b03;
+  /* ---- Signal & action ----
+   * Coral is an editorial marker, not the primary CTA. The primary action is
+   * near-black; coral marks categories, live states and small moments. */
+  --color-signal: #ff7759;
+  --color-accent: #c2410c;
+  --color-accent-hover: #a83808;
+  --color-accent-subtle: rgba(255, 119, 89, 0.12);
+  --color-accent-pressed: #8f2f05;
   --color-on-accent: #ffffff;
 
-  --color-brand: #c23a06;
-  --color-brand-hover: #a83204;
-  --color-brand-subtle: rgba(250, 80, 15, 0.08);
+  --color-brand: #17171c;
+  --color-brand-hover: #000000;
+  --color-brand-subtle: #eeece7;
   --color-on-brand: #ffffff;
   --color-on-danger: #ffffff;
 
-  /* ---- Pixel stage (hero + update scenes only) ---- */
-  --stage-bg: #2f2e73;
+  --color-action: #17171c;
+  --color-action-hover: #000000;
+  --color-action-inverse: #ffffff;
+  --color-link: #1863dc;
+  --color-coral: #ff7759;
+  --color-coral-soft: #ffad9b;
+
+  /* ---- Pixel stage ---- */
+  --stage-bg: #003c33;
   --stage-ink: #131312;
-  --stage-lime: #eef59a;
+  --stage-lime: #edfce9;
 
   /* ---- Feedback ---- */
-  --color-success: #2c6a4c;
-  --color-success-subtle: rgba(44, 106, 76, 0.09);
-  --color-error: #b02f1c;
-  --color-error-subtle: rgba(176, 47, 28, 0.08);
-  --color-warning: #a35a00;
-  --color-warning-subtle: rgba(163, 90, 0, 0.09);
-  --color-info: #2f5a86;
-  --color-info-subtle: rgba(47, 90, 134, 0.08);
+  --color-success: #126b4d;
+  --color-success-subtle: rgba(18, 107, 77, 0.08);
+  --color-error: #b30000;
+  --color-error-subtle: rgba(179, 0, 0, 0.07);
+  --color-warning: #8a5300;
+  --color-warning-subtle: rgba(138, 83, 0, 0.08);
+  --color-info: #1863dc;
+  --color-info-subtle: rgba(24, 99, 220, 0.07);
 
   /* ---- Section hues (small marks + chart series only) ---- */
-  --color-reading: #2f5a86;
-  --color-reading-subtle: rgba(47, 90, 134, 0.09);
-  --color-writing: #3d6a4a;
-  --color-writing-subtle: rgba(61, 106, 74, 0.09);
-  --color-speaking: #c23a06;
-  --color-speaking-subtle: rgba(194, 58, 6, 0.08);
+  --color-reading: #1863dc;
+  --color-reading-subtle: rgba(24, 99, 220, 0.08);
+  --color-writing: #196249;
+  --color-writing-subtle: rgba(25, 98, 73, 0.08);
+  --color-speaking: #c2410c;
+  --color-speaking-subtle: rgba(194, 65, 12, 0.08);
   --color-listening: #57509a;
-  --color-listening-subtle: rgba(87, 80, 154, 0.09);
+  --color-listening-subtle: rgba(87, 80, 154, 0.08);
   --color-toeic: #8a4a5c;
-  --color-toeic-subtle: rgba(138, 74, 92, 0.09);
+  --color-toeic-subtle: rgba(138, 74, 92, 0.08);
 
   /* ---- Chart / canvas ---- */
-  --color-chart-grid: #dcdad3;
-  --color-chart-label: #6f6d66;
-  --color-chart-point: #fbfaf7;
+  --color-chart-grid: #e5e5e8;
+  --color-chart-label: #8b8b96;
+  --color-chart-point: #ffffff;
 
   /* ---- Scrollbar ---- */
-  --color-scrollbar: #cfccc4;
-  --color-scrollbar-hover: #9c9990;
+  --color-scrollbar: #cfcfd4;
+  --color-scrollbar-hover: #9c9ca5;
 
   /* ---- Selection ---- */
-  --color-selection: rgba(250, 80, 15, 0.18);
+  --color-selection: rgba(255, 119, 89, 0.24);
 
-  /* ---- Elevation: rules first; shadows only for things that float ---- */
+  /* ---- Elevation: flat by default; media gets a quiet lift ---- */
   --shadow-xs: 0 0 0 0 transparent;
-  --shadow-sm: 0 1px 2px rgba(19, 19, 18, 0.05);
-  --shadow: 0 1px 3px rgba(19, 19, 18, 0.06);
-  --shadow-md: 0 6px 16px -6px rgba(19, 19, 18, 0.12);
+  --shadow-sm: 0 1px 2px rgba(23, 23, 28, 0.05);
+  --shadow: 0 2px 8px rgba(23, 23, 28, 0.06);
+  --shadow-md: 0 10px 28px -12px rgba(23, 23, 28, 0.18);
   --shadow-lg:
-    0 16px 36px -12px rgba(19, 19, 18, 0.18), 0 0 0 1px rgba(19, 19, 18, 0.04);
-  --shadow-xl: 0 28px 56px -16px rgba(19, 19, 18, 0.22);
+    0 24px 60px -24px rgba(23, 23, 28, 0.24),
+    0 0 0 1px rgba(23, 23, 28, 0.04);
+  --shadow-xl: 0 40px 90px -32px rgba(23, 23, 28, 0.3);
 
-  --shadow-accent: 0 0 0 3px rgba(250, 80, 15, 0.18);
-  --shadow-error: 0 0 0 3px rgba(176, 47, 28, 0.14);
+  --shadow-accent: 0 0 0 3px rgba(255, 119, 89, 0.2);
+  --shadow-error: 0 0 0 3px rgba(179, 0, 0, 0.14);
 
   /* ---- Focus ring ---- */
   --focus-ring:
-    0 0 0 2px var(--color-surface-elevated), 0 0 0 4px var(--color-signal);
+    0 0 0 2px var(--color-surface-elevated), 0 0 0 4px #4c6ee6;
 }
 
-/* Dark mode — carbon paper, same structure */
+/* Dark mode — an ink-green field, same editorial structure */
 [data-theme="dark"] {
   color-scheme: dark;
 
   /* Pixel mascot outline on dark surfaces (see PixelPoodle) */
-  --poodle-rim: drop-shadow(1px 0 0 rgba(244, 243, 239, 0.3))
-    drop-shadow(-1px 0 0 rgba(244, 243, 239, 0.3))
-    drop-shadow(0 -1px 0 rgba(244, 243, 239, 0.3));
+  --poodle-rim: drop-shadow(1px 0 0 rgba(255, 255, 255, 0.28))
+    drop-shadow(-1px 0 0 rgba(255, 255, 255, 0.28))
+    drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.28));
 
-  --color-ink: #ecebe6;
-  --color-ink-secondary: #a3a19a;
-  --color-ink-tertiary: #8a8880;
-  --color-ink-disabled: #4d4c47;
-  --color-ink-inverse: #0f0f0e;
+  --color-ink: #f2f2ef;
+  --color-ink-secondary: #b1b1b9;
+  --color-ink-tertiary: #9a9aa5;
+  --color-ink-disabled: #4d4d55;
+  --color-ink-inverse: #101110;
 
-  --color-surface: #161615;
-  --color-surface-elevated: #0f0f0e;
-  --color-surface-subtle: #1f1f1d;
-  --color-surface-hover: #1c1c1a;
-  --color-surface-overlay: rgba(15, 15, 14, 0.86);
+  --color-surface: #141513;
+  --color-surface-elevated: #0c0d0c;
+  --color-surface-subtle: #1b1c19;
+  --color-surface-hover: #20211e;
+  --color-surface-overlay: rgba(12, 13, 12, 0.9);
+  --color-surface-dark: #090a09;
+  --color-surface-green: #003c33;
+  --color-surface-navy: #071829;
+  --color-surface-pale-green: #10261e;
+  --color-surface-pale-blue: #111a2a;
 
-  --color-nav: rgba(15, 15, 14, 0.84);
-  --color-nav-hover: #1f1f1d;
+  --color-nav: rgba(12, 13, 12, 0.9);
+  --color-nav-hover: #1b1c19;
   --color-nav-active: transparent;
-  --color-nav-text: #ecebe6;
-  --color-nav-text-secondary: #8a8880;
-  --color-nav-border: #282826;
-  --color-nav-divider: #282826;
+  --color-nav-text: #f2f2ef;
+  --color-nav-text-secondary: #a5a5af;
+  --color-nav-border: #2a2b28;
+  --color-nav-divider: #2a2b28;
 
-  --color-border: #282826;
-  --color-border-strong: #3d3c39;
+  --color-border: #2d2e2b;
+  --color-border-strong: #45463f;
+  --color-border-soft: #22231f;
 
-  --color-signal: #ff6a2b;
-  --color-accent: #ff6a2b;
-  --color-accent-hover: #ff8550;
-  --color-accent-subtle: rgba(255, 106, 43, 0.12);
-  --color-accent-pressed: #ff9a6e;
-  --color-on-accent: #0f0f0e;
+  --color-signal: #ff8a70;
+  --color-accent: #ff8a70;
+  --color-accent-hover: #ffa48e;
+  --color-accent-subtle: rgba(255, 138, 112, 0.12);
+  --color-accent-pressed: #ffbda9;
+  --color-on-accent: #101110;
 
-  --color-brand: #ff6a2b;
-  --color-brand-hover: #ff8550;
-  --color-brand-subtle: rgba(255, 106, 43, 0.12);
-  --color-on-brand: #0f0f0e;
-  --color-on-danger: #0f0f0e;
+  --color-brand: #f2f2ef;
+  --color-brand-hover: #ffffff;
+  --color-brand-subtle: #1b1c19;
+  --color-on-brand: #101110;
+  --color-on-danger: #101110;
 
-  --stage-bg: #24235a;
+  --color-action: #f2f2ef;
+  --color-action-hover: #ffffff;
+  --color-action-inverse: #101110;
+  --color-link: #8fb0ff;
+  --color-coral: #ff8a70;
+  --color-coral-soft: #ffc2b3;
 
-  --color-success: #6cc08b;
-  --color-success-subtle: rgba(108, 192, 139, 0.12);
-  --color-error: #f0806f;
-  --color-error-subtle: rgba(240, 128, 111, 0.12);
-  --color-warning: #f0b45a;
-  --color-warning-subtle: rgba(240, 180, 90, 0.12);
-  --color-info: #8fb0cc;
-  --color-info-subtle: rgba(143, 176, 204, 0.12);
+  --stage-bg: #003c33;
+  --stage-ink: #101110;
+  --stage-lime: #edfce9;
 
-  --color-reading: #8fb0cc;
-  --color-reading-subtle: rgba(143, 176, 204, 0.12);
-  --color-writing: #8fbb9c;
-  --color-writing-subtle: rgba(143, 187, 156, 0.12);
-  --color-speaking: #ff8550;
-  --color-speaking-subtle: rgba(255, 133, 80, 0.12);
-  --color-listening: #aaa3dd;
-  --color-listening-subtle: rgba(170, 163, 221, 0.12);
-  --color-toeic: #d79bad;
-  --color-toeic-subtle: rgba(215, 155, 173, 0.12);
+  --color-success: #74c9a2;
+  --color-success-subtle: rgba(116, 201, 162, 0.1);
+  --color-error: #ff9b8c;
+  --color-error-subtle: rgba(255, 155, 140, 0.1);
+  --color-warning: #efbc72;
+  --color-warning-subtle: rgba(239, 188, 114, 0.1);
+  --color-info: #8fb0ff;
+  --color-info-subtle: rgba(143, 176, 255, 0.1);
 
-  --color-chart-grid: #282826;
-  --color-chart-label: #8a8880;
-  --color-chart-point: #161615;
+  --color-reading: #8fb0ff;
+  --color-reading-subtle: rgba(143, 176, 255, 0.1);
+  --color-writing: #8fceb6;
+  --color-writing-subtle: rgba(143, 206, 182, 0.1);
+  --color-speaking: #ff9b82;
+  --color-speaking-subtle: rgba(255, 155, 130, 0.1);
+  --color-listening: #b5afe7;
+  --color-listening-subtle: rgba(181, 175, 231, 0.1);
+  --color-toeic: #d7a1b1;
+  --color-toeic-subtle: rgba(215, 161, 177, 0.1);
 
-  --color-scrollbar: #3d3c39;
-  --color-scrollbar-hover: #5a5954;
+  --color-chart-grid: #2d2e2b;
+  --color-chart-label: #8d8d98;
+  --color-chart-point: #141513;
 
-  --color-selection: rgba(255, 106, 43, 0.26);
+  --color-scrollbar: #353633;
+  --color-scrollbar-hover: #57584f;
+
+  --color-selection: rgba(255, 138, 112, 0.26);
 
   --shadow-xs: 0 0 0 0 transparent;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.45);
-  --shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 8px 20px -8px rgba(0, 0, 0, 0.6);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 10px 30px -12px rgba(0, 0, 0, 0.65);
   --shadow-lg:
-    0 18px 40px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --shadow-xl: 0 32px 64px -16px rgba(0, 0, 0, 0.75);
+    0 24px 60px -24px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-xl: 0 40px 90px -32px rgba(0, 0, 0, 0.85);
 
-  --shadow-accent: 0 0 0 3px rgba(255, 106, 43, 0.22);
-  --shadow-error: 0 0 0 3px rgba(240, 128, 111, 0.2);
+  --shadow-accent: 0 0 0 3px rgba(255, 138, 112, 0.22);
+  --shadow-error: 0 0 0 3px rgba(255, 155, 140, 0.2);
 
   --focus-ring:
-    0 0 0 2px var(--color-surface-elevated), 0 0 0 4px var(--color-signal);
+    0 0 0 2px var(--color-surface-elevated), 0 0 0 4px #8fa8ff;
 }
 
-/* Shared non-color tokens (both themes) */
+/* Shared non-colour tokens (both themes) */
 :root {
   /* ---- Typography ---- */
   --font-sans:
-    "Geist", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-display: var(--font-sans);
+  --font-display:
+    "Space Grotesk", "Inter", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   /* Metadata voice: indexes, counts, eyebrows, timers. Never sentences. */
   --font-mono:
     "Geist Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
@@ -217,18 +244,19 @@
   /* Pixel accents only (the mascots' speech) — never UI text. */
   --font-pixel: "Silkscreen", var(--font-mono);
 
-  /* Type scale — 4 display steps, 5 text steps, 2 meta steps */
+  /* Type scale — display, text and meta steps */
   --text-2xs: 11px;
   --text-xs: 12px;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-lg: 17px;
-  --text-xl: 20px;
-  --text-2xl: 24px;
-  --text-3xl: 32px;
-  --text-4xl: 44px;
-  --text-5xl: 60px;
-  --text-6xl: 76px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 36px;
+  --text-4xl: 48px;
+  --text-5xl: 64px;
+  --text-6xl: 88px;
+  --text-7xl: 112px;
 
   --font-normal: 400;
   --font-medium: 500;
@@ -236,15 +264,15 @@
   --font-bold: 700;
   --font-extrabold: 800;
 
-  --lh-tight: 1.1;
-  --lh-snug: 1.3;
+  --lh-tight: 1.04;
+  --lh-snug: 1.2;
   --lh-normal: 1.55;
   --lh-relaxed: 1.7;
 
   --tracking-tight: -0.02em;
-  --tracking-tighter: -0.035em;
+  --tracking-tighter: -0.032em;
   --tracking-display: -0.045em;
-  --tracking-meta: 0.04em;
+  --tracking-meta: 0.08em;
 
   /* ---- Spacing (4px system) ---- */
   --spacing-1: 4px;
@@ -256,19 +284,21 @@
   --spacing-8: 32px;
   --spacing-10: 40px;
   --spacing-12: 48px;
+  --spacing-14: 56px;
   --spacing-16: 64px;
   --spacing-20: 80px;
   --spacing-24: 96px;
+  --spacing-32: 128px;
 
-  /* ---- Radius: near-square; only floating chips round off ---- */
-  --radius-xs: 2px;
-  --radius-sm: 3px;
-  --radius: 4px;
-  --radius-lg: 6px;
-  --radius-xl: 8px;
-  --radius-2xl: 10px;
+  /* ---- Radius: generous but never cute ---- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-2xl: 30px;
   --radius-full: 9999px;
-  --radius-doc: 2px;
+  --radius-doc: 8px;
 
   /* Document / exam surface helpers (question pages) */
   --doc-border: 1px solid var(--color-border);
@@ -282,16 +312,18 @@
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --duration-fast: 120ms;
-  --duration-base: 180ms;
-  --duration-slow: 260ms;
-  --duration-modal: 320ms;
+  --duration-fast: 140ms;
+  --duration-base: 220ms;
+  --duration-slow: 320ms;
+  --duration-modal: 400ms;
 
   /* ---- Layout ---- */
-  --max-content: 1120px;
-  --max-reading: 720px;
-  --gutter: var(--spacing-8);
-  --header-height: 60px;
+  --max-content: 1200px;
+  --max-wide: 1320px;
+  --max-reading: 760px;
+  --gutter: var(--spacing-10);
+  --header-height: 66px;
+  --announcement-height: 36px;
   /* Space between a page-level error banner and whatever follows it. */
   --notice-gap: var(--spacing-8);
   --rule: 1px solid var(--color-border);
@@ -307,7 +339,6 @@
   --color-correct-bg: var(--color-success-subtle);
   --color-incorrect: var(--color-error);
   --color-incorrect-bg: var(--color-error-subtle);
-  --color-link: var(--color-accent);
   --font-body: var(--font-sans);
   --font-size-body: var(--text-base);
   --font-size-xs: var(--text-xs);
@@ -326,9 +357,17 @@
   --spacing-2xl: var(--spacing-12);
 }
 
-@media (max-width: 620px) {
+@media (max-width: 760px) {
+  :root {
+    --gutter: var(--spacing-5);
+    --doc-padding: var(--spacing-5);
+    --header-height: 60px;
+    --max-content: 100%;
+  }
+}
+
+@media (max-width: 480px) {
   :root {
     --gutter: var(--spacing-4);
-    --doc-padding: var(--spacing-5);
   }
 }

@@ -1,19 +1,17 @@
-/* Sits under the home index, right-aligned to the content column. Not fixed
- * to the viewport corner: below ~1600px the corner overlaps the index rows,
- * and on phones it covered their titles. Small on purpose; the hamster is
- * company, the bubble is the message. It tucks into the bottom padding of
- * <main>, which it follows in the shell. */
+/* Sits under the home page, where it tucks up into the footer instead of
+ * floating over the content. Small on purpose; the hamster is company, the
+ * bubble is the message. */
 
 .notice {
   --hamster-cell: 2px;
   width: 100%;
-  max-width: calc(var(--max-content) + var(--gutter) * 2);
+  max-width: calc(var(--max-wide) + var(--gutter) * 2);
   margin: calc(var(--spacing-16) * -1) auto var(--spacing-8);
   padding: 0 var(--gutter);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 6px;
+  gap: 4px;
   pointer-events: none;
 }
 
@@ -26,79 +24,77 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  max-width: 240px;
-  margin-right: 20px;
-  padding: 6px 6px 6px 10px;
-  font-size: var(--text-xs);
-  color: #1c1917;
-  background: #fffdfa;
-  box-shadow:
-    0 0 0 2px #1c1917,
-    3px 3px 0 0 #1c1917;
-}
-
-/* The tail: a stepped pixel triangle pointing down at the hamster. */
-.bubble::after {
-  content: "";
-  position: absolute;
-  right: 18px;
-  bottom: -8px;
-  width: 8px;
-  height: 6px;
-  background: #fffdfa;
-  box-shadow:
-    -2px 0 0 0 #1c1917,
-    2px 0 0 0 #1c1917,
-    0 2px 0 0 #1c1917;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  max-width: 280px;
+  margin-right: 16px;
+  padding: 7px 7px 7px 12px;
+  border: 1px solid rgba(23, 23, 28, 0.1);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.45);
 }
 
 .bubble a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   color: inherit;
-  text-decoration: none;
+  font-size: var(--text-xs);
   line-height: 1.35;
+  text-decoration: none;
 }
 
 .bubble a:hover {
-  text-decoration: underline;
+  color: var(--color-link);
 }
 
 .tag {
-  margin-right: 6px;
-  padding: 0 4px;
-  font-family: var(--font-pixel);
-  font-size: var(--text-2xs);
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: var(--radius-full);
+  background: var(--color-ink);
+  color: var(--color-coral);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   white-space: nowrap;
-  color: var(--stage-lime);
-  background: var(--stage-bg);
 }
 
 .close {
   flex: none;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   padding: 0;
   border: 0;
+  border-radius: 50%;
   font-size: 14px;
   line-height: 1;
-  color: #57534e;
-  background: none;
+  color: var(--color-ink-tertiary);
+  background: transparent;
   cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out);
 }
 
 .close:hover {
-  color: #1c1917;
+  color: var(--color-ink);
+  background: var(--color-surface-hover);
 }
 
 .bubble a:focus-visible,
 .close:focus-visible {
-  outline: 2px solid var(--color-signal);
+  outline: 2px solid #4c6ee6;
   outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .bubble {
-    animation: pop 240ms steps(4) both;
+    animation: pop 220ms var(--ease-out) both;
   }
 }
 
@@ -106,5 +102,16 @@
   from {
     opacity: 0;
     transform: translateY(6px);
+  }
+}
+
+@media (max-width: 620px) {
+  .notice {
+    margin-top: calc(var(--spacing-8) * -1);
+  }
+
+  .bubble {
+    max-width: calc(100vw - 72px);
+    margin-right: 8px;
   }
 }

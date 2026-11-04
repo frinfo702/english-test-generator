@@ -13,14 +13,14 @@
   background: var(--color-surface);
   border: var(--doc-border);
   border-top: var(--doc-rule);
-  border-radius: 0;
+  border-radius: var(--radius-lg);
   padding: var(--doc-padding);
 }
 
 .doc-surface-quiet {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 0;
+  border-radius: var(--radius-lg);
   padding: var(--doc-padding);
 }
 
@@ -81,7 +81,7 @@
   width: 100%;
   padding: 13px 16px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
   text-align: left;
   font-family: var(--font-sans);
@@ -201,7 +201,7 @@
 .doc-field {
   width: 100%;
   border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
   color: var(--color-ink);
   padding: var(--spacing-4);
@@ -233,8 +233,8 @@
   color: var(--color-ink);
   background: transparent;
   border: 1px solid var(--color-ink);
-  border-radius: var(--radius-xs);
-  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
   white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: var(--tracking-meta);

@@ -46,6 +46,76 @@
   --cell-line: var(--color-brand);
 }
 
+/* A partially typed suffix uses a monospace face so every reached letter is
+ * easy to scan. A completed blank returns to the paragraph's proportional
+ * face, but only once focus leaves it (see .blankComplete.blankFocused). */
+.blankIncomplete .cells {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+}
+
+/* Once every letter is in, the blank becomes a word again: no underline, no
+ * per-letter cells, and no gap between the visible prefix and the answer. The
+ * tint stays so the completed answer is still identifiable at a glance. */
+.blankComplete {
+  gap: 0;
+  border-radius: 3px;
+  background: var(--color-accent-subtle);
+  cursor: text;
+}
+
+.blankComplete .hint {
+  color: var(--color-ink);
+  font-weight: var(--font-normal);
+}
+
+.blankComplete .cells {
+  gap: 0;
+}
+
+.blankComplete .cell {
+  width: auto;
+  height: auto;
+  line-height: inherit;
+  text-align: left;
+  border-bottom: none;
+}
+
+/* Every letter is in, but the caret is still here: hold the monospace face
+ * while focus remains, so the word never changes shape under the caret. Only
+ * the letters change face; the resolved blank keeps its tint and no cells. */
+.blankComplete.blankFocused .cells {
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+}
+
+/* The caret is hidden while the cell marker tracks the next letter; once the
+ * word is complete, it is the only editing cue and must stay visible. */
+.blankComplete .blankInput {
+  caret-color: var(--color-ink);
+}
+
+/* Focus means "still editing": even a complete answer returns to the full
+ * blank treatment — monospace, fixed cells, spacing and underlines — until
+ * the learner leaves the field. */
+.blankComplete.blankFocused {
+  gap: 2px;
+}
+
+.blankComplete.blankFocused .cells {
+  gap: 3px;
+  font-family: var(--font-mono);
+  font-variant-ligatures: none;
+}
+
+.blankComplete.blankFocused .cell {
+  width: 0.85em;
+  height: 1.3em;
+  line-height: 1.3em;
+  text-align: center;
+  border-bottom: 2px solid var(--cell-line);
+}
+
 .blankCorrect .cells {
   --cell-line: var(--color-success);
 }

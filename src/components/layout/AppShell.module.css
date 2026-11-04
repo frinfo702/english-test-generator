@@ -2,8 +2,105 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: transparent;
+  background: var(--color-surface);
 }
+
+/* ---- Announcement ------------------------------------------------------- */
+
+.announcement {
+  height: var(--announcement-height);
+  background: #000000;
+  color: #ffffff;
+}
+
+.announcementInner {
+  position: relative;
+  max-width: var(--max-wide);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  font-size: var(--text-xs);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.announcementCopy {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: #ffffff;
+}
+
+.announcementTag {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: var(--radius-full);
+  background: var(--color-coral);
+  color: #17171c;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.announcementLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  opacity: 0.78;
+}
+
+.announcementLink:hover {
+  color: #ffffff;
+  opacity: 1;
+}
+
+.announcementDismiss {
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.announcementDismiss:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.announcementDismiss:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* ---- Header ------------------------------------------------------------- */
 
 .header {
   position: sticky;
@@ -12,28 +109,28 @@
   height: var(--header-height);
   background: var(--color-nav);
   border-bottom: 1px solid var(--color-nav-border);
-  backdrop-filter: saturate(1.2) blur(14px);
-  -webkit-backdrop-filter: saturate(1.2) blur(14px);
+  backdrop-filter: saturate(1.4) blur(18px);
+  -webkit-backdrop-filter: saturate(1.4) blur(18px);
 }
 
 .headerInner {
-  max-width: calc(var(--max-content) + var(--gutter) * 2);
+  max-width: var(--max-wide);
   margin: 0 auto;
   padding: 0 var(--gutter);
   height: 100%;
   display: flex;
   align-items: center;
-  gap: var(--spacing-8);
+  gap: var(--spacing-6);
 }
 
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-family: var(--font-display);
-  font-size: var(--text-base);
+  font-size: 15px;
   font-weight: var(--font-medium);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   color: var(--color-ink);
   text-decoration: none;
   white-space: nowrap;
@@ -46,7 +143,7 @@
 
 .logoMark {
   display: block;
-  width: 33px;
+  width: 30px;
   height: auto;
   aspect-ratio: 22 / 15;
   flex-shrink: 0;
@@ -54,7 +151,7 @@
 }
 
 .logo:hover .logoMark {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 [data-theme="dark"] .logoMark {
@@ -71,15 +168,12 @@
   display: none;
 }
 
-/* ---- Nav: plain text links; the active one stands on a signal bar that
- * sits on the header's bottom rule. ---- */
-
 .nav {
   position: relative;
   align-self: stretch;
   display: flex;
-  align-items: stretch;
-  gap: var(--spacing-1);
+  align-items: center;
+  gap: 2px;
   margin-left: auto;
   min-width: 0;
   overflow-x: auto;
@@ -93,9 +187,10 @@
 .indicator {
   position: absolute;
   left: 0;
-  bottom: 0;
-  height: 2px;
-  background: var(--color-signal);
+  top: calc(50% - 18px);
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--color-nav-hover);
   opacity: 0;
   transition:
     transform var(--duration-slow) var(--ease-out),
@@ -110,23 +205,29 @@
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 10px;
+  gap: 7px;
+  height: 36px;
+  padding: 0 13px;
+  border-radius: var(--radius-full);
   font-size: var(--text-sm);
-  font-weight: var(--font-medium);
-  letter-spacing: -0.005em;
+  font-weight: var(--font-normal);
+  letter-spacing: -0.01em;
   color: var(--color-nav-text-secondary);
   text-decoration: none;
   white-space: nowrap;
-  transition: color var(--duration-base) var(--ease-out);
+  transition:
+    color var(--duration-base) var(--ease-out),
+    background var(--duration-base) var(--ease-out);
 }
 
 .navLink:hover {
   color: var(--color-ink);
+  background: var(--color-nav-hover);
 }
 
 .navLinkActive {
   color: var(--color-ink);
+  font-weight: var(--font-medium);
 }
 
 .navLink:focus-visible {
@@ -135,36 +236,97 @@
 
 .kbd {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: var(--font-medium);
   letter-spacing: 0;
   color: var(--color-ink-tertiary);
-  padding: 1px 4px;
+  padding: 2px 5px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-full);
 }
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+}
+
+.headerCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  padding: 0 17px;
+  border-radius: var(--radius-full);
+  background: var(--color-action);
+  color: var(--color-action-inverse);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  white-space: nowrap;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.headerCta:hover {
+  background: var(--color-action-hover);
+  color: var(--color-action-inverse);
+}
+
+.headerCta:active {
+  transform: scale(0.98);
+}
+
+.headerInner:has(.clockSlot:not(:empty)) .headerCta {
+  display: none;
+}
+
+/* ---- Main --------------------------------------------------------------- */
 
 .main {
   flex: 1;
-  padding: var(--spacing-10) var(--gutter) var(--spacing-24);
+  width: 100%;
   max-width: calc(var(--max-content) + var(--gutter) * 2);
   margin: 0 auto;
-  width: 100%;
+  padding: var(--spacing-14) var(--gutter) var(--spacing-24);
+}
+
+/* The home page sets its own full-bleed rhythm. */
+.mainHome {
+  max-width: none;
+  padding: 0;
+}
+
+@media (max-width: 1080px) {
+  .headerCta {
+    display: none;
+  }
 }
 
 @media (max-width: 960px) {
-  .logoText {
-    display: none;
-  }
-
   .headerInner {
     gap: var(--spacing-4);
   }
+
+  .announcementInner {
+    justify-content: flex-start;
+  }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 640px) {
+  .logoText {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .announcementLink {
+    display: none;
+  }
+
   .main {
-    padding: var(--spacing-6) var(--gutter) var(--spacing-16);
+    padding: var(--spacing-8) var(--gutter) var(--spacing-16);
   }
 
   .nav {
@@ -173,11 +335,9 @@
   }
 
   .navLink {
-    padding: 0 8px;
+    padding: 0 9px;
   }
 
-  /* No room for both: during a task the clock takes the logo's place, and
-     the Learn tab still goes home. */
   .headerInner:has(.clockSlot:not(:empty)) .logo {
     display: none;
   }
@@ -186,8 +346,6 @@
     display: none;
   }
 
-  /* Four tabs and the theme toggle don't fit at 390px; the icon carries
-     Settings so the bar never scrolls a tab out of view. */
   .iconLabel {
     position: absolute;
     width: 1px;
@@ -195,6 +353,25 @@
     overflow: hidden;
     clip: rect(0 0 0 0);
     white-space: nowrap;
+  }
+
+  .mainHome {
+    padding: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo {
+    display: none;
+  }
+
+  .headerInner {
+    gap: 0;
+  }
+
+  .navLink {
+    padding: 0 7px;
+    font-size: var(--text-xs);
   }
 }
 

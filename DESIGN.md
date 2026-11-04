@@ -1,189 +1,255 @@
-# English Test Practice — Design System
+## Overview
 
-## Philosophy
+Cohere's current web presence feels like a sober enterprise AI command center with editorial restraint. The home page opens on a huge typographic declaration over a white canvas, then uses photography, dark product mockups, trust logos, and generous empty space to make AI infrastructure feel controlled rather than speculative. Product pages invert the tone into deep green-black or dark navy bands, while blog and research pages move toward publishing-system clarity: large filters, thin rules, dense lists, and pale technical backgrounds.
 
-**Field notes.** The app is a study instrument set like a well-made journal:
-paper, ink, ruled lines, and one signal colour. The pixel mascots are the only
-illustration and get a stage of their own; everything else is typography.
+What makes the system distinctive is the mix of austere black-and-white UI with bursts of tactile brand imagery. The site avoids decorative chrome in the normal interface; color arrives through photography, abstract 3D media, coral blog taxonomy chips, blue research links, and dark product environments. Cards are rounded but not cute. Type is large, tight, and almost monospaced in spirit, creating a research-lab cadence across marketing, product, and editorial surfaces.
 
-Three ideas hold the system together:
+**Key Characteristics:**
+- Monumental display headlines with very tight line height and negative tracking.
+- White editorial canvases interrupted by deep green, dark navy, and image-led CTA bands.
+- Rounded media cards and product cards, usually 8px to 22px.
+- Pill CTAs in near-black or white, with most secondary actions rendered as underlined text links.
+- Trust-logo strips with monochrome partner marks and very wide vertical spacing.
+- Agent-console mockups using dark panels, small status chips, and product integration badges.
+- Blog and research surfaces with prominent taxonomy chips, long rule-separated lists, and search fields.
 
-1. **Type carries hierarchy.** Big, quiet display type (Geist 500, tight
-   tracking) does the work that boxes, fills and shadows used to do.
-2. **Rules, not cards.** Lists and sections open with a 1px ink rule and are
-   divided by hairlines. Boxes are reserved for one focused sheet at a time
-   (a question, a passage, a recorder).
-3. **One signal.** The poodle's collar orange (`#fa500f`) — the same orange
-   the pixel art is drawn in — marks progress, focus, the active nav item and
-   the live take. Green/red are reserved for grading. Indigo + lime belong to
-   the pixel stages only.
+## Colors
 
-## Colour
+### Brand & Accent
 
-### Light (paper)
+- **Cohere Black** (`#000000`): Announcement bar, highest-contrast text, and the global brand anchor.
+- **Near-Black Primary** (`#17171c`): Primary CTA buttons, dark footer, and deep UI cards.
+- **Deep Enterprise Green** (`#003c33`): Product hero bands for North and Command-style dark sections.
+- **Dark Navy** (`#071829`): Financial-services and security-oriented solution bands.
+- **Action Blue** (`#1863dc`): Editorial links, pagination, and secondary action emphasis.
+- **Coral** (`#ff7759`): Blog category chips, taxonomy outlines, and warm product markers.
+- **Soft Coral** (`#ffad9b`): Pale chip borders and segmented article-label details.
 
-| Token                      | Hex       | Usage                               |
-| -------------------------- | --------- | ----------------------------------- |
-| `--color-ink`              | `#131312` | Text, primary button, opening rules |
-| `--color-ink-secondary`    | `#4d4c47` | Body, descriptions                  |
-| `--color-ink-tertiary`     | `#6f6d66` | Meta, captions (AA on paper)        |
-| `--color-surface-elevated` | `#f4f3ef` | Page background                     |
-| `--color-surface`          | `#fbfaf7` | Sheets (question cards, passages)   |
-| `--color-surface-subtle`   | `#ecebe5` | Wells, empty calendar cells         |
-| `--color-border`           | `#dcdad3` | Hairlines                           |
-| `--color-border-strong`    | `#bdbab1` | Control outlines                    |
-| `--color-signal`           | `#fa500f` | Non-text marks: bars, dots, fills   |
-| `--color-accent`           | `#c23a06` | Signal as text / button fill (AA)   |
-| `--color-success`          | `#2c6a4c` | Correct                             |
-| `--color-error`            | `#b02f1c` | Incorrect                           |
+### Surface & Background
 
-### Dark (carbon)
+- **Canvas White** (`#ffffff`): Dominant page background and form/card surface.
+- **Soft Stone** (`#eeece7`): Product cards, testimonial placeholders, and warm neutral surface blocks.
+- **Pale Green Wash** (`#edfce9`): North page section backdrop behind stacked dark capability panels.
+- **Pale Blue Wash** (`#f1f5ff`): Blog CTA surface behind abstract 3D imagery.
+- **Card Border** (`#f2f2f2`): Softest card containment line.
 
-`--color-surface-elevated` `#0f0f0e` → `--color-surface` `#161615` →
-`--color-surface-subtle` `#1f1f1d`. Signal and accent both lift to `#ff6a2b`.
-Same structure, no glows.
+### Text & Rules
 
-### Pixel stage
+- **Ink** (`#212121`): Default body text and most link text on light backgrounds.
+- **Muted Slate** (`#93939f`): Footer links, dates, metadata, and de-emphasized labels.
+- **Slate** (`#75758a`): Research separators and tertiary text.
+- **Hairline** (`#d9d9dd`): Standard list rules and section dividers.
+- **Border Light** (`#e5e7eb`): Secondary divider and utility rule.
 
-`--stage-bg` (`#2f2e73`, dark `#24235a`), `--stage-lime` `#eef59a`,
-`--stage-ink`. Used only on announcement visuals: the home hero plate, the
-update pages' call to action and the AI scoring update's line-drawn score
-card. Never on tool surfaces.
+### Semantic
 
-### Test wordmarks
+- **Focus Blue** (`#4c6ee6`): Keyboard focus and ring color.
+- **Form Focus Violet** (`#9b60aa`): Focus border for text inputs.
+- **Error Red** (`#b30000`): Extracted ring/shadow color associated with validation-like states.
 
-The official TOEFL (ETS, 2024) and TOEIC (ets.org) one-colour logos, kept in
-`src/assets/brand/` unaltered, stand in for the test name on the home index
-rows and the TOEFL / TOEIC menu headers — nowhere else. `TestLogo` paints them
-in `currentColor` through a CSS mask, so they read as ink on paper and carbon.
+### Gradient System
 
-### Section hues
-
-Reading / Writing / Listening / Speaking / TOEIC keep distinct muted hues,
-used only as 8px square marks and chart series — never as tints on surfaces.
+Cohere does not use gradients as a generic UI fill. Gradients and color fields are media-led: abstract 3D hero imagery, deep blue open-science particle fields, red-orange product video posters, and dark green-to-black product environments. Keep UI surfaces flat; reserve gradient richness for large media panels and CTA image bands.
 
 ## Typography
 
-| Token            | Family     | Usage                                             |
-| ---------------- | ---------- | ------------------------------------------------- |
-| `--font-display` | Geist      | Titles, task names, big numerals (weight 500)     |
-| `--font-sans`    | Geist      | Body, passages, controls                          |
-| `--font-mono`    | Geist Mono | Metadata: eyebrows, indexes, counts, timers, tags |
-| `--font-pixel`   | Silkscreen | The mascots' speech only                          |
+### Font Family
 
-Scale: `2xs 11 · xs 12 · sm 13 · base 15 · lg 17 · xl 20 · 2xl 24 · 3xl 32 ·
-4xl 44 · 5xl 60 · 6xl 76`. Display sizes use `--tracking-tighter` (-0.035em)
-or `--tracking-display` (-0.045em).
+- **Display**: `CohereText`, falling back to `Space Grotesk`, `Inter`, `ui-sans-serif`, and `system-ui`.
+- **Body/UI**: `Unica77 Cohere Web`, falling back to `Inter`, `Arial`, `ui-sans-serif`, and `system-ui`.
+- **Technical labels**: `CohereMono`, falling back to `Arial`, `ui-sans-serif`, and `system-ui`.
+- **Icons**: Cohere uses custom icon fonts and thin-line geometric illustrations.
 
-**The mono voice labels content; it never is content.** Eyebrows, column
-headers, question numbers, option letters, counts, timers and tags are mono,
-uppercase, `--tracking-meta` (0.04em), 11px. Sentences are never mono. The
-shared `.micro-label` class is this voice.
+### Hierarchy
 
-Numbers that count (timers, scores' denominators, percentages, dates) use
-mono with `tabular-nums`; headline numerals use the display face.
+| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
+|---|---|---:|---:|---:|---:|---|
+| Hero Display | CohereText | 96px | 400 | 1.00 | -1.92px | Home page declaration scale. |
+| Product Display | CohereText | 72px | 400 | 1.00 | -1.44px | Product and research hero headlines. |
+| Section Display | Unica77 | 60px | 400 | 1.00 | -1.2px | Large product-page headings. |
+| Section Heading | Unica77 | 48px | 400 | 1.20 | -0.48px | Split hero and CTA headings. |
+| Card Heading | Unica77 | 32px | 400 | 1.20 | -0.32px | Feature card and list section titles. |
+| Feature Heading | Unica77 | 24px | 400 | 1.30 | 0 | Cards, filters, and article titles. |
+| Body Large | Unica77 | 18px | 400 | 1.40 | 0 | Lead text and larger paragraphs. |
+| Body | Unica77 | 16px | 400 | 1.50 | 0 | Default copy and link text. |
+| Button | Unica77 | 14px | 500 | 1.71 | 0 | Compact CTA labels. |
+| Caption | Unica77 | 14px | 400 | 1.40 | 0 | Metadata and small explanatory text. |
+| Mono Label | CohereMono | 14px | 400 | 1.40 | 0.28px | Uppercase technical labels. |
+| Micro | Unica77 | 12px | 400 | 1.40 | 0 | Footer, nav microcopy, and small links. |
+
+### Principles
+
+- Use massive type sparingly; Cohere pages often have one oversized headline and then settle into restrained 16px-24px UI copy.
+- Keep display type tight. Hero copy should feel compact and carved, not airy.
+- Avoid heavy bold weights. Size, spacing, and surface contrast do most of the hierarchy work.
+- Use uppercase mono labels for category and system markers, especially on product and research pages.
+- Editorial pages can use coral chips and blue links, but the base typography remains black and measured.
 
 ## Layout
 
-- Nav: Learn (the home index: TOEFL, TOEIC, Practice Test, Shadowing,
-  Dictation, Instant Composition) · Review · Dashboard · Settings.
-- Header 60px, translucent paper, hairline bottom rule. Nav is plain text
-  links; the active one stands on a 2px signal bar on the header rule.
-- A task's clock docks in the header after the wordmark, behind a hairline
-  (`HeaderClock`). On phones it takes the wordmark's place. Nothing floats
-  over a passage.
-- `--max-content` 1120px; `--gutter` 32px (16px on phones);
-  `--max-reading` 720px for a single focused sheet.
-- Pages never set their own `max-width`. They fill the shell's
-  `--max-content` column; a page that reads better narrow (Settings, update
-  notes) adds the global `.page-narrow` class, which owns its centring.
-- A page that can't show its content says why in the global `.notice-error`
-  banner. Errors inside a control stay plain error-coloured text.
-- **Index pattern** (home, TOEFL/TOEIC menus, question lists): mono label →
-  ink rule → ruled rows of `index | title + meta | count | →`. Grouped menus
-  hang the group name in a sticky left column.
-- **Page head**: round back button, 32px display title, one line of context.
+### Spacing System
+
+The system uses an 8px base with many one-off alignment values: `2px`, `6px`, `8px`, `10px`, `12px`, `16px`, `20px`, `22px`, `24px`, `28px`, `32px`, `36px`, `40px`, `56px`, `60px`, `64px`, and `80px`.
+
+Large sections rely on dramatic vertical breathing room. The home page places a trust-logo strip far below the hero media. Product pages often hold dark panels inside fields of empty white space, then transition to dense forms or footers only near the end.
+
+### Grid & Container
+
+- Global nav uses a three-zone layout: logo left, menu centered, sign-in/CTA right.
+- Home hero is centered text above a two-card media composition: a wide product mockup card beside a narrower photography card.
+- Feature sections commonly use 3-column cards on desktop.
+- Product pages alternate centered hero blocks, trust-logo strips, large single-feature bands, and 2- or 3-column card grids.
+- Research pages use full-width lists with date and chip columns instead of decorative cards.
+- Forms use two-column input rows inside a rounded white card on dark or stone section backgrounds.
+
+### Whitespace Philosophy
+
+Cohere uses whitespace as a trust signal. Large empty intervals separate the brand claim, customer proof, product proof, and CTA. Dense content appears only where it serves the information architecture: research paper rows, blog card grids, and contact form fields.
+
+## Elevation & Depth
+
+Cohere is mostly flat. Depth comes from surface alternation, media contrast, rounded corners, and thin borders rather than drop shadows.
+
+| Level | Treatment | Use |
+|---|---|---|
+| Flat | No shadow, white or dark field | Hero copy, research lists, editorial surfaces |
+| Bordered | 1px `#d9d9dd`, `#e5e7eb`, or dark translucent rules | Research rows, forms, pale cards, footer inputs |
+| Media Lift | Rounded image or video over contrasting section color | Hero photo cards, product videos, CTA imagery |
+| Dark Product Field | Deep green or navy full-width band | Command, North, financial services, security sections |
+
+## Shapes
+
+### Radius Scale
+
+| Token | Value | Role |
+|---|---:|---|
+| `xs` | 4px | Small images, search fields, article thumbnails, utility elements |
+| `sm` | 8px | Blog chips, cards, small media, dialogs |
+| `md` | 16px | Medium product cards and grouped blocks |
+| `lg` | 22px | Signature media-card and soft placeholder radius |
+| `xl` | 30px | Research/topic filter pills |
+| `pill` | 32px | Primary CTA buttons |
+| `full` | 9999px | Round status elements and fully pill-shaped controls |
+
+### Image Treatment
+
+Images are not decorative backdrops for text except in CTA bands. Most imagery sits as rounded cards with visible corners: product videos, enterprise photography, article thumbnails, and abstract 3D renders. The dominant radii are 8px and 22px.
 
 ## Components
 
-### Buttons
+### **`button-primary`**
 
-Radius `--radius` (4px). **Primary is ink** — the one loud control on a page.
+Near-black or white pill CTA, depending on surface contrast. Uses 14px-16px Unica77, 12px 24px padding, and a 32px pill radius. This is the primary action style for "Request a demo", "Submit", and hero CTAs.
 
-| Variant       | Style                                       |
-| ------------- | ------------------------------------------- |
-| **Primary**   | Ink fill, inverse text                      |
-| **Secondary** | Transparent, strong hairline; ink on hover  |
-| **Accent**    | Signal — live actions only (e.g. recording) |
-| **Ghost**     | Transparent                                 |
-| **Danger**    | Error fill                                  |
+### **`button-secondary`**
 
-Sizes: `sm` 30px · `md` 38px · `lg` 46px. Every button scales to 0.98 on press.
+Text-only action link, usually underlined or rule-aligned, with no filled background. Used for "Explore products", "Try the Playground", newsletter signup, and secondary hero actions.
 
-### Question sheets
+### **`button-pill-outline`**
 
-`src/styles/question-document.css` and the task modules share one register:
-a sheet opens with a 1px ink top rule and square corners; item numbers are
-solid ink chips in mono; option letters are mono, tertiary; options are ruled
-rows whose selected / correct / wrong state adds a 3px inset bar on the left
-(ink / green / red). Large writing boxes frame in ink on focus instead of
-showing a ring.
+Outlined pill control with transparent fill, 1px dark border, and 30px radius. Used for research filters, topic tags, and lightweight taxonomy controls.
 
-### Audio (ported from ElevenLabs UI, MIT)
+### **`announcement-bar`**
 
-| Component      | Role                                                         |
-| -------------- | ------------------------------------------------------------ |
-| `AudioPlayer`  | Decoded waveform scrubber + ink transport + mono speed chips |
-| `LiveWaveform` | Canvas waveform; `processing` mode animates without a mic    |
-| `MicWaveform`  | Level bars fed by the already-open recorder stream           |
-| `VoiceButton`  | Idle → recording → processing → success/error with waveform  |
-| `MicSelector`  | Device listbox with the live device marked                   |
-| `ScrubBar`     | Fallback transport while a waveform decodes                  |
-| `Matrix`       | Dot-matrix display used for loading/empty states             |
+Full-width black strip above the nav, 36px tall, centered microcopy with an underlined "Learn more" link and a close control at the far right.
 
-Rule: **never open a second microphone stream while recording.** Live levels
-come from `useSpeechRecognition().levels`; `LiveWaveform active` is only used
-for pre-recording device previews (mic selector).
+### **`hero-photo-card`**
 
-### Charts and the streak calendar
+Rounded media card used in the home hero and solution pages. It combines photography or abstract imagery with an overlaid dark agent-console module. Radius is usually 22px on large cards and 8px on smaller thumbnails.
 
-Recharts, styled from tokens (hairline grid, tertiary ticks, token-coloured
-series, hairline tooltip). The chart bundle is loaded lazily and only the
-dashboard pulls it. The plot is `aria-hidden`; the same numbers are also
-rendered as a visually hidden list, so no data depends on hovering. The
-streak calendar is square pixel cells stepped in the signal orange.
+### **`agent-console-card`**
 
-### Pixel art
+Dark product mockup panel showing agent names, status chips, integration badges, prompt fields, and generated response cards. Background is near-black, text is white or muted, and small accent chips use product colors.
 
-Poodle, hamsters, pixel icons, the pixel clock and score pips are kept as
-drawn. They may be restaged (scaled uniformly, framed on a stage; the home
-hero's stage enlarges the scene 1.4× on wide screens) but never redrawn or
-recoloured.
+### **`trust-logo-strip`**
 
-## Motion
+Centered copy above a row of monochrome customer logos. It is intentionally quiet: no cards, no borders, just large horizontal spacing and black or white logos depending on the background.
 
-- `--duration-fast` 120ms (press, hover) · `--duration-base` 180ms (state) ·
-  `--duration-slow` 260ms (nav bar, panels).
-- Easing: `--ease-out` `cubic-bezier(0.23, 1, 0.32, 1)` for enter/UI,
-  `--ease-in-out` `cubic-bezier(0.77, 0, 0.175, 1)` for on-screen movement.
-- Animate `transform` / `opacity` only. Respect `prefers-reduced-motion`.
-- Row arrows nudge 3–4px and turn signal on hover; nothing else moves.
-- Keyboard-repeated actions (nav, ⌘D) never animate.
-- One exception: the AI scoring update page's cover drawing draws itself in
-  once with `stroke-dashoffset`, staggered, and is static under
-  `prefers-reduced-motion`. Nothing else follows its lead.
-- Second exception: the instant composition drill marks its usage note with a
-  line-drawn pen that scribbles three strokes (ink drawing in under
-  the nib) when the answer reveals, then rests. Static under
-  `prefers-reduced-motion`.
+### **`capability-card`**
 
-## Anti-patterns
+Content block with thin-line geometric illustration, 24px heading, body copy, and a text link. On light backgrounds, cards often have only a top rule or a subtle image/card relationship rather than full boxing.
 
-- Rounded cards with drop shadows as the default container
-- Tinted fills to group content — use a rule and whitespace
-- Section hues as surface tints; gradients; glows
-- Semibold/bold display type — display is 500, size does the work
-- Mono for sentences; sans for metadata labels
-- Emoji as status icons (use SVG, pixel icons or plain words)
-- Per-page option/score styling that drifts from the shared sheet register
-- Decorative animation, staggered entrances, or motion on frequent actions
+### **`dark-feature-band`**
+
+Deep green or navy full-width section used for product capabilities, security claims, and feature breakdowns. Text turns white; cards use darker translucent surfaces, pale borders, and abstract line illustrations.
+
+### **`product-card`**
+
+Warm stone card used for product/model summaries. Typically 3-column on desktop, with 8px radius, generous padding, a small pill button, a divider line, and checkmark bullet rows.
+
+### **`blog-filter-chip`**
+
+Large coral taxonomy chip used on the blog index. Active chips invert to coral fill with dark text; inactive chips use coral outline and pale fill. Typography is oversized relative to typical filters, making the taxonomy a hero-level control.
+
+### **`research-table`**
+
+Rule-separated publication list with title left, topic pills centered, and date right. Rows are tall, white, and border-driven; filters above use many compact outlined pills.
+
+### **`contact-form-card`**
+
+Rounded white form panel set against dark green or warm stone sections. Inputs are rectangular with thin gray borders, 12px-16px padding, and compact labels/placeholders. Submit uses the same near-black pill style as primary CTAs.
+
+### **`footer-newsletter`**
+
+Dark footer subscription block with coral "AI moves fast" label, white headline, muted legal microcopy, a single-line email field, and arrow submit marker. Footer columns use white section labels and muted links.
+
+## Do's and Don'ts
+
+### Do
+
+- Use white canvas as the default surface; introduce dark green or navy as full-width product bands.
+- Keep primary CTAs pill-shaped and near-black on light surfaces.
+- Use 22px radius on major media cards and placeholders.
+- Use coral for editorial taxonomy and small warm accents, not as the main CTA system.
+- Use monochrome trust logos with wide spacing.
+- Use thin-line geometric illustrations for research and capability icons.
+- Let photography and product mockups carry color, while the UI shell stays restrained.
+
+### Don't
+
+- Do not turn coral or blue into broad decorative surface colors.
+- Do not add heavy drop shadows to cards.
+- Do not make every section card-based; Cohere often uses unframed rows, rules, and open space.
+- Do not use rounded cards below 8px for major media.
+- Do not replace the display/body type split with one generic sans-serif voice.
+- Do not render undocumented interaction variants in documentation or previews.
+- Do not use saturated gradients as normal UI backgrounds; keep gradients media-led.
+
+## Responsive Behavior
+
+### Breakpoints
+
+| Name | Width | Key Changes |
+|---|---:|---|
+| Small Mobile | <425px | Single-column cards, compact nav, reduced hero headline scale |
+| Mobile | 425-640px | Hero media stacks, card grids become one column, form rows stack |
+| Large Mobile | 640-768px | Wider one-column layouts with larger media cards |
+| Tablet | 768-1024px | Two-column cards begin, nav spacing tightens |
+| Desktop | 1024-1440px | Full nav, 3-column card grids, split hero compositions |
+| Large Desktop | 1440-2560px | Wide containers and large empty vertical intervals |
+
+### Touch Targets
+
+Primary CTAs and pills meet comfortable touch sizing through 12px-24px padding and pill radii. Research filter chips and blog category chips are larger than standard tags, making dense taxonomy surfaces usable on touch devices.
+
+### Collapsing Strategy
+
+- Nav collapses from full horizontal links to a compact mobile menu.
+- Hero media moves from split cards to stacked cards.
+- Product and capability grids collapse from 3 columns to 2 and then 1.
+- Form fields collapse from paired rows to a single column.
+- Research rows preserve their rule-separated structure but stack metadata below titles on smaller widths.
+
+## Iteration Guide
+
+1. Start from a white canvas or a full-width dark green/navy band; avoid mid-tone page backgrounds unless the screenshot shows a specific CTA/form section.
+2. Use `button-primary` for the single highest-priority action and `button-secondary` for the companion action.
+3. Use `hero-photo-card` or `agent-console-card` when a page needs visual energy; avoid invented dashboard data.
+4. For editorial pages, combine `blog-filter-chip`, `button-pill-outline`, and `research-table` instead of generic marketing cards.
+5. Keep component examples structurally honest: placeholder product frames are better than invented product content.
+
+## Known Gaps
+
+- Exact proprietary font files are not bundled; use the documented fallbacks when implementing externally.
+- Mobile screenshots were not regenerated in this public update, so mobile behavior is documented from the desktop system and existing responsive patterns.
+- Some live pages lazy-load content blocks late; blank testimonial placeholders are documented as placeholder skeleton surfaces rather than filled testimonial cards.
