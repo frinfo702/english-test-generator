@@ -89,6 +89,8 @@ Colour, spacing, type scale and radii otherwise unchanged; see the file.
   card itself and kept in localStorage (`lib/scoreGoal`). Bands that can't
   add up under the ETS rule (section mean, nearest half) are greyed out, and
   with all four sections set the total fills itself in and locks.
+  Below it, the summary numbers, streak calendar, practice-test cards and
+  task table each sit in their own `.glass` panel with light display numbers.
 - **Header** (`AppShell`) — clear at the top of the page, frosted with a
   hairline once scrolled past 8px. Each nav link has a ⌥+letter shortcut
   (⌥L/⌥R/⌥D/⌥S); it stays hidden and appears after a 1s hover in a small card

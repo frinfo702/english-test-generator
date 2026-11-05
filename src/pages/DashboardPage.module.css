@@ -3,21 +3,24 @@
 .summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: var(--rule-ink);
-  border-bottom: var(--rule);
+  padding: var(--spacing-2) 0;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
 }
 
 .summaryCard {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-6);
-  padding: var(--spacing-4) var(--spacing-5) var(--spacing-5);
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-5);
   border-left: 1px solid var(--color-border);
 }
 
 .summaryCard:first-child {
   border-left: none;
-  padding-left: 0;
 }
 
 .summaryLabel {
@@ -30,8 +33,8 @@
 
 .summaryValue {
   font-family: var(--font-display);
-  font-size: var(--text-4xl);
-  font-weight: var(--font-medium);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-light);
   font-variant-numeric: tabular-nums;
   letter-spacing: var(--tracking-tighter);
   line-height: 1;
@@ -72,16 +75,22 @@
 
 .tasks {
   margin-top: var(--spacing-16);
+  padding: var(--spacing-5);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
   /* Shared by the head and every row so the columns line up. */
   --task-cols: minmax(0, 1fr) 96px repeat(3, 56px) 44px 64px 16px;
 }
 
 .tasksHeading {
   padding-bottom: var(--spacing-3);
-  border-bottom: var(--rule-ink);
+  border-bottom: var(--rule);
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   letter-spacing: var(--tracking-tighter);
 }
 
@@ -372,9 +381,10 @@
 }
 
 .answersHeading {
+  font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-tight);
+  font-weight: var(--font-light);
+  letter-spacing: var(--tracking-tighter);
   padding-bottom: var(--spacing-3);
   border-bottom: var(--rule-ink);
   margin-bottom: var(--spacing-4);
