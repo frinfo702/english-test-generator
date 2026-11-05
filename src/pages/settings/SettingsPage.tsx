@@ -39,7 +39,28 @@ const MAKER_NAMES = { anthropic: "Anthropic", openai: "OpenAI" };
 
 const usd = (n: number) => `$${n.toFixed(2)}`;
 
-/** One labelled setting: the label hangs left, the control sits right. */
+/** Open eye = press to show; struck eye = press to hide. */
+function EyeIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" />
+      <circle cx="12" cy="12" r="3" />
+      {!open && <path d="M4 4l16 16" />}
+    </svg>
+  );
+}
+
+/** One labelled setting in its own frosted panel. */
 function Row({
   label,
   children,
@@ -115,44 +136,11 @@ function AiScoringSection() {
         <PoweredByGateway prefix="" />
       </header>
       <p className={styles.lede}>
-        Score Writing and Speaking right on the page with your own Vercel AI
-        Gateway key, with no copy &amp; paste. You pay the gateway for what you
-        use, usually well under a cent per answer.
+        Score Writing and Speaking right on the page with your own AI Gateway
+        key. You pay the gateway directly, usually well under a cent per answer.
       </p>
 
-      <Row label="Scoring">
-        <div className={styles.choices} role="radiogroup" aria-label="Scoring">
-          <label
-            className={[
-              styles.choice,
-              !settings.key ? styles.disabled : "",
-            ].join(" ")}
-          >
-            <input
-              type="radio"
-              name="mode"
-              checked={auto}
-              disabled={!settings.key}
-              onChange={() => chooseMode("auto")}
-            />
-            Automatic, with my key
-          </label>
-          <label className={styles.choice}>
-            <input
-              type="radio"
-              name="mode"
-              checked={!auto}
-              onChange={() => chooseMode("manual")}
-            />
-            Copy &amp; paste into any AI chat
-          </label>
-        </div>
-        {!settings.key && (
-          <p className={styles.hint}>Automatic scoring needs a saved key.</p>
-        )}
-      </Row>
-
-      <Row label="AI Gateway key">
+      <Row label="Key">
         {settings.key ? (
           <div className={styles.saved}>
             <span className={styles.savedKey}>{maskKey(settings.key)}</span>
@@ -204,12 +192,13 @@ function AiScoringSection() {
                 aria-pressed={reveal}
                 aria-label="Show key"
               >
-                {reveal ? "Hide" : "Show"}
+                <EyeIcon open={!reveal} />
               </button>
             </div>
             <Button
               size="sm"
               type="submit"
+              variant={draft.trim() ? "primary" : "secondary"}
               disabled={!draft.trim() || check.state === "checking"}
             >
               Save
@@ -227,8 +216,8 @@ function AiScoringSection() {
           )}
         </p>
         <p className={styles.hint}>
-          Kept only in this browser and sent only to ai-gateway.vercel.sh, never
-          to our servers. Remove it on a shared computer.{" "}
+          Stays in this browser and goes only to ai-gateway.vercel.sh. Remove it
+          on a shared computer.{" "}
           <a href={CREATE_KEY_URL} target="_blank" rel="noreferrer">
             Create a key ↗
           </a>
@@ -253,59 +242,95 @@ function AiScoringSection() {
               <span className={styles.modelText}>
                 <span className={styles.modelName}>
                   {m.name}
-                  <span className={styles.tag}>
-                    {m.id === DEFAULT_MODEL
-                      ? "Recommended · default"
-                      : "Recommended"}
-                  </span>
+                  {m.id === DEFAULT_MODEL && (
+                    <span className={styles.tag}>Default</span>
+                  )}
                 </span>
                 <span className={styles.hint}>{m.pitch}</span>
               </span>
-              <span className={styles.modelMeta}>
-                <span>{MAKER_NAMES[m.maker]}</span>
-                <span>
-                  {usd(m.price[0])} / {usd(m.price[1])} per 1M
-                </span>
+              <span
+                className={styles.modelMeta}
+                title={`${MAKER_NAMES[m.maker]} · input / output per 1M tokens`}
+              >
+                {usd(m.price[0])} / {usd(m.price[1])}
               </span>
             </label>
           ))}
         </div>
-        <form
-          className={styles.inline}
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (custom.trim()) chooseModel(custom);
-          }}
-        >
-          <label className={styles.fill}>
-            <span className="sr-only">Another AI Gateway model ID</span>
-            <input
-              value={custom}
-              onChange={(e) => setCustom(e.target.value)}
-              placeholder="Another model, e.g. openai/gpt-5.6-luna"
-              spellCheck={false}
-              className={[
-                styles.input,
-                !recommended ? styles.inputActive : "",
-              ].join(" ")}
-            />
-          </label>
-          <Button
-            size="sm"
-            variant="secondary"
-            type="submit"
-            disabled={!custom.trim() || custom.trim() === settings.model}
+        <details className={styles.other} open={!recommended}>
+          <summary>Other model…</summary>
+          <form
+            className={styles.inline}
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (custom.trim()) chooseModel(custom);
+            }}
           >
-            Use
-          </Button>
-        </form>
+            <label className={styles.fill}>
+              <span className="sr-only">Another AI Gateway model ID</span>
+              <input
+                value={custom}
+                onChange={(e) => setCustom(e.target.value)}
+                placeholder="Another model, e.g. openai/gpt-5.6-luna"
+                spellCheck={false}
+                className={[
+                  styles.input,
+                  !recommended ? styles.inputActive : "",
+                ].join(" ")}
+              />
+            </label>
+            <Button
+              size="sm"
+              variant="secondary"
+              type="submit"
+              disabled={!custom.trim() || custom.trim() === settings.model}
+            >
+              Use
+            </Button>
+          </form>
+        </details>
         <p className={styles.hint}>
-          Prices are input / output per million tokens, AI Gateway list prices
-          as of October 2026.{" "}
+          Input / output price per 1M tokens, AI Gateway list prices as of
+          October 2026.{" "}
           <a href={MODELS_URL} target="_blank" rel="noreferrer">
             All models ↗
           </a>
         </p>
+      </Row>
+      <Row label="Scoring">
+        <div
+          className={styles.segmented}
+          role="radiogroup"
+          aria-label="Scoring"
+        >
+          <label className={styles.segment}>
+            <input
+              type="radio"
+              name="mode"
+              checked={!auto}
+              onChange={() => chooseMode("manual")}
+            />
+            Copy &amp; paste into any AI chat
+          </label>
+          <label
+            className={[
+              styles.segment,
+              !settings.key ? styles.disabled : "",
+            ].join(" ")}
+          >
+            <input
+              type="radio"
+              name="mode"
+              checked={auto}
+              disabled={!settings.key}
+              onChange={() => chooseMode("auto")}
+            />
+            Automatic, with my key
+          </label>
+        </div>
+        {!settings.key && (
+          <p className={styles.hint}>Save a key above to turn on Automatic.</p>
+        )}
       </Row>
     </section>
   );
@@ -441,7 +466,7 @@ function DataSection() {
 
 export function SettingsPage() {
   return (
-    <div className="page-narrow">
+    <div className={`page-narrow ${styles.page}`}>
       <SectionHeader
         title="Settings"
         subtitle="Everything here stays in this browser."

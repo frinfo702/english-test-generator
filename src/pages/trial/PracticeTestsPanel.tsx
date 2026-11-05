@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import type { Attempt } from "../../lib/attempts";
 import {
   TRIAL_SECTIONS,
-  estimateScore,
   formatBand,
   isTrial,
   scoreTrial,
   trialTitle,
 } from "../../lib/trial";
-import { BandTable } from "./BandTable";
 import styles from "./Trial.module.css";
 
 const BandTrendChart = lazy(() =>
@@ -31,7 +29,6 @@ export function PracticeTestsPanel({ attempts }: { attempts: Attempt[] }) {
   const finished = trials
     .filter((t) => t.trial.finishedAt)
     .map((t) => ({ t, result: scoreTrial(t.trial, byId) }));
-  const estimate = estimateScore(attempts);
 
   const series = (
     pick: (r: (typeof finished)[number]["result"]) => number | null,
@@ -58,46 +55,24 @@ export function PracticeTestsPanel({ attempts }: { attempts: Attempt[] }) {
         </Link>
       </div>
 
-      <div className={styles.reportGrid}>
+      {/* Empty trend charts are just five boxes saying "nothing yet". */}
+      {finished.length === 0 ? (
+        <p className={styles.note}>
+          Finish a practice test to see your band trend here.
+        </p>
+      ) : (
         <div className={styles.resultCard}>
-          <h3 className={styles.resultTitle}>Estimated real-test score</h3>
-          <BandTable
-            finished
-            result={{
-              overall: estimate.overall,
-              sections: TRIAL_SECTIONS.map((s) => ({
-                key: s.key,
-                label: s.label,
-                points: 0,
-                max: 0,
-                band: estimate.sections[s.key],
-              })),
-            }}
-          />
-          <p className={styles.note}>
-            From {finished.length} practice{" "}
-            {finished.length === 1 ? "test" : "tests"} and your task practice.
-          </p>
+          <Suspense fallback={<p className={styles.note}>Loading chart…</p>}>
+            <BandTrendChart
+              title="Total"
+              colorVar="--color-ink"
+              points={series((r) =>
+                r.sections.length === 1 ? null : r.overall,
+              )}
+            />
+          </Suspense>
         </div>
-        {/* Empty trend charts are just five boxes saying "nothing yet". */}
-        {finished.length === 0 ? (
-          <p className={styles.note}>
-            Finish a practice test to see your band trend here.
-          </p>
-        ) : (
-          <div className={styles.resultCard}>
-            <Suspense fallback={<p className={styles.note}>Loading chart…</p>}>
-              <BandTrendChart
-                title="Total"
-                colorVar="--color-ink"
-                points={series((r) =>
-                  r.sections.length === 1 ? null : r.overall,
-                )}
-              />
-            </Suspense>
-          </div>
-        )}
-      </div>
+      )}
 
       {finished.length > 0 && (
         <div className={styles.chartGrid}>

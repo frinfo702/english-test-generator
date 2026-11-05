@@ -20,6 +20,7 @@ import { formatSecondsAsMmSs } from "../lib/time";
 import { pickFocusTask } from "../lib/focusTask";
 import { getAllAttempts, type Attempt } from "../lib/attempts";
 import styles from "./DashboardPage.module.css";
+import { EstimateCard } from "./trial/EstimateCard";
 import { PracticeTestsPanel } from "./trial/PracticeTestsPanel";
 import { TRIAL_TASK_ID } from "../lib/trial";
 
@@ -317,6 +318,8 @@ export function DashboardPage() {
   return (
     <div>
       {header}
+
+      <EstimateCard attempts={allAttempts} />
 
       <div className={styles.summary}>
         <div className={styles.summaryCard}>

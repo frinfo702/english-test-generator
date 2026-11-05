@@ -29,15 +29,17 @@ illustration, and it lives on the home page only.
 
 ## Tokens (`src/styles/variables.css`)
 
-| Token | Value | Use |
-|---|---|---|
-| `--grid-size` | 7px | Canvas grid pitch; the home fish use the same cell |
-| `--grid-line` | ink at 5% | Grid lines (adapts to theme) |
-| `--canvas-grid` | two 1px gradients | Home hero grid only |
-| `--glass-bg` | surface at 72% | Frosted panel fill |
-| `--glass-blur` | `blur(10px)` | Frosted panel backdrop |
-| `--radius-panel` | 14px | Frosted panels, command boxes, lists |
-| `--font-light` | 300 | Display titles (`h1`, page titles, home prompt) |
+| Token                  | Value             | Use                                                        |
+| ---------------------- | ----------------- | ---------------------------------------------------------- |
+| `--grid-size`          | 7px               | Canvas grid pitch; the home fish use the same cell         |
+| `--grid-line`          | ink at 5%         | Grid lines (adapts to theme)                               |
+| `--canvas-grid`        | two 1px gradients | Home hero grid only                                        |
+| `--glass-bg`           | surface at 72%    | Frosted panel fill                                         |
+| `--glass-blur`         | `blur(10px)`      | Frosted panel backdrop                                     |
+| `--radius-panel`       | 14px              | Frosted panels, command boxes, lists                       |
+| `--control-radius`     | unset → pill      | Button/input corner; a dense page sets it to `--radius-sm` |
+| `--font-light`         | 300               | Display titles (`h1`, page titles, home prompt)            |
+| `--control-h-sm/md/lg` | 34 / 42 / 52px    | Height of Button sizes and of every control beside them    |
 
 Colour, spacing, type scale and radii otherwise unchanged; see the file.
 
@@ -64,12 +66,33 @@ Colour, spacing, type scale and radii otherwise unchanged; see the file.
 - **Pick lists** (`TaskMenu`, `ProblemTable`) — ruled rows inside one frosted
   panel; hover tints the row, never lifts it.
 - **Chips** — pill, 1px border, 13px, ink border on hover.
-- **Buttons** (`Button`) — ink pill is the single primary action per screen;
-  outline pill for secondary; accent (coral) only for live recording.
+- **Buttons** (`Button`) — ink is the single primary action per screen;
+  outline for secondary; accent (coral) only for live recording.
+- **Control shape follows density.** Where controls are few (header, a page's
+  one CTA, chips), they are pills. Where many sit together (Settings, forms),
+  buttons, inputs, segmented switches and option cards are rounded rects:
+  the page root sets `--control-radius: var(--radius-sm)` and everything
+  inside inherits it. Never mix both shapes in one panel.
+- **Controls on one line share edges.** An input, select, trigger or icon
+  button that sits next to a `Button` takes the same `--control-h-*` height as
+  that Button's size, never a hand-typed px. Centring a 30px input against a
+  34px button still leaves the top and bottom edges 2px apart, and that is
+  what the eye catches. A deliberately larger primary (the audio Play button)
+  is fine; two near-equal heights are not.
+- **Settings** (`SettingsPage`) — each setting is a `.glass` panel with a
+  plain-sans label on top; options to pick (models) are small cards side by
+  side, the chosen one ringed in ink.
+- **Dashboard** (`DashboardPage`) — leads with `EstimateCard`: the estimated
+  total band in large light type with "/ goal 4.5" and a gap chip, then one
+  1–6 track per section (ink fill = estimate, upright tick = goal, green once
+  met). Goals (total and section minimums, each optional) are set in the
+  card itself and kept in localStorage (`lib/scoreGoal`). Bands that can't
+  add up under the ETS rule (section mean, nearest half) are greyed out, and
+  with all four sections set the total fills itself in and locks.
 - **Header** (`AppShell`) — clear at the top of the page, frosted with a
   hairline once scrolled past 8px. Each nav link has a ⌥+letter shortcut
   (⌥L/⌥R/⌥D/⌥S); it stays hidden and appears after a 1s hover in a small card
-  with a few-word hint ("Redo what you missed  ⌥R").
+  with a few-word hint ("Redo what you missed ⌥R").
 - **Footer** (`SiteFooter`) — frosted strip with a top rule, not a dark band.
 
 ## Don't

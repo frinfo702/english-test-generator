@@ -7,7 +7,9 @@
   justify-content: center;
   gap: 8px;
   border: 1px solid transparent;
-  border-radius: var(--radius-full);
+  /* Pill where controls are few (header, page CTA); a dense page such as
+   * Settings sets --control-radius to a small rect. */
+  border-radius: var(--control-radius, var(--radius-full));
   font-weight: var(--font-medium);
   font-family: var(--font-sans);
   transition:
@@ -105,19 +107,19 @@
 }
 
 .sm {
-  height: 34px;
+  height: var(--control-h-sm);
   padding: 0 15px;
   font-size: var(--text-xs);
 }
 
 .md {
-  height: 42px;
+  height: var(--control-h-md);
   padding: 0 20px;
   font-size: var(--text-sm);
 }
 
 .lg {
-  height: 52px;
+  height: var(--control-h-lg);
   padding: 0 28px;
   font-size: var(--text-base);
 }

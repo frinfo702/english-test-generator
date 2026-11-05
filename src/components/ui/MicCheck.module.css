@@ -9,7 +9,9 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  /* Top, not centre: the selector grows an error line under its trigger, and
+   * centring would drop the button below the trigger's edges. */
+  align-items: flex-start;
   gap: var(--spacing-2);
 }
 
