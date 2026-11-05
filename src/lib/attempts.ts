@@ -8,6 +8,12 @@ import type { TaskId } from "../hooks/useScoreHistory";
 import type { AiInterviewScores } from "./interviewScoring";
 import type { PronunciationResult } from "./pronunciation";
 import type { TrialRecord } from "./trial";
+import {
+  loadCards,
+  loadSessions,
+  mergeSpeaking,
+  parseSpeakingBackup,
+} from "./speakingLoop";
 
 export interface ItemResponse {
   itemId?: string;
@@ -192,6 +198,8 @@ export async function exportBackup(includeAudio: boolean): Promise<Blob> {
     version: BACKUP_VERSION,
     exportedAt: new Date().toISOString(),
     attempts,
+    // localStorage, not IndexedDB, but losing drilled cards hurts as much.
+    speaking: { cards: loadCards(), sessions: loadSessions() },
   };
   return new Blob([JSON.stringify(backup)], { type: "application/json" });
 }
@@ -235,7 +243,12 @@ export function isBackupAttempt(value: unknown): value is BackupAttempt {
 }
 
 export async function importBackup(file: Blob): Promise<number> {
-  let parsed: { format?: unknown; version?: unknown; attempts?: unknown };
+  let parsed: {
+    format?: unknown;
+    version?: unknown;
+    attempts?: unknown;
+    speaking?: unknown;
+  };
   try {
     parsed = JSON.parse(await file.text());
   } catch {
@@ -270,6 +283,9 @@ export async function importBackup(file: Blob): Promise<number> {
       ),
     })),
   );
+  // Checked before anything is written, so a bad section still imports nothing.
+  const speaking = parseSpeakingBackup(parsed.speaking);
   await putAttempts(attempts);
+  if (speaking) mergeSpeaking(speaking);
   return attempts.length;
 }

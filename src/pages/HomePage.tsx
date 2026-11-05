@@ -72,6 +72,14 @@ const drills = [
     tag: "Fluency",
     path: "/instant-composition",
   },
+  {
+    number: "04",
+    title: "Speaking Loop",
+    description:
+      "Talk at 4/3/2, get what you meant in natural English, drill the gaps by voice.",
+    tag: "Speaking",
+    path: "/speak",
+  },
 ];
 
 const Arrow = ({ diagonal = false }: { diagonal?: boolean }) => (
@@ -234,7 +242,7 @@ export function HomePage() {
               </h2>
             </div>
             <p className={styles.drillIntroCopy}>
-              Three small drills for the days when a full section is too much.
+              Four small drills for the days when a full section is too much.
               Ten minutes, one answer at a time.
             </p>
           </div>

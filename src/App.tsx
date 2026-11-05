@@ -147,6 +147,18 @@ const ReviewPage = lazyNamed<"ReviewPage", object>(
   () => import("./pages/review/ReviewPage"),
   "ReviewPage",
 );
+const SpeakLoopPage = lazyNamed(
+  () => import("./pages/speak/SpeakLoopPage"),
+  "SpeakLoopPage",
+);
+const ChunkCardsPage = lazyNamed(
+  () => import("./pages/speak/ChunkCardsPage"),
+  "ChunkCardsPage",
+);
+const TalkPage = lazyNamed(
+  () => import("./pages/speak/ConversationPage"),
+  "ConversationPage",
+);
 const SettingsPage = lazyNamed(
   () => import("./pages/settings/SettingsPage"),
   "SettingsPage",
@@ -337,6 +349,9 @@ export default function App() {
             <Route path="/review" element={<ReviewPage />} />
             <Route path="/results/:attemptId" element={<ResultPage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/speak" element={<SpeakLoopPage />} />
+            <Route path="/speak/cards" element={<ChunkCardsPage />} />
+            <Route path="/speak/talk" element={<TalkPage />} />
             <Route path="/toefl" element={<ToeflMenuPage />} />
             <Route path="/toeic" element={<ToeicMenuPage />} />
             <Route path="/trial" element={<TrialHomePage />} />

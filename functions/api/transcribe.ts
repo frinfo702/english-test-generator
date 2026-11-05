@@ -7,8 +7,16 @@ interface Env {
   AI?: Ai;
 }
 
+interface TimedWord {
+  word: string;
+  start: number;
+  end: number;
+}
+
 interface TranscriptionResponse {
   text: string;
+  /** Word timestamps when the provider returns them; fluency metrics read the gaps. */
+  words?: TimedWord[];
   language?: string;
   duration?: number;
   provider?: "xai" | "whisper";
@@ -17,6 +25,21 @@ interface TranscriptionResponse {
 const MAX_AUDIO_BYTES = 25 * 1024 * 1024;
 const XAI_STT_URL = "https://api.x.ai/v1/stt";
 const DEFAULT_LANGUAGE = "en";
+/** No language hint: the speaking loop accepts English mixed with Japanese. */
+const MIXED_LANGUAGE = "multi";
+
+function timedWords(raw: unknown): TimedWord[] | undefined {
+  if (!Array.isArray(raw)) return undefined;
+  const words = raw.flatMap((w: Record<string, unknown>) => {
+    const word = String(w?.word ?? w?.text ?? "").trim();
+    const start = Number(w?.start);
+    const end = Number(w?.end);
+    return word && Number.isFinite(start) && Number.isFinite(end)
+      ? [{ word, start, end }]
+      : [];
+  });
+  return words.length ? words : undefined;
+}
 
 function corsHeaders(): Record<string, string> {
   return {
@@ -38,6 +61,7 @@ function extensionForMime(mime: string): string {
 function normalizeLanguage(raw: FormDataEntryValue | null): string {
   if (typeof raw !== "string") return DEFAULT_LANGUAGE;
   const code = raw.trim().toLowerCase();
+  if (code === MIXED_LANGUAGE) return MIXED_LANGUAGE;
   if (!code || code === "auto" || code === "english" || code.startsWith("en")) {
     return DEFAULT_LANGUAGE;
   }
@@ -53,7 +77,7 @@ async function transcribeWithXai(
   // file must be last in multipart (xAI requirement)
   const formData = new FormData();
   formData.append("format", "true");
-  formData.append("language", language);
+  if (language !== MIXED_LANGUAGE) formData.append("language", language);
   formData.append("file", audio, `recording.${ext}`);
 
   const response = await fetch(XAI_STT_URL, {
@@ -73,10 +97,12 @@ async function transcribeWithXai(
     text?: string;
     language?: string;
     duration?: number;
+    words?: unknown;
   };
 
   return {
     text: result.text ?? "",
+    words: timedWords(result.words),
     language: result.language || language,
     duration: result.duration,
     provider: "xai",
@@ -89,15 +115,16 @@ async function transcribeWithWhisper(
   language: string,
 ): Promise<TranscriptionResponse> {
   const bytes = new Uint8Array(await audio.arrayBuffer());
-  const result = await ai.run("@cf/openai/whisper", {
+  const result = (await ai.run("@cf/openai/whisper", {
     audio: [...bytes],
+    ...(language === MIXED_LANGUAGE ? {} : { language }),
+  })) as { text?: string; words?: unknown } | null;
+  return {
+    text: String(result?.text ?? ""),
+    words: timedWords(result?.words),
     language,
-  });
-  const text =
-    result && typeof result === "object" && "text" in result
-      ? String(result.text)
-      : "";
-  return { text, language, provider: "whisper" };
+    provider: "whisper",
+  };
 }
 
 /**
@@ -131,6 +158,10 @@ async function transcribeAudio(
         whisper &&
         isPredominantlyJapaneseScript(result.text)
       ) {
+        return whisper();
+      }
+      // Mixed-language takes are timed by their gaps; Whisper always returns words.
+      if (language === MIXED_LANGUAGE && !result.words && whisper) {
         return whisper();
       }
       return result;

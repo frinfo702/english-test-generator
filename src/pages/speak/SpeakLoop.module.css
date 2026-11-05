@@ -1,0 +1,480 @@
+.block {
+  margin-bottom: var(--spacing-10);
+}
+
+.h2 {
+  margin-bottom: var(--spacing-3);
+  font-size: var(--text-lg);
+  font-weight: 500;
+}
+
+.label,
+.kind {
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+.kind {
+  display: block;
+  margin-bottom: var(--spacing-1);
+}
+
+.hint {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-block: var(--spacing-3);
+}
+
+.row select {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.topics {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+}
+
+.topic {
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--text-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.topic:hover {
+  background: var(--color-surface-hover);
+}
+
+.topic[aria-pressed="true"] {
+  border-color: var(--color-ink);
+}
+
+.textarea {
+  width: 100%;
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  margin-bottom: var(--spacing-2);
+}
+
+.plan {
+  padding-left: var(--spacing-5);
+  line-height: 1.8;
+}
+
+.topicLine {
+  margin-bottom: var(--spacing-6);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-8);
+  padding: var(--spacing-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.clock {
+  font-size: var(--text-4xl);
+  line-height: 1;
+}
+
+/* A round: everything centred on the ring, so the eye stays in one place while talking. */
+.stage {
+  align-items: center;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  gap: var(--spacing-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.steps li {
+  padding: var(--spacing-1) var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  color: var(--color-ink-tertiary);
+}
+
+.steps li[data-step="current"] {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.steps li[data-step="done"] {
+  background: var(--color-surface-subtle);
+  color: var(--color-ink-secondary);
+  text-decoration: line-through;
+}
+
+.timeBar {
+  width: min(320px, 100%);
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.timeBar::before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: calc(var(--left) * 100%);
+  background: var(--color-accent);
+  transition: width 1s linear;
+}
+
+.fileButton {
+  composes: btn secondary md from "../../components/ui/Button.module.css";
+  cursor: pointer;
+}
+
+.fileButton input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fileButton:focus-within {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+.fileButton[aria-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.intent {
+  font-size: var(--text-xl);
+  line-height: 1.4;
+}
+
+.transcript {
+  white-space: pre-wrap;
+  color: var(--color-ink-secondary);
+}
+
+.natural {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.chunks {
+  display: grid;
+  gap: var(--spacing-2);
+  list-style: none;
+  padding: 0;
+  margin-block: var(--spacing-3) var(--spacing-4);
+}
+
+.chunk {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  cursor: pointer;
+}
+
+.chunk:hover {
+  background: var(--color-surface-hover);
+}
+
+.chunk:has(input:checked) {
+  border-color: var(--color-ink);
+}
+
+.chunk input {
+  margin-top: 0.3em;
+  accent-color: var(--color-ink);
+}
+
+.chunkBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-1);
+}
+
+.chunkText {
+  font-size: var(--text-lg);
+  font-weight: 500;
+}
+
+.example {
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+}
+
+.pill {
+  padding: 0 var(--spacing-2);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-subtle);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink-secondary);
+}
+
+/* What you said next to what you meant: the gap between them is the lesson. */
+.compare {
+  display: grid;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-10);
+}
+
+@media (min-width: 760px) {
+  .compare:has(> :nth-child(2)) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.card .kind {
+  margin: 0;
+}
+
+.cardStrong {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-subtle);
+}
+
+.cardStrong .row {
+  margin-block: auto 0;
+}
+
+.select {
+  padding: var(--spacing-1) var(--spacing-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table th,
+.table td {
+  padding: var(--spacing-2);
+  border-bottom: 1px solid var(--color-border);
+  text-align: right;
+}
+
+.table th:first-child {
+  text-align: left;
+}
+
+@media (max-width: 560px) {
+  .table {
+    font-size: var(--text-xs);
+  }
+}
+
+.ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-block: var(--spacing-6);
+}
+
+.convo {
+  max-width: var(--max-reading);
+  margin-inline: auto;
+}
+
+.logWrap {
+  position: relative;
+  margin-top: var(--spacing-6);
+}
+
+.logWrap[data-empty] {
+  display: none;
+}
+
+.log li.logEmpty {
+  align-self: center;
+  margin: auto;
+  max-width: none;
+  color: var(--color-ink-tertiary);
+  font-size: var(--text-sm);
+}
+
+/* Wide screens: controls and the ring on the left, the chat as its own zone on the right. */
+@media (min-width: 960px) {
+  .convo {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: var(--spacing-8);
+    align-items: start;
+    max-width: none;
+  }
+
+  .logWrap,
+  .logWrap[data-empty] {
+    display: block;
+    position: sticky;
+    top: var(--spacing-6);
+    margin-top: 0;
+  }
+
+  .log {
+    height: min(75vh, 720px);
+    max-height: none;
+  }
+}
+
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  max-height: 55vh;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface-subtle);
+}
+
+.log li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  max-width: 80%;
+}
+
+.log li p {
+  margin: 0;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-lg);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.log li[data-who="partner"] {
+  align-self: flex-start;
+}
+
+.log li[data-who="partner"] p {
+  border-bottom-left-radius: var(--radius-xs);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-ink);
+}
+
+.log li[data-who="you"] {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.log li[data-who="you"] p {
+  border-bottom-right-radius: var(--radius-xs);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.jump {
+  position: absolute;
+  bottom: var(--spacing-3);
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+}
+
+.helpButton {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-ink-secondary);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.helpButton:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-ink);
+}
+
+.helpButton:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+.dialog {
+  /* The global reset zeroes margins, which un-centres a modal dialog. */
+  margin: auto;
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 64px);
+  padding: var(--spacing-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  line-height: 1.7;
+}
+
+.dialog::backdrop {
+  background: rgb(0 0 0 / 0.4);
+}
+
+.dialog h3 {
+  margin-top: var(--spacing-5);
+}
+
+.dialog p,
+.dialog .plan {
+  margin-block: var(--spacing-2);
+}
