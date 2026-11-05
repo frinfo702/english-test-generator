@@ -90,6 +90,7 @@ h6 {
 
 h1 {
   font-size: var(--text-4xl);
+  font-weight: var(--font-light);
   letter-spacing: var(--tracking-display);
 }
 h2 {
@@ -184,6 +185,16 @@ samp {
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
   color: var(--color-ink-tertiary);
+}
+
+/* Frosted panel for things you act in (command boxes, menus, the nav).
+ * Reading surfaces — passages, answer sheets — stay solid. */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
 }
 
 /* Tabular numerals for anything that counts. */

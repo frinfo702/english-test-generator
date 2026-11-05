@@ -258,6 +258,7 @@
   --text-6xl: 88px;
   --text-7xl: 112px;
 
+  --font-light: 300;
   --font-normal: 400;
   --font-medium: 500;
   --font-semibold: 600;
@@ -299,6 +300,16 @@
   --radius-2xl: 30px;
   --radius-full: 9999px;
   --radius-doc: 8px;
+  --radius-panel: 14px;
+
+  /* ---- Pond: the graph-paper canvas and frosted panels over it ---- */
+  --grid-size: 7px;
+  --grid-line: color-mix(in srgb, var(--color-ink) 5%, transparent);
+  --canvas-grid:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  --glass-bg: color-mix(in srgb, var(--color-surface) 72%, transparent);
+  --glass-blur: blur(10px);
 
   /* Document / exam surface helpers (question pages) */
   --doc-border: 1px solid var(--color-border);

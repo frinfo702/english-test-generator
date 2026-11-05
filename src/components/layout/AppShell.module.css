@@ -2,7 +2,6 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-surface);
 }
 
 /* ---- Announcement ------------------------------------------------------- */
@@ -107,10 +106,17 @@
   top: 0;
   z-index: 100;
   height: var(--header-height);
-  background: var(--color-nav);
-  border-bottom: 1px solid var(--color-nav-border);
-  backdrop-filter: saturate(1.4) blur(18px);
-  -webkit-backdrop-filter: saturate(1.4) blur(18px);
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+
+.headerScrolled {
+  background: var(--glass-bg);
+  border-bottom-color: var(--color-nav-border);
+  backdrop-filter: saturate(1.4) var(--glass-blur);
+  -webkit-backdrop-filter: saturate(1.4) var(--glass-blur);
 }
 
 .headerInner {
@@ -176,7 +182,6 @@
   gap: 2px;
   margin-left: auto;
   min-width: 0;
-  overflow-x: auto;
   scrollbar-width: none;
 }
 
@@ -234,15 +239,43 @@
   box-shadow: inset var(--focus-ring);
 }
 
+/* Hover card: what the tab is for plus its shortcut. Shows after a
+ * deliberate 1s hover, gone at once on leave. */
 .kbd {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: var(--font-medium);
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-xs);
+  font-weight: var(--font-normal);
   letter-spacing: 0;
-  color: var(--color-ink-tertiary);
-  padding: 2px 5px;
+  white-space: nowrap;
+  color: var(--color-ink-secondary);
+  padding: 5px 6px 5px 10px;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-elevated);
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.kbd kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--color-ink-tertiary);
+  padding: 1px 5px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+}
+
+.navLink:hover .kbd {
+  opacity: 1;
+  transition-delay: 1s;
 }
 
 .headerActions {
@@ -329,7 +362,10 @@
     padding: var(--spacing-8) var(--gutter) var(--spacing-16);
   }
 
+  /* Scroll only where the links can overflow; any overflow on wider screens
+     would also clip the shortcut tooltip that hangs below the header. */
   .nav {
+    overflow-x: auto;
     mask-image: linear-gradient(to right, #000 88%, transparent);
     -webkit-mask-image: linear-gradient(to right, #000 88%, transparent);
   }
@@ -376,7 +412,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .header {
+  .headerScrolled {
+    background: var(--color-nav);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }

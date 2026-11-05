@@ -3,7 +3,16 @@
  * not a tinted fill. */
 
 .container {
-  border-top: var(--rule-ink);
+  overflow: hidden;
+  border: var(--rule);
+  border-radius: var(--radius-panel);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+}
+
+.container > :last-child {
+  border-bottom: none;
 }
 
 .header {

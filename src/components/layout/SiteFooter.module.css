@@ -1,6 +1,7 @@
 .footer {
-  background: #17171c;
-  color: #ffffff;
+  border-top: var(--rule);
+  background: var(--glass-bg);
+  color: var(--color-ink);
 }
 
 .inner {
@@ -15,7 +16,7 @@
   justify-content: space-between;
   gap: var(--spacing-12);
   padding-bottom: clamp(40px, 5vw, 56px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: var(--rule);
 }
 
 .brand {
@@ -26,18 +27,19 @@
   font-family: var(--font-display);
   font-size: var(--text-xl);
   letter-spacing: -0.03em;
-  color: #ffffff;
+  font-weight: var(--font-light);
+  color: var(--color-ink);
 }
 
 .wordmark:hover {
-  color: var(--color-coral-soft);
+  color: var(--color-ink);
 }
 
 .brand p {
   margin-top: var(--spacing-3);
   font-size: var(--text-sm);
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.52);
+  color: var(--color-ink-secondary);
 }
 
 .links {
@@ -51,11 +53,11 @@
 .links a {
   font-size: var(--text-sm);
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--color-ink-secondary);
 }
 
 .links a:hover {
-  color: #ffffff;
+  color: var(--color-ink);
 }
 
 .bottom {
@@ -68,7 +70,7 @@
   font-size: 9px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.32);
+  color: var(--color-ink-tertiary);
 }
 
 @media (max-width: 760px) {

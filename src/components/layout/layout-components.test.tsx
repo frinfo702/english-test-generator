@@ -85,5 +85,8 @@ describe("layout components", () => {
 
     fireEvent.keyDown(window, { key: "d", ctrlKey: true });
     expect(screen.getByTestId("location").textContent).toBe("/dashboard");
+
+    fireEvent.keyDown(window, { key: "®", code: "KeyR", altKey: true });
+    expect(screen.getByTestId("location").textContent).toBe("/review");
   });
 });

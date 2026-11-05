@@ -1,343 +1,160 @@
-import { Link } from "react-router-dom";
-import { HomeHero } from "../components/home/HomeHero";
-import { TestLogo } from "../components/ui/TestLogo";
+import { useId, useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AsciiPond } from "../components/home/AsciiPond";
+import { TASK_NAMES } from "./trial/taskNames";
 import styles from "./HomePage.module.css";
 
-type Product = {
-  number: string;
+interface Destination {
   label: string;
-  logo?: "TOEFL" | "TOEIC";
-  title: string;
-  description: string;
-  meta: string;
+  hint: string;
   path: string;
-  tone: "stone" | "blue" | "green";
-};
+  keys?: string;
+}
 
-const products: Product[] = [
-  {
-    number: "01",
-    label: "Test prep",
-    logo: "TOEFL",
-    title: "TOEFL iBT 2026",
-    description:
-      "All four sections, twelve task types and the new adaptive reading flow — one calm workspace.",
-    meta: "Reading · Writing · Listening · Speaking",
-    path: "/toefl",
-    tone: "stone",
-  },
-  {
-    number: "02",
-    label: "Test prep",
-    logo: "TOEIC",
-    title: "TOEIC L&R",
-    description:
-      "Question-Response, conversations, talks and all three reading parts, with a record of every attempt.",
-    meta: "Parts 2–7 · Listening and reading",
-    path: "/toeic",
-    tone: "blue",
-  },
-  {
-    number: "03",
-    label: "The full run",
-    title: "Practice Test",
-    description:
-      "A timed TOEFL simulation scored on the 1–6 band scale. Sit the whole thing, or work through it section by section.",
-    meta: "Timed · Scored · Reviewable",
-    path: "/trial",
-    tone: "green",
-  },
+const HUBS: Destination[] = [
+  { label: "TOEFL iBT 2026", hint: "All four sections", path: "/toefl", keys: "reading writing listening speaking" },
+  { label: "TOEIC L&R", hint: "Parts 2–7", path: "/toeic" },
+  { label: "Practice Test", hint: "Timed TOEFL, scored 1–6", path: "/trial", keys: "mock exam trial full" },
+  { label: "Speaking Loop", hint: "Talk, see natural English, redo", path: "/speak", keys: "speaking fluency" },
+  { label: "Conversation", hint: "An AI partner that asks back", path: "/speak/talk", keys: "speaking talk chat ai" },
+  { label: "Chunk Cards", hint: "Spaced recall, out loud", path: "/speak/cards", keys: "speaking vocabulary phrases" },
+  { label: "Review", hint: "Redo what you got wrong", path: "/review", keys: "mistakes wrong" },
+  { label: "Dashboard", hint: "Scores and history", path: "/dashboard", keys: "progress" },
 ];
 
-const drills = [
-  {
-    number: "01",
-    title: "Shadowing",
-    description: "Speak along with a model voice, sentence by sentence.",
-    tag: "Speaking",
-    path: "/shadowing",
-  },
-  {
-    number: "02",
-    title: "Dictation",
-    description: "Hear a line, then rebuild it word by word.",
-    tag: "Listening",
-    path: "/dictation",
-  },
-  {
-    number: "03",
-    title: "Instant Composition",
-    description:
-      "See the Japanese, say the English before the bar runs out.",
-    tag: "Fluency",
-    path: "/instant-composition",
-  },
-  {
-    number: "04",
-    title: "Speaking Loop",
-    description:
-      "Talk at 4/3/2, get what you meant in natural English, drill the gaps by voice.",
-    tag: "Speaking",
-    path: "/speak",
-  },
-];
+const TASKS: Destination[] = Object.entries(TASK_NAMES).map(([id, label]) => {
+  const [test, section] = id.split("/");
+  const hint =
+    test === "toefl" ? `TOEFL · ${section[0].toUpperCase()}${section.slice(1)}`
+    : test === "toeic" ? `TOEIC · ${Number(id.slice(-1)) <= 4 ? "Listening" : "Reading"}`
+    : "Daily drill";
+  return { label: label!, hint, path: `/${id}` };
+});
 
-const Arrow = ({ diagonal = false }: { diagonal?: boolean }) => (
-  <span className={styles.arrow} aria-hidden="true">
-    {diagonal ? "↗" : "→"}
-  </span>
+const ALL = [...HUBS, ...TASKS];
+const STARTERS = ["/toefl", "/toeic", "/trial", "/speak", "/dictation"].map(
+  (p) => ALL.find((d) => d.path === p)!,
 );
 
+function search(query: string) {
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (!words.length) return [];
+  return ALL.filter((d) => {
+    const hay = `${d.label} ${d.hint} ${d.keys ?? ""} ${d.path}`.toLowerCase();
+    return words.every((w) => hay.includes(w));
+  }).slice(0, 6);
+}
+
+const STEPS = [
+  { title: "Pick", body: "Type a test, a section or a skill — or tap a suggestion." },
+  { title: "Answer", body: "One question at a time. Writing and speaking get AI feedback." },
+  { title: "Review", body: "Misses land in Review. Scores build up on the Dashboard." },
+];
+
 export function HomePage() {
+  const navigate = useNavigate();
+  const listId = useId();
+  const [query, setQuery] = useState("");
+  const [active, setActive] = useState(0);
+  const results = useMemo(() => search(query), [query]);
+  const open = results.length > 0;
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      if (!open) return;
+      e.preventDefault();
+      const dir = e.key === "ArrowDown" ? 1 : -1;
+      setActive((a) => (a + dir + results.length) % results.length);
+    } else if (e.key === "Enter" && open) {
+      navigate(results[active].path);
+    } else if (e.key === "Escape") {
+      setQuery("");
+    }
+  };
+
   return (
-    <div className={styles.page}>
-      <HomeHero />
+    <div>
+      <section className={styles.hero}>
+        <AsciiPond className={styles.pond} />
+        <div className={styles.halo} aria-hidden="true" />
 
-      <section className={styles.formats} aria-label="What you can practise">
-        <div className={styles.container}>
-          <p className={styles.formatsLabel}>Built for the formats that matter</p>
-          <ul className={styles.formatList}>
-            <li>TOEFL iBT 2026</li>
-            <li>TOEIC L&amp;R</li>
-            <li>AI feedback</li>
-            <li>No sign-up</li>
-            <li>Local progress</li>
-          </ul>
-        </div>
-      </section>
+        <div className={styles.center}>
+          <h1 className={styles.title}>what do you want to practise?</h1>
 
-      <section className={styles.products} aria-labelledby="products-heading">
-        <div className={styles.container}>
-          <div className={styles.sectionIntro}>
-            <p className={styles.sectionLabel}>Start here</p>
-            <h2 id="products-heading" className={styles.sectionTitle}>
-              Choose the test.
-              <br />
-              Keep the proof.
-            </h2>
-            <p className={styles.sectionCopy}>
-              Every attempt is saved locally, so you can see the shape of your
-              progress rather than guessing at it.
-            </p>
-          </div>
+          <div className={`glass ${styles.box}`}>
+            <input
+              className={styles.input}
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setActive(0);
+              }}
+              onKeyDown={onKeyDown}
+              placeholder="Try “reading”, “part 5” or “speaking”…"
+              aria-label="Find a test, section or drill"
+              role="combobox"
+              aria-expanded={open}
+              aria-controls={listId}
+              aria-autocomplete="list"
+              aria-activedescendant={open ? `${listId}-${active}` : undefined}
+              autoComplete="off"
+              spellCheck={false}
+            />
 
-          <div className={styles.productGrid}>
-            {products.map((product) => (
-              <Link
-                key={product.path}
-                to={product.path}
-                className={[styles.productCard, styles[product.tone]].join(" ")}
-              >
-                <span className={styles.productTop}>
-                  <span className={styles.productLabel}>
-                    {product.label}
-                  </span>
-                  <span className={styles.productNumber}>{product.number}</span>
-                </span>
+            {open ? (
+              <ul id={listId} role="listbox" className={styles.results}>
+                {results.map((d, i) => (
+                  <li
+                    key={d.path}
+                    id={`${listId}-${i}`}
+                    role="option"
+                    aria-selected={i === active}
+                    className={styles.result}
+                    onMouseEnter={() => setActive(i)}
+                    onMouseDown={(e) => {
+                      // Keep focus in the input until the route changes.
+                      e.preventDefault();
+                      navigate(d.path);
+                    }}
+                  >
+                    <span>{d.label}</span>
+                    <span className={styles.resultHint}>{d.hint}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className={styles.chips}>
+                {STARTERS.map((d) => (
+                  <Link key={d.path} to={d.path} className={styles.chip}>
+                    {d.label}
+                  </Link>
+                ))}
+              </div>
+            )}
 
-                <span className={styles.productLogo}>
-                  {product.logo ? (
-                    <TestLogo name={product.logo} />
-                  ) : (
-                    <span className={styles.productMark}>1–6</span>
-                  )}
+            <div className={styles.boxFoot} aria-hidden="true">
+              {query && !open ? (
+                <span>No match — try a section name like “listening”.</span>
+              ) : (
+                <span>
+                  <kbd>↑↓</kbd> choose · <kbd>↵</kbd> open
                 </span>
-
-                <span className={styles.productTitle}>{product.title}</span>
-                <span className={styles.productDescription}>
-                  {product.description}
-                </span>
-                <span className={styles.productFooter}>
-                  <span className={styles.productMeta}>{product.meta}</span>
-                  <span className={styles.productCta}>
-                    Explore <Arrow />
-                  </span>
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.darkBand} aria-labelledby="feedback-heading">
-        <div className={styles.container}>
-          <div className={styles.darkLayout}>
-            <div className={styles.darkIntro}>
-              <p className={styles.darkLabel}>
-                <span aria-hidden="true" />
-                The feedback loop
-              </p>
-              <h2 id="feedback-heading" className={styles.darkTitle}>
-                Not just more questions.
-                <br />
-                Better next questions.
-              </h2>
-              <p className={styles.darkCopy}>
-                Bring your own AI Gateway key, or copy a ready-made prompt into
-                any assistant. Either way, an answer becomes a next step — not
-                just a percentage.
-              </p>
-              <Link
-                to="/updates/ai-scoring"
-                className={styles.darkLink}
-              >
-                How scoring works <Arrow diagonal />
-              </Link>
-            </div>
-
-            <div className={styles.featureList}>
-              <Link to="/settings" className={styles.feature}>
-                <span className={styles.featureNumber}>01</span>
-                <span className={styles.featureBody}>
-                  <span className={styles.featureTitle}>
-                    Feedback where it matters
-                  </span>
-                  <span className={styles.featureCopy}>
-                    Writing and Speaking scored on language use, with concrete
-                    edits and model answers.
-                  </span>
-                </span>
-                <Arrow diagonal />
-              </Link>
-              <Link to="/toefl/speaking/listen-repeat" className={styles.feature}>
-                <span className={styles.featureNumber}>02</span>
-                <span className={styles.featureBody}>
-                  <span className={styles.featureTitle}>
-                    Hear the difference
-                  </span>
-                  <span className={styles.featureCopy}>
-                    Transcriptions sit beside the original so pronunciation and
-                    pacing are visible, not vague.
-                  </span>
-                </span>
-                <Arrow diagonal />
-              </Link>
-              <Link to="/dashboard" className={styles.feature}>
-                <span className={styles.featureNumber}>03</span>
-                <span className={styles.featureBody}>
-                  <span className={styles.featureTitle}>
-                    A record that adds up
-                  </span>
-                  <span className={styles.featureCopy}>
-                    Scores, times and trends for every task, kept in this browser
-                    and yours to export.
-                  </span>
-                </span>
-                <Arrow diagonal />
-              </Link>
+              )}
+              <span>No sign-up · progress stays in this browser</span>
             </div>
           </div>
         </div>
       </section>
 
-      <section className={styles.drills} aria-labelledby="drills-heading">
-        <div className={styles.container}>
-          <div className={styles.drillIntro}>
-            <div>
-              <p className={styles.sectionLabel}>The daily rep</p>
-              <h2 id="drills-heading" className={styles.sectionTitle}>
-                Short reps.
-                <br />
-                Long memory.
-              </h2>
-            </div>
-            <p className={styles.drillIntroCopy}>
-              Four small drills for the days when a full section is too much.
-              Ten minutes, one answer at a time.
-            </p>
+      <section className={styles.steps} aria-label="How it works">
+        {STEPS.map((s, i) => (
+          <div key={s.title} className={styles.step}>
+            <span className={styles.stepNum}>0{i + 1}</span>
+            <h2 className={styles.stepTitle}>{s.title}</h2>
+            <p className={styles.stepBody}>{s.body}</p>
           </div>
-
-          <div className={styles.drillList}>
-            {drills.map((drill) => (
-              <Link key={drill.path} to={drill.path} className={styles.drillRow}>
-                <span className={styles.drillNumber}>{drill.number}</span>
-                <span className={styles.drillTitle}>{drill.title}</span>
-                <span className={styles.drillDescription}>
-                  {drill.description}
-                </span>
-                <span className={styles.drillTag}>{drill.tag}</span>
-                <Arrow diagonal />
-              </Link>
-            ))}
-          </div>
-        </div>
+        ))}
       </section>
-
-      <section className={styles.ctaSection} aria-labelledby="cta-heading">
-        <div className={styles.container}>
-          <div className={styles.ctaCard}>
-            <div className={styles.ctaCopy}>
-              <p className={styles.ctaLabel}>Ready when you are</p>
-              <h2 id="cta-heading" className={styles.ctaTitle}>
-                Your next score starts
-                <br />
-                with one answer.
-              </h2>
-            </div>
-            <div className={styles.ctaActions}>
-              <Link to="/toefl" className={styles.ctaButton}>
-                Start practising <Arrow />
-              </Link>
-              <p>
-                No account required. Progress stays in this browser.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer className={styles.footer}>
-        <div className={styles.container}>
-          <div className={styles.footerTop}>
-            <div>
-              <p className={styles.footerLabel}>Keep going</p>
-              <p className={styles.footerStatement}>
-                Practice makes fluent.
-              </p>
-            </div>
-            <Link to="/toefl" className={styles.footerArrow} aria-label="Start practising">
-              ↗
-            </Link>
-          </div>
-
-          <div className={styles.footerGrid}>
-            <div className={styles.footerBrand}>
-              <span className={styles.footerWordmark}>
-                English Test Practice
-              </span>
-              <p>
-                A quieter place to prepare for TOEFL iBT 2026 and TOEIC L&amp;R.
-              </p>
-            </div>
-
-            <div className={styles.footerColumn}>
-              <h3>Tests</h3>
-              <Link to="/toefl">TOEFL iBT 2026</Link>
-              <Link to="/toeic">TOEIC L&amp;R</Link>
-              <Link to="/trial">Practice Test</Link>
-            </div>
-
-            <div className={styles.footerColumn}>
-              <h3>Drills</h3>
-              <Link to="/shadowing">Shadowing</Link>
-              <Link to="/dictation">Dictation</Link>
-              <Link to="/instant-composition">Instant Composition</Link>
-            </div>
-
-            <div className={styles.footerColumn}>
-              <h3>Your desk</h3>
-              <Link to="/dashboard">Dashboard</Link>
-              <Link to="/review">Review</Link>
-              <Link to="/settings">Settings</Link>
-            </div>
-          </div>
-
-          <div className={styles.footerBottom}>
-            <span>© 2026 English Test Practice</span>
-            <span>Built for practice, not for show.</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -49,7 +49,10 @@ function hideSiteFooter(pathname: string) {
 interface NavItem {
   to: string;
   label: string;
-  shortcut?: string;
+  /** One short line shown with the shortcut on a long hover. */
+  hint: string;
+  /** Letter for the ⌥ shortcut. */
+  key: string;
   icon?: React.ReactNode;
   /** Omitted on Learn: whatever no other tab claims is practice. */
   matches?: (pathname: string) => boolean;
@@ -59,21 +62,28 @@ const navItems: NavItem[] = [
   {
     to: "/",
     label: "Learn",
+    hint: "Pick a test or drill",
+    key: "L",
   },
   {
     to: "/review",
     label: "Review",
+    hint: "Redo what you missed",
+    key: "R",
     matches: (p) => p.startsWith("/review"),
   },
   {
     to: "/dashboard",
     label: "Dashboard",
-    shortcut: "⌘D",
+    hint: "Scores and history",
+    key: "D",
     matches: (p) => p === "/dashboard",
   },
   {
     to: "/settings",
     label: "Settings",
+    hint: "AI scoring and backup",
+    key: "S",
     icon: <Settings3LineIcon size={15} aria-hidden="true" />,
     matches: (p) => p.startsWith("/settings"),
   },
@@ -99,6 +109,13 @@ export function AppShell({ children }: AppShellProps) {
   const activeItem =
     navItems.find((item) => item.matches?.(location.pathname)) ?? navItems[0];
   const isHome = location.pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const showFooter = !hideSiteFooter(location.pathname);
 
   /**
@@ -140,10 +157,17 @@ export function AppShell({ children }: AppShellProps) {
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "d") {
-        e.preventDefault();
-        navigate("/dashboard");
-      }
+      // ⌥ + letter, matched on e.code because ⌥ turns e.key into "®" etc.
+      // ⌘ would collide with ⌘L/⌘R/⌘S; ⌘D stays as the original alias.
+      const item =
+        e.altKey && !e.metaKey && !e.ctrlKey
+          ? navItems.find((i) => e.code === `Key${i.key}`)
+          : (e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "d"
+            ? navItems.find((i) => i.to === "/dashboard")
+            : undefined;
+      if (!item) return;
+      e.preventDefault();
+      navigate(item.to);
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -176,7 +200,11 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         </div>
       )}
-      <header className={styles.header}>
+      <header
+        className={[styles.header, scrolled ? styles.headerScrolled : ""].join(
+          " ",
+        )}
+      >
         <div className={styles.headerInner}>
           <Link
             to="/"
@@ -213,16 +241,16 @@ export function AppShell({ children }: AppShellProps) {
                     active ? styles.navLinkActive : "",
                   ].join(" ")}
                   aria-current={active ? "page" : undefined}
+                  aria-keyshortcuts={`Alt+${item.key}`}
                 >
                   {item.icon}
                   <span className={item.icon ? styles.iconLabel : undefined}>
                     {item.label}
                   </span>
-                  {item.shortcut && (
-                    <span className={styles.kbd} aria-hidden="true">
-                      {item.shortcut}
-                    </span>
-                  )}
+                  <span className={styles.kbd} aria-hidden="true">
+                    {item.hint}
+                    <kbd>⌥{item.key}</kbd>
+                  </span>
                 </Link>
               );
             })}
