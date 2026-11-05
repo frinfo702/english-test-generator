@@ -1,0 +1,44 @@
+/// <reference types="@cloudflare/workers-types" />
+
+interface Env {
+  OPENAI_API_KEY?: string;
+}
+
+/** The client connects with whatever model the secret was minted for. */
+const MODEL = "gpt-realtime-2.1-mini";
+
+/**
+ * Browsers can't set headers on a WebSocket, so the conversation page
+ * connects to OpenAI's Realtime API with this short-lived client secret
+ * instead of the API key.
+ */
+export const onRequestPost: PagesFunction<Env> = async ({ env }) => {
+  if (!env.OPENAI_API_KEY) {
+    return Response.json(
+      { error: "Conversation mode is not configured. Set OPENAI_API_KEY." },
+      { status: 503 },
+    );
+  }
+  const response = await fetch("https://api.openai.com/v1/realtime/client_secrets", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.OPENAI_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      expires_after: { anchor: "created_at", seconds: 300 },
+      session: { type: "realtime", model: MODEL },
+    }),
+  });
+  if (!response.ok) {
+    return Response.json(
+      { error: `OpenAI token error ${response.status}` },
+      { status: 502 },
+    );
+  }
+  const body = (await response.json()) as { value?: string };
+  if (!body.value) {
+    return Response.json({ error: "OpenAI returned no token." }, { status: 502 });
+  }
+  return Response.json({ token: body.value, model: MODEL });
+};

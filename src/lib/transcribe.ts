@@ -1,11 +1,13 @@
+import type { TimedWord } from "./speakingRate";
+
 const DEFAULT_LANGUAGE = "en";
 
-export async function transcribeAudio(
+export async function transcribeWithWords(
   audio: Blob,
   url: string,
   signal?: AbortSignal,
   language: string = DEFAULT_LANGUAGE,
-): Promise<string> {
+): Promise<{ text: string; words?: TimedWord[] }> {
   const formData = new FormData();
   // Explicit English default — backend also normalizes missing/auto to "en".
   formData.append("language", language || DEFAULT_LANGUAGE);
@@ -31,6 +33,9 @@ export async function transcribeAudio(
     );
   }
 
-  const body = (await response.json()) as { text?: string };
-  return body.text ?? "";
+  const body = (await response.json()) as {
+    text?: string;
+    words?: TimedWord[];
+  };
+  return { text: body.text ?? "", words: body.words };
 }

@@ -4,13 +4,16 @@ import {
   loadPreferredMicrophoneId,
   openMicrophoneStream,
 } from "../lib/microphonePreference";
-import { transcribeAudio } from "../lib/transcribe";
+import type { TimedWord } from "../lib/speakingRate";
+import { transcribeWithWords } from "../lib/transcribe";
 
 export interface Recording {
   text: string;
   /** Kept even when transcription fails: the audio, not the text, is the answer. */
   audio: Blob | null;
   startedAt: number | null;
+  /** Word timestamps, when the transcriber returned them. */
+  words?: TimedWord[];
 }
 
 export interface UseSpeechRecognitionReturn {
@@ -31,7 +34,7 @@ export interface UseSpeechRecognitionReturn {
 }
 
 const env = typeof import.meta !== "undefined" ? import.meta.env : undefined;
-const TRANSCRIBE_API_URL =
+export const TRANSCRIBE_API_URL =
   (env?.VITE_TRANSCRIBE_API_URL as string | undefined) ?? "/api/transcribe";
 
 function isBrowserSupported(): boolean {
@@ -75,7 +78,10 @@ function getMicrophoneErrorMessage(error: unknown): string {
   return `Failed to access the microphone: ${error instanceof Error ? error.message : String(error)}`;
 }
 
-export function useSpeechRecognition(): UseSpeechRecognitionReturn {
+/** @param language "multi" lets a take mix Japanese into English. */
+export function useSpeechRecognition(
+  language = "en",
+): UseSpeechRecognitionReturn {
   const [supported] = useState(() => isBrowserSupported());
   const [recording, setRecording] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -94,6 +100,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
   const transcriptRef = useRef("");
   const audioRef = useRef<Blob | null>(null);
   const startedAtRef = useRef<number | null>(null);
+  const wordsRef = useRef<TimedWord[] | undefined>(undefined);
   /** Generation token so stale stop handlers ignore themselves. */
   const sessionIdRef = useRef(0);
 
@@ -108,6 +115,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
       text,
       audio: audioRef.current,
       startedAt: startedAtRef.current,
+      words: wordsRef.current,
     }),
     [],
   );
@@ -164,6 +172,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
       transcriptRef.current = "";
       audioRef.current = null;
       startedAtRef.current = null;
+      wordsRef.current = undefined;
       setError(null);
       setProcessing(false);
       chunksRef.current = [];
@@ -241,12 +250,14 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
             const controller = new AbortController();
             abortControllerRef.current = controller;
             try {
-              const text = await transcribeAudio(
+              const { text, words } = await transcribeWithWords(
                 blob,
                 TRANSCRIBE_API_URL,
                 controller.signal,
+                language,
               );
               if (sessionId !== sessionIdRef.current) return;
+              wordsRef.current = words;
               transcriptRef.current = text;
               setTranscript(text);
               setProcessing(false);
@@ -290,7 +301,7 @@ export function useSpeechRecognition(): UseSpeechRecognitionReturn {
     if (startPromiseRef.current === promise) {
       startPromiseRef.current = null;
     }
-  }, [supported, cleanup, resolveStop, stopMeter]);
+  }, [supported, cleanup, resolveStop, stopMeter, language]);
 
   const stop = useCallback(() => {
     return new Promise<Recording>((resolve) => {
