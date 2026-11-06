@@ -257,7 +257,7 @@ export function AppShell({ children }: AppShellProps) {
           </nav>
 
           <div className={styles.headerActions}>
-            <Link to="/toefl" className={styles.headerCta}>
+            <Link to="/practice" className={styles.headerCta}>
               Start practice
               <span aria-hidden="true">→</span>
             </Link>

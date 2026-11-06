@@ -131,7 +131,7 @@ export function TaskMenu({ sections }: TaskMenuProps) {
                     <span className={styles.title}>{item.label}</span>
                     <span className={styles.desc}>{item.desc}</span>
                   </span>
-                  {count !== undefined && (
+                  {!!count && (
                     <span className={styles.meta}>
                       {count} {count === 1 ? "question" : "questions"}
                     </span>

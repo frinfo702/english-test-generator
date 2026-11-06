@@ -10,6 +10,7 @@ import { AppShell } from "./components/layout/AppShell";
 import { HomePage } from "./pages/HomePage";
 import { ToeflMenuPage } from "./pages/toefl/ToeflMenuPage";
 import { ToeicMenuPage } from "./pages/toeic/ToeicMenuPage";
+import { PracticePage } from "./pages/PracticePage";
 import { QuestionSelectorPage } from "./components/question/QuestionSelectorPage";
 import type { ReactElement, ReactNode } from "react";
 import type { TaskId } from "./hooks/useScoreHistory";
@@ -354,6 +355,7 @@ export default function App() {
             <Route path="/speak/talk" element={<TalkPage />} />
             <Route path="/toefl" element={<ToeflMenuPage />} />
             <Route path="/toeic" element={<ToeicMenuPage />} />
+            <Route path="/practice" element={<PracticePage />} />
             <Route path="/trial" element={<TrialHomePage />} />
             <Route path="/updates/ai-scoring" element={<AiScoringPage />} />
             <Route path="/updates/introduce" element={<IntroducePage />} />
