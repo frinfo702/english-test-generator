@@ -35,8 +35,7 @@ function spawn(w: number, h: number, anywhere: boolean): Fish {
     const edge = Math.floor(Math.random() * 4);
     x = edge === 0 ? -40 : edge === 1 ? w + 40 : Math.random() * w;
     y = edge === 2 ? -40 : edge === 3 ? h + 40 : Math.random() * h;
-    heading =
-      Math.atan2(h / 2 - y, w / 2 - x) + (Math.random() - 0.5) * 1.2;
+    heading = Math.atan2(h / 2 - y, w / 2 - x) + (Math.random() - 0.5) * 1.2;
   }
   const len = SEGMENTS * gap;
   const trail = [
@@ -81,7 +80,11 @@ function step(f: Fish, tick: number) {
     const a = trail[j - 1];
     const b = trail[j];
     const l = Math.hypot(b.x - a.x, b.y - a.y);
-    while (l > 0 && spine.length < SEGMENTS && acc + l >= spine.length * f.gap) {
+    while (
+      l > 0 &&
+      spine.length < SEGMENTS &&
+      acc + l >= spine.length * f.gap
+    ) {
       const u = (spine.length * f.gap - acc) / l;
       spine.push({ x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u });
     }
@@ -130,9 +133,11 @@ function rasterize(f: Fish, cells: Map<number, number>, cols: number) {
     }
     // Pectoral fins and the tail fork: short strokes swept back at 45°.
     const fin =
-      i === Math.round(n * 0.28) ? f.width * 1.8
-      : i === n - 1 ? f.width * 1.4
-      : 0;
+      i === Math.round(n * 0.28)
+        ? f.width * 1.8
+        : i === n - 1
+          ? f.width * 1.4
+          : 0;
     if (fin) {
       for (const side of [-1, 1]) {
         const dir = back + (side * Math.PI) / 4;
@@ -174,6 +179,7 @@ export function AsciiPond({ className }: { className?: string }) {
       if (m) ink = m.slice(0, 3).join(",");
     };
     resize();
+    readInk();
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
