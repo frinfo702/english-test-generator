@@ -18,6 +18,22 @@
   fill: #000;
 }
 
+.xai {
+  width: 16px;
+  height: 16px;
+  fill: #000;
+}
+
+.azure {
+  width: 17px;
+  height: 17px;
+  fill: #0078d4;
+}
+
+:global([data-theme="dark"]) .xai {
+  fill: #fff;
+}
+
 :global([data-theme="dark"]) .anthropic {
   fill: #faf9f5;
 }

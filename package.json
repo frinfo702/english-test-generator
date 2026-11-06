@@ -16,7 +16,8 @@
     "check-voices": "tsx scripts/check-voices.ts",
     "compare-jev": "tsx scripts/compare-jev.ts",
     "pages:dev": "wrangler pages dev dist --compatibility-date=2026-06-13",
-    "pages:deploy": "wrangler pages deploy dist"
+    "pages:deploy": "wrangler pages deploy dist",
+    "issue-access-code": "tsx scripts/issue-access-code.ts"
   },
   "dependencies": {
     "@ricky0123/vad-web": "^0.0.31",

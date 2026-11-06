@@ -35,7 +35,7 @@ describe("SettingsPage", () => {
     const headings = screen
       .getAllByRole("heading", { level: 2 })
       .map((h) => h.textContent);
-    expect(headings.slice(0, 2)).toEqual(["AI scoring", "Data"]);
+    expect(headings).toEqual(["AI scoring", "Speech keys", "Premium", "Data"]);
     const data = screen.getByRole("region", { name: "Data" });
     expect(within(data).getByRole("button", { name: /Export/ })).toBeTruthy();
     expect(within(data).getByRole("button", { name: /Import/ })).toBeTruthy();
@@ -69,7 +69,12 @@ describe("SettingsPage", () => {
     fireEvent.change(screen.getByLabelText("AI Gateway API key"), {
       target: { value: "vck_good" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    fireEvent.click(
+      within(screen.getByRole("region", { name: "AI scoring" })).getByRole(
+        "button",
+        { name: "Save" },
+      ),
+    );
 
     expect(
       await screen.findByText("Key works · $4.80 credit left."),
@@ -102,7 +107,12 @@ describe("SettingsPage", () => {
     fireEvent.change(screen.getByLabelText("AI Gateway API key"), {
       target: { value: "vck_bad" },
     });
-    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    fireEvent.click(
+      within(screen.getByRole("region", { name: "AI scoring" })).getByRole(
+        "button",
+        { name: "Save" },
+      ),
+    );
 
     expect(
       await screen.findByText("AI Gateway rejected the key."),
@@ -120,5 +130,38 @@ describe("SettingsPage", () => {
     });
     fireEvent.click(screen.getByRole("button", { name: "Use" }));
     expect(loadScoringSettings().model).toBe("openai/gpt-5.6-luna");
+  });
+
+  it("saves an early access code only after the server accepts it", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(json({ error: "no" }, 401))
+      .mockResolvedValueOnce(json({ ok: true }));
+    vi.stubGlobal("fetch", fetchMock);
+    renderPage();
+    const premium = screen.getByRole("region", { name: "Premium" });
+    expect(
+      within(premium).getByRole("button", { name: "Coming soon" }),
+    ).toHaveProperty("disabled", true);
+
+    const redeem = (code: string) => {
+      fireEvent.change(within(premium).getByLabelText("Early access code"), {
+        target: { value: code },
+      });
+      fireEvent.click(within(premium).getByRole("button", { name: "Redeem" }));
+    };
+    redeem("EA-NOPE-0000");
+    expect(
+      await within(premium).findByText("That code isn't valid."),
+    ).toBeTruthy();
+    expect(localStorage.getItem("early-access-code")).toBeNull();
+
+    redeem("EA-GOOD-1234");
+    await waitFor(() =>
+      expect(localStorage.getItem("early-access-code")).toBe("EA-GOOD-1234"),
+    );
+    expect(fetchMock.mock.calls[1][1].headers).toEqual({
+      "X-Access-Code": "EA-GOOD-1234",
+    });
   });
 });

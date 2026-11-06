@@ -1,3 +1,4 @@
+import { apiHeaders } from "./apiKeys";
 import {
   mergeAssessments,
   parseAzureAssessment,
@@ -9,7 +10,10 @@ const SPEECH_TOKEN_API_URL =
   (env?.VITE_SPEECH_TOKEN_API_URL as string | undefined) ?? "/api/speech-token";
 
 async function fetchSpeechToken(): Promise<{ token: string; region: string }> {
-  const response = await fetch(SPEECH_TOKEN_API_URL, { method: "POST" });
+  const response = await fetch(SPEECH_TOKEN_API_URL, {
+    method: "POST",
+    headers: apiHeaders("azure"),
+  });
   const body = (await response.json().catch(() => ({}))) as {
     token?: string;
     region?: string;

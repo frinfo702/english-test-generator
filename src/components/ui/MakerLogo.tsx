@@ -5,7 +5,9 @@ import styles from "./MakerLogo.module.css";
  * - Anthropic symbol: anthropic.com/press-kit (Slate on light, Ivory on dark).
  * - OpenAI Blossom (monoblossom): cdn.openai.com/brand/OpenAI-Logos-2025.zip
  *   (black on light, white on dark; no other colours, keep its open space).
- * Shown only beside the maker's own model, smaller than the app's branding.
+ * - xAI and Azure: monochrome marks from @lobehub/icons (MIT), Azure in its
+ *   brand blue.
+ * Shown only beside the maker's own model or key, smaller than the app's branding.
  */
 
 function AnthropicSymbol() {
@@ -35,6 +37,50 @@ function OpenAiBlossom() {
   );
 }
 
-export function MakerLogo({ maker }: { maker: "anthropic" | "openai" }) {
-  return maker === "anthropic" ? <AnthropicSymbol /> : <OpenAiBlossom />;
+function XaiMark() {
+  return (
+    <svg
+      className={[styles.logo, styles.xai].join(" ")}
+      viewBox="0 0 24 24"
+      fillRule="evenodd"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M6.469 8.776L16.512 23h-4.464L2.005 8.776H6.47zm-.004 7.9l2.233 3.164L6.467 23H2l4.465-6.324zM22 2.582V23h-3.659V7.764L22 2.582zM22 1l-9.952 14.095-2.233-3.163L17.533 1H22z" />
+    </svg>
+  );
+}
+
+function AzureMark() {
+  return (
+    <svg
+      className={[styles.logo, styles.azure].join(" ")}
+      viewBox="0 0 24 24"
+      fillRule="evenodd"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M18.397 15.296H7.4a.51.51 0 00-.347.882l7.066 6.595c.206.192.477.298.758.298h6.226l-2.706-7.775z"
+        fillOpacity=".75"
+      />
+      <path
+        d="M8.295.857c-.477 0-.9.304-1.053.756L.495 21.605a1.11 1.11 0 001.052 1.466h5.43c.477 0 .9-.304 1.053-.755l1.341-3.975-2.318-2.163a.51.51 0 01.347-.882h3L15.271.857H8.295z"
+        fillOpacity=".5"
+      />
+      <path d="M17.193 1.613a1.11 1.11 0 00-1.052-.756h-7.81.035c.477 0 .9.304 1.052.756l6.748 19.992a1.11 1.11 0 01-1.052 1.466h-.12 7.895a1.11 1.11 0 001.052-1.466L17.193 1.613z" />
+    </svg>
+  );
+}
+
+const MARKS = {
+  anthropic: AnthropicSymbol,
+  openai: OpenAiBlossom,
+  xai: XaiMark,
+  azure: AzureMark,
+};
+
+export function MakerLogo({ maker }: { maker: keyof typeof MARKS }) {
+  const Mark = MARKS[maker];
+  return <Mark />;
 }

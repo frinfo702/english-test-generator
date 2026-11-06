@@ -1,6 +1,9 @@
 /// <reference types="@cloudflare/workers-types" />
 
-interface Env {
+import { NEEDS_KEY_MESSAGE, type AccessEnv } from "../../src/lib/accessCode";
+import { azureCredentials } from "../../src/lib/azureCredentials";
+
+interface Env extends AccessEnv {
   AZURE_SPEECH_KEY?: string;
   AZURE_SPEECH_REGION?: string;
 }
@@ -10,21 +13,19 @@ interface Env {
  * so the browser talks to Azure directly with this 10-minute token instead of
  * the resource key.
  */
-export const onRequestPost: PagesFunction<Env> = async ({ env }) => {
-  if (!env.AZURE_SPEECH_KEY || !env.AZURE_SPEECH_REGION) {
+export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+  const azure = await azureCredentials(request, env);
+  if (!azure) {
     return Response.json(
-      {
-        error:
-          "Pronunciation scoring is not configured. Set AZURE_SPEECH_KEY and AZURE_SPEECH_REGION.",
-      },
-      { status: 503 },
+      { error: NEEDS_KEY_MESSAGE("Azure Speech") },
+      { status: 402 },
     );
   }
   const response = await fetch(
-    `https://${env.AZURE_SPEECH_REGION}.api.cognitive.microsoft.com/sts/v1.0/issueToken`,
+    `https://${azure.region}.api.cognitive.microsoft.com/sts/v1.0/issueToken`,
     {
       method: "POST",
-      headers: { "Ocp-Apim-Subscription-Key": env.AZURE_SPEECH_KEY },
+      headers: { "Ocp-Apim-Subscription-Key": azure.key },
     },
   );
   if (!response.ok) {
@@ -35,6 +36,6 @@ export const onRequestPost: PagesFunction<Env> = async ({ env }) => {
   }
   return Response.json({
     token: await response.text(),
-    region: env.AZURE_SPEECH_REGION,
+    region: azure.region,
   });
 };

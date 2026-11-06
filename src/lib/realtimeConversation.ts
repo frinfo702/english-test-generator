@@ -3,6 +3,7 @@
  * 24 kHz PCM, the partner's voice streams back, and both sides' transcripts
  * build a log that the speaking loop analyzes afterwards.
  */
+import { apiHeaders } from "./apiKeys";
 import {
   loadPreferredMicrophoneId,
   openMicrophoneStream,
@@ -112,7 +113,10 @@ export async function startConversation(
     speaking: (partnerIsSpeaking: boolean) => void;
   },
 ): Promise<Conversation> {
-  const res = await fetch("/api/realtime-token", { method: "POST" });
+  const res = await fetch("/api/realtime-token", {
+    method: "POST",
+    headers: apiHeaders("openai"),
+  });
   const body = (await res.json().catch(() => ({}))) as {
     token?: string;
     model?: string;

@@ -17,6 +17,12 @@ import {
   saveScoringMode,
   type ScoringMode,
 } from "../../lib/aiGateway";
+import {
+  checkAccessCode,
+  loadKey,
+  saveKey,
+  type KeyName,
+} from "../../lib/apiKeys";
 import { exportBackup, importBackup } from "../../lib/attempts";
 import dialogStyles from "../../components/layout/LegacyHistoryNotice.module.css";
 import styles from "./SettingsPage.module.css";
@@ -64,14 +70,19 @@ function EyeIcon({ open }: { open: boolean }) {
 /** One labelled setting in its own frosted panel. */
 function Row({
   label,
+  icon,
   children,
 }: {
   label: string;
+  icon?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <div className={styles.row}>
-      <h3 className={styles.rowLabel}>{label}</h3>
+      <h3 className={styles.rowLabel}>
+        {icon}
+        {label}
+      </h3>
       <div className={styles.rowBody}>{children}</div>
     </div>
   );
@@ -348,6 +359,193 @@ function AiScoringSection() {
   );
 }
 
+/**
+ * One stored value: paste and save, or see it masked and remove it. `verify`
+ * runs before saving and returns an error message to refuse the value.
+ */
+function StoredValue({
+  name,
+  label,
+  placeholder,
+  secret = true,
+  saveLabel = "Save",
+  verify,
+}: {
+  name: KeyName;
+  label: string;
+  placeholder: string;
+  secret?: boolean;
+  saveLabel?: string;
+  verify?: (value: string) => Promise<string | null>;
+}) {
+  const [saved, setSaved] = useState(() => loadKey(name));
+  const [draft, setDraft] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const save = async () => {
+    const value = draft.trim();
+    if (!value) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const problem = verify ? await verify(value) : null;
+      if (problem) return setError(problem);
+      saveKey(name, value);
+      setSaved(value);
+      setDraft("");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  if (saved)
+    return (
+      <div className={styles.saved}>
+        <span className={styles.savedKey}>
+          {secret ? maskKey(saved) : saved}
+        </span>
+        <Button
+          size="sm"
+          variant="ghost"
+          aria-label={`Remove ${label}`}
+          onClick={() => {
+            saveKey(name, null);
+            setSaved(null);
+          }}
+        >
+          Remove
+        </Button>
+      </div>
+    );
+
+  return (
+    <>
+      <form
+        className={styles.inline}
+        onSubmit={(e) => {
+          e.preventDefault();
+          void save();
+        }}
+      >
+        <label className={styles.fill}>
+          <span className="sr-only">{label}</span>
+          <input
+            type={secret ? "password" : "text"}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            placeholder={placeholder}
+            autoComplete="off"
+            spellCheck={false}
+            className={styles.input}
+          />
+        </label>
+        <Button
+          size="sm"
+          type="submit"
+          variant={draft.trim() ? "primary" : "secondary"}
+          disabled={!draft.trim() || busy}
+        >
+          {saveLabel}
+        </Button>
+      </form>
+      {error && (
+        <p className={styles.check} aria-live="polite">
+          <span className={styles.checkError}>{error}</span>
+        </p>
+      )}
+    </>
+  );
+}
+
+function SpeechKeysSection() {
+  return (
+    <section
+      id="speech-keys"
+      className={styles.section}
+      aria-labelledby="speech-title"
+    >
+      <header className={styles.sectionHead}>
+        <h2 id="speech-title" className={styles.sectionTitle}>
+          Speech keys
+        </h2>
+      </header>
+      <p className={styles.lede}>
+        Speaking features run on your own provider keys, billed to you. Each key
+        stays in this browser and passes through our server to its provider on
+        each request; nothing is stored or logged.
+      </p>
+      <Row label="xAI (Grok)" icon={<MakerLogo maker="xai" />}>
+        <StoredValue name="xai" label="xAI API key" placeholder="xai-…" />
+        <p className={styles.hint}>
+          Transcribes Listen and Repeat, Interview and Speaking Loop answers.{" "}
+          <a href="https://console.x.ai" target="_blank" rel="noreferrer">
+            Create a key ↗
+          </a>
+        </p>
+      </Row>
+      <Row label="Azure Speech" icon={<MakerLogo maker="azure" />}>
+        <StoredValue
+          name="azureKey"
+          label="Azure Speech key"
+          placeholder="Resource key"
+        />
+        <StoredValue
+          name="azureRegion"
+          label="Azure Speech region"
+          placeholder="Region, e.g. eastus"
+          secret={false}
+        />
+        <p className={styles.hint}>Pronunciation scores. Needs both.</p>
+      </Row>
+      <Row label="OpenAI" icon={<MakerLogo maker="openai" />}>
+        <StoredValue name="openai" label="OpenAI API key" placeholder="sk-…" />
+        <p className={styles.hint}>The live conversation partner.</p>
+      </Row>
+    </section>
+  );
+}
+
+function PremiumSection() {
+  return (
+    <section
+      id="premium"
+      className={styles.section}
+      aria-labelledby="premium-title"
+    >
+      <header className={styles.sectionHead}>
+        <h2 id="premium-title" className={styles.sectionTitle}>
+          Premium
+        </h2>
+      </header>
+      <p className={styles.lede}>
+        $10 a month: every speaking feature works without keys of your own.
+      </p>
+      <Row label="Plan">
+        <Button size="sm" variant="secondary" disabled>
+          Coming soon
+        </Button>
+      </Row>
+      <Row label="Early access">
+        <StoredValue
+          name="accessCode"
+          label="Early access code"
+          placeholder="EA-…"
+          saveLabel="Redeem"
+          verify={async (code) =>
+            (await checkAccessCode(code)) ? null : "That code isn't valid."
+          }
+        />
+        <p className={styles.hint}>
+          Have a code? Redeem it to use everything free during early access.
+        </p>
+      </Row>
+    </section>
+  );
+}
+
 function DataSection() {
   const [includeAudio, setIncludeAudio] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -481,12 +679,17 @@ export function SettingsPage() {
         backTo="/"
       />
       <AiScoringSection />
+      <SpeechKeysSection />
+      <PremiumSection />
       <DataSection />
       <p className={styles.legal}>
         Vercel, the Vercel logo and AI Gateway are trademarks of Vercel, Inc.
         Anthropic, Claude and the Anthropic logo are trademarks of Anthropic,
         PBC. OpenAI, ChatGPT, GPT and the OpenAI logo are trademarks of OpenAI.
-        Logos identify each maker&rsquo;s models only and imply no endorsement.
+        xAI, Grok and the xAI logo are trademarks of X.AI Corp. Microsoft, Azure
+        and the Azure logo are trademarks of Microsoft Corporation. Logos
+        identify each maker&rsquo;s models and keys only and imply no
+        endorsement.
       </p>
     </div>
   );

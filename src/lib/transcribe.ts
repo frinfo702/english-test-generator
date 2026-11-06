@@ -1,3 +1,4 @@
+import { apiHeaders } from "./apiKeys";
 import type { TimedWord } from "./speakingRate";
 
 const DEFAULT_LANGUAGE = "en";
@@ -20,6 +21,7 @@ export async function transcribeWithWords(
 
   const response = await fetch(url, {
     method: "POST",
+    headers: apiHeaders("xai"),
     body: formData,
     signal,
   });

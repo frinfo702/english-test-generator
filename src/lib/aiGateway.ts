@@ -46,7 +46,7 @@ export const RECOMMENDED_MODELS: GatewayModel[] = [
 
 export const DEFAULT_MODEL = "anthropic/claude-haiku-5.5";
 
-function read(key: string): string | null {
+export function read(key: string): string | null {
   try {
     return localStorage.getItem(key);
   } catch {
@@ -54,7 +54,7 @@ function read(key: string): string | null {
   }
 }
 
-function write(key: string, value: string | null): void {
+export function write(key: string, value: string | null): void {
   try {
     if (value === null) localStorage.removeItem(key);
     else localStorage.setItem(key, value);

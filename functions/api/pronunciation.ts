@@ -1,8 +1,14 @@
 /// <reference types="@cloudflare/workers-types" />
 
+import {
+  CORS_ALLOW_HEADERS,
+  NEEDS_KEY_MESSAGE,
+  type AccessEnv,
+} from "../../src/lib/accessCode";
+import { azureCredentials } from "../../src/lib/azureCredentials";
 import { parseAzureAssessment } from "../../src/lib/pronunciation";
 
-interface Env {
+interface Env extends AccessEnv {
   AZURE_SPEECH_KEY?: string;
   AZURE_SPEECH_REGION?: string;
 }
@@ -15,7 +21,7 @@ function corsHeaders(): Record<string, string> {
   return {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": CORS_ALLOW_HEADERS,
   };
 }
 
@@ -32,12 +38,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const fail = (error: string, status: number) =>
     Response.json({ error }, { status, headers: corsHeaders() });
 
-  if (!env.AZURE_SPEECH_KEY || !env.AZURE_SPEECH_REGION) {
-    return fail(
-      "Pronunciation scoring is not configured. Set AZURE_SPEECH_KEY and AZURE_SPEECH_REGION.",
-      503,
-    );
-  }
+  const azure = await azureCredentials(request, env);
+  if (!azure) return fail(NEEDS_KEY_MESSAGE("Azure Speech"), 402);
 
   const formData = await request.formData();
   const audio = formData.get("audio");
@@ -63,11 +65,11 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   try {
     const response = await fetch(
-      `https://${env.AZURE_SPEECH_REGION}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed`,
+      `https://${azure.region}.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed`,
       {
         method: "POST",
         headers: {
-          "Ocp-Apim-Subscription-Key": env.AZURE_SPEECH_KEY,
+          "Ocp-Apim-Subscription-Key": azure.key,
           "Content-Type": "audio/wav; codecs=audio/pcm; samplerate=16000",
           Accept: "application/json",
           "Pronunciation-Assessment": base64Utf8(JSON.stringify(params)),

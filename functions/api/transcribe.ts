@@ -1,10 +1,23 @@
 /// <reference types="@cloudflare/workers-types" />
 
+import {
+  CORS_ALLOW_HEADERS,
+  hasPremium,
+  NEEDS_KEY_MESSAGE,
+  USER_KEY_HEADERS,
+  type AccessEnv,
+} from "../../src/lib/accessCode";
 import { isPredominantlyJapaneseScript } from "../../src/lib/transcriptionLanguage";
 
-interface Env {
+interface Env extends AccessEnv {
   XAI_API_KEY?: string;
   AI?: Ai;
+}
+
+/** What this request may use: the user's own key, or ours with early access. */
+interface Providers {
+  xaiKey?: string;
+  ai?: Ai;
 }
 
 interface TimedWord {
@@ -45,7 +58,7 @@ function corsHeaders(): Record<string, string> {
   return {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": CORS_ALLOW_HEADERS,
   };
 }
 
@@ -134,14 +147,10 @@ async function transcribeWithWhisper(
 async function transcribeAudio(
   audio: Blob,
   language: string,
-  env: Env,
+  { xaiKey, ai }: Providers,
 ): Promise<TranscriptionResponse> {
-  const whisper = env.AI
-    ? () => transcribeWithWhisper(audio, env.AI!, language)
-    : null;
-  const xai = env.XAI_API_KEY
-    ? () => transcribeWithXai(audio, env.XAI_API_KEY!, language)
-    : null;
+  const whisper = ai ? () => transcribeWithWhisper(audio, ai, language) : null;
+  const xai = xaiKey ? () => transcribeWithXai(audio, xaiKey, language) : null;
 
   if (!whisper && !xai) {
     throw new Error(
@@ -176,6 +185,21 @@ async function transcribeAudio(
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
+    const { request, env } = context;
+    const userKey = request.headers.get(USER_KEY_HEADERS.xai)?.trim();
+    // Whisper runs on our Workers AI account, so a user's own key gets xAI only.
+    const providers: Providers = userKey
+      ? { xaiKey: userKey }
+      : (await hasPremium(request, env))
+        ? { xaiKey: env.XAI_API_KEY, ai: env.AI }
+        : {};
+    if (!providers.xaiKey && !providers.ai) {
+      return Response.json(
+        { error: NEEDS_KEY_MESSAGE("xAI (Grok)") },
+        { status: 402, headers: corsHeaders() },
+      );
+    }
+
     const contentLength = Number(
       context.request.headers.get("Content-Length") ?? "0",
     );
@@ -203,7 +227,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       );
     }
 
-    const result = await transcribeAudio(audio, language, context.env);
+    const result = await transcribeAudio(audio, language, providers);
     return Response.json(result, { headers: corsHeaders() });
   } catch (error) {
     const message =

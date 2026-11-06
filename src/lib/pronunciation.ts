@@ -1,3 +1,4 @@
+import { apiHeaders } from "./apiKeys";
 import type { TimedWord } from "./speakingRate";
 
 export interface AssessedWord extends TimedWord {
@@ -118,6 +119,7 @@ export async function assessPronunciation(
   formData.append("audio", wav, "recording.wav");
   const response = await fetch(PRONUNCIATION_API_URL, {
     method: "POST",
+    headers: apiHeaders("azure"),
     body: formData,
   });
   const body = (await response.json().catch(() => ({}))) as
