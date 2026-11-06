@@ -9,7 +9,6 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
-import { PixelHamster } from "../components/pixel/PixelHamster";
 import { StreakCalendar } from "../components/ui/StreakCalendar";
 import {
   useScoreHistory,
@@ -129,7 +128,7 @@ interface TaskRowProps {
 function TaskRow({ taskId, entries, focus }: TaskRowProps) {
   // The chart bundle only loads once a row is opened.
   const [open, setOpen] = useState(false);
-  const hue = TASK_HUES[taskId] ?? "--color-accent";
+  const hue = TASK_HUES[taskId] ?? "--color-ink";
   const latest = entries[entries.length - 1];
   const best = Math.max(...entries.map((e) => e.pct));
   const avg = average(entries.map((e) => e.pct));
@@ -342,9 +341,7 @@ export function DashboardPage() {
         </div>
       </div>
 
-      <div className={styles.streakPerch}>
-        <PixelHamster variant="pearl" className={styles.pearlHamster} />
-        <PixelHamster className={styles.hamster} />
+      <div className={styles.streak}>
         <StreakCalendar dates={sessionDates} />
       </div>
 

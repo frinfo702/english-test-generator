@@ -59,7 +59,7 @@ const SECTIONS: {
       <p>
         More question sets for every task, added a few at a time. The score
         estimate gets sharper with each practice test you take. When something
-        new lands, the hamster in the corner will tell you.
+        new lands, the updates chip in the corner will tell you.
       </p>
     ),
   },
@@ -136,11 +136,6 @@ export function IntroducePage() {
           <Link to="/trial" className={styles.secondary}>
             Take a practice test
           </Link>
-        </div>
-        <div className={styles.footBars} aria-hidden="true">
-          {BARS.map((c) => (
-            <span key={c} style={{ background: c }} />
-          ))}
         </div>
       </footer>
     </article>

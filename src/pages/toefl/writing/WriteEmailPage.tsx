@@ -26,7 +26,6 @@ import { autoScoring } from "../../../lib/aiGateway";
 import { scoreInBackground } from "../../../lib/backgroundScoring";
 import { putAttempts, saveAttempt, type Attempt } from "../../../lib/attempts";
 import { questionIdFromFile } from "../../../lib/questions";
-import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./WriteEmailPage.module.css";
 import task from "./WritingTask.module.css";
@@ -253,17 +252,15 @@ export function WriteEmailPage() {
               </div>
 
               <>
-                <PoodlePerch>
-                  <textarea
-                    className={task.textarea}
-                    value={userText}
-                    onChange={(e) => setUserText(e.target.value)}
-                    placeholder="Type your email here..."
-                    disabled={phase === "submitted"}
-                    rows={14}
-                    aria-label="Your email"
-                  />
-                </PoodlePerch>
+                <textarea
+                  className={task.textarea}
+                  value={userText}
+                  onChange={(e) => setUserText(e.target.value)}
+                  placeholder="Type your email here..."
+                  disabled={phase === "submitted"}
+                  rows={14}
+                  aria-label="Your email"
+                />
                 <p className={task.wordCount}>
                   Word count:{" "}
                   {userText.trim().split(/\s+/).filter(Boolean).length}

@@ -4,7 +4,6 @@ import { SectionHeader } from "../components/layout/SectionHeader";
 import { Button } from "../components/ui/Button";
 import { LoadingSpinner } from "../components/ui/LoadingSpinner";
 import { NextQuestionButton } from "../components/question/NextQuestionButton";
-import { PixelIcon } from "../components/pixel/PixelIcon";
 import { useTts } from "../hooks/useTts";
 import { useQuestion } from "../hooks/useQuestion";
 import { useScoreHistory } from "../hooks/useScoreHistory";
@@ -183,7 +182,6 @@ function DrillContent({ data, file }: { data: ProblemData; file: string }) {
     return (
       <div className={`${styles.sheet} ${styles.summary}`}>
         <div className={styles.summaryHead}>
-          <PixelIcon name="microphone" className={styles.summaryIcon} />
           <div>
             <p className="doc-eyebrow">First-pass score</p>
             <p className="doc-score">

@@ -4,7 +4,6 @@ import { SectionHeader } from "../../components/layout/SectionHeader";
 import { Button } from "../../components/ui/Button";
 import { CardStack } from "../../components/ui/CardStack";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
-import { ProgressBar } from "../../components/ui/ProgressBar";
 import { HeaderClock } from "../../components/ui/HeaderClock";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
@@ -13,6 +12,7 @@ import { useTts } from "../../hooks/useTts";
 import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part2Page.module.css";
 import { PixelCheckIcon } from "../../components/ui/PixelCheckIcon";
+import { ResultSummary } from "../../components/question/ResultSummary";
 
 interface QRQuestion {
   id: string;
@@ -212,27 +212,18 @@ export function Part2Page() {
         <>
           {graded && (
             <>
-              <div className={styles.resultCard}>
-                <h2>Part 2 Complete</h2>
-                <div className={styles.scoreBox}>
-                  <span className={styles.scoreNum}>{totalCorrect}</span>
-                  <span className={styles.scoreDen}>/{totalQuestions}</span>
-                  <span className={styles.scorePct}>
-                    ({Math.round((totalCorrect / totalQuestions) * 100)}%)
-                  </span>
-                </div>
-                <ProgressBar
-                  current={totalCorrect}
-                  total={totalQuestions}
-                  label="Accuracy"
-                />
-                <div className={styles.resultActions}>
-                  <Button onClick={retake} size="md" variant="secondary">
-                    Retake
-                  </Button>
-                  <NextQuestionButton taskId={TASK_ID} size="md" />
-                </div>
-              </div>
+              <ResultSummary
+                correct={totalCorrect}
+                total={totalQuestions}
+                actions={
+                  <>
+                    <Button onClick={retake} variant="secondary">
+                      Retake
+                    </Button>
+                    <NextQuestionButton taskId={TASK_ID} />
+                  </>
+                }
+              />
 
               {questions.map((q, qIndex) => {
                 const sel = selected[q.id];

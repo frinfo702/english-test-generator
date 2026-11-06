@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PixelArt } from "../../components/pixel/PixelArt";
+import { SectionHeader } from "../../components/layout/SectionHeader";
 import { Button } from "../../components/ui/Button";
 import { getAllAttempts, saveAttempt, type Attempt } from "../../lib/attempts";
 import {
@@ -61,7 +62,7 @@ function PixelRadio({ on }: { on: boolean }) {
   return (
     <PixelArt
       layers={on ? [RADIO_RING, RADIO_DOT] : [RADIO_RING]}
-      palette={{ x: "currentColor", d: "var(--color-accent)" }}
+      palette={{ x: "currentColor", d: "var(--color-ink)" }}
       width={12}
       height={12}
       className={styles.modeRadio}
@@ -100,20 +101,21 @@ export function TrialHomePage() {
 
   return (
     <div>
-      <header className={styles.homeHeader}>
-        <title>Practice Test · English Test Practice</title>
-        <h1 className={styles.homeTitle}>Practice Test</h1>
-        <p className={styles.lede}>
-          A timed TOEFL iBT run with answers hidden until the end, scored on the
-          1–6 band scale.
-        </p>
-      </header>
+      <SectionHeader
+        title="Practice Test"
+        subtitle="A timed TOEFL iBT run with answers hidden until the end, scored on the 1–6 band scale."
+        backTo="/"
+      />
 
       <section aria-labelledby="choose-test" className={styles.block}>
-        <h2 id="choose-test" className={styles.blockHeading}>
+        <h2 id="choose-test" className={`micro-label ${styles.pickHeading}`}>
           Choose a test
         </h2>
-        <div role="radiogroup" aria-labelledby="choose-test">
+        <div
+          role="radiogroup"
+          aria-labelledby="choose-test"
+          className={`glass ${styles.modeList}`}
+        >
           {MODES.map((m) => (
             <button
               key={m.mode}

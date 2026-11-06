@@ -3,7 +3,7 @@
 .homeTitle {
   font-family: var(--font-display);
   font-size: var(--text-4xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   line-height: var(--lh-tight);
   letter-spacing: var(--tracking-tighter);
   color: var(--color-ink);
@@ -52,7 +52,7 @@
 .subheading {
   font-family: var(--font-display);
   font-size: var(--text-lg);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-normal);
   color: var(--color-ink);
   margin: var(--spacing-6) 0 var(--spacing-2);
 }
@@ -64,7 +64,7 @@
   gap: var(--spacing-3);
   padding-bottom: var(--spacing-3);
   margin-bottom: var(--spacing-5);
-  border-bottom: var(--rule-ink);
+  border-bottom: var(--rule);
 }
 
 .columnHeading {
@@ -79,17 +79,12 @@
 .panel {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--rule-ink);
-  border-radius: 0;
+  border-radius: var(--radius-panel);
   padding: var(--spacing-6);
   box-shadow: var(--shadow-xs);
 }
 
 /* ---- Start screen ---- */
-
-.homeHeader {
-  margin-bottom: var(--spacing-8);
-}
 
 .homeTitle + .lede {
   margin-top: var(--spacing-2);
@@ -110,17 +105,10 @@
 .resultTitle {
   font-family: var(--font-display);
   font-size: var(--text-lg);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-normal);
   letter-spacing: -0.015em;
   color: var(--color-ink);
   margin: 0 0 var(--spacing-3);
-}
-
-.resultDate {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  color: var(--color-ink-tertiary);
-  margin: var(--spacing-1) 0 0;
 }
 
 .bandTable {
@@ -144,14 +132,14 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-lg);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-normal);
   font-variant-numeric: tabular-nums;
   color: var(--color-ink);
 }
 
 .bandTotal {
   border-bottom: none;
-  border-top: 1px solid var(--color-ink);
+  border-top: var(--rule);
   padding-top: var(--spacing-3);
 }
 
@@ -184,7 +172,7 @@
   color: var(--color-ink);
   margin: 0;
   padding-bottom: var(--spacing-3);
-  border-bottom: var(--rule-ink);
+  border-bottom: var(--rule);
 }
 
 .modeRow {
@@ -209,8 +197,20 @@
 }
 
 .modeRowOn {
-  background: var(--color-surface);
-  box-shadow: inset 2px 0 0 var(--color-signal);
+  background: var(--color-surface-hover);
+  box-shadow: inset 2px 0 0 var(--color-ink);
+}
+
+.pickHeading {
+  margin-bottom: var(--spacing-3);
+}
+
+.modeList {
+  overflow: hidden;
+}
+
+.modeList > :last-child {
+  border-bottom: none;
 }
 
 .modeRadio {
@@ -229,7 +229,7 @@
 .modeName {
   font-family: var(--font-display);
   font-size: var(--text-lg);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-normal);
   letter-spacing: -0.015em;
 }
 
@@ -291,35 +291,8 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--spacing-8);
   align-items: end;
-  padding-bottom: var(--spacing-6);
+  padding: var(--spacing-5) var(--spacing-6);
   margin-bottom: var(--spacing-8);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.scoreHeaderText {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.eyebrow {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--color-ink-tertiary);
-}
-
-.scoreTitle {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--text-4xl);
-  font-weight: var(--font-medium);
-  line-height: 1.05;
-  letter-spacing: var(--tracking-tighter);
-  color: var(--color-ink);
 }
 
 .stats {
@@ -341,32 +314,23 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   font-variant-numeric: tabular-nums;
   color: var(--color-ink);
 }
 
 .scoreCard {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-5);
-  padding: var(--spacing-5) var(--spacing-6);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-}
-
-.sprite {
-  width: 64px;
-  height: 64px;
-  image-rendering: pixelated;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-2);
 }
 
 .bigScore {
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-5xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   letter-spacing: var(--tracking-display);
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -413,7 +377,7 @@
 .introTitle {
   font-family: var(--font-display);
   font-size: var(--text-4xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   line-height: var(--lh-tight);
   letter-spacing: var(--tracking-tighter);
   margin: var(--spacing-2) 0 var(--spacing-4);
@@ -423,7 +387,7 @@
   list-style: none;
   padding: 0;
   margin: var(--spacing-4) 0 var(--spacing-6);
-  border-top: var(--rule-ink);
+  border-top: var(--rule);
 }
 
 .taskList li {
@@ -457,12 +421,12 @@
   margin-bottom: var(--spacing-4);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-panel);
 }
 
 .runSection {
   font-family: var(--font-display);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-normal);
   color: var(--color-ink);
 }
 
@@ -485,10 +449,6 @@
 }
 
 /* ---- Report ---- */
-
-.reportHeader {
-  margin-bottom: var(--spacing-6);
-}
 
 .reportGrid {
   display: grid;
@@ -514,7 +474,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  border-top: var(--rule-ink);
+  border-top: var(--rule);
 }
 
 .itemRow {
@@ -569,7 +529,7 @@
 
 .reviewHeading {
   font-size: var(--text-sm);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-normal);
   color: var(--color-ink);
   margin: 0 0 var(--spacing-2);
 }

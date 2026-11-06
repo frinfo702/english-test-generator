@@ -13,9 +13,9 @@ import { Settings3LineIcon } from "../ui/SettingsIcon";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { LegacyHistoryNotice } from "./LegacyHistoryNotice";
 import { SiteFooter } from "./SiteFooter";
+import { Toaster } from "../ui/Toaster";
 import { UpdateNotice } from "./UpdateNotice";
 import { HeaderClockSlot } from "./headerSlot";
-import { PerfectCelebration } from "../pixel/PerfectCelebration";
 import styles from "./AppShell.module.css";
 
 // The mascot's head (sprite rows 1–15, ears to collar) as the logo mark.
@@ -275,8 +275,8 @@ export function AppShell({ children }: AppShellProps) {
         </HeaderClockSlot.Provider>
       </main>
       {showFooter && <SiteFooter />}
-      <PerfectCelebration />
       <UpdateNotice />
+      <Toaster />
       <LegacyHistoryNotice onMigrated={() => setHistoryVersion((v) => v + 1)} />
     </div>
   );

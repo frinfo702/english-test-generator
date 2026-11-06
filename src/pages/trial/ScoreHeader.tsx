@@ -1,5 +1,4 @@
-import { PixelIcon } from "../../components/pixel/PixelIcon";
-import type { PixelIconName } from "../../components/pixel/pixelIcons";
+import { SectionHeader } from "../../components/layout/SectionHeader";
 import { ScorePips } from "../../components/pixel/ScorePips";
 import {
   formatBand,
@@ -10,14 +9,7 @@ import {
 } from "../../lib/trial";
 import styles from "./Trial.module.css";
 
-const SECTION_ICONS: Record<SectionKey, PixelIconName> = {
-  reading: "book",
-  listening: "headphones",
-  writing: "pencil",
-  speaking: "microphone",
-};
-
-/** The speaking result's header, for a whole test: sprite, band, pips. */
+/** The report's header: page title, then one frosted panel with the band. */
 export function ScoreHeader({
   title,
   date,
@@ -52,18 +44,18 @@ export function ScoreHeader({
     },
   ];
 
+  const when = new Date(date).toLocaleString(undefined, {
+    dateStyle: "long",
+    timeStyle: "short",
+  });
   return (
-    <header className={styles.scoreHeader}>
-      <div className={styles.scoreHeaderText}>
-        <p className={styles.eyebrow}>Score report</p>
-        <h1 className={styles.scoreTitle}>{title}</h1>
-        <p className={styles.eyebrow}>
-          {new Date(date).toLocaleString(undefined, {
-            dateStyle: "long",
-            timeStyle: "short",
-          })}{" "}
-          · {single ? single.label : "Full test"}
-        </p>
+    <>
+      <SectionHeader
+        title={title}
+        subtitle={`Score report · ${when} · ${single ? single.label : "Full test"}`}
+        backTo="/trial"
+      />
+      <section className={`glass ${styles.scoreHeader}`} aria-label="Score">
         <dl className={styles.stats}>
           {stats.map((s) => (
             <div key={s.label} className={styles.stat}>
@@ -72,16 +64,11 @@ export function ScoreHeader({
             </div>
           ))}
         </dl>
-      </div>
-      <div className={styles.scoreCard}>
-        <PixelIcon
-          name={single ? SECTION_ICONS[single.key] : "university"}
-          className={styles.sprite}
-        />
-        <div>
+        <div className={styles.scoreCard}>
+          <p className="micro-label">Band</p>
           <p className={styles.bigScore}>
             {formatBand(total)}
-            <span>/6</span>
+            <span>/ 6</span>
           </p>
           <ol className={styles.pipStrip} aria-label="Section bands">
             {result.sections.map((s) => (
@@ -92,7 +79,7 @@ export function ScoreHeader({
             ))}
           </ol>
         </div>
-      </div>
-    </header>
+      </section>
+    </>
   );
 }

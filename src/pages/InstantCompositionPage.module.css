@@ -31,7 +31,7 @@
 }
 
 .cells .cellNow {
-  background: var(--color-signal);
+  background: var(--color-ink);
 }
 
 .progressText {
@@ -47,7 +47,7 @@
   min-height: 320px;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-8);
   display: flex;
   flex-direction: column;
@@ -71,7 +71,7 @@
 .en {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   letter-spacing: var(--tracking-tight);
   line-height: var(--lh-relaxed);
   color: var(--color-ink);
@@ -109,48 +109,17 @@
 }
 
 .ink {
-  stroke: var(--color-signal);
+  stroke: var(--color-ink);
   stroke-dasharray: 1;
-  animation: write 0.9s var(--ease-out) 3 both;
 }
 
 .pen {
   /* Pivot at the nib, so the pen rocks the way a wrist moves it. */
   transform-box: fill-box;
   transform-origin: 0% 100%;
-  animation: scribble 0.9s var(--ease-in-out) 3 both;
-}
-
-@keyframes write {
-  from {
-    stroke-dashoffset: 1;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
 }
 
 /* Small loops left to right, like cursive, then the pen lifts back. */
-@keyframes scribble {
-  0% {
-    transform: translate(-3px, 0) rotate(0deg);
-  }
-  20% {
-    transform: translate(-2px, -0.8px) rotate(-3deg);
-  }
-  40% {
-    transform: translate(-1px, 0.5px) rotate(1deg);
-  }
-  60% {
-    transform: translate(0, -0.8px) rotate(-3deg);
-  }
-  80% {
-    transform: translate(1px, 0.4px) rotate(1deg);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-}
 
 /* The bar drains rather than fills: it reads as time left, not progress. */
 .countdown {
@@ -188,12 +157,6 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
-}
-
-.summaryIcon {
-  display: block;
-  width: 40px;
-  height: 40px;
 }
 
 .allClear {
@@ -234,7 +197,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .missRow:hover .missEn {
-    color: var(--color-accent);
+    color: var(--color-ink);
   }
 }
 

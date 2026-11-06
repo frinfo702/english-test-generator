@@ -27,7 +27,6 @@ import { scoreInBackground } from "../../../lib/backgroundScoring";
 import { putAttempts, saveAttempt, type Attempt } from "../../../lib/attempts";
 import { useAttemptUpdates } from "../../../hooks/useAutoScore";
 import { questionIdFromFile } from "../../../lib/questions";
-import { PoodlePerch } from "../../../components/pixel/PoodlePerch";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import styles from "./WriteDiscussionPage.module.css";
 import task from "./WritingTask.module.css";
@@ -325,17 +324,15 @@ export function WriteDiscussionPage() {
               </ul>
 
               <>
-                <PoodlePerch>
-                  <textarea
-                    className={task.textarea}
-                    value={userText}
-                    onChange={(e) => setUserText(e.target.value)}
-                    placeholder="Type your response here..."
-                    disabled={phase === "submitted"}
-                    rows={14}
-                    aria-label="Your response"
-                  />
-                </PoodlePerch>
+                <textarea
+                  className={task.textarea}
+                  value={userText}
+                  onChange={(e) => setUserText(e.target.value)}
+                  placeholder="Type your response here..."
+                  disabled={phase === "submitted"}
+                  rows={14}
+                  aria-label="Your response"
+                />
                 <p className={task.wordCount}>
                   Word count:{" "}
                   <span className={meetsMinWords ? task.ok : task.notOk}>

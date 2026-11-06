@@ -1,65 +1,37 @@
+/* The verdict sits on the question sheet, under a hairline, not in a tinted
+ * box of its own: only the status word and its dot carry the feedback colour. */
 .panel {
-  padding: var(--spacing-4) var(--spacing-5);
-  border-radius: var(--radius);
-  border: 1px solid var(--color-border-strong);
-  margin-top: var(--spacing-4);
-  background: var(--color-surface);
-}
-
-.correct {
-  background: var(--color-success-subtle);
-  border-color: color-mix(in srgb, var(--color-success) 40%, transparent);
-}
-
-.incorrect {
-  background: var(--color-error-subtle);
-  border-color: color-mix(in srgb, var(--color-error) 40%, transparent);
+  margin-top: var(--spacing-5);
+  padding-top: var(--spacing-4);
+  border-top: var(--rule);
 }
 
 .header {
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
-  margin-bottom: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
 }
 
 .icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 7px;
+  height: 7px;
   border-radius: var(--radius-full);
-  border: 1.5px solid currentColor;
-  font-size: 11px;
-  font-weight: var(--font-bold);
-  font-family: var(--font-sans);
+  background: currentColor;
+  font-size: 0;
   flex-shrink: 0;
-  line-height: 1;
-}
-
-.correct .icon {
-  color: var(--color-success);
-}
-
-.incorrect .icon {
-  color: var(--color-error);
 }
 
 .status {
-  font-family: var(--font-mono);
-  font-variant-numeric: tabular-nums;
+  font-size: var(--text-sm);
   font-weight: var(--font-medium);
-  font-size: var(--text-2xs);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-meta);
 }
 
-.correct .status {
+.correct .header {
   color: var(--color-success);
 }
 
-.incorrect .status {
+.incorrect .header {
   color: var(--color-error);
 }
 
@@ -70,13 +42,11 @@
 }
 
 .correctAnswer strong {
-  font-family: var(--font-sans);
-  font-weight: var(--font-semibold);
+  font-weight: var(--font-medium);
 }
 
 .explanation {
   color: var(--color-ink-secondary);
   line-height: var(--lh-doc);
   font-size: var(--text-sm);
-  font-family: var(--font-sans);
 }

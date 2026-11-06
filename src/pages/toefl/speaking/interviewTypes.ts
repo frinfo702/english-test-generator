@@ -73,16 +73,12 @@ export function interviewChrome(
   phase: InterviewPhase,
   questionIndex: number,
   questionCount: number,
-  questionType: string,
   hasScenario: boolean,
-): { tag: string; position: string } {
+): { position: string } {
   if (isScenarioStep(phase, questionIndex, hasScenario)) {
-    return { tag: "Scenario", position: "Scenario" };
+    return { position: "Scenario" };
   }
-  return {
-    tag: INTERVIEW_TYPE_LABELS[questionType] ?? questionType,
-    position: `Question ${questionIndex + 1} / ${questionCount}`,
-  };
+  return { position: `Question ${questionIndex + 1} / ${questionCount}` };
 }
 
 export function phasePrompt(phase: InterviewPhase): string {

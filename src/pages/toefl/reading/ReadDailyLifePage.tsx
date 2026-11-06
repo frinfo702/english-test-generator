@@ -25,13 +25,7 @@ import type {
   DailyLifeQuestion,
   DailyLifeText,
 } from "./dailyLife";
-
-const TYPE_LABELS: Record<string, string> = {
-  factual: "Factual",
-  inference: "Inference",
-  purpose: "Purpose",
-  vocabulary: "Vocabulary",
-};
+import { ResultSummary } from "../../../components/question/ResultSummary";
 
 interface FlatQuestion {
   text: DailyLifeText;
@@ -91,7 +85,6 @@ export function ReadDailyLifePage() {
   }
 
   const totalQ = allQ.length;
-  const totalTexts = data?.texts.length ?? 0;
   const answeredCount = Object.keys(answers).length;
   const current = allQ[Math.min(currentIndex, Math.max(totalQ - 1, 0))];
 
@@ -172,31 +165,18 @@ export function ReadDailyLifePage() {
       {data && !loading && hasValidQuestionId && current && (
         <>
           {graded && (
-            <div className={styles.resultCard}>
-              <h2 className={styles.resultTitle}>Result</h2>
-              <div className={styles.resultModules}>
-                <div className={styles.moduleResult}>
-                  <span className={styles.moduleLabel}>Score</span>
-                  <span className={styles.moduleScore}>
-                    {correctCount}/{totalQ} (
-                    {totalQ > 0 ? Math.round((correctCount / totalQ) * 100) : 0}
-                    %)
-                  </span>
-                </div>
-              </div>
-              <p className={styles.reviewHint}>
-                Step through the questions below to review each answer.
-              </p>
-              <div className={styles.resultActions}>
-                <Button size="lg" onClick={handleRestart}>
-                  Try again
-                </Button>
-                <NextQuestionButton
-                  taskId="toefl/reading/daily-life"
-                  size="lg"
-                />
-              </div>
-            </div>
+            <ResultSummary
+              correct={correctCount}
+              total={totalQ}
+              actions={
+                <>
+                  <Button onClick={handleRestart} variant="secondary">
+                    Try again
+                  </Button>
+                  <NextQuestionButton taskId="toefl/reading/daily-life" />
+                </>
+              }
+            />
           )}
 
           <SplitView
@@ -209,15 +189,6 @@ export function ReadDailyLifePage() {
                 key={current.question.id}
                 question={current.question}
                 index={currentIndex}
-                total={totalQ}
-                context={
-                  totalTexts > 1
-                    ? `Text ${current.textIndex + 1} of ${totalTexts}`
-                    : undefined
-                }
-                typeLabel={
-                  TYPE_LABELS[current.question.type] ?? current.question.type
-                }
                 selected={answers[current.question.id]}
                 graded={graded}
                 onSelect={handleSelect}

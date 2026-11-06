@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { VoiceRing } from "voice-ring";
 import {
   CartesianGrid,
@@ -19,6 +20,7 @@ import {
 } from "../../hooks/useSpeechRecognition";
 import { useTimer } from "../../hooks/useTimer";
 import { autoScoring, scoreWithGateway } from "../../lib/aiGateway";
+import { copyText } from "../../lib/answerSubmission";
 import {
   analysisPrompt,
   dueCards,
@@ -229,13 +231,13 @@ function History({ sessions }: { sessions: LoopSession[] }) {
             type="monotone"
             dataKey="run"
             name="Mean run"
-            stroke="var(--color-accent)"
+            stroke="var(--color-ink)"
             strokeWidth={2}
             dot={{ r: 3, fill: "var(--color-surface)", strokeWidth: 2 }}
             activeDot={{
               r: 5,
               fill: "var(--color-surface)",
-              stroke: "var(--color-accent)",
+              stroke: "var(--color-ink)",
               strokeWidth: 2,
             }}
           />
@@ -273,11 +275,7 @@ function Shadow({ text }: { text: string }) {
       </Button>
       <label className={styles.hint}>
         Speed{" "}
-        <select
-          className={styles.select}
-          value={rate}
-          onChange={(e) => setRate(Number(e.target.value))}
-        >
+        <select value={rate} onChange={(e) => setRate(Number(e.target.value))}>
           {[0.7, 0.8, 0.9, 1, 1.1].map((r) => (
             <option key={r} value={r}>
               {r}×
@@ -472,6 +470,19 @@ export function SpeakLoopPage() {
       .map((c) => newCard(c, topic, now));
     saveCards([...loadCards(), ...fresh]);
     setSavedCards(fresh.length);
+    toast.success(
+      `Added ${fresh.length} ${fresh.length === 1 ? "card" : "cards"}`,
+      { action: { label: "Open", onClick: () => navigate("/speak/cards") } },
+    );
+  };
+
+  const copyPrompt = async (text: string) => {
+    try {
+      if (await copyText(text)) toast.success("Prompt copied");
+      else toast.error("Clipboard isn't available here");
+    } catch {
+      toast.error("Couldn't copy the prompt");
+    }
   };
 
   return (
@@ -625,7 +636,7 @@ export function SpeakLoopPage() {
               <div className={styles.row}>
                 <Button
                   variant="secondary"
-                  onClick={() => void navigator.clipboard.writeText(prompt)}
+                  onClick={() => void copyPrompt(prompt)}
                 >
                   Copy prompt
                 </Button>
@@ -695,10 +706,7 @@ export function SpeakLoopPage() {
                   ))}
                 </ul>
                 {savedCards ? (
-                  <p className={styles.hint}>
-                    Added {savedCards} cards.{" "}
-                    <Link to="/speak/cards">Review them</Link>
-                  </p>
+                  <Button disabled>Added to chunk cards</Button>
                 ) : (
                   <Button disabled={!picked.some(Boolean)} onClick={addCards}>
                     Add {picked.filter(Boolean).length} to chunk cards

@@ -1,3 +1,5 @@
+import { ScorePips } from "../../../components/pixel/ScorePips";
+import { Prose } from "../../../components/ui/Prose";
 import { PoweredByGateway } from "../../../components/ui/VercelMark";
 import {
   buildWritingTaskMessage,
@@ -7,6 +9,7 @@ import {
 import type { Attempt } from "../../../lib/attempts";
 import {
   parseWritingCriteria,
+  parseWritingNotes,
   parseWritingScore,
   stripScoreBlock,
   withWritingAi,
@@ -37,16 +40,72 @@ export function WritingCriteria({
     <ul className={styles.criteria}>
       {rated.map((s, i) => (
         <li key={i} className={styles.criterion}>
-          <div className={styles.criterionHead}>
-            <span className={styles.criterionName}>
-              {criteria[i]?.name ?? `Criterion ${i + 1}`}
-            </span>
-            <span className={styles.criterionPoints}>{s.points}/5</span>
-          </div>
+          <span className={styles.criterionName}>
+            {criteria[i]?.name ?? `Criterion ${i + 1}`}
+          </span>
+          <ScorePips score={s.points} />
+          <span className={styles.criterionPoints}>{s.points}/5</span>
           {s.note && <p className={styles.criterionNote}>{s.note}</p>}
         </li>
       ))}
     </ul>
+  );
+}
+
+/**
+ * A scored Writing response, read top-down: the score and one-line verdict,
+ * each rubric point as pips, what to do next time, the template and edits on
+ * the response itself, and the model's full write-up folded away at the end.
+ * Replies from before the summary/criteria fields have only the prose, so it
+ * starts open for them.
+ */
+export function WritingReport({
+  taskId,
+  question,
+  text,
+  score,
+  reply,
+}: {
+  taskId: WritingTaskId;
+  question: unknown;
+  text: string;
+  score: number;
+  reply: string;
+}) {
+  const { summary, tips } = parseWritingNotes(reply);
+  const structured =
+    summary !== null ||
+    tips.length > 0 ||
+    parseWritingCriteria(reply).length > 0;
+  return (
+    <div className={styles.report}>
+      <div className={styles.verdict}>
+        <p className={styles.score}>
+          {score}
+          <span>/ 5</span>
+        </p>
+        <div className={styles.verdictText}>
+          <ScorePips score={score} />
+          {summary && <p className={styles.summary}>{summary}</p>}
+        </div>
+      </div>
+      <WritingCriteria taskId={taskId} question={question} reply={reply} />
+      {tips.length > 0 && (
+        <section className={styles.block} aria-label="Next time">
+          <p className="micro-label">Next time</p>
+          <ol className={styles.tips}>
+            {tips.map((t, i) => (
+              <li key={i}>{t}</li>
+            ))}
+          </ol>
+        </section>
+      )}
+      <WritingFeedback taskId={taskId} text={text} reply={reply} />
+      <details className={styles.full} open={!structured}>
+        <summary>Full feedback</summary>
+        <Prose text={stripScoreBlock(reply)} className={styles.feedback} />
+      </details>
+    </div>
   );
 }
 
@@ -77,28 +136,19 @@ export function WritingScore({
           <PoweredByGateway prefix="" />
         )}
       </header>
-      {r.itemScore !== undefined ? (
-        <>
-          <p className={styles.score}>
-            {r.itemScore}
-            <span>/5</span>
-          </p>
-          {r.aiReply && (
-            <>
-              <p className={styles.feedback}>{stripScoreBlock(r.aiReply)}</p>
-              <WritingCriteria
-                taskId={taskId}
-                question={question}
-                reply={r.aiReply}
-              />
-              <WritingFeedback
-                taskId={taskId}
-                text={r.text ?? ""}
-                reply={r.aiReply}
-              />
-            </>
-          )}
-        </>
+      {r.itemScore !== undefined && r.aiReply ? (
+        <WritingReport
+          taskId={taskId}
+          question={question}
+          text={r.text ?? ""}
+          score={r.itemScore}
+          reply={r.aiReply}
+        />
+      ) : r.itemScore !== undefined ? (
+        <p className={styles.score}>
+          {r.itemScore}
+          <span>/ 5</span>
+        </p>
       ) : (
         <AiScore
           attemptId={attempt.id}

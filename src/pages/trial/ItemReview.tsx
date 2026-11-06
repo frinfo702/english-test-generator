@@ -14,7 +14,6 @@ import type { Attempt } from "../../lib/attempts";
 import {
   parseAiScores,
   parseWritingScore,
-  stripScoreBlock,
   withInterviewAi,
   withWritingAi,
 } from "../../lib/interviewScoring";
@@ -22,9 +21,8 @@ import { pendingAiResponses } from "../../lib/trial";
 import type { CompleteWordsItem } from "../toefl/reading/completeWords";
 import type { DailyLifeData } from "../toefl/reading/dailyLife";
 import { DailyLifeTextView } from "../toefl/reading/DailyLifeTextView";
-import { isCorrectOrder } from "../toefl/writing/buildSentence";
-import { WritingCriteria } from "../toefl/writing/WritingScore";
-import { WritingFeedback } from "../toefl/writing/SuggestedEdits";
+import { endPunctuation, isCorrectOrder } from "../toefl/writing/buildSentence";
+import { WritingReport } from "../toefl/writing/WritingScore";
 import { AiScore } from "../toefl/speaking/AutoScore";
 import {
   INTERVIEW_TYPE_LABELS,
@@ -68,6 +66,8 @@ interface SentenceData {
     chunks: string[];
     correctOrder: number[];
     fullSentence: string;
+    prefix?: string;
+    suffix?: string;
   }[];
 }
 
@@ -99,7 +99,7 @@ function Choices({
           key={q.id}
           question={q}
           index={i}
-          total={questions.length}
+          numbered
           selected={choices.get(q.id)}
           graded
           onSelect={noop}
@@ -388,6 +388,9 @@ export function ItemReview({
                     {s.fullSentence}
                     <br />
                     <span className={styles.reviewLabel}>Yours</span>
+                    {/* The given words stay in ink: only what you placed is
+                        marked, so a partial answer never reads as whole. */}
+                    {s.prefix && `${s.prefix} `}
                     <span
                       className={
                         isCorrectOrder(order, s.correctOrder)
@@ -397,6 +400,8 @@ export function ItemReview({
                     >
                       {yours || "—"}
                     </span>
+                    {s.suffix && ` ${s.suffix}`}
+                    {endPunctuation(s.fullSentence)}
                   </td>
                 </tr>
               );
@@ -423,18 +428,14 @@ export function ItemReview({
             <h4 className={styles.reviewHeading}>Your response</h4>
             <p className={styles.prose}>{r?.text || "—"}</p>
           </section>
-          {r?.aiReply && (
+          {r?.aiReply && r.itemScore !== undefined && (
             <section>
               <h4 className={styles.reviewHeading}>AI feedback</h4>
-              <p className={styles.prose}>{stripScoreBlock(r.aiReply)}</p>
-              <WritingCriteria
+              <WritingReport
                 taskId={taskId}
                 question={question}
-                reply={r.aiReply}
-              />
-              <WritingFeedback
-                taskId={taskId}
                 text={r.text ?? ""}
+                score={r.itemScore}
                 reply={r.aiReply}
               />
             </section>

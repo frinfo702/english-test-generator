@@ -20,6 +20,7 @@ import {
   QuestionNav,
   SplitView,
 } from "../../../components/question/QuestionStepper";
+import { ResultSummary } from "../../../components/question/ResultSummary";
 
 interface Question {
   id: string;
@@ -35,18 +36,6 @@ interface ProblemData {
   title: string;
   questions: Question[];
 }
-
-const TYPE_LABELS: Record<string, string> = {
-  vocabulary: "Vocabulary",
-  detail: "Detail",
-  inference: "Inference",
-  mainIdea: "Main Idea",
-  paragraphRelation: "Paragraph Relation",
-  importantIdea: "Important Idea",
-  negativeFactual: "Negative Factual",
-  rhetoricalPurpose: "Rhetorical Purpose",
-  insertSentence: "Insert Sentence",
-};
 
 export function ReadAcademicPage() {
   const navigate = useNavigate();
@@ -164,20 +153,16 @@ export function ReadAcademicPage() {
       {data && !loading && hasValidQuestionId && current && (
         <>
           {graded && (
-            <div className={styles.resultCard}>
-              <h2>Section complete</h2>
-              <div className={styles.scoreBox}>
-                <span className={styles.scoreNum}>{score}</span>
-                <span className={styles.scoreDen}>/{totalQ}</span>
-                <span className={styles.scorePct}>
-                  ({Math.round((score / totalQ) * 100)}%)
-                </span>
-              </div>
-              <div className={styles.resultActions}>
-                <BackButton onClick={handleBackToList} size="lg" />
-                <NextQuestionButton taskId="toefl/reading/academic" size="lg" />
-              </div>
-            </div>
+            <ResultSummary
+              correct={score}
+              total={totalQ}
+              actions={
+                <>
+                  <BackButton onClick={handleBackToList} variant="secondary" />
+                  <NextQuestionButton taskId="toefl/reading/academic" />
+                </>
+              }
+            />
           )}
 
           <SplitView
@@ -196,8 +181,6 @@ export function ReadAcademicPage() {
                 key={current.id}
                 question={current}
                 index={currentIndex}
-                total={totalQ}
-                typeLabel={TYPE_LABELS[current.type] ?? current.type}
                 selected={answers[current.id]}
                 graded={graded}
                 onSelect={handleSelect}

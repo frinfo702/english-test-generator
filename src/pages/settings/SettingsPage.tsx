@@ -1,4 +1,5 @@
 import { useRef, useState, type ChangeEvent } from "react";
+import { toast } from "sonner";
 import { SectionHeader } from "../../components/layout/SectionHeader";
 import { PixelIcon } from "../../components/pixel/PixelIcon";
 import { Button } from "../../components/ui/Button";
@@ -109,6 +110,7 @@ function AiScoringSection() {
     setDraft("");
     setReveal(false);
     refresh();
+    toast.success("Key saved");
   };
 
   const chooseMode = (mode: ScoringMode) => {
@@ -156,9 +158,19 @@ function AiScoringSection() {
               size="sm"
               variant="ghost"
               onClick={() => {
+                const removed = settings.key!;
                 clearGatewayKey();
                 setCheck({ state: "idle" });
                 refresh();
+                toast("Key removed", {
+                  action: {
+                    label: "Undo",
+                    onClick: () => {
+                      saveGatewayKey(removed);
+                      refresh();
+                    },
+                  },
+                });
               }}
             >
               Remove
@@ -339,14 +351,12 @@ function AiScoringSection() {
 function DataSection() {
   const [includeAudio, setIncludeAudio] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
   const exportDialogRef = useRef<HTMLDialogElement>(null);
 
   const handleExport = async () => {
     exportDialogRef.current?.close();
     setBusy(true);
-    setMessage(null);
     try {
       const url = URL.createObjectURL(await exportBackup(includeAudio));
       const link = document.createElement("a");
@@ -355,7 +365,9 @@ function DataSection() {
       link.click();
       setTimeout(() => URL.revokeObjectURL(url), 0);
     } catch (e) {
-      setMessage(`Export failed: ${e instanceof Error ? e.message : e}`);
+      toast.error("Export failed", {
+        description: e instanceof Error ? e.message : String(e),
+      });
     } finally {
       setBusy(false);
     }
@@ -366,15 +378,16 @@ function DataSection() {
     e.target.value = "";
     if (!file) return;
     setBusy(true);
-    setMessage(null);
-    try {
-      const count = await importBackup(file);
-      setMessage(`Imported ${count} attempt${count === 1 ? "" : "s"}.`);
-    } catch (err) {
-      setMessage(`Import failed: ${err instanceof Error ? err.message : err}`);
-    } finally {
-      setBusy(false);
-    }
+    const run = importBackup(file);
+    toast.promise(run, {
+      loading: "Importing…",
+      success: (count) => `Imported ${count} attempt${count === 1 ? "" : "s"}`,
+      error: (err) =>
+        `Import failed: ${err instanceof Error ? err.message : String(err)}`,
+    });
+    // The toast reports the outcome; here we only release the buttons.
+    await run.catch(() => undefined);
+    setBusy(false);
   };
 
   return (
@@ -425,11 +438,6 @@ function DataSection() {
             onChange={handleImport}
           />
         </div>
-        {message && (
-          <p className={styles.hint} role="status">
-            {message}
-          </p>
-        )}
       </Row>
       <dialog
         ref={exportDialogRef}

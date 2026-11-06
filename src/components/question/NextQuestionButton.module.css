@@ -12,8 +12,8 @@
 /* Lit like a music player's shuffle/repeat when on. */
 .modeOn,
 .modeOn:hover:not(:disabled) {
-  color: var(--color-accent);
-  background: var(--color-accent-subtle);
+  color: var(--color-ink);
+  background: var(--color-surface-hover);
 }
 
 /* 12-cell pixel icons at 1.5px per cell: 3 device pixels on a 2x screen,

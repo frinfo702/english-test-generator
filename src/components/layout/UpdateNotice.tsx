@@ -5,12 +5,12 @@ import {
   LATEST_UPDATE,
   markLatestUpdateSeen,
 } from "../../lib/updates";
-import { PixelHamster } from "../pixel/PixelHamster";
 import styles from "./UpdateNotice.module.css";
 
 /**
- * A hamster in the corner that speaks up once per release, and again on
- * click. The click only opens the bubble; it never touches the seen mark.
+ * A small "updates" chip in the corner that speaks up once per release, and
+ * again on click. The click only opens the bubble; it never touches the seen
+ * mark.
  */
 export function UpdateNotice() {
   const { pathname } = useLocation();
@@ -72,11 +72,15 @@ export function UpdateNotice() {
           </button>
         </div>
       )}
-      <PixelHamster
+      <button
+        type="button"
+        className={styles.toggle}
         onClick={() => setOpen(!showing)}
-        label="Show the latest update"
-        expanded={showing}
-      />
+        aria-label="Show the latest update"
+        aria-expanded={showing}
+      >
+        updates
+      </button>
     </aside>
   );
 }

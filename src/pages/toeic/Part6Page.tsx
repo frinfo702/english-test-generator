@@ -6,7 +6,6 @@ import { Button } from "../../components/ui/Button";
 import { CardStack } from "../../components/ui/CardStack";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
-import { ProgressBar } from "../../components/ui/ProgressBar";
 import { HeaderClock } from "../../components/ui/HeaderClock";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
@@ -14,6 +13,7 @@ import { useScoreHistory } from "../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part6Page.module.css";
 import { PixelCheckIcon } from "../../components/ui/PixelCheckIcon";
+import { ResultSummary } from "../../components/question/ResultSummary";
 
 interface Question {
   id: string;
@@ -180,32 +180,22 @@ export function Part6Page() {
       {data && !loading && hasValidQuestionId && passage && (
         <>
           {graded && (
-            <div className={styles.resultCard}>
-              <h2>Part 6 Complete</h2>
-              <div className={styles.scoreBox}>
-                <span className={styles.scoreNum}>{totalCorrect}</span>
-                <span className={styles.scoreDen}>/{totalQ}</span>
-                <span className={styles.scorePct}>
-                  ({Math.round((totalCorrect / totalQ) * 100)}%)
-                </span>
-              </div>
-              <ProgressBar
-                current={totalCorrect}
-                total={totalQ}
-                label="Accuracy"
-              />
-              <div className={styles.resultActions}>
-                <BackButton onClick={handleBackToList} size="lg" />
-                <NextQuestionButton taskId="toeic/part6" size="lg" />
-              </div>
-            </div>
+            <ResultSummary
+              correct={totalCorrect}
+              total={totalQ}
+              actions={
+                <>
+                  <BackButton onClick={handleBackToList} variant="secondary" />
+                  <NextQuestionButton taskId="toeic/part6" />
+                </>
+              }
+            />
           )}
 
           <div className={styles.passageNav}>
             <span className={styles.passageLabel}>
               Passage {passageIdx + 1} / {data.passages.length}
             </span>
-            <span className={styles.passageType}>{passage.textType}</span>
           </div>
           <CardStack index={passageIdx} total={data.passages.length}>
             <div className={styles.passageCard}>
@@ -218,7 +208,6 @@ export function Part6Page() {
                   <div key={q.id} className={styles.qBlock}>
                     <div className={styles.qHeader}>
                       <span className={styles.blankTag}>[{q.blankNumber}]</span>
-                      <span className={styles.typeTag}>{q.type}</span>
                     </div>
                     <div className={styles.options}>
                       {(["A", "B", "C", "D"] as const).map((opt) => (

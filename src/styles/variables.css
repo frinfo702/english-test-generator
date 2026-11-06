@@ -65,10 +65,10 @@
   --color-coral: #ff7759;
   --color-coral-soft: #ffad9b;
 
-  /* ---- Pixel stage ---- */
-  --stage-bg: #003c33;
-  --stage-ink: #131312;
-  --stage-lime: #edfce9;
+  /* ---- Figure stage (update-post illustrations): monochrome, like the UI ---- */
+  --stage-bg: var(--color-surface-subtle);
+  --stage-ink: var(--color-ink);
+  --stage-lime: var(--color-ink);
 
   /* ---- Feedback ---- */
   --color-success: #126b4d;
@@ -124,7 +124,7 @@
 [data-theme="dark"] {
   color-scheme: dark;
 
-  /* Pixel mascot outline on dark surfaces (see PixelPoodle) */
+  /* Pixel mascot outline on dark surfaces (the header logo) */
   --poodle-rim: drop-shadow(1px 0 0 rgba(255, 255, 255, 0.28))
     drop-shadow(-1px 0 0 rgba(255, 255, 255, 0.28))
     drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.28));
@@ -177,10 +177,6 @@
   --color-link: #8fb0ff;
   --color-coral: #ff8a70;
   --color-coral-soft: #ffc2b3;
-
-  --stage-bg: #003c33;
-  --stage-ink: #101110;
-  --stage-lime: #edfce9;
 
   --color-success: #74c9a2;
   --color-success-subtle: rgba(116, 201, 162, 0.1);
@@ -296,7 +292,7 @@
   --radius-xl: 22px;
   --radius-2xl: 30px;
   --radius-full: 9999px;
-  --radius-doc: 8px;
+  --radius-doc: var(--radius-panel);
   --radius-panel: 14px;
 
   /* Control heights: anything that sits on a line with a Button takes the
@@ -316,7 +312,6 @@
 
   /* Document / exam surface helpers (question pages) */
   --doc-border: 1px solid var(--color-border);
-  --doc-rule: 1px solid var(--color-ink);
   --doc-rule-soft: 1px solid var(--color-border);
   --lh-doc: 1.75;
   --doc-padding: var(--spacing-8);
@@ -341,7 +336,6 @@
   /* Space between a page-level error banner and whatever follows it. */
   --notice-gap: var(--spacing-8);
   --rule: 1px solid var(--color-border);
-  --rule-ink: 1px solid var(--color-ink);
 
   /* ---- Legacy aliases ---- */
   --color-text: var(--color-ink);

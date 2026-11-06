@@ -1,24 +1,16 @@
-/* Review: a masthead of counts, the recall action, then the question index
- * as ruled rows that open in place. */
-
-.perch {
-  --hamster-cell: 3px;
-  position: relative;
-  padding-top: calc(var(--hamster-cell) * 21 - 1px);
-}
-
-.hamster {
-  position: absolute;
-  top: 0;
-  right: var(--spacing-8);
-}
+/* Review: a frosted strip of counts (as on the dashboard), the recall
+ * action, then the question index as ruled rows that open in place. */
 
 .summary {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;
-  border-top: var(--rule-ink);
-  border-bottom: var(--rule);
+  padding: var(--spacing-2) 0;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
 }
 
 .summary > div {
@@ -32,7 +24,6 @@
 
 .summary > div:first-child {
   border-left: none;
-  padding-left: 0;
 }
 
 .summary dt,
@@ -52,7 +43,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--text-4xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   font-variant-numeric: tabular-nums;
   letter-spacing: var(--tracking-tighter);
   line-height: 1;
@@ -82,7 +73,7 @@
   align-items: flex-end;
   gap: var(--spacing-3) var(--spacing-4);
   padding-top: var(--spacing-4);
-  border-top: var(--rule-ink);
+  border-top: var(--rule);
 }
 
 .select {
@@ -91,28 +82,6 @@
   gap: var(--spacing-1);
 }
 
-.select select {
-  height: var(--control-h-sm);
-  padding: 0 28px 0 var(--spacing-2);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius);
-  /* Own chevron, set in from the edge; the native one hugs it. */
-  appearance: none;
-  background-color: var(--color-surface);
-  background-image:
-    linear-gradient(45deg, transparent 50%, var(--color-ink-secondary) 50%),
-    linear-gradient(135deg, var(--color-ink-secondary) 50%, transparent 50%);
-  background-position:
-    right 15px center,
-    right 11px center;
-  background-size: 4px 4px;
-  background-repeat: no-repeat;
-  color: var(--color-ink);
-  font: inherit;
-  font-size: var(--text-sm);
-}
-
-.select select:focus-visible,
 .check input:focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
@@ -146,8 +115,12 @@
   padding: 10px var(--spacing-3);
 }
 
+/* One frosted panel around the index, like every other pick list. */
+.table {
+  overflow: hidden;
+}
+
 .head {
-  border-top: var(--rule-ink);
   border-bottom: var(--rule);
 }
 
@@ -163,6 +136,10 @@
 
 .row {
   border-bottom: var(--rule);
+}
+
+.row:last-child {
+  border-bottom: none;
 }
 
 .row > summary {
@@ -192,7 +169,7 @@
   min-width: 0;
   font-family: var(--font-display);
   font-size: var(--text-base);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-normal);
   letter-spacing: -0.015em;
   color: var(--color-ink);
 }
@@ -234,7 +211,7 @@
 }
 
 .due {
-  color: var(--color-accent);
+  color: var(--color-ink);
   font-weight: var(--font-medium);
 }
 
@@ -268,7 +245,7 @@
 }
 
 .action:hover {
-  color: var(--color-accent);
+  color: var(--color-link);
 }
 
 /* ---- Recall bar, above the practice page ---- */
@@ -279,7 +256,7 @@
   gap: var(--spacing-4);
   margin-bottom: var(--spacing-6);
   padding: var(--spacing-2) 0;
-  border-top: 2px solid var(--color-signal);
+  border-top: var(--rule);
   border-bottom: var(--rule);
 }
 
@@ -292,14 +269,6 @@
 }
 
 @media (max-width: 640px) {
-  .perch {
-    --hamster-cell: 2px;
-  }
-
-  .hamster {
-    right: var(--spacing-2);
-  }
-
   .summary dd {
     font-size: var(--text-3xl);
   }

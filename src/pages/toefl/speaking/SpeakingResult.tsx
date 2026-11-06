@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { PixelIcon } from "../../../components/pixel/PixelIcon";
+import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { ScorePips } from "../../../components/pixel/ScorePips";
 import { NextQuestionButton } from "../../../components/question/NextQuestionButton";
 import { BarGroup } from "../../../components/ui/BarGroup";
@@ -140,19 +140,21 @@ function ResultHeader({
   const navigate = useNavigate();
   const scored = itemScores.filter((s): s is number => s !== undefined);
   const avg = average(scored);
+  const meta =
+    `Set ${attempt.problemId ?? "—"} · ${new Date(attempt.date).toLocaleString()} · ` +
+    `${itemScores.length} ${itemScores.length === 1 ? "item" : "items"}` +
+    (scored.length < itemScores.length
+      ? ` · ${itemScores.length - scored.length} not scored`
+      : "");
   return (
     <>
-      <header className={styles.header}>
+      <SectionHeader
+        title={title}
+        subtitle={meta}
+        backTo={`/${attempt.taskId}`}
+      />
+      <section className={`glass ${styles.header}`} aria-label="Result">
         <div className={styles.headerText}>
-          <p className={styles.eyebrow}>Result</p>
-          <h1 className={styles.title}>{title}</h1>
-          <p className={styles.meta}>
-            Set {attempt.problemId ?? "—"} ·{" "}
-            {new Date(attempt.date).toLocaleString()} · {itemScores.length}{" "}
-            {itemScores.length === 1 ? "item" : "items"}
-            {scored.length < itemScores.length &&
-              ` · ${itemScores.length - scored.length} not scored`}
-          </p>
           <dl className={styles.stats}>
             {stats.map((s) => (
               <div key={s.label} className={styles.stat}>
@@ -163,31 +165,22 @@ function ResultHeader({
           </dl>
         </div>
         <div className={styles.scoreCard}>
-          <PixelIcon name="microphone" className={styles.sprite} />
-          <div>
-            <p className={styles.bigScore}>
-              {avg === null ? "—" : avg.toFixed(1)}
-              <span>/5</span>
-            </p>
-            <ol className={styles.pipStrip} aria-label="Item scores">
-              {itemScores.map((s, i) => (
-                <li key={i}>
-                  <span>{i + 1}</span>
-                  <ScorePips score={s ?? null} />
-                </li>
-              ))}
-            </ol>
-          </div>
+          <p className="micro-label">Score</p>
+          <p className={styles.bigScore}>
+            {avg === null ? "—" : avg.toFixed(1)}
+            <span>/ 5</span>
+          </p>
+          <ol className={styles.pipStrip} aria-label="Item scores">
+            {itemScores.map((s, i) => (
+              <li key={i}>
+                <span>{i + 1}</span>
+                <ScorePips score={s ?? null} />
+              </li>
+            ))}
+          </ol>
         </div>
-      </header>
+      </section>
       <div className={styles.actions}>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => navigate(`/${attempt.taskId}`)}
-        >
-          Question list
-        </Button>
         {attempt.problemId && (
           <Button
             variant="secondary"
@@ -212,6 +205,7 @@ function ItemRow({
   prompt,
   response,
   side,
+  body,
   details,
 }: {
   index: number;
@@ -223,7 +217,9 @@ function ItemRow({
   prompt: string;
   response: string;
   side: ReactNode;
-  details: ReactNode;
+  /** Replaces the plain prompt/response lines, e.g. with a word diff. */
+  body?: ReactNode;
+  details?: ReactNode;
 }) {
   return (
     <li className={styles.row}>
@@ -234,10 +230,14 @@ function ItemRow({
           </span>
           {controls}
         </div>
-        <p className={styles.prompt}>{prompt}</p>
-        <p className={styles.response}>
-          {response || <em>No speech detected</em>}
-        </p>
+        {body ?? (
+          <>
+            <p className={styles.prompt}>{prompt}</p>
+            <p className={styles.response}>
+              {response || <em>No speech detected</em>}
+            </p>
+          </>
+        )}
       </div>
       <div className={styles.side}>
         <p className={styles.itemScore}>
@@ -258,10 +258,12 @@ function ItemRow({
         <BarGroup>{side}</BarGroup>
       </div>
       {/* Unscored items need the AI paste panel inside, so start them open. */}
-      <details className={styles.details} open={score === undefined}>
-        <summary>Details</summary>
-        <div className={styles.detailsBody}>{details}</div>
-      </details>
+      {details && (
+        <details className={styles.details} open={score === undefined}>
+          <summary>Details</summary>
+          <div className={styles.detailsBody}>{details}</div>
+        </details>
+      )}
     </li>
   );
 }
@@ -380,19 +382,21 @@ export function ListenRepeatResult({ attempt }: { attempt: Attempt }) {
                 <DeliveryBars response={r} />
               </>
             }
-            details={
-              <>
+            body={
+              r.transcript ? (
                 <ListenRepeatDiffView alignment={alignment} />
-                {r.assessment && (
-                  <p className={styles.note}>
-                    Mispronounced:{" "}
-                    {r.assessment.words
-                      .filter((w) => w.errorType === "Mispronunciation")
-                      .map((w) => w.word)
-                      .join(", ") || "none"}
-                  </p>
-                )}
-              </>
+              ) : undefined
+            }
+            details={
+              r.assessment && (
+                <p className={styles.note}>
+                  Mispronounced:{" "}
+                  {r.assessment.words
+                    .filter((w) => w.errorType === "Mispronunciation")
+                    .map((w) => w.word)
+                    .join(", ") || "none"}
+                </p>
+              )
             }
           />
         ))}
@@ -449,11 +453,6 @@ function InterviewItem({
       response={r.transcript ?? ""}
       controls={
         <>
-          {q && (
-            <span className={styles.tag}>
-              {INTERVIEW_TYPE_LABELS[q.type] ?? q.type}
-            </span>
-          )}
           <PlayButton
             audio={audio}
             id={`prompt-${i}`}

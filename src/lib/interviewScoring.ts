@@ -71,6 +71,27 @@ export function parseWritingCriteria(reply: string): CriterionScore[] {
   );
 }
 
+/**
+ * The one-line verdict and next-time tips from a Writing reply's score block.
+ * Older replies have neither; then the prose is all there is.
+ */
+export function parseWritingNotes(reply: string): {
+  summary: string | null;
+  tips: string[];
+} {
+  const block = scoreBlock(reply);
+  const summary =
+    typeof block?.summary === "string" && block.summary.trim()
+      ? block.summary.trim()
+      : null;
+  const tips = Array.isArray(block?.tips)
+    ? block.tips.filter(
+        (t): t is string => typeof t === "string" && t.trim() !== "",
+      )
+    : [];
+  return { summary, tips: tips.slice(0, 3) };
+}
+
 /** The last score block as JSON, or null when it's missing or malformed. */
 export function scoreBlock(reply: string): Record<string, unknown> | null {
   const blocks = [

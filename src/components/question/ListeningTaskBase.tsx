@@ -8,7 +8,6 @@ import {
 import { SectionHeader } from "../layout/SectionHeader";
 import { Button } from "../ui/Button";
 import { LoadingSpinner } from "../ui/LoadingSpinner";
-import { ProgressBar } from "../ui/ProgressBar";
 import { FeedbackPanel } from "../ui/FeedbackPanel";
 import { HeaderClock } from "../ui/HeaderClock";
 import { AudioPlayer } from "../ui/AudioPlayer";
@@ -21,6 +20,7 @@ import styles from "./ListeningTaskBase.module.css";
 import { PixelCheckIcon } from "../ui/PixelCheckIcon";
 import { ChoiceQuestionCard, QuestionNav, SplitView } from "./QuestionStepper";
 import { SpeakerFigure } from "./SpeakerFigure";
+import { ResultSummary } from "./ResultSummary";
 
 interface ListeningQuestion {
   id: string;
@@ -247,20 +247,11 @@ export function ListeningTaskBase({
     );
 
   const resultCard = data && (
-    <div className={styles.resultCard}>
-      <p className="micro-label">Section complete</p>
-      <div className="doc-score">
-        <span className="doc-score-num">{correctCount}</span>
-        <span className="doc-score-den">/ {totalQuestions}</span>
-        <span className="doc-score-pct">
-          {Math.round((correctCount / totalQuestions) * 100)}%
-        </span>
-      </div>
-      <ProgressBar
-        current={correctCount}
-        total={totalQuestions}
-        label="Correct"
-      />
+    <ResultSummary
+      correct={correctCount}
+      total={totalQuestions}
+      actions={<NextQuestionButton taskId={taskId} />}
+    >
       <details className={styles.transcript}>
         <summary>Transcript</summary>
         {data.audioSegments
@@ -272,10 +263,7 @@ export function ListeningTaskBase({
             </p>
           ))}
       </details>
-      <div className={styles.resultActions}>
-        <NextQuestionButton taskId={taskId} />
-      </div>
-    </div>
+    </ResultSummary>
   );
 
   return (
@@ -301,13 +289,13 @@ export function ListeningTaskBase({
 
       {loading && <LoadingSpinner message="Loading question..." />}
       {error && (
-        <div className={styles.errorText}>
+        <div className="notice-error">
           <p>{error}</p>
           <p>questions/{taskId}/</p>
         </div>
       )}
       {!hasValidQuestionId && (
-        <div className={styles.errorText}>
+        <div className="notice-error">
           <p>Invalid question ID in URL.</p>
         </div>
       )}
@@ -348,7 +336,6 @@ export function ListeningTaskBase({
                     key={data.questions[currentIndex].id}
                     question={data.questions[currentIndex]}
                     index={currentIndex}
-                    total={totalQuestions}
                     selected={selections[currentIndex]}
                     graded={graded}
                     onSelect={(_, optionIndex) =>

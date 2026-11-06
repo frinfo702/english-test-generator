@@ -8,8 +8,9 @@
 
 .announcement {
   height: var(--announcement-height);
-  background: #000000;
-  color: #ffffff;
+  background: var(--color-surface-subtle);
+  border-bottom: var(--rule);
+  color: var(--color-ink);
 }
 
 .announcementInner {
@@ -31,7 +32,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-2);
-  color: #ffffff;
+  color: var(--color-ink);
 }
 
 .announcementTag {
@@ -41,7 +42,7 @@
   padding: 0 7px;
   border-radius: var(--radius-full);
   background: var(--color-coral);
-  color: #17171c;
+  color: var(--color-ink-inverse);
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: var(--font-medium);
@@ -53,7 +54,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  color: #ffffff;
+  color: var(--color-ink-secondary);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
@@ -61,7 +62,7 @@
 }
 
 .announcementLink:hover {
-  color: #ffffff;
+  color: var(--color-ink);
   opacity: 1;
 }
 
@@ -79,7 +80,7 @@
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: rgba(255, 255, 255, 0.62);
+  color: var(--color-ink-tertiary);
   font-family: var(--font-sans);
   font-size: 17px;
   line-height: 1;
@@ -90,12 +91,12 @@
 }
 
 .announcementDismiss:hover {
-  background: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background: var(--color-surface-hover);
+  color: var(--color-ink);
 }
 
 .announcementDismiss:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid var(--color-ink);
   outline-offset: 2px;
 }
 
@@ -135,7 +136,7 @@
   gap: 10px;
   font-family: var(--font-display);
   font-size: 15px;
-  font-weight: var(--font-medium);
+  font-weight: var(--font-normal);
   letter-spacing: -0.03em;
   color: var(--color-ink);
   text-decoration: none;
@@ -193,7 +194,7 @@
   position: absolute;
   left: 0;
   top: calc(50% - 18px);
-  height: 36px;
+  height: var(--control-h-sm);
   border-radius: var(--radius-full);
   background: var(--color-nav-hover);
   opacity: 0;
@@ -211,7 +212,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  height: 36px;
+  height: var(--control-h-sm);
   padding: 0 13px;
   border-radius: var(--radius-full);
   font-size: var(--text-sm);
@@ -289,7 +290,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  height: 36px;
+  height: var(--control-h-sm);
   padding: 0 17px;
   border-radius: var(--radius-full);
   background: var(--color-action);

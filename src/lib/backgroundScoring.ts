@@ -9,6 +9,7 @@ import {
   scoreLanguageUseWithJev,
   scoreWithGateway,
 } from "./aiGateway";
+import { toast } from "sonner";
 import { getAttempt, putAttempts, type Attempt } from "./attempts";
 import {
   parseAiScores,
@@ -122,17 +123,39 @@ export function scoreInBackground(task: ScoringTask): boolean {
           "The model replied without a score. Try again, or pick another model in Settings.",
         );
       }
-      await updateAttempt(task.attemptId, (a) => a && apply(a));
+      const saved = await updateAttempt(task.attemptId, (a) => a && apply(a));
       tasks.delete(key);
       setJob(key, null);
+      notifyScored(task, saved?.responses[task.index]?.itemScore);
     } catch (e) {
-      setJob(key, {
-        status: "error",
-        message: e instanceof Error ? e.message : String(e),
+      const message = e instanceof Error ? e.message : String(e);
+      setJob(key, { status: "error", message });
+      toast.error(`${labelOf(task)} couldn't be scored`, {
+        description: message,
+        action: {
+          label: "Retry",
+          onClick: () => retryScoring(task.attemptId, task.index),
+        },
       });
     }
   })();
   return true;
+}
+
+const labelOf = (task: ScoringTask) =>
+  task.kind === "writing" ? "Writing" : `Interview answer ${task.index + 1}`;
+
+// The user may be on another page by now, so say so wherever they are.
+function notifyScored(task: ScoringTask, score: number | undefined) {
+  // HashRouter: this module sits outside React, so it navigates by hash.
+  const to =
+    task.kind === "interview" ? `#/results/${task.attemptId}` : "#/review";
+  toast.success(
+    score === undefined
+      ? `${labelOf(task)} scored`
+      : `${labelOf(task)} scored ${score} / 5`,
+    { action: { label: "View", onClick: () => (window.location.hash = to) } },
+  );
 }
 
 export function retryScoring(attemptId: string, index: number) {

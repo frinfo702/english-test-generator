@@ -1,0 +1,96 @@
+/* Prompt over transcript, one column per aligned word, wrapping like text.
+ * Matches recede to tertiary ink; only the differences carry colour, and
+ * that colour is feedback (error), not decoration. */
+
+.diff {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--spacing-2) var(--spacing-2);
+}
+
+.labels,
+.pair {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.labels {
+  margin-right: var(--spacing-1);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+/* Each label sits on the baseline of its row of words. */
+.labels > span {
+  line-height: 1.6rem;
+}
+
+.top {
+  font-size: var(--text-base);
+  line-height: 1.6rem;
+  color: var(--color-ink);
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 2px;
+}
+
+.bottom {
+  font-size: var(--text-base);
+  line-height: 1.6rem;
+  color: var(--color-ink-tertiary);
+}
+
+.pair[data-kind="substitution"] .top {
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-error);
+}
+
+.pair[data-kind="substitution"] .bottom,
+.pair[data-kind="insertion"] .bottom {
+  color: var(--color-error);
+}
+
+.pair[data-kind="deletion"] .top {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: var(--color-error);
+}
+
+.pair[data-kind="insertion"] .bottom {
+  font-style: italic;
+}
+
+/* ---- Legend: the same marks, small, in the mono whisper ---- */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2) var(--spacing-6);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-ink-tertiary);
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.key .pair {
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.key .top,
+.key .bottom {
+  font-size: var(--text-xs);
+  line-height: 1.1rem;
+}

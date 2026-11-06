@@ -2,8 +2,7 @@
   font-family: var(--font-sans);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: 0;
+  border-radius: var(--radius-panel);
   padding: var(--spacing-8);
   font-size: var(--text-lg);
   line-height: 2.2;
@@ -60,7 +59,7 @@
 .blankComplete {
   gap: 0;
   border-radius: 3px;
-  background: var(--color-accent-subtle);
+  background: var(--color-surface-hover);
   cursor: text;
 }
 
@@ -87,12 +86,6 @@
 .blankComplete.blankFocused .cells {
   font-family: var(--font-mono);
   font-variant-ligatures: none;
-}
-
-/* The caret is hidden while the cell marker tracks the next letter; once the
- * word is complete, it is the only editing cue and must stay visible. */
-.blankComplete .blankInput {
-  caret-color: var(--color-ink);
 }
 
 /* Focus means "still editing": even a complete answer returns to the full
@@ -125,7 +118,32 @@
 }
 
 .cellActive {
-  background: var(--color-accent-subtle);
+  background: var(--color-surface-hover);
+}
+
+/* With every letter in there is no next cell to mark, so draw the caret after
+ * the last one. Not the input's native caret: the invisible input lays its
+ * text out without the cells' widths and gaps, so it lands a letter or two
+ * short. */
+.caretAfter {
+  position: relative;
+}
+
+.caretAfter::after {
+  content: "";
+  position: absolute;
+  top: 0.15em;
+  bottom: 0.15em;
+  right: -2px;
+  width: 1px;
+  background: var(--color-ink);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 /* Captures typing; the cells above draw it, so the input itself is invisible. */
@@ -154,37 +172,6 @@
   color: var(--color-error);
   font-style: italic;
   margin-left: 2px;
-}
-
-.result {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  flex-wrap: wrap;
-  margin-top: var(--spacing-4);
-}
-
-.scoreBox {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.scoreNum {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: var(--font-medium);
-  color: var(--color-ink);
-}
-
-.scoreDen {
-  font-size: var(--text-xl);
-  color: var(--color-ink-secondary);
-}
-
-.scorePct {
-  font-size: var(--text-base);
-  color: var(--color-ink-secondary);
 }
 
 @media (max-width: 620px) {

@@ -58,7 +58,8 @@ describe("ResultPage", () => {
     });
 
     expect(await screen.findByText("4.5")).toBeTruthy();
-    expect(screen.getByText("Could you remind me?")).toBeTruthy();
+    // The prompt is shown as a word diff: the dropped word is marked.
+    expect(screen.getByTitle("Not said: me?")).toBeTruthy();
     expect(screen.getAllByLabelText("4 out of 5")).toHaveLength(2);
   });
 

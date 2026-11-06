@@ -12,25 +12,10 @@
   text-transform: uppercase;
   color: var(--color-ink-tertiary);
 }
-.passageType {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--color-accent);
-  border: 1px solid currentColor;
-  border-radius: var(--radius-xs);
-  padding: 3px 8px;
-}
-
 .passageCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-xl);
   margin-bottom: var(--spacing-xl);
 }
@@ -41,9 +26,9 @@
 
 .inlineBlank {
   display: inline;
-  background: var(--color-accent-subtle);
-  color: var(--color-accent);
-  border: 1px solid var(--color-accent);
+  background: var(--color-surface-hover);
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
   border-radius: var(--radius-xs);
   padding: 1px 6px;
   margin: 0 2px;
@@ -71,8 +56,7 @@
 .qBlock {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
@@ -92,23 +76,15 @@
   padding: 0 6px;
   border: none;
   border-radius: var(--radius-xs);
-  background: var(--color-ink);
-  color: var(--color-ink-inverse);
+  background: transparent;
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-ink-secondary);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: var(--font-medium);
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
 }
-.typeTag {
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--color-ink-tertiary);
-}
-
 .options {
   display: flex;
   flex-direction: column;
@@ -120,7 +96,7 @@
   gap: var(--spacing-sm);
   padding: 10px var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
   text-align: left;
   font-size: var(--text-base);
@@ -166,48 +142,4 @@
   gap: var(--spacing-3);
   flex-wrap: wrap;
   margin-top: var(--spacing-xl);
-}
-
-.resultCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-xs);
-  padding: var(--spacing-2xl);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-lg);
-  text-align: center;
-}
-.scoreBox {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-.scoreNum {
-  font-family: var(--font-display);
-  font-size: var(--text-5xl);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-display);
-  color: var(--color-ink);
-  line-height: 1;
-}
-.scoreDen {
-  font-family: var(--font-mono);
-  font-size: var(--text-xl);
-  color: var(--color-ink-tertiary);
-}
-.scorePct {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-}
-
-.resultActions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-3);
-  flex-wrap: wrap;
 }

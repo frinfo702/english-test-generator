@@ -7,7 +7,7 @@
 .rubricCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
 
 .rubricCard h3 {
   font-size: var(--text-lg);
-  color: var(--color-accent);
+  color: var(--color-ink);
   margin-bottom: var(--spacing-sm);
 }
 
@@ -27,7 +27,7 @@
   padding: var(--spacing-md);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-sm);
 }
 
 .criterion {
@@ -48,8 +48,7 @@
 .modelAnswer {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  box-shadow: inset 3px 0 0 var(--color-signal);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -62,7 +61,7 @@
   font-weight: var(--font-medium);
   letter-spacing: var(--tracking-meta);
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-ink);
 }
 
 .modelAnswer p {

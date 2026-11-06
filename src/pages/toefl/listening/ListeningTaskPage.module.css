@@ -1,7 +1,7 @@
 .playerCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-6);
   margin-bottom: var(--spacing-6);
   text-align: center;
@@ -30,7 +30,7 @@
 
 .progressFill {
   height: 100%;
-  background: var(--color-accent);
+  background: var(--color-ink);
   border-radius: var(--radius-full);
   pointer-events: none;
 }
@@ -51,8 +51,7 @@
 .questionCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-6);
   margin-bottom: var(--spacing-4);
 }
@@ -70,7 +69,7 @@
   gap: var(--spacing-3);
   padding: var(--spacing-3) var(--spacing-4);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   background: var(--color-surface);
   transition:
@@ -119,8 +118,7 @@
 .resultCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-6);
   margin-bottom: var(--spacing-6);
   text-align: center;
@@ -133,7 +131,7 @@
 .scoreNum {
   font-family: var(--font-display);
   font-size: var(--text-5xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   letter-spacing: var(--tracking-display);
   color: var(--color-ink);
   line-height: 1;
@@ -154,7 +152,7 @@
 
 .transcript {
   background: var(--color-surface-subtle);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   padding: var(--spacing-4);
   margin-top: var(--spacing-4);
   font-size: var(--text-sm);
@@ -166,7 +164,7 @@
   margin-top: var(--spacing-3);
   padding: var(--spacing-3);
   background: var(--color-surface-subtle);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
 }

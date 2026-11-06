@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { useAttemptUpdates } from "../../hooks/useAutoScore";
 import { getAttempt, putAttempts, type Attempt } from "../../lib/attempts";
@@ -16,7 +17,6 @@ export function ResultPage() {
     attempt: Attempt | null;
   } | null>(null);
   const attempt = loaded?.id === attemptId ? loaded.attempt : undefined;
-  const [saveError, setSaveError] = useState<string | null>(null);
   // A score finishing in the background lands here while the page is open.
   useAttemptUpdates((a) => {
     if (a.id === attemptId) setLoaded({ id: a.id, attempt: a });
@@ -35,10 +35,11 @@ export function ResultPage() {
 
   const update = (next: Attempt) => {
     setLoaded({ id: next.id, attempt: next });
-    putAttempts([next]).then(
-      () => setSaveError(null),
-      (e: unknown) =>
-        setSaveError(e instanceof Error ? e.message : "Failed to save."),
+    // The score is already on screen; only keeping it failed, so say so in passing.
+    putAttempts([next]).catch((e: unknown) =>
+      toast.error("Couldn't save the score", {
+        description: e instanceof Error ? e.message : String(e),
+      }),
     );
   };
 
@@ -48,7 +49,6 @@ export function ResultPage() {
 
   return (
     <>
-      {saveError && <p role="alert">{saveError}</p>}
       {attempt.taskId === "toefl/speaking/listen-repeat" ? (
         <ListenRepeatResult attempt={attempt} />
       ) : attempt.taskId === "toefl/speaking/interview" ? (

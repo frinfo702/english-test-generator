@@ -51,7 +51,14 @@ Colour, spacing, type scale and radii otherwise unchanged; see the file.
 - `.page-narrow` — opt-in reading width (`--max-reading`) with auto margins.
 - `.notice-error` — the one page-level error banner.
 - `.doc-*` (`question-document.css`) — the exam-sheet register for question
-  pages; solid, ink rule on top.
+  pages; solid, a plain 1px border (no ink rule on top), `--radius-panel`
+  corners like every other panel. Inside a sheet, option rows, chips, slots and text fields are
+  rounded rects (`--radius-sm`); only tiny marks (item numbers, tags) keep
+  `--radius-xs`. Selected, dragged-over and "on" states are ink, not coral.
+  Item numbers are outlined mono marks, not ink-filled tiles. A graded
+  answer's verdict (`FeedbackPanel`) sits under a hairline on the same sheet:
+  a coloured dot and status word, then the answer and explanation in ink — no
+  tinted box.
 
 ## Components
 
@@ -95,7 +102,23 @@ Colour, spacing, type scale and radii otherwise unchanged; see the file.
   hairline once scrolled past 8px. Each nav link has a ⌥+letter shortcut
   (⌥L/⌥R/⌥D/⌥S); it stays hidden and appears after a 1s hover in a small card
   with a few-word hint ("Redo what you missed ⌥R").
+- **Announcement strip** (`AppShell`) — subtle surface with a hairline
+  under it and ink text; only the "New" tag is coral. Never a black band.
 - **Footer** (`SiteFooter`) — frosted strip with a top rule, not a dark band.
+- **Results** (`ResultSummary`) — every graded task shows one `.glass`
+  panel: mono "Score" eyebrow, the count in light display type with a mono
+  percentage, and the actions (retake/back, next question) on the right.
+  Speaking results and the practice-test report use the page header plus the
+  same kind of panel; score pips are ink blocks, never a colour ramp.
+- **Toasts** (`ui/Toaster`, sonner) — one stack bottom-right, mounted in
+  AppShell; each toast is a small frosted panel with an optional outline
+  action (View, Retry, Undo, Open). For things that happen in passing or out
+  of sight (background scoring, a copy, an import, a save that failed after
+  the score is on screen) — never for a page's own load error.
+- **Selects** — one global `select` rule (`global.css`): `--control-h-sm`
+  tall, `--control-radius` shape, own chevron. Pages don't restyle it.
+- **Updates chip** (`UpdateNotice`) — a mono "updates" pill under the home
+  page that opens the latest-post bubble. No mascots anywhere else.
 
 ## Don't
 

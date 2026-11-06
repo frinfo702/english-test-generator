@@ -1,10 +1,10 @@
-/* One focused sheet, opened by an ink rule like the question sheets. */
+/* One solid sheet under the response: the report reads top-down. */
 .sheet {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
   padding: var(--spacing-6);
-  border-top: 1px solid var(--color-ink);
+  border-top: var(--rule);
   background: var(--color-surface);
 }
 
@@ -19,7 +19,7 @@
 .score {
   font-family: var(--font-display);
   font-size: var(--text-5xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   letter-spacing: var(--tracking-display);
   line-height: var(--lh-tight);
   font-variant-numeric: tabular-nums;
@@ -33,12 +33,107 @@
   margin-left: var(--spacing-1);
 }
 
+.report {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+/* Score on the left in light display type; pips and the one-line verdict
+ * beside it. */
+.verdict {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3) var(--spacing-6);
+}
+
+.verdictText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  min-width: 16rem;
+}
+
+.verdictText > svg {
+  align-self: flex-start;
+}
+
+.summary {
+  max-width: 60ch;
+  font-size: var(--text-base);
+  line-height: var(--lh-normal);
+  color: var(--color-ink);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.tips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: tip;
+}
+
+.tips li {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  font-size: var(--text-sm);
+  line-height: var(--lh-relaxed);
+  color: var(--color-ink);
+  counter-increment: tip;
+}
+
+.tips li::before {
+  content: counter(tip, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  line-height: 2.2;
+  color: var(--color-ink-tertiary);
+}
+
+.full summary {
+  width: fit-content;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--color-ink-secondary);
+}
+
 .feedback {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
   max-width: 72ch;
-  white-space: pre-wrap;
+  padding-top: var(--spacing-3);
   font-size: var(--text-sm);
   line-height: var(--lh-relaxed);
   color: var(--color-ink-secondary);
+}
+
+.feedback :global(.micro-label) {
+  margin-top: var(--spacing-2);
+}
+
+.feedback strong {
+  font-weight: var(--font-medium);
+  color: var(--color-ink);
+}
+
+.feedback ul,
+.feedback ol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  margin: 0;
+  padding-left: 1.25rem;
 }
 
 .error {
@@ -56,15 +151,12 @@
 }
 
 .criterion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 2.5rem;
+  align-items: center;
+  gap: var(--spacing-1) var(--spacing-3);
   border-top: 1px solid var(--color-border);
   padding-top: var(--spacing-3);
-}
-
-.criterionHead {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--spacing-3);
 }
 
 .criterionName {
@@ -73,6 +165,7 @@
 }
 
 .criterionPoints {
+  text-align: right;
   font-family: var(--font-mono);
   font-size: var(--text-sm);
   font-variant-numeric: tabular-nums;
@@ -80,7 +173,8 @@
 }
 
 .criterionNote {
-  margin: var(--spacing-1) 0 0;
+  grid-column: 1 / -1;
+  margin: 0;
   font-size: var(--text-sm);
   line-height: var(--lh-relaxed);
   color: var(--color-ink-secondary);

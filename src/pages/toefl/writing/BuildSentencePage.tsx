@@ -12,7 +12,6 @@ import { Button } from "../../../components/ui/Button";
 import { CardStack } from "../../../components/ui/CardStack";
 import { HeaderClock } from "../../../components/ui/HeaderClock";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
 import { useScoreHistory } from "../../../hooks/useScoreHistory";
@@ -30,6 +29,7 @@ import {
 } from "./buildSentence";
 import { useChunkDrag } from "./useChunkDrag";
 import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
+import { ResultSummary } from "../../../components/question/ResultSummary";
 
 interface Sentence {
   id: string;
@@ -219,25 +219,16 @@ export function BuildSentencePage() {
       {data && !loading && hasValidQuestionId && sentence && (
         <>
           {graded && (
-            <div className={styles.resultCard}>
-              <h2>Section complete</h2>
-              <div className={styles.scoreBox}>
-                <span className={styles.scoreNum}>{score}</span>
-                <span className={styles.scoreDen}>/{totalSentences}</span>
-                <span className={styles.scorePct}>
-                  ({Math.round((score / totalSentences) * 100)}%)
-                </span>
-              </div>
-              <ProgressBar
-                current={score}
-                total={totalSentences}
-                label="Accuracy"
-              />
-              <div className={styles.actions}>
-                <BackButton onClick={handleBackToList} size="lg" />
-                <NextQuestionButton taskId={TASK_ID} size="lg" />
-              </div>
-            </div>
+            <ResultSummary
+              correct={score}
+              total={totalSentences}
+              actions={
+                <>
+                  <BackButton onClick={handleBackToList} variant="secondary" />
+                  <NextQuestionButton taskId={TASK_ID} />
+                </>
+              }
+            />
           )}
 
           <CardStack index={current} total={totalSentences}>

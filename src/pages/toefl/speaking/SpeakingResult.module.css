@@ -9,31 +9,13 @@
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--spacing-8);
   align-items: end;
-  padding-bottom: var(--spacing-6);
-  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-5) var(--spacing-6);
 }
 
 .headerText {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
-}
-
-.eyebrow,
-.meta {
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--color-ink-tertiary);
-}
-
-.title {
-  font-family: var(--font-display);
-  font-size: var(--text-4xl);
-  font-weight: var(--font-medium);
-  line-height: 1.05;
-  letter-spacing: var(--tracking-tighter);
 }
 
 .stats {
@@ -54,30 +36,21 @@
 .stat dd {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   font-variant-numeric: tabular-nums;
 }
 
 .scoreCard {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-5);
-  padding: var(--spacing-5) var(--spacing-6);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius);
-  background: var(--color-surface);
-}
-
-.sprite {
-  width: 64px;
-  height: 64px;
-  image-rendering: pixelated;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-2);
 }
 
 .bigScore {
   font-family: var(--font-display);
   font-size: var(--text-5xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-light);
   letter-spacing: var(--tracking-display);
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -129,7 +102,7 @@
 
 .rows {
   list-style: none;
-  border-top: var(--rule-ink);
+  border-top: var(--rule);
 }
 
 .row {
@@ -238,8 +211,11 @@
 
 .aiReply h3,
 .sample h3 {
-  font-size: var(--text-xs);
-  font-weight: var(--font-medium);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--font-normal);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
   color: var(--color-ink-tertiary);
   margin-bottom: var(--spacing-2);
 }

@@ -14,7 +14,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it("reopens the latest update on hamster click without touching the seen mark", () => {
+it("reopens the latest update on chip click without touching the seen mark", () => {
   markLatestUpdateSeen();
   render(
     <MemoryRouter>
@@ -39,7 +39,7 @@ it("reopens the latest update on hamster click without touching the seen mark", 
   expect(screen.queryByText(LATEST_UPDATE.label)).toBeNull();
 });
 
-it("leaves an unseen release unseen when the hamster is clicked", () => {
+it("leaves an unseen release unseen when the chip is clicked", () => {
   render(
     <MemoryRouter>
       <UpdateNotice />

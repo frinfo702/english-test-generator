@@ -1,9 +1,8 @@
 /* Sits under the home page, where it tucks up into the footer instead of
- * floating over the content. Small on purpose; the hamster is company, the
- * bubble is the message. */
+ * floating over the content. Small on purpose: a mono chip, and the bubble
+ * is the message. */
 
 .notice {
-  --hamster-cell: 2px;
   width: 100%;
   max-width: calc(var(--max-wide) + var(--gutter) * 2);
   margin: calc(var(--spacing-16) * -1) auto var(--spacing-8);
@@ -27,11 +26,35 @@
   max-width: 280px;
   margin-right: 16px;
   padding: 7px 7px 7px 12px;
-  border: 1px solid rgba(23, 23, 28, 0.1);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
-  background: var(--color-surface);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   color: var(--color-ink);
-  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.45);
+}
+
+.toggle {
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  color: var(--color-ink-tertiary);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-meta);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.toggle:hover,
+.toggle[aria-expanded="true"] {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
 }
 
 .bubble a {
@@ -87,8 +110,9 @@
 }
 
 .bubble a:focus-visible,
-.close:focus-visible {
-  outline: 2px solid #4c6ee6;
+.close:focus-visible,
+.toggle:focus-visible {
+  outline: 2px solid var(--color-link);
   outline-offset: 2px;
 }
 

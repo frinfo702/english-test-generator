@@ -116,7 +116,7 @@ describe("answerSubmission", () => {
     expect(message).toContain("2. Language use: grammar");
     expect(message).toContain("1. Greeting: opens politely");
     expect(message).toContain(
-      '{"criteria": [{"points": 0, "note": "..."}, {"points": 0, "note": "..."}], "edits": [{"from": "...", "to": "...", "theme": "grammar", "why": "..."}], "template": [0, 0], "score": 0}',
+      '{"summary": "...", "tips": ["...", "..."], "criteria": [{"points": 0, "note": "..."}, {"points": 0, "note": "..."}], "edits": [{"from": "...", "to": "...", "theme": "grammar", "why": "..."}], "template": [0, 0], "score": 0}',
     );
   });
 

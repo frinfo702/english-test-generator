@@ -12,7 +12,6 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { SectionHeader } from "../../components/layout/SectionHeader";
-import { PixelHamster } from "../../components/pixel/PixelHamster";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { PixelArrowIcon } from "../../components/ui/PixelArrowIcon";
@@ -179,8 +178,7 @@ export function ReviewPage() {
         backTo="/"
       />
 
-      <div className={styles.perch}>
-        <PixelHamster className={styles.hamster} />
+      <div>
         <dl className={styles.summary}>
           <div>
             <dt>Answered</dt>
@@ -288,25 +286,27 @@ export function ReviewPage() {
             {shown.length} of {items.length} questions
           </p>
 
-          <div className={styles.head} aria-hidden="true">
-            <span>Question</span>
-            <span>Result</span>
-            <span>Tries</span>
-            <span>Missed</span>
-            <span>Last</span>
-            <span>Recall</span>
+          <div className={`glass ${styles.table}`}>
+            <div className={styles.head} aria-hidden="true">
+              <span>Question</span>
+              <span>Result</span>
+              <span>Tries</span>
+              <span>Missed</span>
+              <span>Last</span>
+              <span>Recall</span>
+            </div>
+            <ol className={styles.rows}>
+              {shown.map((i) => (
+                <Row
+                  key={i.key}
+                  item={i}
+                  now={now}
+                  question={questions.get(i.key)}
+                  onChange={update}
+                />
+              ))}
+            </ol>
           </div>
-          <ol className={styles.rows}>
-            {shown.map((i) => (
-              <Row
-                key={i.key}
-                item={i}
-                now={now}
-                question={questions.get(i.key)}
-                onChange={update}
-              />
-            ))}
-          </ol>
         </>
       )}
     </div>

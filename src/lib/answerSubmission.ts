@@ -160,6 +160,8 @@ export function buildWritingCopyMessage(payload: WritingCopyPayload) {
   // Per-criterion ratings use "points" so the overall "score" stays the
   // only "score" key the parser can find.
   const fields = [
+    '"summary": "..."',
+    '"tips": ["...", "..."]',
     criteria.length > 0 &&
       `"criteria": [${criteria.map(() => '{"points": 0, "note": "..."}').join(", ")}]`,
     `"edits": [{"from": "...", "to": "...", "theme": "grammar", "why": "..."}]`,
@@ -167,6 +169,10 @@ export function buildWritingCopyMessage(payload: WritingCopyPayload) {
     '"score": 0',
   ].filter(Boolean);
   const block = `{${fields.join(", ")}}`;
+  lines.push(
+    "",
+    'In the block, "summary" is one sentence on the response as a whole, and "tips" are up to 3 short, concrete things to do differently next time.',
+  );
   lines.push(
     "",
     `Give your feedback, then end your reply with this block exactly once (whole numbers only${criteria.length > 0 ? `; one "criteria" entry per numbered criterion, in order` : ""}):`,

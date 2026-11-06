@@ -8,7 +8,7 @@
 
 /* Column-specific overrides for the shared row */
 .number {
-  font-weight: var(--font-medium);
+  font-weight: var(--font-normal);
   font-family: var(--font-display);
   font-variant-numeric: tabular-nums;
   font-size: var(--text-base);
@@ -42,7 +42,7 @@
 
 .row5Col:hover .chevron {
   transform: translateX(3px);
-  color: var(--color-signal);
+  color: var(--color-ink);
 }
 
 .headerRow {

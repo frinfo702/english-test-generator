@@ -1,4 +1,4 @@
-/** The newest announcement. Bump `id` to make the hamster speak up again. */
+/** The newest announcement. Bump `id` to make the notice speak up again. */
 export const LATEST_UPDATE = {
   id: "2026-10-10-ai-scoring",
   path: "/updates/ai-scoring",

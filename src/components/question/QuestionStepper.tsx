@@ -50,10 +50,8 @@ function cleanOptionText(text: string): string {
 interface ChoiceQuestionCardProps {
   question: ChoiceQuestion;
   index: number;
-  total: number;
-  /** Extra position info, e.g. "Text 2 of 3". */
-  context?: string;
-  typeLabel?: string;
+  /** Show the item number. Off under a QuestionNav, which already numbers. */
+  numbered?: boolean;
   selected: number | undefined;
   graded: boolean;
   onSelect: (questionId: string, optionIndex: number) => void;
@@ -62,23 +60,18 @@ interface ChoiceQuestionCardProps {
 export function ChoiceQuestionCard({
   question: q,
   index,
-  total,
-  context,
-  typeLabel,
+  numbered = false,
   selected,
   graded,
   onSelect,
 }: ChoiceQuestionCardProps) {
   return (
     <div className={styles.qBlock}>
-      <div className={styles.qHeader}>
-        <span className={styles.qNum}>{index + 1}</span>
-        <span className={styles.qMeta}>
-          Question {index + 1} of {total}
-          {context && ` · ${context}`}
-        </span>
-        {typeLabel && <span className={styles.qType}>{typeLabel}</span>}
-      </div>
+      {numbered && (
+        <div className={styles.qHeader}>
+          <span className={styles.qNum}>{index + 1}</span>
+        </div>
+      )}
       <p className={styles.stem}>{q.stem}</p>
       <div className={styles.options} role="radiogroup">
         {q.options.map((opt, i) => (

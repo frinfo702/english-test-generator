@@ -145,12 +145,10 @@ describe("interviewTypes helpers", () => {
   });
 
   it("labels chrome as Scenario during the scenario step", () => {
-    expect(interviewChrome("scenario", 0, 4, "opening", true)).toEqual({
-      tag: "Scenario",
+    expect(interviewChrome("scenario", 0, 4, true)).toEqual({
       position: "Scenario",
     });
-    expect(interviewChrome("listening", 0, 4, "opening", true)).toEqual({
-      tag: "Opening",
+    expect(interviewChrome("listening", 0, 4, true)).toEqual({
       position: "Question 1 / 4",
     });
   });

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "sonner";
 import { Button } from "../../components/ui/Button";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { useAttemptUpdates, useScoringJobs } from "../../hooks/useAutoScore";
@@ -17,6 +18,7 @@ import {
   type SectionKey,
   type TrialItem,
 } from "../../lib/trial";
+import { SectionHeader } from "../../components/layout/SectionHeader";
 import { ScoreHeader } from "./ScoreHeader";
 import { AiScoring, ItemReview } from "./ItemReview";
 import { TASK_NAMES } from "./taskNames";
@@ -31,7 +33,6 @@ export function TrialReportPage() {
   // With the user's key, answers were scored as they were finished, so the
   // report never waits on a copy & paste gate.
   const [scoreLater, setScoreLater] = useState(() => autoScoring() !== null);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     getAllAttempts().then(setAttempts, () => setAttempts([]));
@@ -77,25 +78,25 @@ export function TrialReportPage() {
 
   const update = (next: Attempt) => {
     setAttempts((all) => all && all.map((a) => (a.id === next.id ? next : a)));
-    putAttempts([next]).then(
-      () => setError(null),
-      (e: unknown) =>
-        setError(e instanceof Error ? e.message : "Failed to save the score."),
+    // The score is already on screen; only keeping it failed, so say so in passing.
+    putAttempts([next]).catch((e: unknown) =>
+      toast.error("Couldn't save the score", {
+        description: e instanceof Error ? e.message : String(e),
+      }),
     );
   };
 
   const header = (
-    <header className={styles.reportHeader}>
-      <p className="micro-label">Score report</p>
-      <h1 className={styles.homeTitle}>{trialTitle(trial, trials)}</h1>
-      <p className={styles.resultDate}>
-        {new Date(trial.date).toLocaleString(undefined, {
-          dateStyle: "long",
-          timeStyle: "short",
-        })}
-      </p>
-      {error && <p className={styles.error}>{error}</p>}
-    </header>
+    <>
+      <SectionHeader
+        title={trialTitle(trial, trials)}
+        subtitle={`Score report · ${new Date(trial.date).toLocaleString(
+          undefined,
+          { dateStyle: "long", timeStyle: "short" },
+        )}`}
+        backTo="/trial"
+      />
+    </>
   );
 
   if (pending.length > 0 && !scoreLater) {
@@ -142,7 +143,6 @@ export function TrialReportPage() {
         estimate={estimate}
         routes={trial.trial.routes}
       />
-      {error && <p className={styles.error}>{error}</p>}
 
       {result.sections.map((s) => (
         <SectionReview

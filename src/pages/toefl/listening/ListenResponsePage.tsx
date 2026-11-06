@@ -8,7 +8,6 @@ import {
 import { SectionHeader } from "../../../components/layout/SectionHeader";
 import { Button } from "../../../components/ui/Button";
 import { LoadingSpinner } from "../../../components/ui/LoadingSpinner";
-import { ProgressBar } from "../../../components/ui/ProgressBar";
 import { HeaderClock } from "../../../components/ui/HeaderClock";
 import { useElapsedTimer } from "../../../hooks/useElapsedTimer";
 import { useQuestion } from "../../../hooks/useQuestion";
@@ -24,6 +23,7 @@ import {
   type ChoiceQuestion,
 } from "../../../components/question/QuestionStepper";
 import { SpeakerFigure } from "../../../components/question/SpeakerFigure";
+import { ResultSummary } from "../../../components/question/ResultSummary";
 
 interface ResponseQuestion {
   id: string;
@@ -244,27 +244,18 @@ export function ListenResponsePage() {
       {data && !loading && hasValidQuestionId && currentQuestion && (
         <>
           {graded && (
-            <div className={styles.resultCard}>
-              <h2>Section complete</h2>
-              <div className={styles.scoreBox}>
-                <span className={styles.scoreNum}>{totalCorrect}</span>
-                <span className={styles.scoreDen}>/{totalQuestions}</span>
-                <span className={styles.scorePct}>
-                  ({Math.round((totalCorrect / totalQuestions) * 100)}%)
-                </span>
-              </div>
-              <ProgressBar
-                current={totalCorrect}
-                total={totalQuestions}
-                label="Accuracy"
-              />
-              <div className={styles.resultActions}>
-                <Button onClick={retake} size="md" variant="secondary">
-                  Retake
-                </Button>
-                <NextQuestionButton taskId={TASK_ID} size="md" />
-              </div>
-            </div>
+            <ResultSummary
+              correct={totalCorrect}
+              total={totalQuestions}
+              actions={
+                <>
+                  <Button onClick={retake} variant="secondary">
+                    Retake
+                  </Button>
+                  <NextQuestionButton taskId={TASK_ID} />
+                </>
+              }
+            />
           )}
 
           <SplitView
@@ -302,8 +293,6 @@ export function ListenResponsePage() {
                 key={currentQuestion.id}
                 question={choiceQuestions[currentIndex]}
                 index={currentIndex}
-                total={totalQuestions}
-                context={currentQuestion.context}
                 selected={answersByIndex[currentQuestion.id]}
                 graded={graded}
                 onSelect={(_, i) => handleSelect(LETTERS[i])}

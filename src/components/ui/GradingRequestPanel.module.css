@@ -4,8 +4,7 @@
   gap: var(--spacing-4);
   background: var(--color-surface);
   border: var(--doc-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-doc);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-5);
 }
 

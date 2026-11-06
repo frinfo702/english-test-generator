@@ -12,6 +12,7 @@ import { useScoreHistory } from "../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part7Page.module.css";
 import { PixelCheckIcon } from "../../components/ui/PixelCheckIcon";
+import { ResultSummary } from "../../components/question/ResultSummary";
 
 interface Passage {
   id: string;
@@ -33,15 +34,6 @@ interface ProblemData {
   passages: Passage[];
   questions: Question[];
 }
-
-const TYPE_LABELS: Record<string, string> = {
-  detail: "Detail",
-  inference: "Inference",
-  vocabulary: "Vocabulary",
-  notStated: "Not Stated",
-  purpose: "Purpose",
-  crossReference: "Cross-reference",
-};
 
 export function Part7Page() {
   const navigate = useNavigate();
@@ -108,13 +100,6 @@ export function Part7Page() {
     navigate("/toeic/part7");
   };
 
-  const setTypeLabel =
-    data?.setType === "single"
-      ? "Single Passage"
-      : data?.setType === "double"
-        ? "Double Passage"
-        : "Triple Passage";
-
   return (
     <div>
       {(running || elapsedSeconds > 0) && (
@@ -152,22 +137,17 @@ export function Part7Page() {
       {data && !loading && hasValidQuestionId && (
         <>
           {graded && (
-            <div className={styles.resultInline}>
-              <p className={styles.inlineScore}>
-                Correct:{" "}
-                <strong>
-                  {totalCorrect} / {questions.length}
-                </strong>
-                ({Math.round((totalCorrect / questions.length) * 100)}%)
-              </p>
-              <div className={styles.resultActions}>
-                <BackButton onClick={handleBackToList} />
-                <NextQuestionButton taskId="toeic/part7" />
-              </div>
-            </div>
+            <ResultSummary
+              correct={totalCorrect}
+              total={questions.length}
+              actions={
+                <>
+                  <BackButton onClick={handleBackToList} variant="secondary" />
+                  <NextQuestionButton taskId="toeic/part7" />
+                </>
+              }
+            />
           )}
-
-          <div className={styles.setTypeBadge}>{setTypeLabel}</div>
 
           <div className={styles.passages}>
             {data.passages.map((p, i) => (
@@ -175,7 +155,6 @@ export function Part7Page() {
                 {data.passages.length > 1 && (
                   <div className={styles.passageMeta}>
                     <span className={styles.passageNum}>Passage {i + 1}</span>
-                    <span className={styles.passageType}>{p.textType}</span>
                   </div>
                 )}
                 {p.title && <h3 className={styles.passageTitle}>{p.title}</h3>}
@@ -191,12 +170,6 @@ export function Part7Page() {
                 <div key={q.id} className={styles.qBlock}>
                   <div className={styles.qHeader}>
                     <span className={styles.qNum}>{idx + 1}</span>
-                    <span className={styles.qType}>
-                      {TYPE_LABELS[q.type] ?? q.type}
-                    </span>
-                    {q.passageRef === "cross" && (
-                      <span className={styles.crossTag}>Cross-reference</span>
-                    )}
                   </div>
                   <p className={styles.stem}>{q.stem}</p>
                   <div className={styles.options}>

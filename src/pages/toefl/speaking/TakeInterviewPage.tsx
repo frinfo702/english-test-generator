@@ -106,13 +106,7 @@ export function TakeInterviewPage() {
 
   const onScenarioStep = isScenarioStep(phase, current, hasScenario);
   const chrome = q
-    ? interviewChrome(
-        phase,
-        current,
-        data?.questions.length ?? 0,
-        q.type,
-        hasScenario,
-      )
+    ? interviewChrome(phase, current, data?.questions.length ?? 0, hasScenario)
     : null;
 
   const { clearTranscript, clearError: clearSpeechError } = speech;
@@ -403,19 +397,14 @@ export function TakeInterviewPage() {
       {data && !loading && hasValidQuestionId && q && chrome && (
         <div className={styles.card}>
           <div className={styles.cardHeader}>
-            <span className={styles.typeTag}>{chrome.tag}</span>
-            {chrome.position !== chrome.tag && (
-              <span className={styles.qNum}>{chrome.position}</span>
-            )}
+            <span className={styles.qNum}>{chrome.position}</span>
           </div>
 
           <InterviewerCard
             voiceId={interviewerVoice}
-            speaking={
-              phase === "scenario" ||
-              phase === "listening" ||
-              (audio.playing && (scenarioActive || questionActive))
-            }
+            // Only while their audio actually plays: the scenario phase
+            // outlasts its clip, waiting for the learner to go on.
+            speaking={audio.playing && (scenarioActive || questionActive)}
           />
 
           <p className={styles.questionHidden}>

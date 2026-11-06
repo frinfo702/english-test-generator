@@ -15,7 +15,7 @@
 .diffBtn {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   padding: 6px 14px;
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
@@ -25,8 +25,8 @@
     color var(--duration-fast) var(--ease-out);
 }
 .diffBtn:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+  border-color: var(--color-ink);
+  color: var(--color-ink);
 }
 .diffBtn.active {
   background: var(--color-ink);
@@ -37,8 +37,7 @@
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: 0;
+  border-radius: var(--radius-panel);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -58,7 +57,7 @@
   padding: var(--spacing-md) var(--spacing-md) var(--spacing-md)
     var(--spacing-5);
   border: none;
-  border-left: 2px solid var(--color-ink);
+  border-left: 2px solid var(--color-border-strong);
   background: transparent;
 }
 .referenceLabel {
@@ -94,7 +93,7 @@
 .slots {
   min-height: 56px;
   border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   padding: var(--spacing-sm);
   display: flex;
   flex-wrap: wrap;
@@ -110,7 +109,7 @@
 
 .chip {
   padding: 8px 16px;
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   font-size: var(--text-base);
   font-weight: 500;
   border: 1px solid;
@@ -123,10 +122,10 @@
 .placed {
   background: transparent;
   border-color: transparent;
-  color: var(--color-accent);
+  color: var(--color-ink);
 }
 .placed:hover:not(:disabled) {
-  border-color: var(--color-accent);
+  border-color: var(--color-ink);
 }
 
 .poolChip {
@@ -155,7 +154,7 @@
 
 .feedback {
   padding: var(--spacing-md);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
 }
 .fbCorrect {
@@ -184,43 +183,6 @@
 .btnRow {
   display: flex;
   gap: var(--spacing-md);
-}
-
-.resultCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-xs);
-  padding: var(--spacing-2xl);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-lg);
-  text-align: center;
-}
-
-.scoreBox {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-.scoreNum {
-  font-family: var(--font-display);
-  font-size: var(--text-5xl);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-display);
-  color: var(--color-ink);
-  line-height: 1;
-}
-.scoreDen {
-  font-family: var(--font-mono);
-  font-size: var(--text-xl);
-  color: var(--color-ink-tertiary);
-}
-.scorePct {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
 }
 
 /* Answer blanks: one underline per chunk, filled by drag and drop */
@@ -271,12 +233,12 @@
 }
 
 .blankOver {
-  border-bottom-color: var(--color-accent);
+  border-bottom-color: var(--color-ink);
   background: var(--color-surface-subtle);
 }
 
 .poolOver {
-  border-color: var(--color-accent);
+  border-color: var(--color-ink);
 }
 
 .chip {
@@ -300,14 +262,6 @@
   cursor: grabbing;
   text-align: center;
   box-shadow: var(--shadow-md, 0 6px 16px rgba(0, 0, 0, 0.18));
-  border-color: var(--color-accent);
+  border-color: var(--color-ink);
   background: var(--color-surface);
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
 }

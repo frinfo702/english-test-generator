@@ -21,6 +21,7 @@ import {
 } from "./completeWords";
 import styles from "./CompleteWordsPage.module.css";
 import { PixelCheckIcon } from "../../../components/ui/PixelCheckIcon";
+import { ResultSummary } from "../../../components/question/ResultSummary";
 
 const TASK_ID = "toefl/reading/complete-words";
 
@@ -231,6 +232,11 @@ export function CompleteWordsPage() {
                     isFocused && c === userInput.length
                       ? styles.cellActive
                       : "",
+                    isFocused &&
+                    !isIncomplete &&
+                    c === expectedSuffix.length - 1
+                      ? styles.caretAfter
+                      : "",
                   ].join(" ")}
                 >
                   {/* An empty inline-block sits on its bottom edge, a
@@ -334,21 +340,16 @@ export function CompleteWordsPage() {
               <NextQuestionButton taskId={TASK_ID} variant="secondary" />
             </div>
           ) : (
-            <div className={styles.result}>
-              <div className={styles.scoreBox}>
-                <span className={styles.scoreNum}>{score?.correct}</span>
-                <span className={styles.scoreDen}>/{score?.total}</span>
-                <span className={styles.scorePct}>
-                  (
-                  {Math.round(
-                    ((score?.correct ?? 0) / (score?.total ?? 1)) * 100,
-                  )}
-                  %)
-                </span>
-              </div>
-              <BackButton onClick={handleBackToList} />
-              <NextQuestionButton taskId={TASK_ID} />
-            </div>
+            <ResultSummary
+              correct={score?.correct ?? 0}
+              total={score?.total ?? 0}
+              actions={
+                <>
+                  <BackButton onClick={handleBackToList} variant="secondary" />
+                  <NextQuestionButton taskId={TASK_ID} />
+                </>
+              }
+            />
           )}
         </>
       )}

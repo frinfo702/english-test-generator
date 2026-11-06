@@ -20,8 +20,7 @@
 .qBlock {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: 0;
+  border-radius: var(--radius-panel);
   padding: var(--spacing-6);
   display: flex;
   flex-direction: column;
@@ -43,32 +42,15 @@
   padding: 0 6px;
   border-radius: var(--radius-xs);
   border: none;
-  background: var(--color-ink);
-  color: var(--color-ink-inverse);
+  background: transparent;
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-ink-secondary);
   font-weight: var(--font-medium);
   font-size: var(--text-xs);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-}
-
-.qMeta {
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--color-ink-secondary);
-  font-variant-numeric: tabular-nums;
-}
-
-.qType {
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--color-ink-tertiary);
 }
 
 .stem {
@@ -91,7 +73,7 @@
   gap: 14px;
   padding: 12px var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
   text-align: left;
   font-size: var(--text-base);
@@ -145,7 +127,7 @@
   gap: var(--spacing-4);
   margin-top: var(--spacing-8);
   padding: var(--spacing-4) 0;
-  border-top: var(--rule-ink);
+  border-top: var(--rule);
 }
 
 .navBar > :first-child {
@@ -169,13 +151,13 @@
 }
 
 .navDot {
-  width: 30px;
-  height: 30px;
+  width: var(--control-h-sm);
+  height: var(--control-h-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--color-ink-secondary);
   font-family: var(--font-mono);

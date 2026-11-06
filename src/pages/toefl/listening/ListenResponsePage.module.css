@@ -1,54 +1,7 @@
-.resultCard {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-xs);
-  padding: var(--spacing-2xl);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-lg);
-  text-align: center;
-}
-
-.scoreBox {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.scoreNum {
-  font-family: var(--font-display);
-  font-size: var(--text-5xl);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-display);
-  color: var(--color-ink);
-  line-height: 1;
-}
-
-.scoreDen {
-  font-family: var(--font-mono);
-  font-size: var(--text-xl);
-  color: var(--color-ink-tertiary);
-}
-
-.scorePct {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--color-ink-secondary);
-}
-
-.resultActions {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
-}
-
 .speakerCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-6);
   display: flex;
   flex-direction: column;
@@ -70,10 +23,6 @@ img.speaker {
   display: flex;
   justify-content: flex-end;
   margin-top: var(--spacing-3);
-}
-
-.resultCard {
-  margin-bottom: var(--spacing-xl);
 }
 
 @media (max-width: 860px) {

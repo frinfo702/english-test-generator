@@ -5,7 +5,7 @@
   padding: var(--spacing-4) var(--spacing-5) var(--spacing-5);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-panel);
 }
 
 .title {
@@ -163,7 +163,7 @@
 }
 
 .player[data-playing] .barsPlayed span {
-  background: var(--color-accent);
+  background: var(--color-ink);
 }
 
 .playhead {

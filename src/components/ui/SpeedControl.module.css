@@ -12,7 +12,7 @@
   height: 22px;
   padding: 0 8px;
   border: none;
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--color-ink-tertiary);
   font-family: var(--font-mono);
@@ -50,7 +50,7 @@
 
 .speedSlider {
   flex: 1;
-  accent-color: var(--color-accent);
+  accent-color: var(--color-ink);
 }
 
 .speedValue {

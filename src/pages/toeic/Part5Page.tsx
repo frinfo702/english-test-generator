@@ -6,7 +6,6 @@ import { Button } from "../../components/ui/Button";
 import { CardStack } from "../../components/ui/CardStack";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { FeedbackPanel } from "../../components/ui/FeedbackPanel";
-import { ProgressBar } from "../../components/ui/ProgressBar";
 import { HeaderClock } from "../../components/ui/HeaderClock";
 import { useElapsedTimer } from "../../hooks/useElapsedTimer";
 import { useQuestion } from "../../hooks/useQuestion";
@@ -14,6 +13,7 @@ import { useScoreHistory } from "../../hooks/useScoreHistory";
 import { NextQuestionButton } from "../../components/question/NextQuestionButton";
 import styles from "./Part5Page.module.css";
 import { PixelCheckIcon } from "../../components/ui/PixelCheckIcon";
+import { ResultSummary } from "../../components/question/ResultSummary";
 
 interface Question {
   id: string;
@@ -145,25 +145,16 @@ export function Part5Page() {
       {data && !loading && hasValidQuestionId && (
         <>
           {graded && (
-            <div className={styles.resultCard}>
-              <h2>Part 5 Complete</h2>
-              <div className={styles.scoreBox}>
-                <span className={styles.scoreNum}>{totalCorrect}</span>
-                <span className={styles.scoreDen}>/{questions.length}</span>
-                <span className={styles.scorePct}>
-                  ({Math.round((totalCorrect / questions.length) * 100)}%)
-                </span>
-              </div>
-              <ProgressBar
-                current={totalCorrect}
-                total={questions.length}
-                label="Accuracy"
-              />
-              <div className={styles.resultActions}>
-                <BackButton onClick={handleBackToList} size="lg" />
-                <NextQuestionButton taskId="toeic/part5" size="lg" />
-              </div>
-            </div>
+            <ResultSummary
+              correct={totalCorrect}
+              total={questions.length}
+              actions={
+                <>
+                  <BackButton onClick={handleBackToList} variant="secondary" />
+                  <NextQuestionButton taskId="toeic/part5" />
+                </>
+              }
+            />
           )}
 
           <div className={styles.pageInfo}>
@@ -180,7 +171,6 @@ export function Part5Page() {
                       <span className={styles.qNum}>
                         {page * PAGE_SIZE + idx + 1}
                       </span>
-                      <span className={styles.focus}>{q.focus}</span>
                     </div>
                     <p className={styles.sentence}>{q.sentence}</p>
                     <div className={styles.options}>

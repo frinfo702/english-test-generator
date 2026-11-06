@@ -1,21 +1,7 @@
-.setTypeBadge {
-  display: inline-block;
-  align-items: center;
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--color-ink);
-  border: 1px solid var(--color-ink);
-  border-radius: var(--radius-xs);
-  padding: 3px 8px;
-  margin-bottom: var(--spacing-lg);
-}
 .typeBtn {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   padding: 6px 14px;
   font-size: var(--text-sm);
   color: var(--color-ink-secondary);
@@ -44,8 +30,7 @@
 .passageCard {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -65,26 +50,19 @@
   padding: 0 6px;
   border: none;
   border-radius: var(--radius-xs);
-  background: var(--color-ink);
-  color: var(--color-ink-inverse);
+  background: transparent;
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-ink-secondary);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: var(--font-medium);
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
 }
-.passageType {
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--color-ink-tertiary);
-}
 .passageTitle {
   font-family: var(--font-display);
   font-size: var(--text-xl);
-  font-weight: var(--font-medium);
+  font-weight: var(--font-normal);
   letter-spacing: -0.015em;
 }
 .passageText {
@@ -101,8 +79,7 @@
 .qBlock {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-top: var(--doc-rule);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-panel);
   padding: var(--spacing-xl);
   display: flex;
   flex-direction: column;
@@ -122,32 +99,14 @@
   padding: 0 6px;
   border: none;
   border-radius: var(--radius-xs);
-  background: var(--color-ink);
-  color: var(--color-ink-inverse);
+  background: transparent;
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-ink-secondary);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: var(--font-medium);
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
-}
-.qType {
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  color: var(--color-ink-tertiary);
-}
-.crossTag {
-  font-family: var(--font-mono);
-  font-size: var(--text-2xs);
-  font-weight: var(--font-medium);
-  letter-spacing: var(--tracking-meta);
-  text-transform: uppercase;
-  background: var(--color-warning-subtle);
-  color: var(--color-warning);
-  padding: 2px 8px;
-  border-radius: var(--radius-xs);
 }
 .stem {
   font-family: var(--font-sans);
@@ -167,7 +126,7 @@
   gap: var(--spacing-sm);
   padding: 10px var(--spacing-md);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-sm);
   background: var(--color-surface);
   text-align: left;
   font-size: var(--text-base);
@@ -209,17 +168,13 @@
   padding: var(--spacing-xl);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-panel);
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--spacing-md);
 }
-.inlineScore {
-  font-size: var(--text-lg);
-}
-
 .resultActions {
   display: flex;
   align-items: center;

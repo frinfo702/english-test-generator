@@ -3,6 +3,7 @@ import {
   interviewItemScore,
   parseAiScores,
   parseWritingCriteria,
+  parseWritingNotes,
   parseWritingScore,
   stripScoreBlock,
 } from "./interviewScoring";
@@ -128,6 +129,23 @@ describe("parseWritingScore with criteria", () => {
 
   it("returns nothing when an old reply has no criteria", () => {
     expect(parseWritingCriteria(block('{"score": 4}'))).toEqual([]);
+  });
+
+  it("reads the one-line verdict and at most three tips, ignoring blanks", () => {
+    expect(
+      parseWritingNotes(
+        block(
+          '{"summary": " Clear but thin. ", "tips": ["Add an example", "", "Name the software", "Sign off", "Extra"], "score": 3}',
+        ),
+      ),
+    ).toEqual({
+      summary: "Clear but thin.",
+      tips: ["Add an example", "Name the software", "Sign off"],
+    });
+    expect(parseWritingNotes(block('{"score": 4}'))).toEqual({
+      summary: null,
+      tips: [],
+    });
   });
 
   it("drops entries whose points are not on the 0–5 scale", () => {
