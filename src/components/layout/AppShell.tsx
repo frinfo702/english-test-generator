@@ -13,6 +13,7 @@ import { Settings3LineIcon } from "../ui/SettingsIcon";
 import { ThemeToggle } from "../ui/ThemeToggle";
 import { LegacyHistoryNotice } from "./LegacyHistoryNotice";
 import { SiteFooter } from "./SiteFooter";
+import { FrameContext, type PageFrame } from "./fullBleed";
 import { Toaster } from "../ui/Toaster";
 import { UpdateNotice } from "./UpdateNotice";
 import { HeaderClockSlot } from "./headerSlot";
@@ -109,6 +110,11 @@ export function AppShell({ children }: AppShellProps) {
   const activeItem =
     navItems.find((item) => item.matches?.(location.pathname)) ?? navItems[0];
   const isHome = location.pathname === "/";
+  // Pages that own their whole canvas (home, the 404 pond) render edge to
+  // edge; the pond 404 keeps none of the shell around it.
+  const [frame, setFrame] = useState<PageFrame>("default");
+  const fullBleed = frame !== "default";
+  const bare = frame === "bare";
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -116,7 +122,7 @@ export function AppShell({ children }: AppShellProps) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  const showFooter = !hideSiteFooter(location.pathname);
+  const showFooter = !bare && !hideSiteFooter(location.pathname);
 
   /**
    * The indicator is positioned imperatively: measuring in a layout effect and
@@ -178,7 +184,7 @@ export function AppShell({ children }: AppShellProps) {
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-      {!announcementDismissed && (
+      {!bare && !announcementDismissed && (
         <div className={styles.announcement}>
           <div className={styles.announcementInner}>
             <span className={styles.announcementCopy}>
@@ -200,79 +206,91 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         </div>
       )}
-      <header
-        className={[styles.header, scrolled ? styles.headerScrolled : ""].join(
-          " ",
-        )}
-      >
-        <div className={styles.headerInner}>
-          <Link
-            to="/"
-            className={styles.logo}
-            aria-label="English Test Practice home"
-          >
-            <PixelArt
-              className={styles.logoMark}
-              layers={[POODLE_HEAD]}
-              palette={POODLE_PALETTE}
-              width={22}
-              height={15}
-            />
-            <span className={styles.logoText}>English Test Practice</span>
-          </Link>
-
-          <div className={styles.clockSlot} ref={setClockSlot} />
-
-          <nav className={styles.nav} ref={navRef} aria-label="Main navigation">
-            <span
-              className={styles.indicator}
-              aria-hidden="true"
-              ref={indicatorRef}
-            />
-            {navItems.map((item) => {
-              const active = item === activeItem;
-              return (
-                <Link
-                  key={item.to}
-                  ref={active ? activeRef : undefined}
-                  to={item.to}
-                  className={[
-                    styles.navLink,
-                    active ? styles.navLinkActive : "",
-                  ].join(" ")}
-                  aria-current={active ? "page" : undefined}
-                  aria-keyshortcuts={`Alt+${item.key}`}
-                >
-                  {item.icon}
-                  <span className={item.icon ? styles.iconLabel : undefined}>
-                    {item.label}
-                  </span>
-                  <span className={styles.kbd} aria-hidden="true">
-                    {item.hint}
-                    <kbd>⌥{item.key}</kbd>
-                  </span>
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className={styles.headerActions}>
-            <Link to="/practice" className={styles.headerCta}>
-              Start practice
-              <span aria-hidden="true">→</span>
+      {!bare && (
+        <header
+          className={[
+            styles.header,
+            scrolled ? styles.headerScrolled : "",
+          ].join(" ")}
+        >
+          <div className={styles.headerInner}>
+            <Link
+              to="/"
+              className={styles.logo}
+              aria-label="English Test Practice home"
+            >
+              <PixelArt
+                className={styles.logoMark}
+                layers={[POODLE_HEAD]}
+                palette={POODLE_PALETTE}
+                width={22}
+                height={15}
+              />
+              <span className={styles.logoText}>English Test Practice</span>
             </Link>
-            <ThemeToggle />
+
+            <div className={styles.clockSlot} ref={setClockSlot} />
+
+            <nav
+              className={styles.nav}
+              ref={navRef}
+              aria-label="Main navigation"
+            >
+              <span
+                className={styles.indicator}
+                aria-hidden="true"
+                ref={indicatorRef}
+              />
+              {navItems.map((item) => {
+                const active = item === activeItem;
+                return (
+                  <Link
+                    key={item.to}
+                    ref={active ? activeRef : undefined}
+                    to={item.to}
+                    className={[
+                      styles.navLink,
+                      active ? styles.navLinkActive : "",
+                    ].join(" ")}
+                    aria-current={active ? "page" : undefined}
+                    aria-keyshortcuts={`Alt+${item.key}`}
+                  >
+                    {item.icon}
+                    <span className={item.icon ? styles.iconLabel : undefined}>
+                      {item.label}
+                    </span>
+                    <span className={styles.kbd} aria-hidden="true">
+                      {item.hint}
+                      <kbd>⌥{item.key}</kbd>
+                    </span>
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className={styles.headerActions}>
+              <Link to="/practice" className={styles.headerCta}>
+                Start practice
+                <span aria-hidden="true">→</span>
+              </Link>
+              <ThemeToggle />
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
       <main
-        className={[styles.main, isHome ? styles.mainHome : ""].join(" ")}
+        className={[
+          styles.main,
+          isHome || fullBleed ? styles.mainHome : "",
+        ].join(" ")}
         id="main-content"
         tabIndex={-1}
       >
-        <HeaderClockSlot.Provider value={clockSlot}>
-          <Fragment key={historyVersion}>{children}</Fragment>
-        </HeaderClockSlot.Provider>
+        <FrameContext.Provider value={setFrame}>
+          <HeaderClockSlot.Provider value={clockSlot}>
+            <Fragment key={historyVersion}>{children}</Fragment>
+          </HeaderClockSlot.Provider>
+        </FrameContext.Provider>
       </main>
       {showFooter && <SiteFooter />}
       <UpdateNotice />

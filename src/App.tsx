@@ -160,6 +160,10 @@ const TalkPage = lazyNamed(
   () => import("./pages/speak/ConversationPage"),
   "ConversationPage",
 );
+const NotFoundPage = lazyNamed(
+  () => import("./pages/NotFoundPage"),
+  "NotFoundPage",
+);
 const SettingsPage = lazyNamed(
   () => import("./pages/settings/SettingsPage"),
   "SettingsPage",
@@ -397,6 +401,7 @@ export default function App() {
                 />
               </Route>
             ))}
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </AppShell>

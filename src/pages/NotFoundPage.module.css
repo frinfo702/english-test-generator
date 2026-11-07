@@ -1,0 +1,74 @@
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  /* No header or footer: the water is the whole window. */
+  min-height: 100svh;
+  padding: 24px 16px;
+  overflow: hidden;
+}
+
+.pond {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--color-ink);
+}
+
+/* The digits sit in the flow; only their transform moves, so nothing around
+ * them can reflow while the 404 drifts. */
+.float {
+  position: relative;
+  display: grid;
+  place-items: center;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+}
+
+.float:active {
+  cursor: grabbing;
+}
+
+.code {
+  margin: 0;
+  padding-right: 0.04em; /* give the tight tracking its trailing space back */
+  font-family: var(--font-display);
+  font-weight: var(--font-light);
+  font-size: clamp(96px, 21vw, 210px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+
+/* Picking the digits up disturbs the water: one ring, once. */
+.ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  aspect-ratio: 1;
+  border: 1px solid var(--color-ink-tertiary);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  animation: ripple 560ms var(--ease-out) forwards;
+}
+
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.6);
+    opacity: 0;
+  }
+}

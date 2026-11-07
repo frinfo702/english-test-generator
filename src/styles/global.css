@@ -228,6 +228,13 @@ samp {
   font-variant-numeric: tabular-nums;
 }
 
+/* The graph-paper canvas. Home hero and the 404 pond only: a grid everywhere
+ * flickers behind text that is meant to be read. */
+.canvas-grid {
+  background-image: var(--canvas-grid);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
 .hairline {
   border-top: var(--rule);
 }

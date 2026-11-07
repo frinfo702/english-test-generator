@@ -74,7 +74,7 @@ export function HomePage() {
 
   return (
     <div>
-      <section className={styles.hero}>
+      <section className={`canvas-grid ${styles.hero}`}>
         <AsciiPond className={styles.pond} />
         <div className={styles.halo} aria-hidden="true" />
 

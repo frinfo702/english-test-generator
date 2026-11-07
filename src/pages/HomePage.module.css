@@ -5,8 +5,6 @@
   min-height: calc(100svh - var(--header-height) - var(--announcement-height));
   padding: 64px 16px;
   overflow: hidden;
-  background-image: var(--canvas-grid);
-  background-size: var(--grid-size) var(--grid-size);
 }
 
 .pond {
